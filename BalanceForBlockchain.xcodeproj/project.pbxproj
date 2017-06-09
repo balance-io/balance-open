@@ -17,8 +17,6 @@
 		532121E01EEAC4DC00F4812A /* FMDatabaseAdditionsVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121D91EEAC4DC00F4812A /* FMDatabaseAdditionsVariadic.swift */; };
 		532121E11EEAC4DC00F4812A /* FMDatabaseVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121DA1EEAC4DC00F4812A /* FMDatabaseVariadic.swift */; };
 		532121E31EEAC4E300F4812A /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 532121E21EEAC4E300F4812A /* libsqlcipher.a */; };
-		532121E71EEAC5DD00F4812A /* KeychainManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121E51EEAC5DD00F4812A /* KeychainManagement.swift */; };
-		532121E81EEAC5DD00F4812A /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121E61EEAC5DD00F4812A /* KeychainManager.swift */; };
 		532121EA1EEAC5F300F4812A /* Singletons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121E91EEAC5F300F4812A /* Singletons.swift */; };
 		532121EF1EEAC72300F4812A /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532121EC1EEAC72300F4812A /* Locksmith.framework */; };
 		532121F01EEAC72300F4812A /* ObjcExceptionBridging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532121ED1EEAC72300F4812A /* ObjcExceptionBridging.framework */; };
@@ -124,6 +122,8 @@
 		532122CF1EEB008700F4812A /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122CE1EEB008700F4812A /* AddAccountViewController.swift */; };
 		532122D11EEB04DA00F4812A /* HoverButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122D01EEB04DA00F4812A /* HoverButton.swift */; };
 		532122D31EEB05A800F4812A /* AddAccountButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122D21EEB05A800F4812A /* AddAccountButtons.swift */; };
+		53946F9F1EEB10AA00E921C3 /* KeychainManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53946F9D1EEB10AA00E921C3 /* KeychainManagement.swift */; };
+		53946FA01EEB10AA00E921C3 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53946F9E1EEB10AA00E921C3 /* KeychainManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -167,8 +167,6 @@
 		532121DA1EEAC4DC00F4812A /* FMDatabaseVariadic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMDatabaseVariadic.swift; sourceTree = "<group>"; };
 		532121E21EEAC4E300F4812A /* libsqlcipher.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsqlcipher.a; path = Frameworks/libsqlcipher.a; sourceTree = "<group>"; };
 		532121E41EEAC53A00F4812A /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
-		532121E51EEAC5DD00F4812A /* KeychainManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainManagement.swift; path = ../../bal/Bal/KeychainManagement.swift; sourceTree = "<group>"; };
-		532121E61EEAC5DD00F4812A /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainManager.swift; path = ../../bal/Bal/KeychainManager.swift; sourceTree = "<group>"; };
 		532121E91EEAC5F300F4812A /* Singletons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Singletons.swift; sourceTree = "<group>"; };
 		532121EC1EEAC72300F4812A /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/Mac/Locksmith.framework; sourceTree = SOURCE_ROOT; };
 		532121ED1EEAC72300F4812A /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjcExceptionBridging.framework; path = Carthage/Build/Mac/ObjcExceptionBridging.framework; sourceTree = SOURCE_ROOT; };
@@ -266,6 +264,8 @@
 		532122CE1EEB008700F4812A /* AddAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
 		532122D01EEB04DA00F4812A /* HoverButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoverButton.swift; sourceTree = "<group>"; };
 		532122D21EEB05A800F4812A /* AddAccountButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountButtons.swift; sourceTree = "<group>"; };
+		53946F9D1EEB10AA00E921C3 /* KeychainManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManagement.swift; sourceTree = "<group>"; };
+		53946F9E1EEB10AA00E921C3 /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -511,8 +511,8 @@
 				532121C51EEAC47300F4812A /* Database.swift */,
 				532122191EEAC90C00F4812A /* Defaults.swift */,
 				5321221A1EEAC90C00F4812A /* DefaultsStorage.swift */,
-				532121E51EEAC5DD00F4812A /* KeychainManagement.swift */,
-				532121E61EEAC5DD00F4812A /* KeychainManager.swift */,
+				53946F9D1EEB10AA00E921C3 /* KeychainManagement.swift */,
+				53946F9E1EEB10AA00E921C3 /* KeychainManager.swift */,
 				532122131EEAC8E400F4812A /* Logging.swift */,
 				5321228B1EEADD0200F4812A /* NetworkStatus.swift */,
 				5321226F1EEAD7F800F4812A /* Notifications.swift */,
@@ -649,6 +649,7 @@
 				5321223D1EEAD1D100F4812A /* PreferencesViewController.swift in Sources */,
 				532121DD1EEAC4DC00F4812A /* FMDatabasePool.m in Sources */,
 				532122921EEADE2700F4812A /* VisualEffectView.swift in Sources */,
+				53946F9F1EEB10AA00E921C3 /* KeychainManagement.swift in Sources */,
 				532121E11EEAC4DC00F4812A /* FMDatabaseVariadic.swift in Sources */,
 				532122381EEAD1D100F4812A /* PreferencesAccountsViewController.swift in Sources */,
 				5321222E1EEAD19600F4812A /* main.swift in Sources */,
@@ -679,11 +680,11 @@
 				5321226B1EEAD7BD00F4812A /* Institution.swift in Sources */,
 				532122121EEAC8CB00F4812A /* AutoLaunch.swift in Sources */,
 				532122B51EEAE89A00F4812A /* TypeAliases.swift in Sources */,
+				53946FA01EEB10AA00E921C3 /* KeychainManager.swift in Sources */,
 				5321228E1EEADD3500F4812A /* ServerMessage.swift in Sources */,
 				532122781EEAD89300F4812A /* TabViewModel.swift in Sources */,
 				5321223A1EEAD1D100F4812A /* PreferencesGeneralViewController.swift in Sources */,
 				532122D31EEB05A800F4812A /* AddAccountButtons.swift in Sources */,
-				532121E71EEAC5DD00F4812A /* KeychainManagement.swift in Sources */,
 				5321228A1EEADC9600F4812A /* ObjC.m in Sources */,
 				5321220A1EEAC89B00F4812A /* CCNStatusItemDropView.m in Sources */,
 				5321229A1EEADFE500F4812A /* QCMethod.swift in Sources */,
@@ -691,7 +692,6 @@
 				532122B91EEAEAE600F4812A /* Date.swift in Sources */,
 				532122641EEAD75C00F4812A /* SectionedTableView.swift in Sources */,
 				5321223C1EEAD1D100F4812A /* PreferencesSecurityViewController.swift in Sources */,
-				532121E81EEAC5DD00F4812A /* KeychainManager.swift in Sources */,
 				532122831EEADA1100F4812A /* ImageView.swift in Sources */,
 				5321228C1EEADD0200F4812A /* NetworkStatus.swift in Sources */,
 				532122811EEADA0700F4812A /* LabelField.swift in Sources */,
@@ -899,6 +899,7 @@
 				532121C31EEAC2BF00F4812A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
