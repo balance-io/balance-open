@@ -116,10 +116,11 @@
 		532122BB1EEAED1F00F4812A /* SetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122BA1EEAED1F00F4812A /* SetPasswordViewController.swift */; };
 		532122BD1EEAED3100F4812A /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122BC1EEAED3100F4812A /* ChangePasswordViewController.swift */; };
 		532122BF1EEAED4200F4812A /* DisablePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122BE1EEAED4200F4812A /* DisablePasswordViewController.swift */; };
-		532122C11EEAED7200F4812A /* EmailIssueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122C01EEAED7200F4812A /* EmailIssueController.swift */; };
 		532122C31EEAEDC400F4812A /* BalanceTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122C21EEAEDC400F4812A /* BalanceTextField.swift */; };
 		532122C51EEAEE5900F4812A /* SecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122C41EEAEE5900F4812A /* SecureField.swift */; };
 		532122C91EEAF09700F4812A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 532122C81EEAF09700F4812A /* Assets.xcassets */; };
+		532122CB1EEAFDF100F4812A /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122CA1EEAFDF100F4812A /* LockViewController.swift */; };
+		532122CD1EEAFF6300F4812A /* NSWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122CC1EEAFF6300F4812A /* NSWindow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -254,10 +255,11 @@
 		532122BA1EEAED1F00F4812A /* SetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPasswordViewController.swift; sourceTree = "<group>"; };
 		532122BC1EEAED3100F4812A /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		532122BE1EEAED4200F4812A /* DisablePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisablePasswordViewController.swift; sourceTree = "<group>"; };
-		532122C01EEAED7200F4812A /* EmailIssueController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailIssueController.swift; sourceTree = "<group>"; };
 		532122C21EEAEDC400F4812A /* BalanceTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceTextField.swift; sourceTree = "<group>"; };
 		532122C41EEAEE5900F4812A /* SecureField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureField.swift; sourceTree = "<group>"; };
 		532122C81EEAF09700F4812A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		532122CA1EEAFDF100F4812A /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
+		532122CC1EEAFF6300F4812A /* NSWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSWindow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -348,7 +350,7 @@
 				532122521EEAD5BF00F4812A /* TabsViewController.swift */,
 				5321223E1EEAD2B700F4812A /* AccountsTabTableCells.swift */,
 				532122401EEAD2B700F4812A /* AccountsTabViewController.swift */,
-				532122C01EEAED7200F4812A /* EmailIssueController.swift */,
+				532122CA1EEAFDF100F4812A /* LockViewController.swift */,
 				532122311EEAD1C000F4812A /* Preferences */,
 				532122AD1EEAE6E700F4812A /* Vector Graphics Draw Functions */,
 				532122791EEAD8B500F4812A /* Models */,
@@ -426,6 +428,7 @@
 				532122A91EEAE3F300F4812A /* NSFont.swift */,
 				532122B61EEAE93400F4812A /* NSImage.swift */,
 				532122841EEADA2B00F4812A /* NSView.swift */,
+				532122CC1EEAFF6300F4812A /* NSWindow.swift */,
 				532121FA1EEAC75A00F4812A /* String.swift */,
 			);
 			name = Extensions;
@@ -643,6 +646,7 @@
 				532121FB1EEAC75A00F4812A /* String.swift in Sources */,
 				5321227B1EEAD8D000F4812A /* Source.swift in Sources */,
 				532122761EEAD87000F4812A /* CwlSysctl.swift in Sources */,
+				532122CB1EEAFDF100F4812A /* LockViewController.swift in Sources */,
 				532122AA1EEAE3F300F4812A /* NSFont.swift in Sources */,
 				532122091EEAC89B00F4812A /* CCNStatusItem.m in Sources */,
 				532121DE1EEAC4DC00F4812A /* FMDatabaseQueue.m in Sources */,
@@ -670,7 +674,6 @@
 				5321223A1EEAD1D100F4812A /* PreferencesGeneralViewController.swift in Sources */,
 				532121E71EEAC5DD00F4812A /* KeychainManagement.swift in Sources */,
 				5321228A1EEADC9600F4812A /* ObjC.m in Sources */,
-				532122C11EEAED7200F4812A /* EmailIssueController.swift in Sources */,
 				5321220A1EEAC89B00F4812A /* CCNStatusItemDropView.m in Sources */,
 				5321229A1EEADFE500F4812A /* QCMethod.swift in Sources */,
 				532122181EEAC8F800F4812A /* SyncManager.swift in Sources */,
@@ -690,6 +693,7 @@
 				5321220C1EEAC89B00F4812A /* CCNStatusItemWindowBackgroundView.m in Sources */,
 				5321229E1EEAE00600F4812A /* SyncButton.swift in Sources */,
 				532122301EEAD1BB00F4812A /* PopoverViewController.swift in Sources */,
+				532122CD1EEAFF6300F4812A /* NSWindow.swift in Sources */,
 				532122AC1EEAE56400F4812A /* Shortcut.swift in Sources */,
 				5321221C1EEAC90C00F4812A /* DefaultsStorage.swift in Sources */,
 				532121DB1EEAC4DC00F4812A /* FMDatabase.m in Sources */,

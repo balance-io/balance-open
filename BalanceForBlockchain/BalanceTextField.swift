@@ -9,7 +9,7 @@
 import Cocoa
 import SnapKit
 
-enum SignUpTextFieldType {
+enum BalanceTextFieldType {
     case username
     case password
     case pin
@@ -20,10 +20,10 @@ enum SignUpTextFieldType {
     case none
 }
 
-class SignUpTextField: View, TextFieldDelegate {
+class BalanceTextField: View, TextFieldDelegate {
     weak var customDelegate: TextFieldDelegate?
     
-    let type: SignUpTextFieldType
+    let type: BalanceTextFieldType
     
     var activeBorderColor = CurrentTheme.balanceTextField.activeBorderColor
     var inactiveBorderColor = CurrentTheme.balanceTextField.inactiveBorderColor
@@ -40,7 +40,7 @@ class SignUpTextField: View, TextFieldDelegate {
     fileprivate let icon = ImageView()
     fileprivate let offset = 7.0
     
-    init(type: SignUpTextFieldType) {
+    init(type: BalanceTextFieldType) {
         self.type = type
         super.init(frame: NSZeroRect)
         commonInit()

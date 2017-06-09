@@ -32,7 +32,6 @@ protocol Theme {
     var tabs: TabsTheme { get }
     var lock: LockTheme { get }
     var accounts: AccountsTheme { get }
-    var emailIssue: EmailIssueTheme { get }
 }
 
 struct DefaultsTheme {
@@ -138,14 +137,4 @@ struct AccountsTheme {
     struct PromptTheme {
         let promptFont: NSFont
     }
-}
-
-struct EmailIssueTheme {
-    let titleFont: NSFont
-    let buttonFont: NSFont
-    let infoLabelNameFont: NSFont
-    let infoLabelNameColor: NSColor
-    let infoLabelValueFont: NSFont
-    let infoLabelValueColor: NSColor
-    let messageLabelFont: NSFont
 }

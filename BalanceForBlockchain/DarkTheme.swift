@@ -117,16 +117,4 @@ struct DarkTheme: Theme {
         
         return AccountsTheme(headerCell: headerCell, cell: cell, cellExpansion: cellExpansion, fixPasswordPrompt: fixPasswordPrompt, prompt: prompt)
     }
-    
-    var emailIssue: EmailIssueTheme {
-        let titleFont = NSFont.lightSystemFont(ofSize: 21)
-        let buttonFont = NSFont.systemFont(ofSize: 14)
-        let infoLabelNameFont = NSFont.boldSystemFont(ofSize: 12)
-        let infoLabelNameColor = NSColor.white
-        let infoLabelValueFont = NSFont.systemFont(ofSize: 12)
-        let infoLabelValueColor = NSColor.lightGray
-        let messageLabelFont = NSFont.systemFont(ofSize: 12)
-        
-        return EmailIssueTheme(titleFont: titleFont, buttonFont: buttonFont, infoLabelNameFont: infoLabelNameFont, infoLabelNameColor: infoLabelNameColor, infoLabelValueFont: infoLabelValueFont, infoLabelValueColor: infoLabelValueColor, messageLabelFont: messageLabelFont)
-    }
 }

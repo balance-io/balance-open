@@ -23,7 +23,6 @@ class TabsViewController: NSViewController {
     // MARK: Tabs
     let tabContainerView = View()
     let accountsViewController = AccountsTabViewController()
-    var feedbackViewController: EmailIssueController?
     let summaryFooterView = View()
     var currentTableViewController: NSViewController?
     var currentVisibleTab = Tab.none
@@ -149,28 +148,8 @@ class TabsViewController: NSViewController {
     }
     
     func sendFeedback() {
-        guard let superview = self.view.superview, let currentTableViewController = currentTableViewController, feedbackViewController == nil else {
-            let urlString = "mailto:support@balancemy.money?Subject=Balance%20Feedback"
-            _ = try? NSWorkspace.shared().open(URL(string: urlString)!, options: [], configuration: [:])
-            return
-        }
-            
-        feedbackViewController = EmailIssueController {
-            currentTableViewController.viewWillAppear()
-            self.feedbackViewController!.viewWillDisappear()
-            superview.replaceSubview(self.feedbackViewController!.view, with: self.view, animation: .slideInFromLeft) {
-                currentTableViewController.viewDidAppear()
-                self.feedbackViewController!.viewDidDisappear()
-                self.feedbackViewController = nil
-            }
-        }
-        
-        currentTableViewController.viewWillDisappear()
-        feedbackViewController!.viewWillAppear()
-        superview.replaceSubview(self.view, with: feedbackViewController!.view, animation: .slideInFromRight) {
-            self.feedbackViewController!.viewDidAppear()
-            currentTableViewController.viewDidDisappear()
-        }
+        let urlString = "https://github.com/balancemymoney/BalanceForBlockchain/issues"
+        _ = try? NSWorkspace.shared().open(URL(string: urlString)!, options: [], configuration: [:])
     }
     
     func quitApp() {
