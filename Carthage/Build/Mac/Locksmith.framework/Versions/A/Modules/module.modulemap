@@ -1,0 +1,10 @@
+framework module Locksmith {
+  umbrella header "Locksmith.h"
+
+  export *
+  module * { export * }
+}
+
+module Locksmith.Swift {
+    header "Locksmith-Swift.h"
+}

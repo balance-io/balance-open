@@ -21,7 +21,7 @@ sqlcipher/Makefile
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
 ## Build generated
-build/
+/build/
 DerivedData
 
 ## Various settings
@@ -71,6 +71,7 @@ Temporary Items
 
 # Carthage
 Carthage/Checkouts
+Carthage/Build/iOS
 Carthage/Build/tvOS
 Carthage/Build/watchOS
 

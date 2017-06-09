@@ -1,0 +1,9 @@
+{
+  "commitish" : "1.4.2",
+  "Mac" : [
+    {
+      "hash" : "8f41d676980eac2b72e55ce6d4fa481d8ad9f3c85820ff408c98bd8823f8babe",
+      "name" : "TrustKit"
+    }
+  ]
+}

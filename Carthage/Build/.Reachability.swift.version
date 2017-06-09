@@ -1,0 +1,9 @@
+{
+  "commitish" : "v3",
+  "Mac" : [
+    {
+      "hash" : "7ab3d68185b01cda23d3628341a4d1f7cc70298faa7ceba63d0223ac244821bb",
+      "name" : "Reachability"
+    }
+  ]
+}

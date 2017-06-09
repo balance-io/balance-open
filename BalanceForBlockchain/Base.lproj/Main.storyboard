@@ -1,34 +1,57 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11134"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Window Controller-->
+        <scene sceneID="wnb-Pe-RNZ">
+            <objects>
+                <windowController storyboardIdentifier="preferencesWindowController" showSeguePresentationStyle="single" id="map-cP-kFL" sceneMemberID="viewController">
+                    <window key="window" title="General" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="QOw-BM-GKl">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="294" y="362" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+                    </window>
+                    <connections>
+                        <segue destination="hVY-gq-v56" kind="relationship" relationship="window.shadowedContentViewController" id="L4l-wd-xtp"/>
+                    </connections>
+                </windowController>
+                <customObject id="wiC-RD-tAu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="566" y="62"/>
+        </scene>
         <!--Application-->
         <scene sceneID="JPo-4y-FX3">
             <objects>
                 <application id="hnw-xV-0zn" sceneMemberID="viewController">
                     <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
                         <items>
-                            <menuItem title="BalanceForBlockchain" id="1Xt-HY-uBw">
+                            <menuItem title="Balance" id="1Xt-HY-uBw">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="BalanceForBlockchain" systemMenu="apple" id="uQy-DD-JDr">
+                                <menu key="submenu" title="Balance" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
-                                        <menuItem title="About BalanceForBlockchain" id="5kV-Vb-QxS">
+                                        <menuItem title="About SwiftPrefs" id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Swift Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <segue destination="map-cP-kFL" kind="show" id="At2-DQ-tAc"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
-                                        <menuItem title="Hide BalanceForBlockchain" keyEquivalent="h" id="Olw-nP-bQN">
+                                        <menuItem title="Hide SwiftPrefs" keyEquivalent="h" id="Olw-nP-bQN">
                                             <connections>
                                                 <action selector="hide:" target="Ady-hI-5gd" id="PnN-Uc-m68"/>
                                             </connections>
@@ -46,7 +69,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                                        <menuItem title="Quit BalanceForBlockchain" keyEquivalent="q" id="4sb-4s-VLi">
+                                        <menuItem title="Quit SwiftPrefs" keyEquivalent="q" id="4sb-4s-VLi">
                                             <connections>
                                                 <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
                                             </connections>
@@ -97,7 +120,8 @@
                                                 <action selector="saveDocumentAs:" target="Ady-hI-5gd" id="mDf-zr-I0C"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Revert to Saved" keyEquivalent="r" id="KaW-ft-85H">
+                                        <menuItem title="Revert to Saved" id="KaW-ft-85H">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="revertDocumentToSaved:" target="Ady-hI-5gd" id="iJ3-Pv-kwq"/>
                                             </connections>
@@ -594,19 +618,6 @@
                                                 <action selector="runToolbarCustomizationPalette:" target="Ady-hI-5gd" id="pQI-g3-MTW"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="hB3-LF-h0Y"/>
-                                        <menuItem title="Show Sidebar" keyEquivalent="s" id="kIP-vf-haE">
-                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="toggleSourceList:" target="Ady-hI-5gd" id="iwa-gc-5KM"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
-                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="toggleFullScreen:" target="Ady-hI-5gd" id="dU3-MA-1Rq"/>
-                                            </connections>
-                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -619,8 +630,8 @@
                                                 <action selector="performMiniaturize:" target="Ady-hI-5gd" id="VwT-WD-YPe"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Zoom" id="R4o-n2-Eq4">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="Zoom" keyEquivalent="a" id="R4o-n2-Eq4">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
                                                 <action selector="performZoom:" target="Ady-hI-5gd" id="DIl-cC-cCs"/>
                                             </connections>
@@ -639,7 +650,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                                     <items>
-                                        <menuItem title="BalanceForBlockchain Help" keyEquivalent="?" id="FKE-Sm-Kum">
+                                        <menuItem title="SwiftPrefs Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                             <connections>
                                                 <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
                                             </connections>
@@ -653,41 +664,270 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Balance" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="566.5" y="-264"/>
         </scene>
-        <!--Window Controller-->
-        <scene sceneID="R2V-B0-nI4">
+        <!--Preferences View Controller-->
+        <scene sceneID="tzP-Db-G1S">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                    </window>
+                <tabViewController identifier="preferencesViewController" storyboardIdentifier="preferencesViewController" showSeguePresentationStyle="single" tabStyle="toolbar" id="hVY-gq-v56" customClass="PreferencesViewController" customModule="Balance" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabViewItems>
+                        <tabViewItem label="General" identifier="" image="settings-general" id="XV9-la-kPC"/>
+                        <tabViewItem label="Accounts" identifier="" image="settings-accounts" id="mjd-3J-VQs"/>
+                        <tabViewItem label="Rules" image="settings-rules" id="zWR-Np-o4u"/>
+                        <tabViewItem label="Billing" image="settings-billing" id="9Zb-GZ-N68"/>
+                        <tabViewItem label="Security" image="settings-security" id="fYX-RW-O1x"/>
+                    </tabViewItems>
+                    <viewControllerTransitionOptions key="transitionOptions" allowUserInteraction="YES"/>
+                    <tabView key="tabView" type="noTabsNoBorder" id="SS2-JJ-fG8">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <font key="font" metaFont="message"/>
+                        <tabViewItems/>
+                        <connections>
+                            <outlet property="delegate" destination="hVY-gq-v56" id="pqp-kw-y1o"/>
+                        </connections>
+                    </tabView>
                     <connections>
-                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
+                        <segue destination="Yil-VZ-ttf" kind="relationship" relationship="tabItems" id="JVQ-Lx-wjN"/>
+                        <segue destination="KH6-LF-Rm2" kind="relationship" relationship="tabItems" id="i1t-Dg-ETH"/>
+                        <segue destination="Dak-x5-z3L" kind="relationship" relationship="tabItems" id="4Ns-f4-Bbc"/>
+                        <segue destination="emK-5P-WCx" kind="relationship" relationship="tabItems" id="EFc-Fa-sLb"/>
+                        <segue destination="nW7-Wz-2se" kind="relationship" relationship="tabItems" id="jyv-u2-OLc"/>
                     </connections>
-                </windowController>
-                <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                </tabViewController>
+                <customObject id="4Ts-BM-gQ7" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="566" y="482"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="hIz-AP-VOD">
+        <!--General-->
+        <scene sceneID="fgF-CH-hBP">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <viewController title="General" id="Yil-VZ-ttf" customClass="PreferencesGeneralViewController" customModule="Balance" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="aKI-tT-xOh">
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="214"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="hbn-Wg-xle">
+                                <rect key="frame" x="191" y="174" width="222" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="218" id="kx5-M5-WT7"/>
+                                </constraints>
+                                <buttonCell key="cell" type="check" title="Launch at log in" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="AHc-1X-hkO">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="logInCheckBoxPress:" target="Yil-VZ-ttf" id="Ov6-aq-xa8"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4GT-dy-df3">
+                                <rect key="frame" x="129" y="102" width="56" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="52" id="hN0-sk-w8p"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Theme:" id="Fbg-YC-RtF">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="x11-fD-q1x">
+                                <rect key="frame" x="191" y="97" width="157" height="24"/>
+                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="ryw-uV-HoY">
+                                    <font key="font" metaFont="system"/>
+                                    <segments>
+                                        <segment label="Auto"/>
+                                        <segment label="Light" selected="YES" tag="1"/>
+                                        <segment label="Dark"/>
+                                    </segments>
+                                </segmentedCell>
+                                <connections>
+                                    <action selector="themeChanged:" target="Yil-VZ-ttf" id="YWd-fv-9QM"/>
+                                </connections>
+                            </segmentedControl>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PRP-Jw-h1M">
+                                <rect key="frame" x="191" y="65" width="158" height="26"/>
+                                <popUpButtonCell key="cell" type="push" title=" Gmail" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="TX4-Pe-8Ry" id="8yS-iR-ReL">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="i0e-1y-D8o">
+                                        <items>
+                                            <menuItem title=" Gmail" state="on" image="gmail-icon" id="TX4-Pe-8Ry"/>
+                                            <menuItem title=" Google Inbox" image="google-inbox-icon" tag="1" id="jJh-nT-H6F"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="emailPreferenceChanged:" target="Yil-VZ-ttf" id="zob-Ig-OPi"/>
+                                </connections>
+                            </popUpButton>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="BQj-3E-j9E">
+                                <rect key="frame" x="99" y="72" width="86" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="82" id="odC-g1-rpH"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Email Search:" id="gbA-xK-ZJQ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fqr-LT-GmM">
+                                <rect key="frame" x="191" y="34" width="158" height="26"/>
+                                <popUpButtonCell key="cell" type="push" title=" Google" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="dQS-hU-v6H" id="wSt-bP-fKy">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="P7D-zw-0cq">
+                                        <items>
+                                            <menuItem title=" Google" state="on" image="google-icon" id="dQS-hU-v6H"/>
+                                            <menuItem title=" DuckDuckGo" image="duck-duck-go-icon" tag="1" id="qrh-z0-A3H"/>
+                                            <menuItem title=" Bing" image="bing-icon" tag="2" id="b1W-CA-3f4"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="searchPreferenceChanged:" target="Yil-VZ-ttf" id="4Iq-a4-Ezt"/>
+                                </connections>
+                            </popUpButton>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OYa-Ry-O3s">
+                                <rect key="frame" x="104" y="40" width="81" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="77" id="Qg4-Z0-jOb"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Web Search:" id="LiC-gm-Jw0">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KLO-OE-sXB">
+                                <rect key="frame" x="111" y="134" width="74" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Shortcut:" id="YNG-1r-VlX">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="cp3-tO-0fm" customClass="MASShortcutView">
+                                <rect key="frame" x="193" y="131" width="153" height="22"/>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="PRP-Jw-h1M" firstAttribute="top" secondItem="x11-fD-q1x" secondAttribute="bottom" constant="10" id="3Tj-0I-1JS"/>
+                            <constraint firstItem="hbn-Wg-xle" firstAttribute="top" secondItem="aKI-tT-xOh" secondAttribute="top" constant="24" id="3kP-dc-UHg"/>
+                            <constraint firstItem="BQj-3E-j9E" firstAttribute="trailing" secondItem="KLO-OE-sXB" secondAttribute="trailing" id="6bM-tw-M5D"/>
+                            <constraint firstItem="cp3-tO-0fm" firstAttribute="centerY" secondItem="KLO-OE-sXB" secondAttribute="centerY" id="CVS-zo-iyT"/>
+                            <constraint firstItem="cp3-tO-0fm" firstAttribute="trailing" secondItem="Fqr-LT-GmM" secondAttribute="trailing" id="Chd-wc-z0J"/>
+                            <constraint firstItem="x11-fD-q1x" firstAttribute="leading" secondItem="4GT-dy-df3" secondAttribute="trailing" constant="10" id="E2e-uR-TsE"/>
+                            <constraint firstItem="cp3-tO-0fm" firstAttribute="leading" secondItem="KLO-OE-sXB" secondAttribute="trailing" constant="10" id="F92-6T-fjN"/>
+                            <constraint firstItem="4GT-dy-df3" firstAttribute="baseline" secondItem="x11-fD-q1x" secondAttribute="baseline" id="FSW-Zv-29d"/>
+                            <constraint firstItem="Fqr-LT-GmM" firstAttribute="top" secondItem="PRP-Jw-h1M" secondAttribute="bottom" constant="10" id="H2e-zT-H5R"/>
+                            <constraint firstItem="4GT-dy-df3" firstAttribute="trailing" secondItem="KLO-OE-sXB" secondAttribute="trailing" id="HFK-z0-063"/>
+                            <constraint firstItem="x11-fD-q1x" firstAttribute="top" secondItem="cp3-tO-0fm" secondAttribute="bottom" constant="11" id="UQD-ay-8fP"/>
+                            <constraint firstItem="cp3-tO-0fm" firstAttribute="trailing" secondItem="x11-fD-q1x" secondAttribute="trailing" id="WwR-3J-46c"/>
+                            <constraint firstItem="OYa-Ry-O3s" firstAttribute="trailing" secondItem="BQj-3E-j9E" secondAttribute="trailing" id="Yke-Mc-dWX"/>
+                            <constraint firstItem="Fqr-LT-GmM" firstAttribute="trailing" secondItem="x11-fD-q1x" secondAttribute="trailing" id="and-dp-6Yz"/>
+                            <constraint firstItem="PRP-Jw-h1M" firstAttribute="leading" secondItem="x11-fD-q1x" secondAttribute="leading" id="bT1-Qu-8Z4"/>
+                            <constraint firstItem="hbn-Wg-xle" firstAttribute="leading" secondItem="x11-fD-q1x" secondAttribute="leading" id="d1C-1N-YAl"/>
+                            <constraint firstItem="Fqr-LT-GmM" firstAttribute="centerY" secondItem="OYa-Ry-O3s" secondAttribute="centerY" constant="1" id="fTb-fb-FYn"/>
+                            <constraint firstItem="4GT-dy-df3" firstAttribute="leading" secondItem="KLO-OE-sXB" secondAttribute="leading" constant="18" id="gGY-h0-7aF"/>
+                            <constraint firstItem="Fqr-LT-GmM" firstAttribute="leading" secondItem="PRP-Jw-h1M" secondAttribute="leading" id="jiO-J1-jiu"/>
+                            <constraint firstItem="PRP-Jw-h1M" firstAttribute="centerY" secondItem="BQj-3E-j9E" secondAttribute="centerY" constant="2" id="mLD-sa-h2x"/>
+                            <constraint firstItem="PRP-Jw-h1M" firstAttribute="trailing" secondItem="x11-fD-q1x" secondAttribute="trailing" id="pq6-ey-hNT"/>
+                            <constraint firstItem="4GT-dy-df3" firstAttribute="leading" secondItem="aKI-tT-xOh" secondAttribute="leading" constant="131" id="rCk-m0-tDg"/>
+                            <constraint firstItem="x11-fD-q1x" firstAttribute="centerY" secondItem="aKI-tT-xOh" secondAttribute="centerY" constant="-2.5" id="tQF-cI-zhh"/>
+                            <constraint firstAttribute="bottom" secondItem="OYa-Ry-O3s" secondAttribute="bottom" constant="40" id="wTa-AT-wAc"/>
+                            <constraint firstItem="KLO-OE-sXB" firstAttribute="top" secondItem="aKI-tT-xOh" secondAttribute="top" constant="63" id="xLV-5o-LAT"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="emailPreferencePopUpButton" destination="PRP-Jw-h1M" id="mf7-yl-76C"/>
+                        <outlet property="logInCheckBox" destination="hbn-Wg-xle" id="4mv-ic-c7s"/>
+                        <outlet property="searchPreferencePopUpButton" destination="Fqr-LT-GmM" id="5sf-gg-twV"/>
+                        <outlet property="shortcutView" destination="cp3-tO-0fm" id="x1e-HX-oJu"/>
+                        <outlet property="themeSegmentControl" destination="x11-fD-q1x" id="IlO-jp-PpT"/>
+                    </connections>
+                </viewController>
+                <customObject id="aRd-Wn-fkq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1098" y="68"/>
+        </scene>
+        <!--Accounts-->
+        <scene sceneID="VS7-JW-ozc">
+            <objects>
+                <viewController title="Advanced" id="KH6-LF-Rm2" userLabel="Accounts" customClass="PreferencesAccountsViewController" customModule="Balance" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="iGy-cX-kKS">
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="311"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </view>
                 </viewController>
-                <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <textFieldCell lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Wells Fargo" id="CxQ-6P-ILq">
+                    <font key="font" metaFont="system"/>
+                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                </textFieldCell>
+                <customObject id="4YC-fG-jJO" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <textFieldCell lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Wells Fargo" id="5et-AI-952">
+                    <font key="font" metaFont="system"/>
+                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                </textFieldCell>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="1652" y="174"/>
+        </scene>
+        <!--Rules-->
+        <scene sceneID="POF-Lf-2Mw">
+            <objects>
+                <viewController title="Rules" id="Dak-x5-z3L" customClass="PreferencesRulesViewController" customModule="Balance" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="xiO-mY-tIs">
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="400"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="m9P-2u-RSa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1417" y="622"/>
+        </scene>
+        <!--Billing-->
+        <scene sceneID="LiR-Ce-0fX">
+            <objects>
+                <viewController title="Billing" id="emK-5P-WCx" customClass="PreferencesBillingViewController" customModule="Balance" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Xni-6G-vF3">
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="400"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="atn-S0-4Dd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="829" y="1058.5"/>
+        </scene>
+        <!--Security-->
+        <scene sceneID="vpY-88-nxY">
+            <objects>
+                <viewController title="Security" id="nW7-Wz-2se" customClass="PreferencesSecurityViewController" customModule="Balance" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="si6-F5-jG8">
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="250"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="J6G-0Y-3MN" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="296" y="1059"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bing-icon" width="16" height="16"/>
+        <image name="duck-duck-go-icon" width="16" height="16"/>
+        <image name="gmail-icon" width="16" height="16"/>
+        <image name="google-icon" width="16" height="16"/>
+        <image name="google-inbox-icon" width="16" height="16"/>
+        <image name="settings-accounts" width="32" height="32"/>
+        <image name="settings-billing" width="32" height="32"/>
+        <image name="settings-general" width="32" height="32"/>
+        <image name="settings-rules" width="32" height="32"/>
+        <image name="settings-security" width="32" height="32"/>
+    </resources>
 </document>
