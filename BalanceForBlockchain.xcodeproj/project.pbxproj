@@ -1,0 +1,298 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		532121B61EEAC2BF00F4812A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121B51EEAC2BF00F4812A /* AppDelegate.swift */; };
+		532121B81EEAC2BF00F4812A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121B71EEAC2BF00F4812A /* ViewController.swift */; };
+		532121BA1EEAC2BF00F4812A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 532121B91EEAC2BF00F4812A /* Assets.xcassets */; };
+		532121BD1EEAC2BF00F4812A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 532121BB1EEAC2BF00F4812A /* Main.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		532121B21EEAC2BF00F4812A /* BalanceForBlockchain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BalanceForBlockchain.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		532121B51EEAC2BF00F4812A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		532121B71EEAC2BF00F4812A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		532121B91EEAC2BF00F4812A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		532121BC1EEAC2BF00F4812A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		532121BE1EEAC2BF00F4812A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		532121AF1EEAC2BF00F4812A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		532121A91EEAC2BF00F4812A = {
+			isa = PBXGroup;
+			children = (
+				532121B41EEAC2BF00F4812A /* BalanceForBlockchain */,
+				532121B31EEAC2BF00F4812A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		532121B31EEAC2BF00F4812A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				532121B21EEAC2BF00F4812A /* BalanceForBlockchain.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		532121B41EEAC2BF00F4812A /* BalanceForBlockchain */ = {
+			isa = PBXGroup;
+			children = (
+				532121B51EEAC2BF00F4812A /* AppDelegate.swift */,
+				532121B71EEAC2BF00F4812A /* ViewController.swift */,
+				532121B91EEAC2BF00F4812A /* Assets.xcassets */,
+				532121BB1EEAC2BF00F4812A /* Main.storyboard */,
+				532121BE1EEAC2BF00F4812A /* Info.plist */,
+			);
+			path = BalanceForBlockchain;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		532121B11EEAC2BF00F4812A /* BalanceForBlockchain */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 532121C11EEAC2BF00F4812A /* Build configuration list for PBXNativeTarget "BalanceForBlockchain" */;
+			buildPhases = (
+				532121AE1EEAC2BF00F4812A /* Sources */,
+				532121AF1EEAC2BF00F4812A /* Frameworks */,
+				532121B01EEAC2BF00F4812A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BalanceForBlockchain;
+			productName = BalanceForBlockchain;
+			productReference = 532121B21EEAC2BF00F4812A /* BalanceForBlockchain.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		532121AA1EEAC2BF00F4812A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "Balanced Software, Inc.";
+				TargetAttributes = {
+					532121B11EEAC2BF00F4812A = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = Q4G66XSS36;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 532121AD1EEAC2BF00F4812A /* Build configuration list for PBXProject "BalanceForBlockchain" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 532121A91EEAC2BF00F4812A;
+			productRefGroup = 532121B31EEAC2BF00F4812A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				532121B11EEAC2BF00F4812A /* BalanceForBlockchain */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		532121B01EEAC2BF00F4812A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				532121BA1EEAC2BF00F4812A /* Assets.xcassets in Resources */,
+				532121BD1EEAC2BF00F4812A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		532121AE1EEAC2BF00F4812A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				532121B81EEAC2BF00F4812A /* ViewController.swift in Sources */,
+				532121B61EEAC2BF00F4812A /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		532121BB1EEAC2BF00F4812A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				532121BC1EEAC2BF00F4812A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		532121BF1EEAC2BF00F4812A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		532121C01EEAC2BF00F4812A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Release;
+		};
+		532121C21EEAC2BF00F4812A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = Q4G66XSS36;
+				INFOPLIST_FILE = BalanceForBlockchain/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = software.balanced.BalanceForBlockchain;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		532121C31EEAC2BF00F4812A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = Q4G66XSS36;
+				INFOPLIST_FILE = BalanceForBlockchain/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = software.balanced.BalanceForBlockchain;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		532121AD1EEAC2BF00F4812A /* Build configuration list for PBXProject "BalanceForBlockchain" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				532121BF1EEAC2BF00F4812A /* Debug */,
+				532121C01EEAC2BF00F4812A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		532121C11EEAC2BF00F4812A /* Build configuration list for PBXNativeTarget "BalanceForBlockchain" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				532121C21EEAC2BF00F4812A /* Debug */,
+				532121C31EEAC2BF00F4812A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 532121AA1EEAC2BF00F4812A /* Project object */;
+}
