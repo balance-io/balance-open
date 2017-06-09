@@ -78,7 +78,13 @@ class TabsViewController: NSViewController {
             make.bottom.equalTo(footerView.snp.top)
         }
         
-//        showTab(tabIndex: defaultTab.rawValue)
+        tabContainerView.addSubview(accountsViewController.view)
+        accountsViewController.view.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
     }
     
     func createFooter() {
@@ -148,12 +154,11 @@ class TabsViewController: NSViewController {
     }
     
     func sendFeedback() {
-        let urlString = "https://github.com/balancemymoney/BalanceForBlockchain/issues"
-        _ = try? NSWorkspace.shared().open(URL(string: urlString)!, options: [], configuration: [:])
+        AppDelegate.sharedInstance.sendFeedback()
     }
     
     func quitApp() {
-        NSApp.terminate(nil)
+        AppDelegate.sharedInstance.quitApp()
     }
     
     //

@@ -137,7 +137,7 @@ class SetPasswordViewController: NSViewController {
     }
     
     func createPassword() {
-        //TODO Get the alerts to pop up over the main view
+        // TODO: Get the alerts to pop up over the main view
         if passwordField.stringValue == "" {
             let alert = NSAlert()
             alert.addButton(withTitle: "OK")
@@ -146,14 +146,6 @@ class SetPasswordViewController: NSViewController {
             alert.alertStyle = .informational
             alert.beginSheetModal(for: self.view.window!, completionHandler: nil)
         }
-//        else if hintField.stringValue == "" {
-//            let alert = NSAlert()
-//            alert.addButton(withTitle: "OK")
-//            alert.messageText = "Please create a hint"
-//            alert.informativeText = "A password hint is required to help you jog your memory."
-//            alert.alertStyle = .informational
-//            alert.beginSheetModal(for: self.view.window!, completionHandler: nil)
-//        }
         else if passwordField.stringValue == self.confirmField.stringValue {
             appLock.password = passwordField.stringValue
             appLock.passwordHint = hintField.stringValue

@@ -94,6 +94,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Setup shortcut
         Shortcut.setupDefaultShortcut()
+        
+        // Prepare the preferences window
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        self.preferencesWindowController = storyboard.instantiateController(withIdentifier: "preferencesWindowController") as! NSWindowController
+        
+        // Present the UI
+        self.showWindow()
     }
     
     //
@@ -270,6 +277,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         task.launchPath = "/bin/sh"
         task.arguments = ["-c", "sleep 0.2; open \"\(Bundle.main.bundlePath)\""]
         task.launch()
+        NSApp.terminate(nil)
+    }
+    
+    func sendFeedback() {
+        let urlString = "https://github.com/balancemymoney/BalanceForBlockchain/issues"
+        _ = try? NSWorkspace.shared().open(URL(string: urlString)!, options: [], configuration: [:])
+    }
+    
+    func quitApp() {
         NSApp.terminate(nil)
     }
     

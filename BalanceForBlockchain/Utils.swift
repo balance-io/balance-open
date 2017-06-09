@@ -174,17 +174,7 @@ func roundCentsToNearestDollar(_ cents: Int) -> Int {
     return Int(round((Double(cents) / 100.0)) * 100.0)
 }
 
-//func powerCurve(value: Double, min x: Double, middle y: Double, max z: Double) -> Double {
-//    let a = (x * z - pow(y, 2)) / (x - 2.0 * y + z)
-//    let b = pow((y - x), 2) / (x - 2.0 * y + z)
-//    let c = 2 * Darwin.log((z-y) / (y-x))
-//    
-//    let final = a + b * exp(c * value)
-//    return final
-//}
-
 // Returns NSNull if the input is nil. Useful for things like db queries.
-// TODO: Figure out why FMDB in Swift won't take nil arguments in var args functions
 func n2N(_ nullableObject: Any?) -> AnyObject {
     return nullableObject == nil ? NSNull() : nullableObject! as AnyObject
 }
@@ -238,36 +228,9 @@ extension NSColor {
         
     }
 }
-
-//https://github.com/ricburton/NSImage-MISSINGTint
-//TODO Turn this into an extension on NSImage
-//
-//        extension NSImage {
-//
-//            func tintWithColor(color: NSColor) -> NSImage {
-//                image.lockFocus()
-//                color.set()
-//                var rect = NSZeroRect
-//                rect.size = image.size
-//                NSRectFillUsingOperation(rect, .CompositeSourceAtop)
-//                image.unlockFocus()
-//                return image
-//            }
-func tintImageWithColor(_ image: NSImage, color: NSColor) -> NSImage {
-    image.lockFocus()
-    color.set()
-    var rect = NSZeroRect
-    rect.size = image.size
-    NSRectFillUsingOperation(rect, .sourceAtop)
-    image.unlockFocus()
-    return image
-}
     
 // Allows you to compare any two things, which is not possible with ==
 func equals(_ lhs: Any?, _ rhs: Any?) -> Bool {
-//    return isEqual(lhs as AnyObject?, rhs as AnyObject?)
-//}
-//func equals(_ lhs: AnyObject?, _ rhs: AnyObject?) -> Bool {
     if lhs as AnyObject? === rhs as AnyObject? {
         return true
     }

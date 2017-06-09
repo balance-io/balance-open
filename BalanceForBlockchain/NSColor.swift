@@ -95,7 +95,6 @@ extension NSColor {
     // MARK: - Int Values -
     //
     
-    // TODO: Look into what happened to calibratedRed and deviceRed on UIColor
     convenience init(calibratedRedInt red: Int, green: Int, blue: Int, alpha: Float = 1.0) {
         self.init(calibratedRed: CGFloat(red) / 255.0,
                           green: CGFloat(green) / 255.0,

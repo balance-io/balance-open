@@ -121,6 +121,9 @@
 		532122C91EEAF09700F4812A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 532122C81EEAF09700F4812A /* Assets.xcassets */; };
 		532122CB1EEAFDF100F4812A /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122CA1EEAFDF100F4812A /* LockViewController.swift */; };
 		532122CD1EEAFF6300F4812A /* NSWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122CC1EEAFF6300F4812A /* NSWindow.swift */; };
+		532122CF1EEB008700F4812A /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122CE1EEB008700F4812A /* AddAccountViewController.swift */; };
+		532122D11EEB04DA00F4812A /* HoverButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122D01EEB04DA00F4812A /* HoverButton.swift */; };
+		532122D31EEB05A800F4812A /* AddAccountButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122D21EEB05A800F4812A /* AddAccountButtons.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -260,6 +263,9 @@
 		532122C81EEAF09700F4812A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		532122CA1EEAFDF100F4812A /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
 		532122CC1EEAFF6300F4812A /* NSWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSWindow.swift; sourceTree = "<group>"; };
+		532122CE1EEB008700F4812A /* AddAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
+		532122D01EEB04DA00F4812A /* HoverButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoverButton.swift; sourceTree = "<group>"; };
+		532122D21EEB05A800F4812A /* AddAccountButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountButtons.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,6 +357,7 @@
 				5321223E1EEAD2B700F4812A /* AccountsTabTableCells.swift */,
 				532122401EEAD2B700F4812A /* AccountsTabViewController.swift */,
 				532122CA1EEAFDF100F4812A /* LockViewController.swift */,
+				532122CE1EEB008700F4812A /* AddAccountViewController.swift */,
 				532122311EEAD1C000F4812A /* Preferences */,
 				532122AD1EEAE6E700F4812A /* Vector Graphics Draw Functions */,
 				532122791EEAD8B500F4812A /* Models */,
@@ -473,6 +480,7 @@
 			children = (
 				532122C21EEAEDC400F4812A /* BalanceTextField.swift */,
 				532122571EEAD66000F4812A /* Button.swift */,
+				532122D01EEB04DA00F4812A /* HoverButton.swift */,
 				532122931EEADE4B00F4812A /* HoverTableRowView.swift */,
 				532122821EEADA1100F4812A /* ImageView.swift */,
 				532122801EEADA0700F4812A /* LabelField.swift */,
@@ -545,6 +553,7 @@
 				532122B41EEAE89A00F4812A /* TypeAliases.swift */,
 				532122B01EEAE85500F4812A /* AccountConnectionErrors.swift */,
 				532122AE1EEAE6F700F4812A /* PreferencesAccounts.swift */,
+				532122D21EEB05A800F4812A /* AddAccountButtons.swift */,
 			);
 			name = "Vector Graphics Draw Functions";
 			sourceTree = "<group>";
@@ -660,6 +669,7 @@
 				532122171EEAC8F800F4812A /* Syncer.swift in Sources */,
 				532122C51EEAEE5900F4812A /* SecureField.swift in Sources */,
 				532122561EEAD65B00F4812A /* View.swift in Sources */,
+				532122CF1EEB008700F4812A /* AddAccountViewController.swift in Sources */,
 				5321227D1EEAD8DA00F4812A /* AccountType.swift in Sources */,
 				532122701EEAD7F800F4812A /* Notifications.swift in Sources */,
 				532122A81EEAE3E500F4812A /* DispatchQueue.swift in Sources */,
@@ -672,6 +682,7 @@
 				5321228E1EEADD3500F4812A /* ServerMessage.swift in Sources */,
 				532122781EEAD89300F4812A /* TabViewModel.swift in Sources */,
 				5321223A1EEAD1D100F4812A /* PreferencesGeneralViewController.swift in Sources */,
+				532122D31EEB05A800F4812A /* AddAccountButtons.swift in Sources */,
 				532121E71EEAC5DD00F4812A /* KeychainManagement.swift in Sources */,
 				5321228A1EEADC9600F4812A /* ObjC.m in Sources */,
 				5321220A1EEAC89B00F4812A /* CCNStatusItemDropView.m in Sources */,
@@ -705,6 +716,7 @@
 				532121DC1EEAC4DC00F4812A /* FMDatabaseAdditions.m in Sources */,
 				5321226D1EEAD7DD00F4812A /* NotificationCenter.swift in Sources */,
 				5321220E1EEAC89B00F4812A /* CCNStatusItemWindowController.m in Sources */,
+				532122D11EEB04DA00F4812A /* HoverButton.swift in Sources */,
 				532121E01EEAC4DC00F4812A /* FMDatabaseAdditionsVariadic.swift in Sources */,
 				5321224D1EEAD35F00F4812A /* LightTheme.swift in Sources */,
 				532121EA1EEAC5F300F4812A /* Singletons.swift in Sources */,
