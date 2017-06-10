@@ -27,6 +27,8 @@ class AddAccountViewController: NSViewController {
     
     // Main fields
     fileprivate let welcomeField = LabelField()
+    fileprivate let subtitleField = LabelField()
+    fileprivate let requestExplanationField = LabelField()
     fileprivate let backButton = Button()
     fileprivate let statusField = LabelField()
     fileprivate let preferencesButton = Button()
@@ -69,7 +71,10 @@ class AddAccountViewController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         
-        welcomeField.stringValue = "Add an Account"
+        welcomeField.stringValue = "Balance"
+        subtitleField.stringValue = "Connect to an exchange"
+        requestExplanationField.stringValue = "Read-only API access to your account"
+        
         backButton.isHidden = !Institution.hasInstitutions && allowSelection
     }
     
@@ -88,16 +93,61 @@ class AddAccountViewController: NSViewController {
             make.bottom.equalTo(self.view)
         }
         
-        welcomeField.font = NSFont.mediumSystemFont(ofSize: 20)//CurrentTheme.addAccounts.welcomeFont
+        let logoImage = #imageLiteral(resourceName: "intro-logo")
+        let logoImageView = ImageView()
+        logoImageView.image = logoImage
+        containerView.addSubview(logoImageView)
+        logoImageView.snp.makeConstraints { make in
+            make.width.equalTo(logoImage.size.width)
+            make.height.equalTo(logoImage.size.height)
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(25)
+        }
+        
+//        let trianglesImage = isLight ? #imageLiteral(resourceName: "intro-light-triangles") : #imageLiteral(resourceName: "intro-dark-triangles")
+        let trianglesImage = #imageLiteral(resourceName: "intro-dark-triangles")
+        let trianglesImageView = ImageView()
+        trianglesImageView.image = trianglesImage
+        containerView.addSubview(trianglesImageView)
+        trianglesImageView.snp.makeConstraints { make in
+            make.width.equalTo(trianglesImage.size.width)
+            make.height.equalTo(trianglesImage.size.height)
+            make.right.equalToSuperview()
+            make.top.equalToSuperview()
+        }
+        
+        welcomeField.font = NSFont.mediumSystemFont(ofSize: 28)//CurrentTheme.addAccounts.welcomeFont
         welcomeField.textColor = CurrentTheme.defaults.foregroundColor
         welcomeField.alignment = .center
         welcomeField.usesSingleLineMode = true
         containerView.addSubview(welcomeField)
         welcomeField.snp.makeConstraints { make in
-            make.height.equalTo(25)
             make.leading.equalTo(containerView).inset(10)
             make.trailing.equalTo(containerView).inset(10)
-            make.top.equalTo(containerView).inset(17)
+            make.top.equalTo(logoImageView.snp.bottom).offset(25)
+        }
+        
+        subtitleField.font = NSFont.mediumSystemFont(ofSize: 18)//CurrentTheme.addAccounts.welcomeFont
+        subtitleField.textColor = CurrentTheme.defaults.foregroundColor
+        subtitleField.alignment = .center
+        subtitleField.usesSingleLineMode = true
+        containerView.addSubview(subtitleField)
+        subtitleField.snp.makeConstraints { make in
+            make.leading.equalTo(containerView).inset(10)
+            make.trailing.equalTo(containerView).inset(10)
+            make.top.equalTo(welcomeField.snp.bottom).offset(10)
+        }
+        
+        requestExplanationField.font = NSFont.mediumSystemFont(ofSize: 14)//CurrentTheme.addAccounts.welcomeFont
+        requestExplanationField.textColor = CurrentTheme.defaults.foregroundColor
+        requestExplanationField.alignment = .center
+        requestExplanationField.alphaValue = 0.6
+        requestExplanationField.usesSingleLineMode = true
+        containerView.addSubview(requestExplanationField)
+        requestExplanationField.snp.makeConstraints { make in
+            make.leading.equalTo(containerView).inset(10)
+            make.trailing.equalTo(containerView).inset(10)
+            make.top.equalTo(subtitleField.snp.bottom).offset(10)
         }
         
         backButton.isHidden = true
@@ -119,11 +169,125 @@ class AddAccountViewController: NSViewController {
         buttonContainerView.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.top.equalTo(welcomeField.snp.bottom).offset(7)
+            make.top.equalTo(requestExplanationField.snp.bottom).offset(15)
             make.bottom.equalTo(backButton.snp.top).offset(-10)
         }
         
         createButtons()
+        
+        var isLight = false
+        
+        let buttonBlueColor = isLight ? NSColor(deviceRedInt: 39, green: 132, blue: 240) : NSColor(deviceRedInt: 71, green: 152, blue: 244)
+        let buttonAltBlueColor = isLight ? NSColor(deviceRedInt: 39, green: 132, blue: 240, alpha: 0.7) : NSColor(deviceRedInt: 71, green: 152, blue: 244, alpha: 0.7)
+        
+        let buttonAttributes = [NSForegroundColorAttributeName: buttonBlueColor,
+                                NSFontAttributeName: NSFont.semiboldSystemFont(ofSize: 13)]
+        let buttonAltAttributes = [NSForegroundColorAttributeName: buttonAltBlueColor,
+                                   NSFontAttributeName: NSFont.semiboldSystemFont(ofSize: 13)]
+        
+        let securityButton = Button()
+        securityButton.attributedTitle = NSAttributedString(string:"Security", attributes: buttonAttributes)
+        securityButton.attributedAlternateTitle = NSAttributedString(string:"Security", attributes: buttonAltAttributes)
+        securityButton.setAccessibilityLabel("Security")
+        securityButton.isBordered = false
+        securityButton.setButtonType(.momentaryChange)
+        securityButton.target = self
+        securityButton.sizeToFit()
+//        securityButton.action = #selector(restoreSubscription)
+        containerView.addSubview(securityButton)
+        securityButton.snp.makeConstraints { make in
+            make.height.equalTo(20)
+            make.left.equalTo(containerView).offset(13)
+            make.bottom.equalTo(containerView.snp.bottom).inset(10)
+        }
+//        subscribeButtons.append(securityButton)
+        
+        let dotLabel1 = LabelField()
+        dotLabel1.stringValue = "•"
+        dotLabel1.font = .semiboldSystemFont(ofSize: 13)
+        dotLabel1.textColor = buttonBlueColor
+        dotLabel1.verticalAlignment = .center
+        dotLabel1.sizeToFit()
+        containerView.addSubview(dotLabel1)
+        dotLabel1.snp.makeConstraints { make in
+            make.height.equalTo(20)
+            make.left.equalTo(securityButton.snp.right).offset(5)
+            make.top.equalTo(securityButton)
+        }
+        
+        let privacyButton = Button()
+        privacyButton.attributedTitle = NSAttributedString(string:"Privacy", attributes: buttonAttributes)
+        privacyButton.attributedAlternateTitle = NSAttributedString(string:"Privacy", attributes: buttonAltAttributes)
+        privacyButton.setAccessibilityLabel("Privacy")
+        privacyButton.isBordered = false
+        privacyButton.setButtonType(.momentaryChange)
+        privacyButton.target = self
+        privacyButton.sizeToFit()
+//        privacyButton.action = #selector(privacy)
+        containerView.addSubview(privacyButton)
+        privacyButton.snp.makeConstraints { make in
+            make.height.equalTo(20)
+            make.left.equalTo(dotLabel1.snp.right).offset(5)
+            make.top.equalTo(securityButton)
+        }
+        
+        let dotLabel2 = LabelField()
+        dotLabel2.stringValue = "•"
+        dotLabel2.font = .semiboldSystemFont(ofSize: 13)
+        dotLabel2.textColor = buttonBlueColor
+        dotLabel2.verticalAlignment = .center
+        dotLabel2.sizeToFit()
+        containerView.addSubview(dotLabel2)
+        dotLabel2.snp.makeConstraints { make in
+            make.height.equalTo(20)
+            make.left.equalTo(privacyButton.snp.right).offset(5)
+            make.top.equalTo(securityButton)
+        }
+        
+        let termsButton = Button()
+        termsButton.attributedTitle = NSAttributedString(string:"Terms", attributes: buttonAttributes)
+        termsButton.attributedAlternateTitle = NSAttributedString(string:"Terms", attributes: buttonAltAttributes)
+        termsButton.setAccessibilityLabel("Terms")
+        termsButton.isBordered = false
+        termsButton.setButtonType(.momentaryChange)
+        termsButton.target = self
+        termsButton.sizeToFit()
+//        termsButton.action = #selector(terms)
+        containerView.addSubview(termsButton)
+        termsButton.snp.makeConstraints { make in
+            make.height.equalTo(20)
+            make.left.equalTo(dotLabel2.snp.right).offset(5)
+            make.top.equalTo(securityButton)
+        }
+        
+        let dotLabel3 = LabelField()
+        dotLabel3.stringValue = "•"
+        dotLabel3.font = .semiboldSystemFont(ofSize: 13)
+        dotLabel3.textColor = buttonBlueColor
+        dotLabel3.verticalAlignment = .center
+        dotLabel3.sizeToFit()
+        containerView.addSubview(dotLabel3)
+        dotLabel3.snp.makeConstraints { make in
+            make.height.equalTo(20)
+            make.left.equalTo(termsButton.snp.right).offset(5)
+            make.top.equalTo(securityButton)
+        }
+        
+        let githubButton = Button()
+        githubButton.attributedTitle = NSAttributedString(string:"GitHub", attributes: buttonAttributes)
+        githubButton.attributedAlternateTitle = NSAttributedString(string:"GitHub", attributes: buttonAltAttributes)
+        githubButton.setAccessibilityLabel("GitHub")
+        githubButton.isBordered = false
+        githubButton.setButtonType(.momentaryChange)
+        githubButton.target = self
+        githubButton.sizeToFit()
+//        contactButton.action = #selector(contact)
+        containerView.addSubview(githubButton)
+        githubButton.snp.makeConstraints { make in
+            make.height.equalTo(20)
+            make.left.equalTo(dotLabel3.snp.right).offset(5)
+            make.top.equalTo(securityButton)
+        }
         
         if allowSelection && Institution.institutionsCount == 0 {
             // Preferences button
