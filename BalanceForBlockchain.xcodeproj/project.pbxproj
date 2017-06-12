@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D8D54481EEB12360060FCCF /* BalanceForBlockchainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D54471EEB12360060FCCF /* BalanceForBlockchainTests.swift */; };
 		532121B61EEAC2BF00F4812A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121B51EEAC2BF00F4812A /* AppDelegate.swift */; };
 		532121C61EEAC47300F4812A /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121C51EEAC47300F4812A /* Database.swift */; };
 		532121DB1EEAC4DC00F4812A /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 532121CE1EEAC4DC00F4812A /* FMDatabase.m */; };
@@ -126,6 +127,16 @@
 		53946FA01EEB10AA00E921C3 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53946F9E1EEB10AA00E921C3 /* KeychainManager.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		2D8D544A1EEB12360060FCCF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 532121AA1EEAC2BF00F4812A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 532121B11EEAC2BF00F4812A;
+			remoteInfo = BalanceForBlockchain;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		532121F81EEAC72D00F4812A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -148,6 +159,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2D8D54451EEB12360060FCCF /* BalanceForBlockchainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceForBlockchainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D8D54471EEB12360060FCCF /* BalanceForBlockchainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceForBlockchainTests.swift; sourceTree = "<group>"; };
+		2D8D54491EEB12360060FCCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		532121B21EEAC2BF00F4812A /* BalanceForBlockchain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BalanceForBlockchain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		532121B51EEAC2BF00F4812A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		532121BE1EEAC2BF00F4812A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -269,6 +283,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2D8D54421EEB12360060FCCF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		532121AF1EEAC2BF00F4812A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -296,10 +317,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D8D54461EEB12360060FCCF /* BalanceForBlockchainTests */ = {
+			isa = PBXGroup;
+			children = (
+				2D8D54471EEB12360060FCCF /* BalanceForBlockchainTests.swift */,
+				2D8D54491EEB12360060FCCF /* Info.plist */,
+			);
+			path = BalanceForBlockchainTests;
+			sourceTree = "<group>";
+		};
 		532121A91EEAC2BF00F4812A = {
 			isa = PBXGroup;
 			children = (
 				532121B41EEAC2BF00F4812A /* BalanceForBlockchain */,
+				2D8D54461EEB12360060FCCF /* BalanceForBlockchainTests */,
 				532121B31EEAC2BF00F4812A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -308,6 +339,7 @@
 			isa = PBXGroup;
 			children = (
 				532121B21EEAC2BF00F4812A /* BalanceForBlockchain.app */,
+				2D8D54451EEB12360060FCCF /* BalanceForBlockchainTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -561,6 +593,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2D8D54441EEB12360060FCCF /* BalanceForBlockchainTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2D8D544E1EEB12360060FCCF /* Build configuration list for PBXNativeTarget "BalanceForBlockchainTests" */;
+			buildPhases = (
+				2D8D54411EEB12360060FCCF /* Sources */,
+				2D8D54421EEB12360060FCCF /* Frameworks */,
+				2D8D54431EEB12360060FCCF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2D8D544B1EEB12360060FCCF /* PBXTargetDependency */,
+			);
+			name = BalanceForBlockchainTests;
+			productName = BalanceForBlockchainTests;
+			productReference = 2D8D54451EEB12360060FCCF /* BalanceForBlockchainTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		532121B11EEAC2BF00F4812A /* BalanceForBlockchain */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 532121C11EEAC2BF00F4812A /* Build configuration list for PBXNativeTarget "BalanceForBlockchain" */;
@@ -589,6 +639,12 @@
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Balanced Software, Inc.";
 				TargetAttributes = {
+					2D8D54441EEB12360060FCCF = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = Q4G66XSS36;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 532121B11EEAC2BF00F4812A;
+					};
 					532121B11EEAC2BF00F4812A = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = Q4G66XSS36;
@@ -610,11 +666,19 @@
 			projectRoot = "";
 			targets = (
 				532121B11EEAC2BF00F4812A /* BalanceForBlockchain */,
+				2D8D54441EEB12360060FCCF /* BalanceForBlockchainTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2D8D54431EEB12360060FCCF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		532121B01EEAC2BF00F4812A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -627,6 +691,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2D8D54411EEB12360060FCCF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D8D54481EEB12360060FCCF /* BalanceForBlockchainTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		532121AE1EEAC2BF00F4812A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -726,6 +798,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		2D8D544B1EEB12360060FCCF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 532121B11EEAC2BF00F4812A /* BalanceForBlockchain */;
+			targetProxy = 2D8D544A1EEB12360060FCCF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		5321222C1EEAD15D00F4812A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -738,6 +818,36 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2D8D544C1EEB12360060FCCF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = Q4G66XSS36;
+				INFOPLIST_FILE = BalanceForBlockchainTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = balance.money.BalanceForBlockchainTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BalanceForBlockchain.app/Contents/MacOS/BalanceForBlockchain";
+			};
+			name = Debug;
+		};
+		2D8D544D1EEB12360060FCCF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = Q4G66XSS36;
+				INFOPLIST_FILE = BalanceForBlockchainTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = balance.money.BalanceForBlockchainTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BalanceForBlockchain.app/Contents/MacOS/BalanceForBlockchain";
+			};
+			name = Release;
+		};
 		532121BF1EEAC2BF00F4812A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -883,6 +993,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2D8D544E1EEB12360060FCCF /* Build configuration list for PBXNativeTarget "BalanceForBlockchainTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D8D544C1EEB12360060FCCF /* Debug */,
+				2D8D544D1EEB12360060FCCF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		532121AD1EEAC2BF00F4812A /* Build configuration list for PBXProject "BalanceForBlockchain" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
