@@ -40,6 +40,7 @@ struct DefaultsTheme {
     let foregroundColor: NSColor
     let material: NSVisualEffectMaterial
     let size: CGSize
+    let noAccountsSize: CGSize
     let touchBarFont: NSFont
     let totalFooter: DefaultsTheme.TotalFooterTheme
     let cell: DefaultsTheme.CellTheme

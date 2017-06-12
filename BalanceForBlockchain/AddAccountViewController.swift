@@ -71,11 +71,21 @@ class AddAccountViewController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         
-        welcomeField.stringValue = "Balance"
-        subtitleField.stringValue = "Connect to an exchange"
-        requestExplanationField.stringValue = "Read-only API access to your account"
-        
         backButton.isHidden = !Institution.hasInstitutions && allowSelection
+        
+        // TODO: Remove delay hack. Currently there to allow for the resize to work on app launch
+        DispatchQueue.main.async(after: hackDelay) {
+            if self.hackDelay > 0.0 {
+                self.hackDelayCount -= 1
+                if self.hackDelayCount == 0 {
+                    self.hackDelay = 0.0
+                }
+            }
+            
+            if self.allowSelection {
+                AppDelegate.sharedInstance.resizeWindowHeight(350, animated: true)
+            }
+        }
     }
     
     //
@@ -116,6 +126,7 @@ class AddAccountViewController: NSViewController {
             make.top.equalToSuperview()
         }
         
+        welcomeField.stringValue = "Balance"
         welcomeField.font = .mediumSystemFont(ofSize: 28)//CurrentTheme.addAccounts.welcomeFont
         welcomeField.textColor = CurrentTheme.defaults.foregroundColor
         welcomeField.alignment = .center
@@ -127,6 +138,7 @@ class AddAccountViewController: NSViewController {
             make.top.equalTo(logoImageView.snp.bottom).offset(25)
         }
         
+        subtitleField.stringValue = "Connect to an exchange"
         subtitleField.font = .mediumSystemFont(ofSize: 18)//CurrentTheme.addAccounts.welcomeFont
         subtitleField.textColor = CurrentTheme.defaults.foregroundColor
         subtitleField.alignment = .center
@@ -138,6 +150,7 @@ class AddAccountViewController: NSViewController {
             make.top.equalTo(welcomeField.snp.bottom).offset(10)
         }
         
+        requestExplanationField.stringValue = "Read-only API access to your account"
         requestExplanationField.font = .mediumSystemFont(ofSize: 14)//CurrentTheme.addAccounts.welcomeFont
         requestExplanationField.textColor = CurrentTheme.defaults.foregroundColor
         requestExplanationField.alignment = .center
