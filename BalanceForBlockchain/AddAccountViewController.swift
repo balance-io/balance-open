@@ -116,7 +116,7 @@ class AddAccountViewController: NSViewController {
             make.top.equalToSuperview()
         }
         
-        welcomeField.font = NSFont.mediumSystemFont(ofSize: 28)//CurrentTheme.addAccounts.welcomeFont
+        welcomeField.font = .mediumSystemFont(ofSize: 28)//CurrentTheme.addAccounts.welcomeFont
         welcomeField.textColor = CurrentTheme.defaults.foregroundColor
         welcomeField.alignment = .center
         welcomeField.usesSingleLineMode = true
@@ -127,7 +127,7 @@ class AddAccountViewController: NSViewController {
             make.top.equalTo(logoImageView.snp.bottom).offset(25)
         }
         
-        subtitleField.font = NSFont.mediumSystemFont(ofSize: 18)//CurrentTheme.addAccounts.welcomeFont
+        subtitleField.font = .mediumSystemFont(ofSize: 18)//CurrentTheme.addAccounts.welcomeFont
         subtitleField.textColor = CurrentTheme.defaults.foregroundColor
         subtitleField.alignment = .center
         subtitleField.usesSingleLineMode = true
@@ -138,7 +138,7 @@ class AddAccountViewController: NSViewController {
             make.top.equalTo(welcomeField.snp.bottom).offset(10)
         }
         
-        requestExplanationField.font = NSFont.mediumSystemFont(ofSize: 14)//CurrentTheme.addAccounts.welcomeFont
+        requestExplanationField.font = .mediumSystemFont(ofSize: 14)//CurrentTheme.addAccounts.welcomeFont
         requestExplanationField.textColor = CurrentTheme.defaults.foregroundColor
         requestExplanationField.alignment = .center
         requestExplanationField.alphaValue = 0.6
