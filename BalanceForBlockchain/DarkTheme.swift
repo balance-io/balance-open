@@ -18,6 +18,7 @@ struct DarkTheme: Theme {
         let foregroundColor = NSColor(deviceWhiteInt: 255)
         let material = NSVisualEffectMaterial.dark
         let size = CGSize(width: 400, height: 600)
+        let noAccountsSize = CGSize(width: 400, height: 350)
         let touchBarFont = NSFont.systemFont(ofSize: 15)
         
         let totalFooter = DefaultsTheme.TotalFooterTheme(
@@ -35,7 +36,7 @@ struct DarkTheme: Theme {
             intercellSpacing: NSSize(width: 0.5, height: 0.5)
         )
     
-        return DefaultsTheme(appearance: appearance, backgroundColor: backgroundColor, foregroundColor: foregroundColor, material: material, size: size, touchBarFont: touchBarFont, totalFooter: totalFooter, cell: cell)
+        return DefaultsTheme(appearance: appearance, backgroundColor: backgroundColor, foregroundColor: foregroundColor, material: material, size: size, noAccountsSize: noAccountsSize, touchBarFont: touchBarFont, totalFooter: totalFooter, cell: cell)
     }
     
     var balanceTextField: BalanceTextFieldTheme {

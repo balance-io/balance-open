@@ -285,3 +285,29 @@ func equals(_ lhs: Any?, _ rhs: Any?) -> Bool {
     
     return false
 }
+
+// Allow for simple string exceptions
+extension String: LocalizedError {
+    public var errorDescription: String? { return self }
+}
+
+// Generic type checking, useful for JSON parsing
+func checkType<T, U>(_ value: T?, name: String, file: String = #file, line: Int = #line, function: String = #function) throws -> U {
+    let fileName = NSURL(fileURLWithPath: file).deletingPathExtension?.lastPathComponent ?? file
+    let functionName = function.components(separatedBy: "(").first ?? function
+    
+    guard let value = value else {
+        throw "[\(fileName):\(line) \(functionName) \"\(name)\"] Expected \(U.self), but value was nil"
+    }
+    
+    guard let result = value as? U else {
+        throw "[\(fileName):\(line) \(functionName) \"\(name)\"] Expected \(U.self), but it was an \(type(of: value)) with value: \(value)"
+    }
+    
+    return result
+}
+
+func checkType<U>(_ dict: Dictionary<String, AnyObject>, file: String = #file, name: String, line: Int = #line, function: String = #function) throws -> U {
+    let value = dict[name]
+    return try checkType(value, name: name, file: file, line: line, function: function)
+}

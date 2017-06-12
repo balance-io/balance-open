@@ -265,7 +265,7 @@ class Account: Equatable {
                 while result.next() {
                     let resultArray = arrayFromResult(result)
                     let account = Account(resultArray)
-                    accounts.append(Account(resultArray))
+                    accounts.append(account)
                 }
                 result.close()
             } catch {

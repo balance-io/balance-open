@@ -125,6 +125,7 @@
 		532122D31EEB05A800F4812A /* AddAccountButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122D21EEB05A800F4812A /* AddAccountButtons.swift */; };
 		53946F9F1EEB10AA00E921C3 /* KeychainManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53946F9D1EEB10AA00E921C3 /* KeychainManagement.swift */; };
 		53946FA01EEB10AA00E921C3 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53946F9E1EEB10AA00E921C3 /* KeychainManager.swift */; };
+		53946FA31EEF0B0B00E921C3 /* CoinbaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53946FA21EEF0B0B00E921C3 /* CoinbaseAccount.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -280,6 +281,7 @@
 		532122D21EEB05A800F4812A /* AddAccountButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountButtons.swift; sourceTree = "<group>"; };
 		53946F9D1EEB10AA00E921C3 /* KeychainManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManagement.swift; sourceTree = "<group>"; };
 		53946F9E1EEB10AA00E921C3 /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		53946FA21EEF0B0B00E921C3 /* CoinbaseAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinbaseAccount.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -360,7 +362,8 @@
 		532121C41EEAC44400F4812A /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				5321226E1EEAD7E300F4812A /* Models */,
+				53946FA11EEF0AEB00E921C3 /* API Models */,
+				5321226E1EEAD7E300F4812A /* Local Models */,
 				532122671EEAD78D00F4812A /* Static & Singletons */,
 			);
 			name = "Data Model";
@@ -558,7 +561,7 @@
 			name = "Static & Singletons";
 			sourceTree = "<group>";
 		};
-		5321226E1EEAD7E300F4812A /* Models */ = {
+		5321226E1EEAD7E300F4812A /* Local Models */ = {
 			isa = PBXGroup;
 			children = (
 				532122681EEAD7BD00F4812A /* Account.swift */,
@@ -567,7 +570,7 @@
 				5321227A1EEAD8D000F4812A /* Source.swift */,
 				532122151EEAC8F800F4812A /* Syncer.swift */,
 			);
-			name = Models;
+			name = "Local Models";
 			sourceTree = "<group>";
 		};
 		532122791EEAD8B500F4812A /* Models */ = {
@@ -588,6 +591,14 @@
 				532122D21EEB05A800F4812A /* AddAccountButtons.swift */,
 			);
 			name = "Vector Graphics Draw Functions";
+			sourceTree = "<group>";
+		};
+		53946FA11EEF0AEB00E921C3 /* API Models */ = {
+			isa = PBXGroup;
+			children = (
+				53946FA21EEF0B0B00E921C3 /* CoinbaseAccount.swift */,
+			);
+			name = "API Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -747,6 +758,7 @@
 				532122701EEAD7F800F4812A /* Notifications.swift in Sources */,
 				532122A81EEAE3E500F4812A /* DispatchQueue.swift in Sources */,
 				532122BB1EEAED1F00F4812A /* SetPasswordViewController.swift in Sources */,
+				53946FA31EEF0B0B00E921C3 /* CoinbaseAccount.swift in Sources */,
 				532121B61EEAC2BF00F4812A /* AppDelegate.swift in Sources */,
 				532122AF1EEAE6F700F4812A /* PreferencesAccounts.swift in Sources */,
 				5321226B1EEAD7BD00F4812A /* Institution.swift in Sources */,
@@ -1000,6 +1012,7 @@
 				2D8D544D1EEB12360060FCCF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		532121AD1EEAC2BF00F4812A /* Build configuration list for PBXProject "BalanceForBlockchain" */ = {
 			isa = XCConfigurationList;

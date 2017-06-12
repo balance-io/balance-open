@@ -51,8 +51,8 @@ class PopoverViewController: NSViewController {
     override func loadView() {
         self.view = View()
         
-        let defaultSize = CurrentTheme.defaults.size
-        self.view.frame = CGRect(x: 0, y: 0, width: defaultSize.width, height: defaultSize.height)
+        let size = Institution.institutionsCount == 0 ? CurrentTheme.defaults.noAccountsSize : CurrentTheme.defaults.size
+        self.view.frame = CGRect(origin: CGPoint.zero, size: size)
     }
     
     override func viewDidLoad() {

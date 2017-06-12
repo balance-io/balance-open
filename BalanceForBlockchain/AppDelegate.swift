@@ -97,10 +97,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Prepare the preferences window
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        self.preferencesWindowController = storyboard.instantiateController(withIdentifier: "preferencesWindowController") as! NSWindowController
+        preferencesWindowController = storyboard.instantiateController(withIdentifier: "preferencesWindowController") as! NSWindowController
         
         // Present the UI
-        self.showWindow()
+        showWindow()
     }
     
     //
@@ -149,7 +149,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Delay the popover so that the animation is smooth and so that it appears in the correct place
         // for users with Mac Bartender
-        var delay = macBartenderRunning ? 2.0 : 1.0
+        let delay = macBartenderRunning ? 2.0 : 1.0
         DispatchQueue.main.async(after: delay) {
             var showedAlert = false
             if !defaults.promptedForLaunchAtLogin && Institution.institutionsCount > 0 {

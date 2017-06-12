@@ -39,8 +39,8 @@ class Syncer {
         NotificationCenter.postOnMainThread(name: Notifications.SyncStarted)
         
         if Institution.institutionsCount > 0 {
-            var success = true
-            var errors = [Error]()
+            let success = true
+            let errors = [Error]()
             let institutions = Institution.allInstitutions(sorted: true)
             if self.canceled {
                 self.cancelSync(errors: errors)
