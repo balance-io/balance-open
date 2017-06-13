@@ -12,30 +12,69 @@ import Security
 fileprivate let tradingURL = URL(string: "https://poloniex.com/tradingApi")!
 fileprivate let APIKEY = "U78QPSJT-9JW9F28T-IMQW7PI8-5VUKB8ZV"
 
-typealias APIKeys = (key: String, secret: String)
 typealias SuccessErrorBlock = (_ success: Bool, _ error: Error) -> Void
+
+enum PoloniexCommands {
+    case returnBalances = "returnBalances"
+    case returnCompleteBalances = "returnCompleteBalances"
+    case returnDepositAddresses = "returnDepositAddresses"
+    case generateNewAddress = "generateNewAddress"
+    case returnDepositsWithdrawals = "returnDepositsWithdrawals"
+    case returnOpenOrders = "returnOpenOrders"
+    case returnTradeHistory = "returnTradeHistory"
+    case returnOrderTrades = "returnOrderTrades"
+    case buy = "buy"
+    case sell = "sell"
+    case cancelOrder = "cancelOrder"
+    case moveOrder = "moveOrder"
+    case withdraw = "withdraw"
+    case returnFeeInfo = "returnFeeInfo"
+    case returnAvailableAccountBalances = "returnAvailableAccountBalances"
+    case returnTradableBalances = "returnTradableBalances"
+    case transferBalance = "transferBalance"
+    case returnMarginAccountSummary = "returnMarginAccountSummary"
+    case marginBuy = "marginBuy"
+    case marginSell = "marginSell"
+    case getMarginPosition = "getMarginPosition"
+    case closeMarginPosition = "closeMarginPosition"
+    case createLoanOffer = "createLoanOffer"
+    case cancelLoanOffer = "cancelLoanOffer"
+    case returnOpenLoanOffers = "returnOpenLoanOffers"
+    case returnActiveLoans = "returnActiveLoans"
+    case returnLendingHistory = "returnLendingHistory"
+    case toggleAutoRenew = "toggleAutoRenew"
+}
 
 struct PoloniexAPI {
     
     let body: String
     let hash: String
-    let keys: APIKeys
     var bodyData: Data {
         return body.data(using: .utf8)!
     }
     var urlRequest: URLRequest {
         var request = URLRequest(url: tradingURL)
-        request.setValue(keys.key, forHTTPHeaderField: "Key")
+        request.setValue(APIKEY, forHTTPHeaderField: "Key")
         request.setValue(hash, forHTTPHeaderField: "Sign")
         request.httpBody = bodyData
         request.httpMethod = "POST"
         return request
     }
     
-    init(params: [String: String], keys: APIKeys) {
+    /*
+     All calls to the trading API are sent via HTTP POST to https://poloniex.com/tradingApi and must contain the following headers:
+     
+     Key - Your API key.
+     Sign - The query's POST data signed by your key's "secret" according to the HMAC-SHA512 method.
+     
+
+     Additionally, all queries must include a "nonce" POST parameter. The nonce parameter is an integer which must always be greater than the previous nonce used.
+     
+     */
+    init(params: [String: String], secret: String) {
         self.keys = keys
         
-        let nonce = Int64(Date().timeIntervalSince1970 * 1000)
+        let nonce = Date().timeIntervalSince1970
         var queryItems = [URLQueryItem]()
         for (key, value) in params {
             queryItems.append(URLQueryItem(name: key, value: value))
@@ -51,6 +90,8 @@ struct PoloniexAPI {
     }
     
 }
+
+//from https://stackoverflow.com/questions/24099520/commonhmac-in-swift
 
 enum HMACECase {
     case SHA512
