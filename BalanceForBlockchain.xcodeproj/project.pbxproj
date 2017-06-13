@@ -126,6 +126,7 @@
 		53946F9F1EEB10AA00E921C3 /* KeychainManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53946F9D1EEB10AA00E921C3 /* KeychainManagement.swift */; };
 		53946FA01EEB10AA00E921C3 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53946F9E1EEB10AA00E921C3 /* KeychainManager.swift */; };
 		53946FA31EEF0B0B00E921C3 /* CoinbaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53946FA21EEF0B0B00E921C3 /* CoinbaseAccount.swift */; };
+		53946FA51EF0035200E921C3 /* CoinbaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53946FA41EF0035200E921C3 /* CoinbaseApi.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -282,6 +283,7 @@
 		53946F9D1EEB10AA00E921C3 /* KeychainManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManagement.swift; sourceTree = "<group>"; };
 		53946F9E1EEB10AA00E921C3 /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		53946FA21EEF0B0B00E921C3 /* CoinbaseAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinbaseAccount.swift; sourceTree = "<group>"; };
+		53946FA41EF0035200E921C3 /* CoinbaseApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinbaseApi.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -596,6 +598,7 @@
 		53946FA11EEF0AEB00E921C3 /* API Models */ = {
 			isa = PBXGroup;
 			children = (
+				53946FA41EF0035200E921C3 /* CoinbaseApi.swift */,
 				53946FA21EEF0B0B00E921C3 /* CoinbaseAccount.swift */,
 			);
 			name = "API Models";
@@ -788,6 +791,7 @@
 				5321220C1EEAC89B00F4812A /* CCNStatusItemWindowBackgroundView.m in Sources */,
 				5321229E1EEAE00600F4812A /* SyncButton.swift in Sources */,
 				532122301EEAD1BB00F4812A /* PopoverViewController.swift in Sources */,
+				53946FA51EF0035200E921C3 /* CoinbaseApi.swift in Sources */,
 				532122CD1EEAFF6300F4812A /* NSWindow.swift in Sources */,
 				532122AC1EEAE56400F4812A /* Shortcut.swift in Sources */,
 				5321221C1EEAC90C00F4812A /* DefaultsStorage.swift in Sources */,

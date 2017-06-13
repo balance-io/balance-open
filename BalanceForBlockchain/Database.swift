@@ -101,7 +101,7 @@ class Database {
             // institutions table
             statements.append("CREATE TABLE IF NOT EXISTS institutions " +
                               "(institutionId INTEGER PRIMARY KEY AUTOINCREMENT, sourceId INTEGER, sourceInstitutionId TEXT, " +
-                              "name TEXT, nameBreak INTEGER, primaryColor TEXT, secondaryColor TEXT, logoData BLOB, ADD COLUMN passwordInvalid INTEGER, ADD COLUMN dateAdded INTEGER)")
+                              "name TEXT, nameBreak INTEGER, primaryColor TEXT, secondaryColor TEXT, logoData BLOB, passwordInvalid INTEGER, dateAdded INTEGER)")
             statements.append("CREATE INDEX IF NOT EXISTS institutions_sourceIdsourceInstitutionId " +
                               "ON institutions (sourceId, sourceInstitutionId)")
             
