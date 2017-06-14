@@ -12,7 +12,7 @@ import Locksmith
 typealias SuccessErrorBlock = (_ success: Bool, _ error: Error) -> Void
 
 fileprivate let connectionTimeout = 30.0
-fileprivate let baseUrl = "http://localhost:8000/"
+fileprivate let baseUrl = "http://localhost:8080/"
 fileprivate let clientId = "e47cf82db1ab3497eb06f96bcac0dde027c90c24a977c0b965416e7351b0af9f"
 
 // Save random state for current authentication request
@@ -25,9 +25,9 @@ struct CoinbaseApi {
     static func authenticate() -> Bool {
         let redirectUri = "balancemymoney%3A%2F%2Fcoinbase"
         let responseType = "code"
-        let scope = "wallet%3Auser%3Aread"
+        let scope = "wallet%3Auser%3Aread,wallet%3Aaccounts%3Aread"
         let state = String.random(32)
-        let url = "https://www.coinbase.com/oauth/authorize?client_id=\(clientId)&redirect_uri=\(redirectUri)&state=\(state)&response_type=\(responseType)&scope=\(scope)"
+        let url = "https://www.coinbase.com/oauth/authorize?client_id=\(clientId)&redirect_uri=\(redirectUri)&state=\(state)&response_type=\(responseType)&scope=\(scope)&account=all"
         
         do {
             _ = try NSWorkspace.shared().open(URL(string: url)!, options: [], configuration: [:])
@@ -69,7 +69,7 @@ struct CoinbaseApi {
                 }
 
                 // Try to parse the JSON
-                guard let JSONResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, let refreshToken = JSONResult["refreshToken"] as? String, let expiresIn = JSONResult["expiresIn"] as? TimeInterval else {
+                guard let JSONResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.length > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.length > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval else {
                     throw "JSON decoding failed"
                 }
                 
