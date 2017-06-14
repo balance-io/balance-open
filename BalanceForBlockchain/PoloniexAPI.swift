@@ -76,6 +76,8 @@ struct PoloniexAPI {
         self.secret = secret
         self.APIKey = key
         let nonce = Int(Date().timeIntervalSince1970*10000)
+        
+        // those components need to be created by request and added to the body, which deppend on the command we want to run - > not init method
         var queryItems = [URLQueryItem]()
         for (key, value) in params {
             queryItems.append(URLQueryItem(name: key, value: value))
@@ -84,6 +86,8 @@ struct PoloniexAPI {
         
         var components = URLComponents()
         components.queryItems = queryItems
+        
+        ///////
         
         let body = components.query!
         let signedPOST = PoloniexAPI.hmac(body:body, algorithm: HMACECase.SHA512, key: secret)
