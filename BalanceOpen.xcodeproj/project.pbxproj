@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2D2308C81EF07D9800EC6C58 /* PoloniexAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2308C71EF07D9800EC6C58 /* PoloniexAPI.swift */; };
 		2D8D54481EEB12360060FCCF /* BalanceForBlockchainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D54471EEB12360060FCCF /* BalanceForBlockchainTests.swift */; };
+		2DA7FAB71EF1B24500CD8CED /* NSURLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA7FAB61EF1B24500CD8CED /* NSURLRequest.swift */; };
 		532121B61EEAC2BF00F4812A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121B51EEAC2BF00F4812A /* AppDelegate.swift */; };
 		532121C61EEAC47300F4812A /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121C51EEAC47300F4812A /* Database.swift */; };
 		532121DB1EEAC4DC00F4812A /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 532121CE1EEAC4DC00F4812A /* FMDatabase.m */; };
@@ -169,10 +170,8 @@
 		2D8D54451EEB12360060FCCF /* BalanceForBlockchainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceForBlockchainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D8D54471EEB12360060FCCF /* BalanceForBlockchainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceForBlockchainTests.swift; sourceTree = "<group>"; };
 		2D8D54491EEB12360060FCCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2DA7FAB81EF2637700CD8CED /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
-		530DD1871EF458A400C0DDD3 /* FMDatabasePoolAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePoolAdditions.h; sourceTree = "<group>"; };
-		530DD1881EF458A400C0DDD3 /* FMDatabasePoolAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePoolAdditions.m; sourceTree = "<group>"; };
-		532121B21EEAC2BF00F4812A /* BalanceOpen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BalanceOpen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DA7FAB61EF1B24500CD8CED /* NSURLRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLRequest.swift; sourceTree = "<group>"; };
+		532121B21EEAC2BF00F4812A /* BalanceForBlockchain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BalanceForBlockchain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		532121B51EEAC2BF00F4812A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		532121BE1EEAC2BF00F4812A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		532121C51EEAC47300F4812A /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
@@ -501,6 +500,7 @@
 				532122CC1EEAFF6300F4812A /* NSWindow.swift */,
 				5321226C1EEAD7DD00F4812A /* NotificationCenter.swift */,
 				532121FA1EEAC75A00F4812A /* String.swift */,
+				2DA7FAB61EF1B24500CD8CED /* NSURLRequest.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -786,6 +786,7 @@
 				532122721EEAD80B00F4812A /* Utils.swift in Sources */,
 				5321225A1EEAD67300F4812A /* OrderedDictionary.swift in Sources */,
 				532122111EEAC8CB00F4812A /* AppLock.swift in Sources */,
+				2DA7FAB71EF1B24500CD8CED /* NSURLRequest.swift in Sources */,
 				5321220B1EEAC89B00F4812A /* CCNStatusItemWindow.m in Sources */,
 				532122981EEADEBD00F4812A /* NSColor.swift in Sources */,
 				532122941EEADE4B00F4812A /* HoverTableRowView.swift in Sources */,
