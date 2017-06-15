@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -655,6 +656,12 @@
                                                 <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="CheckForUpdates" id="kua-Jg-cpc">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="checkForUpdates:" target="DSU-N3-xMq" id="8We-mx-ctl"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -664,15 +671,16 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Balance" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="BalanceForBlockchain" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="DSU-N3-xMq" customClass="SUUpdater"/>
             </objects>
             <point key="canvasLocation" x="566.5" y="-264"/>
         </scene>
         <!--Preferences View Controller-->
         <scene sceneID="tzP-Db-G1S">
             <objects>
-                <tabViewController identifier="preferencesViewController" storyboardIdentifier="preferencesViewController" showSeguePresentationStyle="single" tabStyle="toolbar" id="hVY-gq-v56" customClass="PreferencesViewController" customModule="Balance" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController identifier="preferencesViewController" storyboardIdentifier="preferencesViewController" showSeguePresentationStyle="single" tabStyle="toolbar" id="hVY-gq-v56" customClass="PreferencesViewController" customModule="BalanceForBlockchain" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem label="General" identifier="" image="settings-general" id="XV9-la-kPC"/>
                         <tabViewItem label="Accounts" identifier="" image="settings-accounts" id="mjd-3J-VQs"/>
@@ -705,7 +713,7 @@
         <!--General-->
         <scene sceneID="fgF-CH-hBP">
             <objects>
-                <viewController title="General" id="Yil-VZ-ttf" customClass="PreferencesGeneralViewController" customModule="Balance" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="General" id="Yil-VZ-ttf" customClass="PreferencesGeneralViewController" customModule="BalanceForBlockchain" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="aKI-tT-xOh">
                         <rect key="frame" x="0.0" y="0.0" width="500" height="214"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -723,7 +731,7 @@
                                     <action selector="logInCheckBoxPress:" target="Yil-VZ-ttf" id="Ov6-aq-xa8"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4GT-dy-df3">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4GT-dy-df3">
                                 <rect key="frame" x="129" y="102" width="56" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="52" id="hN0-sk-w8p"/>
@@ -764,7 +772,7 @@
                                     <action selector="emailPreferenceChanged:" target="Yil-VZ-ttf" id="zob-Ig-OPi"/>
                                 </connections>
                             </popUpButton>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="BQj-3E-j9E">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="751" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BQj-3E-j9E">
                                 <rect key="frame" x="99" y="72" width="86" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="82" id="odC-g1-rpH"/>
@@ -792,7 +800,7 @@
                                     <action selector="searchPreferenceChanged:" target="Yil-VZ-ttf" id="4Iq-a4-Ezt"/>
                                 </connections>
                             </popUpButton>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OYa-Ry-O3s">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OYa-Ry-O3s">
                                 <rect key="frame" x="104" y="40" width="81" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="77" id="Qg4-Z0-jOb"/>
@@ -803,7 +811,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KLO-OE-sXB">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KLO-OE-sXB">
                                 <rect key="frame" x="111" y="134" width="74" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Shortcut:" id="YNG-1r-VlX">
                                     <font key="font" metaFont="system"/>
@@ -858,7 +866,7 @@
         <!--Accounts-->
         <scene sceneID="VS7-JW-ozc">
             <objects>
-                <viewController title="Advanced" id="KH6-LF-Rm2" userLabel="Accounts" customClass="PreferencesAccountsViewController" customModule="Balance" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Advanced" id="KH6-LF-Rm2" userLabel="Accounts" customClass="PreferencesAccountsViewController" customModule="BalanceForBlockchain" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="iGy-cX-kKS">
                         <rect key="frame" x="0.0" y="0.0" width="500" height="311"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -881,7 +889,7 @@
         <!--Rules-->
         <scene sceneID="POF-Lf-2Mw">
             <objects>
-                <viewController title="Rules" id="Dak-x5-z3L" customClass="PreferencesRulesViewController" customModule="Balance" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Rules" id="Dak-x5-z3L" customClass="PreferencesRulesViewController" customModule="BalanceForBlockchain" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="xiO-mY-tIs">
                         <rect key="frame" x="0.0" y="0.0" width="500" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -894,7 +902,7 @@
         <!--Billing-->
         <scene sceneID="LiR-Ce-0fX">
             <objects>
-                <viewController title="Billing" id="emK-5P-WCx" customClass="PreferencesBillingViewController" customModule="Balance" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Billing" id="emK-5P-WCx" customClass="PreferencesBillingViewController" customModule="BalanceForBlockchain" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Xni-6G-vF3">
                         <rect key="frame" x="0.0" y="0.0" width="500" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -907,7 +915,7 @@
         <!--Security-->
         <scene sceneID="vpY-88-nxY">
             <objects>
-                <viewController title="Security" id="nW7-Wz-2se" customClass="PreferencesSecurityViewController" customModule="Balance" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Security" id="nW7-Wz-2se" customClass="PreferencesSecurityViewController" customModule="BalanceForBlockchain" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="si6-F5-jG8">
                         <rect key="frame" x="0.0" y="0.0" width="500" height="250"/>
                         <autoresizingMask key="autoresizingMask"/>

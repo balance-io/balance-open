@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2D8D54481EEB12360060FCCF /* BalanceForBlockchainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D54471EEB12360060FCCF /* BalanceForBlockchainTests.swift */; };
+		2DA7FAB91EF2637700CD8CED /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; };
+		2DC8663A1EF2654A00502A98 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		532121B61EEAC2BF00F4812A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121B51EEAC2BF00F4812A /* AppDelegate.swift */; };
 		532121C61EEAC47300F4812A /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121C51EEAC47300F4812A /* Database.swift */; };
 		532121DB1EEAC4DC00F4812A /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 532121CE1EEAC4DC00F4812A /* FMDatabase.m */; };
@@ -139,6 +141,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		2DC866381EF2650E00502A98 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2DC8663A1EF2654A00502A98 /* Sparkle.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		532121F81EEAC72D00F4812A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -163,6 +175,7 @@
 		2D8D54451EEB12360060FCCF /* BalanceForBlockchainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceForBlockchainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D8D54471EEB12360060FCCF /* BalanceForBlockchainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceForBlockchainTests.swift; sourceTree = "<group>"; };
 		2D8D54491EEB12360060FCCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2DA7FAB81EF2637700CD8CED /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		532121B21EEAC2BF00F4812A /* BalanceForBlockchain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BalanceForBlockchain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		532121B51EEAC2BF00F4812A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		532121BE1EEAC2BF00F4812A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -309,6 +322,7 @@
 				5321225E1EEAD6FE00F4812A /* Reachability.framework in Frameworks */,
 				532121EF1EEAC72300F4812A /* Locksmith.framework in Frameworks */,
 				532122261EEACFAD00F4812A /* TrustKit.framework in Frameworks */,
+				2DA7FAB91EF2637700CD8CED /* Sparkle.framework in Frameworks */,
 				532121F01EEAC72300F4812A /* ObjcExceptionBridging.framework in Frameworks */,
 				5321224F1EEAD4F200F4812A /* SnapKit.framework in Frameworks */,
 				532122A31EEAE11400F4812A /* NSDateTimeAgo.framework in Frameworks */,
@@ -404,6 +418,7 @@
 		532121C91EEAC49600F4812A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2DA7FAB81EF2637700CD8CED /* Sparkle.framework */,
 				532121E21EEAC4E300F4812A /* libsqlcipher.a */,
 				532122751EEAD87000F4812A /* CwlSysctl.swift */,
 				532122991EEADFE500F4812A /* QCMethod.swift */,
@@ -630,6 +645,7 @@
 				532121AF1EEAC2BF00F4812A /* Frameworks */,
 				532121B01EEAC2BF00F4812A /* Resources */,
 				532121F81EEAC72D00F4812A /* Embed Frameworks */,
+				2DC866381EF2650E00502A98 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -961,9 +977,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/BalanceForBlockchain",
 				);
 				INFOPLIST_FILE = BalanceForBlockchain/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BalanceForBlockchain",
@@ -986,9 +1003,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/BalanceForBlockchain",
 				);
 				INFOPLIST_FILE = BalanceForBlockchain/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BalanceForBlockchain",
