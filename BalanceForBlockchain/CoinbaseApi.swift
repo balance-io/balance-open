@@ -9,10 +9,10 @@
 import AppKit
 import Locksmith
 
-typealias SuccessErrorBlock = (_ success: Bool, _ error: Error) -> Void
+typealias SuccessErrorBlock = (_ success: Bool, _ error: Error?) -> Void
 
 fileprivate let connectionTimeout = 30.0
-fileprivate let baseUrl = "http://localhost:8080/"
+fileprivate let subServerUrl = "http://localhost:8080/"
 fileprivate let clientId = "e47cf82db1ab3497eb06f96bcac0dde027c90c24a977c0b965416e7351b0af9f"
 
 // Save random state for current authentication request
@@ -51,7 +51,7 @@ struct CoinbaseApi {
         }
         
         lastState = nil
-        let urlString = "\(baseUrl)coinbase/convertCode"
+        let urlString = "\(subServerUrl)coinbase/convertCode"
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.timeoutInterval = connectionTimeout
@@ -78,7 +78,7 @@ struct CoinbaseApi {
                 institution?.refreshToken = refreshToken
                 institution?.tokenExpireDate = Date().addingTimeInterval(expiresIn - 10.0)
                 DispatchQueue.main.async {
-                    completion(false, "state does not match saved state")
+                    completion(true, nil)
                 }
             } catch {
                 DispatchQueue.main.async {
@@ -88,6 +88,130 @@ struct CoinbaseApi {
         })
         
         task.resume()
+    }
+    
+    static func refreshAccessToken(institution: Institution, completion: @escaping SuccessErrorBlock) {
+        guard let refreshToken = institution.refreshToken else {
+            completion(false, "missing refreshToken")
+            return
+        }
+        
+        let urlString = "\(subServerUrl)coinbase/refreshToken"
+        let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        request.timeoutInterval = connectionTimeout
+        request.cachePolicy = .reloadIgnoringLocalCacheData
+        request.httpMethod = "POST"
+        let parameters = "{\"refreshToken\":\"\(refreshToken)\"}"
+        request.httpBody = parameters.data(using: .utf8)
+        
+        // TODO: Create enum types for each error
+        let task = session.dataTask(with: request, completionHandler: { (maybeData, maybeResponse, maybeError) in
+            do {
+                // Make sure there's data
+                guard let data = maybeData, maybeError == nil else {
+                    throw "No data"
+                }
+                
+                // Try to parse the JSON
+                guard let JSONResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.length > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.length > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval else {
+                    throw "JSON decoding failed"
+                }
+                
+                // Update the model
+                institution.accessToken = accessToken
+                institution.refreshToken = refreshToken
+                institution.tokenExpireDate = Date().addingTimeInterval(expiresIn - 10.0)
+                DispatchQueue.main.async {
+                    completion(true, nil)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
+            }
+        })
+        
+        task.resume()
+    }
+    
+    static func updateAccounts(institution: Institution, completion: @escaping SuccessErrorBlock) {
+        guard let accessToken = institution.accessToken else {
+            completion(false, "missing access token")
+            return
+        }
+        
+        let urlString = "https://api.coinbase.com/v2/accounts"
+        let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        request.timeoutInterval = connectionTimeout
+        request.cachePolicy = .reloadIgnoringLocalCacheData
+        request.httpMethod = "GET"
+        request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+        request.setValue("2017-06-14", forHTTPHeaderField: "CB-VERSION")
+        
+        // TODO: Create enum types for each error
+        let task = session.dataTask(with: request, completionHandler: { (maybeData, maybeResponse, maybeError) in
+            do {
+                // Make sure there's data
+                guard let data = maybeData, maybeError == nil else {
+                    throw "No data"
+                }
+                
+                // Try to parse the JSON
+                guard let JSONResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject], let accountDicts = JSONResult["data"] as? [[String: AnyObject]] else {
+                    throw "JSON decoding failed"
+                }
+                
+                // Create the CoinbaseAccount objects
+                var coinbaseAccounts = [CoinbaseAccount]()
+                for accountDict in accountDicts {
+                    do {
+                        let coinbaseAccount = try CoinbaseAccount(account: accountDict)
+                        coinbaseAccounts.append(coinbaseAccount)
+                    } catch {
+                        log.error("Failed to parse account data: \(error)")
+                    }
+                }
+                
+                // Create native Account objects and update them
+                self.processCoinbaseAccounts(coinbaseAccounts, institution: institution)
+                
+                DispatchQueue.main.async {
+                    completion(true, nil)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
+            }
+        })
+        
+        task.resume()
+    }
+    
+    static func processCoinbaseAccounts(_ coinbaseAccounts: [CoinbaseAccount], institution: Institution) {
+        // Add/update accounts
+        for ca in coinbaseAccounts {
+            // Initialize an Account object to insert the record
+            // TODO: Look into how to handle source institution ids
+            // TODO: Add support for the native balance stuff
+            // TODO!: Add currency support to accounts
+            _ = Account(institutionId: institution.institutionId, sourceId: institution.sourceId, sourceAccountId: ca.id, sourceInstitutionId: "", accountTypeId: AccountType.depository, accountSubTypeId: nil, name: ca.name, currentBalance: 0, availableBalance: nil, number: nil)
+        }
+        
+        // Remove accounts that no longer exist
+        // TODO: In the future, when we have metadata associated with accounts / transactions, we'll need to
+        // migrate that metadata to a new account if it is a replacement for an old one. In my case, my Provident
+        // Credit Union at some point returned new accounts with new source account ids with better formatted names.
+        let accounts = Account.accountsForInstitution(institutionId: institution.institutionId)
+        for account in accounts {
+            let index = coinbaseAccounts.index(where: {$0.id == account.sourceAccountId})
+            if index == nil {
+                // This account doesn't exist in the coinbase response, so remove it
+                Account.removeAccount(accountId: account.accountId)
+            }
+        }
     }
 }
 

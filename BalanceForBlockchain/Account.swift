@@ -255,8 +255,10 @@ class Account: Equatable {
         }
     }
     
-    static func allAccounts() -> [Account] {
+    static func allAccounts(includeHidden: Bool = false) -> [Account] {
         var accounts = [Account]()
+        
+        let hiddenAccountIds = defaults.hiddenAccountIds
         
         database.readDbPool.inDatabase { db in
             do {
@@ -265,7 +267,9 @@ class Account: Equatable {
                 while result.next() {
                     let resultArray = arrayFromResult(result)
                     let account = Account(resultArray)
-                    accounts.append(account)
+                    if includeHidden || !hiddenAccountIds.contains(account.accountId) {
+                        accounts.append(Account(resultArray))
+                    }
                 }
                 result.close()
             } catch {
@@ -276,8 +280,10 @@ class Account: Equatable {
         return accounts
     }
     
-    static func accountsByInstitution() -> OrderedDictionary<Institution, [Account]> {
+    static func accountsByInstitution(includeHidden: Bool = false) -> OrderedDictionary<Institution, [Account]> {
         var accountsByInstitutionId = [Int: [Account]]()
+        
+        let hiddenAccountIds = defaults.hiddenAccountIds
         
         database.readDbPool.inDatabase { db in
             do {
@@ -287,11 +293,13 @@ class Account: Equatable {
                 while result.next() {
                     let resultArray = arrayFromResult(result)
                     let account = Account(resultArray)
-                    if var accounts = accountsByInstitutionId[account.institutionId] {
-                        accounts.append(account)
-                        accountsByInstitutionId[account.institutionId] = accounts
-                    } else {
-                        accountsByInstitutionId[account.institutionId] = [account]
+                    if includeHidden || !hiddenAccountIds.contains(account.accountId) {
+                        if var accounts = accountsByInstitutionId[account.institutionId] {
+                            accounts.append(account)
+                            accountsByInstitutionId[account.institutionId] = accounts
+                        } else {
+                            accountsByInstitutionId[account.institutionId] = [account]
+                        }
                     }
                 }
                 result.close()
@@ -367,8 +375,10 @@ class Account: Equatable {
         }
     }
     
-    static func accountsForInstitution(institutionId: Int) -> [Account] {
+    static func accountsForInstitution(institutionId: Int, includeHidden: Bool = false) -> [Account] {
         var accounts = [Account]()
+        
+        let hiddenAccountIds = defaults.hiddenAccountIds
         
         database.readDbPool.inDatabase { db in
             do {
@@ -377,7 +387,9 @@ class Account: Equatable {
                 while result.next() {
                     let resultArray = arrayFromResult(result)
                     let account = Account(resultArray)
-                    accounts.append(account)
+                    if includeHidden || !hiddenAccountIds.contains(account.accountId) {
+                        accounts.append(Account(resultArray))
+                    }
                 }
                 result.close()
             } catch {
@@ -394,10 +406,6 @@ class Account: Equatable {
                 do {
                     // Begin transaction
                     try db.executeUpdate("BEGIN")
-                    
-                    // Delete transaction records
-                    let statement1 = "DELETE FROM transactions WHERE accountId = ?"
-                    try db.executeUpdate(statement1, accountId)
                     
                     // Delete account records
                     let statement2 = "DELETE FROM accounts WHERE accountId = ?"

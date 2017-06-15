@@ -68,6 +68,22 @@ class Syncer {
                 // No access token somehow, so move on to the next one
                 log.severe("Tried to sync institution \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name) but did not find an access token")
                 syncInstitutions(syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
+            } else if institution.sourceId == .coinbase && institution.isTokenExpired {
+                if institution.refreshToken == nil {
+                    // No refresh token somehow, so move on to the next one
+                    log.severe("Tried to refresh access token for institution \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name) but did not find a refresh token")
+                    syncInstitutions(syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
+                } else {
+                    // Refresh the token
+                    CoinbaseApi.refreshAccessToken(institution: institution) { success, error in
+                        if success {
+                            self.syncAccountsAndTransactions(institution: institution, remainingInstitutions: syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
+                        } else {
+                            log.error("Failed to refresh token for institution \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name)")
+                            self.syncInstitutions(syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
+                        }
+                    }
+                }
             } else if institution.accessToken != nil {
                 // Valid institution, so sync it
                 syncAccountsAndTransactions(institution: institution, remainingInstitutions: syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
@@ -77,34 +93,33 @@ class Syncer {
             completeSync(success: success, errors: errors)
         }
     }
-    
-    fileprivate func syncAccountsAndTransactions(institution: Institution, remainingInstitutions: [Institution], beginDate: Date, success: Bool, errors: [Error]) {
-//        var syncingSuccess = success
-//        var syncingErrors = errors
-//        
-//        let userInfo = Notifications.userInfoForInstitution(institution)
-//        NotificationCenter.postOnMainThread(name: Notifications.SyncingInstitution, object: nil, userInfo: userInfo)
-//        
-//        log.debug("Pulling accounts and transactions for \(institution)")
-//        plaidApi.pullAccountsAndTransactions(institution: institution, beginDate: beginDate, endDate: Date(), pruneTransactions: pruneTransactions, canceled: self.canceledBlock) { transSuccess, transError in
-//            
-//            if !transSuccess {
-//                syncingSuccess = false
-//                if let transError = transError {
-//                    syncingErrors.append(transError)
-//                    log.error("Error pulling transactions for \(institution): \(transError)")
-//                }
-//            }
-//            log.debug("Finished pulling accounts and transactions for \(institution)")
-//            
-//            if self.canceled {
-//                self.cancelSync(errors: syncingErrors)
-//                return
-//            }
-//            
-//            self.syncInstitutions(remainingInstitutions, beginDate: beginDate, success: syncingSuccess, errors: syncingErrors)
-//        }
 
+    fileprivate func syncAccountsAndTransactions(institution: Institution, remainingInstitutions: [Institution], beginDate: Date, success: Bool, errors: [Error]) {
+        var syncingSuccess = success
+        var syncingErrors = errors
+        
+        let userInfo = Notifications.userInfoForInstitution(institution)
+        NotificationCenter.postOnMainThread(name: Notifications.SyncingInstitution, object: nil, userInfo: userInfo)
+        
+        log.debug("Pulling accounts and transactions for \(institution)")
+        
+        CoinbaseApi.updateAccounts(institution: institution) { success, error in
+            if !success {
+                syncingSuccess = false
+                if let error = error {
+                    syncingErrors.append(error)
+                    log.error("Error pulling accounts for \(institution): \(error)")
+                }
+                log.debug("Finished pulling accounts for \(institution)")
+                
+                if self.canceled {
+                    self.cancelSync(errors: syncingErrors)
+                    return
+                }
+                
+                self.syncInstitutions(remainingInstitutions, beginDate: beginDate, success: syncingSuccess, errors: syncingErrors)
+            }
+        }
     }
     
     fileprivate func cancelSync(errors: [Error]) {
