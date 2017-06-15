@@ -110,26 +110,26 @@ class AccountsTabAccountCell: View {
     
     func updateModel(_ updatedModel: Account) {
         model = updatedModel
-//        
-//        amountField.attributedStringValue = centsToStringFormatted(updatedModel.displayBalance, showNegative: true)
-//        amountField.setAccessibilityLabel("Account Total")
-//        amountField.snp.updateConstraints { make in
-//            let width = amountField.stringValue.size(font: CurrentTheme.accounts.cell.amountFont)
-//            make.width.equalTo(width)
-//        }
-//        
-//        nameField.stringValue = updatedModel.displayName
-//        nameField.setAccessibilityLabel("Account Name")
-//        
-//        self.setAccessibilityLabel(updatedModel.displayName)
-//        
-//        if model?.accountType == .credit, let number = model?.number {
-//            nameField.stringValue = "\(nameField.stringValue) (\(number))"
-//        }
-//        
+        
+        amountField.attributedStringValue = centsToStringFormatted(updatedModel.displayBalance, showNegative: true)
+        amountField.setAccessibilityLabel("Account Total")
+        amountField.snp.updateConstraints { make in
+            let width = amountField.stringValue.size(font: CurrentTheme.accounts.cell.amountFont)
+            make.width.equalTo(width)
+        }
+        
+        nameField.stringValue = updatedModel.displayName
+        nameField.setAccessibilityLabel("Account Name")
+        
+        self.setAccessibilityLabel(updatedModel.displayName)
+        
+        if model?.accountType == .credit, let number = model?.number {
+            nameField.stringValue = "\(nameField.stringValue) (\(number))"
+        }
+        
 //        self.alphaValue = (debugging.showAllInstitutionsAsIncorrectPassword || updatedModel.passwordInvalid)  ? CurrentTheme.accounts.cell.passwordInvalidDimmedAlpha : 1.0
-//        
-//        updateTopContainerOffset()
+        
+        updateTopContainerOffset()
 //        updateInclusionIndicator()
     }
     
