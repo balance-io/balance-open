@@ -16,8 +16,6 @@ class Defaults {
         static let firstLaunch                          = "firstLaunch"
         static let accountsViewInstitutionsOrder        = "accountsViewInstitutionsOrder"
         static let accountsViewAccountsOrder            = "accountsViewAccountsOrder"
-        static let hideAddAccountPrompt                 = "hideAddAccountPrompt"
-        static let hideDefaultRulesPrompt               = "hideDefaultRulesPrompt"
         static let selectedThemeType                    = "selectedThemeType"
         static let promptedForLaunchAtLogin             = "promptedForLaunchAtLogin"
         static let lockSleep                            = "lockSleep"
@@ -25,6 +23,7 @@ class Defaults {
         static let lockClose                            = "lockClose"
         static let logCount                             = "logCount"
         static let serverMessageReadIds                 = "serverMessageReadIds"
+        static let hiddenAccountIds                     = "hiddenAccountIds"
     }
     
     // First run defaults
@@ -121,6 +120,43 @@ class Defaults {
         set {
             defaults.set(newValue, forKey: Keys.serverMessageReadIds)
         }
+    }
+    
+    var hiddenAccountIds: Set<Int> {
+        if let accountIds = defaults.array(forKey: Keys.hiddenAccountIds) as? [Int] {
+            return Set(accountIds)
+        } else {
+            return Set<Int>()
+        }
+    }
+    
+    var hiddenAccountIdsQuerySet: String {
+        let accountIds = hiddenAccountIds
+        var string = "("
+        for (index, id) in accountIds.enumerated() {
+            if index > 0 {
+                string += ","
+            }
+            string += "\(id)"
+        }
+        string += ")"
+        return string
+    }
+    
+    func hideAccountId(_ accountId: Int) {
+        var accountIds = hiddenAccountIds
+        accountIds.insert(accountId)
+        defaults.set(Array(accountIds), forKey: Keys.hiddenAccountIds)
+        let userInfo = [Notifications.Keys.AccountId: accountId]
+        NotificationCenter.postOnMainThread(name: Notifications.AccountHidden, userInfo: userInfo)
+    }
+    
+    func unhideAccountId(_ accountId: Int) {
+        var accountIds = hiddenAccountIds
+        accountIds.remove(accountId)
+        defaults.set(Array(accountIds), forKey: Keys.hiddenAccountIds)
+        let userInfo = [Notifications.Keys.AccountId: accountId]
+        NotificationCenter.postOnMainThread(name: Notifications.AccountUnhidden, userInfo: userInfo)
     }
 
     // General Preferences

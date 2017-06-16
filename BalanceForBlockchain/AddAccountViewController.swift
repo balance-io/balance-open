@@ -343,7 +343,7 @@ class AddAccountViewController: NSViewController {
         let buttonVertPadding = -1
         let buttonSize = NSRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
         
-        var tag = 0
+        var tag = 2
         var isRightColumn = false
         var topView: NSView? = nil
         for source in buttonSourceOrder {
@@ -405,7 +405,9 @@ class AddAccountViewController: NSViewController {
     
     @objc fileprivate func buttonAction(_ sender: NSButton) {
         if allowSelection, let source = Source(rawValue: sender.tag) {
-            // TODO: Implement this
+            if source == .coinbase {
+                _ = CoinbaseApi.authenticate()
+            }
         }
     }
     

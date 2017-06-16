@@ -32,6 +32,8 @@ struct Notifications {
     static let NetworkBecameReachable                 = Notification.Name("NetworkBecameReachable")
     static let NetworkBecameUnreachable               = Notification.Name("NetworkBecameUnreachable")
     static let DisplayServerMessage                   = Notification.Name("DisplayServerMessage")
+    static let AccountHidden                          = Notification.Name("AccountHidden")
+    static let AccountUnhidden                        = Notification.Name("AccountUnhidden")
 
     struct Keys {
         static let Institution                  = "Institution"
@@ -39,7 +41,6 @@ struct Notifications {
         static let TabIndex                     = "TabIndex"
         static let Account                      = "Account"
         static let AccountId                    = "AccountId"
-        static let ProductId                    = "ProductId"
         static let ServerMessageTitle           = "ServerMessageTitle"
         static let ServerMessageContent         = "ServerMessageContent"
         static let ServerMessageOKButton        = "ServerMessageOKButton"

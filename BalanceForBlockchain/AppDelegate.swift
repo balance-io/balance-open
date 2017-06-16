@@ -73,8 +73,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
     }
-
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        // Register our app to get notified when launched via URL
+        NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(AppDelegate.handleURLEvent(event:withReply:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL)
+        )
+        
         // Query the helper app to see if we were auto launched (dirty hack because Apple makes simple shit difficult)
         forceAutoLaunch()
         
@@ -102,6 +106,38 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Present the UI
         showWindow()
+    }
+    
+    /** Gets called when the App launches/opens via URL. */
+    func handleURLEvent(event: NSAppleEventDescriptor, withReply reply: NSAppleEventDescriptor) {
+        if let urlString = event.paramDescriptor(forKeyword: AEKeyword(keyDirectObject))?.stringValue {
+            print("Handling URL: \(urlString)")
+            if let url = URLComponents(string: urlString), let queryItems = url.queryItems, url.scheme == "balancemymoney" {
+                if url.host == "coinbase" {
+                    print("Handling coinbase callback")
+                    
+                    var code: String?
+                    var state: String?
+                    for queryItem in queryItems {
+                        if queryItem.name == "code" {
+                            code = queryItem.value
+                        } else if queryItem.name == "state" {
+                            state = queryItem.value
+                        }
+                    }
+                    
+                    if let code = code, let state = state {
+                        CoinbaseApi.handleAuthenticationCallback(state: state, code: code) { success, error in
+                            
+                        }
+                    } else {
+                        print("Missing query items, code: \(String(describing: code)), state: \(String(describing: state))")
+                    }
+                }
+            }
+        } else {
+            print("No valid URL to handle")
+        }
     }
     
     //
