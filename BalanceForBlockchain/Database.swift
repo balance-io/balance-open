@@ -111,9 +111,9 @@ class Database {
             
             // account table
             statements.append("CREATE TABLE IF NOT EXISTS accounts " +
-                              "(accountId INTEGER PRIMARY KEY AUTOINCREMENT, sourceId INTEGER, sourceAccountId TEXT, " +
-                              "sourceInstitutionId TEXT, accountTypeId INTEGER, accountSubTypeId INTEGER, name TEXT, " +
-                              "currentBalance INTEGER, availableBalance INTEGER, number TEXT, institutionId INTEGER)")
+                              "(accountId INTEGER PRIMARY KEY AUTOINCREMENT, institutionId INTEGER, sourceId INTEGER, " +
+                              "sourceAccountId TEXT, sourceInstitutionId TEXT, accountTypeId INTEGER, accountSubTypeId INTEGER, " +
+                              "name TEXT, currency TEXT, decimals INTEGER, currentBalance INTEGER, availableBalance INTEGER, number TEXT)")
  
             for statement in statements {
                 if !db.executeUpdate(statement, withArgumentsIn: nil) {

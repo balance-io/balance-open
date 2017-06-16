@@ -193,11 +193,19 @@ struct CoinbaseApi {
     static func processCoinbaseAccounts(_ coinbaseAccounts: [CoinbaseAccount], institution: Institution) {
         // Add/update accounts
         for ca in coinbaseAccounts {
+            // Calculate the number of decimals
+            var decimals = 2
+            if let currency = Currency(rawValue: ca.currency) {
+                decimals = currency.decimals
+            }
+            
+            // Calculate the integer value of the balance based on the decimals
+            var balance = ca.balance
+            balance.multiply(by: Decimal(pow(10.0, Double(decimals))))
+            let currentBalance = (balance as NSDecimalNumber).intValue
+            
             // Initialize an Account object to insert the record
-            // TODO: Look into how to handle source institution ids
-            // TODO: Add support for the native balance stuff
-            // TODO!: Add currency support to accounts
-            _ = Account(institutionId: institution.institutionId, sourceId: institution.sourceId, sourceAccountId: ca.id, sourceInstitutionId: "", accountTypeId: AccountType.depository, accountSubTypeId: nil, name: ca.name, currentBalance: 0, availableBalance: nil, number: nil)
+            _ = Account(institutionId: institution.institutionId, sourceId: institution.sourceId, sourceAccountId: ca.id, sourceInstitutionId: "", accountTypeId: AccountType.depository, accountSubTypeId: nil, name: ca.name, currency: ca.currency, decimals: decimals, currentBalance: currentBalance, availableBalance: nil, number: nil)
         }
         
         // Remove accounts that no longer exist

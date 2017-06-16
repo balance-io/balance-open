@@ -15,7 +15,14 @@ enum Currency: String {
     case gbp = "GBP"
     
     // Crypto
-    case BTC = "BTC"
-    case LTC = "LTC"
-    case ETH = "ETH"
+    case btc = "BTC"
+    case ltc = "LTC"
+    case eth = "ETH"
+    
+    var decimals: Int {
+        switch self {
+        case .btc, .ltc, .eth: return 8
+        default: return 2
+        }
+    }
 }
