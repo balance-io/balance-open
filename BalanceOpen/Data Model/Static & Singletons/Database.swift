@@ -114,6 +114,12 @@ class Database {
                               "(accountId INTEGER PRIMARY KEY AUTOINCREMENT, institutionId INTEGER, sourceId INTEGER, " +
                               "sourceAccountId TEXT, sourceInstitutionId TEXT, accountTypeId INTEGER, accountSubTypeId INTEGER, " +
                               "name TEXT, currency TEXT, decimals INTEGER, currentBalance INTEGER, availableBalance INTEGER, number TEXT)")
+            if !db.columnExists("altCurrency", inTableWithName: "accounts") {
+                statements.append("ALTER TABLE accounts ADD COLUMN altCurrency TEXT")
+                statements.append("ALTER TABLE accounts ADD COLUMN altDecimals INTEGER")
+                statements.append("ALTER TABLE accounts ADD COLUMN altCurrentBalance INTEGER")
+                statements.append("ALTER TABLE accounts ADD COLUMN altAvailableBalance INTEGER")
+            }
  
             for statement in statements {
                 if !db.executeUpdate(statement, withArgumentsIn: nil) {

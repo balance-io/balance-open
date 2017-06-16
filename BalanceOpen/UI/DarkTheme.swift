@@ -94,6 +94,9 @@ struct DarkTheme: Theme {
             amountColorCents: NSColor(deviceRedInt: 153, green: 165, blue: 174),
             amountColorPositive: NSColor(deviceRedInt: 88, green: 184, blue: 33),
             
+            altAmountFont: NSFont.monospacedDigitSystemFont(ofSize: 12),
+            altAmountColor: NSColor(deviceRedInt: 153, green: 165, blue: 174),
+            
             availableFont: NSFont.systemFont(ofSize: 10.5),
             availableColor: NSColor(deviceRedInt: 148, green: 158, blue: 168)
         )

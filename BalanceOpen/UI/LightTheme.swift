@@ -93,6 +93,9 @@ struct LightTheme: Theme {
             amountColorCents: NSColor(deviceRedInt: 19, green: 22, blue: 25, alpha: 0.64),
             amountColorPositive: NSColor(deviceRedInt: 33, green: 143, blue: 0),
             
+            altAmountFont: NSFont.monospacedDigitSystemFont(ofSize: 12),
+            altAmountColor: NSColor(deviceRedInt: 19, green: 22, blue: 25, alpha: 0.64),
+            
             availableFont: NSFont.systemFont(ofSize: 10.5),
             availableColor: NSColor(deviceRedInt: 114, green: 117, blue: 121)
         )

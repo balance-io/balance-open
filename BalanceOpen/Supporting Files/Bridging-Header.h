@@ -7,7 +7,7 @@
 //
 
 #import <Sparkle/Sparkle.h>
-#import "FMDB.h"
+#import "FMDatabasePoolAdditions.h"
 #import "CCNStatusItem.h"
 #import "CertValidator.h"
 #import "ObjC.h"

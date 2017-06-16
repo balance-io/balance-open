@@ -15,6 +15,7 @@
 		2D8D54481EEB12360060FCCF /* BalanceOpenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D54471EEB12360060FCCF /* BalanceOpenTests.swift */; };
 		2DA7FAB91EF2637700CD8CED /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; };
 		2DC8663A1EF2654A00502A98 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		530DD1891EF458A400C0DDD3 /* FMDatabasePoolAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 530DD1881EF458A400C0DDD3 /* FMDatabasePoolAdditions.m */; };
 		532121B61EEAC2BF00F4812A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121B51EEAC2BF00F4812A /* AppDelegate.swift */; };
 		532121C61EEAC47300F4812A /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121C51EEAC47300F4812A /* Database.swift */; };
 		532121DB1EEAC4DC00F4812A /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 532121CE1EEAC4DC00F4812A /* FMDatabase.m */; };
@@ -203,6 +204,8 @@
 		2D8D54471EEB12360060FCCF /* BalanceOpenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceOpenTests.swift; sourceTree = "<group>"; };
 		2D8D54491EEB12360060FCCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DA7FAB81EF2637700CD8CED /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		530DD1871EF458A400C0DDD3 /* FMDatabasePoolAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePoolAdditions.h; sourceTree = "<group>"; };
+		530DD1881EF458A400C0DDD3 /* FMDatabasePoolAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePoolAdditions.m; sourceTree = "<group>"; };
 		532121B21EEAC2BF00F4812A /* BalanceOpen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BalanceOpen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		532121B51EEAC2BF00F4812A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		532121BE1EEAC2BF00F4812A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -505,6 +508,8 @@
 				532121D01EEAC4DC00F4812A /* FMDatabaseAdditions.m */,
 				532121D11EEAC4DC00F4812A /* FMDatabasePool.h */,
 				532121D21EEAC4DC00F4812A /* FMDatabasePool.m */,
+				530DD1871EF458A400C0DDD3 /* FMDatabasePoolAdditions.h */,
+				530DD1881EF458A400C0DDD3 /* FMDatabasePoolAdditions.m */,
 				532121D31EEAC4DC00F4812A /* FMDatabaseQueue.h */,
 				532121D41EEAC4DC00F4812A /* FMDatabaseQueue.m */,
 				532121D61EEAC4DC00F4812A /* FMResultSet.h */,
@@ -869,6 +874,7 @@
 				53FA53041EF3FAFE002990B0 /* InstitutionDefaultBar.swift in Sources */,
 				532122091EEAC89B00F4812A /* CCNStatusItem.m in Sources */,
 				532121DE1EEAC4DC00F4812A /* FMDatabaseQueue.m in Sources */,
+				530DD1891EF458A400C0DDD3 /* FMDatabasePoolAdditions.m in Sources */,
 				532122B11EEAE85500F4812A /* AccountConnectionErrors.swift in Sources */,
 				532122481EEAD32B00F4812A /* Theme.swift in Sources */,
 				532122441EEAD2B700F4812A /* AccountsTabViewController.swift in Sources */,

@@ -215,13 +215,22 @@ struct CoinbaseApi {
                 decimals = currency.decimals
             }
             
+            var altDecimals = 2
+            if let altCurrency = Currency(rawValue: ca.nativeCurrency) {
+                altDecimals = altCurrency.decimals
+            }
+            
             // Calculate the integer value of the balance based on the decimals
             var balance = ca.balance
             balance.multiply(by: Decimal(pow(10.0, Double(decimals))))
             let currentBalance = (balance as NSDecimalNumber).intValue
             
+            var altBalance = ca.nativeBalance
+            altBalance.multiply(by: Decimal(pow(10.0, Double(altDecimals))))
+            let altCurrentBalance = (altBalance as NSDecimalNumber).intValue
+            
             // Initialize an Account object to insert the record
-            _ = Account(institutionId: institution.institutionId, sourceId: institution.sourceId, sourceAccountId: ca.id, sourceInstitutionId: "", accountTypeId: AccountType.depository, accountSubTypeId: nil, name: ca.name, currency: ca.currency, decimals: decimals, currentBalance: currentBalance, availableBalance: nil, number: nil)
+            _ = Account(institutionId: institution.institutionId, sourceId: institution.sourceId, sourceAccountId: ca.id, sourceInstitutionId: "", accountTypeId: AccountType.depository, accountSubTypeId: nil, name: ca.name, currency: ca.currency, decimals: decimals, currentBalance: currentBalance, availableBalance: nil, number: nil, altCurrency: ca.nativeCurrency, altDecimals: altDecimals, altCurrentBalance: altCurrentBalance, altAvailableBalance: nil)
         }
         
         // Remove accounts that no longer exist

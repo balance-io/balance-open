@@ -45,6 +45,7 @@ class AccountsTabAccountCell: View {
     let nameField = LabelField()
     let inclusionIndicator = ImageView()
     let amountField = LabelField()
+    let altAmountField = LabelField()
     
     static var dateFormatter = DateFormatter()
     
@@ -59,7 +60,18 @@ class AccountsTabAccountCell: View {
         amountField.snp.makeConstraints { make in
             make.width.equalTo(100)
             make.trailing.equalToSuperview().inset(12)
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(8)
+        }
+        
+        altAmountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
+        altAmountField.font = CurrentTheme.accounts.cell.altAmountFont
+        altAmountField.textColor = CurrentTheme.accounts.cell.altAmountColor
+        altAmountField.usesSingleLineMode = true
+        self.addSubview(altAmountField)
+        altAmountField.snp.makeConstraints { make in
+            make.width.equalTo(100)
+            make.trailing.equalToSuperview().inset(8)
+            make.bottom.equalToSuperview().offset(-8)
         }
         
         nameField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
@@ -89,6 +101,27 @@ class AccountsTabAccountCell: View {
             amountField.snp.updateConstraints { make in
                 let width = amountField.stringValue.size(font: CurrentTheme.accounts.cell.amountFont)
                 make.width.equalTo(width)
+            }
+        }
+        
+        if updatedModel.altCurrency != nil && updatedModel.currency != updatedModel.altCurrency {
+            if let altCurrency = Currency(rawValue: updatedModel.altCurrency!), let altCurrentBalance = updatedModel.altCurrentBalance {
+                altAmountField.stringValue = amountToString(amount: altCurrentBalance, currency: altCurrency, showNegative: true)
+                altAmountField.setAccessibilityLabel("Account Total")
+                altAmountField.snp.updateConstraints { make in
+                    let width = altAmountField.stringValue.size(font: CurrentTheme.accounts.cell.amountFont)
+                    make.width.equalTo(width)
+                }
+            }
+            
+            altAmountField.isHidden = false
+            amountField.snp.updateConstraints { make in
+                make.top.equalToSuperview().offset(8)
+            }
+        } else {
+            altAmountField.isHidden = true
+            amountField.snp.updateConstraints { make in
+                make.top.equalToSuperview().offset(20)
             }
         }
         

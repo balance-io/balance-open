@@ -117,6 +117,9 @@ struct AccountsTheme {
         let amountColorCents: NSColor
         let amountColorPositive: NSColor
         
+        let altAmountFont: NSFont
+        let altAmountColor: NSColor
+        
         let availableFont: NSFont
         let availableColor: NSColor
     }

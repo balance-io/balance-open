@@ -26,11 +26,16 @@ private func arrayFromResult(_ result: FMResultSet) -> [AnyObject] {
     array.append(result.string(forColumnIndex: 7) as AnyObject)                // name
     
     array.append(result.string(forColumnIndex: 8) as AnyObject)                // currency
-    array.append(result.long(forColumnIndex: 9) as AnyObject)                // decimals
+    array.append(result.long(forColumnIndex: 9) as AnyObject)                  // decimals
     array.append(result.long(forColumnIndex: 10) as AnyObject)                 // currentBalance
     array.append(n2N(result.object(forColumnIndex: 11) as? Int))               // availableBalance
     
     array.append(n2N(result.object(forColumnIndex: 12) as? String))            // number
+    
+    array.append(n2N(result.object(forColumnIndex: 13) as? String))               // altCurrency
+    array.append(n2N(result.object(forColumnIndex: 14) as? Int))               // altDecimals
+    array.append(n2N(result.object(forColumnIndex: 15) as? Int))                // altCurrentBalance
+    array.append(n2N(result.object(forColumnIndex: 16) as? Int))               // altAvailableBalance
     
     return array
 }
@@ -54,6 +59,11 @@ class Account: Equatable {
     
     // Last 4 digits of credit card number, if applicable, using String as Plaid uses that format in JSON
     var number: String?
+    
+    var altCurrency: String?
+    var altDecimals: Int?
+    var altCurrentBalance: Int?
+    var altAvailableBalance: Int?
     
     var isCreditAccount: Bool {
         // Assume a balance is positive.
@@ -177,9 +187,14 @@ class Account: Equatable {
         self.availableBalance = resultArray[11] as? Int
         
         self.number = resultArray[12] as? String
+        
+        self.altCurrency = resultArray[13] as? String
+        self.altDecimals = resultArray[14] as? Int
+        self.altCurrentBalance = resultArray[15] as? Int
+        self.altAvailableBalance = resultArray[16] as? Int
     }
     
-    init?(institutionId: Int, sourceId: Source, sourceAccountId: String, sourceInstitutionId: String, accountTypeId: AccountType, accountSubTypeId: AccountType?, name: String, currency: String, decimals: Int, currentBalance: Int, availableBalance: Int?, number: String?) {
+    init?(institutionId: Int, sourceId: Source, sourceAccountId: String, sourceInstitutionId: String, accountTypeId: AccountType, accountSubTypeId: AccountType?, name: String, currency: String, decimals: Int, currentBalance: Int, availableBalance: Int?, number: String?, altCurrency: String? = nil, altDecimals: Int? = nil, altCurrentBalance: Int? = nil, altAvailableBalance: Int? = nil) {
         
         self.institutionId = institutionId
         self.sourceId = sourceId
@@ -196,6 +211,11 @@ class Account: Equatable {
         self.availableBalance = availableBalance
         
         self.number = number
+        
+        self.altCurrency = altCurrency
+        self.altDecimals = altDecimals
+        self.altCurrentBalance = altCurrentBalance
+        self.altAvailableBalance = altAvailableBalance
         
         // First check if a record for this account already exists
         var accountIdFromDb: Int?
@@ -215,8 +235,8 @@ class Account: Equatable {
             var generatedId: Int?
             database.writeDbQueue.inDatabase { db in
                 do {
-                    let insert = "INSERT INTO accounts VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-                    try db.executeUpdate(insert, NSNull(), institutionId, sourceId.rawValue, sourceAccountId, sourceInstitutionId, accountTypeId.rawValue, n2N(accountSubTypeId?.rawValue), name, currency, decimals, currentBalance, n2N(availableBalance), n2N(number))
+                    let insert = "INSERT INTO accounts VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                    try db.executeUpdate(insert, NSNull(), institutionId, sourceId.rawValue, sourceAccountId, sourceInstitutionId, accountTypeId.rawValue, n2N(accountSubTypeId?.rawValue), name, currency, decimals, currentBalance, n2N(availableBalance), n2N(number), n2N(altCurrency), n2N(altDecimals), n2N(altCurrentBalance), n2N(altAvailableBalance))
                     
                     generatedId = Int(db.lastInsertRowId())
                 } catch {
@@ -239,7 +259,7 @@ class Account: Equatable {
     func updateModel() {
         database.writeDbQueue.inDatabase { db in
             do {
-                let insert = "INSERT OR REPLACE INTO accounts VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                let insert = "INSERT OR REPLACE INTO accounts VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
                 
                 // Hack for compile time speed
                 let accountId: Any = self.accountId
@@ -255,8 +275,12 @@ class Account: Equatable {
                 let currentBalance: Any = self.currentBalance
                 let availableBalance: Any = n2N(self.availableBalance)
                 let number: Any = n2N(self.number)
+                let altCurrency: Any = n2N(self.altCurrency)
+                let altDecimals: Any = n2N(self.altDecimals)
+                let altCurrentBalance: Any = n2N(self.altCurrentBalance)
+                let altAvailableBalance: Any = n2N(self.altAvailableBalance)
                 
-                try db.executeUpdate(insert, accountId, institutionId, sourceId, sourceAccountId, sourceInstitutionId, accountType, accountSubType, name, currency, decimals, currentBalance, availableBalance, number)
+                try db.executeUpdate(insert, accountId, institutionId, sourceId, sourceAccountId, sourceInstitutionId, accountType, accountSubType, name, currency, decimals, currentBalance, availableBalance, number, altCurrency, altDecimals, altCurrentBalance, altAvailableBalance)
             } catch {
                 log.severe("DB Error: " + db.lastErrorMessage())
             }
