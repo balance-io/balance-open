@@ -131,6 +131,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                             if !success {
                                 print("Error handling Coinbase authentication callback: \(String(describing: error))")
                             }
+                            
+                            NotificationCenter.postOnMainThread(name: Notifications.ShowTabIndex, object: nil, userInfo: [Notifications.Keys.TabIndex: Tab.accounts.rawValue])
+                            NotificationCenter.postOnMainThread(name: Notifications.ShowTabs)
                         }
                     } else {
                         print("Missing query items, code: \(String(describing: code)), state: \(String(describing: state))")
