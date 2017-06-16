@@ -111,14 +111,14 @@ class Syncer {
                     log.error("Error pulling accounts for \(institution): \(error)")
                 }
                 log.debug("Finished pulling accounts for \(institution)")
-                
-                if self.canceled {
-                    self.cancelSync(errors: syncingErrors)
-                    return
-                }
-                
-                self.syncInstitutions(remainingInstitutions, beginDate: beginDate, success: syncingSuccess, errors: syncingErrors)
             }
+            
+            if self.canceled {
+                self.cancelSync(errors: syncingErrors)
+                return
+            }
+            
+            self.syncInstitutions(remainingInstitutions, beginDate: beginDate, success: syncingSuccess, errors: syncingErrors)
         }
     }
     

@@ -127,7 +127,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     
                     if let code = code, let state = state {
                         CoinbaseApi.handleAuthenticationCallback(state: state, code: code) { success, error in
-                            
+                            if !success {
+                                print("Error handling Coinbase authentication callback: \(String(describing: error))")
+                            }
                         }
                     } else {
                         print("Missing query items, code: \(String(describing: code)), state: \(String(describing: state))")
