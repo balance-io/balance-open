@@ -78,8 +78,22 @@ struct CoinbaseApi {
                 let institution = Institution(sourceId: .coinbase, sourceInstitutionId: "", name: "Coinbase", nameBreak: nil, primaryColor: nil, secondaryColor: nil, logoData: nil, accessToken: accessToken)
                 institution?.refreshToken = refreshToken
                 institution?.tokenExpireDate = Date().addingTimeInterval(expiresIn - 10.0)
-                DispatchQueue.main.async {
-                    completion(true, nil)
+                
+                // Sync accounts
+                if let institution = institution {
+                    updateAccounts(institution: institution) { success, error in
+                        if !success {
+                            print("Error updating accounts: \(String(describing: error))")
+                        }
+                        
+                        DispatchQueue.main.async {
+                            completion(true, nil)
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        completion(false, "Couldn't create institution so couldn't sync accounts")
+                    }
                 }
             } catch {
                 DispatchQueue.main.async {
