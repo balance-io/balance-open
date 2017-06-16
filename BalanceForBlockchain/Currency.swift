@@ -9,7 +9,7 @@
 import Foundation
 
 enum Currency: String {
-    // Fiat
+    // Traditional
     case usd = "USD"
     case eur = "EUR"
     case gbp = "GBP"
@@ -19,10 +19,20 @@ enum Currency: String {
     case ltc = "LTC"
     case eth = "ETH"
     
+    // TODO: Don't hard code decimals for crypto
     var decimals: Int {
         switch self {
         case .btc, .ltc, .eth: return 8
         default: return 2
+        }
+    }
+    
+    var symbol: String {
+        switch self {
+        case .usd: return "$"
+        case .eur: return "€"
+        case .gbp: return "£"
+        default: return self.rawValue + " "
         }
     }
 }

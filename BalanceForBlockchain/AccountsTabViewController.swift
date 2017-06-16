@@ -485,7 +485,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     }
     
     func updateTotalBalance() {
-        totalField.attributedStringValue = amountToStringFormatted(amount: viewModel.totalBalance(), showNegative: true)
+        //totalField.attributedStringValue = amountToStringFormatted(amount: viewModel.totalBalance(), showNegative: true)
     }
     
     //

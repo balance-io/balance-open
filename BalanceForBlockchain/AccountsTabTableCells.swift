@@ -74,7 +74,7 @@ class AccountsTabAccountCell: View {
         self.addSubview(nameField)
         nameField.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(10)
-            make.trailing.equalTo(inclusionIndicator.snp.leading).inset(-5)
+            make.trailing.equalToSuperview().inset(-5)
             make.top.equalToSuperview().inset(13)
             make.height.equalToSuperview()
         }
@@ -87,11 +87,13 @@ class AccountsTabAccountCell: View {
     func updateModel(_ updatedModel: Account) {
         model = updatedModel
         
-        amountField.attributedStringValue = amountToStringFormatted(amount: updatedModel.displayBalance, showNegative: true)
-        amountField.setAccessibilityLabel("Account Total")
-        amountField.snp.updateConstraints { make in
-            let width = amountField.stringValue.size(font: CurrentTheme.accounts.cell.amountFont)
-            make.width.equalTo(width)
+        if let currency = Currency(rawValue: updatedModel.currency) {
+            amountField.attributedStringValue = amountToStringFormatted(amount: updatedModel.displayBalance, currency: currency, showNegative: true)
+            amountField.setAccessibilityLabel("Account Total")
+            amountField.snp.updateConstraints { make in
+                let width = amountField.stringValue.size(font: CurrentTheme.accounts.cell.amountFont)
+                make.width.equalTo(width)
+            }
         }
         
         nameField.stringValue = updatedModel.displayName

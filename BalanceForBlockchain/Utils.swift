@@ -89,62 +89,38 @@ func decimalDollarAmountToCents(_ amount: Double) -> Int {
     return amountCents
 }
 
-fileprivate var centsFormatterNoDecimal: NumberFormatter = {
+fileprivate var amountFormatter: NumberFormatter = {
     let centsFormatter = NumberFormatter()
-    centsFormatter.currencySymbol = "$"
     centsFormatter.numberStyle = .currency
-    centsFormatter.maximumFractionDigits = 0
     return centsFormatter
 }()
 
-fileprivate var centsFormatter: NumberFormatter = {
-    let centsFormatter = NumberFormatter()
-    centsFormatter.currencySymbol = "$"
-    centsFormatter.numberStyle = .currency
-    centsFormatter.maximumFractionDigits = 2
-    return centsFormatter
-}()
-
-fileprivate var decimalFormatter: NumberFormatter = {
-    let centsFormatter = NumberFormatter()
-    centsFormatter.numberStyle = .decimal
-    centsFormatter.maximumFractionDigits = 2
-    return centsFormatter
-}()
-
-// Takes in strings representing dollars like $300.00, $500, 40 and returns their value in cents
-func stringToCents(_ amountString: String) -> Int? {
-    if let number = centsFormatter.number(from: amountString) {
-        let cents = Int(number.doubleValue * 100.0)
-        return cents
-    } else if let number = decimalFormatter.number(from: amountString) {
-        let cents = Int(number.doubleValue * 100.0)
-        return cents
-    }
-    return nil
-}
-
-func roundCentsToNearestDollar(_ cents: Int) -> Int {
-    return Int(round((Double(cents) / 100.0)) * 100.0)
-}
-
-func amountToString(amount: Int, decimals: Int = 2, showNegative: Bool = false, showDecimal: Bool = true)  -> String {
-    let amount = Double(amount) / pow(10.0, Double(decimals))
-    let formatter = showDecimal ? centsFormatter : centsFormatterNoDecimal
-    let amountString = formatter.string(from: NSNumber(value: amount))!
+// TODO: Add proper locale support for currency symbol location
+func amountToString(amount: Int, currency: Currency, showNegative: Bool = false)  -> String {
+    assert(Thread.isMainThread, "Must be used from main thread")
+    
+    let amount = Double(amount) / pow(10.0, Double(currency.decimals))
+    amountFormatter.currencySymbol = currency.symbol
+    amountFormatter.minimumFractionDigits = currency.decimals
+    amountFormatter.maximumFractionDigits = currency.decimals
+    
+    let amountString = amountFormatter.string(from: NSNumber(value: amount))!
     let minusRemoved = showNegative ? amountString : amountString.replacingOccurrences(of: "-", with: "")
     
     return minusRemoved
 }
 
-func amountToStringFormatted(amount: Int, decimals: Int = 2, showNegative: Bool = false, showDecimal: Bool = true, colorPositive: Bool = true)  -> NSAttributedString {
-    let amountString = amountToString(amount: amount, decimals: decimals, showNegative: showNegative, showDecimal: showDecimal)
+func amountToStringFormatted(amount: Int, currency: Currency, showNegative: Bool = false, colorPositive: Bool = true)  -> NSAttributedString {
+    assert(Thread.isMainThread, "Must be used from main thread")
+    
+    let amountString = amountToString(amount: amount, currency: currency, showNegative: showNegative)
     let preparedString = NSMutableAttributedString(string: amountString, attributes: [NSParagraphStyleAttributeName: rightParagraphStyle])
     
     let count = preparedString.string.length
-    let decimalCharsCount = count - decimals - 1
+    let decimalCharsCount = count - currency.decimals - 1
+    let showDecimal = currency.decimals > 0
     let firstCharacters = NSRange(location: 0, length: showDecimal ? decimalCharsCount : count)
-    let decimalCharacters = NSRange(location: decimalCharsCount, length: decimals + 1)
+    let decimalCharacters = NSRange(location: decimalCharsCount, length: currency.decimals + 1)
     
     // Negative numbers are presented as positive, and vice versa.
     let isNegative = (amount == 0 || amountString.hasPrefix("-"))
