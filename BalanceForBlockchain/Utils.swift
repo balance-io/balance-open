@@ -124,54 +124,50 @@ func stringToCents(_ amountString: String) -> Int? {
     return nil
 }
 
-func centsToString(_ cents: Int, showNegative: Bool = false, showCents: Bool = true)  -> String {
-    let amount = Double(cents) / 100.00
-    let formatter = showCents ? centsFormatter : centsFormatterNoDecimal
+func roundCentsToNearestDollar(_ cents: Int) -> Int {
+    return Int(round((Double(cents) / 100.0)) * 100.0)
+}
+
+func amountToString(amount: Int, decimals: Int = 2, showNegative: Bool = false, showDecimal: Bool = true)  -> String {
+    let amount = Double(amount) / pow(10.0, Double(decimals))
+    let formatter = showDecimal ? centsFormatter : centsFormatterNoDecimal
     let amountString = formatter.string(from: NSNumber(value: amount))!
     let minusRemoved = showNegative ? amountString : amountString.replacingOccurrences(of: "-", with: "")
     
     return minusRemoved
 }
 
-
-func centsToStringFormatted(_ cents: Int, showNegative: Bool = false, showCents: Bool = true, colorPositive: Bool = true)  -> NSAttributedString {
-    let amount = Double(cents) / 100.00
-    let formatter = showCents ? centsFormatter : centsFormatterNoDecimal
-    let amountString = formatter.string(from: NSNumber(value: amount))!
-    let minusRemoved = showNegative ? amountString : amountString.replacingOccurrences(of: "-", with: "")
-    
-    let preparedString = NSMutableAttributedString(string: minusRemoved, attributes: [NSParagraphStyleAttributeName: rightParagraphStyle])
+func amountToStringFormatted(amount: Int, decimals: Int = 2, showNegative: Bool = false, showDecimal: Bool = true, colorPositive: Bool = true)  -> NSAttributedString {
+    let amountString = amountToString(amount: amount, decimals: decimals, showNegative: showNegative, showDecimal: showDecimal)
+    let preparedString = NSMutableAttributedString(string: amountString, attributes: [NSParagraphStyleAttributeName: rightParagraphStyle])
     
     let count = preparedString.string.length
-    let firstCharacters = NSRange(location: 0, length: showCents ? count - 3 : count)
-    let lastTwoCharacters = NSRange(location: count - 3, length: 3)
+    let decimalCharsCount = count - decimals - 1
+    let firstCharacters = NSRange(location: 0, length: showDecimal ? decimalCharsCount : count)
+    let decimalCharacters = NSRange(location: decimalCharsCount, length: decimals + 1)
     
     // Negative numbers are presented as positive, and vice versa.
-    let isNegative = (cents == 0 || amountString.hasPrefix("-"))
+    let isNegative = (amount == 0 || amountString.hasPrefix("-"))
     if isNegative {
         // Set the color to white if it is a negative amount
         preparedString.addAttribute(NSForegroundColorAttributeName, value: CurrentTheme.accounts.cell.amountColor, range: firstCharacters)
-            
-        if showCents {
+        
+        if showDecimal {
             // Add extra alpha to the cents
-            preparedString.addAttribute(NSForegroundColorAttributeName, value: CurrentTheme.accounts.cell.amountColorCents, range: lastTwoCharacters)
+            preparedString.addAttribute(NSForegroundColorAttributeName, value: CurrentTheme.accounts.cell.amountColorCents, range: decimalCharacters)
         }
     } else {
         // Set the color to green if it is a positive amount
         let foregroundColor = colorPositive ? CurrentTheme.accounts.cell.amountColorPositive : CurrentTheme.accounts.cell.amountColor
         preparedString.addAttribute(NSForegroundColorAttributeName, value: foregroundColor, range: firstCharacters)
         
-        if showCents {
+        if showDecimal {
             // Add extra alpha to the cents
-            preparedString.addAttribute(NSForegroundColorAttributeName, value: foregroundColor.withAlphaComponent(0.75), range: lastTwoCharacters)
+            preparedString.addAttribute(NSForegroundColorAttributeName, value: foregroundColor.withAlphaComponent(0.75), range: decimalCharacters)
         }
     }
     
     return preparedString
-}
-
-func roundCentsToNearestDollar(_ cents: Int) -> Int {
-    return Int(round((Double(cents) / 100.0)) * 100.0)
 }
 
 // Returns NSNull if the input is nil. Useful for things like db queries.
