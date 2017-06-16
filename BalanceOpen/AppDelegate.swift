@@ -337,6 +337,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         _ = try? NSWorkspace.shared().open(URL(string: urlString)!, options: [], configuration: [:])
     }
     
+    func checkForUpdates(sender: Any) {
+        SUUpdater.shared().checkForUpdates(sender)
+    }
+    
     func quitApp() {
         NSApp.terminate(nil)
     }

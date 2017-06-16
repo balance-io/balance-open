@@ -406,9 +406,9 @@
 		532121A91EEAC2BF00F4812A = {
 			isa = PBXGroup;
 			children = (
+				532121B41EEAC2BF00F4812A /* BalanceOpen */,
 				2D44500A1EF3A4500023F63C /* AutoLaunchBalanceHelper */,
 				2D8D54461EEB12360060FCCF /* BalanceOpenTests */,
-				532121B41EEAC2BF00F4812A /* BalanceOpen */,
 				532121B31EEAC2BF00F4812A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -426,12 +426,12 @@
 		532121B41EEAC2BF00F4812A /* BalanceOpen */ = {
 			isa = PBXGroup;
 			children = (
+				532121B51EEAC2BF00F4812A /* AppDelegate.swift */,
+				532121C81EEAC48F00F4812A /* UI */,
 				532121C41EEAC44400F4812A /* Data Model */,
 				532121F91EEAC74100F4812A /* Extensions */,
 				532121C91EEAC49600F4812A /* Frameworks */,
 				532121C71EEAC47D00F4812A /* Supporting Files */,
-				532121C81EEAC48F00F4812A /* UI */,
-				532121B51EEAC2BF00F4812A /* AppDelegate.swift */,
 			);
 			path = BalanceOpen;
 			sourceTree = "<group>";

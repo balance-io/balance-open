@@ -140,6 +140,7 @@ class TabsViewController: NSViewController {
         menu.addItem(withTitle: "Preferences...", action: #selector(showPreferences), keyEquivalent: ",")
         menu.addItem(NSMenuItem.separator())
         menu.addItem(withTitle: "Send Feedback", action: #selector(sendFeedback), keyEquivalent: "")
+        menu.addItem(withTitle: "Check for Updates", action: #selector(checkForUpdates(sender:)), keyEquivalent: "")
         menu.addItem(NSMenuItem.separator())
         menu.addItem(withTitle: "Quit Balance", action: #selector(quitApp), keyEquivalent: "q")
         
@@ -157,6 +158,10 @@ class TabsViewController: NSViewController {
     
     func sendFeedback() {
         AppDelegate.sharedInstance.sendFeedback()
+    }
+    
+    func checkForUpdates(sender: Any) {
+        AppDelegate.sharedInstance.checkForUpdates(sender: sender)
     }
     
     func quitApp() {
