@@ -12,7 +12,8 @@ import Locksmith
 typealias SuccessErrorBlock = (_ success: Bool, _ error: Error?) -> Void
 
 fileprivate let connectionTimeout = 30.0
-fileprivate let subServerUrl = "http://localhost:8080/"
+//fileprivate let subServerUrl = "http://localhost:8080/"
+fileprivate let subServerUrl = "https://bal-subscription-server-beta.appspot.com/"
 fileprivate let clientId = "e47cf82db1ab3497eb06f96bcac0dde027c90c24a977c0b965416e7351b0af9f"
 
 // Save random state for current authentication request
