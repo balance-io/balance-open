@@ -19,7 +19,7 @@ fileprivate let clientId = "e47cf82db1ab3497eb06f96bcac0dde027c90c24a977c0b96541
 // Save random state for current authentication request
 fileprivate var lastState: String? = nil
 
-fileprivate let session = URLSession(configuration: .default, delegate: nil, delegateQueue: nil)
+fileprivate let session = URLSession(configuration: .default, delegate: certValidator, delegateQueue: nil)
 
 struct CoinbaseApi {
 
