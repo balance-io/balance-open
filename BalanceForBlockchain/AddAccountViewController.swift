@@ -29,6 +29,7 @@ class AddAccountViewController: NSViewController {
     fileprivate let welcomeField = LabelField()
     fileprivate let subtitleField = LabelField()
     fileprivate let requestExplanationField = LabelField()
+    fileprivate let githubButton = Button()
     fileprivate let backButton = Button()
     fileprivate let statusField = LabelField()
     fileprivate let preferencesButton = Button()
@@ -72,6 +73,7 @@ class AddAccountViewController: NSViewController {
         super.viewWillAppear()
         
         backButton.isHidden = !Institution.hasInstitutions && allowSelection
+        githubButton.isHidden = Institution.hasInstitutions
         
         // TODO: Remove delay hack. Currently there to allow for the resize to work on app launch
         DispatchQueue.main.async(after: hackDelay) {
@@ -197,7 +199,6 @@ class AddAccountViewController: NSViewController {
         let buttonAltAttributes = [NSForegroundColorAttributeName: buttonAltBlueColor,
                                    NSFontAttributeName: NSFont.semiboldSystemFont(ofSize: 13)]
         
-        let githubButton = Button()
         githubButton.attributedTitle = NSAttributedString(string:"GitHub", attributes: buttonAttributes)
         githubButton.attributedAlternateTitle = NSAttributedString(string:"GitHub", attributes: buttonAltAttributes)
         githubButton.setAccessibilityLabel("GitHub")

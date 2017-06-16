@@ -131,7 +131,7 @@ class SyncButton: View {
     
     override func mouseEntered(with event: NSEvent) {
         if mouseHandlingEnabled {
-            overrideText = "Updates every 4-24 hours. Check now?"
+            overrideText = "Click to sync now"
         }
     }
     
