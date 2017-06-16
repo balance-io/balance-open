@@ -83,7 +83,7 @@ class AddAccountViewController: NSViewController {
             }
             
             if self.allowSelection {
-                AppDelegate.sharedInstance.resizeWindowHeight(350, animated: true)
+                AppDelegate.sharedInstance.resizeWindowHeight(370, animated: true)
             }
         }
     }
@@ -114,7 +114,6 @@ class AddAccountViewController: NSViewController {
             make.top.equalToSuperview().offset(25)
         }
         
-//        let trianglesImage = isLight ? #imageLiteral(resourceName: "intro-light-triangles") : #imageLiteral(resourceName: "intro-dark-triangles")
         let trianglesImage = #imageLiteral(resourceName: "intro-dark-triangles")
         let trianglesImageView = ImageView()
         trianglesImageView.image = trianglesImage
@@ -188,7 +187,7 @@ class AddAccountViewController: NSViewController {
         
         createButtons()
         
-        var isLight = false
+        let isLight = CurrentTheme.type == .light
         
         let buttonBlueColor = isLight ? NSColor(deviceRedInt: 39, green: 132, blue: 240) : NSColor(deviceRedInt: 71, green: 152, blue: 244)
         let buttonAltBlueColor = isLight ? NSColor(deviceRedInt: 39, green: 132, blue: 240, alpha: 0.7) : NSColor(deviceRedInt: 71, green: 152, blue: 244, alpha: 0.7)
@@ -198,94 +197,6 @@ class AddAccountViewController: NSViewController {
         let buttonAltAttributes = [NSForegroundColorAttributeName: buttonAltBlueColor,
                                    NSFontAttributeName: NSFont.semiboldSystemFont(ofSize: 13)]
         
-        let securityButton = Button()
-        securityButton.attributedTitle = NSAttributedString(string:"Security", attributes: buttonAttributes)
-        securityButton.attributedAlternateTitle = NSAttributedString(string:"Security", attributes: buttonAltAttributes)
-        securityButton.setAccessibilityLabel("Security")
-        securityButton.isBordered = false
-        securityButton.setButtonType(.momentaryChange)
-        securityButton.target = self
-        securityButton.sizeToFit()
-//        securityButton.action = #selector(restoreSubscription)
-        containerView.addSubview(securityButton)
-        securityButton.snp.makeConstraints { make in
-            make.height.equalTo(20)
-            make.left.equalTo(containerView).offset(13)
-            make.bottom.equalTo(containerView.snp.bottom).inset(10)
-        }
-//        subscribeButtons.append(securityButton)
-        
-        let dotLabel1 = LabelField()
-        dotLabel1.stringValue = "•"
-        dotLabel1.font = .semiboldSystemFont(ofSize: 13)
-        dotLabel1.textColor = buttonBlueColor
-        dotLabel1.verticalAlignment = .center
-        dotLabel1.sizeToFit()
-        containerView.addSubview(dotLabel1)
-        dotLabel1.snp.makeConstraints { make in
-            make.height.equalTo(20)
-            make.left.equalTo(securityButton.snp.right).offset(5)
-            make.top.equalTo(securityButton)
-        }
-        
-        let privacyButton = Button()
-        privacyButton.attributedTitle = NSAttributedString(string:"Privacy", attributes: buttonAttributes)
-        privacyButton.attributedAlternateTitle = NSAttributedString(string:"Privacy", attributes: buttonAltAttributes)
-        privacyButton.setAccessibilityLabel("Privacy")
-        privacyButton.isBordered = false
-        privacyButton.setButtonType(.momentaryChange)
-        privacyButton.target = self
-        privacyButton.sizeToFit()
-//        privacyButton.action = #selector(privacy)
-        containerView.addSubview(privacyButton)
-        privacyButton.snp.makeConstraints { make in
-            make.height.equalTo(20)
-            make.left.equalTo(dotLabel1.snp.right).offset(5)
-            make.top.equalTo(securityButton)
-        }
-        
-        let dotLabel2 = LabelField()
-        dotLabel2.stringValue = "•"
-        dotLabel2.font = .semiboldSystemFont(ofSize: 13)
-        dotLabel2.textColor = buttonBlueColor
-        dotLabel2.verticalAlignment = .center
-        dotLabel2.sizeToFit()
-        containerView.addSubview(dotLabel2)
-        dotLabel2.snp.makeConstraints { make in
-            make.height.equalTo(20)
-            make.left.equalTo(privacyButton.snp.right).offset(5)
-            make.top.equalTo(securityButton)
-        }
-        
-        let termsButton = Button()
-        termsButton.attributedTitle = NSAttributedString(string:"Terms", attributes: buttonAttributes)
-        termsButton.attributedAlternateTitle = NSAttributedString(string:"Terms", attributes: buttonAltAttributes)
-        termsButton.setAccessibilityLabel("Terms")
-        termsButton.isBordered = false
-        termsButton.setButtonType(.momentaryChange)
-        termsButton.target = self
-        termsButton.sizeToFit()
-//        termsButton.action = #selector(terms)
-        containerView.addSubview(termsButton)
-        termsButton.snp.makeConstraints { make in
-            make.height.equalTo(20)
-            make.left.equalTo(dotLabel2.snp.right).offset(5)
-            make.top.equalTo(securityButton)
-        }
-        
-        let dotLabel3 = LabelField()
-        dotLabel3.stringValue = "•"
-        dotLabel3.font = .semiboldSystemFont(ofSize: 13)
-        dotLabel3.textColor = buttonBlueColor
-        dotLabel3.verticalAlignment = .center
-        dotLabel3.sizeToFit()
-        containerView.addSubview(dotLabel3)
-        dotLabel3.snp.makeConstraints { make in
-            make.height.equalTo(20)
-            make.left.equalTo(termsButton.snp.right).offset(5)
-            make.top.equalTo(securityButton)
-        }
-        
         let githubButton = Button()
         githubButton.attributedTitle = NSAttributedString(string:"GitHub", attributes: buttonAttributes)
         githubButton.attributedAlternateTitle = NSAttributedString(string:"GitHub", attributes: buttonAltAttributes)
@@ -294,12 +205,12 @@ class AddAccountViewController: NSViewController {
         githubButton.setButtonType(.momentaryChange)
         githubButton.target = self
         githubButton.sizeToFit()
-//        contactButton.action = #selector(contact)
+        githubButton.action = #selector(githubButtonAction)
         containerView.addSubview(githubButton)
         githubButton.snp.makeConstraints { make in
             make.height.equalTo(20)
-            make.left.equalTo(dotLabel3.snp.right).offset(5)
-            make.top.equalTo(securityButton)
+            make.left.equalToSuperview().offset(13)
+            make.bottom.equalToSuperview().inset(10)
         }
         
         if allowSelection && Institution.institutionsCount == 0 {
@@ -318,6 +229,16 @@ class AddAccountViewController: NSViewController {
                 make.width.equalTo(16)
                 make.height.equalTo(16)
             }
+        }
+    }
+    
+    @objc fileprivate func githubButtonAction() {
+        let url = "https://github.com/balancemymoney/balance-open"
+        do {
+            _ = try NSWorkspace.shared().open(URL(string: url)!, options: [], configuration: [:])
+        } catch {
+            // TODO: Better error handling
+            print("Error opening Github repo URL: \(error)")
         }
     }
     
@@ -375,6 +296,11 @@ class AddAccountViewController: NSViewController {
                 }
                 
                 buttons.append(button)
+                
+                if source != .coinbase {
+                    button.alphaValue = 0.5
+                    button.isEnabled = false
+                }
                 
                 if isRightColumn {
                     topView = button

@@ -12,7 +12,8 @@ import Locksmith
 typealias SuccessErrorBlock = (_ success: Bool, _ error: Error?) -> Void
 
 fileprivate let connectionTimeout = 30.0
-fileprivate let subServerUrl = "http://localhost:8080/"
+//fileprivate let subServerUrl = "http://localhost:8080/"
+fileprivate let subServerUrl = "https://bal-subscription-server-beta.appspot.com/"
 fileprivate let clientId = "e47cf82db1ab3497eb06f96bcac0dde027c90c24a977c0b965416e7351b0af9f"
 
 // Save random state for current authentication request
@@ -77,8 +78,22 @@ struct CoinbaseApi {
                 let institution = Institution(sourceId: .coinbase, sourceInstitutionId: "", name: "Coinbase", nameBreak: nil, primaryColor: nil, secondaryColor: nil, logoData: nil, accessToken: accessToken)
                 institution?.refreshToken = refreshToken
                 institution?.tokenExpireDate = Date().addingTimeInterval(expiresIn - 10.0)
-                DispatchQueue.main.async {
-                    completion(true, nil)
+                
+                // Sync accounts
+                if let institution = institution {
+                    updateAccounts(institution: institution) { success, error in
+                        if !success {
+                            print("Error updating accounts: \(String(describing: error))")
+                        }
+                        
+                        DispatchQueue.main.async {
+                            completion(true, nil)
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        completion(false, "Couldn't create institution so couldn't sync accounts")
+                    }
                 }
             } catch {
                 DispatchQueue.main.async {
@@ -193,11 +208,19 @@ struct CoinbaseApi {
     static func processCoinbaseAccounts(_ coinbaseAccounts: [CoinbaseAccount], institution: Institution) {
         // Add/update accounts
         for ca in coinbaseAccounts {
+            // Calculate the number of decimals
+            var decimals = 2
+            if let currency = Currency(rawValue: ca.currency) {
+                decimals = currency.decimals
+            }
+            
+            // Calculate the integer value of the balance based on the decimals
+            var balance = ca.balance
+            balance.multiply(by: Decimal(pow(10.0, Double(decimals))))
+            let currentBalance = (balance as NSDecimalNumber).intValue
+            
             // Initialize an Account object to insert the record
-            // TODO: Look into how to handle source institution ids
-            // TODO: Add support for the native balance stuff
-            // TODO!: Add currency support to accounts
-            _ = Account(institutionId: institution.institutionId, sourceId: institution.sourceId, sourceAccountId: ca.id, sourceInstitutionId: "", accountTypeId: AccountType.depository, accountSubTypeId: nil, name: ca.name, currentBalance: 0, availableBalance: nil, number: nil)
+            _ = Account(institutionId: institution.institutionId, sourceId: institution.sourceId, sourceAccountId: ca.id, sourceInstitutionId: "", accountTypeId: AccountType.depository, accountSubTypeId: nil, name: ca.name, currency: ca.currency, decimals: decimals, currentBalance: currentBalance, availableBalance: nil, number: nil)
         }
         
         // Remove accounts that no longer exist

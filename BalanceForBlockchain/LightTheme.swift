@@ -18,7 +18,7 @@ struct LightTheme: Theme {
         let foregroundColor = NSColor(deviceRedInt: 19, green: 22, blue: 25)
         let material = NSVisualEffectMaterial.light
         let size = CGSize(width: 400, height: 600)
-        let noAccountsSize = CGSize(width: 400, height: 350)
+        let noAccountsSize = CGSize(width: 400, height: 370)
         let touchBarFont = NSFont.systemFont(ofSize: 15)
         
         let totalFooter = DefaultsTheme.TotalFooterTheme(

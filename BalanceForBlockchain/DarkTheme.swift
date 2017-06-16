@@ -18,7 +18,7 @@ struct DarkTheme: Theme {
         let foregroundColor = NSColor(deviceWhiteInt: 255)
         let material = NSVisualEffectMaterial.dark
         let size = CGSize(width: 400, height: 600)
-        let noAccountsSize = CGSize(width: 400, height: 350)
+        let noAccountsSize = CGSize(width: 400, height: 370)
         let touchBarFont = NSFont.systemFont(ofSize: 15)
         
         let totalFooter = DefaultsTheme.TotalFooterTheme(

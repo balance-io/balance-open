@@ -15,21 +15,22 @@ func ==(lhs: Account, rhs: Account) -> Bool {
 private func arrayFromResult(_ result: FMResultSet) -> [AnyObject] {
     var array = [AnyObject]()
     
-    array.append(result.long(forColumnIndex: 0) as AnyObject)                      // accountId
-    array.append(result.long(forColumnIndex: 1) as AnyObject)                      // sourceId
-    array.append(result.string(forColumnIndex: 2) as AnyObject)                    // sourceAccountId
-    array.append(result.string(forColumnIndex: 3) as AnyObject)                    // sourceInstitutionId
-    array.append(result.long(forColumnIndex: 4) as AnyObject)                      // accountType
-    array.append(n2N(result.object(forColumnIndex: 5) as? Int) as AnyObject)       // accountSubType
+    array.append(result.long(forColumnIndex: 0) as AnyObject)                  // accountId
+    array.append(n2N(result.object(forColumnIndex: 1) as? Int))                // institutionId
+    array.append(result.long(forColumnIndex: 2) as AnyObject)                  // sourceId
+    array.append(result.string(forColumnIndex: 3) as AnyObject)                // sourceAccountId
+    array.append(result.string(forColumnIndex: 4) as AnyObject)                // sourceInstitutionId
+    array.append(result.long(forColumnIndex: 5) as AnyObject)                  // accountType
+    array.append(n2N(result.object(forColumnIndex: 6) as? Int) as AnyObject)   // accountSubType
     
-    array.append(result.string(forColumnIndex: 6) as AnyObject)                    // name
+    array.append(result.string(forColumnIndex: 7) as AnyObject)                // name
     
-    array.append(result.long(forColumnIndex: 7) as AnyObject)                      // currentBalance
-    array.append(n2N(result.object(forColumnIndex: 8) as? Int))       // availableBalance
+    array.append(result.string(forColumnIndex: 8) as AnyObject)                // currency
+    array.append(result.long(forColumnIndex: 9) as AnyObject)                // decimals
+    array.append(result.long(forColumnIndex: 10) as AnyObject)                 // currentBalance
+    array.append(n2N(result.object(forColumnIndex: 11) as? Int))               // availableBalance
     
-    array.append(n2N(result.object(forColumnIndex: 9) as? String))    // number
-    
-    array.append(n2N(result.object(forColumnIndex: 10) as? Int))      // institutionId
+    array.append(n2N(result.object(forColumnIndex: 12) as? String))            // number
     
     return array
 }
@@ -46,6 +47,8 @@ class Account: Equatable {
     
     var name: String
     
+    var currency: String
+    var decimals: Int
     var currentBalance: Int
     var availableBalance: Int?
     
@@ -158,24 +161,25 @@ class Account: Equatable {
     
     init(_ resultArray: [AnyObject]) {
         self.accountId = resultArray[0] as! Int
-        self.sourceId = Source(rawValue: resultArray[1] as! Int)!
-        self.sourceAccountId = resultArray[2] as! String
-        self.sourceInstitutionId = resultArray[3] as! String
-        self.accountType = AccountType(rawValue: resultArray[4] as! Int)!
-        let subType = resultArray[5] as? Int
+        self.institutionId = resultArray[1] as! Int
+        self.sourceId = Source(rawValue: resultArray[2] as! Int)!
+        self.sourceAccountId = resultArray[3] as! String
+        self.sourceInstitutionId = resultArray[4] as! String
+        self.accountType = AccountType(rawValue: resultArray[5] as! Int)!
+        let subType = resultArray[6] as? Int
         self.accountSubType = subType == nil ? nil : AccountType(rawValue: subType!)
         
-        self.name = resultArray[6] as! String
+        self.name = resultArray[7] as! String
         
-        self.currentBalance = resultArray[7] as! Int
-        self.availableBalance = resultArray[8] as? Int
+        self.currency = resultArray[8] as! String
+        self.decimals = resultArray[9] as! Int
+        self.currentBalance = resultArray[10] as! Int
+        self.availableBalance = resultArray[11] as? Int
         
-        self.number = resultArray[9] as? String
-        
-        self.institutionId = resultArray[10] as! Int
+        self.number = resultArray[12] as? String
     }
     
-    init?(institutionId: Int, sourceId: Source, sourceAccountId: String, sourceInstitutionId: String, accountTypeId: AccountType, accountSubTypeId: AccountType?, name: String, currentBalance: Int, availableBalance: Int?, number: String?) {
+    init?(institutionId: Int, sourceId: Source, sourceAccountId: String, sourceInstitutionId: String, accountTypeId: AccountType, accountSubTypeId: AccountType?, name: String, currency: String, decimals: Int, currentBalance: Int, availableBalance: Int?, number: String?) {
         
         self.institutionId = institutionId
         self.sourceId = sourceId
@@ -186,6 +190,8 @@ class Account: Equatable {
         
         self.name = name
         
+        self.currency = currency
+        self.decimals = decimals
         self.currentBalance = currentBalance
         self.availableBalance = availableBalance
         
@@ -209,8 +215,8 @@ class Account: Equatable {
             var generatedId: Int?
             database.writeDbQueue.inDatabase { db in
                 do {
-                    let insert = "INSERT INTO accounts VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-                    try db.executeUpdate(insert, NSNull(), sourceId.rawValue, sourceAccountId, sourceInstitutionId, accountTypeId.rawValue, n2N(accountSubTypeId?.rawValue), name, currentBalance, n2N(availableBalance), n2N(number), institutionId)
+                    let insert = "INSERT INTO accounts VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                    try db.executeUpdate(insert, NSNull(), institutionId, sourceId.rawValue, sourceAccountId, sourceInstitutionId, accountTypeId.rawValue, n2N(accountSubTypeId?.rawValue), name, currency, decimals, currentBalance, n2N(availableBalance), n2N(number))
                     
                     generatedId = Int(db.lastInsertRowId())
                 } catch {
@@ -233,22 +239,24 @@ class Account: Equatable {
     func updateModel() {
         database.writeDbQueue.inDatabase { db in
             do {
-                let insert = "INSERT OR REPLACE INTO accounts VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                let insert = "INSERT OR REPLACE INTO accounts VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
                 
                 // Hack for compile time speed
                 let accountId: Any = self.accountId
+                let institutionId: Any = self.institutionId
                 let sourceId: Any = self.sourceId.rawValue
                 let sourceAccountId: Any = self.sourceAccountId
                 let sourceInstitutionId: Any = self.sourceInstitutionId
                 let accountType: Any = self.accountType.rawValue
                 let accountSubType: Any = n2N(self.accountSubType?.rawValue)
                 let name: Any = self.name
+                let currency: Any = self.currency
+                let decimals: Any = self.decimals
                 let currentBalance: Any = self.currentBalance
                 let availableBalance: Any = n2N(self.availableBalance)
                 let number: Any = n2N(self.number)
-                let institutionId: Any = self.institutionId
                 
-                try db.executeUpdate(insert, accountId, sourceId, sourceAccountId, sourceInstitutionId, accountType, accountSubType, name, currentBalance, availableBalance, number, institutionId)
+                try db.executeUpdate(insert, accountId, institutionId, sourceId, sourceAccountId, sourceInstitutionId, accountType, accountSubType, name, currency, decimals, currentBalance, availableBalance, number)
             } catch {
                 log.severe("DB Error: " + db.lastErrorMessage())
             }

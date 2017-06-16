@@ -74,29 +74,37 @@ class HoverButton: NSButton {
     //
     
     override func mouseEntered(with theEvent: NSEvent) {
-        currentState = .hover
-        self.needsDisplay = true
+        if self.isEnabled {
+            currentState = .hover
+            self.needsDisplay = true
+        }
     }
     
     override func mouseExited(with theEvent: NSEvent) {
-        currentState = .original
-        self.needsDisplay = true
+        if self.isEnabled {
+            currentState = .original
+            self.needsDisplay = true
+        }
     }
     
     override func mouseDown(with theEvent: NSEvent) {
-        currentState = .pressed
-        self.needsDisplay = true
+        if self.isEnabled {
+            currentState = .pressed
+            self.needsDisplay = true
+        }
     }
     
     override func mouseUp(with theEvent: NSEvent) {
-        let pointInButton = self.convert(theEvent.locationInWindow, from: nil)
-        let isInsideButton = NSPointInRect(pointInButton, self.bounds)
-        currentState = isInsideButton ? .hover : .original
-        self.needsDisplay = true
-        
-        // Click handling
-        if isInsideButton, let target = self.target {
-            NSApp.sendAction(action!, to: target, from: self)
+        if self.isEnabled {
+            let pointInButton = self.convert(theEvent.locationInWindow, from: nil)
+            let isInsideButton = NSPointInRect(pointInButton, self.bounds)
+            currentState = isInsideButton ? .hover : .original
+            self.needsDisplay = true
+            
+            // Click handling
+            if isInsideButton, let target = self.target {
+                NSApp.sendAction(action!, to: target, from: self)
+            }
         }
     }
     
