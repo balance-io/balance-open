@@ -47,17 +47,7 @@ class Defaults {
             return defaults.bool(forKey: Keys.launchAtLogin)
         }
         set {
-            if autoLaunch.launchAtLogin(newValue) {
-                defaults.set(newValue, forKey: Keys.launchAtLogin)
-            } else {
-                log.severe("Failed to set login at launch preference")
-                
-                let alert = NSAlert()
-                alert.alertStyle = .warning
-                alert.messageText = newValue ? "Unable to create the login item" : "Unable to remove the login item"
-                alert.addButton(withTitle: "OK")
-                alert.runModal()
-            }
+            defaults.set(newValue, forKey: Keys.launchAtLogin)
         }
     }
     

@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import ServiceManagement
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     
@@ -75,7 +76,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Query the helper app to see if we were auto launched (dirty hack because Apple makes simple shit difficult)
-        autoLaunch.queryHelper()
+        forceAutoLaunch()
         
         // Initialize singletons
         initializeSingletons()
@@ -168,10 +169,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     self.showPopover()
                 }
             }
-            
-            if !autoLaunch.wasLaunchedAtLogin && !showedAlert {
-                self.showPopover()
-            }
+
+            //DO WE NEED THIS?
+//            if !autoLaunch.wasLaunchedAtLogin && !showedAlert {
+//                self.showPopover()
+//            }
         }
     }
     
@@ -278,6 +280,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         task.arguments = ["-c", "sleep 0.2; open \"\(Bundle.main.bundlePath)\""]
         task.launch()
         NSApp.terminate(nil)
+    }
+    
+    func forceAutoLaunch() {
+        if (!SMLoginItemSetEnabled("balance.money.AutoLaunchBalanceHelper" as CFString, defaults.launchAtLogin)) {
+            print("Auto login was not successful");
+        }
     }
     
     func sendFeedback() {
