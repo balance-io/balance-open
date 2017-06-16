@@ -20,6 +20,8 @@ class TabsViewController: NSViewController {
     // MARK: - Properties -
     //
     
+    let balanceLabel = LabelField()
+    
     // MARK: Tabs
     let tabContainerView = View()
     let accountsViewController = AccountsTabViewController()
@@ -69,12 +71,21 @@ class TabsViewController: NSViewController {
         // Create the UI
         createFooter()
         
+        balanceLabel.font = .mediumSystemFont(ofSize: 16)
+        balanceLabel.textColor = CurrentTheme.defaults.foregroundColor
+        balanceLabel.stringValue = "Balance"
+        self.view.addSubview(balanceLabel)
+        balanceLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(10)
+        }
+        
         tabContainerView.layerBackgroundColor = NSColor.clear
         self.view.addSubview(tabContainerView)
         tabContainerView.snp.makeConstraints { make in
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.top.equalToSuperview()
+            make.top.equalTo(balanceLabel.snp.bottom).offset(-2)
             make.bottom.equalTo(footerView.snp.top)
         }
         

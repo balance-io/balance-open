@@ -69,7 +69,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         var finalHeight = CurrentTheme.defaults.size.height
         if let delegate = tableView.delegate {
             // Calculate the table rows total height
-            var tableHeight: CGFloat = 50
+            var tableHeight: CGFloat = 75
             let numberOfRows = tableView.numberOfRows
             
             if numberOfRows > 0 {
