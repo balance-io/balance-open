@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D44500D1EF3A4500023F63C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D44500C1EF3A4500023F63C /* AppDelegate.m */; };
+		2D4450101EF3A4500023F63C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D44500F1EF3A4500023F63C /* main.m */; };
+		2D4450151EF3A4500023F63C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D4450141EF3A4500023F63C /* Assets.xcassets */; };
+		2D4450181EF3A4500023F63C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D4450161EF3A4500023F63C /* Main.storyboard */; };
+		2D44503A1EF3A53E0023F63C /* AutoLaunchBalanceHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D4450091EF3A4500023F63C /* AutoLaunchBalanceHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2D8D54481EEB12360060FCCF /* BalanceForBlockchainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D54471EEB12360060FCCF /* BalanceForBlockchainTests.swift */; };
 		2DA7FAB91EF2637700CD8CED /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; };
 		2DC8663A1EF2654A00502A98 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -38,7 +43,6 @@
 		5321220D1EEAC89B00F4812A /* CCNStatusItemWindowConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 532122061EEAC89B00F4812A /* CCNStatusItemWindowConfiguration.m */; };
 		5321220E1EEAC89B00F4812A /* CCNStatusItemWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 532122081EEAC89B00F4812A /* CCNStatusItemWindowController.m */; };
 		532122111EEAC8CB00F4812A /* AppLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321220F1EEAC8CB00F4812A /* AppLock.swift */; };
-		532122121EEAC8CB00F4812A /* AutoLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122101EEAC8CB00F4812A /* AutoLaunch.swift */; };
 		532122141EEAC8E400F4812A /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122131EEAC8E400F4812A /* Logging.swift */; };
 		532122171EEAC8F800F4812A /* Syncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122151EEAC8F800F4812A /* Syncer.swift */; };
 		532122181EEAC8F800F4812A /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122161EEAC8F800F4812A /* SyncManager.swift */; };
@@ -141,6 +145,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		2D4450391EF3A4DF0023F63C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				2D44503A1EF3A53E0023F63C /* AutoLaunchBalanceHelper.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2DC866381EF2650E00502A98 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -172,6 +186,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2D4450091EF3A4500023F63C /* AutoLaunchBalanceHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoLaunchBalanceHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D44500B1EF3A4500023F63C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2D44500C1EF3A4500023F63C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2D44500F1EF3A4500023F63C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2D4450141EF3A4500023F63C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2D4450171EF3A4500023F63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2D4450191EF3A4500023F63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D8D54451EEB12360060FCCF /* BalanceForBlockchainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceForBlockchainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D8D54471EEB12360060FCCF /* BalanceForBlockchainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceForBlockchainTests.swift; sourceTree = "<group>"; };
 		2D8D54491EEB12360060FCCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -213,7 +234,6 @@
 		532122071EEAC89B00F4812A /* CCNStatusItemWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNStatusItemWindowController.h; sourceTree = "<group>"; };
 		532122081EEAC89B00F4812A /* CCNStatusItemWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNStatusItemWindowController.m; sourceTree = "<group>"; };
 		5321220F1EEAC8CB00F4812A /* AppLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLock.swift; sourceTree = "<group>"; };
-		532122101EEAC8CB00F4812A /* AutoLaunch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLaunch.swift; sourceTree = "<group>"; };
 		532122131EEAC8E400F4812A /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		532122151EEAC8F800F4812A /* Syncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Syncer.swift; sourceTree = "<group>"; };
 		532122161EEAC8F800F4812A /* SyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
@@ -298,6 +318,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2D4450061EF3A4500023F63C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2D8D54421EEB12360060FCCF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -333,6 +360,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D44500A1EF3A4500023F63C /* AutoLaunchBalanceHelper */ = {
+			isa = PBXGroup;
+			children = (
+				2D44500B1EF3A4500023F63C /* AppDelegate.h */,
+				2D44500C1EF3A4500023F63C /* AppDelegate.m */,
+				2D4450141EF3A4500023F63C /* Assets.xcassets */,
+				2D4450161EF3A4500023F63C /* Main.storyboard */,
+				2D4450191EF3A4500023F63C /* Info.plist */,
+				2D44500E1EF3A4500023F63C /* Supporting Files */,
+			);
+			path = AutoLaunchBalanceHelper;
+			sourceTree = "<group>";
+		};
+		2D44500E1EF3A4500023F63C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2D44500F1EF3A4500023F63C /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		2D8D54461EEB12360060FCCF /* BalanceForBlockchainTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,6 +395,7 @@
 			children = (
 				532121B41EEAC2BF00F4812A /* BalanceForBlockchain */,
 				2D8D54461EEB12360060FCCF /* BalanceForBlockchainTests */,
+				2D44500A1EF3A4500023F63C /* AutoLaunchBalanceHelper */,
 				532121B31EEAC2BF00F4812A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -356,6 +405,7 @@
 			children = (
 				532121B21EEAC2BF00F4812A /* BalanceForBlockchain.app */,
 				2D8D54451EEB12360060FCCF /* BalanceForBlockchainTests.xctest */,
+				2D4450091EF3A4500023F63C /* AutoLaunchBalanceHelper.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -555,7 +605,6 @@
 			children = (
 				532121E91EEAC5F300F4812A /* Singletons.swift */,
 				5321220F1EEAC8CB00F4812A /* AppLock.swift */,
-				532122101EEAC8CB00F4812A /* AutoLaunch.swift */,
 				532122211EEAC99000F4812A /* CertValidator.h */,
 				532122221EEAC99000F4812A /* CertValidator.m */,
 				532121C51EEAC47300F4812A /* Database.swift */,
@@ -619,6 +668,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2D4450081EF3A4500023F63C /* AutoLaunchBalanceHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2D4450361EF3A4510023F63C /* Build configuration list for PBXNativeTarget "AutoLaunchBalanceHelper" */;
+			buildPhases = (
+				2D4450051EF3A4500023F63C /* Sources */,
+				2D4450061EF3A4500023F63C /* Frameworks */,
+				2D4450071EF3A4500023F63C /* Resources */,
+				2D4450391EF3A4DF0023F63C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AutoLaunchBalanceHelper;
+			productName = AutoLaunchBalanceHelper;
+			productReference = 2D4450091EF3A4500023F63C /* AutoLaunchBalanceHelper.app */;
+			productType = "com.apple.product-type.application";
+		};
 		2D8D54441EEB12360060FCCF /* BalanceForBlockchainTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D8D544E1EEB12360060FCCF /* Build configuration list for PBXNativeTarget "BalanceForBlockchainTests" */;
@@ -666,6 +733,11 @@
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Balanced Software, Inc.";
 				TargetAttributes = {
+					2D4450081EF3A4500023F63C = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = Q4G66XSS36;
+						ProvisioningStyle = Automatic;
+					};
 					2D8D54441EEB12360060FCCF = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = Q4G66XSS36;
@@ -694,11 +766,21 @@
 			targets = (
 				532121B11EEAC2BF00F4812A /* BalanceForBlockchain */,
 				2D8D54441EEB12360060FCCF /* BalanceForBlockchainTests */,
+				2D4450081EF3A4500023F63C /* AutoLaunchBalanceHelper */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2D4450071EF3A4500023F63C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D4450151EF3A4500023F63C /* Assets.xcassets in Resources */,
+				2D4450181EF3A4500023F63C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2D8D54431EEB12360060FCCF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -718,6 +800,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2D4450051EF3A4500023F63C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D4450101EF3A4500023F63C /* main.m in Sources */,
+				2D44500D1EF3A4500023F63C /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2D8D54411EEB12360060FCCF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -778,7 +869,6 @@
 				532121B61EEAC2BF00F4812A /* AppDelegate.swift in Sources */,
 				532122AF1EEAE6F700F4812A /* PreferencesAccounts.swift in Sources */,
 				5321226B1EEAD7BD00F4812A /* Institution.swift in Sources */,
-				532122121EEAC8CB00F4812A /* AutoLaunch.swift in Sources */,
 				532122B51EEAE89A00F4812A /* TypeAliases.swift in Sources */,
 				53946FA01EEB10AA00E921C3 /* KeychainManager.swift in Sources */,
 				5321228E1EEADD3500F4812A /* ServerMessage.swift in Sources */,
@@ -835,6 +925,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		2D4450161EF3A4500023F63C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2D4450171EF3A4500023F63C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		5321222C1EEAD15D00F4812A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -846,6 +944,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2D4450301EF3A4510023F63C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = Q4G66XSS36;
+				INFOPLIST_FILE = AutoLaunchBalanceHelper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = balance.money.AutoLaunchBalanceHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		2D4450311EF3A4510023F63C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = Q4G66XSS36;
+				INFOPLIST_FILE = AutoLaunchBalanceHelper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = balance.money.AutoLaunchBalanceHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		2D8D544C1EEB12360060FCCF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -972,8 +1102,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = Q4G66XSS36;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -989,6 +1120,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = software.balanced.BalanceForBlockchain;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BalanceForBlockchain/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -998,8 +1130,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = Q4G66XSS36;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -1015,6 +1148,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = software.balanced.BalanceForBlockchain;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BalanceForBlockchain/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -1023,6 +1157,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2D4450361EF3A4510023F63C /* Build configuration list for PBXNativeTarget "AutoLaunchBalanceHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D4450301EF3A4510023F63C /* Debug */,
+				2D4450311EF3A4510023F63C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8D544E1EEB12360060FCCF /* Build configuration list for PBXNativeTarget "BalanceForBlockchainTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

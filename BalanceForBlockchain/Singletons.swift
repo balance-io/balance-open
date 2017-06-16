@@ -18,7 +18,6 @@ let appLock = AppLock()
 let networkStatus = NetworkStatus()
 let certValidator = CertValidator()
 let serverMessage = ServerMessage()
-let autoLaunch = AutoLaunch()
 
 func initializeSingletons() {
     _ = keychain
