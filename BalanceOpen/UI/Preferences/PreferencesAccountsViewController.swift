@@ -253,34 +253,9 @@ class PreferencesAccountsViewController: NSViewController {
         alert.alertStyle = .critical
         alert.beginSheetModal(for: self.view.window!) { returnCode in
             if returnCode == NSAlertSecondButtonReturn {
-                self.institutionsTableView.isEnabled = false
-                self.accountsTableView.isEnabled = false
-                self.removeAccountButton.isEnabled = false
-                self.addAccountButton.isEnabled = false
-        
-//                let institution = self.institutions.keys[self.institutionsTableView.selectedIndex.row]
-//                if let accessToken = institution.accessToken {
-//                    subscriptionManager.deleteAccessToken(accessToken: accessToken) { success, _, message, _, _ in
-//                        self.institutionsTableView.isEnabled = true
-//                        self.accountsTableView.isEnabled = true
-//                        self.addAccountButton.isEnabled = true
-//                        self.selectFirstInstitution()
-//        
-//                        // Handle Plaid's shitty test data
-//                        if success || accessToken.hasPrefix("test_") {
-//                            institution.remove()
-//                        } else {
-//                            let alert = NSAlert()
-//                            alert.alertStyle = .critical
-//                            alert.messageText = "Error removing account"
-//                            alert.informativeText = message
-//                            alert.addButton(withTitle: "OK")
-//                            alert.runModal()
-//                        }
-//                    }
-//                } else {
-//                    institution.remove()
-//                }
+                let institution = self.institutions.keys[self.institutionsTableView.selectedIndex.row]
+                institution.remove()
+                self.selectFirstInstitution()
             }
         }
     }

@@ -293,15 +293,12 @@ class Institution {
     func remove(notify: Bool = true) {
         // Delete the accessToken
         accessToken = nil
+        refreshToken = nil
         
         database.writeDbQueue.inDatabase { db in
             do {
                 // Begin transaction
                 try db.executeUpdate("BEGIN")
-                
-                // Delete transaction records
-                let statement1 = "DELETE FROM transactions WHERE accountId IN (SELECT accountId FROM accounts WHERE institutionId = ?)"
-                try db.executeUpdate(statement1, self.institutionId)
                 
                 // Delete account records
                 let statement2 = "DELETE FROM accounts WHERE institutionId = ?"
