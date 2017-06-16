@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "532121B11EEAC2BF00F4812A"
-               BuildableName = "BalanceForBlockchain.app"
-               BlueprintName = "BalanceForBlockchain"
-               ReferencedContainer = "container:BalanceForBlockchain.xcodeproj">
+               BuildableName = "BalanceOpen.app"
+               BlueprintName = "BalanceOpen"
+               ReferencedContainer = "container:BalanceOpen.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D8D54441EEB12360060FCCF"
-               BuildableName = "BalanceForBlockchainTests.xctest"
-               BlueprintName = "BalanceForBlockchainTests"
-               ReferencedContainer = "container:BalanceForBlockchain.xcodeproj">
+               BuildableName = "BalanceOpenTests.xctest"
+               BlueprintName = "BalanceOpenTests"
+               ReferencedContainer = "container:BalanceOpen.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "532121B11EEAC2BF00F4812A"
-            BuildableName = "BalanceForBlockchain.app"
-            BlueprintName = "BalanceForBlockchain"
-            ReferencedContainer = "container:BalanceForBlockchain.xcodeproj">
+            BuildableName = "BalanceOpen.app"
+            BlueprintName = "BalanceOpen"
+            ReferencedContainer = "container:BalanceOpen.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,9 +66,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "532121B11EEAC2BF00F4812A"
-            BuildableName = "BalanceForBlockchain.app"
-            BlueprintName = "BalanceForBlockchain"
-            ReferencedContainer = "container:BalanceForBlockchain.xcodeproj">
+            BuildableName = "BalanceOpen.app"
+            BlueprintName = "BalanceOpen"
+            ReferencedContainer = "container:BalanceOpen.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -85,9 +85,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "532121B11EEAC2BF00F4812A"
-            BuildableName = "BalanceForBlockchain.app"
-            BlueprintName = "BalanceForBlockchain"
-            ReferencedContainer = "container:BalanceForBlockchain.xcodeproj">
+            BuildableName = "BalanceOpen.app"
+            BlueprintName = "BalanceOpen"
+            ReferencedContainer = "container:BalanceOpen.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
