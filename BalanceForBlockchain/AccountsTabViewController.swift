@@ -69,7 +69,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         var finalHeight = CurrentTheme.defaults.size.height
         if let delegate = tableView.delegate {
             // Calculate the table rows total height
-            var tableHeight: CGFloat = 200 // Account for other UI elements
+            var tableHeight: CGFloat = 50
             let numberOfRows = tableView.numberOfRows
             
             if numberOfRows > 0 {
@@ -79,7 +79,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
             }
             
             // Calculate height
-            let minHeight: CGFloat = 520
+            let minHeight: CGFloat = 200
             let maxHeight: CGFloat = AppDelegate.sharedInstance.maxHeight
             var height = minHeight
             if tableHeight > minHeight && tableHeight < maxHeight {
@@ -120,13 +120,13 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         scrollView.hasVerticalScroller = true
         scrollView.hasHorizontalScroller = false
         scrollView.documentView = tableView
-        scrollView.contentInsets = NSEdgeInsetsMake(0, 0, 110, 0)
+        //scrollView.contentInsets = NSEdgeInsetsMake(0, 0, 110, 0)
         self.view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(self.view).offset(10)
-            make.leading.equalTo(self.view)
-            make.trailing.equalTo(self.view)
-            make.bottom.equalTo(self.view)
+            make.top.equalToSuperview().offset(10)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
         
         tableView.setAccessibilityLabel("Accounts Table")
@@ -338,6 +338,9 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(institutionRemoved(_:)), name: Notifications.InstitutionRemoved)
         
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(accountRemoved(_:)), name: Notifications.AccountRemoved)
+        
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(accountHidden(_:)), name: Notifications.AccountHidden)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(accountUnhidden(_:)), name: Notifications.AccountUnhidden)
 
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(syncCompleted(_:)), name: Notifications.SyncCompleted)
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(accountPatched(_:)), name: Notifications.AccountPatched)
@@ -348,6 +351,9 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.InstitutionRemoved)
     
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.AccountRemoved)
+        
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.AccountHidden)
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.AccountUnhidden)
 
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.SyncCompleted)
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.AccountPatched)
@@ -462,6 +468,20 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
                 self.reloadData()
             }
         }
+    }
+    
+    @objc fileprivate func accountHidden(_ notification: Notification) {
+        reloadData()
+        
+        // This only works as-is because we only have 1 tab right now
+        adjustWindowHeight()
+    }
+    
+    @objc fileprivate func accountUnhidden(_ notification: Notification) {
+        reloadData()
+        
+        // This only works as-is because we only have 1 tab right now
+        adjustWindowHeight()
     }
     
     @objc fileprivate func syncCompleted(_ notification: Notification) {

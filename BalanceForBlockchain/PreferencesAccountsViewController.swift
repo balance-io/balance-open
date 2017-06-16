@@ -230,7 +230,7 @@ class PreferencesAccountsViewController: NSViewController {
     }
     
     @objc fileprivate func reloadData() {
-        institutions = Account.accountsByInstitution()
+        institutions = Account.accountsByInstitution(includeHidden: true)
         institutionsTableView.reloadData()
         selectFirstInstitution()
         accountsTableView.reloadData()
@@ -380,7 +380,7 @@ fileprivate class InstitutionRow: NSTableRowView {
             var selectionFrame = NSRect(x: 0, y: 0, width: 185, height: 31)
             selectionFrame.origin.x = (self.frame.size.width - selectionFrame.size.width) / 2
             selectionFrame.origin.y = ((self.frame.size.height - selectionFrame.size.height) / 2) - 0.5
-            //PreferencesAccounts.drawSelectedAccount(frame: selectionFrame)
+            PreferencesAccounts.drawSelectedAccount(frame: selectionFrame)
         }
     }
 }
@@ -430,12 +430,13 @@ fileprivate class InstitutionCell: View {
         let color = isSelected ? .white : (model?.displayColor ?? .gray)
         var circleFrame = NSRect(x: 10, y: 0, width: 9, height: 9)
         circleFrame.origin.y = (self.frame.size.height - circleFrame.size.height) / 2
-        //PreferencesAccounts.drawAccountColorCircle(frame: circleFrame, color: color)
+        PreferencesAccounts.drawAccountColorCircle(frame: circleFrame, color: color)
     }
 }
 
 fileprivate class AccountCell: View {
     let nameField = LabelField()
+    let showButton = Button()
     
     fileprivate var model: Account?
     
@@ -456,6 +457,16 @@ fileprivate class AccountCell: View {
             make.top.equalToSuperview()
             make.height.equalToSuperview().offset(-1)
         }
+        
+        showButton.setButtonType(.switch)
+        showButton.title = ""
+        showButton.target = self
+        showButton.action = #selector(showButtonAction(button:))
+        self.addSubview(showButton)
+        showButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-10)
+            make.centerY.equalToSuperview()
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -465,8 +476,23 @@ fileprivate class AccountCell: View {
     func updateModel(_ updatedModel: Account) {
         model = updatedModel
         
+        let hidden = defaults.hiddenAccountIds.contains(updatedModel.accountId)
+        showButton.state = hidden ? NSOffState : NSOnState
+        
         nameField.stringValue = updatedModel.name.capitalizedStringIfAllCaps
         nameField.textColor = .black
+    }
+    
+    @objc fileprivate func showButtonAction(button: Button) {
+        guard let accountId = model?.accountId else {
+            return
+        }
+        
+        if button.state == NSOffState {
+            defaults.hideAccountId(accountId)
+        } else {
+            defaults.unhideAccountId(accountId)
+        }
     }
 }
 
