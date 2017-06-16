@@ -85,6 +85,8 @@ class TabsViewController: NSViewController {
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+        
+        currentTableViewController = accountsViewController
     }
     
     func createFooter() {

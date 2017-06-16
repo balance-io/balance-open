@@ -127,7 +127,11 @@ class PopoverViewController: NSViewController {
             currentControllerType = .tabs
             currentController = tabsController
             let animation: ViewAnimation = animated ? .slideInFromLeft : .none
+            oldController.viewWillDisappear()
+            currentController.viewWillAppear()
             self.view.replaceSubview(oldController.view, with: currentController!.view, animation: animation)
+            oldController.viewDidDisappear()
+            currentController.viewDidAppear()
             
             self.view.window?.makeFirstResponder(tabsController.currentTableViewController)
         }
