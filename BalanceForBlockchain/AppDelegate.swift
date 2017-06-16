@@ -283,7 +283,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func forceAutoLaunch() {
-        if (!SMLoginItemSetEnabled("balance.money.AutoLaunchBalanceHelper" as CFString, true)) {
+        if (!SMLoginItemSetEnabled("balance.money.AutoLaunchBalanceHelper" as CFString, defaults.launchAtLogin)) {
             print("Auto login was not successful");
         }
     }

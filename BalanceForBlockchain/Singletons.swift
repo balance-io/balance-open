@@ -28,5 +28,4 @@ func initializeSingletons() {
     _ = defaults
     _ = appLock
     _ = networkStatus
-    _ = autoLaunch
 }
