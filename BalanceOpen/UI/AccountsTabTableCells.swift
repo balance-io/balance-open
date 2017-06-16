@@ -59,7 +59,7 @@ class AccountsTabAccountCell: View {
         amountField.snp.makeConstraints { make in
             make.width.equalTo(100)
             make.trailing.equalToSuperview().inset(12)
-            make.bottom.equalTo(-14.5)
+            make.centerY.equalToSuperview()
         }
         
         nameField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
@@ -71,9 +71,8 @@ class AccountsTabAccountCell: View {
         self.addSubview(nameField)
         nameField.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(10)
-            make.trailing.equalToSuperview().inset(-5)
-            make.top.equalToSuperview().inset(13)
-            make.height.equalToSuperview()
+            make.trailing.equalTo(amountField.snp.leading).inset(-5)
+            make.centerY.equalToSuperview()
         }
     }
     
