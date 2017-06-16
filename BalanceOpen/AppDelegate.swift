@@ -134,6 +134,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                             
                             NotificationCenter.postOnMainThread(name: Notifications.ShowTabIndex, object: nil, userInfo: [Notifications.Keys.TabIndex: Tab.accounts.rawValue])
                             NotificationCenter.postOnMainThread(name: Notifications.ShowTabs)
+                            
+                            // Temporary hack to get Accounts tab showing correct data
+                            NotificationCenter.postOnMainThread(name: Notifications.SyncCompleted)
                         }
                     } else {
                         print("Missing query items, code: \(String(describing: code)), state: \(String(describing: state))")

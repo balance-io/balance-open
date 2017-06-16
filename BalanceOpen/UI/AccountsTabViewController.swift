@@ -472,16 +472,10 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     
     @objc fileprivate func accountHidden(_ notification: Notification) {
         reloadData()
-        
-        // This only works as-is because we only have 1 tab right now
-        adjustWindowHeight()
     }
     
     @objc fileprivate func accountUnhidden(_ notification: Notification) {
         reloadData()
-        
-        // This only works as-is because we only have 1 tab right now
-        adjustWindowHeight()
     }
     
     @objc fileprivate func syncCompleted(_ notification: Notification) {
@@ -502,6 +496,9 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         updateTotalBalance()
         tableView.reloadData()
         createFixPasswordPrompt()
+        
+        // This only works as-is because we only have 1 tab right now
+        adjustWindowHeight()
     }
     
     func updateTotalBalance() {
