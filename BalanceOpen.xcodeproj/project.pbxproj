@@ -134,6 +134,10 @@
 		53946FA31EEF0B0B00E921C3 /* CoinbaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53946FA21EEF0B0B00E921C3 /* CoinbaseAccount.swift */; };
 		53946FA51EF0035200E921C3 /* CoinbaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53946FA41EF0035200E921C3 /* CoinbaseApi.swift */; };
 		53F8E2EA1EF1B6E90071FC73 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F8E2E91EF1B6E90071FC73 /* Currency.swift */; };
+		53FA53001EF3FA93002990B0 /* InstitutionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA52FE1EF3FA93002990B0 /* InstitutionButtons.swift */; };
+		53FA53011EF3FA93002990B0 /* InstitutionHeaderBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA52FF1EF3FA93002990B0 /* InstitutionHeaderBars.swift */; };
+		53FA53041EF3FAFE002990B0 /* InstitutionDefaultBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA53021EF3FAFE002990B0 /* InstitutionDefaultBar.swift */; };
+		53FA53051EF3FAFE002990B0 /* InstitutionHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -319,6 +323,10 @@
 		53946FA21EEF0B0B00E921C3 /* CoinbaseAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinbaseAccount.swift; sourceTree = "<group>"; };
 		53946FA41EF0035200E921C3 /* CoinbaseApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinbaseApi.swift; sourceTree = "<group>"; };
 		53F8E2E91EF1B6E90071FC73 /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
+		53FA52FE1EF3FA93002990B0 /* InstitutionButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionButtons.swift; sourceTree = "<group>"; };
+		53FA52FF1EF3FA93002990B0 /* InstitutionHeaderBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionHeaderBars.swift; sourceTree = "<group>"; };
+		53FA53021EF3FAFE002990B0 /* InstitutionDefaultBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionDefaultBar.swift; sourceTree = "<group>"; };
+		53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionHeaders.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -659,6 +667,10 @@
 				532122B01EEAE85500F4812A /* AccountConnectionErrors.swift */,
 				532122AE1EEAE6F700F4812A /* PreferencesAccounts.swift */,
 				532122D21EEB05A800F4812A /* AddAccountButtons.swift */,
+				53FA52FE1EF3FA93002990B0 /* InstitutionButtons.swift */,
+				53FA53021EF3FAFE002990B0 /* InstitutionDefaultBar.swift */,
+				53FA52FF1EF3FA93002990B0 /* InstitutionHeaderBars.swift */,
+				53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */,
 			);
 			name = "Vector Graphics Draw Functions";
 			sourceTree = "<group>";
@@ -853,8 +865,10 @@
 				532121FB1EEAC75A00F4812A /* String.swift in Sources */,
 				5321227B1EEAD8D000F4812A /* Source.swift in Sources */,
 				532122761EEAD87000F4812A /* CwlSysctl.swift in Sources */,
+				53FA53051EF3FAFE002990B0 /* InstitutionHeaders.swift in Sources */,
 				532122CB1EEAFDF100F4812A /* LockViewController.swift in Sources */,
 				532122AA1EEAE3F300F4812A /* NSFont.swift in Sources */,
+				53FA53041EF3FAFE002990B0 /* InstitutionDefaultBar.swift in Sources */,
 				532122091EEAC89B00F4812A /* CCNStatusItem.m in Sources */,
 				532121DE1EEAC4DC00F4812A /* FMDatabaseQueue.m in Sources */,
 				532122B11EEAE85500F4812A /* AccountConnectionErrors.swift in Sources */,
@@ -896,6 +910,7 @@
 				5321226A1EEAD7BD00F4812A /* Account.swift in Sources */,
 				532122661EEAD76C00F4812A /* TableView.swift in Sources */,
 				5321224C1EEAD35F00F4812A /* DarkTheme.swift in Sources */,
+				53FA53001EF3FA93002990B0 /* InstitutionButtons.swift in Sources */,
 				532122531EEAD5BF00F4812A /* TabsViewController.swift in Sources */,
 				532122C31EEAEDC400F4812A /* BalanceTextField.swift in Sources */,
 				5321220C1EEAC89B00F4812A /* CCNStatusItemWindowBackgroundView.m in Sources */,
@@ -910,6 +925,7 @@
 				532122901EEADE1D00F4812A /* PaintCodeView.swift in Sources */,
 				532122BD1EEAED3100F4812A /* ChangePasswordViewController.swift in Sources */,
 				532122231EEAC99000F4812A /* CertValidator.m in Sources */,
+				53FA53011EF3FA93002990B0 /* InstitutionHeaderBars.swift in Sources */,
 				532121DF1EEAC4DC00F4812A /* FMResultSet.m in Sources */,
 				532122B71EEAE93400F4812A /* NSImage.swift in Sources */,
 				532121DC1EEAC4DC00F4812A /* FMDatabaseAdditions.m in Sources */,

@@ -36,10 +36,10 @@ class AddAccountViewController: NSViewController {
     
     // Buttons
     fileprivate var buttons = [HoverButton]()
-    fileprivate let buttonDrawFunctions: [Source: ButtonFunction] = [.coinbase: AddAccountButtons.drawBoaButton,
-                                                                     .gdax:     AddAccountButtons.drawBoaButton,
-                                                                     .poloniex: AddAccountButtons.drawBoaButton,
-                                                                     .bitfinex: AddAccountButtons.drawBoaButton]
+    fileprivate let buttonDrawFunctions: [Source: ButtonFunction] = [.coinbase: InstitutionButtons.drawCoinbaseButton,
+                                                                     .gdax:     InstitutionButtons.drawGdaxButton,
+                                                                     .poloniex: InstitutionButtons.drawPoloniexButton,
+                                                                     .bitfinex: InstitutionButtons.drawBitfinexButton]
     fileprivate let buttonSourceOrder: [Source] = [.coinbase, .gdax, .poloniex, .bitfinex]
     
     //
