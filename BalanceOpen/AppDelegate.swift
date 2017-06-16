@@ -137,6 +137,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                             
                             // Temporary hack to get Accounts tab showing correct data
                             NotificationCenter.postOnMainThread(name: Notifications.SyncCompleted)
+                            
+                            self.showPopover()
                         }
                     } else {
                         print("Missing query items, code: \(String(describing: code)), state: \(String(describing: state))")
