@@ -11,15 +11,6 @@ import SnapKit
 
 class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, SectionedTableViewDataSource, NSSearchFieldDelegate {
     
-    struct InternalNotifications {
-        static let CellOpened   = Notification.Name("AccountsCellOpened")
-        static let CellClosed   = Notification.Name("AccountsCellClosed")
-        
-        struct Keys {
-            static let Cell     = "Cell"
-        }
-    }
-    
     //
     // MARK: - Properties -
     //
@@ -494,7 +485,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     }
     
     func updateTotalBalance() {
-        totalField.attributedStringValue = centsToStringFormatted(viewModel.totalBalance(), showNegative: true)
+        totalField.attributedStringValue = amountToStringFormatted(amount: viewModel.totalBalance(), showNegative: true)
     }
     
     //
@@ -581,9 +572,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         }
         
         if index == previousSelectedIndex {
-            let userInfo = [InternalNotifications.Keys.Cell: cell]
-            NotificationCenter.postOnMainThread(name: InternalNotifications.CellClosed, object: nil, userInfo: userInfo)
-            
             tableView.deselectIndex(index)
             tableView.noteHeightOfIndex(index)
             previousSelectedIndex = TableIndex.none

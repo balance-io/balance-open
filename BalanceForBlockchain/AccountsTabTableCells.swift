@@ -45,7 +45,6 @@ class AccountsTabAccountCell: View {
     var index = TableIndex.none
     var rowBackgroundColor: RowBackgroundColor?
     
-    let topContainer = View()
     let nameField = LabelField()
     let inclusionIndicator = ImageView()
     let amountField = LabelField()
@@ -56,32 +55,14 @@ class AccountsTabAccountCell: View {
         super.init(frame: NSZeroRect)
         self.layerBackgroundColor = CurrentTheme.defaults.cell.backgroundColor
         
-        self.addSubview(topContainer)
-        topContainer.snp.makeConstraints { make in
-            make.top.equalTo(self)
-            make.leading.equalTo(self)
-            make.trailing.equalTo(self)
-            make.height.equalTo(CurrentTheme.accounts.cell.height)
-        }
-        
         amountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
         amountField.font = CurrentTheme.accounts.cell.amountFont
         amountField.usesSingleLineMode = true
-        topContainer.addSubview(amountField)
+        self.addSubview(amountField)
         amountField.snp.makeConstraints { make in
             make.width.equalTo(100)
-            make.trailing.equalTo(topContainer).inset(12)
+            make.trailing.equalToSuperview().inset(12)
             make.bottom.equalTo(-14.5)
-        }
-        
-        //            inclusionIndicator.alphaValue = 0.5
-        topContainer.addSubview(inclusionIndicator)
-        
-        inclusionIndicator.snp.makeConstraints { make in
-            make.width.equalTo(15)
-            make.height.equalTo(15)
-            make.trailing.equalTo(amountField.snp.leading).offset(-5)
-            make.centerY.equalTo(amountField)
         }
         
         nameField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
@@ -90,12 +71,12 @@ class AccountsTabAccountCell: View {
         nameField.textColor = CurrentTheme.defaults.foregroundColor
         nameField.usesSingleLineMode = true
         nameField.cell?.lineBreakMode = .byTruncatingTail
-        topContainer.addSubview(nameField)
+        self.addSubview(nameField)
         nameField.snp.makeConstraints { make in
-            make.leading.equalTo(topContainer).inset(10)
+            make.leading.equalToSuperview().inset(10)
             make.trailing.equalTo(inclusionIndicator.snp.leading).inset(-5)
-            make.top.equalTo(topContainer).inset(13)
-            make.height.equalTo(topContainer)
+            make.top.equalToSuperview().inset(13)
+            make.height.equalToSuperview()
         }
     }
     
@@ -103,15 +84,10 @@ class AccountsTabAccountCell: View {
         fatalError("unsupported")
     }
     
-    deinit {
-        NotificationCenter.removeObserverOnMainThread(self, name: AccountsTabViewController.InternalNotifications.CellOpened)
-        NotificationCenter.removeObserverOnMainThread(self, name: AccountsTabViewController.InternalNotifications.CellClosed)
-    }
-    
     func updateModel(_ updatedModel: Account) {
         model = updatedModel
         
-        amountField.attributedStringValue = centsToStringFormatted(updatedModel.displayBalance, showNegative: true)
+        amountField.attributedStringValue = amountToStringFormatted(amount: updatedModel.displayBalance, showNegative: true)
         amountField.setAccessibilityLabel("Account Total")
         amountField.snp.updateConstraints { make in
             let width = amountField.stringValue.size(font: CurrentTheme.accounts.cell.amountFont)
@@ -125,17 +101,6 @@ class AccountsTabAccountCell: View {
         
         if model?.accountType == .credit, let number = model?.number {
             nameField.stringValue = "\(nameField.stringValue) (\(number))"
-        }
-        
-//        self.alphaValue = (debugging.showAllInstitutionsAsIncorrectPassword || updatedModel.passwordInvalid)  ? CurrentTheme.accounts.cell.passwordInvalidDimmedAlpha : 1.0
-        
-        updateTopContainerOffset()
-//        updateInclusionIndicator()
-    }
-    
-    func updateTopContainerOffset() {
-        topContainer.snp.updateConstraints { make in
-            make.top.equalTo(self).offset(index.row == 0 ? -4 : 0)
         }
     }
 }
