@@ -11,3 +11,5 @@
 #import "CCNStatusItem.h"
 #import "CertValidator.h"
 #import "ObjC.h"
+#import <LetsMove/LetsMove.h>
+#import "PFMoveApplication.h"

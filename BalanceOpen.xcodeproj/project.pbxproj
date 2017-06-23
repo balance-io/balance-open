@@ -14,7 +14,6 @@
 		2D44503A1EF3A53E0023F63C /* AutoLaunchBalanceHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D4450091EF3A4500023F63C /* AutoLaunchBalanceHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2D8D54481EEB12360060FCCF /* BalanceOpenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D54471EEB12360060FCCF /* BalanceOpenTests.swift */; };
 		2DA7FAB91EF2637700CD8CED /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; };
-		2DC8663A1EF2654A00502A98 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		530DD1891EF458A400C0DDD3 /* FMDatabasePoolAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 530DD1881EF458A400C0DDD3 /* FMDatabasePoolAdditions.m */; };
 		532121B61EEAC2BF00F4812A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121B51EEAC2BF00F4812A /* AppDelegate.swift */; };
 		532121C61EEAC47300F4812A /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121C51EEAC47300F4812A /* Database.swift */; };
@@ -130,6 +129,11 @@
 		5353D3571EF409F3003EE2F5 /* TrustKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D3401EF4096D003EE2F5 /* TrustKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5353D3581EF409F3003EE2F5 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D3411EF4096D003EE2F5 /* XCGLogger.framework */; };
 		5353D3591EF409F3003EE2F5 /* XCGLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D3411EF4096D003EE2F5 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		538A2C651EFD277700C542C4 /* LetsMove.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538A2C641EFD277700C542C4 /* LetsMove.framework */; };
+		538A2C681EFD278000C542C4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538A2C671EFD278000C542C4 /* Security.framework */; };
+		538A2C691EFD278A00C542C4 /* LetsMove.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 538A2C641EFD277700C542C4 /* LetsMove.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		538A2C6A1EFD279900C542C4 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		538A2C6D1EFD27C700C542C4 /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 538A2C6C1EFD27C700C542C4 /* PFMoveApplication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		53946F9F1EEB10AA00E921C3 /* KeychainManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53946F9D1EEB10AA00E921C3 /* KeychainManagement.swift */; };
 		53946FA01EEB10AA00E921C3 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53946F9E1EEB10AA00E921C3 /* KeychainManager.swift */; };
 		53946FA31EEF0B0B00E921C3 /* CoinbaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53946FA21EEF0B0B00E921C3 /* CoinbaseAccount.swift */; };
@@ -162,22 +166,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2DC866381EF2650E00502A98 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				2DC8663A1EF2654A00502A98 /* Sparkle.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		532121F81EEAC72D00F4812A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				538A2C6A1EFD279900C542C4 /* Sparkle.framework in Embed Frameworks */,
+				538A2C691EFD278A00C542C4 /* LetsMove.framework in Embed Frameworks */,
 				5353D34D1EF409F3003EE2F5 /* MASShortcut.framework in Embed Frameworks */,
 				5353D3591EF409F3003EE2F5 /* XCGLogger.framework in Embed Frameworks */,
 				5353D3571EF409F3003EE2F5 /* TrustKit.framework in Embed Frameworks */,
@@ -321,6 +317,10 @@
 		5353D33F1EF4096D003EE2F5 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/Mac/SnapKit.framework; sourceTree = SOURCE_ROOT; };
 		5353D3401EF4096D003EE2F5 /* TrustKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TrustKit.framework; path = Carthage/Build/Mac/TrustKit.framework; sourceTree = SOURCE_ROOT; };
 		5353D3411EF4096D003EE2F5 /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/Mac/XCGLogger.framework; sourceTree = SOURCE_ROOT; };
+		538A2C641EFD277700C542C4 /* LetsMove.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LetsMove.framework; sourceTree = "<group>"; };
+		538A2C671EFD278000C542C4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		538A2C6B1EFD27C700C542C4 /* PFMoveApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMoveApplication.h; sourceTree = "<group>"; };
+		538A2C6C1EFD27C700C542C4 /* PFMoveApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMoveApplication.m; sourceTree = "<group>"; };
 		53946F9D1EEB10AA00E921C3 /* KeychainManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManagement.swift; sourceTree = "<group>"; };
 		53946F9E1EEB10AA00E921C3 /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		53946FA21EEF0B0B00E921C3 /* CoinbaseAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinbaseAccount.swift; sourceTree = "<group>"; };
@@ -351,6 +351,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				538A2C681EFD278000C542C4 /* Security.framework in Frameworks */,
 				5353D3421EF4096D003EE2F5 /* Locksmith.framework in Frameworks */,
 				5353D34E1EF409F3003EE2F5 /* NSDateTimeAgo.framework in Frameworks */,
 				532121E31EEAC4E300F4812A /* libsqlcipher.a in Frameworks */,
@@ -364,6 +365,7 @@
 				5353D34C1EF409F3003EE2F5 /* MASShortcut.framework in Frameworks */,
 				5353D3561EF409F3003EE2F5 /* TrustKit.framework in Frameworks */,
 				2DA7FAB91EF2637700CD8CED /* Sparkle.framework in Frameworks */,
+				538A2C651EFD277700C542C4 /* LetsMove.framework in Frameworks */,
 				5353D3461EF4096D003EE2F5 /* Reachability.framework in Frameworks */,
 				5353D34A1EF409F3003EE2F5 /* Locksmith.framework in Frameworks */,
 				5353D3481EF4096D003EE2F5 /* TrustKit.framework in Frameworks */,
@@ -413,6 +415,7 @@
 				2D44500A1EF3A4500023F63C /* AutoLaunchBalanceHelper */,
 				2D8D54461EEB12360060FCCF /* BalanceOpenTests */,
 				532121B31EEAC2BF00F4812A /* Products */,
+				538A2C661EFD278000C542C4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -484,6 +487,8 @@
 		532121C91EEAC49600F4812A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2DA7FAB81EF2637700CD8CED /* Sparkle.framework */,
+				538A2C6E1EFD27CC00C542C4 /* LetsMove */,
 				532121FC1EEAC89B00F4812A /* CCNStatusItem */,
 				532121EB1EEAC70200F4812A /* Carthage */,
 				532121CC1EEAC4DC00F4812A /* fmdb */,
@@ -491,7 +496,6 @@
 				532122881EEADC9600F4812A /* ObjC.h */,
 				532122891EEADC9600F4812A /* ObjC.m */,
 				532122991EEADFE500F4812A /* QCMethod.swift */,
-				2DA7FAB81EF2637700CD8CED /* Sparkle.framework */,
 				532121E21EEAC4E300F4812A /* libsqlcipher.a */,
 			);
 			path = Frameworks;
@@ -678,6 +682,24 @@
 			path = "Vector Graphics Draw Functions";
 			sourceTree = "<group>";
 		};
+		538A2C661EFD278000C542C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				538A2C671EFD278000C542C4 /* Security.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		538A2C6E1EFD27CC00C542C4 /* LetsMove */ = {
+			isa = PBXGroup;
+			children = (
+				538A2C6B1EFD27C700C542C4 /* PFMoveApplication.h */,
+				538A2C6C1EFD27C700C542C4 /* PFMoveApplication.m */,
+				538A2C641EFD277700C542C4 /* LetsMove.framework */,
+			);
+			name = LetsMove;
+			sourceTree = "<group>";
+		};
 		53946FA11EEF0AEB00E921C3 /* API Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -734,7 +756,6 @@
 				532121AF1EEAC2BF00F4812A /* Frameworks */,
 				532121B01EEAC2BF00F4812A /* Resources */,
 				532121F81EEAC72D00F4812A /* Embed Frameworks */,
-				2DC866381EF2650E00502A98 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -924,6 +945,7 @@
 				53F8E2EA1EF1B6E90071FC73 /* Currency.swift in Sources */,
 				532122CD1EEAFF6300F4812A /* NSWindow.swift in Sources */,
 				532122AC1EEAE56400F4812A /* Shortcut.swift in Sources */,
+				538A2C6D1EFD27C700C542C4 /* PFMoveApplication.m in Sources */,
 				5321221C1EEAC90C00F4812A /* DefaultsStorage.swift in Sources */,
 				532121DB1EEAC4DC00F4812A /* FMDatabase.m in Sources */,
 				532122901EEADE1D00F4812A /* PaintCodeView.swift in Sources */,

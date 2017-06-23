@@ -75,6 +75,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        // Make sure we're running from the Application folder or updates won't work
+        #if !DEBUG
+        PFMoveToApplicationsFolderIfNecessary()
+        #endif
+
         // Register our app to get notified when launched via URL
         NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(AppDelegate.handleURLEvent(event:withReply:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL)
         )
