@@ -24,7 +24,7 @@ class ChangePasswordViewController: NSViewController {
     let createButton = Button()
     
     init() {
-        super.init(nibName: nil, bundle: nil)!
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -147,11 +147,11 @@ class ChangePasswordViewController: NSViewController {
         }
     }
     
-    func dismissSheet() {
+    @objc func dismissSheet() {
         super.dismissViewController(self)
     }
     
-    func changePassword() {
+    @objc func changePassword() {
         if currentPasswordField.stringValue != appLock.password {
             let alert = NSAlert()
             alert.addButton(withTitle: "OK")

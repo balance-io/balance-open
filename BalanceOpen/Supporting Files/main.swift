@@ -8,5 +8,5 @@
 
 import AppKit
 
-NSApplication.shared().delegate = AppDelegate()
+NSApplication.shared.delegate = AppDelegate()
 _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)

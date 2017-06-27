@@ -32,7 +32,7 @@ struct CoinbaseApi {
         let url = "https://www.coinbase.com/oauth/authorize?client_id=\(clientId)&redirect_uri=\(redirectUri)&state=\(state)&response_type=\(responseType)&scope=\(scope)&account=all"
         
         do {
-            _ = try NSWorkspace.shared().open(URL(string: url)!, options: [], configuration: [:])
+            _ = try NSWorkspace.shared.open(URL(string: url)!, options: [], configuration: [:])
         } catch {
             // TODO: Better error handling
             print("Error opening Coinbase authentication URL: \(error)")
@@ -222,11 +222,11 @@ struct CoinbaseApi {
             
             // Calculate the integer value of the balance based on the decimals
             var balance = ca.balance
-            balance.multiply(by: Decimal(pow(10.0, Double(decimals))))
+            balance = balance * Decimal(pow(10.0, Double(decimals)))
             let currentBalance = (balance as NSDecimalNumber).intValue
             
             var altBalance = ca.nativeBalance
-            altBalance.multiply(by: Decimal(pow(10.0, Double(altDecimals))))
+            altBalance = altBalance * Decimal(pow(10.0, Double(altDecimals)))
             let altCurrentBalance = (altBalance as NSDecimalNumber).intValue
             
             // Initialize an Account object to insert the record

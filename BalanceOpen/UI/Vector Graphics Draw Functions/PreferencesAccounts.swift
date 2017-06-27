@@ -45,7 +45,7 @@ public struct PreferencesAccounts {
 
     public static func drawSelectedAccount(frame targetFrame: NSRect = NSRect(x: 0, y: 0, width: 185, height: 31), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
-        let context = NSGraphicsContext.current()!.cgContext
+        let context = NSGraphicsContext.current!.cgContext
         
         //// Resize to Target Frame
         NSGraphicsContext.saveGraphicsState()
@@ -68,7 +68,7 @@ public struct PreferencesAccounts {
 
     public static func drawAccountColorCircle(frame targetFrame: NSRect = NSRect(x: 0, y: 0, width: 9, height: 9), color: NSColor) {
         //// General Declarations
-        let context = NSGraphicsContext.current()!.cgContext
+        let context = NSGraphicsContext.current!.cgContext
         let resizing = ResizingBehavior.aspectFit
         
         //// Resize to Target Frame

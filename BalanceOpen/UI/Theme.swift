@@ -38,7 +38,7 @@ struct DefaultsTheme {
     let appearance: NSAppearance
     let backgroundColor: NSColor
     let foregroundColor: NSColor
-    let material: NSVisualEffectMaterial
+    let material: NSVisualEffectView.Material
     let size: CGSize
     let noAccountsSize: CGSize
     let touchBarFont: NSFont

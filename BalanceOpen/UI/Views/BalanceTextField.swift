@@ -136,13 +136,13 @@ class BalanceTextField: View, TextFieldDelegate {
         }
         updatePlaceholder()
         
-        NotificationCenter.addObserverOnMainThread(self, selector: #selector(textFieldDidBeginEditing), name: Notification.Name.NSControlTextDidBeginEditing, object: textField)
-        NotificationCenter.addObserverOnMainThread(self, selector: #selector(textFieldDidEndEditing), name: Notification.Name.NSControlTextDidEndEditing, object: textField)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(textFieldDidBeginEditing), name: NSControl.textDidBeginEditingNotification, object: textField)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(textFieldDidEndEditing), name: NSControl.textDidEndEditingNotification, object: textField)
     }
     
     deinit {
-        NotificationCenter.removeObserverOnMainThread(self, name: Notification.Name.NSControlTextDidBeginEditing, object: textField)
-        NotificationCenter.removeObserverOnMainThread(self, name: Notification.Name.NSControlTextDidEndEditing, object: textField)
+        NotificationCenter.removeObserverOnMainThread(self, name: NSControl.textDidBeginEditingNotification, object: textField)
+        NotificationCenter.removeObserverOnMainThread(self, name: NSControl.textDidEndEditingNotification, object: textField)
     }
     
     override func becomeFirstResponder() -> Bool {
@@ -173,8 +173,8 @@ class BalanceTextField: View, TextFieldDelegate {
     
     fileprivate func updatePlaceholder() {
         if let placeholderString = textField.placeholderString, placeholderString.length > 0 {
-            let placeholderAttributes = [NSForegroundColorAttributeName: placeHolderStringColor,
-                                         NSFontAttributeName: CurrentTheme.balanceTextField.font] as [String : Any]
+            let placeholderAttributes: [NSAttributedStringKey : Any] = [NSAttributedStringKey.foregroundColor: placeHolderStringColor,
+                                                                        NSAttributedStringKey.font: CurrentTheme.balanceTextField.font]
             textField.placeholderAttributedString = NSAttributedString(string: placeholderString, attributes: placeholderAttributes)
         }
     }

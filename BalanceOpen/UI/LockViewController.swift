@@ -109,7 +109,7 @@ class LockViewController: NSViewController, NSTextFieldDelegate {
         touchIdButton.isBordered = false
         touchIdButton.imageScaling = .scaleProportionallyUpOrDown
         touchIdButton.imagePosition = .imageOnly
-        touchIdButton.image = NSImage(named: "touch-id-preferences-icon")
+        touchIdButton.image = NSImage(named: NSImage.Name(rawValue: "touch-id-preferences-icon"))
         touchIdButton.target = self
         touchIdButton.action = #selector(promptTouchId)
         touchIdButton.setAccessibilityLabel("Touch ID")
@@ -168,7 +168,7 @@ class LockViewController: NSViewController, NSTextFieldDelegate {
         }
     }
     
-    func forgottenPasswordAlert() {
+    @objc func forgottenPasswordAlert() {
         AppDelegate.sharedInstance.pinned = true
         
         if userPasswordAvailable {
@@ -179,7 +179,7 @@ class LockViewController: NSViewController, NSTextFieldDelegate {
             alert.addButton(withTitle: "Yes, remove the lock")
             alert.addButton(withTitle: "Cancel")
             alert.beginSheetModal(for: self.view.window!) { response in
-                if response == NSAlertFirstButtonReturn {
+                if response == NSApplication.ModalResponse.alertFirstButtonReturn {
                     AppDelegate.sharedInstance.pinned = false
                     self.authenticateUserPassword(reason: "unlock Balance") { success, error in
                         if success {
@@ -202,7 +202,7 @@ class LockViewController: NSViewController, NSTextFieldDelegate {
             alert.addButton(withTitle: "Yes, reset Balance completely")
             alert.addButton(withTitle: "Cancel")
             alert.beginSheetModal(for: self.view.window!) { response in
-                if response == NSAlertFirstButtonReturn {
+                if response == NSApplication.ModalResponse.alertFirstButtonReturn {
                     let alert = NSAlert()
                     alert.alertStyle = .informational
                     alert.messageText = "Reset Balance"
@@ -211,7 +211,7 @@ class LockViewController: NSViewController, NSTextFieldDelegate {
                     alert.addButton(withTitle: "Cancel")
                     alert.beginSheetModal(for: self.view.window!) { response in
                         AppDelegate.sharedInstance.pinned = false
-                        if response == NSAlertFirstButtonReturn {
+                        if response == NSApplication.ModalResponse.alertFirstButtonReturn {
                             appLock.resetAppData()
                         }
                     }

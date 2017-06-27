@@ -84,11 +84,11 @@ class PreferencesAccountsViewController: NSViewController {
         addAccountButton.isBordered = false
         addAccountButton.setButtonType(.momentaryChange)
         (addAccountButton.cell as? NSButtonCell)?.highlightsBy = .contentsCellMask
-        var addAccountAttributes = [NSForegroundColorAttributeName: NSColor(deviceRedInt: 0, green: 111, blue: 243),
-                                    NSFontAttributeName: NSFont.mediumSystemFont(ofSize: 13),
-                                    NSParagraphStyleAttributeName: centeredParagraphStyle]
+        var addAccountAttributes = [NSAttributedStringKey.foregroundColor: NSColor(deviceRedInt: 0, green: 111, blue: 243),
+                                    NSAttributedStringKey.font: NSFont.mediumSystemFont(ofSize: 13),
+                                    NSAttributedStringKey.paragraphStyle: centeredParagraphStyle]
         addAccountButton.attributedTitle = NSAttributedString(string: "Add Account", attributes: addAccountAttributes)
-        addAccountAttributes[NSForegroundColorAttributeName] = NSColor(deviceRedInt: 0, green: 111, blue: 243, alpha: 0.5)
+        addAccountAttributes[NSAttributedStringKey.foregroundColor] = NSColor(deviceRedInt: 0, green: 111, blue: 243, alpha: 0.5)
         addAccountButton.attributedAlternateTitle = NSAttributedString(string: "Add Account", attributes: addAccountAttributes)
         
         institutionsBackgroundView.addSubview(addAccountButton)
@@ -104,11 +104,11 @@ class PreferencesAccountsViewController: NSViewController {
         removeAccountButton.isBordered = false
         removeAccountButton.setButtonType(.momentaryChange)
         (removeAccountButton.cell as? NSButtonCell)?.highlightsBy = .contentsCellMask
-        var removeAccountAttributes = [NSForegroundColorAttributeName: NSColor(deviceWhiteInt: 92),
-                                       NSFontAttributeName: NSFont.mediumSystemFont(ofSize: 13),
-                                       NSParagraphStyleAttributeName: centeredParagraphStyle]
+        var removeAccountAttributes = [NSAttributedStringKey.foregroundColor: NSColor(deviceWhiteInt: 92),
+                                       NSAttributedStringKey.font: NSFont.mediumSystemFont(ofSize: 13),
+                                       NSAttributedStringKey.paragraphStyle: centeredParagraphStyle]
         removeAccountButton.attributedTitle = NSAttributedString(string: "Remove", attributes: removeAccountAttributes)
-        removeAccountAttributes[NSForegroundColorAttributeName] = NSColor(deviceWhiteInt: 92, alpha: 0.5)
+        removeAccountAttributes[NSAttributedStringKey.foregroundColor] = NSColor(deviceWhiteInt: 92, alpha: 0.5)
         removeAccountButton.attributedAlternateTitle = NSAttributedString(string: "Remove", attributes: removeAccountAttributes)
         institutionsBackgroundView.addSubview(removeAccountButton)
         removeAccountButton.snp.makeConstraints { make in
@@ -252,7 +252,7 @@ class PreferencesAccountsViewController: NSViewController {
         alert.messageText = "Are you sure you want to remove this account?"
         alert.alertStyle = .critical
         alert.beginSheetModal(for: self.view.window!) { returnCode in
-            if returnCode == NSAlertSecondButtonReturn {
+            if returnCode == NSApplication.ModalResponse.alertSecondButtonReturn {
                 let institution = self.institutions.keys[self.institutionsTableView.selectedIndex.row]
                 institution.remove()
                 self.selectFirstInstitution()
@@ -287,10 +287,10 @@ extension PreferencesAccountsViewController: SectionedTableViewDelegate, Section
     
     func tableView(_ tableView: SectionedTableView, rowViewForRow row: Int, inSection section: Int) -> NSTableRowView? {
         if tableView == institutionsTableView {
-            var row = tableView.make(withIdentifier: "Institution Row", owner: self) as? InstitutionRow
+            var row = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Institution Row"), owner: self) as? InstitutionRow
             if row == nil {
                 row = InstitutionRow()
-                row?.identifier = "Institution Row"
+                row?.identifier = NSUserInterfaceItemIdentifier(rawValue: "Institution Row")
             }
             return row
         }
@@ -300,20 +300,20 @@ extension PreferencesAccountsViewController: SectionedTableViewDelegate, Section
     func tableView(_ tableView: SectionedTableView, viewForRow row: Int, inSection section: Int) -> NSView? {
         if tableView == institutionsTableView {
             let institution = institutions.keys[row]
-            var cell = tableView.make(withIdentifier: "Institution Cell", owner: self) as? InstitutionCell
+            var cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Institution Cell"), owner: self) as? InstitutionCell
             if cell == nil {
                 cell = InstitutionCell()
-                cell?.identifier = "Institution Cell"
+                cell?.identifier = NSUserInterfaceItemIdentifier(rawValue: "Institution Cell")
             }
             
             cell?.updateModel(institution, isSelected: tableView.selectedIndex.row == row)
             return cell
         } else if tableView == accountsTableView, let selectedInstitution = selectedInstitution, let accounts = institutions[selectedInstitution] {
             let account = accounts[row]
-            var cell = tableView.make(withIdentifier: "Account Cell", owner: self) as? AccountCell
+            var cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Account Cell"), owner: self) as? AccountCell
             if cell == nil {
                 cell = AccountCell()
-                cell?.identifier = "Account Cell"
+                cell?.identifier = NSUserInterfaceItemIdentifier(rawValue: "Account Cell")
             }
             
             cell?.updateModel(account)
@@ -452,7 +452,7 @@ fileprivate class AccountCell: View {
         model = updatedModel
         
         let hidden = defaults.hiddenAccountIds.contains(updatedModel.accountId)
-        showButton.state = hidden ? NSOffState : NSOnState
+        showButton.state = hidden ? NSControl.StateValue.offState : NSControl.StateValue.onState
         
         nameField.stringValue = updatedModel.name.capitalizedStringIfAllCaps
         nameField.textColor = .black
@@ -463,7 +463,7 @@ fileprivate class AccountCell: View {
             return
         }
         
-        if button.state == NSOffState {
+        if button.state == NSControl.StateValue.offState {
             defaults.hideAccountId(accountId)
         } else {
             defaults.unhideAccountId(accountId)

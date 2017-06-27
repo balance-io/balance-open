@@ -61,7 +61,7 @@ extension String {
     }
     
     func size(font: NSFont, targetSize: CGSize = CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)) -> NSSize {
-        let attributedString = NSAttributedString(string: self, attributes: [NSFontAttributeName: font])
+        let attributedString = NSAttributedString(string: self, attributes: [NSAttributedStringKey.font: font])
         let framesetter = CTFramesetterCreateWithAttributedString(attributedString)
         let size = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, attributedString.length), nil, targetSize, nil);
         

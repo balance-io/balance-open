@@ -1,3 +1,4 @@
 framework module Reachability {
     header "Reachability-Swift.h"
+    requires objc
 }

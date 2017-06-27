@@ -19,7 +19,7 @@ public struct AccountConnectionErrors {
     
     public static func drawConnectionErrorsLight(frame: NSRect = NSRect(x: 0, y: 0, width: 400, height: 122)) {
         //// General Declarations
-        let context = NSGraphicsContext.current()!.cgContext
+        let context = NSGraphicsContext.current!.cgContext
         // This non-generic function dramatically improves compilation times of complex expressions.
         func fastFloor(_ x: CGFloat) -> CGFloat { return floor(x) }
         
@@ -96,7 +96,7 @@ public struct AccountConnectionErrors {
         
         ////// Rectangle 3 Inner Shadow
         NSGraphicsContext.saveGraphicsState()
-        NSRectClip(rectangle3Path.bounds)
+        rectangle3Path.bounds.clip()
         context.setShadow(offset: NSSize.zero, blur: 0, color: nil)
         
         context.setAlpha(headerInnerShadow.shadowColor!.alphaComponent)
@@ -120,7 +120,7 @@ public struct AccountConnectionErrors {
     
     public static func drawConnectionErrorsDark(frame: NSRect = NSRect(x: 0, y: 0, width: 400, height: 122)) {
         //// General Declarations
-        let context = NSGraphicsContext.current()!.cgContext
+        let context = NSGraphicsContext.current!.cgContext
         // This non-generic function dramatically improves compilation times of complex expressions.
         func fastFloor(_ x: CGFloat) -> CGFloat { return floor(x) }
         
@@ -196,7 +196,7 @@ public struct AccountConnectionErrors {
         
         ////// Rectangle 3 Inner Shadow
         NSGraphicsContext.saveGraphicsState()
-        NSRectClip(rectangle3Path.bounds)
+        rectangle3Path.bounds.clip()
         context.setShadow(offset: NSSize.zero, blur: 0, color: nil)
         
         context.setAlpha(darkHeaderInnerShadow.shadowColor!.alphaComponent)
@@ -220,7 +220,7 @@ public struct AccountConnectionErrors {
     
     public static func drawReconnectButtonLight(frame: NSRect = NSRect(x: 0, y: 0, width: 82, height: 27), buttonText: String = "Reconnect", original: Bool = true, pressed: Bool = false, buttonTextColor: NSColor = NSColor(deviceRed: 0.404, green: 0.431, blue: 0.459, alpha: 1)) {
         //// General Declarations
-        let context = NSGraphicsContext.current()!.cgContext
+        let context = NSGraphicsContext.current!.cgContext
         // This non-generic function dramatically improves compilation times of complex expressions.
         func fastFloor(_ x: CGFloat) -> CGFloat { return floor(x) }
         
@@ -296,19 +296,19 @@ public struct AccountConnectionErrors {
         let textRect = NSRect(x: frame.minX + fastFloor(frame.width * 0.01220 + 0.5), y: frame.minY + fastFloor(frame.height * 0.03704 + 0.5), width: fastFloor(frame.width * 0.98780 + 0.5) - fastFloor(frame.width * 0.01220 + 0.5), height: fastFloor(frame.height * 0.96296 + 0.5) - fastFloor(frame.height * 0.03704 + 0.5))
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .center
-        let textFontAttributes = [NSFontAttributeName: NSFont.systemFont(ofSize: NSFont.systemFontSize()), NSForegroundColorAttributeName: buttonTextColor, NSParagraphStyleAttributeName: textStyle]
+        let textFontAttributes = [NSAttributedStringKey.font: NSFont.systemFont(ofSize: NSFont.systemFontSize), NSAttributedStringKey.foregroundColor: buttonTextColor, NSAttributedStringKey.paragraphStyle: textStyle]
         
         let textTextHeight: CGFloat = buttonText.boundingRect(with: NSSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes).height
         let textTextRect: NSRect = NSRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight)
         NSGraphicsContext.saveGraphicsState()
-        NSRectClip(textRect)
+        textRect.clip()
         buttonText.draw(in: textTextRect.offsetBy(dx: 0, dy: 1), withAttributes: textFontAttributes)
         NSGraphicsContext.restoreGraphicsState()
     }
     
     public static func drawReconnectButtonDark(frame: NSRect = NSRect(x: 0, y: 0, width: 82, height: 27), buttonText: String = "Reconnect", original: Bool = true, pressed: Bool = false, buttonTextColor: NSColor = NSColor(deviceRed: 0.333, green: 0.353, blue: 0.38, alpha: 1)) {
         //// General Declarations
-        let context = NSGraphicsContext.current()!.cgContext
+        let context = NSGraphicsContext.current!.cgContext
         // This non-generic function dramatically improves compilation times of complex expressions.
         func fastFloor(_ x: CGFloat) -> CGFloat { return floor(x) }
         
@@ -384,12 +384,12 @@ public struct AccountConnectionErrors {
         let textRect = NSRect(x: frame.minX + fastFloor(frame.width * 0.01220 + 0.5), y: frame.minY + fastFloor(frame.height * 0.03704 + 0.5), width: fastFloor(frame.width * 0.98780 + 0.5) - fastFloor(frame.width * 0.01220 + 0.5), height: fastFloor(frame.height * 0.96296 + 0.5) - fastFloor(frame.height * 0.03704 + 0.5))
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .center
-        let textFontAttributes = [NSFontAttributeName: NSFont.systemFont(ofSize: NSFont.systemFontSize()), NSForegroundColorAttributeName: buttonTextColor, NSParagraphStyleAttributeName: textStyle]
+        let textFontAttributes = [NSAttributedStringKey.font: NSFont.systemFont(ofSize: NSFont.systemFontSize), NSAttributedStringKey.foregroundColor: buttonTextColor, NSAttributedStringKey.paragraphStyle: textStyle]
         
         let textTextHeight: CGFloat = buttonText.boundingRect(with: NSSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes).height
         let textTextRect: NSRect = NSRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight)
         NSGraphicsContext.saveGraphicsState()
-        NSRectClip(textRect)
+        textRect.clip()
         buttonText.draw(in: textTextRect.offsetBy(dx: 0, dy: 1), withAttributes: textFontAttributes)
         NSGraphicsContext.restoreGraphicsState()
     }

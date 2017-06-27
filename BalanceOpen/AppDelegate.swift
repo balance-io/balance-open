@@ -67,7 +67,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let applications = NSRunningApplication.runningApplications(withBundleIdentifier: bundleIdentifier)
             for application in applications {
                 // If any instances are not this one, terminate
-                if application != NSRunningApplication.current() {
+                if application != NSRunningApplication.current {
                     NSApp.terminate(nil)
                 }
             }
@@ -106,15 +106,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Shortcut.setupDefaultShortcut()
         
         // Prepare the preferences window
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        preferencesWindowController = storyboard.instantiateController(withIdentifier: "preferencesWindowController") as! NSWindowController
+        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
+        preferencesWindowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "preferencesWindowController")) as! NSWindowController
         
         // Present the UI
         showWindow()
     }
     
     /** Gets called when the App launches/opens via URL. */
-    func handleURLEvent(event: NSAppleEventDescriptor, withReply reply: NSAppleEventDescriptor) {
+    @objc func handleURLEvent(event: NSAppleEventDescriptor, withReply reply: NSAppleEventDescriptor) {
         if let urlString = event.paramDescriptor(forKeyword: AEKeyword(keyDirectObject))?.stringValue {
             print("Handling URL: \(urlString)")
             if let url = URLComponents(string: urlString), let queryItems = url.queryItems, url.scheme == "balancemymoney" {
@@ -161,7 +161,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     fileprivate var macBartenderRunning: Bool {
         var running = false
-        let runningApplications = NSWorkspace.shared().runningApplications
+        let runningApplications = NSWorkspace.shared.runningApplications
         for app in runningApplications {
             if app.bundleIdentifier == "com.surteesstudios.Bartender" {
                 running = true
@@ -186,7 +186,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem.windowConfiguration.animationDuration = 0.13
         statusItem.windowConfiguration.toolTip = "Balance"
         statusItem.windowConfiguration.backgroundColor = CurrentTheme.defaults.backgroundColor
-        statusItem.present(with: NSImage(named: "statusIcon"), contentViewController: contentViewController)
+        statusItem.present(with: NSImage(named: NSImage.Name(rawValue: "statusIcon")), contentViewController: contentViewController)
         statusItem.statusItem.button?.setAccessibilityLabel("Balance")
         statusItem.drawBorder = CurrentTheme.type == .light
         
@@ -214,7 +214,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     alert.informativeText = "Would you like to launch Balance automatically when you login? This can be changed later in Preferences."
                     alert.addButton(withTitle: "Yes")
                     alert.addButton(withTitle: "No")
-                    if alert.runModal() == NSAlertFirstButtonReturn {
+                    if alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn {
                         defaults.launchAtLogin = true
                     }
                     self.showPopover()
@@ -341,7 +341,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func sendFeedback() {
         let urlString = "https://github.com/balancemymoney/BalanceForBlockchain/issues"
-        _ = try? NSWorkspace.shared().open(URL(string: urlString)!, options: [], configuration: [:])
+        _ = try? NSWorkspace.shared.open(URL(string: urlString)!, options: [], configuration: [:])
     }
     
     func checkForUpdates(sender: Any) {

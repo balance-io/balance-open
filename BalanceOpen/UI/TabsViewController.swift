@@ -41,7 +41,7 @@ class TabsViewController: NSViewController {
     //
     
     init(defaultTab: Tab = Tab.accounts) {
-        super.init(nibName: nil, bundle: nil)!
+        super.init(nibName: nil, bundle: nil)
         
         self.defaultTab = defaultTab
         
@@ -143,7 +143,7 @@ class TabsViewController: NSViewController {
     
     var spinAnimation: CABasicAnimation?
     
-    func showSettingsMenu(_ sender: NSButton) {
+    @objc func showSettingsMenu(_ sender: NSButton) {
         let menu = NSMenu()
         menu.autoenablesItems = false
         menu.addItem(withTitle: "Add an Account          ", action: #selector(showAddAccount), keyEquivalent: "")
@@ -155,27 +155,27 @@ class TabsViewController: NSViewController {
         menu.addItem(NSMenuItem.separator())
         menu.addItem(withTitle: "Quit Balance", action: #selector(quitApp), keyEquivalent: "q")
         
-        let event = NSApplication.shared().currentEvent ?? NSEvent()
+        let event = NSApplication.shared.currentEvent ?? NSEvent()
         NSMenu.popUpContextMenu(menu, with: event, for: sender)
     }
     
-    func showAddAccount() {
+    @objc func showAddAccount() {
         NotificationCenter.postOnMainThread(name: Notifications.ShowAddAccount)
     }
     
-    func showPreferences() {
+    @objc func showPreferences() {
         AppDelegate.sharedInstance.showPreferences()
     }
     
-    func sendFeedback() {
+    @objc func sendFeedback() {
         AppDelegate.sharedInstance.sendFeedback()
     }
     
-    func checkForUpdates(sender: Any) {
+    @objc func checkForUpdates(sender: Any) {
         AppDelegate.sharedInstance.checkForUpdates(sender: sender)
     }
     
-    func quitApp() {
+    @objc func quitApp() {
         AppDelegate.sharedInstance.quitApp()
     }
     

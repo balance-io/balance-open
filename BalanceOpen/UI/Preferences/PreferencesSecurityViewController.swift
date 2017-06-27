@@ -120,7 +120,7 @@ class PreferencesSecurityViewController: NSViewController {
         lockSleepCheckBox.setAccessibilityLabel("Lock on sleep")
         lockSleepCheckBox.action = #selector(lockSleepCheckBoxPress)
         lockSleepCheckBox.target = self
-        lockSleepCheckBox.state = appLock.lockOnSleep ? NSOnState : NSOffState
+        lockSleepCheckBox.state = appLock.lockOnSleep ? NSControl.StateValue.onState : NSControl.StateValue.offState
         self.view.addSubview(lockSleepCheckBox)
         lockSleepCheckBox.snp.makeConstraints{ make in
             make.top.equalTo(lockQuitTitleField.snp.bottom).offset(12)
@@ -133,7 +133,7 @@ class PreferencesSecurityViewController: NSViewController {
         lockScreenSaverCheckBox.setAccessibilityLabel("Lock when screensaver is activated")
         lockScreenSaverCheckBox.action = #selector(lockScreenSaverCheckBoxPress)
         lockScreenSaverCheckBox.target = self
-        lockScreenSaverCheckBox.state = appLock.lockOnScreenSaver ? NSOnState : NSOffState
+        lockScreenSaverCheckBox.state = appLock.lockOnScreenSaver ? NSControl.StateValue.onState : NSControl.StateValue.offState
         self.view.addSubview(lockScreenSaverCheckBox)
         lockScreenSaverCheckBox.snp.makeConstraints{ make in
             make.top.equalTo(lockSleepCheckBox.snp.bottom).offset(12)
@@ -146,7 +146,7 @@ class PreferencesSecurityViewController: NSViewController {
         lockCloseCheckBox.setAccessibilityLabel("Lock every time the app window is closed")
         lockCloseCheckBox.action = #selector(lockCloseCheckboxPress)
         lockCloseCheckBox.target = self
-        lockCloseCheckBox.state = appLock.lockOnPopoverClose ? NSOnState : NSOffState
+        lockCloseCheckBox.state = appLock.lockOnPopoverClose ? NSControl.StateValue.onState : NSControl.StateValue.offState
         self.view.addSubview(lockCloseCheckBox)
         lockCloseCheckBox.snp.makeConstraints{ make in
             make.top.equalTo(lockScreenSaverCheckBox.snp.bottom).offset(12)
@@ -175,7 +175,7 @@ class PreferencesSecurityViewController: NSViewController {
                 make.leading.equalTo(self.view).offset(20)
             }
             
-            touchIDIconImageView.image = NSImage(named: "touch-id-preferences-icon")
+            touchIDIconImageView.image = NSImage(named: NSImage.Name(rawValue: "touch-id-preferences-icon"))
             touchIDIconImageView.setAccessibilityLabel("Preview of how Balance looks.")
             self.view.addSubview(touchIDIconImageView)
             touchIDIconImageView.snp.makeConstraints{ make in
@@ -214,12 +214,12 @@ class PreferencesSecurityViewController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         updateButtonStates()
-        NotificationCenter.addObserverOnMainThread(self, selector: #selector(windowDidEndSheet(notification:)), name: Notification.Name.NSWindowDidEndSheet, object: AppDelegate.sharedInstance.preferencesWindowController.window!)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(windowDidEndSheet(notification:)), name: NSWindow.didEndSheetNotification, object: AppDelegate.sharedInstance.preferencesWindowController.window!)
     }
     
     override func viewWillDisappear() {
         super.viewDidDisappear()
-        NotificationCenter.removeObserverOnMainThread(self, name: Notification.Name.NSWindowDidEndSheet, object: AppDelegate.sharedInstance.preferencesWindowController.window!)
+        NotificationCenter.removeObserverOnMainThread(self, name: NSWindow.didEndSheetNotification, object: AppDelegate.sharedInstance.preferencesWindowController.window!)
     }
     
     func updateButtonStates() {
@@ -258,44 +258,44 @@ class PreferencesSecurityViewController: NSViewController {
         }
     }
     
-    func showSetPasswordSheet(){
+    @objc func showSetPasswordSheet(){
         let alertViewController = SetPasswordViewController(completionBlock: {
             self.updateButtonStates()
         })
         self.presentViewControllerAsSheet(alertViewController)
     }
     
-    func showChangePasswordSheet(){
+    @objc func showChangePasswordSheet(){
         let alertViewController = ChangePasswordViewController()
         self.presentViewControllerAsSheet(alertViewController)
     }
     
-    func disablePassword() {
+    @objc func disablePassword() {
         let alertViewController = DisablePasswordViewController(completionBlock: {
             self.updateButtonStates()
         })
         self.presentViewControllerAsSheet(alertViewController)
     }
     
-    func lockSleepCheckBoxPress(_ sender:NSButton) {
-        let enabled = (sender.state == NSOnState)
+    @objc func lockSleepCheckBoxPress(_ sender:NSButton) {
+        let enabled = (sender.state == NSControl.StateValue.onState)
         appLock.lockOnSleep = enabled
-        sender.state = appLock.lockOnSleep ? NSOnState : NSOffState
+        sender.state = appLock.lockOnSleep ? NSControl.StateValue.onState : NSControl.StateValue.offState
     }
     
-    func lockScreenSaverCheckBoxPress(_ sender:NSButton) {
-        let enabled = (sender.state == NSOnState)
+    @objc func lockScreenSaverCheckBoxPress(_ sender:NSButton) {
+        let enabled = (sender.state == NSControl.StateValue.onState)
         appLock.lockOnScreenSaver = enabled
-        sender.state = appLock.lockOnScreenSaver ? NSOnState : NSOffState
+        sender.state = appLock.lockOnScreenSaver ? NSControl.StateValue.onState : NSControl.StateValue.offState
     }
     
-    func lockCloseCheckboxPress(_ sender:NSButton) {
-        let enabled = (sender.state == NSOnState)
+    @objc func lockCloseCheckboxPress(_ sender:NSButton) {
+        let enabled = (sender.state == NSControl.StateValue.onState)
         appLock.lockOnPopoverClose = enabled
-        sender.state = appLock.lockOnPopoverClose ? NSOnState : NSOffState
+        sender.state = appLock.lockOnPopoverClose ? NSControl.StateValue.onState : NSControl.StateValue.offState
     }
     
-    func disableTouchID() {
+    @objc func disableTouchID() {
         appLock.authenticateTouchId(reason: "disable Touch ID unlocking") { success, error in
             if success {
                 appLock.touchIdEnabled = false
@@ -304,7 +304,7 @@ class PreferencesSecurityViewController: NSViewController {
         }
     }
     
-    func enableTouchID() {
+    @objc func enableTouchID() {
         appLock.authenticateTouchId(reason: "enable Touch ID unlocking") { success, error in
             if success {
                 appLock.touchIdEnabled = true
@@ -313,7 +313,7 @@ class PreferencesSecurityViewController: NSViewController {
         }
     }
     
-    func windowDidEndSheet(notification: Notification) {
+    @objc func windowDidEndSheet(notification: Notification) {
         updateButtonStates()
     }
 }
