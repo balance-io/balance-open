@@ -15,7 +15,7 @@ Balance Open: A GPL3-licensed macOS menu bar app for all the world’s currencie
 ## Updating dependencies
 We use carthage for dependency management, however we check in all built frameworks, so it is not necessary to run any carthage commands. 
 
-However, if moving to a new Swift version, or for other reasons, it may be necessary to rebuild them using `carthage update`. 
+However, if moving to a new Swift version, or for other reasons, it may be necessary to rebuild them using `carthage update --platform "osx, ios"`. 
 
 The easiest way to install Carthage is to install Homebrew by running `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ` and then run `brew install carthage`. 
