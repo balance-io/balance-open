@@ -105,7 +105,7 @@ extension NSView {
                 transition.type = kCATransitionFade
             }
             transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            self.animations = ["subviews": transition]
+            self.animations = [NSAnimatablePropertyKey(rawValue: "subviews"): transition]
             
             NSAnimationContext.runAnimationGroup({ context in
                 context.duration = duration

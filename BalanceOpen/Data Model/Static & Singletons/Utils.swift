@@ -114,7 +114,7 @@ func amountToStringFormatted(amount: Int, currency: Currency, showNegative: Bool
     assert(Thread.isMainThread, "Must be used from main thread")
     
     let amountString = amountToString(amount: amount, currency: currency, showNegative: showNegative)
-    let preparedString = NSMutableAttributedString(string: amountString, attributes: [NSParagraphStyleAttributeName: rightParagraphStyle])
+    let preparedString = NSMutableAttributedString(string: amountString, attributes: [NSAttributedStringKey.paragraphStyle: rightParagraphStyle])
     
     let count = preparedString.string.length
     let decimalCharsCount = count - currency.decimals - 1
@@ -126,20 +126,20 @@ func amountToStringFormatted(amount: Int, currency: Currency, showNegative: Bool
     let isNegative = (amount == 0 || amountString.hasPrefix("-"))
     if isNegative {
         // Set the color to white if it is a negative amount
-        preparedString.addAttribute(NSForegroundColorAttributeName, value: CurrentTheme.accounts.cell.amountColor, range: firstCharacters)
+        preparedString.addAttribute(NSAttributedStringKey.foregroundColor, value: CurrentTheme.accounts.cell.amountColor, range: firstCharacters)
         
         if showDecimal {
             // Add extra alpha to the cents
-            preparedString.addAttribute(NSForegroundColorAttributeName, value: CurrentTheme.accounts.cell.amountColorCents, range: decimalCharacters)
+            preparedString.addAttribute(NSAttributedStringKey.foregroundColor, value: CurrentTheme.accounts.cell.amountColorCents, range: decimalCharacters)
         }
     } else {
         // Set the color to green if it is a positive amount
         let foregroundColor = colorPositive ? CurrentTheme.accounts.cell.amountColorPositive : CurrentTheme.accounts.cell.amountColor
-        preparedString.addAttribute(NSForegroundColorAttributeName, value: foregroundColor, range: firstCharacters)
+        preparedString.addAttribute(NSAttributedStringKey.foregroundColor, value: foregroundColor, range: firstCharacters)
         
         if showDecimal {
             // Add extra alpha to the cents
-            preparedString.addAttribute(NSForegroundColorAttributeName, value: foregroundColor.withAlphaComponent(0.75), range: decimalCharacters)
+            preparedString.addAttribute(NSAttributedStringKey.foregroundColor, value: foregroundColor.withAlphaComponent(0.75), range: decimalCharacters)
         }
     }
     
@@ -186,7 +186,7 @@ extension NSColor {
             
         #else
             
-            if let rgbColor = self.usingColorSpaceName(NSCalibratedRGBColorSpace) {
+            if let rgbColor = self.usingColorSpaceName(NSColorSpaceName.calibratedRGB) {
                 rgbColor.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
                 return NSColor( hue: hue,
                                 saturation: saturation,
@@ -200,7 +200,7 @@ extension NSColor {
         
     }
 }
-    
+
 // Allows you to compare any two things, which is not possible with ==
 func equals(_ lhs: Any?, _ rhs: Any?) -> Bool {
     if lhs as AnyObject? === rhs as AnyObject? {

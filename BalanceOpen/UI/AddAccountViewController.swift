@@ -47,7 +47,7 @@ class AddAccountViewController: NSViewController {
     //
     
     init() {
-        super.init(nibName: nil, bundle: nil)!
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -194,10 +194,10 @@ class AddAccountViewController: NSViewController {
         let buttonBlueColor = isLight ? NSColor(deviceRedInt: 39, green: 132, blue: 240) : NSColor(deviceRedInt: 71, green: 152, blue: 244)
         let buttonAltBlueColor = isLight ? NSColor(deviceRedInt: 39, green: 132, blue: 240, alpha: 0.7) : NSColor(deviceRedInt: 71, green: 152, blue: 244, alpha: 0.7)
         
-        let buttonAttributes = [NSForegroundColorAttributeName: buttonBlueColor,
-                                NSFontAttributeName: NSFont.semiboldSystemFont(ofSize: 13)]
-        let buttonAltAttributes = [NSForegroundColorAttributeName: buttonAltBlueColor,
-                                   NSFontAttributeName: NSFont.semiboldSystemFont(ofSize: 13)]
+        let buttonAttributes = [NSAttributedStringKey.foregroundColor: buttonBlueColor,
+                                NSAttributedStringKey.font: NSFont.semiboldSystemFont(ofSize: 13)]
+        let buttonAltAttributes = [NSAttributedStringKey.foregroundColor: buttonAltBlueColor,
+                                   NSAttributedStringKey.font: NSFont.semiboldSystemFont(ofSize: 13)]
         
         githubButton.attributedTitle = NSAttributedString(string:"GitHub", attributes: buttonAttributes)
         githubButton.attributedAlternateTitle = NSAttributedString(string:"GitHub", attributes: buttonAltAttributes)
@@ -236,7 +236,7 @@ class AddAccountViewController: NSViewController {
     @objc fileprivate func githubButtonAction() {
         let url = "https://github.com/balancemymoney/balance-open"
         do {
-            _ = try NSWorkspace.shared().open(URL(string: url)!, options: [], configuration: [:])
+            _ = try NSWorkspace.shared.open(URL(string: url)!, options: [], configuration: [:])
         } catch {
             // TODO: Better error handling
             print("Error opening Github repo URL: \(error)")
@@ -247,15 +247,15 @@ class AddAccountViewController: NSViewController {
         func assignBlocks(button: HoverButton, bounds: NSRect, function: @escaping ButtonFunction) {
             button.originalBlock = {
                 function(bounds, true, false, false)
-            }
+            } as HoverButton.DrawingBlock
             
             if allowSelection {
                 button.hoverBlock = {
                     function(bounds, false, true, false)
-                }
+                } as HoverButton.DrawingBlock
                 button.pressedBlock = {
                     function(bounds, false, false, true)
-                }
+                } as HoverButton.DrawingBlock
             }
         }
         
@@ -338,26 +338,26 @@ class AddAccountViewController: NSViewController {
         }
     }
     
-    func showSettingsMenu(_ sender: NSButton) {
+    @objc func showSettingsMenu(_ sender: NSButton) {
         let menu = NSMenu()
         menu.addItem(withTitle: "Send Feedback", action: #selector(sendFeedback), keyEquivalent: "")
         menu.addItem(withTitle: "Check for Updates", action: #selector(checkForUpdates(sender:)), keyEquivalent: "")
         menu.addItem(NSMenuItem.separator())
         menu.addItem(withTitle: "Quit Balance", action: #selector(quitApp), keyEquivalent: "q")
         
-        let event = NSApplication.shared().currentEvent ?? NSEvent()
+        let event = NSApplication.shared.currentEvent ?? NSEvent()
         NSMenu.popUpContextMenu(menu, with: event, for: sender)
     }
     
-    func sendFeedback() {
+    @objc func sendFeedback() {
         AppDelegate.sharedInstance.sendFeedback()
     }
     
-    func checkForUpdates(sender: Any) {
+    @objc func checkForUpdates(sender: Any) {
         AppDelegate.sharedInstance.checkForUpdates(sender: sender)
     }
     
-    func quitApp() {
+    @objc func quitApp() {
         AppDelegate.sharedInstance.quitApp()
     }
     

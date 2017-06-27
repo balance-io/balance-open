@@ -17,9 +17,9 @@ open class InstitutionButtons : NSObject {
 
     //// Drawing Methods
  
-    open dynamic class func drawCoinbaseButton(_ bounds: NSRect = NSRect(x: 0, y: 0, width: 191, height: 56), original: Bool = true, hover: Bool = false, pressed: Bool = false) {
+    @objc open dynamic class func drawCoinbaseButton(_ bounds: NSRect = NSRect(x: 0, y: 0, width: 191, height: 56), original: Bool = true, hover: Bool = false, pressed: Bool = false) {
         //// General Declarations
-        let context = NSGraphicsContext.current()!.cgContext
+        let context = NSGraphicsContext.current!.cgContext
 
         //// Color Declarations
         let highlightGradientColor = NSColor(deviceRed: 1, green: 1, blue: 1, alpha: 0.09)
@@ -62,7 +62,7 @@ open class InstitutionButtons : NSObject {
 
             ////// coinbaseHighlight Inner Shadow
             NSGraphicsContext.saveGraphicsState()
-            NSRectClip(coinbaseHighlightPath.bounds)
+            coinbaseHighlightPath.bounds.clip()
             context.setShadow(offset: NSSize.zero, blur: 0, color: nil)
 
             context.setAlpha(innerStroke.shadowColor!.alphaComponent)
@@ -113,7 +113,7 @@ open class InstitutionButtons : NSObject {
 
             ////// coinbaseHighlight 2 Inner Shadow
             NSGraphicsContext.saveGraphicsState()
-            NSRectClip(coinbaseHighlight2Path.bounds)
+            coinbaseHighlight2Path.bounds.clip()
             context.setShadow(offset: NSSize.zero, blur: 0, color: nil)
 
             context.setAlpha(innerStroke.shadowColor!.alphaComponent)
@@ -163,7 +163,7 @@ open class InstitutionButtons : NSObject {
 
             ////// coinbaseHighlight 3 Inner Shadow
             NSGraphicsContext.saveGraphicsState()
-            NSRectClip(coinbaseHighlight3Path.bounds)
+            coinbaseHighlight3Path.bounds.clip()
             context.setShadow(offset: NSSize.zero, blur: 0, color: nil)
 
             context.setAlpha(innerStroke.shadowColor!.alphaComponent)
@@ -314,9 +314,9 @@ open class InstitutionButtons : NSObject {
         logoPath.fill()
     }
 
-    open dynamic class func drawGdaxButton(_ bounds: NSRect = NSRect(x: 0, y: 0, width: 191, height: 56), original: Bool = true, hover: Bool = false, pressed: Bool = false) {
+    @objc open dynamic class func drawGdaxButton(_ bounds: NSRect = NSRect(x: 0, y: 0, width: 191, height: 56), original: Bool = true, hover: Bool = false, pressed: Bool = false) {
         //// General Declarations
-        let context = NSGraphicsContext.current()!.cgContext
+        let context = NSGraphicsContext.current!.cgContext
 
         //// Color Declarations
         let highlightGradientColor = NSColor(deviceRed: 1, green: 1, blue: 1, alpha: 0.09)
@@ -360,7 +360,7 @@ open class InstitutionButtons : NSObject {
 
             ////// gdaxHighlight Inner Shadow
             NSGraphicsContext.saveGraphicsState()
-            NSRectClip(gdaxHighlightPath.bounds)
+            gdaxHighlightPath.bounds.clip()
             context.setShadow(offset: NSSize.zero, blur: 0, color: nil)
 
             context.setAlpha(innerStroke.shadowColor!.alphaComponent)
@@ -411,7 +411,7 @@ open class InstitutionButtons : NSObject {
 
             ////// gdaxHighlight 2 Inner Shadow
             NSGraphicsContext.saveGraphicsState()
-            NSRectClip(gdaxHighlight2Path.bounds)
+            gdaxHighlight2Path.bounds.clip()
             context.setShadow(offset: NSSize.zero, blur: 0, color: nil)
 
             context.setAlpha(innerStroke.shadowColor!.alphaComponent)
@@ -461,7 +461,7 @@ open class InstitutionButtons : NSObject {
 
             ////// gdaxHighlight 3 Inner Shadow
             NSGraphicsContext.saveGraphicsState()
-            NSRectClip(gdaxHighlight3Path.bounds)
+            gdaxHighlight3Path.bounds.clip()
             context.setShadow(offset: NSSize.zero, blur: 0, color: nil)
 
             context.setAlpha(innerStroke.shadowColor!.alphaComponent)
@@ -626,9 +626,9 @@ open class InstitutionButtons : NSObject {
         //// Group- 8
     }
 
-    open dynamic class func drawPoloniexButton(_ bounds: NSRect = NSRect(x: 0, y: 0, width: 191, height: 56), original: Bool = true, hover: Bool = false, pressed: Bool = false) {
+    @objc open dynamic class func drawPoloniexButton(_ bounds: NSRect = NSRect(x: 0, y: 0, width: 191, height: 56), original: Bool = true, hover: Bool = false, pressed: Bool = false) {
         //// General Declarations
-        let context = NSGraphicsContext.current()!.cgContext
+        let context = NSGraphicsContext.current!.cgContext
 
         //// Color Declarations
         let highlightGradientColor = NSColor(deviceRed: 1, green: 1, blue: 1, alpha: 0.09)
@@ -671,7 +671,7 @@ open class InstitutionButtons : NSObject {
 
             ////// poloniexHighlight Inner Shadow
             NSGraphicsContext.saveGraphicsState()
-            NSRectClip(poloniexHighlightPath.bounds)
+            poloniexHighlightPath.bounds.clip()
             context.setShadow(offset: NSSize.zero, blur: 0, color: nil)
 
             context.setAlpha(innerStroke.shadowColor!.alphaComponent)
@@ -722,7 +722,7 @@ open class InstitutionButtons : NSObject {
 
             ////// poloniexHighlight 2 Inner Shadow
             NSGraphicsContext.saveGraphicsState()
-            NSRectClip(poloniexHighlight2Path.bounds)
+            poloniexHighlight2Path.bounds.clip()
             context.setShadow(offset: NSSize.zero, blur: 0, color: nil)
 
             context.setAlpha(innerStroke.shadowColor!.alphaComponent)
@@ -772,7 +772,7 @@ open class InstitutionButtons : NSObject {
 
             ////// poloniexHighlight 3 Inner Shadow
             NSGraphicsContext.saveGraphicsState()
-            NSRectClip(poloniexHighlight3Path.bounds)
+            poloniexHighlight3Path.bounds.clip()
             context.setShadow(offset: NSSize.zero, blur: 0, color: nil)
 
             context.setAlpha(innerStroke.shadowColor!.alphaComponent)
@@ -981,9 +981,9 @@ open class InstitutionButtons : NSObject {
         logoPath.fill()
     }
 
-    open dynamic class func drawBitfinexButton(_ bounds: NSRect = NSRect(x: 0, y: 0, width: 191, height: 56), original: Bool = true, hover: Bool = false, pressed: Bool = false) {
+    @objc open dynamic class func drawBitfinexButton(_ bounds: NSRect = NSRect(x: 0, y: 0, width: 191, height: 56), original: Bool = true, hover: Bool = false, pressed: Bool = false) {
         //// General Declarations
-        let context = NSGraphicsContext.current()!.cgContext
+        let context = NSGraphicsContext.current!.cgContext
 
         //// Color Declarations
         let highlightGradientColor = NSColor(deviceRed: 1, green: 1, blue: 1, alpha: 0.09)
@@ -1026,7 +1026,7 @@ open class InstitutionButtons : NSObject {
 
             ////// bitfinexHighlight Inner Shadow
             NSGraphicsContext.saveGraphicsState()
-            NSRectClip(bitfinexHighlightPath.bounds)
+            bitfinexHighlightPath.bounds.clip()
             context.setShadow(offset: NSSize.zero, blur: 0, color: nil)
 
             context.setAlpha(innerStroke.shadowColor!.alphaComponent)
@@ -1077,7 +1077,7 @@ open class InstitutionButtons : NSObject {
 
             ////// bitfinexHighlight 2 Inner Shadow
             NSGraphicsContext.saveGraphicsState()
-            NSRectClip(bitfinexHighlight2Path.bounds)
+            bitfinexHighlight2Path.bounds.clip()
             context.setShadow(offset: NSSize.zero, blur: 0, color: nil)
 
             context.setAlpha(innerStroke.shadowColor!.alphaComponent)
@@ -1127,7 +1127,7 @@ open class InstitutionButtons : NSObject {
 
             ////// bitfinexHighlight 3 Inner Shadow
             NSGraphicsContext.saveGraphicsState()
-            NSRectClip(bitfinexHighlight3Path.bounds)
+            bitfinexHighlight3Path.bounds.clip()
             context.setShadow(offset: NSSize.zero, blur: 0, color: nil)
 
             context.setAlpha(innerStroke.shadowColor!.alphaComponent)

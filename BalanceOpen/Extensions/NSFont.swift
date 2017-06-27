@@ -11,15 +11,15 @@ import AppKit
 extension NSFont {
     
     static func semiboldSystemFont(ofSize size: CGFloat) -> NSFont {
-        return NSFont.systemFont(ofSize: size, weight: NSFontWeightSemibold)
+        return NSFont.systemFont(ofSize: size, weight: NSFont.Weight.semibold)
     }
     
     static func mediumSystemFont(ofSize size: CGFloat) -> NSFont {
-        return NSFont.systemFont(ofSize: size, weight: NSFontWeightMedium)
+        return NSFont.systemFont(ofSize: size, weight: NSFont.Weight.medium)
     }
     
     static func lightSystemFont(ofSize size: CGFloat) -> NSFont {
-        return NSFont.systemFont(ofSize: size, weight: NSFontWeightLight)
+        return NSFont.systemFont(ofSize: size, weight: NSFont.Weight.light)
     }
     
     // Cache fonts for performance
@@ -28,16 +28,16 @@ extension NSFont {
         if let cachedFont = cachedMonospacedFonts[size] {
             return cachedFont
         } else {
-            let descriptor = NSFont.monospacedDigitSystemFont(ofSize: size, weight: NSFontWeightRegular).fontDescriptor
+            let descriptor = NSFont.monospacedDigitSystemFont(ofSize: size, weight: NSFont.Weight.regular).fontDescriptor
             let altDescriptor = descriptor.addingAttributes(
                 [
-                    NSFontFeatureSettingsAttribute: [
+                    NSFontDescriptor.AttributeName.featureSettings: [
                         // Alternate 6 and 9
-                        [ NSFontFeatureTypeIdentifierKey: kStylisticAlternativesType,
-                          NSFontFeatureSelectorIdentifierKey: kStylisticAltOneOnSelector ],
+                        [ NSFontDescriptor.FeatureKey.typeIdentifier: kStylisticAlternativesType,
+                          NSFontDescriptor.FeatureKey.selectorIdentifier: kStylisticAltOneOnSelector ],
                         // Alternate 4
-                        [ NSFontFeatureTypeIdentifierKey: kStylisticAlternativesType,
-                          NSFontFeatureSelectorIdentifierKey: kStylisticAltTwoOnSelector ]
+                        [ NSFontDescriptor.FeatureKey.typeIdentifier: kStylisticAlternativesType,
+                          NSFontDescriptor.FeatureKey.selectorIdentifier: kStylisticAltTwoOnSelector ]
                     ]
                 ])
             

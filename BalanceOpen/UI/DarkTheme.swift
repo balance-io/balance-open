@@ -13,10 +13,10 @@ struct DarkTheme: Theme {
     var type: ThemeType = .dark
     
     var defaults: DefaultsTheme {
-        let appearance = NSAppearance(named: NSAppearanceNameVibrantDark) ?? NSAppearance.current()
+        let appearance = NSAppearance(named: NSAppearance.Name.vibrantDark)!
         let backgroundColor = NSColor(deviceRedInt: 37, green: 42, blue: 48)
         let foregroundColor = NSColor(deviceWhiteInt: 255)
-        let material = NSVisualEffectMaterial.dark
+        let material = NSVisualEffectView.Material.dark
         let size = CGSize(width: 400, height: 600)
         let noAccountsSize = CGSize(width: 400, height: 370)
         let touchBarFont = NSFont.systemFont(ofSize: 15)
@@ -54,7 +54,7 @@ struct DarkTheme: Theme {
         let footer = TabsTheme.FooterTheme(
             backgroundColor: NSColor(deviceRedInt: 46, green: 56, blue: 66),
             textColor: NSColor(deviceRedInt: 151, green: 182, blue: 204),
-            preferencesIcon: NSImage(named: "gear-icon-dark")!,
+            preferencesIcon: NSImage(named: NSImage.Name(rawValue: "gear-icon-dark"))!,
             syncButtonColor: NSColor(deviceRedInt: 151, green: 182, blue: 204)
         )
         

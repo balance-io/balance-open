@@ -31,7 +31,7 @@ class SyncManager: NSObject {
         
         // Register for wake notification
         DispatchQueue.main.async() {
-            NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(self.syncIfGreaterThanSyncInterval), name: Notification.Name.NSWorkspaceDidWake, object: nil)
+            NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.syncIfGreaterThanSyncInterval), name: NSWorkspace.didWakeNotification, object: nil)
         }
         
         // Network status notifications
@@ -40,13 +40,13 @@ class SyncManager: NSObject {
     }
     
     deinit {
-        NSWorkspace.shared().notificationCenter.removeObserver(self, name: Notification.Name.NSWorkspaceDidWake, object: nil)
+        NSWorkspace.shared.notificationCenter.removeObserver(self, name: NSWorkspace.didWakeNotification, object: nil)
 
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.NetworkBecameReachable)
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.NetworkBecameUnreachable)
     }
     
-    func cancel() {
+    @objc func cancel() {
         guard syncer.syncing else {
             return
         }
@@ -54,11 +54,11 @@ class SyncManager: NSObject {
         syncer.cancel()
     }
     
-    func automaticSync() {
+    @objc func automaticSync() {
         sync(userInitiated: false, validateReceipt: true, completion: nil)
     }
     
-    func syncIfGreaterThanSyncInterval() {
+    @objc func syncIfGreaterThanSyncInterval() {
         let lastSync = syncDefaults.lastSuccessfulSyncTime
         let performSync = !hasSyncedSinceLaunch || Date().timeIntervalSince(lastSync) > syncDefaults.syncInterval
         if performSync {

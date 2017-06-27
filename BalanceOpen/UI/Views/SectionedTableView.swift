@@ -21,7 +21,7 @@ import AppKit
     @objc optional func tableView(_ tableView: SectionedTableView, canDragIndex index: TableIndex) -> Bool
     @objc optional func tableView(_ tableView: SectionedTableView, dragImageForProposedDragImage dragImage: NSImage, index: TableIndex) -> NSImage
     @objc optional func tableView(_ tableView: SectionedTableView, validateDropFromIndex fromIndex: TableIndex, toIndex: TableIndex) -> NSDragOperation
-    @objc optional func tableView(_ tableView: SectionedTableView, acceptDropFromIndex fromIndex: TableIndex, toIndex: TableIndex, dropOperation: NSTableViewDropOperation) -> Bool
+    @objc optional func tableView(_ tableView: SectionedTableView, acceptDropFromIndex fromIndex: TableIndex, toIndex: TableIndex, dropOperation: NSTableView.DropOperation) -> Bool
 }
 
 @objc protocol SectionedTableViewDataSource {
@@ -78,7 +78,7 @@ class SectionedTableView: TableView, NSTableViewDelegate, NSTableViewDataSource 
     fileprivate func commonInit() {
         self.delegate = self
         self.dataSource = self
-        self.register(forDraggedTypes: ["balance.row"])
+        self.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: "balance.row")])
     }
     
     //
@@ -357,15 +357,15 @@ class SectionedTableView: TableView, NSTableViewDelegate, NSTableViewDataSource 
     }
     
     fileprivate func registerForScrollingNotification(clipView: NSClipView) {
-        NotificationCenter.addObserverOnMainThread(self, selector: #selector(boundsDidChange(_:)), name: Notification.Name.NSViewBoundsDidChange, object: clipView)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(boundsDidChange(_:)), name: NSView.boundsDidChangeNotification, object: clipView)
     }
     
     fileprivate func unregisterForScrollingNotification(clipView: NSClipView) {
-        NotificationCenter.removeObserverOnMainThread(self, name: Notification.Name.NSViewBoundsDidChange, object: clipView)
+        NotificationCenter.removeObserverOnMainThread(self, name: NSView.boundsDidChangeNotification, object: clipView)
     }
     
     @objc fileprivate func boundsDidChange(_ notification: Notification) {
-        let locationInScreen = NSEvent.mouseLocation()
+        let locationInScreen = NSEvent.mouseLocation
         if let locationInWindow = self.window?.convertFromScreen(NSRect(origin: locationInScreen, size: CGSize(width: 1, height: 1))) {
             let locationInSelf = self.convert(locationInWindow.origin, from: nil)
             let hoverRow = hoverRowForPoint(locationInSelf)
@@ -526,14 +526,15 @@ class SectionedTableView: TableView, NSTableViewDelegate, NSTableViewDataSource 
     
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
         let item = NSPasteboardItem()
-        item.setString(String(row), forType: "balance.row")
+        item.setString(String(row), forType: NSPasteboard.PasteboardType(rawValue: "balance.row"))
         return item
     }
     
     fileprivate func indexFromDraggingInfo(_ info: NSDraggingInfo) -> TableIndex? {
         var returnRow: Int?
-        info.enumerateDraggingItems(options: [], for: self, classes: [NSPasteboardItem.self], searchOptions: [:]) {
-            if let item = $0.0.item as? NSPasteboardItem, let rowString = item.string(forType: "balance.row"), let row = Int(rowString) {
+        
+        info.enumerateDraggingItems(options: [], for: self, classes: [NSPasteboardItem.self], searchOptions: [:]) { draggingItem, _, _ in
+            if let item = draggingItem.item as? NSPasteboardItem, let rowString = item.string(forType: NSPasteboard.PasteboardType(rawValue: "balance.row")), let row = Int(rowString) {
                 returnRow = row
             }
         }
@@ -571,7 +572,7 @@ class SectionedTableView: TableView, NSTableViewDelegate, NSTableViewDataSource 
         }
     }
     
-    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableViewDropOperation) -> NSDragOperation {
+    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
         if dropOperation == .above, let customDelegate = customDelegate {
             if let fromIndex = indexFromDraggingInfo(info) {
                 // Because we need to allow dragging to the end of the table (i.e. one row past the end),
@@ -601,7 +602,7 @@ class SectionedTableView: TableView, NSTableViewDelegate, NSTableViewDataSource 
         return NSDragOperation()
     }
     
-    func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableViewDropOperation) -> Bool {
+    func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         if let customDelegate = customDelegate {
             if let fromIndex = indexFromDraggingInfo(info) {
                 // Because we need to allow dragging to the end of the table (i.e. one row past the end),

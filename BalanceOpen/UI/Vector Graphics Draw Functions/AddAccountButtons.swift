@@ -12,7 +12,7 @@ import Cocoa
 struct AddAccountButtons {
     static func drawBoaButton(bounds: NSRect = NSRect(x: 0, y: 0, width: 191, height: 56), original: Bool = true, hover: Bool = false, pressed: Bool = false) {
         //// General Declarations
-        let context = NSGraphicsContext.current()!.cgContext
+        let context = NSGraphicsContext.current!.cgContext
         
         //// Color Declarations
         let highlightGradientColor = NSColor(deviceRed: 1, green: 1, blue: 1, alpha: 0.09)
@@ -55,7 +55,7 @@ struct AddAccountButtons {
             
             ////// bankOfAmericaHighlight Inner Shadow
             NSGraphicsContext.saveGraphicsState()
-            NSRectClip(bankOfAmericaHighlightPath.bounds)
+            bankOfAmericaHighlightPath.bounds.clip()
             context.setShadow(offset: NSSize.zero, blur: 0, color: nil)
             
             context.setAlpha(innerStroke.shadowColor!.alphaComponent)
@@ -106,7 +106,7 @@ struct AddAccountButtons {
             
             ////// bankOfAmericaHighlight 2 Inner Shadow
             NSGraphicsContext.saveGraphicsState()
-            NSRectClip(bankOfAmericaHighlight2Path.bounds)
+            bankOfAmericaHighlight2Path.bounds.clip()
             context.setShadow(offset: NSSize.zero, blur: 0, color: nil)
             
             context.setAlpha(innerStroke.shadowColor!.alphaComponent)
@@ -156,7 +156,7 @@ struct AddAccountButtons {
             
             ////// bankOfAmericaHighlight 3 Inner Shadow
             NSGraphicsContext.saveGraphicsState()
-            NSRectClip(bankOfAmericaHighlight3Path.bounds)
+            bankOfAmericaHighlight3Path.bounds.clip()
             context.setShadow(offset: NSSize.zero, blur: 0, color: nil)
             
             context.setAlpha(innerStroke.shadowColor!.alphaComponent)

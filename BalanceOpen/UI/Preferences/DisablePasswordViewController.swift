@@ -19,7 +19,7 @@ class DisablePasswordViewController: NSViewController {
     let disableButton = Button()
     
     init(completionBlock: (() -> Void)? = nil) {
-        super.init(nibName: nil, bundle: nil)!
+        super.init(nibName: nil, bundle: nil)
         self.completionBlock = completionBlock
     }
     
@@ -85,12 +85,12 @@ class DisablePasswordViewController: NSViewController {
         }
     }
     
-    func dismissSheet() {
+    @objc func dismissSheet() {
         super.dismissViewController(self)
         completionBlock?()
     }
     
-    func disablePassword() {
+    @objc func disablePassword() {
         if currentPasswordField.stringValue == appLock.password {
             appLock.lockEnabled = false
             appLock.password = nil

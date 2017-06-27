@@ -35,7 +35,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     //
     
     init() {
-        super.init(nibName: nil, bundle: nil)!
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -135,7 +135,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         tableView.displayEmptySectionRows = true
         tableView.intercellSpacing = NSZeroSize
         tableView.gridColor = NSColor.clear
-        tableView.gridStyleMask = NSTableViewGridLineStyle()
+        tableView.gridStyleMask = NSTableView.GridLineStyle()
         tableView.selectionHighlightStyle = .none
         
         tableView.reloadData()
@@ -535,10 +535,10 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     }
     
     func tableView(_ tableView: SectionedTableView, rowViewForSection section: Int) -> NSTableRowView? {
-        var row = tableView.make(withIdentifier: "Institution Row", owner: self) as? HoverTableRowView
+        var row = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Institution Row"), owner: self) as? HoverTableRowView
         if row == nil {
             row = HoverTableRowView()
-            row?.identifier = "Institution Row"
+            row?.identifier = NSUserInterfaceItemIdentifier(rawValue: "Institution Row")
             row?.color = CurrentTheme.defaults.cell.backgroundColor
             row?.hoverColor = CurrentTheme.defaults.cell.hoverBackgroundColor
         }
@@ -546,10 +546,10 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     }
     
     func tableView(_ tableView: SectionedTableView, rowViewForRow row: Int, inSection section: Int) -> NSTableRowView? {
-        var row = tableView.make(withIdentifier: "Account Row", owner: self) as? HoverTableRowView
+        var row = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Account Row"), owner: self) as? HoverTableRowView
         if row == nil {
             row = HoverTableRowView()
-            row?.identifier = "Account Row"
+            row?.identifier = NSUserInterfaceItemIdentifier(rawValue: "Account Row")
             row?.color = CurrentTheme.defaults.cell.backgroundColor
             row?.hoverColor = CurrentTheme.defaults.cell.hoverBackgroundColor
         }
@@ -557,10 +557,10 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     }
     
     func tableView(_ tableView: SectionedTableView, viewForSection section: Int) -> NSView? {
-        var cell = tableView.make(withIdentifier: "Group Cell", owner: self) as? AccountsTabGroupCell
+        var cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Group Cell"), owner: self) as? AccountsTabGroupCell
         if cell == nil {
             cell = AccountsTabGroupCell()
-            cell?.identifier = "Group Cell"
+            cell?.identifier = NSUserInterfaceItemIdentifier(rawValue: "Group Cell")
         }
         
         if let institution = viewModel.institution(forSection: section) {
@@ -571,8 +571,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     }
     
     func tableView(_ tableView: SectionedTableView, viewForRow row: Int, inSection section: Int) -> NSView? {
-        let cell = tableView.make(withIdentifier: "Account Cell", owner: self) as? AccountsTabAccountCell ?? AccountsTabAccountCell()
-        cell.identifier = "Account Cell"
+        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Account Cell"), owner: self) as? AccountsTabAccountCell ?? AccountsTabAccountCell()
+        cell.identifier = NSUserInterfaceItemIdentifier(rawValue: "Account Cell")
         
         let index = TableIndex(section: section, row: row)
         cell.index = index
@@ -637,7 +637,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         return NSDragOperation()
     }
     
-    func tableView(_ tableView: SectionedTableView, acceptDropFromIndex fromIndex: TableIndex, toIndex: TableIndex, dropOperation: NSTableViewDropOperation) -> Bool {
+    func tableView(_ tableView: SectionedTableView, acceptDropFromIndex fromIndex: TableIndex, toIndex: TableIndex, dropOperation: NSTableView.DropOperation) -> Bool {
         if fromIndex.row == -1 {
             // Moving a section
             var keys = viewModel.data.keys
