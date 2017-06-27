@@ -6,6 +6,7 @@
 //  Copyright © 2017 Balanced Software, Inc. All rights reserved.
 //
 
+#import <CommonCrypto/CommonHMAC.h>
 #import <Sparkle/Sparkle.h>
 #import "FMDatabasePoolAdditions.h"
 #import "CCNStatusItem.h"
