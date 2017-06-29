@@ -6,7 +6,6 @@ Balance Open: A GPL3-licensed macOS menu bar app for all the world’s currencie
 ==========================
 
 [![Swift Version][swift-image]][swift-url]
-[![Build Status][travis-image]][travis-url]
 [![License][license-image]][license-url]
 
 ## Installation
