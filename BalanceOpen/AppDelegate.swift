@@ -53,6 +53,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Create a singleton reference
         AppDelegate.sharedInstance = self
         
+        
         registerForNotifications()
     }
     
@@ -132,7 +133,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     }
                     
                     if let code = code, let state = state {
-                        CoinbaseApi.handleAuthenticationCallback(state: state, code: code) { success, error in
+                        self.coinbaseApi.handleAuthenticationCallback(state: state, code: code) { success, error in
                             if !success {
                                 print("Error handling Coinbase authentication callback: \(String(describing: error))")
                             }

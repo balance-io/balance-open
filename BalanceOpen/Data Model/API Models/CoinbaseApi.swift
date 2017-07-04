@@ -18,13 +18,13 @@ fileprivate let subServerUrl = "https://www.balancemysubscription.com/"
 fileprivate let clientId = "a6e15fbb0c3362b74360895f261fb079672c10eef79dcb72308c974408c5ce43"
 
 // Save random state for current authentication request
-fileprivate var lastState: String? = nil
+fileprivate var lastAuthenticationState: String? = nil
 
 fileprivate let session = URLSession(configuration: .default, delegate: certValidator, delegateQueue: nil)
 
-struct CoinbaseApi {
+class CoinbaseApi {
 
-    static func authenticate() -> Bool {
+    func authenticate() -> Bool {
         let redirectUri = "balancemymoney%3A%2F%2Fcoinbase"
         let responseType = "code"
         let scope = "wallet%3Auser%3Aread,wallet%3Aaccounts%3Aread"
@@ -40,19 +40,25 @@ struct CoinbaseApi {
         }
         
         // Save random state for verification
-        lastState = state
+        self.lastAuthenticationState = state
         return true
     }
     
-    static func handleAuthenticationCallback(state: String, code: String, completion: @escaping SuccessErrorBlock) {
-        guard lastState == state else {
+    func handleAuthenticationCallback(state: String, code: String, completion: @escaping SuccessErrorBlock) {
+        guard self.lastAuthenticationState == state else {
             DispatchQueue.main.async {
                 completion(false, "state does not match saved state")
             }
             return
         }
         
-        lastState = nil
+        self.lastAuthenticationState = nil
+        
+        self.convertAuthenticationCode(code: code, completion: completion)
+    }
+    
+    func convertAuthenticationCode(code: String, completion: @escaping SuccessErrorBlock) {
+        
         let urlString = "\(subServerUrl)coinbase/convertCode"
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
@@ -106,7 +112,7 @@ struct CoinbaseApi {
         task.resume()
     }
     
-    static func refreshAccessToken(institution: Institution, completion: @escaping SuccessErrorBlock) {
+    func refreshAccessToken(institution: Institution, completion: @escaping SuccessErrorBlock) {
         guard let refreshToken = institution.refreshToken else {
             completion(false, "missing refreshToken")
             return
@@ -151,7 +157,7 @@ struct CoinbaseApi {
         task.resume()
     }
     
-    static func updateAccounts(institution: Institution, completion: @escaping SuccessErrorBlock) {
+    func updateAccounts(institution: Institution, completion: @escaping SuccessErrorBlock) {
         guard let accessToken = institution.accessToken else {
             completion(false, "missing access token")
             return
@@ -206,7 +212,7 @@ struct CoinbaseApi {
         task.resume()
     }
     
-    static func processCoinbaseAccounts(_ coinbaseAccounts: [CoinbaseAccount], institution: Institution) {
+    func processCoinbaseAccounts(_ coinbaseAccounts: [CoinbaseAccount], institution: Institution) {
         // Add/update accounts
         for ca in coinbaseAccounts {
             // Calculate the number of decimals

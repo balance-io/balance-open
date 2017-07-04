@@ -12,6 +12,7 @@ let keychain = KeychainManagerFactory()
 let database = Database()
 let log = XCGLogger.default
 let logging = Logging()
+let coinbaseApi = CoinbaseApi()
 let syncManager = SyncManager()
 let defaults = Defaults()
 let appLock = AppLock()
@@ -24,6 +25,7 @@ func initializeSingletons() {
     _ = database
     _ = log
     _ = logging
+    _ = coinbaseApi
     _ = syncManager
     _ = defaults
     _ = appLock

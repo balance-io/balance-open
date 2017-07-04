@@ -12,6 +12,8 @@ typealias SuccessErrorsBlock = (_ success: Bool, _ errors: [Error]?) -> Void
 typealias CanceledBlock = () -> (Bool)
 
 class Syncer {
+    
+    fileprivate let coinbaseApi: CoinbaseApi
     fileprivate(set) var syncing = false
     fileprivate(set) var canceled = false
     
@@ -21,6 +23,11 @@ class Syncer {
         return {
             return self.canceled
         }
+    }
+    
+    init(coinbaseApi: CoinbaseApi = BalanceOpen.coinbaseApi) {
+        
+        self.coinbaseApi = coinbaseApi
     }
     
     func cancel() {
@@ -75,7 +82,7 @@ class Syncer {
                     syncInstitutions(syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
                 } else {
                     // Refresh the token
-                    CoinbaseApi.refreshAccessToken(institution: institution) { success, error in
+                    self.coinbaseApi.refreshAccessToken(institution: institution) { success, error in
                         if success {
                             self.syncAccountsAndTransactions(institution: institution, remainingInstitutions: syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
                         } else {
@@ -103,7 +110,7 @@ class Syncer {
         
         log.debug("Pulling accounts and transactions for \(institution)")
         
-        CoinbaseApi.updateAccounts(institution: institution) { success, error in
+        self.coinbaseApi.updateAccounts(institution: institution) { success, error in
             if !success {
                 syncingSuccess = false
                 if let error = error {
@@ -120,6 +127,8 @@ class Syncer {
             
             self.syncInstitutions(remainingInstitutions, beginDate: beginDate, success: syncingSuccess, errors: syncingErrors)
         }
+        
+        BTCCApi.getAccountInfo()
     }
     
     fileprivate func cancelSync(errors: [Error]) {

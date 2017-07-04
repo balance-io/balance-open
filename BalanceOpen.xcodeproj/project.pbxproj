@@ -143,6 +143,8 @@
 		53FA53011EF3FA93002990B0 /* InstitutionHeaderBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA52FF1EF3FA93002990B0 /* InstitutionHeaderBars.swift */; };
 		53FA53041EF3FAFE002990B0 /* InstitutionDefaultBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA53021EF3FAFE002990B0 /* InstitutionDefaultBar.swift */; };
 		53FA53051EF3FAFE002990B0 /* InstitutionHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */; };
+		F71921721F067FEA00AE821C /* BTCCAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71921711F067FEA00AE821C /* BTCCAccount.swift */; };
+		F790A3A61F023A27006DC204 /* exampleBTCCResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = F790A3A51F023A27006DC204 /* exampleBTCCResponse.json */; };
 		F798C5C71EF52EC60054492D /* BTCCApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F798C5C61EF52EC60054492D /* BTCCApi.swift */; };
 /* End PBXBuildFile section */
 
@@ -331,6 +333,8 @@
 		53FA52FF1EF3FA93002990B0 /* InstitutionHeaderBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionHeaderBars.swift; sourceTree = "<group>"; };
 		53FA53021EF3FAFE002990B0 /* InstitutionDefaultBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionDefaultBar.swift; sourceTree = "<group>"; };
 		53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionHeaders.swift; sourceTree = "<group>"; };
+		F71921711F067FEA00AE821C /* BTCCAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTCCAccount.swift; sourceTree = "<group>"; };
+		F790A3A51F023A27006DC204 /* exampleBTCCResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = exampleBTCCResponse.json; sourceTree = "<group>"; };
 		F798C5C61EF52EC60054492D /* BTCCApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTCCApi.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -707,7 +711,9 @@
 			children = (
 				53946FA21EEF0B0B00E921C3 /* CoinbaseAccount.swift */,
 				53946FA41EF0035200E921C3 /* CoinbaseApi.swift */,
+				F71921711F067FEA00AE821C /* BTCCAccount.swift */,
 				F798C5C61EF52EC60054492D /* BTCCApi.swift */,
+				F790A3A51F023A27006DC204 /* exampleBTCCResponse.json */,
 			);
 			path = "API Models";
 			sourceTree = "<group>";
@@ -840,6 +846,7 @@
 			files = (
 				532122C91EEAF09700F4812A /* Assets.xcassets in Resources */,
 				5321222A1EEAD15D00F4812A /* Main.storyboard in Resources */,
+				F790A3A61F023A27006DC204 /* exampleBTCCResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -948,6 +955,7 @@
 				53946FA51EF0035200E921C3 /* CoinbaseApi.swift in Sources */,
 				53F8E2EA1EF1B6E90071FC73 /* Currency.swift in Sources */,
 				532122CD1EEAFF6300F4812A /* NSWindow.swift in Sources */,
+				F71921721F067FEA00AE821C /* BTCCAccount.swift in Sources */,
 				532122AC1EEAE56400F4812A /* Shortcut.swift in Sources */,
 				538A2C6D1EFD27C700C542C4 /* PFMoveApplication.m in Sources */,
 				5321221C1EEAC90C00F4812A /* DefaultsStorage.swift in Sources */,
