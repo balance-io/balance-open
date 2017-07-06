@@ -12,7 +12,6 @@
 		2D4450151EF3A4500023F63C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D4450141EF3A4500023F63C /* Assets.xcassets */; };
 		2D4450181EF3A4500023F63C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D4450161EF3A4500023F63C /* Main.storyboard */; };
 		2D44503A1EF3A53E0023F63C /* AutoLaunchBalanceHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D4450091EF3A4500023F63C /* AutoLaunchBalanceHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		2D8D54481EEB12360060FCCF /* BalanceOpenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D54471EEB12360060FCCF /* BalanceOpenTests.swift */; };
 		2DA7FAB91EF2637700CD8CED /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; };
 		530DD1891EF458A400C0DDD3 /* FMDatabasePoolAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 530DD1881EF458A400C0DDD3 /* FMDatabasePoolAdditions.m */; };
 		532121B61EEAC2BF00F4812A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121B51EEAC2BF00F4812A /* AppDelegate.swift */; };
@@ -145,16 +144,6 @@
 		53FA53051EF3FAFE002990B0 /* InstitutionHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		2D8D544A1EEB12360060FCCF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 532121AA1EEAC2BF00F4812A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 532121B11EEAC2BF00F4812A;
-			remoteInfo = BalanceForBlockchain;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		2D4450391EF3A4DF0023F63C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -196,9 +185,6 @@
 		2D4450141EF3A4500023F63C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D4450171EF3A4500023F63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2D4450191EF3A4500023F63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2D8D54451EEB12360060FCCF /* BalanceOpenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceOpenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D8D54471EEB12360060FCCF /* BalanceOpenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceOpenTests.swift; sourceTree = "<group>"; };
-		2D8D54491EEB12360060FCCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DA7FAB81EF2637700CD8CED /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		530DD1871EF458A400C0DDD3 /* FMDatabasePoolAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePoolAdditions.h; sourceTree = "<group>"; };
 		530DD1881EF458A400C0DDD3 /* FMDatabasePoolAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePoolAdditions.m; sourceTree = "<group>"; };
@@ -340,13 +326,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2D8D54421EEB12360060FCCF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		532121AF1EEAC2BF00F4812A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -398,22 +377,11 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		2D8D54461EEB12360060FCCF /* BalanceOpenTests */ = {
-			isa = PBXGroup;
-			children = (
-				2D8D54471EEB12360060FCCF /* BalanceOpenTests.swift */,
-				2D8D54491EEB12360060FCCF /* Info.plist */,
-			);
-			name = BalanceOpenTests;
-			path = BalanceForBlockchainTests;
-			sourceTree = "<group>";
-		};
 		532121A91EEAC2BF00F4812A = {
 			isa = PBXGroup;
 			children = (
 				532121B41EEAC2BF00F4812A /* BalanceOpen */,
 				2D44500A1EF3A4500023F63C /* AutoLaunchBalanceHelper */,
-				2D8D54461EEB12360060FCCF /* BalanceOpenTests */,
 				532121B31EEAC2BF00F4812A /* Products */,
 				538A2C661EFD278000C542C4 /* Frameworks */,
 			);
@@ -423,7 +391,6 @@
 			isa = PBXGroup;
 			children = (
 				532121B21EEAC2BF00F4812A /* BalanceOpen.app */,
-				2D8D54451EEB12360060FCCF /* BalanceOpenTests.xctest */,
 				2D4450091EF3A4500023F63C /* AutoLaunchBalanceHelper.app */,
 			);
 			name = Products;
@@ -730,24 +697,6 @@
 			productReference = 2D4450091EF3A4500023F63C /* AutoLaunchBalanceHelper.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D8D54441EEB12360060FCCF /* BalanceOpenTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2D8D544E1EEB12360060FCCF /* Build configuration list for PBXNativeTarget "BalanceOpenTests" */;
-			buildPhases = (
-				2D8D54411EEB12360060FCCF /* Sources */,
-				2D8D54421EEB12360060FCCF /* Frameworks */,
-				2D8D54431EEB12360060FCCF /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2D8D544B1EEB12360060FCCF /* PBXTargetDependency */,
-			);
-			name = BalanceOpenTests;
-			productName = BalanceForBlockchainTests;
-			productReference = 2D8D54451EEB12360060FCCF /* BalanceOpenTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		532121B11EEAC2BF00F4812A /* BalanceOpen */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 532121C11EEAC2BF00F4812A /* Build configuration list for PBXNativeTarget "BalanceOpen" */;
@@ -781,12 +730,6 @@
 						DevelopmentTeam = Q4G66XSS36;
 						ProvisioningStyle = Automatic;
 					};
-					2D8D54441EEB12360060FCCF = {
-						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = Q4G66XSS36;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 532121B11EEAC2BF00F4812A;
-					};
 					532121B11EEAC2BF00F4812A = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = Q4G66XSS36;
@@ -808,7 +751,6 @@
 			projectRoot = "";
 			targets = (
 				532121B11EEAC2BF00F4812A /* BalanceOpen */,
-				2D8D54441EEB12360060FCCF /* BalanceOpenTests */,
 				2D4450081EF3A4500023F63C /* AutoLaunchBalanceHelper */,
 			);
 		};
@@ -821,13 +763,6 @@
 			files = (
 				2D4450151EF3A4500023F63C /* Assets.xcassets in Resources */,
 				2D4450181EF3A4500023F63C /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2D8D54431EEB12360060FCCF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -849,14 +784,6 @@
 			files = (
 				2D4450101EF3A4500023F63C /* main.m in Sources */,
 				2D44500D1EF3A4500023F63C /* AppDelegate.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2D8D54411EEB12360060FCCF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2D8D54481EEB12360060FCCF /* BalanceOpenTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -967,14 +894,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		2D8D544B1EEB12360060FCCF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 532121B11EEAC2BF00F4812A /* BalanceOpen */;
-			targetProxy = 2D8D544A1EEB12360060FCCF /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
 		2D4450161EF3A4500023F63C /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -1026,36 +945,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		2D8D544C1EEB12360060FCCF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = Q4G66XSS36;
-				INFOPLIST_FILE = BalanceForBlockchainTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = balance.money.BalanceForBlockchainTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BalanceOpen.app/Contents/MacOS/BalanceOpen";
-			};
-			name = Debug;
-		};
-		2D8D544D1EEB12360060FCCF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = Q4G66XSS36;
-				INFOPLIST_FILE = BalanceForBlockchainTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = balance.money.BalanceForBlockchainTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BalanceOpen.app/Contents/MacOS/BalanceOpen";
 			};
 			name = Release;
 		};
@@ -1217,15 +1106,6 @@
 			buildConfigurations = (
 				2D4450301EF3A4510023F63C /* Debug */,
 				2D4450311EF3A4510023F63C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2D8D544E1EEB12360060FCCF /* Build configuration list for PBXNativeTarget "BalanceOpenTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2D8D544C1EEB12360060FCCF /* Debug */,
-				2D8D544D1EEB12360060FCCF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
