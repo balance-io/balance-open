@@ -6,10 +6,8 @@
 //  Copyright © 2017 Balanced Software, Inc. All rights reserved.
 //
 
-#import <Sparkle/Sparkle.h>
-#import "FMDatabasePoolAdditions.h"
+#import "FMDB.h"
 #import "CCNStatusItem.h"
 #import "CertValidator.h"
 #import "ObjC.h"
-#import <LetsMove/LetsMove.h>
-#import "PFMoveApplication.h"
+#import <CommonCrypto/CommonCrypto.h>
