@@ -33,6 +33,7 @@ enum Currency: String {
         case .eur: return "€"
         case .gbp: return "£"
         case .btc: return "Ƀ"
+        case .eth: return "Ξ"
         default: return self.rawValue + " "
         }
     }
