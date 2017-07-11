@@ -3,9 +3,15 @@
 
   ],
   "commitish" : "2.3.6",
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
   "Mac" : [
     {
-      "hash" : "f1e80a8e5124c8737b02ea8515e110c27f70eeb148e78120b403be37fa9bfa1e",
+      "hash" : "e59a5bb961f53648542d704f29ee025a4610721eaeb38e3040747e8d1cb3b0cc",
       "name" : "MASShortcut"
     }
   ]
