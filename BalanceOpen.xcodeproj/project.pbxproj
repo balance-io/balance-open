@@ -191,6 +191,8 @@
 		2D4450171EF3A4500023F63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2D4450191EF3A4500023F63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D6D8AB51F38D987000B372C /* TestingAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
+		2D8147521F1E58C500119FE3 /* PoloniexAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAPI.swift; sourceTree = "<group>"; };
+		2D8147531F1E58CE00119FE3 /* NSURLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSURLRequest.swift; sourceTree = "<group>"; };
 		2DA7FAB81EF2637700CD8CED /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		2DF76CDD1F212F6F00EE18BB /* BalanceOpenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceOpenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DF76CDF1F212F6F00EE18BB /* CoinbaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseTests.swift; sourceTree = "<group>"; };
@@ -546,6 +548,7 @@
 				532122CC1EEAFF6300F4812A /* NSWindow.swift */,
 				5321226C1EEAD7DD00F4812A /* NotificationCenter.swift */,
 				532121FA1EEAC75A00F4812A /* String.swift */,
+				2D8147531F1E58CE00119FE3 /* NSURLRequest.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -692,6 +695,7 @@
 			isa = PBXGroup;
 			children = (
 				53946FA21EEF0B0B00E921C3 /* CoinbaseAccount.swift */,
+				2D8147521F1E58C500119FE3 /* PoloniexAPI.swift */,
 				53946FA41EF0035200E921C3 /* CoinbaseApi.swift */,
 			);
 			path = "API Models";
