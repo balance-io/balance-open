@@ -16,7 +16,7 @@ extension InstitutionHeaderBars {
 
     public class func drawDefaultHeader(frame: NSRect = NSMakeRect(0, 0, 400, 28), backgroundColor: NSColor, foregroundColor: NSColor, font: NSFont, name: String) {
         //// General Declarations
-        let context = unsafeBitCast(NSGraphicsContext.current()!.graphicsPort, to: CGContext.self)
+        let context = unsafeBitCast(NSGraphicsContext.current!.graphicsPort, to: CGContext.self)
 
         //// Color Declarations
         let black = NSColor(deviceRed: 0, green: 0, blue: 0, alpha: 1)
@@ -103,18 +103,18 @@ extension InstitutionHeaderBars {
                                   frame.minY + floor(frame.height * 0.21429 + 0.5),
                                   floor(frame.width * 0.95000 + 0.5) - floor(frame.width * 0.05000 + 0.5),
                                   floor(frame.height * 0.87500) - floor(frame.height * 0.21429 + 0.5) + 1.0)
-        let textStyle = NSParagraphStyle.default().mutableCopy() as! NSMutableParagraphStyle
+        let textStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
         textStyle.alignment = .center
         textStyle.lineBreakMode = .byTruncatingTail
         
-        let textFontAttributes = [NSFontAttributeName: font,
-                                  NSForegroundColorAttributeName: foregroundColor,
-                                  NSParagraphStyleAttributeName: textStyle]
+        let textFontAttributes = [NSAttributedStringKey.font: font,
+                                  NSAttributedStringKey.foregroundColor: foregroundColor,
+                                  NSAttributedStringKey.paragraphStyle: textStyle]
         
-        let textTextHeight: CGFloat = name.boundingRect(with: NSMakeSize(textRect.width, CGFloat.infinity), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: textFontAttributes).size.height
+        let textTextHeight: CGFloat = name.boundingRect(with: NSMakeSize(textRect.width, CGFloat.infinity), options: NSString.DrawingOptions.usesLineFragmentOrigin, attributes: textFontAttributes).size.height
         let textTextRect: NSRect = NSMakeRect(textRect.minX, textRect.minY + (textRect.height - textTextHeight) / 2, textRect.width, textTextHeight)
         NSGraphicsContext.saveGraphicsState()
-        NSRectClip(textRect)
+        textRect.clip()
         name.draw(in: NSOffsetRect(textTextRect, 0, 0), withAttributes: textFontAttributes)
         NSGraphicsContext.restoreGraphicsState()
     }

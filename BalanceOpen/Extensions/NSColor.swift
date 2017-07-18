@@ -21,7 +21,7 @@ extension NSColor {
     // Adapted from this example: https://developer.apple.com/library/mac/qa/qa1576/_index.html
     var hexString: String? {
         // Convert the NSColor to the RGB color space before we can access its components
-        guard let rgbColor = self.usingColorSpaceName(NSCalibratedRGBColorSpace) else {
+        guard let rgbColor = self.usingColorSpaceName(NSColorSpaceName.calibratedRGB) else {
             return nil
         }
         
@@ -72,7 +72,7 @@ extension NSColor {
     
     // Adapted from http://stackoverflow.com/a/11598127/299262
     var lighterColor: NSColor {
-        guard let rgbColor = self.usingColorSpaceName(NSCalibratedRGBColorSpace) else {
+        guard let rgbColor = self.usingColorSpaceName(NSColorSpaceName.calibratedRGB) else {
             return self
         }
             
@@ -82,7 +82,7 @@ extension NSColor {
     }
     
     var darkerColor: NSColor {
-        guard let rgbColor = self.usingColorSpaceName(NSCalibratedRGBColorSpace) else {
+        guard let rgbColor = self.usingColorSpaceName(NSColorSpaceName.calibratedRGB) else {
             return self
         }
         

@@ -23,7 +23,7 @@ class SetPasswordViewController: NSViewController {
     let createButton = Button()
     
     init(completionBlock: (() -> Void)? = nil) {
-        super.init(nibName: nil, bundle: nil)!
+        super.init(nibName: nil, bundle: nil)
         self.completionBlock = completionBlock
     }
     
@@ -131,12 +131,12 @@ class SetPasswordViewController: NSViewController {
         }
     }
     
-    func dismissSheet() {
+    @objc func dismissSheet() {
         super.dismissViewController(self)
         completionBlock?()
     }
     
-    func createPassword() {
+    @objc func createPassword() {
         // TODO: Get the alerts to pop up over the main view
         if passwordField.stringValue == "" {
             let alert = NSAlert()

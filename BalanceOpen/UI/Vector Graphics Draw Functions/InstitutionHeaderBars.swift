@@ -17,9 +17,9 @@ open class InstitutionHeaderBars : NSObject {
 
     //// Drawing Methods
 
-    open dynamic class func drawCoinbase(frame: NSRect = NSRect(x: 0, y: 0, width: 400, height: 28)) {
+    @objc open dynamic class func drawCoinbase(frame: NSRect = NSRect(x: 0, y: 0, width: 400, height: 28)) {
         //// General Declarations
-        let context = NSGraphicsContext.current()!.cgContext
+        let context = NSGraphicsContext.current!.cgContext
         // This non-generic function dramatically improves compilation times of complex expressions.
         func fastFloor(_ x: CGFloat) -> CGFloat { return floor(x) }
 
@@ -228,9 +228,9 @@ open class InstitutionHeaderBars : NSObject {
         coinbaseLogoPath.fill()
     }
 
-    open dynamic class func drawGdax(frame: NSRect = NSRect(x: 0, y: 0, width: 400, height: 28)) {
+    @objc open dynamic class func drawGdax(frame: NSRect = NSRect(x: 0, y: 0, width: 400, height: 28)) {
         //// General Declarations
-        let context = NSGraphicsContext.current()!.cgContext
+        let context = NSGraphicsContext.current!.cgContext
         // This non-generic function dramatically improves compilation times of complex expressions.
         func fastFloor(_ x: CGFloat) -> CGFloat { return floor(x) }
 
@@ -449,9 +449,9 @@ open class InstitutionHeaderBars : NSObject {
         shapePath.fill()
     }
 
-    open dynamic class func drawPoloniex(frame: NSRect = NSRect(x: 0, y: 0, width: 400, height: 28)) {
+    @objc open dynamic class func drawPoloniex(frame: NSRect = NSRect(x: 0, y: 0, width: 400, height: 28)) {
         //// General Declarations
-        let context = NSGraphicsContext.current()!.cgContext
+        let context = NSGraphicsContext.current!.cgContext
         // This non-generic function dramatically improves compilation times of complex expressions.
         func fastFloor(_ x: CGFloat) -> CGFloat { return floor(x) }
 
@@ -718,9 +718,9 @@ open class InstitutionHeaderBars : NSObject {
         combinedShapePath.fill()
     }
 
-    open dynamic class func drawBitfinex(frame: NSRect = NSRect(x: 0, y: 0, width: 400, height: 28)) {
+    @objc open dynamic class func drawBitfinex(frame: NSRect = NSRect(x: 0, y: 0, width: 400, height: 28)) {
         //// General Declarations
-        let context = NSGraphicsContext.current()!.cgContext
+        let context = NSGraphicsContext.current!.cgContext
         // This non-generic function dramatically improves compilation times of complex expressions.
         func fastFloor(_ x: CGFloat) -> CGFloat { return floor(x) }
 

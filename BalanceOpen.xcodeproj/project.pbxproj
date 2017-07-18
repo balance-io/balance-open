@@ -106,19 +106,12 @@
 		532122D31EEB05A800F4812A /* AddAccountButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122D21EEB05A800F4812A /* AddAccountButtons.swift */; };
 		5353D3421EF4096D003EE2F5 /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D33A1EF4096D003EE2F5 /* Locksmith.framework */; };
 		5353D3431EF4096D003EE2F5 /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D33B1EF4096D003EE2F5 /* MASShortcut.framework */; };
-		5353D3441EF4096D003EE2F5 /* NSDateTimeAgo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D33C1EF4096D003EE2F5 /* NSDateTimeAgo.framework */; };
 		5353D3451EF4096D003EE2F5 /* ObjcExceptionBridging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D33D1EF4096D003EE2F5 /* ObjcExceptionBridging.framework */; };
-		5353D3461EF4096D003EE2F5 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D33E1EF4096D003EE2F5 /* Reachability.framework */; };
-		5353D3471EF4096D003EE2F5 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D33F1EF4096D003EE2F5 /* SnapKit.framework */; };
-		5353D3481EF4096D003EE2F5 /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D3401EF4096D003EE2F5 /* TrustKit.framework */; };
 		5353D3491EF4096D003EE2F5 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D3411EF4096D003EE2F5 /* XCGLogger.framework */; };
-		5353D34A1EF409F3003EE2F5 /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D33A1EF4096D003EE2F5 /* Locksmith.framework */; };
 		5353D34B1EF409F3003EE2F5 /* Locksmith.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D33A1EF4096D003EE2F5 /* Locksmith.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		5353D34C1EF409F3003EE2F5 /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D33B1EF4096D003EE2F5 /* MASShortcut.framework */; };
 		5353D34D1EF409F3003EE2F5 /* MASShortcut.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D33B1EF4096D003EE2F5 /* MASShortcut.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5353D34E1EF409F3003EE2F5 /* NSDateTimeAgo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D33C1EF4096D003EE2F5 /* NSDateTimeAgo.framework */; };
 		5353D34F1EF409F3003EE2F5 /* NSDateTimeAgo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D33C1EF4096D003EE2F5 /* NSDateTimeAgo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		5353D3501EF409F3003EE2F5 /* ObjcExceptionBridging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D33D1EF4096D003EE2F5 /* ObjcExceptionBridging.framework */; };
 		5353D3511EF409F3003EE2F5 /* ObjcExceptionBridging.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D33D1EF4096D003EE2F5 /* ObjcExceptionBridging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5353D3521EF409F3003EE2F5 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D33E1EF4096D003EE2F5 /* Reachability.framework */; };
 		5353D3531EF409F3003EE2F5 /* Reachability.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D33E1EF4096D003EE2F5 /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -126,7 +119,6 @@
 		5353D3551EF409F3003EE2F5 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D33F1EF4096D003EE2F5 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5353D3561EF409F3003EE2F5 /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D3401EF4096D003EE2F5 /* TrustKit.framework */; };
 		5353D3571EF409F3003EE2F5 /* TrustKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D3401EF4096D003EE2F5 /* TrustKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		5353D3581EF409F3003EE2F5 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D3411EF4096D003EE2F5 /* XCGLogger.framework */; };
 		5353D3591EF409F3003EE2F5 /* XCGLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5353D3411EF4096D003EE2F5 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		538A2C651EFD277700C542C4 /* LetsMove.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538A2C641EFD277700C542C4 /* LetsMove.framework */; };
 		538A2C681EFD278000C542C4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538A2C671EFD278000C542C4 /* Security.framework */; };
@@ -336,20 +328,12 @@
 				532121E31EEAC4E300F4812A /* libsqlcipher.a in Frameworks */,
 				5353D3451EF4096D003EE2F5 /* ObjcExceptionBridging.framework in Frameworks */,
 				5353D3431EF4096D003EE2F5 /* MASShortcut.framework in Frameworks */,
-				5353D3441EF4096D003EE2F5 /* NSDateTimeAgo.framework in Frameworks */,
-				5353D3501EF409F3003EE2F5 /* ObjcExceptionBridging.framework in Frameworks */,
 				5353D3541EF409F3003EE2F5 /* SnapKit.framework in Frameworks */,
 				5353D3521EF409F3003EE2F5 /* Reachability.framework in Frameworks */,
 				5353D3491EF4096D003EE2F5 /* XCGLogger.framework in Frameworks */,
-				5353D34C1EF409F3003EE2F5 /* MASShortcut.framework in Frameworks */,
 				5353D3561EF409F3003EE2F5 /* TrustKit.framework in Frameworks */,
 				2DA7FAB91EF2637700CD8CED /* Sparkle.framework in Frameworks */,
 				538A2C651EFD277700C542C4 /* LetsMove.framework in Frameworks */,
-				5353D3461EF4096D003EE2F5 /* Reachability.framework in Frameworks */,
-				5353D34A1EF409F3003EE2F5 /* Locksmith.framework in Frameworks */,
-				5353D3481EF4096D003EE2F5 /* TrustKit.framework in Frameworks */,
-				5353D3471EF4096D003EE2F5 /* SnapKit.framework in Frameworks */,
-				5353D3581EF409F3003EE2F5 /* XCGLogger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -722,7 +706,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Balanced Software, Inc.";
 				TargetAttributes = {
 					2D4450081EF3A4500023F63C = {
@@ -730,9 +714,17 @@
 						DevelopmentTeam = Q4G66XSS36;
 						ProvisioningStyle = Automatic;
 					};
+					2D8D54441EEB12360060FCCF = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = Q4G66XSS36;
+						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 532121B11EEAC2BF00F4812A;
+					};
 					532121B11EEAC2BF00F4812A = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = Q4G66XSS36;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -948,6 +940,36 @@
 			};
 			name = Release;
 		};
+		2D8D544C1EEB12360060FCCF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = Q4G66XSS36;
+				INFOPLIST_FILE = BalanceForBlockchainTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = balance.money.BalanceForBlockchainTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BalanceOpen.app/Contents/MacOS/BalanceOpen";
+			};
+			name = Debug;
+		};
+		2D8D544D1EEB12360060FCCF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = Q4G66XSS36;
+				INFOPLIST_FILE = BalanceForBlockchainTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = balance.money.BalanceForBlockchainTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BalanceOpen.app/Contents/MacOS/BalanceOpen";
+			};
+			name = Release;
+		};
 		532121BF1EEAC2BF00F4812A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -958,7 +980,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -966,7 +990,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1009,7 +1037,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1017,7 +1047,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1066,7 +1100,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BalanceOpen/Supporting Files/Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1094,7 +1128,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BalanceOpen/Supporting Files/Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

@@ -31,7 +31,7 @@ class PopoverViewController: NSViewController {
     //
     
     init() {
-        super.init(nibName: nil, bundle: nil)!
+        super.init(nibName: nil, bundle: nil)
 
         registerForNotifications()
     }
@@ -138,7 +138,7 @@ class PopoverViewController: NSViewController {
     }
     
     // Reload all view controllers to use new theme
-    func reloadPopoverController() {
+    @objc func reloadPopoverController() {
         self.view.window?.appearance = CurrentTheme.defaults.appearance
         AppDelegate.sharedInstance.statusItem.windowConfiguration.backgroundColor = CurrentTheme.defaults.backgroundColor
         AppDelegate.sharedInstance.statusItem.drawBorder = CurrentTheme.type == .light
@@ -247,7 +247,7 @@ class PopoverViewController: NSViewController {
         DistributedNotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadPopoverController), name: Notification.Name("AppleInterfaceThemeChangedNotification"))
         
         // App locking
-        NSWorkspace.shared().notificationCenter.addObserver(self, selector: #selector(screenDidSleep), name: Notification.Name.NSWorkspaceScreensDidSleep, object: nil)
+        NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(screenDidSleep), name: NSWorkspace.screensDidSleepNotification, object: nil)
         DistributedNotificationCenter.addObserverOnMainThread(self, selector: #selector(screenDidLock), name: Notification.Name("com.apple.screensaver.didstart"))
         DistributedNotificationCenter.addObserverOnMainThread(self, selector: #selector(screenDidLock), name: Notification.Name("com.apple.screenIsLocked"))
     }
@@ -262,7 +262,7 @@ class PopoverViewController: NSViewController {
         
         DistributedNotificationCenter.removeObserverOnMainThread(self, name: Notification.Name("AppleInterfaceThemeChangedNotification"))
         
-        NSWorkspace.shared().notificationCenter.removeObserver(self, name: Notification.Name.NSWorkspaceScreensDidSleep, object: nil)
+        NSWorkspace.shared.notificationCenter.removeObserver(self, name: NSWorkspace.screensDidSleepNotification, object: nil)
         DistributedNotificationCenter.removeObserverOnMainThread(self, name: Notification.Name("com.apple.screensaver.didstart"))
         DistributedNotificationCenter.removeObserverOnMainThread(self, name: Notification.Name("com.apple.screenIsLocked"))
     }

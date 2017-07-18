@@ -56,6 +56,6 @@ class HoverTableRowView: TableRowView {
     // Override this because NSTableView will wipe out any backgroundColor we set on init. So we'll do it our way. Fucking AppKit...
     override func drawBackground(in dirtyRect: NSRect) {
         currentColor.setFill()
-        NSRectFill(dirtyRect)
+        dirtyRect.fill()
     }
 }

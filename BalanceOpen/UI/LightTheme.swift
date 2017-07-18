@@ -13,10 +13,10 @@ struct LightTheme: Theme {
     var type: ThemeType = .light
     
     var defaults: DefaultsTheme {
-        let appearance = NSAppearance(named: NSAppearanceNameVibrantLight) ?? NSAppearance.current()
+        let appearance = NSAppearance(named: NSAppearance.Name.vibrantLight)!
         let backgroundColor = NSColor(deviceRedInt: 232, green: 234, blue: 237)
         let foregroundColor = NSColor(deviceRedInt: 19, green: 22, blue: 25)
-        let material = NSVisualEffectMaterial.light
+        let material = NSVisualEffectView.Material.light
         let size = CGSize(width: 400, height: 600)
         let noAccountsSize = CGSize(width: 400, height: 370)
         let touchBarFont = NSFont.systemFont(ofSize: 15)
@@ -54,7 +54,7 @@ struct LightTheme: Theme {
         let footer = TabsTheme.FooterTheme(
             backgroundColor: NSColor(deviceRedInt: 255, green: 255, blue: 255),
             textColor: NSColor(deviceRedInt: 107, green: 120, blue: 132),
-            preferencesIcon: NSImage(named: "gear-icon-light")!,
+            preferencesIcon: NSImage(named: NSImage.Name(rawValue: "gear-icon-light"))!,
             syncButtonColor: NSColor(deviceRedInt: 107, green: 120, blue: 132)
         )
         

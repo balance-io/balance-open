@@ -2,7 +2,7 @@ import Cocoa
 
 class HoverButton: NSButton {
     
-    typealias DrawingBlock = (Void) -> (Void)
+    typealias DrawingBlock = () -> (Void)
     
     fileprivate enum State {
         case original
@@ -52,7 +52,7 @@ class HoverButton: NSButton {
     
     func commonInit() {
         // set tracking area
-        let opts: NSTrackingAreaOptions = ([.mouseEnteredAndExited, .activeAlways])
+        let opts: NSTrackingArea.Options = ([.mouseEnteredAndExited, .activeAlways])
         trackingArea = NSTrackingArea(rect: bounds, options: opts, owner: self, userInfo: nil)
         self.addTrackingArea(trackingArea)
     }
@@ -113,7 +113,7 @@ class HoverButton: NSButton {
         
         // Set the correct button state when we get added to a window
         if let window = self.window {
-            let locationInScreen = NSEvent.mouseLocation()
+            let locationInScreen = NSEvent.mouseLocation
             let locationInWindow = window.convertFromScreen(NSRect(origin: locationInScreen, size: CGSize(width: 1, height: 1))).origin
             let pointInButton = self.convert(locationInWindow, from: nil)
             let isInsideButton = NSPointInRect(pointInButton, self.bounds)

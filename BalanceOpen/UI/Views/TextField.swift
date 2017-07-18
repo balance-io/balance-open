@@ -65,8 +65,9 @@ class TextField: NSTextField {
         }
     }
     
-    override class func cellClass() -> AnyClass? {
-        return TextFieldCell.self
+    override class var cellClass: AnyClass? {
+        get { return TextFieldCell.self }
+        set { }
     }
     
     override func becomeFirstResponder() -> Bool {
@@ -89,7 +90,7 @@ fileprivate class TextFieldCell: NSTextFieldCell {
         
         let titleRect = self.titleRect(forBounds: cellFrame)
         let frame = self.isEditable ? paddedRect(cellFrame) : titleRect
-        if let context = NSGraphicsContext.current()?.cgContext {
+        if let context = NSGraphicsContext.current?.cgContext {
             // Save context state
             context.saveGState()
             
@@ -120,7 +121,7 @@ fileprivate class TextFieldCell: NSTextFieldCell {
         if verticalAlignment != .default {
             // Find out how big the rendered text will be
             let attrString = self.attributedStringValue
-            let options: NSStringDrawingOptions = [.truncatesLastVisibleLine, .usesLineFragmentOrigin]
+            let options: NSString.DrawingOptions = [.truncatesLastVisibleLine, .usesLineFragmentOrigin]
             let textRect = attrString.boundingRect(with: titleRect.size, options: options)
             
             // If the height of the rendered text is less then the available height,

@@ -16,7 +16,7 @@ class Shortcut {
         // B
         let keyCode = UInt(kVK_ANSI_B)
         // Ctrl + Alt + CMD
-        let keyMask: NSEventModifierFlags = [.command, .control, .option]
+        let keyMask: NSEvent.ModifierFlags = [.command, .control, .option]
         return MASShortcut(keyCode: keyCode, modifierFlags: keyMask.rawValue)
     }
     

@@ -26,7 +26,7 @@ class TableView: NSTableView {
     
     fileprivate func commonInit() {
         self.wantsLayer = true
-        self.addTableColumn(NSTableColumn(identifier: "main"))
+        self.addTableColumn(NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: "main")))
         
         self.backgroundColor = NSColor.clear
         self.headerView = nil
@@ -44,7 +44,7 @@ class TableView: NSTableView {
     
     // Note: Using NSArrays here because Swift array's indexOf method is extremely slow when optimizations are
     // turned off, aka in Debug builds
-    func updateRows(oldObjects: NSArray, newObjects: NSArray, animationOptions: NSTableViewAnimationOptions, referenceEquality: Bool = true) {
+    func updateRows(oldObjects: NSArray, newObjects: NSArray, animationOptions: NSTableView.AnimationOptions, referenceEquality: Bool = true) {
         do {
             self.beginUpdates()
             

@@ -1,8 +1,14 @@
 {
+  "iOS" : [
+    {
+      "hash" : "b2f9b56b2e816dcaab0a48e82cf4ac6bf13e2de0d9ba35bdecd64f054cf6cdb8",
+      "name" : "Locksmith"
+    }
+  ],
   "commitish" : "3.0.0",
   "Mac" : [
     {
-      "hash" : "cf6f8caa0481a6612edf5d3d70bd80b9c53b95c4d5af7675b9c9546492bf79f7",
+      "hash" : "3f00d6badecf364fe8a10fa0fa8eb013deb30d7d3b91db44aa63c73a00524d72",
       "name" : "Locksmith"
     }
   ]
