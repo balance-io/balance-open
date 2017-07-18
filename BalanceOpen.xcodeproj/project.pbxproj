@@ -188,7 +188,7 @@
 		2DB0BE8E1F0EEADF00384EA7 /* BalanceOpenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceOpenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DB0BE901F0EEADF00384EA7 /* PoloniexCurrencyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexCurrencyTests.swift; sourceTree = "<group>"; };
 		2DB0BE921F0EEADF00384EA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		532121B21EEAC2BF00F4812A /* BalanceForBlockchain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = BalanceForBlockchain.app; path = BalanceOpen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		532121B21EEAC2BF00F4812A /* BalanceOpen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BalanceOpen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		532121B51EEAC2BF00F4812A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		532121BE1EEAC2BF00F4812A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		532121C51EEAC47300F4812A /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
@@ -409,7 +409,7 @@
 		532121B31EEAC2BF00F4812A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				532121B21EEAC2BF00F4812A /* BalanceForBlockchain.app */,
+				532121B21EEAC2BF00F4812A /* BalanceOpen.app */,
 				2DB0BE8E1F0EEADF00384EA7 /* BalanceOpenTests.xctest */,
 			);
 			name = Products;
@@ -748,7 +748,7 @@
 			);
 			name = BalanceOpen;
 			productName = BalanceForBlockchain;
-			productReference = 532121B21EEAC2BF00F4812A /* BalanceForBlockchain.app */;
+			productReference = 532121B21EEAC2BF00F4812A /* BalanceOpen.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1172,7 +1172,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BalanceOpen/Supporting Files/Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1200,7 +1200,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BalanceOpen/Supporting Files/Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1223,6 +1223,7 @@
 				2DB0BE971F0EEADF00384EA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		532121AD1EEAC2BF00F4812A /* Build configuration list for PBXProject "BalanceOpen" */ = {
 			isa = XCConfigurationList;

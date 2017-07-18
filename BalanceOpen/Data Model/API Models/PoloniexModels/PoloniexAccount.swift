@@ -19,19 +19,21 @@ struct PoloniexAccount: Codable {
     let btcValue: Double
 }
 
-let bitcoin = PoloniexAccount(name: "BTC", available: 0.024, onOrders: 0.00000, btcValue: 0.024)
+func stuff () {
+    let bitcoin = PoloniexAccount(name: "BTC", available: 0.024, onOrders: 0.00000, btcValue: 0.024)
 
-let encoder = JSONEncoder()
-if let encoded = try? encoder.encode(bitcoin) {
-    if let json = String(data:encoded, encoding: .utf8) {
-        print(json)
+    let encoder = JSONEncoder()
+    if let encoded = try? encoder.encode(bitcoin) {
+        if let json = String(data:encoded, encoding: .utf8) {
+            print(json)
+        }
     }
+    print("hello")
+
+    let decoder = JSONDecoder()
+
+    //if let decoded = try? decoder.decode(Currency.self, from:encoded) {
+    //    print(decoded.name)
+    //    print(decoded.onOrders)
+    //}
 }
-print("hello")
-
-let decoder = JSONDecoder()
-
-//if let decoded = try? decoder.decode(Currency.self, from:encoded) {
-//    print(decoded.name)
-//    print(decoded.onOrders)
-//}
