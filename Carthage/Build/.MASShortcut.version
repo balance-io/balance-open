@@ -1,11 +1,8 @@
 {
-  "iOS" : [
-
-  ],
   "commitish" : "2.3.6",
   "Mac" : [
     {
-      "hash" : "f1e80a8e5124c8737b02ea8515e110c27f70eeb148e78120b403be37fa9bfa1e",
+      "hash" : "d83762630e9520fe4434c2cab7b4e177ce6f8b8bc50cb63b842186f9d72b99ea",
       "name" : "MASShortcut"
     }
   ]
