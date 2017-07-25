@@ -134,7 +134,19 @@
 		53FA53011EF3FA93002990B0 /* InstitutionHeaderBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA52FF1EF3FA93002990B0 /* InstitutionHeaderBars.swift */; };
 		53FA53041EF3FAFE002990B0 /* InstitutionDefaultBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA53021EF3FAFE002990B0 /* InstitutionDefaultBar.swift */; };
 		53FA53051EF3FAFE002990B0 /* InstitutionHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */; };
+		A4AEE62C1F27728800CD1E77 /* GDAXAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AEE62B1F27728800CD1E77 /* GDAXAPIClient.swift */; };
+		A4AEE6341F27795700CD1E77 /* BalanceOpenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AEE6331F27795700CD1E77 /* BalanceOpenTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A4AEE6361F27795700CD1E77 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 532121AA1EEAC2BF00F4812A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 532121B11EEAC2BF00F4812A;
+			remoteInfo = BalanceOpen;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		2D4450391EF3A4DF0023F63C /* CopyFiles */ = {
@@ -308,6 +320,10 @@
 		53FA52FF1EF3FA93002990B0 /* InstitutionHeaderBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionHeaderBars.swift; sourceTree = "<group>"; };
 		53FA53021EF3FAFE002990B0 /* InstitutionDefaultBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionDefaultBar.swift; sourceTree = "<group>"; };
 		53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionHeaders.swift; sourceTree = "<group>"; };
+		A4AEE62B1F27728800CD1E77 /* GDAXAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAPIClient.swift; sourceTree = "<group>"; };
+		A4AEE6311F27795700CD1E77 /* BalanceOpenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceOpenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4AEE6331F27795700CD1E77 /* BalanceOpenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceOpenTests.swift; sourceTree = "<group>"; };
+		A4AEE6351F27795700CD1E77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,6 +350,13 @@
 				5353D3561EF409F3003EE2F5 /* TrustKit.framework in Frameworks */,
 				2DA7FAB91EF2637700CD8CED /* Sparkle.framework in Frameworks */,
 				538A2C651EFD277700C542C4 /* LetsMove.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4AEE62E1F27795700CD1E77 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +389,7 @@
 			children = (
 				532121B41EEAC2BF00F4812A /* BalanceOpen */,
 				2D44500A1EF3A4500023F63C /* AutoLaunchBalanceHelper */,
+				A4AEE6321F27795700CD1E77 /* BalanceOpenTests */,
 				532121B31EEAC2BF00F4812A /* Products */,
 				538A2C661EFD278000C542C4 /* Frameworks */,
 			);
@@ -376,6 +400,7 @@
 			children = (
 				532121B21EEAC2BF00F4812A /* BalanceOpen.app */,
 				2D4450091EF3A4500023F63C /* AutoLaunchBalanceHelper.app */,
+				A4AEE6311F27795700CD1E77 /* BalanceOpenTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -654,10 +679,28 @@
 		53946FA11EEF0AEB00E921C3 /* API Models */ = {
 			isa = PBXGroup;
 			children = (
+				A4AEE62A1F27725700CD1E77 /* GDAX */,
 				53946FA21EEF0B0B00E921C3 /* CoinbaseAccount.swift */,
 				53946FA41EF0035200E921C3 /* CoinbaseApi.swift */,
 			);
 			path = "API Models";
+			sourceTree = "<group>";
+		};
+		A4AEE62A1F27725700CD1E77 /* GDAX */ = {
+			isa = PBXGroup;
+			children = (
+				A4AEE62B1F27728800CD1E77 /* GDAXAPIClient.swift */,
+			);
+			path = GDAX;
+			sourceTree = "<group>";
+		};
+		A4AEE6321F27795700CD1E77 /* BalanceOpenTests */ = {
+			isa = PBXGroup;
+			children = (
+				A4AEE6331F27795700CD1E77 /* BalanceOpenTests.swift */,
+				A4AEE6351F27795700CD1E77 /* Info.plist */,
+			);
+			path = BalanceOpenTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -699,13 +742,31 @@
 			productReference = 532121B21EEAC2BF00F4812A /* BalanceOpen.app */;
 			productType = "com.apple.product-type.application";
 		};
+		A4AEE6301F27795700CD1E77 /* BalanceOpenTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A4AEE6381F27795700CD1E77 /* Build configuration list for PBXNativeTarget "BalanceOpenTests" */;
+			buildPhases = (
+				A4AEE62D1F27795700CD1E77 /* Sources */,
+				A4AEE62E1F27795700CD1E77 /* Frameworks */,
+				A4AEE62F1F27795700CD1E77 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A4AEE6371F27795700CD1E77 /* PBXTargetDependency */,
+			);
+			name = BalanceOpenTests;
+			productName = BalanceOpenTests;
+			productReference = A4AEE6311F27795700CD1E77 /* BalanceOpenTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		532121AA1EEAC2BF00F4812A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Balanced Software, Inc.";
 				TargetAttributes = {
@@ -714,18 +775,16 @@
 						DevelopmentTeam = Q4G66XSS36;
 						ProvisioningStyle = Automatic;
 					};
-					2D8D54441EEB12360060FCCF = {
-						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = Q4G66XSS36;
-						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 532121B11EEAC2BF00F4812A;
-					};
 					532121B11EEAC2BF00F4812A = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = Q4G66XSS36;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
+					};
+					A4AEE6301F27795700CD1E77 = {
+						CreatedOnToolsVersion = 9.0;
+						DevelopmentTeam = Q4G66XSS36;
+						TestTargetID = 532121B11EEAC2BF00F4812A;
 					};
 				};
 			};
@@ -744,6 +803,7 @@
 			targets = (
 				532121B11EEAC2BF00F4812A /* BalanceOpen */,
 				2D4450081EF3A4500023F63C /* AutoLaunchBalanceHelper */,
+				A4AEE6301F27795700CD1E77 /* BalanceOpenTests */,
 			);
 		};
 /* End PBXProject section */
@@ -764,6 +824,13 @@
 			files = (
 				532122C91EEAF09700F4812A /* Assets.xcassets in Resources */,
 				5321222A1EEAD15D00F4812A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4AEE62F1F27795700CD1E77 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -859,6 +926,7 @@
 				532122C31EEAEDC400F4812A /* BalanceTextField.swift in Sources */,
 				5321220C1EEAC89B00F4812A /* CCNStatusItemWindowBackgroundView.m in Sources */,
 				5321229E1EEAE00600F4812A /* SyncButton.swift in Sources */,
+				A4AEE62C1F27728800CD1E77 /* GDAXAPIClient.swift in Sources */,
 				532122301EEAD1BB00F4812A /* PopoverViewController.swift in Sources */,
 				53946FA51EF0035200E921C3 /* CoinbaseApi.swift in Sources */,
 				53F8E2EA1EF1B6E90071FC73 /* Currency.swift in Sources */,
@@ -884,7 +952,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A4AEE62D1F27795700CD1E77 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4AEE6341F27795700CD1E77 /* BalanceOpenTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A4AEE6371F27795700CD1E77 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 532121B11EEAC2BF00F4812A /* BalanceOpen */;
+			targetProxy = A4AEE6361F27795700CD1E77 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2D4450161EF3A4500023F63C /* Main.storyboard */ = {
@@ -937,36 +1021,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		2D8D544C1EEB12360060FCCF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = Q4G66XSS36;
-				INFOPLIST_FILE = BalanceForBlockchainTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = balance.money.BalanceForBlockchainTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BalanceOpen.app/Contents/MacOS/BalanceOpen";
-			};
-			name = Debug;
-		};
-		2D8D544D1EEB12360060FCCF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = Q4G66XSS36;
-				INFOPLIST_FILE = BalanceForBlockchainTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = balance.money.BalanceForBlockchainTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BalanceOpen.app/Contents/MacOS/BalanceOpen";
 			};
 			name = Release;
 		};
@@ -1132,6 +1186,44 @@
 			};
 			name = Release;
 		};
+		A4AEE6391F27795700CD1E77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = Q4G66XSS36;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = BalanceOpenTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = software.balanced.BalanceOpenTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BalanceOpen.app/Contents/MacOS/BalanceOpen";
+			};
+			name = Debug;
+		};
+		A4AEE63A1F27795700CD1E77 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = Q4G66XSS36;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = BalanceOpenTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = software.balanced.BalanceOpenTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BalanceOpen.app/Contents/MacOS/BalanceOpen";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1158,6 +1250,15 @@
 			buildConfigurations = (
 				532121C21EEAC2BF00F4812A /* Debug */,
 				532121C31EEAC2BF00F4812A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A4AEE6381F27795700CD1E77 /* Build configuration list for PBXNativeTarget "BalanceOpenTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4AEE6391F27795700CD1E77 /* Debug */,
+				A4AEE63A1F27795700CD1E77 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
