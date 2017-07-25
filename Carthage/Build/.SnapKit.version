@@ -1,14 +1,14 @@
 {
   "iOS" : [
     {
-      "hash" : "a7c0cbb330ae86eff58dd9a4c8005fbc0ded7ab3016020bab68ca06e2d4dad23",
+      "hash" : "6335cf28b98f0dc642d1c64c90666d712d938760ce4012d54952ced44a4175e2",
       "name" : "SnapKit"
     }
   ],
   "commitish" : "3.2.0",
   "Mac" : [
     {
-      "hash" : "1a489dac44d9f98cbb00c1a4d84567e835b0071d088e09936efe3006e1b8d43b",
+      "hash" : "3a329b3d29cc44b060d6a871aab066fce7a747158f41fc5ded7256f2816a823e",
       "name" : "SnapKit"
     }
   ]
