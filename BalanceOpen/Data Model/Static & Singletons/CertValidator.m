@@ -62,14 +62,15 @@
         
         // Silence logging and initialize
         [TrustKit setLoggerBlock: ^void (NSString *message){}];
-        [TrustKit initializeWithConfiguration: trustKitConfig];
+        [TrustKit initSharedInstanceWithConfiguration:trustKitConfig];
     }
     
     return self;
 }
 
 - (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler {
-    [TSKPinningValidator handleChallenge:challenge completionHandler:completionHandler];
+    TSKPinningValidator *pingingValidator = [TrustKit sharedInstance].pinningValidator;
+    [pingingValidator handleChallenge:challenge completionHandler:completionHandler];
 }
 
 @end
