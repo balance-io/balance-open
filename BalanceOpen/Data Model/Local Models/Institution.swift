@@ -295,6 +295,7 @@ class Institution {
         accessToken = nil
         refreshToken = nil
         
+        //take this out
         database.writeDbQueue.inDatabase { db in
             do {
                 // Begin transaction

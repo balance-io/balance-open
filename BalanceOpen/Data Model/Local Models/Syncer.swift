@@ -80,6 +80,7 @@ class Syncer {
                             self.syncAccountsAndTransactions(institution: institution, remainingInstitutions: syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
                         } else {
                             log.error("Failed to refresh token for institution \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name)")
+                            NotificationCenter.postOnMainThread(name: Notifications.SyncError, object: institution,  userInfo: nil)
                             self.syncInstitutions(syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
                         }
                     }

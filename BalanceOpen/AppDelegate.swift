@@ -361,6 +361,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(showPopover), name: Notifications.ShowPopover)
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(hidePopover), name: Notifications.HidePopover)
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(displayServerMessage(_:)), name: Notifications.DisplayServerMessage)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadCredentials), name: Notifications.SyncError)
     }
     
     fileprivate func unregisterForNotifications() {
@@ -368,6 +369,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.ShowPopover)
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.HidePopover)
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.DisplayServerMessage)
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.SyncError)
     }
     
     @objc fileprivate func togglePopover() {
@@ -406,6 +408,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             DispatchQueue.main.async(after: 0.5) {
                 alert.runModal()
+            }
+        }
+    }
+    
+    @objc fileprivate func reloadCredentials(_ notification: Notification) {
+        guard let institution = notification.object as? Institution else {
+            return
+        }
+        let alert = NSAlert()
+        alert.addButton(withTitle: "Sync")
+        alert.messageText = "Something went wrong, please sync your credentials again"
+        alert.alertStyle = .critical
+        alert.beginSheetModal(for: preferencesWindowController.window!) { returnCode in
+            if returnCode == NSApplication.ModalResponse.alertFirstButtonReturn {
+                institution.remove(notify:true)
+                _ = CoinbaseApi.authenticate()
             }
         }
     }
