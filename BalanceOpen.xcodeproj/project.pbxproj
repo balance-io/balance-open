@@ -136,6 +136,8 @@
 		53FA53051EF3FAFE002990B0 /* InstitutionHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */; };
 		A4AEE62C1F27728800CD1E77 /* GDAXAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AEE62B1F27728800CD1E77 /* GDAXAPIClient.swift */; };
 		A4AEE6341F27795700CD1E77 /* BalanceOpenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AEE6331F27795700CD1E77 /* BalanceOpenTests.swift */; };
+		A4AEE63D1F277B6B00CD1E77 /* CredentialsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AEE63C1F277B6B00CD1E77 /* CredentialsTest.swift */; };
+		A4AEE6461F277D5D00CD1E77 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -324,6 +326,7 @@
 		A4AEE6311F27795700CD1E77 /* BalanceOpenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceOpenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4AEE6331F27795700CD1E77 /* BalanceOpenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceOpenTests.swift; sourceTree = "<group>"; };
 		A4AEE6351F27795700CD1E77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A4AEE63C1F277B6B00CD1E77 /* CredentialsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -357,6 +360,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4AEE6461F277D5D00CD1E77 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,10 +701,19 @@
 		A4AEE6321F27795700CD1E77 /* BalanceOpenTests */ = {
 			isa = PBXGroup;
 			children = (
+				A4AEE63B1F277B2A00CD1E77 /* GDAXAPIClient */,
 				A4AEE6331F27795700CD1E77 /* BalanceOpenTests.swift */,
 				A4AEE6351F27795700CD1E77 /* Info.plist */,
 			);
 			path = BalanceOpenTests;
+			sourceTree = "<group>";
+		};
+		A4AEE63B1F277B2A00CD1E77 /* GDAXAPIClient */ = {
+			isa = PBXGroup;
+			children = (
+				A4AEE63C1F277B6B00CD1E77 /* CredentialsTest.swift */,
+			);
+			path = GDAXAPIClient;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -956,6 +969,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4AEE63D1F277B6B00CD1E77 /* CredentialsTest.swift in Sources */,
 				A4AEE6341F27795700CD1E77 /* BalanceOpenTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1195,6 +1209,11 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = Q4G66XSS36;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/BalanceOpen/Frameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = BalanceOpenTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
@@ -1214,6 +1233,11 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = Q4G66XSS36;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/BalanceOpen/Frameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = BalanceOpenTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
