@@ -134,8 +134,13 @@
 		53FA53011EF3FA93002990B0 /* InstitutionHeaderBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA52FF1EF3FA93002990B0 /* InstitutionHeaderBars.swift */; };
 		53FA53041EF3FAFE002990B0 /* InstitutionDefaultBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA53021EF3FAFE002990B0 /* InstitutionDefaultBar.swift */; };
 		53FA53051EF3FAFE002990B0 /* InstitutionHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */; };
+		A44981E01F28E43200E861AA /* GDAXAPIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981DF1F28E43200E861AA /* GDAXAPIClientTests.swift */; };
+		A44981E21F28EE3B00E861AA /* GDAXAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981E11F28EE3B00E861AA /* GDAXAccount.swift */; };
+		A44981E71F28F35200E861AA /* Account.json in Resources */ = {isa = PBXBuildFile; fileRef = A44981E61F28F35200E861AA /* Account.json */; };
+		A44981E91F28F3AA00E861AA /* GDAXlErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981E81F28F3AA00E861AA /* GDAXlErrors.swift */; };
+		A44981EB1F28F50500E861AA /* AccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981EA1F28F50500E861AA /* AccountTests.swift */; };
+		A455DEBB1F28D82C0037A805 /* HeadersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A455DEBA1F28D82C0037A805 /* HeadersTests.swift */; };
 		A4AEE62C1F27728800CD1E77 /* GDAXAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AEE62B1F27728800CD1E77 /* GDAXAPIClient.swift */; };
-		A4AEE6341F27795700CD1E77 /* BalanceOpenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AEE6331F27795700CD1E77 /* BalanceOpenTests.swift */; };
 		A4AEE63D1F277B6B00CD1E77 /* CredentialsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AEE63C1F277B6B00CD1E77 /* CredentialsTest.swift */; };
 		A4AEE6461F277D5D00CD1E77 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; };
 /* End PBXBuildFile section */
@@ -322,9 +327,14 @@
 		53FA52FF1EF3FA93002990B0 /* InstitutionHeaderBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionHeaderBars.swift; sourceTree = "<group>"; };
 		53FA53021EF3FAFE002990B0 /* InstitutionDefaultBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionDefaultBar.swift; sourceTree = "<group>"; };
 		53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionHeaders.swift; sourceTree = "<group>"; };
+		A44981DF1F28E43200E861AA /* GDAXAPIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAPIClientTests.swift; sourceTree = "<group>"; };
+		A44981E11F28EE3B00E861AA /* GDAXAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAccount.swift; sourceTree = "<group>"; };
+		A44981E61F28F35200E861AA /* Account.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Account.json; sourceTree = "<group>"; };
+		A44981E81F28F3AA00E861AA /* GDAXlErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXlErrors.swift; sourceTree = "<group>"; };
+		A44981EA1F28F50500E861AA /* AccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTests.swift; sourceTree = "<group>"; };
+		A455DEBA1F28D82C0037A805 /* HeadersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadersTests.swift; sourceTree = "<group>"; };
 		A4AEE62B1F27728800CD1E77 /* GDAXAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAPIClient.swift; sourceTree = "<group>"; };
 		A4AEE6311F27795700CD1E77 /* BalanceOpenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceOpenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A4AEE6331F27795700CD1E77 /* BalanceOpenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceOpenTests.swift; sourceTree = "<group>"; };
 		A4AEE6351F27795700CD1E77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4AEE63C1F277B6B00CD1E77 /* CredentialsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -690,10 +700,37 @@
 			path = "API Models";
 			sourceTree = "<group>";
 		};
+		A44981E31F28F31700E861AA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A44981E41F28F32900E861AA /* Resources */,
+				A4AEE6351F27795700CD1E77 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A44981E41F28F32900E861AA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A44981E51F28F33500E861AA /* GDAX API Responses */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A44981E51F28F33500E861AA /* GDAX API Responses */ = {
+			isa = PBXGroup;
+			children = (
+				A44981E61F28F35200E861AA /* Account.json */,
+			);
+			path = "GDAX API Responses";
+			sourceTree = "<group>";
+		};
 		A4AEE62A1F27725700CD1E77 /* GDAX */ = {
 			isa = PBXGroup;
 			children = (
 				A4AEE62B1F27728800CD1E77 /* GDAXAPIClient.swift */,
+				A44981E11F28EE3B00E861AA /* GDAXAccount.swift */,
+				A44981E81F28F3AA00E861AA /* GDAXlErrors.swift */,
 			);
 			path = GDAX;
 			sourceTree = "<group>";
@@ -702,8 +739,7 @@
 			isa = PBXGroup;
 			children = (
 				A4AEE63B1F277B2A00CD1E77 /* GDAXAPIClient */,
-				A4AEE6331F27795700CD1E77 /* BalanceOpenTests.swift */,
-				A4AEE6351F27795700CD1E77 /* Info.plist */,
+				A44981E31F28F31700E861AA /* Supporting Files */,
 			);
 			path = BalanceOpenTests;
 			sourceTree = "<group>";
@@ -712,6 +748,9 @@
 			isa = PBXGroup;
 			children = (
 				A4AEE63C1F277B6B00CD1E77 /* CredentialsTest.swift */,
+				A455DEBA1F28D82C0037A805 /* HeadersTests.swift */,
+				A44981DF1F28E43200E861AA /* GDAXAPIClientTests.swift */,
+				A44981EA1F28F50500E861AA /* AccountTests.swift */,
 			);
 			path = GDAXAPIClient;
 			sourceTree = "<group>";
@@ -844,6 +883,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A44981E71F28F35200E861AA /* Account.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -921,6 +961,7 @@
 				5321223A1EEAD1D100F4812A /* PreferencesGeneralViewController.swift in Sources */,
 				532122D31EEB05A800F4812A /* AddAccountButtons.swift in Sources */,
 				5321228A1EEADC9600F4812A /* ObjC.m in Sources */,
+				A44981E91F28F3AA00E861AA /* GDAXlErrors.swift in Sources */,
 				5321220A1EEAC89B00F4812A /* CCNStatusItemDropView.m in Sources */,
 				5321229A1EEADFE500F4812A /* QCMethod.swift in Sources */,
 				532122181EEAC8F800F4812A /* SyncManager.swift in Sources */,
@@ -948,6 +989,7 @@
 				538A2C6D1EFD27C700C542C4 /* PFMoveApplication.m in Sources */,
 				5321221C1EEAC90C00F4812A /* DefaultsStorage.swift in Sources */,
 				532121DB1EEAC4DC00F4812A /* FMDatabase.m in Sources */,
+				A44981E21F28EE3B00E861AA /* GDAXAccount.swift in Sources */,
 				532122901EEADE1D00F4812A /* PaintCodeView.swift in Sources */,
 				532122BD1EEAED3100F4812A /* ChangePasswordViewController.swift in Sources */,
 				532122231EEAC99000F4812A /* CertValidator.m in Sources */,
@@ -970,7 +1012,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4AEE63D1F277B6B00CD1E77 /* CredentialsTest.swift in Sources */,
-				A4AEE6341F27795700CD1E77 /* BalanceOpenTests.swift in Sources */,
+				A44981EB1F28F50500E861AA /* AccountTests.swift in Sources */,
+				A455DEBB1F28D82C0037A805 /* HeadersTests.swift in Sources */,
+				A44981E01F28E43200E861AA /* GDAXAPIClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1215,7 +1259,7 @@
 					"$(PROJECT_DIR)/BalanceOpen/Frameworks",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = BalanceOpenTests/Info.plist;
+				INFOPLIST_FILE = "BalanceOpenTests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = software.balanced.BalanceOpenTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1239,7 +1283,7 @@
 					"$(PROJECT_DIR)/BalanceOpen/Frameworks",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = BalanceOpenTests/Info.plist;
+				INFOPLIST_FILE = "BalanceOpenTests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = software.balanced.BalanceOpenTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
