@@ -12,6 +12,8 @@ fileprivate var decimalFormatter: NumberFormatter = {
     let formatter = NumberFormatter()
     formatter.generatesDecimalNumbers = true
     formatter.numberStyle = .decimal
+    formatter.allowsFloats = true
+    formatter.locale = Locale(identifier: "en_US")
     return formatter
 }()
 
@@ -45,13 +47,13 @@ struct CoinbaseAccount {
         let balanceDict: [String: AnyObject] = try checkType(account, name: "balance")
         self.currency = try checkType(balanceDict, name: "currency")
         let balanceAmount: String = try checkType(balanceDict, name: "amount")
-        let balanceAmountDecimal = decimalFormatter.number(from: balanceAmount) as? Decimal
+        let balanceAmountDecimal = decimalFormatter.number(from: balanceAmount)?.decimalValue
         self.balance = try checkType(balanceAmountDecimal, name: "balanceAmountDecimal")
         
         let nativeBalanceDict: [String: AnyObject] = try checkType(account, name: "native_balance")
         self.nativeCurrency = try checkType(nativeBalanceDict, name: "currency")
         let nativeBalanceAmount: String = try checkType(nativeBalanceDict, name: "amount")
-        let nativeBalanceAmountDecimal = decimalFormatter.number(from: nativeBalanceAmount) as? Decimal
+        let nativeBalanceAmountDecimal = decimalFormatter.number(from: nativeBalanceAmount)?.decimalValue
         self.nativeBalance = try checkType(nativeBalanceAmountDecimal, name: "balanceAmountDecimal")
         
         // TODO: Finish this

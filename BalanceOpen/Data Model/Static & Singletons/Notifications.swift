@@ -34,6 +34,7 @@ struct Notifications {
     static let DisplayServerMessage                   = Notification.Name("DisplayServerMessage")
     static let AccountHidden                          = Notification.Name("AccountHidden")
     static let AccountUnhidden                        = Notification.Name("AccountUnhidden")
+    static let SyncError                              = Notification.Name("SyncError")
 
     struct Keys {
         static let Institution                  = "Institution"

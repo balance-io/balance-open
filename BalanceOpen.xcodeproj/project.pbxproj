@@ -13,6 +13,7 @@
 		2D4450181EF3A4500023F63C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D4450161EF3A4500023F63C /* Main.storyboard */; };
 		2D44503A1EF3A53E0023F63C /* AutoLaunchBalanceHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D4450091EF3A4500023F63C /* AutoLaunchBalanceHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2DA7FAB91EF2637700CD8CED /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; };
+		2DF76CE01F212F6F00EE18BB /* CoinbaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF76CDF1F212F6F00EE18BB /* CoinbaseTests.swift */; };
 		530DD1891EF458A400C0DDD3 /* FMDatabasePoolAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 530DD1881EF458A400C0DDD3 /* FMDatabasePoolAdditions.m */; };
 		532121B61EEAC2BF00F4812A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121B51EEAC2BF00F4812A /* AppDelegate.swift */; };
 		532121C61EEAC47300F4812A /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121C51EEAC47300F4812A /* Database.swift */; };
@@ -136,6 +137,16 @@
 		53FA53051EF3FAFE002990B0 /* InstitutionHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		2DF76CE21F212F6F00EE18BB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 532121AA1EEAC2BF00F4812A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 532121B11EEAC2BF00F4812A;
+			remoteInfo = BalanceOpen;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		2D4450391EF3A4DF0023F63C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -178,6 +189,9 @@
 		2D4450171EF3A4500023F63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2D4450191EF3A4500023F63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DA7FAB81EF2637700CD8CED /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		2DF76CDD1F212F6F00EE18BB /* BalanceOpenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceOpenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DF76CDF1F212F6F00EE18BB /* CoinbaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseTests.swift; sourceTree = "<group>"; };
+		2DF76CE11F212F6F00EE18BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		530DD1871EF458A400C0DDD3 /* FMDatabasePoolAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePoolAdditions.h; sourceTree = "<group>"; };
 		530DD1881EF458A400C0DDD3 /* FMDatabasePoolAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePoolAdditions.m; sourceTree = "<group>"; };
 		532121B21EEAC2BF00F4812A /* BalanceOpen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BalanceOpen.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -318,6 +332,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2DF76CDA1F212F6F00EE18BB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		532121AF1EEAC2BF00F4812A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -361,11 +382,21 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		2DF76CDE1F212F6F00EE18BB /* BalanceOpenTests */ = {
+			isa = PBXGroup;
+			children = (
+				2DF76CDF1F212F6F00EE18BB /* CoinbaseTests.swift */,
+				2DF76CE11F212F6F00EE18BB /* Info.plist */,
+			);
+			path = BalanceOpenTests;
+			sourceTree = "<group>";
+		};
 		532121A91EEAC2BF00F4812A = {
 			isa = PBXGroup;
 			children = (
 				532121B41EEAC2BF00F4812A /* BalanceOpen */,
 				2D44500A1EF3A4500023F63C /* AutoLaunchBalanceHelper */,
+				2DF76CDE1F212F6F00EE18BB /* BalanceOpenTests */,
 				532121B31EEAC2BF00F4812A /* Products */,
 				538A2C661EFD278000C542C4 /* Frameworks */,
 			);
@@ -376,6 +407,7 @@
 			children = (
 				532121B21EEAC2BF00F4812A /* BalanceOpen.app */,
 				2D4450091EF3A4500023F63C /* AutoLaunchBalanceHelper.app */,
+				2DF76CDD1F212F6F00EE18BB /* BalanceOpenTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -681,6 +713,24 @@
 			productReference = 2D4450091EF3A4500023F63C /* AutoLaunchBalanceHelper.app */;
 			productType = "com.apple.product-type.application";
 		};
+		2DF76CDC1F212F6F00EE18BB /* BalanceOpenTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2DF76CE61F212F6F00EE18BB /* Build configuration list for PBXNativeTarget "BalanceOpenTests" */;
+			buildPhases = (
+				2DF76CD91F212F6F00EE18BB /* Sources */,
+				2DF76CDA1F212F6F00EE18BB /* Frameworks */,
+				2DF76CDB1F212F6F00EE18BB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2DF76CE31F212F6F00EE18BB /* PBXTargetDependency */,
+			);
+			name = BalanceOpenTests;
+			productName = BalanceOpenTests;
+			productReference = 2DF76CDD1F212F6F00EE18BB /* BalanceOpenTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		532121B11EEAC2BF00F4812A /* BalanceOpen */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 532121C11EEAC2BF00F4812A /* Build configuration list for PBXNativeTarget "BalanceOpen" */;
@@ -705,7 +755,7 @@
 		532121AA1EEAC2BF00F4812A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Balanced Software, Inc.";
 				TargetAttributes = {
@@ -714,11 +764,9 @@
 						DevelopmentTeam = Q4G66XSS36;
 						ProvisioningStyle = Automatic;
 					};
-					2D8D54441EEB12360060FCCF = {
-						CreatedOnToolsVersion = 8.3.2;
+					2DF76CDC1F212F6F00EE18BB = {
+						CreatedOnToolsVersion = 9.0;
 						DevelopmentTeam = Q4G66XSS36;
-						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
 						TestTargetID = 532121B11EEAC2BF00F4812A;
 					};
 					532121B11EEAC2BF00F4812A = {
@@ -744,6 +792,7 @@
 			targets = (
 				532121B11EEAC2BF00F4812A /* BalanceOpen */,
 				2D4450081EF3A4500023F63C /* AutoLaunchBalanceHelper */,
+				2DF76CDC1F212F6F00EE18BB /* BalanceOpenTests */,
 			);
 		};
 /* End PBXProject section */
@@ -755,6 +804,13 @@
 			files = (
 				2D4450151EF3A4500023F63C /* Assets.xcassets in Resources */,
 				2D4450181EF3A4500023F63C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2DF76CDB1F212F6F00EE18BB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -776,6 +832,14 @@
 			files = (
 				2D4450101EF3A4500023F63C /* main.m in Sources */,
 				2D44500D1EF3A4500023F63C /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2DF76CD91F212F6F00EE18BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2DF76CE01F212F6F00EE18BB /* CoinbaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -886,6 +950,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		2DF76CE31F212F6F00EE18BB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 532121B11EEAC2BF00F4812A /* BalanceOpen */;
+			targetProxy = 2DF76CE21F212F6F00EE18BB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		2D4450161EF3A4500023F63C /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -940,30 +1012,38 @@
 			};
 			name = Release;
 		};
-		2D8D544C1EEB12360060FCCF /* Debug */ = {
+		2DF76CE41F212F6F00EE18BB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = Q4G66XSS36;
-				INFOPLIST_FILE = BalanceForBlockchainTests/Info.plist;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = BalanceOpenTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = balance.money.BalanceForBlockchainTests;
+				PRODUCT_BUNDLE_IDENTIFIER = balance.money.BalanceOpenTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BalanceOpen.app/Contents/MacOS/BalanceOpen";
 			};
 			name = Debug;
 		};
-		2D8D544D1EEB12360060FCCF /* Release */ = {
+		2DF76CE51F212F6F00EE18BB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = Q4G66XSS36;
-				INFOPLIST_FILE = BalanceForBlockchainTests/Info.plist;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = BalanceOpenTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = balance.money.BalanceForBlockchainTests;
+				PRODUCT_BUNDLE_IDENTIFIER = balance.money.BalanceOpenTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BalanceOpen.app/Contents/MacOS/BalanceOpen";
@@ -1143,6 +1223,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		2DF76CE61F212F6F00EE18BB /* Build configuration list for PBXNativeTarget "BalanceOpenTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2DF76CE41F212F6F00EE18BB /* Debug */,
+				2DF76CE51F212F6F00EE18BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		532121AD1EEAC2BF00F4812A /* Build configuration list for PBXProject "BalanceOpen" */ = {
 			isa = XCConfigurationList;
