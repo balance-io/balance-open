@@ -11,14 +11,49 @@ import Foundation
 
 internal final class GDAXAPIClient
 {
+    // Internal
+    internal var credentials: Credentials?
+    
     // Private
     private let server: Server
+    private let session = URLSession(configuration: URLSessionConfiguration.default)
     
     // MARK: Initialization
     
     internal required init(server: Server)
     {
         self.server = server
+    }
+    
+    // MARK: Accounts
+    
+    internal func fetchAccounts(_ completionHandler: @escaping () -> Void)
+    {
+        guard let unwrappedCredentials = self.credentials else
+        {
+            // TODO: throw
+            return
+        }
+        
+        let requestPath = "/accounts"
+        let headers = try! HTTPHeader(credentials: unwrappedCredentials, requestPath: requestPath, method: "GET", body: [:])
+        let url = self.server.url().appendingPathComponent(requestPath)
+        
+        var request = URLRequest(url: url)
+        
+        for (key, value) in headers.dictionary
+        {
+            request.setValue(value, forHTTPHeaderField: key)
+        }
+        
+        // Perform request
+        let task = self.session.dataTask(with: request) { (data, response, error) in
+            let json = try! JSONSerialization.jsonObject(with: data!, options: [])
+            print(json)
+            print(data)
+            print(response)
+            print(error)
+        }.resume()
     }
 }
 
@@ -45,6 +80,33 @@ internal extension GDAXAPIClient
     }
 }
 
+// MARK: HTTP Header
+
+internal extension GDAXAPIClient
+{
+    internal struct HTTPHeader
+    {
+        // Internal
+        internal let dictionary: [String : String]
+
+        // MARK: Initialization
+        
+        internal init(credentials: Credentials, requestPath: String, method: String, body: [String : Any]) throws
+        {
+            let nowDate = Date()
+            let signature = try credentials.generateSignature(timestamp: nowDate, requestPath: requestPath, body: body, method: method)
+            
+            self.dictionary = [
+                "CB-ACCESS-KEY" : credentials.key,
+                "CB-ACCESS-SIGN" : signature,
+                "CB-ACCESS-TIMESTAMP" : "\(nowDate.timeIntervalSince1970)",
+                "CB-ACCESS-PASSPHRASE" : credentials.passphrase
+            ]
+        }
+    }
+}
+
+// MARK: Credentials
 
 internal extension GDAXAPIClient
 {
@@ -64,7 +126,7 @@ internal extension GDAXAPIClient
         {
             guard let decodedSecretData = Data(base64Encoded: secret) else
             {
-                throw Error.invalidSecret(message: "Secret is not base64 encoded")
+                throw CredentialsError.invalidSecret(message: "Secret is not base64 encoded")
             }
             
             self.key = key
@@ -75,22 +137,32 @@ internal extension GDAXAPIClient
         
         // MARK: Signature
         
-        internal func generateSignature(timestamp: Date, requestPath: String, body: [String : Any], method: String) throws -> String
+        internal func generateSignature(timestamp: Date, requestPath: String, body: [String : Any]?, method: String) throws -> String
         {
             // Turn body into JSON string
-            guard let jsonData = try? JSONSerialization.data(withJSONObject: body, options: []),
-                  let jsonString = String(data: jsonData, encoding: .utf8) else
+            let bodyString: String
+            if let unwrappedBody = body
             {
-                throw Error.bodyNotValidJSON
+                guard let jsonData = try? JSONSerialization.data(withJSONObject: unwrappedBody, options: []),
+                      let jsonString = String(data: jsonData, encoding: .utf8) else
+                {
+                    throw CredentialsError.bodyNotValidJSON
+                }
+                
+                bodyString = jsonString
+            }
+            else
+            {
+                bodyString = ""
             }
             
             // Message
-            let message = "\(timestamp.timeIntervalSince1970)\(method)\(requestPath)\(jsonString)"
+            let message = "\(timestamp.timeIntervalSince1970)\(method)\(requestPath)\(bodyString)"
             guard let messageData = message.data(using: .utf8) else
             {
                 fatalError()
             }
-            
+
             // Create the signature
             let signatureCapacity = Int(CC_SHA256_DIGEST_LENGTH)
             let signature = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: signatureCapacity)
@@ -109,14 +181,5 @@ internal extension GDAXAPIClient
             let signatureData = Data(bytes: signature, count: signatureCapacity)
             return signatureData.base64EncodedString()
         }
-    }
-}
-
-internal extension GDAXAPIClient.Credentials
-{
-    internal enum Error: Swift.Error
-    {
-        case invalidSecret(message: String)
-        case bodyNotValidJSON
     }
 }
