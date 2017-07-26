@@ -55,23 +55,40 @@ internal extension GDAXAPIClient
         internal let secret: String
         internal let passphrase: String
         
+        // Private
+        private let decodedSecretData: Data
+        
+        // MARK: Initialization
+        
+        internal init(key: String, secret: String, passphrase: String) throws
+        {
+            guard let decodedSecretData = Data(base64Encoded: secret) else
+            {
+                throw Error.invalidSecret(message: "Secret is not base64 encoded")
+            }
+            
+            self.key = key
+            self.secret = secret
+            self.passphrase = passphrase
+            self.decodedSecretData = decodedSecretData
+        }
+        
         // MARK: Signature
         
         internal func generateSignature(timestamp: Date, requestPath: String, body: [String : Any], method: String) throws -> String
         {
+            // Turn body into JSON string
             guard let jsonData = try? JSONSerialization.data(withJSONObject: body, options: []),
                   let jsonString = String(data: jsonData, encoding: .utf8) else
             {
-                abort()
+                throw Error.bodyNotValidJSON
             }
             
+            // Message
             let message = "\(timestamp.timeIntervalSince1970)\(method)\(requestPath)\(jsonString)"
-            print(message)
-            
-            guard let decodedSecretData = Data(base64Encoded: self.secret), // Decode the secret
-                  let messageData = message.data(using: .utf8) else
+            guard let messageData = message.data(using: .utf8) else
             {
-                abort()
+                fatalError()
             }
             
             // Create the signature
@@ -82,15 +99,24 @@ internal extension GDAXAPIClient
                 signature.deallocate(capacity: signatureCapacity)
             }
         
-            decodedSecretData.withUnsafeBytes({ (secretBytes: UnsafePointer<UInt8>) -> Void in
+            self.decodedSecretData.withUnsafeBytes({ (secretBytes: UnsafePointer<UInt8>) -> Void in
                 messageData.withUnsafeBytes({ (messageBytes: UnsafePointer<UInt8>) -> Void in
                     let algorithm = CCHmacAlgorithm(kCCHmacAlgSHA256)
-                    CCHmac(algorithm, secretBytes, decodedSecretData.count, messageBytes, messageData.count, signature)
+                    CCHmac(algorithm, secretBytes, self.decodedSecretData.count, messageBytes, messageData.count, signature)
                 })
             })
             
             let signatureData = Data(bytes: signature, count: signatureCapacity)
             return signatureData.base64EncodedString()
         }
+    }
+}
+
+internal extension GDAXAPIClient.Credentials
+{
+    internal enum Error: Swift.Error
+    {
+        case invalidSecret(message: String)
+        case bodyNotValidJSON
     }
 }
