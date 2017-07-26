@@ -2,6 +2,6 @@ github "DaveWoodCom/XCGLogger" ~> 5.0.1
 github "wolffan/SnapKit" "xcode-4-mac-compatible"
 github "ashleymills/Reachability.swift" ~> 3.0
 github "matthewpalmer/Locksmith"
-github "wolffan/TrustKit" "xcode9beta"
+github "datatheorem/TrustKit" "master"
 github "shpakovski/MASShortcut"
 github "balancemymoney/NSDate-TimeAgo" "master"

@@ -1,8 +1,8 @@
 {
-  "commitish" : "fd568fa68f1a75d2bc9351e0d892d48a4db8ba2a",
+  "commitish" : "e716b89b6bf1a6b12d260d022c9edbda389e7f47",
   "Mac" : [
     {
-      "hash" : "7de1132c8972fcb714234f86391fb325284b118dfb116353a52375618abc7fa7",
+      "hash" : "9b4560026c375156a5821256a6d04c865e06ee89f575db0c2eadf0cdb3ed02a3",
       "name" : "TrustKit"
     }
   ]

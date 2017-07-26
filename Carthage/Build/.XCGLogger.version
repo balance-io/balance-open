@@ -2,11 +2,11 @@
   "commitish" : "5.0.1",
   "Mac" : [
     {
-      "hash" : "407f6f456f0cd3950f71d2d82152cb58dbce2ea2c7b48236702f08ad90396345",
+      "hash" : "121fece0149b9d9d78b6e3d5e3699f27465ac29c4c7e5a3e99c4059ae68bcd2a",
       "name" : "ObjcExceptionBridging"
     },
     {
-      "hash" : "c233a358e81809e222b968f1b3d03d549316683fa1cc24086282e5b904bad275",
+      "hash" : "66a38716af26a8be2673850b4d835b89dcf7db802dd100cbe8846753f720776c",
       "name" : "XCGLogger"
     }
   ]
