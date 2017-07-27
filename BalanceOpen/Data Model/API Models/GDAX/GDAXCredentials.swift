@@ -22,6 +22,14 @@ internal extension GDAXAPIClient
         // Private
         private let decodedSecretData: Data
         
+        private var dictionary: [String : Any] {
+            return [
+                "key" : self.key,
+                "secret" : self.secret,
+                "passphrase" : self.passphrase
+            ]
+        }
+        
         // MARK: Initialization
         
         internal init(key: String, secret: String, passphrase: String) throws
@@ -35,6 +43,19 @@ internal extension GDAXAPIClient
             self.secret = secret
             self.passphrase = passphrase
             self.decodedSecretData = decodedSecretData
+        }
+        
+        internal init(identifier: String) throws
+        {
+            guard let data = Locksmith.loadDataForUserAccount(userAccount: identifier),
+                  let key = data["key"] as? String,
+                  let secret = data["secret"] as? String,
+                  let passphrase = data["passphrase"] as? String else
+            {
+                throw CredentialsError.dataNotFound(identifier: identifier)
+            }
+            
+            try self.init(key: key, secret: secret, passphrase: passphrase)
         }
         
         // MARK: Signature
@@ -82,6 +103,13 @@ internal extension GDAXAPIClient
             
             let signatureData = Data(bytes: signature, count: signatureCapacity)
             return signatureData.base64EncodedString()
+        }
+        
+        // MARK: Save
+        
+        internal func save(identifier: String) throws
+        {
+            try Locksmith.saveData(data: self.dictionary, forUserAccount: identifier)
         }
     }
 }
