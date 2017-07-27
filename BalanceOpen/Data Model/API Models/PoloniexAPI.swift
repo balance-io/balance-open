@@ -9,6 +9,14 @@
 import Foundation
 import Security
 
+protocol exchangeAPI {
+    static func authenticate() -> Bool
+    optional static func handleAuthenticationCallback(state: String, code: String, completion: @escaping SuccessErrorBlock)
+    static func refreshAccessToken(institution: Institution, completion: @escaping SuccessErrorBlock)
+    static func updateAccounts(institution: Institution, completion: @escaping SuccessErrorBlock)
+    static func processAccounts(_ coinbaseAccounts: [CoinbaseAccount], institution: Institution)
+}
+
 fileprivate let tradingURL = URL(string: "https://poloniex.com/tradingApi")!
 typealias SuccessErrorBlock = (_ success: Bool, _ error: Error) -> Void
 
@@ -54,7 +62,7 @@ enum PoloniexCommands: String {
  
  */
 
-struct PoloniexAPI {
+struct PoloniexAPI: exchangeAPI {
     
     let body: String
     let hash: String
@@ -96,6 +104,10 @@ struct PoloniexAPI {
         self.hash = signedPOST
     }
     
+    private static func createRequest() {
+        
+    }
+    
     private static func hmac(body: String, algorithm: HMACECase, key: String) -> String {
         let cKey = key.cString(using: String.Encoding.utf8)
         let str = body.cString(using: String.Encoding.utf8)
@@ -122,6 +134,101 @@ struct PoloniexAPI {
     
 }
 
+extension Institution {
+    fileprivate var APIkeyKey: String {
+        return "APIkey institutionId: \(institutionId)"
+    }
+    var APIkey: String? {
+        get {
+            var APIkey: String? = nil
+            if let dictionary = Locksmith.loadDataForUserAccount(userAccount: APIkeyKey) {
+                APIKey = dictionary["APIkey"] as? String
+            }
+            
+            print("get APIkeyKey: \(APIkeyKey)  APIKey: \(String(describing: APIKey))")
+            if APIkeyKey == nil {
+                // We should always be getting an APIkey becasuse we never read it until after it's been written
+                log.severe("Tried to read APIkey for institution [\(self)] but it didn't work! We must not have keychain access")
+            }
+            
+            return APIKey
+        }
+        set {
+            print("set APIkeyKey: \(APIkeyKey)  newValue: \(String(describing: newValue))")
+            if let APIkey = newValue {
+                do {
+                    try Locksmith.updateData(data: ["APIkey": APIkey], forUserAccount: APIkeyKey)
+                } catch {
+                    log.severe("Couldn't update APIkey keychain data for institution [\(self)]: \(error)")
+                }
+                
+                // Double check that it saved correctly
+                if APIkey != self.APIkey {
+                    log.severe("Saved APIkeyKey for institution [\(self)] but it didn't work! We must not have keychain access")
+                }
+            } else {
+                do {
+                    try Locksmith.deleteDataForUserAccount(userAccount: APIkeyKey)
+                } catch {
+                    log.severe("Couldn't delete APIkey keychain data for institution [\(self)]: \(error)")
+                }
+                
+                // Double check that it deleted correctly
+                let dictionary = Locksmith.loadDataForUserAccount(userAccount: APIkeyKey)
+                if dictionary != nil {
+                    log.severe("Deleted APIkey for institution [\(self)] but it didn't work! We must not have keychain access")
+                }
+            }
+        }
+    }
+    
+    fileprivate var SecretKey: String {
+        return "Secret institutionId: \(institutionId)"
+    }
+    var Secret: String? {
+        get {
+            var Secret: String? = nil
+            if let dictionary = Locksmith.loadDataForUserAccount(userAccount: SecretKey) {
+                Secret = dictionary["Secret"] as? String
+            }
+            
+            print("get SecretKey: \(SecretKey)  Secret: \(String(describing: Secret))")
+            if APIkeyKey == nil {
+                // We should always be getting an Secret becasuse we never read it until after it's been written
+                log.severe("Tried to read SecretKey for institution [\(self)] but it didn't work! We must not have keychain access")
+            }
+            
+            return Secret
+        }
+        set {
+            print("set SecretKey: \(SecretKey)  newValue: \(String(describing: newValue))")
+            if let Secret = newValue {
+                do {
+                    try Locksmith.updateData(data: ["Secret": Secret], forUserAccount: SecretKey)
+                } catch {
+                    log.severe("Couldn't update Secret keychain data for institution [\(self)]: \(error)")
+                }
+                
+                // Double check that it saved correctly
+                if Secret != self.Secret {
+                    log.severe("Saved SecretKey for institution [\(self)] but it didn't work! We must not have keychain access")
+                }
+            } else {
+                do {
+                    try Locksmith.deleteDataForUserAccount(userAccount: SecretKey)
+                } catch {
+                    log.severe("Couldn't delete Secret keychain data for institution [\(self)]: \(error)")
+                }
+                
+                // Double check that it deleted correctly
+                let dictionary = Locksmith.loadDataForUserAccount(userAccount: SecretKey)
+                if dictionary != nil {
+                    log.severe("Deleted Secret for institution [\(self)] but it didn't work! We must not have keychain access")
+                }
+            }
+        }
+    }
+}
 //from https://stackoverflow.com/questions/24099520/commonhmac-in-swift
 
 fileprivate enum HMACECase {
