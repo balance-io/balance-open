@@ -12,8 +12,8 @@
 		2D4450151EF3A4500023F63C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D4450141EF3A4500023F63C /* Assets.xcassets */; };
 		2D4450181EF3A4500023F63C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D4450161EF3A4500023F63C /* Main.storyboard */; };
 		2D44503A1EF3A53E0023F63C /* AutoLaunchBalanceHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D4450091EF3A4500023F63C /* AutoLaunchBalanceHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		2D6D8AB21F38D85B000B372C /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; };
-		2D6D8AB61F38D987000B372C /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D8AB51F38D987000B372C /* TestingAppDelegate.swift */; };
+		2D4D9BC41F2A3B6F00ABA5CB /* PoloniexAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8147521F1E58C500119FE3 /* PoloniexAPI.swift */; };
+		2D4D9BC71F2A3BA000ABA5CB /* NSURLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8147531F1E58CE00119FE3 /* NSURLRequest.swift */; };
 		2DA7FAB91EF2637700CD8CED /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; };
 		2DF76CE01F212F6F00EE18BB /* CoinbaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF76CDF1F212F6F00EE18BB /* CoinbaseTests.swift */; };
 		530DD1891EF458A400C0DDD3 /* FMDatabasePoolAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 530DD1881EF458A400C0DDD3 /* FMDatabasePoolAdditions.m */; };
@@ -914,6 +914,7 @@
 				5321229A1EEADFE500F4812A /* QCMethod.swift in Sources */,
 				532122181EEAC8F800F4812A /* SyncManager.swift in Sources */,
 				532122B91EEAEAE600F4812A /* Date.swift in Sources */,
+				2D4D9BC71F2A3BA000ABA5CB /* NSURLRequest.swift in Sources */,
 				532122641EEAD75C00F4812A /* SectionedTableView.swift in Sources */,
 				5321223C1EEAD1D100F4812A /* PreferencesSecurityViewController.swift in Sources */,
 				532122831EEADA1100F4812A /* ImageView.swift in Sources */,
@@ -929,6 +930,7 @@
 				5321220C1EEAC89B00F4812A /* CCNStatusItemWindowBackgroundView.m in Sources */,
 				5321229E1EEAE00600F4812A /* SyncButton.swift in Sources */,
 				532122301EEAD1BB00F4812A /* PopoverViewController.swift in Sources */,
+				2D4D9BC41F2A3B6F00ABA5CB /* PoloniexAPI.swift in Sources */,
 				53946FA51EF0035200E921C3 /* CoinbaseApi.swift in Sources */,
 				53F8E2EA1EF1B6E90071FC73 /* Currency.swift in Sources */,
 				532122CD1EEAFF6300F4812A /* NSWindow.swift in Sources */,
@@ -1017,49 +1019,22 @@
 			};
 			name = Release;
 		};
-		2DF76CE41F212F6F00EE18BB /* Debug */ = {
+		2D4D9BC51F2A3B6F00ABA5CB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = Q4G66XSS36;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/BalanceOpen/Frameworks",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = BalanceOpenTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = balance.money.BalanceOpenTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BalanceOpen.app/Contents/MacOS/BalanceOpen";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = BalanceOpenTests;
 			};
 			name = Debug;
 		};
-		2DF76CE51F212F6F00EE18BB /* Release */ = {
+		2D4D9BC61F2A3B6F00ABA5CB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = Q4G66XSS36;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/BalanceOpen/Frameworks",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = BalanceOpenTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = balance.money.BalanceOpenTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BalanceOpen.app/Contents/MacOS/BalanceOpen";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				PRODUCT_NAME = BalanceOpenTests;
 			};
 			name = Release;
 		};
@@ -1240,8 +1215,8 @@
 		2DF76CE61F212F6F00EE18BB /* Build configuration list for PBXNativeTarget "BalanceOpenTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2DF76CE41F212F6F00EE18BB /* Debug */,
-				2DF76CE51F212F6F00EE18BB /* Release */,
+				2D4D9BC51F2A3B6F00ABA5CB /* Debug */,
+				2D4D9BC61F2A3B6F00ABA5CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -8,17 +8,20 @@
 
 import Foundation
 import Security
+import Locksmith
+
+//typealias SuccessErrorBlock2 = (_ success: Bool, _ error: Error?) -> Void
 
 protocol exchangeAPI {
     static func authenticate() -> Bool
-    optional static func handleAuthenticationCallback(state: String, code: String, completion: @escaping SuccessErrorBlock)
+    static func handleAuthenticationCallback(state: String, code: String, completion: @escaping SuccessErrorBlock)
     static func refreshAccessToken(institution: Institution, completion: @escaping SuccessErrorBlock)
     static func updateAccounts(institution: Institution, completion: @escaping SuccessErrorBlock)
     static func processAccounts(_ coinbaseAccounts: [CoinbaseAccount], institution: Institution)
 }
 
 fileprivate let tradingURL = URL(string: "https://poloniex.com/tradingApi")!
-typealias SuccessErrorBlock = (_ success: Bool, _ error: Error) -> Void
+//typealias SuccessErrorBlock = (_ success: Bool, _ error: Error) -> Void
 
 enum PoloniexCommands: String {
     case returnBalances
@@ -62,30 +65,20 @@ enum PoloniexCommands: String {
  
  */
 
-struct PoloniexAPI: exchangeAPI {
-    
-    let body: String
-    let hash: String
+struct PoloniexAPI {
+
     let secret: String
     let APIKey: String
-    var bodyData: Data {
-        return body.data(using: .utf8)!
-    }
-    var urlRequest: URLRequest {
-        var request = URLRequest(url: tradingURL)
-        request.httpMethod = "POST"
-        request.setHeaders(headers: ["Key":APIKey,"Sign":hash])
-        request.httpBody = bodyData
-        return request
-    }
     
-    init(params: [String: String], secret: String, key: String) {
+    init(secret:String, key: String) {
         
         self.secret = secret
         self.APIKey = key
+    }
+    
+    private static func createRequestBodyandHash(params: [String: String], secret: String, key: String) -> (body: String, signedBody: String) {
         let nonce = Int(Date().timeIntervalSince1970*10000)
-        
-        // those components need to be created by request and added to the body, which deppend on the command we want to run - > not init method
+
         var queryItems = [URLQueryItem]()
         for (key, value) in params {
             queryItems.append(URLQueryItem(name: key, value: value))
@@ -95,17 +88,18 @@ struct PoloniexAPI: exchangeAPI {
         var components = URLComponents()
         components.queryItems = queryItems
         
-        ///////
-        
         let body = components.query!
         let signedPOST = PoloniexAPI.hmac(body:body, algorithm: HMACECase.SHA512, key: secret)
         
-        self.body = body
-        self.hash = signedPOST
+        return (body, signedPOST)
     }
     
-    private static func createRequest() {
-        
+    private static func assembleTradingRequest(key: String, body: String, hashBody: String) -> URLRequest {
+        var request = URLRequest(url: tradingURL)
+        request.httpMethod = "POST"
+        request.setHeaders(headers: ["Key":key,"Sign":hashBody])
+        request.httpBody = body.data(using: .utf8)!
+        return request
     }
     
     private static func hmac(body: String, algorithm: HMACECase, key: String) -> String {
@@ -120,7 +114,9 @@ struct PoloniexAPI: exchangeAPI {
     }
     
     func fetchBalances() {
-        let datatask = URLSession.shared.dataTask(with: self.urlRequest) { (data:Data?, response:URLResponse?, error:Error?) in
+        let requestInfo = PoloniexAPI.createRequestBodyandHash(params: ["command":PoloniexCommands.returnBalances.rawValue],secret: self.secret, key: self.APIKey)
+        let urlRequest = PoloniexAPI.assembleTradingRequest(key: self.APIKey, body: requestInfo.body, hashBody: requestInfo.signedBody)
+        let datatask = URLSession.shared.dataTask(with: urlRequest) { (data:Data?, response:URLResponse?, error:Error?) in
             if let safeInfo = data {
                 print("Poloniex Response: \(String(describing: String(data:safeInfo, encoding:.utf8)))")
             }
@@ -142,16 +138,16 @@ extension Institution {
         get {
             var APIkey: String? = nil
             if let dictionary = Locksmith.loadDataForUserAccount(userAccount: APIkeyKey) {
-                APIKey = dictionary["APIkey"] as? String
+                APIkey = dictionary["APIkey"] as? String
             }
             
-            print("get APIkeyKey: \(APIkeyKey)  APIKey: \(String(describing: APIKey))")
-            if APIkeyKey == nil {
+            print("get APIkeyKey: \(APIkeyKey)  APIKey: \(String(describing: APIkey))")
+            if APIkey == nil {
                 // We should always be getting an APIkey becasuse we never read it until after it's been written
                 log.severe("Tried to read APIkey for institution [\(self)] but it didn't work! We must not have keychain access")
             }
             
-            return APIKey
+            return APIkey
         }
         set {
             print("set APIkeyKey: \(APIkeyKey)  newValue: \(String(describing: newValue))")
@@ -193,7 +189,7 @@ extension Institution {
             }
             
             print("get SecretKey: \(SecretKey)  Secret: \(String(describing: Secret))")
-            if APIkeyKey == nil {
+            if Secret == nil {
                 // We should always be getting an Secret becasuse we never read it until after it's been written
                 log.severe("Tried to read SecretKey for institution [\(self)] but it didn't work! We must not have keychain access")
             }
