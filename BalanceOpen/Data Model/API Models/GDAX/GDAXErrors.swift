@@ -18,11 +18,23 @@ internal extension GDAXAPIClient
     }
 }
 
+// MARK: Credentials error
+
 internal extension GDAXAPIClient
 {
     internal enum CredentialsError: Error
     {
         case invalidSecret(message: String)
         case bodyNotValidJSON
+        case dataNotFound(identifier: String)
+    }
+}
+
+internal extension GDAXAPIClient
+{
+    internal enum APIError: Error
+    {
+        case invalidJSON
+        case response(httpResponse: HTTPURLResponse, json: Any)
     }
 }

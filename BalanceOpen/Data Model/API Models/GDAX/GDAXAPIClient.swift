@@ -27,7 +27,7 @@ internal final class GDAXAPIClient
     
     // MARK: Accounts
     
-    internal func fetchAccounts(_ completionHandler: @escaping () -> Void)
+    internal func fetchAccounts(_ completionHandler: @escaping (_ accounts: [Account]?, _ error: APIError?) -> Void)
     {
         guard let unwrappedCredentials = self.credentials else
         {
@@ -36,7 +36,7 @@ internal final class GDAXAPIClient
         }
         
         let requestPath = "/accounts"
-        let headers = try! HTTPHeader(credentials: unwrappedCredentials, requestPath: requestPath, method: "GET", body: [:])
+        let headers = try! AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, method: "GET", body: nil)
         let url = self.server.url().appendingPathComponent(requestPath)
         
         var request = URLRequest(url: url)
@@ -48,138 +48,41 @@ internal final class GDAXAPIClient
         
         // Perform request
         let task = self.session.dataTask(with: request) { (data, response, error) in
-            let json = try! JSONSerialization.jsonObject(with: data!, options: [])
-            print(json)
-            print(data)
-            print(response)
-            print(error)
-        }.resume()
-    }
-}
-
-// MARK: Server
-
-internal extension GDAXAPIClient
-{
-    internal enum Server
-    {
-        case sandbox, production
-        
-        // MARK: URL
-        
-        internal func url() -> URL
-        {
-            switch self
+            guard let httpResponse = response as? HTTPURLResponse,
+                  let json = try? JSONSerialization.jsonObject(with: data!, options: []) else
             {
-            case .production:
-                return URL(string: "https://api.gdax.com")!
-            case .sandbox:
-                return URL(string: "https://api-public.sandbox.gdax.com")!
-            }
-        }
-    }
-}
-
-// MARK: HTTP Header
-
-internal extension GDAXAPIClient
-{
-    internal struct HTTPHeader
-    {
-        // Internal
-        internal let dictionary: [String : String]
-
-        // MARK: Initialization
-        
-        internal init(credentials: Credentials, requestPath: String, method: String, body: [String : Any]) throws
-        {
-            let nowDate = Date()
-            let signature = try credentials.generateSignature(timestamp: nowDate, requestPath: requestPath, body: body, method: method)
-            
-            self.dictionary = [
-                "CB-ACCESS-KEY" : credentials.key,
-                "CB-ACCESS-SIGN" : signature,
-                "CB-ACCESS-TIMESTAMP" : "\(nowDate.timeIntervalSince1970)",
-                "CB-ACCESS-PASSPHRASE" : credentials.passphrase
-            ]
-        }
-    }
-}
-
-// MARK: Credentials
-
-internal extension GDAXAPIClient
-{
-    internal struct Credentials
-    {
-        // Internal
-        internal let key: String
-        internal let secret: String
-        internal let passphrase: String
-        
-        // Private
-        private let decodedSecretData: Data
-        
-        // MARK: Initialization
-        
-        internal init(key: String, secret: String, passphrase: String) throws
-        {
-            guard let decodedSecretData = Data(base64Encoded: secret) else
-            {
-                throw CredentialsError.invalidSecret(message: "Secret is not base64 encoded")
+                return
             }
             
-            self.key = key
-            self.secret = secret
-            self.passphrase = passphrase
-            self.decodedSecretData = decodedSecretData
-        }
-        
-        // MARK: Signature
-        
-        internal func generateSignature(timestamp: Date, requestPath: String, body: [String : Any]?, method: String) throws -> String
-        {
-            // Turn body into JSON string
-            let bodyString: String
-            if let unwrappedBody = body
+            if case 200...299 = httpResponse.statusCode
             {
-                guard let jsonData = try? JSONSerialization.data(withJSONObject: unwrappedBody, options: []),
-                      let jsonString = String(data: jsonData, encoding: .utf8) else
+                guard let accountsJSON = json as? [[String : Any]] else
                 {
-                    throw CredentialsError.bodyNotValidJSON
+                    // return invalid json
+                    fatalError()
                 }
                 
-                bodyString = jsonString
+                // Build accounts
+                var accounts = [GDAXAPIClient.Account]()
+                for accountJSON in accountsJSON
+                {
+                    do
+                    {
+                        let account = try Account(dictionary: accountJSON)
+                        accounts.append(account)
+                    }
+                    catch { }
+                }
+                
+                completionHandler(accounts, nil)
             }
             else
             {
-                bodyString = ""
+                let error = APIError.response(httpResponse: httpResponse, json: json)
+                completionHandler(nil, error)
             }
-            
-            // Message
-            let message = "\(timestamp.timeIntervalSince1970)\(method)\(requestPath)\(bodyString)"
-            guard let messageData = message.data(using: .utf8) else
-            {
-                fatalError()
-            }
-
-            // Create the signature
-            let signatureCapacity = Int(CC_SHA256_DIGEST_LENGTH)
-            let signature = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: signatureCapacity)
-            defer
-            {
-                signature.deallocate(capacity: signatureCapacity)
-            }
-        
-            self.decodedSecretData.withUnsafeBytes({ (secretBytes: UnsafePointer<UInt8>) -> Void in
-                messageData.withUnsafeBytes({ (messageBytes: UnsafePointer<UInt8>) -> Void in
-                    let algorithm = CCHmacAlgorithm(kCCHmacAlgSHA256)
-                    CCHmac(algorithm, secretBytes, self.decodedSecretData.count, messageBytes, messageData.count, signature)
-                })
-            })
-            
-            let signatureData = Data(bytes: signature, count: signatureCapacity)
-            return signatureData.base64EncodedString()
         }
+            
+        task.resume()
     }
 }
