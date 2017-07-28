@@ -24,7 +24,7 @@ fileprivate let session = URLSession(configuration: .default, delegate: certVali
 
 struct CoinbaseApi {
 
-    static func authenticate() -> Bool {
+    @discardableResult static func authenticate() -> Bool {
         let redirectUri = "balancemymoney%3A%2F%2Fcoinbase"
         let responseType = "code"
         let scope = "wallet%3Auser%3Aread,wallet%3Aaccounts%3Aread"
