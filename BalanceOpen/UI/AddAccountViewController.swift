@@ -297,9 +297,12 @@ class AddAccountViewController: NSViewController {
                 
                 buttons.append(button)
                 
-                if source != .coinbase {
+                switch source
+                {
+                case .bitfinex, .plaid, .poloniex:
                     button.alphaValue = 0.5
                     button.isEnabled = false
+                default:()
                 }
                 
                 if isRightColumn {
@@ -330,8 +333,15 @@ class AddAccountViewController: NSViewController {
     
     @objc fileprivate func buttonAction(_ sender: NSButton) {
         if allowSelection, let source = Source(rawValue: sender.tag) {
-            if source == .coinbase {
-                _ = CoinbaseApi.authenticate()
+            switch source
+            {
+            case .coinbase:
+                CoinbaseApi.authenticate()
+            case .gdax:
+                let authViewController = GDAXAuthViewController()
+                authViewController.delegate = self
+                self.presentViewControllerAsModalWindow(authViewController)
+            default:()
             }
         }
     }
@@ -387,5 +397,15 @@ class AddAccountViewController: NSViewController {
             NSEvent.removeMonitor(monitor)
             shortcutMonitor = nil
         }
+    }
+}
+
+// MARK: GDAXAuthViewControllerDelegate
+
+extension AddAccountViewController: GDAXAuthViewControllerDelegate
+{
+    func didSuccessfullyLogin(with credentials: GDAXAPIClient.Credentials, in controller: GDAXAuthViewController)
+    {
+        self.dismissViewController(controller)
     }
 }
