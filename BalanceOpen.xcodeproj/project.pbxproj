@@ -134,6 +134,7 @@
 		53FA53011EF3FA93002990B0 /* InstitutionHeaderBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA52FF1EF3FA93002990B0 /* InstitutionHeaderBars.swift */; };
 		53FA53041EF3FAFE002990B0 /* InstitutionDefaultBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA53021EF3FAFE002990B0 /* InstitutionDefaultBar.swift */; };
 		53FA53051EF3FAFE002990B0 /* InstitutionHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */; };
+		A412352C1F2B318A00C4C6E1 /* GDAXAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A412352B1F2B318A00C4C6E1 /* GDAXAuthViewController.swift */; };
 		A44981E01F28E43200E861AA /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981DF1F28E43200E861AA /* APIClientTests.swift */; };
 		A44981E21F28EE3B00E861AA /* GDAXAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981E11F28EE3B00E861AA /* GDAXAccount.swift */; };
 		A44981E71F28F35200E861AA /* Account.json in Resources */ = {isa = PBXBuildFile; fileRef = A44981E61F28F35200E861AA /* Account.json */; };
@@ -330,6 +331,7 @@
 		53FA52FF1EF3FA93002990B0 /* InstitutionHeaderBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionHeaderBars.swift; sourceTree = "<group>"; };
 		53FA53021EF3FAFE002990B0 /* InstitutionDefaultBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionDefaultBar.swift; sourceTree = "<group>"; };
 		53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionHeaders.swift; sourceTree = "<group>"; };
+		A412352B1F2B318A00C4C6E1 /* GDAXAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAuthViewController.swift; sourceTree = "<group>"; };
 		A44981DF1F28E43200E861AA /* APIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
 		A44981E11F28EE3B00E861AA /* GDAXAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAccount.swift; sourceTree = "<group>"; };
 		A44981E61F28F35200E861AA /* Account.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Account.json; sourceTree = "<group>"; };
@@ -612,6 +614,7 @@
 				532122861EEADA5800F4812A /* TextField.swift */,
 				532122551EEAD65B00F4812A /* View.swift */,
 				532122911EEADE2700F4812A /* VisualEffectView.swift */,
+				A412352B1F2B318A00C4C6E1 /* GDAXAuthViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -977,6 +980,7 @@
 				532122181EEAC8F800F4812A /* SyncManager.swift in Sources */,
 				532122B91EEAEAE600F4812A /* Date.swift in Sources */,
 				532122641EEAD75C00F4812A /* SectionedTableView.swift in Sources */,
+				A412352C1F2B318A00C4C6E1 /* GDAXAuthViewController.swift in Sources */,
 				5321223C1EEAD1D100F4812A /* PreferencesSecurityViewController.swift in Sources */,
 				532122831EEADA1100F4812A /* ImageView.swift in Sources */,
 				5321228C1EEADD0200F4812A /* NetworkStatus.swift in Sources */,
