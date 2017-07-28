@@ -265,7 +265,6 @@ class AddAccountViewController: NSViewController {
         let buttonVertPadding = -1
         let buttonSize = NSRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
         
-        var tag = 2
         var isRightColumn = false
         var topView: NSView? = nil
         for source in buttonSourceOrder {
@@ -274,7 +273,7 @@ class AddAccountViewController: NSViewController {
                 
                 button.target = self
                 button.action = #selector(buttonAction(_:))
-                button.tag = tag
+                button.tag = source.rawValue
                 button.setAccessibilityLabel(source.description)
                 
                 assignBlocks(button: button, bounds: buttonSize, function: drawFunction)
@@ -308,7 +307,6 @@ class AddAccountViewController: NSViewController {
                 }
                 isRightColumn = !isRightColumn
             }
-            tag += 1
         }
     }
     
