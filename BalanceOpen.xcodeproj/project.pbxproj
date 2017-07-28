@@ -469,6 +469,7 @@
 				532122311EEAD1C000F4812A /* Preferences */,
 				532122AD1EEAE6E700F4812A /* Vector Graphics Draw Functions */,
 				532122541EEAD63700F4812A /* Views */,
+				A412352B1F2B318A00C4C6E1 /* GDAXAuthViewController.swift */,
 				5321223E1EEAD2B700F4812A /* AccountsTabTableCells.swift */,
 				532122401EEAD2B700F4812A /* AccountsTabViewController.swift */,
 				532122CE1EEB008700F4812A /* AddAccountViewController.swift */,
@@ -614,7 +615,6 @@
 				532122861EEADA5800F4812A /* TextField.swift */,
 				532122551EEAD65B00F4812A /* View.swift */,
 				532122911EEADE2700F4812A /* VisualEffectView.swift */,
-				A412352B1F2B318A00C4C6E1 /* GDAXAuthViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
