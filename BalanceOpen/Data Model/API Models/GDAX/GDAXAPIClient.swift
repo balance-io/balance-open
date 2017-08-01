@@ -24,9 +24,12 @@ internal final class GDAXAPIClient
     {
         self.server = server
     }
-    
-    // MARK: Accounts
-    
+}
+
+// MARK: Accounts
+
+internal extension GDAXAPIClient
+{
     internal func fetchAccounts(_ completionHandler: @escaping (_ accounts: [Account]?, _ error: APIError?) -> Void)
     {
         guard let unwrappedCredentials = self.credentials else
@@ -45,7 +48,7 @@ internal final class GDAXAPIClient
         // Perform request
         let task = self.session.dataTask(with: request) { (data, response, error) in
             guard let httpResponse = response as? HTTPURLResponse,
-                  let json = try? JSONSerialization.jsonObject(with: data!, options: []) else
+                let json = try? JSONSerialization.jsonObject(with: data!, options: []) else
             {
                 return
             }
@@ -74,10 +77,14 @@ internal final class GDAXAPIClient
             }
             else
             {
-                let error = APIError.response(httpResponse: httpResponse, json: json)
+                let error = APIError.response(httpResponse: httpResponse, data: data)
                 completionHandler(nil, error)
             }
         }
+        
+        task.resume()
+    }
+}
             
         task.resume()
     }

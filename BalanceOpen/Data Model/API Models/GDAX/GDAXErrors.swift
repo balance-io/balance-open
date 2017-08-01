@@ -35,6 +35,6 @@ internal extension GDAXAPIClient
     internal enum APIError: Error
     {
         case invalidJSON
-        case response(httpResponse: HTTPURLResponse, json: Any)
+        case response(httpResponse: HTTPURLResponse, data: Data?)
     }
 }
