@@ -109,7 +109,18 @@ internal extension GDAXAPIClient
         
         internal func save(identifier: String) throws
         {
-            try Locksmith.saveData(data: self.dictionary, forUserAccount: identifier)
+            do
+            {
+                try Locksmith.saveData(data: self.dictionary, forUserAccount: identifier)
+            }
+            catch LocksmithError.duplicate
+            {
+                try Locksmith.updateData(data: self.dictionary, forUserAccount: identifier)
+            }
+            catch let error
+            {
+                throw error
+            }
         }
     }
 }
