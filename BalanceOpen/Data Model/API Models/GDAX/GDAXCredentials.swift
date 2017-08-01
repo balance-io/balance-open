@@ -60,25 +60,20 @@ internal extension GDAXAPIClient
         
         // MARK: Signature
         
-        internal func generateSignature(timestamp: Date, requestPath: String, body: [String : Any]?, method: String) throws -> String
+        internal func generateSignature(timestamp: Date, requestPath: String, body: Data?, method: String) throws -> String
         {
             // Turn body into JSON string
             let bodyString: String
-            if let unwrappedBody = body
+            if let unwrappedBody = body,
+               let dataString = String(data: unwrappedBody, encoding: .utf8)
             {
-                guard let jsonData = try? JSONSerialization.data(withJSONObject: unwrappedBody, options: []),
-                    let jsonString = String(data: jsonData, encoding: .utf8) else
-                {
-                    throw CredentialsError.bodyNotValidJSON
-                }
-                
-                bodyString = jsonString
+                bodyString = dataString
             }
             else
             {
                 bodyString = ""
             }
-            
+
             // Message
             let message = "\(timestamp.timeIntervalSince1970)\(method)\(requestPath)\(bodyString)"
             guard let messageData = message.data(using: .utf8) else

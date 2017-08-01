@@ -18,7 +18,7 @@ internal extension GDAXAPIClient
         
         // MARK: Initialization
         
-        internal init(credentials: Credentials, requestPath: String, method: String, body: [String : Any]?) throws
+        internal init(credentials: Credentials, requestPath: String, method: String, body: Data?) throws
         {
             let nowDate = Date()
             let signature = try credentials.generateSignature(timestamp: nowDate, requestPath: requestPath, body: body, method: method)
