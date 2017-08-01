@@ -85,7 +85,50 @@ internal extension GDAXAPIClient
         task.resume()
     }
 }
+
+// MARK: Withdraw
+
+internal extension GDAXAPIClient
+{
+    internal func make(withdrawal: Withdrawal, completionHandler: @escaping (_ success: Bool, _ error: APIError?) -> Void)
+    {
+        guard let unwrappedCredentials = self.credentials else
+        {
+            // TODO: throw
+            return
+        }
+        
+        let requestPath = "/withdrawals/crypto"
+        let body = withdrawal.jsonData()
+        
+        let headers = try! AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, method: "POST", body: body)
+        let url = self.server.url().appendingPathComponent(requestPath)
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = body
+        
+        request.add(headers: headers.dictionary)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // Perform request
+        let task = self.session.dataTask(with: request) { (data, response, error) in
+            guard let httpResponse = response as? HTTPURLResponse else
+            {
+                return
+            }
             
+            if case 200...299 = httpResponse.statusCode
+            {
+                completionHandler(true, nil)
+            }
+            else
+            {
+                let error = APIError.response(httpResponse: httpResponse, data: data)
+                completionHandler(false, error)
+            }
+        }
+        
         task.resume()
     }
 }
