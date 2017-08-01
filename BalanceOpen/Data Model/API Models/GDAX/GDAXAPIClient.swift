@@ -40,11 +40,7 @@ internal final class GDAXAPIClient
         let url = self.server.url().appendingPathComponent(requestPath)
         
         var request = URLRequest(url: url)
-        
-        for (key, value) in headers.dictionary
-        {
-            request.setValue(value, forHTTPHeaderField: key)
-        }
+        request.add(headers: headers.dictionary)
         
         // Perform request
         let task = self.session.dataTask(with: request) { (data, response, error) in
