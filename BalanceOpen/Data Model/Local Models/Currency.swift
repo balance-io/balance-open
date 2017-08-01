@@ -23,7 +23,8 @@ enum Currency: String {
     var decimals: Int {
         switch self {
         case .btc, .ltc, .eth: return 8
-        default: return 2
+        case .usd, .eur, .gbp: return 2
+        default: return 8
         }
     }
     
@@ -32,8 +33,7 @@ enum Currency: String {
         case .usd: return "$"
         case .eur: return "€"
         case .gbp: return "£"
-        case .btc: return "Ƀ"
-        case .eth: return "Ξ"
+
         default: return self.rawValue + " "
         }
     }

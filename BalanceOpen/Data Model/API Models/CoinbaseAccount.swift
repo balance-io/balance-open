@@ -8,15 +8,6 @@
 
 import Foundation
 
-fileprivate var decimalFormatter: NumberFormatter = {
-    let formatter = NumberFormatter()
-    formatter.generatesDecimalNumbers = true
-    formatter.numberStyle = .decimal
-    formatter.allowsFloats = true
-    formatter.locale = Locale(identifier: "en_US")
-    return formatter
-}()
-
 fileprivate var jsonDateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
@@ -47,13 +38,13 @@ struct CoinbaseAccount {
         let balanceDict: [String: AnyObject] = try checkType(account, name: "balance")
         self.currency = try checkType(balanceDict, name: "currency")
         let balanceAmount: String = try checkType(balanceDict, name: "amount")
-        let balanceAmountDecimal = decimalFormatter.number(from: balanceAmount)?.decimalValue
+        let balanceAmountDecimal = NumberUtils.decimalFormatter.number(from: balanceAmount)?.decimalValue
         self.balance = try checkType(balanceAmountDecimal, name: "balanceAmountDecimal")
         
         let nativeBalanceDict: [String: AnyObject] = try checkType(account, name: "native_balance")
         self.nativeCurrency = try checkType(nativeBalanceDict, name: "currency")
         let nativeBalanceAmount: String = try checkType(nativeBalanceDict, name: "amount")
-        let nativeBalanceAmountDecimal = decimalFormatter.number(from: nativeBalanceAmount)?.decimalValue
+        let nativeBalanceAmountDecimal = NumberUtils.decimalFormatter.number(from: nativeBalanceAmount)?.decimalValue
         self.nativeBalance = try checkType(nativeBalanceAmountDecimal, name: "balanceAmountDecimal")
         
         // TODO: Finish this

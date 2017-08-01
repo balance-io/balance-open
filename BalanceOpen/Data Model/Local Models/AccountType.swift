@@ -34,6 +34,10 @@ enum AccountType: Int, CustomStringConvertible {
     case certificateOfDeposit   = 18
     case mutualFund             = 19
     
+    //other
+    case exchange               = 20
+    case lending                = 21
+    
     init(plaidString: String) {
         switch plaidString {
         case "depository":              self = .depository
@@ -57,6 +61,8 @@ enum AccountType: Int, CustomStringConvertible {
         case "cd":                      self = .cd
         case "certificate of deposit":  self = .certificateOfDeposit
         case "mutual_fund":             self = .mutualFund
+        case "exchange":                self = .exchange
+        case "lending":                 self = .lending
             
         default:                        self = .other
         }
@@ -84,6 +90,8 @@ enum AccountType: Int, CustomStringConvertible {
         case .cd:                    return "CD"
         case .certificateOfDeposit:  return "Certificate of Deposit"
         case .mutualFund:            return "Mutual Fund"
+        case .exchange:              return "Exchange"
+        case .lending:               return "Lending"
         }
     }
 }
