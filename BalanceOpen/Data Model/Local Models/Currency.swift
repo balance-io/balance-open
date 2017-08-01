@@ -13,6 +13,7 @@ enum Currency: String {
     case usd = "USD"
     case eur = "EUR"
     case gbp = "GBP"
+    case cad = "CAD"
     
     // Crypto
     case btc = "BTC"
@@ -30,6 +31,7 @@ enum Currency: String {
     var symbol: String {
         switch self {
         case .usd: return "$"
+        case .cad: return "C$"
         case .eur: return "€"
         case .gbp: return "£"
         case .btc: return "Ƀ"
