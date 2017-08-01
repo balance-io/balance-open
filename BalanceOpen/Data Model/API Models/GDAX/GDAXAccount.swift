@@ -35,7 +35,7 @@ internal extension GDAXAPIClient
                   let heldFundsString = dictionary["hold"] as? String,
                   let heldFunds = Double(heldFundsString) else
             {
-                fatalError()
+                throw GDAXAPIClient.ModelError.invalidJSON(json: dictionary)
             }
             
             self.identifier = identifier
