@@ -134,6 +134,8 @@
 		53FA53011EF3FA93002990B0 /* InstitutionHeaderBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA52FF1EF3FA93002990B0 /* InstitutionHeaderBars.swift */; };
 		53FA53041EF3FAFE002990B0 /* InstitutionDefaultBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA53021EF3FAFE002990B0 /* InstitutionDefaultBar.swift */; };
 		53FA53051EF3FAFE002990B0 /* InstitutionHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */; };
+		A408662A1F30883A00D3FB2E /* GDAXWithdrawal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40866291F30883A00D3FB2E /* GDAXWithdrawal.swift */; };
+		A408662C1F308A4800D3FB2E /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A408662B1F308A4800D3FB2E /* URLRequest.swift */; };
 		A412352C1F2B318A00C4C6E1 /* GDAXAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A412352B1F2B318A00C4C6E1 /* GDAXAuthViewController.swift */; };
 		A44981E01F28E43200E861AA /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981DF1F28E43200E861AA /* APIClientTests.swift */; };
 		A44981E21F28EE3B00E861AA /* GDAXAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981E11F28EE3B00E861AA /* GDAXAccount.swift */; };
@@ -331,6 +333,8 @@
 		53FA52FF1EF3FA93002990B0 /* InstitutionHeaderBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionHeaderBars.swift; sourceTree = "<group>"; };
 		53FA53021EF3FAFE002990B0 /* InstitutionDefaultBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionDefaultBar.swift; sourceTree = "<group>"; };
 		53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionHeaders.swift; sourceTree = "<group>"; };
+		A40866291F30883A00D3FB2E /* GDAXWithdrawal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXWithdrawal.swift; sourceTree = "<group>"; };
+		A408662B1F308A4800D3FB2E /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
 		A412352B1F2B318A00C4C6E1 /* GDAXAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAuthViewController.swift; sourceTree = "<group>"; };
 		A44981DF1F28E43200E861AA /* APIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
 		A44981E11F28EE3B00E861AA /* GDAXAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAccount.swift; sourceTree = "<group>"; };
@@ -557,6 +561,7 @@
 				532122CC1EEAFF6300F4812A /* NSWindow.swift */,
 				5321226C1EEAD7DD00F4812A /* NotificationCenter.swift */,
 				532121FA1EEAC75A00F4812A /* String.swift */,
+				A408662B1F308A4800D3FB2E /* URLRequest.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -743,6 +748,7 @@
 				A4A150181F2A325600790EAC /* GDAXServer.swift */,
 				A4A1501A1F2A32F400790EAC /* GDAXAuthHeaders.swift */,
 				A4A1501C1F2A331B00790EAC /* GDAXCredentials.swift */,
+				A40866291F30883A00D3FB2E /* GDAXWithdrawal.swift */,
 			);
 			path = GDAX;
 			sourceTree = "<group>";
@@ -929,6 +935,7 @@
 				532122981EEADEBD00F4812A /* NSColor.swift in Sources */,
 				532122941EEADE4B00F4812A /* HoverTableRowView.swift in Sources */,
 				532122A01EEAE01400F4812A /* SyncDefaults.swift in Sources */,
+				A408662C1F308A4800D3FB2E /* URLRequest.swift in Sources */,
 				532122581EEAD66000F4812A /* Button.swift in Sources */,
 				5321223D1EEAD1D100F4812A /* PreferencesViewController.swift in Sources */,
 				532121DD1EEAC4DC00F4812A /* FMDatabasePool.m in Sources */,
@@ -1009,6 +1016,7 @@
 				532122901EEADE1D00F4812A /* PaintCodeView.swift in Sources */,
 				532122BD1EEAED3100F4812A /* ChangePasswordViewController.swift in Sources */,
 				532122231EEAC99000F4812A /* CertValidator.m in Sources */,
+				A408662A1F30883A00D3FB2E /* GDAXWithdrawal.swift in Sources */,
 				53FA53011EF3FA93002990B0 /* InstitutionHeaderBars.swift in Sources */,
 				532121DF1EEAC4DC00F4812A /* FMResultSet.m in Sources */,
 				532122B71EEAE93400F4812A /* NSImage.swift in Sources */,
