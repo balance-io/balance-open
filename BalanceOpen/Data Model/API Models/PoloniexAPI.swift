@@ -74,39 +74,14 @@ struct PoloniexAPI: exchangeAPI {
         let urlRequest = PoloniexAPI.assembleTradingRequest(key: key, body: requestInfo.body, hashBody: requestInfo.signedBody)
         let datatask = URLSession.shared.dataTask(with: urlRequest, completionHandler: {(data:Data?, response:URLResponse?, error:Error?) in
             do {
-                if let safeInfo = data {
-                    print("Poloniex Response: \(String(describing: String(data:safeInfo, encoding:.utf8)))")
-                    
+                if let safeData = data {
                     // Create the institution and finish (we do not have access tokens
-                    let institution = Institution(sourceId: .poloniex, sourceInstitutionId: "", name: "Poloniex", nameBreak: nil, primaryColor: .green, secondaryColor: nil, logoData: nil, accessToken: "")
+                    let institution = Institution(sourceId: .poloniex, sourceInstitutionId: "", name: "Poloniex", nameBreak: nil, primaryColor: .green, secondaryColor: nil, logoData: nil, accessToken: nil)
                     institution?.Secret = secret
                     institution?.APIkey = key
                     
                     //create accounts
-                    guard let dict = try JSONSerialization.jsonObject(with: safeInfo, options: .mutableContainers) as? [String: AnyObject], let accountDict = dict as? [String:[String:String]] else {
-                        throw "JSON decoding failed"
-                    }
-                    var poloniexAccounts = [PoloniexAccount]()
-                    let filteredAccountDicts = dict.filter({
-                        do {
-                            let (_, dictionary) = $0
-                            let availableAmount: String = dictionary["available"] as! String
-                            let availableDecimal = Double(availableAmount)
-                            return availableDecimal! != 0.0
-                        } catch {
-                            log.error("Failed to filter data: \(error)")
-                            return false
-                        }
-                        
-                    })
-                    for (currency, dictionary) in filteredAccountDicts {
-                        do {
-                            let poloniexAccount = try PoloniexAccount(dictionary: dictionary as! [String : AnyObject], currency: currency, type: AccountType.exchange)
-                            poloniexAccounts.append(poloniexAccount)
-                        } catch {
-                            log.error("Failed to parse account data: \(error)")
-                        }
-                    }
+                    let poloniexAccounts = try createPoloniexAccounts(data: safeData)
                     processPoloniexAccounts(accounts: poloniexAccounts, institution: institution!)
                 } else {
                     print("Poloniex Error: \(String(describing: error))")
@@ -114,6 +89,7 @@ struct PoloniexAPI: exchangeAPI {
                 }
             }
             catch {
+                log.error("Failed to Poloniex balance login data: \(error)")
             }
             })
         datatask.resume()
@@ -156,21 +132,57 @@ struct PoloniexAPI: exchangeAPI {
         return digest.joined()
     }
     
-    func fetchBalances(secret: String, APIKey: String) {
-        let requestInfo = PoloniexAPI.createRequestBodyandHash(params: ["command":PoloniexCommands.returnBalances.rawValue],secret: secret, key: APIKey)
-        let urlRequest = PoloniexAPI.assembleTradingRequest(key: APIKey, body: requestInfo.body, hashBody: requestInfo.signedBody)
-        let datatask = URLSession.shared.dataTask(with: urlRequest) { (data:Data?, response:URLResponse?, error:Error?) in
-            if let safeInfo = data {
-                print("Poloniex Response: \(String(describing: String(data:safeInfo, encoding:.utf8)))")
+    static func fetchBalances(secret: String, key: String, institution: Institution, completion: @escaping SuccessErrorBlock) {
+        let requestInfo = PoloniexAPI.createRequestBodyandHash(params: ["command":PoloniexCommands.returnCompleteBalances.rawValue],secret: secret, key: key)
+        let urlRequest = PoloniexAPI.assembleTradingRequest(key: key, body: requestInfo.body, hashBody: requestInfo.signedBody)
+        
+        let datatask = URLSession.shared.dataTask(with: urlRequest, completionHandler: {(data:Data?, response:URLResponse?, error:Error?) in
+            do {
+                if let safeData = data {
+                    //create accounts
+                    let poloniexAccounts = try createPoloniexAccounts(data: safeData)
+                    processPoloniexAccounts(accounts: poloniexAccounts, institution: institution)
+                } else {
+                    print("Poloniex Error: \(String(describing: error))")
+                    print("Poloniex Data: \(String(describing: data))")
+                }
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
             }
-            else {
-                print("Poloniex Error: \(String(describing: error))")
-                print("Poloniex Data: \(String(describing: data))")
+            catch {
+                log.error("Failed to Poloniex balance data: \(error)")
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
             }
-        }
+        })
         datatask.resume()
     }
     
+}
+
+fileprivate func createPoloniexAccounts(data: Data) throws -> [PoloniexAccount] {
+    //create accounts
+    guard let dict = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] else {
+        throw "JSON decoding failed"
+    }
+    var poloniexAccounts = [PoloniexAccount]()
+    let filteredAccountDicts = dict.filter({
+        let (_, dictionary) = $0
+        let availableAmount: String = dictionary["available"] as! String
+        let availableDecimal = Double(availableAmount)
+        return availableDecimal! != 0.0
+    })
+    for (currency, dictionary) in filteredAccountDicts {
+        do {
+            let poloniexAccount = try PoloniexAccount(dictionary: dictionary as! [String : AnyObject], currency: currency, type: AccountType.exchange)
+            poloniexAccounts.append(poloniexAccount)
+        } catch {
+            log.error("Failed to parse account data: \(error)")
+        }
+    }
+    return poloniexAccounts
 }
 
 fileprivate func processPoloniexAccounts(accounts: [PoloniexAccount],institution: Institution) {

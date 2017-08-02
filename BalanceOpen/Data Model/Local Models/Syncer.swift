@@ -85,9 +85,16 @@ class Syncer {
                         }
                     }
                 }
-            } else if institution.accessToken != nil {
+            } else if institution.accessToken != nil  {
                 // Valid institution, so sync it
                 syncAccountsAndTransactions(institution: institution, remainingInstitutions: syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
+            } else if institution.sourceId == .poloniex {
+                if let apiKey = institution.APIkey, let secret = institution.Secret {
+                    syncPoloniexAccountsAndTransactions(secret: secret, key: apiKey, institution: institution, remainingInstitutions: syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
+                } else {
+                    //logout and ask for resync
+                    log.error("Failed get api and key for \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name)")
+                }
             }
         } else {
             // No more institutions
@@ -122,6 +129,32 @@ class Syncer {
             self.syncInstitutions(remainingInstitutions, beginDate: beginDate, success: syncingSuccess, errors: syncingErrors)
         }
     }
+    
+    fileprivate func syncPoloniexAccountsAndTransactions(secret:String , key:String ,institution: Institution, remainingInstitutions: [Institution], beginDate: Date, success: Bool, errors: [Error]) {
+        var syncingSuccess = success
+        var syncingErrors = errors
+        
+        let userInfo = Notifications.userInfoForInstitution(institution)
+        NotificationCenter.postOnMainThread(name: Notifications.SyncingInstitution, object: nil, userInfo: userInfo)
+        log.debug("Pulling accounts and transactions for \(institution)")
+        
+        //sync Poloniex
+        PoloniexAPI.fetchBalances(secret: secret, key: key, institution: institution) { success, error in
+            if !success {
+                syncingSuccess = false
+                if let error = error {
+                    syncingErrors.append(error)
+                }
+            }
+            
+            if self.canceled {
+                self.cancelSync(errors: syncingErrors)
+                return
+            }
+            self.syncInstitutions(remainingInstitutions, beginDate: beginDate, success: syncingSuccess, errors: syncingErrors)
+        }
+    }
+
     
     fileprivate func cancelSync(errors: [Error]) {
         completeSync(success: false, errors: errors)
