@@ -64,7 +64,7 @@ class Syncer {
                 // Institution needs a PATCH, so skip
                 log.error("Tried to sync institution \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name) but the password was invalid")
                 syncInstitutions(syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
-            } else if institution.accessToken == nil {
+            } else if institution.accessToken == nil && institution.sourceId == .coinbase {
                 // No access token somehow, so move on to the next one
                 log.severe("Tried to sync institution \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name) but did not find an access token")
                 syncInstitutions(syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
@@ -144,7 +144,9 @@ class Syncer {
                 syncingSuccess = false
                 if let error = error {
                     syncingErrors.append(error)
+                    log.error("Error pulling accounts for \(institution): \(error)")
                 }
+                log.debug("Finished pulling accounts for \(institution)")
             }
             
             if self.canceled {

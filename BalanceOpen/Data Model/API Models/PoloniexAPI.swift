@@ -86,6 +86,7 @@ struct PoloniexAPI: exchangeAPI {
                 } else {
                     print("Poloniex Error: \(String(describing: error))")
                     print("Poloniex Data: \(String(describing: data))")
+                    throw "Error \(String(describing:error))"
                 }
             }
             catch {
@@ -143,6 +144,7 @@ struct PoloniexAPI: exchangeAPI {
                     let poloniexAccounts = try createPoloniexAccounts(data: safeData)
                     processPoloniexAccounts(accounts: poloniexAccounts, institution: institution)
                 } else {
+                    
                     print("Poloniex Error: \(String(describing: error))")
                     print("Poloniex Data: \(String(describing: data))")
                 }
@@ -206,6 +208,7 @@ fileprivate func processPoloniexAccounts(accounts: [PoloniexAccount],institution
         altBalance = altBalance * Decimal(pow(10.0, Double(altDecimals)))
         let altCurrentBalance = (altBalance as NSDecimalNumber).intValue
         
+        //\"SC\":{\"available\":\"26576.40000000\",\"onOrders\":\"0.00000000\",\"btcValue\":\"0.07786885\"},
         //Poloniex doesn't have id's per-se, the id a coin is the coin symbol itself
         _ = Account(institutionId: institution.institutionId, sourceId: institution.sourceId, sourceAccountId: account.currency, sourceInstitutionId: "", accountTypeId: AccountType.exchange, accountSubTypeId: nil, name: account.currency, currency: account.currency, decimals: decimals, currentBalance: currentBalance, availableBalance: nil, number: nil, altCurrency: Currency.btc.rawValue, altDecimals: altDecimals, altCurrentBalance: altCurrentBalance, altAvailableBalance: nil)
     }

@@ -78,7 +78,8 @@ class Institution {
     fileprivate var accessTokenKey: String {
         return "institutionId: \(institutionId)"
     }
-        
+    
+    //we need to deal with the case that accessToken is in fact non existant (gdax, poloniex... etc)
     var accessToken: String? {
         get {
             var accessToken: String? = nil
