@@ -138,7 +138,7 @@ internal extension ShapeShiftAPIClient
 
 internal extension ShapeShiftAPIClient
 {
-    internal func createTransaction(to recipientAddress: String, for amount: Double, pairCode: String, returnAddress: String? = nil, completionHandler: @escaping (_ transactionRequest: TransactionRequest?, _ error: Error?) -> Void)
+    internal func createTransaction(amount: Double, recipientAddress: String, pairCode: String, returnAddress: String? = nil, completionHandler: @escaping (_ transactionRequest: TransactionRequest?, _ error: Error?) -> Void)
     {
         // Body
         var bodyJSON: [String : Any] = [
