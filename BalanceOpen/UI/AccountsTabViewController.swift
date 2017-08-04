@@ -36,6 +36,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     
     init() {
         super.init(nibName: nil, bundle: nil)
+        
+        self.viewModel.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -602,6 +604,11 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         return cell
     }
     
+    func menuForRow(_ row: Int, section: Int, in tableView: SectionedTableView) -> NSMenu?
+    {
+        return self.viewModel.menu(forRow: row, inSection: section)
+    }
+    
     // MARK: Rearranging
     
     func tableView(_ tableView: SectionedTableView, canDragIndex index: TableIndex) -> Bool {
@@ -688,5 +695,16 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         }
         
         return false
+    }
+}
+
+// MARK: AccountsTabViewModelDelegate
+
+extension AccountsTabViewController: AccountsTabViewModelDelegate
+{
+    func didClickTransferMenuItem(from source: Account, to recipient: Account)
+    {
+        let transferFundsViewController = TransferFundsViewController(sourceAccount: source, recipientAccount: recipient)
+        self.presentViewControllerAsModalWindow(transferFundsViewController)
     }
 }

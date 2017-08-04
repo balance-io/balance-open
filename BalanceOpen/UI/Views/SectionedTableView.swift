@@ -30,6 +30,7 @@ import AppKit
     func tableView(_ tableView: SectionedTableView, heightOfRow row: Int, inSection section: Int) -> CGFloat
     func tableView(_ tableView: SectionedTableView, rowViewForRow row: Int, inSection section: Int) -> NSTableRowView?
     func tableView(_ tableView: SectionedTableView, viewForRow row: Int, inSection section: Int) -> NSView?
+    func menuForRow(_ row: Int, section: Int, in tableView: SectionedTableView) -> NSMenu?
     
     // Section support is optional
     @objc optional func tableView(_ tableView: SectionedTableView, heightOfSection section: Int) -> CGFloat
@@ -285,6 +286,15 @@ class SectionedTableView: TableView, NSTableViewDelegate, NSTableViewDataSource 
     //
     
     override func mouseDown(with theEvent: NSEvent) {
+        // For people that don't use secondary click
+        if theEvent.modifierFlags.contains(.control) {
+            if let menu = self.menu(for: theEvent) {
+                NSMenu.popUpContextMenu(menu, with: theEvent, for: self)
+            }
+            
+            return
+        }
+        
         let globalLocation = theEvent.locationInWindow
         let localLocation = self.convert(globalLocation, from: nil)
         
@@ -297,6 +307,31 @@ class SectionedTableView: TableView, NSTableViewDelegate, NSTableViewDataSource 
                 customDelegate?.tableView?(self, clickedSection: clickedIndex.section)
             }
         }
+    }
+    
+    // MARK: Menu item
+
+    override func menu(for event: NSEvent) -> NSMenu? {
+        guard let unwrappedDataSource = self.customDataSource else {
+            return super.menu(for: event)
+        }
+        
+        let eventPoint = self.convert(event.locationInWindow, from: nil)
+        var row = self.row(at: eventPoint)
+        
+        // User is not clicking a specific row
+        if row == -1 {
+            row = self.selectedRow
+        }
+        
+        let index = self.convertRowToIndex(row)
+        
+        if row != self.selectedRow {
+            let rowIndexSet = IndexSet(integer: row)
+            self.selectRowIndexes(rowIndexSet, byExtendingSelection: false)
+        }
+        
+        return unwrappedDataSource.menuForRow(index.row, section: index.section, in: self)
     }
     
     //

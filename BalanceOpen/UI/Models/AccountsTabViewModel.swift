@@ -8,7 +8,16 @@
 
 import Foundation
 
+
+internal protocol AccountsTabViewModelDelegate: class
+{
+    func didClickTransferMenuItem(from source: Account, to recipient: Account)
+}
+
+
 class AccountsTabViewModel: TabViewModel {
+    // Internal
+    internal weak var delegate: AccountsTabViewModelDelegate?
     
     // MARK: Table Data
     var data = OrderedDictionary<Institution, [Account]>()
@@ -116,5 +125,73 @@ class AccountsTabViewModel: TabViewModel {
             return account
         }
         return nil
+    }
+    
+    // MARK: Menu
+    
+    internal func menu(forRow row: Int, inSection section: Int) -> NSMenu?
+    {
+        guard let selectedAccount = self.account(forRow: row, inSection: section) else
+        {
+            return nil
+        }
+        
+        // Accounts to transfer to
+        let transferMenu = NSMenu(title: "Transfer menu")
+        
+        for (institution, accounts) in self.data.values
+        {
+            let institutionMenu = NSMenu(title: institution.name)
+            
+            for account in accounts
+            {
+                if account == selectedAccount
+                {
+                    continue
+                }
+                
+                let accountItem = NSMenuItem(title: account.displayName, action: #selector(self.transferToAccountMenuItemClicked(_:)), keyEquivalent: "")
+                accountItem.target = self
+                
+                let transferAction = TransferRequest(sourceAccount: selectedAccount, recipientAccount: account)
+                accountItem.representedObject = transferAction
+                
+                institutionMenu.addItem(accountItem)
+            }
+            
+            let institutionItem = NSMenuItem(title: institution.name, action: nil, keyEquivalent: "")
+            institutionItem.submenu = institutionMenu
+            transferMenu.addItem(institutionItem)
+        }
+
+        let transferToItem = NSMenuItem(title: "Transfer To", action: nil, keyEquivalent: "")
+        transferToItem.submenu = transferMenu
+        
+        let menu = NSMenu(title: "Account menu")
+        menu.addItem(transferToItem)
+        
+        return menu
+    }
+    
+    @objc private func transferToAccountMenuItemClicked(_ sender: Any)
+    {
+        guard let menuItem = sender as? NSMenuItem,
+              let transferAction = menuItem.representedObject as? TransferRequest else
+        {
+            return
+        }
+        
+        self.delegate?.didClickTransferMenuItem(from: transferAction.sourceAccount, to: transferAction.recipientAccount)
+    }
+}
+
+// MARK: TransferRequest
+
+fileprivate extension AccountsTabViewModel
+{
+    fileprivate struct TransferRequest
+    {
+        fileprivate let sourceAccount: Account
+        fileprivate let recipientAccount: Account
     }
 }

@@ -341,6 +341,10 @@ extension PreferencesAccountsViewController: SectionedTableViewDelegate, Section
             accountsTableView.reloadData()
         }
     }
+    
+    func menuForRow(_ row: Int, section: Int, in tableView: SectionedTableView) -> NSMenu? {
+        return nil
+    }
 }
 
 fileprivate class InstitutionRow: NSTableRowView {
