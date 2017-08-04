@@ -147,6 +147,7 @@
 		A416A5301F320AA400DA6480 /* SSMarketInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A416A52F1F320AA400DA6480 /* SSMarketInformation.swift */; };
 		A416A5321F32180600DA6480 /* SSCoinPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = A416A5311F32180600DA6480 /* SSCoinPair.swift */; };
 		A416A5341F3227B200DA6480 /* SSTransactionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A416A5331F3227B200DA6480 /* SSTransactionRequest.swift */; };
+		A43429701F33548700D17BC6 /* TransferFundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A434296E1F33548700D17BC6 /* TransferFundsViewController.swift */; };
 		A44981E01F28E43200E861AA /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981DF1F28E43200E861AA /* APIClientTests.swift */; };
 		A44981E21F28EE3B00E861AA /* GDAXAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981E11F28EE3B00E861AA /* GDAXAccount.swift */; };
 		A44981E71F28F35200E861AA /* Account.json in Resources */ = {isa = PBXBuildFile; fileRef = A44981E61F28F35200E861AA /* Account.json */; };
@@ -357,6 +358,7 @@
 		A416A52F1F320AA400DA6480 /* SSMarketInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSMarketInformation.swift; sourceTree = "<group>"; };
 		A416A5311F32180600DA6480 /* SSCoinPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSCoinPair.swift; sourceTree = "<group>"; };
 		A416A5331F3227B200DA6480 /* SSTransactionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSTransactionRequest.swift; sourceTree = "<group>"; };
+		A434296E1F33548700D17BC6 /* TransferFundsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferFundsViewController.swift; sourceTree = "<group>"; };
 		A44981DF1F28E43200E861AA /* APIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
 		A44981E11F28EE3B00E861AA /* GDAXAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAccount.swift; sourceTree = "<group>"; };
 		A44981E61F28F35200E861AA /* Account.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Account.json; sourceTree = "<group>"; };
@@ -505,6 +507,7 @@
 				5321222F1EEAD1BB00F4812A /* PopoverViewController.swift */,
 				532122521EEAD5BF00F4812A /* TabsViewController.swift */,
 				532122461EEAD32B00F4812A /* Theme.swift */,
+				A434296E1F33548700D17BC6 /* TransferFundsViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1030,6 +1033,7 @@
 				532122701EEAD7F800F4812A /* Notifications.swift in Sources */,
 				532122A81EEAE3E500F4812A /* DispatchQueue.swift in Sources */,
 				532122BB1EEAED1F00F4812A /* SetPasswordViewController.swift in Sources */,
+				A43429701F33548700D17BC6 /* TransferFundsViewController.swift in Sources */,
 				53946FA31EEF0B0B00E921C3 /* CoinbaseAccount.swift in Sources */,
 				532121B61EEAC2BF00F4812A /* AppDelegate.swift in Sources */,
 				532122AF1EEAE6F700F4812A /* PreferencesAccounts.swift in Sources */,
