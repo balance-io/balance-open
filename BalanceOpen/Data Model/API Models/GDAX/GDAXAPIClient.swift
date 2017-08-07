@@ -16,12 +16,13 @@ internal final class GDAXAPIClient
     
     // Private
     private let server: Server
-    private let session = URLSession(configuration: URLSessionConfiguration.default)
+    private let session: URLSession
     
     // MARK: Initialization
     
-    internal required init(server: Server)
+    internal required init(server: Server, session: URLSession = URLSession(configuration: .default))
     {
+        self.session = session
         self.server = server
     }
 }
@@ -30,12 +31,11 @@ internal final class GDAXAPIClient
 
 internal extension GDAXAPIClient
 {
-    internal func fetchAccounts(_ completionHandler: @escaping (_ accounts: [Account]?, _ error: APIError?) -> Void)
+    internal func fetchAccounts(_ completionHandler: @escaping (_ accounts: [Account]?, _ error: APIError?) -> Void) throws
     {
         guard let unwrappedCredentials = self.credentials else
         {
-            // TODO: throw
-            return
+            throw GDAXAPIClient.CredentialsError.noCredentials
         }
         
         let requestPath = "/accounts"
@@ -90,12 +90,11 @@ internal extension GDAXAPIClient
 
 internal extension GDAXAPIClient
 {
-    internal func make(withdrawal: Withdrawal, completionHandler: @escaping (_ success: Bool, _ error: APIError?) -> Void)
+    internal func make(withdrawal: Withdrawal, completionHandler: @escaping (_ success: Bool, _ error: APIError?) -> Void) throws
     {
         guard let unwrappedCredentials = self.credentials else
         {
-            // TODO: throw
-            return
+            throw GDAXAPIClient.CredentialsError.noCredentials
         }
         
         let requestPath = "/withdrawals/crypto"

@@ -157,7 +157,7 @@ class Syncer {
             
             // Fetch data from GDAX
             self.gdaxAPIClient.credentials = credentials
-            self.gdaxAPIClient.fetchAccounts({ (accounts, error) in
+            try! self.gdaxAPIClient.fetchAccounts({ (accounts, error) in
                 guard let unwrappedAccounts = accounts else
                 {
                     if let unwrappedError = error

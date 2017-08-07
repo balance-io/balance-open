@@ -148,6 +148,10 @@
 		A416A5321F32180600DA6480 /* SSCoinPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = A416A5311F32180600DA6480 /* SSCoinPair.swift */; };
 		A416A5341F3227B200DA6480 /* SSTransactionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A416A5331F3227B200DA6480 /* SSTransactionRequest.swift */; };
 		A43429701F33548700D17BC6 /* TransferFundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A434296E1F33548700D17BC6 /* TransferFundsViewController.swift */; };
+		A417E7F01F34C78F00E2309F /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A417E7EF1F34C78F00E2309F /* MockURLSession.swift */; };
+		A417E7F21F37441400E2309F /* FetchAccounts.json in Resources */ = {isa = PBXBuildFile; fileRef = A417E7F11F37441400E2309F /* FetchAccounts.json */; };
+		A417E7F41F38546700E2309F /* WithdrawToCrypto.json in Resources */ = {isa = PBXBuildFile; fileRef = A417E7F31F38546700E2309F /* WithdrawToCrypto.json */; };
+		A417E7F61F3857E400E2309F /* Error.json in Resources */ = {isa = PBXBuildFile; fileRef = A417E7F51F3857E400E2309F /* Error.json */; };
 		A44981E01F28E43200E861AA /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981DF1F28E43200E861AA /* APIClientTests.swift */; };
 		A44981E21F28EE3B00E861AA /* GDAXAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981E11F28EE3B00E861AA /* GDAXAccount.swift */; };
 		A44981E71F28F35200E861AA /* Account.json in Resources */ = {isa = PBXBuildFile; fileRef = A44981E61F28F35200E861AA /* Account.json */; };
@@ -359,6 +363,10 @@
 		A416A5311F32180600DA6480 /* SSCoinPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSCoinPair.swift; sourceTree = "<group>"; };
 		A416A5331F3227B200DA6480 /* SSTransactionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSTransactionRequest.swift; sourceTree = "<group>"; };
 		A434296E1F33548700D17BC6 /* TransferFundsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferFundsViewController.swift; sourceTree = "<group>"; };
+		A417E7EF1F34C78F00E2309F /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
+		A417E7F11F37441400E2309F /* FetchAccounts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FetchAccounts.json; sourceTree = "<group>"; };
+		A417E7F31F38546700E2309F /* WithdrawToCrypto.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = WithdrawToCrypto.json; sourceTree = "<group>"; };
+		A417E7F51F3857E400E2309F /* Error.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Error.json; sourceTree = "<group>"; };
 		A44981DF1F28E43200E861AA /* APIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
 		A44981E11F28EE3B00E861AA /* GDAXAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAccount.swift; sourceTree = "<group>"; };
 		A44981E61F28F35200E861AA /* Account.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Account.json; sourceTree = "<group>"; };
@@ -770,6 +778,22 @@
 				A416A52D1F31F3D700DA6480 /* ShapeShiftCoinPairTests.swift */,
 			);
 			path = ShapeShiftAPIClient;
+      sourceTree = "<group>";
+    };
+		A417E7ED1F34C6D200E2309F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A417E7EF1F34C78F00E2309F /* MockURLSession.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		A417E7EE1F34C77B00E2309F /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				A4AEE63B1F277B2A00CD1E77 /* GDAXAPIClient */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		A44981E31F28F31700E861AA /* Supporting Files */ = {
@@ -793,6 +817,9 @@
 			isa = PBXGroup;
 			children = (
 				A44981E61F28F35200E861AA /* Account.json */,
+				A417E7F11F37441400E2309F /* FetchAccounts.json */,
+				A417E7F31F38546700E2309F /* WithdrawToCrypto.json */,
+				A417E7F51F3857E400E2309F /* Error.json */,
 			);
 			path = "GDAX API Responses";
 			sourceTree = "<group>";
@@ -817,6 +844,8 @@
 				A416A52A1F31F21A00DA6480 /* ShapeShiftAPIClient */,
 				A4AEE63B1F277B2A00CD1E77 /* GDAXAPIClient */,
 				A416A5271F31EF7D00DA6480 /* Extensions */,
+				A417E7EE1F34C77B00E2309F /* Tests */,
+				A417E7ED1F34C6D200E2309F /* Utilities */,
 				A44981E31F28F31700E861AA /* Supporting Files */,
 			);
 			path = BalanceOpenTests;
@@ -961,7 +990,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A417E7F61F3857E400E2309F /* Error.json in Resources */,
+				A417E7F41F38546700E2309F /* WithdrawToCrypto.json in Resources */,
 				A44981E71F28F35200E861AA /* Account.json in Resources */,
+				A417E7F21F37441400E2309F /* FetchAccounts.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1110,6 +1142,7 @@
 				A416A52C1F31F23C00DA6480 /* ShapeShiftAPIClientTests.swift in Sources */,
 				A44981EB1F28F50500E861AA /* AccountTests.swift in Sources */,
 				A455DEBB1F28D82C0037A805 /* HeadersTests.swift in Sources */,
+				A417E7F01F34C78F00E2309F /* MockURLSession.swift in Sources */,
 				A44981E01F28E43200E861AA /* APIClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
