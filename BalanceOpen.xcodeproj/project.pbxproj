@@ -17,11 +17,12 @@
 		2D60617F1F2B4CE000D83D0E /* PoloniexAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D60617E1F2B4CE000D83D0E /* PoloniexAccount.swift */; };
 		2D6061811F2B543E00D83D0E /* NumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6061801F2B543E00D83D0E /* NumberUtils.swift */; };
 		2DA7FAB91EF2637700CD8CED /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; };
-		2DCFD9CC1F385E9E0009A029 /* PoloniexAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCFD9CB1F385E9E0009A029 /* PoloniexAccountTests.swift */; };
 		2DCFD9D01F385F910009A029 /* PoloniexAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DCFD9CF1F385F910009A029 /* PoloniexAccount.json */; };
 		2DCFD9D41F38603F0009A029 /* CompleteBalancesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DCFD9D31F38603F0009A029 /* CompleteBalancesResponse.json */; };
 		2DCFD9D61F3861E40009A029 /* PoloniexTradingError.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DCFD9D51F3861E40009A029 /* PoloniexTradingError.json */; };
-		2DF76CE01F212F6F00EE18BB /* CoinbaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF76CDF1F212F6F00EE18BB /* CoinbaseTests.swift */; };
+		2DCFD9D81F386D460009A029 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCFD9D71F386D460009A029 /* TestHelpers.swift */; };
+		2DCFD9DA1F38CB130009A029 /* CoinbaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF76CDF1F212F6F00EE18BB /* CoinbaseTests.swift */; };
+		2DCFD9DB1F38CB150009A029 /* PoloniexAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCFD9CB1F385E9E0009A029 /* PoloniexAccountTests.swift */; };
 		530DD1891EF458A400C0DDD3 /* FMDatabasePoolAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 530DD1881EF458A400C0DDD3 /* FMDatabasePoolAdditions.m */; };
 		532121B61EEAC2BF00F4812A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121B51EEAC2BF00F4812A /* AppDelegate.swift */; };
 		532121C61EEAC47300F4812A /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121C51EEAC47300F4812A /* Database.swift */; };
@@ -206,6 +207,7 @@
 		2DCFD9CF1F385F910009A029 /* PoloniexAccount.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PoloniexAccount.json; sourceTree = "<group>"; };
 		2DCFD9D31F38603F0009A029 /* CompleteBalancesResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CompleteBalancesResponse.json; sourceTree = "<group>"; };
 		2DCFD9D51F3861E40009A029 /* PoloniexTradingError.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PoloniexTradingError.json; sourceTree = "<group>"; };
+		2DCFD9D71F386D460009A029 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		2DF76CDD1F212F6F00EE18BB /* BalanceOpenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceOpenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DF76CDF1F212F6F00EE18BB /* CoinbaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseTests.swift; sourceTree = "<group>"; };
 		2DF76CE11F212F6F00EE18BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 			children = (
 				2DF76CDF1F212F6F00EE18BB /* CoinbaseTests.swift */,
 				2DCFD9CB1F385E9E0009A029 /* PoloniexAccountTests.swift */,
+				2DCFD9D71F386D460009A029 /* TestHelpers.swift */,
 				2DCFD9CD1F385F460009A029 /* APIResponses */,
 				2DF76CE11F212F6F00EE18BB /* Info.plist */,
 			);
@@ -880,8 +883,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DF76CE01F212F6F00EE18BB /* CoinbaseTests.swift in Sources */,
-				2DCFD9CC1F385E9E0009A029 /* PoloniexAccountTests.swift in Sources */,
+				2DCFD9DB1F38CB150009A029 /* PoloniexAccountTests.swift in Sources */,
+				2DCFD9D81F386D460009A029 /* TestHelpers.swift in Sources */,
+				2DCFD9DA1F38CB130009A029 /* CoinbaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1063,9 +1067,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BalanceOpen/Frameworks",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/Frameworks";
 				PRODUCT_NAME = BalanceOpenTests;
+				SWIFT_OBJC_BRIDGING_HEADER = "BalanceOpen/Supporting Files/Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -1074,7 +1084,13 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BalanceOpen/Frameworks",
+				);
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/Frameworks";
 				PRODUCT_NAME = BalanceOpenTests;
+				SWIFT_OBJC_BRIDGING_HEADER = "BalanceOpen/Supporting Files/Bridging-Header.h";
 			};
 			name = Release;
 		};
