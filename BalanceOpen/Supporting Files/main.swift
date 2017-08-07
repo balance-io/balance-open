@@ -8,5 +8,9 @@
 
 import AppKit
 
-NSApplication.shared.delegate = AppDelegate()
+let isRunningTests =  ProcessInfo.processInfo
+    .environment["XCTestConfigurationFilePath"] != nil
+let appDelegate = isRunningTests ? TestingAppDelegate() : AppDelegate()
+NSApplication.shared.delegate = appDelegate as? NSApplicationDelegate
 _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
+
