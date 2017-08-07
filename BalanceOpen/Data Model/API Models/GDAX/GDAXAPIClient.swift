@@ -31,12 +31,11 @@ internal final class GDAXAPIClient
 
 internal extension GDAXAPIClient
 {
-    internal func fetchAccounts(_ completionHandler: @escaping (_ accounts: [Account]?, _ error: APIError?) -> Void)
+    internal func fetchAccounts(_ completionHandler: @escaping (_ accounts: [Account]?, _ error: APIError?) -> Void) throws
     {
         guard let unwrappedCredentials = self.credentials else
         {
-            // TODO: throw
-            return
+            throw GDAXAPIClient.CredentialsError.noCredentials
         }
         
         let requestPath = "/accounts"
@@ -91,12 +90,11 @@ internal extension GDAXAPIClient
 
 internal extension GDAXAPIClient
 {
-    internal func make(withdrawal: Withdrawal, completionHandler: @escaping (_ success: Bool, _ error: APIError?) -> Void)
+    internal func make(withdrawal: Withdrawal, completionHandler: @escaping (_ success: Bool, _ error: APIError?) -> Void) throws
     {
         guard let unwrappedCredentials = self.credentials else
         {
-            // TODO: throw
-            return
+            throw GDAXAPIClient.CredentialsError.noCredentials
         }
         
         let requestPath = "/withdrawals/crypto"

@@ -153,7 +153,7 @@ internal final class GDAXAuthViewController: NSViewController
             let credentials = try GDAXAPIClient.Credentials(key: self.keyTextField.stringValue, secret: self.secretTextField.stringValue, passphrase: self.passphraseTextField.stringValue)
             
             self.apiClient.credentials = credentials
-            self.apiClient.fetchAccounts({ [unowned self] (_, error) in
+            try! self.apiClient.fetchAccounts({ [unowned self] (_, error) in
                 guard let unwrappedError = error else
                 {
                     self.delegate?.didSuccessfullyLogin(with: credentials, in: self)
