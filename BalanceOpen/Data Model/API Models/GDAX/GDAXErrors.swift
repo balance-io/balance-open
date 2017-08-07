@@ -24,6 +24,7 @@ internal extension GDAXAPIClient
 {
     internal enum CredentialsError: Error
     {
+        case noCredentials
         case invalidSecret(message: String)
         case bodyNotValidJSON
         case dataNotFound(identifier: String)
@@ -36,5 +37,25 @@ internal extension GDAXAPIClient
     {
         case invalidJSON
         case response(httpResponse: HTTPURLResponse, data: Data?)
+        
+        // MARK: Message
+        
+        internal func message() -> String?
+        {
+            switch self
+            {
+            case .invalidJSON:
+                return "Invalid JSON"
+            case .response(_, let data):
+                guard let unwrappedData = data,
+                      let json = try? JSONSerialization.jsonObject(with: unwrappedData, options: []) as? [String : Any],
+                      let message = json?["message"] as? String else
+                {
+                    return nil
+                }
+                
+                return message
+            }
+        }
     }
 }
