@@ -16,12 +16,13 @@ internal final class GDAXAPIClient
     
     // Private
     private let server: Server
-    private let session = URLSession(configuration: URLSessionConfiguration.default)
+    private let session: URLSession
     
     // MARK: Initialization
     
-    internal required init(server: Server)
+    internal required init(server: Server, session: URLSession = URLSession(configuration: .default))
     {
+        self.session = session
         self.server = server
     }
 }
