@@ -47,7 +47,11 @@ internal extension GDAXAPIClient
         
         internal init(identifier: String) throws
         {
-            guard let data = Locksmith.loadDataForUserAccount(userAccount: identifier),
+            // :( Unable to use namespacing function as we can't call self before
+            // intialization, making this brital. There are tests to catch this
+            // being an issue though.
+            let namespacedIdentifier = "com.GDAXAPIClient.Credentials.\(identifier)"
+            guard let data = Locksmith.loadDataForUserAccount(userAccount: namespacedIdentifier),
                   let key = data["key"] as? String,
                   let secret = data["secret"] as? String,
                   let passphrase = data["passphrase"] as? String else
@@ -104,18 +108,27 @@ internal extension GDAXAPIClient
         
         internal func save(identifier: String) throws
         {
+            let namespacedIdentifier = self.namespacedKeychainIdentifier(identifier)
+            
             do
             {
-                try Locksmith.saveData(data: self.dictionary, forUserAccount: identifier)
+                try Locksmith.saveData(data: self.dictionary, forUserAccount: namespacedIdentifier)
             }
             catch LocksmithError.duplicate
             {
-                try Locksmith.updateData(data: self.dictionary, forUserAccount: identifier)
+                try Locksmith.updateData(data: self.dictionary, forUserAccount: namespacedIdentifier)
             }
             catch let error
             {
                 throw error
             }
+        }
+        
+        // MARK: Keychain
+        
+        private func namespacedKeychainIdentifier(_ identifier: String) -> String
+        {
+            return "com.GDAXAPIClient.Credentials.\(identifier)"
         }
     }
 }
