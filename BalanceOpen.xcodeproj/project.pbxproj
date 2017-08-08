@@ -16,6 +16,15 @@
 		2D4D9BC71F2A3BA000ABA5CB /* NSURLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8147531F1E58CE00119FE3 /* NSURLRequest.swift */; };
 		2D60617F1F2B4CE000D83D0E /* PoloniexAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D60617E1F2B4CE000D83D0E /* PoloniexAccount.swift */; };
 		2D6061811F2B543E00D83D0E /* NumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6061801F2B543E00D83D0E /* NumberUtils.swift */; };
+		2D8339C41F39B2FB00C73DC2 /* BalanceOpenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8339C31F39B2FB00C73DC2 /* BalanceOpenTests.swift */; };
+		2D8339CB1F39B30E00C73DC2 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; };
+		2D8339CC1F39B35400C73DC2 /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D8AB51F38D987000B372C /* TestingAppDelegate.swift */; };
+		2D8339CD1F39B39B00C73DC2 /* CoinbaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF76CDF1F212F6F00EE18BB /* CoinbaseTests.swift */; };
+		2D8339CE1F39B39D00C73DC2 /* PoloniexAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCFD9CB1F385E9E0009A029 /* PoloniexAccountTests.swift */; };
+		2D8339CF1F39B39F00C73DC2 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCFD9D71F386D460009A029 /* TestHelpers.swift */; };
+		2D8339D01F39B3F400C73DC2 /* PoloniexAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DCFD9CF1F385F910009A029 /* PoloniexAccount.json */; };
+		2D8339D11F39B3F600C73DC2 /* PoloniexTradingError.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DCFD9D51F3861E40009A029 /* PoloniexTradingError.json */; };
+		2D8339D21F39B3F800C73DC2 /* CompleteBalancesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DCFD9D31F38603F0009A029 /* CompleteBalancesResponse.json */; };
 		2DA7FAB91EF2637700CD8CED /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; };
 		530DD1891EF458A400C0DDD3 /* FMDatabasePoolAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 530DD1881EF458A400C0DDD3 /* FMDatabasePoolAdditions.m */; };
 		532121B61EEAC2BF00F4812A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121B51EEAC2BF00F4812A /* AppDelegate.swift */; };
@@ -140,6 +149,16 @@
 		53FA53051EF3FAFE002990B0 /* InstitutionHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		2D8339C61F39B2FB00C73DC2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 532121AA1EEAC2BF00F4812A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 532121B11EEAC2BF00F4812A;
+			remoteInfo = BalanceOpen;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		2D4450391EF3A4DF0023F63C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -181,11 +200,14 @@
 		2D4450141EF3A4500023F63C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D4450171EF3A4500023F63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2D4450191EF3A4500023F63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2D6D8AB51F38D987000B372C /* TestingAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		2D60617E1F2B4CE000D83D0E /* PoloniexAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAccount.swift; sourceTree = "<group>"; };
 		2D6061801F2B543E00D83D0E /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
+		2D6D8AB51F38D987000B372C /* TestingAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		2D8147521F1E58C500119FE3 /* PoloniexApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexApi.swift; sourceTree = "<group>"; };
 		2D8147531F1E58CE00119FE3 /* NSURLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSURLRequest.swift; sourceTree = "<group>"; };
+		2D8339C11F39B2FA00C73DC2 /* BalanceOpenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceOpenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D8339C31F39B2FB00C73DC2 /* BalanceOpenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceOpenTests.swift; sourceTree = "<group>"; };
+		2D8339C51F39B2FB00C73DC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DA7FAB81EF2637700CD8CED /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		2DCFD9CB1F385E9E0009A029 /* PoloniexAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAccountTests.swift; sourceTree = "<group>"; };
 		2DCFD9CF1F385F910009A029 /* PoloniexAccount.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PoloniexAccount.json; sourceTree = "<group>"; };
@@ -331,7 +353,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D0398191F38CED10094467B /* Sparkle.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D8339BE1F39B2FA00C73DC2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D8339CB1F39B30E00C73DC2 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +407,15 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		2D8339C21F39B2FB00C73DC2 /* BalanceOpenTests */ = {
+			isa = PBXGroup;
+			children = (
+				2D8339C31F39B2FB00C73DC2 /* BalanceOpenTests.swift */,
+				2D8339C51F39B2FB00C73DC2 /* Info.plist */,
+			);
+			path = BalanceOpenTests;
+			sourceTree = "<group>";
+		};
 		2DCFD9CD1F385F460009A029 /* APIResponses */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,6 +452,7 @@
 				532121B41EEAC2BF00F4812A /* BalanceOpen */,
 				2D44500A1EF3A4500023F63C /* AutoLaunchBalanceHelper */,
 				2DF76CDE1F212F6F00EE18BB /* BalanceOpenTests */,
+				2D8339C21F39B2FB00C73DC2 /* BalanceOpenTests */,
 				532121B31EEAC2BF00F4812A /* Products */,
 				538A2C661EFD278000C542C4 /* Frameworks */,
 			);
@@ -424,6 +463,7 @@
 			children = (
 				532121B21EEAC2BF00F4812A /* BalanceOpen.app */,
 				2D4450091EF3A4500023F63C /* AutoLaunchBalanceHelper.app */,
+				2D8339C11F39B2FA00C73DC2 /* BalanceOpenTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -734,6 +774,24 @@
 			productReference = 2D4450091EF3A4500023F63C /* AutoLaunchBalanceHelper.app */;
 			productType = "com.apple.product-type.application";
 		};
+		2D8339C01F39B2FA00C73DC2 /* BalanceOpenTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2D8339CA1F39B2FB00C73DC2 /* Build configuration list for PBXNativeTarget "BalanceOpenTests" */;
+			buildPhases = (
+				2D8339BD1F39B2FA00C73DC2 /* Sources */,
+				2D8339BE1F39B2FA00C73DC2 /* Frameworks */,
+				2D8339BF1F39B2FA00C73DC2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2D8339C71F39B2FB00C73DC2 /* PBXTargetDependency */,
+			);
+			name = BalanceOpenTests;
+			productName = BalanceOpenTests;
+			productReference = 2D8339C11F39B2FA00C73DC2 /* BalanceOpenTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		532121B11EEAC2BF00F4812A /* BalanceOpen */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 532121C11EEAC2BF00F4812A /* Build configuration list for PBXNativeTarget "BalanceOpen" */;
@@ -767,6 +825,11 @@
 						DevelopmentTeam = Q4G66XSS36;
 						ProvisioningStyle = Automatic;
 					};
+					2D8339C01F39B2FA00C73DC2 = {
+						CreatedOnToolsVersion = 9.0;
+						DevelopmentTeam = Q4G66XSS36;
+						TestTargetID = 532121B11EEAC2BF00F4812A;
+					};
 					532121B11EEAC2BF00F4812A = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = Q4G66XSS36;
@@ -790,6 +853,7 @@
 			targets = (
 				532121B11EEAC2BF00F4812A /* BalanceOpen */,
 				2D4450081EF3A4500023F63C /* AutoLaunchBalanceHelper */,
+				2D8339C01F39B2FA00C73DC2 /* BalanceOpenTests */,
 			);
 		};
 /* End PBXProject section */
@@ -801,6 +865,16 @@
 			files = (
 				2D4450151EF3A4500023F63C /* Assets.xcassets in Resources */,
 				2D4450181EF3A4500023F63C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D8339BF1F39B2FA00C73DC2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D8339D11F39B3F600C73DC2 /* PoloniexTradingError.json in Resources */,
+				2D8339D21F39B3F800C73DC2 /* CompleteBalancesResponse.json in Resources */,
+				2D8339D01F39B3F400C73DC2 /* PoloniexAccount.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -825,6 +899,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2D8339BD1F39B2FA00C73DC2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D8339CE1F39B39D00C73DC2 /* PoloniexAccountTests.swift in Sources */,
+				2D8339C41F39B2FB00C73DC2 /* BalanceOpenTests.swift in Sources */,
+				2D8339CD1F39B39B00C73DC2 /* CoinbaseTests.swift in Sources */,
+				2D8339CF1F39B39F00C73DC2 /* TestHelpers.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		532121AE1EEAC2BF00F4812A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -834,7 +919,6 @@
 				532121C61EEAC47300F4812A /* Database.swift in Sources */,
 				5321221B1EEAC90C00F4812A /* Defaults.swift in Sources */,
 				532122871EEADA5800F4812A /* TextField.swift in Sources */,
-				2D6D8AB61F38D987000B372C /* TestingAppDelegate.swift in Sources */,
 				532122BF1EEAED4200F4812A /* DisablePasswordViewController.swift in Sources */,
 				532122141EEAC8E400F4812A /* Logging.swift in Sources */,
 				532122721EEAD80B00F4812A /* Utils.swift in Sources */,
@@ -892,6 +976,7 @@
 				5321228A1EEADC9600F4812A /* ObjC.m in Sources */,
 				5321220A1EEAC89B00F4812A /* CCNStatusItemDropView.m in Sources */,
 				5321229A1EEADFE500F4812A /* QCMethod.swift in Sources */,
+				2D8339CC1F39B35400C73DC2 /* TestingAppDelegate.swift in Sources */,
 				532122181EEAC8F800F4812A /* SyncManager.swift in Sources */,
 				532122B91EEAEAE600F4812A /* Date.swift in Sources */,
 				2D4D9BC71F2A3BA000ABA5CB /* NSURLRequest.swift in Sources */,
@@ -936,6 +1021,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2D8339C71F39B2FB00C73DC2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 532121B11EEAC2BF00F4812A /* BalanceOpen */;
+			targetProxy = 2D8339C61F39B2FB00C73DC2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2D4450161EF3A4500023F63C /* Main.storyboard */ = {
@@ -988,6 +1081,52 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		2D8339C81F39B2FB00C73DC2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = Q4G66XSS36;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BalanceOpen/Frameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = BalanceOpenTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = balance.money.BalanceOpenTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BalanceOpen.app/Contents/MacOS/BalanceOpen";
+			};
+			name = Debug;
+		};
+		2D8339C91F39B2FB00C73DC2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = Q4G66XSS36;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BalanceOpen/Frameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = BalanceOpenTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = balance.money.BalanceOpenTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BalanceOpen.app/Contents/MacOS/BalanceOpen";
 			};
 			name = Release;
 		};
@@ -1161,6 +1300,15 @@
 			buildConfigurations = (
 				2D4450301EF3A4510023F63C /* Debug */,
 				2D4450311EF3A4510023F63C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D8339CA1F39B2FB00C73DC2 /* Build configuration list for PBXNativeTarget "BalanceOpenTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D8339C81F39B2FB00C73DC2 /* Debug */,
+				2D8339C91F39B2FB00C73DC2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
