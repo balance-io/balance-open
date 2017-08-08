@@ -1,8 +1,8 @@
 {
-  "commitish" : "5d75c2abe8ae48bb9a04dadfaa8df60a5a1fdee8",
+  "commitish" : "6725b31e4e25fac168cab75c8eabebeca6236ff8",
   "Mac" : [
     {
-      "hash" : "bb390df83663efb1ca221e2e5c16bac1bdcbe6ad6f6ac1fcfeff8744c553a887",
+      "hash" : "78d2544d65e497982fec534bf4d836c3b53e34adb4a27b67ecba47d1e2a7e034",
       "name" : "SnapKit"
     }
   ]

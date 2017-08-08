@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13178.6"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,6 +15,9 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="294" y="362" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+                        <connections>
+                            <outlet property="delegate" destination="map-cP-kFL" id="lW8-OP-T1b"/>
+                        </connections>
                     </window>
                     <connections>
                         <segue destination="hVY-gq-v56" kind="relationship" relationship="window.shadowedContentViewController" id="L4l-wd-xtp"/>
@@ -667,11 +670,7 @@
                             </menuItem>
                         </items>
                     </menu>
-                    <connections>
-                        <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
-                    </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="BalanceOpen" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <customObject id="DSU-N3-xMq" customClass="SUUpdater"/>
             </objects>
@@ -697,6 +696,7 @@
                         </connections>
                     </tabView>
                     <connections>
+                        <outlet property="tabView" destination="SS2-JJ-fG8" id="WPr-iY-6Tl"/>
                         <segue destination="Yil-VZ-ttf" kind="relationship" relationship="tabItems" id="JVQ-Lx-wjN"/>
                         <segue destination="KH6-LF-Rm2" kind="relationship" relationship="tabItems" id="i1t-Dg-ETH"/>
                         <segue destination="nW7-Wz-2se" kind="relationship" relationship="tabItems" id="jyv-u2-OLc"/>
