@@ -1,5 +1,5 @@
 //
-//  PoloniexAPI.swift
+//  PoloniexApi.swift
 //  BalanceForBlockchain
 //
 //  Created by Raimon Lapuente on 13/06/2017.
@@ -12,7 +12,7 @@ import Locksmith
 
 //typealias SuccessErrorBlock2 = (_ success: Bool, _ error: Error?) -> Void
 
-protocol exchangeAPI {
+protocol ExchangeApi {
     static func authenticate(secret: String, key: String)
 //    static func handleAuthenticationCallback(state: String, code: String, completion: @escaping SuccessErrorBlock)
 //    static func refreshAccessToken(institution: Institution, completion: @escaping SuccessErrorBlock)
@@ -65,20 +65,20 @@ enum PoloniexCommands: String {
  
  */
 
-struct PoloniexAPI: exchangeAPI {
+struct PoloniexApi: ExchangeApi {
     
     //Poloniex doesn't have an authenticate method "per-se" so we use the returnBalances call to validate the key-secret pair for login
     static func authenticate(secret: String, key: String) {
         
-        let requestInfo = PoloniexAPI.createRequestBodyandHash(params: ["command":PoloniexCommands.returnCompleteBalances.rawValue],secret: secret, key: key)
-        let urlRequest = PoloniexAPI.assembleTradingRequest(key: key, body: requestInfo.body, hashBody: requestInfo.signedBody)
-        let datatask = URLSession.shared.dataTask(with: urlRequest, completionHandler: {(data:Data?, response:URLResponse?, error:Error?) in
+        let requestInfo = PoloniexApi.createRequestBodyandHash(params: ["command":PoloniexCommands.returnCompleteBalances.rawValue],secret: secret, key: key)
+        let urlRequest = PoloniexApi.assembleTradingRequest(key: key, body: requestInfo.body, hashBody: requestInfo.signedBody)
+        let datatask = URLSession.shared.dataTask(with: urlRequest, completionHandler: {(data: Data?, response: URLResponse?, error: Error?) in
             do {
                 if let safeData = data {
                     // Create the institution and finish (we do not have access tokens
                     let institution = Institution(sourceId: .poloniex, sourceInstitutionId: "", name: "Poloniex", nameBreak: nil, primaryColor: .green, secondaryColor: nil, logoData: nil, accessToken: nil)
-                    institution?.Secret = secret
-                    institution?.APIkey = key
+                    institution?.secret = secret
+                    institution?.apiKey = key
                     
                     //create accounts
                     let poloniexAccounts = try createPoloniexAccounts(data: safeData)
@@ -92,7 +92,7 @@ struct PoloniexAPI: exchangeAPI {
             catch {
                 log.error("Failed to Poloniex balance login data: \(error)")
             }
-            })
+        })
         datatask.resume()
     }
     
@@ -109,9 +109,9 @@ struct PoloniexAPI: exchangeAPI {
         components.queryItems = queryItems
         
         let body = components.query!
-        let signedPOST = PoloniexAPI.hmac(body:body, algorithm: HMACECase.SHA512, key: secret)
+        let signedPost = CryptoAlgorithm.sha512.hmac(body: body, key: secret)
         
-        return (body, signedPOST)
+        return (body, signedPost)
     }
     
     private static func assembleTradingRequest(key: String, body: String, hashBody: String) -> URLRequest {
@@ -122,20 +122,9 @@ struct PoloniexAPI: exchangeAPI {
         return request
     }
     
-    private static func hmac(body: String, algorithm: HMACECase, key: String) -> String {
-        let cKey = key.cString(using: String.Encoding.utf8)
-        let str = body.cString(using: String.Encoding.utf8)
-        var result = [CUnsignedChar](repeating: 0, count: Int(algorithm.digestLength))
-        
-        CCHmac(algorithm.HMACAlgorithm, cKey!, Int(strlen(cKey!)), str!, Int(strlen(str!)), &result)
-        let digest = result.map { String(format: "%02hhx", $0) }
-        
-        return digest.joined()
-    }
-    
     static func fetchBalances(secret: String, key: String, institution: Institution, completion: @escaping SuccessErrorBlock) {
-        let requestInfo = PoloniexAPI.createRequestBodyandHash(params: ["command":PoloniexCommands.returnCompleteBalances.rawValue],secret: secret, key: key)
-        let urlRequest = PoloniexAPI.assembleTradingRequest(key: key, body: requestInfo.body, hashBody: requestInfo.signedBody)
+        let requestInfo = PoloniexApi.createRequestBodyandHash(params: ["command":PoloniexCommands.returnCompleteBalances.rawValue],secret: secret, key: key)
+        let urlRequest = PoloniexApi.assembleTradingRequest(key: key, body: requestInfo.body, hashBody: requestInfo.signedBody)
         
         let datatask = URLSession.shared.dataTask(with: urlRequest, completionHandler: {(data:Data?, response:URLResponse?, error:Error?) in
             do {
@@ -223,46 +212,46 @@ fileprivate func processPoloniexAccounts(accounts: [PoloniexAccount],institution
 }
 
 extension Institution {
-    fileprivate var APIkeyKey: String {
-        return "APIkey institutionId: \(institutionId)"
+    fileprivate var apiKeyKey: String {
+        return "apiKey institutionId: \(institutionId)"
     }
-    var APIkey: String? {
+    var apiKey: String? {
         get {
-            var APIkey: String? = nil
-            if let dictionary = Locksmith.loadDataForUserAccount(userAccount: APIkeyKey) {
-                APIkey = dictionary["APIkey"] as? String
+            var apiKey: String? = nil
+            if let dictionary = Locksmith.loadDataForUserAccount(userAccount: apiKeyKey) {
+                apiKey = dictionary["apiKey"] as? String
             }
             
-            print("get APIkeyKey: \(APIkeyKey)  APIKey: \(String(describing: APIkey))")
-            if APIkey == nil {
-                // We should always be getting an APIkey becasuse we never read it until after it's been written
+            print("get apiKeyKey: \(apiKeyKey)  APIKey: \(String(describing: apiKey))")
+            if apiKey == nil {
+                // We should always be getting an apiKey becasuse we never read it until after it's been written
                 log.severe("Tried to read APIkey for institution [\(self)] but it didn't work! We must not have keychain access")
             }
             
-            return APIkey
+            return apiKey
         }
         set {
-            print("set APIkeyKey: \(APIkeyKey)  newValue: \(String(describing: newValue))")
-            if let APIkey = newValue {
+            print("set apiKeyKey: \(apiKeyKey)  newValue: \(String(describing: newValue))")
+            if let apiKey = newValue {
                 do {
-                    try Locksmith.updateData(data: ["APIkey": APIkey], forUserAccount: APIkeyKey)
+                    try Locksmith.updateData(data: ["apiKey": apiKey], forUserAccount: apiKeyKey)
                 } catch {
                     log.severe("Couldn't update APIkey keychain data for institution [\(self)]: \(error)")
                 }
                 
                 // Double check that it saved correctly
-                if APIkey != self.APIkey {
-                    log.severe("Saved APIkeyKey for institution [\(self)] but it didn't work! We must not have keychain access")
+                if apiKey != self.apiKey {
+                    log.severe("Saved apiKeyKey for institution [\(self)] but it didn't work! We must not have keychain access")
                 }
             } else {
                 do {
-                    try Locksmith.deleteDataForUserAccount(userAccount: APIkeyKey)
+                    try Locksmith.deleteDataForUserAccount(userAccount: apiKeyKey)
                 } catch {
                     log.severe("Couldn't delete APIkey keychain data for institution [\(self)]: \(error)")
                 }
                 
                 // Double check that it deleted correctly
-                let dictionary = Locksmith.loadDataForUserAccount(userAccount: APIkeyKey)
+                let dictionary = Locksmith.loadDataForUserAccount(userAccount: apiKeyKey)
                 if dictionary != nil {
                     log.severe("Deleted APIkey for institution [\(self)] but it didn't work! We must not have keychain access")
                 }
@@ -270,72 +259,50 @@ extension Institution {
         }
     }
     
-    fileprivate var SecretKey: String {
-        return "Secret institutionId: \(institutionId)"
+    fileprivate var secretKey: String {
+        return "secret institutionId: \(institutionId)"
     }
-    var Secret: String? {
+    var secret: String? {
         get {
-            var Secret: String? = nil
-            if let dictionary = Locksmith.loadDataForUserAccount(userAccount: SecretKey) {
-                Secret = dictionary["Secret"] as? String
+            var secret: String? = nil
+            if let dictionary = Locksmith.loadDataForUserAccount(userAccount: secretKey) {
+                secret = dictionary["secret"] as? String
             }
             
-            print("get SecretKey: \(SecretKey)  Secret: \(String(describing: Secret))")
-            if Secret == nil {
-                // We should always be getting an Secret becasuse we never read it until after it's been written
-                log.severe("Tried to read SecretKey for institution [\(self)] but it didn't work! We must not have keychain access")
+            print("get secretKey: \(secretKey)  secret: \(String(describing: secret))")
+            if secret == nil {
+                // We should always be getting an secret becasuse we never read it until after it's been written
+                log.severe("Tried to read secretKey for institution [\(self)] but it didn't work! We must not have keychain access")
             }
             
-            return Secret
+            return secret
         }
         set {
-            print("set SecretKey: \(SecretKey)  newValue: \(String(describing: newValue))")
-            if let Secret = newValue {
+            print("set secretKey: \(secretKey)  newValue: \(String(describing: newValue))")
+            if let secret = newValue {
                 do {
-                    try Locksmith.updateData(data: ["Secret": Secret], forUserAccount: SecretKey)
+                    try Locksmith.updateData(data: ["secret": secret], forUserAccount: secretKey)
                 } catch {
-                    log.severe("Couldn't update Secret keychain data for institution [\(self)]: \(error)")
+                    log.severe("Couldn't update secret keychain data for institution [\(self)]: \(error)")
                 }
                 
                 // Double check that it saved correctly
-                if Secret != self.Secret {
-                    log.severe("Saved SecretKey for institution [\(self)] but it didn't work! We must not have keychain access")
+                if secret != self.secret {
+                    log.severe("Saved secretKey for institution [\(self)] but it didn't work! We must not have keychain access")
                 }
             } else {
                 do {
-                    try Locksmith.deleteDataForUserAccount(userAccount: SecretKey)
+                    try Locksmith.deleteDataForUserAccount(userAccount: secretKey)
                 } catch {
-                    log.severe("Couldn't delete Secret keychain data for institution [\(self)]: \(error)")
+                    log.severe("Couldn't delete secret keychain data for institution [\(self)]: \(error)")
                 }
                 
                 // Double check that it deleted correctly
-                let dictionary = Locksmith.loadDataForUserAccount(userAccount: SecretKey)
+                let dictionary = Locksmith.loadDataForUserAccount(userAccount: secretKey)
                 if dictionary != nil {
-                    log.severe("Deleted Secret for institution [\(self)] but it didn't work! We must not have keychain access")
+                    log.severe("Deleted secret for institution [\(self)] but it didn't work! We must not have keychain access")
                 }
             }
         }
-    }
-}
-//from https://stackoverflow.com/questions/24099520/commonhmac-in-swift
-
-fileprivate enum HMACECase {
-    case SHA512
-    
-    var HMACAlgorithm: CCHmacAlgorithm {
-        var algorithm: Int = 0
-        switch self {
-        case .SHA512:   algorithm = kCCHmacAlgSHA512
-        }
-        return CCHmacAlgorithm(algorithm)
-    }
-    
-    var digestLength: Int {
-        var length: CInt = 0
-        switch self {
-        case .SHA512:
-            length = CC_SHA512_DIGEST_LENGTH
-        }
-        return Int(length)
     }
 }

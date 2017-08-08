@@ -24,7 +24,6 @@ enum Currency: String {
         switch self {
         case .btc, .ltc, .eth: return 8
         case .usd, .eur, .gbp: return 2
-        default: return 8
         }
     }
     

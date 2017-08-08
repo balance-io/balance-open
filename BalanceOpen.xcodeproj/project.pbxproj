@@ -12,7 +12,7 @@
 		2D4450151EF3A4500023F63C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D4450141EF3A4500023F63C /* Assets.xcassets */; };
 		2D4450181EF3A4500023F63C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D4450161EF3A4500023F63C /* Main.storyboard */; };
 		2D44503A1EF3A53E0023F63C /* AutoLaunchBalanceHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D4450091EF3A4500023F63C /* AutoLaunchBalanceHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		2D4D9BC41F2A3B6F00ABA5CB /* PoloniexAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8147521F1E58C500119FE3 /* PoloniexAPI.swift */; };
+		2D4D9BC41F2A3B6F00ABA5CB /* PoloniexApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8147521F1E58C500119FE3 /* PoloniexApi.swift */; };
 		2D4D9BC71F2A3BA000ABA5CB /* NSURLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8147531F1E58CE00119FE3 /* NSURLRequest.swift */; };
 		2D60617F1F2B4CE000D83D0E /* PoloniexAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D60617E1F2B4CE000D83D0E /* PoloniexAccount.swift */; };
 		2D6061811F2B543E00D83D0E /* NumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6061801F2B543E00D83D0E /* NumberUtils.swift */; };
@@ -184,7 +184,7 @@
 		2D6D8AB51F38D987000B372C /* TestingAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		2D60617E1F2B4CE000D83D0E /* PoloniexAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAccount.swift; sourceTree = "<group>"; };
 		2D6061801F2B543E00D83D0E /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
-		2D8147521F1E58C500119FE3 /* PoloniexAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAPI.swift; sourceTree = "<group>"; };
+		2D8147521F1E58C500119FE3 /* PoloniexApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexApi.swift; sourceTree = "<group>"; };
 		2D8147531F1E58CE00119FE3 /* NSURLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSURLRequest.swift; sourceTree = "<group>"; };
 		2DA7FAB81EF2637700CD8CED /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		2DCFD9CB1F385E9E0009A029 /* PoloniexAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAccountTests.swift; sourceTree = "<group>"; };
@@ -707,7 +707,7 @@
 			children = (
 				53946FA21EEF0B0B00E921C3 /* CoinbaseAccount.swift */,
 				53946FA41EF0035200E921C3 /* CoinbaseApi.swift */,
-				2D8147521F1E58C500119FE3 /* PoloniexAPI.swift */,
+				2D8147521F1E58C500119FE3 /* PoloniexApi.swift */,
 				2D60617E1F2B4CE000D83D0E /* PoloniexAccount.swift */,
 			);
 			path = "API Models";
@@ -910,7 +910,7 @@
 				5321220C1EEAC89B00F4812A /* CCNStatusItemWindowBackgroundView.m in Sources */,
 				5321229E1EEAE00600F4812A /* SyncButton.swift in Sources */,
 				532122301EEAD1BB00F4812A /* PopoverViewController.swift in Sources */,
-				2D4D9BC41F2A3B6F00ABA5CB /* PoloniexAPI.swift in Sources */,
+				2D4D9BC41F2A3B6F00ABA5CB /* PoloniexApi.swift in Sources */,
 				53946FA51EF0035200E921C3 /* CoinbaseApi.swift in Sources */,
 				53F8E2EA1EF1B6E90071FC73 /* Currency.swift in Sources */,
 				532122CD1EEAFF6300F4812A /* NSWindow.swift in Sources */,
