@@ -197,7 +197,6 @@ fileprivate func processPoloniexAccounts(accounts: [PoloniexAccount],institution
         altBalance = altBalance * Decimal(pow(10.0, Double(altDecimals)))
         let altCurrentBalance = (altBalance as NSDecimalNumber).intValue
         
-        //\"SC\":{\"available\":\"26576.40000000\",\"onOrders\":\"0.00000000\",\"btcValue\":\"0.07786885\"},
         //Poloniex doesn't have id's per-se, the id a coin is the coin symbol itself
         _ = Account(institutionId: institution.institutionId, sourceId: institution.sourceId, sourceAccountId: account.currency, sourceInstitutionId: "", accountTypeId: AccountType.exchange, accountSubTypeId: nil, name: account.currency, currency: account.currency, decimals: decimals, currentBalance: currentBalance, availableBalance: nil, number: nil, altCurrency: Currency.btc.rawValue, altDecimals: altDecimals, altCurrentBalance: altCurrentBalance, altAvailableBalance: nil)
     }
@@ -215,7 +214,7 @@ extension Institution {
     fileprivate var apiKeyKey: String {
         return "apiKey institutionId: \(institutionId)"
     }
-    var apiKey: String? {
+    public var apiKey: String? {
         get {
             var apiKey: String? = nil
             if let dictionary = Locksmith.loadDataForUserAccount(userAccount: apiKeyKey) {
@@ -262,7 +261,7 @@ extension Institution {
     fileprivate var secretKey: String {
         return "secret institutionId: \(institutionId)"
     }
-    var secret: String? {
+    public var secret: String? {
         get {
             var secret: String? = nil
             if let dictionary = Locksmith.loadDataForUserAccount(userAccount: secretKey) {

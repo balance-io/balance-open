@@ -26,6 +26,7 @@
 		2D8339D11F39B3F600C73DC2 /* PoloniexTradingError.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DCFD9D51F3861E40009A029 /* PoloniexTradingError.json */; };
 		2D8339D21F39B3F800C73DC2 /* CompleteBalancesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DCFD9D31F38603F0009A029 /* CompleteBalancesResponse.json */; };
 		2DA7FAB91EF2637700CD8CED /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; };
+		2DD6B4B71F39FCF800E2E217 /* InstitutionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD6B4B61F39FCF800E2E217 /* InstitutionTests.swift */; };
 		530DD1891EF458A400C0DDD3 /* FMDatabasePoolAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 530DD1881EF458A400C0DDD3 /* FMDatabasePoolAdditions.m */; };
 		532121B61EEAC2BF00F4812A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121B51EEAC2BF00F4812A /* AppDelegate.swift */; };
 		532121C61EEAC47300F4812A /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121C51EEAC47300F4812A /* Database.swift */; };
@@ -214,6 +215,7 @@
 		2DCFD9D31F38603F0009A029 /* CompleteBalancesResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CompleteBalancesResponse.json; sourceTree = "<group>"; };
 		2DCFD9D51F3861E40009A029 /* PoloniexTradingError.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PoloniexTradingError.json; sourceTree = "<group>"; };
 		2DCFD9D71F386D460009A029 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
+		2DD6B4B61F39FCF800E2E217 /* InstitutionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionTests.swift; sourceTree = "<group>"; };
 		2DF76CDF1F212F6F00EE18BB /* CoinbaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseTests.swift; sourceTree = "<group>"; };
 		2DF76CE11F212F6F00EE18BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		530DD1871EF458A400C0DDD3 /* FMDatabasePoolAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePoolAdditions.h; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 				2DF76CDF1F212F6F00EE18BB /* CoinbaseTests.swift */,
 				2DCFD9CB1F385E9E0009A029 /* PoloniexAccountTests.swift */,
 				2DCFD9D71F386D460009A029 /* TestHelpers.swift */,
+				2DD6B4B61F39FCF800E2E217 /* InstitutionTests.swift */,
 				2DCFD9CD1F385F460009A029 /* APIResponses */,
 				2DF76CE11F212F6F00EE18BB /* Info.plist */,
 			);
@@ -905,6 +908,7 @@
 			files = (
 				2D8339CE1F39B39D00C73DC2 /* PoloniexAccountTests.swift in Sources */,
 				2D8339C41F39B2FB00C73DC2 /* BalanceOpenTests.swift in Sources */,
+				2DD6B4B71F39FCF800E2E217 /* InstitutionTests.swift in Sources */,
 				2D8339CD1F39B39B00C73DC2 /* CoinbaseTests.swift in Sources */,
 				2D8339CF1F39B39F00C73DC2 /* TestHelpers.swift in Sources */,
 			);
