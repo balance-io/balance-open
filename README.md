@@ -2,7 +2,7 @@
   <img src="https://cl.ly/453225333E0u/balance-open.png" alt="Balance Open Menubar App" />
 </h3>
 
-Balance Open: A GPL3-licensed macOS menu bar app for all the world’s currencies.
+Balance Open: An app for all the world’s currencies.
 ==========================
 
 [![Swift Version][swift-image]][swift-url]
