@@ -155,6 +155,7 @@
 		A4A1501B1F2A32F400790EAC /* GDAXAuthHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1501A1F2A32F400790EAC /* GDAXAuthHeaders.swift */; };
 		A4A1501D1F2A331B00790EAC /* GDAXCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1501C1F2A331B00790EAC /* GDAXCredentials.swift */; };
 		A4AEE62C1F27728800CD1E77 /* GDAXAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AEE62B1F27728800CD1E77 /* GDAXAPIClient.swift */; };
+		A4C518DE1F3AFE3D008F59CC /* TransferController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C518DD1F3AFE3D008F59CC /* TransferController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -372,6 +373,7 @@
 		A4A1501A1F2A32F400790EAC /* GDAXAuthHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAuthHeaders.swift; sourceTree = "<group>"; };
 		A4A1501C1F2A331B00790EAC /* GDAXCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXCredentials.swift; sourceTree = "<group>"; };
 		A4AEE62B1F27728800CD1E77 /* GDAXAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAPIClient.swift; sourceTree = "<group>"; };
+		A4C518DD1F3AFE3D008F59CC /* TransferController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -682,6 +684,7 @@
 				5321229F1EEAE01400F4812A /* SyncDefaults.swift */,
 				532122161EEAC8F800F4812A /* SyncManager.swift */,
 				532122711EEAD80B00F4812A /* Utils.swift */,
+				A4C518DD1F3AFE3D008F59CC /* TransferController.swift */,
 			);
 			path = "Static & Singletons";
 			sourceTree = "<group>";
@@ -1072,6 +1075,7 @@
 				A4A1501B1F2A32F400790EAC /* GDAXAuthHeaders.swift in Sources */,
 				532122781EEAD89300F4812A /* TabViewModel.swift in Sources */,
 				5321223A1EEAD1D100F4812A /* PreferencesGeneralViewController.swift in Sources */,
+				A4C518DE1F3AFE3D008F59CC /* TransferController.swift in Sources */,
 				532122D31EEB05A800F4812A /* AddAccountButtons.swift in Sources */,
 				5321228A1EEADC9600F4812A /* ObjC.m in Sources */,
 				A44981E91F28F3AA00E861AA /* GDAXErrors.swift in Sources */,
