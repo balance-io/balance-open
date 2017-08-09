@@ -179,26 +179,7 @@ fileprivate func createPoloniexAccounts(data: Data) throws -> [PoloniexAccount] 
 fileprivate func processPoloniexAccounts(accounts: [PoloniexAccount],institution: Institution) {
     for account in accounts {
         // Calculate the number of decimals
-        var decimals = 2
-        if let currency = Currency(rawValue: account.currency) {
-            decimals = currency.decimals
-        }
-        var altDecimals = 2
-        if let altCurrency = Currency(rawValue: "BTC") {
-            altDecimals = altCurrency.decimals
-        }
-        
-        // Calculate the integer value of the balance based on the decimals
-        var balance = account.available
-        balance = balance * Decimal(pow(10.0, Double(decimals)))
-        let currentBalance = (balance as NSDecimalNumber).intValue
-        
-        var altBalance = account.btcValue
-        altBalance = altBalance * Decimal(pow(10.0, Double(altDecimals)))
-        let altCurrentBalance = (altBalance as NSDecimalNumber).intValue
-        
-        //Poloniex doesn't have id's per-se, the id a coin is the coin symbol itself
-        _ = Account(institutionId: institution.institutionId, sourceId: institution.sourceId, sourceAccountId: account.currency, sourceInstitutionId: "", accountTypeId: AccountType.exchange, accountSubTypeId: nil, name: account.currency, currency: account.currency, decimals: decimals, currentBalance: currentBalance, availableBalance: nil, number: nil, altCurrency: Currency.btc.rawValue, altDecimals: altDecimals, altCurrentBalance: altCurrentBalance, altAvailableBalance: nil)
+        _ = PoloniexAccount.getAccountEquivalent(account:account, institution: institution)
     }
     let accounts = Account.accountsForInstitution(institutionId: institution.institutionId)
     for account in accounts {
@@ -207,6 +188,52 @@ fileprivate func processPoloniexAccounts(accounts: [PoloniexAccount],institution
             // This account doesn't exist in the coinbase response, so remove it
             Account.removeAccount(accountId: account.accountId)
         }
+    }
+}
+
+extension PoloniexAccount {
+    private var currencyDecimal: Int {
+        var decimals = 2
+        if let currency = Currency(rawValue: self.currency) {
+            decimals = currency.decimals
+        }
+        return decimals
+    }
+    
+    private var altCurrencyDecimal: Int {
+        var altDecimals = 2
+        if let altCurrency = Currency(rawValue: "BTC") {
+            altDecimals = altCurrency.decimals
+        }
+        return altDecimals
+    }
+    
+    private var balance: Int {
+        var balance = self.available
+        balance = balance * Decimal(pow(10.0, Double(self.currencyDecimal)))
+        let currentBalance = (balance as NSDecimalNumber).intValue
+        return 0
+    }
+    
+    private var altBalance: Int {
+        var altBalance = self.btcValue
+        altBalance = altBalance * Decimal(pow(10.0, Double(self.altCurrencyDecimal)))
+        let altCurrentBalance = (altBalance as NSDecimalNumber).intValue
+        return 0
+    }
+    
+    static func getAccountEquivalent(account: PoloniexAccount, institution: Institution) -> Account {
+        // Calculate the number of decimals
+        let decimals = account.currencyDecimal
+        let altDecimals = account.altCurrencyDecimal
+        
+        // Calculate the integer value of the balance based on the decimals
+        let currentBalance = account.balance
+        let altCurrentBalance = account.altBalance
+        
+        //Poloniex doesn't have id's per-se, the id a coin is the coin symbol itself
+        let newAccount = Account(institutionId: institution.institutionId, sourceId: institution.sourceId, sourceAccountId: account.currency, sourceInstitutionId: "", accountTypeId: AccountType.exchange, accountSubTypeId: nil, name: account.currency, currency: account.currency, decimals: decimals, currentBalance: currentBalance, availableBalance: nil, number: nil, altCurrency: Currency.btc.rawValue, altDecimals: altDecimals, altCurrentBalance: altCurrentBalance, altAvailableBalance: nil)
+        return newAccount!
     }
 }
 

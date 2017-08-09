@@ -26,6 +26,8 @@
 		2D8339D11F39B3F600C73DC2 /* PoloniexTradingError.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DCFD9D51F3861E40009A029 /* PoloniexTradingError.json */; };
 		2D8339D21F39B3F800C73DC2 /* CompleteBalancesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DCFD9D31F38603F0009A029 /* CompleteBalancesResponse.json */; };
 		2DA7FAB91EF2637700CD8CED /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; };
+		2DBEA3A51F3B0E0A00BBE16C /* PoloniexAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBEA3A41F3B0E0A00BBE16C /* PoloniexAPITests.swift */; };
+		2DBEA3A71F3B0E3300BBE16C /* PoloniexAccountToAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBEA3A61F3B0E3300BBE16C /* PoloniexAccountToAccountTests.swift */; };
 		2DD6B4B71F39FCF800E2E217 /* InstitutionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD6B4B61F39FCF800E2E217 /* InstitutionTests.swift */; };
 		530DD1891EF458A400C0DDD3 /* FMDatabasePoolAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 530DD1881EF458A400C0DDD3 /* FMDatabasePoolAdditions.m */; };
 		532121B61EEAC2BF00F4812A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121B51EEAC2BF00F4812A /* AppDelegate.swift */; };
@@ -210,6 +212,8 @@
 		2D8339C31F39B2FB00C73DC2 /* BalanceOpenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceOpenTests.swift; sourceTree = "<group>"; };
 		2D8339C51F39B2FB00C73DC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DA7FAB81EF2637700CD8CED /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		2DBEA3A41F3B0E0A00BBE16C /* PoloniexAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAPITests.swift; sourceTree = "<group>"; };
+		2DBEA3A61F3B0E3300BBE16C /* PoloniexAccountToAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAccountToAccountTests.swift; sourceTree = "<group>"; };
 		2DCFD9CB1F385E9E0009A029 /* PoloniexAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAccountTests.swift; sourceTree = "<group>"; };
 		2DCFD9CF1F385F910009A029 /* PoloniexAccount.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PoloniexAccount.json; sourceTree = "<group>"; };
 		2DCFD9D31F38603F0009A029 /* CompleteBalancesResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CompleteBalancesResponse.json; sourceTree = "<group>"; };
@@ -441,6 +445,8 @@
 			children = (
 				2DF76CDF1F212F6F00EE18BB /* CoinbaseTests.swift */,
 				2DCFD9CB1F385E9E0009A029 /* PoloniexAccountTests.swift */,
+				2DBEA3A41F3B0E0A00BBE16C /* PoloniexAPITests.swift */,
+				2DBEA3A61F3B0E3300BBE16C /* PoloniexAccountToAccountTests.swift */,
 				2DCFD9D71F386D460009A029 /* TestHelpers.swift */,
 				2DD6B4B61F39FCF800E2E217 /* InstitutionTests.swift */,
 				2DCFD9CD1F385F460009A029 /* APIResponses */,
@@ -906,10 +912,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DBEA3A71F3B0E3300BBE16C /* PoloniexAccountToAccountTests.swift in Sources */,
 				2D8339CE1F39B39D00C73DC2 /* PoloniexAccountTests.swift in Sources */,
 				2D8339C41F39B2FB00C73DC2 /* BalanceOpenTests.swift in Sources */,
 				2DD6B4B71F39FCF800E2E217 /* InstitutionTests.swift in Sources */,
 				2D8339CD1F39B39B00C73DC2 /* CoinbaseTests.swift in Sources */,
+				2DBEA3A51F3B0E0A00BBE16C /* PoloniexAPITests.swift in Sources */,
 				2D8339CF1F39B39F00C73DC2 /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
