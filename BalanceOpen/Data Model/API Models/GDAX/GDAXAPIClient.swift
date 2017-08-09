@@ -39,7 +39,7 @@ internal extension GDAXAPIClient
         }
         
         let requestPath = "/accounts"
-        let headers = try! AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, method: "GET", body: nil)
+        let headers = try AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, method: "GET", body: nil)
         let url = self.server.url().appendingPathComponent(requestPath)
         
         var request = URLRequest(url: url)
@@ -98,9 +98,9 @@ internal extension GDAXAPIClient
         }
         
         let requestPath = "/withdrawals/crypto"
-        let body = withdrawal.jsonData()
+        let body = try withdrawal.jsonData()
         
-        let headers = try! AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, method: "POST", body: body)
+        let headers = try AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, method: "POST", body: body)
         let url = self.server.url().appendingPathComponent(requestPath)
         
         var request = URLRequest(url: url)

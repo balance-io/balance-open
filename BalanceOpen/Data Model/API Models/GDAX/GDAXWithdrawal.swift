@@ -29,9 +29,9 @@ internal extension GDAXAPIClient
         
         // MARK: JSON
         
-        internal func jsonData() -> Data
+        internal func jsonData() throws -> Data
         {
-            return try! JSONSerialization.data(withJSONObject: self.dictionaryRepresentation, options: [])
+            return try JSONSerialization.data(withJSONObject: self.dictionaryRepresentation, options: [])
         }
     }
 }
