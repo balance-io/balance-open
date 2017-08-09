@@ -39,7 +39,7 @@ internal extension GDAXAPIClient
         }
         
         let requestPath = "/accounts"
-        let headers = try! AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, method: "GET", body: nil)
+        let headers = try AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, method: "GET", body: nil)
         let url = self.server.url().appendingPathComponent(requestPath)
         
         var request = URLRequest(url: url)
@@ -50,6 +50,7 @@ internal extension GDAXAPIClient
             guard let httpResponse = response as? HTTPURLResponse,
                 let json = try? JSONSerialization.jsonObject(with: data!, options: []) else
             {
+                completionHandler(nil, GDAXAPIClient.APIError.invalidJSON)
                 return
             }
             
@@ -98,9 +99,9 @@ internal extension GDAXAPIClient
         }
         
         let requestPath = "/withdrawals/crypto"
-        let body = withdrawal.jsonData()
+        let body = try withdrawal.jsonData()
         
-        let headers = try! AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, method: "POST", body: body)
+        let headers = try AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, method: "POST", body: body)
         let url = self.server.url().appendingPathComponent(requestPath)
         
         var request = URLRequest(url: url)
