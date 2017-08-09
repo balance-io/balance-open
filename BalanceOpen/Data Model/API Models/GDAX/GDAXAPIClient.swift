@@ -50,6 +50,7 @@ internal extension GDAXAPIClient
             guard let httpResponse = response as? HTTPURLResponse,
                 let json = try? JSONSerialization.jsonObject(with: data!, options: []) else
             {
+                completionHandler(nil, GDAXAPIClient.APIError.invalidJSON)
                 return
             }
             
