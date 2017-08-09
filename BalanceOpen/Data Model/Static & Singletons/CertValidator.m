@@ -9,10 +9,15 @@
 #import "CertValidator.h"
 #import <TrustKit/TrustKit.h>
 
+@interface CertValidator ()
+    @property (nonatomic, readonly, strong) TSKPinningValidator* pinningValidator;
+@end
+
 @implementation CertValidator
 
 - (instancetype)init {
     if (self = [super init]) {
+        _pinningValidator = [[TSKPinningValidator alloc] init];
         NSDictionary *trustKitConfig =
         @{kTSKSwizzleNetworkDelegates: @NO,
           kTSKPinnedDomains : @{
@@ -62,15 +67,14 @@
         
         // Silence logging and initialize
         [TrustKit setLoggerBlock: ^void (NSString *message){}];
-        [TrustKit initSharedInstanceWithConfiguration:trustKitConfig];
+        [TrustKit initSharedInstanceWithConfiguration: trustKitConfig];
     }
     
     return self;
 }
 
 - (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler {
-    TSKPinningValidator *pingingValidator = [TrustKit sharedInstance].pinningValidator;
-    [pingingValidator handleChallenge:challenge completionHandler:completionHandler];
+    [self.pinningValidator handleChallenge:challenge completionHandler:completionHandler];
 }
 
 @end

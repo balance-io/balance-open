@@ -143,7 +143,7 @@ struct CoinbaseApi {
                 }
             } catch {
                 DispatchQueue.main.async {
-                    completion(false, error)
+                    completion(false, maybeError)
                 }
             }
         })
@@ -248,6 +248,7 @@ struct CoinbaseApi {
     }
 }
 
+//THIS NEEDS TESTING
 extension Institution {
     fileprivate var refreshTokenKey: String {
         return "refreshToken institutionId: \(institutionId)"
