@@ -156,6 +156,8 @@
 		A4A1501D1F2A331B00790EAC /* GDAXCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1501C1F2A331B00790EAC /* GDAXCredentials.swift */; };
 		A4AEE62C1F27728800CD1E77 /* GDAXAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AEE62B1F27728800CD1E77 /* GDAXAPIClient.swift */; };
 		A4C518DE1F3AFE3D008F59CC /* TransferController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C518DD1F3AFE3D008F59CC /* TransferController.swift */; };
+		A4C518E21F3B5400008F59CC /* ShapeShiftTransferOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C518E11F3B5400008F59CC /* ShapeShiftTransferOperator.swift */; };
+		A4C518E51F3B5F46008F59CC /* Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C518E41F3B5F46008F59CC /* Transfer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -374,6 +376,8 @@
 		A4A1501C1F2A331B00790EAC /* GDAXCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXCredentials.swift; sourceTree = "<group>"; };
 		A4AEE62B1F27728800CD1E77 /* GDAXAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAPIClient.swift; sourceTree = "<group>"; };
 		A4C518DD1F3AFE3D008F59CC /* TransferController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferController.swift; sourceTree = "<group>"; };
+		A4C518E11F3B5400008F59CC /* ShapeShiftTransferOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeShiftTransferOperator.swift; sourceTree = "<group>"; };
+		A4C518E41F3B5F46008F59CC /* Transfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transfer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -666,6 +670,7 @@
 		532122671EEAD78D00F4812A /* Static & Singletons */ = {
 			isa = PBXGroup;
 			children = (
+				A4C518DF1F3B53BB008F59CC /* Transfer Controller */,
 				5321220F1EEAC8CB00F4812A /* AppLock.swift */,
 				532122211EEAC99000F4812A /* CertValidator.h */,
 				532122221EEAC99000F4812A /* CertValidator.m */,
@@ -684,7 +689,6 @@
 				5321229F1EEAE01400F4812A /* SyncDefaults.swift */,
 				532122161EEAC8F800F4812A /* SyncManager.swift */,
 				532122711EEAD80B00F4812A /* Utils.swift */,
-				A4C518DD1F3AFE3D008F59CC /* TransferController.swift */,
 			);
 			path = "Static & Singletons";
 			sourceTree = "<group>";
@@ -854,6 +858,32 @@
 				A40866291F30883A00D3FB2E /* GDAXWithdrawal.swift */,
 			);
 			path = GDAX;
+			sourceTree = "<group>";
+		};
+		A4C518DF1F3B53BB008F59CC /* Transfer Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A4C518DD1F3AFE3D008F59CC /* TransferController.swift */,
+				A4C518E31F3B5F37008F59CC /* Models */,
+				A4C518E01F3B53CC008F59CC /* Transfer Operators */,
+			);
+			path = "Transfer Controller";
+			sourceTree = "<group>";
+		};
+		A4C518E01F3B53CC008F59CC /* Transfer Operators */ = {
+			isa = PBXGroup;
+			children = (
+				A4C518E11F3B5400008F59CC /* ShapeShiftTransferOperator.swift */,
+			);
+			path = "Transfer Operators";
+			sourceTree = "<group>";
+		};
+		A4C518E31F3B5F37008F59CC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A4C518E41F3B5F46008F59CC /* Transfer.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1057,6 +1087,7 @@
 				532122961EEADE9400F4812A /* TableRowView.swift in Sources */,
 				5321227F1EEAD9D300F4812A /* ScrollView.swift in Sources */,
 				532122171EEAC8F800F4812A /* Syncer.swift in Sources */,
+				A4C518E51F3B5F46008F59CC /* Transfer.swift in Sources */,
 				532122C51EEAEE5900F4812A /* SecureField.swift in Sources */,
 				532122561EEAD65B00F4812A /* View.swift in Sources */,
 				532122CF1EEB008700F4812A /* AddAccountViewController.swift in Sources */,
@@ -1115,6 +1146,7 @@
 				A44981E21F28EE3B00E861AA /* GDAXAccount.swift in Sources */,
 				532122901EEADE1D00F4812A /* PaintCodeView.swift in Sources */,
 				532122BD1EEAED3100F4812A /* ChangePasswordViewController.swift in Sources */,
+				A4C518E21F3B5400008F59CC /* ShapeShiftTransferOperator.swift in Sources */,
 				532122231EEAC99000F4812A /* CertValidator.m in Sources */,
 				A408662A1F30883A00D3FB2E /* GDAXWithdrawal.swift in Sources */,
 				53FA53011EF3FA93002990B0 /* InstitutionHeaderBars.swift in Sources */,
