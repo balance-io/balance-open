@@ -192,34 +192,32 @@ fileprivate func processPoloniexAccounts(accounts: [PoloniexAccount],institution
 }
 
 extension PoloniexAccount {
-    private var currencyDecimal: Int {
+    var currencyDecimal: Int {
         var decimals = 2
-        if let currency = Currency(rawValue: self.currency) {
+        if let currency = Currency.rawValue(currency: self.currency) {
             decimals = currency.decimals
         }
         return decimals
     }
     
-    private var altCurrencyDecimal: Int {
+    var altCurrencyDecimal: Int {
         var altDecimals = 2
-        if let altCurrency = Currency(rawValue: "BTC") {
+        if let altCurrency = Currency.rawValue(currency: "BTC") {
             altDecimals = altCurrency.decimals
         }
         return altDecimals
     }
     
-    private var balance: Int {
+    var balance: Int {
         var balance = self.available
         balance = balance * Decimal(pow(10.0, Double(self.currencyDecimal)))
-        let currentBalance = (balance as NSDecimalNumber).intValue
-        return 0
+        return (balance as NSDecimalNumber).intValue
     }
     
-    private var altBalance: Int {
+    var altBalance: Int {
         var altBalance = self.btcValue
         altBalance = altBalance * Decimal(pow(10.0, Double(self.altCurrencyDecimal)))
-        let altCurrentBalance = (altBalance as NSDecimalNumber).intValue
-        return 0
+        return (altBalance as NSDecimalNumber).intValue
     }
     
     static func getAccountEquivalent(account: PoloniexAccount, institution: Institution) -> Account {
@@ -230,9 +228,10 @@ extension PoloniexAccount {
         // Calculate the integer value of the balance based on the decimals
         let currentBalance = account.balance
         let altCurrentBalance = account.altBalance
+        let altCurrency = Currency.rawValue(currency: "BTC")
         
         //Poloniex doesn't have id's per-se, the id a coin is the coin symbol itself
-        let newAccount = Account(institutionId: institution.institutionId, sourceId: institution.sourceId, sourceAccountId: account.currency, sourceInstitutionId: "", accountTypeId: AccountType.exchange, accountSubTypeId: nil, name: account.currency, currency: account.currency, decimals: decimals, currentBalance: currentBalance, availableBalance: nil, number: nil, altCurrency: Currency.btc.rawValue, altDecimals: altDecimals, altCurrentBalance: altCurrentBalance, altAvailableBalance: nil)
+        let newAccount = Account(institutionId: institution.institutionId, sourceId: institution.sourceId, sourceAccountId: account.currency, sourceInstitutionId: "", accountTypeId: AccountType.exchange, accountSubTypeId: nil, name: account.currency, currency: account.currency, decimals: decimals, currentBalance: currentBalance, availableBalance: nil, number: nil, altCurrency: altCurrency?.name, altDecimals: altDecimals, altCurrentBalance: altCurrentBalance, altAvailableBalance: nil)
         return newAccount!
     }
 }

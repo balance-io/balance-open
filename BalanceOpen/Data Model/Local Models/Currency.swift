@@ -8,32 +8,48 @@
 
 import Foundation
 
-enum Currency: String {
-    // Traditional
-    case usd = "USD"
-    case eur = "EUR"
-    case gbp = "GBP"
+enum Currency {
+    enum Traditional: String {
+        case usd = "USD"
+        case eur = "EUR"
+        case gbp = "GBP"
+    }
+    case Crypto(shortName: String)
+    case Common(traditional: Traditional)
     
-    // Crypto
-    case btc = "BTC"
-    case ltc = "LTC"
-    case eth = "ETH"
+    static func rawValue(currency: String) -> Currency? {
+        switch currency {
+            case "USD": return .Common(traditional:.usd)
+            case "EUR": return .Common(traditional:.eur)
+            case "GBP": return .Common(traditional:.gbp)
+            default: return .Crypto(shortName:currency)
+        }
+    }
     
-    // TODO: Don't hard code decimals for crypto
     var decimals: Int {
         switch self {
-        case .btc, .ltc, .eth: return 8
-        case .usd, .eur, .gbp: return 2
+            case .Common(traditional:.usd), .Common(traditional:.eur), .Common(traditional:.gbp): return 2
+            default: return 8
         }
     }
     
     var symbol: String {
         switch self {
-        case .usd: return "$"
-        case .eur: return "€"
-        case .gbp: return "£"
-
-        default: return self.rawValue + " "
+            case .Common(traditional:.usd): return "$"
+            case .Common(traditional:.eur): return "€"
+            case .Common(traditional:.gbp): return "£"
+            case .Crypto(let val): return val + " "
+            default: fatalError("Unexpected value \(self)")
+        }
+    }
+    
+    var name: String {
+        switch self {
+            case .Common(traditional: .usd): return "USD"
+            case .Common(traditional: .eur): return "EUR"
+            case .Common(traditional: .gbp): return "GBP"
+            case .Crypto(let val): return val
+            default: fatalError("Unexpected value \(self)")
         }
     }
 }

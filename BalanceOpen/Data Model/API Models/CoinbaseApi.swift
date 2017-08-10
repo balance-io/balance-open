@@ -211,12 +211,12 @@ struct CoinbaseApi {
         for ca in coinbaseAccounts {
             // Calculate the number of decimals
             var decimals = 2
-            if let currency = Currency(rawValue: ca.currency) {
+            if let currency = Currency.rawValue(currency: ca.currency) {
                 decimals = currency.decimals
             }
             
             var altDecimals = 2
-            if let altCurrency = Currency(rawValue: ca.nativeCurrency) {
+            if let altCurrency = Currency.rawValue(currency: ca.nativeCurrency) {
                 altDecimals = altCurrency.decimals
             }
             

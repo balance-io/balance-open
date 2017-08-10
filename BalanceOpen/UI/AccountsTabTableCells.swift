@@ -95,7 +95,7 @@ class AccountsTabAccountCell: View {
     func updateModel(_ updatedModel: Account) {
         model = updatedModel
         
-        if let currency = Currency(rawValue: updatedModel.currency) {
+        if let currency = Currency.rawValue(currency: updatedModel.currency) {
             amountField.attributedStringValue = amountToStringFormatted(amount: updatedModel.displayBalance, currency: currency, showNegative: true)
             amountField.setAccessibilityLabel("Account Total")
             amountField.snp.updateConstraints { make in
@@ -105,7 +105,7 @@ class AccountsTabAccountCell: View {
         }
         
         if updatedModel.altCurrency != nil && updatedModel.currency != updatedModel.altCurrency {
-            if let altCurrency = Currency(rawValue: updatedModel.altCurrency!), let altCurrentBalance = updatedModel.altCurrentBalance {
+            if let altCurrency = Currency.rawValue(currency: updatedModel.altCurrency!), let altCurrentBalance = updatedModel.altCurrentBalance {
                 altAmountField.stringValue = amountToString(amount: altCurrentBalance, currency: altCurrency, showNegative: true)
                 altAmountField.setAccessibilityLabel("Account Total")
                 altAmountField.snp.updateConstraints { make in
