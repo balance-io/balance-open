@@ -13,3 +13,4 @@
 #import "ObjC.h"
 #import <LetsMove/LetsMove.h>
 #import "PFMoveApplication.h"
+#import <CommonCrypto/CommonCrypto.h>

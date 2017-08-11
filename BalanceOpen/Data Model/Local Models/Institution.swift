@@ -78,7 +78,8 @@ class Institution {
     fileprivate var accessTokenKey: String {
         return "institutionId: \(institutionId)"
     }
-        
+    
+    //we need to deal with the case that accessToken is in fact non existant (gdax, poloniex... etc)
     var accessToken: String? {
         get {
             var accessToken: String? = nil
@@ -183,7 +184,7 @@ class Institution {
     }
     
     // Since we allow duplicate institutions, never check if they exist first
-    init?(sourceId: Source, sourceInstitutionId: String, name: String, nameBreak: Int?, primaryColor: NSColor?, secondaryColor: NSColor?, logoData: Data?, accessToken: String, dateAdded: Date = Date()) {
+    init?(sourceId: Source, sourceInstitutionId: String, name: String, nameBreak: Int?, primaryColor: NSColor?, secondaryColor: NSColor?, logoData: Data?, accessToken: String?, dateAdded: Date = Date()) {
         
         self.sourceId = sourceId
         self.sourceInstitutionId = sourceInstitutionId

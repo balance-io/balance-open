@@ -12,10 +12,24 @@
 		2D4450151EF3A4500023F63C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D4450141EF3A4500023F63C /* Assets.xcassets */; };
 		2D4450181EF3A4500023F63C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D4450161EF3A4500023F63C /* Main.storyboard */; };
 		2D44503A1EF3A53E0023F63C /* AutoLaunchBalanceHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D4450091EF3A4500023F63C /* AutoLaunchBalanceHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		2D6D8AB21F38D85B000B372C /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; };
-		2D6D8AB61F38D987000B372C /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D8AB51F38D987000B372C /* TestingAppDelegate.swift */; };
+		2D4D9BC41F2A3B6F00ABA5CB /* PoloniexApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8147521F1E58C500119FE3 /* PoloniexApi.swift */; };
+		2D4D9BC71F2A3BA000ABA5CB /* NSURLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8147531F1E58CE00119FE3 /* NSURLRequest.swift */; };
+		2D60617F1F2B4CE000D83D0E /* PoloniexAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D60617E1F2B4CE000D83D0E /* PoloniexAccount.swift */; };
+		2D6061811F2B543E00D83D0E /* NumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6061801F2B543E00D83D0E /* NumberUtils.swift */; };
+		2D8339C41F39B2FB00C73DC2 /* BalanceOpenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8339C31F39B2FB00C73DC2 /* BalanceOpenTests.swift */; };
+		2D8339CB1F39B30E00C73DC2 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; };
+		2D8339CC1F39B35400C73DC2 /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D8AB51F38D987000B372C /* TestingAppDelegate.swift */; };
+		2D8339CD1F39B39B00C73DC2 /* CoinbaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF76CDF1F212F6F00EE18BB /* CoinbaseTests.swift */; };
+		2D8339CE1F39B39D00C73DC2 /* PoloniexAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCFD9CB1F385E9E0009A029 /* PoloniexAccountTests.swift */; };
+		2D8339CF1F39B39F00C73DC2 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCFD9D71F386D460009A029 /* TestHelpers.swift */; };
+		2D8339D01F39B3F400C73DC2 /* PoloniexAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DCFD9CF1F385F910009A029 /* PoloniexAccount.json */; };
+		2D8339D11F39B3F600C73DC2 /* PoloniexTradingError.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DCFD9D51F3861E40009A029 /* PoloniexTradingError.json */; };
+		2D8339D21F39B3F800C73DC2 /* CompleteBalancesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DCFD9D31F38603F0009A029 /* CompleteBalancesResponse.json */; };
 		2DA7FAB91EF2637700CD8CED /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; };
-		2DF76CE01F212F6F00EE18BB /* CoinbaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF76CDF1F212F6F00EE18BB /* CoinbaseTests.swift */; };
+		2DBEA3A51F3B0E0A00BBE16C /* PoloniexAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBEA3A41F3B0E0A00BBE16C /* PoloniexAPITests.swift */; };
+		2DBEA3A71F3B0E3300BBE16C /* PoloniexAccountToAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBEA3A61F3B0E3300BBE16C /* PoloniexAccountToAccountTests.swift */; };
+		2DD6B4B71F39FCF800E2E217 /* InstitutionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD6B4B61F39FCF800E2E217 /* InstitutionTests.swift */; };
+		2DFCC5791F3C4C17006A6CFF /* CurrencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFCC5781F3C4C17006A6CFF /* CurrencyTests.swift */; };
 		530DD1891EF458A400C0DDD3 /* FMDatabasePoolAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 530DD1881EF458A400C0DDD3 /* FMDatabasePoolAdditions.m */; };
 		532121B61EEAC2BF00F4812A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121B51EEAC2BF00F4812A /* AppDelegate.swift */; };
 		532121C61EEAC47300F4812A /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532121C51EEAC47300F4812A /* Database.swift */; };
@@ -140,7 +154,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2DF76CE21F212F6F00EE18BB /* PBXContainerItemProxy */ = {
+		2D8339C61F39B2FB00C73DC2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 532121AA1EEAC2BF00F4812A /* Project object */;
 			proxyType = 1;
@@ -190,11 +204,26 @@
 		2D4450141EF3A4500023F63C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D4450171EF3A4500023F63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2D4450191EF3A4500023F63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2D60617E1F2B4CE000D83D0E /* PoloniexAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAccount.swift; sourceTree = "<group>"; };
+		2D6061801F2B543E00D83D0E /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
 		2D6D8AB51F38D987000B372C /* TestingAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
+		2D8147521F1E58C500119FE3 /* PoloniexApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexApi.swift; sourceTree = "<group>"; };
+		2D8147531F1E58CE00119FE3 /* NSURLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSURLRequest.swift; sourceTree = "<group>"; };
+		2D8339C11F39B2FA00C73DC2 /* BalanceOpenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceOpenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D8339C31F39B2FB00C73DC2 /* BalanceOpenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceOpenTests.swift; sourceTree = "<group>"; };
+		2D8339C51F39B2FB00C73DC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DA7FAB81EF2637700CD8CED /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
-		2DF76CDD1F212F6F00EE18BB /* BalanceOpenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceOpenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DBEA3A41F3B0E0A00BBE16C /* PoloniexAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAPITests.swift; sourceTree = "<group>"; };
+		2DBEA3A61F3B0E3300BBE16C /* PoloniexAccountToAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAccountToAccountTests.swift; sourceTree = "<group>"; };
+		2DCFD9CB1F385E9E0009A029 /* PoloniexAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAccountTests.swift; sourceTree = "<group>"; };
+		2DCFD9CF1F385F910009A029 /* PoloniexAccount.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PoloniexAccount.json; sourceTree = "<group>"; };
+		2DCFD9D31F38603F0009A029 /* CompleteBalancesResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CompleteBalancesResponse.json; sourceTree = "<group>"; };
+		2DCFD9D51F3861E40009A029 /* PoloniexTradingError.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PoloniexTradingError.json; sourceTree = "<group>"; };
+		2DCFD9D71F386D460009A029 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
+		2DD6B4B61F39FCF800E2E217 /* InstitutionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionTests.swift; sourceTree = "<group>"; };
 		2DF76CDF1F212F6F00EE18BB /* CoinbaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseTests.swift; sourceTree = "<group>"; };
 		2DF76CE11F212F6F00EE18BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2DFCC5781F3C4C17006A6CFF /* CurrencyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTests.swift; sourceTree = "<group>"; };
 		530DD1871EF458A400C0DDD3 /* FMDatabasePoolAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePoolAdditions.h; sourceTree = "<group>"; };
 		530DD1881EF458A400C0DDD3 /* FMDatabasePoolAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePoolAdditions.m; sourceTree = "<group>"; };
 		532121B21EEAC2BF00F4812A /* BalanceOpen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BalanceOpen.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -335,11 +364,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2DF76CDA1F212F6F00EE18BB /* Frameworks */ = {
+		2D8339BE1F39B2FA00C73DC2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D6D8AB21F38D85B000B372C /* Sparkle.framework in Frameworks */,
+				2D8339CB1F39B30E00C73DC2 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,10 +415,44 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		2D8339C21F39B2FB00C73DC2 /* BalanceOpenTests */ = {
+			isa = PBXGroup;
+			children = (
+				2D8339C31F39B2FB00C73DC2 /* BalanceOpenTests.swift */,
+				2D8339C51F39B2FB00C73DC2 /* Info.plist */,
+			);
+			path = BalanceOpenTests;
+			sourceTree = "<group>";
+		};
+		2DCFD9CD1F385F460009A029 /* APIResponses */ = {
+			isa = PBXGroup;
+			children = (
+				2DCFD9CE1F385F600009A029 /* Poloniex */,
+			);
+			path = APIResponses;
+			sourceTree = "<group>";
+		};
+		2DCFD9CE1F385F600009A029 /* Poloniex */ = {
+			isa = PBXGroup;
+			children = (
+				2DCFD9CF1F385F910009A029 /* PoloniexAccount.json */,
+				2DCFD9D31F38603F0009A029 /* CompleteBalancesResponse.json */,
+				2DCFD9D51F3861E40009A029 /* PoloniexTradingError.json */,
+			);
+			path = Poloniex;
+			sourceTree = "<group>";
+		};
 		2DF76CDE1F212F6F00EE18BB /* BalanceOpenTests */ = {
 			isa = PBXGroup;
 			children = (
 				2DF76CDF1F212F6F00EE18BB /* CoinbaseTests.swift */,
+				2DCFD9CB1F385E9E0009A029 /* PoloniexAccountTests.swift */,
+				2DBEA3A41F3B0E0A00BBE16C /* PoloniexAPITests.swift */,
+				2DBEA3A61F3B0E3300BBE16C /* PoloniexAccountToAccountTests.swift */,
+				2DFCC5781F3C4C17006A6CFF /* CurrencyTests.swift */,
+				2DD6B4B61F39FCF800E2E217 /* InstitutionTests.swift */,
+				2DCFD9D71F386D460009A029 /* TestHelpers.swift */,
+				2DCFD9CD1F385F460009A029 /* APIResponses */,
 				2DF76CE11F212F6F00EE18BB /* Info.plist */,
 			);
 			path = BalanceOpenTests;
@@ -401,6 +464,7 @@
 				532121B41EEAC2BF00F4812A /* BalanceOpen */,
 				2D44500A1EF3A4500023F63C /* AutoLaunchBalanceHelper */,
 				2DF76CDE1F212F6F00EE18BB /* BalanceOpenTests */,
+				2D8339C21F39B2FB00C73DC2 /* BalanceOpenTests */,
 				532121B31EEAC2BF00F4812A /* Products */,
 				538A2C661EFD278000C542C4 /* Frameworks */,
 			);
@@ -411,7 +475,7 @@
 			children = (
 				532121B21EEAC2BF00F4812A /* BalanceOpen.app */,
 				2D4450091EF3A4500023F63C /* AutoLaunchBalanceHelper.app */,
-				2DF76CDD1F212F6F00EE18BB /* BalanceOpenTests.xctest */,
+				2D8339C11F39B2FA00C73DC2 /* BalanceOpenTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -546,6 +610,7 @@
 				532122CC1EEAFF6300F4812A /* NSWindow.swift */,
 				5321226C1EEAD7DD00F4812A /* NotificationCenter.swift */,
 				532121FA1EEAC75A00F4812A /* String.swift */,
+				2D8147531F1E58CE00119FE3 /* NSURLRequest.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -629,6 +694,7 @@
 				5321229F1EEAE01400F4812A /* SyncDefaults.swift */,
 				532122161EEAC8F800F4812A /* SyncManager.swift */,
 				532122711EEAD80B00F4812A /* Utils.swift */,
+				2D6061801F2B543E00D83D0E /* NumberUtils.swift */,
 			);
 			path = "Static & Singletons";
 			sourceTree = "<group>";
@@ -693,6 +759,8 @@
 			children = (
 				53946FA21EEF0B0B00E921C3 /* CoinbaseAccount.swift */,
 				53946FA41EF0035200E921C3 /* CoinbaseApi.swift */,
+				2D8147521F1E58C500119FE3 /* PoloniexApi.swift */,
+				2D60617E1F2B4CE000D83D0E /* PoloniexAccount.swift */,
 			);
 			path = "API Models";
 			sourceTree = "<group>";
@@ -718,22 +786,22 @@
 			productReference = 2D4450091EF3A4500023F63C /* AutoLaunchBalanceHelper.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2DF76CDC1F212F6F00EE18BB /* BalanceOpenTests */ = {
+		2D8339C01F39B2FA00C73DC2 /* BalanceOpenTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2DF76CE61F212F6F00EE18BB /* Build configuration list for PBXNativeTarget "BalanceOpenTests" */;
+			buildConfigurationList = 2D8339CA1F39B2FB00C73DC2 /* Build configuration list for PBXNativeTarget "BalanceOpenTests" */;
 			buildPhases = (
-				2DF76CD91F212F6F00EE18BB /* Sources */,
-				2DF76CDA1F212F6F00EE18BB /* Frameworks */,
-				2DF76CDB1F212F6F00EE18BB /* Resources */,
+				2D8339BD1F39B2FA00C73DC2 /* Sources */,
+				2D8339BE1F39B2FA00C73DC2 /* Frameworks */,
+				2D8339BF1F39B2FA00C73DC2 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				2DF76CE31F212F6F00EE18BB /* PBXTargetDependency */,
+				2D8339C71F39B2FB00C73DC2 /* PBXTargetDependency */,
 			);
 			name = BalanceOpenTests;
 			productName = BalanceOpenTests;
-			productReference = 2DF76CDD1F212F6F00EE18BB /* BalanceOpenTests.xctest */;
+			productReference = 2D8339C11F39B2FA00C73DC2 /* BalanceOpenTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		532121B11EEAC2BF00F4812A /* BalanceOpen */ = {
@@ -769,7 +837,7 @@
 						DevelopmentTeam = Q4G66XSS36;
 						ProvisioningStyle = Automatic;
 					};
-					2DF76CDC1F212F6F00EE18BB = {
+					2D8339C01F39B2FA00C73DC2 = {
 						CreatedOnToolsVersion = 9.0;
 						DevelopmentTeam = Q4G66XSS36;
 						TestTargetID = 532121B11EEAC2BF00F4812A;
@@ -797,7 +865,7 @@
 			targets = (
 				532121B11EEAC2BF00F4812A /* BalanceOpen */,
 				2D4450081EF3A4500023F63C /* AutoLaunchBalanceHelper */,
-				2DF76CDC1F212F6F00EE18BB /* BalanceOpenTests */,
+				2D8339C01F39B2FA00C73DC2 /* BalanceOpenTests */,
 			);
 		};
 /* End PBXProject section */
@@ -812,10 +880,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2DF76CDB1F212F6F00EE18BB /* Resources */ = {
+		2D8339BF1F39B2FA00C73DC2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D8339D11F39B3F600C73DC2 /* PoloniexTradingError.json in Resources */,
+				2D8339D21F39B3F800C73DC2 /* CompleteBalancesResponse.json in Resources */,
+				2D8339D01F39B3F400C73DC2 /* PoloniexAccount.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -840,11 +911,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2DF76CD91F212F6F00EE18BB /* Sources */ = {
+		2D8339BD1F39B2FA00C73DC2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DF76CE01F212F6F00EE18BB /* CoinbaseTests.swift in Sources */,
+				2DBEA3A71F3B0E3300BBE16C /* PoloniexAccountToAccountTests.swift in Sources */,
+				2D8339CE1F39B39D00C73DC2 /* PoloniexAccountTests.swift in Sources */,
+				2D8339C41F39B2FB00C73DC2 /* BalanceOpenTests.swift in Sources */,
+				2DD6B4B71F39FCF800E2E217 /* InstitutionTests.swift in Sources */,
+				2DFCC5791F3C4C17006A6CFF /* CurrencyTests.swift in Sources */,
+				2D8339CD1F39B39B00C73DC2 /* CoinbaseTests.swift in Sources */,
+				2DBEA3A51F3B0E0A00BBE16C /* PoloniexAPITests.swift in Sources */,
+				2D8339CF1F39B39F00C73DC2 /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -857,7 +935,6 @@
 				532121C61EEAC47300F4812A /* Database.swift in Sources */,
 				5321221B1EEAC90C00F4812A /* Defaults.swift in Sources */,
 				532122871EEADA5800F4812A /* TextField.swift in Sources */,
-				2D6D8AB61F38D987000B372C /* TestingAppDelegate.swift in Sources */,
 				532122BF1EEAED4200F4812A /* DisablePasswordViewController.swift in Sources */,
 				532122141EEAC8E400F4812A /* Logging.swift in Sources */,
 				532122721EEAD80B00F4812A /* Utils.swift in Sources */,
@@ -866,6 +943,7 @@
 				5321220B1EEAC89B00F4812A /* CCNStatusItemWindow.m in Sources */,
 				532122981EEADEBD00F4812A /* NSColor.swift in Sources */,
 				532122941EEADE4B00F4812A /* HoverTableRowView.swift in Sources */,
+				2D60617F1F2B4CE000D83D0E /* PoloniexAccount.swift in Sources */,
 				532122A01EEAE01400F4812A /* SyncDefaults.swift in Sources */,
 				532122581EEAD66000F4812A /* Button.swift in Sources */,
 				5321223D1EEAD1D100F4812A /* PreferencesViewController.swift in Sources */,
@@ -886,6 +964,7 @@
 				532121DE1EEAC4DC00F4812A /* FMDatabaseQueue.m in Sources */,
 				530DD1891EF458A400C0DDD3 /* FMDatabasePoolAdditions.m in Sources */,
 				532122B11EEAE85500F4812A /* AccountConnectionErrors.swift in Sources */,
+				2D6061811F2B543E00D83D0E /* NumberUtils.swift in Sources */,
 				532122481EEAD32B00F4812A /* Theme.swift in Sources */,
 				532122441EEAD2B700F4812A /* AccountsTabViewController.swift in Sources */,
 				5321220D1EEAC89B00F4812A /* CCNStatusItemWindowConfiguration.m in Sources */,
@@ -913,8 +992,10 @@
 				5321228A1EEADC9600F4812A /* ObjC.m in Sources */,
 				5321220A1EEAC89B00F4812A /* CCNStatusItemDropView.m in Sources */,
 				5321229A1EEADFE500F4812A /* QCMethod.swift in Sources */,
+				2D8339CC1F39B35400C73DC2 /* TestingAppDelegate.swift in Sources */,
 				532122181EEAC8F800F4812A /* SyncManager.swift in Sources */,
 				532122B91EEAEAE600F4812A /* Date.swift in Sources */,
+				2D4D9BC71F2A3BA000ABA5CB /* NSURLRequest.swift in Sources */,
 				532122641EEAD75C00F4812A /* SectionedTableView.swift in Sources */,
 				5321223C1EEAD1D100F4812A /* PreferencesSecurityViewController.swift in Sources */,
 				532122831EEADA1100F4812A /* ImageView.swift in Sources */,
@@ -930,6 +1011,7 @@
 				5321220C1EEAC89B00F4812A /* CCNStatusItemWindowBackgroundView.m in Sources */,
 				5321229E1EEAE00600F4812A /* SyncButton.swift in Sources */,
 				532122301EEAD1BB00F4812A /* PopoverViewController.swift in Sources */,
+				2D4D9BC41F2A3B6F00ABA5CB /* PoloniexApi.swift in Sources */,
 				53946FA51EF0035200E921C3 /* CoinbaseApi.swift in Sources */,
 				53F8E2EA1EF1B6E90071FC73 /* Currency.swift in Sources */,
 				532122CD1EEAFF6300F4812A /* NSWindow.swift in Sources */,
@@ -957,10 +1039,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2DF76CE31F212F6F00EE18BB /* PBXTargetDependency */ = {
+		2D8339C71F39B2FB00C73DC2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 532121B11EEAC2BF00F4812A /* BalanceOpen */;
-			targetProxy = 2DF76CE21F212F6F00EE18BB /* PBXContainerItemProxy */;
+			targetProxy = 2D8339C61F39B2FB00C73DC2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1018,7 +1100,7 @@
 			};
 			name = Release;
 		};
-		2DF76CE41F212F6F00EE18BB /* Debug */ = {
+		2D8339C81F39B2FB00C73DC2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1041,7 +1123,7 @@
 			};
 			name = Debug;
 		};
-		2DF76CE51F212F6F00EE18BB /* Release */ = {
+		2D8339C91F39B2FB00C73DC2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1238,11 +1320,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2DF76CE61F212F6F00EE18BB /* Build configuration list for PBXNativeTarget "BalanceOpenTests" */ = {
+		2D8339CA1F39B2FB00C73DC2 /* Build configuration list for PBXNativeTarget "BalanceOpenTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2DF76CE41F212F6F00EE18BB /* Debug */,
-				2DF76CE51F212F6F00EE18BB /* Release */,
+				2D8339C81F39B2FB00C73DC2 /* Debug */,
+				2D8339C91F39B2FB00C73DC2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

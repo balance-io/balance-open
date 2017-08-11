@@ -64,7 +64,7 @@ class Syncer {
                 // Institution needs a PATCH, so skip
                 log.error("Tried to sync institution \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name) but the password was invalid")
                 syncInstitutions(syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
-            } else if institution.accessToken == nil {
+            } else if institution.accessToken == nil && institution.sourceId == .coinbase {
                 // No access token somehow, so move on to the next one
                 log.severe("Tried to sync institution \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name) but did not find an access token")
                 syncInstitutions(syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
@@ -85,9 +85,16 @@ class Syncer {
                         }
                     }
                 }
-            } else if institution.accessToken != nil {
+            } else if institution.accessToken != nil  {
                 // Valid institution, so sync it
                 syncAccountsAndTransactions(institution: institution, remainingInstitutions: syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
+            } else if institution.sourceId == .poloniex {
+                if let apiKey = institution.apiKey, let secret = institution.secret {
+                    syncPoloniexAccountsAndTransactions(secret: secret, key: apiKey, institution: institution, remainingInstitutions: syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
+                } else {
+                    //logout and ask for resync
+                    log.error("Failed get api and key for \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name)")
+                }
             }
         } else {
             // No more institutions
@@ -122,6 +129,34 @@ class Syncer {
             self.syncInstitutions(remainingInstitutions, beginDate: beginDate, success: syncingSuccess, errors: syncingErrors)
         }
     }
+    
+    fileprivate func syncPoloniexAccountsAndTransactions(secret:String , key:String ,institution: Institution, remainingInstitutions: [Institution], beginDate: Date, success: Bool, errors: [Error]) {
+        var syncingSuccess = success
+        var syncingErrors = errors
+        
+        let userInfo = Notifications.userInfoForInstitution(institution)
+        NotificationCenter.postOnMainThread(name: Notifications.SyncingInstitution, object: nil, userInfo: userInfo)
+        log.debug("Pulling accounts and transactions for \(institution)")
+        
+        //sync Poloniex
+        PoloniexApi.fetchBalances(secret: secret, key: key, institution: institution) { success, error in
+            if !success {
+                syncingSuccess = false
+                if let error = error {
+                    syncingErrors.append(error)
+                    log.error("Error pulling accounts for \(institution): \(error)")
+                }
+                log.debug("Finished pulling accounts for \(institution)")
+            }
+            
+            if self.canceled {
+                self.cancelSync(errors: syncingErrors)
+                return
+            }
+            self.syncInstitutions(remainingInstitutions, beginDate: beginDate, success: syncingSuccess, errors: syncingErrors)
+        }
+    }
+
     
     fileprivate func cancelSync(errors: [Error]) {
         completeSync(success: false, errors: errors)
