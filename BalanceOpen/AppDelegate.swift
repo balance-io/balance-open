@@ -224,7 +224,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 }
             }
 
-            //DO WE NEED THIS?
+            //Show Popover if we are manually lauching the app
             if !self.launchAtLogin && !showedAlert {
                 self.showPopover()
             }
