@@ -1,14 +1,8 @@
 {
-  "iOS" : [
-    {
-      "hash" : "5666749d97bba47ba3cdea65c9de689dfe0cb2d53fdaf66ee4c88eb29e5da9b9",
-      "name" : "NSDateTimeAgo"
-    }
-  ],
   "commitish" : "a6d2749a8c4a1722363cce19672e006e0a4cb70d",
   "Mac" : [
     {
-      "hash" : "9ef16004f0ada10514a1730eb733f5cf16084b18c36875850f29243a868a34d2",
+      "hash" : "ab945205969cf28203f22952e0529ee9fd2cd46f511515379157bd06aafb5738",
       "name" : "NSDateTimeAgo"
     }
   ]
