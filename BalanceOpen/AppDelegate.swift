@@ -28,7 +28,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Check for running process and return bool
         fatalError("implement")
     }
-}
 
     var pinned: Bool {
         get {
