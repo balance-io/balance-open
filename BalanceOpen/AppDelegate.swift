@@ -20,7 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let statusItem = CCNStatusItem.sharedInstance()!
     var contentViewController: PopoverViewController!
     var preferencesWindowController: NSWindowController!
-    var launchAtLogin: Bool
+    var launchAtLogin: Bool = false
     
     var pinned: Bool {
         get {
@@ -47,8 +47,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     //
     
     override init() {
-        self.launchAtLogin = false
-
         super.init()
         
         terminateIfAlreadyRunning()
