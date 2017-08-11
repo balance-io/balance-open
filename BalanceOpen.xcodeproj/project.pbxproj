@@ -995,7 +995,7 @@
 				DEVELOPMENT_TEAM = Q4G66XSS36;
 				INFOPLIST_FILE = AutoLaunchBalanceHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = balance.money.AutoLaunchBalanceHelper;
+				PRODUCT_BUNDLE_IDENTIFIER = "software.balanced.balance-open-autolaunch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1011,7 +1011,7 @@
 				DEVELOPMENT_TEAM = Q4G66XSS36;
 				INFOPLIST_FILE = AutoLaunchBalanceHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = balance.money.AutoLaunchBalanceHelper;
+				PRODUCT_BUNDLE_IDENTIFIER = "software.balanced.balance-open-autolaunch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;

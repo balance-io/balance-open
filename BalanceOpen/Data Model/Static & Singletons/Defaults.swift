@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ServiceManagement
 
 class Defaults {
     internal struct Keys {
@@ -46,7 +47,17 @@ class Defaults {
             return defaults.bool(forKey: Keys.launchAtLogin)
         }
         set {
-            defaults.set(newValue, forKey: Keys.launchAtLogin)
+            if SMLoginItemSetEnabled(autolaunchBundleId as CFString, enabled) {
+                defaults.set(newValue, forKey: Keys.launchAtLogin)
+            } else {
+                log.severe("Failed to set login at launch preference")
+                
+                let alert = NSAlert()
+                alert.alertStyle = .warning
+                alert.messageText = newValue ? "Unable to create the login item" : "Unable to remove the login item"
+                alert.addButton(withTitle: "OK")
+                alert.runModal()
+            }
         }
     }
     
