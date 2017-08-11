@@ -20,6 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let statusItem = CCNStatusItem.sharedInstance()!
     var contentViewController: PopoverViewController!
     var preferencesWindowController: NSWindowController!
+    var launchAtLogin: Bool
     
     var pinned: Bool {
         get {
@@ -46,6 +47,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     //
     
     override init() {
+        self.launchAtLogin = false
+
         super.init()
         
         terminateIfAlreadyRunning()
@@ -85,7 +88,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         )
         
         // Query the helper app to see if we were auto launched (dirty hack because Apple makes simple shit difficult)
-        forceAutoLaunch()
+        launchAtLogin = forceAutoLaunch()
         
         // Initialize singletons
         initializeSingletons()
@@ -222,9 +225,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
 
             //DO WE NEED THIS?
-//            if !autoLaunch.wasLaunchedAtLogin && !showedAlert {
-//                self.showPopover()
-//            }
+            if !self.launchAtLogin && !showedAlert {
+                self.showPopover()
+            }
         }
     }
     
@@ -333,9 +336,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.terminate(nil)
     }
     
-    func forceAutoLaunch() {
+    func forceAutoLaunch() -> Bool{
         if (!SMLoginItemSetEnabled("balance.money.AutoLaunchBalanceHelper" as CFString, defaults.launchAtLogin)) {
             print("Auto login was not successful");
+            return false
+        } else {
+            return true
         }
     }
     
