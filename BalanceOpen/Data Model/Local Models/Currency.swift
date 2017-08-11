@@ -13,6 +13,7 @@ enum Currency {
         case usd = "USD"
         case eur = "EUR"
         case gbp = "GBP"
+        case cad = "CAD"
     }
     case Crypto(shortName: String)
     case Common(traditional: Traditional)
@@ -38,6 +39,7 @@ enum Currency {
             case .Common(traditional:.usd): return "$"
             case .Common(traditional:.eur): return "€"
             case .Common(traditional:.gbp): return "£"
+            case .Common(Traditional:.cad): return "C$"
             case .Crypto(let val): return val + " "
             default: fatalError("Unexpected value \(self)")
         }

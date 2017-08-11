@@ -23,6 +23,10 @@ class Syncer {
         }
     }
     
+    private let gdaxAPIClient = GDAXAPIClient(server: .sandbox)
+    
+    // MARK: -
+    
     func cancel() {
         canceled = true
     }
@@ -111,22 +115,93 @@ class Syncer {
         
         log.debug("Pulling accounts and transactions for \(institution)")
         
-        CoinbaseApi.updateAccounts(institution: institution) { success, error in
-            if !success {
-                syncingSuccess = false
-                if let error = error {
-                    syncingErrors.append(error)
-                    log.error("Error pulling accounts for \(institution): \(error)")
-                }
-                log.debug("Finished pulling accounts for \(institution)")
-            }
-            
-            if self.canceled {
+        // Perform next sync handler
+        let performNextSyncHandler = { ( _ remainingInstitutions: [Institution], _ beginDate: Date, _ syncingSuccess: Bool, _ syncingErrors: [Error]) -> Void in
+            if self.canceled
+            {
                 self.cancelSync(errors: syncingErrors)
                 return
             }
             
             self.syncInstitutions(remainingInstitutions, beginDate: beginDate, success: syncingSuccess, errors: syncingErrors)
+        }
+        
+        // Perform sync
+        switch institution.sourceId
+        {
+        case .coinbase:
+            CoinbaseApi.updateAccounts(institution: institution) { success, error in
+                if !success {
+                    syncingSuccess = false
+                    if let error = error {
+                        syncingErrors.append(error)
+                        log.error("Error pulling accounts for \(institution): \(error)")
+                    }
+                    log.debug("Finished pulling accounts for \(institution)")
+                }
+                
+                performNextSyncHandler(remainingInstitutions, beginDate, syncingSuccess, syncingErrors)
+            }
+        case .gdax:
+            guard let accessToken = institution.accessToken else
+            {
+                syncingSuccess = false
+                performNextSyncHandler(remainingInstitutions, beginDate, syncingSuccess, syncingErrors)
+                return
+            }
+            
+            // Load credentials
+            let credentials: GDAXAPIClient.Credentials
+            do
+            {
+                credentials = try GDAXAPIClient.Credentials(identifier: accessToken)
+            }
+            catch let error
+            {
+                syncingErrors.append(error)
+                performNextSyncHandler(remainingInstitutions, beginDate, syncingSuccess, syncingErrors)
+                return
+            }
+            
+            // Fetch data from GDAX
+            self.gdaxAPIClient.credentials = credentials
+            try! self.gdaxAPIClient.fetchAccounts({ (accounts, error) in
+                guard let unwrappedAccounts = accounts else
+                {
+                    if let unwrappedError = error
+                    {
+                        syncingErrors.append(unwrappedError)
+                    }
+                    
+                    syncingSuccess = false
+                    performNextSyncHandler(remainingInstitutions, beginDate, syncingSuccess, syncingErrors)
+                    return
+                }
+                
+                for account in unwrappedAccounts
+                {
+                    var decimals = 2
+                    if let currency = Currency(rawValue: account.currencyCode)
+                    {
+                        decimals = currency.decimals
+                    }
+                    
+                    // Calculate the integer value of the balance based on the decimals
+                    var balance = Decimal(account.balance)
+                    balance = balance * Decimal(pow(10.0, Double(decimals)))
+                    let currentBalance = (balance as NSDecimalNumber).intValue
+
+                    balance = Decimal(account.availableBalance)
+                    balance = balance * Decimal(pow(10.0, Double(decimals)))
+                    let availableBalance = (balance as NSDecimalNumber).intValue
+                    
+                    // Initialize an Account object to insert the record
+                    _ = Account(institutionId: institution.institutionId, sourceId: institution.sourceId, sourceAccountId: account.identifier, sourceInstitutionId: "", accountTypeId: AccountType.depository, accountSubTypeId: nil, name: account.currencyCode, currency: account.currencyCode, decimals: decimals, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altDecimals: nil, altCurrentBalance: nil, altAvailableBalance: nil)
+                }
+                
+                performNextSyncHandler(remainingInstitutions, beginDate, syncingSuccess, syncingErrors)
+            })
+        default:()
         }
     }
     

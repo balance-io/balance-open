@@ -265,7 +265,6 @@ class AddAccountViewController: NSViewController {
         let buttonVertPadding = -1
         let buttonSize = NSRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
         
-        var tag = 2
         var isRightColumn = false
         var topView: NSView? = nil
         for source in buttonSourceOrder {
@@ -274,7 +273,7 @@ class AddAccountViewController: NSViewController {
                 
                 button.target = self
                 button.action = #selector(buttonAction(_:))
-                button.tag = tag
+                button.tag = source.rawValue
                 button.setAccessibilityLabel(source.description)
                 
                 assignBlocks(button: button, bounds: buttonSize, function: drawFunction)
@@ -298,9 +297,12 @@ class AddAccountViewController: NSViewController {
                 
                 buttons.append(button)
                 
-                if source != .coinbase {
+                switch source
+                {
+                case .bitfinex, .plaid, .poloniex:
                     button.alphaValue = 0.5
                     button.isEnabled = false
+                default:()
                 }
                 
                 if isRightColumn {
@@ -308,7 +310,6 @@ class AddAccountViewController: NSViewController {
                 }
                 isRightColumn = !isRightColumn
             }
-            tag += 1
         }
     }
     
@@ -332,8 +333,15 @@ class AddAccountViewController: NSViewController {
     
     @objc fileprivate func buttonAction(_ sender: NSButton) {
         if allowSelection, let source = Source(rawValue: sender.tag) {
-            if source == .coinbase {
-                _ = CoinbaseApi.authenticate()
+            switch source
+            {
+            case .coinbase:
+                CoinbaseApi.authenticate()
+            case .gdax:
+                let authViewController = GDAXAuthViewController()
+                authViewController.delegate = self
+                self.presentViewControllerAsModalWindow(authViewController)
+            default:()
             }
         }
     }
@@ -388,6 +396,30 @@ class AddAccountViewController: NSViewController {
         if let monitor = shortcutMonitor {
             NSEvent.removeMonitor(monitor)
             shortcutMonitor = nil
+        }
+    }
+}
+
+// MARK: GDAXAuthViewControllerDelegate
+
+extension AddAccountViewController: GDAXAuthViewControllerDelegate
+{
+    func didSuccessfullyLogin(with credentials: GDAXAPIClient.Credentials, in controller: GDAXAuthViewController)
+    {
+        self.dismissViewController(controller)
+        
+        // Save credentials
+        do
+        {
+            let credentialsIdentifier = "main"
+            try credentials.save(identifier: credentialsIdentifier)
+            
+            // Create institution
+            _ = Institution(sourceId: .gdax, sourceInstitutionId: "", name: "GDAX", nameBreak: nil, primaryColor: nil, secondaryColor: nil, logoData: nil, accessToken: credentialsIdentifier)
+        }
+        catch
+        {
+            // TODO: Display error
         }
     }
 }

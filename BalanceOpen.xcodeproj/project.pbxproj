@@ -151,6 +151,15 @@
 		53FA53011EF3FA93002990B0 /* InstitutionHeaderBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA52FF1EF3FA93002990B0 /* InstitutionHeaderBars.swift */; };
 		53FA53041EF3FAFE002990B0 /* InstitutionDefaultBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA53021EF3FAFE002990B0 /* InstitutionDefaultBar.swift */; };
 		53FA53051EF3FAFE002990B0 /* InstitutionHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */; };
+		A408662A1F30883A00D3FB2E /* GDAXWithdrawal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40866291F30883A00D3FB2E /* GDAXWithdrawal.swift */; };
+		A408662C1F308A4800D3FB2E /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A408662B1F308A4800D3FB2E /* URLRequest.swift */; };
+		A412352C1F2B318A00C4C6E1 /* GDAXAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A412352B1F2B318A00C4C6E1 /* GDAXAuthViewController.swift */; };
+		A44981E21F28EE3B00E861AA /* GDAXAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981E11F28EE3B00E861AA /* GDAXAccount.swift */; };
+		A44981E91F28F3AA00E861AA /* GDAXErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981E81F28F3AA00E861AA /* GDAXErrors.swift */; };
+		A4A150191F2A325600790EAC /* GDAXServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A150181F2A325600790EAC /* GDAXServer.swift */; };
+		A4A1501B1F2A32F400790EAC /* GDAXAuthHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1501A1F2A32F400790EAC /* GDAXAuthHeaders.swift */; };
+		A4A1501D1F2A331B00790EAC /* GDAXCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1501C1F2A331B00790EAC /* GDAXCredentials.swift */; };
+		A4AEE62C1F27728800CD1E77 /* GDAXAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AEE62B1F27728800CD1E77 /* GDAXAPIClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -354,6 +363,25 @@
 		53FA52FF1EF3FA93002990B0 /* InstitutionHeaderBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionHeaderBars.swift; sourceTree = "<group>"; };
 		53FA53021EF3FAFE002990B0 /* InstitutionDefaultBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionDefaultBar.swift; sourceTree = "<group>"; };
 		53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionHeaders.swift; sourceTree = "<group>"; };
+		A40866291F30883A00D3FB2E /* GDAXWithdrawal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXWithdrawal.swift; sourceTree = "<group>"; };
+		A408662B1F308A4800D3FB2E /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
+		A412352B1F2B318A00C4C6E1 /* GDAXAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAuthViewController.swift; sourceTree = "<group>"; };
+		A44981E11F28EE3B00E861AA /* GDAXAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAccount.swift; sourceTree = "<group>"; };
+		A44981E81F28F3AA00E861AA /* GDAXErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXErrors.swift; sourceTree = "<group>"; };
+		A494E9581F3A2231007F800C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A494E95B1F3A2231007F800C /* Account.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Account.json; sourceTree = "<group>"; };
+		A494E95C1F3A2231007F800C /* Error.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Error.json; sourceTree = "<group>"; };
+		A494E95D1F3A2231007F800C /* FetchAccounts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FetchAccounts.json; sourceTree = "<group>"; };
+		A494E95E1F3A2231007F800C /* WithdrawToCrypto.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = WithdrawToCrypto.json; sourceTree = "<group>"; };
+		A494E9601F3A2231007F800C /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
+		A494E9631F3A2231007F800C /* AccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTests.swift; sourceTree = "<group>"; };
+		A494E9641F3A2231007F800C /* APIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
+		A494E9651F3A2231007F800C /* CredentialsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsTest.swift; sourceTree = "<group>"; };
+		A494E9661F3A2231007F800C /* HeadersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadersTests.swift; sourceTree = "<group>"; };
+		A4A150181F2A325600790EAC /* GDAXServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXServer.swift; sourceTree = "<group>"; };
+		A4A1501A1F2A32F400790EAC /* GDAXAuthHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAuthHeaders.swift; sourceTree = "<group>"; };
+		A4A1501C1F2A331B00790EAC /* GDAXCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXCredentials.swift; sourceTree = "<group>"; };
+		A4AEE62B1F27728800CD1E77 /* GDAXAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAPIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -446,6 +474,9 @@
 			isa = PBXGroup;
 			children = (
 				2DF76CDF1F212F6F00EE18BB /* CoinbaseTests.swift */,
+				A494E9571F3A2231007F800C /* Supporting Files */,
+				A494E9611F3A2231007F800C /* Tests */,
+				A494E95F1F3A2231007F800C /* Utilities */,
 				2DCFD9CB1F385E9E0009A029 /* PoloniexAccountTests.swift */,
 				2DBEA3A41F3B0E0A00BBE16C /* PoloniexAPITests.swift */,
 				2DBEA3A61F3B0E3300BBE16C /* PoloniexAccountToAccountTests.swift */,
@@ -523,6 +554,7 @@
 				532122311EEAD1C000F4812A /* Preferences */,
 				532122AD1EEAE6E700F4812A /* Vector Graphics Draw Functions */,
 				532122541EEAD63700F4812A /* Views */,
+				A412352B1F2B318A00C4C6E1 /* GDAXAuthViewController.swift */,
 				5321223E1EEAD2B700F4812A /* AccountsTabTableCells.swift */,
 				532122401EEAD2B700F4812A /* AccountsTabViewController.swift */,
 				532122CE1EEB008700F4812A /* AddAccountViewController.swift */,
@@ -610,6 +642,7 @@
 				532122CC1EEAFF6300F4812A /* NSWindow.swift */,
 				5321226C1EEAD7DD00F4812A /* NotificationCenter.swift */,
 				532121FA1EEAC75A00F4812A /* String.swift */,
+				A408662B1F308A4800D3FB2E /* URLRequest.swift */,
 				2D8147531F1E58CE00119FE3 /* NSURLRequest.swift */,
 			);
 			path = Extensions;
@@ -757,12 +790,82 @@
 		53946FA11EEF0AEB00E921C3 /* API Models */ = {
 			isa = PBXGroup;
 			children = (
+				A4AEE62A1F27725700CD1E77 /* GDAX */,
 				53946FA21EEF0B0B00E921C3 /* CoinbaseAccount.swift */,
 				53946FA41EF0035200E921C3 /* CoinbaseApi.swift */,
 				2D8147521F1E58C500119FE3 /* PoloniexApi.swift */,
 				2D60617E1F2B4CE000D83D0E /* PoloniexAccount.swift */,
 			);
 			path = "API Models";
+			sourceTree = "<group>";
+		};
+		A494E9571F3A2231007F800C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A494E9581F3A2231007F800C /* Info.plist */,
+				A494E9591F3A2231007F800C /* Resources */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A494E9591F3A2231007F800C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A494E95A1F3A2231007F800C /* GDAX API Responses */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A494E95A1F3A2231007F800C /* GDAX API Responses */ = {
+			isa = PBXGroup;
+			children = (
+				A494E95B1F3A2231007F800C /* Account.json */,
+				A494E95C1F3A2231007F800C /* Error.json */,
+				A494E95D1F3A2231007F800C /* FetchAccounts.json */,
+				A494E95E1F3A2231007F800C /* WithdrawToCrypto.json */,
+			);
+			path = "GDAX API Responses";
+			sourceTree = "<group>";
+		};
+		A494E95F1F3A2231007F800C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A494E9601F3A2231007F800C /* MockURLSession.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		A494E9611F3A2231007F800C /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				A494E9621F3A2231007F800C /* GDAXAPIClient */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		A494E9621F3A2231007F800C /* GDAXAPIClient */ = {
+			isa = PBXGroup;
+			children = (
+				A494E9631F3A2231007F800C /* AccountTests.swift */,
+				A494E9641F3A2231007F800C /* APIClientTests.swift */,
+				A494E9651F3A2231007F800C /* CredentialsTest.swift */,
+				A494E9661F3A2231007F800C /* HeadersTests.swift */,
+			);
+			path = GDAXAPIClient;
+			sourceTree = "<group>";
+		};
+		A4AEE62A1F27725700CD1E77 /* GDAX */ = {
+			isa = PBXGroup;
+			children = (
+				A4AEE62B1F27728800CD1E77 /* GDAXAPIClient.swift */,
+				A44981E11F28EE3B00E861AA /* GDAXAccount.swift */,
+				A44981E81F28F3AA00E861AA /* GDAXErrors.swift */,
+				A4A150181F2A325600790EAC /* GDAXServer.swift */,
+				A4A1501A1F2A32F400790EAC /* GDAXAuthHeaders.swift */,
+				A4A1501C1F2A331B00790EAC /* GDAXCredentials.swift */,
+				A40866291F30883A00D3FB2E /* GDAXWithdrawal.swift */,
+			);
+			path = GDAX;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -945,6 +1048,7 @@
 				532122941EEADE4B00F4812A /* HoverTableRowView.swift in Sources */,
 				2D60617F1F2B4CE000D83D0E /* PoloniexAccount.swift in Sources */,
 				532122A01EEAE01400F4812A /* SyncDefaults.swift in Sources */,
+				A408662C1F308A4800D3FB2E /* URLRequest.swift in Sources */,
 				532122581EEAD66000F4812A /* Button.swift in Sources */,
 				5321223D1EEAD1D100F4812A /* PreferencesViewController.swift in Sources */,
 				532121DD1EEAC4DC00F4812A /* FMDatabasePool.m in Sources */,
@@ -986,10 +1090,12 @@
 				532122B51EEAE89A00F4812A /* TypeAliases.swift in Sources */,
 				53946FA01EEB10AA00E921C3 /* KeychainManager.swift in Sources */,
 				5321228E1EEADD3500F4812A /* ServerMessage.swift in Sources */,
+				A4A1501B1F2A32F400790EAC /* GDAXAuthHeaders.swift in Sources */,
 				532122781EEAD89300F4812A /* TabViewModel.swift in Sources */,
 				5321223A1EEAD1D100F4812A /* PreferencesGeneralViewController.swift in Sources */,
 				532122D31EEB05A800F4812A /* AddAccountButtons.swift in Sources */,
 				5321228A1EEADC9600F4812A /* ObjC.m in Sources */,
+				A44981E91F28F3AA00E861AA /* GDAXErrors.swift in Sources */,
 				5321220A1EEAC89B00F4812A /* CCNStatusItemDropView.m in Sources */,
 				5321229A1EEADFE500F4812A /* QCMethod.swift in Sources */,
 				2D8339CC1F39B35400C73DC2 /* TestingAppDelegate.swift in Sources */,
@@ -997,6 +1103,7 @@
 				532122B91EEAEAE600F4812A /* Date.swift in Sources */,
 				2D4D9BC71F2A3BA000ABA5CB /* NSURLRequest.swift in Sources */,
 				532122641EEAD75C00F4812A /* SectionedTableView.swift in Sources */,
+				A412352C1F2B318A00C4C6E1 /* GDAXAuthViewController.swift in Sources */,
 				5321223C1EEAD1D100F4812A /* PreferencesSecurityViewController.swift in Sources */,
 				532122831EEADA1100F4812A /* ImageView.swift in Sources */,
 				5321228C1EEADD0200F4812A /* NetworkStatus.swift in Sources */,
@@ -1010,18 +1117,23 @@
 				532122C31EEAEDC400F4812A /* BalanceTextField.swift in Sources */,
 				5321220C1EEAC89B00F4812A /* CCNStatusItemWindowBackgroundView.m in Sources */,
 				5321229E1EEAE00600F4812A /* SyncButton.swift in Sources */,
+				A4AEE62C1F27728800CD1E77 /* GDAXAPIClient.swift in Sources */,
 				532122301EEAD1BB00F4812A /* PopoverViewController.swift in Sources */,
 				2D4D9BC41F2A3B6F00ABA5CB /* PoloniexApi.swift in Sources */,
 				53946FA51EF0035200E921C3 /* CoinbaseApi.swift in Sources */,
 				53F8E2EA1EF1B6E90071FC73 /* Currency.swift in Sources */,
+				A4A1501D1F2A331B00790EAC /* GDAXCredentials.swift in Sources */,
 				532122CD1EEAFF6300F4812A /* NSWindow.swift in Sources */,
+				A4A150191F2A325600790EAC /* GDAXServer.swift in Sources */,
 				532122AC1EEAE56400F4812A /* Shortcut.swift in Sources */,
 				538A2C6D1EFD27C700C542C4 /* PFMoveApplication.m in Sources */,
 				5321221C1EEAC90C00F4812A /* DefaultsStorage.swift in Sources */,
 				532121DB1EEAC4DC00F4812A /* FMDatabase.m in Sources */,
+				A44981E21F28EE3B00E861AA /* GDAXAccount.swift in Sources */,
 				532122901EEADE1D00F4812A /* PaintCodeView.swift in Sources */,
 				532122BD1EEAED3100F4812A /* ChangePasswordViewController.swift in Sources */,
 				532122231EEAC99000F4812A /* CertValidator.m in Sources */,
+				A408662A1F30883A00D3FB2E /* GDAXWithdrawal.swift in Sources */,
 				53FA53011EF3FA93002990B0 /* InstitutionHeaderBars.swift in Sources */,
 				532121DF1EEAC4DC00F4812A /* FMResultSet.m in Sources */,
 				532122B71EEAE93400F4812A /* NSImage.swift in Sources */,
@@ -1114,7 +1226,7 @@
 					"$(PROJECT_DIR)/BalanceOpen/Frameworks",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = BalanceOpenTests/Info.plist;
+				INFOPLIST_FILE = "BalanceOpenTests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = balance.money.BalanceOpenTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1137,7 +1249,7 @@
 					"$(PROJECT_DIR)/BalanceOpen/Frameworks",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = BalanceOpenTests/Info.plist;
+				INFOPLIST_FILE = "BalanceOpenTests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = balance.money.BalanceOpenTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

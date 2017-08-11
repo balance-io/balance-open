@@ -1,8 +1,14 @@
 {
+  "iOS" : [
+    {
+      "hash" : "8acf90862c49c3eaab2cc3261f4d6c60115c429d254f8e1a4907daf29816200c",
+      "name" : "Reachability"
+    }
+  ],
   "commitish" : "v3",
   "Mac" : [
     {
-      "hash" : "d6aab2bba0444c7b894ccfddaafc2b296e2a7c62ff865984afbe3fe4e73151e5",
+      "hash" : "7e0ddca9556921f29ef0f623f4b3ae134f1e8b6ff503706a9569c1e7a8ac8d95",
       "name" : "Reachability"
     }
   ]
