@@ -47,7 +47,7 @@ class Defaults {
             return defaults.bool(forKey: Keys.launchAtLogin)
         }
         set {
-            if SMLoginItemSetEnabled(autolaunchBundleId as CFString, enabled) {
+            if SMLoginItemSetEnabled(autolaunchBundleId as CFString, newValue) {
                 defaults.set(newValue, forKey: Keys.launchAtLogin)
             } else {
                 log.severe("Failed to set login at launch preference")

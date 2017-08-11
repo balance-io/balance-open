@@ -25,8 +25,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     var launchedAtLogin = false
     var isAutolaunchHelperRunning: Bool {
-        // Check for running process and return bool
-        fatalError("implement")
+        let appsRunning = NSRunningApplication.runningApplications(withBundleIdentifier: autolaunchBundleId)
+        return appsRunning.count > 0
     }
 
     var pinned: Bool {
