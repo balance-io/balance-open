@@ -461,3 +461,51 @@ extension Account: CustomStringConvertible {
         return "\(accountId): \(name)"
     }
 }
+
+// MARK: Transferable
+
+extension Account: Transferable
+{
+    internal var directTransferOperator: TransferOperator.Type? {
+        switch self.sourceId
+        {
+            //        case .coinbase:
+            //            return CoinbaseApi
+            //        case .gdax:
+        //            return GDAXAPIClient
+        default:
+            return nil
+        }
+    }
+    
+    internal var exchangeTransferOperator: TransferOperator.Type? {
+        return ShapeShiftTransferOperator.self
+    }
+    
+    internal func make(withdrawal: Withdrawal, completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void) throws
+    {
+        switch self.sourceId
+        {
+        case .gdax:
+            guard let institution = self.institution,
+                  let accessToken = institution.accessToken else
+            {
+                // TODO: throw error
+                fatalError()
+            }
+            
+            // GDAX withdrawal
+            let gdaxWithdrawal = GDAXAPIClient.Withdrawal(amount: withdrawal.amount, currencyCode: self.currency, recipientCryptoAddress: withdrawal.recipientCryptoAddress)
+            
+            // Load credentials
+            let credentials = try GDAXAPIClient.Credentials(identifier: accessToken)
+            let apiClient = GDAXAPIClient(server: .sandbox)
+            apiClient.credentials = credentials
+            
+            try apiClient.make(withdrawal: gdaxWithdrawal, completionHandler: completionHandler)
+        default:
+            throw TransferableError.transferNotSupported
+        }
+    }
+}
+
