@@ -181,7 +181,7 @@ class Syncer {
                 for account in unwrappedAccounts
                 {
                     var decimals = 2
-                    if let currency = Currency(rawValue: account.currencyCode)
+                    if let currency = Currency.rawValue(currency:account.currencyCode)
                     {
                         decimals = currency.decimals
                     }

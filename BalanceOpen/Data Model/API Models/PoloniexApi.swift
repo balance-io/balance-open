@@ -117,7 +117,7 @@ struct PoloniexApi: ExchangeApi {
     private static func assembleTradingRequest(key: String, body: String, hashBody: String) -> URLRequest {
         var request = URLRequest(url: tradingURL)
         request.httpMethod = "POST"
-        request.setHeaders(headers: ["Key":key,"Sign":hashBody])
+        request.add(headers: ["Key":key,"Sign":hashBody])
         request.httpBody = body.data(using: .utf8)!
         return request
     }

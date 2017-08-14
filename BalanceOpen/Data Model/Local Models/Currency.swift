@@ -15,43 +15,43 @@ enum Currency {
         case gbp = "GBP"
         case cad = "CAD"
     }
-    case Crypto(shortName: String)
-    case Common(traditional: Traditional)
+    case crypto(shortName: String)
+    case common(traditional: Traditional)
     
     static func rawValue(currency: String) -> Currency? {
         switch currency {
-            case "USD": return .Common(traditional:.usd)
-            case "EUR": return .Common(traditional:.eur)
-            case "GBP": return .Common(traditional:.gbp)
-            default: return .Crypto(shortName:currency)
+            case "USD": return .common(traditional:.usd)
+            case "EUR": return .common(traditional:.eur)
+            case "GBP": return .common(traditional:.gbp)
+            case "CAD": return .common(traditional:.cad)
+            default: return .crypto(shortName:currency)
         }
     }
     
     var decimals: Int {
         switch self {
-            case .Common(traditional:.usd), .Common(traditional:.eur), .Common(traditional:.gbp): return 2
+            case .common(traditional:.usd), .common(traditional:.eur), .common(traditional:.gbp): return 2
             default: return 8
         }
     }
     
     var symbol: String {
         switch self {
-            case .Common(traditional:.usd): return "$"
-            case .Common(traditional:.eur): return "€"
-            case .Common(traditional:.gbp): return "£"
-            case .Common(Traditional:.cad): return "C$"
-            case .Crypto(let val): return val + " "
-            default: fatalError("Unexpected value \(self)")
+            case .common(traditional:.usd): return "$"
+            case .common(traditional:.eur): return "€"
+            case .common(traditional:.gbp): return "£"
+            case .common(traditional:.cad): return "C$"
+            case .crypto(let val): return val + " "
         }
     }
     
     var name: String {
         switch self {
-            case .Common(traditional: .usd): return "USD"
-            case .Common(traditional: .eur): return "EUR"
-            case .Common(traditional: .gbp): return "GBP"
-            case .Crypto(let val): return val
-            default: fatalError("Unexpected value \(self)")
+            case .common(traditional:.usd): return "USD"
+            case .common(traditional:.eur): return "EUR"
+            case .common(traditional:.gbp): return "GBP"
+            case .common(traditional:.cad): return "CAD"
+            case .crypto(let val): return val
         }
     }
 }
