@@ -7,3 +7,26 @@
 //
 
 import Foundation
+
+
+internal struct TransferQuote
+{
+    // Internal
+    internal let rate: Double
+    internal let minerFee: Double
+    internal let recipientAmount: Double
+    internal let depositAmount: Double
+}
+
+// MARK: Shape Shift
+
+internal extension TransferQuote
+{
+    internal init(shapeShiftQuote: ShapeShiftAPIClient.Quote)
+    {
+        self.rate = shapeShiftQuote.rate
+        self.minerFee = shapeShiftQuote.minerFee
+        self.recipientAmount = shapeShiftQuote.recipientAmount
+        self.depositAmount = shapeShiftQuote.depositAmount
+    }
+}
