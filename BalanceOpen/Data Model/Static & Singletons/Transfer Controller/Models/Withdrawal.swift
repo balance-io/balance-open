@@ -9,7 +9,9 @@
 import Foundation
 
 
-internal struct Transfer
+internal struct Withdrawal
 {
-    
+    // Internal
+    internal let amount: Double
+    internal let recipientCryptoAddress: String
 }
