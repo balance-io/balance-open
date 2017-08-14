@@ -7,3 +7,19 @@
 //
 
 import Foundation
+
+
+// TODO: This needs a better name
+internal protocol Transferable
+{
+    var directTransferOperator: TransferOperator.Type? { get }
+    var exchangeTransferOperator: TransferOperator.Type? { get }
+    
+    func make(withdrawal: Withdrawal, completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void) throws
+}
+
+
+internal enum TransferableError: Error
+{
+    case transferNotSupported
+}
