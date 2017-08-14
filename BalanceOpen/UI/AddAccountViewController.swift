@@ -333,14 +333,15 @@ class AddAccountViewController: NSViewController {
     
     @objc fileprivate func buttonAction(_ sender: NSButton) {
         if allowSelection, let source = Source(rawValue: sender.tag) {
-            switch source
-            {
+            switch source {
             case .coinbase:
                 CoinbaseApi.authenticate()
             case .gdax:
                 let authViewController = GDAXAuthViewController()
                 authViewController.delegate = self
                 self.presentViewControllerAsModalWindow(authViewController)
+            case .poloniex:
+                
             default:()
             }
         }
