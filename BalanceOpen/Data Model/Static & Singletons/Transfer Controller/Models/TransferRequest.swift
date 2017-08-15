@@ -22,7 +22,7 @@ internal struct TransferRequest
     
     // MARK: Initialization
     
-    internal init(sourceAccount: Account, recipientAddress: String, recipientCurrency: Currency, amount: Double)
+    internal init(sourceAccount: Account, recipientAddress: String, recipientCurrency: Currency, amount: Double) throws
     {
         guard let sourceCurrency = Currency(rawValue: sourceAccount.currency),
               let sourceInstitution = sourceAccount.institution else
