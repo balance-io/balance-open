@@ -16,6 +16,12 @@ internal protocol Transferable
     var exchangeTransferOperator: TransferOperator.Type? { get }
     
     func make(withdrawal: Withdrawal, completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void) throws
+    
+    // TODO:
+    // Determine if this is best approach.
+    // For example, SS would be required to make a request
+    // to determine if the currency conversion was supported
+    func supportsTransfer(to account: Account) -> Bool
 }
 
 

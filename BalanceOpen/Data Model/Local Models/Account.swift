@@ -482,6 +482,12 @@ extension Account: Transferable
         return ShapeShiftTransferOperator.self
     }
     
+    func supportsTransfer(to account: Account) -> Bool
+    {
+        // TODO: Logic to determine
+        return true
+    }
+    
     internal func make(withdrawal: Withdrawal, completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void) throws
     {
         switch self.sourceId
