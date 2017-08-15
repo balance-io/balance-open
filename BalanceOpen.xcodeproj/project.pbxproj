@@ -147,6 +147,8 @@
 		A416A5301F320AA400DA6480 /* SSMarketInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A416A52F1F320AA400DA6480 /* SSMarketInformation.swift */; };
 		A416A5321F32180600DA6480 /* SSCoinPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = A416A5311F32180600DA6480 /* SSCoinPair.swift */; };
 		A416A5341F3227B200DA6480 /* SSTransactionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A416A5331F3227B200DA6480 /* SSTransactionRequest.swift */; };
+		A4211A1D1F42FE630080C76A /* TransferFundsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4211A1C1F42FE630080C76A /* TransferFundsViewModel.swift */; };
+		A4211A201F435EF60080C76A /* CurrencyTextFieldFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4211A1F1F435EF60080C76A /* CurrencyTextFieldFormatter.swift */; };
 		A43429701F33548700D17BC6 /* TransferFundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A434296E1F33548700D17BC6 /* TransferFundsViewController.swift */; };
 		A44981E21F28EE3B00E861AA /* GDAXAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981E11F28EE3B00E861AA /* GDAXAccount.swift */; };
 		A44981E91F28F3AA00E861AA /* GDAXErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981E81F28F3AA00E861AA /* GDAXErrors.swift */; };
@@ -359,6 +361,8 @@
 		A416A52F1F320AA400DA6480 /* SSMarketInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSMarketInformation.swift; sourceTree = "<group>"; };
 		A416A5311F32180600DA6480 /* SSCoinPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSCoinPair.swift; sourceTree = "<group>"; };
 		A416A5331F3227B200DA6480 /* SSTransactionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSTransactionRequest.swift; sourceTree = "<group>"; };
+		A4211A1C1F42FE630080C76A /* TransferFundsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferFundsViewModel.swift; sourceTree = "<group>"; };
+		A4211A1F1F435EF60080C76A /* CurrencyTextFieldFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTextFieldFormatter.swift; sourceTree = "<group>"; };
 		A434296E1F33548700D17BC6 /* TransferFundsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferFundsViewController.swift; sourceTree = "<group>"; };
 		A43EAAFF1F3AFCC5002CEEAF /* ShapeShiftCoinPairTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeShiftCoinPairTests.swift; sourceTree = "<group>"; };
 		A43EAB011F3AFCC5002CEEAF /* HTTPURLResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPURLResponseTests.swift; sourceTree = "<group>"; };
@@ -522,6 +526,7 @@
 				532122311EEAD1C000F4812A /* Preferences */,
 				532122AD1EEAE6E700F4812A /* Vector Graphics Draw Functions */,
 				532122541EEAD63700F4812A /* Views */,
+				A4211A1E1F435E610080C76A /* Utilities */,
 				A412352B1F2B318A00C4C6E1 /* GDAXAuthViewController.swift */,
 				5321223E1EEAD2B700F4812A /* AccountsTabTableCells.swift */,
 				532122401EEAD2B700F4812A /* AccountsTabViewController.swift */,
@@ -719,6 +724,7 @@
 			children = (
 				532122411EEAD2B700F4812A /* AccountsTabViewModel.swift */,
 				532122771EEAD89300F4812A /* TabViewModel.swift */,
+				A4211A1C1F42FE630080C76A /* TransferFundsViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -779,6 +785,14 @@
 				A45777511F3312DB006D1AD2 /* SSQuote.swift */,
 			);
 			path = "Shape Shift";
+			sourceTree = "<group>";
+		};
+		A4211A1E1F435E610080C76A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A4211A1F1F435EF60080C76A /* CurrencyTextFieldFormatter.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		A43EAAFE1F3AFCC5002CEEAF /* ShapeShiftAPIClient */ = {
@@ -1085,6 +1099,7 @@
 				532122921EEADE2700F4812A /* VisualEffectView.swift in Sources */,
 				53946F9F1EEB10AA00E921C3 /* KeychainManagement.swift in Sources */,
 				532121E11EEAC4DC00F4812A /* FMDatabaseVariadic.swift in Sources */,
+				A4211A1D1F42FE630080C76A /* TransferFundsViewModel.swift in Sources */,
 				532122381EEAD1D100F4812A /* PreferencesAccountsViewController.swift in Sources */,
 				A416A5341F3227B200DA6480 /* SSTransactionRequest.swift in Sources */,
 				5321222E1EEAD19600F4812A /* main.swift in Sources */,
@@ -1116,6 +1131,7 @@
 				5321227D1EEAD8DA00F4812A /* AccountType.swift in Sources */,
 				532122701EEAD7F800F4812A /* Notifications.swift in Sources */,
 				532122A81EEAE3E500F4812A /* DispatchQueue.swift in Sources */,
+				A4211A201F435EF60080C76A /* CurrencyTextFieldFormatter.swift in Sources */,
 				532122BB1EEAED1F00F4812A /* SetPasswordViewController.swift in Sources */,
 				A43429701F33548700D17BC6 /* TransferFundsViewController.swift in Sources */,
 				53946FA31EEF0B0B00E921C3 /* CoinbaseAccount.swift in Sources */,
