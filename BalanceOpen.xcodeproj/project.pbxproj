@@ -149,6 +149,18 @@
 		A416A5341F3227B200DA6480 /* SSTransactionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A416A5331F3227B200DA6480 /* SSTransactionRequest.swift */; };
 		A4211A1D1F42FE630080C76A /* TransferFundsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4211A1C1F42FE630080C76A /* TransferFundsViewModel.swift */; };
 		A4211A201F435EF60080C76A /* CurrencyTextFieldFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4211A1F1F435EF60080C76A /* CurrencyTextFieldFormatter.swift */; };
+		A4211A221F442F350080C76A /* CurrencyTextFieldFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4211A211F442F350080C76A /* CurrencyTextFieldFormatterTests.swift */; };
+		A4211A231F44310D0080C76A /* AccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494E9631F3A2231007F800C /* AccountTests.swift */; };
+		A4211A241F4431110080C76A /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494E9641F3A2231007F800C /* APIClientTests.swift */; };
+		A4211A251F4431110080C76A /* CredentialsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494E9651F3A2231007F800C /* CredentialsTest.swift */; };
+		A4211A261F4431110080C76A /* HeadersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494E9661F3A2231007F800C /* HeadersTests.swift */; };
+		A4211A271F4431170080C76A /* ShapeShiftCoinPairTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43EAAFF1F3AFCC5002CEEAF /* ShapeShiftCoinPairTests.swift */; };
+		A4211A281F44311B0080C76A /* HTTPURLResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43EAB011F3AFCC5002CEEAF /* HTTPURLResponseTests.swift */; };
+		A4211A291F4431250080C76A /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494E9601F3A2231007F800C /* MockURLSession.swift */; };
+		A4211A2A1F4431490080C76A /* Account.json in Resources */ = {isa = PBXBuildFile; fileRef = A494E95B1F3A2231007F800C /* Account.json */; };
+		A4211A2B1F4431490080C76A /* Error.json in Resources */ = {isa = PBXBuildFile; fileRef = A494E95C1F3A2231007F800C /* Error.json */; };
+		A4211A2C1F4431490080C76A /* FetchAccounts.json in Resources */ = {isa = PBXBuildFile; fileRef = A494E95D1F3A2231007F800C /* FetchAccounts.json */; };
+		A4211A2D1F4431490080C76A /* WithdrawToCrypto.json in Resources */ = {isa = PBXBuildFile; fileRef = A494E95E1F3A2231007F800C /* WithdrawToCrypto.json */; };
 		A43429701F33548700D17BC6 /* TransferFundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A434296E1F33548700D17BC6 /* TransferFundsViewController.swift */; };
 		A44981E21F28EE3B00E861AA /* GDAXAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981E11F28EE3B00E861AA /* GDAXAccount.swift */; };
 		A44981E91F28F3AA00E861AA /* GDAXErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981E81F28F3AA00E861AA /* GDAXErrors.swift */; };
@@ -363,6 +375,7 @@
 		A416A5331F3227B200DA6480 /* SSTransactionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSTransactionRequest.swift; sourceTree = "<group>"; };
 		A4211A1C1F42FE630080C76A /* TransferFundsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferFundsViewModel.swift; sourceTree = "<group>"; };
 		A4211A1F1F435EF60080C76A /* CurrencyTextFieldFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTextFieldFormatter.swift; sourceTree = "<group>"; };
+		A4211A211F442F350080C76A /* CurrencyTextFieldFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTextFieldFormatterTests.swift; sourceTree = "<group>"; };
 		A434296E1F33548700D17BC6 /* TransferFundsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferFundsViewController.swift; sourceTree = "<group>"; };
 		A43EAAFF1F3AFCC5002CEEAF /* ShapeShiftCoinPairTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeShiftCoinPairTests.swift; sourceTree = "<group>"; };
 		A43EAB011F3AFCC5002CEEAF /* HTTPURLResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPURLResponseTests.swift; sourceTree = "<group>"; };
@@ -853,6 +866,7 @@
 				A43EAB001F3AFCC5002CEEAF /* Extensions */,
 				A43EAAFE1F3AFCC5002CEEAF /* ShapeShiftAPIClient */,
 				A494E9621F3A2231007F800C /* GDAXAPIClient */,
+				A4211A211F442F350080C76A /* CurrencyTextFieldFormatterTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1039,6 +1053,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4211A2C1F4431490080C76A /* FetchAccounts.json in Resources */,
+				A4211A2B1F4431490080C76A /* Error.json in Resources */,
+				A4211A2A1F4431490080C76A /* Account.json in Resources */,
+				A4211A2D1F4431490080C76A /* WithdrawToCrypto.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1068,6 +1086,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DF76CE01F212F6F00EE18BB /* CoinbaseTests.swift in Sources */,
+				A4211A231F44310D0080C76A /* AccountTests.swift in Sources */,
+				A4211A281F44311B0080C76A /* HTTPURLResponseTests.swift in Sources */,
+				A4211A271F4431170080C76A /* ShapeShiftCoinPairTests.swift in Sources */,
+				A4211A251F4431110080C76A /* CredentialsTest.swift in Sources */,
+				A4211A221F442F350080C76A /* CurrencyTextFieldFormatterTests.swift in Sources */,
+				A4211A291F4431250080C76A /* MockURLSession.swift in Sources */,
+				A4211A261F4431110080C76A /* HeadersTests.swift in Sources */,
+				A4211A241F4431110080C76A /* APIClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -28,7 +28,7 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A4AEE6301F27795700CD1E77"
+               BlueprintIdentifier = "2DF76CDC1F212F6F00EE18BB"
                BuildableName = "BalanceOpenTests.xctest"
                BlueprintName = "BalanceOpenTests"
                ReferencedContainer = "container:BalanceOpen.xcodeproj">
@@ -47,7 +47,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A4AEE6301F27795700CD1E77"
+               BlueprintIdentifier = "2DF76CDC1F212F6F00EE18BB"
                BuildableName = "BalanceOpenTests.xctest"
                BlueprintName = "BalanceOpenTests"
                ReferencedContainer = "container:BalanceOpen.xcodeproj">
