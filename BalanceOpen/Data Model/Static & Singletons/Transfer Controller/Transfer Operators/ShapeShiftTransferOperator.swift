@@ -114,7 +114,7 @@ internal final class ShapeShiftTransferOperator: TransferOperator
             
             // Find source coin
             guard let sourceCoin = unwrappedCoins.first(where: { (coin) -> Bool in
-                return coin.symbol == self.request.sourceCurrency.symbol
+                return coin.symbol.lowercased() == self.request.sourceCurrency.rawValue.lowercased()
             }) else
             {
                 completionHandler(false, Error.unsupportedCurrency(currency: self.request.sourceCurrency))
@@ -123,7 +123,7 @@ internal final class ShapeShiftTransferOperator: TransferOperator
             
             // Find recipient coin
             guard let recipientCoin = unwrappedCoins.first(where: { (coin) -> Bool in
-                return coin.symbol == self.request.recipientCurrency.symbol
+                return coin.symbol.lowercased() == self.request.recipientCurrency.rawValue.lowercased()
             }) else
             {
                 completionHandler(false, Error.unsupportedCurrency(currency: self.request.recipientCurrency))
