@@ -299,7 +299,7 @@ class AddAccountViewController: NSViewController {
                 
                 switch source
                 {
-                case .bitfinex, .plaid, .poloniex:
+                case .bitfinex, .plaid:
                     button.alphaValue = 0.5
                     button.isEnabled = false
                 default:()
