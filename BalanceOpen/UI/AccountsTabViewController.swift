@@ -115,6 +115,9 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         createTable()
         createFixPasswordPrompt()
         //createTotalFooter()
+        
+        let transferFundsViewController = TransferFundsViewController()
+        self.presentViewControllerAsModalWindow(transferFundsViewController)
     }
     
     func createTable() {
@@ -704,7 +707,7 @@ extension AccountsTabViewController: AccountsTabViewModelDelegate
 {
     func didClickTransferMenuItem(from source: Account, to recipient: Account)
     {
-        let transferFundsViewController = TransferFundsViewController(sourceAccount: source, recipientAccount: recipient)
-        self.presentViewControllerAsModalWindow(transferFundsViewController)
+//        let transferFundsViewController = TransferFundsViewController(sourceAccount: source, recipientAccount: recipient)
+//        self.presentViewControllerAsModalWindow(transferFundsViewController)
     }
 }
