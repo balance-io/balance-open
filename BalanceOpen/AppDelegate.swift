@@ -9,6 +9,8 @@
 import Cocoa
 import ServiceManagement
 
+let autolaunchBundleId = "software.balanced.balance-open-autolaunch"
+
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     //
@@ -21,6 +23,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var contentViewController: PopoverViewController!
     var preferencesWindowController: NSWindowController!
     
+    var launchedAtLogin = false
+    var isAutolaunchHelperRunning: Bool {
+        let appsRunning = NSRunningApplication.runningApplications(withBundleIdentifier: autolaunchBundleId)
+        return appsRunning.count > 0
+    }
+
     var pinned: Bool {
         get {
             return statusItem.windowConfiguration.isPinned
@@ -84,8 +92,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(AppDelegate.handleURLEvent(event:withReply:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL)
         )
         
-        // Query the helper app to see if we were auto launched (dirty hack because Apple makes simple shit difficult)
-        forceAutoLaunch()
+        // Check for the helper app to see if we were auto launched
+        launchedAtLogin = isAutolaunchHelperRunning
         
         // Initialize singletons
         initializeSingletons()
@@ -221,10 +229,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 }
             }
 
-            //DO WE NEED THIS?
-//            if !autoLaunch.wasLaunchedAtLogin && !showedAlert {
-//                self.showPopover()
-//            }
+            // Show Popover if we are manually lauching the app
+            if !self.launchedAtLogin && !showedAlert {
+                self.showPopover()
+            }
         }
     }
     
@@ -331,12 +339,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         task.arguments = ["-c", "sleep 0.2; open \"\(Bundle.main.bundlePath)\""]
         task.launch()
         NSApp.terminate(nil)
-    }
-    
-    func forceAutoLaunch() {
-        if (!SMLoginItemSetEnabled("balance.money.AutoLaunchBalanceHelper" as CFString, defaults.launchAtLogin)) {
-            print("Auto login was not successful");
-        }
     }
     
     func sendFeedback() {
