@@ -25,7 +25,7 @@ class EmailIssueController: NSViewController {
     
     fileprivate let backButton = Button()
     fileprivate let submitButton = Button()
-    fileprivate let plaidInstitution: WrapperInstitution?
+    fileprivate let plaidInstitution: InstitutionWrapper?
     
     fileprivate var isEmailValid: Bool {
         return validateEmail(emailField.stringValue)
@@ -34,7 +34,7 @@ class EmailIssueController: NSViewController {
         return plaidInstitution != nil && plaidErrorCode != nil
     }
     
-    init(plaidInstitution: WrapperInstitution, plaidErrorCode: Int, closeBlock: @escaping () -> Void) {
+    init(plaidInstitution: InstitutionWrapper, plaidErrorCode: Int, closeBlock: @escaping () -> Void) {
         self.plaidInstitution = plaidInstitution
         self.plaidErrorCode = plaidErrorCode
         self.closeBlock = closeBlock

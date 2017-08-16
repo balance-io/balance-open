@@ -8,22 +8,21 @@
 
 import Cocoa
 
-protocol WrapperInstitution {
+protocol InstitutionWrapper {
     var currencyCode: String {get set}
     var usernameLabel: String {get set}
     var passwordLabel: String {get set}
-    
-    var hasMfa: Bool {get set}
-    var mfa: [String] {get set}
     
     var name: String {get set}
     var products: [String] {get set}
     
     var type: String {get set}
     var url: String? {get set}
+    
+    var fields: [Field] {get set}
 }
 
-private enum PlaidFieldType: String {
+private enum FieldType: String {
     case username = "username"
     case password = "password"
     case pin      = "pin"
@@ -62,9 +61,9 @@ class SignUpViewController: NSViewController {
     fileprivate var currentStep = Step.connect
     fileprivate var institution: Institution?
     
-    fileprivate let plaidInstitution: WrapperInstitution
+    fileprivate let plaidInstitution: InstitutionWrapper
     fileprivate let patch: Bool
-    fileprivate let closeBlock: (_ finished: Bool) -> Void
+    fileprivate let closeBlock: (_ finished: Bool, _ signUpController: SignUpViewController) -> Void
     
     fileprivate var primaryColor = NSColor.gray
     fileprivate let margin = 25
@@ -162,7 +161,7 @@ class SignUpViewController: NSViewController {
     // MARK: - Lifecycle -
     //
     
-    init(plaidInstitution: WrapperInstitution, patch: Bool = false, institution: Institution? = nil, closeBlock: @escaping (_ finished: Bool) -> Void) {
+    init(plaidInstitution: InstitutionWrapper, patch: Bool = false, institution: Institution? = nil, closeBlock: @escaping (_ finished: Bool, _ signUpViewController: SignUpViewController) -> Void) {
         self.plaidInstitution = plaidInstitution
         self.closeBlock = closeBlock
         self.patch = patch
@@ -547,7 +546,7 @@ class SignUpViewController: NSViewController {
         expandedExplanationButton.alphaValue = 1.0
     }
     
-    fileprivate func generatePlaceholder(field: PlaidSearchInstitution.Field) -> String {
+    fileprivate func generatePlaceholder(field: Field) -> String {
         let lowercaseLabel = field.label.lowercased()
         if lowercaseLabel == "account number/userid" {
             return "Account Number or User ID"
@@ -562,7 +561,7 @@ class SignUpViewController: NSViewController {
         } else if lowercaseLabel.contains("user") || lowercaseLabel.contains("id") {
             return "User ID"
         } else {
-            if let type = PlaidFieldType(rawValue: field.type) {
+            if let type = FieldType(rawValue: field.type) {
                 switch type {
                 case .username: return "User ID"
                 case .password: return "Password"
@@ -578,11 +577,11 @@ class SignUpViewController: NSViewController {
         var previousTextField: SignUpTextField?
         for field in plaidInstitution.fields {
             var type: SignUpTextFieldType = .username
-            if field.type == PlaidFieldType.username.rawValue {
+            if field.type == FieldType.username.rawValue {
                 type = .username
-            } else if field.type == PlaidFieldType.password.rawValue {
+            } else if field.type == FieldType.password.rawValue {
                 type = .password
-            } else if field.type == PlaidFieldType.pin.rawValue {
+            } else if field.type == FieldType.pin.rawValue {
                 type = .pin
             }
             let textField = SignUpTextField(type: type)
@@ -640,9 +639,7 @@ class SignUpViewController: NSViewController {
             make.leading.equalToSuperview().offset(margin)
             make.top.equalTo(questionField.snp.bottom).offset(25)
         }
-        
-        submitButton.action = #selector(submitMFA(_:))
-        
+            
         self.view.window?.makeFirstResponder(questionField)
         
         AppDelegate.sharedInstance.resizeWindowHeight(height, animated: true)
@@ -664,7 +661,6 @@ class SignUpViewController: NSViewController {
             button.title = "\(device.type): \(device.mask)"
             button.tag = i
             button.target = self
-            button.action = #selector(submitMFA(_:))
             containerView.addSubview(button)
             button.snp.makeConstraints { make in
                 if let previousButton = previousButton {
@@ -703,38 +699,6 @@ class SignUpViewController: NSViewController {
         submitButton.isHidden = false
     }
     
-    fileprivate func displayMFACodeEntry() {
-        removeMFADevices()
-        
-        codeField.delegate = self
-        codeField.placeholderString = "Code"
-        containerView.addSubview(codeField)
-        codeField.snp.makeConstraints { make in
-            make.top.equalTo(loadingFieldScrollView.snp.bottom).offset(10)
-            make.height.equalTo(30)
-            make.leading.equalToSuperview().offset(margin)
-            make.trailing.equalToSuperview().offset(-margin)
-        }
-        codeField.nextKeyView = submitButton
-        
-        backButton.snp.remakeConstraints { make in
-            make.height.equalTo(25)
-            make.leading.equalToSuperview().offset(margin)
-            make.top.equalTo(codeField.snp.bottom).offset(25)
-        }
-        
-        submitButton.action = #selector(submitMFA(_:))
-        
-        self.view.window?.makeFirstResponder(codeField)
-        
-        AppDelegate.sharedInstance.resizeWindowHeight(height, animated: true)
-    }
-    
-    fileprivate func removeMFACodeEntry() {
-        codeField.removeFromSuperview()
-        submitButton.action = nil
-    }
-    
     fileprivate func createHtmlAttributedString(string: String, font: NSFont, color: NSColor) -> NSAttributedString {
         if let hexColor = color.hexString {
             let finalHtml = "<span style=\"font-family:'\(font.fontName)'; font-size:\(Int(font.pointSize))px; color:\(hexColor);\">\(string)</span>"
@@ -742,8 +706,8 @@ class SignUpViewController: NSViewController {
             if let data = finalHtml.data(using: String.Encoding.utf8) {
                 var attributedString: NSAttributedString?
                 do {
-                    attributedString =  try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil)
-                } catch {}
+                    attributedString =  try NSAttributedString(data: data, options: [NSAttributedString.DocumentReadingOptionKey.fileType: NSAttributedString.DocumentType.html, NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
+                } catch {} 
                 
                 if let attributedString = attributedString {
                     return attributedString
@@ -838,7 +802,7 @@ class SignUpViewController: NSViewController {
             }
         }
         
-        closeBlock(false)
+        closeBlock(false, self)
     }
     
     @objc fileprivate func close() {
@@ -877,7 +841,7 @@ class SignUpViewController: NSViewController {
         let nameComponents = plaidInstitution.name.components(separatedBy: " ")
         let name = nameComponents.first ?? plaidInstitution.name
         let url = URL(string: "onepassword://search/\(name.URLQueryStringEncodedValue)") ?? URL(string: "onepassword://search/")!
-        NSWorkspace.shared().open(url)
+        NSWorkspace.shared.open(url)
     }
     
     //
@@ -952,88 +916,24 @@ class SignUpViewController: NSViewController {
         updateConnectLabelWorkItem?.cancel()
     }
     
-    fileprivate func completeConnect(institution: Institution, MFAType: PlaidMFAType?, MFAData: [[String: AnyObject]]?) {
+    fileprivate func completeConnect(institution: Institution) {
         stopAutoUpdatingConnectLabel()
         
         connectionFailures = 0
         
-        if let MFAType = MFAType, let MFAData = MFAData {
-            // Show MFA workflow
-            if MFAType == .Questions {
-                // Display MFA question
-                var question = ""
-                if let questionValue = MFAData[0]["question"] as? String, MFAData.count > 0 {
-                    question = questionValue
-                }
-                
-                self.currentStep = .question
-                self.displayMFAQuestion("Answer")
-                
-                self.loadingField.textColor = CurrentTheme.addAccounts.textColor
-                self.loadingField.shadow = nil
-                self.setLoadingFieldString(question)
-                self.backButton.isEnabled = true
-                self.submitButton.isEnabled = true
-                self.submitButton.title = "Submit"
-                self.spinner.stopAnimation(nil)
-                self.onePasswordButton.isHidden = !showOnePasswordButton
-            } else if MFAType == .List {
-                // Display device choices
-                var devicesSet = Set<Device>()
-                for value in MFAData {
-                    if let type = value["type"] as? String, let mask = value["mask"] as? String {
-                        let device = Device(type: type, mask: mask)
-                        devicesSet.insert(device)
-                    }
-                }
-                
-                // Sort the devices by type
-                self.devices = devicesSet.sorted {
-                    return $0.type < $1.type
-                }
-                
-                self.currentStep = .deviceList
-                self.displayMFADevices(self.devices)
-                
-                self.loadingField.textColor = CurrentTheme.addAccounts.textColor
-                self.loadingField.shadow = nil
-                self.setLoadingFieldString("Choose a device to send your code")
-                self.backButton.isEnabled = true
-                self.spinner.stopAnimation(nil)
-                self.onePasswordButton.isHidden = !showOnePasswordButton
-            } else if MFAType == .Device {
-                // Parse message
-                self.loadingField.textColor = CurrentTheme.addAccounts.textColor
-                self.loadingField.shadow = nil
-                if let message = MFAData[0]["message"] as? String, MFAData.count > 0 {
-                    self.setLoadingFieldString(message)
-                } else {
-                    self.setLoadingFieldString("Enter the code your received")
-                }
-                
-                // Display code entry
-                self.currentStep = .codeEntry
-                self.displayMFACodeEntry()
-                self.backButton.isEnabled = true
-                self.submitButton.isEnabled = true
-                self.spinner.stopAnimation(nil)
-                self.onePasswordButton.isHidden = false
-            }
-        } else {
-            // Success, so close the window
-            if !patch {
-                let userInfo = Notifications.userInfoForInstitution(institution)
-                NotificationCenter.postOnMainThread(name: Notifications.InstitutionAdded, object: nil, userInfo: userInfo)
-            }
-            
-            self.finished()
+        // Success, so close the window
+        if !patch {
+            let userInfo = Notifications.userInfoForInstitution(institution)
+            NotificationCenter.postOnMainThread(name: Notifications.InstitutionAdded, object: nil, userInfo: userInfo)
         }
+        
+        self.finished()
     }
     
     fileprivate func failConnect(error: Error?) {
         stopAutoUpdatingConnectLabel()
         
-        if let error = error {
+        if let error = error! as? NSError {
             lastPlaidErrorCode = error.code
         }
         connectionFailures += 1
@@ -1050,12 +950,7 @@ class SignUpViewController: NSViewController {
         loadingField.textColor = errorTextColor
         loadingField.shadow = loadingFieldShadow
         if let error = error {
-            if error.code == PlaidError.mfaNotSupported.rawValue {
-                // Special case because the message is too long
-                setLoadingFieldString("This account requires a form of multi-factor authentication that is not currently supported.")
-            } else {
-                setLoadingFieldString(error.localizedDescription)
-            }
+            setLoadingFieldString(error.localizedDescription)
         } else {
             setLoadingFieldString("Connecting failed with an unknown error")
         }
@@ -1064,61 +959,6 @@ class SignUpViewController: NSViewController {
         
         // Shake the window
         self.view.window?.shake()
-    }
-    
-    @objc fileprivate func submitMFA(_ sender: AnyObject?) {
-        var responseType: PlaidMFAResponseType?
-        var response: String?
-        var loadingText: String?
-        
-        if currentStep == .question {
-            guard allFieldsFilled() else {
-                return
-            }
-            
-            responseType = .question
-            response = questionField.stringValue
-            loadingText = "Submitting answer"
-            log.info("Submitting MFA question answer for \(self.plaidInstitution.type): \(self.plaidInstitution.name)")
-        } else if currentStep == .deviceList {
-            if let button = sender as? NSButton, let institution = institution, let _ = institution.accessToken {
-                let device = devices[button.tag]
-                responseType = PlaidMFAResponseType.deviceType
-                response = device.type
-                loadingText = "Sending code to your device"
-                
-                // Check if we need to use the mask instead
-                let filtered = devices.filter {
-                    $0.type == device.type
-                }
-                if filtered.count > 1 {
-                    responseType = .deviceMask
-                    response = device.mask
-                }
-                
-                log.info("Submitting MFA device type choice for \(self.plaidInstitution.type): \(self.plaidInstitution.name)")
-            }
-        } else if currentStep == .codeEntry {
-            guard allFieldsFilled() else {
-                return
-            }
-            
-            responseType = .code
-            response = codeField.stringValue
-            loadingText = "Connecting to \(plaidInstitution.name)"
-            log.info("Submitting MFA code for \(self.plaidInstitution.type): \(self.plaidInstitution.name)")
-        }
-        
-        if let institution = institution, let responseType = responseType, let response = response, let loadingText = loadingText {
-            prepareViewsForSubmit(loadingText: loadingText)
-            plaidApi.submitMFA(institution: institution, responseType: responseType, response: response, patch: patch) { success, error, MFAType, MFAData in
-                if success {
-                    self.completeConnect(institution: institution, MFAType: MFAType, MFAData: MFAData)
-                } else {
-                    self.failedMFA(error: error)
-                }
-            }
-        }
     }
     
     fileprivate func prepareViewsForSubmit(loadingText: String) {
@@ -1237,7 +1077,6 @@ extension SignUpViewController: NSTextFieldDelegate {
         } else if currentStep == .question || currentStep == .codeEntry {
             if allFieldsFilled() {
                 submitButton.title = "Submit"
-                submitMFA(submitButton)
                 return true
             }
         }

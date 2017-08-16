@@ -74,6 +74,52 @@ struct LightTheme: Theme {
         return LockTheme(titleFont: titleFont, explanationFont: explanationFont, passwordBackgroundColor: passwordBackgroundColor, passwordActiveBorderColor: passwordActiveBorderColor, passwordInactiveBorderColor: passwordInactiveBorderColor, passwordTextColor: passwordTextColor, passwordPlaceholderColor: passwordPlaceholderColor)
     }
     
+    var addAccounts: AddAccountsTheme {
+        let institutionNameFont = NSFont.systemFont(ofSize: 23)
+        
+        let welcomeFont = NSFont.lightSystemFont(ofSize: 21)
+        
+        let labelFont = NSFont.systemFont(ofSize: 13)
+        let textColor = NSColor.white
+        
+        let statusFont = NSFont.systemFont(ofSize: 14)
+        let statusColor = NSColor(deviceWhiteInt: 255, alpha: 0.7)
+        
+        let buttonFont = NSFont.systemFont(ofSize: 14)
+        let buttonBackgroundColor = NSColor(deviceWhiteInt: 255, alpha: 0.15)
+        let buttonBorderColor = NSColor(deviceWhiteInt: 255, alpha: 0.7)
+        
+        let lineColor = NSColor(deviceWhiteInt: 255, alpha: 0.1)
+        
+        let onePasswordButtonImage = NSImage.init(named: NSImage.Name(rawValue: "onepassword-button-light"))!
+        let waveImage = NSImage.init(named:NSImage.Name(rawValue: "waves-light"))!
+        let padlockImage = NSImage.init(named:NSImage.Name(rawValue: "padlockInRoundedRectangle-light"))!
+        
+        let searchHeaderBackgroundColor = NSColor(deviceRedInt: 53, green: 61, blue: 71)
+        let searchHeaderFont = NSFont.mediumSystemFont(ofSize: 13)
+        let searchHeaderPopularFont = NSFont.semiboldSystemFont(ofSize: 13)
+        let searchHeaderColor = NSColor(deviceRedInt: 234, green: 241, blue: 245)
+        let searchPopularFont = NSFont.mediumSystemFont(ofSize: 14)
+        let searchPopularColor = NSColor(deviceWhiteInt: 255)
+        let searchMoreResultsFont = NSFont.systemFont(ofSize: 13)
+        let searchMoreResultsColor = NSColor(deviceWhiteInt: 255, alpha: 0.72)
+        
+        let signUpFieldActiveBorderColor = NSColor(deviceRedInt: 203, green: 226, blue: 255, alpha: 0.5)
+        let signUpFieldInactiveBorderColor = NSColor.clear
+        let signUpFieldBackgroundColor = NSColor(deviceWhiteInt: 255, alpha: 0.16)
+        let signUpFieldTextColor = NSColor.white
+        let signUpFieldplaceHolderTextColor = NSColor(deviceRedInt: 235, green: 240, blue: 245, alpha: 0.8)
+        let signUpFieldFont = NSFont.systemFont(ofSize: 13.5)
+        
+        let emailIssueInfoLabelNameFont = NSFont.boldSystemFont(ofSize: 12)
+        let emailIssueInfoLabelNameColor = NSColor.white
+        let emailIssueInfoLabelValueFont = NSFont.systemFont(ofSize: 12)
+        let emailIssueInfoLabelValueColor = NSColor.lightGray
+        let emailIssueMessageLabelFont = NSFont.systemFont(ofSize: 12)
+        
+        return AddAccountsTheme(institutionNameFont: institutionNameFont,  welcomeFont: welcomeFont, labelFont: labelFont, textColor: textColor, statusFont: statusFont, statusColor: statusColor, buttonFont: buttonFont, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, lineColor: lineColor, onePasswordButtonImage: onePasswordButtonImage, waveImage: waveImage, padlockImage: padlockImage, searchHeaderBackgroundColor: searchHeaderBackgroundColor, searchHeaderFont: searchHeaderFont, searchHeaderPopularFont: searchHeaderPopularFont, searchHeaderColor: searchHeaderColor, searchPopularFont: searchPopularFont, searchPopularColor: searchPopularColor, searchMoreResultsFont: searchMoreResultsFont, searchMoreResultsColor: searchMoreResultsColor, signUpFieldActiveBorderColor: signUpFieldActiveBorderColor, signUpFieldInactiveBorderColor: signUpFieldInactiveBorderColor, signUpFieldBackgroundColor: signUpFieldBackgroundColor, signUpFieldTextColor: signUpFieldTextColor, signUpFieldplaceHolderTextColor: signUpFieldplaceHolderTextColor, signUpFieldFont: signUpFieldFont, emailIssueInfoLabelNameFont: emailIssueInfoLabelNameFont, emailIssueInfoLabelNameColor: emailIssueInfoLabelNameColor, emailIssueInfoLabelValueFont: emailIssueInfoLabelValueFont, emailIssueInfoLabelValueColor: emailIssueInfoLabelValueColor, emailIssueMessageLabelFont: emailIssueMessageLabelFont)
+    }
+    
     var accounts: AccountsTheme {
         let headerCell = AccountsTheme.HeaderCellTheme(
             height: 26.0,

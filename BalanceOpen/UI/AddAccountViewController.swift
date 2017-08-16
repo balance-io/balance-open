@@ -341,9 +341,31 @@ class AddAccountViewController: NSViewController {
                 authViewController.delegate = self
                 self.presentViewControllerAsModalWindow(authViewController)
             case .poloniex:
-                
+                let institution = Institution.init([String]() as [AnyObject])
+                let signup = SignUpViewController(plaidInstitution: institution as InstitutionWrapper, patch: false, institution: institution, closeBlock: { (finished, signUpViewController: SignUpViewController) in
+                    if finished {
+                        self.back()
+                    } else {
+                        self.removeSignUpController(animated: true, signUpController: signUpViewController)
+                    }
+                })
+                preferencesButton.isEnabled = false
+                    preferencesButton.animator().alphaValue = 0.0
+                    self.view.replaceSubview(containerView, with: signup.view, animation: .slideInFromRight)
             default:()
             }
+        }
+    }
+    
+    func removeSignUpController(animated: Bool, signUpController: SignUpViewController) {
+        preferencesButton.isEnabled = true
+        if animated {
+            preferencesButton.animator().alphaValue = 1.0
+            self.view.replaceSubview(signUpController.view, with: containerView, animation: .slideInFromLeft) {
+            }
+        } else {
+            preferencesButton.alphaValue = 1.0
+            self.view.replaceSubview(signUpController.view, with: containerView, animation: .none)
         }
     }
     
