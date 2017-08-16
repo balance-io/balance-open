@@ -176,6 +176,7 @@
 		A4C518DE1F3AFE3D008F59CC /* TransferController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C518DD1F3AFE3D008F59CC /* TransferController.swift */; };
 		A4C518E21F3B5400008F59CC /* ShapeShiftTransferOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C518E11F3B5400008F59CC /* ShapeShiftTransferOperator.swift */; };
 		A4C518E51F3B5F46008F59CC /* Withdrawal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C518E41F3B5F46008F59CC /* Withdrawal.swift */; };
+		A4F59D3B1F44A21700A3CB49 /* TransferOperatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F59D3A1F44A21700A3CB49 /* TransferOperatorError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -403,6 +404,7 @@
 		A4C518DD1F3AFE3D008F59CC /* TransferController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferController.swift; sourceTree = "<group>"; };
 		A4C518E11F3B5400008F59CC /* ShapeShiftTransferOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeShiftTransferOperator.swift; sourceTree = "<group>"; };
 		A4C518E41F3B5F46008F59CC /* Withdrawal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Withdrawal.swift; sourceTree = "<group>"; };
+		A4F59D3A1F44A21700A3CB49 /* TransferOperatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOperatorError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -930,6 +932,7 @@
 				A4C518E41F3B5F46008F59CC /* Withdrawal.swift */,
 				A49FC38B1F3C596300212DC3 /* TransferQuote.swift */,
 				A47F11291F4193DB00138594 /* TransferRequest.swift */,
+				A4F59D3A1F44A21700A3CB49 /* TransferOperatorError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1168,6 +1171,7 @@
 				53946FA01EEB10AA00E921C3 /* KeychainManager.swift in Sources */,
 				5321228E1EEADD3500F4812A /* ServerMessage.swift in Sources */,
 				A4A1501B1F2A32F400790EAC /* GDAXAuthHeaders.swift in Sources */,
+				A4F59D3B1F44A21700A3CB49 /* TransferOperatorError.swift in Sources */,
 				532122781EEAD89300F4812A /* TabViewModel.swift in Sources */,
 				5321223A1EEAD1D100F4812A /* PreferencesGeneralViewController.swift in Sources */,
 				A4C518DE1F3AFE3D008F59CC /* TransferController.swift in Sources */,

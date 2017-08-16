@@ -29,13 +29,20 @@ internal final class TransferFundsViewController: NSViewController
     private let recipientAmountLabel = LabelField(frame: NSRect.zero)
     
     private let minerFeeLabel = LabelField(frame: NSRect.zero)
-    
     private let minerFeeHelpButton: Button = {
         let button = Button(frame: NSRect.zero)
         button.bezelStyle = .helpButton
         button.title = ""
         
         return button
+    }()
+    
+    private let errorLabel: LabelField = {
+        let label = LabelField(frame: NSRect.zero)
+        label.textColor = NSColor(hexString: "AB0000")
+        label.alignment = .center
+        
+        return label
     }()
     
     private let cancelButton: Button = {
@@ -126,8 +133,7 @@ internal final class TransferFundsViewController: NSViewController
         }
         
         // Exchange amount currency popup button
-        // TODO:
-        // Unhide once we support main currency to X
+        // TODO: Unhide once we support main currency to X
         self.exchangeAmountCurrencyPopupButton.isHidden = true
         self.container.addSubview(self.exchangeAmountCurrencyPopupButton)
         
@@ -175,6 +181,15 @@ internal final class TransferFundsViewController: NSViewController
         self.exchangeButton.snp.makeConstraints { (make) in
             make.right.equalToSuperview().inset(10.0)
             make.bottom.equalToSuperview().inset(10.0)
+        }
+        
+        // Error label
+        self.errorLabel.isHidden = true
+        self.container.addSubview(self.errorLabel)
+        
+        self.errorLabel.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.centerY.equalTo(self.cancelButton)
         }
         
         // Miner fee label
@@ -228,6 +243,9 @@ internal final class TransferFundsViewController: NSViewController
         self.exchangeAmountCurrencyPopupButton.removeAllItems()
         self.exchangeAmountCurrencyPopupButton.addItems(withTitles: currencyTitles)
         
+        // Hide error message
+        self.errorLabel.isHidden = true
+        
         self.updateTransferDetails()
     }
     
@@ -256,6 +274,18 @@ internal final class TransferFundsViewController: NSViewController
                 DispatchQueue.main.async {
                     guard let unwrappedQuote = quote else
                     {
+                        self.errorLabel.isHidden = false
+                        
+                        if let unwrappedError = error
+                        {
+                            switch unwrappedError
+                            {
+                            case TransferOperatorError.unsupportedCurrency(let currency):
+                                self.errorLabel.stringValue = "\(currency.rawValue.uppercased()) is not supported"
+                            default:()
+                            }
+                        }
+                        
                         return
                     }
                     
@@ -263,6 +293,11 @@ internal final class TransferFundsViewController: NSViewController
                     self.minerFeeLabel.stringValue = "Miner fee: \(unwrappedQuote.minerFee) \(unwrappedQuote.minerFeeCurrency.rawValue.uppercased())"
                 }
             })
+        }
+        catch let error as TransferController.InitializationError where error == .directTransferUnsupported || error == .exchangeTransferUnsupported
+        {
+            self.errorLabel.stringValue = "Sorry! Transfer not supported"
+            self.errorLabel.isHidden = false
         }
         catch let error
         {

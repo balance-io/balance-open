@@ -31,7 +31,7 @@ internal final class ShapeShiftTransferOperator: TransferOperator
     
     // MARK: Quote
     
-    func fetchQuote(_ completionHandler: @escaping (_ quote: TransferQuote?, _ error: Swift.Error?) -> Void)
+    func fetchQuote(_ completionHandler: @escaping (_ quote: TransferQuote?, _ error: Error?) -> Void)
     {
         guard let unwrappedCoinPair = self.coinPair else
         {
@@ -72,7 +72,7 @@ internal final class ShapeShiftTransferOperator: TransferOperator
     
     // MARK: Transfer
     
-    internal func performTransfer(_ completionHandler: @escaping (_ success: Bool, _ error: Swift.Error?) -> Void)
+    internal func performTransfer(_ completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void)
     {
         guard let unwrappedCoinPair = self.coinPair else
         {
@@ -114,7 +114,7 @@ internal final class ShapeShiftTransferOperator: TransferOperator
     
     // MARK: Coinpair
     
-    private func fetchCoinPair(_ completionHandler: @escaping (_ success: Bool, _ error: Swift.Error?) -> Void)
+    private func fetchCoinPair(_ completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void)
     {
         self.apiClient.fetchSupportedCoins { [weak self] (coins, error) in
             guard let unwrappedSelf = self else { return }
@@ -129,7 +129,7 @@ internal final class ShapeShiftTransferOperator: TransferOperator
                 return coin.symbol.lowercased() == unwrappedSelf.request.sourceCurrency.rawValue.lowercased()
             }) else
             {
-                completionHandler(false, Error.unsupportedCurrency(currency: unwrappedSelf.request.sourceCurrency))
+                completionHandler(false, TransferOperatorError.unsupportedCurrency(currency: unwrappedSelf.request.sourceCurrency))
                 return
             }
             
@@ -138,7 +138,7 @@ internal final class ShapeShiftTransferOperator: TransferOperator
                 return coin.symbol.lowercased() == unwrappedSelf.request.recipientCurrency.rawValue.lowercased()
             }) else
             {
-                completionHandler(false, Error.unsupportedCurrency(currency: unwrappedSelf.request.recipientCurrency))
+                completionHandler(false, TransferOperatorError.unsupportedCurrency(currency: unwrappedSelf.request.recipientCurrency))
                 return
             }
             
@@ -146,14 +146,5 @@ internal final class ShapeShiftTransferOperator: TransferOperator
             unwrappedSelf.coinPair = ShapeShiftAPIClient.CoinPair(input: sourceCoin, output: recipientCoin)
             completionHandler(true, nil)
         }
-    }
-}
-
-
-internal extension ShapeShiftTransferOperator
-{
-    internal enum Error: Swift.Error
-    {
-        case unsupportedCurrency(currency: Currency)
     }
 }
