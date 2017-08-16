@@ -12,30 +12,31 @@ import Cocoa
 internal final class TransferFundsViewController: NSViewController
 {
     // Private
-    private let sourceAccount: Account
-    private let recipientAccount: Account
-    private var coinPair: ShapeShiftAPIClient.CoinPair?
+    private let viewModel = TransferFundsViewModel()
+    private var transferController: TransferController?
     
-    private var state = State.loading(message: "Fetching Rates...") {
-        didSet
-        {
-            self.updateStateUI()
-        }
-    }
+    private let container = NSView()
     
-    private let apiClient: ShapeShiftAPIClient = {
-        let client = ShapeShiftAPIClient()
-//        client.apiKey = ""
-        return client
-    }()
+    private let sourceAccountPopupButton = NSPopUpButton()
+    private let sourceAccountBalanceLabel = LabelField(frame: NSRect.zero)
     
-    private let titleLabel = LabelField(frame: NSRect.zero)
-    private let rateLabel = LabelField(frame: NSRect.zero)
-    private let maximumDepositLimitLabel = LabelField(frame: NSRect.zero)
-    private let minimumDepositLimitLabel = LabelField(frame: NSRect.zero)
+    private let recipientAccountPopupButton = NSPopUpButton()
+    private let recipientAccountBalanceLabel = LabelField(frame: NSRect.zero)
+    
+    private let exchangeAmountTextField = TextField(frame: NSRect.zero)
+    private let exchangeAmountCurrencyPopupButton = NSPopUpButton()
+    
+    private let recipientAmountLabel = LabelField(frame: NSRect.zero)
+    
     private let minerFeeLabel = LabelField(frame: NSRect.zero)
     
-    private let depositAmountField = TextField(frame: NSRect.zero)
+    private let minerFeeHelpButton: Button = {
+        let button = Button(frame: NSRect.zero)
+        button.bezelStyle = .helpButton
+        button.title = ""
+        
+        return button
+    }()
     
     private let cancelButton: Button = {
         let button = Button(frame: NSRect.zero)
@@ -45,41 +46,18 @@ internal final class TransferFundsViewController: NSViewController
         return button
     }()
     
-    private let requestQuoteButton: Button = {
+    private let exchangeButton: Button = {
         let button = Button(frame: NSRect.zero)
-        button.title = "Request Quote"
+        button.title = "Exchange"
         button.bezelStyle = .rounded
         
         return button
     }()
-    
-    private let requestTransferButton: Button = {
-        let button = Button(frame: NSRect.zero)
-        button.title = "Request Transfer"
-        button.bezelStyle = .rounded
-        
-        return button
-    }()
-    
-    private let statusLabel = LabelField(frame: NSRect.zero)
-    private let progressIndicator: NSProgressIndicator = {
-        let indicator = NSProgressIndicator()
-        indicator.style = .spinning
-        indicator.startAnimation(nil)
-        
-        return indicator
-    }()
-    
-    private let container = NSView()
-    private let statusContainer = NSView()
     
     // MARK: Initialization
     
-    internal required init(sourceAccount: Account, recipientAccount: Account)
+    internal required init()
     {
-        self.sourceAccount = sourceAccount
-        self.recipientAccount = recipientAccount
-        
         super.init(nibName: nil, bundle: nil)
         self.title = "Transfer Funds"
     }
@@ -104,102 +82,81 @@ internal final class TransferFundsViewController: NSViewController
         self.view.addSubview(self.container)
         
         self.container.snp.makeConstraints { (make) in
-            make.width.equalToSuperview().multipliedBy(0.5)
-            make.center.equalToSuperview()
+            make.edges.equalToSuperview()
         }
         
-        // Status container
-        self.statusContainer.isHidden = true
-        self.view.addSubview(self.statusContainer)
+        // Source account combo box
+        self.sourceAccountPopupButton.target = self
+        self.sourceAccountPopupButton.action = #selector(self.accountSelectionChanged(_:))
+        self.sourceAccountPopupButton.addItems(withTitles: self.viewModel.accountNames)
+        self.container.addSubview(self.sourceAccountPopupButton)
         
-        self.statusContainer.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
+        self.sourceAccountPopupButton.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().inset(10.0)
+            make.top.equalToSuperview().inset(10.0)
+            make.width.equalTo(140.0)
         }
         
-        // Progress indicator
-        self.statusContainer.addSubview(self.progressIndicator)
+        // Source account balance label
+        self.container.addSubview(self.sourceAccountBalanceLabel)
         
-        self.progressIndicator.snp.makeConstraints { (make) in
-            make.top.equalToSuperview()
-            make.centerX.equalToSuperview()
+        self.sourceAccountBalanceLabel.snp.makeConstraints { (make) in
+            make.right.equalTo(self.sourceAccountPopupButton)
+            make.top.equalTo(self.sourceAccountPopupButton.snp.bottom).offset(5.0)
         }
         
-        // Status label
-        self.statusContainer.addSubview(self.statusLabel)
-        self.statusLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.progressIndicator.snp.bottom).offset(10.0)
-            make.bottom.equalToSuperview()
-            make.width.lessThanOrEqualToSuperview()
-            make.centerX.equalToSuperview()
+        // Recipient account combo box
+        self.recipientAccountPopupButton.target = self
+        self.recipientAccountPopupButton.action = #selector(self.accountSelectionChanged(_:))
+        self.recipientAccountPopupButton.addItems(withTitles: self.viewModel.accountNames)
+        self.container.addSubview(self.recipientAccountPopupButton)
+        
+        self.recipientAccountPopupButton.snp.makeConstraints { (make) in
+            make.right.equalToSuperview().inset(10.0)
+            make.top.equalToSuperview().inset(10.0)
+            make.width.equalTo(140.0)
         }
         
-        // Title label
-        self.container.addSubview(self.titleLabel)
+        // Recipient account balance label
+        self.container.addSubview(self.recipientAccountBalanceLabel)
         
-        self.titleLabel.snp.makeConstraints { (make) in
-            make.top.equalToSuperview()
-            make.centerX.equalToSuperview()
+        self.recipientAccountBalanceLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(self.recipientAccountPopupButton)
+            make.top.equalTo(self.recipientAccountPopupButton.snp.bottom).offset(5.0)
         }
         
-        // Rate label
-        self.container.addSubview(self.rateLabel)
+        // Exchange amount currency popup button
+        // TODO:
+        // Unhide once we support main currency to X
+        self.exchangeAmountCurrencyPopupButton.isHidden = true
+        self.container.addSubview(self.exchangeAmountCurrencyPopupButton)
         
-        self.rateLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.titleLabel.snp.bottom).offset(10.0)
-            make.centerX.equalToSuperview()
+        self.exchangeAmountCurrencyPopupButton.snp.makeConstraints { (make) in
+            make.right.equalTo(self.sourceAccountPopupButton)
+            make.width.equalTo(60.0)
+            make.top.equalTo(self.sourceAccountBalanceLabel.snp.bottom).offset(10.0)
         }
         
-        // Maximum deposit label
-        self.container.addSubview(self.maximumDepositLimitLabel)
+        // Exchange amount text field
+        self.exchangeAmountTextField.delegate = self
+        self.exchangeAmountTextField.stringValue = "1.00"
+        self.exchangeAmountTextField.formatter = CurrencyTextFieldFormatter()
+        self.exchangeAmountTextField.alignment = .right
+        self.container.addSubview(self.exchangeAmountTextField)
         
-        self.maximumDepositLimitLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.rateLabel.snp.bottom).offset(10.0)
-            make.centerX.equalToSuperview()
+        self.exchangeAmountTextField.snp.makeConstraints { (make) in
+            make.width.equalTo(104.0)
+            make.height.equalTo(self.exchangeAmountCurrencyPopupButton)
+            make.right.equalTo(self.sourceAccountPopupButton)
+            make.top.equalTo(self.exchangeAmountCurrencyPopupButton)
         }
         
-        // Minimum deposit label
-        self.container.addSubview(self.minimumDepositLimitLabel)
+        // Recipient amount label
+        self.container.addSubview(self.recipientAmountLabel)
         
-        self.minimumDepositLimitLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.maximumDepositLimitLabel.snp.bottom).offset(10.0)
-            make.centerX.equalToSuperview()
-        }
-        
-        // Miner feed label
-        self.container.addSubview(self.minerFeeLabel)
-        
-        self.minerFeeLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.minimumDepositLimitLabel.snp.bottom).offset(10.0)
-            make.centerX.equalToSuperview()
-        }
-        
-        // Deposit amount text field
-        self.depositAmountField.placeholderString = "Amount to transfer"
-        self.container.addSubview(self.depositAmountField)
-        
-        self.depositAmountField.snp.makeConstraints { (make) in
-            make.width.equalToSuperview()
-            make.top.equalTo(self.minerFeeLabel.snp.bottom).offset(10.0)
-            make.centerX.equalToSuperview()
-        }
-        
-        // Request quote button
-        self.requestQuoteButton.set(target: self, action: #selector(self.requestQuoteButtonClicked(_:)))
-        self.container.addSubview(self.requestQuoteButton)
-        
-        self.requestQuoteButton.snp.makeConstraints { (make) in
-            make.right.equalTo(self.depositAmountField)
-            make.top.equalTo(self.depositAmountField.snp.bottom).offset(10.0)
-            make.bottom.equalToSuperview()
-        }
-        
-        // Request transfer button
-        self.requestTransferButton.set(target: self, action: #selector(self.requestTransferButtonClicked(_:)))
-        self.container.addSubview(self.requestTransferButton)
-        
-        self.requestTransferButton.snp.makeConstraints { (make) in
-            make.top.equalTo(self.requestQuoteButton)
-            make.right.equalTo(self.requestQuoteButton)
+        self.recipientAmountLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(self.recipientAccountPopupButton.snp.left)
+            make.centerY.equalTo(self.exchangeAmountCurrencyPopupButton)
         }
         
         // Cancel button
@@ -207,175 +164,136 @@ internal final class TransferFundsViewController: NSViewController
         self.container.addSubview(self.cancelButton)
         
         self.cancelButton.snp.makeConstraints { (make) in
-            make.top.equalTo(self.requestTransferButton)
-            make.right.equalTo(self.requestTransferButton.snp.left).offset(-10.0)
+            make.left.equalToSuperview().inset(10.0)
+            make.bottom.equalToSuperview().inset(10.0)
         }
         
-        self.updateStateUI()
-        self.checkSupportedCurrencies()
+        // Exchange button
+        self.exchangeButton.set(target: self, action: #selector(self.cancelButtonClicked(_:)))
+        self.container.addSubview(self.exchangeButton)
+        
+        self.exchangeButton.snp.makeConstraints { (make) in
+            make.right.equalToSuperview().inset(10.0)
+            make.bottom.equalToSuperview().inset(10.0)
+        }
+        
+        // Miner fee label
+        self.container.addSubview(self.minerFeeLabel)
+        
+        self.minerFeeLabel.snp.makeConstraints { (make) in
+            make.centerX.equalTo(self.container.snp.right).multipliedBy(0.25)
+            make.bottom.equalTo(self.cancelButton.snp.top).offset(-8.0)
+        }
+        
+        // Miner fee help button
+        self.minerFeeHelpButton.set(target: self, action: #selector(self.minerFeeHelpButtonClicked(_:)))
+        self.container.addSubview(self.minerFeeHelpButton)
+        
+        self.minerFeeHelpButton.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self.minerFeeLabel)
+            make.left.equalTo(self.minerFeeLabel.snp.right).offset(5.0)
+        }
     }
     
     override func viewDidAppear()
     {
         super.viewDidAppear()
+        
+        self.updateUI()
     }
     
     // MARK: State
     
-    private func updateStateUI()
+    private func updateUI()
     {
-        switch self.state
+        guard let selectedSourceAccountTitle = self.sourceAccountPopupButton.titleOfSelectedItem,
+              let sourceAccount = self.viewModel.account(for: selectedSourceAccountTitle),
+              let selectedRecipientAccountTitle = self.recipientAccountPopupButton.titleOfSelectedItem,
+              let recipientAccount = self.viewModel.account(for: selectedRecipientAccountTitle) else
         {
-        case .loading(let message):
-            self.container.isHidden = true
-            self.statusContainer.isHidden = false
-            self.statusLabel.stringValue = message
-        case .awaitingAmountInput(let marketInformation):
-            self.container.isHidden = false
-            self.statusContainer.isHidden = true
-            
-            self.titleLabel.stringValue = "\(self.sourceAccount.currency) (\(self.sourceAccount.displayBalance)) 👉 \(self.recipientAccount.currency) (\(self.recipientAccount.displayBalance))"
-            self.rateLabel.stringValue = "Rate: \(marketInformation.rate)"
-            self.maximumDepositLimitLabel.stringValue = "Maximum Deposit: \(marketInformation.maximumDepositLimit)"
-            self.minimumDepositLimitLabel.stringValue = "Minimum Deposit: \(marketInformation.minimumDepositLimit)"
-            self.minerFeeLabel.stringValue = "Miner Fee: \(marketInformation.minerFee)"
-            
-            self.depositAmountField.isHidden = false
-            
-            self.cancelButton.isHidden = true
-            self.requestQuoteButton.isHidden = false
-            self.requestTransferButton.isHidden = true
-        case .displaying(let quote):
-            self.container.isHidden = false
-            self.statusContainer.isHidden = true
-            
-            self.rateLabel.stringValue = "Rate: \(quote.rate)"
-            self.maximumDepositLimitLabel.stringValue = "Recipient Amount: \(quote.recipientAmount)"
-            self.minimumDepositLimitLabel.stringValue = "Deposit Amount: \(quote.depositAmount)"
-            self.minerFeeLabel.stringValue = "Miner Fee: \(quote.minerFee)"
-            
-            self.depositAmountField.isHidden = true
-            
-            self.cancelButton.isHidden = false
-            self.requestQuoteButton.isHidden = true
-            self.requestTransferButton.isHidden = false
-        case .transferComplete:
-            self.container.isHidden = false
-            self.statusContainer.isHidden = true
-            
-            self.rateLabel.isHidden = true
-            self.maximumDepositLimitLabel.isHidden = true
-            self.minimumDepositLimitLabel.isHidden = true
-            self.minerFeeLabel.isHidden = true
-            self.depositAmountField.isHidden = true
-            self.cancelButton.isHidden = true
-            self.requestQuoteButton.isHidden = true
-            self.requestTransferButton.isHidden = false
-            
-            self.titleLabel.stringValue = "👍 Transfer Complete!"
-            self.requestTransferButton.title = "Request a Receipt"
-        default:()
-        }
-    }
-    
-    // MARK: Market rates
-    
-    private func checkSupportedCurrencies()
-    {
-        self.apiClient.fetchSupportedCoins { [unowned self] (coins, error) in
-            DispatchQueue.main.async {
-                guard let unwrappedCoins = coins else
-                {
-                    return
-                }
-                
-                let sourceCoin = unwrappedCoins.first(where: { (coin) -> Bool in
-                    return coin.symbol == self.sourceAccount.currency
-                })
-                
-                let recipientCoin = unwrappedCoins.first(where: { (coin) -> Bool in
-                    return coin.symbol == self.recipientAccount.currency
-                })
-                
-                guard let unwrappedSourceCoin = sourceCoin,
-                    let unwrappedRecipientCoin = recipientCoin,
-                    unwrappedSourceCoin.isAvailable,
-                    unwrappedRecipientCoin.isAvailable else
-                {
-                    self.state = .error(message: "Currency not currently availble")
-                    return
-                }
-                
-                self.coinPair = ShapeShiftAPIClient.CoinPair(input: unwrappedSourceCoin, output: unwrappedRecipientCoin)
-                self.fetchMarketRates()
-            }
-        }
-    }
-    
-    private func fetchMarketRates()
-    {
-        guard let unwrappedCoinPair = self.coinPair else
-        {
-            fatalError()
+            return
         }
         
-        self.state = .loading(message: "Fetching market rates...")
+        self.viewModel.sourceAccount = sourceAccount
+        self.viewModel.recipientAccount = recipientAccount
         
-        self.apiClient.fetchMarketInformation(for: unwrappedCoinPair) { [unowned self] (marketInformation, error) in
-            DispatchQueue.main.async {
-                guard let unwrappedMarketInformation = marketInformation else
-                {
-                    self.state = .error(message: "Error fetching rates")
-                    return
+        self.sourceAccountBalanceLabel.stringValue = "\(sourceAccount.currentBalance)"
+        self.recipientAccountBalanceLabel.stringValue = "\(recipientAccount.currentBalance)"
+        
+        // Exchange currencies
+        let currencyTitles = self.viewModel.sourceCurrencies.map { (currency) -> String in
+            return currency.rawValue.uppercased()
+        }
+        
+        self.exchangeAmountCurrencyPopupButton.removeAllItems()
+        self.exchangeAmountCurrencyPopupButton.addItems(withTitles: currencyTitles)
+        
+        self.updateTransferDetails()
+    }
+    
+    fileprivate func updateTransferDetails()
+    {
+        // Note:
+        // Calling self.exchangeAmountTextField.doubleValue/stringValue etc
+        // causes the text field to use the formatter to format the text and then
+        // replace(!) the text fields content with the value.
+        // This makes it impossible to type "1.23", because as soon as the "." is typed
+        // the value is reformatted to "1"
+        guard let sourceAccount = self.viewModel.sourceAccount,
+              let recipientAccount = self.viewModel.recipientAccount,
+              let recipientAccountCurrency = Currency(rawValue: recipientAccount.currency),
+              let amountString = self.exchangeAmountTextField.currentEditor()?.string,
+              let amount = Double(amountString) else
+        {
+            return
+        }
+        
+        do
+        {
+            let transferRequest = try TransferRequest(sourceAccount: sourceAccount, recipientAddress: "test", recipientCurrency: recipientAccountCurrency, amount: amount)
+            self.transferController = try TransferController(request: transferRequest)
+            self.transferController?.fetchQuote({ (quote, error) in
+                DispatchQueue.main.async {
+                    guard let unwrappedQuote = quote else
+                    {
+                        return
+                    }
+                    
+                    self.recipientAmountLabel.stringValue = "\(unwrappedQuote.recipientAmount) \(recipientAccountCurrency.rawValue)"
+                    self.minerFeeLabel.stringValue = "Miner fee: \(unwrappedQuote.minerFee) \(unwrappedQuote.minerFeeCurrency.rawValue.uppercased())"
                 }
-                
-                self.state = .awaitingAmountInput(marketInformation: unwrappedMarketInformation)
-            }
+            })
+        }
+        catch let error
+        {
+            // TODO: Handle error
+            print(error)
         }
     }
     
     // MARK: Actions
-    
-    @objc private func requestQuoteButtonClicked(_ sender: Any)
+
+    @objc private func accountSelectionChanged(_ sender: Any)
     {
-        guard let unwrappedCoinPair = self.coinPair,
-              let amount = Double(self.depositAmountField.stringValue) else
-        {
-            fatalError()
-        }
-        
-        self.state = .loading(message: "Fetching quote...")
-        
-        self.apiClient.fetchQuote(amount: amount, pairCode: unwrappedCoinPair.code) { [unowned self] (quote, error) in
-            DispatchQueue.main.async {
-                guard let unwrappedQuote = quote else
-                {
-                    self.state = .error(message: "Unable to fetch quote")
-                    return
-                }
-                
-                self.state = .displaying(quote: unwrappedQuote)
-            }
-        }
+        // TODO:
+        // - Fetch quote for inputted value
+        // - Update UI
+        self.updateUI()
     }
     
-    @objc private func requestTransferButtonClicked(_ sender: Any)
+    @objc private func minerFeeHelpButtonClicked(_ sender: Any)
     {
-        self.state = .loading(message: "Transfer in progress...")
         
-        // TODO:
-        // 1. Make transfer request
-        // 2. Make withdrawel from source account
-        // 3. Show success
+    }
+    
+    @objc private func exchangeButtonClicked(_ sender: Any)
+    {
         
-        DispatchQueue.main.async(after: 1.0) {
-            self.state = .transferComplete
-        }
     }
     
     @objc private func cancelButtonClicked(_ sender: Any)
     {
-        self.fetchMarketRates()
+        
     }
 }
 
@@ -390,5 +308,15 @@ fileprivate extension TransferFundsViewController
         case displaying(quote: ShapeShiftAPIClient.Quote)
         case transferComplete
         case error(message: String)
+    }
+}
+
+// MARK: NSTextFieldDelegate
+
+extension TransferFundsViewController: NSTextFieldDelegate
+{
+    override func controlTextDidChange(_ obj: Notification)
+    {
+        self.updateTransferDetails()
     }
 }
