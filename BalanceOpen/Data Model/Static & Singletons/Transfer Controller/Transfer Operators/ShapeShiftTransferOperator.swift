@@ -35,30 +35,39 @@ internal final class ShapeShiftTransferOperator: TransferOperator
     {
         guard let unwrappedCoinPair = self.coinPair else
         {
-            self.fetchCoinPair({ [unowned self] (success, error) in
+            self.fetchCoinPair({ [weak self] (success, error) in
+                guard let unwrappedSelf = self else { return }
                 guard success else
                 {
                     completionHandler(nil, error)
                     return
                 }
                 
-                self.fetchQuote(completionHandler)
+                unwrappedSelf.fetchQuote(completionHandler)
             })
             
             return
         }
         
-        // Fetch quote
-        self.apiClient.fetchQuote(amount: self.request.amount, pairCode: unwrappedCoinPair.code, completionHandler: { (quote, error) in
-            guard let unwrappedQuote = quote else
+        // Fetch market information
+        self.apiClient.fetchMarketInformation(for: unwrappedCoinPair) { [weak self] (marketInformation, error) in
+            guard let unwrappedSelf = self else { return }
+            guard let unwrappedMarketInformation = marketInformation else
             {
                 completionHandler(nil, error)
                 return
             }
             
-            let transferQuote = TransferQuote(shapeShiftQuote: unwrappedQuote)
-            completionHandler(transferQuote, nil)
-        })
+            do
+            {
+                let transferQuote = try TransferQuote(sourceAmount: unwrappedSelf.request.amount, marketInformation: unwrappedMarketInformation)
+                completionHandler(transferQuote, nil)
+            }
+            catch let error
+            {
+                completionHandler(nil, error)
+            }
+        }
     }
     
     // MARK: Transfer
@@ -67,14 +76,15 @@ internal final class ShapeShiftTransferOperator: TransferOperator
     {
         guard let unwrappedCoinPair = self.coinPair else
         {
-            self.fetchCoinPair({ [unowned self] (success, error) in
+            self.fetchCoinPair({ [weak self] (success, error) in
+                guard let unwrappedSelf = self else { return }
                 guard success else
                 {
                     completionHandler(false, error)
                     return
                 }
                 
-                self.performTransfer(completionHandler)
+                unwrappedSelf.performTransfer(completionHandler)
             })
             
             return
@@ -82,7 +92,8 @@ internal final class ShapeShiftTransferOperator: TransferOperator
         
         // Create transaction request (self.request.sourceAccount - crypto address?)
         // TODO: Return address
-        self.apiClient.createTransaction(amount: self.request.amount, recipientAddress: self.request.recipientAddress, pairCode: unwrappedCoinPair.code, returnAddress: nil) { [unowned self] (transactionRequest, error) in
+        self.apiClient.createTransaction(amount: self.request.amount, recipientAddress: self.request.recipientAddress, pairCode: unwrappedCoinPair.code, returnAddress: nil) { [weak self] (transactionRequest, error) in
+            guard let unwrappedSelf = self else { return }
             guard let unwrappedTransactionRequest = transactionRequest else
             {
                 completionHandler(false, error)
@@ -92,7 +103,7 @@ internal final class ShapeShiftTransferOperator: TransferOperator
             let withdrawal = Withdrawal(amount: unwrappedTransactionRequest.depositAmount, recipientCryptoAddress: unwrappedTransactionRequest.depositAddress)
             do
             {
-                try self.request.sourceAccount.make(withdrawal: withdrawal, completionHandler: completionHandler)
+                try unwrappedSelf.request.sourceAccount.make(withdrawal: withdrawal, completionHandler: completionHandler)
             }
             catch let error
             {
@@ -105,7 +116,8 @@ internal final class ShapeShiftTransferOperator: TransferOperator
     
     private func fetchCoinPair(_ completionHandler: @escaping (_ success: Bool, _ error: Swift.Error?) -> Void)
     {
-        self.apiClient.fetchSupportedCoins { [unowned self] (coins, error) in
+        self.apiClient.fetchSupportedCoins { [weak self] (coins, error) in
+            guard let unwrappedSelf = self else { return }
             guard let unwrappedCoins = coins else
             {
                 completionHandler(false, error)
@@ -114,24 +126,24 @@ internal final class ShapeShiftTransferOperator: TransferOperator
             
             // Find source coin
             guard let sourceCoin = unwrappedCoins.first(where: { (coin) -> Bool in
-                return coin.symbol.lowercased() == self.request.sourceCurrency.rawValue.lowercased()
+                return coin.symbol.lowercased() == unwrappedSelf.request.sourceCurrency.rawValue.lowercased()
             }) else
             {
-                completionHandler(false, Error.unsupportedCurrency(currency: self.request.sourceCurrency))
+                completionHandler(false, Error.unsupportedCurrency(currency: unwrappedSelf.request.sourceCurrency))
                 return
             }
             
             // Find recipient coin
             guard let recipientCoin = unwrappedCoins.first(where: { (coin) -> Bool in
-                return coin.symbol.lowercased() == self.request.recipientCurrency.rawValue.lowercased()
+                return coin.symbol.lowercased() == unwrappedSelf.request.recipientCurrency.rawValue.lowercased()
             }) else
             {
-                completionHandler(false, Error.unsupportedCurrency(currency: self.request.recipientCurrency))
+                completionHandler(false, Error.unsupportedCurrency(currency: unwrappedSelf.request.recipientCurrency))
                 return
             }
             
             // Complete!
-            self.coinPair = ShapeShiftAPIClient.CoinPair(input: sourceCoin, output: recipientCoin)
+            unwrappedSelf.coinPair = ShapeShiftAPIClient.CoinPair(input: sourceCoin, output: recipientCoin)
             completionHandler(true, nil)
         }
     }
