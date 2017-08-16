@@ -20,7 +20,7 @@ internal extension ShapeShiftAPIClient
         internal let minerFee: Double
         
         internal let recipientAmount: Double
-        internal let depositAmount: Double
+        internal let sourceAmount: Double
         
         // MARK: Initialization
         
@@ -30,8 +30,8 @@ internal extension ShapeShiftAPIClient
                   let pairCode = dictionary["pair"] as? String,
                   let recipientAmountString = dictionary["withdrawalAmount"] as? String,
                   let recipientAmount = Double(recipientAmountString),
-                  let depositAmountString = dictionary["depositAmount"] as? String,
-                  let depositAmount = Double(depositAmountString),
+                  let sourceAmountString = dictionary["depositAmount"] as? String,
+                  let sourceAmount = Double(sourceAmountString),
                   let rateString = dictionary["quotedRate"] as? String,
                   let rate = Double(rateString),
                   let minerFeeString = dictionary["minerFee"] as? String,
@@ -43,7 +43,7 @@ internal extension ShapeShiftAPIClient
             self.identifier = identifier
             self.pairCode = pairCode
             self.recipientAmount = recipientAmount
-            self.depositAmount = depositAmount
+            self.sourceAmount = sourceAmount
             self.rate = rate
             self.minerFee = minerFee
         }
