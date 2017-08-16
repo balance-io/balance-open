@@ -12,7 +12,7 @@
 		2D4450151EF3A4500023F63C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D4450141EF3A4500023F63C /* Assets.xcassets */; };
 		2D4450181EF3A4500023F63C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D4450161EF3A4500023F63C /* Main.storyboard */; };
 		2D44503A1EF3A53E0023F63C /* AutoLaunchBalanceHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D4450091EF3A4500023F63C /* AutoLaunchBalanceHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		2D46FA281F44470A0004FBE3 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D46FA271F44470A0004FBE3 /* Field.swift */; };
+		2D46FA281F44470A0004FBE3 /* OpenField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D46FA271F44470A0004FBE3 /* OpenField.swift */; };
 		2D4D9BC41F2A3B6F00ABA5CB /* PoloniexApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8147521F1E58C500119FE3 /* PoloniexApi.swift */; };
 		2D60617F1F2B4CE000D83D0E /* PoloniexAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D60617E1F2B4CE000D83D0E /* PoloniexAccount.swift */; };
 		2D6061811F2B543E00D83D0E /* NumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6061801F2B543E00D83D0E /* NumberUtils.swift */; };
@@ -28,9 +28,9 @@
 		2DA7FAB91EF2637700CD8CED /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; };
 		2DBEA3A51F3B0E0A00BBE16C /* PoloniexAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBEA3A41F3B0E0A00BBE16C /* PoloniexAPITests.swift */; };
 		2DBEA3A71F3B0E3300BBE16C /* PoloniexAccountToAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBEA3A61F3B0E3300BBE16C /* PoloniexAccountToAccountTests.swift */; };
-		2DC3B2C51F41B46500B84503 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC3B2C41F41B46500B84503 /* SignUpViewController.swift */; };
-		2DC3B2C71F41B5AA00B84503 /* SignUpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC3B2C61F41B5AA00B84503 /* SignUpTextField.swift */; };
-		2DC3B2C91F41EEA400B84503 /* EmailIssueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC3B2C81F41EEA400B84503 /* EmailIssueController.swift */; };
+		2DC3B2C51F41B46500B84503 /* OpenSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC3B2C41F41B46500B84503 /* OpenSignUpViewController.swift */; };
+		2DC3B2C71F41B5AA00B84503 /* OpenSignUpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC3B2C61F41B5AA00B84503 /* OpenSignUpTextField.swift */; };
+		2DC3B2C91F41EEA400B84503 /* OpenEmailIssueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC3B2C81F41EEA400B84503 /* OpenEmailIssueController.swift */; };
 		2DD6B4B71F39FCF800E2E217 /* InstitutionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD6B4B61F39FCF800E2E217 /* InstitutionTests.swift */; };
 		2DFCC5791F3C4C17006A6CFF /* CurrencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFCC5781F3C4C17006A6CFF /* CurrencyTests.swift */; };
 		530DD1891EF458A400C0DDD3 /* FMDatabasePoolAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 530DD1881EF458A400C0DDD3 /* FMDatabasePoolAdditions.m */; };
@@ -69,7 +69,7 @@
 		532122421EEAD2B700F4812A /* AccountsTabTableCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321223E1EEAD2B700F4812A /* AccountsTabTableCells.swift */; };
 		532122441EEAD2B700F4812A /* AccountsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122401EEAD2B700F4812A /* AccountsTabViewController.swift */; };
 		532122451EEAD2B700F4812A /* AccountsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122411EEAD2B700F4812A /* AccountsTabViewModel.swift */; };
-		532122481EEAD32B00F4812A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122461EEAD32B00F4812A /* Theme.swift */; };
+		532122481EEAD32B00F4812A /* OpenTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122461EEAD32B00F4812A /* OpenTheme.swift */; };
 		5321224C1EEAD35F00F4812A /* DarkTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321224A1EEAD35F00F4812A /* DarkTheme.swift */; };
 		5321224D1EEAD35F00F4812A /* LightTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321224B1EEAD35F00F4812A /* LightTheme.swift */; };
 		532122531EEAD5BF00F4812A /* TabsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532122521EEAD5BF00F4812A /* TabsViewController.swift */; };
@@ -216,7 +216,7 @@
 		2D4450141EF3A4500023F63C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D4450171EF3A4500023F63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2D4450191EF3A4500023F63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2D46FA271F44470A0004FBE3 /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
+		2D46FA271F44470A0004FBE3 /* OpenField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenField.swift; sourceTree = "<group>"; };
 		2D60617E1F2B4CE000D83D0E /* PoloniexAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAccount.swift; sourceTree = "<group>"; };
 		2D6061801F2B543E00D83D0E /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
 		2D6D8AB51F38D987000B372C /* TestingAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
@@ -227,9 +227,9 @@
 		2DA7FAB81EF2637700CD8CED /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		2DBEA3A41F3B0E0A00BBE16C /* PoloniexAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAPITests.swift; sourceTree = "<group>"; };
 		2DBEA3A61F3B0E3300BBE16C /* PoloniexAccountToAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAccountToAccountTests.swift; sourceTree = "<group>"; };
-		2DC3B2C41F41B46500B84503 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		2DC3B2C61F41B5AA00B84503 /* SignUpTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTextField.swift; sourceTree = "<group>"; };
-		2DC3B2C81F41EEA400B84503 /* EmailIssueController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailIssueController.swift; sourceTree = "<group>"; };
+		2DC3B2C41F41B46500B84503 /* OpenSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSignUpViewController.swift; sourceTree = "<group>"; };
+		2DC3B2C61F41B5AA00B84503 /* OpenSignUpTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSignUpTextField.swift; sourceTree = "<group>"; };
+		2DC3B2C81F41EEA400B84503 /* OpenEmailIssueController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenEmailIssueController.swift; sourceTree = "<group>"; };
 		2DCFD9CB1F385E9E0009A029 /* PoloniexAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAccountTests.swift; sourceTree = "<group>"; };
 		2DCFD9CF1F385F910009A029 /* PoloniexAccount.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PoloniexAccount.json; sourceTree = "<group>"; };
 		2DCFD9D31F38603F0009A029 /* CompleteBalancesResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CompleteBalancesResponse.json; sourceTree = "<group>"; };
@@ -292,7 +292,7 @@
 		5321223E1EEAD2B700F4812A /* AccountsTabTableCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsTabTableCells.swift; sourceTree = "<group>"; };
 		532122401EEAD2B700F4812A /* AccountsTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsTabViewController.swift; sourceTree = "<group>"; };
 		532122411EEAD2B700F4812A /* AccountsTabViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsTabViewModel.swift; sourceTree = "<group>"; };
-		532122461EEAD32B00F4812A /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		532122461EEAD32B00F4812A /* OpenTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenTheme.swift; sourceTree = "<group>"; };
 		5321224A1EEAD35F00F4812A /* DarkTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkTheme.swift; sourceTree = "<group>"; };
 		5321224B1EEAD35F00F4812A /* LightTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightTheme.swift; sourceTree = "<group>"; };
 		532122521EEAD5BF00F4812A /* TabsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabsViewController.swift; sourceTree = "<group>"; };
@@ -569,11 +569,11 @@
 				532122CA1EEAFDF100F4812A /* LockViewController.swift */,
 				5321222F1EEAD1BB00F4812A /* PopoverViewController.swift */,
 				532122521EEAD5BF00F4812A /* TabsViewController.swift */,
-				532122461EEAD32B00F4812A /* Theme.swift */,
-				2DC3B2C41F41B46500B84503 /* SignUpViewController.swift */,
-				2DC3B2C61F41B5AA00B84503 /* SignUpTextField.swift */,
-				2DC3B2C81F41EEA400B84503 /* EmailIssueController.swift */,
-				2D46FA271F44470A0004FBE3 /* Field.swift */,
+				532122461EEAD32B00F4812A /* OpenTheme.swift */,
+				2DC3B2C41F41B46500B84503 /* OpenSignUpViewController.swift */,
+				2DC3B2C61F41B5AA00B84503 /* OpenSignUpTextField.swift */,
+				2DC3B2C81F41EEA400B84503 /* OpenEmailIssueController.swift */,
+				2D46FA271F44470A0004FBE3 /* OpenField.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1044,7 +1044,7 @@
 			files = (
 				532122421EEAD2B700F4812A /* AccountsTabTableCells.swift in Sources */,
 				532122451EEAD2B700F4812A /* AccountsTabViewModel.swift in Sources */,
-				2DC3B2C91F41EEA400B84503 /* EmailIssueController.swift in Sources */,
+				2DC3B2C91F41EEA400B84503 /* OpenEmailIssueController.swift in Sources */,
 				532121C61EEAC47300F4812A /* Database.swift in Sources */,
 				5321221B1EEAC90C00F4812A /* Defaults.swift in Sources */,
 				532122871EEADA5800F4812A /* TextField.swift in Sources */,
@@ -1079,7 +1079,7 @@
 				530DD1891EF458A400C0DDD3 /* FMDatabasePoolAdditions.m in Sources */,
 				532122B11EEAE85500F4812A /* AccountConnectionErrors.swift in Sources */,
 				2D6061811F2B543E00D83D0E /* NumberUtils.swift in Sources */,
-				532122481EEAD32B00F4812A /* Theme.swift in Sources */,
+				532122481EEAD32B00F4812A /* OpenTheme.swift in Sources */,
 				532122441EEAD2B700F4812A /* AccountsTabViewController.swift in Sources */,
 				5321220D1EEAC89B00F4812A /* CCNStatusItemWindowConfiguration.m in Sources */,
 				5321229C1EEADFF500F4812A /* SyncCircle.swift in Sources */,
@@ -1087,7 +1087,7 @@
 				5321227F1EEAD9D300F4812A /* ScrollView.swift in Sources */,
 				532122171EEAC8F800F4812A /* Syncer.swift in Sources */,
 				532122C51EEAEE5900F4812A /* SecureField.swift in Sources */,
-				2D46FA281F44470A0004FBE3 /* Field.swift in Sources */,
+				2D46FA281F44470A0004FBE3 /* OpenField.swift in Sources */,
 				532122561EEAD65B00F4812A /* View.swift in Sources */,
 				532122CF1EEB008700F4812A /* AddAccountViewController.swift in Sources */,
 				5321227D1EEAD8DA00F4812A /* AccountType.swift in Sources */,
@@ -1140,7 +1140,7 @@
 				5321221C1EEAC90C00F4812A /* DefaultsStorage.swift in Sources */,
 				532121DB1EEAC4DC00F4812A /* FMDatabase.m in Sources */,
 				A44981E21F28EE3B00E861AA /* GDAXAccount.swift in Sources */,
-				2DC3B2C71F41B5AA00B84503 /* SignUpTextField.swift in Sources */,
+				2DC3B2C71F41B5AA00B84503 /* OpenSignUpTextField.swift in Sources */,
 				532122901EEADE1D00F4812A /* PaintCodeView.swift in Sources */,
 				532122BD1EEAED3100F4812A /* ChangePasswordViewController.swift in Sources */,
 				532122231EEAC99000F4812A /* CertValidator.m in Sources */,
@@ -1151,7 +1151,7 @@
 				532121DC1EEAC4DC00F4812A /* FMDatabaseAdditions.m in Sources */,
 				5321226D1EEAD7DD00F4812A /* NotificationCenter.swift in Sources */,
 				5321220E1EEAC89B00F4812A /* CCNStatusItemWindowController.m in Sources */,
-				2DC3B2C51F41B46500B84503 /* SignUpViewController.swift in Sources */,
+				2DC3B2C51F41B46500B84503 /* OpenSignUpViewController.swift in Sources */,
 				532122D11EEB04DA00F4812A /* HoverButton.swift in Sources */,
 				532121E01EEAC4DC00F4812A /* FMDatabaseAdditionsVariadic.swift in Sources */,
 				5321224D1EEAD35F00F4812A /* LightTheme.swift in Sources */,

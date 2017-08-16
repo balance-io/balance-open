@@ -23,7 +23,7 @@ enum SignUpTextFieldType {
     case none
 }
 
-class SignUpTextField: View, TextFieldDelegate {
+class OpenSignUpTextField: View, TextFieldDelegate {
     weak var customDelegate: TextFieldDelegate?
     
     let type: SignUpTextFieldType

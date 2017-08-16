@@ -8,7 +8,7 @@
 
 import Foundation
 
-class EmailIssueController: NSViewController {
+class OpenEmailIssueController: NSViewController {
     fileprivate let margin = 25
     
     fileprivate let plaidErrorCode: Int?
@@ -19,8 +19,8 @@ class EmailIssueController: NSViewController {
     fileprivate let versionLabel = LabelField()
     fileprivate let hardwareLabel = LabelField()
     fileprivate let operatingSystemLabel = LabelField()
-    fileprivate let notesField = SignUpTextField(type: .none)
-    fileprivate let emailField = SignUpTextField(type: .email)
+    fileprivate let notesField = OpenSignUpTextField(type: .none)
+    fileprivate let emailField = OpenSignUpTextField(type: .email)
     fileprivate let messageLabel = LabelField()
     
     fileprivate let backButton = Button()
@@ -276,7 +276,7 @@ class EmailIssueController: NSViewController {
     }
 }
 
-extension EmailIssueController: NSTextFieldDelegate {
+extension OpenEmailIssueController: NSTextFieldDelegate {
     override func controlTextDidChange(_ obj: Notification) {
         if isConnectionIssue {
             submitButton.isEnabled = isEmailValid

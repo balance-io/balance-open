@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Field {
+public struct OpenField {
     public var name: String
     public var label: String
     public var type: String

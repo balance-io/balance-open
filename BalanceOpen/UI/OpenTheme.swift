@@ -14,7 +14,7 @@ enum ThemeType: Int {
     case dark   = 2
 }
 
-var CurrentTheme: Theme {
+var CurrentTheme: OpenTheme {
     switch defaults.selectedThemeType {
     case .light:
         return LightTheme()
@@ -25,7 +25,7 @@ var CurrentTheme: Theme {
     }
 }
 
-protocol Theme {
+protocol OpenTheme {
     var type: ThemeType { get }
     var defaults: DefaultsTheme { get }
     var balanceTextField: BalanceTextFieldTheme { get }

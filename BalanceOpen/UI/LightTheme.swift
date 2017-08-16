@@ -8,7 +8,7 @@
 
 import AppKit
 
-struct LightTheme: Theme {
+struct LightTheme: OpenTheme {
 
     var type: ThemeType = .light
     

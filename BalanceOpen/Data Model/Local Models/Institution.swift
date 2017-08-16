@@ -42,7 +42,7 @@ class Institution: InstitutionWrapper {
     var products: [String]
     var type: String
     var url: String?
-    var fields: [Field]
+    var fields: [OpenField]
     
     var institutionId: Int
     var sourceId: Source
@@ -195,7 +195,7 @@ class Institution: InstitutionWrapper {
         self.products = [String]()
         self.type = String()
         self.url = ""
-        self.fields = [Field]()
+        self.fields = [OpenField]()
     }
     
     // Since we allow duplicate institutions, never check if they exist first
@@ -222,7 +222,7 @@ class Institution: InstitutionWrapper {
         self.products = [String]()
         self.type = String()
         self.url = ""
-        self.fields = [Field]()
+        self.fields = [OpenField]()
 
         var generatedId: Int?
         database.writeDbQueue.inDatabase { db in

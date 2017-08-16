@@ -1,5 +1,5 @@
 //
-//  SignUpViewController.swift
+//  OpenSignUpViewController.swift
 //  Bal
 //
 //  Created by Benjamin Baron on 2/24/16.
@@ -19,7 +19,7 @@ protocol InstitutionWrapper {
     var type: String {get set}
     var url: String? {get set}
     
-    var fields: [Field] {get set}
+    var fields: [OpenField] {get set}
 }
 
 private enum FieldType: String {
@@ -50,7 +50,7 @@ func ==(lhs: Device, rhs: Device) -> Bool {
     return lhs.type == rhs.type && lhs.mask == rhs.mask
 }
 
-class SignUpViewController: NSViewController {
+class OpenSignUpViewController: NSViewController {
     
     fileprivate let errorTextColor = NSColor(deviceRedInt: 243, green: 191, blue: 107)
     
@@ -63,11 +63,11 @@ class SignUpViewController: NSViewController {
     
     fileprivate let plaidInstitution: InstitutionWrapper
     fileprivate let patch: Bool
-    fileprivate let closeBlock: (_ finished: Bool, _ signUpController: SignUpViewController) -> Void
+    fileprivate let closeBlock: (_ finished: Bool, _ signUpController: OpenSignUpViewController) -> Void
     
     fileprivate var primaryColor = NSColor.gray
     fileprivate let margin = 25
-    fileprivate var emailIssueController: EmailIssueController?
+    fileprivate var emailIssueController: OpenEmailIssueController?
     fileprivate var lastPlaidErrorCode = -1
     fileprivate var connectionFailures = 0 {
         didSet {
@@ -85,11 +85,11 @@ class SignUpViewController: NSViewController {
     
     fileprivate let containerView = View()
     
-    fileprivate var connectFields = [SignUpTextField]() // These match the order of plaidInstitution.fields
-    fileprivate var questionField = SignUpTextField(type: .mfaAnswer)
+    fileprivate var connectFields = [OpenSignUpTextField]() // These match the order of plaidInstitution.fields
+    fileprivate var questionField = OpenSignUpTextField(type: .mfaAnswer)
     fileprivate var deviceButtons = [NSButton]()
     fileprivate var devices = [Device]()
-    fileprivate var codeField = SignUpTextField(type: .mfaCode)
+    fileprivate var codeField = OpenSignUpTextField(type: .mfaCode)
     
     fileprivate let institutionNameField = LabelField()
     
@@ -161,7 +161,7 @@ class SignUpViewController: NSViewController {
     // MARK: - Lifecycle -
     //
     
-    init(plaidInstitution: InstitutionWrapper, patch: Bool = false, institution: Institution? = nil, closeBlock: @escaping (_ finished: Bool, _ signUpViewController: SignUpViewController) -> Void) {
+    init(plaidInstitution: InstitutionWrapper, patch: Bool = false, institution: Institution? = nil, closeBlock: @escaping (_ finished: Bool, _ signUpViewController: OpenSignUpViewController) -> Void) {
         self.plaidInstitution = plaidInstitution
         self.closeBlock = closeBlock
         self.patch = patch
@@ -546,7 +546,7 @@ class SignUpViewController: NSViewController {
         expandedExplanationButton.alphaValue = 1.0
     }
     
-    fileprivate func generatePlaceholder(field: Field) -> String {
+    fileprivate func generatePlaceholder(field: OpenField) -> String {
         let lowercaseLabel = field.label.lowercased()
         if lowercaseLabel == "account number/userid" {
             return "Account Number or User ID"
@@ -574,7 +574,7 @@ class SignUpViewController: NSViewController {
     }
     
     fileprivate func displayConnectFields() {
-        var previousTextField: SignUpTextField?
+        var previousTextField: OpenSignUpTextField?
         for field in plaidInstitution.fields {
             var type: SignUpTextFieldType = .username
             if field.type == FieldType.username.rawValue {
@@ -584,7 +584,7 @@ class SignUpViewController: NSViewController {
             } else if field.type == FieldType.pin.rawValue {
                 type = .pin
             }
-            let textField = SignUpTextField(type: type)
+            let textField = OpenSignUpTextField(type: type)
             textField.delegate = self
             textField.alphaValue = 0.9
             containerView.addSubview(textField)
@@ -730,7 +730,7 @@ class SignUpViewController: NSViewController {
         // Hack so that explanationTabView doesn't show while resizing
         explanationTabView.isHidden = true
         
-        emailIssueController = EmailIssueController(plaidInstitution: plaidInstitution, plaidErrorCode: lastPlaidErrorCode) {
+        emailIssueController = OpenEmailIssueController(plaidInstitution: plaidInstitution, plaidErrorCode: lastPlaidErrorCode) {
             self.removeEmailIssueController()
             self.hideReportFailureButton()
         }
@@ -772,7 +772,7 @@ class SignUpViewController: NSViewController {
     }
     
     fileprivate func allFieldsFilled() -> Bool {
-        var textFields = [SignUpTextField]()
+        var textFields = [OpenSignUpTextField]()
         switch currentStep {
         case .connect: textFields = connectFields
         case .question: textFields = [questionField]
@@ -1041,7 +1041,7 @@ class SignUpViewController: NSViewController {
 // MARK: - NSTextFieldDelegate -
 //
 
-extension SignUpViewController: NSTextFieldDelegate {
+extension OpenSignUpViewController: NSTextFieldDelegate {
     override func controlTextDidChange(_ obj: Notification) {
         submitButton.isEnabled = allFieldsFilled()
     }
@@ -1106,7 +1106,7 @@ extension SignUpViewController: NSTextFieldDelegate {
 // MARK: - NSTabViewDelegate -
 //
 
-extension SignUpViewController: NSTabViewDelegate {
+extension OpenSignUpViewController: NSTabViewDelegate {
     func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
         guard let tabViewItem = tabViewItem else {
             return
