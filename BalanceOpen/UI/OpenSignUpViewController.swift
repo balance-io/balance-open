@@ -23,9 +23,12 @@ protocol InstitutionWrapper {
 }
 
 private enum FieldType: String {
-    case username = "username"
-    case password = "password"
-    case pin      = "pin"
+    case username   = "username"
+    case password   = "password"
+    case pin        = "pin"
+    case key        = "key"
+    case secret     = "secret"
+    case passphrase = "passphrase"
 }
 
 private enum Step: String {
@@ -566,6 +569,9 @@ class OpenSignUpViewController: NSViewController {
                 case .username: return "User ID"
                 case .password: return "Password"
                 case .pin: return "PIN"
+                case .passphrase: return "Passphrase"
+                case .key: return "Key"
+                case .secret: return "Secret"
                 }
             } else {
                 return ""
@@ -573,6 +579,7 @@ class OpenSignUpViewController: NSViewController {
         }
     }
     
+    //show the fields
     fileprivate func displayConnectFields() {
         var previousTextField: OpenSignUpTextField?
         for field in plaidInstitution.fields {
@@ -583,7 +590,14 @@ class OpenSignUpViewController: NSViewController {
                 type = .password
             } else if field.type == FieldType.pin.rawValue {
                 type = .pin
+            } else if field.type == FieldType.passphrase.rawValue {
+                type = .passphrase
+            } else if field.type == FieldType.key.rawValue {
+                type = .key
+            } else if field.type == FieldType.secret.rawValue {
+                type = .secret
             }
+            
             let textField = OpenSignUpTextField(type: type)
             textField.delegate = self
             textField.alphaValue = 0.9
@@ -617,88 +631,7 @@ class OpenSignUpViewController: NSViewController {
         connectFields.removeAll()
         submitButton.action = nil
     }
-    
-    fileprivate func displayMFAQuestion(_ question: String) {
-        removeConnectFields()
-        removeMFAQuestion()
-        
-        questionField.isEnabled = true
-        questionField.delegate = self
-        questionField.placeholderString = question
-        questionField.stringValue = ""
-        containerView.addSubview(questionField)
-        questionField.snp.makeConstraints { make in
-            make.top.equalTo(loadingFieldScrollView.snp.bottom).offset(10)
-            make.height.equalTo(30)
-            make.leading.equalToSuperview().offset(margin)
-            make.trailing.equalToSuperview().offset(-margin)
-        }
-        
-        backButton.snp.remakeConstraints { make in
-            make.height.equalTo(25)
-            make.leading.equalToSuperview().offset(margin)
-            make.top.equalTo(questionField.snp.bottom).offset(25)
-        }
-            
-        self.view.window?.makeFirstResponder(questionField)
-        
-        AppDelegate.sharedInstance.resizeWindowHeight(height, animated: true)
-    }
-    
-    fileprivate func removeMFAQuestion() {
-        questionField.removeFromSuperview()
-        submitButton.action = nil
-    }
-    
-    fileprivate func displayMFADevices(_ devices: [Device]) {
-        removeConnectFields()
-        
-        var previousButton: NSButton?
-        var i = 0
-        for device in devices {
-            let button = NSButton()
-            button.bezelStyle = .texturedRounded
-            button.title = "\(device.type): \(device.mask)"
-            button.tag = i
-            button.target = self
-            containerView.addSubview(button)
-            button.snp.makeConstraints { make in
-                if let previousButton = previousButton {
-                    make.top.equalTo(previousButton.snp.bottom).offset(10)
-                } else {
-                    make.top.equalTo(loadingFieldScrollView.snp.bottom)
-                }
-                
-                make.centerX.equalToSuperview()
-            }
-            
-            deviceButtons.append(button)
-            previousButton = button
-            i += 1
-        }
-        
-        if let lastButton = deviceButtons.last {
-            backButton.snp.remakeConstraints { make in
-                make.height.equalTo(25)
-                make.leading.equalToSuperview().offset(margin)
-                make.top.equalTo(lastButton.snp.bottom).offset(25)
-            }
-        }
-        
-        submitButton.isHidden = true
-        
-        AppDelegate.sharedInstance.resizeWindowHeight(height, animated: true)
-    }
-    
-    fileprivate func removeMFADevices() {
-        for button in deviceButtons {
-            button.removeFromSuperview()
-        }
-        deviceButtons.removeAll()
-        
-        submitButton.isHidden = false
-    }
-    
+
     fileprivate func createHtmlAttributedString(string: String, font: NSFont, color: NSColor) -> NSAttributedString {
         if let hexColor = color.hexString {
             let finalHtml = "<span style=\"font-family:'\(font.fontName)'; font-size:\(Int(font.pointSize))px; color:\(hexColor);\">\(string)</span>"
@@ -987,54 +920,6 @@ class OpenSignUpViewController: NSViewController {
         autoUpdateConnectLabel(initialText: loadingText)
     }
     
-    fileprivate func successMFA() {
-        stopAutoUpdatingConnectLabel()
-        
-        if !self.patch, let institution = institution {
-            let userInfo = Notifications.userInfoForInstitution(institution)
-            NotificationCenter.postOnMainThread(name: Notifications.InstitutionAdded, object: nil, userInfo: userInfo)
-        }
-        
-        self.finished()
-    }
-    
-    fileprivate func failedMFA(error: Error?) {
-        stopAutoUpdatingConnectLabel()
-        
-        if let error = error! as? NSError {
-            self.lastPlaidErrorCode = error.code
-        }
-        self.connectionFailures += 1
-        
-        // Error, so allow the user to try again
-        if currentStep == .codeEntry {
-            codeField.isEnabled = true
-        } else if currentStep == .deviceList {
-            for button in deviceButtons {
-                button.isEnabled = true
-            }
-        } else if currentStep == .question {
-            questionField.isEnabled = true
-        }
-        
-        backButton.isEnabled = true
-        submitButton.isEnabled = true
-        spinner.stopAnimation(nil)
-        onePasswordButton.isHidden = !showOnePasswordButton
-        
-        loadingField.textColor = self.errorTextColor
-        loadingField.shadow = self.loadingFieldShadow
-        if let errorDescription = error?.localizedDescription {
-            setLoadingFieldString("Connecting failed: " + errorDescription)
-        } else {
-            setLoadingFieldString("Connecting failed with an unknown error")
-        }
-        
-        submitConnectionFailedEvent(error?.localizedDescription ?? "Unknown error")
-        
-        // Shake the window
-        self.view.window?.shake()
-    }
 }
 
 //

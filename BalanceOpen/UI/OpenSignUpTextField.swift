@@ -17,9 +17,9 @@ enum SignUpTextFieldType {
     case mfaAnswer
     case balancePassword
     case email
-//    case threeWayKey
-//    case threeWayId
-//    case threeWayUniqueId
+    case key
+    case secret
+    case passphrase
     case none
 }
 
@@ -78,10 +78,10 @@ class OpenSignUpTextField: View, TextFieldDelegate {
         case .username:
             iconImage = #imageLiteral(resourceName: "login-user")
             iconImageSize = NSSize(width: 13, height: 13)
-        case .password:
+        case .password, .key:
             iconImage = #imageLiteral(resourceName: "login-password")
             iconImageSize = NSSize(width: 10, height: 12)
-        case .pin, .mfaCode:
+        case .pin, .mfaCode, .passphrase:
             iconImage = #imageLiteral(resourceName: "login-pin")
             iconImageSize = NSSize(width: 12, height: 12)
         case .mfaAnswer:
@@ -94,6 +94,10 @@ class OpenSignUpTextField: View, TextFieldDelegate {
         case .email:
             iconImage = CurrentTheme.type == .light ? #imageLiteral(resourceName: "login-mail-light") : #imageLiteral(resourceName: "login-mail-dark")
             iconImageSize = NSSize(width: 13, height: 10)
+        case .secret:
+            //needs a different icon
+            iconImage = #imageLiteral(resourceName: "login-password")
+            iconImageSize = NSSize(width: 10, height: 12)
         case .none:
             iconImage = NSImage()
             iconImageSize = NSZeroSize
