@@ -337,24 +337,30 @@ class AddAccountViewController: NSViewController {
             case .coinbase:
                 CoinbaseApi.authenticate()
             case .gdax:
-                let authViewController = GDAXAuthViewController()
-                authViewController.delegate = self
-                self.presentViewControllerAsModalWindow(authViewController)
+//                let authViewController = GDAXAuthViewController()
+//                authViewController.delegate = self
+//                self.presentViewControllerAsModalWindow(authViewController)
+                let institution = GDAXAPIClient.gdaxInstitution
+                self.presentLoginScreenWith(institution: institution)
             case .poloniex:
                 let institution = PoloniexApi.poloniexInstitution
-                let signup = OpenSignUpViewController(plaidInstitution: institution as InstitutionWrapper, patch: false, institution: nil, closeBlock: { (finished, signUpViewController: OpenSignUpViewController) in
-                    if finished {
-                        self.back()
-                    } else {
-                        self.removeSignUpController(animated: true, signUpController: signUpViewController)
-                    }
-                })
-                preferencesButton.isEnabled = false
-                    preferencesButton.animator().alphaValue = 0.0
-                    self.view.replaceSubview(containerView, with: signup.view, animation: .slideInFromRight)
+                self.presentLoginScreenWith(institution: institution)
             default:()
             }
         }
+    }
+    
+    func presentLoginScreenWith(institution: InstitutionWrapper) {
+        let signup = OpenSignUpViewController(plaidInstitution: institution as InstitutionWrapper, patch: false, institution: nil, closeBlock: { (finished, signUpViewController: OpenSignUpViewController) in
+            if finished {
+                self.back()
+            } else {
+                self.removeSignUpController(animated: true, signUpController: signUpViewController)
+            }
+        })
+        preferencesButton.isEnabled = false
+        preferencesButton.animator().alphaValue = 0.0
+        self.view.replaceSubview(containerView, with: signup.view, animation: .slideInFromRight)
     }
     
     func removeSignUpController(animated: Bool, signUpController: OpenSignUpViewController) {
