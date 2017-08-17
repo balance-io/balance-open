@@ -466,13 +466,21 @@ extension Account: CustomStringConvertible {
 
 extension Account: Transferable
 {
+    internal var currencyType: Currency {
+        // TODO:
+        // Look over this again. Should we ever hold an account for an
+        // unsupported currency? Maybe it safer for this to be optional
+        // and then this can be caught somewhere else...
+        return Currency(rawValue: self.currency)!
+    }
+    
     internal var directTransferOperator: TransferOperator.Type? {
         switch self.sourceId
         {
-            //        case .coinbase:
-            //            return CoinbaseApi
-            //        case .gdax:
-        //            return GDAXAPIClient
+//        case .coinbase:
+//            return CoinbaseApi
+//        case .gdax:
+//            return GDAXAPIClient
         default:
             return nil
         }
@@ -480,12 +488,6 @@ extension Account: Transferable
     
     internal var exchangeTransferOperator: TransferOperator.Type? {
         return ShapeShiftTransferOperator.self
-    }
-    
-    func supportsTransfer(to account: Account) -> Bool
-    {
-        // TODO: Logic to determine
-        return true
     }
     
     internal func make(withdrawal: Withdrawal, completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void) throws
@@ -513,5 +515,9 @@ extension Account: Transferable
             throw TransferableError.transferNotSupported
         }
     }
+    
+    internal func fetchAddress(_ completionHandler: @escaping (_ address: String?, _ error: Error?) -> Void)
+    {
+        
+    }
 }
-

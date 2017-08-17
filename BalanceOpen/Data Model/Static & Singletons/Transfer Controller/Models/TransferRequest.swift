@@ -12,31 +12,25 @@ import Foundation
 internal struct TransferRequest
 {
     // Internal
-    internal let sourceAccount: Account
-    internal let sourceInstitution: Institution
+    internal let source: Transferable
     internal let sourceCurrency: Currency
-    internal let recipientAddress: String
+    
+    internal let recipient: Transferable
     internal let recipientCurrency: Currency
+    
     internal let amount: Double
     internal let type: RequestType
-    
+
     // MARK: Initialization
     
-    internal init(sourceAccount: Account, recipientAddress: String, recipientCurrency: Currency, amount: Double) throws
+    internal init(source: Transferable, recipient: Transferable, amount: Double) throws
     {
-        guard let sourceCurrency = Currency(rawValue: sourceAccount.currency),
-              let sourceInstitution = sourceAccount.institution else
-        {
-            throw InitializationError.unsupportedCurrency(code: sourceAccount.currency)
-        }
-        
-        self.sourceAccount = sourceAccount
-        self.sourceInstitution = sourceInstitution
-        self.sourceCurrency = sourceCurrency
-        self.recipientAddress = recipientAddress
-        self.recipientCurrency = recipientCurrency
+        self.source = source
+        self.sourceCurrency = source.currencyType
+        self.recipient = recipient
+        self.recipientCurrency = recipient.currencyType
         self.amount = amount
-        self.type = sourceCurrency == recipientCurrency ? .direct : .exchange
+        self.type = self.sourceCurrency == self.recipientCurrency ? .direct : .exchange
     }
 }
 

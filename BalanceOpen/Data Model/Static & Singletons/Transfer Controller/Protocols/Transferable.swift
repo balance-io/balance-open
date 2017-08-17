@@ -9,21 +9,15 @@
 import Foundation
 
 
-// TODO: This needs a better name
 internal protocol Transferable
 {
+    var currencyType: Currency { get }
     var directTransferOperator: TransferOperator.Type? { get }
     var exchangeTransferOperator: TransferOperator.Type? { get }
     
     func make(withdrawal: Withdrawal, completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void) throws
-    
-    // TODO:
-    // Determine if this is best approach.
-    // For example, SS would be required to make a request
-    // to determine if the currency conversion was supported
-    func supportsTransfer(to account: Account) -> Bool
+    func fetchAddress(_ completionHandler: @escaping (_ address: String?, _ error: Error?) -> Void)
 }
-
 
 internal enum TransferableError: Error
 {

@@ -26,14 +26,14 @@ internal final class TransferController
         switch transferRequest.type
         {
         case .direct:
-            guard let operatorType = self.transferRequest.sourceAccount.directTransferOperator else
+            guard let operatorType = self.transferRequest.source.directTransferOperator else
             {
                 throw InitializationError.directTransferUnsupported
             }
             
             transferOperatorType = operatorType
         case .exchange:
-            guard let operatorType = self.transferRequest.sourceAccount.exchangeTransferOperator else
+            guard let operatorType = self.transferRequest.source.exchangeTransferOperator else
             {
                 throw InitializationError.exchangeTransferUnsupported
             }
