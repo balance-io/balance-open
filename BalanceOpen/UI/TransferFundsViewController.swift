@@ -259,7 +259,6 @@ internal final class TransferFundsViewController: NSViewController
         // the value is reformatted to "1"
         guard let sourceAccount = self.viewModel.sourceAccount,
               let recipientAccount = self.viewModel.recipientAccount,
-              let recipientAccountCurrency = Currency(rawValue: recipientAccount.currency),
               let amountString = self.exchangeAmountTextField.currentEditor()?.string,
               let amount = Double(amountString) else
         {
@@ -268,20 +267,22 @@ internal final class TransferFundsViewController: NSViewController
         
         do
         {
-            let transferRequest = try TransferRequest(sourceAccount: sourceAccount, recipientAddress: "test", recipientCurrency: recipientAccountCurrency, amount: amount)
+            let transferRequest = try TransferRequest(source: sourceAccount, recipient: recipientAccount, amount: amount)
             self.transferController = try TransferController(request: transferRequest)
-            self.transferController?.fetchQuote({ (quote, error) in
+            self.transferController?.fetchQuote({ [weak self] (quote, error) in
+                guard let unwrappedSelf = self else { return }
+                
                 DispatchQueue.main.async {
                     guard let unwrappedQuote = quote else
                     {
-                        self.errorLabel.isHidden = false
+                        unwrappedSelf.errorLabel.isHidden = false
                         
                         if let unwrappedError = error
                         {
                             switch unwrappedError
                             {
                             case TransferOperatorError.unsupportedCurrency(let currency):
-                                self.errorLabel.stringValue = "\(currency.rawValue.uppercased()) is not supported"
+                                unwrappedSelf.errorLabel.stringValue = "\(currency.rawValue.uppercased()) is not supported"
                             default:()
                             }
                         }
@@ -289,8 +290,8 @@ internal final class TransferFundsViewController: NSViewController
                         return
                     }
                     
-                    self.recipientAmountLabel.stringValue = "\(unwrappedQuote.recipientAmount) \(recipientAccountCurrency.rawValue)"
-                    self.minerFeeLabel.stringValue = "Miner fee: \(unwrappedQuote.minerFee) \(unwrappedQuote.minerFeeCurrency.rawValue.uppercased())"
+                    unwrappedSelf.recipientAmountLabel.stringValue = "\(unwrappedQuote.recipientAmount) \(transferRequest.recipientCurrency.rawValue)"
+                    unwrappedSelf.minerFeeLabel.stringValue = "Miner fee: \(unwrappedQuote.minerFee) \(unwrappedQuote.minerFeeCurrency.rawValue.uppercased())"
                 }
             })
         }
