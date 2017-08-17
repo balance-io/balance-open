@@ -12,14 +12,6 @@ import Locksmith
 
 //typealias SuccessErrorBlock2 = (_ success: Bool, _ error: Error?) -> Void
 
-protocol ExchangeApi {
-    static func authenticate(secret: String, key: String)
-//    static func handleAuthenticationCallback(state: String, code: String, completion: @escaping SuccessErrorBlock)
-//    static func refreshAccessToken(institution: Institution, completion: @escaping SuccessErrorBlock)
-//    static func updateAccounts(institution: Institution, completion: @escaping SuccessErrorBlock)
-//    static func processAccounts(_ coinbaseAccounts: [CoinbaseAccount], institution: Institution)
-}
-
 fileprivate let tradingURL = URL(string: "https://poloniex.com/tradingApi")!
 //typealias SuccessErrorBlock = (_ success: Bool, _ error: Error) -> Void
 

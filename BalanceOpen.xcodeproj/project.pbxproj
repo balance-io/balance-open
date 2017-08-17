@@ -26,6 +26,7 @@
 		2D8339D11F39B3F600C73DC2 /* PoloniexTradingError.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DCFD9D51F3861E40009A029 /* PoloniexTradingError.json */; };
 		2D8339D21F39B3F800C73DC2 /* CompleteBalancesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DCFD9D31F38603F0009A029 /* CompleteBalancesResponse.json */; };
 		2DA7FAB91EF2637700CD8CED /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA7FAB81EF2637700CD8CED /* Sparkle.framework */; };
+		2DB8FA6B1F45E74C0074B1AD /* ExchangeProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB8FA6A1F45E74C0074B1AD /* ExchangeProtocols.swift */; };
 		2DBEA3A51F3B0E0A00BBE16C /* PoloniexAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBEA3A41F3B0E0A00BBE16C /* PoloniexAPITests.swift */; };
 		2DBEA3A71F3B0E3300BBE16C /* PoloniexAccountToAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBEA3A61F3B0E3300BBE16C /* PoloniexAccountToAccountTests.swift */; };
 		2DC3B2C51F41B46500B84503 /* OpenSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC3B2C41F41B46500B84503 /* OpenSignUpViewController.swift */; };
@@ -225,6 +226,7 @@
 		2D8339C31F39B2FB00C73DC2 /* BalanceOpenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceOpenTests.swift; sourceTree = "<group>"; };
 		2D8339C51F39B2FB00C73DC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DA7FAB81EF2637700CD8CED /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		2DB8FA6A1F45E74C0074B1AD /* ExchangeProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeProtocols.swift; sourceTree = "<group>"; };
 		2DBEA3A41F3B0E0A00BBE16C /* PoloniexAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAPITests.swift; sourceTree = "<group>"; };
 		2DBEA3A61F3B0E3300BBE16C /* PoloniexAccountToAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAccountToAccountTests.swift; sourceTree = "<group>"; };
 		2DC3B2C41F41B46500B84503 /* OpenSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSignUpViewController.swift; sourceTree = "<group>"; };
@@ -574,6 +576,7 @@
 				2DC3B2C61F41B5AA00B84503 /* OpenSignUpTextField.swift */,
 				2DC3B2C81F41EEA400B84503 /* OpenEmailIssueController.swift */,
 				2D46FA271F44470A0004FBE3 /* OpenField.swift */,
+				2DB8FA6A1F45E74C0074B1AD /* ExchangeProtocols.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1056,6 +1059,7 @@
 				5321220B1EEAC89B00F4812A /* CCNStatusItemWindow.m in Sources */,
 				532122981EEADEBD00F4812A /* NSColor.swift in Sources */,
 				532122941EEADE4B00F4812A /* HoverTableRowView.swift in Sources */,
+				2DB8FA6B1F45E74C0074B1AD /* ExchangeProtocols.swift in Sources */,
 				2D60617F1F2B4CE000D83D0E /* PoloniexAccount.swift in Sources */,
 				532122A01EEAE01400F4812A /* SyncDefaults.swift in Sources */,
 				A408662C1F308A4800D3FB2E /* URLRequest.swift in Sources */,
