@@ -25,6 +25,30 @@ internal final class GDAXAPIClient
         self.session = session
         self.server = server
     }
+    
+    static var gdaxInstitution: GdaxInstitution {
+        get {
+            return GdaxInstitution()
+        }
+    }
+    
+    class GdaxInstitution: InstitutionWrapper {
+        var currencyCode: String = ""
+        var usernameLabel: String = ""
+        var passwordLabel: String = ""
+        var name: String = ""
+        var products: [String] = []
+        var type: String = ""
+        var url: String? = "https://www.gdax.com/"
+        var fields: [OpenField]
+        
+        init() {
+            let keyField = OpenField.init(name: "Key", label: "Key", type: "key")
+            let secretField = OpenField.init(name: "Secret", label: "Secret", type: "secret")
+            let passphraseField = OpenField.init(name: "Passphrase", label: "Passphrase", type: "passphrase")
+            self.fields = [keyField, secretField, passphraseField]
+        }
+    }
 }
 
 // MARK: Accounts
