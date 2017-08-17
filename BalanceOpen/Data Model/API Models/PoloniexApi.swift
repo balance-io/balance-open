@@ -151,6 +151,29 @@ struct PoloniexApi: ExchangeApi {
         datatask.resume()
     }
     
+    static var poloniexInstitution: PoloniexInstitution {
+        get {
+            return PoloniexInstitution()
+        }
+    }
+    
+    class PoloniexInstitution: InstitutionWrapper {
+        var currencyCode: String = ""
+        var usernameLabel: String = ""
+        var passwordLabel: String = ""
+        var name: String = ""
+        var products: [String] = []
+        var type: String = ""
+        var url: String? = "https://poloniex.com/login"
+        var fields: [OpenField]
+        
+     init() {
+        let keyField = OpenField.init(name: "Key", label: "Key", type: "key")
+        let secretField = OpenField.init(name: "Secret", label: "Secret", type: "secret")
+        self.fields = [keyField, secretField]
+        }
+    }
+    
 }
 
 fileprivate func createPoloniexAccounts(data: Data) throws -> [PoloniexAccount] {

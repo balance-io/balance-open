@@ -341,8 +341,8 @@ class AddAccountViewController: NSViewController {
                 authViewController.delegate = self
                 self.presentViewControllerAsModalWindow(authViewController)
             case .poloniex:
-                let institution = Institution.init([String]() as [AnyObject])
-                let signup = OpenSignUpViewController(plaidInstitution: institution as InstitutionWrapper, patch: false, institution: institution, closeBlock: { (finished, signUpViewController: OpenSignUpViewController) in
+                let institution = PoloniexApi.poloniexInstitution
+                let signup = OpenSignUpViewController(plaidInstitution: institution as InstitutionWrapper, patch: false, institution: nil, closeBlock: { (finished, signUpViewController: OpenSignUpViewController) in
                     if finished {
                         self.back()
                     } else {

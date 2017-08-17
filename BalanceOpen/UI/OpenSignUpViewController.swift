@@ -22,7 +22,7 @@ protocol InstitutionWrapper {
     var fields: [OpenField] {get set}
 }
 
-private enum FieldType: String {
+private enum OpenFieldType: String {
     case username   = "username"
     case password   = "password"
     case pin        = "pin"
@@ -564,7 +564,7 @@ class OpenSignUpViewController: NSViewController {
         } else if lowercaseLabel.contains("user") || lowercaseLabel.contains("id") {
             return "User ID"
         } else {
-            if let type = FieldType(rawValue: field.type) {
+            if let type = OpenFieldType(rawValue: field.type) {
                 switch type {
                 case .username: return "User ID"
                 case .password: return "Password"
@@ -584,17 +584,17 @@ class OpenSignUpViewController: NSViewController {
         var previousTextField: OpenSignUpTextField?
         for field in plaidInstitution.fields {
             var type: SignUpTextFieldType = .username
-            if field.type == FieldType.username.rawValue {
+            if field.type == OpenFieldType.username.rawValue {
                 type = .username
-            } else if field.type == FieldType.password.rawValue {
+            } else if field.type == OpenFieldType.password.rawValue {
                 type = .password
-            } else if field.type == FieldType.pin.rawValue {
+            } else if field.type == OpenFieldType.pin.rawValue {
                 type = .pin
-            } else if field.type == FieldType.passphrase.rawValue {
+            } else if field.type == OpenFieldType.passphrase.rawValue {
                 type = .passphrase
-            } else if field.type == FieldType.key.rawValue {
+            } else if field.type == OpenFieldType.key.rawValue {
                 type = .key
-            } else if field.type == FieldType.secret.rawValue {
+            } else if field.type == OpenFieldType.secret.rawValue {
                 type = .secret
             }
             
