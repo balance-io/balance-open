@@ -15,9 +15,7 @@ internal final class TransferFundsViewModel
     internal var sourceAccount: Account?
     internal var recipientAccount: Account?
     
-    internal var accountNames: [String] {
-        return Array(self.accounts.keys)
-    }
+    internal let accountNames: [String]
     
     internal var sourceCurrencies: [Currency] {
         let usd = Currency.usd // TODO: This will be the selected "global" currency
@@ -32,31 +30,31 @@ internal final class TransferFundsViewModel
     }
     
     // Private
-    private let accounts: [String : Account] = {
-        let accounts = Account.allAccounts(includeHidden: false)
-        
-        return accounts.reduce([String : Account](), { (dictionary, account) -> [String : Account] in
-            var mutableDictionary = dictionary
-            
-            // TODO: It's possible that accounts have the same display name
-            let key = "\(account.sourceInstitutionId) \(account.displayName)"
-            mutableDictionary[key] = account
-            
-            return mutableDictionary
-        })
-    }()
+    private let accounts: [Account] = Account.allAccounts(includeHidden: false)
     
     // MARK: Initialization
     
     internal required init()
     {
-
+        self.accountNames = self.accounts.map({ (account) -> String in
+            guard let institutionName = account.institution?.name else
+            {
+                return account.displayName
+            }
+            
+            return "\(institutionName): \(account.displayName)"
+        })
     }
     
     // MARK: Account
     
-    internal func account(for key: String) -> Account?
+    internal func account(at index: Int) -> Account
     {
-        return self.accounts[key]
+        return self.accounts[index]
+    }
+    
+    internal func index(of account: Account) -> Int?
+    {
+        return self.accounts.index(of: account)
     }
 }
