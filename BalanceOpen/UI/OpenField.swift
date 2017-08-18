@@ -12,10 +12,12 @@ public struct OpenField {
     public var name: String
     public var label: String
     public var type: String
+    public var value: String?
     
-    public init(name: String, label: String, type: String) {
+    public init(name: String, label: String, type: String, value: String?) {
         self.name = name
         self.label = label
         self.type = type
+        self.value = value
     }
 }

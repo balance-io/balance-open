@@ -128,6 +128,7 @@ class OpenSignUpViewController: NSViewController {
     fileprivate var showingExplanation: Bool {
         return expandedExplanationButton.state == NSControl.StateValue.onState
     }
+    fileprivate let loginService: ExchangeApi
     
     fileprivate var showOnePasswordButton: Bool {
         // Check for 1password
@@ -164,11 +165,12 @@ class OpenSignUpViewController: NSViewController {
     // MARK: - Lifecycle -
     //
     
-    init(plaidInstitution: InstitutionWrapper, patch: Bool = false, institution: Institution? = nil, closeBlock: @escaping (_ finished: Bool, _ signUpViewController: OpenSignUpViewController) -> Void) {
+    init(plaidInstitution: InstitutionWrapper, patch: Bool = false, institution: Institution? = nil, loginService: ExchangeApi, closeBlock: @escaping (_ finished: Bool, _ signUpViewController: OpenSignUpViewController) -> Void) {
         self.plaidInstitution = plaidInstitution
         self.closeBlock = closeBlock
         self.patch = patch
         self.institution = institution
+        self.loginService = loginService
         log.info("Opened sign up controller for \(plaidInstitution.type): \(plaidInstitution.name)")
         super.init(nibName: nil, bundle: nil)
     }
@@ -781,10 +783,24 @@ class OpenSignUpViewController: NSViewController {
     // MARK: - Connecting -
     //
     
+    //TODO: 1) map connectFields back to openField class with values
+    //TODO: 2) pass array of open fields for a completion block either injected or on an institution object
+    //TODO: 3) completion block will perform mapping from fields to required login credentials (injected, so no code will live here)
+    //TODO: 4) on sucess, move away and show normal screen
+    
     // Initial connection
     @objc fileprivate func connect() {
         guard allFieldsFilled() else {
             return
+        }
+        
+        if (true) {
+            var loginFields = [OpenField]()
+            for field in self.connectFields {
+                loginFields.append(field.signupFieldToOpenField())
+            }
+            // try login with loginFields
+            self.plaidInstitution
         }
         
         var username: String?

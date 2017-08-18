@@ -58,6 +58,14 @@ enum PoloniexCommands: String {
  */
 
 struct PoloniexApi: ExchangeApi {
+    static func authenticate(secret: String, key: String, passphrase: String) {
+        //
+    }
+    
+    static func authenticationChallenge() {
+        //
+    }
+    
     
     //Poloniex doesn't have an authenticate method "per-se" so we use the returnBalances call to validate the key-secret pair for login
     static func authenticate(secret: String, key: String) {
@@ -160,8 +168,8 @@ struct PoloniexApi: ExchangeApi {
         var fields: [OpenField]
         
      init() {
-        let keyField = OpenField.init(name: "Key", label: "Key", type: "key")
-        let secretField = OpenField.init(name: "Secret", label: "Secret", type: "secret")
+        let keyField = OpenField.init(name: "Key", label: "Key", type: "key", value: nil)
+        let secretField = OpenField.init(name: "Secret", label: "Secret", type: "secret", value: nil)
         self.fields = [keyField, secretField]
         }
     }

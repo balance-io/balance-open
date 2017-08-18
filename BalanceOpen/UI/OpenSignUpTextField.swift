@@ -9,7 +9,7 @@
 import Cocoa
 import SnapKit
 
-enum SignUpTextFieldType {
+enum SignUpTextFieldType: String {
     case username
     case password
     case pin
@@ -259,6 +259,18 @@ class OpenSignUpTextField: View, TextFieldDelegate {
         set {
             textField.usesSingleLineMode = newValue
             textField.cell?.wraps = !newValue
+        }
+    }
+}
+
+extension OpenSignUpTextField {
+    func signupFieldToOpenField() -> OpenField {
+        let value = self.textField.stringValue
+        switch self.type {
+        case .none:
+            return OpenField(name: self.type.rawValue, label: self.type.rawValue, type: self.type.rawValue, value: nil)
+        default:
+            return OpenField(name: self.type.rawValue, label: self.type.rawValue, type: self.type.rawValue, value: value)
         }
     }
 }

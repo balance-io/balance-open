@@ -43,9 +43,9 @@ internal final class GDAXAPIClient
         var fields: [OpenField]
         
         init() {
-            let keyField = OpenField.init(name: "Key", label: "Key", type: "key")
-            let secretField = OpenField.init(name: "Secret", label: "Secret", type: "secret")
-            let passphraseField = OpenField.init(name: "Passphrase", label: "Passphrase", type: "passphrase")
+            let keyField = OpenField.init(name: "Key", label: "Key", type: "key", value: nil)
+            let secretField = OpenField.init(name: "Secret", label: "Secret", type: "secret", value: nil)
+            let passphraseField = OpenField.init(name: "Passphrase", label: "Passphrase", type: "passphrase", value: nil)
             self.fields = [keyField, secretField, passphraseField]
         }
     }
