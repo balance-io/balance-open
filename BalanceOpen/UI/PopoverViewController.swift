@@ -13,6 +13,7 @@ enum ContentControllerType {
     case addAccount
     case patchAccount
     case tabs
+    case transferFunds
 }
 
 class PopoverViewController: NSViewController {
@@ -119,6 +120,14 @@ class PopoverViewController: NSViewController {
             currentController = AddAccountViewController()
             let animation: ViewAnimation = animated ? .slideInFromRight : .none
             self.view.replaceSubview(oldController.view, with: currentController!.view, animation: animation)
+        }
+    }
+    
+    func showTransferFundsViewController(source: Account?, recipient: Account?) {
+        if let oldController = appLock.locked ? lockController : currentController {
+            self.currentControllerType = .transferFunds
+            self.currentController = TransferFundsViewController(source: source, recipient: recipient)
+            self.view.replaceSubview(oldController.view, with: currentController!.view, animation: .slideInFromRight)
         }
     }
     
@@ -240,6 +249,7 @@ class PopoverViewController: NSViewController {
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(showTabsNotification), name: Notifications.ShowTabs)
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadPopoverController), name: Notifications.ReloadPopoverController)
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(showPatchAccount(notification:)), name: Notifications.ShowPatchAccount)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(self.showTransferFundsNotification(_:)), name: Notifications.ShowTransferFundsController)
         
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(lockUserInterfaceNotification), name: Notifications.LockUserInterface)
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(unlockUserInterfaceNotification), name: Notifications.UnlockUserInterface)
@@ -280,6 +290,13 @@ class PopoverViewController: NSViewController {
     
     @objc fileprivate func showAddAccountNotification() {
         showAddAccount(animated: true)
+    }
+    
+    @objc fileprivate func showTransferFundsNotification(_ notification: Notification) {
+        let sourceAccount = notification.userInfo?[Notifications.Keys.TransferSourceAccount] as? Account
+        let recipientAccount = notification.userInfo?[Notifications.Keys.TransferRecipientAccount] as? Account
+        
+        self.showTransferFundsViewController(source: sourceAccount, recipient: recipientAccount)
     }
     
     @objc fileprivate func showTabsNotification() {
