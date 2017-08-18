@@ -115,9 +115,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         createTable()
         createFixPasswordPrompt()
         //createTotalFooter()
-        
-        let transferFundsViewController = TransferFundsViewController()
-        self.presentViewControllerAsModalWindow(transferFundsViewController)
     }
     
     func createTable() {
