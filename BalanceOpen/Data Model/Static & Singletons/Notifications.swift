@@ -15,6 +15,7 @@ struct Notifications {
     static let SyncingInstitution                     = Notification.Name("SyncingInstitution")
     static let SyncCompleted                          = Notification.Name("SyncCompleted")
     static let ShowAddAccount                         = Notification.Name("ShowAddAccount")
+    static let ShowTransferFundsController            = Notification.Name("ShowTransferFundsController")
     static let ShowTabs                               = Notification.Name("ShowTabs")
     static let TogglePopover                          = Notification.Name("TogglePopover")
     static let ShowPopover                            = Notification.Name("ShowPopover")
