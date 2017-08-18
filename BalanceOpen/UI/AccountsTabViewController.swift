@@ -704,7 +704,7 @@ extension AccountsTabViewController: AccountsTabViewModelDelegate
 {
     func didClickTransferMenuItem(from source: Account, to recipient: Account)
     {
-//        let transferFundsViewController = TransferFundsViewController(sourceAccount: source, recipientAccount: recipient)
-//        self.presentViewControllerAsModalWindow(transferFundsViewController)
+        let userInfo = Notifications.userInfoForTransfer(source: source, recipient: recipient)
+        NotificationCenter.postOnMainThread(name: Notifications.ShowTransferFundsController, object: nil, userInfo: userInfo)
     }
 }
