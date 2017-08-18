@@ -46,6 +46,24 @@ struct Notifications {
         static let ServerMessageTitle           = "ServerMessageTitle"
         static let ServerMessageContent         = "ServerMessageContent"
         static let ServerMessageOKButton        = "ServerMessageOKButton"
+        static let TransferSourceAccount        = "TransferSourceAccount"
+        static let TransferRecipientAccount     = "TransferRecipientAccount"
+    }
+    
+    static func userInfoForTransfer(source: Account?, recipient: Account?) -> [AnyHashable: Any] {
+        var userInfo = [AnyHashable: Any]()
+        
+        if let unwrappedSource = source
+        {
+            userInfo[Notifications.Keys.TransferSourceAccount] = unwrappedSource
+        }
+        
+        if let unwrappedRecipient = recipient
+        {
+            userInfo[Notifications.Keys.TransferRecipientAccount] = unwrappedRecipient
+        }
+
+        return userInfo
     }
     
     static func userInfoForInstitution(_ institution: Institution) -> [AnyHashable: Any] {
