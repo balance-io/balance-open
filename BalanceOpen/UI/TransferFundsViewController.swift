@@ -329,7 +329,8 @@ internal final class TransferFundsViewController: NSViewController
     
     @objc private func cancelButtonClicked(_ sender: Any)
     {
-        
+        NotificationCenter.postOnMainThread(name: Notifications.ShowTabIndex, object: nil, userInfo: [Notifications.Keys.TabIndex: Tab.accounts.rawValue])
+        NotificationCenter.postOnMainThread(name: Notifications.ShowTabs)
     }
 }
 
