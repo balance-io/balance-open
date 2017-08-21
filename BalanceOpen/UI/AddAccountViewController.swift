@@ -425,27 +425,3 @@ class AddAccountViewController: NSViewController {
         }
     }
 }
-
-// MARK: GDAXAuthViewControllerDelegate
-
-extension AddAccountViewController: GDAXAuthViewControllerDelegate
-{
-    func didSuccessfullyLogin(with credentials: GDAXAPIClient.Credentials, in controller: GDAXAuthViewController)
-    {
-        self.dismissViewController(controller)
-        
-        // Save credentials
-        do
-        {
-            let credentialsIdentifier = "main"
-            try credentials.save(identifier: credentialsIdentifier)
-            
-            // Create institution
-            _ = Institution(sourceId: .gdax, sourceInstitutionId: "", name: "GDAX", nameBreak: nil, primaryColor: nil, secondaryColor: nil, logoData: nil, accessToken: credentialsIdentifier)
-        }
-        catch
-        {
-            // TODO: Display error
-        }
-    }
-}

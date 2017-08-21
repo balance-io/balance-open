@@ -157,7 +157,6 @@
 		53FA53051EF3FAFE002990B0 /* InstitutionHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */; };
 		A408662A1F30883A00D3FB2E /* GDAXWithdrawal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40866291F30883A00D3FB2E /* GDAXWithdrawal.swift */; };
 		A408662C1F308A4800D3FB2E /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A408662B1F308A4800D3FB2E /* URLRequest.swift */; };
-		A412352C1F2B318A00C4C6E1 /* GDAXAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A412352B1F2B318A00C4C6E1 /* GDAXAuthViewController.swift */; };
 		A44981E21F28EE3B00E861AA /* GDAXAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981E11F28EE3B00E861AA /* GDAXAccount.swift */; };
 		A44981E91F28F3AA00E861AA /* GDAXErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981E81F28F3AA00E861AA /* GDAXErrors.swift */; };
 		A4A150191F2A325600790EAC /* GDAXServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A150181F2A325600790EAC /* GDAXServer.swift */; };
@@ -373,7 +372,6 @@
 		53FA53031EF3FAFE002990B0 /* InstitutionHeaders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionHeaders.swift; sourceTree = "<group>"; };
 		A40866291F30883A00D3FB2E /* GDAXWithdrawal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXWithdrawal.swift; sourceTree = "<group>"; };
 		A408662B1F308A4800D3FB2E /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
-		A412352B1F2B318A00C4C6E1 /* GDAXAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAuthViewController.swift; sourceTree = "<group>"; };
 		A44981E11F28EE3B00E861AA /* GDAXAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAccount.swift; sourceTree = "<group>"; };
 		A44981E81F28F3AA00E861AA /* GDAXErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXErrors.swift; sourceTree = "<group>"; };
 		A494E9581F3A2231007F800C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -562,7 +560,6 @@
 				532122311EEAD1C000F4812A /* Preferences */,
 				532122AD1EEAE6E700F4812A /* Vector Graphics Draw Functions */,
 				532122541EEAD63700F4812A /* Views */,
-				A412352B1F2B318A00C4C6E1 /* GDAXAuthViewController.swift */,
 				5321223E1EEAD2B700F4812A /* AccountsTabTableCells.swift */,
 				532122401EEAD2B700F4812A /* AccountsTabViewController.swift */,
 				532122CE1EEB008700F4812A /* AddAccountViewController.swift */,
@@ -1117,7 +1114,6 @@
 				532122181EEAC8F800F4812A /* SyncManager.swift in Sources */,
 				532122B91EEAEAE600F4812A /* Date.swift in Sources */,
 				532122641EEAD75C00F4812A /* SectionedTableView.swift in Sources */,
-				A412352C1F2B318A00C4C6E1 /* GDAXAuthViewController.swift in Sources */,
 				5321223C1EEAD1D100F4812A /* PreferencesSecurityViewController.swift in Sources */,
 				532122831EEADA1100F4812A /* ImageView.swift in Sources */,
 				5321228C1EEADD0200F4812A /* NetworkStatus.swift in Sources */,
