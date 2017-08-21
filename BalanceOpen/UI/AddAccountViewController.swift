@@ -338,7 +338,7 @@ class AddAccountViewController: NSViewController {
                 CoinbaseApi.authenticate()
             case .gdax:
                 let institution = GDAXAPIClient.gdaxInstitution
-                self.presentLoginScreenWith(institution: institution, loginService: GDAXAPIClient(server: .sandbox) as! ExchangeApi)
+                self.presentLoginScreenWith(institution: institution, loginService: GDAXAPIClient(server: .production))
             case .poloniex:
                 let institution = PoloniexApi.poloniexInstitution
                 self.presentLoginScreenWith(institution: institution, loginService: PoloniexApi())
