@@ -783,10 +783,7 @@ class OpenSignUpViewController: NSViewController {
     // MARK: - Connecting -
     //
     
-    //TODO: 1) map connectFields back to openField class with values
-    //TODO: 2) pass array of open fields for a completion block either injected or on an institution object
-    //TODO: 3) completion block will perform mapping from fields to required login credentials (injected, so no code will live here)
-    //TODO: 4) on sucess, move away and show normal screen
+    //TODO: 4) on sucess, move away and show normal screen -> problem screen crashing due to wrong thread call
     
     // Initial connection
     @objc fileprivate func connect() {
@@ -794,31 +791,14 @@ class OpenSignUpViewController: NSViewController {
             return
         }
         
-        if (true) {
-            var loginFields = [OpenField]()
-            for field in self.connectFields {
-                loginFields.append(field.signupFieldToOpenField())
-            }
-            // try login with loginFields
-            self.plaidInstitution
+        var loginFields = [OpenField]()
+        for field in self.connectFields {
+            loginFields.append(field.signupFieldToOpenField())
         }
-        
-        var username: String?
-        var password: String?
-        
-        
-        // TODO: choose appropiate login system
-        
-        if let username = username, let password = password {
-            self.view.window?.makeFirstResponder(self)
-            
-            connectStartTime = Date()
-            
-            prepareViewsForSubmit(loadingText: "Connecting to \(plaidInstitution.name)")
-            
-            // Verify subscription
-            log.info("Verifying subscription")
-        }
+        // try login with loginFields
+        self.loginService.authenticationChallenge(loginStrings: loginFields, closeBlock: { (success) in
+            self.callCloseBlock(finished: success)
+        })
     }
     
     fileprivate func setLoadingFieldString(_ stringValue: String) {

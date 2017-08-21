@@ -58,17 +58,35 @@ enum PoloniexCommands: String {
  */
 
 struct PoloniexApi: ExchangeApi {
-    static func authenticate(secret: String, key: String, passphrase: String) {
-        //
+    func authenticate(secret: String, key: String) {
+        assert(false, "implement")
     }
     
-    static func authenticationChallenge() {
-        //
+    func authenticate(secret: String, key: String, passphrase: String) {
+        assert(false, "implement")
     }
     
-    
+    func authenticationChallenge(loginStrings: [OpenField], closeBlock: @escaping (Bool) -> Void) {
+        assert(loginStrings.count == 2, "number of auth fields should be 2 for Poloniex")
+        var secretField : String?
+        var keyField : String?
+        for field in loginStrings {
+            if field.type == "key" {
+                keyField = field.value
+            } else if field.type == "secret" {
+                secretField = field.value
+            } else {
+                assert(false, "wrong fields are passed into the poloniex auth, we require secret and key fields and values")
+            }
+        }
+        guard let secret = secretField, let key = keyField else {
+            assert(false, "wrong fields are passed into the poloniex auth, we require secret and key fields and values")
+        }
+        PoloniexApi.authenticate(secret: secret, key: key, closeBlock: closeBlock)
+    }
+
     //Poloniex doesn't have an authenticate method "per-se" so we use the returnBalances call to validate the key-secret pair for login
-    static func authenticate(secret: String, key: String) {
+    static func authenticate(secret: String, key: String, closeBlock: @escaping (Bool) -> Void) {
         
         let requestInfo = PoloniexApi.createRequestBodyandHash(params: ["command":PoloniexCommands.returnCompleteBalances.rawValue],secret: secret, key: key)
         let urlRequest = PoloniexApi.assembleTradingRequest(key: key, body: requestInfo.body, hashBody: requestInfo.signedBody)
@@ -83,9 +101,11 @@ struct PoloniexApi: ExchangeApi {
                     //create accounts
                     let poloniexAccounts = try createPoloniexAccounts(data: safeData)
                     processPoloniexAccounts(accounts: poloniexAccounts, institution: institution!)
+                    closeBlock(true)
                 } else {
                     print("Poloniex Error: \(String(describing: error))")
                     print("Poloniex Data: \(String(describing: data))")
+                    closeBlock(false)
                     throw "Error \(String(describing:error))"
                 }
             }

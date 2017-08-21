@@ -338,17 +338,17 @@ class AddAccountViewController: NSViewController {
                 CoinbaseApi.authenticate()
             case .gdax:
                 let institution = GDAXAPIClient.gdaxInstitution
-                self.presentLoginScreenWith(institution: institution)
+                self.presentLoginScreenWith(institution: institution, loginService: GDAXAPIClient(server: .sandbox) as! ExchangeApi)
             case .poloniex:
                 let institution = PoloniexApi.poloniexInstitution
-                self.presentLoginScreenWith(institution: institution)
+                self.presentLoginScreenWith(institution: institution, loginService: PoloniexApi())
             default:()
             }
         }
     }
     
-    func presentLoginScreenWith(institution: InstitutionWrapper) {
-        let signup = OpenSignUpViewController(plaidInstitution: institution as InstitutionWrapper, patch: false, institution: nil, closeBlock: { (finished, signUpViewController: OpenSignUpViewController) in
+    func presentLoginScreenWith(institution: InstitutionWrapper,  loginService: ExchangeApi) {
+        let signup = OpenSignUpViewController(plaidInstitution: institution as InstitutionWrapper, patch: false, institution: nil, loginService: loginService, closeBlock: { (finished, signUpViewController: OpenSignUpViewController) in
             if finished {
                 self.back()
             } else {
