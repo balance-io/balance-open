@@ -9,11 +9,7 @@
 import Foundation
 
 protocol ExchangeApi {
-    func authenticate(secret: String, key: String)
-    func authenticate(secret: String, key: String, passphrase: String)
+//    func authenticate(secret: String, key: String)
+//    func authenticate(secret: String, key: String, passphrase: String)
     func authenticationChallenge(loginStrings: [OpenField], closeBlock: @escaping (_ success: Bool) -> Void)
-    //    static func handleAuthenticationCallback(state: String, code: String, completion: @escaping SuccessErrorBlock)
-    //    static func refreshAccessToken(institution: Institution, completion: @escaping SuccessErrorBlock)
-    //    static func updateAccounts(institution: Institution, completion: @escaping SuccessErrorBlock)
-    //    static func processAccounts(_ coinbaseAccounts: [CoinbaseAccount], institution: Institution)
 }
