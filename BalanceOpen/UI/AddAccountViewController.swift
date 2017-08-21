@@ -265,7 +265,6 @@ class AddAccountViewController: NSViewController {
         let buttonVertPadding = -1
         let buttonSize = NSRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
         
-        var tag = 2
         var isRightColumn = false
         var topView: NSView? = nil
         for source in buttonSourceOrder {
@@ -274,7 +273,7 @@ class AddAccountViewController: NSViewController {
                 
                 button.target = self
                 button.action = #selector(buttonAction(_:))
-                button.tag = tag
+                button.tag = source.rawValue
                 button.setAccessibilityLabel(source.description)
                 
                 assignBlocks(button: button, bounds: buttonSize, function: drawFunction)
@@ -298,9 +297,12 @@ class AddAccountViewController: NSViewController {
                 
                 buttons.append(button)
                 
-                if source != .coinbase {
+                switch source
+                {
+                case .bitfinex, .plaid:
                     button.alphaValue = 0.5
                     button.isEnabled = false
+                default:()
                 }
                 
                 if isRightColumn {
@@ -308,7 +310,6 @@ class AddAccountViewController: NSViewController {
                 }
                 isRightColumn = !isRightColumn
             }
-            tag += 1
         }
     }
     
@@ -332,9 +333,42 @@ class AddAccountViewController: NSViewController {
     
     @objc fileprivate func buttonAction(_ sender: NSButton) {
         if allowSelection, let source = Source(rawValue: sender.tag) {
-            if source == .coinbase {
-                _ = CoinbaseApi.authenticate()
+            switch source {
+            case .coinbase:
+                CoinbaseApi.authenticate()
+            case .gdax:
+                let institution = GDAXAPIClient.gdaxInstitution
+                self.presentLoginScreenWith(institution: institution, loginService: GDAXAPIClient(server: .production))
+            case .poloniex:
+                let institution = PoloniexApi.poloniexInstitution
+                self.presentLoginScreenWith(institution: institution, loginService: PoloniexApi())
+            default:()
             }
+        }
+    }
+    
+    func presentLoginScreenWith(institution: InstitutionWrapper,  loginService: ExchangeApi) {
+        let signup = OpenSignUpViewController(plaidInstitution: institution as InstitutionWrapper, patch: false, institution: nil, loginService: loginService, closeBlock: { (finished, signUpViewController: OpenSignUpViewController) in
+            if finished {
+                self.back()
+            } else {
+                self.removeSignUpController(animated: true, signUpController: signUpViewController)
+            }
+        })
+        preferencesButton.isEnabled = false
+        preferencesButton.animator().alphaValue = 0.0
+        self.view.replaceSubview(containerView, with: signup.view, animation: .slideInFromRight)
+    }
+    
+    func removeSignUpController(animated: Bool, signUpController: OpenSignUpViewController) {
+        preferencesButton.isEnabled = true
+        if animated {
+            preferencesButton.animator().alphaValue = 1.0
+            self.view.replaceSubview(signUpController.view, with: containerView, animation: .slideInFromLeft) {
+            }
+        } else {
+            preferencesButton.alphaValue = 1.0
+            self.view.replaceSubview(signUpController.view, with: containerView, animation: .none)
         }
     }
     

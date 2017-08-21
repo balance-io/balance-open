@@ -25,4 +25,11 @@ class Button: NSButton {
         self.wantsLayer = true
         self.translatesAutoresizingMaskIntoConstraints = false
     }
+    
+    // MARK: Actions
+    
+    internal func set(target: AnyObject, action: Selector) {
+        self.target = target
+        self.action = action
+    }
 }

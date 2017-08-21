@@ -35,7 +35,14 @@ private func arrayFromResult(_ result: FMResultSet) -> [AnyObject] {
     return array as [AnyObject]
 }
 
-class Institution {
+class Institution: InstitutionWrapper {
+    var currencyCode: String
+    var usernameLabel: String
+    var passwordLabel: String
+    var products: [String]
+    var type: String
+    var url: String?
+    var fields: [OpenField]
     
     var institutionId: Int
     var sourceId: Source
@@ -78,7 +85,8 @@ class Institution {
     fileprivate var accessTokenKey: String {
         return "institutionId: \(institutionId)"
     }
-        
+    
+    //we need to deal with the case that accessToken is in fact non existant (gdax, poloniex... etc)
     var accessToken: String? {
         get {
             var accessToken: String? = nil
@@ -180,10 +188,18 @@ class Institution {
         self.passwordInvalid = resultArray[8] as! Bool
         
         self.dateAdded = resultArray[9] as! Date
+        
+        self.currencyCode = String()
+        self.usernameLabel = String()
+        self.passwordLabel = String()
+        self.products = [String]()
+        self.type = String()
+        self.url = ""
+        self.fields = [OpenField]()
     }
     
     // Since we allow duplicate institutions, never check if they exist first
-    init?(sourceId: Source, sourceInstitutionId: String, name: String, nameBreak: Int?, primaryColor: NSColor?, secondaryColor: NSColor?, logoData: Data?, accessToken: String, dateAdded: Date = Date()) {
+    init?(sourceId: Source, sourceInstitutionId: String, name: String, nameBreak: Int?, primaryColor: NSColor?, secondaryColor: NSColor?, logoData: Data?, accessToken: String?, dateAdded: Date = Date()) {
         
         self.sourceId = sourceId
         self.sourceInstitutionId = sourceInstitutionId
@@ -199,6 +215,14 @@ class Institution {
         self.passwordInvalid = false
         
         self.dateAdded = dateAdded
+        
+        self.currencyCode = String()
+        self.usernameLabel = String()
+        self.passwordLabel = String()
+        self.products = [String]()
+        self.type = String()
+        self.url = ""
+        self.fields = [OpenField]()
 
         var generatedId: Int?
         database.writeDbQueue.inDatabase { db in

@@ -14,7 +14,7 @@ enum ThemeType: Int {
     case dark   = 2
 }
 
-var CurrentTheme: Theme {
+var CurrentTheme: OpenTheme {
     switch defaults.selectedThemeType {
     case .light:
         return LightTheme()
@@ -25,11 +25,12 @@ var CurrentTheme: Theme {
     }
 }
 
-protocol Theme {
+protocol OpenTheme {
     var type: ThemeType { get }
     var defaults: DefaultsTheme { get }
     var balanceTextField: BalanceTextFieldTheme { get }
     var tabs: TabsTheme { get }
+    var addAccounts: AddAccountsTheme { get }
     var lock: LockTheme { get }
     var accounts: AccountsTheme { get }
 }
@@ -89,6 +90,51 @@ struct LockTheme {
     let passwordInactiveBorderColor: NSColor
     let passwordTextColor: NSColor
     let passwordPlaceholderColor: NSColor
+}
+
+
+struct AddAccountsTheme {
+    let institutionNameFont: NSFont
+    
+    let welcomeFont: NSFont
+    
+    let labelFont: NSFont
+    let textColor: NSColor
+    
+    let statusFont: NSFont
+    let statusColor: NSColor
+    
+    let buttonFont: NSFont
+    let buttonBackgroundColor: NSColor
+    let buttonBorderColor: NSColor
+    
+    let lineColor: NSColor
+    
+    let onePasswordButtonImage: NSImage
+    let waveImage: NSImage
+    let padlockImage: NSImage
+    
+    let searchHeaderBackgroundColor: NSColor
+    let searchHeaderFont: NSFont
+    let searchHeaderPopularFont: NSFont
+    let searchHeaderColor: NSColor
+    let searchPopularFont: NSFont
+    let searchPopularColor: NSColor
+    let searchMoreResultsFont: NSFont
+    let searchMoreResultsColor: NSColor
+    
+    let signUpFieldActiveBorderColor: NSColor
+    let signUpFieldInactiveBorderColor: NSColor
+    let signUpFieldBackgroundColor: NSColor
+    let signUpFieldTextColor: NSColor
+    let signUpFieldplaceHolderTextColor: NSColor
+    let signUpFieldFont: NSFont
+    
+    let emailIssueInfoLabelNameFont: NSFont
+    let emailIssueInfoLabelNameColor: NSColor
+    let emailIssueInfoLabelValueFont: NSFont
+    let emailIssueInfoLabelValueColor: NSColor
+    let emailIssueMessageLabelFont: NSFont
 }
 
 struct AccountsTheme {

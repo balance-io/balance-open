@@ -23,6 +23,10 @@ class Syncer {
         }
     }
     
+    private let gdaxAPIClient = GDAXAPIClient(server: .sandbox)
+    
+    // MARK: -
+    
     func cancel() {
         canceled = true
     }
@@ -64,7 +68,7 @@ class Syncer {
                 // Institution needs a PATCH, so skip
                 log.error("Tried to sync institution \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name) but the password was invalid")
                 syncInstitutions(syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
-            } else if institution.accessToken == nil {
+            } else if institution.accessToken == nil && institution.sourceId == .coinbase {
                 // No access token somehow, so move on to the next one
                 log.severe("Tried to sync institution \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name) but did not find an access token")
                 syncInstitutions(syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
@@ -85,9 +89,16 @@ class Syncer {
                         }
                     }
                 }
-            } else if institution.accessToken != nil {
+            } else if institution.accessToken != nil  {
                 // Valid institution, so sync it
                 syncAccountsAndTransactions(institution: institution, remainingInstitutions: syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
+            } else if institution.sourceId == .poloniex {
+                if let apiKey = institution.apiKey, let secret = institution.secret {
+                    syncPoloniexAccountsAndTransactions(secret: secret, key: apiKey, institution: institution, remainingInstitutions: syncingInstitutions, beginDate: beginDate, success: success, errors: errors)
+                } else {
+                    //logout and ask for resync
+                    log.error("Failed get api and key for \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name)")
+                }
             }
         } else {
             // No more institutions
@@ -104,7 +115,106 @@ class Syncer {
         
         log.debug("Pulling accounts and transactions for \(institution)")
         
-        CoinbaseApi.updateAccounts(institution: institution) { success, error in
+        // Perform next sync handler
+        let performNextSyncHandler = { ( _ remainingInstitutions: [Institution], _ beginDate: Date, _ syncingSuccess: Bool, _ syncingErrors: [Error]) -> Void in
+            if self.canceled
+            {
+                self.cancelSync(errors: syncingErrors)
+                return
+            }
+            
+            self.syncInstitutions(remainingInstitutions, beginDate: beginDate, success: syncingSuccess, errors: syncingErrors)
+        }
+        
+        // Perform sync
+        switch institution.sourceId
+        {
+        case .coinbase:
+            CoinbaseApi.updateAccounts(institution: institution) { success, error in
+                if !success {
+                    syncingSuccess = false
+                    if let error = error {
+                        syncingErrors.append(error)
+                        log.error("Error pulling accounts for \(institution): \(error)")
+                    }
+                    log.debug("Finished pulling accounts for \(institution)")
+                }
+                
+                performNextSyncHandler(remainingInstitutions, beginDate, syncingSuccess, syncingErrors)
+            }
+        case .gdax:
+            guard let accessToken = institution.accessToken else
+            {
+                syncingSuccess = false
+                performNextSyncHandler(remainingInstitutions, beginDate, syncingSuccess, syncingErrors)
+                return
+            }
+            
+            // Load credentials
+            let credentials: GDAXAPIClient.Credentials
+            do
+            {
+                credentials = try GDAXAPIClient.Credentials(identifier: accessToken)
+            }
+            catch let error
+            {
+                syncingErrors.append(error)
+                performNextSyncHandler(remainingInstitutions, beginDate, syncingSuccess, syncingErrors)
+                return
+            }
+            
+            // Fetch data from GDAX
+            self.gdaxAPIClient.credentials = credentials
+            try! self.gdaxAPIClient.fetchAccounts({ (accounts, error) in
+                guard let unwrappedAccounts = accounts else
+                {
+                    if let unwrappedError = error
+                    {
+                        syncingErrors.append(unwrappedError)
+                    }
+                    
+                    syncingSuccess = false
+                    performNextSyncHandler(remainingInstitutions, beginDate, syncingSuccess, syncingErrors)
+                    return
+                }
+                
+                for account in unwrappedAccounts
+                {
+                    var decimals = 2
+                    if let currency = Currency.rawValue(currency:account.currencyCode)
+                    {
+                        decimals = currency.decimals
+                    }
+                    
+                    // Calculate the integer value of the balance based on the decimals
+                    var balance = Decimal(account.balance)
+                    balance = balance * Decimal(pow(10.0, Double(decimals)))
+                    let currentBalance = (balance as NSDecimalNumber).intValue
+
+                    balance = Decimal(account.availableBalance)
+                    balance = balance * Decimal(pow(10.0, Double(decimals)))
+                    let availableBalance = (balance as NSDecimalNumber).intValue
+                    
+                    // Initialize an Account object to insert the record
+                    _ = Account(institutionId: institution.institutionId, sourceId: institution.sourceId, sourceAccountId: account.identifier, sourceInstitutionId: "", accountTypeId: AccountType.depository, accountSubTypeId: nil, name: account.currencyCode, currency: account.currencyCode, decimals: decimals, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altDecimals: nil, altCurrentBalance: nil, altAvailableBalance: nil)
+                }
+                
+                performNextSyncHandler(remainingInstitutions, beginDate, syncingSuccess, syncingErrors)
+            })
+        default:()
+        }
+    }
+    
+    fileprivate func syncPoloniexAccountsAndTransactions(secret:String , key:String ,institution: Institution, remainingInstitutions: [Institution], beginDate: Date, success: Bool, errors: [Error]) {
+        var syncingSuccess = success
+        var syncingErrors = errors
+        
+        let userInfo = Notifications.userInfoForInstitution(institution)
+        NotificationCenter.postOnMainThread(name: Notifications.SyncingInstitution, object: nil, userInfo: userInfo)
+        log.debug("Pulling accounts and transactions for \(institution)")
+        
+        //sync Poloniex
+        PoloniexApi.fetchBalances(secret: secret, key: key, institution: institution) { success, error in
             if !success {
                 syncingSuccess = false
                 if let error = error {
@@ -118,10 +228,10 @@ class Syncer {
                 self.cancelSync(errors: syncingErrors)
                 return
             }
-            
             self.syncInstitutions(remainingInstitutions, beginDate: beginDate, success: syncingSuccess, errors: syncingErrors)
         }
     }
+
     
     fileprivate func cancelSync(errors: [Error]) {
         completeSync(success: false, errors: errors)
