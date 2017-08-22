@@ -162,6 +162,7 @@
 		A4211A2C1F4431490080C76A /* FetchAccounts.json in Resources */ = {isa = PBXBuildFile; fileRef = A494E95D1F3A2231007F800C /* FetchAccounts.json */; };
 		A4211A2D1F4431490080C76A /* WithdrawToCrypto.json in Resources */ = {isa = PBXBuildFile; fileRef = A494E95E1F3A2231007F800C /* WithdrawToCrypto.json */; };
 		A42E9C3C1F4C297A00A5E8BD /* TransferQuoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42E9C3B1F4C297A00A5E8BD /* TransferQuoteTests.swift */; };
+		A42E9C3E1F4C31F100A5E8BD /* TransferRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42E9C3D1F4C31F100A5E8BD /* TransferRequestTests.swift */; };
 		A43429701F33548700D17BC6 /* TransferFundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A434296E1F33548700D17BC6 /* TransferFundsViewController.swift */; };
 		A44981E21F28EE3B00E861AA /* GDAXAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981E11F28EE3B00E861AA /* GDAXAccount.swift */; };
 		A44981E91F28F3AA00E861AA /* GDAXErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981E81F28F3AA00E861AA /* GDAXErrors.swift */; };
@@ -379,6 +380,7 @@
 		A4211A1F1F435EF60080C76A /* CurrencyTextFieldFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTextFieldFormatter.swift; sourceTree = "<group>"; };
 		A4211A211F442F350080C76A /* CurrencyTextFieldFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTextFieldFormatterTests.swift; sourceTree = "<group>"; };
 		A42E9C3B1F4C297A00A5E8BD /* TransferQuoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferQuoteTests.swift; sourceTree = "<group>"; };
+		A42E9C3D1F4C31F100A5E8BD /* TransferRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRequestTests.swift; sourceTree = "<group>"; };
 		A434296E1F33548700D17BC6 /* TransferFundsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferFundsViewController.swift; sourceTree = "<group>"; };
 		A43EAAFF1F3AFCC5002CEEAF /* ShapeShiftCoinPairTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeShiftCoinPairTests.swift; sourceTree = "<group>"; };
 		A43EAB011F3AFCC5002CEEAF /* HTTPURLResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPURLResponseTests.swift; sourceTree = "<group>"; };
@@ -816,6 +818,7 @@
 			isa = PBXGroup;
 			children = (
 				A42E9C3B1F4C297A00A5E8BD /* TransferQuoteTests.swift */,
+				A42E9C3D1F4C31F100A5E8BD /* TransferRequestTests.swift */,
 			);
 			path = "Transfer Controller";
 			sourceTree = "<group>";
@@ -1100,6 +1103,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DF76CE01F212F6F00EE18BB /* CoinbaseTests.swift in Sources */,
+				A42E9C3E1F4C31F100A5E8BD /* TransferRequestTests.swift in Sources */,
 				A4211A231F44310D0080C76A /* AccountTests.swift in Sources */,
 				A4211A281F44311B0080C76A /* HTTPURLResponseTests.swift in Sources */,
 				A4211A271F4431170080C76A /* ShapeShiftCoinPairTests.swift in Sources */,
