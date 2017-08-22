@@ -11,7 +11,7 @@ import Foundation
 
 internal extension ShapeShiftAPIClient
 {
-    internal struct Coin
+    internal struct Coin: Equatable
     {
         // Internal
         internal let name: String
@@ -44,4 +44,11 @@ internal extension ShapeShiftAPIClient
             self.init(name: name, symbol: symbol, imageURL: imageURL, isAvailable: isAvailable)
         }
     }
+}
+
+// MARK: Equatable
+
+internal func ==(lhs: ShapeShiftAPIClient.Coin, rhs: ShapeShiftAPIClient.Coin) -> Bool
+{
+    return lhs.symbol == rhs.symbol
 }
