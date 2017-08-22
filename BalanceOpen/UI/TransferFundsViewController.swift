@@ -306,7 +306,7 @@ internal final class TransferFundsViewController: NSViewController
 
         do
         {
-            let transferRequest = try TransferRequest(source: sourceAccount, recipient: recipientAccount, amount: amount)
+            let transferRequest = TransferRequest(source: sourceAccount, recipient: recipientAccount, amount: amount)
             self.transferController = try TransferController(request: transferRequest)
             self.transferController?.fetchQuote({ [weak self] (quote, error) in
                 guard let unwrappedSelf = self else { return }

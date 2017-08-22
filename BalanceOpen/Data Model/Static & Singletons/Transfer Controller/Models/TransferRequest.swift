@@ -23,7 +23,7 @@ internal struct TransferRequest
 
     // MARK: Initialization
     
-    internal init(source: Transferable, recipient: Transferable, amount: Double) throws
+    internal init(source: Transferable, recipient: Transferable, amount: Double)
     {
         self.source = source
         self.sourceCurrency = source.currencyType
@@ -50,20 +50,3 @@ internal extension TransferRequest
         case direct, exchange
     }
 }
-
-
-// MARK: Initialization error
-
-internal extension TransferRequest
-{
-    /**
-     Initialization error.
-     
-     - unsupportedCurrency: Unsupported currency
-     */
-    internal enum InitializationError: Error
-    {
-        case unsupportedCurrency(code: String)
-    }
-}
-
