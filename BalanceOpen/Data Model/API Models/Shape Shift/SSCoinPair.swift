@@ -23,7 +23,7 @@ internal extension ShapeShiftAPIClient
         internal init(input: Coin, output: Coin)
         {
             self.input = input
-            self.output = input
+            self.output = output
             self.code = "\(input.symbol.lowercased())_\(output.symbol.lowercased())"
         }
     }
