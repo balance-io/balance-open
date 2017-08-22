@@ -18,13 +18,13 @@ internal final class ShapeShiftAPIClient
     fileprivate let baseURL = URL(string: "https://shapeshift.io")!
     
     // Private
-    private let session = URLSession(configuration: URLSessionConfiguration.default)
+    private let session: URLSession
     
     // MARK: Initialization
     
-    internal required init()
+    internal required init(session: URLSession = URLSession(configuration: .default))
     {
-        
+        self.session = session
     }
     
     // MARK: Request

@@ -12,13 +12,7 @@ import Foundation
 internal final class ShapeShiftTransferOperator: TransferOperator
 {
     // Private
-    private let apiClient: ShapeShiftAPIClient = {
-        let client = ShapeShiftAPIClient()
-        // TODO: add the Balance API key
-        // client.apiKey = ""
-        return client
-    }()
-    
+    private var apiClient: ShapeShiftAPIClient
     private let request: TransferRequest
     private var coinPair: ShapeShiftAPIClient.CoinPair?
     
@@ -27,6 +21,15 @@ internal final class ShapeShiftTransferOperator: TransferOperator
     internal init(request: TransferRequest)
     {
         self.request = request
+        
+        self.apiClient = ShapeShiftAPIClient()
+//        self.apiClient.apiKey = "TODO"
+    }
+    
+    internal convenience init(request: TransferRequest, shapeShiftClient: ShapeShiftAPIClient)
+    {
+        self.init(request: request)
+        self.apiClient = shapeShiftClient
     }
     
     // MARK: Quote
