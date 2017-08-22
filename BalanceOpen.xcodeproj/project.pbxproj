@@ -164,6 +164,9 @@
 		A42E9C3C1F4C297A00A5E8BD /* TransferQuoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42E9C3B1F4C297A00A5E8BD /* TransferQuoteTests.swift */; };
 		A42E9C3E1F4C31F100A5E8BD /* TransferRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42E9C3D1F4C31F100A5E8BD /* TransferRequestTests.swift */; };
 		A42E9C401F4C377200A5E8BD /* ShapeShiftTransferOperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42E9C3F1F4C377200A5E8BD /* ShapeShiftTransferOperatorTests.swift */; };
+		A42E9C431F4C6A4A00A5E8BD /* GetCoins.json in Resources */ = {isa = PBXBuildFile; fileRef = A42E9C421F4C6A4A00A5E8BD /* GetCoins.json */; };
+		A42E9C451F4C6A8B00A5E8BD /* XCTest+MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42E9C441F4C6A8B00A5E8BD /* XCTest+MockData.swift */; };
+		A42E9C471F4C6C2A00A5E8BD /* MarketInfoBTC-ETH.json in Resources */ = {isa = PBXBuildFile; fileRef = A42E9C461F4C6C2A00A5E8BD /* MarketInfoBTC-ETH.json */; };
 		A43429701F33548700D17BC6 /* TransferFundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A434296E1F33548700D17BC6 /* TransferFundsViewController.swift */; };
 		A44981E21F28EE3B00E861AA /* GDAXAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981E11F28EE3B00E861AA /* GDAXAccount.swift */; };
 		A44981E91F28F3AA00E861AA /* GDAXErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981E81F28F3AA00E861AA /* GDAXErrors.swift */; };
@@ -383,6 +386,9 @@
 		A42E9C3B1F4C297A00A5E8BD /* TransferQuoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferQuoteTests.swift; sourceTree = "<group>"; };
 		A42E9C3D1F4C31F100A5E8BD /* TransferRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRequestTests.swift; sourceTree = "<group>"; };
 		A42E9C3F1F4C377200A5E8BD /* ShapeShiftTransferOperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeShiftTransferOperatorTests.swift; sourceTree = "<group>"; };
+		A42E9C421F4C6A4A00A5E8BD /* GetCoins.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GetCoins.json; sourceTree = "<group>"; };
+		A42E9C441F4C6A8B00A5E8BD /* XCTest+MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+MockData.swift"; sourceTree = "<group>"; };
+		A42E9C461F4C6C2A00A5E8BD /* MarketInfoBTC-ETH.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "MarketInfoBTC-ETH.json"; sourceTree = "<group>"; };
 		A434296E1F33548700D17BC6 /* TransferFundsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferFundsViewController.swift; sourceTree = "<group>"; };
 		A43EAAFF1F3AFCC5002CEEAF /* ShapeShiftCoinPairTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeShiftCoinPairTests.swift; sourceTree = "<group>"; };
 		A43EAB011F3AFCC5002CEEAF /* HTTPURLResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPURLResponseTests.swift; sourceTree = "<group>"; };
@@ -826,6 +832,15 @@
 			path = "Transfer Controller";
 			sourceTree = "<group>";
 		};
+		A42E9C411F4C6A2700A5E8BD /* ShapeShift API Responses */ = {
+			isa = PBXGroup;
+			children = (
+				A42E9C421F4C6A4A00A5E8BD /* GetCoins.json */,
+				A42E9C461F4C6C2A00A5E8BD /* MarketInfoBTC-ETH.json */,
+			);
+			path = "ShapeShift API Responses";
+			sourceTree = "<group>";
+		};
 		A43EAAFE1F3AFCC5002CEEAF /* ShapeShiftAPIClient */ = {
 			isa = PBXGroup;
 			children = (
@@ -838,6 +853,7 @@
 			isa = PBXGroup;
 			children = (
 				A43EAB011F3AFCC5002CEEAF /* HTTPURLResponseTests.swift */,
+				A42E9C441F4C6A8B00A5E8BD /* XCTest+MockData.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -854,6 +870,7 @@
 		A494E9591F3A2231007F800C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A42E9C411F4C6A2700A5E8BD /* ShapeShift API Responses */,
 				A494E95A1F3A2231007F800C /* GDAX API Responses */,
 			);
 			path = Resources;
@@ -1073,7 +1090,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A42E9C471F4C6C2A00A5E8BD /* MarketInfoBTC-ETH.json in Resources */,
 				A4211A2C1F4431490080C76A /* FetchAccounts.json in Resources */,
+				A42E9C431F4C6A4A00A5E8BD /* GetCoins.json in Resources */,
 				A4211A2B1F4431490080C76A /* Error.json in Resources */,
 				A4211A2A1F4431490080C76A /* Account.json in Resources */,
 				A4211A2D1F4431490080C76A /* WithdrawToCrypto.json in Resources */,
@@ -1116,6 +1135,7 @@
 				A42E9C3C1F4C297A00A5E8BD /* TransferQuoteTests.swift in Sources */,
 				A4211A261F4431110080C76A /* HeadersTests.swift in Sources */,
 				A4211A241F4431110080C76A /* APIClientTests.swift in Sources */,
+				A42E9C451F4C6A8B00A5E8BD /* XCTest+MockData.swift in Sources */,
 				A42E9C401F4C377200A5E8BD /* ShapeShiftTransferOperatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
