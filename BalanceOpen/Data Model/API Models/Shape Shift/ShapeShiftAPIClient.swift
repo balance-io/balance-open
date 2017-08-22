@@ -35,7 +35,15 @@ internal final class ShapeShiftAPIClient
         let task = self.session.dataTask(with: request) { (data, response, error) in
             let httpResponse = response as! HTTPURLResponse
             
-            guard let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any] else
+            // Response with no data
+            guard let unwrappedData = data else
+            {
+                completionHandler(nil, nil, httpResponse, error)
+                return
+            }
+            
+            // Response with invalid JSON
+            guard let json = try? JSONSerialization.jsonObject(with: unwrappedData, options: []) as? [String : Any] else
             {
                 completionHandler(nil, data, httpResponse, APIError.invalidJSON)
                 return
