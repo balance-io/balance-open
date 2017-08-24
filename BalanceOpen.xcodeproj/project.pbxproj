@@ -173,6 +173,7 @@
 		A45777521F3312DB006D1AD2 /* SSQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45777511F3312DB006D1AD2 /* SSQuote.swift */; };
 		A47F112A1F4193DB00138594 /* TransferRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47F11291F4193DB00138594 /* TransferRequest.swift */; };
 		A47FBC381F4ED22000308E5E /* TransferControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47FBC371F4ED22000308E5E /* TransferControllerTests.swift */; };
+		A47FBC3A1F4ED78700308E5E /* CoinbaseWalletAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47FBC391F4ED78700308E5E /* CoinbaseWalletAddress.swift */; };
 		A49FC38C1F3C596300212DC3 /* TransferQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49FC38B1F3C596300212DC3 /* TransferQuote.swift */; };
 		A49FC38F1F3CA44A00212DC3 /* Transferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49FC38E1F3CA44A00212DC3 /* Transferable.swift */; };
 		A49FC3911F3CA4B400212DC3 /* TransferOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49FC3901F3CA4B400212DC3 /* TransferOperator.swift */; };
@@ -398,6 +399,7 @@
 		A45777511F3312DB006D1AD2 /* SSQuote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSQuote.swift; sourceTree = "<group>"; };
 		A47F11291F4193DB00138594 /* TransferRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRequest.swift; sourceTree = "<group>"; };
 		A47FBC371F4ED22000308E5E /* TransferControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferControllerTests.swift; sourceTree = "<group>"; };
+		A47FBC391F4ED78700308E5E /* CoinbaseWalletAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseWalletAddress.swift; sourceTree = "<group>"; };
 		A494E9581F3A2231007F800C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A494E95B1F3A2231007F800C /* Account.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Account.json; sourceTree = "<group>"; };
 		A494E95C1F3A2231007F800C /* Error.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Error.json; sourceTree = "<group>"; };
@@ -798,6 +800,7 @@
 				A4AEE62A1F27725700CD1E77 /* GDAX */,
 				53946FA21EEF0B0B00E921C3 /* CoinbaseAccount.swift */,
 				53946FA41EF0035200E921C3 /* CoinbaseApi.swift */,
+				A47FBC391F4ED78700308E5E /* CoinbaseWalletAddress.swift */,
 			);
 			path = "API Models";
 			sourceTree = "<group>";
@@ -1221,6 +1224,7 @@
 				A4C518DE1F3AFE3D008F59CC /* TransferController.swift in Sources */,
 				532122D31EEB05A800F4812A /* AddAccountButtons.swift in Sources */,
 				5321228A1EEADC9600F4812A /* ObjC.m in Sources */,
+				A47FBC3A1F4ED78700308E5E /* CoinbaseWalletAddress.swift in Sources */,
 				A44981E91F28F3AA00E861AA /* GDAXErrors.swift in Sources */,
 				5321220A1EEAC89B00F4812A /* CCNStatusItemDropView.m in Sources */,
 				5321229A1EEADFE500F4812A /* QCMethod.swift in Sources */,
