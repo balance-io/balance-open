@@ -16,10 +16,10 @@ internal protocol Transferable
     var exchangeTransferOperator: TransferOperator.Type? { get }
     
     func make(withdrawal: Withdrawal, completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void) throws
-    func fetchAddress(_ completionHandler: @escaping (_ address: String?, _ error: Error?) -> Void)
+    func fetchAddress(_ completionHandler: @escaping (_ address: String?, _ error: Error?) -> Void) throws
 }
 
 internal enum TransferableError: Error
 {
-    case transferNotSupported
+    case unsupported
 }

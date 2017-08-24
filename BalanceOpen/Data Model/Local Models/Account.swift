@@ -512,12 +512,20 @@ extension Account: Transferable
             
             try apiClient.make(withdrawal: gdaxWithdrawal, completionHandler: completionHandler)
         default:
-            throw TransferableError.transferNotSupported
+            throw TransferableError.unsupported
         }
     }
     
-    internal func fetchAddress(_ completionHandler: @escaping (_ address: String?, _ error: Error?) -> Void)
+    internal func fetchAddress(_ completionHandler: @escaping (_ address: String?, _ error: Error?) -> Void) throws
     {
-        
+        switch self.sourceId
+        {
+        case .coinbase:
+            CoinbaseApi.createAddress(for: self, completionHandler: { (address, error) in
+                completionHandler(address?.address, error)
+            })
+        default:
+            throw TransferableError.unsupported
+        }
     }
 }
