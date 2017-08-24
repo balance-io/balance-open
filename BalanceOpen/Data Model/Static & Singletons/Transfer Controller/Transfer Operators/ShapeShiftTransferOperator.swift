@@ -93,45 +93,52 @@ internal final class ShapeShiftTransferOperator: TransferOperator
             return
         }
         
-        // Fetch recipient address
-        self.request.recipient.fetchAddress { [weak self] (recipientAddress, error) in
+        self.fetchQuote { [weak self] (transferQuote, error) in
             guard let unwrappedSelf = self,
-                  let unwrappedRecipientAddress = recipientAddress else
+                  let unwrappedQuote = transferQuote else
             {
                 completionHandler(false, error)
                 return
             }
             
-            // Fetch source address (to use as return address)
-            unwrappedSelf.request.source.fetchAddress({ (sourceAddress, error) in
-                guard let unwrappedSourceAddress = sourceAddress else
-                {
-                    completionHandler(false, error)
-                    return
-                }
-                
-                // Create Shape Shift transaction
-                unwrappedSelf.apiClient.createTransaction(amount: unwrappedSelf.request.amount, recipientAddress: unwrappedRecipientAddress, pairCode: unwrappedCoinPair.code, returnAddress: unwrappedSourceAddress) { (transactionRequest, error) in
-                    guard let unwrappedTransactionRequest = transactionRequest else
+            // Fetch recipient address
+            do
+            {
+                try unwrappedSelf.request.recipient.fetchAddress({ (recipientAddress, error) -> Void in
+                    guard let unwrappedRecipientAddress = recipientAddress else
                     {
                         completionHandler(false, error)
                         return
                     }
                     
-                    // Transaction has been created with Shape Shift.
-                    // To complete transaction we need to transfer funds from
-                    // the source account to the SS account
-                    let withdrawal = Withdrawal(amount: unwrappedTransactionRequest.depositAmount, recipientCryptoAddress: unwrappedTransactionRequest.depositAddress)
-                    do
-                    {
-                        try unwrappedSelf.request.source.make(withdrawal: withdrawal, completionHandler: completionHandler)
+                    // Create Shape Shift transaction
+                    unwrappedSelf.apiClient.createTransaction(amount: unwrappedQuote.recipientAmount, recipientAddress: unwrappedRecipientAddress, pairCode: unwrappedCoinPair.code, returnAddress: nil) { (transactionRequest, error) in
+                        guard let unwrappedTransactionRequest = transactionRequest else
+                        {
+                            completionHandler(false, error)
+                            return
+                        }
+                        
+                        // Transaction has been created with Shape Shift.
+                        // To complete transaction we need to transfer funds from
+                        // the source account to the SS account
+                        let withdrawal = Withdrawal(amount: unwrappedTransactionRequest.depositAmount, recipientCryptoAddress: unwrappedTransactionRequest.depositAddress)
+                        do
+                        {
+                            try unwrappedSelf.request.source.make(withdrawal: withdrawal, completionHandler: completionHandler)
+                        }
+                        catch let error
+                        {
+                            completionHandler(false, error)
+                        }
                     }
-                    catch let error
-                    {
-                        completionHandler(false, error)
-                    }
-                }
-            })
+                })
+            }
+            catch
+            {
+                completionHandler(false, error)
+                return
+            }
         }
     }
     
