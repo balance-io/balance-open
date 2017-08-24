@@ -7,3 +7,28 @@
 //
 
 import Foundation
+
+
+internal struct CoinbaseWalletAddress
+{
+    // Internal
+    internal let identifier: String
+    internal let address: String
+    internal let name: String
+    
+    // MARK: Initialization
+    
+    internal init(dictionary: [String : Any]) throws
+    {
+        guard let identifier = dictionary["id"] as? String,
+              let address = dictionary["address"] as? String,
+              let name = dictionary["name"] as? String else
+        {
+            throw "Invalid JSON"
+        }
+        
+        self.identifier = identifier
+        self.address = address
+        self.name = name
+    }
+}
