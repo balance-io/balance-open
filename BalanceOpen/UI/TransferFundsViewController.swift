@@ -227,7 +227,7 @@ internal final class TransferFundsViewController: NSViewController
         }
 
         // Exchange button
-        self.exchangeButton.set(target: self, action: #selector(self.cancelButtonClicked(_:)))
+        self.exchangeButton.set(target: self, action: #selector(self.exchangeButtonClicked(_:)))
         self.container.addSubview(self.exchangeButton)
 
         self.exchangeButton.snp.makeConstraints { (make) in
@@ -367,7 +367,15 @@ internal final class TransferFundsViewController: NSViewController
     
     @objc private func exchangeButtonClicked(_ sender: Any)
     {
+        guard let unwrappedTransferController = self.transferController else
+        {
+            return
+        }
         
+        unwrappedTransferController.performTransferRequest { (success, error) in
+            print(success)
+            print(error)
+        }
     }
     
     @objc private func cancelButtonClicked(_ sender: Any)
