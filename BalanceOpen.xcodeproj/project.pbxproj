@@ -172,6 +172,7 @@
 		A44981E91F28F3AA00E861AA /* GDAXErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44981E81F28F3AA00E861AA /* GDAXErrors.swift */; };
 		A45777521F3312DB006D1AD2 /* SSQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45777511F3312DB006D1AD2 /* SSQuote.swift */; };
 		A47F112A1F4193DB00138594 /* TransferRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47F11291F4193DB00138594 /* TransferRequest.swift */; };
+		A47FBC381F4ED22000308E5E /* TransferControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47FBC371F4ED22000308E5E /* TransferControllerTests.swift */; };
 		A49FC38C1F3C596300212DC3 /* TransferQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49FC38B1F3C596300212DC3 /* TransferQuote.swift */; };
 		A49FC38F1F3CA44A00212DC3 /* Transferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49FC38E1F3CA44A00212DC3 /* Transferable.swift */; };
 		A49FC3911F3CA4B400212DC3 /* TransferOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49FC3901F3CA4B400212DC3 /* TransferOperator.swift */; };
@@ -396,6 +397,7 @@
 		A44981E81F28F3AA00E861AA /* GDAXErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXErrors.swift; sourceTree = "<group>"; };
 		A45777511F3312DB006D1AD2 /* SSQuote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSQuote.swift; sourceTree = "<group>"; };
 		A47F11291F4193DB00138594 /* TransferRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRequest.swift; sourceTree = "<group>"; };
+		A47FBC371F4ED22000308E5E /* TransferControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferControllerTests.swift; sourceTree = "<group>"; };
 		A494E9581F3A2231007F800C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A494E95B1F3A2231007F800C /* Account.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Account.json; sourceTree = "<group>"; };
 		A494E95C1F3A2231007F800C /* Error.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Error.json; sourceTree = "<group>"; };
@@ -825,6 +827,7 @@
 		A42E9C391F4C28CC00A5E8BD /* Transfer Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A47FBC371F4ED22000308E5E /* TransferControllerTests.swift */,
 				A42E9C3B1F4C297A00A5E8BD /* TransferQuoteTests.swift */,
 				A42E9C3D1F4C31F100A5E8BD /* TransferRequestTests.swift */,
 				A42E9C3F1F4C377200A5E8BD /* ShapeShiftTransferOperatorTests.swift */,
@@ -1136,6 +1139,7 @@
 				A4211A261F4431110080C76A /* HeadersTests.swift in Sources */,
 				A4211A241F4431110080C76A /* APIClientTests.swift in Sources */,
 				A42E9C451F4C6A8B00A5E8BD /* XCTest+MockData.swift in Sources */,
+				A47FBC381F4ED22000308E5E /* TransferControllerTests.swift in Sources */,
 				A42E9C401F4C377200A5E8BD /* ShapeShiftTransferOperatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
