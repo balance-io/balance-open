@@ -212,7 +212,7 @@ struct CoinbaseApi {
             return
         }
         
-        let urlString = "https://api.coinbase.com/v2/accounts/\(account.accountId)/addresses"
+        let urlString = "https://api.coinbase.com/v2/accounts/\(account.sourceAccountId)/addresses"
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.timeoutInterval = connectionTimeout
@@ -229,8 +229,8 @@ struct CoinbaseApi {
                 }
                 
                 // Try to parse the JSON
-                guard let JSONResult = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                      let addressDictionary = JSONResult["data"] as? [String: Any] else {
+                guard let JSONResult = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any],
+                      let addressDictionary = JSONResult["data"] as? [String : Any] else {
                     throw "JSON decoding failed"
                 }
                 
