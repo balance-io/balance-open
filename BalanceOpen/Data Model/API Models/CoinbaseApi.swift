@@ -206,6 +206,49 @@ struct CoinbaseApi {
         task.resume()
     }
     
+    static func createAddress(for account: Account, completionHandler: @escaping (_ address: CoinbaseWalletAddress?, _ error: Error?) -> Void) {
+        guard let accessToken = account.institution?.accessToken else {
+            completionHandler(nil, "missing access token")
+            return
+        }
+        
+        let urlString = "https://api.coinbase.com/v2/accounts/\(account.accountId)/addresses"
+        let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        request.timeoutInterval = connectionTimeout
+        request.cachePolicy = .reloadIgnoringLocalCacheData
+        request.httpMethod = "POST"
+        request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+        request.setValue("2017-06-14", forHTTPHeaderField: "CB-VERSION")
+        
+        let task = session.dataTask(with: request, completionHandler: { (maybeData, maybeResponse, maybeError) in
+            do {
+                // Make sure there's data
+                guard let data = maybeData, maybeError == nil else {
+                    throw "No data"
+                }
+                
+                // Try to parse the JSON
+                guard let JSONResult = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                      let addressDictionary = JSONResult["data"] as? [String: Any] else {
+                    throw "JSON decoding failed"
+                }
+                
+                let address = try CoinbaseWalletAddress(dictionary: addressDictionary)
+                
+                DispatchQueue.main.async {
+                    completionHandler(address, nil)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
+            }
+        })
+        
+        task.resume()
+    }
+    
     static func processCoinbaseAccounts(_ coinbaseAccounts: [CoinbaseAccount], institution: Institution) {
         // Add/update accounts
         for ca in coinbaseAccounts {
