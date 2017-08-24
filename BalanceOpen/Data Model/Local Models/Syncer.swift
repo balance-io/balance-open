@@ -23,7 +23,7 @@ class Syncer {
         }
     }
     
-    private let gdaxAPIClient = GDAXAPIClient(server: .sandbox)
+    private let gdaxAPIClient = GDAXAPIClient(server: .production)
     
     // MARK: -
     

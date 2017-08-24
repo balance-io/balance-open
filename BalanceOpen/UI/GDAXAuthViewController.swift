@@ -21,7 +21,7 @@ internal final class GDAXAuthViewController: NSViewController
     internal weak var delegate: GDAXAuthViewControllerDelegate?
     
     // Private
-    private let apiClient = GDAXAPIClient(server: .sandbox)
+    private let apiClient = GDAXAPIClient(server: .production)
     
     private let keyTextField = TextField(frame: NSRect.zero)
     private let secretTextField = TextField(frame: NSRect.zero)

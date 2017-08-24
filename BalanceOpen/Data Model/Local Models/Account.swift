@@ -507,7 +507,7 @@ extension Account: Transferable
             
             // Load credentials
             let credentials = try GDAXAPIClient.Credentials(identifier: accessToken)
-            let apiClient = GDAXAPIClient(server: .sandbox)
+            let apiClient = GDAXAPIClient(server: .production)
             apiClient.credentials = credentials
             
             try apiClient.make(withdrawal: gdaxWithdrawal, completionHandler: completionHandler)
