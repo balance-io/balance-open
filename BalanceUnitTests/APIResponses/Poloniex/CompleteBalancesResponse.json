@@ -1,0 +1,32 @@
+{
+    "SC": {
+        "available":"26576.40000000",
+        "onOrders":"0.00000000",
+        "btcValue":"0.07786885",
+    },
+    "AC": {
+        "available":"0.00000000",
+        "onOrders":"0.00000000",
+        "btcValue":"0.00000000",
+    },
+    "ETH": {
+        "available":"2.14955490",
+        "onOrders":"0.00000000",
+        "btcValue":"0.16551574",
+    },
+    "MAID": {
+        "available":"0.00000000",
+        "onOrders":"0.00000000",
+        "btcValue":"0.00000000",
+    },
+    "FCT": {
+        "available":"9.97500000",
+        "onOrders":"0.00000000",
+        "btcValue":"0.05998745",
+    },
+    "LTC": {
+        "available":"0.00000000",
+        "onOrders":"0.00000000",
+        "btcValue":"0.00000000",
+    }
+}

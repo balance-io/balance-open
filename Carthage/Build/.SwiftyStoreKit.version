@@ -1,0 +1,15 @@
+{
+  "iOS" : [
+    {
+      "hash" : "6ac10a4d4ca69b7711ea24a95a6895c09aec66cc4e79e6ecfe41ceeedac5540b",
+      "name" : "SwiftyStoreKit"
+    }
+  ],
+  "commitish" : "9a0a4632dcb07e6ed87ef73320a9be012ce09a87",
+  "Mac" : [
+    {
+      "hash" : "19e9f22096d5aedd0974451682bb00836112059743ee4b891a946c0c70130c5d",
+      "name" : "SwiftyStoreKit"
+    }
+  ]
+}

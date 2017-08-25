@@ -1,7 +1,4 @@
-#########
-# SQLCipher Build Files
-#########
-
+# Sqlcipher build files
 sqlcipher/tsrc/parse.c
 sqlcipher/sqlite3.c
 sqlcipher/parse.out
@@ -12,6 +9,7 @@ sqlcipher/lemon
 sqlcipher/config.log
 sqlcipher/config.status
 sqlcipher/Makefile
+
 
 # Created by https://www.gitignore.io/api/xcode,osx
 
@@ -71,7 +69,6 @@ Temporary Items
 
 # Carthage
 Carthage/Checkouts
-Carthage/Build/iOS
 Carthage/Build/tvOS
 Carthage/Build/watchOS
 

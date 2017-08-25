@@ -1,0 +1,79 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "944E7F13E475B908215FCA48288DF3ACBD649B84",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "04101981B66E318109934C9516F88D824BB96459" : 0,
+    "3AF18F9C6F5D633BAA0B3F935459E0C777C82047" : 0,
+    "0FF119D3A232BE598CF0E0A1A73C661228FDECB0" : 9223372036854775807,
+    "742E98EE91F30E3A3C1D3BE74FD6EE1AF3629F40" : 0,
+    "3D61BB02C9063049CDB6A040A6A53F1608E1FFED" : 9223372036854775807,
+    "9B743EAFE885833D5C3FB79C6F033B93695A0689" : 0,
+    "944E7F13E475B908215FCA48288DF3ACBD649B84" : 0,
+    "2A63BC41B916F5CE2B51A776CF473F9841915587" : 0,
+    "55011AEBD444630C0E9DF47BD2E18FDBBDCC285D" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C68DD8E4-C2E5-4833-BCA6-FB3E70CD807B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "04101981B66E318109934C9516F88D824BB96459" : "bal\/Frameworks\/FMDB\/",
+    "3AF18F9C6F5D633BAA0B3F935459E0C777C82047" : "bal\/Frameworks\/SnapKit\/",
+    "0FF119D3A232BE598CF0E0A1A73C661228FDECB0" : "bal\/Bal\/RNPinnedCertValidator\/",
+    "742E98EE91F30E3A3C1D3BE74FD6EE1AF3629F40" : "bal\/Frameworks\/SFBPopovers\/",
+    "3D61BB02C9063049CDB6A040A6A53F1608E1FFED" : "SwiftyStoreKit\/",
+    "9B743EAFE885833D5C3FB79C6F033B93695A0689" : "NSDate-TimeAgo\/",
+    "944E7F13E475B908215FCA48288DF3ACBD649B84" : "bal\/",
+    "2A63BC41B916F5CE2B51A776CF473F9841915587" : "bal\/Frameworks\/Plaidster\/",
+    "55011AEBD444630C0E9DF47BD2E18FDBBDCC285D" : "bal\/sqlcipher\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Bal",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Bal.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:ccgus\/fmdb.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "04101981B66E318109934C9516F88D824BB96459"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:balancemymoney\/RNPinnedCertValidator.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0FF119D3A232BE598CF0E0A1A73C661228FDECB0"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:einsteinx2\/Plaidster.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2A63BC41B916F5CE2B51A776CF473F9841915587"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/SnapKit\/SnapKit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3AF18F9C6F5D633BAA0B3F935459E0C777C82047"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:balancemymoney\/SwiftyStoreKit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3D61BB02C9063049CDB6A040A6A53F1608E1FFED"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:balancemymoney\/sqlcipher.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "55011AEBD444630C0E9DF47BD2E18FDBBDCC285D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:sbooth\/SFBPopovers.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "742E98EE91F30E3A3C1D3BE74FD6EE1AF3629F40"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ricburton\/bal.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "944E7F13E475B908215FCA48288DF3ACBD649B84"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:einsteinx2\/NSDate-TimeAgo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9B743EAFE885833D5C3FB79C6F033B93695A0689"
+    }
+  ]
+}

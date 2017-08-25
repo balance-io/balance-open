@@ -1,0 +1,4 @@
+framework module JMSRangeSlider {
+    header "JMSRangeSlider-Swift.h"
+    requires objc
+}

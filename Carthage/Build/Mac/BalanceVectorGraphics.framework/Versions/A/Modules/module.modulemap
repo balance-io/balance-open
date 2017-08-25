@@ -1,0 +1,11 @@
+framework module BalanceVectorGraphics {
+  umbrella header "BalanceVectorGraphics.h"
+
+  export *
+  module * { export * }
+}
+
+module BalanceVectorGraphics.Swift {
+    header "BalanceVectorGraphics-Swift.h"
+    requires objc
+}
