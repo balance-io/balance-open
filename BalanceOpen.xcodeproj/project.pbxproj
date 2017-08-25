@@ -185,6 +185,7 @@
 		A4C518E21F3B5400008F59CC /* ShapeShiftTransferOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C518E11F3B5400008F59CC /* ShapeShiftTransferOperator.swift */; };
 		A4C518E51F3B5F46008F59CC /* Withdrawal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C518E41F3B5F46008F59CC /* Withdrawal.swift */; };
 		A4F59D3B1F44A21700A3CB49 /* TransferOperatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F59D3A1F44A21700A3CB49 /* TransferOperatorError.swift */; };
+		A4FFF4B51F5021B800C92D62 /* Shift.json in Resources */ = {isa = PBXBuildFile; fileRef = A4FFF4B41F5021B800C92D62 /* Shift.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -421,6 +422,7 @@
 		A4C518E11F3B5400008F59CC /* ShapeShiftTransferOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeShiftTransferOperator.swift; sourceTree = "<group>"; };
 		A4C518E41F3B5F46008F59CC /* Withdrawal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Withdrawal.swift; sourceTree = "<group>"; };
 		A4F59D3A1F44A21700A3CB49 /* TransferOperatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOperatorError.swift; sourceTree = "<group>"; };
+		A4FFF4B41F5021B800C92D62 /* Shift.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Shift.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -843,6 +845,7 @@
 			children = (
 				A42E9C421F4C6A4A00A5E8BD /* GetCoins.json */,
 				A42E9C461F4C6C2A00A5E8BD /* MarketInfoBTC-ETH.json */,
+				A4FFF4B41F5021B800C92D62 /* Shift.json */,
 			);
 			path = "ShapeShift API Responses";
 			sourceTree = "<group>";
@@ -1098,6 +1101,7 @@
 			files = (
 				A42E9C471F4C6C2A00A5E8BD /* MarketInfoBTC-ETH.json in Resources */,
 				A4211A2C1F4431490080C76A /* FetchAccounts.json in Resources */,
+				A4FFF4B51F5021B800C92D62 /* Shift.json in Resources */,
 				A42E9C431F4C6A4A00A5E8BD /* GetCoins.json in Resources */,
 				A4211A2B1F4431490080C76A /* Error.json in Resources */,
 				A4211A2A1F4431490080C76A /* Account.json in Resources */,

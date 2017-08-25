@@ -146,12 +146,11 @@ internal extension ShapeShiftAPIClient
 
 internal extension ShapeShiftAPIClient
 {
-    internal func createTransaction(amount: Double, recipientAddress: String, pairCode: String, returnAddress: String? = nil, completionHandler: @escaping (_ transactionRequest: TransactionRequest?, _ error: Error?) -> Void)
+    internal func createTransaction(recipientAddress: String, pairCode: String, returnAddress: String? = nil, completionHandler: @escaping (_ transactionRequest: TransactionRequest?, _ error: Error?) -> Void)
     {
         // Body
         var bodyJSON: [String : Any] = [
             "withdrawal" : recipientAddress,
-            "amount" : amount,
             "pair" : pairCode
         ]
         
@@ -168,7 +167,7 @@ internal extension ShapeShiftAPIClient
         let bodyData = try! JSONSerialization.data(withJSONObject: bodyJSON, options: [])
         
         // Request
-        let requestPath = "/sendamount"
+        let requestPath = "/shift"
         let url = self.baseURL.appendingPathComponent(requestPath)
         
         var request = URLRequest(url: url)
@@ -177,7 +176,7 @@ internal extension ShapeShiftAPIClient
         request.httpBody = bodyData
         
         self.perform(request: request) { (json, data, response, error) in
-            guard let transactionRequestJSON = json?["success"] as? [String : Any] else
+            guard let unwrappedJSON = json else
             {
                 let error = APIError.response(httpResponse: response, data: data)
                 completionHandler(nil, error)
@@ -186,7 +185,7 @@ internal extension ShapeShiftAPIClient
             
             do
             {
-                let transactionRequest = try TransactionRequest(dictionary: transactionRequestJSON)
+                let transactionRequest = try TransactionRequest(dictionary: unwrappedJSON)
                 completionHandler(transactionRequest, nil)
             }
             catch let error

@@ -112,7 +112,7 @@ internal final class ShapeShiftTransferOperator: TransferOperator
                     }
                     
                     // Create Shape Shift transaction
-                    unwrappedSelf.apiClient.createTransaction(amount: unwrappedQuote.recipientAmount, recipientAddress: unwrappedRecipientAddress, pairCode: unwrappedCoinPair.code, returnAddress: nil) { (transactionRequest, error) in
+                    unwrappedSelf.apiClient.createTransaction(recipientAddress: unwrappedRecipientAddress, pairCode: unwrappedCoinPair.code, returnAddress: nil) { (transactionRequest, error) in
                         guard let unwrappedTransactionRequest = transactionRequest else
                         {
                             completionHandler(false, error)
@@ -122,7 +122,7 @@ internal final class ShapeShiftTransferOperator: TransferOperator
                         // Transaction has been created with Shape Shift.
                         // To complete transaction we need to transfer funds from
                         // the source account to the SS account
-                        let withdrawal = Withdrawal(amount: unwrappedTransactionRequest.depositAmount, recipientCryptoAddress: unwrappedTransactionRequest.depositAddress)
+                        let withdrawal = Withdrawal(amount: unwrappedQuote.sourceAmount, recipientCryptoAddress: unwrappedTransactionRequest.depositAddress)
                         do
                         {
                             try unwrappedSelf.request.source.make(withdrawal: withdrawal, completionHandler: completionHandler)
