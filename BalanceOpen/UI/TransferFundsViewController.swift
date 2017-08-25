@@ -11,6 +11,14 @@ import Cocoa
 
 internal final class TransferFundsViewController: NSViewController
 {
+    // Fileprivate
+    fileprivate var state = State.default {
+        didSet
+        {
+            self.updateStateUI()
+        }
+    }
+    
     // Private
     private let viewModel = TransferFundsViewModel()
     private var transferController: TransferController?
@@ -260,6 +268,30 @@ internal final class TransferFundsViewController: NSViewController
     }
     // MARK: State
     
+    private func updateStateUI()
+    {
+        switch self.state
+        {
+        case .error(let message):
+            self.errorLabel.isHidden = false
+            self.errorLabel.stringValue = message
+            
+            self.exchangeButton.isEnabled = false
+            
+            self.minerFeeLabel.isHidden = true
+            self.recipientAmountLabel.isHidden = true
+            self.minerFeeHelpButton.isHidden = true
+        default:
+            self.errorLabel.isHidden = true
+            
+            self.exchangeButton.isEnabled = true
+            
+            self.minerFeeLabel.isHidden = false
+            self.recipientAmountLabel.isHidden = false
+            self.minerFeeHelpButton.isHidden = false
+        }
+    }
+    
     private func updateUI()
     {
         let sourceAccount = self.viewModel.account(at: self.sourceAccountPopupButton.indexOfSelectedItem)
@@ -290,51 +322,23 @@ internal final class TransferFundsViewController: NSViewController
     private func updateUI(with quote: TransferQuote, transferRequest: TransferRequest)
     {
         // Check that user is trying to transfer between min and max amounts
-        var errorText: String?
         if quote.sourceAmount < quote.minimumAmount
         {
-            errorText = "Minimum amount: \(quote.minimumAmount)"
+            self.state = .error(message: "Minimum amount: \(quote.minimumAmount)")
         }
         else if quote.sourceAmount > quote.maximumAmount
         {
-            errorText = "Maximum amount: \(quote.maximumAmount)"
+            self.state = .error(message: "Maximum amount: \(quote.maximumAmount)")
         }
         
-        if let unwrappedErrorText = errorText
+        if case State.error = self.state
         {
-            self.errorLabel.stringValue = unwrappedErrorText
-            
-            self.exchangeButton.isEnabled = false
-            self.errorLabel.isHidden = false
-            self.minerFeeLabel.isHidden = true
-            self.recipientAmountLabel.isHidden = true
-            self.minerFeeHelpButton.isHidden = true
-            
             return
         }
         
-        self.exchangeButton.isEnabled = true
-        self.errorLabel.isHidden = true
-        self.recipientAmountLabel.isHidden = false
-        self.minerFeeLabel.isHidden = false
-        self.minerFeeHelpButton.isHidden = false
-        
+        self.state = .default
         self.recipientAmountLabel.stringValue = "\(quote.recipientAmount) \(transferRequest.recipientCurrency.rawValue)"
         self.minerFeeLabel.stringValue = "Miner fee: \(quote.minerFee) \(quote.minerFeeCurrency.rawValue.uppercased())"
-    }
-    
-    private func updateUI(with error: Error)
-    {
-        self.errorLabel.isHidden = false
-        self.minerFeeLabel.isHidden = true
-        self.minerFeeHelpButton.isHidden = true
-        
-        switch error
-        {
-        case TransferOperatorError.unsupportedCurrency(let currency):
-            self.errorLabel.stringValue = "\(currency.rawValue.uppercased()) is not supported"
-        default:()
-        }
     }
     
     fileprivate func fetchQuote()
@@ -364,7 +368,12 @@ internal final class TransferFundsViewController: NSViewController
                     {
                         if let unwrappedError = error
                         {
-                            self?.updateUI(with: unwrappedError)
+                            switch unwrappedError
+                            {
+                            case TransferOperatorError.unsupportedCurrency(let currency):
+                                self?.state = .error(message: "\(currency.rawValue.uppercased()) is not supported")
+                            default:()
+                            }
                         }
                         
                         return
@@ -376,10 +385,7 @@ internal final class TransferFundsViewController: NSViewController
         }
         catch let error as TransferController.InitializationError where error == .directTransferUnsupported || error == .exchangeTransferUnsupported
         {
-            self.errorLabel.stringValue = "Sorry! Transfer not supported"
-            self.errorLabel.isHidden = false
-            self.minerFeeLabel.isHidden = true
-            self.minerFeeHelpButton.isHidden = true
+            self.state = .error(message: "Sorry! Transfer not supported")
         }
         catch let error
         {
@@ -426,11 +432,10 @@ fileprivate extension TransferFundsViewController
 {
     fileprivate enum State
     {
+        case `default`
         case loading(message: String)
-        case awaitingAmountInput(marketInformation: ShapeShiftAPIClient.MarketInformation)
-        case displaying(quote: ShapeShiftAPIClient.Quote)
-        case transferComplete
         case error(message: String)
+        case transferComplete
     }
 }
 
