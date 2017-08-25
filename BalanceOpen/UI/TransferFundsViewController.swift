@@ -284,10 +284,60 @@ internal final class TransferFundsViewController: NSViewController
         // Hide error message
         self.errorLabel.isHidden = true
         
-        self.updateTransferDetails()
+        self.fetchQuote()
     }
     
-    fileprivate func updateTransferDetails()
+    private func updateUI(with quote: TransferQuote, transferRequest: TransferRequest)
+    {
+        // Check that user is trying to transfer between min and max amounts
+        var errorText: String?
+        if quote.sourceAmount < quote.minimumAmount
+        {
+            errorText = "Minimum amount: \(quote.minimumAmount)"
+        }
+        else if quote.sourceAmount > quote.maximumAmount
+        {
+            errorText = "Maximum amount: \(quote.maximumAmount)"
+        }
+        
+        if let unwrappedErrorText = errorText
+        {
+            self.errorLabel.stringValue = unwrappedErrorText
+            
+            self.exchangeButton.isEnabled = false
+            self.errorLabel.isHidden = false
+            self.minerFeeLabel.isHidden = true
+            self.recipientAmountLabel.isHidden = true
+            self.minerFeeHelpButton.isHidden = true
+            
+            return
+        }
+        
+        self.exchangeButton.isEnabled = true
+        self.errorLabel.isHidden = true
+        self.recipientAmountLabel.isHidden = false
+        self.minerFeeLabel.isHidden = false
+        self.minerFeeHelpButton.isHidden = false
+        
+        self.recipientAmountLabel.stringValue = "\(quote.recipientAmount) \(transferRequest.recipientCurrency.rawValue)"
+        self.minerFeeLabel.stringValue = "Miner fee: \(quote.minerFee) \(quote.minerFeeCurrency.rawValue.uppercased())"
+    }
+    
+    private func updateUI(with error: Error)
+    {
+        self.errorLabel.isHidden = false
+        self.minerFeeLabel.isHidden = true
+        self.minerFeeHelpButton.isHidden = true
+        
+        switch error
+        {
+        case TransferOperatorError.unsupportedCurrency(let currency):
+            self.errorLabel.stringValue = "\(currency.rawValue.uppercased()) is not supported"
+        default:()
+        }
+    }
+    
+    fileprivate func fetchQuote()
     {
         // Note:
         // Calling self.exchangeAmountTextField.doubleValue/stringValue etc
@@ -309,33 +359,18 @@ internal final class TransferFundsViewController: NSViewController
             let transferRequest = TransferRequest(source: sourceAccount, recipient: recipientAccount, amount: amount)
             self.transferController = try TransferController(request: transferRequest)
             self.transferController?.fetchQuote({ [weak self] (quote, error) in
-                guard let unwrappedSelf = self else { return }
-                
                 DispatchQueue.main.async {
                     guard let unwrappedQuote = quote else
                     {
-                        unwrappedSelf.errorLabel.isHidden = false
-                        unwrappedSelf.minerFeeLabel.isHidden = true
-                        unwrappedSelf.minerFeeHelpButton.isHidden = true
-                        
                         if let unwrappedError = error
                         {
-                            switch unwrappedError
-                            {
-                            case TransferOperatorError.unsupportedCurrency(let currency):
-                                unwrappedSelf.errorLabel.stringValue = "\(currency.rawValue.uppercased()) is not supported"
-                            default:()
-                            }
+                            self?.updateUI(with: unwrappedError)
                         }
                         
                         return
                     }
                     
-                    unwrappedSelf.minerFeeLabel.isHidden = false
-                    unwrappedSelf.minerFeeHelpButton.isHidden = false
-                    
-                    unwrappedSelf.recipientAmountLabel.stringValue = "\(unwrappedQuote.recipientAmount) \(transferRequest.recipientCurrency.rawValue)"
-                    unwrappedSelf.minerFeeLabel.stringValue = "Miner fee: \(unwrappedQuote.minerFee) \(unwrappedQuote.minerFeeCurrency.rawValue.uppercased())"
+                    self?.updateUI(with: unwrappedQuote, transferRequest: transferRequest)
                 }
             })
         }
@@ -405,6 +440,6 @@ extension TransferFundsViewController: NSTextFieldDelegate
 {
     override func controlTextDidChange(_ obj: Notification)
     {
-        self.updateTransferDetails()
+        self.fetchQuote()
     }
 }
