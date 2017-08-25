@@ -23,7 +23,7 @@ internal final class ShapeShiftTransferOperator: TransferOperator
         self.request = request
         
         self.apiClient = ShapeShiftAPIClient()
-//        self.apiClient.apiKey = "TODO"
+        self.apiClient.apiKey = "a54e55caad74dd7baa5bd45e6e83fee91feb5c61734af17cabad87cbed12973abc6e794b4a4ac0f80be51f18df819b4ee787c96c9f13ad81fb43f034a1357d5c"
     }
     
     internal convenience init(request: TransferRequest, shapeShiftClient: ShapeShiftAPIClient)
