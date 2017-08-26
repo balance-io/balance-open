@@ -66,6 +66,22 @@ struct PoloniexApi: ExchangeApi {
         assert(false, "implement")
     }
     
+    func findError(data: Data) -> String? {
+        do {
+            guard let dict = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] else {
+                throw "JSON decoding failed"
+            }
+            if dict.keys.count == 1 {
+                if let errorDict = dict["error"] {
+                    return errorDict as? String
+                }
+            }
+        } catch {
+            return nil
+        }
+        return nil
+    }
+    
     func authenticationChallenge(loginStrings: [Field], closeBlock: @escaping (Bool) -> Void) {
         assert(loginStrings.count == 2, "number of auth fields should be 2 for Poloniex")
         var secretField : String?
@@ -85,6 +101,8 @@ struct PoloniexApi: ExchangeApi {
         PoloniexApi.authenticate(secret: secret, key: key, closeBlock: closeBlock)
     }
 
+    //TODO:
+    
     //Poloniex doesn't have an authenticate method "per-se" so we use the returnBalances call to validate the key-secret pair for login
     static func authenticate(secret: String, key: String, closeBlock: @escaping (Bool) -> Void) {
         
@@ -93,6 +111,8 @@ struct PoloniexApi: ExchangeApi {
         let datatask = URLSession.shared.dataTask(with: urlRequest, completionHandler: {(data: Data?, response: URLResponse?, error: Error?) in
             do {
                 if let safeData = data {
+                    //if error exists should be reported to UI data
+                    _ = findError
                     // Create the institution and finish (we do not have access tokens)
                     let institution = InstitutionRepository.si.institution(source: .poloniex, sourceInstitutionId: "", name: "Poloniex")
                     institution?.secret = secret
