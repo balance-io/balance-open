@@ -150,8 +150,8 @@ class SignUpViewController: NSViewController {
     fileprivate var height: CGFloat {
         switch currentStep {
         case .connect:
-            let placeholderFor3Fields = 3
-            return 270.0 + (CGFloat(placeholderFor3Fields/*apiInstitution.fields.count*/) * 45.0) + (showingExplanation ? 240.0 : 0.0)
+            let placeholderFor2Fields = 2
+            return 270.0 + (CGFloat(apiInstitution.fields.count) * 45.0) + (showingExplanation ? 240.0 : 0.0)
         case .question, .codeEntry:
             return 315.0 + (showingExplanation ? 240.0 : 0.0)
         case .deviceList:

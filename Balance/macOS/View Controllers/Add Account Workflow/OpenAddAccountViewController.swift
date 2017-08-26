@@ -42,7 +42,8 @@ class OpenAddAccountViewController: NSViewController {
                                                                      .poloniex: InstitutionButtons.drawPoloniexButton,
                                                                      .bitfinex: InstitutionButtons.drawBitfinexButton]
     fileprivate let buttonSourceOrder: [Source] = [.coinbase, .gdax, .poloniex, .bitfinex]
-    
+    fileprivate var signUpController: SignUpViewController?
+
     //
     // MARK: - Lifecycle -
     //
@@ -348,27 +349,35 @@ class OpenAddAccountViewController: NSViewController {
     }
     
     func presentLoginScreenWith(apiInstitution: ApiInstitution,  loginService: ExchangeApi) {
-        let signup = SignUpViewController(apiInstitution: apiInstitution, patch: false, institution: nil, loginService: loginService, closeBlock: { (finished, signUpViewController: SignUpViewController) in
+        guard signUpController == nil else {
+            return
+        }
+        signUpController = SignUpViewController(apiInstitution: apiInstitution, patch: false, institution: nil, loginService: loginService, closeBlock: { (finished, signUpViewController: SignUpViewController) in
             if finished {
                 self.back()
             } else {
-                self.removeSignUpController(animated: true, signUpController: signUpViewController)
+                self.removeSignUpController(animated: true)
             }
         })
         preferencesButton.isEnabled = false
         preferencesButton.animator().alphaValue = 0.0
-        self.view.replaceSubview(containerView, with: signup.view, animation: .slideInFromRight)
+        self.view.replaceSubview(containerView, with: (signUpController?.view)!, animation: .slideInFromRight)
     }
     
-    func removeSignUpController(animated: Bool, signUpController: SignUpViewController) {
-        preferencesButton.isEnabled = true
-        if animated {
-            preferencesButton.animator().alphaValue = 1.0
-            self.view.replaceSubview(signUpController.view, with: containerView, animation: .slideInFromLeft) {
+    func removeSignUpController(animated: Bool) {
+        if let signUpController = signUpController {
+            preferencesButton.isEnabled = true
+            if animated {
+                preferencesButton.animator().alphaValue = 1.0
+                self.view.replaceSubview(signUpController.view, with: containerView, animation: .slideInFromLeft) {
+                    self.signUpController = nil
+                }
+            } else {
+                preferencesButton.alphaValue = 1.0
+                self.view.replaceSubview(signUpController.view, with: containerView, animation: .none) {
+                    self.signUpController = nil
+                }
             }
-        } else {
-            preferencesButton.alphaValue = 1.0
-            self.view.replaceSubview(signUpController.view, with: containerView, animation: .none)
         }
     }
     
