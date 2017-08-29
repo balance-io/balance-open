@@ -190,6 +190,9 @@ class PreferencesAccountsViewController: NSViewController {
         accountsTableView.gridStyleMask = NSTableView.GridLineStyle.solidHorizontalGridLineMask
         accountsTableView.rowHeight = 5000
         
+        if debugging.disableSubscription {
+            statusField.isHidden = true
+        }
         statusField.alignment = .left
         statusField.verticalAlignment = .center
         statusField.font = .systemFont(ofSize: 12)
