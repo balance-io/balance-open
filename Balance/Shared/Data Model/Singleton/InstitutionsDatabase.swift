@@ -130,6 +130,7 @@ class InstitutionsDatabase {
     
     func checkForUpdate(completion: (() -> Void)? = nil) {
         if debugging.disableSubscription {
+            async { completion?() }
             return
         }
         
