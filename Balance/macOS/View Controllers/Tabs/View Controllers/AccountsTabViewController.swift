@@ -131,7 +131,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         createTable()
         createFixPasswordPrompt()
         createPrompt()
-        createTotalFooter()
+        //createTotalFooter()
     }
     
     func createTable() {
