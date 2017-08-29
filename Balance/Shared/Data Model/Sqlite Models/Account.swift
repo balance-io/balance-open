@@ -144,7 +144,8 @@ extension Account {
     }
     
     var displayName: String {
-        return name.capitalizedStringIfAllCaps
+        // Poloniex account names are just the currency symbol, so we want them in caps
+        return source == .poloniex ? "\(name) Wallet" : name.capitalizedStringIfAllCaps
     }
     
     var institution: Institution? {

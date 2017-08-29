@@ -83,7 +83,7 @@ class AccountsTabAccountCell: View {
             make.top.equalToSuperview().offset(8)
         }
         
-        amountField.setAccessibilityLabel("Alternate Currency Amount Total")
+        altAmountField.setAccessibilityLabel("Alternate Currency Amount Total")
         altAmountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
         altAmountField.font = CurrentTheme.accounts.cell.altAmountFont
         altAmountField.textColor = CurrentTheme.accounts.cell.altAmountColor
