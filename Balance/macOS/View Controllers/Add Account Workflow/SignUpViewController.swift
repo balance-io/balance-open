@@ -149,7 +149,6 @@ class SignUpViewController: NSViewController {
     fileprivate var height: CGFloat {
         switch currentStep {
         case .connect:
-            let placeholderFor2Fields = 2
             return 270.0 + (CGFloat(apiInstitution.fields.count) * 45.0) + (showingExplanation ? 240.0 : 0.0)
         case .question, .codeEntry:
             return 315.0 + (showingExplanation ? 240.0 : 0.0)
@@ -783,25 +782,24 @@ class SignUpViewController: NSViewController {
     // MARK: - Connecting -
     //
     
-    //TODO: 4) on sucess, move away and show normal screen -> problem screen crashing due to wrong thread call
-    
     // Initial connection
     @objc fileprivate func connect() {
         guard allFieldsFilled() else {
             return
         }
         
+        prepareViewsForSubmit(loadingText: "Connecting to \(apiInstitution.name)...")
+
         var loginFields = [Field]()
-        for textField in self.connectFields {
+        for textField in connectFields {
             loginFields.append(textField.field)
         }
         // try login with loginFields
-        self.loginService.authenticationChallenge(loginStrings: loginFields) { success in
-            if success {
-                self.finished()
+        loginService.authenticationChallenge(loginStrings: loginFields) { success, error, institution in
+            if success, let institution = institution {
+                self.completeConnect(institution: institution)
             } else {
-                // TODO: Use proper error
-                self.failConnect(error: nil)
+                self.failConnect(error: error)
             }
         }
     }

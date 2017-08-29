@@ -39,7 +39,7 @@ internal final class GDAXAPIClient
         var currencyCode: String = ""
         var usernameLabel: String = ""
         var passwordLabel: String = ""
-        var name: String = ""
+        var name: String = "GDAX"
         var products: [String] = []
         var type: String = ""
         var url: String? = "https://www.gdax.com/"
@@ -169,7 +169,7 @@ extension GDAXAPIClient: ExchangeApi {
         assert(false, "implement")
     }
     
-    func authenticationChallenge(loginStrings: [Field], closeBlock: @escaping (Bool) -> Void) {
+    func authenticationChallenge(loginStrings: [Field], closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
         
         assert(loginStrings.count == 3, "number of auth fields should be 2 for Poloniex")
         var secretField : String?
@@ -194,7 +194,7 @@ extension GDAXAPIClient: ExchangeApi {
             let credentials = try GDAXAPIClient.Credentials(key: key, secret: secret, passphrase: passphrase)
             
             self.credentials = credentials
-            try! self.fetchAccounts({(_, error) in
+            try self.fetchAccounts { _, error in
                 guard let unwrappedError = error else {
                     do {
                         let credentialsIdentifier = "main"
@@ -202,23 +202,33 @@ extension GDAXAPIClient: ExchangeApi {
                         let institution = InstitutionRepository.si.institution(source: .gdax, sourceInstitutionId: "", name: "GDAX")
                         institution?.accessToken = credentialsIdentifier
                         
-                        closeBlock(true)
+                        async {
+                            closeBlock(true, nil, institution)
+                        }
                     }
                     catch {
-                       closeBlock(false)
+                        async {
+                            closeBlock(false, error, nil)
+                        }
                     }
                     return
                 }
                 
                 // TODO: Display error
                 print(unwrappedError)
-            })
+            }
         }
-        catch GDAXAPIClient.CredentialsError.invalidSecret
-        {
+        catch GDAXAPIClient.CredentialsError.invalidSecret {
             // TODO: show alert
-            closeBlock(false)
+            async {
+                closeBlock(false, GDAXAPIClient.CredentialsError.invalidSecret(message: ""), nil)
+            }
         }
-        catch { }
+        catch {
+            // TODO: show alert
+            async {
+                closeBlock(false, error, nil)
+            }
+        }
     }
 }
