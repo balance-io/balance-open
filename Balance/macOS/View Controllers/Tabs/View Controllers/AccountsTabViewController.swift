@@ -87,7 +87,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         var finalHeight = CurrentTheme.defaults.size.height
         if let delegate = tableView.delegate {
             // Calculate the table rows total height
-            var tableHeight: CGFloat = 200 // Account for other UI elements
+            var tableHeight: CGFloat = debugging.disableTransactions ? 50 : 200 // Account for other UI elements
             let numberOfRows = tableView.numberOfRows
             
             if numberOfRows > 0 {
@@ -97,7 +97,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
             }
             
             // Calculate height
-            let minHeight: CGFloat = 520
+            let minHeight: CGFloat = debugging.disableTransactions ? 370 : 520
             let maxHeight: CGFloat = AppDelegate.sharedInstance.maxHeight
             var height = minHeight
             if tableHeight > minHeight && tableHeight < maxHeight {
@@ -139,7 +139,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         scrollView.hasVerticalScroller = true
         scrollView.hasHorizontalScroller = false
         scrollView.documentView = tableView
-        let bottomOffset = defaults.hideAddAccountPrompt ? 30 : 110
+        let bottomOffset = defaults.hideAddAccountPrompt ? 0 : 80
+        //let bottomOffset = defaults.hideAddAccountPrompt ? 30 : 110
         scrollView.contentInsets = NSEdgeInsetsMake(0, 0, CGFloat(bottomOffset), 0)
         self.view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
