@@ -80,6 +80,11 @@ struct PlaidApi {
     //
     
     static func pullCategories(completion: SuccessErrorHandler? = nil) {
+        if debugging.disableSubscription {
+            async { completion?(false, nil) }
+            return
+        }
+        
         let url = URL(string: "\(baseUrl)/categories")!
         var request = URLRequest(url: url)
         request.timeoutInterval = connectionTimeout
