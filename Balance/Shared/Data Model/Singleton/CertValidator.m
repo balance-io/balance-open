@@ -88,7 +88,7 @@ const NSString *geoTrustGlobalCA           = @"7HIpactkIAq2Y49orFOOQKurWxmmSFZhB
                           kTSKPublicKeyHashes : @[digiCertSHA2SecureServerCA, digiCertGlobalRootCA],
                           kTSKReportUris : @[balanceReportUri]
                           },
-                  @"poloniex.com/tradingApi" : @{
+                  @"poloniex.com" : @{
                           kTSKEnforcePinning : @YES,
                           kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                           kTSKPublicKeyHashes : @[alphaSSLCASHA256G2, globalSignRootR1],
