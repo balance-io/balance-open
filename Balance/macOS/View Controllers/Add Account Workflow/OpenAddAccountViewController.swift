@@ -79,7 +79,7 @@ class OpenAddAccountViewController: NSViewController {
         githubButton.isHidden = hasInstitutions
         
         // TODO: Remove delay hack. Currently there to allow for the resize to work on app launch
-        DispatchQueue.main.async(after: hackDelay) {
+        async(after: hackDelay) {
             if self.hackDelay > 0.0 {
                 self.hackDelayCount -= 1
                 if self.hackDelayCount == 0 {

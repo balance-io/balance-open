@@ -724,6 +724,7 @@ class SignUpViewController: NSViewController {
         return filled
     }
     
+    // NOTE: Do not call directly, use close, cancel, or finished instead
     fileprivate func callCloseBlock(finished: Bool) {
         // Hack to color the popover arrow during the push animation
         DispatchQueue.main.async(after: 0.12) {
@@ -731,7 +732,9 @@ class SignUpViewController: NSViewController {
             
             // Must resize after changing the color or the color changes too late
             DispatchQueue.main.async(after: 0.1) {
-                AppDelegate.sharedInstance.resizeWindow(CurrentTheme.defaults.size, animated: true)
+                // NOTE: We should figure out a way to do this without knowing the height of the add accounts controller
+                AppDelegate.sharedInstance.resizeWindowHeight(370, animated: true)
+                //AppDelegate.sharedInstance.resizeWindow(CurrentTheme.defaults.size, animated: true)
             }
         }
         
