@@ -1,3 +1,11 @@
+//
+//  InstitutionRepository.swift
+//  Balance
+//
+//  Created by Benjamin Baron on 8/29/17.
+//  Copyright © 2017 Balanced Software, Inc. All rights reserved.
+//
+
 import Cocoa
 
 class HoverButton: NSButton {
@@ -52,7 +60,7 @@ class HoverButton: NSButton {
     
     func commonInit() {
         // set tracking area
-        let opts: NSTrackingArea.Options = ([NSTrackingArea.Options.mouseEnteredAndExited, NSTrackingArea.Options.activeAlways])
+        let opts: NSTrackingArea.Options = ([.mouseEnteredAndExited, .activeAlways])
         trackingArea = NSTrackingArea(rect: bounds, options: opts, owner: self, userInfo: nil)
         self.addTrackingArea(trackingArea)
     }
@@ -74,29 +82,37 @@ class HoverButton: NSButton {
     //
     
     override func mouseEntered(with theEvent: NSEvent) {
-        currentState = .hover
-        self.needsDisplay = true
+        if self.isEnabled {
+            currentState = .hover
+            self.needsDisplay = true
+        }
     }
     
     override func mouseExited(with theEvent: NSEvent) {
-        currentState = .original
-        self.needsDisplay = true
+        if self.isEnabled {
+            currentState = .original
+            self.needsDisplay = true
+        }
     }
     
     override func mouseDown(with theEvent: NSEvent) {
-        currentState = .pressed
-        self.needsDisplay = true
+        if self.isEnabled {
+            currentState = .pressed
+            self.needsDisplay = true
+        }
     }
     
     override func mouseUp(with theEvent: NSEvent) {
-        let pointInButton = self.convert(theEvent.locationInWindow, from: nil)
-        let isInsideButton = NSPointInRect(pointInButton, self.bounds)
-        currentState = isInsideButton ? .hover : .original
-        self.needsDisplay = true
-        
-        // Click handling
-        if isInsideButton, let target = self.target {
-            NSApp.sendAction(action!, to: target, from: self)
+        if self.isEnabled {
+            let pointInButton = self.convert(theEvent.locationInWindow, from: nil)
+            let isInsideButton = NSPointInRect(pointInButton, self.bounds)
+            currentState = isInsideButton ? .hover : .original
+            self.needsDisplay = true
+            
+            // Click handling
+            if isInsideButton, let target = self.target {
+                NSApp.sendAction(action!, to: target, from: self)
+            }
         }
     }
     
@@ -114,3 +130,4 @@ class HoverButton: NSButton {
         }
     }
 }
+
