@@ -236,9 +236,9 @@ class AccountsTabAccountCell: View {
         
         includeInTotalButton = Button()
         includeInTotalButton.bezelStyle = .rounded
-        includeInTotalButton.state = defaults.accountIdsExcludedFromTotal.contains(model.accountId) ? NSControl.StateValue.offState : NSControl.StateValue.onState
+        includeInTotalButton.state = defaults.accountIdsExcludedFromTotal.contains(model.accountId) ? .off : .on
         includeInTotalButton.font = CurrentTheme.accounts.cellExpansion.font
-        if includeInTotalButton.state == NSControl.StateValue.onState {
+        if includeInTotalButton.state == .on {
             let circleRemoveImage = NSImage(named: NSImage.Name(rawValue: "CircleRemove"))
             circleRemoveImage?.size = NSSize(width: 18, height: 18)
             includeInTotalButton.image = tintImageWithColor(circleRemoveImage!, color: CurrentTheme.defaults.foregroundColor)
@@ -288,7 +288,7 @@ class AccountsTabAccountCell: View {
             transactionDetailsField.stringValue = "\(countString)"
         }
         
-        includeInTotalButton.state = defaults.accountIdsExcludedFromTotal.contains(model.accountId) ? NSControl.StateValue.offState : NSControl.StateValue.onState
+        includeInTotalButton.state = defaults.accountIdsExcludedFromTotal.contains(model.accountId) ? .off : .on
     }
     
     func hideBottomContainer(notify: Bool = true) {
@@ -306,7 +306,7 @@ class AccountsTabAccountCell: View {
     
     @objc fileprivate func includeInTotalAction(_ sender: NSButton) {
         if let model = model {
-            if sender.state == NSControl.StateValue.onState {
+            if sender.state == .on {
                 defaults.includeAccountIdInTotal(model.accountId)
                 //TODO - is there a cleaner way to do this? I’m copying and pasting which feels wrong
                 let circleRemoveImage = NSImage(named: NSImage.Name(rawValue: "CircleRemove"))!

@@ -16,7 +16,7 @@ class PreferencesGeneralViewController: NSViewController {
         shortcutView.associatedUserDefaultsKey = Shortcut.shortcutUserDefaultsKey
         shortcutView.shortcutValue = Shortcut.defaultShortcut
         
-        logInCheckBox.state = defaults.launchAtLogin ? NSControl.StateValue.onState : NSControl.StateValue.offState
+        logInCheckBox.state = defaults.launchAtLogin ? .on : .off
         
         themeSegmentControl.selectedSegment = defaults.selectedThemeType.rawValue
         
@@ -25,9 +25,9 @@ class PreferencesGeneralViewController: NSViewController {
     }
 
     @IBAction func logInCheckBoxPress(_ sender: NSButton) {
-        let enabled = (sender.state == NSControl.StateValue.onState)
+        let enabled = (sender.state == .on)
         defaults.launchAtLogin = enabled
-        sender.state = defaults.launchAtLogin ? NSControl.StateValue.onState : NSControl.StateValue.offState
+        sender.state = defaults.launchAtLogin ? .on : .off
     }
     
     @IBAction func themeChanged(_ sender: NSSegmentedControl) {

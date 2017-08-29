@@ -53,7 +53,7 @@ class WebSignUpViewController: NSViewController, NSTabViewDelegate, WebPolicyDel
     fileprivate let explanationImage = ImageView()
     
     fileprivate var showingExplanation: Bool {
-        return expandedExplanationButton.state == NSControl.StateValue.onState
+        return expandedExplanationButton.state == .on
     }
     
     fileprivate var height: CGFloat {
@@ -159,7 +159,7 @@ class WebSignUpViewController: NSViewController, NSTabViewDelegate, WebPolicyDel
         
         expandedExplanationButton.bezelStyle = .roundedDisclosure
         expandedExplanationButton.setButtonType(.pushOnPushOff)
-        expandedExplanationButton.state = NSControl.StateValue.offState
+        expandedExplanationButton.state = .off
         expandedExplanationButton.title = ""
         expandedExplanationButton.target = self
         expandedExplanationButton.action = #selector(toggleExplanation)
@@ -255,8 +255,8 @@ class WebSignUpViewController: NSViewController, NSTabViewDelegate, WebPolicyDel
         }
         
         async(after: 0.5) {
-            if self.expandedExplanationButton.state == NSControl.StateValue.onState {
-                self.expandedExplanationButton.state = NSControl.StateValue.offState
+            if self.expandedExplanationButton.state == .on {
+                self.expandedExplanationButton.state = .off
                 self.toggleExplanation()
             }
             

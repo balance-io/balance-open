@@ -69,15 +69,14 @@ class SignUpViewController: NSViewController {
     fileprivate var primaryColor = NSColor.gray
     fileprivate let margin = 25
     fileprivate var emailIssueController: EmailIssueController?
-    fileprivate var lastPlaidErrorCode = -1
     fileprivate var connectionFailures = 0 {
         didSet {
             if connectionFailures == 0 {
-                DispatchQueue.main.async {
+                async {
                     self.hideReportFailureButton()
                 }
             } else if connectionFailures > 0 {
-                DispatchQueue.main.async {
+                async {
                     self.showReportFailureButton()
                 }
             }
@@ -124,7 +123,7 @@ class SignUpViewController: NSViewController {
     fileprivate let explanationImage = ImageView()
     
     fileprivate var showingExplanation: Bool {
-        return expandedExplanationButton.state == NSControl.StateValue.onState
+        return expandedExplanationButton.state == .on
     }
     fileprivate let loginService: ExchangeApi
     
@@ -200,14 +199,14 @@ class SignUpViewController: NSViewController {
         super.viewWillAppear()
         
         // Hack to color the popover arrow during the push animation
-        DispatchQueue.main.async(after: 0.1) {
+        async(after: 0.1) {
             AppDelegate.sharedInstance.statusItem.arrowColor = self.primaryColor
             
             // Must resize after changing the color or the color changes too late
-            DispatchQueue.main.async {
+            async {
                 AppDelegate.sharedInstance.resizeWindowHeight(self.height, animated: true)
                 
-                DispatchQueue.main.async(after: 0.5) {
+                async(after: 0.5) {
                     self.explanationTabView.isHidden = false
                 }
             }
@@ -217,7 +216,7 @@ class SignUpViewController: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
         
-        DispatchQueue.main.async(after: 0.3) {
+        async(after: 0.3) {
             _ = self.connectFields.first?.becomeFirstResponder()
         }
     }
@@ -424,7 +423,7 @@ class SignUpViewController: NSViewController {
         
         expandedExplanationButton.bezelStyle = .roundedDisclosure
         expandedExplanationButton.setButtonType(.pushOnPushOff)
-        expandedExplanationButton.state = NSControl.StateValue.offState
+        expandedExplanationButton.state = .off
         expandedExplanationButton.title = ""
         expandedExplanationButton.target = self
         expandedExplanationButton.action = #selector(toggleExplanation)
@@ -480,7 +479,7 @@ class SignUpViewController: NSViewController {
     
     @objc func toggleExplanation() {
         // Resize window
-        DispatchQueue.main.async {
+        async {
             AppDelegate.sharedInstance.resizeWindowHeight(self.height, animated: true)
         }
     }
@@ -520,9 +519,9 @@ class SignUpViewController: NSViewController {
             make.height.equalTo(30)
         }
         
-        DispatchQueue.main.async(after: 0.5) {
-            if self.expandedExplanationButton.state == NSControl.StateValue.onState {
-                self.expandedExplanationButton.state = NSControl.StateValue.offState
+        async(after: 0.5) {
+            if self.expandedExplanationButton.state == .on {
+                self.expandedExplanationButton.state = .off
                 self.toggleExplanation()
             }
             
@@ -676,14 +675,14 @@ class SignUpViewController: NSViewController {
     fileprivate func removeEmailIssueController() {
         if let emailIssueController = emailIssueController {
             // Hack to color the popover arrow during the push animation
-            DispatchQueue.main.async(after: 0.1) {
+            async(after: 0.1) {
                 AppDelegate.sharedInstance.statusItem.arrowColor = self.primaryColor
                 
                 // Must resize after changing the color or the color changes too late
-                DispatchQueue.main.async {
+                async {
                     AppDelegate.sharedInstance.resizeWindowHeight(self.height, animated: true)
                     
-                    DispatchQueue.main.async(after: 0.5) {
+                    async(after: 0.5) {
                         // Hack so that explanationTabView doesn't show while resizing
                         self.explanationTabView.isHidden = false
                     }
@@ -727,11 +726,11 @@ class SignUpViewController: NSViewController {
     // NOTE: Do not call directly, use close, cancel, or finished instead
     fileprivate func callCloseBlock(finished: Bool) {
         // Hack to color the popover arrow during the push animation
-        DispatchQueue.main.async(after: 0.12) {
+        async(after: 0.12) {
             AppDelegate.sharedInstance.statusItem.arrowColor = NSColor.clear
             
             // Must resize after changing the color or the color changes too late
-            DispatchQueue.main.async(after: 0.1) {
+            async(after: 0.1) {
                 // NOTE: We should figure out a way to do this without knowing the height of the add accounts controller
                 AppDelegate.sharedInstance.resizeWindowHeight(370, animated: true)
                 //AppDelegate.sharedInstance.resizeWindow(CurrentTheme.defaults.size, animated: true)
@@ -797,9 +796,14 @@ class SignUpViewController: NSViewController {
             loginFields.append(textField.field)
         }
         // try login with loginFields
-        self.loginService.authenticationChallenge(loginStrings: loginFields, closeBlock: { (success) in
-            self.callCloseBlock(finished: success)
-        })
+        self.loginService.authenticationChallenge(loginStrings: loginFields) { success in
+            if success {
+                self.finished()
+            } else {
+                // TODO: Use proper error
+                self.failConnect(error: nil)
+            }
+        }
     }
     
     fileprivate func setLoadingFieldString(_ stringValue: String) {
@@ -863,9 +867,6 @@ class SignUpViewController: NSViewController {
     fileprivate func failConnect(error: Error?) {
         stopAutoUpdatingConnectLabel()
         
-        if let error = error! as? NSError {
-            lastPlaidErrorCode = error.code
-        }
         connectionFailures += 1
         
         // Error, so allow the user to try again

@@ -121,7 +121,7 @@ class PreferencesSecurityViewController: NSViewController {
         lockSleepCheckBox.setAccessibilityLabel("Lock on sleep")
         lockSleepCheckBox.action = #selector(lockSleepCheckBoxPress)
         lockSleepCheckBox.target = self
-        lockSleepCheckBox.state = appLock.lockOnSleep ? NSControl.StateValue.onState : NSControl.StateValue.offState
+        lockSleepCheckBox.state = appLock.lockOnSleep ? .on : .off
         self.view.addSubview(lockSleepCheckBox)
         lockSleepCheckBox.snp.makeConstraints{ make in
             make.top.equalTo(lockQuitTitleField.snp.bottom).offset(12)
@@ -134,7 +134,7 @@ class PreferencesSecurityViewController: NSViewController {
         lockScreenSaverCheckBox.setAccessibilityLabel("Lock when screensaver is activated")
         lockScreenSaverCheckBox.action = #selector(lockScreenSaverCheckBoxPress)
         lockScreenSaverCheckBox.target = self
-        lockScreenSaverCheckBox.state = appLock.lockOnScreenSaver ? NSControl.StateValue.onState : NSControl.StateValue.offState
+        lockScreenSaverCheckBox.state = appLock.lockOnScreenSaver ? .on : .off
         self.view.addSubview(lockScreenSaverCheckBox)
         lockScreenSaverCheckBox.snp.makeConstraints{ make in
             make.top.equalTo(lockSleepCheckBox.snp.bottom).offset(12)
@@ -147,7 +147,7 @@ class PreferencesSecurityViewController: NSViewController {
         lockCloseCheckBox.setAccessibilityLabel("Lock every time the app window is closed")
         lockCloseCheckBox.action = #selector(lockCloseCheckboxPress)
         lockCloseCheckBox.target = self
-        lockCloseCheckBox.state = appLock.lockOnPopoverClose ? NSControl.StateValue.onState : NSControl.StateValue.offState
+        lockCloseCheckBox.state = appLock.lockOnPopoverClose ? .on : .off
         self.view.addSubview(lockCloseCheckBox)
         lockCloseCheckBox.snp.makeConstraints{ make in
             make.top.equalTo(lockScreenSaverCheckBox.snp.bottom).offset(12)
@@ -279,21 +279,21 @@ class PreferencesSecurityViewController: NSViewController {
     }
     
     @objc func lockSleepCheckBoxPress(_ sender:NSButton) {
-        let enabled = (sender.state == NSControl.StateValue.onState)
+        let enabled = (sender.state == .on)
         appLock.lockOnSleep = enabled
-        sender.state = appLock.lockOnSleep ? NSControl.StateValue.onState : NSControl.StateValue.offState
+        sender.state = appLock.lockOnSleep ? .on : .off
     }
     
     @objc func lockScreenSaverCheckBoxPress(_ sender:NSButton) {
-        let enabled = (sender.state == NSControl.StateValue.onState)
+        let enabled = (sender.state == .on)
         appLock.lockOnScreenSaver = enabled
-        sender.state = appLock.lockOnScreenSaver ? NSControl.StateValue.onState : NSControl.StateValue.offState
+        sender.state = appLock.lockOnScreenSaver ? .on : .off
     }
     
     @objc func lockCloseCheckboxPress(_ sender:NSButton) {
-        let enabled = (sender.state == NSControl.StateValue.onState)
+        let enabled = (sender.state == .on)
         appLock.lockOnPopoverClose = enabled
-        sender.state = appLock.lockOnPopoverClose ? NSControl.StateValue.onState : NSControl.StateValue.offState
+        sender.state = appLock.lockOnPopoverClose ? .on : .off
     }
     
     @objc func disableTouchID() {

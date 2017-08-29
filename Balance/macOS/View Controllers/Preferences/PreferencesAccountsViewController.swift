@@ -498,7 +498,7 @@ fileprivate class AccountCell: View {
         model = updatedModel
         
         let hidden = defaults.hiddenAccountIds.contains(updatedModel.accountId)
-        showButton.state = hidden ? NSControl.StateValue.offState : NSControl.StateValue.onState
+        showButton.state = hidden ? .off : .on
         
         nameField.stringValue = updatedModel.name.capitalizedStringIfAllCaps
         nameField.textColor = hidden ? NSColor(deviceWhite: 0, alpha: 0.46) : .black
@@ -509,7 +509,7 @@ fileprivate class AccountCell: View {
             return
         }
         
-        if button.state == NSControl.StateValue.offState {
+        if button.state == .off {
             defaults.hideAccountId(accountId)
         } else {
             defaults.unhideAccountId(accountId)

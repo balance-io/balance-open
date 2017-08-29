@@ -210,7 +210,7 @@ class PreferencesRulesViewController: NSViewController {
         notifyButton.setButtonType(.switch)
         notifyButton.title = "Desktop Notification "
         notifyButton.setAccessibilityLabel("Desktop Notification ")
-        notifyButton.state = (rule.notify ? NSControl.StateValue.onState : NSControl.StateValue.offState)
+        notifyButton.state = (rule.notify ? .on : .off)
         notifyButton.imagePosition = .imageRight
         notifyButton.target = self
         notifyButton.action = #selector(ruleNotifyButtonAction(_:))
@@ -304,7 +304,7 @@ class PreferencesRulesViewController: NSViewController {
         if let index = ruleNotifyButtons.index(of: sender) {
             let rule = feed.rules[index]
             realmManager.writePrefs(withoutNotifying: [rulesNotificationToken!]) { _ in
-                rule.notify = (sender.state == NSControl.StateValue.onState)
+                rule.notify = (sender.state == .on)
             }
         }
     }
