@@ -41,7 +41,9 @@ struct InstitutionRepository: ItemRepository {
             
             if let institutionId = generatedId {
                 let institution = Institution(institutionId: institutionId, source: source, sourceInstitutionId: sourceInstitutionId, name: name, nameBreak: nameBreak, primaryColor: primaryColor, secondaryColor: secondaryColor, logoData: logoData, dateAdded: dateAdded, repository: self)
-                institution.accessToken = accessToken
+                if let accessToken = accessToken {
+                    institution.accessToken = accessToken
+                }
                 defaults.institutionColors[sourceInstitutionId] = nextAvailableDefaultInstitutionColorIndex()
                 return institution
             } else {

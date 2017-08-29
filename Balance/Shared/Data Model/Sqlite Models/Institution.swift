@@ -113,11 +113,7 @@ extension Institution {
             }
             
             print("get accessTokenKey: \(accessTokenKey)  accessToken: \(String(describing: accessToken))")
-            if accessToken == nil {
-                // We should always be getting an access token becasuse we never read it until after it's been written
-                log.severe("Tried to read access token for institution [\(self)] but it didn't work! We must not have keychain access")
-            }
-            
+
             return accessToken
         }
         set {
