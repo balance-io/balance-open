@@ -196,6 +196,8 @@
 		535905691CC8482400DBC816 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535905681CC8482400DBC816 /* Logging.swift */; };
 		535AEA331D22D177003F13E2 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535AEA321D22D177003F13E2 /* NSAttributedString.swift */; };
 		535BE39E1F05A14C00DEA4EF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 535BE39D1F05A14C00DEA4EF /* libz.tbd */; };
+		5361BC9E1F562580009C3F07 /* PoloniexInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5361BC9D1F562580009C3F07 /* PoloniexInstitution.swift */; };
+		5361BC9F1F562580009C3F07 /* PoloniexInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5361BC9D1F562580009C3F07 /* PoloniexInstitution.swift */; };
 		536C6EEF1D864C9B00823688 /* MockedDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536C6EEE1D864C9B00823688 /* MockedDefaultsStorage.swift */; };
 		536C6EF21D864CB900823688 /* DefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536C6EF11D864CB900823688 /* DefaultsStorage.swift */; };
 		536F8B821E0111EA00A3B718 /* SyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536F8B811E0111EA00A3B718 /* SyncButton.swift */; };
@@ -589,6 +591,7 @@
 		535905681CC8482400DBC816 /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		535AEA321D22D177003F13E2 /* NSAttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		535BE39D1F05A14C00DEA4EF /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
+		5361BC9D1F562580009C3F07 /* PoloniexInstitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexInstitution.swift; sourceTree = "<group>"; };
 		536C6EEE1D864C9B00823688 /* MockedDefaultsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockedDefaultsStorage.swift; sourceTree = "<group>"; };
 		536C6EF11D864CB900823688 /* DefaultsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsStorage.swift; sourceTree = "<group>"; };
 		536F8B811E0111EA00A3B718 /* SyncButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncButton.swift; sourceTree = "<group>"; };
@@ -1280,6 +1283,7 @@
 			children = (
 				538B47BC1F4C9FD70023CED5 /* PoloniexApi.swift */,
 				538B47BB1F4C9FD70023CED5 /* PoloniexAccount.swift */,
+				5361BC9D1F562580009C3F07 /* PoloniexInstitution.swift */,
 			);
 			name = Poloniex;
 			path = APIs/Poloniex;
@@ -2054,6 +2058,7 @@
 				537187DF1F4CC23B00E7F9D6 /* GDAXAccount.swift in Sources */,
 				53552A7C1ED7347E00DD95F9 /* MockedDefaults.swift in Sources */,
 				53F078671ED740E500E7EDF9 /* SampleResponses.swift in Sources */,
+				5361BC9F1F562580009C3F07 /* PoloniexInstitution.swift in Sources */,
 				53552A351ED72B5B00DD95F9 /* OrderedDictionary.swift in Sources */,
 				537187E31F4CC23B00E7F9D6 /* GDAXServer.swift in Sources */,
 				532121A81EE8B91600F4812A /* ZipUtilities.swift in Sources */,
@@ -2132,6 +2137,7 @@
 				532121A31EE8B91600F4812A /* QuickZip.swift in Sources */,
 				53E8C77E1C62EB4C0085D64E /* TabsViewController.swift in Sources */,
 				53D441F81F44CD93006967E1 /* InstitutionRepository.swift in Sources */,
+				5361BC9E1F562580009C3F07 /* PoloniexInstitution.swift in Sources */,
 				536C6EEF1D864C9B00823688 /* MockedDefaultsStorage.swift in Sources */,
 				537187EF1F4CC23C00E7F9D6 /* GDAXWithdrawal.swift in Sources */,
 				5304228A1ED39742001CA499 /* TabViewModel.swift in Sources */,

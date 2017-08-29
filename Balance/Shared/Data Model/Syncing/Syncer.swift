@@ -229,7 +229,8 @@ class Syncer {
         log.debug("Pulling accounts and transactions for \(institution)")
         
         //sync Poloniex
-        PoloniexApi.fetchBalances(secret: secret, key: key, institution: institution) { success, error in
+        let poloniexApi = PoloniexApi(secret: secret, key: key)
+        poloniexApi.fetchBalances(institution: institution) { success, error in
             if !success {
                 syncingSuccess = false
                 if let error = error {

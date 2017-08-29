@@ -342,7 +342,7 @@ class OpenAddAccountViewController: NSViewController {
             case .gdax:
                 self.presentLoginScreenWith(apiInstitution: GDAXAPIClient.gdaxInstitution, loginService: GDAXAPIClient(server: .production))
             case .poloniex:
-                self.presentLoginScreenWith(apiInstitution: PoloniexApi.poloniexInstitution, loginService: PoloniexApi())
+                self.presentLoginScreenWith(apiInstitution: PoloniexInstitution(), loginService: PoloniexApi())
             default:()
             }
         }

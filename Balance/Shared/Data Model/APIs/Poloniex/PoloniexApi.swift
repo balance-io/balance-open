@@ -10,42 +10,6 @@ import Foundation
 import Security
 import Locksmith
 
-//typealias SuccessErrorBlock2 = (_ success: Bool, _ error: Error?) -> Void
-
-fileprivate let tradingURL = URL(string: "https://poloniex.com/tradingApi")!
-//typealias SuccessErrorBlock = (_ success: Bool, _ error: Error) -> Void
-
-enum PoloniexCommands: String {
-    case returnBalances
-    case returnCompleteBalances
-    case returnDepositAddresses
-    case generateNewAddress
-    case returnDepositsWithdrawals
-    case returnOpenOrders
-    case returnTradeHistory
-    case returnOrderTrades
-    case buy
-    case sell
-    case cancelOrder
-    case moveOrder
-    case withdraw
-    case returnFeeInfo
-    case returnAvailableAccountBalances
-    case returnTradableBalances
-    case transferBalance
-    case returnMarginAccountSummary
-    case marginBuy
-    case marginSell
-    case getMarginPosition
-    case closeMarginPosition
-    case createLoanOffer
-    case cancelLoanOffer
-    case returnOpenLoanOffers
-    case returnActiveLoans
-    case returnLendingHistory
-    case toggleAutoRenew
-}
-
 /*
  All calls to the trading API are sent via HTTP POST to https://poloniex.com/tradingApi and must contain the following headers:
  
@@ -57,30 +21,61 @@ enum PoloniexCommands: String {
  
  */
 
-struct PoloniexApi: ExchangeApi {
-    func authenticate(secret: String, key: String) {
-        assert(false, "implement")
+class PoloniexApi: ExchangeApi {
+    
+    fileprivate enum Commands: String {
+        case returnBalances
+        case returnCompleteBalances
+        case returnDepositAddresses
+        case generateNewAddress
+        case returnDepositsWithdrawals
+        case returnOpenOrders
+        case returnTradeHistory
+        case returnOrderTrades
+        case buy
+        case sell
+        case cancelOrder
+        case moveOrder
+        case withdraw
+        case returnFeeInfo
+        case returnAvailableAccountBalances
+        case returnTradableBalances
+        case transferBalance
+        case returnMarginAccountSummary
+        case marginBuy
+        case marginSell
+        case getMarginPosition
+        case closeMarginPosition
+        case createLoanOffer
+        case cancelLoanOffer
+        case returnOpenLoanOffers
+        case returnActiveLoans
+        case returnLendingHistory
+        case toggleAutoRenew
     }
     
-    func authenticate(secret: String, key: String, passphrase: String) {
-        assert(false, "implement")
+    // MARK: - Constants -
+    
+    fileprivate let tradingURL = URL(string: "https://poloniex.com/tradingApi")!
+    
+    // MARK: - Properties -
+    
+    fileprivate var secret: String
+    fileprivate var key: String
+    
+    // MARK: - Lifecycle -
+    
+    init() {
+        self.secret = ""
+        self.key = ""
+    }
+
+    init(secret: String, key: String) {
+        self.secret = secret
+        self.key = key
     }
     
-    func findError(data: Data) -> String? {
-        do {
-            guard let dict = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] else {
-                throw "JSON decoding failed"
-            }
-            if dict.keys.count == 1 {
-                if let errorDict = dict["error"] {
-                    return errorDict as? String
-                }
-            }
-        } catch {
-            return nil
-        }
-        return nil
-    }
+    // MARK: - Public -
     
     func authenticationChallenge(loginStrings: [Field], closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
         assert(loginStrings.count == 2, "number of auth fields should be 2 for Poloniex")
@@ -98,28 +93,75 @@ struct PoloniexApi: ExchangeApi {
         guard let secret = secretField, let key = keyField else {
             assert(false, "wrong fields are passed into the poloniex auth, we require secret and key fields and values")
         }
-        PoloniexApi.authenticate(secret: secret, key: key, closeBlock: closeBlock)
+        authenticate(secret: secret, key: key, closeBlock: closeBlock)
     }
-
-    //TODO:
     
-    //Poloniex doesn't have an authenticate method "per-se" so we use the returnBalances call to validate the key-secret pair for login
-    static func authenticate(secret: String, key: String, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
-        let requestInfo = PoloniexApi.createRequestBodyandHash(params: ["command":PoloniexCommands.returnCompleteBalances.rawValue],secret: secret, key: key)
-        let urlRequest = PoloniexApi.assembleTradingRequest(key: key, body: requestInfo.body, hashBody: requestInfo.signedBody)
+    func fetchBalances(institution: Institution, completion: @escaping SuccessErrorBlock) {
+        let requestInfo = createRequestBodyandHash(params: ["command": Commands.returnCompleteBalances.rawValue], secret: secret, key: key)
+        let urlRequest = assembleTradingRequest(key: key, body: requestInfo.body, hashBody: requestInfo.signedBody)
+        
+        let datatask = certValidatedSession.dataTask(with: urlRequest) { data, response, error in
+            do {
+                if let safeData = data {
+                    //create accounts
+                    let poloniexAccounts = try self.parsePoloniexAccounts(data: safeData)
+                    self.processPoloniexAccounts(accounts: poloniexAccounts, institution: institution)
+                } else {
+                    print("Poloniex Error: \(String(describing: error))")
+                    print("Poloniex Data: \(String(describing: data))")
+                }
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
+            }
+            catch {
+                log.error("Failed to Poloniex balance data: \(error)")
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
+            }
+        }
+        datatask.resume()
+    }
+    
+    // MARK: - Private -
+    
+    fileprivate func findError(data: Data) -> String? {
+        do {
+            guard let dict = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] else {
+                throw "JSON decoding failed"
+            }
+            if dict.keys.count == 1 {
+                if let errorDict = dict["error"] {
+                    return errorDict as? String
+                }
+            }
+        } catch {
+            return nil
+        }
+        return nil
+    }
+    
+    // Poloniex doesn't have an authenticate method "per-se" so we use the returnBalances call to validate the key-secret pair for login
+    fileprivate func authenticate(secret: String, key: String, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
+        self.secret = secret
+        self.key = key
+        
+        let requestInfo = createRequestBodyandHash(params: ["command": Commands.returnCompleteBalances.rawValue], secret: secret, key: key)
+        let urlRequest = assembleTradingRequest(key: key, body: requestInfo.body, hashBody: requestInfo.signedBody)
         let datatask = certValidatedSession.dataTask(with: urlRequest) { data, response, error in
             do {
                 if let safeData = data {
                     //if error exists should be reported to UI data
-                    _ = findError
+                    _ = self.findError(data: safeData)
                     // Create the institution and finish (we do not have access tokens)
                     if let institution = InstitutionRepository.si.institution(source: .poloniex, sourceInstitutionId: "", name: "Poloniex") {
                         institution.secret = secret
                         institution.apiKey = key
                         
                         //create accounts
-                        let poloniexAccounts = try createPoloniexAccounts(data: safeData)
-                        processPoloniexAccounts(accounts: poloniexAccounts, institution: institution)
+                        let poloniexAccounts = try self.parsePoloniexAccounts(data: safeData)
+                        self.processPoloniexAccounts(accounts: poloniexAccounts, institution: institution)
                         async {
                             closeBlock(true, nil, institution)
                         }
@@ -142,8 +184,8 @@ struct PoloniexApi: ExchangeApi {
         datatask.resume()
     }
     
-    private static func createRequestBodyandHash(params: [String: String], secret: String, key: String) -> (body: String, signedBody: String) {
-        let nonce = Int(Date().timeIntervalSince1970*10000)
+    fileprivate func createRequestBodyandHash(params: [String: String], secret: String, key: String) -> (body: String, signedBody: String) {
+        let nonce = Int(Date().timeIntervalSince1970 * 10000)
 
         var queryItems = [URLQueryItem]()
         for (key, value) in params {
@@ -160,7 +202,7 @@ struct PoloniexApi: ExchangeApi {
         return (body, signedPost)
     }
     
-    private static func assembleTradingRequest(key: String, body: String, hashBody: String) -> URLRequest {
+    fileprivate func assembleTradingRequest(key: String, body: String, hashBody: String) -> URLRequest {
         var request = URLRequest(url: tradingURL)
         request.httpMethod = "POST"
         request.setValue(key, forHTTPHeaderField: "Key")
@@ -169,98 +211,43 @@ struct PoloniexApi: ExchangeApi {
         return request
     }
     
-    static func fetchBalances(secret: String, key: String, institution: Institution, completion: @escaping SuccessErrorBlock) {
-        let requestInfo = PoloniexApi.createRequestBodyandHash(params: ["command":PoloniexCommands.returnCompleteBalances.rawValue],secret: secret, key: key)
-        let urlRequest = PoloniexApi.assembleTradingRequest(key: key, body: requestInfo.body, hashBody: requestInfo.signedBody)
+    fileprivate func parsePoloniexAccounts(data: Data) throws -> [PoloniexAccount] {
+        guard let dict = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] else {
+            throw "JSON decoding failed"
+        }
         
-        let datatask = certValidatedSession.dataTask(with: urlRequest) { data, response, error in
+        var poloniexAccounts = [PoloniexAccount]()
+        for (currencyShortName, dictionary) in dict {
             do {
-                if let safeData = data {
-                    //create accounts
-                    let poloniexAccounts = try createPoloniexAccounts(data: safeData)
-                    processPoloniexAccounts(accounts: poloniexAccounts, institution: institution)
-                } else {
-                    
-                    print("Poloniex Error: \(String(describing: error))")
-                    print("Poloniex Data: \(String(describing: data))")
+                if let dictionary = dictionary as? [String: AnyObject] {
+                    let poloniexAccount = try PoloniexAccount(dictionary: dictionary, currencyShortName: currencyShortName, type: .exchange)
+                    poloniexAccounts.append(poloniexAccount)
                 }
-                DispatchQueue.main.async {
-                    completion(false, error)
-                }
-            }
-            catch {
-                log.error("Failed to Poloniex balance data: \(error)")
-                DispatchQueue.main.async {
-                    completion(false, error)
-                }
+            } catch {
+                log.error("Failed to parse account data: \(error)")
             }
         }
-        datatask.resume()
+        return poloniexAccounts
     }
     
-    static var poloniexInstitution: PoloniexInstitution {
-        get {
-            return PoloniexInstitution()
+    fileprivate func processPoloniexAccounts(accounts: [PoloniexAccount], institution: Institution) {
+        for account in accounts {
+            // Create or upload the local account object
+            account.updateLocalAccount(institution: institution)
         }
-    }
-    
-    class PoloniexInstitution: ApiInstitution {
-        let source: Source = .poloniex
-        let sourceInstitutionId: String = ""
         
-        var currencyCode: String = ""
-        var usernameLabel: String = ""
-        var passwordLabel: String = ""
-        var name: String = "Poloniex"
-        var products: [String] = []
-        var type: String = ""
-        var url: String? = "https://poloniex.com/login"
-        var fields: [Field]
-        
-        init() {
-            let keyField = Field(name: "Key", label: "Key", type: "key", value: nil)
-            let secretField = Field(name: "Secret", label: "Secret", type: "secret", value: nil)
-            self.fields = [keyField, secretField]
-        }
-    }
-    
-}
-
-fileprivate func createPoloniexAccounts(data: Data) throws -> [PoloniexAccount] {
-    //create accounts
-    guard let dict = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] else {
-        throw "JSON decoding failed"
-    }
-    var poloniexAccounts = [PoloniexAccount]()
-    for (currencyShortName, dictionary) in dict {
-        do {
-            if let dictionary = dictionary as? [String: AnyObject] {
-                let poloniexAccount = try PoloniexAccount(dictionary: dictionary, currencyShortName: currencyShortName, type: .exchange)
-                poloniexAccounts.append(poloniexAccount)
+        let accounts = AccountRepository.si.accounts(institutionId: institution.institutionId)
+        for account in accounts {
+            let index = accounts.index(where: {$0.currency == account.currency})
+            if index == nil {
+                // This account doesn't exist in the response, so remove it
+                AccountRepository.si.delete(account: account)
             }
-        } catch {
-            log.error("Failed to parse account data: \(error)")
-        }
-    }
-    return poloniexAccounts
-}
-
-fileprivate func processPoloniexAccounts(accounts: [PoloniexAccount],institution: Institution) {
-    for account in accounts {
-        // Calculate the number of decimals
-        _ = PoloniexAccount.getAccountEquivalent(account:account, institution: institution)
-    }
-    let accounts = AccountRepository.si.accounts(institutionId: institution.institutionId)
-    for account in accounts {
-        let index = accounts.index(where: {$0.currency == account.currency})
-        if index == nil {
-            // This account doesn't exist in the response, so remove it
-            AccountRepository.si.delete(account: account)
         }
     }
 }
 
-extension PoloniexAccount {
+fileprivate extension PoloniexAccount {
     var altCurrency: Currency {
         return Currency.rawValue(shortName: "BTC")
     }
@@ -275,16 +262,16 @@ extension PoloniexAccount {
         return (altBalance as NSDecimalNumber).intValue
     }
     
-    static func getAccountEquivalent(account: PoloniexAccount, institution: Institution) -> Account? {
+    @discardableResult func updateLocalAccount(institution: Institution) -> Account? {
         // Calculate the integer value of the balance based on the decimals
-        let currentBalance = account.balance
-        let altCurrentBalance = account.altBalance
+        let currentBalance = balance
+        let altCurrentBalance = altBalance
         
         // Poloniex doesn't have id's per-se, the id a coin is the coin symbol itself
-        if let newAccount = AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: account.currency.name, sourceInstitutionId: "", accountTypeId: AccountType.exchange, accountSubTypeId: nil, name: account.currency.name, currency: account.currency.name, currentBalance: currentBalance, availableBalance: nil, number: nil, altCurrency: account.altCurrency.name, altCurrentBalance: altCurrentBalance, altAvailableBalance: nil) {
+        if let newAccount = AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: currency.name, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: currency.name, currency: currency.name, currentBalance: currentBalance, availableBalance: nil, number: nil, altCurrency: altCurrency.name, altCurrentBalance: altCurrentBalance, altAvailableBalance: nil) {
             
             // Hide unpoplular currencies that have a 0 balance
-            if account.currency != Currency.btc && account.currency != Currency.eth {
+            if currency != Currency.btc && currency != Currency.eth {
                 newAccount.isHidden = (currentBalance == 0)
             }
             
@@ -295,10 +282,8 @@ extension PoloniexAccount {
 }
 
 extension Institution {
-    fileprivate var apiKeyKey: String {
-        return "apiKey institutionId: \(institutionId)"
-    }
-    public var apiKey: String? {
+    fileprivate var apiKeyKey: String { return "apiKey institutionId: \(institutionId)" }
+    var apiKey: String? {
         get {
             var apiKey: String? = nil
             if let dictionary = Locksmith.loadDataForUserAccount(userAccount: apiKeyKey) {
@@ -342,10 +327,8 @@ extension Institution {
         }
     }
     
-    fileprivate var secretKey: String {
-        return "secret institutionId: \(institutionId)"
-    }
-    public var secret: String? {
+    fileprivate var secretKey: String { return "secret institutionId: \(institutionId)" }
+    var secret: String? {
         get {
             var secret: String? = nil
             if let dictionary = Locksmith.loadDataForUserAccount(userAccount: secretKey) {
