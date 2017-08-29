@@ -358,6 +358,21 @@ extension Defaults {
     }
 }
 
+extension Account {
+    var isHidden: Bool {
+        get {
+            return defaults.hiddenAccountIds.contains(accountId)
+        }
+        set {
+            if newValue {
+                defaults.hideAccountId(accountId)
+            } else {
+                defaults.unhideAccountId(accountId)
+            }
+        }
+    }
+}
+
 // Depricated
 class FeedRule: NSObject, NSCoding {
     

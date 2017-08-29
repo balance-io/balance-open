@@ -8,13 +8,14 @@
 
 import Foundation
 
-enum Currency {
+enum Currency: Equatable {
     enum Traditional: String {
         case usd = "USD"
         case eur = "EUR"
         case gbp = "GBP"
         case cad = "CAD"
     }
+    
     case crypto(shortName: String)
     case common(traditional: Traditional)
     
@@ -53,5 +54,14 @@ enum Currency {
             case .common(traditional:.cad): return "CAD"
             case .crypto(let val): return val
         }
+    }
+    
+    // Convenience values
+    static let btc: Currency = .crypto(shortName: "BTC")
+    static let eth: Currency = .crypto(shortName: "ETH")
+    
+    // Equatable
+    static func ==(lhs: Currency, rhs: Currency) -> Bool {
+        return lhs.name == rhs.name
     }
 }

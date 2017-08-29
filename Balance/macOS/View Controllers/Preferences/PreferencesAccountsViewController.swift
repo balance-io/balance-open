@@ -505,14 +505,8 @@ fileprivate class AccountCell: View {
     }
     
     @objc fileprivate func showButtonAction(button: Button) {
-        guard let accountId = model?.accountId else {
-            return
-        }
-        
-        if button.state == .off {
-            defaults.hideAccountId(accountId)
-        } else {
-            defaults.unhideAccountId(accountId)
+        if let model = model {
+            model.isHidden = (button.state == .on)
         }
     }
 }

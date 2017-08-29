@@ -275,14 +275,22 @@ extension PoloniexAccount {
         return (altBalance as NSDecimalNumber).intValue
     }
     
-    static func getAccountEquivalent(account: PoloniexAccount, institution: Institution) -> Account {
+    static func getAccountEquivalent(account: PoloniexAccount, institution: Institution) -> Account? {
         // Calculate the integer value of the balance based on the decimals
         let currentBalance = account.balance
         let altCurrentBalance = account.altBalance
         
         // Poloniex doesn't have id's per-se, the id a coin is the coin symbol itself
-        let newAccount = AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: account.currency.name, sourceInstitutionId: "", accountTypeId: AccountType.exchange, accountSubTypeId: nil, name: account.currency.name, currency: account.currency.name, currentBalance: currentBalance, availableBalance: nil, number: nil, altCurrency: account.altCurrency.name, altCurrentBalance: altCurrentBalance, altAvailableBalance: nil)
-        return newAccount!
+        if let newAccount = AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: account.currency.name, sourceInstitutionId: "", accountTypeId: AccountType.exchange, accountSubTypeId: nil, name: account.currency.name, currency: account.currency.name, currentBalance: currentBalance, availableBalance: nil, number: nil, altCurrency: account.altCurrency.name, altCurrentBalance: altCurrentBalance, altAvailableBalance: nil) {
+            
+            // Hide unpoplular currencies that have a 0 balance
+            if account.currency != Currency.btc && account.currency != Currency.eth {
+                newAccount.isHidden = (currentBalance == 0)
+            }
+            
+            return newAccount
+        }
+        return nil
     }
 }
 
