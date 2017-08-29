@@ -20,7 +20,7 @@ internal final class GDAXAPIClient
     
     // MARK: Initialization
     
-    internal required init(server: Server, session: URLSession = URLSession(configuration: .default))
+    internal required init(server: Server, session: URLSession = certValidatedSession)
     {
         self.session = session
         self.server = server

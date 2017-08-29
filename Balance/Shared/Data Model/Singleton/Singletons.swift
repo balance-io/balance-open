@@ -24,6 +24,7 @@ let subscriptionManager = SubscriptionManager()
 let realmManager = RealmManager()
 let networkStatus = NetworkStatus()
 let certValidator = CertValidator()
+let certValidatedSession = URLSession(configuration: .default, delegate: certValidator, delegateQueue: nil)
 let serverMessage = ServerMessage()
 
 func initializeSingletons() {

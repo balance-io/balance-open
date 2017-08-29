@@ -105,10 +105,9 @@ struct PoloniexApi: ExchangeApi {
     
     //Poloniex doesn't have an authenticate method "per-se" so we use the returnBalances call to validate the key-secret pair for login
     static func authenticate(secret: String, key: String, closeBlock: @escaping (Bool) -> Void) {
-        
         let requestInfo = PoloniexApi.createRequestBodyandHash(params: ["command":PoloniexCommands.returnCompleteBalances.rawValue],secret: secret, key: key)
         let urlRequest = PoloniexApi.assembleTradingRequest(key: key, body: requestInfo.body, hashBody: requestInfo.signedBody)
-        let datatask = URLSession.shared.dataTask(with: urlRequest, completionHandler: {(data: Data?, response: URLResponse?, error: Error?) in
+        let datatask = certValidatedSession.dataTask(with: urlRequest) { data, response, error in
             do {
                 if let safeData = data {
                     //if error exists should be reported to UI data
@@ -121,18 +120,22 @@ struct PoloniexApi: ExchangeApi {
                     //create accounts
                     let poloniexAccounts = try createPoloniexAccounts(data: safeData)
                     processPoloniexAccounts(accounts: poloniexAccounts, institution: institution!)
-                    closeBlock(true)
+                    async {
+                        closeBlock(true)
+                    }
                 } else {
                     print("Poloniex Error: \(String(describing: error))")
                     print("Poloniex Data: \(String(describing: data))")
-                    closeBlock(false)
+                    async {
+                        closeBlock(false)
+                    }
                     throw "Error \(String(describing:error))"
                 }
             }
             catch {
                 log.error("Failed to Poloniex balance login data: \(error)")
             }
-        })
+        }
         datatask.resume()
     }
     
@@ -167,7 +170,7 @@ struct PoloniexApi: ExchangeApi {
         let requestInfo = PoloniexApi.createRequestBodyandHash(params: ["command":PoloniexCommands.returnCompleteBalances.rawValue],secret: secret, key: key)
         let urlRequest = PoloniexApi.assembleTradingRequest(key: key, body: requestInfo.body, hashBody: requestInfo.signedBody)
         
-        let datatask = URLSession.shared.dataTask(with: urlRequest, completionHandler: {(data:Data?, response:URLResponse?, error:Error?) in
+        let datatask = certValidatedSession.dataTask(with: urlRequest) { data, response, error in
             do {
                 if let safeData = data {
                     //create accounts
@@ -188,7 +191,7 @@ struct PoloniexApi: ExchangeApi {
                     completion(false, error)
                 }
             }
-        })
+        }
         datatask.resume()
     }
     

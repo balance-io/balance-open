@@ -24,8 +24,6 @@ fileprivate let clientId = "a6e15fbb0c3362b74360895f261fb079672c10eef79dcb72308c
 // Save random state for current authentication request
 fileprivate var lastState: String? = nil
 
-fileprivate let session = URLSession(configuration: .default, delegate: certValidator, delegateQueue: nil)
-
 struct CoinbaseApi {
 
     @discardableResult static func authenticate() -> Bool {
@@ -71,7 +69,7 @@ struct CoinbaseApi {
         request.httpBody = parameters.data(using: .utf8)
         
         // TODO: Create enum types for each error
-        let task = session.dataTask(with: request, completionHandler: { (maybeData, maybeResponse, maybeError) in
+        let task = certValidatedSession.dataTask(with: request) { maybeData, maybeResponse, maybeError in
             do {
                 // Make sure there's data
                 guard let data = maybeData, maybeError == nil else {
@@ -110,7 +108,7 @@ struct CoinbaseApi {
                     completion(false, error)
                 }
             }
-        })
+        }
         
         task.resume()
     }
@@ -131,7 +129,7 @@ struct CoinbaseApi {
         request.httpBody = parameters.data(using: .utf8)
         
         // TODO: Create enum types for each error
-        let task = session.dataTask(with: request, completionHandler: { (maybeData, maybeResponse, maybeError) in
+        let task = certValidatedSession.dataTask(with: request) { maybeData, maybeResponse, maybeError in
             do {
                 // Make sure there's data
                 guard let data = maybeData, maybeError == nil else {
@@ -155,7 +153,7 @@ struct CoinbaseApi {
                     completion(false, maybeError)
                 }
             }
-        })
+        }
         
         task.resume()
     }
@@ -176,7 +174,7 @@ struct CoinbaseApi {
         request.setValue("2017-06-14", forHTTPHeaderField: "CB-VERSION")
         
         // TODO: Create enum types for each error
-        let task = session.dataTask(with: request, completionHandler: { (maybeData, maybeResponse, maybeError) in
+        let task = certValidatedSession.dataTask(with: request) { maybeData, maybeResponse, maybeError in
             do {
                 // Make sure there's data
                 guard let data = maybeData, maybeError == nil else {
@@ -210,7 +208,7 @@ struct CoinbaseApi {
                     completion(false, error)
                 }
             }
-        })
+        }
         
         task.resume()
     }

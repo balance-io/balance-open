@@ -39,8 +39,6 @@ struct PlaidApi {
     fileprivate static let baseUrl = environment.baseUrl
     fileprivate static let connectionTimeout = 240.0
     
-    fileprivate static let session = URLSession(configuration: .default, delegate: certValidator, delegateQueue: nil)
-    
     fileprivate static var dateFormatter: DateFormatter = {
         var dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "y-M-d"
@@ -87,7 +85,7 @@ struct PlaidApi {
         request.timeoutInterval = connectionTimeout
         request.cachePolicy = .reloadIgnoringLocalCacheData
         
-        let task = session.dataTask(with: request) { maybeData, maybeResponse, maybeError in
+        let task = certValidatedSession.dataTask(with: request) { maybeData, maybeResponse, maybeError in
             // Make sure there's data
             guard let data = maybeData, maybeError == nil else {
                 log.error("Failed to pull categories, maybeData == nil: \(maybeData == nil) error: \(maybeError!)")

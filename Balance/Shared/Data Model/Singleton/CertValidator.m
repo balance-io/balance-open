@@ -9,9 +9,28 @@
 #import "CertValidator.h"
 #import <TrustKit/TrustKit.h>
 
-@interface CertValidator ()
-    @property (nonatomic, readonly, strong) TSKPinningValidator* pinningValidator;
-    @end
+const NSString *balanceReportUri = @"https://www.balancemysubscription.com/certReport";
+
+// Let's Encrypt
+const NSString *letsEncryptAuthorityX3     = @"YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg="; // Let's Encrypt Authority X3
+const NSString *dstRootCAX3                = @"sRHdihwgkaib1P1gxX8HFszlD+7/gTfNvuAybgLPNis="; // DST Root CA X3
+
+// DigiCert
+const NSString *digiCertSHA2SecureServerCA = @"5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w="; // DigiCert SHA2 Secure Server CA
+const NSString *digiCertGlobalRootCA       = @"r/mIkG3eEpVdm+u/ko/cwxzOMo1bk4TyHIlByibiA5E="; // DigiCert Global Root CA
+
+// GlobalSign
+const NSString *alphaSSLCASHA256G2         = @"amMeV6gb9QNx0Zf7FtJ19Wa/t2B7KpCF/1n2Js3UuSU="; // AlphaSSL CA - SHA256 - G2
+const NSString *globalSignRootR1           = @"K87oWBWM9UZfyddvDfoxL+8lpNyoUB2ptGtn0fv6G2Q="; // GlobalSign Root R1 (note this shows up as GlobalSign Root CA in Safari, but according to GlobalSign, AlphaSSL uses their R1 root cert: https://support.globalsign.com/customer/portal/articles/1426602-globalsign-root-certificates
+
+// Google App Engine
+const NSString *googleInternetAuthorityG2  = @"h6801m+z8v3zbgkRHpq6L29Esgfzhj89C1SyUCOQmqU="; // Google Internet Authority G2
+const NSString *geoTrustGlobalCA           = @"7HIpactkIAq2Y49orFOOQKurWxmmSFZhBCoQYcRhJ3Y="; // GeoTrust Global CA
+
+@interface CertValidator() {
+    TSKPinningValidator *_pinningValidator;
+}
+@end
 
 @implementation CertValidator
     
@@ -21,47 +40,59 @@
         NSDictionary *trustKitConfig =
         @{kTSKSwizzleNetworkDelegates: @NO,
           kTSKPinnedDomains : @{
-                  @"api.plaid.com" : @{
+                  @"sandbox.plaid.com" : @{
                           kTSKEnforcePinning : @YES,
                           kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                          kTSKPublicKeyHashes : @[@"UCNW3UCkRyrwx+B2lu8hy8wTgOxKj3xeka6IYYKhm1Q=",
-                                                  @"WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="],
-                          kTSKReportUris : @[@"https://www.balancemysubscription.com/ce.r.t.R.e.p.o.r.t"]
+                          kTSKPublicKeyHashes : @[digiCertSHA2SecureServerCA, digiCertGlobalRootCA],
+                          kTSKReportUris : @[balanceReportUri]
+                          },
+                  @"production.plaid.com" : @{
+                          kTSKEnforcePinning : @YES,
+                          kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                          kTSKPublicKeyHashes : @[digiCertSHA2SecureServerCA, digiCertGlobalRootCA],
+                          kTSKReportUris : @[balanceReportUri]
                           },
                   @"www.balancemysubscription.com" : @{
                           kTSKEnforcePinning : @YES,
                           kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                          kTSKPublicKeyHashes : @[@"YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg=",
-                                                  @"sRHdihwgkaib1P1gxX8HFszlD+7/gTfNvuAybgLPNis="],
-                          kTSKReportUris : @[@"https://www.balancemysubscription.com/certReport"]
+                          kTSKPublicKeyHashes : @[letsEncryptAuthorityX3, dstRootCAX3],
+                          kTSKReportUris : @[balanceReportUri]
                           },
                   @"bal-subscription-server-beta.appspot.com" : @{
                           kTSKEnforcePinning : @YES,
                           kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                          kTSKPublicKeyHashes : @[@"h6801m+z8v3zbgkRHpq6L29Esgfzhj89C1SyUCOQmqU=",
-                                                  @"7HIpactkIAq2Y49orFOOQKurWxmmSFZhBCoQYcRhJ3Y="],
-                          kTSKReportUris : @[@"https://www.balancemysubscription.com/certReport"]
+                          kTSKPublicKeyHashes : @[googleInternetAuthorityG2, geoTrustGlobalCA],
+                          kTSKReportUris : @[balanceReportUri]
                           },
                   @"balancemy.money" : @{
                           kTSKEnforcePinning : @YES,
                           kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                          kTSKPublicKeyHashes : @[@"YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg=",
-                                                  @"sRHdihwgkaib1P1gxX8HFszlD+7/gTfNvuAybgLPNis="],
-                          kTSKReportUris : @[@"https://www.balancemysubscription.com/certReport"]
+                          kTSKPublicKeyHashes : @[letsEncryptAuthorityX3, dstRootCAX3],
+                          kTSKReportUris : @[balanceReportUri]
                           },
                   @"sync.balancemy.money" : @{
                           kTSKEnforcePinning : @YES,
                           kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                          kTSKPublicKeyHashes : @[@"YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg=",
-                                                  @"sRHdihwgkaib1P1gxX8HFszlD+7/gTfNvuAybgLPNis="],
-                          kTSKReportUris : @[@"https://www.balancemysubscription.com/certReport"]
+                          kTSKPublicKeyHashes : @[letsEncryptAuthorityX3, dstRootCAX3],
+                          kTSKReportUris : @[balanceReportUri]
                           },
                   @"api.coinbase.com" : @{
                           kTSKEnforcePinning : @YES,
                           kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                          kTSKPublicKeyHashes : @[@"5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w=",
-                                                  @"r/mIkG3eEpVdm+u/ko/cwxzOMo1bk4TyHIlByibiA5E="],
-                          kTSKReportUris : @[@"https://www.balancemysubscription.com/certReport"]
+                          kTSKPublicKeyHashes : @[digiCertSHA2SecureServerCA, digiCertGlobalRootCA],
+                          kTSKReportUris : @[balanceReportUri]
+                          },
+                  @"api.gdax.com" : @{
+                          kTSKEnforcePinning : @YES,
+                          kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                          kTSKPublicKeyHashes : @[digiCertSHA2SecureServerCA, digiCertGlobalRootCA],
+                          kTSKReportUris : @[balanceReportUri]
+                          },
+                  @"poloniex.com/tradingApi" : @{
+                          kTSKEnforcePinning : @YES,
+                          kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                          kTSKPublicKeyHashes : @[alphaSSLCASHA256G2, globalSignRootR1],
+                          kTSKReportUris : @[balanceReportUri]
                           }
                   }};
         
@@ -74,7 +105,7 @@
 }
     
 - (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler {
-    [self.pinningValidator handleChallenge:challenge completionHandler:completionHandler];
+    [_pinningValidator handleChallenge:challenge completionHandler:completionHandler];
 }
     
 @end
