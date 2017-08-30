@@ -440,7 +440,7 @@ fileprivate class InstitutionCell: View {
         self.isSelected = isSelected
         self.needsDisplay = true
         
-        nameField.stringValue = updatedModel.name.capitalizedStringIfAllCaps
+        nameField.stringValue = updatedModel.displayName
     }
     
     fileprivate override func draw(_ dirtyRect: NSRect) {
