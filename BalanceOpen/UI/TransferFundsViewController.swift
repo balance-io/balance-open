@@ -325,17 +325,15 @@ internal final class TransferFundsViewController: NSViewController
         if quote.sourceAmount < quote.minimumAmount
         {
             self.state = .error(message: "Minimum amount: \(quote.minimumAmount)")
+            return
         }
         else if quote.sourceAmount > quote.maximumAmount
         {
             self.state = .error(message: "Maximum amount: \(quote.maximumAmount)")
-        }
-        
-        if case State.error = self.state
-        {
             return
         }
         
+        // Default state
         self.state = .default
         self.recipientAmountLabel.stringValue = "\(quote.recipientAmount) \(transferRequest.recipientCurrency.rawValue)"
         self.minerFeeLabel.stringValue = "Miner fee: \(quote.minerFee) \(quote.minerFeeCurrency.rawValue.uppercased())"
