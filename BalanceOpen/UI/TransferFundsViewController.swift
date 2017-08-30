@@ -358,8 +358,8 @@ internal final class TransferFundsViewController: NSViewController
 
         do
         {
-            let transferRequest = TransferRequest(source: sourceAccount, recipient: recipientAccount, amount: amount)
-            self.transferController = try TransferController(request: transferRequest)
+            let transferRequest = try TransferRequest(source: sourceAccount, recipient: recipientAccount, amount: amount)
+            self.transferController = TransferController(request: transferRequest)
             self.transferController?.fetchQuote({ [weak self] (quote, error) in
                 DispatchQueue.main.async {
                     guard let unwrappedQuote = quote else
@@ -381,9 +381,17 @@ internal final class TransferFundsViewController: NSViewController
                 }
             })
         }
-        catch let error as TransferController.InitializationError where error == .directTransferUnsupported || error == .exchangeTransferUnsupported
+        catch let error as TransferRequest.InitializationError where error == .directTransferUnsupported || error == .exchangeTransferUnsupported
         {
             self.state = .error(message: "Sorry! Transfer not supported")
+        }
+        catch let error as TransferRequest.InitializationError where error == .sourceAccountDoesNotSupportWithdrawing
+        {
+            self.state = .error(message: "Source does not support withdrawing")
+        }
+        catch let error as TransferRequest.InitializationError where error == .recipientAccountDoesNotSupportAccessingCryptoAddress
+        {
+            self.state = .error(message: "Recipient does not support fetching address")
         }
         catch let error
         {
