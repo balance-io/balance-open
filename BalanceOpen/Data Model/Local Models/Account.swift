@@ -477,10 +477,6 @@ extension Account: Transferable
     internal var directTransferOperator: TransferOperator.Type? {
         switch self.sourceId
         {
-//        case .coinbase:
-//            return CoinbaseApi
-//        case .gdax:
-//            return GDAXAPIClient
         default:
             return nil
         }
@@ -488,6 +484,16 @@ extension Account: Transferable
     
     internal var exchangeTransferOperator: TransferOperator.Type? {
         return ShapeShiftTransferOperator.self
+    }
+    
+    internal var canMakeWithdrawal: Bool {
+        switch self.sourceId
+        {
+        case .gdax:
+            return true
+        default:
+            return false
+        }
     }
     
     internal func make(withdrawal: Withdrawal, completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void) throws
@@ -513,6 +519,16 @@ extension Account: Transferable
             try apiClient.make(withdrawal: gdaxWithdrawal, completionHandler: completionHandler)
         default:
             throw TransferableError.unsupported
+        }
+    }
+    
+    internal var canRequestCryptoAddress: Bool {
+        switch self.sourceId
+        {
+        case .coinbase:
+            return true
+        default:
+            return false
         }
     }
     
