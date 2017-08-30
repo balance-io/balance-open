@@ -26,7 +26,12 @@ class AccountsTabGroupCell: View {
         self.headerView?.removeFromSuperview()
         self.headerView = nil
         
-        let sourceInstitutionId = institutionsDatabase.primarySourceInstitutionId(source: model.source, sourceInstitutionId: model.sourceInstitutionId) ?? model.sourceInstitutionId
+        let sourceInstitutionId: String
+        if debugging.disableSubscription {
+            sourceInstitutionId = model.source.description
+        } else {
+            sourceInstitutionId = institutionsDatabase.primarySourceInstitutionId(source: model.source, sourceInstitutionId: model.sourceInstitutionId) ?? model.sourceInstitutionId
+        }
         if let headerView = InstitutionHeaders.headerViewForId(sourceInstitutionId: sourceInstitutionId) {
             self.addSubview(headerView)
             self.headerView = headerView
