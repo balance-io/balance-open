@@ -15,6 +15,9 @@ internal protocol Transferable
     var directTransferOperator: TransferOperator.Type? { get }
     var exchangeTransferOperator: TransferOperator.Type? { get }
     
+    var canMakeWithdrawal: Bool { get }
+    var canRequestCryptoAddress: Bool { get }
+    
     func make(withdrawal: Withdrawal, completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void) throws
     func fetchAddress(_ completionHandler: @escaping (_ address: String?, _ error: Error?) -> Void) throws
 }
