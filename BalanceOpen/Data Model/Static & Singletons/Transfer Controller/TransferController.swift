@@ -18,30 +18,10 @@ internal final class TransferController
     
     // MARK: Initialization
     
-    internal init(request: TransferRequest) throws
+    internal init(request: TransferRequest)
     {
         self.transferRequest = request
-        
-        let transferOperatorType: TransferOperator.Type
-        switch transferRequest.type
-        {
-        case .direct:
-            guard let operatorType = self.transferRequest.source.directTransferOperator else
-            {
-                throw InitializationError.directTransferUnsupported
-            }
-            
-            transferOperatorType = operatorType
-        case .exchange:
-            guard let operatorType = self.transferRequest.source.exchangeTransferOperator else
-            {
-                throw InitializationError.exchangeTransferUnsupported
-            }
-            
-            transferOperatorType = operatorType
-        }
-        
-        self.transferOperator = transferOperatorType.init(request: request)
+        self.transferOperator = request.operatorType.init(request: request)
     }
     
     // MARK: Quote
@@ -63,17 +43,5 @@ internal final class TransferController
     internal func performTransferRequest(_ completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void)
     {
         self.transferOperator.performTransfer(completionHandler)
-    }
-}
-
-
-// MARK: Initialization error
-
-internal extension TransferController
-{
-    internal enum InitializationError: Error
-    {
-        case directTransferUnsupported
-        case exchangeTransferUnsupported
     }
 }

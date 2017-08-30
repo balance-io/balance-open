@@ -20,10 +20,11 @@ internal struct TransferRequest
     
     internal let amount: Double
     internal let type: RequestType
+    internal let operatorType: TransferOperator.Type
 
     // MARK: Initialization
     
-    internal init(source: Transferable, recipient: Transferable, amount: Double)
+    internal init(source: Transferable, recipient: Transferable, amount: Double) throws
     {
         self.source = source
         self.sourceCurrency = source.currencyType
@@ -31,6 +32,31 @@ internal struct TransferRequest
         self.recipientCurrency = recipient.currencyType
         self.amount = amount
         self.type = self.sourceCurrency == self.recipientCurrency ? .direct : .exchange
+        
+        // Transfer type validations
+        switch self.type
+        {
+        case .direct:
+            guard let operatorType = source.directTransferOperator else
+            {
+                throw InitializationError.directTransferUnsupported
+            }
+            
+            self.operatorType = operatorType
+        case .exchange:
+            guard let operatorType = source.exchangeTransferOperator else
+            {
+                throw InitializationError.exchangeTransferUnsupported
+            }
+            
+            self.operatorType = operatorType
+        }
+        
+        // Source validations
+        if !source.canMakeWithdrawal { throw InitializationError.sourceAccountDoesNotSupportWithdrawing }
+        
+        // Recipient validations
+        if !recipient.canRequestCryptoAddress { throw InitializationError.recipientAccountDoesNotSupportAccessingCryptoAddress }
     }
 }
 
@@ -48,5 +74,18 @@ internal extension TransferRequest
     internal enum RequestType
     {
         case direct, exchange
+    }
+}
+
+// MARK:
+
+internal extension TransferRequest
+{
+    internal enum InitializationError: Error
+    {
+        case directTransferUnsupported
+        case exchangeTransferUnsupported
+        case sourceAccountDoesNotSupportWithdrawing
+        case recipientAccountDoesNotSupportAccessingCryptoAddress
     }
 }
