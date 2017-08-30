@@ -19,6 +19,9 @@ internal protocol Transferable
     func fetchAddress(_ completionHandler: @escaping (_ address: String?, _ error: Error?) -> Void) throws
 }
 
+
+// MARK: TransferableError
+
 internal enum TransferableError: Error
 {
     case unsupported
