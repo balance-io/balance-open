@@ -500,13 +500,13 @@ fileprivate class AccountCell: View {
         let hidden = defaults.hiddenAccountIds.contains(updatedModel.accountId)
         showButton.state = hidden ? .off : .on
         
-        nameField.stringValue = updatedModel.name.capitalizedStringIfAllCaps
+        nameField.stringValue = updatedModel.displayName
         nameField.textColor = hidden ? NSColor(deviceWhite: 0, alpha: 0.46) : .black
     }
     
     @objc fileprivate func showButtonAction(button: Button) {
         if let model = model {
-            model.isHidden = (button.state == .on)
+            model.isHidden = (button.state == .off)
         }
     }
 }
