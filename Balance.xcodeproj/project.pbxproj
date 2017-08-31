@@ -57,6 +57,7 @@
 		530F57C61DCD72680083F3A7 /* FMDatabaseAdditionsVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530F57971DCD72680083F3A7 /* FMDatabaseAdditionsVariadic.swift */; };
 		530F57CF1DCD72680083F3A7 /* FMDatabaseVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530F57981DCD72680083F3A7 /* FMDatabaseVariadic.swift */; };
 		53124FB91D8F13E700D7ADF6 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53124FB81D8F13E700D7ADF6 /* IntroViewController.swift */; };
+		5313F9621F58CFB800DD6BDB /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5313F9601F58CFAC00DD6BDB /* TrustKit.framework */; };
 		5317BD251D51346F003E8BAB /* PreferencesRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5317BD241D51346F003E8BAB /* PreferencesRulesViewController.swift */; };
 		531913E51D5C8E2B00BB995B /* InsightsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531913E41D5C8E2B00BB995B /* InsightsTabViewController.swift */; };
 		531E8D9A1C6A598500F765F7 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531E8D991C6A598500F765F7 /* Source.swift */; };
@@ -506,6 +507,7 @@
 		530F57971DCD72680083F3A7 /* FMDatabaseAdditionsVariadic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMDatabaseAdditionsVariadic.swift; sourceTree = "<group>"; };
 		530F57981DCD72680083F3A7 /* FMDatabaseVariadic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMDatabaseVariadic.swift; sourceTree = "<group>"; };
 		53124FB81D8F13E700D7ADF6 /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		5313F9601F58CFAC00DD6BDB /* TrustKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TrustKit.framework; path = Carthage/Build/iOS/TrustKit.framework; sourceTree = SOURCE_ROOT; };
 		5317BD241D51346F003E8BAB /* PreferencesRulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesRulesViewController.swift; sourceTree = "<group>"; };
 		531913E41D5C8E2B00BB995B /* InsightsTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsightsTabViewController.swift; sourceTree = "<group>"; };
 		531E8D991C6A598500F765F7 /* Source.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
@@ -791,6 +793,7 @@
 				53F0786C1ED747C700E7EDF9 /* libsqlcipher.a in Frameworks */,
 				53552A521ED72E4C00DD95F9 /* StoreKit.framework in Frameworks */,
 				53FCE3481F06B5DC004EB25C /* XCGLogger.framework in Frameworks */,
+				5313F9621F58CFB800DD6BDB /* TrustKit.framework in Frameworks */,
 				53FCE3461F06B5DC004EB25C /* SnapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -967,6 +970,13 @@
 				530F57981DCD72680083F3A7 /* FMDatabaseVariadic.swift */,
 			);
 			path = "Swift extensions";
+			sourceTree = "<group>";
+		};
+		5313F9611F58CFB800DD6BDB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		532121901EE8B91600F4812A /* Zip */ = {
@@ -1233,6 +1243,7 @@
 		53552A571ED72F6C00DD95F9 /* Carthage */ = {
 			isa = PBXGroup;
 			children = (
+				5313F9601F58CFAC00DD6BDB /* TrustKit.framework */,
 				53FCE3391F06B5DC004EB25C /* Locksmith.framework */,
 				53FCE33A1F06B5DC004EB25C /* NSDateTimeAgo.framework */,
 				53FCE33B1F06B5DC004EB25C /* Reachability.framework */,
@@ -1600,6 +1611,7 @@
 				F107D99F1D6B048800CEEF35 /* BalanceUITests */,
 				F1F948801D8049B800AB30B2 /* BalanceUnitTests */,
 				DC1A64951B867B1F009356A0 /* Products */,
+				5313F9611F58CFB800DD6BDB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1971,6 +1983,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyStoreKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/XCGLogger.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/TrustKit.framework",
 			);
 			name = "Copy Carthage Frameworks";
 			outputPaths = (
