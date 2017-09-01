@@ -1,0 +1,525 @@
+{
+    "ANT": {
+        "image": "https://shapeshift.io/images/coins/aragon.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/aragon.png",
+        "name": "Aragon",
+        "status": "available",
+        "symbol": "ANT"
+    },
+    "BAT": {
+        "image": "https://shapeshift.io/images/coins/basicattentiontoken.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/basicattentiontoken.png",
+        "name": "Basic Attention Token",
+        "status": "available",
+        "symbol": "BAT"
+    },
+    "BCH": {
+        "image": "https://shapeshift.io/images/coins/bitcoincash.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/bitcoincash.png",
+        "name": "Bitcoin Cash",
+        "status": "available",
+        "symbol": "BCH"
+    },
+    "BCY": {
+        "image": "https://shapeshift.io/images/coins/bitcrystals.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/bitcrystals.png",
+        "name": "BitCrystals",
+        "status": "unavailable",
+        "symbol": "BCY"
+    },
+    "BLK": {
+        "image": "https://shapeshift.io/images/coins/blackcoin.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/blackcoin.png",
+        "name": "Blackcoin",
+        "status": "available",
+        "symbol": "BLK"
+    },
+    "BNT": {
+        "image": "https://shapeshift.io/images/coins/bancor.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/bancor.png",
+        "name": "Bancor",
+        "status": "available",
+        "symbol": "BNT"
+    },
+    "BTC": {
+        "image": "https://shapeshift.io/images/coins/bitcoin.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/bitcoin.png",
+        "name": "Bitcoin",
+        "status": "available",
+        "symbol": "BTC"
+    },
+    "BTCD": {
+        "image": "https://shapeshift.io/images/coins/bitcoindark.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/bitcoindark.png",
+        "name": "BitcoinDark",
+        "status": "unavailable",
+        "symbol": "BTCD"
+    },
+    "BTS": {
+        "fieldKey": "destTag",
+        "fieldName": "destTag",
+        "image": "https://shapeshift.io/images/coins/bitshares.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/bitshares.png",
+        "name": "Bitshares",
+        "specialIncoming": true,
+        "specialOutgoing": true,
+        "specialReturn": false,
+        "status": "available",
+        "symbol": "BTS"
+    },
+    "CLAM": {
+        "image": "https://shapeshift.io/images/coins/clams.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/clams.png",
+        "name": "Clams",
+        "status": "unavailable",
+        "symbol": "CLAM"
+    },
+    "CVC": {
+        "image": "https://shapeshift.io/images/coins/civic.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/civic.png",
+        "name": "Civic",
+        "status": "available",
+        "symbol": "CVC"
+    },
+    "DASH": {
+        "image": "https://shapeshift.io/images/coins/dash.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/dash.png",
+        "name": "Dash",
+        "status": "available",
+        "symbol": "DASH"
+    },
+    "DCR": {
+        "image": "https://shapeshift.io/images/coins/decred.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/decred.png",
+        "name": "Decred",
+        "status": "available",
+        "symbol": "DCR"
+    },
+    "DGB": {
+        "image": "https://shapeshift.io/images/coins/digibyte.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/digibyte.png",
+        "name": "Digibyte",
+        "status": "available",
+        "symbol": "DGB"
+    },
+    "DGD": {
+        "image": "https://shapeshift.io/images/coins/digixdao.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/digixdao.png",
+        "name": "DigixDao",
+        "status": "available",
+        "symbol": "DGD"
+    },
+    "DNT": {
+        "image": "https://shapeshift.io/images/coins/district0x.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/district0x.png",
+        "name": "district0x",
+        "status": "unavailable",
+        "symbol": "DNT"
+    },
+    "DOGE": {
+        "image": "https://shapeshift.io/images/coins/dogecoin.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/dogecoin.png",
+        "name": "Dogecoin",
+        "status": "available",
+        "symbol": "DOGE"
+    },
+    "EDG": {
+        "image": "https://shapeshift.io/images/coins/edgeless.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/edgeless.png",
+        "name": "Edgeless",
+        "status": "available",
+        "symbol": "EDG"
+    },
+    "EMC": {
+        "image": "https://shapeshift.io/images/coins/emercoin.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/emercoin.png",
+        "name": "Emercoin",
+        "status": "unavailable",
+        "symbol": "EMC"
+    },
+    "EOS": {
+        "image": "https://shapeshift.io/images/coins/eos.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/eos.jpeg",
+        "name": "EOS",
+        "status": "available",
+        "symbol": "EOS"
+    },
+    "ETC": {
+        "image": "https://shapeshift.io/images/coins/etherclassic.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/etherclassic.png",
+        "name": "Ether Classic",
+        "status": "unavailable",
+        "symbol": "ETC"
+    },
+    "ETH": {
+        "image": "https://shapeshift.io/images/coins/ether.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/ether.png",
+        "name": "Ether",
+        "status": "available",
+        "symbol": "ETH"
+    },
+    "FCT": {
+        "image": "https://shapeshift.io/images/coins/factoids.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/factoids.png",
+        "name": "Factoids",
+        "status": "available",
+        "symbol": "FCT"
+    },
+    "FUN": {
+        "image": "https://shapeshift.io/images/coins/funfair.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/funfair.png",
+        "name": "FunFair",
+        "status": "available",
+        "symbol": "FUN"
+    },
+    "GAME": {
+        "image": "https://shapeshift.io/images/coins/game.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/game.png",
+        "name": "GameCredits",
+        "status": "available",
+        "symbol": "GAME"
+    },
+    "GNO": {
+        "image": "https://shapeshift.io/images/coins/gnosis.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/gnosis.png",
+        "name": "Gnosis",
+        "status": "available",
+        "symbol": "GNO"
+    },
+    "GNT": {
+        "image": "https://shapeshift.io/images/coins/golem.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/golem.png",
+        "name": "Golem",
+        "status": "available",
+        "symbol": "GNT"
+    },
+    "GUP": {
+        "image": "https://shapeshift.io/images/coins/matchpool.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/matchpool.png",
+        "name": "Matchpool",
+        "status": "available",
+        "symbol": "GUP"
+    },
+    "ICN": {
+        "image": "https://shapeshift.io/images/coins/iconomi.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/iconomi.png",
+        "name": "Iconomi",
+        "status": "available",
+        "symbol": "ICN"
+    },
+    "KMD": {
+        "image": "https://shapeshift.io/images/coins/komodo.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/komodo.png",
+        "name": "Komodo",
+        "status": "available",
+        "symbol": "KMD"
+    },
+    "LBC": {
+        "image": "https://shapeshift.io/images/coins/lbry.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/lbry.png",
+        "name": "LBRY Credits",
+        "status": "available",
+        "symbol": "LBC"
+    },
+    "LSK": {
+        "image": "https://shapeshift.io/images/coins/lisk.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/lisk.png",
+        "name": "Lisk",
+        "status": "unavailable",
+        "symbol": "LSK"
+    },
+    "LTC": {
+        "image": "https://shapeshift.io/images/coins/litecoin.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/litecoin.png",
+        "name": "Litecoin",
+        "status": "available",
+        "symbol": "LTC"
+    },
+    "MAID": {
+        "image": "https://shapeshift.io/images/coins/maidsafe.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/maidsafe.png",
+        "name": "Maidsafe",
+        "status": "unavailable",
+        "symbol": "MAID"
+    },
+    "MLN": {
+        "image": "https://shapeshift.io/images/coins/melon.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/melon.png",
+        "name": "Melon",
+        "status": "available",
+        "symbol": "MLN"
+    },
+    "MONA": {
+        "image": "https://shapeshift.io/images/coins/monacoin.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/monacoin.png",
+        "name": "Monacoin",
+        "status": "available",
+        "symbol": "MONA"
+    },
+    "MSC": {
+        "image": "https://shapeshift.io/images/coins/mastercoin.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/mastercoin.png",
+        "name": "Omni",
+        "status": "unavailable",
+        "symbol": "MSC"
+    },
+    "MTL": {
+        "image": "https://shapeshift.io/images/coins/metal.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/metal.png",
+        "name": "Metal",
+        "status": "available",
+        "symbol": "MTL"
+    },
+    "NBT": {
+        "image": "https://shapeshift.io/images/coins/nubits.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/nubits.png",
+        "name": "Nubits",
+        "status": "unavailable",
+        "symbol": "NBT"
+    },
+    "NMC": {
+        "image": "https://shapeshift.io/images/coins/namecoin.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/namecoin.png",
+        "name": "Namecoin",
+        "status": "available",
+        "symbol": "NMC"
+    },
+    "NMR": {
+        "image": "https://shapeshift.io/images/coins/numeraire.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/numeraire.png",
+        "name": "Numeraire",
+        "status": "available",
+        "symbol": "NMR"
+    },
+    "NVC": {
+        "image": "https://shapeshift.io/images/coins/novacoin.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/novacoin.png",
+        "name": "Novacoin",
+        "status": "unavailable",
+        "symbol": "NVC"
+    },
+    "NXT": {
+        "fieldKey": "rsAddress",
+        "image": "https://shapeshift.io/images/coins/nxt.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/nxt.png",
+        "name": "Nxt",
+        "specialIncoming": true,
+        "specialIncomingStatus": false,
+        "specialOutgoing": true,
+        "specialReturn": false,
+        "status": "available",
+        "symbol": "NXT"
+    },
+    "OMG": {
+        "image": "https://shapeshift.io/images/coins/omisego.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/omisego.png",
+        "name": "OmiseGo",
+        "status": "available",
+        "symbol": "OMG"
+    },
+    "PAY": {
+        "image": "https://shapeshift.io/images/coins/tenx.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/tenx.png",
+        "name": "TenX",
+        "status": "available",
+        "symbol": "PAY"
+    },
+    "POT": {
+        "image": "https://shapeshift.io/images/coins/potcoin.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/potcoin.png",
+        "name": "Potcoin",
+        "status": "available",
+        "symbol": "POT"
+    },
+    "PPC": {
+        "image": "https://shapeshift.io/images/coins/peercoin.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/peercoin.png",
+        "name": "Peercoin",
+        "status": "unavailable",
+        "symbol": "PPC"
+    },
+    "QTUM": {
+        "image": "https://shapeshift.io/images/coins/qtum.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/qtum.png",
+        "name": "Qtum",
+        "status": "unavailable",
+        "symbol": "QTUM"
+    },
+    "RDD": {
+        "image": "https://shapeshift.io/images/coins/reddcoin.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/reddcoin.png",
+        "name": "Reddcoin",
+        "status": "available",
+        "symbol": "RDD"
+    },
+    "REP": {
+        "image": "https://shapeshift.io/images/coins/augur.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/augur.png",
+        "name": "Augur",
+        "status": "available",
+        "symbol": "REP"
+    },
+    "RLC": {
+        "image": "https://shapeshift.io/images/coins/iexec.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/iexec.png",
+        "name": "iExec",
+        "status": "available",
+        "symbol": "RLC"
+    },
+    "SC": {
+        "image": "https://shapeshift.io/images/coins/siacoin.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/siacoin.png",
+        "name": "Siacoin",
+        "status": "available",
+        "symbol": "SC"
+    },
+    "SJCX": {
+        "image": "https://shapeshift.io/images/coins/storjcoinx.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/storjcoinx.png",
+        "name": "StorjX",
+        "status": "unavailable",
+        "symbol": "SJCX"
+    },
+    "SNGLS": {
+        "image": "https://shapeshift.io/images/coins/singular.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/singular.png",
+        "name": "SingularDTV",
+        "status": "available",
+        "symbol": "SNGLS"
+    },
+    "SNT": {
+        "image": "https://shapeshift.io/images/coins/status.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/status.png",
+        "name": "Status",
+        "status": "available",
+        "symbol": "SNT"
+    },
+    "START": {
+        "image": "https://shapeshift.io/images/coins/startcoin.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/startcoin.png",
+        "name": "Startcoin",
+        "status": "available",
+        "symbol": "START"
+    },
+    "STEEM": {
+        "fieldKey": "destTag",
+        "fieldName": "destTag",
+        "image": "https://shapeshift.io/images/coins/steem.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/steem.png",
+        "name": "Steem",
+        "specialIncoming": true,
+        "specialOutgoing": true,
+        "specialReturn": false,
+        "status": "unavailable",
+        "symbol": "STEEM"
+    },
+    "SWT": {
+        "image": "https://shapeshift.io/images/coins/swarmcity.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/swarmcity.png",
+        "name": "Swarm City",
+        "status": "available",
+        "symbol": "SWT"
+    },
+    "TKN": {
+        "image": "https://shapeshift.io/images/coins/tokencard.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/tokencard.png",
+        "name": "TokenCard",
+        "status": "available",
+        "symbol": "TKN"
+    },
+    "TRST": {
+        "image": "https://shapeshift.io/images/coins/wetrust.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/wetrust.png",
+        "name": "WeTrust",
+        "status": "available",
+        "symbol": "TRST"
+    },
+    "USDT": {
+        "image": "https://shapeshift.io/images/coins/tether.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/tether.png",
+        "name": "Tether",
+        "status": "unavailable",
+        "symbol": "USDT"
+    },
+    "VOX": {
+        "image": "https://shapeshift.io/images/coins/voxels.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/voxels.png",
+        "name": "Voxels",
+        "status": "available",
+        "symbol": "VOX"
+    },
+    "VRC": {
+        "image": "https://shapeshift.io/images/coins/vericoin.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/vericoin.png",
+        "name": "Vericoin",
+        "status": "available",
+        "symbol": "VRC"
+    },
+    "VTC": {
+        "image": "https://shapeshift.io/images/coins/vertcoin.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/vertcoin.png",
+        "name": "Vertcoin",
+        "status": "available",
+        "symbol": "VTC"
+    },
+    "WAVES": {
+        "image": "https://shapeshift.io/images/coins/waves.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/waves.png",
+        "name": "Waves",
+        "status": "unavailable",
+        "symbol": "WAVES"
+    },
+    "WINGS": {
+        "image": "https://shapeshift.io/images/coins/wings.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/wings.png",
+        "name": "Wings",
+        "status": "available",
+        "symbol": "WINGS"
+    },
+    "XCP": {
+        "image": "https://shapeshift.io/images/coins/counterparty.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/counterparty.png",
+        "name": "Counterparty",
+        "status": "unavailable",
+        "symbol": "XCP"
+    },
+    "XMR": {
+        "fieldKey": "paymentId",
+        "fieldName": "Payment Id",
+        "image": "https://shapeshift.io/images/coins/monero.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/monero.png",
+        "name": "Monero",
+        "qrName": "tx_payment_id",
+        "specialIncoming": true,
+        "specialOutgoing": true,
+        "specialReturn": false,
+        "status": "available",
+        "symbol": "XMR"
+    },
+    "XRP": {
+        "fieldKey": "destTag",
+        "fieldName": "Destination Tag",
+        "image": "https://shapeshift.io/images/coins/ripple.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/ripple.png",
+        "name": "Ripple",
+        "specialIncoming": true,
+        "specialOutgoing": true,
+        "specialReturn": false,
+        "status": "available",
+        "symbol": "XRP"
+    },
+    "ZEC": {
+        "image": "https://shapeshift.io/images/coins/zcash.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/zcash.png",
+        "name": "Zcash",
+        "status": "available",
+        "symbol": "ZEC"
+    },
+    "ZRX": {
+        "image": "https://shapeshift.io/images/coins/0x.png",
+        "imageSmall": "https://shapeshift.io/images/coins-sm/0x.png",
+        "name": "0x",
+        "status": "unavailable",
+        "symbol": "ZRX"
+    }
+}

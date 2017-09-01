@@ -1,0 +1,11 @@
+{
+    "apiPubKey": "shapeshift",
+    "deposit": "0xd1ca5e7b056f8b2f0519f88164746ec87f98cac6",
+    "depositType": "ETH",
+    "orderId": "b5d27dc5-9f0b-4f24-aec7-82a89e09e984",
+    "public": null,
+    "returnAddress": "0x9afc2d379f8ac9e672977525883110b5836c017f",
+    "returnAddressType": "ETH",
+    "withdrawal": "1Nu5L2yc5o6hfBraKtXVF8AKFpPqGntSX6",
+    "withdrawalType": "BTC"
+}
