@@ -54,7 +54,7 @@ class PoloniexAccountToAccountTests: XCTestCase {
         let account = try! PoloniexAccount(dictionary: dictionary as! [String : AnyObject], currencyShortName: currency, type: AccountType.exchange)
         
         //then
-        XCTAssertEqual(account.balance, Int(2657640000000))
+        XCTAssertEqual(account.available, Decimal.init(string: "26576.400000005")!)
     }
     
     func testCurrencyBalanceForBTC() {
@@ -66,7 +66,7 @@ class PoloniexAccountToAccountTests: XCTestCase {
         let account = try! PoloniexAccount(dictionary: dictionary as! [String : AnyObject], currencyShortName: currency, type: AccountType.exchange)
         
         //then
-        XCTAssertEqual(account.balance, Int(17786885))
+        XCTAssertEqual(account.available, Decimal.init(string: "0.17786885")!)
     }
     
     func testCurrencyAltBalanceForSC() {
@@ -78,7 +78,7 @@ class PoloniexAccountToAccountTests: XCTestCase {
         let account = try! PoloniexAccount(dictionary: dictionary as! [String : AnyObject], currencyShortName: currency, type: AccountType.exchange)
         
         //then
-        XCTAssertEqual(account.altBalance, Int(17786885))
+        XCTAssertEqual(account.btcValue, Decimal.init(string: "0.17786885")!)
     }
     
     func testCurrencyAltBalanceForBTC() {
@@ -90,7 +90,7 @@ class PoloniexAccountToAccountTests: XCTestCase {
         let account = try! PoloniexAccount(dictionary: dictionary as! [String : AnyObject], currencyShortName: currency, type: AccountType.exchange)
         
         //then
-        XCTAssertEqual(account.altBalance, Int(17786885))
+        XCTAssertEqual(account.btcValue, Decimal.init(string: "0.17786885")!)
     }
 
 }
