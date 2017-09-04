@@ -5,5 +5,4 @@
 #import <CommonCrypto/CommonCrypto.h>
 #import "ObjC.h"
 #import "FMDB.h"
-#import "TrustKit.h"
 #import "CertValidator.h"

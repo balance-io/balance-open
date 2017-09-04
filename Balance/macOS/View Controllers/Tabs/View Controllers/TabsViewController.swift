@@ -135,10 +135,12 @@ class TabsViewController: NSViewController {
             showTab(tabIndex: defaultTab.rawValue)
         }
         
-        // Preload the views
-        let _ = transactionsViewController.view
-        let _ = notificationsViewController.view
-        let _ = insightsViewController.view
+        if !debugging.disableTransactions {
+            // Preload the transaction views
+            let _ = transactionsViewController.view
+            let _ = notificationsViewController.view
+            let _ = insightsViewController.view
+        }
     }
     
     func createHeader() {

@@ -9,7 +9,7 @@
 import Foundation
 
 class Syncer {
-    fileprivate let gdaxApiClient = GDAXAPIClient(server: .sandbox)
+    fileprivate let gdaxApiClient = GDAXAPIClient(server: .production)
     
     fileprivate(set) var newInstitutionsOnly = false
     fileprivate(set) var syncing = false

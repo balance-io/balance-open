@@ -7,7 +7,9 @@ class PreferencesGeneralViewController: NSViewController {
     @IBOutlet weak var logInCheckBox: NSButton!
     @IBOutlet weak var themeSegmentControl: NSSegmentedControl!
     @IBOutlet weak var shortcutView: MASShortcutView!
+    @IBOutlet weak var emailPreferenceTextField: NSTextField!
     @IBOutlet weak var emailPreferencePopUpButton: NSPopUpButton!
+    @IBOutlet weak var searchPreferenceTextField: NSTextField!
     @IBOutlet weak var searchPreferencePopUpButton: NSPopUpButton!
     
     override func viewWillAppear() {
@@ -22,6 +24,12 @@ class PreferencesGeneralViewController: NSViewController {
         
         emailPreferencePopUpButton.selectItem(at: defaults.emailPreference.rawValue)
         searchPreferencePopUpButton.selectItem(at: defaults.searchPreference.rawValue)
+        
+        let disableTransactions = debugging.disableTransactions
+        emailPreferenceTextField.isHidden = disableTransactions
+        emailPreferencePopUpButton.isHidden = disableTransactions
+        searchPreferenceTextField.isHidden = disableTransactions
+        searchPreferencePopUpButton.isHidden = disableTransactions
     }
 
     @IBAction func logInCheckBoxPress(_ sender: NSButton) {
