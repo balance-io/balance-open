@@ -93,7 +93,11 @@ class PoloniexApi: ExchangeApi {
         guard let secret = secretField, let key = keyField else {
             assert(false, "wrong fields are passed into the poloniex auth, we require secret and key fields and values")
         }
-        authenticate(secret: secret, key: key, closeBlock: closeBlock)
+        do {
+            try authenticate(secret: secret, key: key, closeBlock: closeBlock)
+        } catch {
+            
+        }
     }
     
     func fetchBalances(institution: Institution, completion: @escaping SuccessErrorBlock) {
@@ -129,7 +133,7 @@ class PoloniexApi: ExchangeApi {
     fileprivate func findError(data: Data) -> String? {
         do {
             guard let dict = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] else {
-                throw "JSON decoding failed"
+                throw PoloniexApi.CredentialsError.bodyNotValidJSON
             }
             if dict.keys.count == 1 {
                 if let errorDict = dict["error"] {
@@ -143,7 +147,7 @@ class PoloniexApi: ExchangeApi {
     }
     
     // Poloniex doesn't have an authenticate method "per-se" so we use the returnBalances call to validate the key-secret pair for login
-    fileprivate func authenticate(secret: String, key: String, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
+    fileprivate func authenticate(secret: String, key: String, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) throws {
         self.secret = secret
         self.key = key
         
@@ -153,7 +157,9 @@ class PoloniexApi: ExchangeApi {
             do {
                 if let safeData = data {
                     //if error exists should be reported to UI data
-                    _ = self.findError(data: safeData)
+                    if let error = self.findError(data: safeData) {
+                        throw PoloniexApi.CredentialsError.invalidCredentials(message: error)
+                    }
                     // Create the institution and finish (we do not have access tokens)
                     if let institution = InstitutionRepository.si.institution(source: .poloniex, sourceInstitutionId: "", name: "Poloniex") {
                         institution.secret = secret
@@ -171,7 +177,7 @@ class PoloniexApi: ExchangeApi {
                 } else {
                     print("Poloniex Error: \(String(describing: error))")
                     print("Poloniex Data: \(String(describing: data))")
-                    throw "Error \(String(describing:error))"
+                    throw PoloniexApi.CredentialsError.bodyNotValidJSON
                 }
             }
             catch {
@@ -213,7 +219,7 @@ class PoloniexApi: ExchangeApi {
     
     fileprivate func parsePoloniexAccounts(data: Data) throws -> [PoloniexAccount] {
         guard let dict = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] else {
-            throw "JSON decoding failed"
+            throw PoloniexApi.CredentialsError.bodyNotValidJSON
         }
         
         var poloniexAccounts = [PoloniexAccount]()

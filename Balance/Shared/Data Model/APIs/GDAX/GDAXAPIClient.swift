@@ -74,6 +74,7 @@ internal extension GDAXAPIClient
         
         // Perform request
         let task = self.session.dataTask(with: request) { (data, response, error) in
+            do {
             guard let httpResponse = response as? HTTPURLResponse,
                 let json = try? JSONSerialization.jsonObject(with: data!, options: []) else
             {
@@ -81,20 +82,16 @@ internal extension GDAXAPIClient
                 return
             }
             
-            if case 200...299 = httpResponse.statusCode
-            {
-                guard let accountsJSON = json as? [[String : Any]] else
-                {
+            if case 200...299 = httpResponse.statusCode {
+                guard let accountsJSON = json as? [[String : Any]] else {
                     // return invalid json
                     fatalError()
                 }
                 
                 // Build accounts
                 var accounts = [GDAXAPIClient.Account]()
-                for accountJSON in accountsJSON
-                {
-                    do
-                    {
+                for accountJSON in accountsJSON {
+                    do {
                         let account = try Account(dictionary: accountJSON)
                         accounts.append(account)
                     }
@@ -103,11 +100,15 @@ internal extension GDAXAPIClient
                 
                 completionHandler(accounts, nil)
             }
-            else
-            {
+            if case 400...499 = httpResponse.statusCode {
+                let error = APIError.response(httpResponse: httpResponse, data: data)
+                completionHandler(nil, error)
+                throw GDAXAPIClient.CredentialsError.invalidSecret(message: "One or more of your credentials is invalid")
+            } else {
                 let error = APIError.response(httpResponse: httpResponse, data: data)
                 completionHandler(nil, error)
             }
+            } catch {}
         }
         
         task.resume()
@@ -116,12 +117,9 @@ internal extension GDAXAPIClient
 
 // MARK: Withdraw
 
-internal extension GDAXAPIClient
-{
-    internal func make(withdrawal: Withdrawal, completionHandler: @escaping (_ success: Bool, _ error: APIError?) -> Void) throws
-    {
-        guard let unwrappedCredentials = self.credentials else
-        {
+internal extension GDAXAPIClient {
+    internal func make(withdrawal: Withdrawal, completionHandler: @escaping (_ success: Bool, _ error: APIError?) -> Void) throws {
+        guard let unwrappedCredentials = self.credentials else {
             throw GDAXAPIClient.CredentialsError.noCredentials
         }
         
@@ -140,17 +138,13 @@ internal extension GDAXAPIClient
         
         // Perform request
         let task = self.session.dataTask(with: request) { (data, response, error) in
-            guard let httpResponse = response as? HTTPURLResponse else
-            {
+            guard let httpResponse = response as? HTTPURLResponse else {
                 return
             }
             
-            if case 200...299 = httpResponse.statusCode
-            {
+            if case 200...299 = httpResponse.statusCode {
                 completionHandler(true, nil)
-            }
-            else
-            {
+            } else {
                 let error = APIError.response(httpResponse: httpResponse, data: data)
                 completionHandler(false, error)
             }
@@ -216,6 +210,10 @@ extension GDAXAPIClient: ExchangeApi {
                 
                 // TODO: Display error
                 print(unwrappedError)
+                async {
+                    closeBlock(false, unwrappedError, nil)
+                }
+                
             }
         }
         catch GDAXAPIClient.CredentialsError.invalidSecret {
