@@ -99,8 +99,7 @@ internal extension GDAXAPIClient
                 }
                 
                 completionHandler(accounts, nil)
-            }
-            if case 400...499 = httpResponse.statusCode {
+            } else if case 400...499 = httpResponse.statusCode {
                 let error = APIError.response(httpResponse: httpResponse, data: data)
                 completionHandler(nil, error)
                 throw GDAXAPIClient.CredentialsError.invalidSecret(message: "One or more of your credentials is invalid")
