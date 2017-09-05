@@ -10,27 +10,30 @@ import Foundation
 
 // MARK: Model error
 
-internal extension GDAXAPIClient
-{
-    internal enum ModelError: Error
-    {
+extension GDAXAPIClient {
+    enum ModelError: LocalizedError {
         case invalidJSON(json: [String : Any])
+        
+        var errorDescription: String? {
+            switch self {
+            case .invalidJSON:
+                return "There was a problem reaching the server."
+            }
+        }
     }
 }
 
 // MARK: Credentials error
 
-internal extension GDAXAPIClient
-{
-    internal enum CredentialsError: Error
-    {
+extension GDAXAPIClient {
+    enum CredentialsError: LocalizedError {
         case noCredentials
         case invalidSecret(message: String)
         case bodyNotValidJSON
         case dataNotFound(identifier: String)
         case missingPermissions
         
-        var localizedDescription: String {
+        var errorDescription: String? {
             switch self {
             case .bodyNotValidJSON:
                 return "There was a problem reaching the server."
@@ -47,26 +50,21 @@ internal extension GDAXAPIClient
     }
 }
 
-internal extension GDAXAPIClient
-{
-    internal enum APIError: Error
-    {
+extension GDAXAPIClient {
+    enum APIError: LocalizedError {
         case invalidJSON
         case response(httpResponse: HTTPURLResponse, data: Data?)
         
         // MARK: Message
         
-        internal func message() -> String?
-        {
-            switch self
-            {
+        var errorDescription: String? {
+            switch self {
             case .invalidJSON:
                 return "Invalid JSON"
             case .response(_, let data):
                 guard let unwrappedData = data,
                       let json = try? JSONSerialization.jsonObject(with: unwrappedData, options: []) as? [String : Any],
-                      let message = json?["message"] as? String else
-                {
+                      let message = json?["message"] as? String else {
                     return nil
                 }
                 

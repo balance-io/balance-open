@@ -9,12 +9,12 @@
 import Foundation
 
 extension PoloniexApi {
-    enum CredentialsError: Error {
+    enum CredentialsError: LocalizedError {
         case bodyNotValidJSON
         case incorrectLoginCredentials
         case invalidPermissionCredentials
     
-        var localizedDescription: String {
+        var errorDescription: String? {
             switch self {
             case .bodyNotValidJSON:
                 return "There was a problem reaching the server."

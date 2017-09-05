@@ -878,13 +878,15 @@ class SignUpViewController: NSViewController {
         
         loadingField.textColor = errorTextColor
         loadingField.shadow = loadingFieldShadow
-        if let error = error {
-            setLoadingFieldString(error.localizedDescription)
-        } else {
-            setLoadingFieldString("Connecting failed with an unknown error")
+        var submissionDescription = "Connecting failed with an unknown error"
+        if let error = error as? LocalizedError, let errorDescription = error.errorDescription {
+            submissionDescription = errorDescription
+        } else if let error = error {
+            submissionDescription = error.localizedDescription
         }
+        setLoadingFieldString(submissionDescription)
         
-        submitConnectionFailedEvent(error?.localizedDescription ?? "Unknown error")
+        submitConnectionFailedEvent(submissionDescription)
         
         // Shake the window
         self.view.window?.shake()
