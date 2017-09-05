@@ -43,6 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         
+        // Background fetch
+        let hourInSeconds = 60.0 * 60.0
+        application.setMinimumBackgroundFetchInterval(hourInSeconds)
         
         //////////////////
         //benDebugging()
@@ -104,8 +107,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
+    {
+        syncManager.sync(userInitiated: false, validateReceipt: false) { (success, error) in
+            let result: UIBackgroundFetchResult = success ? .newData : .failed
+            completionHandler(result)
+        }
     }
-
-
 }
 
