@@ -119,7 +119,6 @@
 		535315271F4CEBF2008D6890 /* ApiInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535315251F4CEBF2008D6890 /* ApiInstitution.swift */; };
 		535529DB1ED723C600DD95F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535529DA1ED723C600DD95F9 /* AppDelegate.swift */; };
 		535529DD1ED723C600DD95F9 /* AccountsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535529DC1ED723C600DD95F9 /* AccountsTabViewController.swift */; };
-		535529E01ED723C600DD95F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 535529DE1ED723C600DD95F9 /* Main.storyboard */; };
 		535529E21ED723C600DD95F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 535529E11ED723C600DD95F9 /* Assets.xcassets */; };
 		535529E51ED723C600DD95F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 535529E31ED723C600DD95F9 /* LaunchScreen.storyboard */; };
 		535529F11ED724ED00DD95F9 /* TabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530422891ED39742001CA499 /* TabViewModel.swift */; };
@@ -381,6 +380,15 @@
 		53FCE37C1F06B819004EB25C /* XCGLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3551F06B653004EB25C /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		676ED7A51D17ACB400D03395 /* SampleResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676ED7A41D17ACB400D03395 /* SampleResponses.swift */; };
 		683C8AF33412F6F79047BEA7 /* PlaidDataMockingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683C80ACC7400FAF5987EC28 /* PlaidDataMockingProtocol.swift */; };
+		A42D58941F5EB37B0046BDCE /* MultilineTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42D58931F5EB3770046BDCE /* MultilineTitleView.swift */; };
+		A42D58971F5ECE7A0046BDCE /* AddAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42D58961F5ECE7A0046BDCE /* AddAccountViewModel.swift */; };
+		A4C49F431F5EA20300AA79FA /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C49F421F5EA20300AA79FA /* RootViewController.swift */; };
+		A4C49F461F5EA53000AA79FA /* AccountsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C49F451F5EA53000AA79FA /* AccountsListViewController.swift */; };
+		A4C49F491F5EA98900AA79FA /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C49F481F5EA98900AA79FA /* AddAccountViewController.swift */; };
+		A4C49F531F5EAD9300AA79FA /* Reuseable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C49F4C1F5EABB000AA79FA /* Reuseable.swift */; };
+		A4C49F541F5EAD9800AA79FA /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C49F501F5EABD800AA79FA /* TableViewCell.swift */; };
+		A4C49F551F5EAD9800AA79FA /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C49F4F1F5EABD800AA79FA /* TextFieldTableViewCell.swift */; };
+		A4C49F561F5EAD9800AA79FA /* Value1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C49F4E1F5EABD800AA79FA /* Value1TableViewCell.swift */; };
 		AA4776591DEA901900110685 /* InstitutionInitialsCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4776581DEA901900110685 /* InstitutionInitialsCircleView.swift */; };
 		AA5031A41DF2334000842A7D /* HeaderBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5031A31DF2334000842A7D /* HeaderBackgroundView.swift */; };
 		DC1A649F1B867B1F009356A0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1A649D1B867B1F009356A0 /* MainMenu.xib */; };
@@ -576,7 +584,6 @@
 		535529D81ED723C600DD95F9 /* Balance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		535529DA1ED723C600DD95F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		535529DC1ED723C600DD95F9 /* AccountsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsTabViewController.swift; sourceTree = "<group>"; };
-		535529DF1ED723C600DD95F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		535529E11ED723C600DD95F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		535529E41ED723C600DD95F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		535529E61ED723C600DD95F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -735,6 +742,15 @@
 		676ED79E1D17AC5D00D03395 /* MockData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MockData; sourceTree = "<group>"; };
 		676ED7A41D17ACB400D03395 /* SampleResponses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleResponses.swift; sourceTree = "<group>"; };
 		683C80ACC7400FAF5987EC28 /* PlaidDataMockingProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaidDataMockingProtocol.swift; sourceTree = "<group>"; };
+		A42D58931F5EB3770046BDCE /* MultilineTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTitleView.swift; sourceTree = "<group>"; };
+		A42D58961F5ECE7A0046BDCE /* AddAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountViewModel.swift; sourceTree = "<group>"; };
+		A4C49F421F5EA20300AA79FA /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		A4C49F451F5EA53000AA79FA /* AccountsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListViewController.swift; sourceTree = "<group>"; };
+		A4C49F481F5EA98900AA79FA /* AddAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
+		A4C49F4C1F5EABB000AA79FA /* Reuseable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reuseable.swift; sourceTree = "<group>"; };
+		A4C49F4E1F5EABD800AA79FA /* Value1TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Value1TableViewCell.swift; sourceTree = "<group>"; };
+		A4C49F4F1F5EABD800AA79FA /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		A4C49F501F5EABD800AA79FA /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		AA4776581DEA901900110685 /* InstitutionInitialsCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionInitialsCircleView.swift; sourceTree = "<group>"; };
 		AA5031A31DF2334000842A7D /* HeaderBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderBackgroundView.swift; sourceTree = "<group>"; };
 		DC1A64941B867B1F009356A0 /* Balance Open.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Balance Open.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1132,11 +1148,14 @@
 		535529ED1ED7242B00DD95F9 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				53762EB21ED796F100D34A1E /* main.swift */,
+				535529DA1ED723C600DD95F9 /* AppDelegate.swift */,
+				A42D58951F5ECE650046BDCE /* View Models */,
+				53762EAC1ED7768E00D34A1E /* View Controllers */,
+				A4C49F4A1F5EAB8D00AA79FA /* Views */,
+				A4C49F511F5EAC4B00AA79FA /* Utilities */,
 				53552A491ED72BE000DD95F9 /* Frameworks */,
 				53552A4A1ED72BE900DD95F9 /* Supporting Files */,
-				53762EAC1ED7768E00D34A1E /* View Controllers */,
-				535529DA1ED723C600DD95F9 /* AppDelegate.swift */,
-				53762EB21ED796F100D34A1E /* main.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -1183,7 +1202,6 @@
 				53552A781ED7333100DD95F9 /* Bal-Bridging-Header-iOS.h */,
 				535529E61ED723C600DD95F9 /* Info.plist */,
 				535529E31ED723C600DD95F9 /* LaunchScreen.storyboard */,
-				535529DE1ED723C600DD95F9 /* Main.storyboard */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -1259,7 +1277,9 @@
 		53762EAC1ED7768E00D34A1E /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				535529DC1ED723C600DD95F9 /* AccountsTabViewController.swift */,
+				A4C49F421F5EA20300AA79FA /* RootViewController.swift */,
+				A4C49F441F5EA2AF00AA79FA /* Accounts list */,
+				A4C49F471F5EA95500AA79FA /* Add Account */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -1601,6 +1621,66 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
+		A42D58951F5ECE650046BDCE /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				A42D58961F5ECE7A0046BDCE /* AddAccountViewModel.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		A4C49F441F5EA2AF00AA79FA /* Accounts list */ = {
+			isa = PBXGroup;
+			children = (
+				A4C49F451F5EA53000AA79FA /* AccountsListViewController.swift */,
+				535529DC1ED723C600DD95F9 /* AccountsTabViewController.swift */,
+			);
+			path = "Accounts list";
+			sourceTree = "<group>";
+		};
+		A4C49F471F5EA95500AA79FA /* Add Account */ = {
+			isa = PBXGroup;
+			children = (
+				A4C49F481F5EA98900AA79FA /* AddAccountViewController.swift */,
+			);
+			path = "Add Account";
+			sourceTree = "<group>";
+		};
+		A4C49F4A1F5EAB8D00AA79FA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A42D58931F5EB3770046BDCE /* MultilineTitleView.swift */,
+				A4C49F4B1F5EABA200AA79FA /* Table View */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A4C49F4B1F5EABA200AA79FA /* Table View */ = {
+			isa = PBXGroup;
+			children = (
+				A4C49F4C1F5EABB000AA79FA /* Reuseable.swift */,
+				A4C49F4D1F5EABCE00AA79FA /* Table View Cells */,
+			);
+			path = "Table View";
+			sourceTree = "<group>";
+		};
+		A4C49F4D1F5EABCE00AA79FA /* Table View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				A4C49F501F5EABD800AA79FA /* TableViewCell.swift */,
+				A4C49F4F1F5EABD800AA79FA /* TextFieldTableViewCell.swift */,
+				A4C49F4E1F5EABD800AA79FA /* Value1TableViewCell.swift */,
+			);
+			path = "Table View Cells";
+			sourceTree = "<group>";
+		};
+		A4C49F511F5EAC4B00AA79FA /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		DC1A648B1B867B1F009356A0 = {
 			isa = PBXGroup;
 			children = (
@@ -1847,6 +1927,11 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = Q4G66XSS36;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					DC1A64931B867B1F009356A0 = {
 						CreatedOnToolsVersion = 6.4;
@@ -1914,7 +1999,6 @@
 				535529E51ED723C600DD95F9 /* LaunchScreen.storyboard in Resources */,
 				53F0786E1ED75F4900E7EDF9 /* institutions.db.zip in Resources */,
 				535529E21ED723C600DD95F9 /* Assets.xcassets in Resources */,
-				535529E01ED723C600DD95F9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2060,15 +2144,18 @@
 				5301A76F1F17F56500668099 /* PlaidAccount.swift in Sources */,
 				53F0785E1ED73B7D00E7EDF9 /* Element.swift in Sources */,
 				53552A041ED7251200DD95F9 /* Debugging.swift in Sources */,
+				A42D58971F5ECE7A0046BDCE /* AddAccountViewModel.swift in Sources */,
 				537504FE1F192D280062C11A /* TypeAliases.swift in Sources */,
 				537187F51F4CC37400E7F9D6 /* ExchangeApi.swift in Sources */,
 				53552A0A1ED7251200DD95F9 /* Notifications.swift in Sources */,
 				53D441FC1F44D813006967E1 /* CategoryRepository.swift in Sources */,
 				53552A071ED7251200DD95F9 /* Insights.swift in Sources */,
 				53D441ED1F44B224006967E1 /* FMDatabasePoolAdditions.m in Sources */,
+				A4C49F541F5EAD9800AA79FA /* TableViewCell.swift in Sources */,
 				5301A7781F17F86900668099 /* HTTPMethod.swift in Sources */,
 				535529DD1ED723C600DD95F9 /* AccountsTabViewController.swift in Sources */,
 				537187DF1F4CC23B00E7F9D6 /* GDAXAccount.swift in Sources */,
+				A42D58941F5EB37B0046BDCE /* MultilineTitleView.swift in Sources */,
 				53552A7C1ED7347E00DD95F9 /* MockedDefaults.swift in Sources */,
 				53F078671ED740E500E7EDF9 /* SampleResponses.swift in Sources */,
 				5361BC9F1F562580009C3F07 /* PoloniexInstitution.swift in Sources */,
@@ -2080,6 +2167,7 @@
 				5301A7691F17F47E00668099 /* PlaidApi.swift in Sources */,
 				53552A171ED7251700DD95F9 /* Institution.swift in Sources */,
 				53552A021ED7251200DD95F9 /* Singletons.swift in Sources */,
+				A4C49F431F5EA20300AA79FA /* RootViewController.swift in Sources */,
 				534DDFD91F4CCE9400E6C37F /* URLRequest.swift in Sources */,
 				537187DC1F4CC23B00E7F9D6 /* CoinbaseApi.swift in Sources */,
 				53552A231ED7252900DD95F9 /* Date.swift in Sources */,
@@ -2088,6 +2176,7 @@
 				53552A2A1ED7252900DD95F9 /* DispatchQueue.swift in Sources */,
 				53552A0D1ED7251200DD95F9 /* Search.swift in Sources */,
 				53D441F61F44C477006967E1 /* TransactionRepository.swift in Sources */,
+				A4C49F491F5EA98900AA79FA /* AddAccountViewController.swift in Sources */,
 				535529F11ED724ED00DD95F9 /* TabViewModel.swift in Sources */,
 				532121A61EE8B91600F4812A /* Zip.swift in Sources */,
 				53552A321ED72B5700DD95F9 /* FMResultSet.m in Sources */,
@@ -2095,6 +2184,7 @@
 				53552A251ED7252900DD95F9 /* Data.swift in Sources */,
 				535315271F4CEBF2008D6890 /* ApiInstitution.swift in Sources */,
 				535529F81ED7250100DD95F9 /* SyncDefaults.swift in Sources */,
+				A4C49F551F5EAD9800AA79FA /* TextFieldTableViewCell.swift in Sources */,
 				53D441F91F44CD93006967E1 /* InstitutionRepository.swift in Sources */,
 				537187DE1F4CC23B00E7F9D6 /* GDAXAPIClient.swift in Sources */,
 				537505011F192DC50062C11A /* BalanceError.swift in Sources */,
@@ -2111,10 +2201,12 @@
 				53552A011ED7251200DD95F9 /* Testing.swift in Sources */,
 				53552A031ED7251200DD95F9 /* Database.swift in Sources */,
 				535529F61ED724FA00DD95F9 /* AsyncOperation.swift in Sources */,
+				A4C49F531F5EAD9300AA79FA /* Reuseable.swift in Sources */,
 				53552A001ED7251200DD95F9 /* ObjC.m in Sources */,
 				53552A301ED72B5700DD95F9 /* FMDatabasePool.m in Sources */,
 				53552A241ED7252900DD95F9 /* TimeInterval.swift in Sources */,
 				53552A121ED7251200DD95F9 /* NetworkStatus.swift in Sources */,
+				A4C49F561F5EAD9800AA79FA /* Value1TableViewCell.swift in Sources */,
 				535529F91ED7250100DD95F9 /* Syncer.swift in Sources */,
 				53F078651ED73E6D00E7EDF9 /* ThemeGlobals.swift in Sources */,
 				537187E01F4CC23B00E7F9D6 /* GDAXAuthHeaders.swift in Sources */,
@@ -2128,6 +2220,7 @@
 				53552A2E1ED72B5700DD95F9 /* FMDatabase.m in Sources */,
 				5301A77B1F17FA4600668099 /* PlaidCategory.swift in Sources */,
 				537187FB1F4CC3EF00E7F9D6 /* NumberUtils.swift in Sources */,
+				A4C49F461F5EA53000AA79FA /* AccountsListViewController.swift in Sources */,
 				53552A131ED7251200DD95F9 /* CertValidator.m in Sources */,
 				53552A141ED7251200DD95F9 /* ServerMessage.swift in Sources */,
 				535529FF1ED7250500DD95F9 /* DefaultsStorage.swift in Sources */,
@@ -2395,15 +2488,6 @@
 				5350DFD31D4BB981001C70D3 /* Base */,
 			);
 			name = MainMenu.xib;
-			path = .;
-			sourceTree = "<group>";
-		};
-		535529DE1ED723C600DD95F9 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				535529DF1ED723C600DD95F9 /* Base */,
-			);
-			name = Main.storyboard;
 			path = .;
 			sourceTree = "<group>";
 		};
