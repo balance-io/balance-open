@@ -20,6 +20,8 @@ internal extension Reusable
 }
 
 
+// MARK: UITableView
+
 internal extension UITableView
 {
     func register<T: UITableViewCell>(reusableCell: T.Type) where T: Reusable
@@ -33,6 +35,8 @@ internal extension UITableView
     }
 }
 
+
+// MARK: UICollectionView
 
 internal extension UICollectionView
 {

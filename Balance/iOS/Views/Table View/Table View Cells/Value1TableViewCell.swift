@@ -1,6 +1,6 @@
 //
 //  Value1TableViewCell.swift
-//  ToolKit
+//  Red Davis
 //
 //  Created by Red Davis on 25/05/2017.
 //  Copyright © 2017 Red Davis. All rights reserved.

@@ -14,7 +14,7 @@ internal final class MultilineTitleView: UIView
     // Internal
     internal let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
+        label.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .center
         
@@ -23,7 +23,7 @@ internal final class MultilineTitleView: UIView
     
     internal let detailLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightLight)
+        label.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.light)
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .center
         
