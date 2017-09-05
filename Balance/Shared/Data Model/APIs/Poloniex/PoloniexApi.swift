@@ -161,7 +161,7 @@ class PoloniexApi: ExchangeApi {
                     if case 400 = httpResponse.statusCode {
                         throw PoloniexApi.CredentialsError.incorrectLoginCredentials
                     } else if case 403 = httpResponse.statusCode {
-                        throw PoloniexApi.CredentialsError.invalidPermissionCredentials
+                        throw PoloniexApi.CredentialsError.incorrectLoginCredentials
                     }
                 }
                 
