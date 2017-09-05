@@ -157,10 +157,19 @@ class PoloniexApi: ExchangeApi {
         let urlRequest = assembleTradingRequest(key: key, body: requestInfo.body, hashBody: requestInfo.signedBody)
         let datatask = certValidatedSession.dataTask(with: urlRequest) { data, response, error in
             do {
+                if let httpResponse = response as? HTTPURLResponse {
+                    if case 400 = httpResponse.statusCode {
+                        throw PoloniexApi.CredentialsError.incorrectLoginCredentials
+                    } else if case 403 = httpResponse.statusCode {
+                        throw PoloniexApi.CredentialsError.invalidPermissionCredentials
+                    }
+                }
+                
                 if let safeData = data {
                     //if error exists should be reported to UI data
                     if let error = self.findError(data: safeData) {
-                        throw PoloniexApi.CredentialsError.invalidCredentials(message: error)
+                        print("\(error)")
+                        throw PoloniexApi.CredentialsError.incorrectLoginCredentials
                     }
                     // Create the institution and finish (we do not have access tokens)
                     if let institution = InstitutionRepository.si.institution(source: .poloniex, sourceInstitutionId: "", name: "Poloniex") {

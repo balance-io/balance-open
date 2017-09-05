@@ -28,6 +28,22 @@ internal extension GDAXAPIClient
         case invalidSecret(message: String)
         case bodyNotValidJSON
         case dataNotFound(identifier: String)
+        case missingPermissions
+        
+        var localizedDescription: String {
+            switch self {
+            case .bodyNotValidJSON:
+                return "There was a problem reaching the server."
+            case .noCredentials:
+                return "Invalid login credentials"
+            case .invalidSecret(let message):
+                return "Invalid login credentials. Make sure you have right API and Secret pair: \(message)"
+            case .dataNotFound(let identifier):
+                return "We couldn't reach the server: \(identifier)"
+            case .missingPermissions:
+                return "Your API key needs more permission, please create a new one with more permissions"
+            }
+        }
     }
 }
 

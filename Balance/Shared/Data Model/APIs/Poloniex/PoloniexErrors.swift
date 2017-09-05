@@ -8,13 +8,21 @@
 
 import Foundation
 
-internal extension PoloniexApi
-{
-    internal enum CredentialsError: Error
-    {
-        case invalidCredentials(message: String)
+extension PoloniexApi {
+    enum CredentialsError: Error {
         case bodyNotValidJSON
-        case invalidJSON(json: [String : Any])
-        case incorrectLoginCredentials(message: String)
+        case incorrectLoginCredentials
+        case invalidPermissionCredentials
+    
+        var localizedDescription: String {
+            switch self {
+            case .bodyNotValidJSON:
+                return "There was a problem reaching the server."
+            case .incorrectLoginCredentials:
+                return "Invalid login credentials. Make sure you have right API and Secret pair."
+            case .invalidPermissionCredentials:
+                return "Your API key doesn't have enough permisions to perfom this action."
+            }
+        }
     }
 }
