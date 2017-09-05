@@ -326,6 +326,10 @@ class Debugging {
     var disableSubscription: Bool {
         return true
     }
+    
+    var disableTransactions: Bool {
+        return true
+    }
 }
 
 #endif
