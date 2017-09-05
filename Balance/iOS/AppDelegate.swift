@@ -11,8 +11,14 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     static fileprivate(set) var sharedInstance: AppDelegate!
-
+    
+    // Private
+    private let rootViewController = RootViewController()
+    
+    // Internal
     var window: UIWindow?
+    
+    // MARK: Initialization
     
     override init() {
         super.init()
@@ -27,9 +33,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             URLProtocol.registerClass(PlaidDataMockingProtocol.self)
         }
     }
-
+    
+    // MARK: UIApplicationDelegate
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        // Window
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = self.rootViewController
+        self.window?.backgroundColor = UIColor.white
+        self.window?.makeKeyAndVisible()
+        
         
         //////////////////
         //benDebugging()
