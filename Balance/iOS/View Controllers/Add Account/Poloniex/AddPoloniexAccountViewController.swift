@@ -44,7 +44,7 @@ internal final class AddPoloniexAccountViewController: UIViewController
     {
         super.viewDidLoad()
         
-        self.title = "GDAX"
+        self.title = "Poloniex"
         self.view.backgroundColor = UIColor.white
         
         // Navigation bar
