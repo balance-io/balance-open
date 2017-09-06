@@ -8,28 +8,159 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
 
-    override func viewDidLoad() {
+internal final class SettingsViewController: UIViewController
+{
+    // Fileprivate
+    fileprivate var tableData = [TableSection]()
+    
+    // Private
+    private let viewModel = AccountsTabViewModel()
+    private let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+    
+    // MARK: View lifecycle
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        self.view.backgroundColor = UIColor.white
+        
+        self.title = "Settings"
+        self.view.backgroundColor = UIColor.white
+        
+        // Navigation bar
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneButtonTapped(_:)))
+        
+        if #available(iOS 11.0, *)
+        {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+        }
+        
+        // Table view
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.register(reusableCell: TableViewCell.self)
+        self.view.addSubview(self.tableView)
+        
+        self.tableView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        
+        self.buildTableData()
+        self.tableView.reloadData()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: Data
+    
+    private func buildTableData()
+    {
+        self.viewModel.reloadData()
+        
+        // Table sections
+        var tableSections = [TableSection]()
+        
+        // Insitutions
+        var institutionRows = [TableRow]()
+        let numberOfInstitutions = self.viewModel.numberOfSections()
+        for index in 0..<numberOfInstitutions
+        {
+            guard let institution = self.viewModel.institution(forSection: index) else
+            {
+                continue
+            }
+            
+            var row = TableRow(cellPreparationHandler: { (tableView, indexPath) -> UITableViewCell in
+                let cell: TableViewCell = tableView.dequeueReusableCell(at: indexPath)
+                cell.textLabel?.text = institution.displayName
+                cell.accessoryType = .disclosureIndicator
+                
+                return cell
+            })
+            
+            row.actionHandler = { (indexPath) in
+                // TODO: show list of accounts so user can
+                // choose which ones to show/hide
+            }
+            
+            row.deletionHandler = { [unowned self] (indexPath) in
+                if institution.delete()
+                {
+                    self.buildTableData()
+                    self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                }
+            }
+            
+            institutionRows.append(row)
+        }
+        
+        let accountsSection = TableSection(title: "Accounts", rows: institutionRows)
+        tableSections.append(accountsSection)
+        
+        self.tableData = tableSections
     }
-    */
+    
+    // MARK: Actions
+    
+    @objc private func doneButtonTapped(_ sender: Any)
+    {
+        self.dismiss(animated: true, completion: nil)
+    }
+}
 
+// MARK: UITableViewDataSource
+
+extension SettingsViewController: UITableViewDataSource
+{
+    func numberOfSections(in tableView: UITableView) -> Int
+    {
+        return self.tableData.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        let sectionData = self.tableData[section]
+        return sectionData.rows.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        let sectionData = self.tableData[indexPath.section]
+        let rowData = sectionData.rows[indexPath.row]
+        
+        return rowData.cellPreparationHandler(tableView, indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    {
+        let sectionData = self.tableData[section]
+        return sectionData.title
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
+    {
+        let sectionData = self.tableData[indexPath.section]
+        let rowData = sectionData.rows[indexPath.row]
+        
+        return rowData.isDeletable
+    }
+}
+
+// MARK: UITableViewDelegate
+
+extension SettingsViewController: UITableViewDelegate
+{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return 44.0
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
+    {
+        guard editingStyle == .delete else { return }
+        
+        let sectionData = self.tableData[indexPath.section]
+        let rowData = sectionData.rows[indexPath.row]
+        rowData.deletionHandler?(indexPath)
+    }
 }
