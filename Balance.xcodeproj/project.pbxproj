@@ -392,6 +392,7 @@
 		A4FCFA571F5FE667003EFD55 /* AddGDAXAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FCFA561F5FE667003EFD55 /* AddGDAXAccountViewController.swift */; };
 		A4FCFA591F5FEFF3003EFD55 /* TableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FCFA581F5FEFF3003EFD55 /* TableData.swift */; };
 		A4FCFA5C1F601686003EFD55 /* AddPoloniexAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FCFA5B1F601686003EFD55 /* AddPoloniexAccountViewController.swift */; };
+		A4FCFA5F1F603157003EFD55 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FCFA5E1F603157003EFD55 /* SettingsViewController.swift */; };
 		AA4776591DEA901900110685 /* InstitutionInitialsCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4776581DEA901900110685 /* InstitutionInitialsCircleView.swift */; };
 		AA5031A41DF2334000842A7D /* HeaderBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5031A31DF2334000842A7D /* HeaderBackgroundView.swift */; };
 		DC1A649F1B867B1F009356A0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1A649D1B867B1F009356A0 /* MainMenu.xib */; };
@@ -757,6 +758,7 @@
 		A4FCFA561F5FE667003EFD55 /* AddGDAXAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGDAXAccountViewController.swift; sourceTree = "<group>"; };
 		A4FCFA581F5FEFF3003EFD55 /* TableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableData.swift; sourceTree = "<group>"; };
 		A4FCFA5B1F601686003EFD55 /* AddPoloniexAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPoloniexAccountViewController.swift; sourceTree = "<group>"; };
+		A4FCFA5E1F603157003EFD55 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		AA4776581DEA901900110685 /* InstitutionInitialsCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionInitialsCircleView.swift; sourceTree = "<group>"; };
 		AA5031A31DF2334000842A7D /* HeaderBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderBackgroundView.swift; sourceTree = "<group>"; };
 		DC1A64941B867B1F009356A0 /* Balance Open.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Balance Open.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1286,6 +1288,7 @@
 				A4C49F421F5EA20300AA79FA /* RootViewController.swift */,
 				A4C49F441F5EA2AF00AA79FA /* Accounts list */,
 				A4C49F471F5EA95500AA79FA /* Add Account */,
+				A4FCFA5D1F603144003EFD55 /* Settings */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -1704,6 +1707,14 @@
 				A4FCFA5B1F601686003EFD55 /* AddPoloniexAccountViewController.swift */,
 			);
 			path = Poloniex;
+			sourceTree = "<group>";
+		};
+		A4FCFA5D1F603144003EFD55 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A4FCFA5E1F603157003EFD55 /* SettingsViewController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		DC1A648B1B867B1F009356A0 = {
@@ -2194,6 +2205,7 @@
 				5301A7691F17F47E00668099 /* PlaidApi.swift in Sources */,
 				53552A171ED7251700DD95F9 /* Institution.swift in Sources */,
 				53552A021ED7251200DD95F9 /* Singletons.swift in Sources */,
+				A4FCFA5F1F603157003EFD55 /* SettingsViewController.swift in Sources */,
 				A4C49F431F5EA20300AA79FA /* RootViewController.swift in Sources */,
 				534DDFD91F4CCE9400E6C37F /* URLRequest.swift in Sources */,
 				537187DC1F4CC23B00E7F9D6 /* CoinbaseApi.swift in Sources */,
