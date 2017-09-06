@@ -25,9 +25,15 @@ internal struct TableRow
     // Internal
     typealias CellPreparationHandler = (_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell
     typealias ActionHandler = (_ indexPath: IndexPath) -> Void
+    typealias DeletionHandler = (_ indexPath: IndexPath) -> Void
     
     internal let cellPreparationHandler: CellPreparationHandler
     internal var actionHandler: ActionHandler?
+    internal var deletionHandler: DeletionHandler?
+    
+    internal var isDeletable: Bool {
+        return self.deletionHandler != nil
+    }
     
     // MARK: Initialization
     
