@@ -98,8 +98,10 @@ extension AddAccountViewController: UITableViewDelegate
         case .coinbase:
             self.dismiss(animated: true, completion: nil)
             CoinbaseApi.authenticate()
-        case .gdax:()
         case .poloniex:()
+        case .gdax:
+            let addGDAXAccountViewController = AddGDAXAccountViewController()
+            self.navigationController?.pushViewController(addGDAXAccountViewController, animated: true)
         default:()
         }
     }
