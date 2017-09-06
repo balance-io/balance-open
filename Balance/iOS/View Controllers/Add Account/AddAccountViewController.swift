@@ -38,6 +38,7 @@ internal final class AddAccountViewController: UIViewController
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.register(reusableCell: TableViewCell.self)
+        self.tableView.tableFooterView = UIView()
         self.view.addSubview(self.tableView)
         
         self.tableView.snp.makeConstraints { (make) in
@@ -98,11 +99,18 @@ extension AddAccountViewController: UITableViewDelegate
         case .coinbase:
             self.dismiss(animated: true, completion: nil)
             CoinbaseApi.authenticate()
-        case .poloniex:()
         case .gdax:
             let addGDAXAccountViewController = AddGDAXAccountViewController()
             self.navigationController?.pushViewController(addGDAXAccountViewController, animated: true)
+        case .poloniex:
+            let addPoloniexAccountViewController = AddPoloniexAccountViewController()
+            self.navigationController?.pushViewController(addPoloniexAccountViewController, animated: true)
         default:()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return 44.0
     }
 }
