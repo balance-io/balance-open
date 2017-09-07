@@ -382,6 +382,9 @@
 		683C8AF33412F6F79047BEA7 /* PlaidDataMockingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683C80ACC7400FAF5987EC28 /* PlaidDataMockingProtocol.swift */; };
 		A42D58941F5EB37B0046BDCE /* MultilineTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42D58931F5EB3770046BDCE /* MultilineTitleView.swift */; };
 		A42D58971F5ECE7A0046BDCE /* AddAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42D58961F5ECE7A0046BDCE /* AddAccountViewModel.swift */; };
+		A4829CCD1F6134CF00E46C42 /* SegmentedControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4829CCC1F6134CF00E46C42 /* SegmentedControlTableViewCell.swift */; };
+		A4829CCF1F6135CD00E46C42 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4829CCE1F6135CD00E46C42 /* UserPreferences.swift */; };
+		A4829CD11F6138FF00E46C42 /* ApplicationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4829CD01F6138FF00E46C42 /* ApplicationConfiguration.swift */; };
 		A4C49F431F5EA20300AA79FA /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C49F421F5EA20300AA79FA /* RootViewController.swift */; };
 		A4C49F461F5EA53000AA79FA /* AccountsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C49F451F5EA53000AA79FA /* AccountsListViewController.swift */; };
 		A4C49F491F5EA98900AA79FA /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C49F481F5EA98900AA79FA /* AddAccountViewController.swift */; };
@@ -748,6 +751,9 @@
 		683C80ACC7400FAF5987EC28 /* PlaidDataMockingProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaidDataMockingProtocol.swift; sourceTree = "<group>"; };
 		A42D58931F5EB3770046BDCE /* MultilineTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTitleView.swift; sourceTree = "<group>"; };
 		A42D58961F5ECE7A0046BDCE /* AddAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountViewModel.swift; sourceTree = "<group>"; };
+		A4829CCC1F6134CF00E46C42 /* SegmentedControlTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlTableViewCell.swift; sourceTree = "<group>"; };
+		A4829CCE1F6135CD00E46C42 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
+		A4829CD01F6138FF00E46C42 /* ApplicationConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationConfiguration.swift; sourceTree = "<group>"; };
 		A4C49F421F5EA20300AA79FA /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		A4C49F451F5EA53000AA79FA /* AccountsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListViewController.swift; sourceTree = "<group>"; };
 		A4C49F481F5EA98900AA79FA /* AddAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
@@ -1682,6 +1688,7 @@
 				A4C49F501F5EABD800AA79FA /* TableViewCell.swift */,
 				A4C49F4F1F5EABD800AA79FA /* TextFieldTableViewCell.swift */,
 				A4C49F4E1F5EABD800AA79FA /* Value1TableViewCell.swift */,
+				A4829CCC1F6134CF00E46C42 /* SegmentedControlTableViewCell.swift */,
 			);
 			path = "Table View Cells";
 			sourceTree = "<group>";
@@ -1689,6 +1696,8 @@
 		A4C49F511F5EAC4B00AA79FA /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				A4829CCE1F6135CD00E46C42 /* UserPreferences.swift */,
+				A4829CD01F6138FF00E46C42 /* ApplicationConfiguration.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1964,6 +1973,9 @@
 						DevelopmentTeam = Q4G66XSS36;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
@@ -2155,6 +2167,7 @@
 				53F078661ED73F0F00E7EDF9 /* Color.swift in Sources */,
 				535529F71ED7250100DD95F9 /* SyncManager.swift in Sources */,
 				53552A061ED7251200DD95F9 /* Feed.swift in Sources */,
+				A4829CCF1F6135CD00E46C42 /* UserPreferences.swift in Sources */,
 				A4FCFA5C1F601686003EFD55 /* AddPoloniexAccountViewController.swift in Sources */,
 				53D441E91F44B0DD006967E1 /* FMDatabasePoolAdditionsVariadic.swift in Sources */,
 				53552A2B1ED7252900DD95F9 /* FileManager.swift in Sources */,
@@ -2215,6 +2228,7 @@
 				53552A2A1ED7252900DD95F9 /* DispatchQueue.swift in Sources */,
 				53552A0D1ED7251200DD95F9 /* Search.swift in Sources */,
 				53D441F61F44C477006967E1 /* TransactionRepository.swift in Sources */,
+				A4829CD11F6138FF00E46C42 /* ApplicationConfiguration.swift in Sources */,
 				A4C49F491F5EA98900AA79FA /* AddAccountViewController.swift in Sources */,
 				535529F11ED724ED00DD95F9 /* TabViewModel.swift in Sources */,
 				532121A61EE8B91600F4812A /* Zip.swift in Sources */,
@@ -2247,6 +2261,7 @@
 				53552A241ED7252900DD95F9 /* TimeInterval.swift in Sources */,
 				53552A121ED7251200DD95F9 /* NetworkStatus.swift in Sources */,
 				A4C49F561F5EAD9800AA79FA /* Value1TableViewCell.swift in Sources */,
+				A4829CCD1F6134CF00E46C42 /* SegmentedControlTableViewCell.swift in Sources */,
 				535529F91ED7250100DD95F9 /* Syncer.swift in Sources */,
 				53F078651ED73E6D00E7EDF9 /* ThemeGlobals.swift in Sources */,
 				537187E01F4CC23B00E7F9D6 /* GDAXAuthHeaders.swift in Sources */,
@@ -2559,6 +2574,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_ENTITLEMENTS = "Balance/macOS/Supporting Files/Balance.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Q4G66XSS36;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2585,6 +2601,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_ENTITLEMENTS = "Balance/macOS/Supporting Files/Balance.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Q4G66XSS36;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2611,6 +2628,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_ENTITLEMENTS = "Balance/macOS/Supporting Files/Balance.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Q4G66XSS36;
 				FRAMEWORK_SEARCH_PATHS = (
