@@ -24,8 +24,6 @@ internal final class SettingsViewController: UIViewController
     {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.white
-        
         self.title = "Settings"
         self.view.backgroundColor = UIColor.white
         

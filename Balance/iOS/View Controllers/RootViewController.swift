@@ -29,12 +29,7 @@ internal final class RootViewController: UIViewController
         
         self.addChildViewController(self.rootNavigationController)
     }
-    
-    internal override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-    {
-        abort()
-    }
-    
+
     internal required init?(coder aDecoder: NSCoder)
     {
         abort()
