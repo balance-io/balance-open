@@ -16,6 +16,7 @@ internal final class AccountsListViewController: UIViewController
     
     // Private
     private let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+    private let titleView = MultilineTitleView()
     
     // MARK: Initialization
     
@@ -72,6 +73,9 @@ internal final class AccountsListViewController: UIViewController
     {
         self.viewModel.reloadData()
         self.tableView.reloadData()
+        
+        // Total balance
+        self.titleView.detailLabel.attributedText = centsToStringFormatted(self.viewModel.totalBalance(), showNegative: true)
     }
     
     // MARK: UI
@@ -88,12 +92,10 @@ internal final class AccountsListViewController: UIViewController
             self.navigationItem.titleView = containerView
             
             // Add the title view
-            let titleView = MultilineTitleView()
-            titleView.titleLabel.text = "Total Balance"
-            titleView.detailLabel.text = "$1,000,000"
-            navigationBar.addSubview(titleView)
+            self.titleView.titleLabel.text = "Total Balance"
+            navigationBar.addSubview(self.titleView)
             
-            titleView.snp.makeConstraints({ (make) in
+            self.titleView.snp.makeConstraints({ (make) in
                 make.width.lessThanOrEqualToSuperview().multipliedBy(0.6)
                 make.height.equalToSuperview()
                 make.center.equalTo(navigationBar)
