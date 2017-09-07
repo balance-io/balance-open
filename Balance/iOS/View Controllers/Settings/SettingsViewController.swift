@@ -103,9 +103,9 @@ internal final class SettingsViewController: UIViewController
                 return cell
             })
             
-            row.actionHandler = { (indexPath) in
-                // TODO: show list of accounts so user can
-                // choose which ones to show/hide
+            row.actionHandler = { [unowned self] (indexPath) in
+                let institutionSettingsViewController = InstitutionSettingsViewController(institution: institution)
+                self.navigationController?.pushViewController(institutionSettingsViewController, animated: true)
             }
             
             row.deletionHandler = { [unowned self] (indexPath) in
@@ -178,6 +178,15 @@ extension SettingsViewController: UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         return 44.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let sectionData = self.tableData[indexPath.section]
+        let rowData = sectionData.rows[indexPath.row]
+        rowData.actionHandler?(indexPath)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
