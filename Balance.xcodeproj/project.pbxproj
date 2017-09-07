@@ -385,6 +385,8 @@
 		A4829CCD1F6134CF00E46C42 /* SegmentedControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4829CCC1F6134CF00E46C42 /* SegmentedControlTableViewCell.swift */; };
 		A4829CCF1F6135CD00E46C42 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4829CCE1F6135CD00E46C42 /* UserPreferences.swift */; };
 		A4829CD11F6138FF00E46C42 /* ApplicationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4829CD01F6138FF00E46C42 /* ApplicationConfiguration.swift */; };
+		A4829CD51F6168A100E46C42 /* InstitutionSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4829CD41F6168A100E46C42 /* InstitutionSettingsViewController.swift */; };
+		A4829CD71F616CC300E46C42 /* InstitutionSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4829CD61F616CC300E46C42 /* InstitutionSettingsViewModel.swift */; };
 		A4C49F431F5EA20300AA79FA /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C49F421F5EA20300AA79FA /* RootViewController.swift */; };
 		A4C49F461F5EA53000AA79FA /* AccountsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C49F451F5EA53000AA79FA /* AccountsListViewController.swift */; };
 		A4C49F491F5EA98900AA79FA /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C49F481F5EA98900AA79FA /* AddAccountViewController.swift */; };
@@ -755,6 +757,8 @@
 		A4829CCE1F6135CD00E46C42 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		A4829CD01F6138FF00E46C42 /* ApplicationConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationConfiguration.swift; sourceTree = "<group>"; };
 		A4829CD21F61566200E46C42 /* Balance.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Balance.entitlements; sourceTree = "<group>"; };
+		A4829CD41F6168A100E46C42 /* InstitutionSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionSettingsViewController.swift; sourceTree = "<group>"; };
+		A4829CD61F616CC300E46C42 /* InstitutionSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionSettingsViewModel.swift; sourceTree = "<group>"; };
 		A4C49F421F5EA20300AA79FA /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		A4C49F451F5EA53000AA79FA /* AccountsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListViewController.swift; sourceTree = "<group>"; };
 		A4C49F481F5EA98900AA79FA /* AddAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
@@ -1641,8 +1645,17 @@
 			isa = PBXGroup;
 			children = (
 				A42D58961F5ECE7A0046BDCE /* AddAccountViewModel.swift */,
+				A4829CD61F616CC300E46C42 /* InstitutionSettingsViewModel.swift */,
 			);
 			path = "View Models";
+			sourceTree = "<group>";
+		};
+		A4829CD31F61688100E46C42 /* Institution Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A4829CD41F6168A100E46C42 /* InstitutionSettingsViewController.swift */,
+			);
+			path = "Institution Settings";
 			sourceTree = "<group>";
 		};
 		A4C49F441F5EA2AF00AA79FA /* Accounts list */ = {
@@ -1723,6 +1736,7 @@
 			isa = PBXGroup;
 			children = (
 				A4FCFA5E1F603157003EFD55 /* SettingsViewController.swift */,
+				A4829CD31F61688100E46C42 /* Institution Settings */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -2250,6 +2264,7 @@
 				A4FCFA571F5FE667003EFD55 /* AddGDAXAccountViewController.swift in Sources */,
 				535529FA1ED7250100DD95F9 /* SubscriptionManager.swift in Sources */,
 				537187E21F4CC23B00E7F9D6 /* GDAXErrors.swift in Sources */,
+				A4829CD51F6168A100E46C42 /* InstitutionSettingsViewController.swift in Sources */,
 				53552A151ED7251200DD95F9 /* Swizzling.swift in Sources */,
 				53552A191ED7251700DD95F9 /* AccountType.swift in Sources */,
 				53552A101ED7251200DD95F9 /* InstitutionsDatabase.swift in Sources */,
@@ -2261,6 +2276,7 @@
 				A4C49F531F5EAD9300AA79FA /* Reuseable.swift in Sources */,
 				53552A001ED7251200DD95F9 /* ObjC.m in Sources */,
 				53552A301ED72B5700DD95F9 /* FMDatabasePool.m in Sources */,
+				A4829CD71F616CC300E46C42 /* InstitutionSettingsViewModel.swift in Sources */,
 				53552A241ED7252900DD95F9 /* TimeInterval.swift in Sources */,
 				53552A121ED7251200DD95F9 /* NetworkStatus.swift in Sources */,
 				A4C49F561F5EAD9800AA79FA /* Value1TableViewCell.swift in Sources */,
