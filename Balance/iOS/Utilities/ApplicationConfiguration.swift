@@ -11,6 +11,6 @@ import Foundation
 
 internal enum ApplicationConfiguration
 {
-    static let userDefaults = UserDefaults.standard //TODO: UserDefaults(suiteName: "balance.group")
+    static let userDefaults = UserDefaults.standard //TODO: UserDefaults(suiteName: "group.balance")
     static let userPreferences = UserPreferences(identifier: "main", userDefaults: ApplicationConfiguration.userDefaults)
 }
