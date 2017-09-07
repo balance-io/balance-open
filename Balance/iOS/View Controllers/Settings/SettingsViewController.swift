@@ -41,6 +41,7 @@ internal final class SettingsViewController: UIViewController
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.register(reusableCell: TableViewCell.self)
+        self.tableView.register(reusableCell: SegmentedControlTableViewCell.self)
         self.view.addSubview(self.tableView)
         
         self.tableView.snp.makeConstraints { (make) in
@@ -59,6 +60,32 @@ internal final class SettingsViewController: UIViewController
         
         // Table sections
         var tableSections = [TableSection]()
+        
+        // Theme
+        let themeRow = TableRow { (tableView, indexPath) -> UITableViewCell in
+            // Segmented control
+            let themeSegmentedControl = UISegmentedControl()
+            for theme in UserPreferences.Theme.available
+            {
+                let index = themeSegmentedControl.numberOfSegments
+                themeSegmentedControl.insertSegment(withTitle: theme.title(), at: index, animated: false)
+                
+                if theme == ApplicationConfiguration.userPreferences.theme
+                {
+                    themeSegmentedControl.selectedSegmentIndex = index
+                }
+            }
+            
+            // Cell
+            let cell: SegmentedControlTableViewCell = tableView.dequeueReusableCell(at: indexPath)
+            cell.textLabel?.text = "Theme"
+            cell.segmentedControl = themeSegmentedControl
+            
+            return cell
+        }
+        
+        let themeSection = TableSection(title: "Theme", rows: [themeRow])
+        tableSections.append(themeSection)
         
         // Insitutions
         var institutionRows = [TableRow]()
