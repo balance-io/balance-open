@@ -63,6 +63,8 @@ internal final class SettingsViewController: UIViewController
         let themeRow = TableRow { (tableView, indexPath) -> UITableViewCell in
             // Segmented control
             let themeSegmentedControl = UISegmentedControl()
+            themeSegmentedControl.addTarget(self, action: #selector(self.themeSegmentedControlChanged(_:)), for: .valueChanged)
+            
             for theme in UserPreferences.Theme.available
             {
                 let index = themeSegmentedControl.numberOfSegments
@@ -130,6 +132,17 @@ internal final class SettingsViewController: UIViewController
     @objc private func doneButtonTapped(_ sender: Any)
     {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func themeSegmentedControlChanged(_ sender: Any)
+    {
+        guard let control = sender as? UISegmentedControl,
+              control.selectedSegmentIndex < UserPreferences.Theme.available.count else
+        {
+            return
+        }
+        
+        ApplicationConfiguration.userPreferences.theme = UserPreferences.Theme.available[control.selectedSegmentIndex]
     }
 }
 
