@@ -188,6 +188,7 @@ extension GDAXAPIClient: ExchangeApi {
         }
         guard let secret = secretField, let key = keyField, let passphrase = passphrasField else {
             assert(false, "wrong fields are passed into the poloniex auth, we require secret and key fields and values")
+            return
         }
         
         do {

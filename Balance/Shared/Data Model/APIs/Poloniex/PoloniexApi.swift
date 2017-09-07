@@ -92,6 +92,7 @@ class PoloniexApi: ExchangeApi {
         }
         guard let secret = secretField, let key = keyField else {
             assert(false, "wrong fields are passed into the poloniex auth, we require secret and key fields and values")
+            return
         }
         authenticate(secret: secret, key: key, closeBlock: closeBlock)
     }
