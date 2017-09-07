@@ -13,6 +13,8 @@
 		28F678481DCB6E9600383D22 /* SetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F678471DCB6E9600383D22 /* SetPasswordViewController.swift */; };
 		28FD09C21D99F18500A395AB /* PaintCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FD09C11D99F18500A395AB /* PaintCodeButton.swift */; };
 		2D326D261F5EA22900873286 /* PoloniexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D251F5EA22900873286 /* PoloniexErrors.swift */; };
+		2D326D2B1F60349200873286 /* EthplorerInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D2A1F60349200873286 /* EthplorerInstitution.swift */; };
+		2D326D2D1F6036A200873286 /* EthplorerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D2C1F6036A200873286 /* EthplorerAccount.swift */; };
 		2D6B22DB1EDE238200356035 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1A64991B867B1F009356A0 /* AppDelegate.swift */; };
 		2DD9B1F01EDDDFD10006268F /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */; };
 		5300D6261DCE5A1E00D02657 /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5300D6251DCE5A1E00D02657 /* LockViewController.swift */; };
@@ -469,6 +471,8 @@
 		28F678471DCB6E9600383D22 /* SetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPasswordViewController.swift; sourceTree = "<group>"; };
 		28FD09C11D99F18500A395AB /* PaintCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintCodeButton.swift; sourceTree = "<group>"; };
 		2D326D251F5EA22900873286 /* PoloniexErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexErrors.swift; sourceTree = "<group>"; };
+		2D326D2A1F60349200873286 /* EthplorerInstitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthplorerInstitution.swift; sourceTree = "<group>"; };
+		2D326D2C1F6036A200873286 /* EthplorerAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthplorerAccount.swift; sourceTree = "<group>"; };
 		2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		5300D6251DCE5A1E00D02657 /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
 		5301A75E1F17DC3E00668099 /* WebSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSignUpViewController.swift; sourceTree = "<group>"; };
@@ -861,6 +865,15 @@
 			path = Modals;
 			sourceTree = "<group>";
 		};
+		2D326D271F5FEBF200873286 /* Etherscan */ = {
+			isa = PBXGroup;
+			children = (
+				2D326D2A1F60349200873286 /* EthplorerInstitution.swift */,
+				2D326D2C1F6036A200873286 /* EthplorerAccount.swift */,
+			);
+			path = Etherscan;
+			sourceTree = "<group>";
+		};
 		5301A7641F17F42700668099 /* APIs */ = {
 			isa = PBXGroup;
 			children = (
@@ -869,6 +882,7 @@
 				538B47AF1F4C9FD60023CED5 /* Coinbase */,
 				538B47B21F4C9FD70023CED5 /* GDAX */,
 				538B47BA1F4C9FD70023CED5 /* Poloniex */,
+				2D326D271F5FEBF200873286 /* Etherscan */,
 				5301A7651F17F44E00668099 /* Plaid */,
 			);
 			name = APIs;
@@ -2247,6 +2261,8 @@
 				535315261F4CEBF2008D6890 /* ApiInstitution.swift in Sources */,
 				53980CC41D5D0C1F0013B981 /* Date.swift in Sources */,
 				530870E71CE6823D005B591C /* TextField.swift in Sources */,
+				2D326D2B1F60349200873286 /* EthplorerInstitution.swift in Sources */,
+				2D326D2D1F6036A200873286 /* EthplorerAccount.swift in Sources */,
 				537187EA1F4CC23C00E7F9D6 /* GDAXAccount.swift in Sources */,
 				537187FA1F4CC3EE00E7F9D6 /* NumberUtils.swift in Sources */,
 				531E8D9C1C6A633800F765F7 /* Category.swift in Sources */,
