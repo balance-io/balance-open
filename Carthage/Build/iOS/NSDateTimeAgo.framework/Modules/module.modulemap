@@ -1,0 +1,11 @@
+framework module NSDateTimeAgo {
+  umbrella header "NSDateTimeAgo.h"
+
+  export *
+  module * { export * }
+}
+
+module NSDateTimeAgo.Swift {
+    header "NSDateTimeAgo-Swift.h"
+    requires objc
+}

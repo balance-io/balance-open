@@ -1,0 +1,10 @@
+framework module CerealOSX {
+  umbrella header "CerealOSX.h"
+
+  export *
+  module * { export * }
+}
+
+module CerealOSX.Swift {
+    header "CerealOSX-Swift.h"
+}

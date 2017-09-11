@@ -1,0 +1,9 @@
+language: objective-c
+osx_image: xcode7.3
+before_install:
+    - brew update
+    - brew outdated xctool || brew upgrade xctool
+    - brew outdated carthage || brew upgrade carthage
+    - carthage bootstrap --platform OSX
+script:
+    - xctool -project Bal.xcodeproj -scheme Balance -sdk macosx10.11 -configuration Release CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=""

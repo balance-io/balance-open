@@ -1,6 +1,5 @@
 #import <Carbon/Carbon.h>
 #import <AppKit/AppKit.h>
-#import "MASKeyMasks.h"
 
 // These glyphs are missed in Carbon.h
 enum {
@@ -31,14 +30,14 @@ NS_INLINE NSString* NSStringFromMASKeyCode(unsigned short ch)
 
 NS_INLINE NSUInteger MASPickCocoaModifiers(NSUInteger flags)
 {
-    return (flags & (NSEventModifierFlagControl | NSEventModifierFlagShift | NSEventModifierFlagOption | NSEventModifierFlagCommand));
+    return (flags & (NSControlKeyMask | NSShiftKeyMask | NSAlternateKeyMask | NSCommandKeyMask));
 }
 
 NS_INLINE UInt32 MASCarbonModifiersFromCocoaModifiers(NSUInteger cocoaFlags)
 {
     return
-          (cocoaFlags & NSEventModifierFlagCommand ? cmdKey : 0)
-        | (cocoaFlags & NSEventModifierFlagOption ? optionKey : 0)
-        | (cocoaFlags & NSEventModifierFlagControl ? controlKey : 0)
-        | (cocoaFlags & NSEventModifierFlagShift ? shiftKey : 0);
+          (cocoaFlags & NSCommandKeyMask ? cmdKey : 0)
+        | (cocoaFlags & NSAlternateKeyMask ? optionKey : 0)
+        | (cocoaFlags & NSControlKeyMask ? controlKey : 0)
+        | (cocoaFlags & NSShiftKeyMask ? shiftKey : 0);
 }

@@ -1,7 +1,12 @@
-github "DaveWoodCom/XCGLogger" ~> 5.0.1
-github "wolffan/SnapKit" "xcode-4-mac-compatible"
-github "ashleymills/Reachability.swift" ~> 3.0
-github "matthewpalmer/Locksmith"
+github "realm/realm-cocoa"
 github "datatheorem/TrustKit" "master"
-github "shpakovski/MASShortcut"
+github "wolffan/SnapKit" "xcode-4-mac-compatible"
+github "balancemymoney/Locksmith" "master"
+github "balancemymoney/XCGLogger" ~> 4.0.0
 github "balancemymoney/NSDate-TimeAgo" "master"
+github "balancemymoney/MASShortcut" "master"
+github "balancemymoney/SwiftyStoreKit" "master"
+github "balancemymoney/Zip" "master"
+github "balancemymoney/Reachability.swift" "master"
+github "balancemymoney/JMSRangeSlider" "master"
+github "balancemymoney/bal-vector-graphics" "swift4"

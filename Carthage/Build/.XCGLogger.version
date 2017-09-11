@@ -1,12 +1,14 @@
 {
-  "commitish" : "5.0.1",
+  "iOS" : [
+    {
+      "hash" : "8509fdc6b4da4d449211977c5a0eb0c1e003bd57a78d196f69d1a87948f0d311",
+      "name" : "XCGLogger"
+    }
+  ],
+  "commitish" : "Version_4.0.0",
   "Mac" : [
     {
-      "hash" : "3808a4111c12585eed8442b37ae055020dbca38b8e1a7303555e89021e258b79",
-      "name" : "ObjcExceptionBridging"
-    },
-    {
-      "hash" : "82f2b6a7b86c6ff95228ac9bc55a701879231e2f5bee97be975df2debc5a948c",
+      "hash" : "c719fb795fff5d85eb2446bbf1edce58abc6fc8610472b58b9b9ed94dadb4284",
       "name" : "XCGLogger"
     }
   ]

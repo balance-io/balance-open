@@ -1,0 +1,11 @@
+framework module Zip {
+  umbrella header "Zip.h"
+
+  export *
+  module * { export * }
+}
+
+module Zip.Swift {
+    header "Zip-Swift.h"
+    requires objc
+}
