@@ -9,16 +9,17 @@
 import Foundation
 import Locksmith
 
-
+  
 internal protocol APICredentials
 {
     var components: APICredentialsComponents { get }
     var hmacAlgorithm: CCHmacAlgorithm { get }
+    var hmacAlgorithmDigestLength: Int { get }
     
     init(identifier: String) throws
-    init(component: APICredentialsComponents)
+    init(component: APICredentialsComponents) throws
     
-    func createSignature(with message: String) -> String
+    func createSignatureData(with message: String, secretKeyData: Data) -> Data
     func namespacedKeychainIdentifier(_ identifier: String) -> String
     func save(identifier: String) throws
 }
@@ -50,7 +51,7 @@ internal extension APICredentials
     
     // MARK: Signature
     
-    internal func createSignature(with message: String) -> String
+    internal func createSignatureData(with message: String, secretKeyData: Data) -> Data
     {
         guard let messageData = message.data(using: .utf8) else
         {
@@ -58,20 +59,20 @@ internal extension APICredentials
         }
         
         // Create the signature
-        let signatureCapacity = Int(CC_SHA256_DIGEST_LENGTH)
+        
+        let signatureCapacity = self.hmacAlgorithmDigestLength
         let signature = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: signatureCapacity)
         defer
         {
             signature.deallocate(capacity: signatureCapacity)
         }
         
-        self.components.decodedSecretData.withUnsafeBytes({ (secretBytes: UnsafePointer<UInt8>) -> Void in
+        secretKeyData.withUnsafeBytes({ (secretBytes: UnsafePointer<UInt8>) -> Void in
             messageData.withUnsafeBytes({ (messageBytes: UnsafePointer<UInt8>) -> Void in
-                CCHmac(self.hmacAlgorithm, secretBytes, self.components.decodedSecretData.count, messageBytes, messageData.count, signature)
+                CCHmac(self.hmacAlgorithm, secretBytes, secretKeyData.count, messageBytes, messageData.count, signature)
             })
         })
         
-        let signatureData = Data(bytes: signature, count: signatureCapacity)
-        return signatureData.base64EncodedString()
+        return Data(bytes: signature, count: signatureCapacity)
     }
 }

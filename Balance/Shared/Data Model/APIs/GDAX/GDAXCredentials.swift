@@ -17,6 +17,7 @@ internal extension GDAXAPIClient
         // Internal
         internal let components: APICredentialsComponents
         internal let hmacAlgorithm = CCHmacAlgorithm(kCCHmacAlgSHA256)
+        internal let hmacAlgorithmDigestLength = Int(CC_SHA256_DIGEST_LENGTH)
         
         // Private
         private let secretKeyData: Data
@@ -69,7 +70,9 @@ internal extension GDAXAPIClient
 
             // Message
             let message = "\(timestamp.timeIntervalSince1970)\(method)\(requestPath)\(bodyString)"
-            return self.createSignature(with: message)
+            let signatureData = self.createSignatureData(with: message, secretKeyData: self.secretKeyData)
+            
+            return signatureData.base64EncodedString()
         }
         
         // MARK: Keychain

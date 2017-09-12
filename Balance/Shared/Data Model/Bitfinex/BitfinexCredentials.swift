@@ -17,6 +17,7 @@ internal extension BitfinexAPIClient
         // Internal
         internal let components: APICredentialsComponents
         internal let hmacAlgorithm = CCHmacAlgorithm(kCCHmacAlgSHA384)
+        internal let hmacAlgorithmDigestLength = Int(CC_SHA384_DIGEST_LENGTH)
         
         // Private
         private let secretKeyData: Data
@@ -53,7 +54,7 @@ internal extension BitfinexAPIClient
         
         // MARK: Signature
         
-        internal func generateSignature(requestPath: String, body: Data?) throws -> String
+        internal func generateSignature(date: Date, requestPath: String, body: Data?) throws -> String
         {
             // Turn body into JSON string
             let bodyString: String
@@ -68,8 +69,13 @@ internal extension BitfinexAPIClient
             }
             
             // Message
-            let message = "api/\(requestPath)\(Date().timeIntervalSince1970)\(bodyString)"
-            return self.createSignature(with: message)
+            let message = "/api/\(requestPath)\(date.timeIntervalSince1970)\(bodyString)"
+
+            let signature = self.createSignatureData(with: message, secretKeyData: self.secretKeyData).reduce("") { (result, byte) -> String in
+                return result + String(format: "%02x", byte)
+            }
+
+            return signature
         }
         
         // MARK: Keychain
