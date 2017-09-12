@@ -33,7 +33,7 @@ internal final class CredentialsTest: XCTestCase
             let _ = try GDAXAPIClient.Credentials(key: "1", secret: "2", passphrase: "3")
             XCTFail()
         }
-        catch APICredentialsComponents.InitializationError.invalidSecret
+        catch APICredentialsComponents.Error.invalidSecret
         {
             XCTAssert(true)
         }
