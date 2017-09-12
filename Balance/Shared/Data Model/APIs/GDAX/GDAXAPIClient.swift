@@ -62,7 +62,7 @@ internal extension GDAXAPIClient
     {
         guard let unwrappedCredentials = self.credentials else
         {
-            throw GDAXAPIClient.CredentialsError.noCredentials
+            throw APICredentialsComponents.Error.noCredentials
         }
         
         let requestPath = "/accounts"
@@ -102,11 +102,11 @@ internal extension GDAXAPIClient
             } else if case 400...402 = httpResponse.statusCode {
                 let error = APIError.response(httpResponse: httpResponse, data: data)
                 completionHandler(nil, error)
-                throw GDAXAPIClient.CredentialsError.invalidSecret(message: "One or more of your credentials is invalid")
+                throw APICredentialsComponents.Error.invalidSecret(message: "One or more of your credentials is invalid")
             } else if case 403...499 = httpResponse.statusCode {
                 let error = APIError.response(httpResponse: httpResponse, data: data)
                 completionHandler(nil, error)
-                throw GDAXAPIClient.CredentialsError.missingPermissions
+                throw APICredentialsComponents.Error.missingPermissions
             } else {
                 let error = APIError.response(httpResponse: httpResponse, data: data)
                 completionHandler(nil, error)
@@ -123,7 +123,7 @@ internal extension GDAXAPIClient
 internal extension GDAXAPIClient {
     internal func make(withdrawal: Withdrawal, completionHandler: @escaping (_ success: Bool, _ error: APIError?) -> Void) throws {
         guard let unwrappedCredentials = self.credentials else {
-            throw GDAXAPIClient.CredentialsError.noCredentials
+            throw APICredentialsComponents.Error.noCredentials
         }
         
         let requestPath = "/withdrawals/crypto"
@@ -221,10 +221,10 @@ extension GDAXAPIClient: ExchangeApi {
                 
             }
         }
-        catch GDAXAPIClient.CredentialsError.invalidSecret {
+        catch APICredentialsComponents.Error.invalidSecret {
             // TODO: show alert
             async {
-                closeBlock(false, GDAXAPIClient.CredentialsError.invalidSecret(message: ""), nil)
+                closeBlock(false, APICredentialsComponents.Error.invalidSecret(message: ""), nil)
             }
         }
         catch {

@@ -33,7 +33,7 @@ internal final class CredentialsTest: XCTestCase
             let _ = try GDAXAPIClient.Credentials(key: "1", secret: "2", passphrase: "3")
             XCTFail()
         }
-        catch GDAXAPIClient.CredentialsError.invalidSecret
+        catch APICredentialsComponents.InitializationError.invalidSecret
         {
             XCTAssert(true)
         }
@@ -71,8 +71,8 @@ internal final class CredentialsTest: XCTestCase
         try! credentials.save(identifier: identifier)
         
         let loadedCredentials = try! GDAXAPIClient.Credentials(identifier: identifier)
-        XCTAssertEqual(loadedCredentials.key, key)
-        XCTAssertEqual(loadedCredentials.secret, secret)
-        XCTAssertEqual(loadedCredentials.passphrase, passphrase)
+        XCTAssertEqual(loadedCredentials.components.key, key)
+        XCTAssertEqual(loadedCredentials.components.secret, secret)
+        XCTAssertEqual(loadedCredentials.components.passphrase, passphrase)
     }
 }
