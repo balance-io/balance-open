@@ -15,7 +15,6 @@ internal struct APICredentialsComponents
     // Internal
     internal let key: String
     internal let secret: String
-    internal let decodedSecretData: Data
     internal let passphrase: String?
     
     internal var dictionary: [String : Any] {
@@ -36,14 +35,8 @@ internal struct APICredentialsComponents
     
     internal init(key: String, secret: String, passphrase: String?) throws
     {
-        guard let decodedSecretData = Data(base64Encoded: secret) else
-        {
-            throw Error.invalidSecret(message: "Secret is not base64 encoded")
-        }
-        
         self.key = key
         self.secret = secret
-        self.decodedSecretData = decodedSecretData
         self.passphrase = passphrase
     }
     

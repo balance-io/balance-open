@@ -19,17 +19,24 @@ internal extension BitfinexAPIClient
         internal let hmacAlgorithm = CCHmacAlgorithm(kCCHmacAlgSHA384)
         
         // Private
+        private let secretKeyData: Data
 
         // MARK: Initialization
         
         internal init(key: String, secret: String) throws
         {
             let components = try APICredentialsComponents(key: key, secret: secret, passphrase: nil)
-            self.init(component: components)
+            try self.init(component: components)
         }
         
-        internal init(component: APICredentialsComponents)
+        internal init(component: APICredentialsComponents) throws
         {
+            guard let secretData = component.secret.data(using: .utf8) else
+            {
+                throw APICredentialsComponents.Error.invalidSecret(message: "Unable to turn secret into Data")
+            }
+            
+            self.secretKeyData = secretData
             self.components = component
         }
         
@@ -41,7 +48,7 @@ internal extension BitfinexAPIClient
             let namespacedIdentifier = "com.BitfinexClient.Credentials.\(identifier)"
             let components = try APICredentialsComponents(identifier: namespacedIdentifier)
             
-            self.init(component: components)
+            try self.init(component: components)
         }
         
         // MARK: Signature

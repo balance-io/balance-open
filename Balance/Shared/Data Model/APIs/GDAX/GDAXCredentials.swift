@@ -19,17 +19,24 @@ internal extension GDAXAPIClient
         internal let hmacAlgorithm = CCHmacAlgorithm(kCCHmacAlgSHA256)
         
         // Private
+        private let secretKeyData: Data
         
         // MARK: Initialization
         
         internal init(key: String, secret: String, passphrase: String) throws
         {
             let components = try APICredentialsComponents(key: key, secret: secret, passphrase: passphrase)
-            self.init(component: components)
+            try self.init(component: components)
         }
         
-        internal init(component: APICredentialsComponents)
+        internal init(component: APICredentialsComponents) throws
         {
+            guard let decodedSecretData = Data(base64Encoded: component.secret) else
+            {
+                throw APICredentialsComponents.Error.invalidSecret(message: "Secret is not base64 encoded")
+            }
+            
+            self.secretKeyData = decodedSecretData
             self.components = component
         }
         
@@ -41,7 +48,7 @@ internal extension GDAXAPIClient
             let namespacedIdentifier = "com.GDAXAPIClient.Credentials.\(identifier)"
             let components = try APICredentialsComponents(identifier: namespacedIdentifier)
             
-            self.init(component: components)
+            try self.init(component: components)
         }
         
         // MARK: Signature
