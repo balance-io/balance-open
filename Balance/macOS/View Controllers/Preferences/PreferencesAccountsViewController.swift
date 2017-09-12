@@ -273,31 +273,35 @@ class PreferencesAccountsViewController: NSViewController {
                 self.addAccountButton.isEnabled = false
         
                 let institution = self.institutions.keys[self.institutionsTableView.selectedIndex.row]
-                if let accessToken = institution.accessToken {
-                    subscriptionManager.plaidDeleteAccessToken(accessToken: accessToken) { success, error in
-                        self.institutionsTableView.isEnabled = true
-                        self.accountsTableView.isEnabled = true
-                        self.addAccountButton.isEnabled = true
-                        self.selectFirstInstitution()
-        
-                        // Handle Plaid's shitty test data
-                        if success || accessToken.hasPrefix("test_") {
-                            institution.delete()
-                        } else {
-                            var message = ""
-                            if let error = error as? BalanceError {
-                                message = error.message
-                            } else if let error = error {
-                                message = "\(error)"
-                            }
+                if institution.source == .plaid {
+                    if let accessToken = institution.accessToken {
+                        subscriptionManager.plaidDeleteAccessToken(accessToken: accessToken) { success, error in
+                            self.institutionsTableView.isEnabled = true
+                            self.accountsTableView.isEnabled = true
+                            self.addAccountButton.isEnabled = true
+                            self.selectFirstInstitution()
                             
-                            let alert = NSAlert()
-                            alert.alertStyle = .critical
-                            alert.messageText = "Error removing account"
-                            alert.informativeText = message
-                            alert.addButton(withTitle: "OK")
-                            alert.runModal()
+                            // Handle Plaid's shitty test data
+                            if success || accessToken.hasPrefix("test_") {
+                                institution.delete()
+                            } else {
+                                var message = ""
+                                if let error = error as? BalanceError {
+                                    message = error.message
+                                } else if let error = error {
+                                    message = "\(error)"
+                                }
+                                
+                                let alert = NSAlert()
+                                alert.alertStyle = .critical
+                                alert.messageText = "Error removing account"
+                                alert.informativeText = message
+                                alert.addButton(withTitle: "OK")
+                                alert.runModal()
+                            }
                         }
+                    } else {
+                        institution.delete()
                     }
                 } else {
                     institution.delete()
