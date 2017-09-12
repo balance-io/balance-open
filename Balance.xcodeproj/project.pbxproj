@@ -383,11 +383,19 @@
 		53FCE37C1F06B819004EB25C /* XCGLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3551F06B653004EB25C /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		676ED7A51D17ACB400D03395 /* SampleResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676ED7A41D17ACB400D03395 /* SampleResponses.swift */; };
 		683C8AF33412F6F79047BEA7 /* PlaidDataMockingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683C80ACC7400FAF5987EC28 /* PlaidDataMockingProtocol.swift */; };
+		A493B9391F68137E0074ACCC /* APICredentialsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B9381F68137E0074ACCC /* APICredentialsComponents.swift */; };
+		A493B93A1F68137E0074ACCC /* APICredentialsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B9381F68137E0074ACCC /* APICredentialsComponents.swift */; };
 		A4E768021F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768011F67DB02002B1AE1 /* BitfinexAPIClient.swift */; };
 		A4E768031F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768011F67DB02002B1AE1 /* BitfinexAPIClient.swift */; };
 		A4E768051F67DB2B002B1AE1 /* BitfinexCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768041F67DB2B002B1AE1 /* BitfinexCredentials.swift */; };
 		A4E768061F67DB2B002B1AE1 /* BitfinexCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768041F67DB2B002B1AE1 /* BitfinexCredentials.swift */; };
 		A4E768071F67DC60002B1AE1 /* PoloniexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D251F5EA22900873286 /* PoloniexErrors.swift */; };
+		A4E768091F67DDFE002B1AE1 /* BitfinexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768081F67DDFE002B1AE1 /* BitfinexErrors.swift */; };
+		A4E7680A1F67DDFE002B1AE1 /* BitfinexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768081F67DDFE002B1AE1 /* BitfinexErrors.swift */; };
+		A4E7680C1F67E410002B1AE1 /* APICredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E7680B1F67E410002B1AE1 /* APICredentials.swift */; };
+		A4E7680D1F67E410002B1AE1 /* APICredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E7680B1F67E410002B1AE1 /* APICredentials.swift */; };
+		A4E768101F67F049002B1AE1 /* APICredentialsComponentsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E7680F1F67F049002B1AE1 /* APICredentialsComponentsError.swift */; };
+		A4E768111F67F049002B1AE1 /* APICredentialsComponentsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E7680F1F67F049002B1AE1 /* APICredentialsComponentsError.swift */; };
 		AA4776591DEA901900110685 /* InstitutionInitialsCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4776581DEA901900110685 /* InstitutionInitialsCircleView.swift */; };
 		AA5031A41DF2334000842A7D /* HeaderBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5031A31DF2334000842A7D /* HeaderBackgroundView.swift */; };
 		DC1A649F1B867B1F009356A0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1A649D1B867B1F009356A0 /* MainMenu.xib */; };
@@ -743,8 +751,12 @@
 		676ED79E1D17AC5D00D03395 /* MockData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MockData; sourceTree = "<group>"; };
 		676ED7A41D17ACB400D03395 /* SampleResponses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleResponses.swift; sourceTree = "<group>"; };
 		683C80ACC7400FAF5987EC28 /* PlaidDataMockingProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaidDataMockingProtocol.swift; sourceTree = "<group>"; };
+		A493B9381F68137E0074ACCC /* APICredentialsComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICredentialsComponents.swift; sourceTree = "<group>"; };
 		A4E768011F67DB02002B1AE1 /* BitfinexAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexAPIClient.swift; sourceTree = "<group>"; };
 		A4E768041F67DB2B002B1AE1 /* BitfinexCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexCredentials.swift; sourceTree = "<group>"; };
+		A4E768081F67DDFE002B1AE1 /* BitfinexErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexErrors.swift; sourceTree = "<group>"; };
+		A4E7680B1F67E410002B1AE1 /* APICredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICredentials.swift; sourceTree = "<group>"; };
+		A4E7680F1F67F049002B1AE1 /* APICredentialsComponentsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICredentialsComponentsError.swift; sourceTree = "<group>"; };
 		AA4776581DEA901900110685 /* InstitutionInitialsCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionInitialsCircleView.swift; sourceTree = "<group>"; };
 		AA5031A31DF2334000842A7D /* HeaderBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderBackgroundView.swift; sourceTree = "<group>"; };
 		DC1A64941B867B1F009356A0 /* Balance Open.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Balance Open.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -868,6 +880,7 @@
 		5301A7641F17F42700668099 /* APIs */ = {
 			isa = PBXGroup;
 			children = (
+				A4E7680E1F67F034002B1AE1 /* API Credentials */,
 				537187F31F4CC37400E7F9D6 /* ExchangeApi.swift */,
 				535315251F4CEBF2008D6890 /* ApiInstitution.swift */,
 				538B47AF1F4C9FD60023CED5 /* Coinbase */,
@@ -1618,8 +1631,19 @@
 			children = (
 				A4E768011F67DB02002B1AE1 /* BitfinexAPIClient.swift */,
 				A4E768041F67DB2B002B1AE1 /* BitfinexCredentials.swift */,
+				A4E768081F67DDFE002B1AE1 /* BitfinexErrors.swift */,
 			);
 			path = Bitfinex;
+			sourceTree = "<group>";
+		};
+		A4E7680E1F67F034002B1AE1 /* API Credentials */ = {
+			isa = PBXGroup;
+			children = (
+				A4E7680B1F67E410002B1AE1 /* APICredentials.swift */,
+				A4E7680F1F67F049002B1AE1 /* APICredentialsComponentsError.swift */,
+				A493B9381F68137E0074ACCC /* APICredentialsComponents.swift */,
+			);
+			path = "API Credentials";
 			sourceTree = "<group>";
 		};
 		DC1A648B1B867B1F009356A0 = {
@@ -2057,6 +2081,7 @@
 				53552A061ED7251200DD95F9 /* Feed.swift in Sources */,
 				53D441E91F44B0DD006967E1 /* FMDatabasePoolAdditionsVariadic.swift in Sources */,
 				53552A2B1ED7252900DD95F9 /* FileManager.swift in Sources */,
+				A4E7680D1F67E410002B1AE1 /* APICredentials.swift in Sources */,
 				53552A2F1ED72B5700DD95F9 /* FMDatabaseAdditions.m in Sources */,
 				53552A1C1ED7251A00DD95F9 /* Rule.swift in Sources */,
 				537187E61F4CC23B00E7F9D6 /* PoloniexAccount.swift in Sources */,
@@ -2073,11 +2098,14 @@
 				53552A161ED7251700DD95F9 /* Source.swift in Sources */,
 				535529F31ED724ED00DD95F9 /* TransactionsTabViewModel.swift in Sources */,
 				53552A371ED72B5B00DD95F9 /* CwlSysctl.swift in Sources */,
+				A493B93A1F68137E0074ACCC /* APICredentialsComponents.swift in Sources */,
+				A4E7680A1F67DDFE002B1AE1 /* BitfinexErrors.swift in Sources */,
 				53552A221ED7252900DD95F9 /* NSAttributedString.swift in Sources */,
 				535529F21ED724ED00DD95F9 /* AccountsTabViewModel.swift in Sources */,
 				532121A21EE8B91600F4812A /* zip.c in Sources */,
 				537187E51F4CC23B00E7F9D6 /* PoloniexApi.swift in Sources */,
 				535529F51ED724ED00DD95F9 /* InsightsTabViewModel.swift in Sources */,
+				A4E768111F67F049002B1AE1 /* APICredentialsComponentsError.swift in Sources */,
 				5301A76F1F17F56500668099 /* PlaidAccount.swift in Sources */,
 				53F0785E1ED73B7D00E7EDF9 /* Element.swift in Sources */,
 				53552A041ED7251200DD95F9 /* Debugging.swift in Sources */,
@@ -2227,6 +2255,7 @@
 				53E8C78C1C6412A90085D64E /* Theme.swift in Sources */,
 				5301A77A1F17FA4600668099 /* PlaidCategory.swift in Sources */,
 				53294FA61D1DDD9500F08059 /* CCNStatusItemWindowConfiguration.m in Sources */,
+				A493B9391F68137E0074ACCC /* APICredentialsComponents.swift in Sources */,
 				537504FA1F19237E0062C11A /* ProductId.swift in Sources */,
 				5355749B1E299A4A0003ED7B /* Error.swift in Sources */,
 				534DDFD81F4CCE9400E6C37F /* URLRequest.swift in Sources */,
@@ -2236,6 +2265,7 @@
 				530422A21ED3C94A001CA499 /* InsightsTabViewModel.swift in Sources */,
 				53E8C7801C62F5D40085D64E /* Utils.swift in Sources */,
 				5334023A1DDFB8C4000236A0 /* NetworkStatus.swift in Sources */,
+				A4E7680C1F67E410002B1AE1 /* APICredentials.swift in Sources */,
 				534E83C61D3FB76200F76E8A /* OrderedDictionary.swift in Sources */,
 				534FD6401C7F8F5E0066FE91 /* Institution.swift in Sources */,
 				53560E7F1DFCDF8A00547AF7 /* NSBezierPath.swift in Sources */,
@@ -2255,6 +2285,7 @@
 				53F0785D1ED73B7D00E7EDF9 /* Element.swift in Sources */,
 				532B6FE51E95D5C40010D81D /* Swizzling.swift in Sources */,
 				530F57B41DCD72680083F3A7 /* FMDatabaseQueue.m in Sources */,
+				A4E768101F67F049002B1AE1 /* APICredentialsComponentsError.swift in Sources */,
 				530422A01ED3C896001CA499 /* InsightsTabTouchBar.swift in Sources */,
 				537187ED1F4CC23C00E7F9D6 /* GDAXErrors.swift in Sources */,
 				5300D6261DCE5A1E00D02657 /* LockViewController.swift in Sources */,
@@ -2341,6 +2372,7 @@
 				5304228D1ED39A20001CA499 /* AccountsTabTouchBar.swift in Sources */,
 				2D6B22DB1EDE238200356035 /* AppDelegate.swift in Sources */,
 				531913E51D5C8E2B00BB995B /* InsightsTabViewController.swift in Sources */,
+				A4E768091F67DDFE002B1AE1 /* BitfinexErrors.swift in Sources */,
 				53DEFABD1CF40B0900332720 /* Insights.swift in Sources */,
 				530F57AB1DCD72680083F3A7 /* FMDatabasePool.m in Sources */,
 				537187E91F4CC23C00E7F9D6 /* GDAXAPIClient.swift in Sources */,
