@@ -7,3 +7,69 @@
 //
 
 import Foundation
+import Locksmith
+
+
+internal extension BitfinexAPIClient
+{
+    internal struct Credentials: APICredentials
+    {
+        // Internal
+        internal let components: APICredentialsComponents
+        internal let hmacAlgorithm = CCHmacAlgorithm(kCCHmacAlgSHA384)
+        
+        // Private
+
+        // MARK: Initialization
+        
+        internal init(key: String, secret: String) throws
+        {
+            let components = try APICredentialsComponents(key: key, secret: secret, passphrase: nil)
+            self.init(component: components)
+        }
+        
+        internal init(component: APICredentialsComponents)
+        {
+            self.components = component
+        }
+        
+        internal init(identifier: String) throws
+        {
+            // :( Unable to use the namespacing function (self.namespacedKeychainIdentifier())
+            // as we can't call self before intialization, making this brital.
+            // There are tests to catch this being an issue though.
+            let namespacedIdentifier = "com.BitfinexClient.Credentials.\(identifier)"
+            let components = try APICredentialsComponents(identifier: namespacedIdentifier)
+            
+            self.init(component: components)
+        }
+        
+        // MARK: Signature
+        
+        internal func generateSignature(requestPath: String, body: Data?) throws -> String
+        {
+            // Turn body into JSON string
+            let bodyString: String
+            if let unwrappedBody = body,
+               let dataString = String(data: unwrappedBody, encoding: .utf8)
+            {
+                bodyString = dataString
+            }
+            else
+            {
+                bodyString = ""
+            }
+            
+            // Message
+            let message = "api/\(requestPath)\(Date().timeIntervalSince1970)\(bodyString)"
+            return self.createSignature(with: message)
+        }
+        
+        // MARK: Keychain
+        
+        func namespacedKeychainIdentifier(_ identifier: String) -> String
+        {
+            return "com.BitfinexAPIClient.Credentials.\(identifier)"
+        }
+    }
+}
