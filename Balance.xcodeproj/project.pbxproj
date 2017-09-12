@@ -385,6 +385,11 @@
 		683C8AF33412F6F79047BEA7 /* PlaidDataMockingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683C80ACC7400FAF5987EC28 /* PlaidDataMockingProtocol.swift */; };
 		A493B9391F68137E0074ACCC /* APICredentialsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B9381F68137E0074ACCC /* APICredentialsComponents.swift */; };
 		A493B93A1F68137E0074ACCC /* APICredentialsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B9381F68137E0074ACCC /* APICredentialsComponents.swift */; };
+		A493B93C1F6819600074ACCC /* BitfinexAuthHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B93B1F6819600074ACCC /* BitfinexAuthHeaders.swift */; };
+		A493B93D1F6819600074ACCC /* BitfinexAuthHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B93B1F6819600074ACCC /* BitfinexAuthHeaders.swift */; };
+		A493B93F1F681BA00074ACCC /* BitfinexWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B93E1F681BA00074ACCC /* BitfinexWallet.swift */; };
+		A493B9401F681BA00074ACCC /* BitfinexWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B93E1F681BA00074ACCC /* BitfinexWallet.swift */; };
+		A4CB29E21F682C2D00128E48 /* BitfinexAPIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CB29E11F682C2D00128E48 /* BitfinexAPIClientTests.swift */; };
 		A4E768021F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768011F67DB02002B1AE1 /* BitfinexAPIClient.swift */; };
 		A4E768031F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768011F67DB02002B1AE1 /* BitfinexAPIClient.swift */; };
 		A4E768051F67DB2B002B1AE1 /* BitfinexCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768041F67DB2B002B1AE1 /* BitfinexCredentials.swift */; };
@@ -752,6 +757,9 @@
 		676ED7A41D17ACB400D03395 /* SampleResponses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleResponses.swift; sourceTree = "<group>"; };
 		683C80ACC7400FAF5987EC28 /* PlaidDataMockingProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaidDataMockingProtocol.swift; sourceTree = "<group>"; };
 		A493B9381F68137E0074ACCC /* APICredentialsComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICredentialsComponents.swift; sourceTree = "<group>"; };
+		A493B93B1F6819600074ACCC /* BitfinexAuthHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexAuthHeaders.swift; sourceTree = "<group>"; };
+		A493B93E1F681BA00074ACCC /* BitfinexWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexWallet.swift; sourceTree = "<group>"; };
+		A4CB29E11F682C2D00128E48 /* BitfinexAPIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexAPIClientTests.swift; sourceTree = "<group>"; };
 		A4E768011F67DB02002B1AE1 /* BitfinexAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexAPIClient.swift; sourceTree = "<group>"; };
 		A4E768041F67DB2B002B1AE1 /* BitfinexCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexCredentials.swift; sourceTree = "<group>"; };
 		A4E768081F67DDFE002B1AE1 /* BitfinexErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexErrors.swift; sourceTree = "<group>"; };
@@ -1626,12 +1634,22 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
+		A4CB29E01F68209E00128E48 /* BitfinexAPIClient */ = {
+			isa = PBXGroup;
+			children = (
+				A4CB29E11F682C2D00128E48 /* BitfinexAPIClientTests.swift */,
+			);
+			path = BitfinexAPIClient;
+			sourceTree = "<group>";
+		};
 		A4E768001F67DACC002B1AE1 /* Bitfinex */ = {
 			isa = PBXGroup;
 			children = (
 				A4E768011F67DB02002B1AE1 /* BitfinexAPIClient.swift */,
 				A4E768041F67DB2B002B1AE1 /* BitfinexCredentials.swift */,
 				A4E768081F67DDFE002B1AE1 /* BitfinexErrors.swift */,
+				A493B93B1F6819600074ACCC /* BitfinexAuthHeaders.swift */,
+				A493B93E1F681BA00074ACCC /* BitfinexWallet.swift */,
 			);
 			path = Bitfinex;
 			sourceTree = "<group>";
@@ -1781,6 +1799,7 @@
 		F1F948801D8049B800AB30B2 /* BalanceUnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				A4CB29E01F68209E00128E48 /* BitfinexAPIClient */,
 				53F0783B1F4F8EC700D0054C /* APIResponses */,
 				53F078401F4F8EC700D0054C /* BalanceOpenTests.swift */,
 				53F078471F4F8EC700D0054C /* CoinbaseTests.swift */,
@@ -2155,6 +2174,7 @@
 				535529DB1ED723C600DD95F9 /* AppDelegate.swift in Sources */,
 				535529FA1ED7250100DD95F9 /* SubscriptionManager.swift in Sources */,
 				537187E21F4CC23B00E7F9D6 /* GDAXErrors.swift in Sources */,
+				A493B93D1F6819600074ACCC /* BitfinexAuthHeaders.swift in Sources */,
 				53552A151ED7251200DD95F9 /* Swizzling.swift in Sources */,
 				53552A191ED7251700DD95F9 /* AccountType.swift in Sources */,
 				53552A101ED7251200DD95F9 /* InstitutionsDatabase.swift in Sources */,
@@ -2172,6 +2192,7 @@
 				537187E01F4CC23B00E7F9D6 /* GDAXAuthHeaders.swift in Sources */,
 				538B47BF1F4CA0200023CED5 /* Currency.swift in Sources */,
 				535529FE1ED7250500DD95F9 /* KeychainManagement.swift in Sources */,
+				A493B9401F681BA00074ACCC /* BitfinexWallet.swift in Sources */,
 				53552A0F1ED7251200DD95F9 /* KeychainManager.swift in Sources */,
 				53552A7A1ED7347900DD95F9 /* MockedKeychainManager.swift in Sources */,
 				535529FD1ED7250500DD95F9 /* PlaidDataMockingProtocol.swift in Sources */,
@@ -2258,6 +2279,7 @@
 				A493B9391F68137E0074ACCC /* APICredentialsComponents.swift in Sources */,
 				537504FA1F19237E0062C11A /* ProductId.swift in Sources */,
 				5355749B1E299A4A0003ED7B /* Error.swift in Sources */,
+				A493B93F1F681BA00074ACCC /* BitfinexWallet.swift in Sources */,
 				534DDFD81F4CCE9400E6C37F /* URLRequest.swift in Sources */,
 				5321219F1EE8B91600F4812A /* unzip.c in Sources */,
 				537187EB1F4CC23C00E7F9D6 /* GDAXAuthHeaders.swift in Sources */,
@@ -2397,6 +2419,7 @@
 				537187EE1F4CC23C00E7F9D6 /* GDAXServer.swift in Sources */,
 				53D441F51F44C477006967E1 /* TransactionRepository.swift in Sources */,
 				53C078A61DFF7CEB00696666 /* CertValidator.m in Sources */,
+				A493B93C1F6819600074ACCC /* BitfinexAuthHeaders.swift in Sources */,
 				532B6FF21E9613520010D81D /* AccountsTabViewModel.swift in Sources */,
 				683C8AF33412F6F79047BEA7 /* PlaidDataMockingProtocol.swift in Sources */,
 			);
@@ -2427,6 +2450,7 @@
 				53F078621F4F8F3C00D0054C /* PoloniexAccountToAccountTests.swift in Sources */,
 				53F0785C1F4F8F3100D0054C /* CoinbaseTests.swift in Sources */,
 				53F078671F4F8F3C00D0054C /* CredentialsTest.swift in Sources */,
+				A4CB29E21F682C2D00128E48 /* BitfinexAPIClientTests.swift in Sources */,
 				53F078601F4F8F3C00D0054C /* InstitutionTests.swift in Sources */,
 				53F078631F4F8F3C00D0054C /* PoloniexAPITests.swift in Sources */,
 				53F0785F1F4F8F3C00D0054C /* SearchTest.swift in Sources */,
