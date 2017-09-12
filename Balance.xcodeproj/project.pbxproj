@@ -387,6 +387,7 @@
 		A4E768031F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768011F67DB02002B1AE1 /* BitfinexAPIClient.swift */; };
 		A4E768051F67DB2B002B1AE1 /* BitfinexCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768041F67DB2B002B1AE1 /* BitfinexCredentials.swift */; };
 		A4E768061F67DB2B002B1AE1 /* BitfinexCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768041F67DB2B002B1AE1 /* BitfinexCredentials.swift */; };
+		A4E768071F67DC60002B1AE1 /* PoloniexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D251F5EA22900873286 /* PoloniexErrors.swift */; };
 		AA4776591DEA901900110685 /* InstitutionInitialsCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4776581DEA901900110685 /* InstitutionInitialsCircleView.swift */; };
 		AA5031A41DF2334000842A7D /* HeaderBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5031A31DF2334000842A7D /* HeaderBackgroundView.swift */; };
 		DC1A649F1B867B1F009356A0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1A649D1B867B1F009356A0 /* MainMenu.xib */; };
@@ -2104,6 +2105,7 @@
 				537187DC1F4CC23B00E7F9D6 /* CoinbaseApi.swift in Sources */,
 				A4E768031F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */,
 				53552A231ED7252900DD95F9 /* Date.swift in Sources */,
+				A4E768071F67DC60002B1AE1 /* PoloniexErrors.swift in Sources */,
 				532121A41EE8B91600F4812A /* QuickZip.swift in Sources */,
 				535529FC1ED7250100DD95F9 /* RealmManager.swift in Sources */,
 				53552A2A1ED7252900DD95F9 /* DispatchQueue.swift in Sources */,
