@@ -9,7 +9,7 @@ Balance Open: An app for all the world’s currencies.
 [![License][license-image]][license-url]
 
 ## Installation
-1. Make sure you have the latest version of the Xcode 8 (will be migrating to Xcode 9 and Swift 4 soon).
+1. Make sure you have latest Xcode 9 Beta (at the time of writing, that's beta 6) as the app is now in Swift 4
 2. Clone the repository: `git clone git@github.com:balancemymoney/balance-open.git`
 3. Open the project in Xcode
 4. Build and run
