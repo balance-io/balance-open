@@ -46,7 +46,7 @@ internal extension BitfinexAPIClient
             // :( Unable to use the namespacing function (self.namespacedKeychainIdentifier())
             // as we can't call self before intialization, making this brital.
             // There are tests to catch this being an issue though.
-            let namespacedIdentifier = "com.BitfinexClient.Credentials.\(identifier)"
+            let namespacedIdentifier = "com.BitfinexAPIClient.Credentials.\(identifier)"
             let components = try APICredentialsComponents(identifier: namespacedIdentifier)
             
             try self.init(component: components)
@@ -70,7 +70,7 @@ internal extension BitfinexAPIClient
             
             // Message
             let message = "/api/\(requestPath)\(date.timeIntervalSince1970)\(bodyString)"
-
+            
             let signature = self.createSignatureData(with: message, secretKeyData: self.secretKeyData).reduce("") { (result, byte) -> String in
                 return result + String(format: "%02x", byte)
             }
