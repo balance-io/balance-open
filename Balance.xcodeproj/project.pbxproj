@@ -262,6 +262,9 @@
 		539F65D61D3D17EF00A22EF7 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539F65D51D3D17EF00A22EF7 /* ImageView.swift */; };
 		53A179B61DC91CBE006442E4 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A179B51DC91CBE006442E4 /* SubscriptionManager.swift */; };
 		53A179BD1DC923C0006442E4 /* AppLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A179BC1DC923C0006442E4 /* AppLock.swift */; };
+		53A5B0C31F6989B6005AB47E /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A5B0C21F698907005AB47E /* Reachability.swift */; };
+		53A5B0C41F6989B6005AB47E /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A5B0C21F698907005AB47E /* Reachability.swift */; };
+		53A5B0C51F698B77005AB47E /* PoloniexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D251F5EA22900873286 /* PoloniexErrors.swift */; };
 		53B147781E70DC3B00BE1E51 /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B147771E70DC3B00BE1E51 /* Rule.swift */; };
 		53B327C11E56AD72009C7AFC /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B327C01E56AD72009C7AFC /* AsyncOperation.swift */; };
 		53B327C41E56AE0F009C7AFC /* Syncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B327C31E56AE0F009C7AFC /* Syncer.swift */; };
@@ -349,7 +352,6 @@
 		53F6383F1C5FFF3200864346 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F6383E1C5FFF3200864346 /* Transaction.swift */; };
 		53FCE3411F06B5DC004EB25C /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3391F06B5DC004EB25C /* Locksmith.framework */; };
 		53FCE3421F06B5DC004EB25C /* NSDateTimeAgo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33A1F06B5DC004EB25C /* NSDateTimeAgo.framework */; };
-		53FCE3431F06B5DC004EB25C /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33B1F06B5DC004EB25C /* Reachability.framework */; };
 		53FCE3441F06B5DC004EB25C /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33C1F06B5DC004EB25C /* Realm.framework */; };
 		53FCE3451F06B5DC004EB25C /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33D1F06B5DC004EB25C /* RealmSwift.framework */; };
 		53FCE3461F06B5DC004EB25C /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33E1F06B5DC004EB25C /* SnapKit.framework */; };
@@ -369,8 +371,6 @@
 		53FCE36E1F06B819004EB25C /* MASShortcut.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34E1F06B653004EB25C /* MASShortcut.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53FCE36F1F06B819004EB25C /* NSDateTimeAgo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34F1F06B653004EB25C /* NSDateTimeAgo.framework */; };
 		53FCE3701F06B819004EB25C /* NSDateTimeAgo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34F1F06B653004EB25C /* NSDateTimeAgo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		53FCE3711F06B819004EB25C /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3501F06B653004EB25C /* Reachability.framework */; };
-		53FCE3721F06B819004EB25C /* Reachability.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3501F06B653004EB25C /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53FCE3731F06B819004EB25C /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3511F06B653004EB25C /* Realm.framework */; };
 		53FCE3741F06B819004EB25C /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3511F06B653004EB25C /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53FCE3751F06B819004EB25C /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3521F06B653004EB25C /* RealmSwift.framework */; };
@@ -436,7 +436,6 @@
 				53FCE36C1F06B819004EB25C /* Locksmith.framework in Embed Frameworks */,
 				53FCE37A1F06B819004EB25C /* SwiftyStoreKit.framework in Embed Frameworks */,
 				53FCE3661F06B818004EB25C /* Crashlytics.framework in Embed Frameworks */,
-				53FCE3721F06B819004EB25C /* Reachability.framework in Embed Frameworks */,
 				53FCE3641F06B818004EB25C /* BalanceVectorGraphics.framework in Embed Frameworks */,
 				53FCE3761F06B819004EB25C /* RealmSwift.framework in Embed Frameworks */,
 				53FCE36A1F06B819004EB25C /* JMSRangeSlider.framework in Embed Frameworks */,
@@ -642,6 +641,7 @@
 		539F65D51D3D17EF00A22EF7 /* ImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		53A179B51DC91CBE006442E4 /* SubscriptionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
 		53A179BC1DC923C0006442E4 /* AppLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLock.swift; sourceTree = "<group>"; };
+		53A5B0C21F698907005AB47E /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		53B147771E70DC3B00BE1E51 /* Rule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rule.swift; sourceTree = "<group>"; };
 		53B327C01E56AD72009C7AFC /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		53B327C31E56AE0F009C7AFC /* Syncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Syncer.swift; sourceTree = "<group>"; };
@@ -716,7 +716,6 @@
 		53F6383E1C5FFF3200864346 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		53FCE3391F06B5DC004EB25C /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/iOS/Locksmith.framework; sourceTree = SOURCE_ROOT; };
 		53FCE33A1F06B5DC004EB25C /* NSDateTimeAgo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NSDateTimeAgo.framework; path = Carthage/Build/iOS/NSDateTimeAgo.framework; sourceTree = SOURCE_ROOT; };
-		53FCE33B1F06B5DC004EB25C /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = SOURCE_ROOT; };
 		53FCE33C1F06B5DC004EB25C /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = SOURCE_ROOT; };
 		53FCE33D1F06B5DC004EB25C /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = SOURCE_ROOT; };
 		53FCE33E1F06B5DC004EB25C /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = SOURCE_ROOT; };
@@ -729,7 +728,6 @@
 		53FCE34D1F06B653004EB25C /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/Mac/Locksmith.framework; sourceTree = SOURCE_ROOT; };
 		53FCE34E1F06B653004EB25C /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASShortcut.framework; path = Carthage/Build/Mac/MASShortcut.framework; sourceTree = SOURCE_ROOT; };
 		53FCE34F1F06B653004EB25C /* NSDateTimeAgo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NSDateTimeAgo.framework; path = Carthage/Build/Mac/NSDateTimeAgo.framework; sourceTree = SOURCE_ROOT; };
-		53FCE3501F06B653004EB25C /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/Mac/Reachability.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3511F06B653004EB25C /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3521F06B653004EB25C /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/Mac/RealmSwift.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3531F06B653004EB25C /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/Mac/SnapKit.framework; sourceTree = SOURCE_ROOT; };
@@ -791,7 +789,6 @@
 				53FCE3471F06B5DC004EB25C /* SwiftyStoreKit.framework in Frameworks */,
 				53552A4C1ED72E2600DD95F9 /* MapKit.framework in Frameworks */,
 				53FCE3421F06B5DC004EB25C /* NSDateTimeAgo.framework in Frameworks */,
-				53FCE3431F06B5DC004EB25C /* Reachability.framework in Frameworks */,
 				53552A501ED72E3B00DD95F9 /* Security.framework in Frameworks */,
 				53F0786C1ED747C700E7EDF9 /* libsqlcipher.a in Frameworks */,
 				53552A521ED72E4C00DD95F9 /* StoreKit.framework in Frameworks */,
@@ -814,7 +811,6 @@
 				53FCE3731F06B819004EB25C /* Realm.framework in Frameworks */,
 				53FCE3791F06B819004EB25C /* SwiftyStoreKit.framework in Frameworks */,
 				533674FD1F4CE0C40034040F /* Sparkle.framework in Frameworks */,
-				53FCE3711F06B819004EB25C /* Reachability.framework in Frameworks */,
 				53FCE3691F06B819004EB25C /* JMSRangeSlider.framework in Frameworks */,
 				53FCE3771F06B819004EB25C /* SnapKit.framework in Frameworks */,
 				539E0C201DC27A5D0038ACEC /* StoreKit.framework in Frameworks */,
@@ -1164,6 +1160,7 @@
 				5329FB721E3EA36F00A9CAF7 /* CwlSysctl.swift */,
 				534E83C51D3FB76200F76E8A /* OrderedDictionary.swift */,
 				53980CBE1D5CD6F80013B981 /* Pluralize.swift */,
+				53A5B0C21F698907005AB47E /* Reachability.swift */,
 				53F0786A1ED747C700E7EDF9 /* libsqlcipher.a */,
 				535BE39D1F05A14C00DEA4EF /* libz.tbd */,
 			);
@@ -1209,7 +1206,6 @@
 				53FCE34D1F06B653004EB25C /* Locksmith.framework */,
 				53FCE34E1F06B653004EB25C /* MASShortcut.framework */,
 				53FCE34F1F06B653004EB25C /* NSDateTimeAgo.framework */,
-				53FCE3501F06B653004EB25C /* Reachability.framework */,
 				53FCE3511F06B653004EB25C /* Realm.framework */,
 				53FCE3521F06B653004EB25C /* RealmSwift.framework */,
 				53FCE3531F06B653004EB25C /* SnapKit.framework */,
@@ -1249,7 +1245,6 @@
 				5313F9601F58CFAC00DD6BDB /* TrustKit.framework */,
 				53FCE3391F06B5DC004EB25C /* Locksmith.framework */,
 				53FCE33A1F06B5DC004EB25C /* NSDateTimeAgo.framework */,
-				53FCE33B1F06B5DC004EB25C /* Reachability.framework */,
 				53FCE33C1F06B5DC004EB25C /* Realm.framework */,
 				53FCE33D1F06B5DC004EB25C /* RealmSwift.framework */,
 				53FCE33E1F06B5DC004EB25C /* SnapKit.framework */,
@@ -1981,7 +1976,6 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Locksmith.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/NSDateTimeAgo.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Reachability.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
@@ -2041,6 +2035,7 @@
 				53D441E91F44B0DD006967E1 /* FMDatabasePoolAdditionsVariadic.swift in Sources */,
 				53552A2B1ED7252900DD95F9 /* FileManager.swift in Sources */,
 				53552A2F1ED72B5700DD95F9 /* FMDatabaseAdditions.m in Sources */,
+				53A5B0C51F698B77005AB47E /* PoloniexErrors.swift in Sources */,
 				53552A1C1ED7251A00DD95F9 /* Rule.swift in Sources */,
 				537187E61F4CC23B00E7F9D6 /* PoloniexAccount.swift in Sources */,
 				53552A7B1ED7347C00DD95F9 /* MockedDefaultsStorage.swift in Sources */,
@@ -2135,6 +2130,7 @@
 				53552A131ED7251200DD95F9 /* CertValidator.m in Sources */,
 				53552A141ED7251200DD95F9 /* ServerMessage.swift in Sources */,
 				535529FF1ED7250500DD95F9 /* DefaultsStorage.swift in Sources */,
+				53A5B0C41F6989B6005AB47E /* Reachability.swift in Sources */,
 				53552A181ED7251700DD95F9 /* Account.swift in Sources */,
 				53552A201ED7252900DD95F9 /* NotificationCenter.swift in Sources */,
 				53552A211ED7252900DD95F9 /* String.swift in Sources */,
@@ -2276,6 +2272,7 @@
 				531EC4941D50CADD0056E75B /* Feed.swift in Sources */,
 				530F57C61DCD72680083F3A7 /* FMDatabaseAdditionsVariadic.swift in Sources */,
 				5372E96F1DF7E75C00DDE214 /* SignUpTextField.swift in Sources */,
+				53A5B0C31F6989B6005AB47E /* Reachability.swift in Sources */,
 				53EB77CE1CF3E6F600F01903 /* NSFont.swift in Sources */,
 				537504FD1F192D280062C11A /* TypeAliases.swift in Sources */,
 				532550901D06FEFE0045404E /* SearchField.swift in Sources */,
