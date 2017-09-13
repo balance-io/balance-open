@@ -302,7 +302,7 @@ class OpenAddAccountViewController: NSViewController {
                 
                 switch source
                 {
-                case .bitfinex, .plaid:
+                case .plaid:
                     button.alphaValue = 0.5
                     button.isEnabled = false
                 default:()
@@ -343,6 +343,8 @@ class OpenAddAccountViewController: NSViewController {
                 self.presentLoginScreenWith(apiInstitution: GDAXAPIClient.gdaxInstitution, loginService: GDAXAPIClient(server: .production))
             case .poloniex:
                 self.presentLoginScreenWith(apiInstitution: PoloniexInstitution(), loginService: PoloniexApi())
+            case .bitfinex:
+                self.presentLoginScreenWith(apiInstitution: BitfinexAPIClient.institution, loginService: BitfinexAPIClient())
             default:()
             }
         }
