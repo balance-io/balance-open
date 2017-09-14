@@ -35,6 +35,7 @@ enum AccountType: Int, CustomStringConvertible {
     // Other
     case exchange               = 20
     case lending                = 21
+    case wallet                 = 22
     
     init(plaidString: String) {
         switch plaidString {
@@ -62,6 +63,7 @@ enum AccountType: Int, CustomStringConvertible {
             
         case "exchange":                self = .exchange
         case "lending":                 self = .lending
+        case "wallet":                  self = .wallet
             
         default:                        self = .other
         }
@@ -92,6 +94,7 @@ enum AccountType: Int, CustomStringConvertible {
             
         case .exchange:              return "Exchange"
         case .lending:               return "Lending"
+        case .wallet:                return "Wallet"
         }
     }
 }

@@ -12,6 +12,8 @@
 		28E990EA1D909A39003A2F1F /* PreferencesBillingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E990E91D909A39003A2F1F /* PreferencesBillingViewController.swift */; };
 		28F678481DCB6E9600383D22 /* SetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F678471DCB6E9600383D22 /* SetPasswordViewController.swift */; };
 		28FD09C21D99F18500A395AB /* PaintCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FD09C11D99F18500A395AB /* PaintCodeButton.swift */; };
+		2D1CCA141F6159B900BACC20 /* EthplorerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1CCA131F6159B900BACC20 /* EthplorerApi.swift */; };
+		2D1CCA171F62AE1100BACC20 /* EthploreAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D1CCA161F62AE1100BACC20 /* EthploreAccountResponse.json */; };
 		2D326D261F5EA22900873286 /* PoloniexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D251F5EA22900873286 /* PoloniexErrors.swift */; };
 		2D326D2B1F60349200873286 /* EthplorerInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D2A1F60349200873286 /* EthplorerInstitution.swift */; };
 		2D326D2D1F6036A200873286 /* EthplorerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D2C1F6036A200873286 /* EthplorerAccount.swift */; };
@@ -470,6 +472,8 @@
 		28E990E91D909A39003A2F1F /* PreferencesBillingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesBillingViewController.swift; sourceTree = "<group>"; };
 		28F678471DCB6E9600383D22 /* SetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPasswordViewController.swift; sourceTree = "<group>"; };
 		28FD09C11D99F18500A395AB /* PaintCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintCodeButton.swift; sourceTree = "<group>"; };
+		2D1CCA131F6159B900BACC20 /* EthplorerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthplorerApi.swift; sourceTree = "<group>"; };
+		2D1CCA161F62AE1100BACC20 /* EthploreAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EthploreAccountResponse.json; sourceTree = "<group>"; };
 		2D326D251F5EA22900873286 /* PoloniexErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexErrors.swift; sourceTree = "<group>"; };
 		2D326D2A1F60349200873286 /* EthplorerInstitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthplorerInstitution.swift; sourceTree = "<group>"; };
 		2D326D2C1F6036A200873286 /* EthplorerAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthplorerAccount.swift; sourceTree = "<group>"; };
@@ -865,11 +869,20 @@
 			path = Modals;
 			sourceTree = "<group>";
 		};
+		2D1CCA151F62ADF300BACC20 /* Ethplore */ = {
+			isa = PBXGroup;
+			children = (
+				2D1CCA161F62AE1100BACC20 /* EthploreAccountResponse.json */,
+			);
+			path = Ethplore;
+			sourceTree = "<group>";
+		};
 		2D326D271F5FEBF200873286 /* Etherscan */ = {
 			isa = PBXGroup;
 			children = (
 				2D326D2A1F60349200873286 /* EthplorerInstitution.swift */,
 				2D326D2C1F6036A200873286 /* EthplorerAccount.swift */,
+				2D1CCA131F6159B900BACC20 /* EthplorerApi.swift */,
 			);
 			path = Etherscan;
 			sourceTree = "<group>";
@@ -1489,6 +1502,7 @@
 		53F0783B1F4F8EC700D0054C /* APIResponses */ = {
 			isa = PBXGroup;
 			children = (
+				2D1CCA151F62ADF300BACC20 /* Ethplore */,
 				53F0783C1F4F8EC700D0054C /* Poloniex */,
 			);
 			path = APIResponses;
@@ -1970,6 +1984,7 @@
 				53F0786D1F4F916800D0054C /* Account.json in Resources */,
 				53F0786A1F4F916500D0054C /* CompleteBalancesResponse.json in Resources */,
 				53F0786E1F4F916800D0054C /* Error.json in Resources */,
+				2D1CCA171F62AE1100BACC20 /* EthploreAccountResponse.json in Resources */,
 				53F0786B1F4F916500D0054C /* PoloniexAccount.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2322,6 +2337,7 @@
 				535AEA331D22D177003F13E2 /* NSAttributedString.swift in Sources */,
 				5325508E1D06FED30045404E /* TableView.swift in Sources */,
 				53124FB91D8F13E700D7ADF6 /* IntroViewController.swift in Sources */,
+				2D1CCA141F6159B900BACC20 /* EthplorerApi.swift in Sources */,
 				537187E71F4CC23C00E7F9D6 /* CoinbaseApi.swift in Sources */,
 				536C6EF21D864CB900823688 /* DefaultsStorage.swift in Sources */,
 				DCC684D81BD1080E00E95B90 /* TransactionsTabViewController.swift in Sources */,

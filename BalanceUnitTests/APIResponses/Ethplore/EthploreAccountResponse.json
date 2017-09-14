@@ -1,0 +1,33 @@
+{
+    "address": "0x3c44151439965c709f7d79ceebaeda5bc5fba9ca",
+    "ETH": {
+    "balance": "2.629951259",
+    "totalIn": "9.486951259",
+    "totalOut": "6.856999999999999"
+    },
+    "countTxs": "4",
+    "tokens": [
+    {
+        "tokenInfo": {
+        "address": "0xe41d2489571d322189246dafa5ebde1f4699f498",
+        "name": "0x Protocol Token",
+        "decimals": "18",
+        "symbol": "ZRX",
+        "totalSupply": "1000000000000000000000000000",
+        "owner": "0x",
+        "lastUpdated": "1504864755",
+        "issuancesCount": "0",
+        "holdersCount": "14",
+        "price": {
+            "rate": "0.32",
+            "diff": "28.82",
+            "ts": "1504803294",
+            "currency": "USD"
+        }
+        },
+        "balance": "3.94402043750082e+22",
+        "totalIn": "0",
+        "totalOut": "0"
+    }
+    ]
+}
