@@ -30,9 +30,6 @@ enum CoinbaseError: String, LocalizedError {
     case internalServerError     = "internal_server_error"
     
     var errorDescription: String? {
-        switch self {
-        case .twoFactorRequired: return ""
-        default: return ""
-        }
+        return rawValue
     }
 }
