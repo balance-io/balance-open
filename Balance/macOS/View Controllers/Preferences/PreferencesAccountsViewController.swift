@@ -287,7 +287,7 @@ class PreferencesAccountsViewController: NSViewController {
                             } else {
                                 var message = ""
                                 if let error = error as? BalanceError {
-                                    message = error.message
+                                    message = error.errorDescription ?? "\(error)"
                                 } else if let error = error {
                                     message = "\(error)"
                                 }

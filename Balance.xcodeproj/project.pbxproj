@@ -238,8 +238,6 @@
 		537504FB1F19237E0062C11A /* ProductId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537504F91F19237E0062C11A /* ProductId.swift */; };
 		537504FD1F192D280062C11A /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537504FC1F192D280062C11A /* TypeAliases.swift */; };
 		537504FE1F192D280062C11A /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537504FC1F192D280062C11A /* TypeAliases.swift */; };
-		537505001F192DC50062C11A /* BalanceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537504FF1F192DC50062C11A /* BalanceError.swift */; };
-		537505011F192DC50062C11A /* BalanceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537504FF1F192DC50062C11A /* BalanceError.swift */; };
 		5375963F1F50B90A00B36E6E /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5375963E1F50B8FD00B36E6E /* TrustKit.framework */; };
 		537596401F50B90A00B36E6E /* TrustKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5375963E1F50B8FD00B36E6E /* TrustKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53762EB11ED793A200D34A1E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53762EB01ED793A200D34A1E /* main.swift */; };
@@ -262,6 +260,10 @@
 		539F65D61D3D17EF00A22EF7 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539F65D51D3D17EF00A22EF7 /* ImageView.swift */; };
 		53A179B61DC91CBE006442E4 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A179B51DC91CBE006442E4 /* SubscriptionManager.swift */; };
 		53A179BD1DC923C0006442E4 /* AppLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A179BC1DC923C0006442E4 /* AppLock.swift */; };
+		53A5B0CC1F69C9D3005AB47E /* CoinbaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A5B0CB1F69C9D2005AB47E /* CoinbaseError.swift */; };
+		53A5B0CD1F69C9D3005AB47E /* CoinbaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A5B0CB1F69C9D2005AB47E /* CoinbaseError.swift */; };
+		53A5B0CF1F69D417005AB47E /* BalanceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A5B0CE1F69D417005AB47E /* BalanceError.swift */; };
+		53A5B0D01F69D417005AB47E /* BalanceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A5B0CE1F69D417005AB47E /* BalanceError.swift */; };
 		53B147781E70DC3B00BE1E51 /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B147771E70DC3B00BE1E51 /* Rule.swift */; };
 		53B327C11E56AD72009C7AFC /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B327C01E56AD72009C7AFC /* AsyncOperation.swift */; };
 		53B327C41E56AE0F009C7AFC /* Syncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B327C31E56AE0F009C7AFC /* Syncer.swift */; };
@@ -608,7 +610,6 @@
 		5374D69C1CE194F100527388 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		537504F91F19237E0062C11A /* ProductId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductId.swift; sourceTree = "<group>"; };
 		537504FC1F192D280062C11A /* TypeAliases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
-		537504FF1F192DC50062C11A /* BalanceError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceError.swift; sourceTree = "<group>"; };
 		5375963E1F50B8FD00B36E6E /* TrustKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TrustKit.framework; path = Carthage/Build/Mac/TrustKit.framework; sourceTree = SOURCE_ROOT; };
 		53762EB01ED793A200D34A1E /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		53762EB21ED796F100D34A1E /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -642,6 +643,8 @@
 		539F65D51D3D17EF00A22EF7 /* ImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		53A179B51DC91CBE006442E4 /* SubscriptionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
 		53A179BC1DC923C0006442E4 /* AppLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLock.swift; sourceTree = "<group>"; };
+		53A5B0CB1F69C9D2005AB47E /* CoinbaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseError.swift; sourceTree = "<group>"; };
+		53A5B0CE1F69D417005AB47E /* BalanceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceError.swift; sourceTree = "<group>"; };
 		53B147771E70DC3B00BE1E51 /* Rule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rule.swift; sourceTree = "<group>"; };
 		53B327C01E56AD72009C7AFC /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		53B327C31E56AE0F009C7AFC /* Syncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Syncer.swift; sourceTree = "<group>"; };
@@ -1272,6 +1275,7 @@
 			children = (
 				538B47B11F4C9FD60023CED5 /* CoinbaseApi.swift */,
 				538B47B01F4C9FD60023CED5 /* CoinbaseAccount.swift */,
+				53A5B0CB1F69C9D2005AB47E /* CoinbaseError.swift */,
 			);
 			name = Coinbase;
 			path = APIs/Coinbase;
@@ -1564,6 +1568,7 @@
 				538B47BD1F4CA0200023CED5 /* Currency.swift */,
 				53F0785C1ED73B7D00E7EDF9 /* Element.swift */,
 				53F0785F1ED73B9500E7EDF9 /* RuleTemplate.swift */,
+				53A5B0CE1F69D417005AB47E /* BalanceError.swift */,
 			);
 			path = "Other Models";
 			sourceTree = "<group>";
@@ -1589,7 +1594,6 @@
 				53B327C01E56AD72009C7AFC /* AsyncOperation.swift */,
 				5301A7761F17F86900668099 /* HTTPMethod.swift */,
 				537504FC1F192D280062C11A /* TypeAliases.swift */,
-				537504FF1F192DC50062C11A /* BalanceError.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -2062,6 +2066,7 @@
 				537187E51F4CC23B00E7F9D6 /* PoloniexApi.swift in Sources */,
 				535529F51ED724ED00DD95F9 /* InsightsTabViewModel.swift in Sources */,
 				5301A76F1F17F56500668099 /* PlaidAccount.swift in Sources */,
+				53A5B0CC1F69C9D3005AB47E /* CoinbaseError.swift in Sources */,
 				53F0785E1ED73B7D00E7EDF9 /* Element.swift in Sources */,
 				53552A041ED7251200DD95F9 /* Debugging.swift in Sources */,
 				537504FE1F192D280062C11A /* TypeAliases.swift in Sources */,
@@ -2101,7 +2106,6 @@
 				535529F81ED7250100DD95F9 /* SyncDefaults.swift in Sources */,
 				53D441F91F44CD93006967E1 /* InstitutionRepository.swift in Sources */,
 				537187DE1F4CC23B00E7F9D6 /* GDAXAPIClient.swift in Sources */,
-				537505011F192DC50062C11A /* BalanceError.swift in Sources */,
 				537504FB1F19237E0062C11A /* ProductId.swift in Sources */,
 				53552A361ED72B5B00DD95F9 /* Pluralize.swift in Sources */,
 				535529DB1ED723C600DD95F9 /* AppDelegate.swift in Sources */,
@@ -2109,6 +2113,7 @@
 				537187E21F4CC23B00E7F9D6 /* GDAXErrors.swift in Sources */,
 				53552A151ED7251200DD95F9 /* Swizzling.swift in Sources */,
 				53552A191ED7251700DD95F9 /* AccountType.swift in Sources */,
+				53A5B0CF1F69D417005AB47E /* BalanceError.swift in Sources */,
 				53552A101ED7251200DD95F9 /* InstitutionsDatabase.swift in Sources */,
 				53552A291ED7252900DD95F9 /* Error.swift in Sources */,
 				53552A331ED72B5700DD95F9 /* FMDatabaseAdditionsVariadic.swift in Sources */,
@@ -2258,7 +2263,6 @@
 				5301A7611F17DC8B00668099 /* URL.swift in Sources */,
 				5301A7701F17F56500668099 /* PlaidInstitution.swift in Sources */,
 				53A179BD1DC923C0006442E4 /* AppLock.swift in Sources */,
-				537505001F192DC50062C11A /* BalanceError.swift in Sources */,
 				53B5C1961D8637CE00323ACE /* Testing.swift in Sources */,
 				53D441EF1F44B34B006967E1 /* AccountRepository.swift in Sources */,
 				530870EB1CE8175E005B591C /* Search.swift in Sources */,
@@ -2327,6 +2331,7 @@
 				53CED06A1D19B26000CE1B73 /* VisualEffectView.swift in Sources */,
 				AA4776591DEA901900110685 /* InstitutionInitialsCircleView.swift in Sources */,
 				530415BE1DFE1A6E00F0679C /* NSTextView.swift in Sources */,
+				53A5B0D01F69D417005AB47E /* BalanceError.swift in Sources */,
 				53DC85B11E678223007C72EB /* FileManager.swift in Sources */,
 				532121A51EE8B91600F4812A /* Zip.swift in Sources */,
 				53E74A571DD53CCB00AD8876 /* TimeInterval.swift in Sources */,
@@ -2338,6 +2343,7 @@
 				530F57BD1DCD72680083F3A7 /* FMResultSet.m in Sources */,
 				531F590B1DDA4ABC0008E8BA /* DisablePasswordViewController.swift in Sources */,
 				53B4D5BA1D072C9B00FF0411 /* TabButton.swift in Sources */,
+				53A5B0CD1F69C9D3005AB47E /* CoinbaseError.swift in Sources */,
 				535769A01D5A4A7600013543 /* SectionedTableView.swift in Sources */,
 				530291321C6AA18F00C31CC1 /* AccountsTabViewController.swift in Sources */,
 				537187EE1F4CC23C00E7F9D6 /* GDAXServer.swift in Sources */,
