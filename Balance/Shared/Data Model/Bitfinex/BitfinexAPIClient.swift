@@ -84,12 +84,13 @@ internal extension BitfinexAPIClient
             do
             {
                 guard let httpResponse = response as? HTTPURLResponse,
-                      let json = try? JSONSerialization.jsonObject(with: data!, options: []) else
+                      let unwrappedData = data,
+                      let json = try? JSONSerialization.jsonObject(with: unwrappedData, options: []) else
                 {
                     completionHandler(nil, APIError.invalidJSON)
                     return
                 }
-                
+
                 if case 200...299 = httpResponse.statusCode {
                     guard let walletsJSON = json as? [[Any]] else
                     {
