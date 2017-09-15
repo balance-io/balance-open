@@ -7,29 +7,48 @@
 //
 
 import XCTest
+@testable import BalancemacOS
 
-class BitfinexAPIClientTests: XCTestCase {
+
+internal final class BitfinexAPIClientTests: XCTestCase
+{
+    // Private
+    private let mockSession = MockSession()
+    private var apiClient: BitfinexAPIClient!
     
-    override func setUp() {
+    // MARK: Setup
+    
+    override func setUp()
+    {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        let credentials = try! BitfinexAPIClient.Credentials(key: "aaa", secret: "bbb")
+        
+        self.apiClient = BitfinexAPIClient(session: self.mockSession)
+        self.apiClient.credentials = credentials
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    override func tearDown()
+    {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+    // MARK: Fetch wallets
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    internal func testFetchAccounts()
+    {
+        let data = TestHelpers.loadData(filename: "FetchWallets.json")
+        self.mockSession.mockResponse = MockSession.Response(data: data, statusCode: 200, headers: nil)
+        
+        let expectation = self.expectation(description: "Request")
+        
+        try! self.apiClient.fetchWallets { (wallets, error) in
+            XCTAssertNil(error)
+            XCTAssertEqual(wallets?.count, 2)
+            
+            expectation.fulfill()
         }
+        
+        self.waitForExpectations(timeout: 2.0, handler: nil)
     }
-    
 }
