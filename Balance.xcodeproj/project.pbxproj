@@ -892,14 +892,15 @@
 		5301A7641F17F42700668099 /* APIs */ = {
 			isa = PBXGroup;
 			children = (
-				A4E7680E1F67F034002B1AE1 /* API Credentials */,
 				537187F31F4CC37400E7F9D6 /* ExchangeApi.swift */,
 				535315251F4CEBF2008D6890 /* ApiInstitution.swift */,
+				A4E7680E1F67F034002B1AE1 /* API Credentials */,
+				A4E768001F67DACC002B1AE1 /* Bitfinex */,
 				538B47AF1F4C9FD60023CED5 /* Coinbase */,
 				538B47B21F4C9FD70023CED5 /* GDAX */,
-				A4E768001F67DACC002B1AE1 /* Bitfinex */,
-				538B47BA1F4C9FD70023CED5 /* Poloniex */,
+				A40ABBE41F6BBFD100383C62 /* Kraken */,
 				5301A7651F17F44E00668099 /* Plaid */,
+				538B47BA1F4C9FD70023CED5 /* Poloniex */,
 			);
 			name = APIs;
 			sourceTree = "<group>";
@@ -1637,6 +1638,13 @@
 				A40ABBE21F6BBD1100383C62 /* FetchWallets.json */,
 			);
 			path = "Bitfinex API Responses";
+			sourceTree = "<group>";
+		};
+		A40ABBE41F6BBFD100383C62 /* Kraken */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Kraken;
 			sourceTree = "<group>";
 		};
 		A4CB29E01F68209E00128E48 /* BitfinexAPIClient */ = {
