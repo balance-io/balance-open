@@ -16,9 +16,9 @@ struct PoloniexAccount {
     let onOrders: Decimal
     let btcValue: Decimal
     
-    init(dictionary: [String: AnyObject], currencyShortName: String, type: AccountType) throws {
+    init(dictionary: [String: AnyObject], currencyCode: String, type: AccountType) throws {
         self.type = type
-        self.currency = Currency.rawValue(shortName: currencyShortName)
+        self.currency = Currency.rawValue(code: currencyCode)
         let availableAmount: String = try checkType(dictionary, name: "available")
         let availableDecimal = NumberUtils.decimalFormatter.number(from: availableAmount)?.decimalValue
         self.available = try checkType(availableDecimal, name: "availableDecimal")

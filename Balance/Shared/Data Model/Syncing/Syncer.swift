@@ -193,7 +193,7 @@ class Syncer {
                     }
                     
                     for account in unwrappedAccounts {
-                        let decimals = Currency.rawValue(shortName: account.currencyCode).decimals
+                        let decimals = Currency.rawValue(code: account.currencyCode).decimals
                         
                         // Calculate the integer value of the balance based on the decimals
                         var balance = Decimal(account.balance)
