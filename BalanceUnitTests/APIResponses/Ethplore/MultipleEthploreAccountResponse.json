@@ -11,7 +11,7 @@
         "tokenInfo": {
         "address": "0xe41d2489571d322189246dafa5ebde1f4699f498",
         "name": "0x Protocol Token",
-        "decimals": 18,
+        "decimals": "18",
         "symbol": "ZRX",
         "totalSupply": "1000000000000000000000000000",
         "owner": "0x",
@@ -20,7 +20,7 @@
         "holdersCount": 14,
         "price": {
             "rate": 0.32,
-            "diff": 28.82,
+            "diff": -28.82,
             "ts": 1504803294,
             "currency": "USD"
         }
@@ -28,6 +28,24 @@
         "balance": 3.94402043750082e+22,
         "totalIn": 0,
         "totalOut": 0
-    }
+    },
+       {
+           "tokenInfo": {
+           "address": "0xdd974d5c2e2928dea5f71b9825b8b646686bd200",
+           "name": "Kyber Network Crystal",
+           "decimals": 18,
+           "symbol": "KNC",
+           "totalSupply": "226000000000000000000000000",
+           "owner": "0xfdf28bf25779ed4ca74e958d54653260af604c20",
+           "lastUpdated": 1505463876,
+           "issuancesCount": 0,
+           "holdersCount": 2,
+           "price": false
+       },
+           "balance": 2.16e+21,
+           "totalIn": 0,
+           "totalOut": 0
+       }
     ]
 }
+

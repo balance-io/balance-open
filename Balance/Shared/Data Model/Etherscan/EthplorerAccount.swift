@@ -13,8 +13,8 @@ struct EthplorerAccount {
     let currency: Currency
     
     let address: String
-    let available: Decimal
-    let altValue: Decimal
+    let available: Double
+    let altValue: Double
     let altCurrency: Currency
 }
 
@@ -25,14 +25,12 @@ struct EthplorerAccountObject {
     
     let address: String
     let ETH: Eth
-    let tokenInfo: String
     let tokens: [Token]
     
     init(dictionary: [String: AnyObject], currencyShortName: String, type: AccountType) throws {
         self.type = type
         self.currency = Currency.rawValue(shortName: "ETH")
     
-        self.tokenInfo = try checkType(dictionary, name: "tokenInfo")
         self.address = try checkType(dictionary, name: "address")
         
         self.ETH = try Eth.init(dictionary: dictionary["ETH"] as! [String : AnyObject])
@@ -44,46 +42,28 @@ struct EthplorerAccountObject {
     }
     
     struct Eth {
-        let balance: Decimal
-        let totalIn: Decimal
-        let totalOut: Decimal
+        let balance: Double
+        let totalIn: Double
+        let totalOut: Double
         
         init(dictionary: [String: AnyObject]) throws {
-            let balanceRaw: String = try checkType(dictionary, name: "balance")
-            let balanceDecimal = NumberUtils.decimalFormatter.number(from: balanceRaw)?.decimalValue
-            self.balance = try checkType(balanceDecimal, name: "balanceDecimal")
-            
-            let totalInRaw: String = try checkType(dictionary, name: "totalIn")
-            let totalInDecimal = NumberUtils.decimalFormatter.number(from: totalInRaw)?.decimalValue
-            self.totalIn = try checkType(totalInDecimal, name: "totalInDecimal")
-            
-            let totalOutRaw: String = try checkType(dictionary, name: "totalOut")
-            let totalOutDecimal = NumberUtils.decimalFormatter.number(from: totalOutRaw)?.decimalValue
-            self.totalOut = try checkType(totalOutDecimal, name: "totalOutDecimal")
+            self.balance = try checkType(dictionary, name: "balance")
+            self.totalIn = try checkType(dictionary, name: "totalIn")
+            self.totalOut = try checkType(dictionary, name: "totalOut")
         }
     }
     
     struct Token {
         let tokenInfo: TokenInfo
-        let balance: Decimal
-        let totalIn: Decimal
-        let totalOut: Decimal
+        let balance: Double
+        let totalIn: Double
+        let totalOut: Double
         
         init (dictionary: [String:AnyObject]) throws {
-            let balanceRaw: String = try checkType(dictionary, name: "balance")
-            let balanceDecimal = NumberUtils.decimalFormatter.number(from: balanceRaw)?.decimalValue
-            self.balance = try checkType(balanceDecimal, name: "balanceDecimal")
-            
-            let totalInRaw: String = try checkType(dictionary, name: "totalIn")
-            let totalInDecimal = NumberUtils.decimalFormatter.number(from: totalInRaw)?.decimalValue
-            self.totalIn = try checkType(totalInDecimal, name: "totalInDecimal")
-            
-            let totalOutRaw: String = try checkType(dictionary, name: "totalOut")
-            let totalOutDecimal = NumberUtils.decimalFormatter.number(from: totalOutRaw)?.decimalValue
-            self.totalOut = try checkType(totalOutDecimal, name: "totalOutDecimal")
-            
+            self.balance = try checkType(dictionary, name: "balance")
+            self.totalIn = try checkType(dictionary, name: "totalIn")
+            self.totalOut = try checkType(dictionary, name: "totalOut")
             self.tokenInfo = try TokenInfo.init(dictionary: dictionary["tokenInfo"] as! [String:AnyObject])
-
         }
     }
     
@@ -92,37 +72,31 @@ struct EthplorerAccountObject {
         let name: String
         let decimals: Int
         let symbol: String
-        let price: ExchangePrice
+        let price: ExchangePrice?
         
         init (dictionary: [String:AnyObject]) throws {
             self.address = try checkType(dictionary, name: "address")
             self.name = try checkType(dictionary, name: "name")
             self.decimals = try checkType(dictionary, name: "decimals")
             self.symbol = try checkType(dictionary, name: "symbol")
-            self.price = try ExchangePrice.init(dictionary: dictionary["price"] as! [String : AnyObject])
+            if let _ = dictionary["price"] as? Bool {
+                self.price = nil
+            } else {
+                self.price = try ExchangePrice.init(dictionary: dictionary["price"] as! [String : AnyObject])
+            }
         }
     }
     
     //empty info
     struct ExchangePrice {
-        let rate: Decimal
+        let rate: Double
         let currency: Currency
-        let diff: Decimal
-        let ts: Date
+        let diff: Double
         
         init (dictionary: [String:AnyObject]) throws {
-            let rateRaw: String = try checkType(dictionary, name: "rate")
-            let rateDecimal = NumberUtils.decimalFormatter.number(from: rateRaw)?.decimalValue
-            self.rate = try checkType(rateDecimal, name: "rateDecimal")
-            
+            self.rate = try checkType(dictionary, name: "rate")
             self.currency = .common(traditional: .usd)
-            
-            let diffRaw: String = try checkType(dictionary, name: "diff")
-            let diffDecimal = NumberUtils.decimalFormatter.number(from: diffRaw)?.decimalValue
-            self.diff = try checkType(diffDecimal, name: "diffDecimal")
-            
-            let timestamp: TimeInterval = try checkType(dictionary, name: "ts")
-            self.ts = Date.init(timeIntervalSinceReferenceDate: timestamp)
+            self.diff = try checkType(dictionary, name: "diff")
         }
     }
     
@@ -131,7 +105,13 @@ struct EthplorerAccountObject {
         let ethAccount = EthplorerAccount.init(type: .wallet, currency: self.currency, address: self.address, available: self.ETH.balance, altValue: 0, altCurrency: Currency.rawValue(shortName: "BTC"))
         arrayOlder.append(ethAccount)
         for ethplorerObject in self.tokens {
-            let tokenAccount = EthplorerAccount.init(type: .wallet, currency: Currency.rawValue(shortName: ethplorerObject.tokenInfo.symbol), address: ethplorerObject.tokenInfo.address, available: ethplorerObject.balance, altValue: ethplorerObject.tokenInfo.price.rate, altCurrency: ethplorerObject.tokenInfo.price.currency)
+            var altRate: Double = 0
+            var altCurrency: Currency = Currency.common(traditional: .usd)
+            if let tokenPrice = ethplorerObject.tokenInfo.price {
+                altRate = tokenPrice.rate
+                altCurrency = tokenPrice.currency
+            }
+            let tokenAccount = EthplorerAccount.init(type: .wallet, currency: Currency.rawValue(shortName: ethplorerObject.tokenInfo.symbol), address: ethplorerObject.tokenInfo.address, available: ethplorerObject.balance, altValue: altRate, altCurrency: altCurrency)
             arrayOlder.append(tokenAccount)
         }
         return arrayOlder

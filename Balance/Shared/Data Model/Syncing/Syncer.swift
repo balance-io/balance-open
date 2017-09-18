@@ -114,7 +114,7 @@ class Syncer {
             } else if institution.source == .wallet {
                 //ethplorer
                 if let address = institution.address {
-                    
+                    syncWallet(address: address, institution: institution, remainingInstitutions: syncingInstitutions, startDate: startDate, success: success, errors: errors)
                 } else {
                     log.error("Failed to get the stored Address for the wallet")
                 }

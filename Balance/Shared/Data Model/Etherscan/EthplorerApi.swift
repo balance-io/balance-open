@@ -49,7 +49,7 @@ class EthplorerApi: ExchangeApi {
     // MARK: - Public -
     
     func authenticationChallenge(loginStrings: [Field], closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
-        assert(loginStrings.count == 2, "number of auth fields should be 2 for Poloniex")
+        assert(loginStrings.count == 2, "number of auth fields should be 2 for Ethplorer")
         var nameField : String?
         var addressField : String?
         for field in loginStrings {
@@ -58,12 +58,12 @@ class EthplorerApi: ExchangeApi {
             } else if field.type == "address" {
                 addressField = field.value
             } else {
-                assert(false, "wrong fields are passed into the poloniex auth, we require secret and key fields and values")
+                assert(false, "wrong fields are passed into the Ethplore auth, we require secret and key fields and values")
             }
         }
         guard let name = nameField, let address = addressField else {
-            assert(false, "wrong fields are passed into the poloniex auth, we require secret and key fields and values")
-            closeBlock(false, "wrong fields are passed into the poloniex auth, we require secret and key fields and values", nil)
+            assert(false, "wrong fields are passed into the ethplore auth, we require secret and key fields and values")
+            closeBlock(false, "wrong fields are passed into the ethlpore auth, we require secret and key fields and values", nil)
             return
         }
         do {
@@ -85,7 +85,7 @@ class EthplorerApi: ExchangeApi {
         
         let urlRequest = assembleRequest(components:urlComponent!)
         
-        let datatask = certValidatedSession.dataTask(with: urlRequest) { data, response, error in
+        let datatask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             do {
                 if let safeData = data {
                     //create accounts
@@ -177,13 +177,15 @@ class EthplorerApi: ExchangeApi {
 
 fileprivate extension EthplorerAccount {
     var balance: Int {
-        let balance = available * Decimal(pow(10.0, Double(currency.decimals)))
-        return (balance as NSDecimalNumber).intValue
+        let balance = available //* pow(10.0, Double(currency.decimals))
+//        return (balance as NSDecimalNumber).intValue
+        return Int(balance)
     }
     
     var altBalance: Int {
-        let altBalance = altValue * Decimal(pow(10.0, Double(altCurrency.decimals)))
-        return (altBalance as NSDecimalNumber).intValue
+        let altBalance = altValue //* pow(10.0, Double(altCurrency.decimals))
+//        return (altBalance as NSDecimalNumber).intValue
+        return Int(altBalance)
     }
     
     @discardableResult func updateLocalAccount(institution: Institution) -> Account? {
@@ -191,7 +193,6 @@ fileprivate extension EthplorerAccount {
         let currentBalance = balance
         let altCurrentBalance = altBalance
         
-        // Poloniex doesn't have id's per-se, the id a coin is the coin symbol itself
         if let newAccount = AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: currency.name, sourceInstitutionId: "", accountTypeId: .wallet, accountSubTypeId: nil, name: currency.name, currency: currency.name, currentBalance: currentBalance, availableBalance: nil, number: nil, altCurrency: altCurrency.name, altCurrentBalance: altCurrentBalance, altAvailableBalance: nil) {
             
             // Hide unpoplular currencies that have a 0 balance
