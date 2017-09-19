@@ -264,7 +264,7 @@ class PoloniexApi: ExchangeApi {
     }
 }
 
-fileprivate extension PoloniexAccount {
+extension PoloniexAccount {
     var altCurrency: Currency {
         return Currency.rawValue(shortName: "BTC")
     }

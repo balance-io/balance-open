@@ -175,17 +175,15 @@ class EthplorerApi: ExchangeApi {
     
 }
 
-fileprivate extension EthplorerAccount {
+ extension EthplorerAccount {
     var balance: Int {
-        let balance = available //* pow(10.0, Double(currency.decimals))
-//        return (balance as NSDecimalNumber).intValue
-        return Int(balance)
+        let balance = available.integerFixedCryptoDecimals()
+        return balance
     }
     
     var altBalance: Int {
-        let altBalance = altValue //* pow(10.0, Double(altCurrency.decimals))
-//        return (altBalance as NSDecimalNumber).intValue
-        return Int(altBalance)
+        let altBalance = altValue.integerFixedCryptoDecimals()
+        return altBalance
     }
     
     @discardableResult func updateLocalAccount(institution: Institution) -> Account? {

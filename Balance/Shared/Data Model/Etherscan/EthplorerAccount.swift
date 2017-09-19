@@ -16,6 +16,7 @@ struct EthplorerAccount {
     let available: Double
     let altValue: Double
     let altCurrency: Currency
+    let decimals: Int
 }
 
 struct EthplorerAccountObject {
@@ -102,7 +103,7 @@ struct EthplorerAccountObject {
     
     var arrayOfEthplorerAccounts: [EthplorerAccount] {
         var arrayOlder = [EthplorerAccount]()
-        let ethAccount = EthplorerAccount.init(type: .wallet, currency: self.currency, address: self.address, available: self.ETH.balance, altValue: 0, altCurrency: Currency.rawValue(shortName: "BTC"))
+        let ethAccount = EthplorerAccount.init(type: .wallet, currency: self.currency, address: self.address, available: self.ETH.balance, altValue: 0, altCurrency: Currency.rawValue(shortName: "BTC"), decimals: 8)
         arrayOlder.append(ethAccount)
         for ethplorerObject in self.tokens {
             var altRate: Double = 0
@@ -111,7 +112,9 @@ struct EthplorerAccountObject {
                 altRate = tokenPrice.rate
                 altCurrency = tokenPrice.currency
             }
-            let tokenAccount = EthplorerAccount.init(type: .wallet, currency: Currency.rawValue(shortName: ethplorerObject.tokenInfo.symbol), address: ethplorerObject.tokenInfo.address, available: ethplorerObject.balance, altValue: altRate, altCurrency: altCurrency)
+            let balance = ethplorerObject.balance.cientificToEightDecimals(decimals: ethplorerObject.tokenInfo.decimals)
+            
+            let tokenAccount = EthplorerAccount.init(type: .wallet, currency: Currency.rawValue(shortName: ethplorerObject.tokenInfo.symbol), address: ethplorerObject.tokenInfo.address, available: balance, altValue: altRate, altCurrency: altCurrency, decimals: 8)
             arrayOlder.append(tokenAccount)
         }
         return arrayOlder

@@ -43,6 +43,24 @@ class PoloniexAccountTests: XCTestCase {
         XCTAssertEqual(account.available, available)
     }
     
+    func testPoloniexAccountTransformationVars() {
+        //given
+        let data = TestHelpers.loadData(filename: "PoloniexAccount.json")
+        let accountInfo = TestHelpers.dataToJSON(data: data)
+        let (currency, dictionary) = accountInfo.first!
+        
+        //when
+        let account = try! PoloniexAccount(dictionary: dictionary as! [String : AnyObject], currencyShortName: currency, type: AccountType.exchange)
+        
+        //then
+        //altBalance
+        XCTAssertEqual(account.altBalance, 7786885)
+        //balance
+        XCTAssertEqual(account.balance, 2657640000000)
+        //altCurrency
+        XCTAssertEqual(account.altCurrency, Currency.btc)
+    }
+    
     func testPoloniexAccountFails() {
         //given
         let dictionary = [String:Any]()
