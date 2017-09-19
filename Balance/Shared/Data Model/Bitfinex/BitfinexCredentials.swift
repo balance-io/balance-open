@@ -70,8 +70,11 @@ internal extension BitfinexAPIClient
             
             // Message
             let message = "/api/\(requestPath)\(date.timeIntervalSince1970)\(bodyString)"
+            guard let messageData = message.data(using: .utf8) else {
+                throw APICredentialsComponents.Error.standard(message: "Unable to turn message string into Data")
+            }
             
-            let signature = self.createSignatureData(with: message, secretKeyData: self.secretKeyData).reduce("") { (result, byte) -> String in
+            let signature = self.createSignatureData(with: messageData, secretKeyData: self.secretKeyData).reduce("") { (result, byte) -> String in
                 return result + String(format: "%02x", byte)
             }
 

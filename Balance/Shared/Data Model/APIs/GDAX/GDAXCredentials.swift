@@ -70,8 +70,11 @@ internal extension GDAXAPIClient
 
             // Message
             let message = "\(timestamp.timeIntervalSince1970)\(method)\(requestPath)\(bodyString)"
-            let signatureData = self.createSignatureData(with: message, secretKeyData: self.secretKeyData)
+            guard let messageData = message.data(using: .utf8) else {
+                throw APICredentialsComponents.Error.standard(message: "Unable to turn message string into Data")
+            }
             
+            let signatureData = self.createSignatureData(with: messageData, secretKeyData: self.secretKeyData)
             return signatureData.base64EncodedString()
         }
         

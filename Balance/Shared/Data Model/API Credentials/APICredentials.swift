@@ -19,7 +19,7 @@ internal protocol APICredentials
     init(identifier: String) throws
     init(component: APICredentialsComponents) throws
     
-    func createSignatureData(with message: String, secretKeyData: Data) -> Data
+    func createSignatureData(with message: Data, secretKeyData: Data) -> Data
     func namespacedKeychainIdentifier(_ identifier: String) -> String
     func save(identifier: String) throws
 }
@@ -51,15 +51,9 @@ internal extension APICredentials
     
     // MARK: Signature
     
-    internal func createSignatureData(with message: String, secretKeyData: Data) -> Data
+    internal func createSignatureData(with message: Data, secretKeyData: Data) -> Data
     {
-        guard let messageData = message.data(using: .utf8) else
-        {
-            fatalError()
-        }
-        
         // Create the signature
-        
         let signatureCapacity = self.hmacAlgorithmDigestLength
         let signature = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: signatureCapacity)
         defer
@@ -68,11 +62,19 @@ internal extension APICredentials
         }
         
         secretKeyData.withUnsafeBytes({ (secretBytes: UnsafePointer<UInt8>) -> Void in
-            messageData.withUnsafeBytes({ (messageBytes: UnsafePointer<UInt8>) -> Void in
-                CCHmac(self.hmacAlgorithm, secretBytes, secretKeyData.count, messageBytes, messageData.count, signature)
+            message.withUnsafeBytes({ (messageBytes: UnsafePointer<UInt8>) -> Void in
+                CCHmac(self.hmacAlgorithm, secretBytes, secretKeyData.count, messageBytes, message.count, signature)
             })
         })
         
         return Data(bytes: signature, count: signatureCapacity)
     }
+}
+
+
+// MARK: Errors
+
+internal enum APICredentialsError: Error
+{
+    case creatingSignature(message: String?)
 }

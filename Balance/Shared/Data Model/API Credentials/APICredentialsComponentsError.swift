@@ -18,6 +18,7 @@ extension APICredentialsComponents
         case bodyNotValidJSON
         case dataNotFound(identifier: String)
         case missingPermissions
+        case standard(message: String)
         
         var errorDescription: String? {
             switch self {
@@ -31,6 +32,8 @@ extension APICredentialsComponents
                 return "We couldn't reach the server: \(identifier)"
             case .missingPermissions:
                 return "Your API key needs more permission, please create a new one with more permissions"
+            case .standard(let message):
+                return message
             }
         }
     }
