@@ -389,6 +389,7 @@
 		A40ABBE91F6BC5A000383C62 /* KrakenCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40ABBE81F6BC5A000383C62 /* KrakenCredentials.swift */; };
 		A40ABBEA1F6BC5A000383C62 /* KrakenCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40ABBE81F6BC5A000383C62 /* KrakenCredentials.swift */; };
 		A41204C51F719CB800FD8078 /* KrakenFetchAccounts.json in Resources */ = {isa = PBXBuildFile; fileRef = A41204C41F719CB800FD8078 /* KrakenFetchAccounts.json */; };
+		A41204C71F71A25F00FD8078 /* KrakenCredentialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41204C61F71A25F00FD8078 /* KrakenCredentialTests.swift */; };
 		A41D3E421F6BF75100FD25B5 /* KrakenErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41D3E411F6BF75100FD25B5 /* KrakenErrors.swift */; };
 		A41D3E431F6BF75100FD25B5 /* KrakenErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41D3E411F6BF75100FD25B5 /* KrakenErrors.swift */; };
 		A41D3E451F6BF81A00FD25B5 /* KrakenAuthHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41D3E441F6BF81A00FD25B5 /* KrakenAuthHeaders.swift */; };
@@ -774,6 +775,7 @@
 		A40ABBE51F6BC0C000383C62 /* KrakenAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenAPIClient.swift; sourceTree = "<group>"; };
 		A40ABBE81F6BC5A000383C62 /* KrakenCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenCredentials.swift; sourceTree = "<group>"; };
 		A41204C41F719CB800FD8078 /* KrakenFetchAccounts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = KrakenFetchAccounts.json; sourceTree = "<group>"; };
+		A41204C61F71A25F00FD8078 /* KrakenCredentialTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenCredentialTests.swift; sourceTree = "<group>"; };
 		A41D3E411F6BF75100FD25B5 /* KrakenErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenErrors.swift; sourceTree = "<group>"; };
 		A41D3E441F6BF81A00FD25B5 /* KrakenAuthHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenAuthHeaders.swift; sourceTree = "<group>"; };
 		A41D3E481F6BFC5600FD25B5 /* KrakenAPIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenAPIClientTests.swift; sourceTree = "<group>"; };
@@ -1684,6 +1686,7 @@
 			isa = PBXGroup;
 			children = (
 				A41D3E481F6BFC5600FD25B5 /* KrakenAPIClientTests.swift */,
+				A41204C61F71A25F00FD8078 /* KrakenCredentialTests.swift */,
 			);
 			path = KrakenAPIClient;
 			sourceTree = "<group>";
@@ -2513,6 +2516,7 @@
 				53F078691F4F8F3C00D0054C /* MockURLSession.swift in Sources */,
 				53F078661F4F8F3C00D0054C /* APIClientTests.swift in Sources */,
 				53F078681F4F8F3C00D0054C /* HeadersTests.swift in Sources */,
+				A41204C71F71A25F00FD8078 /* KrakenCredentialTests.swift in Sources */,
 				A46DBC841F69B2C3006F4247 /* BitfinexCredentialsTests.swift in Sources */,
 				53F0785B1F4F8F2E00D0054C /* BalanceOpenTests.swift in Sources */,
 				53F0785E1F4F8F3C00D0054C /* FeedTest.swift in Sources */,
