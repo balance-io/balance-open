@@ -86,7 +86,7 @@ class EthploreAccountTests: XCTestCase {
         
         //then
         XCTAssertEqual(ethploreAccount.balance, 3944020437500)
-        XCTAssertEqual(ethploreAccount.altBalance, 234)
+        XCTAssertEqual(ethploreAccount.altBalance, 1262086540000)
     }
     
     func testEthploreAccountObjectFails() {

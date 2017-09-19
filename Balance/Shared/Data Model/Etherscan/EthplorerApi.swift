@@ -182,7 +182,8 @@ class EthplorerApi: ExchangeApi {
     }
     
     var altBalance: Int {
-        let altBalance = altValue.integerFixedCryptoDecimals()
+        let altValance = altRate * available
+        let altBalance = altValance.integerFixedCryptoDecimals()
         return altBalance
     }
     
