@@ -13,6 +13,7 @@ enum Source: Int, CustomStringConvertible {
     case poloniex = 3
     case gdax     = 4
     case bitfinex = 5
+    case kraken = 6
     
     var description: String {
         switch self {
@@ -21,6 +22,7 @@ enum Source: Int, CustomStringConvertible {
         case .poloniex: return "Poloniex"
         case .gdax:     return "GDAX"
         case .bitfinex: return "Bitfinex"
+        case .kraken:   return "Kraken"
         }
     }
 }
