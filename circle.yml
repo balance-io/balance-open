@@ -10,7 +10,7 @@ dependencies:
     - "Carthage"
 test:
   override:
-		- xcodebuild -showsdks
+    - xcodebuild -showsdks
     - set -o pipefail && xcodebuild
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
