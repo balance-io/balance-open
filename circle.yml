@@ -1,6 +1,6 @@
 machine:
   environment:
-    XCODE_SCHEME: BalancemacOS
+    XCODE_SCHEME: Balance macOS
   xcode:
     version: "9.0"
 dependencies:
@@ -16,5 +16,5 @@ test:
       CODE_SIGN_IDENTITY=
       PROVISIONING_PROFILE=
       -sdk macosx10.13
-      -scheme "BalancemacOS"
+      -scheme "Balance macOS"
       clean build test | tee $CIRCLE_ARTIFACTS/xcode_raw.log | xcpretty --color --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml
