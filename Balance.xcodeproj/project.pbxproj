@@ -12,6 +12,7 @@
 		28E990EA1D909A39003A2F1F /* PreferencesBillingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E990E91D909A39003A2F1F /* PreferencesBillingViewController.swift */; };
 		28F678481DCB6E9600383D22 /* SetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F678471DCB6E9600383D22 /* SetPasswordViewController.swift */; };
 		28FD09C21D99F18500A395AB /* PaintCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FD09C11D99F18500A395AB /* PaintCodeButton.swift */; };
+		2D10AA1B1F725DCE0010BC32 /* EthplorerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D10AA1A1F725DCE0010BC32 /* EthplorerErrors.swift */; };
 		2D1CCA141F6159B900BACC20 /* EthplorerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1CCA131F6159B900BACC20 /* EthplorerApi.swift */; };
 		2D1CCA171F62AE1100BACC20 /* EthploreAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D1CCA161F62AE1100BACC20 /* EthploreAccountResponse.json */; };
 		2D326D261F5EA22900873286 /* PoloniexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D251F5EA22900873286 /* PoloniexErrors.swift */; };
@@ -478,6 +479,7 @@
 		28E990E91D909A39003A2F1F /* PreferencesBillingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesBillingViewController.swift; sourceTree = "<group>"; };
 		28F678471DCB6E9600383D22 /* SetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPasswordViewController.swift; sourceTree = "<group>"; };
 		28FD09C11D99F18500A395AB /* PaintCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintCodeButton.swift; sourceTree = "<group>"; };
+		2D10AA1A1F725DCE0010BC32 /* EthplorerErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthplorerErrors.swift; sourceTree = "<group>"; };
 		2D1CCA131F6159B900BACC20 /* EthplorerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthplorerApi.swift; sourceTree = "<group>"; };
 		2D1CCA161F62AE1100BACC20 /* EthploreAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EthploreAccountResponse.json; sourceTree = "<group>"; };
 		2D326D251F5EA22900873286 /* PoloniexErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexErrors.swift; sourceTree = "<group>"; };
@@ -895,6 +897,7 @@
 				2D326D2A1F60349200873286 /* EthplorerInstitution.swift */,
 				2D326D2C1F6036A200873286 /* EthplorerAccount.swift */,
 				2D1CCA131F6159B900BACC20 /* EthplorerApi.swift */,
+				2D10AA1A1F725DCE0010BC32 /* EthplorerErrors.swift */,
 			);
 			path = Etherscan;
 			sourceTree = "<group>";
@@ -2316,6 +2319,7 @@
 				5300D6261DCE5A1E00D02657 /* LockViewController.swift in Sources */,
 				536F8B821E0111EA00A3B718 /* SyncButton.swift in Sources */,
 				535315261F4CEBF2008D6890 /* ApiInstitution.swift in Sources */,
+				2D10AA1B1F725DCE0010BC32 /* EthplorerErrors.swift in Sources */,
 				53980CC41D5D0C1F0013B981 /* Date.swift in Sources */,
 				530870E71CE6823D005B591C /* TextField.swift in Sources */,
 				2D326D2B1F60349200873286 /* EthplorerInstitution.swift in Sources */,

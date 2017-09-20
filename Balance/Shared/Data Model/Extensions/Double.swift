@@ -9,6 +9,12 @@
 import Foundation
 
 extension Double {
+    
+    func integerFixedFiatDecimals() -> Int {
+        let fixedDecimalsFiat = 2
+        return self.integerValueWith(decimals:fixedDecimalsFiat)
+    }
+    
     func integerFixedCryptoDecimals() -> Int {
         let fixedDecimalsCrypto = 8
         return self.integerValueWith(decimals:fixedDecimalsCrypto)
@@ -24,6 +30,10 @@ extension Double {
     func cientificToEightDecimals(decimals: Int) -> Double {
         let decimal = self / pow(10.0, Double(decimals))
         return decimal
+    }
+    
+    func integerFrom(decimals: Int, toDecimals: Int) -> Int {
+        return 0
     }
 }
 

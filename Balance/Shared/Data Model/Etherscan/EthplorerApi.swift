@@ -69,7 +69,7 @@ class EthplorerApi: ExchangeApi {
         do {
             try authenticate(name: name, address: address, closeBlock: closeBlock)
         } catch {
-            
+            log.error("Failed to Ethplore wallet data: \(error)")
         }
     }
     
@@ -114,15 +114,52 @@ class EthplorerApi: ExchangeApi {
     fileprivate func authenticate(name: String, address: String, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) throws {
         self.address = address
         self.name = name
-        if let institution = InstitutionRepository.si.institution(source: .wallet, sourceInstitutionId: "", name: "\(name)") {
-            institution.address = address
-            
-            self.fetchAddressInfo(institution: institution) { (finish, error) in
-                async {
-                    closeBlock(finish, error, institution)
+        
+        let addressURL = EthplorerUrl.appendingPathComponent("\(Commands.getAddressInfo.rawValue)/\(address)")
+        var urlComponent = URLComponents(url: addressURL, resolvingAgainstBaseURL: false)
+        var params = [URLQueryItem]()
+        params.append(URLQueryItem(name: "apiKey", value: ethploreToken))
+        urlComponent?.queryItems = params
+        
+        let urlRequest = assembleRequest(components:urlComponent!)
+        
+        let datatask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+            do {
+                if let safeData = data {
+                    
+                    if let error = self.findError(data: safeData) {
+                        print("\(error)")
+                        throw EthplorerApi.CredentialsError.incorrectLoginCredentials
+                    }
+                    
+                    //crete institution
+                    if let institution = InstitutionRepository.si.institution(source: .wallet, sourceInstitutionId: "", name: "\(name)") {
+                        institution.address = address
+                        
+                        //create accounts
+                        let ethexploreWallet = try self.parseEthploreWallet(data: safeData)
+                        self.processEthploreAccounts(ethplorerObject: ethexploreWallet, institution: institution)
+                        
+                        async {
+                            closeBlock(true, nil, institution)
+                        }
+                    } else {
+                        throw "Error creating institution"
+                    }
+                } else {
+                    print("Ethplore Error: \(String(describing: error))")
+                    print("Ethplore Data: \(String(describing: data))")
+                    throw EthplorerApi.CredentialsError.bodyNotValidJSON
+                }
+            }
+            catch {
+                log.error("Failed to Ethplore wallet data: \(error)")
+                DispatchQueue.main.async {
+                    closeBlock(false, error, nil)
                 }
             }
         }
+        datatask.resume()
 	}
     
     fileprivate func processEthploreAccounts(ethplorerObject: EthplorerAccountObject, institution: Institution) {
@@ -144,7 +181,7 @@ class EthplorerApi: ExchangeApi {
     
     fileprivate func parseEthploreWallet(data: Data) throws -> EthplorerAccountObject {
         guard let dict = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] else {
-            throw PoloniexApi.CredentialsError.bodyNotValidJSON
+            throw EthplorerApi.CredentialsError.bodyNotValidJSON
         }
         let ethplorerAccount = try EthplorerAccountObject.init(dictionary: dict, currencyShortName: "ETH", type: .wallet)
         return ethplorerAccount
@@ -153,7 +190,7 @@ class EthplorerApi: ExchangeApi {
     fileprivate func findError(data: Data) -> String? {
         do {
             guard let dict = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] else {
-                throw PoloniexApi.CredentialsError.bodyNotValidJSON
+                throw EthplorerApi.CredentialsError.bodyNotValidJSON
             }
             if dict.keys.count == 1 {
                 if let errorDict = dict["error"] {
@@ -183,7 +220,7 @@ class EthplorerApi: ExchangeApi {
     
     var altBalance: Int {
         let altValance = altRate * available
-        let altBalance = altValance.integerFixedCryptoDecimals()
+        let altBalance = altValance.integerFixedFiatDecimals()
         return altBalance
     }
     

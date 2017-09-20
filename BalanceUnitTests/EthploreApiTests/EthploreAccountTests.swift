@@ -78,7 +78,21 @@ class EthploreAccountTests: XCTestCase {
         XCTAssertEqual(tokenPrice?.diff, 28.82)
     }
     
-    func testEthploreAccountObjectToEthploreAccountArray() {
+    func testEthploreAccountObjectToEthploreAccount() {
+        //when
+        let account = try! EthplorerAccountObject.init(dictionary: self.json, currencyShortName: "ETH", type: .wallet)
+        XCTAssertEqual(account.tokens.count, 1)
+        let ethploreAccount: EthplorerAccount = account.arrayOfEthplorerAccounts[1]
+        
+        //then
+        XCTAssertEqual(ethploreAccount.altRate, 0.32)
+        XCTAssertEqual(ethploreAccount.available, atof("39440.2043750082"))
+        XCTAssertEqual(ethploreAccount.currency, Currency.crypto(shortName: "ZRX"))
+        XCTAssertEqual(ethploreAccount.altCurrency, Currency.common(traditional: .usd))
+        XCTAssertEqual(ethploreAccount.decimals, 8)
+    }
+    
+    func testEthploreAccounExportToAccountVariables() {
         //when
         let account = try! EthplorerAccountObject.init(dictionary: self.json, currencyShortName: "ETH", type: .wallet)
         XCTAssertEqual(account.tokens.count, 1)
@@ -86,7 +100,7 @@ class EthploreAccountTests: XCTestCase {
         
         //then
         XCTAssertEqual(ethploreAccount.balance, 3944020437500)
-        XCTAssertEqual(ethploreAccount.altBalance, 1262086540000)
+        XCTAssertEqual(ethploreAccount.altBalance, 1262086)
     }
     
     func testEthploreAccountObjectFails() {
