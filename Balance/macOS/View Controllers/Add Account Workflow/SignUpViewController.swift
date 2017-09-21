@@ -116,17 +116,6 @@ class SignUpViewController: NSViewController {
     fileprivate let reportFailureField = LabelField()
     fileprivate let reportFailureButton = Button()
     
-    fileprivate let lock = ImageView()
-    fileprivate let reassuranceField = LabelField()
-    fileprivate let expandedExplanationButton = Button()
-    
-    fileprivate let explanationTabView = NSTabView()
-    fileprivate let explanationField = LabelField()
-    fileprivate let explanationImage = ImageView()
-    
-    fileprivate var showingExplanation: Bool {
-        return expandedExplanationButton.state == .on
-    }
     fileprivate let loginService: ExchangeApi
     
     fileprivate var showOnePasswordButton: Bool {
@@ -151,11 +140,11 @@ class SignUpViewController: NSViewController {
     fileprivate var height: CGFloat {
         switch currentStep {
         case .connect:
-            return 270.0 + (CGFloat(apiInstitution.fields.count) * 45.0) + (showingExplanation ? 240.0 : 0.0)
+            return 270.0 + (CGFloat(apiInstitution.fields.count) * 45.0)
         case .question, .codeEntry:
-            return 315.0 + (showingExplanation ? 240.0 : 0.0)
+            return 315.0
         case .deviceList:
-            return 295.0 + (CGFloat(devices.count - 1) * 33.0) + (showingExplanation ? 240.0 : 0.0)
+            return 295.0 + (CGFloat(devices.count - 1) * 33.0)
         }
     }
     
@@ -183,17 +172,7 @@ class SignUpViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        subscriptionManager.isShowingSignUpController = true
-        
         onePasswordButton.isHidden = !showOnePasswordButton
-        
-        let firstItem = explanationTabView.tabViewItems[0]
-        explanationTabView.selectTabViewItem(firstItem)
-        
-        // For some reason (probably AppKit bug), the delegate is not getting called when we call
-        // selectTabViewItemAtIndex, so we have to call it manually
-        self.tabView(explanationTabView, didSelect: firstItem)
     }
     
     override func viewWillAppear() {
@@ -206,10 +185,6 @@ class SignUpViewController: NSViewController {
             // Must resize after changing the color or the color changes too late
             async {
                 AppDelegate.sharedInstance.resizeWindowHeight(self.height, animated: true)
-                
-                async(after: 0.5) {
-                    self.explanationTabView.isHidden = false
-                }
             }
         }
     }
@@ -411,71 +386,6 @@ class SignUpViewController: NSViewController {
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
         }
-        
-        lock.image = CurrentTheme.addAccounts.padlockImage
-        lock.alphaValue = 0.9
-        containerView.addSubview(lock)
-        lock.snp.makeConstraints { make in
-            make.height.equalTo(24)
-            make.width.equalTo(24)
-            make.top.equalTo(line.snp.bottom).inset(-14)
-            make.leading.equalToSuperview().inset(margin)
-        }
-        
-        expandedExplanationButton.bezelStyle = .roundedDisclosure
-        expandedExplanationButton.setButtonType(.pushOnPushOff)
-        expandedExplanationButton.state = .off
-        expandedExplanationButton.title = ""
-        expandedExplanationButton.target = self
-        expandedExplanationButton.action = #selector(toggleExplanation)
-        containerView.addSubview(expandedExplanationButton)
-        expandedExplanationButton.snp.makeConstraints { make in
-            make.height.equalTo(20)
-            make.width.equalTo(20)
-            make.centerY.equalTo(lock)
-            make.trailing.equalToSuperview().inset(19)
-        }
-        
-        //reassuranceField.attributedStringValue = createHtmlAttributedString(string: "Balance uses the industry-standard banking data service from <a href='https://plaid.com/security'>Plaid.com</a> to protect your login details.", font: NSFont.systemFontOfSize(12), color: CurrentTheme.defaults.foregroundColor)
-        reassuranceField.stringValue = "Balance uses a secure bank service. Learn More"
-        reassuranceField.allowsEditingTextAttributes = true
-        reassuranceField.isSelectable = true
-        reassuranceField.isEnabled = false
-        reassuranceField.alignment = .center
-        reassuranceField.lineBreakMode = .byWordWrapping
-        reassuranceField.alphaValue = 0.75
-        containerView.addSubview(reassuranceField)
-        reassuranceField.snp.makeConstraints { make in
-            make.leading.equalTo(lock.snp.trailing).inset(-10)
-            make.trailing.equalTo(expandedExplanationButton.snp.leading).inset(-10)
-            make.top.equalTo(line.snp.bottom).inset(-16)
-        }
-        
-        let tabLabels = ["Basic", "Technical", "Expert"]
-        for label in tabLabels {
-            let item = NSTabViewItem()
-            item.label = label
-            explanationTabView.addTabViewItem(item)
-        }
-        explanationTabView.wantsLayer = true
-        explanationTabView.delegate = self
-        explanationTabView.isHidden = true
-        containerView.addSubview(explanationTabView)
-        explanationTabView.snp.makeConstraints { make in
-            make.top.equalTo(expandedExplanationButton.snp.bottom).offset(20)
-            make.leading.equalToSuperview().inset(15)
-            make.trailing.equalToSuperview().inset(15)
-            make.height.equalTo(220)
-        }
-
-        explanationField.lineBreakMode = .byWordWrapping
-        explanationTabView.addSubview(explanationField)
-        explanationField.snp.makeConstraints { make in
-            make.top.equalTo(explanationTabView).inset(30)
-            make.centerX.equalTo(explanationTabView).offset(5)
-            make.width.equalTo(350)
-            make.bottom.equalTo(explanationTabView).inset(10)
-        }
     }
     
     @objc func toggleExplanation() {
@@ -498,13 +408,6 @@ class SignUpViewController: NSViewController {
         reportFailureButton.target = self
         reportFailureButton.action = #selector(showEmailIssueController)
         containerView.addSubview(reportFailureButton)
-        reportFailureButton.snp.makeConstraints { make in
-            make.height.equalTo(30)
-            make.width.equalTo(150)
-            make.centerY.equalTo(lock)
-            make.trailing.equalToSuperview().inset(19)
-        }
-        
         reportFailureField.alphaValue = 0.0
         reportFailureField.stringValue = "Having trouble connecting?"
         reportFailureField.font = CurrentTheme.addAccounts.buttonFont
@@ -519,21 +422,6 @@ class SignUpViewController: NSViewController {
             make.top.equalTo(line.snp.bottom).offset(16)
             make.height.equalTo(30)
         }
-        
-        async(after: 0.5) {
-            if self.expandedExplanationButton.state == .on {
-                self.expandedExplanationButton.state = .off
-                self.toggleExplanation()
-            }
-            
-            self.lock.alphaValue = 0.0
-            
-            self.reassuranceField.alphaValue = 0.0
-            self.expandedExplanationButton.alphaValue = 0.0
-            
-            self.reportFailureField.alphaValue = 0.75
-            self.reportFailureButton.alphaValue = 1.0
-        }
     }
     
     func hideReportFailureButton() {
@@ -543,10 +431,6 @@ class SignUpViewController: NSViewController {
         
         reportFailureButton.removeFromSuperview()
         reportFailureField.removeFromSuperview()
-        
-        lock.alphaValue = 1.0
-        reassuranceField.alphaValue = 0.75
-        expandedExplanationButton.alphaValue = 1.0
     }
     
     fileprivate func generatePlaceholder(field: Field) -> String {
@@ -666,9 +550,6 @@ class SignUpViewController: NSViewController {
             return
         }
         
-        // Hack so that explanationTabView doesn't show while resizing
-        explanationTabView.isHidden = true
-        
         emailIssueController = EmailIssueController(apiInstitution: apiInstitution) {
             self.removeEmailIssueController()
             self.hideReportFailureButton()
@@ -688,11 +569,6 @@ class SignUpViewController: NSViewController {
                 // Must resize after changing the color or the color changes too late
                 async {
                     AppDelegate.sharedInstance.resizeWindowHeight(self.height, animated: true)
-                    
-                    async(after: 0.5) {
-                        // Hack so that explanationTabView doesn't show while resizing
-                        self.explanationTabView.isHidden = false
-                    }
                 }
             }
             
@@ -990,34 +866,5 @@ extension SignUpViewController: NSTextFieldDelegate {
         }
         
         return false
-    }
-}
-
-//
-// MARK: - NSTabViewDelegate -
-//
-
-extension SignUpViewController: NSTabViewDelegate {
-    func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
-        guard let tabViewItem = tabViewItem else {
-            return
-        }
-        
-        var explanation: String?
-        switch tabView.indexOfTabViewItem(tabViewItem) {
-        case 0:
-            explanation = "We do not store your login information on your Mac or on our servers. We use Plaid.com, a service which provides infrastructure to companies like Venmo and PayPal.\n\nYour details are sent directly and securely to them. Plaid makes a copy of your transaction history and then gives Balance read-only access to that information. We cannot log in to your online bank or move your money.\n\nWe will never sell your data to third parties or use it to recommend financial products to you."
-        case 1:
-            explanation = "Your login information is sent using SSL to Plaid's API. They have direct integrations with several banks and have partnered with Intuit to access a long tail of thousands of institutions. Plaid retrieves as much transaction history as possible and gives us a read-only access token.\n\nWe store this token on your Mac's keychain, and Balance downloads the transactions directly to your machine. We also store the token on our subscription server to allow syncing accounts between your devices, and so that we can sever Plaid's connection if you cancel your subscription."
-        case 2:
-            explanation = "Balance is a closed-source application which we sell to cover the cost of data and development. Therefore, we cannot open source all the code for you to look through. However, we have been working on Plaidster, an open source library written in Swift for working with Plaid's API. You can see the code here:\n\nhttps://github.com/balancemymoney/Plaidster\n\nHere you can see how we handle bank credentials and pass them directly to Plaid without storing them."// If you find any security holes, please email bounty@balancemy.money."  // <-- I like this but let's figure out details on the program first before mentioning it
-        default:
-            break
-        }
-        
-        if let explanation = explanation {
-            //explanationField.attributedStringValue = createHtmlAttributedString(string: explanation, font: NSFont.systemFontOfSize(12), color: CurrentTheme.defaults.foregroundColor)
-            explanationField.stringValue = explanation
-        }
     }
 }
