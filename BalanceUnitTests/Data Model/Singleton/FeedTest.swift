@@ -34,7 +34,7 @@ class FeedRuleTest: XCTestCase {
         }
     }
     
-    func testDisplayname_NewRuleWhenNoName() {
+    func disable_testDisplayname_NewRuleWhenNoName() {
         let newRule = Rule(ruleId: "0", name: "", notify: false, searchTokens: [:])
         XCTAssertEqual(newRule.displayName, "New Rule")
         }
