@@ -76,9 +76,12 @@ struct CoinbaseApi {
                 guard let data = maybeData, maybeError == nil else {
                     throw BalanceError.noData
                 }
-
+                
                 // Try to parse the JSON
-                guard let JSONResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.length > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.length > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval else {
+                guard let JSONResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject],
+                      let accessToken = JSONResult["access_token"] as? String, accessToken.length > 0,
+                      let refreshToken = JSONResult["refresh_token"] as? String, refreshToken.length > 0,
+                      let expiresIn = JSONResult["expires_in"] as? TimeInterval else {
                     throw BalanceError.jsonDecoding
                 }
                 
