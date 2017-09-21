@@ -89,7 +89,11 @@ class OpenAddAccountViewController: NSViewController {
             }
             
             if self.allowSelection {
-                AppDelegate.sharedInstance.resizeWindowHeight(370, animated: true)
+                let buttonHeight = 50.0
+                let minimumViewHeight = 260.0
+                let verticalButtons = ceil(Float(self.buttonDrawFunctions.count)/Float(2.0))
+                let windowHeight = (Double(verticalButtons) * buttonHeight) + minimumViewHeight
+                AppDelegate.sharedInstance.resizeWindowHeight(CGFloat(windowHeight), animated: true)
             }
         }
     }
