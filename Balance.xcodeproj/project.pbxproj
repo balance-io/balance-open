@@ -12,9 +12,20 @@
 		28E990EA1D909A39003A2F1F /* PreferencesBillingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E990E91D909A39003A2F1F /* PreferencesBillingViewController.swift */; };
 		28F678481DCB6E9600383D22 /* SetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F678471DCB6E9600383D22 /* SetPasswordViewController.swift */; };
 		28FD09C21D99F18500A395AB /* PaintCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FD09C11D99F18500A395AB /* PaintCodeButton.swift */; };
+		2D10AA1B1F725DCE0010BC32 /* EthplorerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D10AA1A1F725DCE0010BC32 /* EthplorerErrors.swift */; };
+		2D1CCA141F6159B900BACC20 /* EthplorerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1CCA131F6159B900BACC20 /* EthplorerApi.swift */; };
+		2D1CCA171F62AE1100BACC20 /* EthploreAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D1CCA161F62AE1100BACC20 /* EthploreAccountResponse.json */; };
 		2D326D261F5EA22900873286 /* PoloniexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D251F5EA22900873286 /* PoloniexErrors.swift */; };
+		2D326D2B1F60349200873286 /* EthplorerInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D2A1F60349200873286 /* EthplorerInstitution.swift */; };
+		2D326D2D1F6036A200873286 /* EthplorerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D2C1F6036A200873286 /* EthplorerAccount.swift */; };
+		2D56197F1F6FBE7B00AA2A93 /* EthploreAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D56197E1F6FBE7B00AA2A93 /* EthploreAccountTests.swift */; };
+		2D5619811F6FBE8700AA2A93 /* EthploreInstitutionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619801F6FBE8700AA2A93 /* EthploreInstitutionTests.swift */; };
+		2D5619831F6FC99D00AA2A93 /* MultipleEthploreAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D5619821F6FC99D00AA2A93 /* MultipleEthploreAccountResponse.json */; };
+		2D5619861F7121D200AA2A93 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619841F7121CD00AA2A93 /* Double.swift */; };
+		2D5619891F7125F300AA2A93 /* DoubleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619881F7125F300AA2A93 /* DoubleTests.swift */; };
 		2D6B22DB1EDE238200356035 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1A64991B867B1F009356A0 /* AppDelegate.swift */; };
 		2DD9B1F01EDDDFD10006268F /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */; };
+		2DE638C51F71562F00B54351 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619841F7121CD00AA2A93 /* Double.swift */; };
 		5300D6261DCE5A1E00D02657 /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5300D6251DCE5A1E00D02657 /* LockViewController.swift */; };
 		5301A75F1F17DC3E00668099 /* WebSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301A75E1F17DC3E00668099 /* WebSignUpViewController.swift */; };
 		5301A7611F17DC8B00668099 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301A7601F17DC8B00668099 /* URL.swift */; };
@@ -468,7 +479,17 @@
 		28E990E91D909A39003A2F1F /* PreferencesBillingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesBillingViewController.swift; sourceTree = "<group>"; };
 		28F678471DCB6E9600383D22 /* SetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPasswordViewController.swift; sourceTree = "<group>"; };
 		28FD09C11D99F18500A395AB /* PaintCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintCodeButton.swift; sourceTree = "<group>"; };
+		2D10AA1A1F725DCE0010BC32 /* EthplorerErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthplorerErrors.swift; sourceTree = "<group>"; };
+		2D1CCA131F6159B900BACC20 /* EthplorerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthplorerApi.swift; sourceTree = "<group>"; };
+		2D1CCA161F62AE1100BACC20 /* EthploreAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EthploreAccountResponse.json; sourceTree = "<group>"; };
 		2D326D251F5EA22900873286 /* PoloniexErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexErrors.swift; sourceTree = "<group>"; };
+		2D326D2A1F60349200873286 /* EthplorerInstitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthplorerInstitution.swift; sourceTree = "<group>"; };
+		2D326D2C1F6036A200873286 /* EthplorerAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthplorerAccount.swift; sourceTree = "<group>"; };
+		2D56197E1F6FBE7B00AA2A93 /* EthploreAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthploreAccountTests.swift; sourceTree = "<group>"; };
+		2D5619801F6FBE8700AA2A93 /* EthploreInstitutionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthploreInstitutionTests.swift; sourceTree = "<group>"; };
+		2D5619821F6FC99D00AA2A93 /* MultipleEthploreAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MultipleEthploreAccountResponse.json; sourceTree = "<group>"; };
+		2D5619841F7121CD00AA2A93 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		2D5619881F7125F300AA2A93 /* DoubleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTests.swift; sourceTree = "<group>"; };
 		2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		5300D6251DCE5A1E00D02657 /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
 		5301A75E1F17DC3E00668099 /* WebSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSignUpViewController.swift; sourceTree = "<group>"; };
@@ -861,6 +882,54 @@
 			path = Modals;
 			sourceTree = "<group>";
 		};
+		2D1CCA151F62ADF300BACC20 /* Ethplore */ = {
+			isa = PBXGroup;
+			children = (
+				2D1CCA161F62AE1100BACC20 /* EthploreAccountResponse.json */,
+				2D5619821F6FC99D00AA2A93 /* MultipleEthploreAccountResponse.json */,
+			);
+			path = Ethplore;
+			sourceTree = "<group>";
+		};
+		2D326D271F5FEBF200873286 /* Etherscan */ = {
+			isa = PBXGroup;
+			children = (
+				2D326D2A1F60349200873286 /* EthplorerInstitution.swift */,
+				2D326D2C1F6036A200873286 /* EthplorerAccount.swift */,
+				2D1CCA131F6159B900BACC20 /* EthplorerApi.swift */,
+				2D10AA1A1F725DCE0010BC32 /* EthplorerErrors.swift */,
+			);
+			path = Etherscan;
+			sourceTree = "<group>";
+		};
+		2D56197A1F6FBDBB00AA2A93 /* Poloniex */ = {
+			isa = PBXGroup;
+			children = (
+				53F078521F4F8EC800D0054C /* InstitutionTests.swift */,
+				53F078411F4F8EC700D0054C /* PoloniexAccountTests.swift */,
+				53F078491F4F8EC700D0054C /* PoloniexAccountToAccountTests.swift */,
+				53F0783A1F4F8EC700D0054C /* PoloniexAPITests.swift */,
+			);
+			path = Poloniex;
+			sourceTree = "<group>";
+		};
+		2D56197D1F6FBE2A00AA2A93 /* EthploreApiTests */ = {
+			isa = PBXGroup;
+			children = (
+				2D5619801F6FBE8700AA2A93 /* EthploreInstitutionTests.swift */,
+				2D56197E1F6FBE7B00AA2A93 /* EthploreAccountTests.swift */,
+			);
+			path = EthploreApiTests;
+			sourceTree = "<group>";
+		};
+		2D5619871F7125E300AA2A93 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2D5619881F7125F300AA2A93 /* DoubleTests.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		5301A7641F17F42700668099 /* APIs */ = {
 			isa = PBXGroup;
 			children = (
@@ -869,6 +938,7 @@
 				538B47AF1F4C9FD60023CED5 /* Coinbase */,
 				538B47B21F4C9FD70023CED5 /* GDAX */,
 				538B47BA1F4C9FD70023CED5 /* Poloniex */,
+				2D326D271F5FEBF200873286 /* Etherscan */,
 				5301A7651F17F44E00668099 /* Plaid */,
 			);
 			name = APIs;
@@ -1447,6 +1517,7 @@
 				53E74A561DD53CCB00AD8876 /* TimeInterval.swift */,
 				5301A7601F17DC8B00668099 /* URL.swift */,
 				534DDFD71F4CCE9400E6C37F /* URLRequest.swift */,
+				2D5619841F7121CD00AA2A93 /* Double.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1475,6 +1546,7 @@
 		53F0783B1F4F8EC700D0054C /* APIResponses */ = {
 			isa = PBXGroup;
 			children = (
+				2D1CCA151F62ADF300BACC20 /* Ethplore */,
 				53F0783C1F4F8EC700D0054C /* Poloniex */,
 			);
 			path = APIResponses;
@@ -1744,15 +1816,14 @@
 		F1F948801D8049B800AB30B2 /* BalanceUnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				2D5619871F7125E300AA2A93 /* Extensions */,
 				53F0783B1F4F8EC700D0054C /* APIResponses */,
 				53F078401F4F8EC700D0054C /* BalanceOpenTests.swift */,
 				53F078471F4F8EC700D0054C /* CoinbaseTests.swift */,
 				53F078481F4F8EC700D0054C /* CurrencyTests.swift */,
 				53F078431F4F8EC700D0054C /* Data Model */,
-				53F078521F4F8EC800D0054C /* InstitutionTests.swift */,
-				53F078411F4F8EC700D0054C /* PoloniexAccountTests.swift */,
-				53F078491F4F8EC700D0054C /* PoloniexAccountToAccountTests.swift */,
-				53F0783A1F4F8EC700D0054C /* PoloniexAPITests.swift */,
+				2D56197D1F6FBE2A00AA2A93 /* EthploreApiTests */,
+				2D56197A1F6FBDBB00AA2A93 /* Poloniex */,
 				53F078531F4F8EC800D0054C /* Supporting Files */,
 				53F078421F4F8EC700D0054C /* TestHelpers.swift */,
 				53F0784A1F4F8EC700D0054C /* Tests */,
@@ -1956,6 +2027,8 @@
 				53F0786D1F4F916800D0054C /* Account.json in Resources */,
 				53F0786A1F4F916500D0054C /* CompleteBalancesResponse.json in Resources */,
 				53F0786E1F4F916800D0054C /* Error.json in Resources */,
+				2D5619831F6FC99D00AA2A93 /* MultipleEthploreAccountResponse.json in Resources */,
+				2D1CCA171F62AE1100BACC20 /* EthploreAccountResponse.json in Resources */,
 				53F0786B1F4F916500D0054C /* PoloniexAccount.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2097,6 +2170,7 @@
 				53552A2A1ED7252900DD95F9 /* DispatchQueue.swift in Sources */,
 				53552A0D1ED7251200DD95F9 /* Search.swift in Sources */,
 				53D441F61F44C477006967E1 /* TransactionRepository.swift in Sources */,
+				2DE638C51F71562F00B54351 /* Double.swift in Sources */,
 				535529F11ED724ED00DD95F9 /* TabViewModel.swift in Sources */,
 				532121A61EE8B91600F4812A /* Zip.swift in Sources */,
 				53552A321ED72B5700DD95F9 /* FMResultSet.m in Sources */,
@@ -2245,8 +2319,11 @@
 				5300D6261DCE5A1E00D02657 /* LockViewController.swift in Sources */,
 				536F8B821E0111EA00A3B718 /* SyncButton.swift in Sources */,
 				535315261F4CEBF2008D6890 /* ApiInstitution.swift in Sources */,
+				2D10AA1B1F725DCE0010BC32 /* EthplorerErrors.swift in Sources */,
 				53980CC41D5D0C1F0013B981 /* Date.swift in Sources */,
 				530870E71CE6823D005B591C /* TextField.swift in Sources */,
+				2D326D2B1F60349200873286 /* EthplorerInstitution.swift in Sources */,
+				2D326D2D1F6036A200873286 /* EthplorerAccount.swift in Sources */,
 				537187EA1F4CC23C00E7F9D6 /* GDAXAccount.swift in Sources */,
 				537187FA1F4CC3EE00E7F9D6 /* NumberUtils.swift in Sources */,
 				531E8D9C1C6A633800F765F7 /* Category.swift in Sources */,
@@ -2271,6 +2348,7 @@
 				532550881D06FA5C0045404E /* ScrollView.swift in Sources */,
 				53E7BC181D1805F600FD8613 /* Singletons.swift in Sources */,
 				532550941D0702980045404E /* TableRowView.swift in Sources */,
+				2D5619861F7121D200AA2A93 /* Double.swift in Sources */,
 				5334022A1DDD0E5E000236A0 /* PaintCodeView.swift in Sources */,
 				28FD09C21D99F18500A395AB /* PaintCodeButton.swift in Sources */,
 				532121A71EE8B91600F4812A /* ZipUtilities.swift in Sources */,
@@ -2306,6 +2384,7 @@
 				535AEA331D22D177003F13E2 /* NSAttributedString.swift in Sources */,
 				5325508E1D06FED30045404E /* TableView.swift in Sources */,
 				53124FB91D8F13E700D7ADF6 /* IntroViewController.swift in Sources */,
+				2D1CCA141F6159B900BACC20 /* EthplorerApi.swift in Sources */,
 				537187E71F4CC23C00E7F9D6 /* CoinbaseApi.swift in Sources */,
 				536C6EF21D864CB900823688 /* DefaultsStorage.swift in Sources */,
 				DCC684D81BD1080E00E95B90 /* TransactionsTabViewController.swift in Sources */,
@@ -2375,12 +2454,15 @@
 				53F078681F4F8F3C00D0054C /* HeadersTests.swift in Sources */,
 				53F0785B1F4F8F2E00D0054C /* BalanceOpenTests.swift in Sources */,
 				53F0785E1F4F8F3C00D0054C /* FeedTest.swift in Sources */,
+				2D56197F1F6FBE7B00AA2A93 /* EthploreAccountTests.swift in Sources */,
 				53F0785D1F4F8F3C00D0054C /* CurrencyTests.swift in Sources */,
 				53F078621F4F8F3C00D0054C /* PoloniexAccountToAccountTests.swift in Sources */,
 				53F0785C1F4F8F3100D0054C /* CoinbaseTests.swift in Sources */,
+				2D5619811F6FBE8700AA2A93 /* EthploreInstitutionTests.swift in Sources */,
 				53F078671F4F8F3C00D0054C /* CredentialsTest.swift in Sources */,
 				53F078601F4F8F3C00D0054C /* InstitutionTests.swift in Sources */,
 				53F078631F4F8F3C00D0054C /* PoloniexAPITests.swift in Sources */,
+				2D5619891F7125F300AA2A93 /* DoubleTests.swift in Sources */,
 				53F0785F1F4F8F3C00D0054C /* SearchTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -97,7 +97,7 @@ internal final class GDAXAPIClientTests: XCTestCase
         try! self.apiClient.make(withdrawal: withdrawal) { (success, error) in
             XCTAssertFalse(success)
             XCTAssertNotNil(error)
-            XCTAssertNotNil(error?.message())
+            XCTAssertNotNil(error?.errorDescription)
             
             expectation.fulfill()
         }

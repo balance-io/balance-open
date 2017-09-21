@@ -40,8 +40,9 @@ class OpenAddAccountViewController: NSViewController {
     fileprivate let buttonDrawFunctions: [Source: ButtonFunction] = [.coinbase: InstitutionButtons.drawCoinbaseButton,
                                                                      .gdax:     InstitutionButtons.drawGdaxButton,
                                                                      .poloniex: InstitutionButtons.drawPoloniexButton,
-                                                                     .bitfinex: InstitutionButtons.drawBitfinexButton]
-    fileprivate let buttonSourceOrder: [Source] = [.coinbase, .gdax, .poloniex, .bitfinex]
+                                                                     .bitfinex: InstitutionButtons.drawBitfinexButton,
+                                                                     .wallet:   InstitutionButtons.drawEtradeButton]
+    fileprivate let buttonSourceOrder: [Source] = [.coinbase, .gdax, .poloniex, .bitfinex, .wallet]
     fileprivate var signUpController: SignUpViewController?
 
     //
@@ -343,6 +344,8 @@ class OpenAddAccountViewController: NSViewController {
                 self.presentLoginScreenWith(apiInstitution: GDAXAPIClient.gdaxInstitution, loginService: GDAXAPIClient(server: .production))
             case .poloniex:
                 self.presentLoginScreenWith(apiInstitution: PoloniexInstitution(), loginService: PoloniexApi())
+            case .wallet:
+                self.presentLoginScreenWith(apiInstitution: EthplorerInstitution(), loginService: EthplorerApi())
             default:()
             }
         }
