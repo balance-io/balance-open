@@ -147,6 +147,7 @@ class SignUpViewController: NSViewController {
             return 295.0 + (CGFloat(devices.count - 1) * 33.0)
         }
     }
+    fileprivate var previousScreenSize: CGFloat = 0
     
     //
     // MARK: - Lifecycle -
@@ -611,13 +612,6 @@ class SignUpViewController: NSViewController {
         // Hack to color the popover arrow during the push animation
         async(after: 0.12) {
             AppDelegate.sharedInstance.statusItem.arrowColor = NSColor.clear
-            
-            // Must resize after changing the color or the color changes too late
-            async(after: 0.1) {
-                // NOTE: We should figure out a way to do this without knowing the height of the add accounts controller
-                AppDelegate.sharedInstance.resizeWindowHeight(370, animated: true)
-                //AppDelegate.sharedInstance.resizeWindow(CurrentTheme.defaults.size, animated: true)
-            }
         }
         
         closeBlock(false, self)
