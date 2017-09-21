@@ -15,6 +15,8 @@ private enum FieldType: String {
     case key        = "key"
     case secret     = "secret"
     case passphrase = "passphrase"
+    case name       = "name"
+    case address    = "address"
 }
 
 private enum Step: String {
@@ -570,6 +572,8 @@ class SignUpViewController: NSViewController {
                 case .passphrase: return "Passphrase"
                 case .key: return "Key"
                 case .secret: return "Secret"
+                case .address: return "Address"
+                case .name: return "Name"
                 }
             } else {
                 return ""
@@ -594,6 +598,10 @@ class SignUpViewController: NSViewController {
                 type = .key
             } else if field.type == FieldType.secret.rawValue {
                 type = .secret
+            }else if field.type == FieldType.name.rawValue {
+                type = .name
+            } else if field.type == FieldType.address.rawValue {
+                type = .address
             }
             
             let textField = SignUpTextField(type: type)
