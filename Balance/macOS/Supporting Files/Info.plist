@@ -20,6 +20,19 @@
 	<string>0.9.4</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Main</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>balancemymoney</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>5</string>
 	<key>Fabric</key>
