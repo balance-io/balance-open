@@ -2,7 +2,7 @@ machine:
   environment:
     XCODE_SCHEME: Balance macOS
   xcode:
-    version: 8.3.2
+    version: "9.0"
 dependencies:
   override:
     - carthage version
@@ -10,10 +10,11 @@ dependencies:
     - "Carthage"
 test:
   override:
+    - xcodebuild -showsdks
     - set -o pipefail && xcodebuild
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
       PROVISIONING_PROFILE=
-      -sdk macosx10.12
+      -sdk macosx10.13
       -scheme "Balance macOS"
       clean build test | tee $CIRCLE_ARTIFACTS/xcode_raw.log | xcpretty --color --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml

@@ -41,8 +41,9 @@ class OpenAddAccountViewController: NSViewController {
                                                                      .gdax:     InstitutionButtons.drawGdaxButton,
                                                                      .poloniex: InstitutionButtons.drawPoloniexButton,
                                                                      .bitfinex: InstitutionButtons.drawBitfinexButton,
-                                                                     .kraken:   InstitutionButtons.drawBitfinexButton]
-    fileprivate let buttonSourceOrder: [Source] = [.coinbase, .gdax, .poloniex, .bitfinex, .kraken]
+                                                                     .kraken:   InstitutionButtons.drawEtradeButton,
+                                                                     .wallet:   InstitutionButtons.drawEtradeButton]
+    fileprivate let buttonSourceOrder: [Source] = [.coinbase, .gdax, .poloniex, .bitfinex, .kraken, .wallet]
     fileprivate var signUpController: SignUpViewController?
 
     //
@@ -70,6 +71,14 @@ class OpenAddAccountViewController: NSViewController {
         removeShortcutMonitor()
     }
     
+    fileprivate var windowHeight: CGFloat {
+        let buttonHeight = 50.0
+        let minimumViewHeight = 260.0
+        let verticalButtons = ceil(Float(self.buttonDrawFunctions.count)/Float(2.0))
+        let windowHeight = (Double(verticalButtons) * buttonHeight) + minimumViewHeight
+        return CGFloat(windowHeight)
+    }
+    
     fileprivate var hackDelay = 0.25
     fileprivate var hackDelayCount = 2
     override func viewWillAppear() {
@@ -87,9 +96,9 @@ class OpenAddAccountViewController: NSViewController {
                     self.hackDelay = 0.0
                 }
             }
-            
+            print("going back \(self.allowSelection)")
             if self.allowSelection {
-                AppDelegate.sharedInstance.resizeWindowHeight(410, animated: true)
+                AppDelegate.sharedInstance.resizeWindowHeight(self.windowHeight, animated: true)
             }
         }
     }
@@ -348,6 +357,8 @@ class OpenAddAccountViewController: NSViewController {
                 self.presentLoginScreenWith(apiInstitution: BitfinexAPIClient.institution, loginService: BitfinexAPIClient())
             case .kraken:
                 self.presentLoginScreenWith(apiInstitution: KrakenAPIClient.institution, loginService: KrakenAPIClient())
+            case .wallet:
+                self.presentLoginScreenWith(apiInstitution: EthplorerInstitution(), loginService: EthplorerApi())
             default:()
             }
         }
@@ -362,6 +373,11 @@ class OpenAddAccountViewController: NSViewController {
                 self.back()
             } else {
                 self.removeSignUpController(animated: true)
+            }
+            async() {
+                if self.allowSelection {
+                    AppDelegate.sharedInstance.resizeWindowHeight(self.windowHeight, animated: true)
+                }
             }
         })
         preferencesButton.isEnabled = false

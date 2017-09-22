@@ -20,6 +20,8 @@ enum SignUpTextFieldType: String {
     case key
     case secret
     case passphrase
+    case name
+    case address
     case none
 }
 
@@ -75,7 +77,7 @@ class SignUpTextField: View, TextFieldDelegate {
         var iconImage = #imageLiteral(resourceName: "login-user")
         var iconImageSize = NSZeroSize
         switch type {
-        case .username:
+        case .username, .name:
             iconImage = #imageLiteral(resourceName: "login-user")
             iconImageSize = NSSize(width: 13, height: 13)
         case .password, .key:
@@ -94,7 +96,7 @@ class SignUpTextField: View, TextFieldDelegate {
         case .email:
             iconImage = CurrentTheme.type == .light ? #imageLiteral(resourceName: "login-mail-light") : #imageLiteral(resourceName: "login-mail-dark")
             iconImageSize = NSSize(width: 13, height: 10)
-        case .secret:
+        case .secret, .address:
             //needs a different icon
             iconImage = #imageLiteral(resourceName: "login-password")
             iconImageSize = NSSize(width: 10, height: 12)

@@ -18,7 +18,8 @@ typealias SuccessErrorBlock = (_ success: Bool, _ error: Error?) -> Void
 fileprivate let connectionTimeout = 30.0
 //fileprivate let subServerUrl = "http://localhost:8080/"
 //fileprivate let subServerUrl = "https://bal-subscription-server-beta.appspot.com/"
-fileprivate let subServerUrl = "https://www.balancemysubscription.com/"
+//fileprivate let subServerUrl = "https://www.balancemysubscription.com/"
+fileprivate let subServerUrl = "https://balance-server.appspot.com/"
 fileprivate let clientId = "a6e15fbb0c3362b74360895f261fb079672c10eef79dcb72308c974408c5ce43"
 
 // Save random state for current authentication request
@@ -59,7 +60,7 @@ struct CoinbaseApi {
         }
         
         lastState = nil
-        let urlString = "\(subServerUrl)coinbase/convertCode"
+        let urlString = "\(subServerUrl)coinbase/requestToken"
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.timeoutInterval = connectionTimeout
@@ -73,12 +74,12 @@ struct CoinbaseApi {
             do {
                 // Make sure there's data
                 guard let data = maybeData, maybeError == nil else {
-                    throw "No data"
+                    throw BalanceError.noData
                 }
 
                 // Try to parse the JSON
                 guard let JSONResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.length > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.length > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval else {
-                    throw "JSON decoding failed"
+                    throw BalanceError.jsonDecoding
                 }
                 
                 // Create the institution and finish
@@ -133,12 +134,12 @@ struct CoinbaseApi {
             do {
                 // Make sure there's data
                 guard let data = maybeData, maybeError == nil else {
-                    throw "No data"
+                    throw BalanceError.noData
                 }
                 
                 // Try to parse the JSON
                 guard let JSONResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.length > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.length > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval else {
-                    throw "JSON decoding failed"
+                    throw BalanceError.jsonDecoding
                 }
                 
                 // Update the model
@@ -171,19 +172,48 @@ struct CoinbaseApi {
         request.cachePolicy = .reloadIgnoringLocalCacheData
         request.httpMethod = "GET"
         request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
-        request.setValue("2017-06-14", forHTTPHeaderField: "CB-VERSION")
+        request.setValue("2017-05-19", forHTTPHeaderField: "CB-VERSION")
         
         // TODO: Create enum types for each error
         let task = certValidatedSession.dataTask(with: request) { maybeData, maybeResponse, maybeError in
             do {
                 // Make sure there's data
                 guard let data = maybeData, maybeError == nil else {
-                    throw "No data"
+                    throw BalanceError.noData
                 }
                 
                 // Try to parse the JSON
-                guard let JSONResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject], let accountDicts = JSONResult["data"] as? [[String: AnyObject]] else {
-                    throw "JSON decoding failed"
+                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject]
+                
+                // Check for errors (they return an array, but as far as I know it's always one error
+                if let errorDicts = jsonResult?["errors"] as? [[String: AnyObject]] {
+                    for errorDict in errorDicts {
+                        if let id = errorDict["id"] as? String, let coinbaseError = CoinbaseError(rawValue: id) {
+                            switch coinbaseError {
+                            case .personalDetailsRequired:
+                                // TODO: Display message to user
+                                throw coinbaseError
+                            case .unverifiedEmail:
+                                // TODO: Display message to user
+                                throw coinbaseError
+                            case .invalidScope:
+                                // TODO: Display message to user
+                                throw coinbaseError
+                            case .authenticationError, .invalidToken, .revokedToken, .expiredToken:
+                                institution.passwordInvalid = true
+                                throw coinbaseError
+                            default:
+                                throw coinbaseError
+                            }
+                        } else {
+                            throw (errorDict["id"] as? String) ?? BalanceError.unknownError
+                        }
+                    }
+                }
+                
+                // Check for account data
+                guard let accountDicts = jsonResult?["data"] as? [[String: AnyObject]] else {
+                    throw BalanceError.jsonDecoding
                 }
                 
                 // Create the CoinbaseAccount objects

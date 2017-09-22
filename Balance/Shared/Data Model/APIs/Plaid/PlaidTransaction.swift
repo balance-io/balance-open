@@ -28,17 +28,17 @@ public struct PlaidTransaction {
     public let longitude: Double?
     
     public init(transaction: [String: AnyObject]) throws {
-        transactionId = try checkType(transaction, name: "transaction_id")
-        accountId = try checkType(transaction, name: "account_id")
-        amount = try checkType(transaction, name: "amount")
-        date = try checkType(transaction, name: "date")
-        name = try checkType(transaction, name: "name")
-        pending = try checkType(transaction, name: "pending")
+        transactionId = try checkType(transaction["transaction_id"], name: "transaction_id")
+        accountId = try checkType(transaction["account_id"], name: "account_id")
+        amount = try checkType(transaction["amount"], name: "amount")
+        date = try checkType(transaction["date"], name: "date")
+        name = try checkType(transaction["name"], name: "name")
+        pending = try checkType(transaction["pending"], name: "pending")
         
         category = transaction["category"] as? [String]
         categoryId = transaction["category_id"] as? String
         
-        let location = transaction["location"] as? [String: AnyObject]
+        let location = transaction["location"] as? [String: Any]
         address = location?["address"] as? String
         city = location?["city"] as? String
         state = location?["state"] as? String
