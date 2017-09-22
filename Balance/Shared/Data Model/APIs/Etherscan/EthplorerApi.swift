@@ -76,6 +76,7 @@ class EthplorerApi: ExchangeApi {
     func fetchAddressInfo(institution: Institution, completion: @escaping SuccessErrorBlock) {
         guard let address = institution.address else {
             assert(false, "Address shouldn't be nil")
+            return
         }
         let addressURL = EthplorerUrl.appendingPathComponent("\(Commands.getAddressInfo.rawValue)/\(address)")
         var urlComponent = URLComponents(url: addressURL, resolvingAgainstBaseURL: false)

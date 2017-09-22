@@ -71,7 +71,7 @@ struct EthplorerAccountObject {
     struct TokenInfo {
         let address: String
         let name: String
-        let decimals: Int
+        let decimals: Double
         let symbol: String
         let price: ExchangePrice?
         
@@ -112,7 +112,7 @@ struct EthplorerAccountObject {
                 altRate = tokenPrice.rate
                 altCurrency = tokenPrice.currency
             }
-            let balance = ethplorerObject.balance.cientificToEightDecimals(decimals: ethplorerObject.tokenInfo.decimals)
+            let balance = ethplorerObject.balance.cientificToEightDecimals(decimals: Int(ethplorerObject.tokenInfo.decimals))
             
             let tokenAccount = EthplorerAccount.init(type: .wallet, currency: Currency.rawValue(shortName: ethplorerObject.tokenInfo.symbol), address: ethplorerObject.tokenInfo.address, available: balance, altRate: altRate, altCurrency: altCurrency, decimals: 8)
             arrayOlder.append(tokenAccount)
