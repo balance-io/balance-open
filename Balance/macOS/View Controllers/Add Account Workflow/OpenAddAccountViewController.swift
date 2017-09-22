@@ -70,7 +70,7 @@ class OpenAddAccountViewController: NSViewController {
         removeShortcutMonitor()
     }
     
-    fileprivate var screenSize: CGFloat {
+    fileprivate var windowHeight: CGFloat {
         let buttonHeight = 50.0
         let minimumViewHeight = 260.0
         let verticalButtons = ceil(Float(self.buttonDrawFunctions.count)/Float(2.0))
@@ -97,7 +97,7 @@ class OpenAddAccountViewController: NSViewController {
             }
             print("going back \(self.allowSelection)")
             if self.allowSelection {
-                AppDelegate.sharedInstance.resizeWindowHeight(self.screenSize, animated: true)
+                AppDelegate.sharedInstance.resizeWindowHeight(self.windowHeight, animated: true)
             }
         }
     }
@@ -371,7 +371,7 @@ class OpenAddAccountViewController: NSViewController {
             }
             async() {
                 if self.allowSelection {
-                    AppDelegate.sharedInstance.resizeWindowHeight(self.screenSize, animated: true)
+                    AppDelegate.sharedInstance.resizeWindowHeight(self.windowHeight, animated: true)
                 }
             }
         })
