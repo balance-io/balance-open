@@ -20,6 +20,7 @@
 		2D5619861F7121D200AA2A93 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619841F7121CD00AA2A93 /* Double.swift */; };
 		2D5619891F7125F300AA2A93 /* DoubleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619881F7125F300AA2A93 /* DoubleTests.swift */; };
 		2D6B22DB1EDE238200356035 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1A64991B867B1F009356A0 /* AppDelegate.swift */; };
+		2DBAAE261F754A2C004DA1BD /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBAAE251F754A2C004DA1BD /* UtilsTests.swift */; };
 		2DD9B1F01EDDDFD10006268F /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */; };
 		2DE638C51F71562F00B54351 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619841F7121CD00AA2A93 /* Double.swift */; };
 		5300D6261DCE5A1E00D02657 /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5300D6251DCE5A1E00D02657 /* LockViewController.swift */; };
@@ -488,6 +489,7 @@
 		2D5619821F6FC99D00AA2A93 /* MultipleEthploreAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MultipleEthploreAccountResponse.json; sourceTree = "<group>"; };
 		2D5619841F7121CD00AA2A93 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		2D5619881F7125F300AA2A93 /* DoubleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTests.swift; sourceTree = "<group>"; };
+		2DBAAE251F754A2C004DA1BD /* UtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsTests.swift; sourceTree = "<group>"; };
 		2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		5300D6251DCE5A1E00D02657 /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
 		5301A75E1F17DC3E00668099 /* WebSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSignUpViewController.swift; sourceTree = "<group>"; };
@@ -928,7 +930,7 @@
 				538B47AF1F4C9FD60023CED5 /* Coinbase */,
 				538B47B21F4C9FD70023CED5 /* GDAX */,
 				538B47BA1F4C9FD70023CED5 /* Poloniex */,
-				53A899A11F74862300AB113D /* Etherscan */,
+				53A899A11F74862300AB113D /* Ethplorer */,
 				5301A7651F17F44E00668099 /* Plaid */,
 			);
 			name = APIs;
@@ -1383,7 +1385,7 @@
 			path = Preferences;
 			sourceTree = "<group>";
 		};
-		53A899A11F74862300AB113D /* Etherscan */ = {
+		53A899A11F74862300AB113D /* Ethplorer */ = {
 			isa = PBXGroup;
 			children = (
 				53A899A21F74862300AB113D /* EthplorerErrors.swift */,
@@ -1391,8 +1393,8 @@
 				53A899A41F74862300AB113D /* EthplorerApi.swift */,
 				53A899A51F74862300AB113D /* EthplorerAccount.swift */,
 			);
-			name = Etherscan;
-			path = APIs/Etherscan;
+			name = Ethplorer;
+			path = APIs/Ethplorer;
 			sourceTree = "<group>";
 		};
 		53B147761E70DC1700BE1E51 /* Realm Models */ = {
@@ -1824,6 +1826,7 @@
 				53F078401F4F8EC700D0054C /* BalanceOpenTests.swift */,
 				53F078471F4F8EC700D0054C /* CoinbaseTests.swift */,
 				53F078481F4F8EC700D0054C /* CurrencyTests.swift */,
+				2DBAAE251F754A2C004DA1BD /* UtilsTests.swift */,
 				53F078431F4F8EC700D0054C /* Data Model */,
 				2D56197D1F6FBE2A00AA2A93 /* EthploreApiTests */,
 				2D56197A1F6FBDBB00AA2A93 /* Poloniex */,
@@ -2461,6 +2464,7 @@
 				53F078661F4F8F3C00D0054C /* APIClientTests.swift in Sources */,
 				53F078681F4F8F3C00D0054C /* HeadersTests.swift in Sources */,
 				53F0785B1F4F8F2E00D0054C /* BalanceOpenTests.swift in Sources */,
+				2DBAAE261F754A2C004DA1BD /* UtilsTests.swift in Sources */,
 				53F0785E1F4F8F3C00D0054C /* FeedTest.swift in Sources */,
 				2D56197F1F6FBE7B00AA2A93 /* EthploreAccountTests.swift in Sources */,
 				53F0785D1F4F8F3C00D0054C /* CurrencyTests.swift in Sources */,
