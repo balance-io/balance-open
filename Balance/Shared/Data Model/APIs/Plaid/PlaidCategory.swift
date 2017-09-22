@@ -15,10 +15,10 @@ public struct PlaidCategory {
     
     public let hierarchy: [String]
     
-    public init(category: [String: AnyObject]) throws {
-        id = try checkType(category, name: "id")
-        type = try checkType(category, name: "type")
+    public init(category: [String: Any]) throws {
+        id = try checkType(category["id"], name: "id")
+        type = try checkType(category["type"], name: "type")
         
-        hierarchy = try checkType(category, name: "hierarchy")
+        hierarchy = try checkType(category["hierarchy"], name: "hierarchy")
     }
 }

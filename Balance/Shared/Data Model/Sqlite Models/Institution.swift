@@ -112,7 +112,7 @@ extension Institution {
                 accessToken = dictionary["accessToken"] as? String
             }
             
-            print("get accessTokenKey: \(accessTokenKey)  accessToken: \(String(describing: accessToken))")
+            //print("get accessTokenKey: \(accessTokenKey)  accessToken: \(String(describing: accessToken))")
 
             return accessToken
         }

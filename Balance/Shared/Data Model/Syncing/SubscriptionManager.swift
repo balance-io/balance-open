@@ -452,7 +452,7 @@ class SubscriptionManager {
                                             "sourceInstitutionId": sourceInstitutionId]
         guard let jsonData = jsonDataFromDictionary(parameters) else {
             log.debug("Failed to exchange plaid token, JSON body could not be created")
-            async { completion?(false, BalanceError.jsonSerialization) }
+            async { completion?(false, BalanceError.jsonEncoding) }
             return
         }
 
@@ -471,7 +471,7 @@ class SubscriptionManager {
             // Try to parse the JSON
             guard let jsonResult = self.dictionaryFromJsonData(data), let codeInt = jsonResult[Keys.Code] as? Int, let code = BalanceServerCode(rawValue: codeInt) else {
                 log.debug("Failed to delete plaid access token. Failed to parse the JSON.")
-                async { completion?(false, BalanceError.jsonParsing) }
+                async { completion?(false, BalanceError.jsonDecoding) }
                 return
             }
             
@@ -516,7 +516,7 @@ class SubscriptionManager {
                                             "accessToken": accessToken]
         guard let jsonData = jsonDataFromDictionary(parameters) else {
             log.debug("Failed to delete plaid token, JSON body could not be created")
-            async { completion?(false, BalanceError.jsonSerialization) }
+            async { completion?(false, BalanceError.jsonEncoding) }
             return
         }
         
@@ -534,7 +534,7 @@ class SubscriptionManager {
             // Try to parse the JSON
             guard let jsonResult = self.dictionaryFromJsonData(data), let codeInt = jsonResult[Keys.Code] as? Int, let code = BalanceServerCode(rawValue: codeInt) else {
                 log.debug("Failed to delete plaid access token. Failed to parse the JSON.")
-                async { completion?(false, BalanceError.jsonParsing) }
+                async { completion?(false, BalanceError.jsonDecoding) }
                 return
             }
             
@@ -568,7 +568,7 @@ class SubscriptionManager {
                                          "startDateTimestamp": startDate?.timeIntervalSince1970 ?? 0]
         guard let jsonData = jsonDataFromDictionary(parameters) else {
             log.debug("Failed to pull accounts and transactions, JSON body could not be created")
-            async { completion(false, BalanceError.jsonSerialization, [], [], nil) }
+            async { completion(false, BalanceError.jsonEncoding, [], [], nil) }
             return
         }
         
@@ -586,7 +586,7 @@ class SubscriptionManager {
             // Try to parse the JSON
             guard let jsonResult = self.dictionaryFromJsonData(data) else {
                 log.error("Failed to pull accounts and transactions, invalid JSON")
-                async { completion(false, BalanceError.jsonParsing, [], [], nil) }
+                async { completion(false, BalanceError.jsonDecoding, [], [], nil) }
                 return
             }
             

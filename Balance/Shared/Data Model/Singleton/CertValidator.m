@@ -64,6 +64,12 @@ const NSString *geoTrustGlobalCA           = @"7HIpactkIAq2Y49orFOOQKurWxmmSFZhB
                           kTSKPublicKeyHashes : @[googleInternetAuthorityG2, geoTrustGlobalCA],
                           kTSKReportUris : @[balanceReportUri]
                           },
+                  @"balance-server.appspot.com" : @{
+                          kTSKEnforcePinning : @YES,
+                          kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                          kTSKPublicKeyHashes : @[googleInternetAuthorityG2, geoTrustGlobalCA],
+                          kTSKReportUris : @[balanceReportUri]
+                          },
                   @"balancemy.money" : @{
                           kTSKEnforcePinning : @YES,
                           kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
