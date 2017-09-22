@@ -70,6 +70,14 @@ class OpenAddAccountViewController: NSViewController {
         removeShortcutMonitor()
     }
     
+    fileprivate var windowHeight: CGFloat {
+        let buttonHeight = 50.0
+        let minimumViewHeight = 260.0
+        let verticalButtons = ceil(Float(self.buttonDrawFunctions.count)/Float(2.0))
+        let windowHeight = (Double(verticalButtons) * buttonHeight) + minimumViewHeight
+        return CGFloat(windowHeight)
+    }
+    
     fileprivate var hackDelay = 0.25
     fileprivate var hackDelayCount = 2
     override func viewWillAppear() {
@@ -87,9 +95,9 @@ class OpenAddAccountViewController: NSViewController {
                     self.hackDelay = 0.0
                 }
             }
-            
+            print("going back \(self.allowSelection)")
             if self.allowSelection {
-                AppDelegate.sharedInstance.resizeWindowHeight(370, animated: true)
+                AppDelegate.sharedInstance.resizeWindowHeight(self.windowHeight, animated: true)
             }
         }
     }
@@ -360,6 +368,11 @@ class OpenAddAccountViewController: NSViewController {
                 self.back()
             } else {
                 self.removeSignUpController(animated: true)
+            }
+            async() {
+                if self.allowSelection {
+                    AppDelegate.sharedInstance.resizeWindowHeight(self.windowHeight, animated: true)
+                }
             }
         })
         preferencesButton.isEnabled = false

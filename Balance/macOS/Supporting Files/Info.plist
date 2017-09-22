@@ -18,26 +18,21 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>0.9.4</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>money.balancemy.balancemymoney</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>balancemymoney</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>5</string>
-	<key>Fabric</key>
-	<dict>
-		<key>APIKey</key>
-		<string>9ffe9906507d3cd65faf7736c673440ddb7e7aed</string>
-		<key>Kits</key>
-		<array>
-			<dict>
-				<key>KitInfo</key>
-				<dict/>
-				<key>KitName</key>
-				<string>Crashlytics</string>
-			</dict>
-		</array>
-	</dict>
-	<key>LSApplicationCategoryType</key>
-	<string>public.app-category.finance</string>
+	<string>3</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>LSUIElement</key>
@@ -48,10 +43,12 @@
 		<true/>
 	</dict>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2015 Balanced Software, Inc. All rights reserved.</string>
+	<string>Copyright © 2017 Balanced Software, Inc. All rights reserved.</string>
 	<key>NSMainStoryboardFile</key>
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>SUFeedURL</key>
+	<string>https://balancemy.money/updates/balanceopen.xml</string>
 </dict>
 </plist>
