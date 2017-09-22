@@ -20,6 +20,7 @@
 		2D5619861F7121D200AA2A93 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619841F7121CD00AA2A93 /* Double.swift */; };
 		2D5619891F7125F300AA2A93 /* DoubleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619881F7125F300AA2A93 /* DoubleTests.swift */; };
 		2D6B22DB1EDE238200356035 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1A64991B867B1F009356A0 /* AppDelegate.swift */; };
+		2D73587F1F74F836004872FD /* PoloniexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D251F5EA22900873286 /* PoloniexErrors.swift */; };
 		2DD9B1F01EDDDFD10006268F /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */; };
 		2DE638C51F71562F00B54351 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619841F7121CD00AA2A93 /* Double.swift */; };
 		5300D6261DCE5A1E00D02657 /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5300D6251DCE5A1E00D02657 /* LockViewController.swift */; };
@@ -2192,6 +2193,7 @@
 				537187E21F4CC23B00E7F9D6 /* GDAXErrors.swift in Sources */,
 				53552A151ED7251200DD95F9 /* Swizzling.swift in Sources */,
 				53552A191ED7251700DD95F9 /* AccountType.swift in Sources */,
+				2D73587F1F74F836004872FD /* PoloniexErrors.swift in Sources */,
 				53A5B0CF1F69D417005AB47E /* BalanceError.swift in Sources */,
 				53552A101ED7251200DD95F9 /* InstitutionsDatabase.swift in Sources */,
 				53552A291ED7252900DD95F9 /* Error.swift in Sources */,
