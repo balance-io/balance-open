@@ -433,11 +433,6 @@ func checkType<T, U>(_ value: T?, name: String, file: String = #file, line: Int 
     return result
 }
 
-func checkType<U>(_ dict: Dictionary<String, Any>, file: String = #file, name: String, line: Int = #line, function: String = #function) throws -> U {
-    let value = dict[name]
-    return try checkType(value, name: name, file: file, line: line, function: function)
-}
-
 /*
  * Crypto
  */

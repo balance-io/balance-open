@@ -163,7 +163,7 @@ class EthplorerApi: ExchangeApi {
 	}
     
     fileprivate func processEthploreAccounts(ethplorerObject: EthplorerAccountObject, institution: Institution) {
-        let accounts = ethplorerObject.arrayOfEthplorerAccounts
+        let accounts = ethplorerObject.ethplorerAccounts
         for localAccount in accounts {
             // Create or upload the local account object
             localAccount.updateLocalAccount(institution: institution)

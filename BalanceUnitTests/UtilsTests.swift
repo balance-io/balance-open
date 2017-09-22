@@ -24,9 +24,9 @@ class UtilsTests: XCTestCase {
     func testCheckTypeInteger() {
         // given
         var integer: Int
-        let dictionary = ["decimals":19]
+        let dictionary = ["decimals": 19]
         do {
-            integer = try checkType(dictionary, name: "decimals")
+            integer = try checkType(dictionary["decimals"], name: "decimals")
         } catch {
             print("Other error: \(error)")
             XCTAssert(false)
@@ -36,9 +36,9 @@ class UtilsTests: XCTestCase {
     func testCheckTypeDouble() {
         // given
         var double: Double
-        let dictionary = ["decimals":19]
+        let dictionary = ["decimals": 19.0]
         do {
-            double = try checkType(dictionary, name: "decimals")
+            double = try checkType(dictionary["decimals"], name: "decimals")
         } catch {
             print("Other error: \(error)")
             XCTAssert(false)
@@ -48,9 +48,9 @@ class UtilsTests: XCTestCase {
     func testCheckTypeFloat() {
         // given
         var float: Float
-        let dictionary = ["decimals":19.0]
+        let dictionary = ["decimals": Float(19.0)]
         do {
-            float = try checkType(dictionary, name: "decimals")
+            float = try checkType(dictionary["decimals"], name: "decimals")
         } catch {
             print("Other error: \(error)")
             XCTAssert(false)
@@ -59,10 +59,10 @@ class UtilsTests: XCTestCase {
     
     func testCheckTypeString() {
         // given
-        var float: String
-        let dictionary = ["decimals":"19.0"]
+        var string: String
+        let dictionary = ["decimals": "19.0"]
         do {
-            float = try checkType(dictionary, name: "decimals")
+            string = try checkType(dictionary["decimals"], name: "decimals")
         } catch {
             print("Other error: \(error)")
             XCTAssert(false)

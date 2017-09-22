@@ -172,7 +172,7 @@ struct CoinbaseApi {
         request.cachePolicy = .reloadIgnoringLocalCacheData
         request.httpMethod = "GET"
         request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
-        request.setValue("2017-10-13", forHTTPHeaderField: "CB-VERSION")
+        request.setValue("2017-05-19", forHTTPHeaderField: "CB-VERSION")
         
         // TODO: Create enum types for each error
         let task = certValidatedSession.dataTask(with: request) { maybeData, maybeResponse, maybeError in

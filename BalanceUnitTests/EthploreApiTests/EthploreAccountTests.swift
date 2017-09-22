@@ -82,7 +82,7 @@ class EthploreAccountTests: XCTestCase {
         //when
         let account = try! EthplorerAccountObject.init(dictionary: self.json, currencyShortName: "ETH", type: .wallet)
         XCTAssertEqual(account.tokens.count, 1)
-        let ethploreAccount: EthplorerAccount = account.arrayOfEthplorerAccounts[1]
+        let ethploreAccount: EthplorerAccount = account.ethplorerAccounts[1]
         
         //then
         XCTAssertEqual(ethploreAccount.altRate, 0.32)
@@ -96,7 +96,7 @@ class EthploreAccountTests: XCTestCase {
         //when
         let account = try! EthplorerAccountObject.init(dictionary: self.json, currencyShortName: "ETH", type: .wallet)
         XCTAssertEqual(account.tokens.count, 1)
-        let ethploreAccount = account.arrayOfEthplorerAccounts[1]
+        let ethploreAccount = account.ethplorerAccounts[1]
         
         //then
         XCTAssertEqual(ethploreAccount.balance, 3944020437500)

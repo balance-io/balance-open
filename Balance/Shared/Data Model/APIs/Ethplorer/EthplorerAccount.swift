@@ -28,16 +28,19 @@ struct EthplorerAccountObject {
     let ETH: Eth
     let tokens: [Token]
     
-    init(dictionary: [String: AnyObject], currencyShortName: String, type: AccountType) throws {
+    init(dictionary: [String: Any], currencyShortName: String, type: AccountType) throws {
         self.type = type
         self.currency = Currency.rawValue(shortName: "ETH")
     
-        self.address = try checkType(dictionary, name: "address")
+        self.address = try checkType(dictionary["address"], name: "address")
         
-        self.ETH = try Eth.init(dictionary: dictionary["ETH"] as! [String : AnyObject])
+        let ethDict: [String: Any] = try checkType(dictionary["ETH"], name: "ETH")
+        self.ETH = try Eth(dictionary: ethDict)
+        
+        let tokensArray: [[String: Any]] = try checkType(dictionary["tokens"], name: "tokens")
         var tokens = [Token]()
-        for token in dictionary["tokens"] as! [AnyObject] {
-            tokens.append(try Token.init(dictionary: token as! [String : AnyObject]))
+        for token in tokensArray {
+            tokens.append(try Token(dictionary: token))
         }
         self.tokens = tokens
     }
@@ -47,10 +50,10 @@ struct EthplorerAccountObject {
         let totalIn: Double
         let totalOut: Double
         
-        init(dictionary: [String: AnyObject]) throws {
-            self.balance = try checkType(dictionary, name: "balance")
-            self.totalIn = try checkType(dictionary, name: "totalIn")
-            self.totalOut = try checkType(dictionary, name: "totalOut")
+        init(dictionary: [String: Any]) throws {
+            self.balance = try checkType(dictionary["balance"], name: "balance")
+            self.totalIn = try checkType(dictionary["totalIn"], name: "totalIn")
+            self.totalOut = try checkType(dictionary["totalOut"], name: "totalOut")
         }
     }
     
@@ -60,11 +63,12 @@ struct EthplorerAccountObject {
         let totalIn: Double
         let totalOut: Double
         
-        init (dictionary: [String:AnyObject]) throws {
-            self.balance = try checkType(dictionary, name: "balance")
-            self.totalIn = try checkType(dictionary, name: "totalIn")
-            self.totalOut = try checkType(dictionary, name: "totalOut")
-            self.tokenInfo = try TokenInfo.init(dictionary: dictionary["tokenInfo"] as! [String:AnyObject])
+        init (dictionary: [String: Any]) throws {
+            self.balance = try checkType(dictionary["balance"], name: "balance")
+            self.totalIn = try checkType(dictionary["totalIn"], name: "totalIn")
+            self.totalOut = try checkType(dictionary["totalOut"], name: "totalOut")
+            let tokenInfoDict: [String: Any] = try checkType(dictionary["tokenInfo"], name: "tokenInfo")
+            self.tokenInfo = try TokenInfo(dictionary: tokenInfoDict)
         }
     }
     
@@ -75,15 +79,16 @@ struct EthplorerAccountObject {
         let symbol: String
         let price: ExchangePrice?
         
-        init (dictionary: [String:AnyObject]) throws {
-            self.address = try checkType(dictionary, name: "address")
-            self.name = try checkType(dictionary, name: "name")
-            self.decimals = try checkType(dictionary, name: "decimals")
-            self.symbol = try checkType(dictionary, name: "symbol")
-            if let _ = dictionary["price"] as? Bool {
+        init (dictionary: [String: Any]) throws {
+            self.address = try checkType(dictionary["address"], name: "address")
+            self.name = try checkType(dictionary["name"], name: "name")
+            self.decimals = try checkType(dictionary["decimals"], name: "decimals")
+            self.symbol = try checkType(dictionary["symbol"], name: "symbol")
+            if dictionary["price"] is Bool {
                 self.price = nil
             } else {
-                self.price = try ExchangePrice.init(dictionary: dictionary["price"] as! [String : AnyObject])
+                let priceDict: [String: Any] = try checkType(dictionary["price"], name: "price")
+                self.price = try ExchangePrice(dictionary: priceDict)
             }
         }
     }
@@ -94,16 +99,16 @@ struct EthplorerAccountObject {
         let currency: Currency
         let diff: Double
         
-        init (dictionary: [String:AnyObject]) throws {
-            self.rate = try checkType(dictionary, name: "rate")
+        init (dictionary: [String: Any]) throws {
+            self.rate = try checkType(dictionary["rate"], name: "rate")
             self.currency = .common(traditional: .usd)
-            self.diff = try checkType(dictionary, name: "diff")
+            self.diff = try checkType(dictionary["diff"], name: "diff")
         }
     }
     
-    var arrayOfEthplorerAccounts: [EthplorerAccount] {
+    var ethplorerAccounts: [EthplorerAccount] {
         var arrayOlder = [EthplorerAccount]()
-        let ethAccount = EthplorerAccount.init(type: .wallet, currency: self.currency, address: self.address, available: self.ETH.balance, altRate: 0, altCurrency: Currency.rawValue(shortName: "BTC"), decimals: 8)
+        let ethAccount = EthplorerAccount(type: .wallet, currency: self.currency, address: self.address, available: self.ETH.balance, altRate: 0, altCurrency: Currency.rawValue(shortName: "BTC"), decimals: 8)
         arrayOlder.append(ethAccount)
         for ethplorerObject in self.tokens {
             var altRate: Double = 0
@@ -114,7 +119,7 @@ struct EthplorerAccountObject {
             }
             let balance = ethplorerObject.balance.cientificToEightDecimals(decimals: ethplorerObject.tokenInfo.decimals)
             
-            let tokenAccount = EthplorerAccount.init(type: .wallet, currency: Currency.rawValue(shortName: ethplorerObject.tokenInfo.symbol), address: ethplorerObject.tokenInfo.address, available: balance, altRate: altRate, altCurrency: altCurrency, decimals: 8)
+            let tokenAccount = EthplorerAccount(type: .wallet, currency: Currency.rawValue(shortName: ethplorerObject.tokenInfo.symbol), address: ethplorerObject.tokenInfo.address, available: balance, altRate: altRate, altCurrency: altCurrency, decimals: 8)
             arrayOlder.append(tokenAccount)
         }
         return arrayOlder
