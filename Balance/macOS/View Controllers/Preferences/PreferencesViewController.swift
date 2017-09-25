@@ -62,7 +62,7 @@ class PreferencesViewController: NSTabViewController {
             window.setFrame(frame, display: false, animate: true)
             
             // Analytics
-//            Answers.logContentView(withName: "Preferences tab selected \(tabViewItem.label)", contentType: nil, contentId: nil, customAttributes: nil)
+            BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Preferences tab selected \(tabViewItem.label)")
         }
     }
 }

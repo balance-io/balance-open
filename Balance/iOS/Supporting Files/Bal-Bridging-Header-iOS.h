@@ -3,6 +3,7 @@
 //
 
 #import <CommonCrypto/CommonCrypto.h>
+#import <HockeySDK/HockeySDK.h>
 #import "ObjC.h"
 #import "FMDB.h"
 #import "CertValidator.h"

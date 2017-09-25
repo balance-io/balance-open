@@ -353,7 +353,7 @@ class TabsViewController: NSViewController {
         case 3: contentName = "Insights tab selected"
         default: break
         }
-//        Answers.logContentView(withName: contentName, contentType: nil, contentId: nil, customAttributes: nil)
+        BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: contentName)
         
         for i in 0...tabButtons.count-1 {
             let tabButton = tabButtons[i]

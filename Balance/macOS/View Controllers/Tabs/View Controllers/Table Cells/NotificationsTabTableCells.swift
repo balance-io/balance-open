@@ -206,7 +206,7 @@ class NotificationsTabTransactionCell: View {
         }
         
         // Analytics
-//        Answers.logContentView(withName: "Feed tab cell expanded", contentType: nil, contentId: nil, customAttributes: nil)
+        BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Feed tab cell expanded")
         
         let userInfo = [NotificationsTabViewController.InternalNotifications.Keys.Cell: self]
         NotificationCenter.postOnMainThread(name: NotificationsTabViewController.InternalNotifications.CellOpened, object: nil, userInfo: userInfo)

@@ -326,7 +326,7 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
     
     func textFieldDidBecomeFirstResponder(_ textField: NSTextField) {
         // Analytics
-//        Answers.logContentView(withName: "Transactions tab search started", contentType: nil, contentId: nil, customAttributes: nil)
+        BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Transactions tab search started")
         showSearchFilters()
     }
     

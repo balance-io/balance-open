@@ -609,7 +609,7 @@ class NotificationsTabViewController: NSViewController, NotificationsTabViewMode
     
     func textFieldDidBecomeFirstResponder(_ textField: NSTextField) {
         // Analytics
-//        Answers.logContentView(withName: "Feed tab search started", contentType: nil, contentId: nil, customAttributes: nil)
+        BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Feed tab search started")
     }
     
     func performSearch(_ searchString: String) {

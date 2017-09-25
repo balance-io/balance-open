@@ -390,7 +390,7 @@ class InsightsTabViewController: NSViewController, InsightsTabViewModelDelegate,
                     showFooter()
                     
                     // Analytics
-//                    Answers.logContentView(withName: "Insights tab display mode changed top merchants", contentType: nil, contentId: nil, customAttributes: nil)
+                    BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Insights tab display mode changed top merchants")
                 case .newMerchants:
                     hideNoResultsField()
                     tableView.displaySectionRows = true
@@ -400,7 +400,7 @@ class InsightsTabViewController: NSViewController, InsightsTabViewModelDelegate,
                     hideFooter()
                     
                     // Analytics
-//                    Answers.logContentView(withName: "Insights tab display mode changed new merchants", contentType: nil, contentId: nil, customAttributes: nil)
+                    BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Insights tab display mode changed new merchants")
                 }
             
                 tableView.reloadData()
@@ -474,7 +474,7 @@ class InsightsTabViewController: NSViewController, InsightsTabViewModelDelegate,
     
     func textFieldDidBecomeFirstResponder(_ textField: NSTextField) {
         // Analytics
-//        Answers.logContentView(withName: "Insights tab search started", contentType: nil, contentId: nil, customAttributes: nil)
+        BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Insights tab search started")
     }
     
     func cancelAllSearches() {
@@ -1334,7 +1334,7 @@ class InsightsTabViewController: NSViewController, InsightsTabViewModelDelegate,
             }
             
             // Analytics
-//            Answers.logContentView(withName: "Insights tab cell expanded", contentType: nil, contentId: nil, customAttributes: nil)
+            BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Insights tab cell expanded")
             
             let userInfo = [InternalNotifications.Keys.Cell: self]
             NotificationCenter.postOnMainThread(name: InternalNotifications.CellOpened, object: nil, userInfo: userInfo)
