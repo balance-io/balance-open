@@ -317,11 +317,7 @@
 		53F0785E1F4F8F3C00D0054C /* FeedTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078451F4F8EC700D0054C /* FeedTest.swift */; };
 		53F0785F1F4F8F3C00D0054C /* SearchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078461F4F8EC700D0054C /* SearchTest.swift */; };
 		53F078601ED73B9500E7EDF9 /* RuleTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F0785F1ED73B9500E7EDF9 /* RuleTemplate.swift */; };
-		53F078601F4F8F3C00D0054C /* InstitutionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078521F4F8EC800D0054C /* InstitutionTests.swift */; };
 		53F078611ED73B9500E7EDF9 /* RuleTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F0785F1ED73B9500E7EDF9 /* RuleTemplate.swift */; };
-		53F078611F4F8F3C00D0054C /* PoloniexAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078411F4F8EC700D0054C /* PoloniexAccountTests.swift */; };
-		53F078621F4F8F3C00D0054C /* PoloniexAccountToAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078491F4F8EC700D0054C /* PoloniexAccountToAccountTests.swift */; };
-		53F078631F4F8F3C00D0054C /* PoloniexAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F0783A1F4F8EC700D0054C /* PoloniexAPITests.swift */; };
 		53F078641ED73E6D00E7EDF9 /* ThemeGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078631ED73E6D00E7EDF9 /* ThemeGlobals.swift */; };
 		53F078641F4F8F3C00D0054C /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078421F4F8EC700D0054C /* TestHelpers.swift */; };
 		53F078651ED73E6D00E7EDF9 /* ThemeGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078631ED73E6D00E7EDF9 /* ThemeGlobals.swift */; };
@@ -421,6 +417,15 @@
 		A4E4571D1F790388002E2879 /* CoinbaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4571B1F790388002E2879 /* CoinbaseError.swift */; };
 		A4E4571F1F79045A002E2879 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4571E1F790442002E2879 /* Double.swift */; };
 		A4E457201F79045A002E2879 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4571E1F790442002E2879 /* Double.swift */; };
+		A4E457221F790EE5002E2879 /* PoloniexTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E457211F790EE5002E2879 /* PoloniexTransaction.swift */; };
+		A4E457231F790EE5002E2879 /* PoloniexTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E457211F790EE5002E2879 /* PoloniexTransaction.swift */; };
+		A4E457291F7921BC002E2879 /* InstitutionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E457251F7921B5002E2879 /* InstitutionTests.swift */; };
+		A4E4572A1F7921BC002E2879 /* PoloniexAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E457261F7921B5002E2879 /* PoloniexAccountTests.swift */; };
+		A4E4572B1F7921BC002E2879 /* PoloniexAccountToAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E457271F7921B5002E2879 /* PoloniexAccountToAccountTests.swift */; };
+		A4E4572C1F7921BC002E2879 /* PoloniexAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E457281F7921B5002E2879 /* PoloniexAPITests.swift */; };
+		A4E4572E1F792206002E2879 /* PoloniexTransactionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4572D1F792206002E2879 /* PoloniexTransactionTests.swift */; };
+		A4E457311F79362F002E2879 /* PoloniexDeposit.json in Resources */ = {isa = PBXBuildFile; fileRef = A4E457301F79362F002E2879 /* PoloniexDeposit.json */; };
+		A4E457331F793702002E2879 /* PoloniexWithdrawal.json in Resources */ = {isa = PBXBuildFile; fileRef = A4E457321F793702002E2879 /* PoloniexWithdrawal.json */; };
 		A4E768021F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768011F67DB02002B1AE1 /* BitfinexAPIClient.swift */; };
 		A4E768031F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768011F67DB02002B1AE1 /* BitfinexAPIClient.swift */; };
 		A4E768051F67DB2B002B1AE1 /* BitfinexCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768041F67DB2B002B1AE1 /* BitfinexCredentials.swift */; };
@@ -731,24 +736,20 @@
 		53EB77CD1CF3E6F600F01903 /* NSFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSFont.swift; sourceTree = "<group>"; };
 		53EB77D11CF3EB9100F01903 /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
 		53EB77D51CF3EFAA00F01903 /* NSView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSView.swift; sourceTree = "<group>"; };
-		53F0783A1F4F8EC700D0054C /* PoloniexAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAPITests.swift; sourceTree = "<group>"; };
 		53F0783D1F4F8EC700D0054C /* CompleteBalancesResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CompleteBalancesResponse.json; sourceTree = "<group>"; };
 		53F0783E1F4F8EC700D0054C /* PoloniexAccount.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PoloniexAccount.json; sourceTree = "<group>"; };
 		53F0783F1F4F8EC700D0054C /* PoloniexTradingError.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PoloniexTradingError.json; sourceTree = "<group>"; };
 		53F078401F4F8EC700D0054C /* BalanceOpenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceOpenTests.swift; sourceTree = "<group>"; };
-		53F078411F4F8EC700D0054C /* PoloniexAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAccountTests.swift; sourceTree = "<group>"; };
 		53F078421F4F8EC700D0054C /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		53F078451F4F8EC700D0054C /* FeedTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTest.swift; sourceTree = "<group>"; };
 		53F078461F4F8EC700D0054C /* SearchTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTest.swift; sourceTree = "<group>"; };
 		53F078471F4F8EC700D0054C /* CoinbaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseTests.swift; sourceTree = "<group>"; };
 		53F078481F4F8EC700D0054C /* CurrencyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTests.swift; sourceTree = "<group>"; };
-		53F078491F4F8EC700D0054C /* PoloniexAccountToAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAccountToAccountTests.swift; sourceTree = "<group>"; };
 		53F0784C1F4F8EC700D0054C /* AccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTests.swift; sourceTree = "<group>"; };
 		53F0784D1F4F8EC700D0054C /* APIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
 		53F0784E1F4F8EC700D0054C /* CredentialsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsTest.swift; sourceTree = "<group>"; };
 		53F0784F1F4F8EC700D0054C /* HeadersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadersTests.swift; sourceTree = "<group>"; };
 		53F078511F4F8EC800D0054C /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
-		53F078521F4F8EC800D0054C /* InstitutionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionTests.swift; sourceTree = "<group>"; };
 		53F078541F4F8EC800D0054C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53F078571F4F8EC800D0054C /* Account.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Account.json; sourceTree = "<group>"; };
 		53F078581F4F8EC800D0054C /* Error.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Error.json; sourceTree = "<group>"; };
@@ -810,6 +811,14 @@
 		A4E457121F7901DD002E2879 /* EthplorerInstitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthplorerInstitution.swift; sourceTree = "<group>"; };
 		A4E4571B1F790388002E2879 /* CoinbaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseError.swift; sourceTree = "<group>"; };
 		A4E4571E1F790442002E2879 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		A4E457211F790EE5002E2879 /* PoloniexTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexTransaction.swift; sourceTree = "<group>"; };
+		A4E457251F7921B5002E2879 /* InstitutionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionTests.swift; sourceTree = "<group>"; };
+		A4E457261F7921B5002E2879 /* PoloniexAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAccountTests.swift; sourceTree = "<group>"; };
+		A4E457271F7921B5002E2879 /* PoloniexAccountToAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAccountToAccountTests.swift; sourceTree = "<group>"; };
+		A4E457281F7921B5002E2879 /* PoloniexAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAPITests.swift; sourceTree = "<group>"; };
+		A4E4572D1F792206002E2879 /* PoloniexTransactionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexTransactionTests.swift; sourceTree = "<group>"; };
+		A4E457301F79362F002E2879 /* PoloniexDeposit.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PoloniexDeposit.json; sourceTree = "<group>"; };
+		A4E457321F793702002E2879 /* PoloniexWithdrawal.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PoloniexWithdrawal.json; sourceTree = "<group>"; };
 		A4E768011F67DB02002B1AE1 /* BitfinexAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexAPIClient.swift; sourceTree = "<group>"; };
 		A4E768041F67DB2B002B1AE1 /* BitfinexCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexCredentials.swift; sourceTree = "<group>"; };
 		A4E768081F67DDFE002B1AE1 /* BitfinexErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexErrors.swift; sourceTree = "<group>"; };
@@ -1382,6 +1391,7 @@
 				538B47BB1F4C9FD70023CED5 /* PoloniexAccount.swift */,
 				5361BC9D1F562580009C3F07 /* PoloniexInstitution.swift */,
 				2D326D251F5EA22900873286 /* PoloniexErrors.swift */,
+				A4E457211F790EE5002E2879 /* PoloniexTransaction.swift */,
 			);
 			name = Poloniex;
 			path = APIs/Poloniex;
@@ -1618,6 +1628,7 @@
 		53F078551F4F8EC800D0054C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A4E4572F1F7935F2002E2879 /* Poloniex API Responses */,
 				A41742951F73E8A3004A9B4F /* Coinbase API Responses */,
 				A41204C31F719CA300FD8078 /* Kraken API Responses */,
 				A40ABBE11F6BBCF900383C62 /* Bitfinex API Responses */,
@@ -1757,6 +1768,27 @@
 			);
 			name = Ethplorer;
 			path = APIs/Ethplorer;
+			sourceTree = "<group>";
+		};
+		A4E457241F7921B5002E2879 /* Poloniex */ = {
+			isa = PBXGroup;
+			children = (
+				A4E457251F7921B5002E2879 /* InstitutionTests.swift */,
+				A4E457261F7921B5002E2879 /* PoloniexAccountTests.swift */,
+				A4E457271F7921B5002E2879 /* PoloniexAccountToAccountTests.swift */,
+				A4E457281F7921B5002E2879 /* PoloniexAPITests.swift */,
+				A4E4572D1F792206002E2879 /* PoloniexTransactionTests.swift */,
+			);
+			path = Poloniex;
+			sourceTree = "<group>";
+		};
+		A4E4572F1F7935F2002E2879 /* Poloniex API Responses */ = {
+			isa = PBXGroup;
+			children = (
+				A4E457301F79362F002E2879 /* PoloniexDeposit.json */,
+				A4E457321F793702002E2879 /* PoloniexWithdrawal.json */,
+			);
+			path = "Poloniex API Responses";
 			sourceTree = "<group>";
 		};
 		A4E768001F67DACC002B1AE1 /* Bitfinex */ = {
@@ -1916,6 +1948,7 @@
 		F1F948801D8049B800AB30B2 /* BalanceUnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				A4E457241F7921B5002E2879 /* Poloniex */,
 				A41742921F73E829004A9B4F /* CoinbaseAPIClient */,
 				A41D3E471F6BFC4100FD25B5 /* KrakenAPIClient */,
 				53F0784B1F4F8EC700D0054C /* GDAXAPIClient */,
@@ -1924,10 +1957,6 @@
 				53F078401F4F8EC700D0054C /* BalanceOpenTests.swift */,
 				53F078481F4F8EC700D0054C /* CurrencyTests.swift */,
 				53F078431F4F8EC700D0054C /* Data Model */,
-				53F078521F4F8EC800D0054C /* InstitutionTests.swift */,
-				53F078411F4F8EC700D0054C /* PoloniexAccountTests.swift */,
-				53F078491F4F8EC700D0054C /* PoloniexAccountToAccountTests.swift */,
-				53F0783A1F4F8EC700D0054C /* PoloniexAPITests.swift */,
 				53F078421F4F8EC700D0054C /* TestHelpers.swift */,
 				53F078531F4F8EC800D0054C /* Supporting Files */,
 				53F078501F4F8EC800D0054C /* Utilities */,
@@ -2124,7 +2153,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4E457331F793702002E2879 /* PoloniexWithdrawal.json in Resources */,
 				53F0786F1F4F916800D0054C /* FetchAccounts.json in Resources */,
+				A4E457311F79362F002E2879 /* PoloniexDeposit.json in Resources */,
 				A41204C51F719CB800FD8078 /* KrakenFetchAccounts.json in Resources */,
 				53F078701F4F916800D0054C /* WithdrawToCrypto.json in Resources */,
 				53F0786C1F4F916500D0054C /* PoloniexTradingError.json in Resources */,
@@ -2231,6 +2262,7 @@
 				53552A051ED7251200DD95F9 /* Logging.swift in Sources */,
 				53D441E61F44ABBD006967E1 /* Item.swift in Sources */,
 				532121A01EE8B91600F4812A /* unzip.c in Sources */,
+				A4E457231F790EE5002E2879 /* PoloniexTransaction.swift in Sources */,
 				5301A7751F17F56500668099 /* PlaidTransaction.swift in Sources */,
 				5321219E1EE8B91600F4812A /* ioapi.c in Sources */,
 				53552A0C1ED7251200DD95F9 /* Utils.swift in Sources */,
@@ -2567,6 +2599,7 @@
 				53D441F51F44C477006967E1 /* TransactionRepository.swift in Sources */,
 				53C078A61DFF7CEB00696666 /* CertValidator.m in Sources */,
 				A493B93C1F6819600074ACCC /* BitfinexAuthHeaders.swift in Sources */,
+				A4E457221F790EE5002E2879 /* PoloniexTransaction.swift in Sources */,
 				532B6FF21E9613520010D81D /* AccountsTabViewModel.swift in Sources */,
 				683C8AF33412F6F79047BEA7 /* PlaidDataMockingProtocol.swift in Sources */,
 			);
@@ -2587,23 +2620,24 @@
 			files = (
 				53F078651F4F8F3C00D0054C /* AccountTests.swift in Sources */,
 				A41D3E491F6BFC5600FD25B5 /* KrakenAPIClientTests.swift in Sources */,
-				53F078611F4F8F3C00D0054C /* PoloniexAccountTests.swift in Sources */,
 				53F078641F4F8F3C00D0054C /* TestHelpers.swift in Sources */,
 				53F078691F4F8F3C00D0054C /* MockURLSession.swift in Sources */,
 				53F078661F4F8F3C00D0054C /* APIClientTests.swift in Sources */,
+				A4E4572B1F7921BC002E2879 /* PoloniexAccountToAccountTests.swift in Sources */,
 				53F078681F4F8F3C00D0054C /* HeadersTests.swift in Sources */,
 				A41204C71F71A25F00FD8078 /* KrakenCredentialTests.swift in Sources */,
+				A4E4572C1F7921BC002E2879 /* PoloniexAPITests.swift in Sources */,
 				A46DBC841F69B2C3006F4247 /* BitfinexCredentialsTests.swift in Sources */,
 				53F0785B1F4F8F2E00D0054C /* BalanceOpenTests.swift in Sources */,
+				A4E4572A1F7921BC002E2879 /* PoloniexAccountTests.swift in Sources */,
 				A41742941F73E84B004A9B4F /* CoinbaseTransactionTests.swift in Sources */,
 				53F0785E1F4F8F3C00D0054C /* FeedTest.swift in Sources */,
 				53F0785D1F4F8F3C00D0054C /* CurrencyTests.swift in Sources */,
-				53F078621F4F8F3C00D0054C /* PoloniexAccountToAccountTests.swift in Sources */,
+				A4E457291F7921BC002E2879 /* InstitutionTests.swift in Sources */,
 				53F0785C1F4F8F3100D0054C /* CoinbaseTests.swift in Sources */,
 				53F078671F4F8F3C00D0054C /* CredentialsTest.swift in Sources */,
 				A4CB29E21F682C2D00128E48 /* BitfinexAPIClientTests.swift in Sources */,
-				53F078601F4F8F3C00D0054C /* InstitutionTests.swift in Sources */,
-				53F078631F4F8F3C00D0054C /* PoloniexAPITests.swift in Sources */,
+				A4E4572E1F792206002E2879 /* PoloniexTransactionTests.swift in Sources */,
 				53F0785F1F4F8F3C00D0054C /* SearchTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
