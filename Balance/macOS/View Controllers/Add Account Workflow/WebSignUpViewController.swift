@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import Crashlytics
 import WebKit
 
 class WebSignUpViewController: NSViewController, NSTabViewDelegate, WebPolicyDelegate, WebFrameLoadDelegate {
@@ -351,7 +350,7 @@ class WebSignUpViewController: NSViewController, NSTabViewDelegate, WebPolicyDel
         let attributes: [String: Any] = ["Source":              source.rawValue,
                                          "SourceInstitutionId": sourceInstitutionId,
                                          "Error Description":   errorDescription]
-        Answers.logCustomEvent(withName: "Connection Failed", customAttributes: attributes)
+//        Answers.logCustomEvent(withName: "Connection Failed", customAttributes: attributes)
     }
     
     fileprivate func callCloseBlock(finished: Bool) {

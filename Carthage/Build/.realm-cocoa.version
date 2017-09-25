@@ -1,22 +1,12 @@
 {
-  "iOS" : [
-    {
-      "hash" : "e111cfea5e681cbcced7aefb4a990d58e1e44ab10e20c3e2254edca15384a272",
-      "name" : "RealmSwift"
-    },
-    {
-      "hash" : "5fa2eb940d34ff80de766566d1cf920fe685264fe996f3e00ed3f007420130db",
-      "name" : "Realm"
-    }
-  ],
-  "commitish" : "v2.9.1",
+  "commitish" : "v2.10.1",
   "Mac" : [
     {
-      "hash" : "c662696885d58ea55005b43df03070187b4a56f480a350662fb26bb23aee41b0",
+      "hash" : "3ab1cbacb001aaeea227e21c0b1653845025a398f5a78434002317905d0ec09c",
       "name" : "RealmSwift"
     },
     {
-      "hash" : "e2ae526730fe0f921be31a2e93e1354b9526fa793c284ffa597dca2e94f18687",
+      "hash" : "d8aed8d56f05324be84f6e5cd0797a77cac41ab88bc0724080d5e570e9b556d5",
       "name" : "Realm"
     }
   ]

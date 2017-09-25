@@ -8,7 +8,6 @@
 
 import Cocoa
 import SnapKit
-import Crashlytics
 import BalanceVectorGraphics
 
 enum Tab: Int {
@@ -354,7 +353,7 @@ class TabsViewController: NSViewController {
         case 3: contentName = "Insights tab selected"
         default: break
         }
-        Answers.logContentView(withName: contentName, contentType: nil, contentId: nil, customAttributes: nil)
+//        Answers.logContentView(withName: contentName, contentType: nil, contentId: nil, customAttributes: nil)
         
         for i in 0...tabButtons.count-1 {
             let tabButton = tabButtons[i]

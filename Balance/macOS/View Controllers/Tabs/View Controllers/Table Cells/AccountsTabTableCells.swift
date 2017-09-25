@@ -8,7 +8,6 @@
 
 import Foundation
 import BalanceVectorGraphics
-import Crashlytics
 
 class AccountsTabGroupCell: View {
     var headerView: NSView?
@@ -205,7 +204,7 @@ class AccountsTabAccountCell: View {
         }
         
         // Analytics
-        Answers.logContentView(withName: "Accounts tab cell expanded", contentType: nil, contentId: nil, customAttributes: nil)
+//        Answers.logContentView(withName: "Accounts tab cell expanded", contentType: nil, contentId: nil, customAttributes: nil)
         
         let userInfo = [AccountsTabViewController.InternalNotifications.Keys.Cell: self]
         NotificationCenter.postOnMainThread(name: AccountsTabViewController.InternalNotifications.CellOpened, object: nil, userInfo: userInfo)
@@ -320,7 +319,7 @@ class AccountsTabAccountCell: View {
                 includeInTotalButton.title = "Exclude balance"
             } else {
                 // Analytics
-                Answers.logContentView(withName: "Accounts tab cell excluded from balance", contentType: nil, contentId: nil, customAttributes: nil)
+//                Answers.logContentView(withName: "Accounts tab cell excluded from balance", contentType: nil, contentId: nil, customAttributes: nil)
                 
                 defaults.excludeAccountIdFromTotal(model.accountId)
                 let circleAddImage = NSImage(named: NSImage.Name(rawValue: "CircleAdd"))!
@@ -338,7 +337,7 @@ class AccountsTabAccountCell: View {
             Search.searchTransactions(accountOrInstitutionName: model.name)
             
             // Analytics
-            Answers.logContentView(withName: "Accounts tab cell transactions searched", contentType: nil, contentId: nil, customAttributes: nil)
+//            Answers.logContentView(withName: "Accounts tab cell transactions searched", contentType: nil, contentId: nil, customAttributes: nil)
         }
     }
     

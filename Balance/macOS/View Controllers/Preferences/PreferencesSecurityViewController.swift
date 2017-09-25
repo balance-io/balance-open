@@ -4,7 +4,6 @@
 //
 
 import Foundation
-import Crashlytics
 
 class PreferencesSecurityViewController: NSViewController {
     

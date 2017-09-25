@@ -8,7 +8,6 @@
 
 import Foundation
 import MapKit
-import Crashlytics
 
 class TransactionsTabGroupCell: View {
     var section = -1
@@ -437,7 +436,7 @@ class TransactionsTabTransactionCell: View {
         loadBottomContainer()
         
         // Analytics
-        Answers.logContentView(withName: "Transactions tab cell expanded", contentType: nil, contentId: nil, customAttributes: nil)
+//        Answers.logContentView(withName: "Transactions tab cell expanded", contentType: nil, contentId: nil, customAttributes: nil)
         
         let userInfo = [TransactionsTabViewController.InternalNotifications.Keys.Cell: self]
         NotificationCenter.postOnMainThread(name: TransactionsTabViewController.InternalNotifications.CellOpened, object: nil, userInfo: userInfo)
