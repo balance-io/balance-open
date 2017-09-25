@@ -26,7 +26,7 @@ internal final class BitfinexCredentialsTest: XCTestCase
     
     // MARK: Initialization
     
-    internal func testInitializationWithInvalidSecret()
+    internal func testInitialization()
     {
         do
         {
