@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Crashlytics
 import BalanceVectorGraphics
 import StoreKit
 

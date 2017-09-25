@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Crashlytics
 import BalanceVectorGraphics
 import RealmSwift
 
@@ -279,7 +278,7 @@ class PreferencesRulesViewController: NSViewController {
         }
         
         // Analytics
-        Answers.logContentView(withName: "Preferences new feed rule created", contentType: nil, contentId: nil, customAttributes: nil)
+//        Answers.logContentView(withName: "Preferences new feed rule created", contentType: nil, contentId: nil, customAttributes: nil)
     }
     
     @objc fileprivate func ruleDeleteButtonAction(_ sender: Button) {

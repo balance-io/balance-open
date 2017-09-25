@@ -9,7 +9,6 @@
 import Cocoa
 import SnapKit
 import MapKit
-import Crashlytics
 
 class InsightsTabViewController: NSViewController, InsightsTabViewModelDelegate, NSTextFieldDelegate, TextFieldDelegate, SectionedTableViewDelegate, SectionedTableViewDataSource {
     
@@ -391,7 +390,7 @@ class InsightsTabViewController: NSViewController, InsightsTabViewModelDelegate,
                     showFooter()
                     
                     // Analytics
-                    Answers.logContentView(withName: "Insights tab display mode changed top merchants", contentType: nil, contentId: nil, customAttributes: nil)
+//                    Answers.logContentView(withName: "Insights tab display mode changed top merchants", contentType: nil, contentId: nil, customAttributes: nil)
                 case .newMerchants:
                     hideNoResultsField()
                     tableView.displaySectionRows = true
@@ -401,7 +400,7 @@ class InsightsTabViewController: NSViewController, InsightsTabViewModelDelegate,
                     hideFooter()
                     
                     // Analytics
-                    Answers.logContentView(withName: "Insights tab display mode changed new merchants", contentType: nil, contentId: nil, customAttributes: nil)
+//                    Answers.logContentView(withName: "Insights tab display mode changed new merchants", contentType: nil, contentId: nil, customAttributes: nil)
                 }
             
                 tableView.reloadData()
@@ -475,7 +474,7 @@ class InsightsTabViewController: NSViewController, InsightsTabViewModelDelegate,
     
     func textFieldDidBecomeFirstResponder(_ textField: NSTextField) {
         // Analytics
-        Answers.logContentView(withName: "Insights tab search started", contentType: nil, contentId: nil, customAttributes: nil)
+//        Answers.logContentView(withName: "Insights tab search started", contentType: nil, contentId: nil, customAttributes: nil)
     }
     
     func cancelAllSearches() {
@@ -1335,7 +1334,7 @@ class InsightsTabViewController: NSViewController, InsightsTabViewModelDelegate,
             }
             
             // Analytics
-            Answers.logContentView(withName: "Insights tab cell expanded", contentType: nil, contentId: nil, customAttributes: nil)
+//            Answers.logContentView(withName: "Insights tab cell expanded", contentType: nil, contentId: nil, customAttributes: nil)
             
             let userInfo = [InternalNotifications.Keys.Cell: self]
             NotificationCenter.postOnMainThread(name: InternalNotifications.CellOpened, object: nil, userInfo: userInfo)

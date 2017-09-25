@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Crashlytics
 
 class TransactionContextMenu: NSObject, NSMenuDelegate {
     fileprivate let transaction: Transaction
@@ -53,7 +52,7 @@ class TransactionContextMenu: NSObject, NSMenuDelegate {
         NotificationCenter.postOnMainThread(name: Notifications.PerformSearch, object: nil, userInfo: [Notifications.Keys.SearchString: name])
         
         // Analytics
-        Answers.logContentView(withName: "Accounts tab cell transactions searched", contentType: nil, contentId: nil, customAttributes: nil)
+//        Answers.logContentView(withName: "Accounts tab cell transactions searched", contentType: nil, contentId: nil, customAttributes: nil)
     }
     
     @objc fileprivate func copyTransactionToClipboard() {
