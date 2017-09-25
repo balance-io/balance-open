@@ -33,8 +33,6 @@ internal final class CoinbaseTransactionTests: XCTestCase
         let data = TestHelpers.loadData(filename: "CoinbaseSendTransaction.json")
         let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
         
-        print(json)
-        
         let transaction = try! CoinbaseApi.Transaction(dictionary: json)
         XCTAssertEqual(transaction.identifier, "57ffb4ae-0c59-5430-bcd3-3f98f797a66c")
         XCTAssertEqual(transaction.type, "send")
