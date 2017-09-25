@@ -20,14 +20,19 @@ internal extension GDAXAPIClient
         
         internal init(credentials: Credentials, requestPath: String, method: String, body: Data?) throws
         {
+            guard let passphrase = credentials.components.passphrase else
+            {
+                throw APICredentialsComponents.Error.noCredentials
+            }
+            
             let nowDate = Date()
             let signature = try credentials.generateSignature(timestamp: nowDate, requestPath: requestPath, body: body, method: method)
             
             self.dictionary = [
-                "CB-ACCESS-KEY" : credentials.key,
+                "CB-ACCESS-KEY" : credentials.components.key,
                 "CB-ACCESS-SIGN" : signature,
                 "CB-ACCESS-TIMESTAMP" : "\(nowDate.timeIntervalSince1970)",
-                "CB-ACCESS-PASSPHRASE" : credentials.passphrase
+                "CB-ACCESS-PASSPHRASE" : passphrase
             ]
         }
     }

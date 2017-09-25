@@ -1,18 +1,19 @@
 //
-//  GDAXModelError.swift
-//  BalanceOpen
+//  BitfinexErrors.swift
+//  Balance
 //
-//  Created by Red Davis on 26/07/2017.
+//  Created by Red Davis on 12/09/2017.
 //  Copyright © 2017 Balanced Software, Inc. All rights reserved.
 //
 
 import Foundation
 
+
 // MARK: Model error
 
-extension GDAXAPIClient {
+extension BitfinexAPIClient {
     enum ModelError: LocalizedError {
-        case invalidJSON(json: [String : Any])
+        case invalidJSON(json: Any)
         
         var errorDescription: String? {
             switch self {
@@ -26,7 +27,7 @@ extension GDAXAPIClient {
 
 // MARK: APIError
 
-extension GDAXAPIClient {
+extension BitfinexAPIClient {
     enum APIError: LocalizedError {
         case invalidJSON
         case response(httpResponse: HTTPURLResponse, data: Data?)
@@ -39,9 +40,9 @@ extension GDAXAPIClient {
                 return "Invalid JSON"
             case .response(_, let data):
                 guard let unwrappedData = data,
-                      let json = try? JSONSerialization.jsonObject(with: unwrappedData, options: []) as? [String : Any],
-                      let message = json?["message"] as? String else {
-                    return nil
+                    let json = try? JSONSerialization.jsonObject(with: unwrappedData, options: []) as? [String : Any],
+                    let message = json?["message"] as? String else {
+                        return nil
                 }
                 
                 return message

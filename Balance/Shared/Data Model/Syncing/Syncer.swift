@@ -10,6 +10,7 @@ import Foundation
 
 class Syncer {
     fileprivate let gdaxApiClient = GDAXAPIClient(server: .production)
+    fileprivate let bitfinexApiClient = BitfinexAPIClient()
     
     fileprivate(set) var newInstitutionsOnly = false
     fileprivate(set) var syncing = false
@@ -220,6 +221,54 @@ class Syncer {
             } catch {
                 syncingErrors.append(error)
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                return
+            }
+        case .bitfinex:
+            guard let accessToken = institution.accessToken else {
+                syncingSuccess = false
+                performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                
+                return
+            }
+            
+            // Load credentials
+            do {
+                let credentials = try BitfinexAPIClient.Credentials(identifier: accessToken)
+                
+                // Fetch data from Bitfinex
+                self.bitfinexApiClient.credentials = credentials
+                try! self.bitfinexApiClient.fetchWallets { wallets, error in
+                    guard let unwrappedWallets = wallets else {
+                        if let unwrappedError = error {
+                            syncingErrors.append(unwrappedError)
+                        }
+                        
+                        syncingSuccess = false
+                        performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                        
+                        return
+                    }
+                    
+                    for wallet in unwrappedWallets {
+                        let decimals = Currency.rawValue(shortName: wallet.currencyCode).decimals
+                        
+                        // Calculate the integer value of the balance based on the decimals
+                        var balance = Decimal(wallet.balance)
+                        balance = balance * Decimal(pow(10.0, Double(decimals)))
+                        let currentBalance = (balance as NSDecimalNumber).intValue
+                        
+                        let availableBalance = currentBalance
+                        
+                        // Initialize an Account object to insert the record
+                        AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: wallet.currencyCode, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: wallet.currencyCode, currency: wallet.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
+                    }
+                    
+                    performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                }
+            } catch {
+                syncingErrors.append(error)
+                performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                
                 return
             }
         default:

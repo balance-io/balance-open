@@ -1,8 +1,8 @@
 //
-//  Credentials.swift
-//  BalanceOpen
+//  BitfinexCredentials.swift
+//  Balance
 //
-//  Created by Red Davis on 27/07/2017.
+//  Created by Red Davis on 12/09/2017.
 //  Copyright © 2017 Balanced Software, Inc. All rights reserved.
 //
 
@@ -10,34 +10,34 @@ import Foundation
 import Locksmith
 
 
-internal extension GDAXAPIClient
+internal extension BitfinexAPIClient
 {
     internal struct Credentials: APICredentials
     {
         // Internal
         internal let components: APICredentialsComponents
-        internal let hmacAlgorithm = CCHmacAlgorithm(kCCHmacAlgSHA256)
-        internal let hmacAlgorithmDigestLength = Int(CC_SHA256_DIGEST_LENGTH)
+        internal let hmacAlgorithm = CCHmacAlgorithm(kCCHmacAlgSHA384)
+        internal let hmacAlgorithmDigestLength = Int(CC_SHA384_DIGEST_LENGTH)
         
         // Private
         private let secretKeyData: Data
-        
+
         // MARK: Initialization
         
-        internal init(key: String, secret: String, passphrase: String) throws
+        internal init(key: String, secret: String) throws
         {
-            let components = try APICredentialsComponents(key: key, secret: secret, passphrase: passphrase)
+            let components = try APICredentialsComponents(key: key, secret: secret, passphrase: nil)
             try self.init(component: components)
         }
         
         internal init(component: APICredentialsComponents) throws
         {
-            guard let decodedSecretData = Data(base64Encoded: component.secret) else
+            guard let secretData = component.secret.data(using: .utf8) else
             {
-                throw APICredentialsComponents.Error.invalidSecret(message: "Secret is not base64 encoded")
+                throw APICredentialsComponents.Error.invalidSecret(message: "Unable to turn secret into Data")
             }
             
-            self.secretKeyData = decodedSecretData
+            self.secretKeyData = secretData
             self.components = component
         }
         
@@ -46,7 +46,7 @@ internal extension GDAXAPIClient
             // :( Unable to use the namespacing function (self.namespacedKeychainIdentifier())
             // as we can't call self before intialization, making this brital.
             // There are tests to catch this being an issue though.
-            let namespacedIdentifier = "com.GDAXAPIClient.Credentials.\(identifier)"
+            let namespacedIdentifier = "com.BitfinexAPIClient.Credentials.\(identifier)"
             let components = try APICredentialsComponents(identifier: namespacedIdentifier)
             
             try self.init(component: components)
@@ -54,7 +54,7 @@ internal extension GDAXAPIClient
         
         // MARK: Signature
         
-        internal func generateSignature(timestamp: Date, requestPath: String, body: Data?, method: String) throws -> String
+        internal func generateSignature(date: Date, requestPath: String, body: Data?) throws -> String
         {
             // Turn body into JSON string
             let bodyString: String
@@ -67,19 +67,22 @@ internal extension GDAXAPIClient
             {
                 bodyString = ""
             }
-
-            // Message
-            let message = "\(timestamp.timeIntervalSince1970)\(method)\(requestPath)\(bodyString)"
-            let signatureData = self.createSignatureData(with: message, secretKeyData: self.secretKeyData)
             
-            return signatureData.base64EncodedString()
+            // Message
+            let message = "/api/\(requestPath)\(date.timeIntervalSince1970)\(bodyString)"
+            
+            let signature = self.createSignatureData(with: message, secretKeyData: self.secretKeyData).reduce("") { (result, byte) -> String in
+                return result + String(format: "%02x", byte)
+            }
+
+            return signature
         }
         
         // MARK: Keychain
         
-        internal func namespacedKeychainIdentifier(_ identifier: String) -> String
+        func namespacedKeychainIdentifier(_ identifier: String) -> String
         {
-            return "com.GDAXAPIClient.Credentials.\(identifier)"
+            return "com.BitfinexAPIClient.Credentials.\(identifier)"
         }
     }
 }
