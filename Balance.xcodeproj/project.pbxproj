@@ -20,8 +20,8 @@
 		2D5619861F7121D200AA2A93 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619841F7121CD00AA2A93 /* Double.swift */; };
 		2D5619891F7125F300AA2A93 /* DoubleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619881F7125F300AA2A93 /* DoubleTests.swift */; };
 		2D6B22DB1EDE238200356035 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1A64991B867B1F009356A0 /* AppDelegate.swift */; };
-		2DBAAE261F754A2C004DA1BD /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBAAE251F754A2C004DA1BD /* UtilsTests.swift */; };
 		2D73587F1F74F836004872FD /* PoloniexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D251F5EA22900873286 /* PoloniexErrors.swift */; };
+		2DBAAE261F754A2C004DA1BD /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBAAE251F754A2C004DA1BD /* UtilsTests.swift */; };
 		2DD9B1F01EDDDFD10006268F /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */; };
 		2DE638C51F71562F00B54351 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619841F7121CD00AA2A93 /* Double.swift */; };
 		5300D6261DCE5A1E00D02657 /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5300D6251DCE5A1E00D02657 /* LockViewController.swift */; };
@@ -375,14 +375,10 @@
 		53FCE3461F06B5DC004EB25C /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33E1F06B5DC004EB25C /* SnapKit.framework */; };
 		53FCE3471F06B5DC004EB25C /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33F1F06B5DC004EB25C /* SwiftyStoreKit.framework */; };
 		53FCE3481F06B5DC004EB25C /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3401F06B5DC004EB25C /* XCGLogger.framework */; };
-		53FCE3581F06B653004EB25C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34B1F06B653004EB25C /* Fabric.framework */; };
 		53FCE35A1F06B653004EB25C /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34D1F06B653004EB25C /* Locksmith.framework */; };
 		53FCE35B1F06B653004EB25C /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34E1F06B653004EB25C /* MASShortcut.framework */; };
 		53FCE3631F06B818004EB25C /* BalanceVectorGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3491F06B653004EB25C /* BalanceVectorGraphics.framework */; };
 		53FCE3641F06B818004EB25C /* BalanceVectorGraphics.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3491F06B653004EB25C /* BalanceVectorGraphics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		53FCE3651F06B818004EB25C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34A1F06B653004EB25C /* Crashlytics.framework */; };
-		53FCE3661F06B818004EB25C /* Crashlytics.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34A1F06B653004EB25C /* Crashlytics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		53FCE3681F06B819004EB25C /* Fabric.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34B1F06B653004EB25C /* Fabric.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53FCE3691F06B819004EB25C /* JMSRangeSlider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34C1F06B653004EB25C /* JMSRangeSlider.framework */; };
 		53FCE36A1F06B819004EB25C /* JMSRangeSlider.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34C1F06B653004EB25C /* JMSRangeSlider.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53FCE36C1F06B819004EB25C /* Locksmith.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34D1F06B653004EB25C /* Locksmith.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -453,11 +449,9 @@
 				537596401F50B90A00B36E6E /* TrustKit.framework in Embed Frameworks */,
 				53FCE36C1F06B819004EB25C /* Locksmith.framework in Embed Frameworks */,
 				53FCE37A1F06B819004EB25C /* SwiftyStoreKit.framework in Embed Frameworks */,
-				53FCE3661F06B818004EB25C /* Crashlytics.framework in Embed Frameworks */,
 				53FCE3641F06B818004EB25C /* BalanceVectorGraphics.framework in Embed Frameworks */,
 				53FCE3761F06B819004EB25C /* RealmSwift.framework in Embed Frameworks */,
 				53FCE36A1F06B819004EB25C /* JMSRangeSlider.framework in Embed Frameworks */,
-				53FCE3681F06B819004EB25C /* Fabric.framework in Embed Frameworks */,
 				53FCE3701F06B819004EB25C /* NSDateTimeAgo.framework in Embed Frameworks */,
 				53FCE3781F06B819004EB25C /* SnapKit.framework in Embed Frameworks */,
 			);
@@ -753,8 +747,6 @@
 		53FCE33F1F06B5DC004EB25C /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = Carthage/Build/iOS/SwiftyStoreKit.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3401F06B5DC004EB25C /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/iOS/XCGLogger.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3491F06B653004EB25C /* BalanceVectorGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BalanceVectorGraphics.framework; path = Carthage/Build/Mac/BalanceVectorGraphics.framework; sourceTree = SOURCE_ROOT; };
-		53FCE34A1F06B653004EB25C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Carthage/Build/Mac/Crashlytics.framework; sourceTree = SOURCE_ROOT; };
-		53FCE34B1F06B653004EB25C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Carthage/Build/Mac/Fabric.framework; sourceTree = SOURCE_ROOT; };
 		53FCE34C1F06B653004EB25C /* JMSRangeSlider.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JMSRangeSlider.framework; path = Carthage/Build/Mac/JMSRangeSlider.framework; sourceTree = SOURCE_ROOT; };
 		53FCE34D1F06B653004EB25C /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/Mac/Locksmith.framework; sourceTree = SOURCE_ROOT; };
 		53FCE34E1F06B653004EB25C /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASShortcut.framework; path = Carthage/Build/Mac/MASShortcut.framework; sourceTree = SOURCE_ROOT; };
@@ -849,11 +841,9 @@
 				53FCE37B1F06B819004EB25C /* XCGLogger.framework in Frameworks */,
 				53F0786B1ED747C700E7EDF9 /* libsqlcipher.a in Frameworks */,
 				53FCE36F1F06B819004EB25C /* NSDateTimeAgo.framework in Frameworks */,
-				53FCE3651F06B818004EB25C /* Crashlytics.framework in Frameworks */,
 				53FCE3631F06B818004EB25C /* BalanceVectorGraphics.framework in Frameworks */,
 				53FCE35B1F06B653004EB25C /* MASShortcut.framework in Frameworks */,
 				53FCE35A1F06B653004EB25C /* Locksmith.framework in Frameworks */,
-				53FCE3581F06B653004EB25C /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1270,8 +1260,6 @@
 			isa = PBXGroup;
 			children = (
 				53FCE3491F06B653004EB25C /* BalanceVectorGraphics.framework */,
-				53FCE34A1F06B653004EB25C /* Crashlytics.framework */,
-				53FCE34B1F06B653004EB25C /* Fabric.framework */,
 				53FCE34C1F06B653004EB25C /* JMSRangeSlider.framework */,
 				53FCE34D1F06B653004EB25C /* Locksmith.framework */,
 				53FCE34E1F06B653004EB25C /* MASShortcut.framework */,
@@ -1869,7 +1857,6 @@
 				DC1A64921B867B1F009356A0 /* Resources */,
 				53A866BB1C6AB39C00C411F2 /* Embed Frameworks */,
 				DC65EFA01CE3E3E1006C9373 /* Copy Bal Helper */,
-				DCA6CA6F1CF65D5600B8A9E1 /* Setup Fabric */,
 				676ED7A81D17AF8F00D03395 /* Copy Mock Data and Databases If Needed */,
 				53BB513E1E466CD400384E7F /* Add Warnings For TODO And FIXME Comments */,
 			);
@@ -2092,20 +2079,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [[ \"${CONFIGURATION}\" == \"UITesting\" ]]; then\n    copy_dir=\"${BUILT_PRODUCTS_DIR}\"/\"${FULL_PRODUCT_NAME}\"/Contents/Resources\n\n    cp -r \"${PROJECT_DIR}/Bal/MockData\" $copy_dir\n\n    mkdir -p \"${copy_dir}/UITests/Database\"\n    cp -r \"${PROJECT_DIR}\"/BalanceUITests/Support/db \"${copy_dir}\"/UITests/Database\nfi";
-		};
-		DCA6CA6F1CF65D5600B8A9E1 /* Setup Fabric */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Setup Fabric";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Carthage/Build/Mac/Fabric.framework/run 9ffe9906507d3cd65faf7736c673440ddb7e7aed f3d1441479c4a011b7650fd03fd540b98b3a5ad0988ec9aeda0c5bd616b48a96";
 		};
 /* End PBXShellScriptBuildPhase section */
 

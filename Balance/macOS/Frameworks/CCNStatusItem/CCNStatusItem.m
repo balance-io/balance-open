@@ -31,7 +31,7 @@
 #import "CCNStatusItem.h"
 #import "CCNStatusItemDropView.h"
 #import "CCNStatusItemWindowController.h"
-#import <Crashlytics/Crashlytics.h>
+//#import <Crashlytics/Crashlytics.h>
 
 static NSString *const CCNStatusItemFrameKeyPath = @"statusItem.button.window.frame";
 static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConfiguration.pinned";
@@ -415,7 +415,7 @@ static NSString *const CCNStatusItemWindowConfigurationPinnedPath = @"windowConf
 #pragma mark - Handling the Status Item Window
 
 - (void)showStatusItemWindow {
-    [Answers logContentViewWithName:@"Popover opened" contentType:nil contentId:nil customAttributes:nil];
+//    [Answers logContentViewWithName:@"Popover opened" contentType:nil contentId:nil customAttributes:nil];
     
     [self.statusItemWindowController showStatusItemWindow];
 }

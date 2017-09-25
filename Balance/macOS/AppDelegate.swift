@@ -1,7 +1,5 @@
 import Cocoa
 import Locksmith
-import Fabric
-import Crashlytics
 import ServiceManagement
 import RealmSwift
 
@@ -91,7 +89,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     fileprivate func fabricInit() {
         #if !DEBUG
-        Fabric.with([Crashlytics.self])
+//        Fabric.with([Crashlytics.self])
         #endif
     }
     
@@ -343,7 +341,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     NSApp.activate(ignoringOtherApps: true)
                     
                     // Analytics
-                    Answers.logContentView(withName: "Preferences opened", contentType: nil, contentId: nil, customAttributes: nil)
+//                    Answers.logContentView(withName: "Preferences opened", contentType: nil, contentId: nil, customAttributes: nil)
                 } else {
                     prefsWindow.makeKeyAndOrderFront(nil)
                 }

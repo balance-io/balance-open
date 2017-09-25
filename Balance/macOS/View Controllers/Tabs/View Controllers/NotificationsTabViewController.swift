@@ -9,7 +9,6 @@
 import Cocoa
 import SnapKit
 import MapKit
-import Crashlytics
 import BalanceVectorGraphics
 
 class NotificationsTabViewController: NSViewController, NotificationsTabViewModelDelegate, NSTextFieldDelegate, TextFieldDelegate, SectionedTableViewDelegate, SectionedTableViewDataSource {
@@ -610,7 +609,7 @@ class NotificationsTabViewController: NSViewController, NotificationsTabViewMode
     
     func textFieldDidBecomeFirstResponder(_ textField: NSTextField) {
         // Analytics
-        Answers.logContentView(withName: "Feed tab search started", contentType: nil, contentId: nil, customAttributes: nil)
+//        Answers.logContentView(withName: "Feed tab search started", contentType: nil, contentId: nil, customAttributes: nil)
     }
     
     func performSearch(_ searchString: String) {
