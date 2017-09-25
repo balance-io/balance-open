@@ -30,7 +30,7 @@ struct CoinbaseApi {
     @discardableResult static func authenticate() -> Bool {
         let redirectUri = "balancemymoney%3A%2F%2Fcoinbase"
         let responseType = "code"
-        let scope = "wallet%3Auser%3Aread,wallet%3Aaccounts%3Aread"
+        let scope = "wallet%3Auser%3Aread,wallet%3Aaccounts%3Aread,wallet%3Atransactions%3Aread"
         let state = String.random(32)
         let url = "https://www.coinbase.com/oauth/authorize?client_id=\(clientId)&redirect_uri=\(redirectUri)&state=\(state)&response_type=\(responseType)&scope=\(scope)&account=all"
         
