@@ -698,7 +698,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
             height -= 4
         }
         
-        if TableIndex(section: section, row: row) == tableView.selectedIndex {
+        if !debugging.disableTransactions && TableIndex(section: section, row: row) == tableView.selectedIndex {
             return height + 50.0
         } else {
             return height

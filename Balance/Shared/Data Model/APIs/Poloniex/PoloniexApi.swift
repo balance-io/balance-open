@@ -190,8 +190,7 @@ class PoloniexApi: ExchangeApi {
                     print("Poloniex Data: \(String(describing: data))")
                     throw PoloniexApi.CredentialsError.bodyNotValidJSON
                 }
-            }
-            catch {
+            } catch {
                 log.error("Failed to Poloniex balance login data: \(error)")
                 async {
                     closeBlock(false, error, nil)
@@ -264,7 +263,7 @@ class PoloniexApi: ExchangeApi {
     }
 }
 
-fileprivate extension PoloniexAccount {
+extension PoloniexAccount {
     var altCurrency: Currency {
         return Currency.rawValue(shortName: "BTC")
     }

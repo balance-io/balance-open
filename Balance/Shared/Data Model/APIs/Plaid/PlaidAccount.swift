@@ -25,20 +25,20 @@ public struct PlaidAccount {
     public let type: String
     public let subType: String?
     
-    public init(account: [String: AnyObject]) throws {
-        accountId = try checkType(account, name: "account_id")
+    public init(account: [String: Any]) throws {
+        accountId = try checkType(account["account_id"], name: "account_id")
         
-        let balances: [String: AnyObject] = try checkType(account, name: "balances")
+        let balances: [String: Any] = try checkType(account["balances"], name: "balances")
         current = balances["current"] as? Double ?? 0.0
         available = balances["available"] as? Double
         limit = balances["limit"] as? Double
         
         mask = balances["mask"] as? String
         
-        name = try checkType(account, name: "name")
+        name = try checkType(account["name"], name: "name")
         officialName = account["official_name"] as? String
         
-        type = try checkType(account, name: "type")
+        type = try checkType(account["type"], name: "type")
         subType = account["subtype"] as? String
     }
 }
