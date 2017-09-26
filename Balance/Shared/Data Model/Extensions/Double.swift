@@ -34,18 +34,5 @@ extension Double {
         let decimal = self / pow(10.0, Double(decimals))
         return decimal
     }
-    
-    func isInteger() -> Bool{
-        let integerPart: Int = Int(ceil(self))
-        if self - Double(integerPart) == 0 {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    func integerFrom(decimals: Int, toDecimals: Int) -> Double {
-        return self * pow(10.0, Double(toDecimals - decimals))
-    }
 }
 
