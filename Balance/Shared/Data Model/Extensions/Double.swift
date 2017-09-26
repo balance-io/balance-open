@@ -28,12 +28,24 @@ extension Double {
     }
     
     func cientificToEightDecimals(decimals: Int) -> Double {
+        if decimals < 8 {
+            return self
+        }
         let decimal = self / pow(10.0, Double(decimals))
         return decimal
     }
     
-    func integerFrom(decimals: Int, toDecimals: Int) -> Int {
-        return 0
+    func isInteger() -> Bool{
+        let integerPart: Int = Int(ceil(self))
+        if self - Double(integerPart) == 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func integerFrom(decimals: Int, toDecimals: Int) -> Double {
+        return self * pow(10.0, Double(toDecimals - decimals))
     }
 }
 
