@@ -13,12 +13,15 @@
 		28F678481DCB6E9600383D22 /* SetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F678471DCB6E9600383D22 /* SetPasswordViewController.swift */; };
 		28FD09C21D99F18500A395AB /* PaintCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FD09C11D99F18500A395AB /* PaintCodeButton.swift */; };
 		2D1CCA171F62AE1100BACC20 /* EthploreAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D1CCA161F62AE1100BACC20 /* EthploreAccountResponse.json */; };
+		2D326D261F5EA22900873286 /* PoloniexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D251F5EA22900873286 /* PoloniexErrors.swift */; };
 		2D56197F1F6FBE7B00AA2A93 /* EthploreAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D56197E1F6FBE7B00AA2A93 /* EthploreAccountTests.swift */; };
 		2D5619811F6FBE8700AA2A93 /* EthploreInstitutionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619801F6FBE8700AA2A93 /* EthploreInstitutionTests.swift */; };
 		2D5619831F6FC99D00AA2A93 /* MultipleEthploreAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D5619821F6FC99D00AA2A93 /* MultipleEthploreAccountResponse.json */; };
 		2D5619861F7121D200AA2A93 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619841F7121CD00AA2A93 /* Double.swift */; };
 		2D5619891F7125F300AA2A93 /* DoubleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619881F7125F300AA2A93 /* DoubleTests.swift */; };
 		2D6B22DB1EDE238200356035 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1A64991B867B1F009356A0 /* AppDelegate.swift */; };
+		2D73587F1F74F836004872FD /* PoloniexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D251F5EA22900873286 /* PoloniexErrors.swift */; };
+		2D83E0B21F7A3C02000B3474 /* EthploreTwoDecimalCrypto.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D83E0B11F7A3C02000B3474 /* EthploreTwoDecimalCrypto.json */; };
 		2DBAAE261F754A2C004DA1BD /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBAAE251F754A2C004DA1BD /* UtilsTests.swift */; };
 		2DD9B1F01EDDDFD10006268F /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */; };
 		2DE638C51F71562F00B54351 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619841F7121CD00AA2A93 /* Double.swift */; };
@@ -424,6 +427,7 @@
 		A4E768031F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768011F67DB02002B1AE1 /* BitfinexAPIClient.swift */; };
 		A4E768051F67DB2B002B1AE1 /* BitfinexCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768041F67DB2B002B1AE1 /* BitfinexCredentials.swift */; };
 		A4E768061F67DB2B002B1AE1 /* BitfinexCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768041F67DB2B002B1AE1 /* BitfinexCredentials.swift */; };
+		A4E768071F67DC60002B1AE1 /* PoloniexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D251F5EA22900873286 /* PoloniexErrors.swift */; };
 		A4E768091F67DDFE002B1AE1 /* BitfinexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768081F67DDFE002B1AE1 /* BitfinexErrors.swift */; };
 		A4E7680A1F67DDFE002B1AE1 /* BitfinexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768081F67DDFE002B1AE1 /* BitfinexErrors.swift */; };
 		A4E7680C1F67E410002B1AE1 /* APICredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E7680B1F67E410002B1AE1 /* APICredentials.swift */; };
@@ -512,11 +516,13 @@
 		28F678471DCB6E9600383D22 /* SetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPasswordViewController.swift; sourceTree = "<group>"; };
 		28FD09C11D99F18500A395AB /* PaintCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintCodeButton.swift; sourceTree = "<group>"; };
 		2D1CCA161F62AE1100BACC20 /* EthploreAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EthploreAccountResponse.json; sourceTree = "<group>"; };
+		2D326D251F5EA22900873286 /* PoloniexErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexErrors.swift; sourceTree = "<group>"; };
 		2D56197E1F6FBE7B00AA2A93 /* EthploreAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthploreAccountTests.swift; sourceTree = "<group>"; };
 		2D5619801F6FBE8700AA2A93 /* EthploreInstitutionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthploreInstitutionTests.swift; sourceTree = "<group>"; };
 		2D5619821F6FC99D00AA2A93 /* MultipleEthploreAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MultipleEthploreAccountResponse.json; sourceTree = "<group>"; };
 		2D5619841F7121CD00AA2A93 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		2D5619881F7125F300AA2A93 /* DoubleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTests.swift; sourceTree = "<group>"; };
+		2D83E0B11F7A3C02000B3474 /* EthploreTwoDecimalCrypto.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EthploreTwoDecimalCrypto.json; sourceTree = "<group>"; };
 		2DBAAE251F754A2C004DA1BD /* UtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsTests.swift; sourceTree = "<group>"; };
 		2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		5300D6251DCE5A1E00D02657 /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
@@ -892,6 +898,9 @@
 				53FCE3691F06B819004EB25C /* JMSRangeSlider.framework in Frameworks */,
 				53FCE3771F06B819004EB25C /* SnapKit.framework in Frameworks */,
 				5381F3CF1F7990C9006AF27C /* HockeySDK.framework in Frameworks */,
+				533674FD1F4CE0C40034040F /* Sparkle.framework in Frameworks */,
+				53FCE3691F06B819004EB25C /* JMSRangeSlider.framework in Frameworks */,
+				53FCE3771F06B819004EB25C /* SnapKit.framework in Frameworks */,
 				539E0C201DC27A5D0038ACEC /* StoreKit.framework in Frameworks */,
 				53FCE37B1F06B819004EB25C /* XCGLogger.framework in Frameworks */,
 				53F0786B1ED747C700E7EDF9 /* libsqlcipher.a in Frameworks */,
@@ -936,6 +945,7 @@
 			children = (
 				2D1CCA161F62AE1100BACC20 /* EthploreAccountResponse.json */,
 				2D5619821F6FC99D00AA2A93 /* MultipleEthploreAccountResponse.json */,
+				2D83E0B11F7A3C02000B3474 /* EthploreTwoDecimalCrypto.json */,
 			);
 			path = Ethplore;
 			sourceTree = "<group>";
@@ -1420,6 +1430,8 @@
 				538B47BB1F4C9FD70023CED5 /* PoloniexAccount.swift */,
 				530F377D1F79A3EF0038E0E1 /* PoloniexErrors.swift */,
 				5361BC9D1F562580009C3F07 /* PoloniexInstitution.swift */,
+				5361BC9D1F562580009C3F07 /* PoloniexInstitution.swift */,
+				2D326D251F5EA22900873286 /* PoloniexErrors.swift */,
 			);
 			name = Poloniex;
 			path = APIs/Poloniex;
@@ -2154,6 +2166,7 @@
 				53F0786E1F4F916800D0054C /* Error.json in Resources */,
 				2D5619831F6FC99D00AA2A93 /* MultipleEthploreAccountResponse.json in Resources */,
 				2D1CCA171F62AE1100BACC20 /* EthploreAccountResponse.json in Resources */,
+				2D83E0B21F7A3C02000B3474 /* EthploreTwoDecimalCrypto.json in Resources */,
 				53F0786B1F4F916500D0054C /* PoloniexAccount.json in Resources */,
 				A40ABBE31F6BBD1100383C62 /* FetchWallets.json in Resources */,
 			);

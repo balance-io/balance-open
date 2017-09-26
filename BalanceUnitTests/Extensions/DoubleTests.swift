@@ -54,6 +54,17 @@ class DoubleTests: XCTestCase {
         XCTAssertEqual(509230000, integerTransform)
     }
     
+    func testIntegerToIntegerTransformationWithCryptoDecimalsLessDecimals() {
+        // given
+        let double = Double(5)
+        
+        // when
+        let integerTransform = double.integerFixedCryptoDecimals()
+        
+        // then
+        XCTAssertEqual(500000000, integerTransform)
+    }
+    
     func testDoubleToIntegerTransformationWithCryptoDecimalse22() {
         // given
         let double = 3.94402043750082e+22
@@ -71,10 +82,55 @@ class DoubleTests: XCTestCase {
         
         // where
         let balance = double.cientificToEightDecimals(decimals: 18)
-        print(balance)
         let noDecimals = balance.integerFixedCryptoDecimals()
         
         //then
         XCTAssertEqual(3944020437500, noDecimals)
+    }
+    
+    func testFromTwoDecimals() {
+        //given
+        let double = 342.23
+        
+        // where
+        let balance = double.cientificToEightDecimals(decimals: 2)
+        
+        //then
+        XCTAssertEqual(342.23, balance)
+    }
+    
+    func testFromZeroDecimals() {
+        //given
+        let double = Double(34223)
+        
+        // where
+        let balance = double.cientificToEightDecimals(decimals: 2)
+        
+        //then
+        XCTAssertEqual(34223, balance)
+    }
+    
+    func testFromTwoDecimalsToFixedCrypto() {
+        //given
+        let double = 342.23
+        
+        // where
+        let balance = double.cientificToEightDecimals(decimals: 2)
+        let noDecimals = balance.integerFixedCryptoDecimals()
+        
+        //then
+        XCTAssertEqual(34223000000, noDecimals)
+    }
+    
+    func testFromZeroDecimalsToFixedCrypto() {
+        //given
+        let double = Double(34223)
+        
+        // where
+        let balance = double.cientificToEightDecimals(decimals: 2)
+        let noDecimals = balance.integerFixedCryptoDecimals()
+        
+        //then
+        XCTAssertEqual(3422300000000, noDecimals)
     }
 }

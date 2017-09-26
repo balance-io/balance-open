@@ -1,0 +1,29 @@
+{
+    "address": "0x1492004547ff0efd778cc2c14e794b26b4701105",
+    "ETH": {
+    "balance": 0.34742,
+    "totalIn": 0.34742,
+    "totalOut": 0
+    },
+    "countTxs": 1,
+    "tokens": [
+    {
+        "tokenInfo": {
+            "address": "0xa6218644a294e611213dc5629bc4cc48053f739f",
+            "name": "Queen Jin Token",
+            "decimals": "2",
+            "symbol": "QJT",
+            "totalSupply": "17000",
+            "owner": "0x",
+            "lastUpdated": 1505820844,
+            "issuancesCount": 0,
+            "holdersCount": 2,
+            "price": false
+        },
+        "balance": 15317,
+        "totalIn": 0,
+        "totalOut": 0
+    }]
+}
+
+

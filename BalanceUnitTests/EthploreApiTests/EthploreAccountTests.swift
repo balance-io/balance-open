@@ -16,7 +16,8 @@ class EthploreAccountTests: XCTestCase {
     override func setUp() {
         super.setUp()
         let data = TestHelpers.loadData(filename: "EthploreAccountResponse.json")
-        self.json = TestHelpers.dataToJSON(data: data) as [String:AnyObject]    }
+        self.json = TestHelpers.dataToJSON(data: data) as [String:AnyObject]
+    }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
@@ -109,6 +110,56 @@ class EthploreAccountTests: XCTestCase {
         
         //then
         XCTAssertThrowsError(try EthplorerAccountObject(dictionary: dictionary as [String : AnyObject], currencyShortName: "ETH", type: .wallet))
+    }
+    
+    func testJinTokenEthploreAccountObjectTokenBalance() {
+        //given
+        let data = TestHelpers.loadData(filename: "EthploreTwoDecimalCrypto.json")
+        self.json = TestHelpers.dataToJSON(data: data) as [String:AnyObject]
+        
+        //when
+        let account = try! EthplorerAccountObject.init(dictionary: self.json, currencyShortName: "ETH", type: .wallet)
+        XCTAssertEqual(account.tokens.count, 1)
+        let token = account.tokens.first
+        
+        //then
+        XCTAssertEqual(token?.balance, atof("15317"))
+    }
+    
+    func testJinTokenEthploreAccountObjectTokenInfo() {
+        //given
+        let data = TestHelpers.loadData(filename: "EthploreTwoDecimalCrypto.json")
+        self.json = TestHelpers.dataToJSON(data: data) as [String:AnyObject]
+        
+        //when
+        let account = try! EthplorerAccountObject.init(dictionary: self.json, currencyShortName: "ETH", type: .wallet)
+        let token = account.tokens.first
+        let tokenInfo = token?.tokenInfo
+        
+        //then
+        XCTAssertEqual(tokenInfo?.address, "0xa6218644a294e611213dc5629bc4cc48053f739f")
+        XCTAssertEqual(tokenInfo?.decimals, 2)
+        XCTAssertEqual(tokenInfo?.name, "Queen Jin Token")
+        XCTAssertNil(tokenInfo?.price)
+        XCTAssertEqual(tokenInfo?.symbol, "QJT")
+    }
+    
+    func testJinTOkenEthploreAccountObjectToEthploreAccount() {
+        //given
+        let data = TestHelpers.loadData(filename: "EthploreTwoDecimalCrypto.json")
+        self.json = TestHelpers.dataToJSON(data: data) as [String:AnyObject]
+        
+        //when
+        let account = try! EthplorerAccountObject.init(dictionary: self.json, currencyShortName: "ETH", type: .wallet)
+        XCTAssertEqual(account.tokens.count, 1)
+        let ethploreAccount: EthplorerAccount = account.ethplorerAccounts[1]
+        
+        //then
+        XCTAssertEqual(ethploreAccount.available, atof("15317"))
+        XCTAssertEqual(ethploreAccount.balance, 1531700000000)
+        XCTAssertEqual(ethploreAccount.currency, Currency.crypto(shortName: "QJT"))
+        XCTAssertEqual(ethploreAccount.altCurrency, Currency.common(traditional: .usd))
+        XCTAssertEqual(ethploreAccount.decimals, 8)
     }
 
 }
