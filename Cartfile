@@ -1,6 +1,6 @@
 github "realm/realm-cocoa"
 github "datatheorem/TrustKit" "master"
-github "wolffan/SnapKit" "xcode-4-mac-compatible"
+github "SnapKit/SnapKit" "master"
 github "balancemymoney/Locksmith" "master"
 github "balancemymoney/XCGLogger" ~> 4.0.0
 github "balancemymoney/NSDate-TimeAgo" "master"
