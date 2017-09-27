@@ -155,8 +155,8 @@ class LockViewController: NSViewController, NSTextFieldDelegate {
         AppDelegate.sharedInstance.promptTouchId()
     }
 
-    @objc fileprivate func unlock(force: Bool = false) {
-        if force || passwordField.stringValue == appLock.password {
+    @objc fileprivate func unlock() {
+        if passwordField.stringValue == appLock.password {
             NotificationCenter.postOnMainThread(name: Notifications.UnlockUserInterface)
             hintField.alphaValue = 0.0
             forgottenPasswordButton.isHidden = true
@@ -184,7 +184,7 @@ class LockViewController: NSViewController, NSTextFieldDelegate {
                     self.authenticateUserPassword(reason: "unlock Balance") { success, error in
                         if success {
                             appLock.lockEnabled = false
-                            self.unlock(force: true)
+                            NotificationCenter.postOnMainThread(name: Notifications.UnlockUserInterface)
                             async(after: 0.8) {
                                 NotificationCenter.postOnMainThread(name: Notifications.ShowPopover)
                             }
