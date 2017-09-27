@@ -13,14 +13,13 @@
 		28F678481DCB6E9600383D22 /* SetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F678471DCB6E9600383D22 /* SetPasswordViewController.swift */; };
 		28FD09C21D99F18500A395AB /* PaintCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FD09C11D99F18500A395AB /* PaintCodeButton.swift */; };
 		2D1CCA171F62AE1100BACC20 /* EthploreAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D1CCA161F62AE1100BACC20 /* EthploreAccountResponse.json */; };
-		2D326D261F5EA22900873286 /* PoloniexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D251F5EA22900873286 /* PoloniexErrors.swift */; };
+		2D528C7D1F7B8115003BFD74 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3551F06B653004EB25C /* XCGLogger.framework */; };
 		2D56197F1F6FBE7B00AA2A93 /* EthploreAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D56197E1F6FBE7B00AA2A93 /* EthploreAccountTests.swift */; };
 		2D5619811F6FBE8700AA2A93 /* EthploreInstitutionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619801F6FBE8700AA2A93 /* EthploreInstitutionTests.swift */; };
 		2D5619831F6FC99D00AA2A93 /* MultipleEthploreAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D5619821F6FC99D00AA2A93 /* MultipleEthploreAccountResponse.json */; };
 		2D5619861F7121D200AA2A93 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619841F7121CD00AA2A93 /* Double.swift */; };
 		2D5619891F7125F300AA2A93 /* DoubleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619881F7125F300AA2A93 /* DoubleTests.swift */; };
 		2D6B22DB1EDE238200356035 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1A64991B867B1F009356A0 /* AppDelegate.swift */; };
-		2D73587F1F74F836004872FD /* PoloniexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D251F5EA22900873286 /* PoloniexErrors.swift */; };
 		2D83E0B21F7A3C02000B3474 /* EthploreTwoDecimalCrypto.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D83E0B11F7A3C02000B3474 /* EthploreTwoDecimalCrypto.json */; };
 		2DBAAE261F754A2C004DA1BD /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBAAE251F754A2C004DA1BD /* UtilsTests.swift */; };
 		2DD9B1F01EDDDFD10006268F /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */; };
@@ -261,6 +260,10 @@
 		5381F3D51F79927A006AF27C /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5381F3D41F799272006AF27C /* HockeySDK.framework */; };
 		5381F3D61F79927E006AF27C /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5381F3D31F799272006AF27C /* HockeySDKResources.bundle */; };
 		538575531E776C72003D3E98 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538575521E776C72003D3E98 /* RealmManager.swift */; };
+		538867DF1F7C52D6001E77B2 /* ObjcExceptionBridging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538867DE1F7C52C4001E77B2 /* ObjcExceptionBridging.framework */; };
+		538867E01F7C5471001E77B2 /* ObjcExceptionBridging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538867DE1F7C52C4001E77B2 /* ObjcExceptionBridging.framework */; };
+		538867E11F7C5471001E77B2 /* ObjcExceptionBridging.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 538867DE1F7C52C4001E77B2 /* ObjcExceptionBridging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		538867E31F7C5490001E77B2 /* ObjcExceptionBridging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538867E21F7C548D001E77B2 /* ObjcExceptionBridging.framework */; };
 		538B47BE1F4CA0200023CED5 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538B47BD1F4CA0200023CED5 /* Currency.swift */; };
 		538B47BF1F4CA0200023CED5 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538B47BD1F4CA0200023CED5 /* Currency.swift */; };
 		538DD1711DA2EDB600066288 /* TransactionContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538DD1701DA2EDB600066288 /* TransactionContextMenu.swift */; };
@@ -427,7 +430,6 @@
 		A4E768031F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768011F67DB02002B1AE1 /* BitfinexAPIClient.swift */; };
 		A4E768051F67DB2B002B1AE1 /* BitfinexCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768041F67DB2B002B1AE1 /* BitfinexCredentials.swift */; };
 		A4E768061F67DB2B002B1AE1 /* BitfinexCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768041F67DB2B002B1AE1 /* BitfinexCredentials.swift */; };
-		A4E768071F67DC60002B1AE1 /* PoloniexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D251F5EA22900873286 /* PoloniexErrors.swift */; };
 		A4E768091F67DDFE002B1AE1 /* BitfinexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768081F67DDFE002B1AE1 /* BitfinexErrors.swift */; };
 		A4E7680A1F67DDFE002B1AE1 /* BitfinexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E768081F67DDFE002B1AE1 /* BitfinexErrors.swift */; };
 		A4E7680C1F67E410002B1AE1 /* APICredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E7680B1F67E410002B1AE1 /* APICredentials.swift */; };
@@ -473,6 +475,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		2D8C3E8D1F7BB3D4008B64F0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		53A866BB1C6AB39C00C411F2 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -485,6 +496,7 @@
 				533674FE1F4CE0C40034040F /* Sparkle.framework in Embed Frameworks */,
 				537596401F50B90A00B36E6E /* TrustKit.framework in Embed Frameworks */,
 				53FCE36C1F06B819004EB25C /* Locksmith.framework in Embed Frameworks */,
+				538867E11F7C5471001E77B2 /* ObjcExceptionBridging.framework in Embed Frameworks */,
 				53FCE37A1F06B819004EB25C /* SwiftyStoreKit.framework in Embed Frameworks */,
 				53FCE3641F06B818004EB25C /* BalanceVectorGraphics.framework in Embed Frameworks */,
 				53FCE3761F06B819004EB25C /* RealmSwift.framework in Embed Frameworks */,
@@ -674,6 +686,8 @@
 		5381F3D31F799272006AF27C /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
 		5381F3D41F799272006AF27C /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		538575521E776C72003D3E98 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		538867DE1F7C52C4001E77B2 /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjcExceptionBridging.framework; path = Carthage/Build/Mac/ObjcExceptionBridging.framework; sourceTree = SOURCE_ROOT; };
+		538867E21F7C548D001E77B2 /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjcExceptionBridging.framework; path = Carthage/Build/iOS/ObjcExceptionBridging.framework; sourceTree = SOURCE_ROOT; };
 		538B47B01F4C9FD60023CED5 /* CoinbaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseAccount.swift; sourceTree = "<group>"; };
 		538B47B11F4C9FD60023CED5 /* CoinbaseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseApi.swift; sourceTree = "<group>"; };
 		538B47B31F4C9FD70023CED5 /* GDAXAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAccount.swift; sourceTree = "<group>"; };
@@ -779,7 +793,6 @@
 		53F6383E1C5FFF3200864346 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		53FCE3391F06B5DC004EB25C /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/iOS/Locksmith.framework; sourceTree = SOURCE_ROOT; };
 		53FCE33A1F06B5DC004EB25C /* NSDateTimeAgo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NSDateTimeAgo.framework; path = Carthage/Build/iOS/NSDateTimeAgo.framework; sourceTree = SOURCE_ROOT; };
-		53FCE33B1F06B5DC004EB25C /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = SOURCE_ROOT; };
 		53FCE33C1F06B5DC004EB25C /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = SOURCE_ROOT; };
 		53FCE33D1F06B5DC004EB25C /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = SOURCE_ROOT; };
 		53FCE33E1F06B5DC004EB25C /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = SOURCE_ROOT; };
@@ -790,7 +803,6 @@
 		53FCE34D1F06B653004EB25C /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/Mac/Locksmith.framework; sourceTree = SOURCE_ROOT; };
 		53FCE34E1F06B653004EB25C /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASShortcut.framework; path = Carthage/Build/Mac/MASShortcut.framework; sourceTree = SOURCE_ROOT; };
 		53FCE34F1F06B653004EB25C /* NSDateTimeAgo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NSDateTimeAgo.framework; path = Carthage/Build/Mac/NSDateTimeAgo.framework; sourceTree = SOURCE_ROOT; };
-		53FCE3501F06B653004EB25C /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/Mac/Reachability.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3511F06B653004EB25C /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3521F06B653004EB25C /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/Mac/RealmSwift.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3531F06B653004EB25C /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/Mac/SnapKit.framework; sourceTree = SOURCE_ROOT; };
@@ -877,6 +889,7 @@
 				53552A521ED72E4C00DD95F9 /* StoreKit.framework in Frameworks */,
 				53FCE3481F06B5DC004EB25C /* XCGLogger.framework in Frameworks */,
 				5313F9621F58CFB800DD6BDB /* TrustKit.framework in Frameworks */,
+				538867E31F7C5490001E77B2 /* ObjcExceptionBridging.framework in Frameworks */,
 				53FCE3461F06B5DC004EB25C /* SnapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -899,9 +912,11 @@
 				53FCE3771F06B819004EB25C /* SnapKit.framework in Frameworks */,
 				5381F3CF1F7990C9006AF27C /* HockeySDK.framework in Frameworks */,
 				533674FD1F4CE0C40034040F /* Sparkle.framework in Frameworks */,
+				538867DF1F7C52D6001E77B2 /* ObjcExceptionBridging.framework in Frameworks */,
 				53FCE3691F06B819004EB25C /* JMSRangeSlider.framework in Frameworks */,
 				53FCE3771F06B819004EB25C /* SnapKit.framework in Frameworks */,
 				539E0C201DC27A5D0038ACEC /* StoreKit.framework in Frameworks */,
+				538867E01F7C5471001E77B2 /* ObjcExceptionBridging.framework in Frameworks */,
 				53FCE37B1F06B819004EB25C /* XCGLogger.framework in Frameworks */,
 				53F0786B1ED747C700E7EDF9 /* libsqlcipher.a in Frameworks */,
 				53FCE36F1F06B819004EB25C /* NSDateTimeAgo.framework in Frameworks */,
@@ -923,6 +938,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D528C7D1F7B8115003BFD74 /* XCGLogger.framework in Frameworks */,
 				53F078381F4F54C500D0054C /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1093,13 +1109,6 @@
 				530F57981DCD72680083F3A7 /* FMDatabaseVariadic.swift */,
 			);
 			path = "Swift extensions";
-			sourceTree = "<group>";
-		};
-		5313F9611F58CFB800DD6BDB /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		532121901EE8B91600F4812A /* Zip */ = {
@@ -1325,12 +1334,12 @@
 		53552A541ED72F2400DD95F9 /* Carthage */ = {
 			isa = PBXGroup;
 			children = (
+				538867DE1F7C52C4001E77B2 /* ObjcExceptionBridging.framework */,
 				53FCE3491F06B653004EB25C /* BalanceVectorGraphics.framework */,
 				53FCE34C1F06B653004EB25C /* JMSRangeSlider.framework */,
 				53FCE34D1F06B653004EB25C /* Locksmith.framework */,
 				53FCE34E1F06B653004EB25C /* MASShortcut.framework */,
 				53FCE34F1F06B653004EB25C /* NSDateTimeAgo.framework */,
-				53FCE3501F06B653004EB25C /* Reachability.framework */,
 				53FCE3511F06B653004EB25C /* Realm.framework */,
 				53FCE3521F06B653004EB25C /* RealmSwift.framework */,
 				53FCE3531F06B653004EB25C /* SnapKit.framework */,
@@ -1367,10 +1376,10 @@
 		53552A571ED72F6C00DD95F9 /* Carthage */ = {
 			isa = PBXGroup;
 			children = (
+				538867E21F7C548D001E77B2 /* ObjcExceptionBridging.framework */,
 				5313F9601F58CFAC00DD6BDB /* TrustKit.framework */,
 				53FCE3391F06B5DC004EB25C /* Locksmith.framework */,
 				53FCE33A1F06B5DC004EB25C /* NSDateTimeAgo.framework */,
-				53FCE33B1F06B5DC004EB25C /* Reachability.framework */,
 				53FCE33C1F06B5DC004EB25C /* Realm.framework */,
 				53FCE33D1F06B5DC004EB25C /* RealmSwift.framework */,
 				53FCE33E1F06B5DC004EB25C /* SnapKit.framework */,
@@ -1429,7 +1438,6 @@
 				538B47BC1F4C9FD70023CED5 /* PoloniexApi.swift */,
 				538B47BB1F4C9FD70023CED5 /* PoloniexAccount.swift */,
 				530F377D1F79A3EF0038E0E1 /* PoloniexErrors.swift */,
-				5361BC9D1F562580009C3F07 /* PoloniexInstitution.swift */,
 				5361BC9D1F562580009C3F07 /* PoloniexInstitution.swift */,
 				2D326D251F5EA22900873286 /* PoloniexErrors.swift */,
 			);
@@ -1824,7 +1832,6 @@
 				F107D99F1D6B048800CEEF35 /* BalanceUITests */,
 				F1F948801D8049B800AB30B2 /* BalanceUnitTests */,
 				DC1A64951B867B1F009356A0 /* Products */,
-				5313F9611F58CFB800DD6BDB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2000,6 +2007,7 @@
 				DC65EFA01CE3E3E1006C9373 /* Copy Bal Helper */,
 				676ED7A81D17AF8F00D03395 /* Copy Mock Data and Databases If Needed */,
 				53BB513E1E466CD400384E7F /* Add Warnings For TODO And FIXME Comments */,
+				2D8C3E8D1F7BB3D4008B64F0 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -2203,6 +2211,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyStoreKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/XCGLogger.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/TrustKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ObjcExceptionBridging.framework",
 			);
 			name = "Copy Carthage Frameworks";
 			outputPaths = (
