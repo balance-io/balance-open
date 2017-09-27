@@ -40,6 +40,8 @@
 		2DBAAE261F754A2C004DA1BD /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBAAE251F754A2C004DA1BD /* UtilsTests.swift */; };
 		2DD9B1F01EDDDFD10006268F /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */; };
 		2DE638C51F71562F00B54351 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619841F7121CD00AA2A93 /* Double.swift */; };
+		2DFB65F71F7BB74A00BFD523 /* ObjcExceptionBridging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DFB65F61F7BB74900BFD523 /* ObjcExceptionBridging.framework */; };
+		2DFB65F81F7BB74A00BFD523 /* ObjcExceptionBridging.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2DFB65F61F7BB74900BFD523 /* ObjcExceptionBridging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5300D6261DCE5A1E00D02657 /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5300D6251DCE5A1E00D02657 /* LockViewController.swift */; };
 		5301A75F1F17DC3E00668099 /* WebSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301A75E1F17DC3E00668099 /* WebSignUpViewController.swift */; };
 		5301A7611F17DC8B00668099 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301A7601F17DC8B00668099 /* URL.swift */; };
@@ -511,6 +513,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				2DFB65F81F7BB74A00BFD523 /* ObjcExceptionBridging.framework in Embed Frameworks */,
 				53FCE3741F06B819004EB25C /* Realm.framework in Embed Frameworks */,
 				53FCE36E1F06B819004EB25C /* MASShortcut.framework in Embed Frameworks */,
 				53FCE37C1F06B819004EB25C /* XCGLogger.framework in Embed Frameworks */,
@@ -571,6 +574,7 @@
 		2D8C3E9C1F7BB409008B64F0 /* MASShortcut.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = MASShortcut.framework.dSYM; path = Carthage/Build/Mac/MASShortcut.framework.dSYM; sourceTree = "<group>"; };
 		2DBAAE251F754A2C004DA1BD /* UtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsTests.swift; sourceTree = "<group>"; };
 		2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
+		2DFB65F61F7BB74900BFD523 /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjcExceptionBridging.framework; path = Carthage/Build/Mac/ObjcExceptionBridging.framework; sourceTree = "<group>"; };
 		5300D6251DCE5A1E00D02657 /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
 		5301A75E1F17DC3E00668099 /* WebSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSignUpViewController.swift; sourceTree = "<group>"; };
 		5301A7601F17DC8B00668099 /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
@@ -938,6 +942,7 @@
 				53FCE3691F06B819004EB25C /* JMSRangeSlider.framework in Frameworks */,
 				53FCE3771F06B819004EB25C /* SnapKit.framework in Frameworks */,
 				539E0C201DC27A5D0038ACEC /* StoreKit.framework in Frameworks */,
+				2DFB65F71F7BB74A00BFD523 /* ObjcExceptionBridging.framework in Frameworks */,
 				53FCE37B1F06B819004EB25C /* XCGLogger.framework in Frameworks */,
 				53F0786B1ED747C700E7EDF9 /* libsqlcipher.a in Frameworks */,
 				53FCE36F1F06B819004EB25C /* NSDateTimeAgo.framework in Frameworks */,
@@ -1841,6 +1846,7 @@
 		DC1A648B1B867B1F009356A0 = {
 			isa = PBXGroup;
 			children = (
+				2DFB65F61F7BB74900BFD523 /* ObjcExceptionBridging.framework */,
 				2D8C3E911F7BB408008B64F0 /* BalanceVectorGraphics.framework.dSYM */,
 				2D8C3E9B1F7BB409008B64F0 /* CerealOSX.framework.dSYM */,
 				2D8C3E9A1F7BB409008B64F0 /* FMDB.framework.dSYM */,
