@@ -22,6 +22,21 @@
 		2D5619891F7125F300AA2A93 /* DoubleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619881F7125F300AA2A93 /* DoubleTests.swift */; };
 		2D6B22DB1EDE238200356035 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1A64991B867B1F009356A0 /* AppDelegate.swift */; };
 		2D73587F1F74F836004872FD /* PoloniexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D251F5EA22900873286 /* PoloniexErrors.swift */; };
+		2D8C3E9D1F7BB409008B64F0 /* ObjcExceptionBridging.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D8C3E8E1F7BB408008B64F0 /* ObjcExceptionBridging.framework.dSYM */; };
+		2D8C3E9E1F7BB409008B64F0 /* SnapKit.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D8C3E8F1F7BB408008B64F0 /* SnapKit.framework.dSYM */; };
+		2D8C3E9F1F7BB409008B64F0 /* JMSRangeSlider.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D8C3E901F7BB408008B64F0 /* JMSRangeSlider.framework.dSYM */; };
+		2D8C3EA01F7BB409008B64F0 /* BalanceVectorGraphics.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D8C3E911F7BB408008B64F0 /* BalanceVectorGraphics.framework.dSYM */; };
+		2D8C3EA11F7BB409008B64F0 /* XCGLogger.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D8C3E921F7BB408008B64F0 /* XCGLogger.framework.dSYM */; };
+		2D8C3EA21F7BB409008B64F0 /* Locksmith.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D8C3E931F7BB408008B64F0 /* Locksmith.framework.dSYM */; };
+		2D8C3EA31F7BB409008B64F0 /* NSDateTimeAgo.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D8C3E941F7BB408008B64F0 /* NSDateTimeAgo.framework.dSYM */; };
+		2D8C3EA41F7BB409008B64F0 /* TrustKit.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D8C3E951F7BB408008B64F0 /* TrustKit.framework.dSYM */; };
+		2D8C3EA51F7BB409008B64F0 /* SwiftyStoreKit.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D8C3E961F7BB408008B64F0 /* SwiftyStoreKit.framework.dSYM */; };
+		2D8C3EA61F7BB409008B64F0 /* RealmSwift.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D8C3E971F7BB408008B64F0 /* RealmSwift.framework.dSYM */; };
+		2D8C3EA71F7BB409008B64F0 /* Realm.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D8C3E981F7BB408008B64F0 /* Realm.framework.dSYM */; };
+		2D8C3EA81F7BB409008B64F0 /* Zip.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D8C3E991F7BB408008B64F0 /* Zip.framework.dSYM */; };
+		2D8C3EA91F7BB409008B64F0 /* FMDB.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D8C3E9A1F7BB409008B64F0 /* FMDB.framework.dSYM */; };
+		2D8C3EAA1F7BB409008B64F0 /* CerealOSX.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D8C3E9B1F7BB409008B64F0 /* CerealOSX.framework.dSYM */; };
+		2D8C3EAB1F7BB409008B64F0 /* MASShortcut.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D8C3E9C1F7BB409008B64F0 /* MASShortcut.framework.dSYM */; };
 		2DBAAE261F754A2C004DA1BD /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBAAE251F754A2C004DA1BD /* UtilsTests.swift */; };
 		2DD9B1F01EDDDFD10006268F /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */; };
 		2DE638C51F71562F00B54351 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619841F7121CD00AA2A93 /* Double.swift */; };
@@ -466,6 +481,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		2D8C3E8D1F7BB3D4008B64F0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				2D8C3E9D1F7BB409008B64F0 /* ObjcExceptionBridging.framework.dSYM in CopyFiles */,
+				2D8C3E9E1F7BB409008B64F0 /* SnapKit.framework.dSYM in CopyFiles */,
+				2D8C3E9F1F7BB409008B64F0 /* JMSRangeSlider.framework.dSYM in CopyFiles */,
+				2D8C3EA01F7BB409008B64F0 /* BalanceVectorGraphics.framework.dSYM in CopyFiles */,
+				2D8C3EA11F7BB409008B64F0 /* XCGLogger.framework.dSYM in CopyFiles */,
+				2D8C3EA21F7BB409008B64F0 /* Locksmith.framework.dSYM in CopyFiles */,
+				2D8C3EA31F7BB409008B64F0 /* NSDateTimeAgo.framework.dSYM in CopyFiles */,
+				2D8C3EA41F7BB409008B64F0 /* TrustKit.framework.dSYM in CopyFiles */,
+				2D8C3EA51F7BB409008B64F0 /* SwiftyStoreKit.framework.dSYM in CopyFiles */,
+				2D8C3EA61F7BB409008B64F0 /* RealmSwift.framework.dSYM in CopyFiles */,
+				2D8C3EA71F7BB409008B64F0 /* Realm.framework.dSYM in CopyFiles */,
+				2D8C3EA81F7BB409008B64F0 /* Zip.framework.dSYM in CopyFiles */,
+				2D8C3EA91F7BB409008B64F0 /* FMDB.framework.dSYM in CopyFiles */,
+				2D8C3EAA1F7BB409008B64F0 /* CerealOSX.framework.dSYM in CopyFiles */,
+				2D8C3EAB1F7BB409008B64F0 /* MASShortcut.framework.dSYM in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		53A866BB1C6AB39C00C411F2 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -515,6 +554,21 @@
 		2D5619821F6FC99D00AA2A93 /* MultipleEthploreAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MultipleEthploreAccountResponse.json; sourceTree = "<group>"; };
 		2D5619841F7121CD00AA2A93 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		2D5619881F7125F300AA2A93 /* DoubleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTests.swift; sourceTree = "<group>"; };
+		2D8C3E8E1F7BB408008B64F0 /* ObjcExceptionBridging.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = ObjcExceptionBridging.framework.dSYM; path = Carthage/Build/Mac/ObjcExceptionBridging.framework.dSYM; sourceTree = "<group>"; };
+		2D8C3E8F1F7BB408008B64F0 /* SnapKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SnapKit.framework.dSYM; path = Carthage/Build/Mac/SnapKit.framework.dSYM; sourceTree = "<group>"; };
+		2D8C3E901F7BB408008B64F0 /* JMSRangeSlider.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = JMSRangeSlider.framework.dSYM; path = Carthage/Build/Mac/JMSRangeSlider.framework.dSYM; sourceTree = "<group>"; };
+		2D8C3E911F7BB408008B64F0 /* BalanceVectorGraphics.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = BalanceVectorGraphics.framework.dSYM; path = Carthage/Build/Mac/BalanceVectorGraphics.framework.dSYM; sourceTree = "<group>"; };
+		2D8C3E921F7BB408008B64F0 /* XCGLogger.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = XCGLogger.framework.dSYM; path = Carthage/Build/Mac/XCGLogger.framework.dSYM; sourceTree = "<group>"; };
+		2D8C3E931F7BB408008B64F0 /* Locksmith.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Locksmith.framework.dSYM; path = Carthage/Build/Mac/Locksmith.framework.dSYM; sourceTree = "<group>"; };
+		2D8C3E941F7BB408008B64F0 /* NSDateTimeAgo.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = NSDateTimeAgo.framework.dSYM; path = Carthage/Build/Mac/NSDateTimeAgo.framework.dSYM; sourceTree = "<group>"; };
+		2D8C3E951F7BB408008B64F0 /* TrustKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = TrustKit.framework.dSYM; path = Carthage/Build/Mac/TrustKit.framework.dSYM; sourceTree = "<group>"; };
+		2D8C3E961F7BB408008B64F0 /* SwiftyStoreKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftyStoreKit.framework.dSYM; path = Carthage/Build/Mac/SwiftyStoreKit.framework.dSYM; sourceTree = "<group>"; };
+		2D8C3E971F7BB408008B64F0 /* RealmSwift.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = RealmSwift.framework.dSYM; path = Carthage/Build/Mac/RealmSwift.framework.dSYM; sourceTree = "<group>"; };
+		2D8C3E981F7BB408008B64F0 /* Realm.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Realm.framework.dSYM; path = Carthage/Build/Mac/Realm.framework.dSYM; sourceTree = "<group>"; };
+		2D8C3E991F7BB408008B64F0 /* Zip.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Zip.framework.dSYM; path = Carthage/Build/Mac/Zip.framework.dSYM; sourceTree = "<group>"; };
+		2D8C3E9A1F7BB409008B64F0 /* FMDB.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = FMDB.framework.dSYM; path = Carthage/Build/Mac/FMDB.framework.dSYM; sourceTree = "<group>"; };
+		2D8C3E9B1F7BB409008B64F0 /* CerealOSX.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = CerealOSX.framework.dSYM; path = Carthage/Build/Mac/CerealOSX.framework.dSYM; sourceTree = "<group>"; };
+		2D8C3E9C1F7BB409008B64F0 /* MASShortcut.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = MASShortcut.framework.dSYM; path = Carthage/Build/Mac/MASShortcut.framework.dSYM; sourceTree = "<group>"; };
 		2DBAAE251F754A2C004DA1BD /* UtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsTests.swift; sourceTree = "<group>"; };
 		2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		5300D6251DCE5A1E00D02657 /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
@@ -1787,6 +1841,21 @@
 		DC1A648B1B867B1F009356A0 = {
 			isa = PBXGroup;
 			children = (
+				2D8C3E911F7BB408008B64F0 /* BalanceVectorGraphics.framework.dSYM */,
+				2D8C3E9B1F7BB409008B64F0 /* CerealOSX.framework.dSYM */,
+				2D8C3E9A1F7BB409008B64F0 /* FMDB.framework.dSYM */,
+				2D8C3E901F7BB408008B64F0 /* JMSRangeSlider.framework.dSYM */,
+				2D8C3E931F7BB408008B64F0 /* Locksmith.framework.dSYM */,
+				2D8C3E9C1F7BB409008B64F0 /* MASShortcut.framework.dSYM */,
+				2D8C3E941F7BB408008B64F0 /* NSDateTimeAgo.framework.dSYM */,
+				2D8C3E8E1F7BB408008B64F0 /* ObjcExceptionBridging.framework.dSYM */,
+				2D8C3E981F7BB408008B64F0 /* Realm.framework.dSYM */,
+				2D8C3E971F7BB408008B64F0 /* RealmSwift.framework.dSYM */,
+				2D8C3E8F1F7BB408008B64F0 /* SnapKit.framework.dSYM */,
+				2D8C3E961F7BB408008B64F0 /* SwiftyStoreKit.framework.dSYM */,
+				2D8C3E951F7BB408008B64F0 /* TrustKit.framework.dSYM */,
+				2D8C3E921F7BB408008B64F0 /* XCGLogger.framework.dSYM */,
+				2D8C3E991F7BB408008B64F0 /* Zip.framework.dSYM */,
 				F14C80D41D646A7400D97E57 /* Config.xcconfig */,
 				53328D731E0260720075EC92 /* get_pin_from_certificate.py */,
 				DC1A64961B867B1F009356A0 /* Balance */,
@@ -1970,6 +2039,7 @@
 				DC65EFA01CE3E3E1006C9373 /* Copy Bal Helper */,
 				676ED7A81D17AF8F00D03395 /* Copy Mock Data and Databases If Needed */,
 				53BB513E1E466CD400384E7F /* Add Warnings For TODO And FIXME Comments */,
+				2D8C3E8D1F7BB3D4008B64F0 /* CopyFiles */,
 			);
 			buildRules = (
 			);

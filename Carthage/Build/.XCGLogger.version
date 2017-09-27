@@ -1,8 +1,8 @@
 {
-  "commitish" : "Version_4.0.0",
+  "commitish" : "Version_4.0.0-beta.5",
   "Mac" : [
     {
-      "hash" : "6fec08714bdebdaac6cc1bb7ed5b2d67199ff5a4c81e1feea278c5e63c63b66e",
+      "hash" : "8c1bdb14123ddbd95c49abf886d818a8cf4e9c65cb438e07c046f8ab3fb45007",
       "name" : "XCGLogger"
     }
   ]
