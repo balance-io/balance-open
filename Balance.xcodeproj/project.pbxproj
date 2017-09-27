@@ -393,6 +393,10 @@
 		A41D3E491F6BFC5600FD25B5 /* KrakenAPIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41D3E481F6BFC5600FD25B5 /* KrakenAPIClientTests.swift */; };
 		A41D3E4B1F6C32E700FD25B5 /* KrakenAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41D3E4A1F6C32E700FD25B5 /* KrakenAccount.swift */; };
 		A41D3E4C1F6C32E700FD25B5 /* KrakenAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41D3E4A1F6C32E700FD25B5 /* KrakenAccount.swift */; };
+		A44C76221F7BD9610024476E /* BitfinexTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44C76211F7BD9610024476E /* BitfinexTransaction.swift */; };
+		A44C76231F7BD9610024476E /* BitfinexTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44C76211F7BD9610024476E /* BitfinexTransaction.swift */; };
+		A44C76251F7BE5280024476E /* BitfinexTransactionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44C76241F7BE5280024476E /* BitfinexTransactionTests.swift */; };
+		A44C76271F7BE5A00024476E /* BitfinexMovement.json in Resources */ = {isa = PBXBuildFile; fileRef = A44C76261F7BE5A00024476E /* BitfinexMovement.json */; };
 		A46DBC841F69B2C3006F4247 /* BitfinexCredentialsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46DBC831F69B2C3006F4247 /* BitfinexCredentialsTests.swift */; };
 		A493B9391F68137E0074ACCC /* APICredentialsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B9381F68137E0074ACCC /* APICredentialsComponents.swift */; };
 		A493B93A1F68137E0074ACCC /* APICredentialsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B9381F68137E0074ACCC /* APICredentialsComponents.swift */; };
@@ -798,6 +802,9 @@
 		A41D3E441F6BF81A00FD25B5 /* KrakenAuthHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenAuthHeaders.swift; sourceTree = "<group>"; };
 		A41D3E481F6BFC5600FD25B5 /* KrakenAPIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenAPIClientTests.swift; sourceTree = "<group>"; };
 		A41D3E4A1F6C32E700FD25B5 /* KrakenAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenAccount.swift; sourceTree = "<group>"; };
+		A44C76211F7BD9610024476E /* BitfinexTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexTransaction.swift; sourceTree = "<group>"; };
+		A44C76241F7BE5280024476E /* BitfinexTransactionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexTransactionTests.swift; sourceTree = "<group>"; };
+		A44C76261F7BE5A00024476E /* BitfinexMovement.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BitfinexMovement.json; sourceTree = "<group>"; };
 		A46DBC831F69B2C3006F4247 /* BitfinexCredentialsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexCredentialsTests.swift; sourceTree = "<group>"; };
 		A493B9381F68137E0074ACCC /* APICredentialsComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICredentialsComponents.swift; sourceTree = "<group>"; };
 		A493B93B1F6819600074ACCC /* BitfinexAuthHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexAuthHeaders.swift; sourceTree = "<group>"; };
@@ -1699,6 +1706,7 @@
 			isa = PBXGroup;
 			children = (
 				A40ABBE21F6BBD1100383C62 /* FetchWallets.json */,
+				A44C76261F7BE5A00024476E /* BitfinexMovement.json */,
 			);
 			path = "Bitfinex API Responses";
 			sourceTree = "<group>";
@@ -1754,6 +1762,7 @@
 			children = (
 				A4CB29E11F682C2D00128E48 /* BitfinexAPIClientTests.swift */,
 				A46DBC831F69B2C3006F4247 /* BitfinexCredentialsTests.swift */,
+				A44C76241F7BE5280024476E /* BitfinexTransactionTests.swift */,
 			);
 			path = BitfinexAPIClient;
 			sourceTree = "<group>";
@@ -1799,6 +1808,7 @@
 				A4E768081F67DDFE002B1AE1 /* BitfinexErrors.swift */,
 				A493B93B1F6819600074ACCC /* BitfinexAuthHeaders.swift */,
 				A493B93E1F681BA00074ACCC /* BitfinexWallet.swift */,
+				A44C76211F7BD9610024476E /* BitfinexTransaction.swift */,
 			);
 			path = Bitfinex;
 			sourceTree = "<group>";
@@ -2158,6 +2168,7 @@
 				A4E457311F79362F002E2879 /* PoloniexDeposit.json in Resources */,
 				A41204C51F719CB800FD8078 /* KrakenFetchAccounts.json in Resources */,
 				53F078701F4F916800D0054C /* WithdrawToCrypto.json in Resources */,
+				A44C76271F7BE5A00024476E /* BitfinexMovement.json in Resources */,
 				53F0786C1F4F916500D0054C /* PoloniexTradingError.json in Resources */,
 				A41742971F73E8D2004A9B4F /* CoinbaseSendTransaction.json in Resources */,
 				53F0786D1F4F916800D0054C /* Account.json in Resources */,
@@ -2270,6 +2281,7 @@
 				53D441E31F44AA9F006967E1 /* GenericItemRepository.swift in Sources */,
 				53552A161ED7251700DD95F9 /* Source.swift in Sources */,
 				535529F31ED724ED00DD95F9 /* TransactionsTabViewModel.swift in Sources */,
+				A44C76231F7BD9610024476E /* BitfinexTransaction.swift in Sources */,
 				53552A371ED72B5B00DD95F9 /* CwlSysctl.swift in Sources */,
 				A493B93A1F68137E0074ACCC /* APICredentialsComponents.swift in Sources */,
 				A4E7680A1F67DDFE002B1AE1 /* BitfinexErrors.swift in Sources */,
@@ -2390,6 +2402,7 @@
 				53E8C77E1C62EB4C0085D64E /* TabsViewController.swift in Sources */,
 				A4E457091F79010A002E2879 /* BalanceError.swift in Sources */,
 				53D441F81F44CD93006967E1 /* InstitutionRepository.swift in Sources */,
+				A44C76221F7BD9610024476E /* BitfinexTransaction.swift in Sources */,
 				A41D3E451F6BF81A00FD25B5 /* KrakenAuthHeaders.swift in Sources */,
 				5361BC9E1F562580009C3F07 /* PoloniexInstitution.swift in Sources */,
 				536C6EEF1D864C9B00823688 /* MockedDefaultsStorage.swift in Sources */,
@@ -2639,6 +2652,7 @@
 				A4CB29E21F682C2D00128E48 /* BitfinexAPIClientTests.swift in Sources */,
 				A4E4572E1F792206002E2879 /* PoloniexTransactionTests.swift in Sources */,
 				53F0785F1F4F8F3C00D0054C /* SearchTest.swift in Sources */,
+				A44C76251F7BE5280024476E /* BitfinexTransactionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
