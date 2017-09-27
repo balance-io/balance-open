@@ -52,7 +52,7 @@ class TransactionContextMenu: NSObject, NSMenuDelegate {
         NotificationCenter.postOnMainThread(name: Notifications.PerformSearch, object: nil, userInfo: [Notifications.Keys.SearchString: name])
         
         // Analytics
-//        Answers.logContentView(withName: "Accounts tab cell transactions searched", contentType: nil, contentId: nil, customAttributes: nil)
+        BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Accounts tab cell transactions searched")
     }
     
     @objc fileprivate func copyTransactionToClipboard() {

@@ -278,7 +278,7 @@ class PreferencesRulesViewController: NSViewController {
         }
         
         // Analytics
-//        Answers.logContentView(withName: "Preferences new feed rule created", contentType: nil, contentId: nil, customAttributes: nil)
+        BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Preferences new feed rule created")
     }
     
     @objc fileprivate func ruleDeleteButtonAction(_ sender: Button) {
