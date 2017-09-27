@@ -76,9 +76,9 @@ struct CoinbaseApi {
                 guard let data = maybeData, maybeError == nil else {
                     throw BalanceError.noData
                 }
-
+                
                 // Try to parse the JSON
-                guard let JSONResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.length > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.length > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval else {
+                guard let JSONResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.length > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.length > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval, let scope = JSONResult["scope"] as? String else {
                     throw BalanceError.jsonDecoding
                 }
                 
@@ -87,6 +87,7 @@ struct CoinbaseApi {
                 institution?.accessToken = accessToken
                 institution?.refreshToken = refreshToken
                 institution?.tokenExpireDate = Date().addingTimeInterval(expiresIn - 10.0)
+                institution?.apiScope = scope
                 
                 // Sync accounts
                 if let institution = institution {
@@ -340,6 +341,17 @@ extension Institution {
     
     var isTokenExpired: Bool {
         return Date().timeIntervalSince(tokenExpireDate) > 0.0
+    }
+    
+    // Scope
+    fileprivate static let apiScopeKey = "Institution.apiScopeKey"
+    fileprivate var apiScope: String? {
+        get {
+            return UserDefaults.standard.string(forKey: Institution.apiScopeKey)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Institution.apiScopeKey)
+        }
     }
 }
 
