@@ -81,7 +81,20 @@ internal extension KrakenAPIClient
                 {
                     do
                     {
-                        let account = try Account(currency: currency, balance: balance)
+                        // NOTE: Kraken standardizes all of their currency codes to 4 characters for some reason
+                        // so for example LTC is XLTC, USD is ZUSD, but USDT is just USDT. So we need to remove
+                        // the trailing characters. It appears that X is for crypto and Z is for fiat.
+                        
+                        // TODO: Right now, we're safe just removing trailing Z and X characters. However, in the
+                        // future, if there is a 4 letter symbol for a currency and it starts with X or Z, we will
+                        // run into issues. Thankfully they use XZEC for ZCASH tokens.
+                        
+                        var currencyCode = currency
+                        if currency.length == 4 && (currency.hasPrefix("Z") || currency.hasPrefix("X")) {
+                            currencyCode = currency.substring(from: 1)
+                        }
+                        
+                        let account = try Account(currency: currencyCode, balance: balance)
                         accounts.append(account)
                     }
                     catch { }
