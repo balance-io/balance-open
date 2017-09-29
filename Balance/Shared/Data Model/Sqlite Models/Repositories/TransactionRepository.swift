@@ -186,7 +186,13 @@ struct TransactionRepository: ItemRepository {
                 let result = try db.executeQuery(statement, institutionId)
                 while result.next() {
                     let transaction = Transaction(result: result, repository: self)
-                    if includeHidden || !hiddenAccountIds.contains(transaction.accountId) {
+                    
+                    var belongsToHiddenAccount = false
+                    if let accountID = transaction.accountId {
+                        belongsToHiddenAccount = hiddenAccountIds.contains(accountID)
+                    }
+                    
+                    if includeHidden || !belongsToHiddenAccount {
                         transactions.append(transaction)
                     }
                 }
@@ -297,7 +303,12 @@ struct TransactionRepository: ItemRepository {
                         // Process the transaction
                         let transaction = Transaction(result: result, repository: self)
                         
-                        if includeHidden || !hiddenAccountIds.contains(transaction.accountId) {
+                        var belongsToHiddenAccount = false
+                        if let accountID = transaction.accountId {
+                            belongsToHiddenAccount = hiddenAccountIds.contains(accountID)
+                        }
+                        
+                        if includeHidden || !belongsToHiddenAccount {
                             // Setup the dictionary key if first row
                             if firstRow {
                                 if !pending {
@@ -355,7 +366,13 @@ struct TransactionRepository: ItemRepository {
                 let result = try db.executeQuery(statement, startDate.timeIntervalSince1970, endDate.timeIntervalSince1970, startDate.timeIntervalSince1970)
                 while result.next() {
                     let transaction = Transaction(result: result, repository: self)
-                    if includeHidden || !hiddenAccountIds.contains(transaction.accountId) {
+                    
+                    var belongsToHiddenAccount = false
+                    if let accountID = transaction.accountId {
+                        belongsToHiddenAccount = hiddenAccountIds.contains(accountID)
+                    }
+                    
+                    if includeHidden || !belongsToHiddenAccount {
                         transactions.append(transaction)
                     }
                 }
