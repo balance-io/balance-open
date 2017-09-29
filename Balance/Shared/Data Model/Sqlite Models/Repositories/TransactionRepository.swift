@@ -8,6 +8,24 @@
 
 import Foundation
 
+
+/**
+ Table Schema
+ 
+ [0] transactionId: INTEGER PRIMARY KEY AUTOINCREMENT
+ [1] sourceId: INTEGER
+ [2] sourceTransactionId TEXT
+ [3] accountId INTEGER
+ [4] name TEXT
+ [5] currency TEXT
+ [6] amount INTEGER
+ [7] date REAL
+ [8] institutionID INTEGER NOT NULL
+ [9] sourceInstitutionID TEXT
+ [10] categoryID INTEGER
+ */
+
+
 struct TransactionRepository: ItemRepository {
     static let si = TransactionRepository()
     fileprivate let gr = GenericItemRepository.si
