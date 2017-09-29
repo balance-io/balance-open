@@ -39,10 +39,11 @@ final class Transaction {
         
         self.currency = result.string(forColumnIndex: 5)
         self.amount = result.long(forColumnIndex: 6)
-        self.date = result.date(forColumnIndex: 9)
+        self.date = result.date(forColumnIndex: 7)
         
-        self.sourceInstitutionId = result.string(forColumnIndex: 19)
-        self.institutionId = result.object(forColumnIndex: 20) as! Int
+        self.institutionId = result.object(forColumnIndex: 8) as! Int
+        self.sourceInstitutionId = result.string(forColumnIndex: 9)
+        self.categoryId = result.object(forColumnIndex: 10) as? Int
     }
     
     init(transactionId: Int, source: Source, sourceTransactionId: String, sourceAccountId: String, accountId: Int, name: String, currency: String, amount: Int, date: Date, institution: Institution, repository: TransactionRepository = TransactionRepository.si) {
