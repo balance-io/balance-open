@@ -211,31 +211,23 @@ struct TransactionRepository: ItemRepository {
         database.write.inDatabase { db in
             do {
                 let insert = "INSERT OR REPLACE INTO transactions " +
-                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
                 
                 // This is a hack to prevent the Swift compiler's random "type inferance takes fucking forever" bug
                 // Drops compile time on this function from ~35 seconds to ~5 milliseconds
                 let transactionId: Any = transaction.transactionId
                 let source: Any = transaction.source.rawValue
                 let sourceTransactionId: Any = transaction.sourceTransactionId
-                let accountId: Any = transaction.accountId
+                let accountId: Any = n2N(transaction.accountId)
                 let name: Any = transaction.name
                 let currency: Any = transaction.currency
                 let amount: Any = transaction.amount
-                let altCurrency: Any = n2N(transaction.altCurrency)
-                let altAmount: Any = n2N(transaction.altAmount)
                 let date: Any = transaction.date
-                let pending: Any = transaction.pending
-                let address: Any = n2N(transaction.address)
-                let city: Any = n2N(transaction.city)
-                let state: Any = n2N(transaction.state)
-                let zip: Any = n2N(transaction.zip)
-                let latitude: Any = n2N(transaction.latitude)
-                let longitude: Any = n2N(transaction.longitude)
-                let phone: Any = n2N(transaction.phone)
-                let categoryId: Any = n2N(transaction.categoryId)
+                let institutionID: Any = transaction.institutionId
+                let sourceInstitutionID: Any = transaction.sourceInstitutionId
+                let categoryID: Any = n2N(transaction.categoryId)
                 
-                try db.executeUpdate(insert, transactionId, source, sourceTransactionId, accountId, name, currency, amount, altCurrency, altAmount, date, pending, address, city, state, zip, latitude, longitude, phone, categoryId)
+                try db.executeUpdate(insert, transactionId, source, sourceTransactionId, accountId, name, currency, amount, date, institutionID, sourceInstitutionID, categoryID)
             } catch {
                 log.severe("Error replacing transaction \(transaction): " + db.lastErrorMessage())
                 success = false
