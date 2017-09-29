@@ -691,7 +691,7 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         hoverPreloadWorkItem?.cancel()
         
         // If we hover over a cell when it has a location and is not already opened, preload the map
-        if hoveredIndex != previousSelectedIndex, let hoveredCell = tableView.viewAtIndex(hoveredIndex, makeIfNecessary: false) as? TransactionsTabTransactionCell, let model = hoveredCell.model, model.hasLocation {
+        if hoveredIndex != previousSelectedIndex, let hoveredCell = tableView.viewAtIndex(hoveredIndex, makeIfNecessary: false) as? TransactionsTabTransactionCell {//}, let model = hoveredCell.model{
             // Add a small delay to allow for canceling preload when quickly moving mouse
             hoverPreloadWorkItem = DispatchWorkItem {
                 hoveredCell.loadBottomContainer()
@@ -700,7 +700,7 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         }
         
         // If we are no longer hovering over a cell when it has a location and is not already opened, unload the map to save memory
-        if lastHoveredIndex != previousSelectedIndex, let lastHoveredCell = tableView.viewAtIndex(lastHoveredIndex, makeIfNecessary: false) as? TransactionsTabTransactionCell, let model = lastHoveredCell.model, model.hasLocation {
+        if lastHoveredIndex != previousSelectedIndex, let lastHoveredCell = tableView.viewAtIndex(lastHoveredIndex, makeIfNecessary: false) as? TransactionsTabTransactionCell {//}, let model = lastHoveredCell.model, model.hasLocation {
             lastHoveredCell.unloadBottomContainer()
         }
     }
@@ -770,15 +770,15 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         if TableIndex(section: section, row: row) == tableView.selectedIndex, let transactions = viewModel.data[section] {
             let transaction = transactions[row]
             var extraHeight: CGFloat = 0.0
-            if transaction.hasLocation {
-                extraHeight = 212.0 + 32
-            } else {
+//            if transaction.hasLocation {
+//                extraHeight = 212.0 + 32
+//            } else {
                 if transaction.categoryId == nil {
                     extraHeight = 63.0 + 32
                 } else {
                     extraHeight = 90.0 + 32
                 }
-            }
+//            }
             return CurrentTheme.transactions.cell.height + extraHeight
         } else {
             return CurrentTheme.transactions.cell.height

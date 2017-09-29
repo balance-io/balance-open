@@ -289,41 +289,42 @@ class NotificationsTabTransactionCell: View {
             }
         }
         
-        if model.hasLocation, let latitude = model.latitude, let longitude = model.longitude {
-            accountContainer.cornerRadius = 0.0
-            infoContainer.cornerRadius = 7.0
-            
-            mapView = NoHitMapView()
-            mapView.wantsLayer = true
-            mapView.isZoomEnabled = false
-            mapView.isScrollEnabled = false
-            mapView.isPitchEnabled = false
-            mapView.isRotateEnabled = false
-            infoContainer.addSubview(mapView, positioned: .below, relativeTo: accountContainer)
-            mapView.snp.makeConstraints { make in
-                make.leading.equalTo(bottomContainer)
-                make.trailing.equalTo(bottomContainer)
-                make.top.equalTo(bottomContainer)
-                make.bottom.equalTo(bottomContainer)
-            }
-            
-            var coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            let annotation = Annotation(coordinate: coordinate)
-            mapView.addAnnotation(annotation)
-            let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
-            coordinate.latitude += 0.0025
-            let region = MKCoordinateRegion(center: coordinate, span: span)
-            mapView.setRegion(region, animated: false)
-            
-            if hasCategory {
-                categoryView.snp.makeConstraints { make in
-                    make.bottom.equalTo(infoContainer)
-                    make.leading.equalTo(infoContainer)
-                    make.trailing.equalTo(infoContainer)
-                    make.height.equalTo(30)
-                }
-            }
-        } else if hasCategory {
+//        if model.hasLocation, let latitude = model.latitude, let longitude = model.longitude {
+//            accountContainer.cornerRadius = 0.0
+//            infoContainer.cornerRadius = 7.0
+//
+//            mapView = NoHitMapView()
+//            mapView.wantsLayer = true
+//            mapView.isZoomEnabled = false
+//            mapView.isScrollEnabled = false
+//            mapView.isPitchEnabled = false
+//            mapView.isRotateEnabled = false
+//            infoContainer.addSubview(mapView, positioned: .below, relativeTo: accountContainer)
+//            mapView.snp.makeConstraints { make in
+//                make.leading.equalTo(bottomContainer)
+//                make.trailing.equalTo(bottomContainer)
+//                make.top.equalTo(bottomContainer)
+//                make.bottom.equalTo(bottomContainer)
+//            }
+//
+//            var coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+//            let annotation = Annotation(coordinate: coordinate)
+//            mapView.addAnnotation(annotation)
+//            let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+//            coordinate.latitude += 0.0025
+//            let region = MKCoordinateRegion(center: coordinate, span: span)
+//            mapView.setRegion(region, animated: false)
+//
+//            if hasCategory {
+//                categoryView.snp.makeConstraints { make in
+//                    make.bottom.equalTo(infoContainer)
+//                    make.leading.equalTo(infoContainer)
+//                    make.trailing.equalTo(infoContainer)
+//                    make.height.equalTo(30)
+//                }
+//            }
+//        } else
+        if hasCategory {
             categoryView.snp.makeConstraints { make in
                 make.top.equalTo(accountContainer.snp.bottom).offset(3)
                 make.leading.equalTo(infoContainer).offset(-5)
