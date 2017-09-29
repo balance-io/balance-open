@@ -49,6 +49,6 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>SUFeedURL</key>
-	<string>https://balancemy.money/updates/balanceopen.xml</string>
+	<string>https://balance.nyc3.digitaloceanspaces.com/sparkle/balanceopen.xml</string>
 </dict>
 </plist>
