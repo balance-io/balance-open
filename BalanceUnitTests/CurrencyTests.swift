@@ -41,7 +41,7 @@ class CurrencyTests: XCTestCase {
         //given
         let currency = Currency.rawValue(shortName: "BTC")
         
-        //then
+        //then 
         XCTAssertEqual(currency.decimals, 8)
     }
     
