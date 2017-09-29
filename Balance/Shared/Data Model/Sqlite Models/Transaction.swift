@@ -46,7 +46,7 @@ final class Transaction {
         self.categoryId = result.object(forColumnIndex: 10) as? Int
     }
     
-    init(transactionId: Int, source: Source, sourceTransactionId: String, sourceAccountId: String, accountId: Int, name: String, currency: String, amount: Int, date: Date, institution: Institution, repository: TransactionRepository = TransactionRepository.si) {
+    init(transactionId: Int, source: Source, sourceTransactionId: String, sourceAccountId: String, accountId: Int, name: String, currency: String, amount: Int, date: Date, categoryID: Int?, institution: Institution, repository: TransactionRepository = TransactionRepository.si) {
         self.repository = repository
         
         self.transactionId = transactionId
