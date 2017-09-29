@@ -173,7 +173,25 @@ class Syncer {
                     log.debug("Finished pulling accounts for \(institution)")
                 }
                 
-                performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                for account in AccountRepository.si.accounts(institutionId: institution.institutionId)
+                {
+                    CoinbaseApi.fetchTransactions(accountID: account.sourceAccountId, institution: institution, completionHandler: { (transactions, error) in
+                        if let unwrappedTransactions = transactions {
+                            for transaction in unwrappedTransactions
+                            {
+                                let decimals = Currency.rawValue(shortName: transaction.currencyCode).decimals
+                                
+                                var amountDecimal = Decimal(transaction.amount)
+                                amountDecimal = amountDecimal * Decimal(pow(10.0, Double(decimals)))
+                                let amount = (amountDecimal as NSDecimalNumber).intValue
+                                
+                                TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: transaction.identifier, sourceAccountId: account.sourceAccountId, name: transaction.identifier, currency: transaction.currencyCode, amount: amount, date: transaction.createdAt, categoryID: nil, institution: institution)
+                            }
+                        }
+                        
+                        performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                    })
+                }
             }
         case .gdax:
             guard let accessToken = institution.accessToken else {
