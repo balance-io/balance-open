@@ -23,6 +23,8 @@ final class Transaction {
     let amount: Int
     let date: Date
     
+    let categoryId: Int?
+    
     var ruleNames: [String]?
     
     required init(result: FMResultSet, repository: ItemRepository = TransactionRepository.si) {
@@ -56,6 +58,7 @@ final class Transaction {
         self.currency = currency
         self.amount = amount
         self.date = date
+        self.categoryId = categoryID
         
         self.sourceInstitutionId = institution.sourceInstitutionId
         self.institutionId = institution.institutionId
@@ -105,6 +108,15 @@ extension Transaction {
         } else if let institution = InstitutionRepository.si.institution(institutionId: institutionId) {
             Transaction.institutionsCache[institutionId] = institution
             return institution
+        } else {
+            return nil
+        }
+    }
+    
+    // TODO: Make this non-optional
+    var category: Category? {
+        if let categoryId = categoryId {
+            return CategoryRepository.si.category(categoryId: categoryId)
         } else {
             return nil
         }

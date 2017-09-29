@@ -54,7 +54,7 @@ struct TransactionRepository: ItemRepository {
                 statements.append("DROP TABLE IF EXISTS transactions")
                 
                 let createTransactionsTable = """
-                    CREATE TABLE IF NOT EXISTS transactions (transactionId INTEGER PRIMARY KEY AUTOINCREMENT, sourceId INTEGER, sourceTransactionId TEXT, accountId INTEGER, name TEXT, currency TEXT, amount INTEGER, date REAL, institutionID INTEGER NOT NULL)
+                    CREATE TABLE IF NOT EXISTS transactions (transactionId INTEGER PRIMARY KEY AUTOINCREMENT, sourceId INTEGER, sourceTransactionId TEXT, accountId INTEGER, name TEXT, currency TEXT, amount INTEGER, date REAL, institutionID INTEGER NOT NULL, sourceInstitutionID TEXT, categoryID INTEGER)
                 """
                 statements.append(createTransactionsTable)
                 
