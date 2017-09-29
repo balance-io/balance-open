@@ -165,8 +165,6 @@ internal extension BitfinexAPIClient
                         return
                     }
                     
-                    print(json)
-                    
                     // Build transactions
                     var transactions = [BitfinexAPIClient.Transaction]()
                     for transactionJSON in transactionsJSON
