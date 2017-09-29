@@ -15,6 +15,44 @@ struct TransactionRepository: ItemRepository {
     let table = "transactions"
     let itemIdField = "transactionId"
     
+    // MARK: Initialization
+    
+    internal init() {
+        self.performMigrations()
+    }
+    
+    // MARK: Migrations
+    
+    private func performMigrations() {
+        // If the app has the old transactions table
+        // drop it a build the new one
+        database.write.inDatabase { db in
+            let result = db.getTableSchema("transactions")
+            
+            // Old database schema. Update...
+            if db.columnExists("address", inTableWithName: "transactions")
+            {
+                var statements = [String]()
+                statements.append("DROP TABLE IF EXISTS transactions")
+                
+                let createTransactionsTable = """
+                    CREATE TABLE IF NOT EXISTS transactions (transactionId INTEGER PRIMARY KEY AUTOINCREMENT, sourceId INTEGER, sourceTransactionId TEXT, accountId INTEGER, name TEXT, currency TEXT, amount INTEGER, date REAL, institutionID INTEGER NOT NULL)
+                """
+                statements.append(createTransactionsTable)
+                
+                for statement in statements {
+                    if !db.executeUpdate(statement, withArgumentsIn: nil) {
+                        log.severe("DB Error: " + db.lastErrorMessage())
+                    }
+                }
+            }
+            
+            result?.close()
+        }
+    }
+    
+    // MARK: -
+    
     func transaction(transactionId: Int) -> Transaction? {
         var transaction: Transaction?
         database.read.inDatabase { db in
