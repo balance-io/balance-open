@@ -14,30 +14,14 @@ final class Transaction {
     let transactionId: Int
     let source: Source
     let sourceTransactionId: String
-    let accountId: Int
+    let accountId: Int?
     let institutionId: Int
     let sourceInstitutionId: String
     
     let name: String
-    
     let currency: String
     let amount: Int
-    
-    let altCurrency: String?
-    let altAmount: Int?
-    
     let date: Date
-    let pending: Bool
-    
-    let address: String?
-    let city: String?
-    let state: String?
-    let zip: String?
-    let latitude: Double?
-    let longitude: Double?
-    let phone: String?
-    
-    let categoryId: Int?
     
     var ruleNames: [String]?
     
@@ -53,27 +37,13 @@ final class Transaction {
         
         self.currency = result.string(forColumnIndex: 5)
         self.amount = result.long(forColumnIndex: 6)
-        self.altCurrency = result.string(forColumnIndex: 7)
-        self.altAmount = result.object(forColumnIndex: 8) as? Int
-        
         self.date = result.date(forColumnIndex: 9)
-        self.pending = result.bool(forColumnIndex: 10)
-        
-        self.address = result.string(forColumnIndex: 11)
-        self.city = result.string(forColumnIndex: 12)
-        self.state = result.string(forColumnIndex: 13)
-        self.zip = result.string(forColumnIndex: 14)
-        self.latitude = result.object(forColumnIndex: 15) as? Double
-        self.longitude = result.object(forColumnIndex: 16) as? Double
-        self.phone = result.string(forColumnIndex: 17)
-        
-        self.categoryId = result.object(forColumnIndex: 18) as? Int
         
         self.sourceInstitutionId = result.string(forColumnIndex: 19)
         self.institutionId = result.object(forColumnIndex: 20) as! Int
     }
     
-    init(transactionId: Int, source: Source, sourceTransactionId: String, sourceAccountId: String, accountId: Int, name: String, currency: String, amount: Int, altCurrency: String?, altAmount: Int?, date: Date, pending: Bool, address: String?, city: String?, state: String?, zip: String?, latitude: Double?, longitude: Double?, phone: String?, categoryId: Int?, institution: Institution, repository: TransactionRepository = TransactionRepository.si) {
+    init(transactionId: Int, source: Source, sourceTransactionId: String, sourceAccountId: String, accountId: Int, name: String, currency: String, amount: Int, date: Date, institution: Institution, repository: TransactionRepository = TransactionRepository.si) {
         self.repository = repository
         
         self.transactionId = transactionId
@@ -85,20 +55,7 @@ final class Transaction {
         
         self.currency = currency
         self.amount = amount
-        self.altCurrency = altCurrency
-        self.altAmount = altAmount
         self.date = date
-        self.pending = pending
-        
-        self.address = address
-        self.city = city
-        self.state = state
-        self.zip = zip
-        self.latitude = latitude
-        self.longitude = longitude
-        self.phone = phone
-        
-        self.categoryId = categoryId
         
         self.sourceInstitutionId = institution.sourceInstitutionId
         self.institutionId = institution.institutionId
@@ -154,21 +111,12 @@ extension Transaction {
     }
     
     // TODO: Make this non-optional
-    var category: Category? {
-        if let categoryId = categoryId {
-            return CategoryRepository.si.category(categoryId: categoryId)
-        } else {
+    var account: Account? {
+        guard let unwrappedAccountID = self.accountId else {
             return nil
         }
-    }
-    
-    // TODO: Make this non-optional
-    var account: Account? {
-        return AccountRepository.si.account(accountId: accountId)
-    }
-    
-    var hasLocation: Bool {
-        return address != nil && latitude != nil && longitude != nil
+        
+        return AccountRepository.si.account(accountId: unwrappedAccountID)
     }
     
     var displayName: String {
