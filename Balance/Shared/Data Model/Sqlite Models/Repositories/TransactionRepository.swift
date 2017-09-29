@@ -90,7 +90,7 @@ struct TransactionRepository: ItemRepository {
         return transaction
     }
     
-    @discardableResult func transaction(source: Source, sourceTransactionId: String, sourceAccountId: String, name: String, currency: String, amount: Int, altCurrency: String?, altAmount: Int?, date: Date, pending: Bool, address: String?, city: String?, state: String?, zip: String?, latitude: Double?, longitude: Double?, phone: String?, categoryId: Int?, institution: Institution) -> Transaction? {
+    @discardableResult func transaction(source: Source, sourceTransactionId: String, sourceAccountId: String, name: String, currency: String, amount: Int, date: Date, categoryID: Int?, institution: Institution) -> Transaction? {
         // First check if a record for this transaction already exists
         var transactionIdFromDb: Int?
         var accountIdFromDb: Int?
@@ -112,8 +112,9 @@ struct TransactionRepository: ItemRepository {
         }
         
         if let transactionId = transactionIdFromDb, let accountId = accountIdFromDb {
-            let transaction = Transaction(transactionId: transactionId, source: source, sourceTransactionId: sourceTransactionId, sourceAccountId: sourceAccountId, accountId: accountId, name: name, currency: currency, amount: amount, altCurrency: altCurrency, altAmount: altAmount, date: date, pending: pending, address: address, city: city, state: state, zip: zip, latitude: latitude, longitude: longitude, phone: phone, categoryId: categoryId, institution: institution, repository: self)
+            let transaction = Transaction(transactionId: transactionId, source: source, sourceTransactionId: sourceTransactionId, sourceAccountId: sourceAccountId, accountId: accountId, name: name, currency: currency, amount: amount, date: date, categoryID: categoryID, institution: institution, repository: self)
             transaction.replace()
+            
             return transaction
         } else {
             // No record exists, so this is a new transaction. Insert the record and retrieve the transaction id
@@ -129,8 +130,8 @@ struct TransactionRepository: ItemRepository {
                     
                     if let accountIdFromDb = accountIdFromDb {
                         let insert = "INSERT INTO transactions " +
-                                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-                        try db.executeUpdate(insert, NSNull(), source.rawValue, sourceTransactionId, accountIdFromDb, name, currency, amount, n2N(altCurrency), n2N(altAmount), date, pending, n2N(address), n2N(city), n2N(state), n2N(zip), n2N(latitude), n2N(longitude), n2N(phone), n2N(categoryId))
+                                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                        try db.executeUpdate(insert, NSNull(), source.rawValue, sourceTransactionId, accountIdFromDb, name, currency, amount, date, institution.institutionId, institution.sourceInstitutionId, n2N(categoryID))
                         
                         generatedId = Int(db.lastInsertRowId())
                     }
@@ -140,7 +141,7 @@ struct TransactionRepository: ItemRepository {
             }
             
             if let transactionId = generatedId, let accountId = accountIdFromDb {
-                let transaction = Transaction(transactionId: transactionId, source: source, sourceTransactionId: sourceTransactionId, sourceAccountId: sourceAccountId, accountId: accountId, name: name, currency: currency, amount: amount, altCurrency: altCurrency, altAmount: altAmount, date: date, pending: pending, address: address, city: city, state: state, zip: zip, latitude: latitude, longitude: longitude, phone: phone, categoryId: categoryId, institution: institution, repository: self)
+                let transaction = Transaction(transactionId: transactionId, source: source, sourceTransactionId: sourceTransactionId, sourceAccountId: sourceAccountId, accountId: accountId, name: name, currency: currency, amount: amount, date: date, categoryID: categoryID, institution: institution, repository: self)
                 return transaction
             } else {
                 // Something went really wrong and we didn't get a transaction id
