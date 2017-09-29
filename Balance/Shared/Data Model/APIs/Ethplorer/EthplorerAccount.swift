@@ -37,7 +37,10 @@ struct EthplorerAccountObject {
         let ethDict: [String: Any] = try checkType(dictionary["ETH"], name: "ETH")
         self.ETH = try Eth(dictionary: ethDict)
         
-        let tokensArray: [[String: Any]] = try checkType(dictionary["tokens"], name: "tokens")
+        var tokensArray = [[String: Any]]()
+        if dictionary["tokens"] != nil {
+            tokensArray = try checkType(dictionary["tokens"], name: "tokens")
+        }
         var tokens = [Token]()
         for token in tokensArray {
             tokens.append(try Token(dictionary: token))

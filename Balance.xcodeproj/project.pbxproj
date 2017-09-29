@@ -13,6 +13,7 @@
 		28F678481DCB6E9600383D22 /* SetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F678471DCB6E9600383D22 /* SetPasswordViewController.swift */; };
 		28FD09C21D99F18500A395AB /* PaintCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FD09C11D99F18500A395AB /* PaintCodeButton.swift */; };
 		2D1CCA171F62AE1100BACC20 /* EthploreAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D1CCA161F62AE1100BACC20 /* EthploreAccountResponse.json */; };
+		2D3990541F7E5BB600A1AD84 /* EthploreAccountNoTokens.json in Resources */ = {isa = PBXBuildFile; fileRef = 2D3990531F7E5BB600A1AD84 /* EthploreAccountNoTokens.json */; };
 		2D528C7D1F7B8115003BFD74 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3551F06B653004EB25C /* XCGLogger.framework */; };
 		2D56197F1F6FBE7B00AA2A93 /* EthploreAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D56197E1F6FBE7B00AA2A93 /* EthploreAccountTests.swift */; };
 		2D5619811F6FBE8700AA2A93 /* EthploreInstitutionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5619801F6FBE8700AA2A93 /* EthploreInstitutionTests.swift */; };
@@ -529,6 +530,7 @@
 		28FD09C11D99F18500A395AB /* PaintCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintCodeButton.swift; sourceTree = "<group>"; };
 		2D1CCA161F62AE1100BACC20 /* EthploreAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EthploreAccountResponse.json; sourceTree = "<group>"; };
 		2D326D251F5EA22900873286 /* PoloniexErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexErrors.swift; sourceTree = "<group>"; };
+		2D3990531F7E5BB600A1AD84 /* EthploreAccountNoTokens.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EthploreAccountNoTokens.json; sourceTree = "<group>"; };
 		2D56197E1F6FBE7B00AA2A93 /* EthploreAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthploreAccountTests.swift; sourceTree = "<group>"; };
 		2D5619801F6FBE8700AA2A93 /* EthploreInstitutionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthploreInstitutionTests.swift; sourceTree = "<group>"; };
 		2D5619821F6FC99D00AA2A93 /* MultipleEthploreAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MultipleEthploreAccountResponse.json; sourceTree = "<group>"; };
@@ -962,6 +964,7 @@
 				2D1CCA161F62AE1100BACC20 /* EthploreAccountResponse.json */,
 				2D5619821F6FC99D00AA2A93 /* MultipleEthploreAccountResponse.json */,
 				2D83E0B11F7A3C02000B3474 /* EthploreTwoDecimalCrypto.json */,
+				2D3990531F7E5BB600A1AD84 /* EthploreAccountNoTokens.json */,
 			);
 			path = Ethplore;
 			sourceTree = "<group>";
@@ -2167,6 +2170,7 @@
 			files = (
 				53F0786F1F4F916800D0054C /* FetchAccounts.json in Resources */,
 				A41204C51F719CB800FD8078 /* KrakenFetchAccounts.json in Resources */,
+				2D3990541F7E5BB600A1AD84 /* EthploreAccountNoTokens.json in Resources */,
 				53F078701F4F916800D0054C /* WithdrawToCrypto.json in Resources */,
 				53F0786C1F4F916500D0054C /* PoloniexTradingError.json in Resources */,
 				53F0786D1F4F916800D0054C /* Account.json in Resources */,
