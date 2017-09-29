@@ -161,5 +161,17 @@ class EthploreAccountTests: XCTestCase {
         XCTAssertEqual(ethploreAccount.altCurrency, Currency.common(traditional: .usd))
         XCTAssertEqual(ethploreAccount.decimals, 8)
     }
+    
+    func testAccountWithNoTokens() {
+        //given
+        let data = TestHelpers.loadData(filename: "EthploreAccountNoTokens.json")
+        self.json = TestHelpers.dataToJSON(data: data) as [String:AnyObject]
+        
+        //when
+        let account = try! EthplorerAccountObject.init(dictionary: self.json, currencyShortName: "ETH", type: .wallet)
+        
+        //then
+        XCTAssertEqual(account.tokens.count, 0)
+    }
 
 }
