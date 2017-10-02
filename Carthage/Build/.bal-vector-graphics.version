@@ -2,10 +2,16 @@
   "iOS" : [
 
   ],
-  "commitish" : "751dffda1d9a3b4961739ce91a598943d2f01e13",
+  "commitish" : "dd8a48697728e53a6a8340fafe4bf960243fd2c3",
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
   "Mac" : [
     {
-      "hash" : "4250166731faf41edd7e60de790ed8677b14e2b8942af26921e9652fd9635095",
+      "hash" : "5507fe62cb91d9ec289311a29e7cd7a475c00a42b1f68b2ab21ec3ce05447db4",
       "name" : "BalanceVectorGraphics"
     }
   ]

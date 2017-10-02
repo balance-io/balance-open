@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import Crashlytics
 import WebKit
 
 class WebSignUpViewController: NSViewController, NSTabViewDelegate, WebPolicyDelegate, WebFrameLoadDelegate {
@@ -348,10 +347,10 @@ class WebSignUpViewController: NSViewController, NSTabViewDelegate, WebPolicyDel
     }
     
     fileprivate func submitConnectionFailedEvent(_ errorDescription: String) {
-        let attributes: [String: Any] = ["Source":              source.rawValue,
-                                         "SourceInstitutionId": sourceInstitutionId,
-                                         "Error Description":   errorDescription]
-        Answers.logCustomEvent(withName: "Connection Failed", customAttributes: attributes)
+        let properties: [String: String] = ["Source":              "\(source.rawValue)",
+                                            "SourceInstitutionId": "\(sourceInstitutionId)",
+                                            "Error Description":   errorDescription]
+        BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Connection Failed", properties: properties, measurements: nil)
     }
     
     fileprivate func callCloseBlock(finished: Bool) {

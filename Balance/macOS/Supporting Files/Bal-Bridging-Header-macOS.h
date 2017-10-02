@@ -4,6 +4,7 @@
 
 #import <CommonCrypto/CommonCrypto.h>
 #import <Sparkle/Sparkle.h>
+#import <HockeySDK/HockeySDK.h>
 #import "CCNStatusItem.h"
 #import "ObjC.h"
 #import "FMDB.h"

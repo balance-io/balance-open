@@ -1,5 +1,4 @@
 import Cocoa
-import Crashlytics
 
 // In the storyboard, ensure the view controller's transition checkboxes are all off, and the NSTabView's delegate is set to this controller object
 
@@ -63,7 +62,7 @@ class PreferencesViewController: NSTabViewController {
             window.setFrame(frame, display: false, animate: true)
             
             // Analytics
-            Answers.logContentView(withName: "Preferences tab selected \(tabViewItem.label)", contentType: nil, contentId: nil, customAttributes: nil)
+            BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Preferences tab selected \(tabViewItem.label)")
         }
     }
 }

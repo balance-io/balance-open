@@ -9,7 +9,6 @@
 import AppKit
 import Cocoa
 import SnapKit
-import Crashlytics
 import BalanceVectorGraphics
 
 class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, SectionedTableViewDataSource, NSSearchFieldDelegate {
@@ -837,7 +836,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
             invalidateTouchBar()
             
             // Analytics
-            Answers.logContentView(withName: "Accounts tab institution rearranged", contentType: nil, contentId: nil, customAttributes: nil)
+            BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Accounts tab institution rearranged")
             
             return true
         } else {
@@ -865,7 +864,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
                 tableView.moveRowAtTableIndex(fromIndex, toIndex: toIndex)
                 
                 // Analytics
-                Answers.logContentView(withName: "Accounts tab account rearranged", contentType: nil, contentId: nil, customAttributes: nil)
+                BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Accounts tab account rearranged")
                 
                 return true
             }

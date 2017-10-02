@@ -1,7 +1,5 @@
 import Cocoa
 import Locksmith
-import Fabric
-import Crashlytics
 import ServiceManagement
 import RealmSwift
 
@@ -89,9 +87,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
-    fileprivate func fabricInit() {
+    fileprivate func hockeyAppInit() {
         #if !DEBUG
-        Fabric.with([Crashlytics.self])
+            BITHockeyManager.shared().configure(withIdentifier: "bca73ad39bdb4dda98870be89899e263")
+            BITHockeyManager.shared().start()
         #endif
     }
     
@@ -140,8 +139,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Initialize local notifications delegate
         NSUserNotificationCenter.default.delegate = self
         
-        // Inititialize Fabric
-        fabricInit()
+        // Initialyze crash logging and analytics
+        hockeyAppInit()
         
         if !debugging.disableSubscription {
             // Initialize Store
@@ -343,7 +342,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     NSApp.activate(ignoringOtherApps: true)
                     
                     // Analytics
-                    Answers.logContentView(withName: "Preferences opened", contentType: nil, contentId: nil, customAttributes: nil)
+                    BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Preferences opened")
                 } else {
                     prefsWindow.makeKeyAndOrderFront(nil)
                 }

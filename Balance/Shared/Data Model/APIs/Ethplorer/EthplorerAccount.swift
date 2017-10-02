@@ -37,7 +37,10 @@ struct EthplorerAccountObject {
         let ethDict: [String: Any] = try checkType(dictionary["ETH"], name: "ETH")
         self.ETH = try Eth(dictionary: ethDict)
         
-        let tokensArray: [[String: Any]] = try checkType(dictionary["tokens"], name: "tokens")
+        var tokensArray = [[String: Any]]()
+        if dictionary["tokens"] != nil {
+            tokensArray = try checkType(dictionary["tokens"], name: "tokens")
+        }
         var tokens = [Token]()
         for token in tokensArray {
             tokens.append(try Token(dictionary: token))
@@ -82,7 +85,12 @@ struct EthplorerAccountObject {
         init (dictionary: [String: Any]) throws {
             self.address = try checkType(dictionary["address"], name: "address")
             self.name = try checkType(dictionary["name"], name: "name")
-            self.decimals = try checkType(dictionary["decimals"], name: "decimals")
+            if dictionary["decimals"] is String {
+                let decimals: String = try checkType(dictionary["decimals"], name: "decimals")
+                self.decimals = Int(decimals)!
+            } else {
+                self.decimals = try checkType(dictionary["decimals"], name: "decimals")
+            }
             self.symbol = try checkType(dictionary["symbol"], name: "symbol")
             if dictionary["price"] is Bool {
                 self.price = nil

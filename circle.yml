@@ -6,8 +6,6 @@ machine:
 dependencies:
   override:
     - carthage version
-  cache_directories:
-    - "Carthage"
 test:
   override:
     - xcodebuild -showsdks

@@ -8,7 +8,6 @@
 
 import Foundation
 import BalanceVectorGraphics
-import Crashlytics
 import NSDateTimeAgo
 
 class SyncButton: View {
@@ -154,7 +153,7 @@ class SyncButton: View {
                 syncManager.sync(userInitiated: true)
                 
                 // Analytics
-                Answers.logContentView(withName: "Synced manually", contentType: nil, contentId: nil, customAttributes: nil)
+                BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Synced manually")
             }
         }
     }

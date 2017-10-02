@@ -1,14 +1,8 @@
 {
-  "iOS" : [
-    {
-      "hash" : "8509fdc6b4da4d449211977c5a0eb0c1e003bd57a78d196f69d1a87948f0d311",
-      "name" : "XCGLogger"
-    }
-  ],
-  "commitish" : "Version_4.0.0",
+  "commitish" : "Version_4.0.0-beta.5",
   "Mac" : [
     {
-      "hash" : "c719fb795fff5d85eb2446bbf1edce58abc6fc8610472b58b9b9ed94dadb4284",
+      "hash" : "8c1bdb14123ddbd95c49abf886d818a8cf4e9c65cb438e07c046f8ab3fb45007",
       "name" : "XCGLogger"
     }
   ]
