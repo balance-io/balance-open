@@ -279,19 +279,19 @@ struct PlaidApi {
                 category = CategoryRepository.si.category(source: .plaid, name1: name1, name2: name2, name3: name3)
             }
             
-            // Initialize a Transaction object to insert the record
-            let transaction = TransactionRepository.si.transaction(source: Source.plaid, sourceTransactionId: pt.transactionId, sourceAccountId: pt.accountId, name: pt.name, currency: "USD", amount: amount, altCurrency: nil, altAmount: nil, date: date, pending: pt.pending, address: pt.address, city: pt.city, state: pt.state, zip: pt.zip, latitude: pt.latitude, longitude: pt.longitude, phone: nil, categoryId: category?.categoryId, institution: institution)
-            
-            // Record pending transactions to prune records
-            if let transaction = transaction, transaction.pending == true {
-                pendingSourceTransactionIds.insert(transaction.sourceTransactionId)
-            } else if let transaction = transaction {
-                sourceTransactionIds.insert(transaction.sourceTransactionId)
-                
-                // Record all institutionIds to find pending transactions in the db, otherwise if no
-                // pending transactions were returned by Plaid, we'll never prune the local ones.
-                institutionIds.insert(transaction.institutionId)
-            }
+//            // Initialize a Transaction object to insert the record
+//            let transaction = TransactionRepository.si.transaction(source: Source.plaid, sourceTransactionId: pt.transactionId, sourceAccountId: pt.accountId, name: pt.name, currency: "USD", amount: amount, altCurrency: nil, altAmount: nil, date: date, pending: pt.pending, address: pt.address, city: pt.city, state: pt.state, zip: pt.zip, latitude: pt.latitude, longitude: pt.longitude, phone: nil, categoryId: category?.categoryId, institution: institution)
+//
+//            // Record pending transactions to prune records
+//            if let transaction = transaction, transaction.pending == true {
+//                pendingSourceTransactionIds.insert(transaction.sourceTransactionId)
+//            } else if let transaction = transaction {
+//                sourceTransactionIds.insert(transaction.sourceTransactionId)
+//
+//                // Record all institutionIds to find pending transactions in the db, otherwise if no
+//                // pending transactions were returned by Plaid, we'll never prune the local ones.
+//                institutionIds.insert(transaction.institutionId)
+//            }
         }
         
         var pendingTransactionsFromDb = [Transaction]()

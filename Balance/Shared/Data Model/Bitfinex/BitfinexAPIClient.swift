@@ -66,16 +66,12 @@ internal extension BitfinexAPIClient
             throw APICredentialsComponents.Error.noCredentials
         }
         
-        
-        let body = try! JSONSerialization.data(withJSONObject: [:], options: [])
-        
         let requestPath = "v2/auth/r/wallets"
-        let headers = try AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, body: body)
+        let headers = try AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, body: nil)
         let url = self.baseURL.appendingPathComponent(requestPath)
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.httpBody = body
         request.add(headers: headers.dictionary)
         request.setValue("application/json", forHTTPHeaderField: "content-type")
         
@@ -94,8 +90,8 @@ internal extension BitfinexAPIClient
                 if case 200...299 = httpResponse.statusCode {
                     guard let walletsJSON = json as? [[Any]] else
                     {
-                        // return invalid json
-                        fatalError()
+                        completionHandler(nil, APIError.invalidJSON)
+                        return
                     }
                     
                     // Build wallets
@@ -111,6 +107,77 @@ internal extension BitfinexAPIClient
                     }
                     
                     completionHandler(wallets, nil)
+                } else if case 400...402 = httpResponse.statusCode {
+                    let error = APIError.response(httpResponse: httpResponse, data: data)
+                    completionHandler(nil, error)
+                    throw APICredentialsComponents.Error.invalidSecret(message: "One or more of your credentials is invalid")
+                } else if case 403...499 = httpResponse.statusCode {
+                    let error = APIError.response(httpResponse: httpResponse, data: data)
+                    completionHandler(nil, error)
+                    throw APICredentialsComponents.Error.missingPermissions
+                } else {
+                    let error = APIError.response(httpResponse: httpResponse, data: data)
+                    completionHandler(nil, error)
+                }
+            } catch {}
+        }
+        
+        task.resume()
+    }
+}
+
+// MARK: Transactions
+
+internal extension BitfinexAPIClient
+{
+    internal func fetchTransactions(_ completionHandler: @escaping (_ transactions: [Transaction]?, _ error: APIError?) -> Void) throws
+    {
+        guard let unwrappedCredentials = self.credentials else
+        {
+            throw APICredentialsComponents.Error.noCredentials
+        }
+        
+        let requestPath = "v2/auth/r/movements/hist"
+        let headers = try AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, body: nil)
+        let url = self.baseURL.appendingPathComponent(requestPath)
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.add(headers: headers.dictionary)
+        request.setValue("application/json", forHTTPHeaderField: "content-type")
+        
+        // Perform request
+        let task = self.session.dataTask(with: request) { (data, response, error) in
+            do
+            {
+                guard let httpResponse = response as? HTTPURLResponse,
+                      let unwrappedData = data,
+                      let json = try? JSONSerialization.jsonObject(with: unwrappedData, options: []) else
+                {
+                    completionHandler(nil, APIError.invalidJSON)
+                    return
+                }
+
+                if case 200...299 = httpResponse.statusCode {
+                    guard let transactionsJSON = json as? [[Any]] else
+                    {
+                        completionHandler(nil, APIError.invalidJSON)
+                        return
+                    }
+                    
+                    // Build transactions
+                    var transactions = [BitfinexAPIClient.Transaction]()
+                    for transactionJSON in transactionsJSON
+                    {
+                        do
+                        {
+                            let transaction = try Transaction(data: transactionJSON)
+                            transactions.append(transaction)
+                        }
+                        catch { }
+                    }
+                    
+                    completionHandler(transactions, nil)
                 } else if case 400...402 = httpResponse.statusCode {
                     let error = APIError.response(httpResponse: httpResponse, data: data)
                     completionHandler(nil, error)

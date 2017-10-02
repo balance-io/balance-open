@@ -1,0 +1,10 @@
+{
+    "withdrawalNumber" : 134933,
+    "currency" : "BTC",
+    "address" : "1N2i5n8DwTGzUq2Vmn9TUL8J1vdr1XBDFg",
+    "amount" : "5.00010000",
+    "timestamp" : 1399267904,
+    "status" : "COMPLETE",
+    "txid" : "36e483efa6aff9fd53a235177579d98451c4eb237c210e66cd2b9a2d4a988f8e",
+    "ipAddress" : "123"
+}

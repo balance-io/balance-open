@@ -173,7 +173,21 @@ class Syncer {
                     log.debug("Finished pulling accounts for \(institution)")
                 }
                 
-                performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                for account in AccountRepository.si.accounts(institutionId: institution.institutionId)
+                {
+                    CoinbaseApi.fetchTransactions(accountID: account.sourceAccountId, institution: institution, completionHandler: { (transactions, error) in
+                        if let unwrappedTransactions = transactions {
+                            for transaction in unwrappedTransactions
+                            {
+                                let amount = self.paddedInteger(for: transaction.amount, currencyCode: transaction.currencyCode)
+                                
+                                TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: transaction.identifier, sourceAccountId: account.sourceAccountId, name: transaction.identifier, currency: transaction.currencyCode, amount: amount, date: transaction.createdAt, categoryID: nil, institution: institution)
+                            }
+                        }
+                        
+                        performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                    })
+                }
             }
         case .gdax:
             guard let accessToken = institution.accessToken else {
@@ -202,16 +216,8 @@ class Syncer {
                     }
                     
                     for account in unwrappedAccounts {
-                        let decimals = Currency.rawValue(shortName: account.currencyCode).decimals
-                        
-                        // Calculate the integer value of the balance based on the decimals
-                        var balance = Decimal(account.balance)
-                        balance = balance * Decimal(pow(10.0, Double(decimals)))
-                        let currentBalance = (balance as NSDecimalNumber).intValue
-                        
-                        balance = Decimal(account.availableBalance)
-                        balance = balance * Decimal(pow(10.0, Double(decimals)))
-                        let availableBalance = (balance as NSDecimalNumber).intValue
+                        let currentBalance = self.paddedInteger(for: account.balance, currencyCode: account.currencyCode)
+                        let availableBalance = self.paddedInteger(for: account.availableBalance, currencyCode: account.currencyCode)
                         
                         // Initialize an Account object to insert the record
                         AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: account.identifier, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: account.currencyCode, currency: account.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
@@ -251,20 +257,28 @@ class Syncer {
                     }
                     
                     for wallet in unwrappedWallets {
-                        let decimals = Currency.rawValue(shortName: wallet.currencyCode).decimals
-                        
-                        // Calculate the integer value of the balance based on the decimals
-                        var balance = Decimal(wallet.balance)
-                        balance = balance * Decimal(pow(10.0, Double(decimals)))
-                        let currentBalance = (balance as NSDecimalNumber).intValue
-                        
+                        let currentBalance = self.paddedInteger(for: wallet.balance, currencyCode: wallet.currencyCode)
                         let availableBalance = currentBalance
                         
                         // Initialize an Account object to insert the record
-                        AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: wallet.currencyCode, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: wallet.currencyCode, currency: wallet.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
+                        AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: wallet.currencyCode, sourceInstitutionId: institution.sourceInstitutionId, accountTypeId: .exchange, accountSubTypeId: nil, name: wallet.currencyCode, currency: wallet.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
                     }
                     
-                    performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                    // Sync transactions
+                    try! self.bitfinexApiClient.fetchTransactions({ (transactions, error) in
+                        if let unwrappedTransactions = transactions
+                        {
+                            for transaction in unwrappedTransactions
+                            {
+                                let amount = self.paddedInteger(for: transaction.amount, currencyCode: transaction.currencyCode)
+                                let identifier = "\(transaction.address)\(transaction.amount)\(transaction.movementTimestamp)"
+
+                                TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: identifier, sourceAccountId: transaction.currencyCode, name: identifier, currency: transaction.currencyCode, amount: amount, date: transaction.createdAt, categoryID: nil, institution: institution)
+                            }
+                        }
+                        
+                        performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                    })
                 }
             } catch {
                 syncingErrors.append(error)
@@ -299,13 +313,7 @@ class Syncer {
                     }
                     
                     for account in unwrappedAccounts {
-                        let decimals = Currency.rawValue(shortName: account.currencyCode).decimals
-                        
-                        // Calculate the integer value of the balance based on the decimals
-                        var balance = Decimal(account.balance)
-                        balance = balance * Decimal(pow(10.0, Double(decimals)))
-                        let currentBalance = (balance as NSDecimalNumber).intValue
-                        
+                        let currentBalance = self.paddedInteger(for: account.balance, currencyCode: account.currencyCode)
                         let availableBalance = currentBalance
                         
                         // Initialize an Account object to insert the record
@@ -349,7 +357,17 @@ class Syncer {
                 self.cancelSync(errors: syncingErrors)
                 return
             }
-            self.syncInstitutions(remainingInstitutions, startDate: startDate, success: syncingSuccess, errors: syncingErrors)
+            
+            poloniexApi.fetchTransactions(institution: institution, completion: { (success, error) in
+                if let error = error {
+                    syncingSuccess = false
+                
+                    syncingErrors.append(error)
+                    log.error("Error pulling transactions for \(institution): \(error)")
+                }
+                
+                self.syncInstitutions(remainingInstitutions, startDate: startDate, success: syncingSuccess, errors: syncingErrors)
+            })
         }
     }
     
@@ -396,6 +414,17 @@ class Syncer {
             
             log.debug("Syncing completed")
         }
+    }
+    
+    // MARK: Helpers
+    
+    private func paddedInteger(for amount: Double, currencyCode: String) -> Int {
+        let decimals = Currency.rawValue(shortName: currencyCode).decimals
+        
+        var amountDecimal = Decimal(amount)
+        amountDecimal = amountDecimal * Decimal(pow(10.0, Double(decimals)))
+        
+        return (amountDecimal as NSDecimalNumber).intValue
     }
 }
 

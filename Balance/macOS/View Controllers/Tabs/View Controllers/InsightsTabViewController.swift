@@ -746,15 +746,15 @@ class InsightsTabViewController: NSViewController, InsightsTabViewModelDelegate,
             if TableIndex(section: section, row: row) == tableView.selectedIndex, let transactions = viewModel.newMerchantsData[viewModel.newMerchantsRange.rawValue][section] {
                 let transaction = transactions[row]
                 var extraHeight: CGFloat = 0.0
-                if transaction.hasLocation {
-                    extraHeight = 207.0
-                } else {
+//                if transaction.hasLocation {
+//                    extraHeight = 207.0
+//                } else {
                     if transaction.categoryId == nil {
                         extraHeight = 56.0
                     } else {
                         extraHeight = 85.0
                     }
-                }
+//                }
                 return CurrentTheme.transactions.cell.height + extraHeight
             } else {
                 return CurrentTheme.transactions.cell.height
@@ -1018,20 +1018,20 @@ class InsightsTabViewController: NSViewController, InsightsTabViewModelDelegate,
             institutionInitialsCircleView.stringValue = updatedModel.institution?.initials ?? ""
             
             amountField.attributedStringValue = centsToStringFormatted(-updatedModel.amount)
-            if updatedModel.hasLocation, let address = updatedModel.address {
-                centerNameField.stringValue = ""
-                nameField.stringValue = updatedModel.displayName
-                
-                if let city = updatedModel.city, let state = updatedModel.state, let zip = updatedModel.zip {
-                    addressField.stringValue = "\(address.capitalizedStringIfAllCaps) \(city.capitalizedStringIfAllCaps) \(state) \(zip)"
-                } else {
-                    addressField.stringValue = address.capitalizedStringIfAllCaps
-                }
-                
-                centerNameField.isHidden = true
-                nameField.isHidden = false
-                addressField.isHidden = false
-            } else {
+//            if updatedModel.hasLocation, let address = updatedModel.address {
+//                centerNameField.stringValue = ""
+//                nameField.stringValue = updatedModel.displayName
+//
+//                if let city = updatedModel.city, let state = updatedModel.state, let zip = updatedModel.zip {
+//                    addressField.stringValue = "\(address.capitalizedStringIfAllCaps) \(city.capitalizedStringIfAllCaps) \(state) \(zip)"
+//                } else {
+//                    addressField.stringValue = address.capitalizedStringIfAllCaps
+//                }
+//
+//                centerNameField.isHidden = true
+//                nameField.isHidden = false
+//                addressField.isHidden = false
+//            } else {
                 centerNameField.stringValue = updatedModel.displayName
                 nameField.stringValue = ""
                 addressField.stringValue = ""
@@ -1039,7 +1039,7 @@ class InsightsTabViewController: NSViewController, InsightsTabViewModelDelegate,
                 centerNameField.isHidden = false
                 nameField.isHidden = true
                 addressField.isHidden = true
-            }
+//            }
             
             self.toolTip = updatedModel.displayName
         }
@@ -1131,40 +1131,41 @@ class InsightsTabViewController: NSViewController, InsightsTabViewModelDelegate,
             }
             
             
-            if model.hasLocation, let latitude = model.latitude, let longitude = model.longitude {
-                accountContainer.cornerRadius = 0.0
-                
-                mapView = NoHitMapView()
-                mapView.wantsLayer = true
-                mapView.isZoomEnabled = false
-                mapView.isScrollEnabled = false
-                mapView.isPitchEnabled = false
-                mapView.isRotateEnabled = false
-                infoContainer.addSubview(mapView, positioned: .below, relativeTo: accountContainer)
-                mapView.snp.makeConstraints { make in
-                    make.leading.equalTo(bottomContainer)
-                    make.trailing.equalTo(bottomContainer)
-                    make.top.equalTo(bottomContainer)
-                    make.bottom.equalTo(bottomContainer)
-                }
-                
-                var coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                let annotation = Annotation(coordinate: coordinate)
-                mapView.addAnnotation(annotation)
-                let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
-                coordinate.latitude += 0.0025
-                let region = MKCoordinateRegion(center: coordinate, span: span)
-                mapView.setRegion(region, animated: false)
-                
-                if hasCategory {
-                    categoryView.snp.makeConstraints { make in
-                        make.bottom.equalTo(infoContainer)
-                        make.leading.equalTo(infoContainer)
-                        make.trailing.equalTo(infoContainer)
-                        make.height.equalTo(30)
-                    }
-                }
-            } else if hasCategory {
+//            if model.hasLocation, let latitude = model.latitude, let longitude = model.longitude {
+//                accountContainer.cornerRadius = 0.0
+//
+//                mapView = NoHitMapView()
+//                mapView.wantsLayer = true
+//                mapView.isZoomEnabled = false
+//                mapView.isScrollEnabled = false
+//                mapView.isPitchEnabled = false
+//                mapView.isRotateEnabled = false
+//                infoContainer.addSubview(mapView, positioned: .below, relativeTo: accountContainer)
+//                mapView.snp.makeConstraints { make in
+//                    make.leading.equalTo(bottomContainer)
+//                    make.trailing.equalTo(bottomContainer)
+//                    make.top.equalTo(bottomContainer)
+//                    make.bottom.equalTo(bottomContainer)
+//                }
+//
+//                var coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+//                let annotation = Annotation(coordinate: coordinate)
+//                mapView.addAnnotation(annotation)
+//                let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+//                coordinate.latitude += 0.0025
+//                let region = MKCoordinateRegion(center: coordinate, span: span)
+//                mapView.setRegion(region, animated: false)
+//
+//                if hasCategory {
+//                    categoryView.snp.makeConstraints { make in
+//                        make.bottom.equalTo(infoContainer)
+//                        make.leading.equalTo(infoContainer)
+//                        make.trailing.equalTo(infoContainer)
+//                        make.height.equalTo(30)
+//                    }
+//                }
+//            } else
+            if hasCategory {
                 categoryView.snp.makeConstraints { make in
                     make.top.equalTo(accountContainer.snp.bottom).offset(3)
                     make.leading.equalTo(institutionInitialsCircleView).offset(-5)

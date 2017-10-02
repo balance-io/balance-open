@@ -92,13 +92,14 @@ class PoloniexApi: ExchangeApi {
         }
         guard let secret = secretField, let key = keyField else {
             assert(false, "wrong fields are passed into the poloniex auth, we require secret and key fields and values")
+
             closeBlock(false, "wrong fields are passed into the poloniex auth, we require secret and key fields and values", nil)
             return
         }
         do {
             try authenticate(secret: secret, key: key, closeBlock: closeBlock)
         } catch {
-            
+        
         }
     }
     
@@ -386,5 +387,82 @@ extension Institution {
                 }
             }
         }
+    }
+}
+
+// MARK: Transactions
+
+internal extension PoloniexApi {
+    internal func fetchTransactions(institution: Institution, completion: @escaping SuccessErrorBlock) {
+        let parameters: [String : String] = [
+            "command" : Commands.returnDepositsWithdrawals.rawValue,
+            "start" : "0",
+            "end" : "\(Date().timeIntervalSince1970)"
+        ]
+        
+        let requestInfo = createRequestBodyandHash(params: parameters, secret: secret, key: key)
+        let urlRequest = assembleTradingRequest(key: key, body: requestInfo.body, hashBody: requestInfo.signedBody)
+        
+        let datatask = certValidatedSession.dataTask(with: urlRequest) { data, response, error in
+            do {
+                if let safeData = data {
+                    //create accounts
+                    let poloniexTransactions = try self.parsePoloniexTransactions(data: safeData)
+                    self.processPoloniexTransactions(transactions: poloniexTransactions, institution: institution)
+                    
+                    DispatchQueue.main.async {
+                        completion(true, error)
+                    }
+                } else {
+                    print("Poloniex Error: \(String(describing: error))")
+                    print("Poloniex Data: \(String(describing: data))")
+                    
+                    DispatchQueue.main.async {
+                        completion(false, error)
+                    }
+                }
+            }
+            catch {
+                log.error("Failed to Poloniex balance data: \(error)")
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
+            }
+        }
+        datatask.resume()
+    }
+    
+    fileprivate func parsePoloniexTransactions(data: Data) throws -> [PoloniexApi.Transaction] {
+        guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String : AnyObject] else {
+            throw PoloniexApi.CredentialsError.bodyNotValidJSON
+        }
+        
+        var transactions = [PoloniexApi.Transaction]()
+        
+        if let depositsJSON = json["deposits"] as? [[String : Any]] {
+            for depositJSON in depositsJSON {
+                do {
+                    let deposit = try Transaction(depositDictionary: depositJSON)
+                    transactions.append(deposit)
+                }
+                catch { }
+            }
+        }
+        
+        if let withdrawalsJSON = json["withdrawals"] as? [[String : Any]] {
+            for withdrawalJSON in withdrawalsJSON {
+                do {
+                    let withdrawal = try Transaction(withdrawalDictionary: withdrawalJSON)
+                    transactions.append(withdrawal)
+                }
+                catch { }
+            }
+        }
+        
+        return transactions
+    }
+    
+    fileprivate func processPoloniexTransactions(transactions: [PoloniexApi.Transaction], institution: Institution) {
+        // TODO: Save transactions
     }
 }

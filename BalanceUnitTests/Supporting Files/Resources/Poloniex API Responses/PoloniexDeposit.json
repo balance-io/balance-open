@@ -1,0 +1,9 @@
+{
+    "currency" : "BTC",
+    "address" : "123",
+    "amount" : "0.01006132",
+    "confirmations" : 10,
+    "txid" : "17f819a91369a9ff6c4a34216d434597cfc1b4a3d0489b46bd6f924137a47701",
+    "timestamp" : 1399305798,
+    "status" : "COMPLETE"
+}

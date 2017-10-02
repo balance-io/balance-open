@@ -799,15 +799,15 @@ class NotificationsTabViewController: NSViewController, NotificationsTabViewMode
         if TableIndex(section: section, row: row) == tableView.selectedIndex, let transactions = viewModel.data[section] {
             let transaction = transactions[row]
             var extraHeight: CGFloat = 0.0
-            if transaction.hasLocation {
-                extraHeight = 212.0
-            } else {
-                if transaction.categoryId == nil {
-                    extraHeight = 63.0
-                } else {
-                    extraHeight = 90.0
-                }
-            }
+//            if transaction.hasLocation {
+//                extraHeight = 212.0
+//            } else {
+//                if transaction.categoryId == nil {
+//                    extraHeight = 63.0
+//                } else {
+//                    extraHeight = 90.0
+//                }
+//            }
             return CurrentTheme.feed.cell.height + extraHeight
         } else {
             return CurrentTheme.feed.cell.height

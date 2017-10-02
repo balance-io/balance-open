@@ -30,7 +30,7 @@ struct CoinbaseApi {
     @discardableResult static func authenticate() -> Bool {
         let redirectUri = "balancemymoney%3A%2F%2Fcoinbase"
         let responseType = "code"
-        let scope = "wallet%3Auser%3Aread,wallet%3Aaccounts%3Aread"
+        let scope = "wallet%3Auser%3Aread,wallet%3Aaccounts%3Aread,wallet%3Atransactions%3Aread"
         let state = String.random(32)
         let url = "https://www.coinbase.com/oauth/authorize?client_id=\(clientId)&redirect_uri=\(redirectUri)&state=\(state)&response_type=\(responseType)&scope=\(scope)&account=all"
         
@@ -76,9 +76,9 @@ struct CoinbaseApi {
                 guard let data = maybeData, maybeError == nil else {
                     throw BalanceError.noData
                 }
-
+                
                 // Try to parse the JSON
-                guard let JSONResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.length > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.length > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval else {
+                guard let JSONResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.length > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.length > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval, let scope = JSONResult["scope"] as? String else {
                     throw BalanceError.jsonDecoding
                 }
                 
@@ -87,6 +87,7 @@ struct CoinbaseApi {
                 institution?.accessToken = accessToken
                 institution?.refreshToken = refreshToken
                 institution?.tokenExpireDate = Date().addingTimeInterval(expiresIn - 10.0)
+                institution?.apiScope = scope
                 
                 // Sync accounts
                 if let institution = institution {
@@ -341,4 +342,72 @@ extension Institution {
     var isTokenExpired: Bool {
         return Date().timeIntervalSince(tokenExpireDate) > 0.0
     }
+    
+    // Scope
+    fileprivate static let apiScopeKey = "Institution.apiScopeKey"
+    fileprivate var apiScope: String? {
+        get {
+            return UserDefaults.standard.string(forKey: Institution.apiScopeKey)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Institution.apiScopeKey)
+        }
+    }
 }
+
+// MARK: Transactions
+
+internal extension CoinbaseApi {
+    internal static func fetchTransactions(accountID: String, institution: Institution, completionHandler: @escaping (_ transactions: [CoinbaseApi.Transaction]?, _ error: Error?) -> Void) {
+        guard let accessToken = institution.accessToken else {
+            completionHandler(nil, "missing access token")
+            return
+        }
+        
+        let urlString = "https://api.coinbase.com/v2/accounts/\(accountID)/transactions"
+        let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        request.timeoutInterval = connectionTimeout
+        request.cachePolicy = .reloadIgnoringLocalCacheData
+        request.httpMethod = "GET"
+        request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+        request.setValue("2017-06-14", forHTTPHeaderField: "CB-VERSION")
+        
+        let task = certValidatedSession.dataTask(with: request) { data, response, error in
+            do {
+                guard let unwrappedData = data,
+                          error == nil else {
+                    throw "No data"
+                }
+                
+                // Try to parse the JSON
+                guard let JSONResult = try JSONSerialization.jsonObject(with: unwrappedData, options: []) as? [String : Any],
+                      let transactionsJSON = JSONResult["data"] as? [[String: AnyObject]] else {
+                    throw "JSON decoding failed"
+                }
+                
+                // Transactions
+                var transactions = [CoinbaseApi.Transaction]()
+                for transactionJSON in transactionsJSON {
+                    do {
+                        let transaction = try CoinbaseApi.Transaction(dictionary: transactionJSON)
+                        transactions.append(transaction)
+                    } catch {
+                        log.error("Failed to parse account data: \(error)")
+                    }
+                }
+                
+                DispatchQueue.main.async {
+                    completionHandler(transactions, nil)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
+            }
+        }
+        
+        task.resume()
+    }
+}
+
