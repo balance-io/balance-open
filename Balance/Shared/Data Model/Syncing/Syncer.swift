@@ -313,13 +313,7 @@ class Syncer {
                     }
                     
                     for account in unwrappedAccounts {
-                        let decimals = Currency.rawValue(shortName: account.currencyCode).decimals
-                        
-                        // Calculate the integer value of the balance based on the decimals
-                        var balance = Decimal(account.balance)
-                        balance = balance * Decimal(pow(10.0, Double(decimals)))
-                        let currentBalance = (balance as NSDecimalNumber).intValue
-                        
+                        let currentBalance = self.paddedInteger(for: account.balance, currencyCode: account.currencyCode)
                         let availableBalance = currentBalance
                         
                         // Initialize an Account object to insert the record
