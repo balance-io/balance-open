@@ -178,10 +178,6 @@ internal final class AddGDAXAccountViewController: UIViewController
                 }
             })
         }
-        catch GDAXAPIClient.CredentialsError.invalidSecret
-        {
-            // TODO: Error for invalid secret
-        }
         catch
         {
             // TODO: Generic error
