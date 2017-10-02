@@ -867,7 +867,7 @@
 		A4E7680F1F67F049002B1AE1 /* APICredentialsComponentsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICredentialsComponentsError.swift; sourceTree = "<group>"; };
 		AA4776581DEA901900110685 /* InstitutionInitialsCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionInitialsCircleView.swift; sourceTree = "<group>"; };
 		AA5031A31DF2334000842A7D /* HeaderBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderBackgroundView.swift; sourceTree = "<group>"; };
-		DC1A64941B867B1F009356A0 /* Balance Open.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Balance Open.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC1A64941B867B1F009356A0 /* BalanceOpen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BalanceOpen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC1A64981B867B1F009356A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC1A64991B867B1F009356A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC1A649E1B867B1F009356A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -1979,7 +1979,7 @@
 		DC1A64951B867B1F009356A0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DC1A64941B867B1F009356A0 /* Balance Open.app */,
+				DC1A64941B867B1F009356A0 /* BalanceOpen.app */,
 				DC65EF8F1CE3E2CD006C9373 /* Bal Helper.app */,
 				F1F9487F1D8049B800AB30B2 /* BalanceUnitTests.xctest */,
 				535529D81ED723C600DD95F9 /* Balance.app */,
@@ -2153,7 +2153,7 @@
 			);
 			name = BalancemacOS;
 			productName = Bal;
-			productReference = DC1A64941B867B1F009356A0 /* Balance Open.app */;
+			productReference = DC1A64941B867B1F009356A0 /* BalanceOpen.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DC65EF8E1CE3E2CD006C9373 /* Bal Helper */ = {
@@ -3054,7 +3054,7 @@
 				OTHER_SWIFT_FLAGS = "-D DEBUG -D APPSTORE -Xfrontend -debug-time-function-bodies -Onone";
 				PRODUCT_BUNDLE_IDENTIFIER = "software.balanced.balance-open";
 				PRODUCT_MODULE_NAME = BalancemacOS;
-				PRODUCT_NAME = "Balance Open";
+				PRODUCT_NAME = BalanceOpen;
 				PROVISIONING_PROFILE = "";
 				SWIFT_INCLUDE_PATHS = "$(PROJECT_DIR)/Balance/Shared/Frameworks/Zip/minizip";
 				SWIFT_OBJC_BRIDGING_HEADER = "Balance/macOS/Supporting Files/Bal-Bridging-Header-macOS.h";
@@ -3086,7 +3086,7 @@
 				OTHER_SWIFT_FLAGS = "-D RELEASE -D APPSTORE";
 				PRODUCT_BUNDLE_IDENTIFIER = "software.balanced.balance-open";
 				PRODUCT_MODULE_NAME = BalancemacOS;
-				PRODUCT_NAME = "Balance Open";
+				PRODUCT_NAME = BalanceOpen;
 				PROVISIONING_PROFILE = "";
 				SWIFT_INCLUDE_PATHS = "$(PROJECT_DIR)/Balance/Shared/Frameworks/Zip/minizip";
 				SWIFT_OBJC_BRIDGING_HEADER = "Balance/macOS/Supporting Files/Bal-Bridging-Header-macOS.h";
@@ -3219,7 +3219,7 @@
 				OTHER_SWIFT_FLAGS = "-D DEBUG -D APPSTORE";
 				PRODUCT_BUNDLE_IDENTIFIER = "software.balanced.balance-open";
 				PRODUCT_MODULE_NAME = BalancemacOS;
-				PRODUCT_NAME = "Balance Open";
+				PRODUCT_NAME = BalanceOpen;
 				PROVISIONING_PROFILE = "";
 				SWIFT_INCLUDE_PATHS = "$(PROJECT_DIR)/Balance/Shared/Frameworks/Zip/minizip";
 				SWIFT_OBJC_BRIDGING_HEADER = "Balance/macOS/Supporting Files/Bal-Bridging-Header-macOS.h";
