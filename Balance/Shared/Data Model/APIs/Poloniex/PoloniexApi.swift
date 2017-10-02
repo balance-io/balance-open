@@ -408,12 +408,17 @@ internal extension PoloniexApi {
                     //create accounts
                     let poloniexTransactions = try self.parsePoloniexTransactions(data: safeData)
                     self.processPoloniexTransactions(transactions: poloniexTransactions, institution: institution)
+                    
+                    DispatchQueue.main.async {
+                        completion(true, error)
+                    }
                 } else {
                     print("Poloniex Error: \(String(describing: error))")
                     print("Poloniex Data: \(String(describing: data))")
-                }
-                DispatchQueue.main.async {
-                    completion(false, error)
+                    
+                    DispatchQueue.main.async {
+                        completion(false, error)
+                    }
                 }
             }
             catch {
