@@ -12,7 +12,7 @@ import UIKit
 internal final class AddAccountViewController: UIViewController
 {
     // Fileprivate
-    fileprivate let viewModel = AddAccountViewModel()
+    fileprivate let viewModel = NewAccountListViewModel()
     
     // Private
     private let tableView = UITableView(frame: CGRect.zero, style: .plain)
@@ -99,13 +99,9 @@ extension AddAccountViewController: UITableViewDelegate
         case .coinbase:
             self.dismiss(animated: true, completion: nil)
             CoinbaseApi.authenticate()
-        case .gdax:
-            let addGDAXAccountViewController = AddGDAXAccountViewController()
-            self.navigationController?.pushViewController(addGDAXAccountViewController, animated: true)
-        case .poloniex:
-            let addPoloniexAccountViewController = AddPoloniexAccountViewController()
-            self.navigationController?.pushViewController(addPoloniexAccountViewController, animated: true)
-        default:()
+        default:
+            let newCredentialBasedAccountViewController = AddCredentialBasedAccountViewController(source: source)
+            self.navigationController?.pushViewController(newCredentialBasedAccountViewController, animated: true)
         }
     }
     

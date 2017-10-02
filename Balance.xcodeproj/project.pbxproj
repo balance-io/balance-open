@@ -398,7 +398,7 @@
 		A45433561F8250670045DD95 /* AddPoloniexAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45433501F82504A0045DD95 /* AddPoloniexAccountViewController.swift */; };
 		A45433571F8250670045DD95 /* InstitutionSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45433491F82504A0045DD95 /* InstitutionSettingsViewController.swift */; };
 		A45433581F8250670045DD95 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A454334A1F82504A0045DD95 /* SettingsViewController.swift */; };
-		A454335C1F8266EA0045DD95 /* AddAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A454335A1F8266E30045DD95 /* AddAccountViewModel.swift */; };
+		A454335C1F8266EA0045DD95 /* NewAccountListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A454335A1F8266E30045DD95 /* NewAccountListViewModel.swift */; };
 		A454335D1F8266EA0045DD95 /* InstitutionSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A454335B1F8266E30045DD95 /* InstitutionSettingsViewModel.swift */; };
 		A454336B1F8267580045DD95 /* ApplicationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45433691F8267510045DD95 /* ApplicationConfiguration.swift */; };
 		A454336C1F8267580045DD95 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = A454336A1F8267510045DD95 /* UserPreferences.swift */; };
@@ -410,6 +410,8 @@
 		A45433721F8267640045DD95 /* Value1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45433661F8267010045DD95 /* Value1TableViewCell.swift */; };
 		A45433731F8267640045DD95 /* TableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45433671F8267010045DD95 /* TableData.swift */; };
 		A46DBC841F69B2C3006F4247 /* BitfinexCredentialsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46DBC831F69B2C3006F4247 /* BitfinexCredentialsTests.swift */; };
+		A47D03B11F82754A0032AD38 /* AddCredentialBasedAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47D03B01F82754A0032AD38 /* AddCredentialBasedAccountViewController.swift */; };
+		A47D03B31F827CB30032AD38 /* NewAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47D03B21F827CB30032AD38 /* NewAccountViewModel.swift */; };
 		A493B9391F68137E0074ACCC /* APICredentialsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B9381F68137E0074ACCC /* APICredentialsComponents.swift */; };
 		A493B93A1F68137E0074ACCC /* APICredentialsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B9381F68137E0074ACCC /* APICredentialsComponents.swift */; };
 		A493B93C1F6819600074ACCC /* BitfinexAuthHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B93B1F6819600074ACCC /* BitfinexAuthHeaders.swift */; };
@@ -821,7 +823,7 @@
 		A454334C1F82504A0045DD95 /* AddAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
 		A454334E1F82504A0045DD95 /* AddGDAXAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGDAXAccountViewController.swift; sourceTree = "<group>"; };
 		A45433501F82504A0045DD95 /* AddPoloniexAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPoloniexAccountViewController.swift; sourceTree = "<group>"; };
-		A454335A1F8266E30045DD95 /* AddAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountViewModel.swift; sourceTree = "<group>"; };
+		A454335A1F8266E30045DD95 /* NewAccountListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAccountListViewModel.swift; sourceTree = "<group>"; };
 		A454335B1F8266E30045DD95 /* InstitutionSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionSettingsViewModel.swift; sourceTree = "<group>"; };
 		A454335F1F8267010045DD95 /* MultilineTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTitleView.swift; sourceTree = "<group>"; };
 		A45433611F8267010045DD95 /* Reuseable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reuseable.swift; sourceTree = "<group>"; };
@@ -833,6 +835,8 @@
 		A45433691F8267510045DD95 /* ApplicationConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationConfiguration.swift; sourceTree = "<group>"; };
 		A454336A1F8267510045DD95 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		A46DBC831F69B2C3006F4247 /* BitfinexCredentialsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexCredentialsTests.swift; sourceTree = "<group>"; };
+		A47D03B01F82754A0032AD38 /* AddCredentialBasedAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCredentialBasedAccountViewController.swift; sourceTree = "<group>"; };
+		A47D03B21F827CB30032AD38 /* NewAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAccountViewModel.swift; sourceTree = "<group>"; };
 		A493B9381F68137E0074ACCC /* APICredentialsComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICredentialsComponents.swift; sourceTree = "<group>"; };
 		A493B93B1F6819600074ACCC /* BitfinexAuthHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexAuthHeaders.swift; sourceTree = "<group>"; };
 		A493B93E1F681BA00074ACCC /* BitfinexWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexWallet.swift; sourceTree = "<group>"; };
@@ -1257,6 +1261,7 @@
 			children = (
 				53762EB21ED796F100D34A1E /* main.swift */,
 				535529DA1ED723C600DD95F9 /* AppDelegate.swift */,
+				A47D03AC1F8273D40032AD38 /* Models */,
 				A45433591F8266E30045DD95 /* View Models */,
 				53762EAC1ED7768E00D34A1E /* View Controllers */,
 				A454335E1F8267010045DD95 /* Views */,
@@ -1816,6 +1821,7 @@
 			isa = PBXGroup;
 			children = (
 				A454334C1F82504A0045DD95 /* AddAccountViewController.swift */,
+				A47D03AF1F82751A0032AD38 /* AddCredentialBasedAccountViewController */,
 				A454334D1F82504A0045DD95 /* GDAX */,
 				A454334F1F82504A0045DD95 /* Poloniex */,
 			);
@@ -1841,8 +1847,9 @@
 		A45433591F8266E30045DD95 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				A454335A1F8266E30045DD95 /* AddAccountViewModel.swift */,
+				A454335A1F8266E30045DD95 /* NewAccountListViewModel.swift */,
 				A454335B1F8266E30045DD95 /* InstitutionSettingsViewModel.swift */,
+				A47D03B21F827CB30032AD38 /* NewAccountViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1884,6 +1891,21 @@
 				A454336A1F8267510045DD95 /* UserPreferences.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		A47D03AC1F8273D40032AD38 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A47D03AF1F82751A0032AD38 /* AddCredentialBasedAccountViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A47D03B01F82754A0032AD38 /* AddCredentialBasedAccountViewController.swift */,
+			);
+			path = AddCredentialBasedAccountViewController;
 			sourceTree = "<group>";
 		};
 		A4CB29E01F68209E00128E48 /* BitfinexAPIClient */ = {
@@ -2372,7 +2394,7 @@
 				537187E41F4CC23B00E7F9D6 /* GDAXWithdrawal.swift in Sources */,
 				53552A111ED7251200DD95F9 /* AppLock.swift in Sources */,
 				53F078661ED73F0F00E7EDF9 /* Color.swift in Sources */,
-				A454335C1F8266EA0045DD95 /* AddAccountViewModel.swift in Sources */,
+				A454335C1F8266EA0045DD95 /* NewAccountListViewModel.swift in Sources */,
 				535529F71ED7250100DD95F9 /* SyncManager.swift in Sources */,
 				53552A061ED7251200DD95F9 /* Feed.swift in Sources */,
 				53D441E91F44B0DD006967E1 /* FMDatabasePoolAdditionsVariadic.swift in Sources */,
@@ -2437,6 +2459,7 @@
 				534DDFD91F4CCE9400E6C37F /* URLRequest.swift in Sources */,
 				537187DC1F4CC23B00E7F9D6 /* CoinbaseApi.swift in Sources */,
 				A4E4570D1F79018A002E2879 /* Reachability.swift in Sources */,
+				A47D03B11F82754A0032AD38 /* AddCredentialBasedAccountViewController.swift in Sources */,
 				A454336F1F8267640045DD95 /* SegmentedControlTableViewCell.swift in Sources */,
 				A4E768031F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */,
 				53552A231ED7252900DD95F9 /* Date.swift in Sources */,
@@ -2468,6 +2491,7 @@
 				53552A361ED72B5B00DD95F9 /* Pluralize.swift in Sources */,
 				535529DB1ED723C600DD95F9 /* AppDelegate.swift in Sources */,
 				535529FA1ED7250100DD95F9 /* SubscriptionManager.swift in Sources */,
+				A47D03B31F827CB30032AD38 /* NewAccountViewModel.swift in Sources */,
 				A4E457201F79045A002E2879 /* Double.swift in Sources */,
 				537187E21F4CC23B00E7F9D6 /* GDAXErrors.swift in Sources */,
 				A493B93D1F6819600074ACCC /* BitfinexAuthHeaders.swift in Sources */,

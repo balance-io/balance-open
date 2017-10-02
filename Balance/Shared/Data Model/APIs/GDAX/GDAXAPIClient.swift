@@ -168,7 +168,7 @@ extension GDAXAPIClient: ExchangeApi {
     
     func authenticationChallenge(loginStrings: [Field], closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
         
-        assert(loginStrings.count == 3, "number of auth fields should be 2 for Poloniex")
+        assert(loginStrings.count == 3, "number of auth fields should be 3 for GDAX")
         var secretField : String?
         var keyField : String?
         var passphrasField: String?

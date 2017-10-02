@@ -8,7 +8,8 @@
 
 import Foundation
 
-internal final class AddAccountViewModel
+
+internal final class NewAccountListViewModel
 {
     // Internal
     internal var numberOfSources: Int {
