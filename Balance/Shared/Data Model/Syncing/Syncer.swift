@@ -363,7 +363,17 @@ class Syncer {
                 self.cancelSync(errors: syncingErrors)
                 return
             }
-            self.syncInstitutions(remainingInstitutions, startDate: startDate, success: syncingSuccess, errors: syncingErrors)
+            
+            poloniexApi.fetchTransactions(institution: institution, completion: { (success, error) in
+                if let error = error {
+                    syncingSuccess = false
+                
+                    syncingErrors.append(error)
+                    log.error("Error pulling transactions for \(institution): \(error)")
+                }
+                
+                self.syncInstitutions(remainingInstitutions, startDate: startDate, success: syncingSuccess, errors: syncingErrors)
+            })
         }
     }
     
