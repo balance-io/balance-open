@@ -120,7 +120,6 @@
 		535315261F4CEBF2008D6890 /* ApiInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535315251F4CEBF2008D6890 /* ApiInstitution.swift */; };
 		535315271F4CEBF2008D6890 /* ApiInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535315251F4CEBF2008D6890 /* ApiInstitution.swift */; };
 		535529DB1ED723C600DD95F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535529DA1ED723C600DD95F9 /* AppDelegate.swift */; };
-		535529DD1ED723C600DD95F9 /* AccountsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535529DC1ED723C600DD95F9 /* AccountsTabViewController.swift */; };
 		535529E01ED723C600DD95F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 535529DE1ED723C600DD95F9 /* Main.storyboard */; };
 		535529E21ED723C600DD95F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 535529E11ED723C600DD95F9 /* Assets.xcassets */; };
 		535529E51ED723C600DD95F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 535529E31ED723C600DD95F9 /* LaunchScreen.storyboard */; };
@@ -393,6 +392,14 @@
 		A44C76231F7BD9610024476E /* BitfinexTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44C76211F7BD9610024476E /* BitfinexTransaction.swift */; };
 		A44C76251F7BE5280024476E /* BitfinexTransactionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44C76241F7BE5280024476E /* BitfinexTransactionTests.swift */; };
 		A44C76271F7BE5A00024476E /* BitfinexMovement.json in Resources */ = {isa = PBXBuildFile; fileRef = A44C76261F7BE5A00024476E /* BitfinexMovement.json */; };
+		A45433511F82504A0045DD95 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45433461F82504A0045DD95 /* RootViewController.swift */; };
+		A45433521F8250570045DD95 /* AccountsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45433441F82504A0045DD95 /* AccountsListViewController.swift */; };
+		A45433531F82505C0045DD95 /* AccountsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45433451F82504A0045DD95 /* AccountsTabViewController.swift */; };
+		A45433541F8250670045DD95 /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A454334C1F82504A0045DD95 /* AddAccountViewController.swift */; };
+		A45433551F8250670045DD95 /* AddGDAXAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A454334E1F82504A0045DD95 /* AddGDAXAccountViewController.swift */; };
+		A45433561F8250670045DD95 /* AddPoloniexAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45433501F82504A0045DD95 /* AddPoloniexAccountViewController.swift */; };
+		A45433571F8250670045DD95 /* InstitutionSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45433491F82504A0045DD95 /* InstitutionSettingsViewController.swift */; };
+		A45433581F8250670045DD95 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A454334A1F82504A0045DD95 /* SettingsViewController.swift */; };
 		A46DBC841F69B2C3006F4247 /* BitfinexCredentialsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46DBC831F69B2C3006F4247 /* BitfinexCredentialsTests.swift */; };
 		A493B9391F68137E0074ACCC /* APICredentialsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B9381F68137E0074ACCC /* APICredentialsComponents.swift */; };
 		A493B93A1F68137E0074ACCC /* APICredentialsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B9381F68137E0074ACCC /* APICredentialsComponents.swift */; };
@@ -629,7 +636,6 @@
 		535315251F4CEBF2008D6890 /* ApiInstitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiInstitution.swift; sourceTree = "<group>"; };
 		535529D81ED723C600DD95F9 /* Balance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		535529DA1ED723C600DD95F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		535529DC1ED723C600DD95F9 /* AccountsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsTabViewController.swift; sourceTree = "<group>"; };
 		535529DF1ED723C600DD95F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		535529E11ED723C600DD95F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		535529E41ED723C600DD95F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -799,6 +805,14 @@
 		A44C76211F7BD9610024476E /* BitfinexTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexTransaction.swift; sourceTree = "<group>"; };
 		A44C76241F7BE5280024476E /* BitfinexTransactionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexTransactionTests.swift; sourceTree = "<group>"; };
 		A44C76261F7BE5A00024476E /* BitfinexMovement.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BitfinexMovement.json; sourceTree = "<group>"; };
+		A45433441F82504A0045DD95 /* AccountsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListViewController.swift; sourceTree = "<group>"; };
+		A45433451F82504A0045DD95 /* AccountsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsTabViewController.swift; sourceTree = "<group>"; };
+		A45433461F82504A0045DD95 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		A45433491F82504A0045DD95 /* InstitutionSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionSettingsViewController.swift; sourceTree = "<group>"; };
+		A454334A1F82504A0045DD95 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		A454334C1F82504A0045DD95 /* AddAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
+		A454334E1F82504A0045DD95 /* AddGDAXAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGDAXAccountViewController.swift; sourceTree = "<group>"; };
+		A45433501F82504A0045DD95 /* AddPoloniexAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPoloniexAccountViewController.swift; sourceTree = "<group>"; };
 		A46DBC831F69B2C3006F4247 /* BitfinexCredentialsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexCredentialsTests.swift; sourceTree = "<group>"; };
 		A493B9381F68137E0074ACCC /* APICredentialsComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICredentialsComponents.swift; sourceTree = "<group>"; };
 		A493B93B1F6819600074ACCC /* BitfinexAuthHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexAuthHeaders.swift; sourceTree = "<group>"; };
@@ -1351,7 +1365,10 @@
 		53762EAC1ED7768E00D34A1E /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				535529DC1ED723C600DD95F9 /* AccountsTabViewController.swift */,
+				A45433461F82504A0045DD95 /* RootViewController.swift */,
+				A45433431F82504A0045DD95 /* Accounts list */,
+				A454334B1F82504A0045DD95 /* Add Account */,
+				A45433471F82504A0045DD95 /* Settings */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -1747,6 +1764,58 @@
 				A41204C61F71A25F00FD8078 /* KrakenCredentialTests.swift */,
 			);
 			path = KrakenAPIClient;
+			sourceTree = "<group>";
+		};
+		A45433431F82504A0045DD95 /* Accounts list */ = {
+			isa = PBXGroup;
+			children = (
+				A45433441F82504A0045DD95 /* AccountsListViewController.swift */,
+				A45433451F82504A0045DD95 /* AccountsTabViewController.swift */,
+			);
+			path = "Accounts list";
+			sourceTree = "<group>";
+		};
+		A45433471F82504A0045DD95 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A45433481F82504A0045DD95 /* Institution Settings */,
+				A454334A1F82504A0045DD95 /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		A45433481F82504A0045DD95 /* Institution Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A45433491F82504A0045DD95 /* InstitutionSettingsViewController.swift */,
+			);
+			path = "Institution Settings";
+			sourceTree = "<group>";
+		};
+		A454334B1F82504A0045DD95 /* Add Account */ = {
+			isa = PBXGroup;
+			children = (
+				A454334C1F82504A0045DD95 /* AddAccountViewController.swift */,
+				A454334D1F82504A0045DD95 /* GDAX */,
+				A454334F1F82504A0045DD95 /* Poloniex */,
+			);
+			path = "Add Account";
+			sourceTree = "<group>";
+		};
+		A454334D1F82504A0045DD95 /* GDAX */ = {
+			isa = PBXGroup;
+			children = (
+				A454334E1F82504A0045DD95 /* AddGDAXAccountViewController.swift */,
+			);
+			path = GDAX;
+			sourceTree = "<group>";
+		};
+		A454334F1F82504A0045DD95 /* Poloniex */ = {
+			isa = PBXGroup;
+			children = (
+				A45433501F82504A0045DD95 /* AddPoloniexAccountViewController.swift */,
+			);
+			path = Poloniex;
 			sourceTree = "<group>";
 		};
 		A4CB29E01F68209E00128E48 /* BitfinexAPIClient */ = {
@@ -2265,6 +2334,7 @@
 				A41D3E461F6BF81A00FD25B5 /* KrakenAuthHeaders.swift in Sources */,
 				A41D3E4C1F6C32E700FD25B5 /* KrakenAccount.swift in Sources */,
 				53552A221ED7252900DD95F9 /* NSAttributedString.swift in Sources */,
+				A45433551F8250670045DD95 /* AddGDAXAccountViewController.swift in Sources */,
 				535529F21ED724ED00DD95F9 /* AccountsTabViewModel.swift in Sources */,
 				532121A21EE8B91600F4812A /* zip.c in Sources */,
 				537187E51F4CC23B00E7F9D6 /* PoloniexApi.swift in Sources */,
@@ -2280,7 +2350,6 @@
 				53552A071ED7251200DD95F9 /* Insights.swift in Sources */,
 				53D441ED1F44B224006967E1 /* FMDatabasePoolAdditions.m in Sources */,
 				5301A7781F17F86900668099 /* HTTPMethod.swift in Sources */,
-				535529DD1ED723C600DD95F9 /* AccountsTabViewController.swift in Sources */,
 				537187DF1F4CC23B00E7F9D6 /* GDAXAccount.swift in Sources */,
 				53552A7C1ED7347E00DD95F9 /* MockedDefaults.swift in Sources */,
 				53F078671ED740E500E7EDF9 /* SampleResponses.swift in Sources */,
@@ -2300,6 +2369,7 @@
 				A4E768031F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */,
 				53552A231ED7252900DD95F9 /* Date.swift in Sources */,
 				A4E768071F67DC60002B1AE1 /* PoloniexErrors.swift in Sources */,
+				A45433511F82504A0045DD95 /* RootViewController.swift in Sources */,
 				532121A41EE8B91600F4812A /* QuickZip.swift in Sources */,
 				535529FC1ED7250100DD95F9 /* RealmManager.swift in Sources */,
 				A40ABBEA1F6BC5A000383C62 /* KrakenCredentials.swift in Sources */,
@@ -2331,12 +2401,14 @@
 				53552A101ED7251200DD95F9 /* InstitutionsDatabase.swift in Sources */,
 				53552A291ED7252900DD95F9 /* Error.swift in Sources */,
 				53552A331ED72B5700DD95F9 /* FMDatabaseAdditionsVariadic.swift in Sources */,
+				A45433581F8250670045DD95 /* SettingsViewController.swift in Sources */,
 				53552A011ED7251200DD95F9 /* Testing.swift in Sources */,
 				53552A031ED7251200DD95F9 /* Database.swift in Sources */,
 				535529F61ED724FA00DD95F9 /* AsyncOperation.swift in Sources */,
 				53552A001ED7251200DD95F9 /* ObjC.m in Sources */,
 				53552A301ED72B5700DD95F9 /* FMDatabasePool.m in Sources */,
 				53552A241ED7252900DD95F9 /* TimeInterval.swift in Sources */,
+				A45433531F82505C0045DD95 /* AccountsTabViewController.swift in Sources */,
 				53552A121ED7251200DD95F9 /* NetworkStatus.swift in Sources */,
 				535529F91ED7250100DD95F9 /* Syncer.swift in Sources */,
 				53F078651ED73E6D00E7EDF9 /* ThemeGlobals.swift in Sources */,
@@ -2349,8 +2421,10 @@
 				53552A7A1ED7347900DD95F9 /* MockedKeychainManager.swift in Sources */,
 				535529FD1ED7250500DD95F9 /* PlaidDataMockingProtocol.swift in Sources */,
 				A4E457171F7901E7002E2879 /* EthplorerAccount.swift in Sources */,
+				A45433521F8250570045DD95 /* AccountsListViewController.swift in Sources */,
 				535529F41ED724ED00DD95F9 /* NotificationsTabViewModel.swift in Sources */,
 				53F078611ED73B9500E7EDF9 /* RuleTemplate.swift in Sources */,
+				A45433561F8250670045DD95 /* AddPoloniexAccountViewController.swift in Sources */,
 				53552A2E1ED72B5700DD95F9 /* FMDatabase.m in Sources */,
 				A4E4570A1F79010A002E2879 /* BalanceError.swift in Sources */,
 				5301A77B1F17FA4600668099 /* PlaidCategory.swift in Sources */,
@@ -2361,12 +2435,14 @@
 				53552A181ED7251700DD95F9 /* Account.swift in Sources */,
 				53552A201ED7252900DD95F9 /* NotificationCenter.swift in Sources */,
 				53552A211ED7252900DD95F9 /* String.swift in Sources */,
+				A45433571F8250670045DD95 /* InstitutionSettingsViewController.swift in Sources */,
 				53552A1A1ED7251700DD95F9 /* Category.swift in Sources */,
 				53552A341ED72B5700DD95F9 /* FMDatabaseVariadic.swift in Sources */,
 				53D441F01F44B34B006967E1 /* AccountRepository.swift in Sources */,
 				53762EB31ED796F100D34A1E /* main.swift in Sources */,
 				53552A1B1ED7251700DD95F9 /* Transaction.swift in Sources */,
 				A4E4571D1F790388002E2879 /* CoinbaseError.swift in Sources */,
+				A45433541F8250670045DD95 /* AddAccountViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
