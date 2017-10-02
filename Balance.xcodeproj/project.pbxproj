@@ -3276,7 +3276,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Balance Open.app/Contents/MacOS/Balance Open";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BalanceOpen.app/Contents/MacOS/BalanceOpen";
 			};
 			name = Debug;
 		};
@@ -3307,7 +3307,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Balance Open.app/Contents/MacOS/Balance Open";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BalanceOpen.app/Contents/MacOS/BalanceOpen";
 			};
 			name = UITesting;
 		};
@@ -3337,7 +3337,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Balance Open.app/Contents/MacOS/Balance Open";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BalanceOpen.app/Contents/MacOS/BalanceOpen";
 			};
 			name = Release;
 		};
