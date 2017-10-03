@@ -18,17 +18,27 @@ internal final class SettingsViewController: UIViewController
     private let viewModel = AccountsTabViewModel()
     private let tableView = UITableView(frame: CGRect.zero, style: .grouped)
     
+    // MARK: Initialization
+    
+    internal required init()
+    {
+        super.init(nibName: nil, bundle: nil)
+        self.title = "Settings"
+        self.tabBarItem.image = UIImage(named: "Gear")
+    }
+    
+    internal required init?(coder aDecoder: NSCoder)
+    {
+        fatalError()
+    }
+    
     // MARK: View lifecycle
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        self.title = "Settings"
         self.view.backgroundColor = UIColor.white
-        
-        // Navigation bar
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneButtonTapped(_:)))
         
         if #available(iOS 11.0, *)
         {
@@ -128,12 +138,7 @@ internal final class SettingsViewController: UIViewController
     }
     
     // MARK: Actions
-    
-    @objc private func doneButtonTapped(_ sender: Any)
-    {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
+
     @objc private func themeSegmentedControlChanged(_ sender: Any)
     {
         guard let control = sender as? UISegmentedControl,
