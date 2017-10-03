@@ -24,6 +24,9 @@ internal final class AccountsListViewController: UIViewController
     {
         super.init(nibName: nil, bundle: nil)
         
+        self.title = "Accounts"
+        self.tabBarItem.image = UIImage(named: "Library")
+        
         // Notifications
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(self.syncCompletedNotification(_:)), name: Notifications.SyncCompleted)
     }
