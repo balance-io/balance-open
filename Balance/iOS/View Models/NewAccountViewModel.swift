@@ -36,6 +36,9 @@ internal final class NewAccountViewModel
     
     private let gdaxAPIClient = GDAXAPIClient(server: .production)
     private let poloniexAPIClient = PoloniexApi()
+    private let bitfinexAPIClient = BitfinexAPIClient()
+    private let krakenAPIClient = KrakenAPIClient()
+    private let ethplorerAPIClient = EthplorerApi()
     
     private let apiKeyTextField: UITextField = {
         let textField = UITextField()
@@ -67,6 +70,25 @@ internal final class NewAccountViewModel
         return textField
     }()
     
+    private let nameTextField: UITextField = {
+        let textField = UITextField()
+        textField.autocapitalizationType = .words
+        textField.textAlignment = .right
+        textField.placeholder = "Main Wallet"
+        
+        return textField
+    }()
+    
+    private let addressTextField: UITextField = {
+        let textField = UITextField()
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
+        textField.textAlignment = .right
+        textField.placeholder = "0x6e11086B4559e0740195b7C4ecFA32ed16a8a90D"
+        
+        return textField
+    }()
+    
     // MARK: Initialization
     
     internal init(source: Source)
@@ -78,6 +100,12 @@ internal final class NewAccountViewModel
         case .gdax:
             self.fieldTypes = [.key, .secretKey, .passphrase]
         case .poloniex:
+            self.fieldTypes = [.key, .secretKey]
+        case .kraken:
+            self.fieldTypes = [.key, .secretKey]
+        case .bitfinex:
+            self.fieldTypes = [.key, .secretKey]
+        case .wallet:
             self.fieldTypes = [.key, .secretKey]
         default:
             self.fieldTypes = []
@@ -105,6 +133,18 @@ internal final class NewAccountViewModel
             self.poloniexAPIClient.authenticationChallenge(loginStrings: loginStrings, closeBlock: { (success, error, _) in
                 completionHandler(success, error)
             })
+        case .bitfinex:
+            self.bitfinexAPIClient.authenticationChallenge(loginStrings: loginStrings, closeBlock: { (success, error, _) in
+                completionHandler(success, error)
+            })
+        case .kraken:
+            self.krakenAPIClient.authenticationChallenge(loginStrings: loginStrings, closeBlock: { (success, error, _) in
+                completionHandler(success, error)
+            })
+        case .wallet:
+            self.ethplorerAPIClient.authenticationChallenge(loginStrings: loginStrings, closeBlock: { (success, error, _) in
+                completionHandler(success, error)
+            })
         default:
             completionHandler(false, nil)
         }
@@ -123,7 +163,11 @@ internal final class NewAccountViewModel
             case .secretKey:
                 field = Field(name: "Secret", label: "Secret", type: "secret", value: self.secretKeyKeyTextField.text)
             case .passphrase:
-                field = Field(name: "Passphrase", label: "Passphrase", type: "secrepassphrase", value: self.passphraseKeyTextField.text)
+                field = Field(name: "Passphrase", label: "Passphrase", type: "passphrase", value: self.passphraseKeyTextField.text)
+            case .name:
+                field = Field(name: "Name", label: "Name", type: "name", value: self.nameTextField.text)
+            case .address:
+                field = Field(name: "Address", label: "Address", type: "address", value: self.addressTextField.text)
             }
             
             fields.append(field)
@@ -146,6 +190,10 @@ internal final class NewAccountViewModel
             return self.passphraseKeyTextField
         case .secretKey:
             return self.secretKeyKeyTextField
+        case .name:
+            return self.nameTextField
+        case .address:
+            return self.addressTextField
         }
     }
     
@@ -165,6 +213,8 @@ fileprivate extension NewAccountViewModel
         case key
         case secretKey
         case passphrase
+        case name
+        case address
         
         // MARK: Description
         
@@ -178,6 +228,10 @@ fileprivate extension NewAccountViewModel
                 return "Secret"
             case .passphrase:
                 return "Passphrase"
+            case .name:
+                return "Name"
+            case .address:
+                return "Address"
             }
         }
     }
