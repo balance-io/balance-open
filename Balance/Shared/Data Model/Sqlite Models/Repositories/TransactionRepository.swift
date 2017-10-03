@@ -45,6 +45,10 @@ struct TransactionRepository: ItemRepository {
         // If the app has the old transactions table
         // drop it a build the new one
         database.write.inDatabase { db in
+            if !db.tableExists("transactions") {
+                return
+            }
+            
             let result = db.getTableSchema("transactions")
             
             // Old database schema. Update...
