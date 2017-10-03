@@ -15,19 +15,30 @@ internal final class RootViewController: UIViewController
     // Internal
     
     // Private
+    private let rootTabBarController = UITabBarController()
     private let accountsListViewController = AccountsListViewController()
-    private let rootNavigationController: UINavigationController
+    private let transactionsListViewController = TransactionsListViewController()
+    private let settingsViewController = SettingsViewController()
     
     // MARK: Initialization
     
     internal required init()
     {
-        // Root navigation controller
-        self.rootNavigationController = UINavigationController(rootViewController: self.accountsListViewController)
-        
         super.init(nibName: nil, bundle: nil)
         
-        self.addChildViewController(self.rootNavigationController)
+        // Tab bar controller
+        let accountsListNavigationController = UINavigationController(rootViewController: self.accountsListViewController)
+        let transactionsListNavigationController = UINavigationController(rootViewController: self.transactionsListViewController)
+        let settingsNavigationController = UINavigationController(rootViewController: self.settingsViewController)
+        
+        self.rootTabBarController.viewControllers = [
+            accountsListNavigationController,
+            transactionsListNavigationController,
+            settingsNavigationController
+        ]
+        
+        // Add as child view controller
+        self.addChildViewController(self.rootTabBarController)
     }
 
     internal required init?(coder aDecoder: NSCoder)
@@ -48,10 +59,10 @@ internal final class RootViewController: UIViewController
         
         self.setUIDefaults()
         
-        // Root navigation controller
-        self.view.addSubview(self.rootNavigationController.view)
+        // Root tab bar controller
+        self.view.addSubview(self.rootTabBarController.view)
 
-        self.rootNavigationController.view.snp.makeConstraints { (make) in
+        self.rootTabBarController.view.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
     }
