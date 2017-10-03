@@ -909,7 +909,6 @@
 				53FCE3471F06B5DC004EB25C /* SwiftyStoreKit.framework in Frameworks */,
 				53FCE3421F06B5DC004EB25C /* NSDateTimeAgo.framework in Frameworks */,
 				53F63CD81F82C2A100FD4B27 /* ObjcExceptionBridging.framework in Frameworks */,
-				53552A501ED72E3B00DD95F9 /* Security.framework in Frameworks */,
 				53F0786C1ED747C700E7EDF9 /* libsqlcipher.a in Frameworks */,
 				53FCE3481F06B5DC004EB25C /* XCGLogger.framework in Frameworks */,
 				5313F9621F58CFB800DD6BDB /* TrustKit.framework in Frameworks */,
@@ -1257,10 +1256,10 @@
 			children = (
 				53762EB21ED796F100D34A1E /* main.swift */,
 				535529DA1ED723C600DD95F9 /* AppDelegate.swift */,
-				53561EA11F82DD120043D4F9 /* Utilities */,
-				53561E941F82DD120043D4F9 /* View Controllers */,
 				53561E861F82DD120043D4F9 /* View Models */,
+				53561E941F82DD120043D4F9 /* View Controllers */,
 				53561E8A1F82DD120043D4F9 /* Views */,
+				53561EA11F82DD120043D4F9 /* Utilities */,
 				53552A491ED72BE000DD95F9 /* Frameworks */,
 				53552A4A1ED72BE900DD95F9 /* Supporting Files */,
 			);
@@ -1412,9 +1411,9 @@
 		53561E941F82DD120043D4F9 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				53561E9C1F82DD120043D4F9 /* RootViewController.swift */,
 				53561E951F82DD120043D4F9 /* Settings */,
 				53561E991F82DD120043D4F9 /* Accounts list */,
-				53561E9C1F82DD120043D4F9 /* RootViewController.swift */,
 				53561E9D1F82DD120043D4F9 /* Add Account */,
 			);
 			path = "View Controllers";
