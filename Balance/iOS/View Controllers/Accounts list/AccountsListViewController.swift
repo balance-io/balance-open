@@ -47,7 +47,6 @@ internal final class AccountsListViewController: UIViewController
         // Navigation bar
         self.setupTitleView()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addAccountButtonTapped(_:)))
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Gear"), style: .plain, target: self, action: #selector(self.settingsButtonTapped(_:)))
         
         // Table view
         self.tableView.dataSource = self
@@ -109,14 +108,6 @@ internal final class AccountsListViewController: UIViewController
     {
         let addAccountViewController = AddAccountViewController()
         let navigationController = UINavigationController(rootViewController: addAccountViewController)
-        
-        self.present(navigationController, animated: true, completion: nil)
-    }
-    
-    @objc private func settingsButtonTapped(_ sender: Any)
-    {
-        let settingsViewController = SettingsViewController()
-        let navigationController = UINavigationController(rootViewController: settingsViewController)
         
         self.present(navigationController, animated: true, completion: nil)
     }
