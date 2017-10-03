@@ -283,11 +283,10 @@ struct TransactionRepository: ItemRepository {
         let hiddenAccountIds = defaults.hiddenAccountIds
         
         database.read.inDatabase { db in
-            func addTransactions(pending: Bool) {
+            func addTransactions() {
                 do {
                     let statement = "SELECT transactions.*, accounts.sourceInstitutionId, accounts.institutionId " +
                                     "FROM transactions LEFT JOIN accounts ON transactions.accountId = accounts.accountId " +
-                                    "WHERE transactions.pending = \(pending ? 1 : 0) " +
                                     "ORDER BY transactions.date DESC"
                     let result = try db.executeQuery(statement)
                     
@@ -308,14 +307,12 @@ struct TransactionRepository: ItemRepository {
                         if includeHidden || !belongsToHiddenAccount {
                             // Setup the dictionary key if first row
                             if firstRow {
-                                if !pending {
-                                    previousDate = transaction.date
-                                }
+                                previousDate = transaction.date
                                 firstRow = false
                             }
                             
                             // If not pending and dates don't match, store the previous transactions in the dictionary
-                            if !pending && !calendar.isDate(previousDate, inSameDayAs: transaction.date) {
+                            if !calendar.isDate(previousDate, inSameDayAs: transaction.date) {
                                 transactionsByDate[previousDate] = transactions
                                 counts.append(transactions.count)
                                 transactions = [Transaction]()
@@ -338,8 +335,7 @@ struct TransactionRepository: ItemRepository {
                 }
             }
             
-            addTransactions(pending: true)
-            addTransactions(pending: false)
+            addTransactions()
         }
         
         return (transactionsByDate, counts)
