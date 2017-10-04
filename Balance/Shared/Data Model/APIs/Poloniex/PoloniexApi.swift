@@ -289,7 +289,10 @@ extension PoloniexAccount {
             
             // Hide unpoplular currencies that have a 0 balance
             if currency != Currency.btc && currency != Currency.eth {
-                newAccount.isHidden = (currentBalance == 0)
+                let isHidden = (currentBalance == 0)
+                if newAccount.isHidden != isHidden {
+                    newAccount.isHidden = isHidden
+                }
             }
             
             return newAccount
