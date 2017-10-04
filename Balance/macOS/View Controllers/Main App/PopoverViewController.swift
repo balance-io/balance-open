@@ -334,9 +334,7 @@ class PopoverViewController: NSViewController {
     }
     
     @objc fileprivate func appleInterfaceThemeChanged() {
-        if defaults.selectedThemeType == .auto {
-            reloadPopoverController()
-        }
+        // Do nothing for now as we only use one theme
     }
     
     @objc fileprivate func showIntro() {

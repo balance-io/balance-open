@@ -13,8 +13,7 @@ class MockedDefaults: Defaults {
         let dict: [String: Any] = [Keys.crashOnExceptions:                 true,
                                    Keys.launchAtLogin:               true,
                                    Keys.accountIdsExcludedFromTotal: NSArray(),
-                                   Keys.firstLaunch:                 false,
-                                   Keys.selectedThemeType:           ThemeType.light.rawValue]
+                                   Keys.firstLaunch:                 false]
         defaults.register(defaults: dict)
     }
 }

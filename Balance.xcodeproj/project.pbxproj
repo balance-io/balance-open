@@ -266,6 +266,7 @@
 		539348B91DEBA600009F4564 /* RoundedBackgroundAttributeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539348B81DEBA600009F4564 /* RoundedBackgroundAttributeView.swift */; };
 		539348BB1DEBB479009F4564 /* TokenSearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539348BA1DEBB479009F4564 /* TokenSearchField.swift */; };
 		539348C51DECD94B009F4564 /* TokenTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539348C41DECD94B009F4564 /* TokenTextField.swift */; };
+		539660151F858A8E0037A2B3 /* OpenTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539660141F858A8E0037A2B3 /* OpenTheme.swift */; };
 		53980CBF1D5CD6F80013B981 /* Pluralize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53980CBE1D5CD6F80013B981 /* Pluralize.swift */; };
 		53980CC41D5D0C1F0013B981 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53980CC31D5D0C1F0013B981 /* Date.swift */; };
 		539C8E931C73CB31005C72BC /* PreferencesAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539C8E921C73CB31005C72BC /* PreferencesAccountsViewController.swift */; };
@@ -715,6 +716,7 @@
 		539348B81DEBA600009F4564 /* RoundedBackgroundAttributeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedBackgroundAttributeView.swift; sourceTree = "<group>"; };
 		539348BA1DEBB479009F4564 /* TokenSearchField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenSearchField.swift; sourceTree = "<group>"; };
 		539348C41DECD94B009F4564 /* TokenTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenTextField.swift; sourceTree = "<group>"; };
+		539660141F858A8E0037A2B3 /* OpenTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTheme.swift; sourceTree = "<group>"; };
 		53980CBE1D5CD6F80013B981 /* Pluralize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pluralize.swift; sourceTree = "<group>"; };
 		53980CC31D5D0C1F0013B981 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		539C8E921C73CB31005C72BC /* PreferencesAccountsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesAccountsViewController.swift; sourceTree = "<group>"; };
@@ -909,7 +911,6 @@
 				53FCE3471F06B5DC004EB25C /* SwiftyStoreKit.framework in Frameworks */,
 				53FCE3421F06B5DC004EB25C /* NSDateTimeAgo.framework in Frameworks */,
 				53F63CD81F82C2A100FD4B27 /* ObjcExceptionBridging.framework in Frameworks */,
-				53552A501ED72E3B00DD95F9 /* Security.framework in Frameworks */,
 				53F0786C1ED747C700E7EDF9 /* libsqlcipher.a in Frameworks */,
 				53FCE3481F06B5DC004EB25C /* XCGLogger.framework in Frameworks */,
 				5313F9621F58CFB800DD6BDB /* TrustKit.framework in Frameworks */,
@@ -1582,6 +1583,7 @@
 		53E8C7831C64129B0085D64E /* Themes */ = {
 			isa = PBXGroup;
 			children = (
+				539660141F858A8E0037A2B3 /* OpenTheme.swift */,
 				53E8C78D1C6412B70085D64E /* DarkTheme.swift */,
 				53B4D5BD1D07342B00FF0411 /* LightTheme.swift */,
 				53E8C78B1C6412A90085D64E /* Theme.swift */,
@@ -2565,6 +2567,7 @@
 				5304229C1ED3C2D8001CA499 /* NotificationsTabTableCells.swift in Sources */,
 				5301A7681F17F47E00668099 /* PlaidApi.swift in Sources */,
 				283D18351DC8F6240044BF51 /* PreferencesSecurityViewController.swift in Sources */,
+				539660151F858A8E0037A2B3 /* OpenTheme.swift in Sources */,
 				539348C51DECD94B009F4564 /* TokenTextField.swift in Sources */,
 				532121A11EE8B91600F4812A /* zip.c in Sources */,
 				53F078601ED73B9500E7EDF9 /* RuleTemplate.swift in Sources */,

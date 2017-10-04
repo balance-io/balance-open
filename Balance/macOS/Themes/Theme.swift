@@ -9,14 +9,7 @@
 import AppKit
 
 var CurrentTheme: Theme {
-    switch defaults.selectedThemeType {
-    case .light:
-        return LightTheme()
-    case .dark:
-        return DarkTheme()
-    default:
-        return defaults.darkMode ? DarkTheme() : LightTheme()
-    }
+    return OpenTheme()
 }
 
 protocol Theme {

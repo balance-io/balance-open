@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13189.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -705,7 +705,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="500" height="214"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" id="hbn-Wg-xle">
+                            <button ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hbn-Wg-xle">
                                 <rect key="frame" x="191" y="174" width="222" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="218" id="kx5-M5-WT7"/>
@@ -718,33 +718,8 @@
                                     <action selector="logInCheckBoxPress:" target="Yil-VZ-ttf" id="Ov6-aq-xa8"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4GT-dy-df3">
-                                <rect key="frame" x="129" y="102" width="56" height="17"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="52" id="hN0-sk-w8p"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Theme:" id="Fbg-YC-RtF">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="x11-fD-q1x">
-                                <rect key="frame" x="191" y="97" width="157" height="24"/>
-                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="ryw-uV-HoY">
-                                    <font key="font" metaFont="system"/>
-                                    <segments>
-                                        <segment label="Auto"/>
-                                        <segment label="Light" selected="YES" tag="1"/>
-                                        <segment label="Dark"/>
-                                    </segments>
-                                </segmentedCell>
-                                <connections>
-                                    <action selector="themeChanged:" target="Yil-VZ-ttf" id="YWd-fv-9QM"/>
-                                </connections>
-                            </segmentedControl>
-                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PRP-Jw-h1M">
-                                <rect key="frame" x="191" y="65" width="158" height="26"/>
+                            <popUpButton verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PRP-Jw-h1M">
+                                <rect key="frame" x="191" y="65" width="171" height="26"/>
                                 <popUpButtonCell key="cell" type="push" title=" Gmail" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="TX4-Pe-8Ry" id="8yS-iR-ReL">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -759,7 +734,7 @@
                                     <action selector="emailPreferenceChanged:" target="Yil-VZ-ttf" id="zob-Ig-OPi"/>
                                 </connections>
                             </popUpButton>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="751" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BQj-3E-j9E">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="751" ambiguous="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BQj-3E-j9E">
                                 <rect key="frame" x="99" y="72" width="86" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="82" id="odC-g1-rpH"/>
@@ -770,8 +745,8 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fqr-LT-GmM">
-                                <rect key="frame" x="191" y="34" width="158" height="26"/>
+                            <popUpButton verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fqr-LT-GmM">
+                                <rect key="frame" x="191" y="34" width="171" height="26"/>
                                 <popUpButtonCell key="cell" type="push" title=" Google" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="dQS-hU-v6H" id="wSt-bP-fKy">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -787,7 +762,7 @@
                                     <action selector="searchPreferenceChanged:" target="Yil-VZ-ttf" id="4Iq-a4-Ezt"/>
                                 </connections>
                             </popUpButton>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OYa-Ry-O3s">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OYa-Ry-O3s">
                                 <rect key="frame" x="104" y="40" width="81" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="77" id="Qg4-Z0-jOb"/>
@@ -798,7 +773,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KLO-OE-sXB">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KLO-OE-sXB">
                                 <rect key="frame" x="111" y="134" width="74" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Shortcut:" id="YNG-1r-VlX">
                                     <font key="font" metaFont="system"/>
@@ -806,34 +781,21 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="cp3-tO-0fm" customClass="MASShortcutView">
-                                <rect key="frame" x="193" y="131" width="153" height="22"/>
+                            <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cp3-tO-0fm" customClass="MASShortcutView">
+                                <rect key="frame" x="193" y="131" width="166" height="22"/>
                             </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="PRP-Jw-h1M" firstAttribute="top" secondItem="x11-fD-q1x" secondAttribute="bottom" constant="10" id="3Tj-0I-1JS"/>
                             <constraint firstItem="hbn-Wg-xle" firstAttribute="top" secondItem="aKI-tT-xOh" secondAttribute="top" constant="24" id="3kP-dc-UHg"/>
                             <constraint firstItem="BQj-3E-j9E" firstAttribute="trailing" secondItem="KLO-OE-sXB" secondAttribute="trailing" id="6bM-tw-M5D"/>
                             <constraint firstItem="cp3-tO-0fm" firstAttribute="centerY" secondItem="KLO-OE-sXB" secondAttribute="centerY" id="CVS-zo-iyT"/>
                             <constraint firstItem="cp3-tO-0fm" firstAttribute="trailing" secondItem="Fqr-LT-GmM" secondAttribute="trailing" id="Chd-wc-z0J"/>
-                            <constraint firstItem="x11-fD-q1x" firstAttribute="leading" secondItem="4GT-dy-df3" secondAttribute="trailing" constant="10" id="E2e-uR-TsE"/>
                             <constraint firstItem="cp3-tO-0fm" firstAttribute="leading" secondItem="KLO-OE-sXB" secondAttribute="trailing" constant="10" id="F92-6T-fjN"/>
-                            <constraint firstItem="4GT-dy-df3" firstAttribute="baseline" secondItem="x11-fD-q1x" secondAttribute="baseline" id="FSW-Zv-29d"/>
                             <constraint firstItem="Fqr-LT-GmM" firstAttribute="top" secondItem="PRP-Jw-h1M" secondAttribute="bottom" constant="10" id="H2e-zT-H5R"/>
-                            <constraint firstItem="4GT-dy-df3" firstAttribute="trailing" secondItem="KLO-OE-sXB" secondAttribute="trailing" id="HFK-z0-063"/>
-                            <constraint firstItem="x11-fD-q1x" firstAttribute="top" secondItem="cp3-tO-0fm" secondAttribute="bottom" constant="11" id="UQD-ay-8fP"/>
-                            <constraint firstItem="cp3-tO-0fm" firstAttribute="trailing" secondItem="x11-fD-q1x" secondAttribute="trailing" id="WwR-3J-46c"/>
                             <constraint firstItem="OYa-Ry-O3s" firstAttribute="trailing" secondItem="BQj-3E-j9E" secondAttribute="trailing" id="Yke-Mc-dWX"/>
-                            <constraint firstItem="Fqr-LT-GmM" firstAttribute="trailing" secondItem="x11-fD-q1x" secondAttribute="trailing" id="and-dp-6Yz"/>
-                            <constraint firstItem="PRP-Jw-h1M" firstAttribute="leading" secondItem="x11-fD-q1x" secondAttribute="leading" id="bT1-Qu-8Z4"/>
-                            <constraint firstItem="hbn-Wg-xle" firstAttribute="leading" secondItem="x11-fD-q1x" secondAttribute="leading" id="d1C-1N-YAl"/>
                             <constraint firstItem="Fqr-LT-GmM" firstAttribute="centerY" secondItem="OYa-Ry-O3s" secondAttribute="centerY" constant="1" id="fTb-fb-FYn"/>
-                            <constraint firstItem="4GT-dy-df3" firstAttribute="leading" secondItem="KLO-OE-sXB" secondAttribute="leading" constant="18" id="gGY-h0-7aF"/>
                             <constraint firstItem="Fqr-LT-GmM" firstAttribute="leading" secondItem="PRP-Jw-h1M" secondAttribute="leading" id="jiO-J1-jiu"/>
                             <constraint firstItem="PRP-Jw-h1M" firstAttribute="centerY" secondItem="BQj-3E-j9E" secondAttribute="centerY" constant="2" id="mLD-sa-h2x"/>
-                            <constraint firstItem="PRP-Jw-h1M" firstAttribute="trailing" secondItem="x11-fD-q1x" secondAttribute="trailing" id="pq6-ey-hNT"/>
-                            <constraint firstItem="4GT-dy-df3" firstAttribute="leading" secondItem="aKI-tT-xOh" secondAttribute="leading" constant="131" id="rCk-m0-tDg"/>
-                            <constraint firstItem="x11-fD-q1x" firstAttribute="centerY" secondItem="aKI-tT-xOh" secondAttribute="centerY" constant="-2.5" id="tQF-cI-zhh"/>
                             <constraint firstAttribute="bottom" secondItem="OYa-Ry-O3s" secondAttribute="bottom" constant="40" id="wTa-AT-wAc"/>
                             <constraint firstItem="KLO-OE-sXB" firstAttribute="top" secondItem="aKI-tT-xOh" secondAttribute="top" constant="63" id="xLV-5o-LAT"/>
                         </constraints>
@@ -845,7 +807,6 @@
                         <outlet property="searchPreferencePopUpButton" destination="Fqr-LT-GmM" id="5sf-gg-twV"/>
                         <outlet property="searchPreferenceTextField" destination="OYa-Ry-O3s" id="smM-ev-yEu"/>
                         <outlet property="shortcutView" destination="cp3-tO-0fm" id="x1e-HX-oJu"/>
-                        <outlet property="themeSegmentControl" destination="x11-fD-q1x" id="IlO-jp-PpT"/>
                     </connections>
                 </viewController>
                 <customObject id="aRd-Wn-fkq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
