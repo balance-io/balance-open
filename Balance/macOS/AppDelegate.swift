@@ -133,7 +133,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Initialize UserDefaults
         defaults.setupDefaults()
-        print("feedRules: \(String(describing: defaults.feedRules))")
         //defaults.setupCloudSyncing()
         
         // Initialize local notifications delegate

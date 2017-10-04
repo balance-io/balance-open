@@ -72,8 +72,6 @@ class Feed {
                 }
             }
         }
-        
-        convertOldFeedRules()
     }
     
     // In case a user creates the same rule on two machines while offline, we should only keep one.
@@ -102,18 +100,7 @@ class Feed {
             deleteRule(dupe)
         }
     }
-    
-    // Convert old NSUserDefaults based FeedRule objects to the new Realm based Rule objects
-    fileprivate func convertOldFeedRules() {
-        if let feedRules = defaults.feedRules {
-            for feedRule in feedRules {
-                _ = createRule(name: feedRule.name, notify: feedRule.notify, searchTokens: feedRule.searchTokens)
-                print("Converted feed rule")
-            }
-        }
-        defaults.feedRules = nil
-    }
-    
+        
     var rules: [Rule] {
         if let realm = realmManager.prefsRealm {
             let objects = realm.objects(Rule.self).sorted(byKeyPath: "created")
