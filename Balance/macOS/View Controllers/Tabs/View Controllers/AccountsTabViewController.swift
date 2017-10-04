@@ -705,25 +705,35 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     }
     
     func tableView(_ tableView: SectionedTableView, rowViewForSection section: Int) -> NSTableRowView? {
-        var row = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Institution Row"), owner: self) as? HoverTableRowView
-        if row == nil {
-            row = HoverTableRowView()
-            row?.identifier = NSUserInterfaceItemIdentifier(rawValue: "Institution Row")
-            row?.color = CurrentTheme.defaults.cell.backgroundColor
-            row?.hoverColor = CurrentTheme.defaults.cell.hoverBackgroundColor
+        var rowView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Institution Row"), owner: self) as? HoverTableRowView
+        if rowView == nil {
+            rowView = HoverTableRowView()
+            rowView?.identifier = NSUserInterfaceItemIdentifier(rawValue: "Institution Row")
         }
-        return row
+        
+        if let institution = viewModel.institution(forSection: section) {
+            let color = institution.source.color
+            rowView?.color = color
+            rowView?.hoverColor = color
+        }
+        
+        return rowView
     }
     
     func tableView(_ tableView: SectionedTableView, rowViewForRow row: Int, inSection section: Int) -> NSTableRowView? {
-        var row = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Account Row"), owner: self) as? HoverTableRowView
-        if row == nil {
-            row = HoverTableRowView()
-            row?.identifier = NSUserInterfaceItemIdentifier(rawValue: "Account Row")
-            row?.color = CurrentTheme.defaults.cell.backgroundColor
-            row?.hoverColor = CurrentTheme.defaults.cell.hoverBackgroundColor
+        var rowView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Account Row"), owner: self) as? HoverTableRowView
+        if rowView == nil {
+            rowView = HoverTableRowView()
+            rowView?.identifier = NSUserInterfaceItemIdentifier(rawValue: "Account Row")
         }
-        return row
+        
+        if let account = viewModel.account(forRow: row, inSection: section) {
+            let color = account.source.color
+            rowView?.color = color
+            rowView?.hoverColor = color
+        }
+        
+        return rowView
     }
     
     func tableView(_ tableView: SectionedTableView, viewForSection section: Int) -> NSView? {

@@ -25,16 +25,22 @@ class AccountsTabGroupCell: View {
         self.headerView?.removeFromSuperview()
         self.headerView = nil
         
-        let sourceInstitutionId: String
-        if debugging.disableSubscription {
-            sourceInstitutionId = model.source.description
-        } else {
-            sourceInstitutionId = institutionsDatabase.primarySourceInstitutionId(source: model.source, sourceInstitutionId: model.sourceInstitutionId) ?? model.sourceInstitutionId
-        }
-        if let headerView = InstitutionHeaders.headerViewForId(sourceInstitutionId: sourceInstitutionId) {
-            self.addSubview(headerView)
-            self.headerView = headerView
-        } else if let headerView = InstitutionHeaders.defaultHeaderView(backgroundColor: model.displayColor, foregroundColor: CurrentTheme.accounts.headerCell.genericInstitutionTextColor, font: CurrentTheme.accounts.headerCell.genericInstitutionFont, name: model.name) {
+//        let sourceInstitutionId: String
+//        if debugging.disableSubscription {
+//            sourceInstitutionId = model.source.description
+//        } else {
+//            sourceInstitutionId = institutionsDatabase.primarySourceInstitutionId(source: model.source, sourceInstitutionId: model.sourceInstitutionId) ?? model.sourceInstitutionId
+//        }
+//        if let headerView = InstitutionHeaders.headerViewForId(sourceInstitutionId: sourceInstitutionId) {
+//            self.addSubview(headerView)
+//            self.headerView = headerView
+//        } else if let headerView = InstitutionHeaders.defaultHeaderView(backgroundColor: model.displayColor, foregroundColor: CurrentTheme.accounts.headerCell.genericInstitutionTextColor, font: CurrentTheme.accounts.headerCell.genericInstitutionFont, name: model.name) {
+//            self.addSubview(headerView)
+//            self.headerView = headerView
+//        }
+        
+        // NOTE: Just use text until new header graphics are ready
+        if let headerView = InstitutionHeaders.defaultHeaderView(backgroundColor: model.displayColor, foregroundColor: CurrentTheme.accounts.headerCell.genericInstitutionTextColor, font: CurrentTheme.accounts.headerCell.genericInstitutionFont, name: model.name) {
             self.addSubview(headerView)
             self.headerView = headerView
         }
@@ -178,8 +184,18 @@ class AccountsTabAccountCell: View {
         
         self.alphaValue = (debugging.showAllInstitutionsAsIncorrectPassword || updatedModel.passwordInvalid)  ? CurrentTheme.accounts.cell.passwordInvalidDimmedAlpha : 1.0
         
+        updateBackgroundColors()
         updateTopContainerOffset()
         updateInclusionIndicator()
+    }
+    
+    func updateBackgroundColors() {
+        if let color = model?.source.color {
+            self.layerBackgroundColor = color
+            amountField.backgroundColor = color
+            altAmountField.backgroundColor = color
+            nameField.backgroundColor = color
+        }
     }
     
     func updateTopContainerOffset() {
