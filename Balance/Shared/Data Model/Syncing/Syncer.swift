@@ -113,7 +113,7 @@ class Syncer {
                     //logout and ask for resync
                     log.error("Failed get api and key for \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name)")
                 }
-            } else if institution.source == .wallet {
+            } else if institution.source == .ethplorer {
                 //ethplorer
                 if let address = institution.address {
                     syncWallet(address: address, institution: institution, remainingInstitutions: syncingInstitutions, startDate: startDate, success: success, errors: errors)

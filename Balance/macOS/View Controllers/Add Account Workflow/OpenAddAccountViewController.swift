@@ -37,13 +37,13 @@ class OpenAddAccountViewController: NSViewController {
     
     // Buttons
     fileprivate var buttons = [HoverButton]()
-    fileprivate let buttonDrawFunctions: [Source: ButtonFunction] = [.coinbase: InstitutionButtons.drawCoinbaseButton,
-                                                                     .gdax:     InstitutionButtons.drawGdaxButton,
-                                                                     .poloniex: InstitutionButtons.drawPoloniexButton,
-                                                                     .bitfinex: InstitutionButtons.drawBitfinexButton,
-                                                                     .kraken:   InstitutionButtons.drawKrakenButton,
-                                                                     .wallet:   InstitutionButtons.drawAddWalletAddressButton]
-    fileprivate let buttonSourceOrder: [Source] = [.coinbase, .gdax, .poloniex, .bitfinex, .kraken, .wallet]
+    fileprivate let buttonDrawFunctions: [Source: ButtonFunction] = [.coinbase:    InstitutionButtons.drawCoinbaseButton,
+                                                                     .gdax:        InstitutionButtons.drawGdaxButton,
+                                                                     .poloniex:    InstitutionButtons.drawPoloniexButton,
+                                                                     .bitfinex:    InstitutionButtons.drawBitfinexButton,
+                                                                     .kraken:      InstitutionButtons.drawKrakenButton,
+                                                                     .ethplorer:   InstitutionButtons.drawAddWalletAddressButton]
+    fileprivate let buttonSourceOrder: [Source] = [.coinbase, .gdax, .poloniex, .bitfinex, .kraken, .ethplorer]
     fileprivate var signUpController: SignUpViewController?
 
     //
@@ -350,15 +350,15 @@ class OpenAddAccountViewController: NSViewController {
             case .coinbase:
                 CoinbaseApi.authenticate()
             case .gdax:
-                self.presentLoginScreenWith(apiInstitution: GDAXAPIClient.gdaxInstitution, loginService: GDAXAPIClient(server: .production))
+                presentLoginScreenWith(apiInstitution: GDAXAPIClient.gdaxInstitution, loginService: GDAXAPIClient(server: .production))
             case .poloniex:
-                self.presentLoginScreenWith(apiInstitution: PoloniexInstitution(), loginService: PoloniexApi())
+                presentLoginScreenWith(apiInstitution: PoloniexInstitution(), loginService: PoloniexApi())
             case .bitfinex:
-                self.presentLoginScreenWith(apiInstitution: BitfinexAPIClient.institution, loginService: BitfinexAPIClient())
+                presentLoginScreenWith(apiInstitution: BitfinexAPIClient.institution, loginService: BitfinexAPIClient())
             case .kraken:
-                self.presentLoginScreenWith(apiInstitution: KrakenAPIClient.institution, loginService: KrakenAPIClient())
-            case .wallet:
-                self.presentLoginScreenWith(apiInstitution: EthplorerInstitution(), loginService: EthplorerApi())
+                presentLoginScreenWith(apiInstitution: KrakenAPIClient.institution, loginService: KrakenAPIClient())
+            case .ethplorer:
+                presentLoginScreenWith(apiInstitution: EthplorerInstitution(), loginService: EthplorerApi())
             default:()
             }
         }
