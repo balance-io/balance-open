@@ -137,13 +137,14 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         scrollView.drawsBackground = false
         scrollView.hasVerticalScroller = true
         scrollView.hasHorizontalScroller = false
+        scrollView.verticalScrollElasticity = .none
         scrollView.documentView = tableView
         let bottomOffset = defaults.hideAddAccountPrompt ? 0 : 80
         //let bottomOffset = defaults.hideAddAccountPrompt ? 30 : 110
         scrollView.contentInsets = NSEdgeInsetsMake(0, 0, CGFloat(bottomOffset), 0)
         self.view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(self.view).offset(10)
+            make.top.equalTo(self.view)
             make.leading.equalTo(self.view)
             make.trailing.equalTo(self.view)
             make.bottom.equalTo(self.view)
@@ -744,7 +745,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         }
         
         if let institution = viewModel.institution(forSection: section) {
-            cell?.updateModel(institution)
+            let previousSectionColor = viewModel.institution(forSection: section - 1)?.source.color ?? .clear
+            cell?.updateModel(institution, previousSectionColor: previousSectionColor)
         }
         
         return cell

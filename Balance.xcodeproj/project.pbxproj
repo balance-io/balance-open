@@ -279,7 +279,6 @@
 		53B327C41E56AE0F009C7AFC /* Syncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B327C31E56AE0F009C7AFC /* Syncer.swift */; };
 		53B327C61E56AEC2009C7AFC /* SyncDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B327C51E56AEC2009C7AFC /* SyncDefaults.swift */; };
 		53B4D5BA1D072C9B00FF0411 /* TabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B4D5B91D072C9B00FF0411 /* TabButton.swift */; };
-		53B4D5BE1D07342B00FF0411 /* LightTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B4D5BD1D07342B00FF0411 /* LightTheme.swift */; };
 		53B5C1961D8637CE00323ACE /* Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B5C1951D8637CE00323ACE /* Testing.swift */; };
 		53BB42E71CE849E70002D473 /* Shortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BB42E61CE849E70002D473 /* Shortcut.swift */; };
 		53C078A61DFF7CEB00696666 /* CertValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C078A51DFF7CEB00696666 /* CertValidator.m */; };
@@ -314,7 +313,6 @@
 		53E8C77E1C62EB4C0085D64E /* TabsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E8C77D1C62EB4C0085D64E /* TabsViewController.swift */; };
 		53E8C7801C62F5D40085D64E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E8C77F1C62F5D40085D64E /* Utils.swift */; };
 		53E8C78C1C6412A90085D64E /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E8C78B1C6412A90085D64E /* Theme.swift */; };
-		53E8C78E1C6412B70085D64E /* DarkTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E8C78D1C6412B70085D64E /* DarkTheme.swift */; };
 		53EB77BB1CF3DF6E00F01903 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB77BA1CF3DF6E00F01903 /* Color.swift */; };
 		53EB77BD1CF3DFDB00F01903 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB77BC1CF3DFDB00F01903 /* NotificationCenter.swift */; };
 		53EB77BF1CF3E02400F01903 /* NSTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB77BE1CF3E02400F01903 /* NSTableView.swift */; };
@@ -731,7 +729,6 @@
 		53B327C31E56AE0F009C7AFC /* Syncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Syncer.swift; sourceTree = "<group>"; };
 		53B327C51E56AEC2009C7AFC /* SyncDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncDefaults.swift; sourceTree = "<group>"; };
 		53B4D5B91D072C9B00FF0411 /* TabButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabButton.swift; sourceTree = "<group>"; };
-		53B4D5BD1D07342B00FF0411 /* LightTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightTheme.swift; sourceTree = "<group>"; };
 		53B5C1951D8637CE00323ACE /* Testing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Testing.swift; sourceTree = "<group>"; };
 		53BB42E61CE849E70002D473 /* Shortcut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shortcut.swift; sourceTree = "<group>"; };
 		53C078A41DFF7CEB00696666 /* CertValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertValidator.h; sourceTree = "<group>"; };
@@ -760,7 +757,6 @@
 		53E8C77D1C62EB4C0085D64E /* TabsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabsViewController.swift; sourceTree = "<group>"; };
 		53E8C77F1C62F5D40085D64E /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		53E8C78B1C6412A90085D64E /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		53E8C78D1C6412B70085D64E /* DarkTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkTheme.swift; sourceTree = "<group>"; };
 		53EB77BA1CF3DF6E00F01903 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		53EB77BC1CF3DFDB00F01903 /* NotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
 		53EB77BE1CF3E02400F01903 /* NSTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTableView.swift; sourceTree = "<group>"; };
@@ -1584,8 +1580,6 @@
 			isa = PBXGroup;
 			children = (
 				539660141F858A8E0037A2B3 /* OpenTheme.swift */,
-				53E8C78D1C6412B70085D64E /* DarkTheme.swift */,
-				53B4D5BD1D07342B00FF0411 /* LightTheme.swift */,
 				53E8C78B1C6412A90085D64E /* Theme.swift */,
 			);
 			path = Themes;
@@ -2523,7 +2517,6 @@
 				532F37DF1D5A5FFC00145BAA /* NSWindow.swift in Sources */,
 				53D441FB1F44D813006967E1 /* CategoryRepository.swift in Sources */,
 				53294FA71D1DDD9500F08059 /* CCNStatusItemWindowController.m in Sources */,
-				53E8C78E1C6412B70085D64E /* DarkTheme.swift in Sources */,
 				F19BF68C1D880DA100496A66 /* MockedDefaults.swift in Sources */,
 				537187F41F4CC37400E7F9D6 /* ExchangeApi.swift in Sources */,
 				53DEFAB51CF4063C00332720 /* NotificationsTabViewController.swift in Sources */,
@@ -2628,7 +2621,6 @@
 				676ED7A51D17ACB400D03395 /* SampleResponses.swift in Sources */,
 				53C9EF2D1D53ABC600525DAB /* RuleEditor.swift in Sources */,
 				53B147781E70DC3B00BE1E51 /* Rule.swift in Sources */,
-				53B4D5BE1D07342B00FF0411 /* LightTheme.swift in Sources */,
 				5301A7611F17DC8B00668099 /* URL.swift in Sources */,
 				5301A7701F17F56500668099 /* PlaidInstitution.swift in Sources */,
 				53A179BD1DC923C0006442E4 /* AppLock.swift in Sources */,

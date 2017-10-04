@@ -100,14 +100,14 @@ class AccountsTabViewModel: TabViewModel {
     }
     
     func numberOfRows(inSection section: Int) -> Int {
-        if data.count > section, let accounts = data[section] {
+        if section >= 0, data.count > section, let accounts = data[section] {
             return accounts.count
         }
         return 0
     }
     
     func institution(forSection section: Int) -> Institution? {
-        if data.keys.count > section {
+        if section >= 0, data.keys.count > section {
             let institution = data.keys[section]
             return institution
         }
@@ -115,7 +115,7 @@ class AccountsTabViewModel: TabViewModel {
     }
     
     func account(forRow row: Int, inSection section: Int) -> Account? {
-        if let sectionData = data[section], sectionData.count > row {
+        if section >= 0, row >= 0, let sectionData = data[section], sectionData.count > row {
             let account = sectionData[row]
             return account
         }

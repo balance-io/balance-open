@@ -147,9 +147,10 @@ struct AccountsTheme {
     
     struct HeaderCellTheme {
         let height: CGFloat
-        let genericInstitutionBrandColor: NSColor
-        let genericInstitutionFont: NSFont
-        let genericInstitutionTextColor: NSColor
+        let nameFont: NSFont
+        let nameColor: NSColor
+        let amountFont: NSFont
+        let amountColor: NSColor
     }
     
     struct CellTheme {

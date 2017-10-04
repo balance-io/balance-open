@@ -10,7 +10,7 @@ import AppKit
 
 struct OpenTheme: Theme {
     
-    var type: ThemeType = .dark
+    var type: ThemeType = .open
     
     var defaults: DefaultsTheme {
         let appearance = NSAppearance(named: NSAppearance.Name.vibrantDark) ?? NSAppearance.current!
@@ -132,14 +132,15 @@ struct OpenTheme: Theme {
     
     var accounts: AccountsTheme {
         let headerCell = AccountsTheme.HeaderCellTheme(
-            height: 26.0,
-            genericInstitutionBrandColor: NSColor(deviceWhiteInt: 0),
-            genericInstitutionFont: NSFont.mediumSystemFont(ofSize: 11),
-            genericInstitutionTextColor: NSColor(deviceWhiteInt: 255)
+            height: 79.0,
+            nameFont: .systemFont(ofSize: 20),
+            nameColor: .white,
+            amountFont: .monospacedDigitSystemFont(ofSize: 20),
+            amountColor: .white
         )
         
         let cell = AccountsTheme.CellTheme(
-            height: 57.0,
+            height: 64.0,
             dimmedAlpha: 0.65,
             passwordInvalidDimmedAlpha: 0.50,
             

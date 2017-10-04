@@ -8,46 +8,153 @@
 
 import Foundation
 import BalanceVectorGraphics
+import SnapKit
 
 class AccountsTabGroupCell: View {
-    var headerView: NSView?
+    var model: Institution?
+    var topColor = NSColor.clear
     
+    let cardView = PaintCodeView()
+    let logoView = PaintCodeView()
+    let nameField = LabelField()
+    let amountField = LabelField()
+
     init() {
         super.init(frame: NSZeroRect)
-        self.layerBackgroundColor = CurrentTheme.defaults.cell.backgroundColor
+        
+        cardView.drawingBlock = drawCardBorder
+        self.addSubview(cardView)
+        cardView.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.top.equalToSuperview().offset(-28)
+            make.height.equalTo(44)
+        }
+        
+        let cardBorderOffset = 15.0
+        
+        self.addSubview(amountField)
+        amountField.font = CurrentTheme.accounts.headerCell.amountFont
+        amountField.textColor = CurrentTheme.accounts.headerCell.amountColor
+        amountField.verticalAlignment = .center
+        amountField.alignment = .right
+        amountField.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-10)
+            make.top.equalToSuperview().offset(cardBorderOffset)
+            make.height.equalToSuperview().offset(-cardBorderOffset)
+            make.width.equalTo(150)
+        }
+        
+        self.addSubview(nameField)
+        nameField.font = CurrentTheme.accounts.headerCell.nameFont
+        nameField.textColor = CurrentTheme.accounts.headerCell.nameColor
+        nameField.verticalAlignment = .center
+        nameField.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(cardBorderOffset)
+            make.height.equalToSuperview().offset(-cardBorderOffset)
+            make.right.equalTo(amountField.snp.left).offset(5)
+        }
+        
+        self.addSubview(logoView)
+        logoView.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.top.equalToSuperview().offset(cardBorderOffset)
+            make.height.equalToSuperview().offset(-cardBorderOffset)
+            make.right.equalTo(amountField.snp.left).offset(-10)
+        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("unsupported")
     }
     
-    func updateModel(_ model: Institution) {
-        self.headerView?.removeFromSuperview()
-        self.headerView = nil
+    func updateModel(_ updatedModel: Institution, previousSectionColor: NSColor) {
+        model = updatedModel
+        topColor = previousSectionColor
         
-//        let sourceInstitutionId: String
-//        if debugging.disableSubscription {
-//            sourceInstitutionId = model.source.description
-//        } else {
-//            sourceInstitutionId = institutionsDatabase.primarySourceInstitutionId(source: model.source, sourceInstitutionId: model.sourceInstitutionId) ?? model.sourceInstitutionId
-//        }
-//        if let headerView = InstitutionHeaders.headerViewForId(sourceInstitutionId: sourceInstitutionId) {
-//            self.addSubview(headerView)
-//            self.headerView = headerView
-//        } else if let headerView = InstitutionHeaders.defaultHeaderView(backgroundColor: model.displayColor, foregroundColor: CurrentTheme.accounts.headerCell.genericInstitutionTextColor, font: CurrentTheme.accounts.headerCell.genericInstitutionFont, name: model.name) {
-//            self.addSubview(headerView)
-//            self.headerView = headerView
-//        }
-        
-        // NOTE: Just use text until new header graphics are ready
-        if let headerView = InstitutionHeaders.defaultHeaderView(backgroundColor: model.displayColor, foregroundColor: CurrentTheme.accounts.headerCell.genericInstitutionTextColor, font: CurrentTheme.accounts.headerCell.genericInstitutionFont, name: model.name) {
-            self.addSubview(headerView)
-            self.headerView = headerView
+        if false { // If let header view
+            // Waiting for graphics
+            logoView.isHidden = false
+            nameField.isHidden = true
+        } else {
+            logoView.isHidden = true
+            nameField.isHidden = false
+            nameField.stringValue = updatedModel.name
         }
         
-        self.alphaValue = (debugging.showAllInstitutionsAsIncorrectPassword || model.passwordInvalid) ? CurrentTheme.accounts.cell.passwordInvalidDimmedAlpha : 1.0
+        amountField.stringValue = "10,000 USD"
         
-        self.setAccessibilityLabel("Section: " + model.name)
+        self.alphaValue = (debugging.showAllInstitutionsAsIncorrectPassword || updatedModel.passwordInvalid) ? CurrentTheme.accounts.cell.passwordInvalidDimmedAlpha : 1.0
+        
+        self.setAccessibilityLabel("Section: " + updatedModel.name)
+        self.needsDisplay = true
+    }
+    
+    fileprivate func drawCardBorder(frame targetFrame: NSRect = NSRect(x: 0, y: 0, width: 400, height: 44)) {
+        //// General Declarations
+        let context = NSGraphicsContext.current!.cgContext
+        
+        //// Resize to Target Frame
+        NSGraphicsContext.saveGraphicsState()
+        let resizing = ResizingBehavior.aspectFit
+        let resizedFrame: NSRect = resizing.apply(rect: NSRect(x: 0, y: 0, width: 400, height: 44), target: targetFrame)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 400, y: resizedFrame.height / 44)
+        let resizedShadowScale: CGFloat = min(resizedFrame.width / 400, resizedFrame.height / 44)
+        
+        
+        //// Color Declarations
+        let upperCardBackground = topColor
+        let lowerCardBackground = model?.source.color ?? .clear
+        
+        //// Shadow Declarations
+        let smallCardShadow = NSShadow()
+        smallCardShadow.shadowColor = NSColor.black.withAlphaComponent(0.06)
+        smallCardShadow.shadowOffset = NSSize(width: 0, height: 4)
+        smallCardShadow.shadowBlurRadius = 12
+        let largeCardShadow = NSShadow()
+        largeCardShadow.shadowColor = NSColor.black.withAlphaComponent(0.05)
+        largeCardShadow.shadowOffset = NSSize(width: 0, height: 7)
+        largeCardShadow.shadowBlurRadius = 21
+        
+        //// upperCard Drawing
+        let upperCardPath = NSBezierPath(rect: NSRect(x: 0, y: 0, width: 400, height: 44))
+        upperCardBackground.setFill()
+        upperCardPath.fill()
+        
+        
+        //// lowerCardContainer
+        NSGraphicsContext.saveGraphicsState()
+        context.setShadow(offset: NSSize(width: largeCardShadow.shadowOffset.width * resizedShadowScale, height: largeCardShadow.shadowOffset.height * resizedShadowScale), blur: largeCardShadow.shadowBlurRadius * resizedShadowScale, color: largeCardShadow.shadowColor!.cgColor)
+        context.beginTransparencyLayer(auxiliaryInfo: nil)
+        
+        
+        //// lowerCard Drawing
+        let lowerCardPath = NSBezierPath()
+        lowerCardPath.move(to: NSPoint(x: 400, y: -100))
+        lowerCardPath.line(to: NSPoint(x: 400, y: 0.62))
+        lowerCardPath.curve(to: NSPoint(x: 398.4, y: 9.86), controlPoint1: NSPoint(x: 400, y: 5.97), controlPoint2: NSPoint(x: 399.44, y: 7.91))
+        lowerCardPath.curve(to: NSPoint(x: 393.86, y: 14.4), controlPoint1: NSPoint(x: 397.35, y: 11.82), controlPoint2: NSPoint(x: 395.82, y: 13.35))
+        lowerCardPath.curve(to: NSPoint(x: 384.62, y: 16), controlPoint1: NSPoint(x: 391.91, y: 15.44), controlPoint2: NSPoint(x: 389.97, y: 16))
+        lowerCardPath.line(to: NSPoint(x: 15.38, y: 16))
+        lowerCardPath.curve(to: NSPoint(x: 6.14, y: 14.4), controlPoint1: NSPoint(x: 10.03, y: 16), controlPoint2: NSPoint(x: 8.09, y: 15.44))
+        lowerCardPath.curve(to: NSPoint(x: 1.6, y: 9.86), controlPoint1: NSPoint(x: 4.18, y: 13.35), controlPoint2: NSPoint(x: 2.65, y: 11.82))
+        lowerCardPath.curve(to: NSPoint(x: 0, y: 0.62), controlPoint1: NSPoint(x: 0.56, y: 7.91), controlPoint2: NSPoint(x: 0, y: 5.97))
+        lowerCardPath.line(to: NSPoint(x: 0, y: -100))
+        lowerCardPath.line(to: NSPoint(x: 400, y: -100))
+        lowerCardPath.close()
+        NSGraphicsContext.saveGraphicsState()
+        context.setShadow(offset: NSSize(width: smallCardShadow.shadowOffset.width * resizedShadowScale, height: smallCardShadow.shadowOffset.height * resizedShadowScale), blur: smallCardShadow.shadowBlurRadius * resizedShadowScale, color: smallCardShadow.shadowColor!.cgColor)
+        lowerCardPath.windingRule = .evenOddWindingRule
+        lowerCardBackground.setFill()
+        lowerCardPath.fill()
+        NSGraphicsContext.restoreGraphicsState()
+        
+        context.endTransparencyLayer()
+        NSGraphicsContext.restoreGraphicsState()
+        
+        NSGraphicsContext.restoreGraphicsState()
     }
 }
 
