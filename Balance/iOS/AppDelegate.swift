@@ -59,7 +59,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Initialize UserDefaults
         defaults.setupDefaults()
-        print("feedRules: \(String(describing: defaults.feedRules))")
         
         // Initialize database
         database.create()
