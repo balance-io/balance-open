@@ -27,4 +27,16 @@ enum Source: Int, CustomStringConvertible {
         case .wallet:   return "Wallet"
         }
     }
+    
+    var color: PXColor {
+        switch self {
+        case .coinbase: return PXColor(hexString: "#0667D0")!
+        case .poloniex: return PXColor(hexString: "#086166")!
+        case .gdax:     return PXColor(hexString: "#212D3D")!
+        case .bitfinex: return PXColor(hexString: "#97C653")!
+        case .kraken:   return PXColor(hexString: "#4F6E89")!
+        case .wallet:   return .gray
+        default:        return .gray
+        }
+    }
 }
