@@ -68,33 +68,22 @@ internal final class SettingsViewController: UIViewController
         // Table sections
         var tableSections = [TableSection]()
         
-        // Theme
-        let themeRow = TableRow { (tableView, indexPath) -> UITableViewCell in
-            // Segmented control
-            let themeSegmentedControl = UISegmentedControl()
-            themeSegmentedControl.addTarget(self, action: #selector(self.themeSegmentedControlChanged(_:)), for: .valueChanged)
-            
-            for theme in UserPreferences.Theme.available
-            {
-                let index = themeSegmentedControl.numberOfSegments
-                themeSegmentedControl.insertSegment(withTitle: theme.title(), at: index, animated: false)
-                
-                if theme == ApplicationConfiguration.userPreferences.theme
-                {
-                    themeSegmentedControl.selectedSegmentIndex = index
-                }
-            }
-            
-            // Cell
-            let cell: SegmentedControlTableViewCell = tableView.dequeueReusableCell(at: indexPath)
-            cell.textLabel?.text = "Theme"
-            cell.segmentedControl = themeSegmentedControl
+        // Main currency
+        var mainCurrencyRow = TableRow { (tableView, indexPath) -> UITableViewCell in
+            let cell: TableViewCell = tableView.dequeueReusableCell(at: indexPath)
+            cell.textLabel?.text = "TODO: USD"
+            cell.accessoryType = .disclosureIndicator
             
             return cell
         }
         
-        let themeSection = TableSection(title: "Theme", rows: [themeRow])
-        tableSections.append(themeSection)
+        mainCurrencyRow.actionHandler = { [unowned self] (indexPath) in
+            let mainCurencySelectionViewController = MainCurrencySelectionViewController()
+            self.navigationController?.pushViewController(mainCurencySelectionViewController, animated: true)
+        }
+        
+        let currencySection = TableSection(title: "Main Currency", rows: [mainCurrencyRow])
+        tableSections.append(currencySection)
         
         // Insitutions
         var institutionRows = [TableRow]()
