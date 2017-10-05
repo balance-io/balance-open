@@ -54,7 +54,8 @@ internal final class AccountsListViewController: UIViewController
         // Table view
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        self.tableView.register(reusableCell: Value1TableViewCell.self)
+        self.tableView.register(reusableCell: AccountTableViewCell.self)
+        self.tableView.register(reusableView: InstitutionTableHeaderView.self)
         self.view.addSubview(self.tableView)
         
         self.tableView.snp.makeConstraints { (make) in
@@ -139,16 +140,18 @@ extension AccountsListViewController: UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell: Value1TableViewCell = tableView.dequeueReusableCell(at: indexPath)
-        cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
-        cell.accessoryType = .disclosureIndicator
-
-        return cell
+        return tableView.dequeueReusableCell(at: indexPath) as AccountTableViewCell
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
-    {
-        return self.viewModel.institution(forSection: section)?.name
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableView() as InstitutionTableHeaderView
+        header.institution = self.viewModel.institution(forSection: section)
+        
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return InstitutionTableHeaderView.height
     }
 }
 
@@ -156,22 +159,16 @@ extension AccountsListViewController: UITableViewDataSource
 
 extension AccountsListViewController: UITableViewDelegate
 {
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
-    {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let account = self.viewModel.account(forRow: indexPath.row, inSection: indexPath.section),
-              let cell = cell as? Value1TableViewCell else
-        {
+              let cell = cell as? AccountTableViewCell else {
             return
         }
         
-        cell.textLabel?.text = account.displayName
-            
-        let currency = Currency.crypto(shortName: account.currency)
-        cell.detailTextLabel?.text = amountToString(amount: account.displayBalance, currency: currency)
+        cell.account = account
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
-        // TODO:
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return AccountTableViewCell.height
     }
 }
