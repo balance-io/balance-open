@@ -248,8 +248,8 @@ struct CoinbaseApi {
         // Add/update accounts
         for ca in coinbaseAccounts {
             // Calculate the number of decimals
-            let decimals = Currency.rawValue(shortName: ca.currency).decimals
-            let altDecimals = Currency.rawValue(shortName: ca.nativeCurrency).decimals
+            let decimals = Currency.rawValue(ca.currency).decimals
+            let altDecimals = Currency.rawValue(ca.nativeCurrency).decimals
             
             // Calculate the integer value of the balance based on the decimals
             var balance = ca.balance
