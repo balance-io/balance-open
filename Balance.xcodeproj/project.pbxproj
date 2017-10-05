@@ -458,6 +458,7 @@
 		A4E768111F67F049002B1AE1 /* APICredentialsComponentsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E7680F1F67F049002B1AE1 /* APICredentialsComponentsError.swift */; };
 		A4ED56DB1F86301A00E4CC42 /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED56DA1F86301A00E4CC42 /* AccountTableViewCell.swift */; };
 		A4ED56DE1F86378200E4CC42 /* InstitutionTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED56DD1F86378200E4CC42 /* InstitutionTableHeaderView.swift */; };
+		A4ED56E11F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED56E01F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift */; };
 		AA4776591DEA901900110685 /* InstitutionInitialsCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4776581DEA901900110685 /* InstitutionInitialsCircleView.swift */; };
 		AA5031A41DF2334000842A7D /* HeaderBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5031A31DF2334000842A7D /* HeaderBackgroundView.swift */; };
 		DC1A649F1B867B1F009356A0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1A649D1B867B1F009356A0 /* MainMenu.xib */; };
@@ -865,6 +866,7 @@
 		A4E7680F1F67F049002B1AE1 /* APICredentialsComponentsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICredentialsComponentsError.swift; sourceTree = "<group>"; };
 		A4ED56DA1F86301A00E4CC42 /* AccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
 		A4ED56DD1F86378200E4CC42 /* InstitutionTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionTableHeaderView.swift; sourceTree = "<group>"; };
+		A4ED56E01F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCurrencySelectionViewController.swift; sourceTree = "<group>"; };
 		AA4776581DEA901900110685 /* InstitutionInitialsCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionInitialsCircleView.swift; sourceTree = "<group>"; };
 		AA5031A31DF2334000842A7D /* HeaderBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderBackgroundView.swift; sourceTree = "<group>"; };
 		DC1A64941B867B1F009356A0 /* BalanceOpen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BalanceOpen.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1424,10 +1426,11 @@
 			isa = PBXGroup;
 			children = (
 				53561E9C1F82DD120043D4F9 /* RootViewController.swift */,
-				53561E951F82DD120043D4F9 /* Settings */,
 				53561E991F82DD120043D4F9 /* Accounts list */,
 				53561E9D1F82DD120043D4F9 /* Add Account */,
 				A459EDA21F839D8200DC4B51 /* Transactions List */,
+				53561E951F82DD120043D4F9 /* Settings */,
+				A4ED56DF1F865ECC00E4CC42 /* Main Currency Selection */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -1958,6 +1961,14 @@
 			path = Headers;
 			sourceTree = "<group>";
 		};
+		A4ED56DF1F865ECC00E4CC42 /* Main Currency Selection */ = {
+			isa = PBXGroup;
+			children = (
+				A4ED56E01F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift */,
+			);
+			path = "Main Currency Selection";
+			sourceTree = "<group>";
+		};
 		DC1A648B1B867B1F009356A0 = {
 			isa = PBXGroup;
 			children = (
@@ -2463,6 +2474,7 @@
 				532121A61EE8B91600F4812A /* Zip.swift in Sources */,
 				53552A321ED72B5700DD95F9 /* FMResultSet.m in Sources */,
 				53552A311ED72B5700DD95F9 /* FMDatabaseQueue.m in Sources */,
+				A4ED56E11F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift in Sources */,
 				A4E457181F7901E7002E2879 /* EthplorerApi.swift in Sources */,
 				53552A251ED7252900DD95F9 /* Data.swift in Sources */,
 				535315271F4CEBF2008D6890 /* ApiInstitution.swift in Sources */,
