@@ -33,13 +33,14 @@ func initializeSingletons() {
     _ = debugging
     _ = log
     _ = logging
-    _ = feed
-    _ = insights
+//    _ = feed
+//    _ = insights
     _ = syncManager
     _ = defaults
     
     _ = institutionsDatabase
     _ = appLock
     _ = subscriptionManager
+//    _ = realmManager
     _ = networkStatus
 }

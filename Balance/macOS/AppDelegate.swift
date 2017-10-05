@@ -120,10 +120,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         launchedAtLogin = isAutolaunchHelperRunning
         
         // Setup Realm options
-        RealmSwift.SyncManager.shared.logLevel = SyncLogLevel.all
-        RealmSwift.SyncManager.shared.errorHandler = { error, _ in
-            print("Realm error: \(error)")
-        }
+//        RealmSwift.SyncManager.shared.logLevel = SyncLogLevel.all
+//        RealmSwift.SyncManager.shared.errorHandler = { error, _ in
+//            print("Realm error: \(error)")
+//        }
         
         // Initialize singletons
         initializeSingletons()
