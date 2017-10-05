@@ -133,10 +133,10 @@ struct OpenTheme: Theme {
     var accounts: AccountsTheme {
         let headerCell = AccountsTheme.HeaderCellTheme(
             height: 79.0,
-            nameFont: .systemFont(ofSize: 20),
-            nameColor: .white,
-            amountFont: .monospacedDigitSystemFont(ofSize: 20),
-            amountColor: .white
+            nameFont: NSFont.systemFont(ofSize: 20),
+            nameColor: NSColor.white,
+            amountFont: NSFont.monospacedDigitSystemFont(ofSize: 20),
+            amountColor: NSColor.white
         )
         
         let cell = AccountsTheme.CellTheme(
@@ -148,14 +148,14 @@ struct OpenTheme: Theme {
             
             amountFont: NSFont.monospacedDigitSystemFont(ofSize: 14),
             amountColor: NSColor(deviceWhiteInt: 255, alpha: 0.9),
-            amountColorCents: NSColor(deviceRedInt: 153, green: 165, blue: 174),
-            amountColorPositive: NSColor(deviceRedInt: 88, green: 184, blue: 33),
+            amountColorCents: NSColor.white,
+            amountColorPositive: NSColor.white,
             
             altAmountFont: NSFont.monospacedDigitSystemFont(ofSize: 12),
-            altAmountColor: NSColor(deviceRedInt: 153, green: 165, blue: 174),
+            altAmountColor: NSColor.white,
             
             availableFont: NSFont.systemFont(ofSize: 10.5),
-            availableColor: NSColor(deviceRedInt: 148, green: 158, blue: 168)
+            availableColor: NSColor.white
         )
         
         let fixPasswordPrompt = AccountsTheme.FixPasswordPromptTheme(

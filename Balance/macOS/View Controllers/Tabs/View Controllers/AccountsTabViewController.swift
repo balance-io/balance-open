@@ -738,15 +738,12 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     }
     
     func tableView(_ tableView: SectionedTableView, viewForSection section: Int) -> NSView? {
-        var cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Group Cell"), owner: self) as? AccountsTabGroupCell
-        if cell == nil {
-            cell = AccountsTabGroupCell()
-            cell?.identifier = NSUserInterfaceItemIdentifier(rawValue: "Group Cell")
-        }
+        let cell = AccountsTabGroupCell()
+        cell.identifier = NSUserInterfaceItemIdentifier(rawValue: "Group Cell")
         
         if let institution = viewModel.institution(forSection: section) {
             let previousSectionColor = viewModel.institution(forSection: section - 1)?.source.color ?? .clear
-            cell?.updateModel(institution, previousSectionColor: previousSectionColor)
+            cell.updateModel(institution, previousSectionColor: previousSectionColor)
         }
         
         return cell

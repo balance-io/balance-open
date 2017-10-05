@@ -189,17 +189,6 @@ class AccountsTabAccountCell: View {
             make.height.equalTo(CurrentTheme.accounts.cell.height)
         }
         
-        amountField.setAccessibilityLabel("Account Total")
-        amountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
-        amountField.font = CurrentTheme.accounts.cell.amountFont
-        amountField.usesSingleLineMode = true
-        topContainer.addSubview(amountField)
-        amountField.snp.makeConstraints { make in
-            make.width.equalTo(100)
-            make.trailing.equalToSuperview().inset(12)
-            make.top.equalToSuperview().offset(8)
-        }
-        
         altAmountField.setAccessibilityLabel("Alternate Currency Amount Total")
         altAmountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
         altAmountField.font = CurrentTheme.accounts.cell.altAmountFont
@@ -217,8 +206,8 @@ class AccountsTabAccountCell: View {
         inclusionIndicator.snp.makeConstraints { make in
             make.width.equalTo(15)
             make.height.equalTo(15)
-            make.trailing.equalTo(amountField.snp.leading).offset(-5)
-            make.centerY.equalTo(amountField)
+            make.trailing.equalTo(altAmountField.snp.leading).offset(-5)
+            make.centerY.equalTo(altAmountField)
         }
         
         nameField.setAccessibilityLabel("Account Name")
@@ -232,7 +221,19 @@ class AccountsTabAccountCell: View {
         nameField.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(10)
             make.trailing.equalTo(inclusionIndicator.snp.leading).inset(-5)
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(10)
+        }
+        
+        amountField.setAccessibilityLabel("Account Total")
+        amountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
+        amountField.font = CurrentTheme.accounts.cell.amountFont
+        amountField.usesSingleLineMode = true
+        amountField.alignment = .left
+        topContainer.addSubview(amountField)
+        amountField.snp.makeConstraints { make in
+            make.leading.equalTo(nameField)
+            make.bottom.equalToSuperview().offset(-10)
+            make.width.equalTo(100)
         }
         
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(cellOpened(_:)), name: AccountsTabViewController.InternalNotifications.CellOpened)
@@ -251,9 +252,8 @@ class AccountsTabAccountCell: View {
     func updateModel(_ updatedModel: Account) {
         model = updatedModel
         
-        let currency = Currency.rawValue(shortName: updatedModel.currency)
+        let currency = Currency.rawValue(updatedModel.currency)
         amountField.attributedStringValue = amountToStringFormatted(amount: updatedModel.displayBalance, currency: currency, showNegative: true)
-        amountField.setAccessibilityLabel("Account Total")
         amountField.snp.updateConstraints { make in
             let width = amountField.stringValue.size(font: CurrentTheme.accounts.cell.amountFont)
             make.width.equalTo(width)
@@ -261,9 +261,8 @@ class AccountsTabAccountCell: View {
         
         if updatedModel.altCurrency != nil && updatedModel.currency != updatedModel.altCurrency {
             if let altCurrentBalance = updatedModel.altCurrentBalance {
-                let altCurrency = Currency.rawValue(shortName: updatedModel.altCurrency!)
+                let altCurrency = Currency.rawValue(updatedModel.altCurrency!)
                 altAmountField.stringValue = amountToString(amount: altCurrentBalance, currency: altCurrency, showNegative: true)
-                altAmountField.setAccessibilityLabel("Account Total")
                 altAmountField.snp.updateConstraints { make in
                     let width = altAmountField.stringValue.size(font: CurrentTheme.accounts.cell.amountFont)
                     make.width.equalTo(width)
@@ -271,14 +270,8 @@ class AccountsTabAccountCell: View {
             }
             
             altAmountField.isHidden = false
-            amountField.snp.updateConstraints { make in
-                make.top.equalToSuperview().offset(8)
-            }
         } else {
             altAmountField.isHidden = true
-            amountField.snp.updateConstraints { make in
-                make.top.equalToSuperview().offset(20)
-            }
         }
         
         nameField.stringValue = updatedModel.displayName
