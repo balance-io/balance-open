@@ -77,6 +77,11 @@ internal final class AccountsListViewController: UIViewController
         self.viewModel.reloadData()
         self.tableView.reloadData()
         
+        // Background color
+        let lastInstitutionIndex = self.viewModel.numberOfSections() - 1
+        let lastInstitution = self.viewModel.institution(forSection: lastInstitutionIndex)
+        self.tableView.backgroundColor = lastInstitution?.displayColor
+        
         // Total balance
         self.titleView.detailLabel.attributedText = centsToStringFormatted(self.viewModel.totalBalance(), showNegative: true)
     }
