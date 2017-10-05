@@ -40,10 +40,9 @@ internal final class SettingsViewController: UIViewController
         
         self.view.backgroundColor = UIColor.white
         
-        if #available(iOS 11.0, *)
-        {
-            self.navigationController?.navigationBar.prefersLargeTitles = true
-        }
+        // Navigation bar
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(self.logoutButtonTapped(_:)))
         
         // Table view
         self.tableView.dataSource = self
@@ -139,15 +138,8 @@ internal final class SettingsViewController: UIViewController
     
     // MARK: Actions
 
-    @objc private func themeSegmentedControlChanged(_ sender: Any)
-    {
-        guard let control = sender as? UISegmentedControl,
-              control.selectedSegmentIndex < UserPreferences.Theme.available.count else
-        {
-            return
-        }
-        
-        ApplicationConfiguration.userPreferences.theme = UserPreferences.Theme.available[control.selectedSegmentIndex]
+    @objc private func logoutButtonTapped(_ sender: Any) {
+        // TODO: Logout
     }
 }
 
