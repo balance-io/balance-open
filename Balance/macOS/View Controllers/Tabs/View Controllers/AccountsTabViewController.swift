@@ -155,8 +155,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         tableView.customDataSource = self
         tableView.displayEmptySectionRows = true
         tableView.intercellSpacing = NSZeroSize
-        tableView.gridColor = NSColor.clear
-        tableView.gridStyleMask = NSTableView.GridLineStyle()
         tableView.selectionHighlightStyle = .none
         
         tableView.reloadData()
