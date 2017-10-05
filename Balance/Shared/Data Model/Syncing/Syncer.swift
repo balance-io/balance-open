@@ -112,6 +112,7 @@ class Syncer {
                 } else {
                     //logout and ask for resync
                     log.error("Failed get api and key for \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name)")
+                    self.syncInstitutions(syncingInstitutions, startDate: startDate, success: success, errors: errors, pruneTransactions: pruneTransactions)
                 }
             } else if institution.source == .ethplorer {
                 //ethplorer
@@ -119,7 +120,7 @@ class Syncer {
                     syncWallet(address: address, institution: institution, remainingInstitutions: syncingInstitutions, startDate: startDate, success: success, errors: errors)
                 } else {
                     log.error("Failed to get the stored Address for the wallet")
-                }
+                    self.syncInstitutions(syncingInstitutions, startDate: startDate, success: success, errors: errors, pruneTransactions: pruneTransactions)                }
             }
         } else {
             // No more institutions
