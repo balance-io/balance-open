@@ -456,6 +456,8 @@
 		A4E7680D1F67E410002B1AE1 /* APICredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E7680B1F67E410002B1AE1 /* APICredentials.swift */; };
 		A4E768101F67F049002B1AE1 /* APICredentialsComponentsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E7680F1F67F049002B1AE1 /* APICredentialsComponentsError.swift */; };
 		A4E768111F67F049002B1AE1 /* APICredentialsComponentsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E7680F1F67F049002B1AE1 /* APICredentialsComponentsError.swift */; };
+		A4ED56DB1F86301A00E4CC42 /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED56DA1F86301A00E4CC42 /* AccountTableViewCell.swift */; };
+		A4ED56DE1F86378200E4CC42 /* InstitutionTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED56DD1F86378200E4CC42 /* InstitutionTableHeaderView.swift */; };
 		AA4776591DEA901900110685 /* InstitutionInitialsCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4776581DEA901900110685 /* InstitutionInitialsCircleView.swift */; };
 		AA5031A41DF2334000842A7D /* HeaderBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5031A31DF2334000842A7D /* HeaderBackgroundView.swift */; };
 		DC1A649F1B867B1F009356A0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1A649D1B867B1F009356A0 /* MainMenu.xib */; };
@@ -861,6 +863,8 @@
 		A4E768081F67DDFE002B1AE1 /* BitfinexErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexErrors.swift; sourceTree = "<group>"; };
 		A4E7680B1F67E410002B1AE1 /* APICredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICredentials.swift; sourceTree = "<group>"; };
 		A4E7680F1F67F049002B1AE1 /* APICredentialsComponentsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICredentialsComponentsError.swift; sourceTree = "<group>"; };
+		A4ED56DA1F86301A00E4CC42 /* AccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
+		A4ED56DD1F86378200E4CC42 /* InstitutionTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionTableHeaderView.swift; sourceTree = "<group>"; };
 		AA4776581DEA901900110685 /* InstitutionInitialsCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionInitialsCircleView.swift; sourceTree = "<group>"; };
 		AA5031A31DF2334000842A7D /* HeaderBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderBackgroundView.swift; sourceTree = "<group>"; };
 		DC1A64941B867B1F009356A0 /* BalanceOpen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BalanceOpen.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1396,6 +1400,7 @@
 			isa = PBXGroup;
 			children = (
 				53561E8C1F82DD120043D4F9 /* Reuseable.swift */,
+				A4ED56DC1F86373200E4CC42 /* Headers */,
 				53561E8D1F82DD120043D4F9 /* Table View Cells */,
 			);
 			path = "Table View";
@@ -1410,6 +1415,7 @@
 				53561E911F82DD120043D4F9 /* TableData.swift */,
 				53561E921F82DD120043D4F9 /* TextFieldTableViewCell.swift */,
 				A459EDA71F83D2BB00DC4B51 /* TransactionTableViewCell.swift */,
+				A4ED56DA1F86301A00E4CC42 /* AccountTableViewCell.swift */,
 			);
 			path = "Table View Cells";
 			sourceTree = "<group>";
@@ -1944,6 +1950,14 @@
 			path = "API Credentials";
 			sourceTree = "<group>";
 		};
+		A4ED56DC1F86373200E4CC42 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				A4ED56DD1F86378200E4CC42 /* InstitutionTableHeaderView.swift */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
 		DC1A648B1B867B1F009356A0 = {
 			isa = PBXGroup;
 			children = (
@@ -2388,6 +2402,7 @@
 				53552A161ED7251700DD95F9 /* Source.swift in Sources */,
 				535529F31ED724ED00DD95F9 /* TransactionsTabViewModel.swift in Sources */,
 				A44C76231F7BD9610024476E /* BitfinexTransaction.swift in Sources */,
+				A4ED56DB1F86301A00E4CC42 /* AccountTableViewCell.swift in Sources */,
 				53552A371ED72B5B00DD95F9 /* CwlSysctl.swift in Sources */,
 				A493B93A1F68137E0074ACCC /* APICredentialsComponents.swift in Sources */,
 				A4E7680A1F67DDFE002B1AE1 /* BitfinexErrors.swift in Sources */,
@@ -2422,6 +2437,7 @@
 				53552A351ED72B5B00DD95F9 /* OrderedDictionary.swift in Sources */,
 				537187E31F4CC23B00E7F9D6 /* GDAXServer.swift in Sources */,
 				532121A81EE8B91600F4812A /* ZipUtilities.swift in Sources */,
+				A4ED56DE1F86378200E4CC42 /* InstitutionTableHeaderView.swift in Sources */,
 				5301A77E1F17FDED00668099 /* Feedback.swift in Sources */,
 				53561EAA1F82DD260043D4F9 /* RootViewController.swift in Sources */,
 				537187E11F4CC23B00E7F9D6 /* GDAXCredentials.swift in Sources */,
