@@ -148,6 +148,7 @@ class AccountsTabAccountCell: View {
         }
         
         nameField.setAccessibilityLabel("Account Name")
+        nameField.alphaValue = 0.80
         nameField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
         nameField.alignment = .left
         nameField.font = CurrentTheme.accounts.cell.nameFont
@@ -162,6 +163,7 @@ class AccountsTabAccountCell: View {
         }
         
         amountField.setAccessibilityLabel("Account Total")
+        amountField.alphaValue = 0.95
         amountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
         amountField.font = CurrentTheme.accounts.cell.amountFont
         amountField.usesSingleLineMode = true
