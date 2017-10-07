@@ -182,7 +182,7 @@ class AppLock {
     func resetAppData() {
         let institutions = InstitutionRepository.si.allInstitutions()
         for institution in institutions {
-            PlaidApi.deleteInstitution(institutionId: institution.institutionId)
+            institution.delete()
         }
         
         DispatchQueue.userInitiated.async {

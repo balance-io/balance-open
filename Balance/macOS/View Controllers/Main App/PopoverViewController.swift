@@ -13,7 +13,6 @@ enum ContentControllerType {
     case addAccount
     case patchAccount
     case tabs
-    case intro
 }
 
 class PopoverViewController: NSViewController {
@@ -26,7 +25,7 @@ class PopoverViewController: NSViewController {
     fileprivate var currentController: NSViewController!
     fileprivate var tabsController = TabsViewController()
     fileprivate var lockController = LockViewController()
-    fileprivate var patchController: WebSignUpViewController?
+    fileprivate var patchController: SignUpViewController?
     
     //
     // MARK: - Lifecycle -
@@ -53,8 +52,7 @@ class PopoverViewController: NSViewController {
     override func loadView() {
         self.view = View()
         
-        let height = debugging.showIntroOnLaunch ? 400 : 650
-        self.view.frame = CGRect(x: 0, y: 0, width: 400, height: height)
+        self.view.frame = CGRect(x: 0, y: 0, width: 400, height: 650)
     }
     
     override func viewDidLoad() {
@@ -67,37 +65,16 @@ class PopoverViewController: NSViewController {
         if debugging.showAddAccountsOnLaunch {
             currentControllerType = .addAccount
             currentController = AddAccountViewController()
-        } else if debugging.showIntroOnLaunch {
-            currentControllerType = .intro
-            currentController = IntroViewController(closeBlock: closeIntro)
         } else {
-            if debugging.disableSubscription {
-                if InstitutionRepository.si.hasInstitutions {
-                    currentControllerType = .tabs
-                    currentController = tabsController
-                    if appLock.lockEnabled {
-                        appLock.locked = true
-                    }
-                } else {
-                    currentControllerType = .addAccount
-                    currentController = OpenAddAccountViewController()
+            if InstitutionRepository.si.hasInstitutions {
+                currentControllerType = .tabs
+                currentController = tabsController
+                if appLock.lockEnabled {
+                    appLock.locked = true
                 }
             } else {
-                if subscriptionManager.productId == .none {
-                    currentControllerType = .intro
-                    currentController = IntroViewController(closeBlock: closeIntro)
-                } else {
-                    if subscriptionManager.remainingAccounts < subscriptionManager.maxAccounts || InstitutionRepository.si.hasInstitutions {
-                        currentControllerType = .tabs
-                        currentController = tabsController
-                        if appLock.lockEnabled {
-                            appLock.locked = true
-                        }
-                    } else {
-                        currentControllerType = .addAccount
-                        currentController = AddAccountViewController()
-                    }
-                }
+                currentControllerType = .addAccount
+                currentController = AddAccountViewController()
             }
         }
         
@@ -144,7 +121,7 @@ class PopoverViewController: NSViewController {
         let oldController = appLock.locked ? lockController : currentController
         if currentControllerType != .addAccount, let oldController = oldController {
             currentControllerType = .addAccount
-            currentController = debugging.disableSubscription ? OpenAddAccountViewController() : AddAccountViewController()
+            currentController = AddAccountViewController()
             let animation: ViewAnimation = animated ? .slideInFromRight : .none
             self.view.replaceSubview(oldController.view, with: currentController!.view, animation: animation)
         }
@@ -154,7 +131,7 @@ class PopoverViewController: NSViewController {
         let oldController = appLock.locked ? lockController : currentController
         if currentControllerType != .patchAccount, let oldController = oldController {
             if patchController == nil {
-                patchController = WebSignUpViewController(source: institution.source, sourceInstitutionId: institution.sourceInstitutionId, patch: true, institution: institution) { _ in
+                patchController = SignUpViewController(apiInstitution: institution.source.apiInstitution, patch: true, institution: institution, loginService: institution.source.exchangeApi) { _, _ in
                     self.showTabs(animated: true)
                     self.patchController = nil
                 }
@@ -203,9 +180,7 @@ class PopoverViewController: NSViewController {
         if currentControllerType == .tabs {
             currentController = tabsController
         } else if currentControllerType == .addAccount {
-            currentController = debugging.disableSubscription ? OpenAddAccountViewController() : AddAccountViewController()
-        } else if currentControllerType == .intro {
-            currentController = IntroViewController(closeBlock: closeIntro)
+            currentController = AddAccountViewController()
         }
         
         if appLock.locked {
@@ -284,7 +259,6 @@ class PopoverViewController: NSViewController {
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(showAddAccountNotification), name: Notifications.ShowAddAccount)
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(showTabsNotification), name: Notifications.ShowTabs)
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadPopoverController), name: Notifications.ReloadPopoverController)
-        NotificationCenter.addObserverOnMainThread(self, selector: #selector(showIntro), name: Notifications.ShowIntro)
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(showPatchAccount(notification:)), name: Notifications.ShowPatchAccount)
         
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(lockUserInterfaceNotification), name: Notifications.LockUserInterface)
@@ -304,7 +278,6 @@ class PopoverViewController: NSViewController {
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.ShowAddAccount)
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.ShowTabs)
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.ReloadPopoverController)
-        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.ShowIntro)
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.ShowPatchAccount)
         
         DistributedNotificationCenter.removeObserverOnMainThread(self, name: Notification.Name("AppleInterfaceThemeChangedNotification"))
@@ -319,7 +292,7 @@ class PopoverViewController: NSViewController {
     }
     
     @objc fileprivate func institutionRemoved() {
-        if !InstitutionRepository.si.hasInstitutions && subscriptionManager.productId != .none {
+        if !InstitutionRepository.si.hasInstitutions {
             AppDelegate.sharedInstance.preferencesWindowController.close()
             showAddAccount(animated: true)
         }
@@ -335,15 +308,6 @@ class PopoverViewController: NSViewController {
     
     @objc fileprivate func appleInterfaceThemeChanged() {
         // Do nothing for now as we only use one theme
-    }
-    
-    @objc fileprivate func showIntro() {
-        if currentControllerType != .intro, let oldController = currentController {
-            appLock.lockEnabled = false
-            currentControllerType = .intro
-            currentController = IntroViewController(closeBlock: closeIntro)
-            self.view.replaceSubview(oldController.view, with: currentController!.view, animation: .slideInFromLeft)
-        }
     }
     
     @objc fileprivate func showPatchAccount(notification: Notification) {
@@ -370,9 +334,5 @@ class PopoverViewController: NSViewController {
         if appLock.lockEnabled && appLock.lockOnScreenSaver {
             lockUserInterface(animated: false)
         }
-    }
-    
-    fileprivate func closeIntro() {
-        showAddAccount(animated: true)
     }
 }

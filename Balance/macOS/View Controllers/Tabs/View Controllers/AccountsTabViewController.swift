@@ -36,12 +36,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     // MARK: Fix Password Prompt
     let fixPasswordPromptView = PaintCodeView()
     
-    // MARK: Prompt
-    let promptView = VisualEffectView()
-    let promptField = LabelField()
-    let promptAddAccountButton = Button()
-    let promptHideButton = Button()
-    
     // MARK: Footer
     let totalFooterView = VisualEffectView()
     let balanceField = LabelField()
@@ -86,7 +80,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         var finalHeight = CurrentTheme.defaults.size.height
         if let delegate = tableView.delegate {
             // Calculate the table rows total height
-            var tableHeight: CGFloat = debugging.disableTransactions ? 50 : 200 // Account for other UI elements
+            var tableHeight: CGFloat = 200 // Account for other UI elements
             let numberOfRows = tableView.numberOfRows
             
             if numberOfRows > 0 {
@@ -96,7 +90,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
             }
             
             // Calculate height
-            let minHeight: CGFloat = debugging.disableTransactions ? 370 : 520
+            let minHeight: CGFloat = 520
             let maxHeight: CGFloat = AppDelegate.sharedInstance.maxHeight
             var height = minHeight
             if tableHeight > minHeight && tableHeight < maxHeight {
@@ -129,7 +123,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         
         createTable()
         createFixPasswordPrompt()
-        createPrompt()
         //createTotalFooter()
     }
     
@@ -163,9 +156,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     fileprivate func createFixPasswordPrompt() {
         let fixPasswordInstitutions = InstitutionRepository.si.institutionsWithInvalidPasswords()
         let count = fixPasswordInstitutions.count
-        if count > 0 {
-            promptHide(persist: false)
-            
+        if count > 0 {            
             for subview in fixPasswordPromptView.subviews {
                 subview.removeFromSuperview()
             }
@@ -312,87 +303,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         }
     }
     
-    fileprivate func createPrompt() {
-        if !defaults.hideAddAccountPrompt && InstitutionRepository.si.institutionsWithInvalidPasswords().count == 0 {
-            promptView.blendingMode = .withinWindow
-            promptView.material = CurrentTheme.defaults.material
-            //promptView.layer?.backgroundColor = NSColor.lightGrayColor().CGColor
-            promptView.state = .active
-            promptView.cornerRadius = 5
-            self.view.addSubview(promptView)
-            promptView.snp.makeConstraints { make in
-                make.height.equalTo(40)
-                make.leading.equalTo(self.view).offset(10)
-                make.trailing.equalTo(self.view).offset(-10)
-                make.bottom.equalTo(self.view).offset(-50)
-            }
-            
-            //Other prompts
-            //If you want to add another account, you can upgrade
-            //You have 23 days left of your trial.
-            promptField.alignment = .left
-            promptField.font = CurrentTheme.accounts.prompt.promptFont
-            promptField.textColor = CurrentTheme.defaults.foregroundColor
-            promptField.usesSingleLineMode = true
-            promptView.addSubview(promptField)
-            promptField.snp.makeConstraints { make in
-                make.centerY.equalTo(promptView.snp.centerY)
-                make.trailing.equalTo(promptView).offset(-35)
-            }
-            
-            promptAddAccountButton.bezelStyle = .rounded
-            promptAddAccountButton.font = CurrentTheme.addAccounts.buttonFont
-            promptAddAccountButton.title = "Add another"
-            promptAddAccountButton.sizeToFit()
-            promptAddAccountButton.target = self
-            promptAddAccountButton.action = #selector(promptAddAccount)
-            promptView.addSubview(promptAddAccountButton)
-            promptAddAccountButton.snp.makeConstraints { make in
-                make.height.equalTo(23)
-                make.centerY.equalTo(promptView.snp.centerY)
-                make.leading.equalTo(promptView).offset(10)
-            }
-            
-            promptHideButton.isBordered = false
-            promptHideButton.font = CurrentTheme.addAccounts.buttonFont
-            let hideIcon = NSImage(named: NSImage.Name.stopProgressTemplate)
-            promptHideButton.image = tintImageWithColor(hideIcon!, color: CurrentTheme.defaults.foregroundColor)
-            promptHideButton.imagePosition = .imageOnly
-            promptHideButton.title = ""
-            promptHideButton.sizeToFit()
-            promptHideButton.target = self
-            promptHideButton.action = #selector(promptHide)
-            promptView.addSubview(promptHideButton)
-            promptHideButton.snp.makeConstraints { make in
-                make.height.equalTo(15)
-                make.centerY.equalTo(promptView.snp.centerY)
-                make.trailing.equalTo(promptView).inset(10)
-            }
-            
-            updatePromptView()
-        }
-    }
-    
-    @objc fileprivate func promptAddAccount() {
-        NotificationCenter.postOnMainThread(name: Notifications.ShowAddAccount)
-    }
-    
-    @objc fileprivate func promptHide(persist: Bool = true) {
-        defaults.hideAddAccountPrompt = persist
-        promptView.removeFromSuperview()
-        scrollView.contentInsets = NSEdgeInsetsMake(0, 0, 30, 0)
-    }
-    
-    fileprivate func updatePromptView() {
-        let remainingAccounts = subscriptionManager.remainingAccounts
-        if remainingAccounts > 0 {
-            let accountsString = "account".pluralize(remainingAccounts)
-            promptField.stringValue = "You can add up to \(remainingAccounts) more \(accountsString)"
-        } else {
-            promptHide()
-        }
-    }
-    
     fileprivate func createTotalFooter() {
         totalFooterView.blendingMode = .withinWindow
         totalFooterView.material = CurrentTheme.defaults.material
@@ -475,7 +385,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
             if let institution = InstitutionRepository.si.institution(institutionId: institutionId) {
                 let oldData = viewModel.data
                 viewModel.institutionAdded(institution: institution)
-                updatePromptView()
                 reload = false
                 
                 self.invalidateTouchBar()
@@ -520,7 +429,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         if let institution = notification.userInfo?[Notifications.Keys.Institution] as? Institution {
             let oldData = viewModel.data
             viewModel.institutionRemoved(institution: institution)
-            updatePromptView()
             reload = false
             
             self.invalidateTouchBar()
@@ -559,7 +467,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         if let account = notification.userInfo?[Notifications.Keys.Account] as? Account {
             let oldData = viewModel.data
             viewModel.accountRemoved(account: account)
-            updatePromptView()
             reload = false
             
             do {
@@ -630,9 +537,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     //
 
     func tableView(_ tableView: SectionedTableView, clickedRow row: Int, inSection section: Int) {
-        if debugging.disableTransactions {
-            return
-        }
+        // Click to view transactions not implemented yet until we re-implement searching/filtering
+        return
         
         let selectedIndex = tableView.selectedIndex
         if selectedIndex.section >= 0 {
@@ -696,7 +602,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
             height -= 4
         }
         
-        if !debugging.disableTransactions && TableIndex(section: section, row: row) == tableView.selectedIndex {
+        if TableIndex(section: section, row: row) == tableView.selectedIndex {
             return height + 50.0
         } else {
             return height

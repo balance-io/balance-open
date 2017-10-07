@@ -14,3 +14,15 @@ protocol ExchangeApi {
     func authenticationChallenge(loginStrings: [Field], closeBlock: @escaping (_ success: Bool, _ error: Error?, _ institution: Institution?) -> Void)
 }
 
+extension Source {
+    var exchangeApi: ExchangeApi {
+        switch self {
+        case .coinbase: return CoinbaseApi()
+        case .gdax:     return GDAXAPIClient(server: .production)
+        case .poloniex: return PoloniexApi()
+        case .bitfinex: return BitfinexAPIClient()
+        case .kraken:   return KrakenAPIClient()
+        case .wallet:   return EthplorerApi()
+        }
+    }
+}

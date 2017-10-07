@@ -76,10 +76,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
             }
-            if debugging.logRealmCredentials {
-                log.debug("realmUser: \(String(describing: subscriptionManager.realmUser))")
-                log.debug("realmPass: \(String(describing: subscriptionManager.realmPass))")
-            }
         }
         #endif
         

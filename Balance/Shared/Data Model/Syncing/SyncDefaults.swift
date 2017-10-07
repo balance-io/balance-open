@@ -14,7 +14,6 @@ class SyncDefaults {
         static let lastFullSyncTimeKey = "lastFullSyncTime"
         static let lastSuccessfulSyncTimeKey = "lastSuccessfulSyncTime"
         static let lastSuccessfulFullSyncTimeKey = "lastSuccessfulFullSyncTime"
-        static let lastSyncMaxTransactionIdKey = "lastSyncMaxTransactionId"
         static let lastNewInstitutionAddedTimeKey = "lastNewInstitutionAddedTimeKey"
     }
     
@@ -84,15 +83,6 @@ class SyncDefaults {
         }
         set {
             userDefaults.set(newValue, forKey: Keys.lastSuccessfulFullSyncTimeKey)
-        }
-    }
-    
-    var lastSyncMaxTransactionId: Int {
-        get {
-            return userDefaults.integer(forKey: Keys.lastSyncMaxTransactionIdKey)
-        }
-        set {
-            userDefaults.set(newValue, forKey: Keys.lastSyncMaxTransactionIdKey)
         }
     }
     

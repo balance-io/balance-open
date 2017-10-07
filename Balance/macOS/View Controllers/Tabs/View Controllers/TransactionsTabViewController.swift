@@ -94,7 +94,7 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
     
     override func loadView() {
         self.view = View()
-        createHeader()
+        //createHeader()
         createTable()
         createFooter()
     }
@@ -168,7 +168,8 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         noResultsField.alphaValue = 0.0
         self.view.addSubview(noResultsField)
         noResultsField.snp.makeConstraints { make in
-            make.top.equalTo(searchField.snp.bottom).offset(35 + 70)
+            //make.top.equalTo(searchField.snp.bottom).offset(35 + 70)
+            make.top.equalToSuperview().offset(35 + 70)
             make.height.equalTo(100)
             make.width.equalTo(250)
             make.centerX.equalTo(self.view)
@@ -177,12 +178,13 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         scrollView.documentView = tableView
         self.view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
-            make.leading.equalTo(self.view)
-            make.trailing.equalTo(self.view)
-            make.bottom.equalTo(self.view)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.top.equalToSuperview()
         }
-        scrollViewTopConstraint = NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal, toItem: searchField, attribute: .bottom, multiplier: 1.0, constant: 12)
-        self.view.addConstraint(scrollViewTopConstraint)
+        //scrollViewTopConstraint = NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal, toItem: searchField, attribute: .bottom, multiplier: 1.0, constant: 12)
+        //self.view.addConstraint(scrollViewTopConstraint)
         
         tableView.customDelegate = self
         tableView.customDataSource = self

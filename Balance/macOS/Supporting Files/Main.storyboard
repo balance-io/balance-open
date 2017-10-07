@@ -670,8 +670,6 @@
                     <tabViewItems>
                         <tabViewItem label="General" identifier="" image="settings-general" id="XV9-la-kPC"/>
                         <tabViewItem label="Accounts" identifier="" image="settings-accounts" id="mjd-3J-VQs"/>
-                        <tabViewItem label="Rules" image="settings-rules" id="zWR-Np-o4u"/>
-                        <tabViewItem label="Billing" image="settings-billing" id="9Zb-GZ-N68"/>
                         <tabViewItem label="Security" image="settings-security" id="fYX-RW-O1x"/>
                     </tabViewItems>
                     <viewControllerTransitionOptions key="transitionOptions" allowUserInteraction="YES"/>
@@ -688,8 +686,6 @@
                         <outlet property="tabView" destination="SS2-JJ-fG8" id="e6d-gM-3CT"/>
                         <segue destination="Yil-VZ-ttf" kind="relationship" relationship="tabItems" id="JVQ-Lx-wjN"/>
                         <segue destination="KH6-LF-Rm2" kind="relationship" relationship="tabItems" id="i1t-Dg-ETH"/>
-                        <segue destination="Dak-x5-z3L" kind="relationship" relationship="tabItems" id="4Ns-f4-Bbc"/>
-                        <segue destination="emK-5P-WCx" kind="relationship" relationship="tabItems" id="EFc-Fa-sLb"/>
                         <segue destination="nW7-Wz-2se" kind="relationship" relationship="tabItems" id="jyv-u2-OLc"/>
                     </connections>
                 </tabViewController>
@@ -705,7 +701,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="500" height="214"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hbn-Wg-xle">
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="hbn-Wg-xle">
                                 <rect key="frame" x="191" y="174" width="222" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="218" id="kx5-M5-WT7"/>
@@ -718,94 +714,31 @@
                                     <action selector="logInCheckBoxPress:" target="Yil-VZ-ttf" id="Ov6-aq-xa8"/>
                                 </connections>
                             </button>
-                            <popUpButton verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PRP-Jw-h1M">
-                                <rect key="frame" x="191" y="65" width="171" height="26"/>
-                                <popUpButtonCell key="cell" type="push" title=" Gmail" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="TX4-Pe-8Ry" id="8yS-iR-ReL">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="i0e-1y-D8o">
-                                        <items>
-                                            <menuItem title=" Gmail" state="on" image="gmail-icon" id="TX4-Pe-8Ry"/>
-                                            <menuItem title=" Google Inbox" image="google-inbox-icon" tag="1" id="jJh-nT-H6F"/>
-                                        </items>
-                                    </menu>
-                                </popUpButtonCell>
-                                <connections>
-                                    <action selector="emailPreferenceChanged:" target="Yil-VZ-ttf" id="zob-Ig-OPi"/>
-                                </connections>
-                            </popUpButton>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="751" ambiguous="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BQj-3E-j9E">
-                                <rect key="frame" x="99" y="72" width="86" height="17"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="82" id="odC-g1-rpH"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Email Search:" id="gbA-xK-ZJQ">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <popUpButton verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fqr-LT-GmM">
-                                <rect key="frame" x="191" y="34" width="171" height="26"/>
-                                <popUpButtonCell key="cell" type="push" title=" Google" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="dQS-hU-v6H" id="wSt-bP-fKy">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="P7D-zw-0cq">
-                                        <items>
-                                            <menuItem title=" Google" state="on" image="google-icon" id="dQS-hU-v6H"/>
-                                            <menuItem title=" DuckDuckGo" image="duck-duck-go-icon" tag="1" id="qrh-z0-A3H"/>
-                                            <menuItem title=" Bing" image="bing-icon" tag="2" id="b1W-CA-3f4"/>
-                                        </items>
-                                    </menu>
-                                </popUpButtonCell>
-                                <connections>
-                                    <action selector="searchPreferenceChanged:" target="Yil-VZ-ttf" id="4Iq-a4-Ezt"/>
-                                </connections>
-                            </popUpButton>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OYa-Ry-O3s">
-                                <rect key="frame" x="104" y="40" width="81" height="17"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="77" id="Qg4-Z0-jOb"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Web Search:" id="LiC-gm-Jw0">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KLO-OE-sXB">
-                                <rect key="frame" x="111" y="134" width="74" height="17"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KLO-OE-sXB">
+                                <rect key="frame" x="124" y="134" width="61" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Shortcut:" id="YNG-1r-VlX">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cp3-tO-0fm" customClass="MASShortcutView">
-                                <rect key="frame" x="193" y="131" width="166" height="22"/>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="cp3-tO-0fm" customClass="MASShortcutView">
+                                <rect key="frame" x="193" y="131" width="135" height="22"/>
                             </customView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="hbn-Wg-xle" firstAttribute="top" secondItem="aKI-tT-xOh" secondAttribute="top" constant="24" id="3kP-dc-UHg"/>
-                            <constraint firstItem="BQj-3E-j9E" firstAttribute="trailing" secondItem="KLO-OE-sXB" secondAttribute="trailing" id="6bM-tw-M5D"/>
+                            <constraint firstItem="hbn-Wg-xle" firstAttribute="leading" secondItem="cp3-tO-0fm" secondAttribute="leading" id="4LL-sf-ctE"/>
+                            <constraint firstAttribute="trailing" secondItem="hbn-Wg-xle" secondAttribute="trailing" constant="89" id="4Rr-rH-j45"/>
                             <constraint firstItem="cp3-tO-0fm" firstAttribute="centerY" secondItem="KLO-OE-sXB" secondAttribute="centerY" id="CVS-zo-iyT"/>
-                            <constraint firstItem="cp3-tO-0fm" firstAttribute="trailing" secondItem="Fqr-LT-GmM" secondAttribute="trailing" id="Chd-wc-z0J"/>
                             <constraint firstItem="cp3-tO-0fm" firstAttribute="leading" secondItem="KLO-OE-sXB" secondAttribute="trailing" constant="10" id="F92-6T-fjN"/>
-                            <constraint firstItem="Fqr-LT-GmM" firstAttribute="top" secondItem="PRP-Jw-h1M" secondAttribute="bottom" constant="10" id="H2e-zT-H5R"/>
-                            <constraint firstItem="OYa-Ry-O3s" firstAttribute="trailing" secondItem="BQj-3E-j9E" secondAttribute="trailing" id="Yke-Mc-dWX"/>
-                            <constraint firstItem="Fqr-LT-GmM" firstAttribute="centerY" secondItem="OYa-Ry-O3s" secondAttribute="centerY" constant="1" id="fTb-fb-FYn"/>
-                            <constraint firstItem="Fqr-LT-GmM" firstAttribute="leading" secondItem="PRP-Jw-h1M" secondAttribute="leading" id="jiO-J1-jiu"/>
-                            <constraint firstItem="PRP-Jw-h1M" firstAttribute="centerY" secondItem="BQj-3E-j9E" secondAttribute="centerY" constant="2" id="mLD-sa-h2x"/>
-                            <constraint firstAttribute="bottom" secondItem="OYa-Ry-O3s" secondAttribute="bottom" constant="40" id="wTa-AT-wAc"/>
+                            <constraint firstItem="cp3-tO-0fm" firstAttribute="top" secondItem="hbn-Wg-xle" secondAttribute="bottom" constant="23" id="eEo-LK-s6u"/>
+                            <constraint firstAttribute="trailing" secondItem="cp3-tO-0fm" secondAttribute="trailing" constant="172" id="q4K-Ym-ZW1"/>
                             <constraint firstItem="KLO-OE-sXB" firstAttribute="top" secondItem="aKI-tT-xOh" secondAttribute="top" constant="63" id="xLV-5o-LAT"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="emailPreferencePopUpButton" destination="PRP-Jw-h1M" id="mf7-yl-76C"/>
-                        <outlet property="emailPreferenceTextField" destination="BQj-3E-j9E" id="Whf-ds-rHm"/>
                         <outlet property="logInCheckBox" destination="hbn-Wg-xle" id="4mv-ic-c7s"/>
-                        <outlet property="searchPreferencePopUpButton" destination="Fqr-LT-GmM" id="5sf-gg-twV"/>
-                        <outlet property="searchPreferenceTextField" destination="OYa-Ry-O3s" id="smM-ev-yEu"/>
                         <outlet property="shortcutView" destination="cp3-tO-0fm" id="x1e-HX-oJu"/>
                     </connections>
                 </viewController>
@@ -836,32 +769,6 @@
             </objects>
             <point key="canvasLocation" x="1652" y="174"/>
         </scene>
-        <!--Rules-->
-        <scene sceneID="POF-Lf-2Mw">
-            <objects>
-                <viewController title="Rules" id="Dak-x5-z3L" customClass="PreferencesRulesViewController" customModule="BalancemacOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="xiO-mY-tIs">
-                        <rect key="frame" x="0.0" y="0.0" width="500" height="400"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="m9P-2u-RSa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1417" y="622"/>
-        </scene>
-        <!--Billing-->
-        <scene sceneID="LiR-Ce-0fX">
-            <objects>
-                <viewController title="Billing" id="emK-5P-WCx" customClass="PreferencesBillingViewController" customModule="BalancemacOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="Xni-6G-vF3">
-                        <rect key="frame" x="0.0" y="0.0" width="500" height="400"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="atn-S0-4Dd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="829" y="1058.5"/>
-        </scene>
         <!--Security-->
         <scene sceneID="vpY-88-nxY">
             <objects>
@@ -877,15 +784,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bing-icon" width="16" height="16"/>
-        <image name="duck-duck-go-icon" width="16" height="16"/>
-        <image name="gmail-icon" width="16" height="16"/>
-        <image name="google-icon" width="16" height="16"/>
-        <image name="google-inbox-icon" width="16" height="16"/>
         <image name="settings-accounts" width="32" height="32"/>
-        <image name="settings-billing" width="32" height="32"/>
         <image name="settings-general" width="32" height="32"/>
-        <image name="settings-rules" width="32" height="32"/>
         <image name="settings-security" width="32" height="32"/>
     </resources>
 </document>

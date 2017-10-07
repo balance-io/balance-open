@@ -14,8 +14,6 @@ enum Tab: Int {
     case none           = -1
     case accounts       = 0
     case transactions   = 1
-    case feed           = 2
-    case insights       = 3
 }
 
 class TabsViewController: NSViewController {
@@ -29,16 +27,12 @@ class TabsViewController: NSViewController {
     let headerView = View()
     var accountsButton: TabButton!
     var transactionsButton: TabButton!
-    var feedButton: TabButton!
-    var insightsButton: TabButton!
     var tabButtons = [TabButton]()
     
     // MARK: Tabs
     let tabContainerView = View()
     let accountsViewController = AccountsTabViewController()
     let transactionsViewController = TransactionsTabViewController()
-    let notificationsViewController = NotificationsTabViewController()
-    let insightsViewController = InsightsTabViewController()
     var feedbackViewController: EmailIssueController?
     var tabControllers = [NSViewController]()
     let tabSwitchDelay = 1.0
@@ -68,15 +62,10 @@ class TabsViewController: NSViewController {
         
         let accountsTabIcon = AccountsTabIcon(tabIconColor: inactive, tabIconBorderColor: border, tabIconSelectedColor: active)
         let transactionsTabIcon = TransactionsTabIcon(tabIconColor: inactive, tabIconBorderColor: border, tabIconSelectedColor: active)
-        let feedTabIcon = FeedTabIcon(tabIconColor: inactive, tabIconBorderColor: border, tabIconSelectedColor: active)
-        let feedAltTabIcon = FeedTabIcon(tabIconColor: inactive, tabIconBorderColor: border, tabIconSelectedColor: active)
-        let insightsTabIcon = InsightsTabIcon(tabIconColor: inactive, tabIconBorderColor: border, tabIconSelectedColor: active)
         
         accountsButton = TabButton(iconView: accountsTabIcon, labelText: "Accounts")
         transactionsButton = TabButton(iconView: transactionsTabIcon, labelText: "Transactions")
-        feedButton = TabButton(iconView: feedTabIcon, altIconView: feedAltTabIcon, labelText: "Notifications")
-        insightsButton = TabButton(iconView: insightsTabIcon, labelText: "Insights")
-        tabButtons = [accountsButton, transactionsButton, feedButton, insightsButton]
+        tabButtons = [accountsButton, transactionsButton]
         
         var i = 0
         for tabButton in tabButtons {
@@ -86,7 +75,7 @@ class TabsViewController: NSViewController {
             i += 1
         }
         
-        tabControllers = [accountsViewController, transactionsViewController, notificationsViewController, insightsViewController]
+        tabControllers = [accountsViewController, transactionsViewController]
         
         registerForNotifications()
         addShortcutMonitor()
@@ -122,93 +111,52 @@ class TabsViewController: NSViewController {
         tabContainerView.snp.makeConstraints { make in
             make.leading.equalTo(self.view)
             make.trailing.equalTo(self.view)
-            make.top.equalTo(headerView.snp.bottom)
+            make.top.equalTo(headerView.snp.bottom).offset(10)
             make.bottom.equalTo(footerView.snp.top)
         }
         
-        if debugging.defaultToInsightsTab {
-            showTab(tabIndex: Tab.insights.rawValue)
-        } else if debugging.defaultToTransactionsTab {
+        if debugging.defaultToTransactionsTab {
             showTab(tabIndex: Tab.transactions.rawValue)
         } else {
             showTab(tabIndex: defaultTab.rawValue)
         }
         
-        if !debugging.disableTransactions {
-            // Preload the transaction views
-            let _ = transactionsViewController.view
-            let _ = notificationsViewController.view
-            let _ = insightsViewController.view
-        }
+        // Preload the transaction views
+        let _ = transactionsViewController.view
     }
     
     func createHeader() {
-        if debugging.disableTransactions {
-            // Header container
-            headerBackgroundView.frame = NSRect(x: 0, y: 0, width: 400, height: 0)
-            headerBackgroundView.layer?.backgroundColor = NSColor.red.cgColor
-            self.view.addSubview(headerBackgroundView)
-            headerBackgroundView.snp.makeConstraints { make in
-                make.width.equalTo(400)
-                make.height.equalTo(0)
-                make.centerX.equalTo(self.view).offset(0)
-                make.top.equalTo(self.view)
-            }
-            
-            self.view.addSubview(headerView)
-            headerView.snp.makeConstraints { make in
-                make.width.equalTo(308)
-                make.height.equalTo(0)
-                make.centerX.equalTo(self.view).offset(1)
-                make.top.equalTo(self.view)
-            }
-        } else {
-            // Header container
-            headerBackgroundView.frame = NSRect(x: 0, y: 0, width: 400, height: 45)
-            headerBackgroundView.layer?.backgroundColor = NSColor.red.cgColor
-            self.view.addSubview(headerBackgroundView)
-            headerBackgroundView.snp.makeConstraints { make in
-                make.width.equalTo(400)
-                make.height.equalTo(45)
-                make.centerX.equalTo(self.view).offset(0)
-                make.top.equalTo(self.view)
-            }
-            
-            self.view.addSubview(headerView)
-            headerView.snp.makeConstraints { make in
-                make.width.equalTo(308)
-                make.height.equalTo(45)
-                make.centerX.equalTo(self.view).offset(1)
-                make.top.equalTo(self.view)
-            }
-            
-            // Accounts button
-            headerView.addSubview(accountsButton)
-            accountsButton.snp.makeConstraints { make in
-                make.centerX.equalTo(headerView).multipliedBy(0.245)
-                make.top.equalTo(headerView).offset(5)
-            }
-            
-            // Transactions button
-            headerView.addSubview(transactionsButton)
-            transactionsButton.snp.makeConstraints { make in
-                make.centerX.equalTo(headerView).multipliedBy(0.735)
-                make.top.equalTo(headerView).offset(5)
-            }
-            
-            // Feed button
-            headerView.addSubview(feedButton)
-            feedButton.snp.makeConstraints { make in
-                make.centerX.equalTo(headerView).multipliedBy(1.285)
-                make.top.equalTo(headerView).offset(5)
-            }
-            
-            // Insights button
-            headerView.addSubview(insightsButton)
-            insightsButton.snp.makeConstraints { make in
-                make.centerX.equalTo(headerView).multipliedBy(1.76)
-                make.top.equalTo(headerView).offset(5)
-            }
+        // Header container
+        headerBackgroundView.frame = NSRect(x: 0, y: 0, width: 400, height: 45)
+        headerBackgroundView.layer?.backgroundColor = NSColor.red.cgColor
+        self.view.addSubview(headerBackgroundView)
+        headerBackgroundView.snp.makeConstraints { make in
+            make.width.equalTo(400)
+            make.height.equalTo(45)
+            make.centerX.equalTo(self.view).offset(0)
+            make.top.equalTo(self.view)
+        }
+        
+        self.view.addSubview(headerView)
+        headerView.snp.makeConstraints { make in
+            make.width.equalTo(308)
+            make.height.equalTo(45)
+            make.centerX.equalTo(self.view).offset(1)
+            make.top.equalTo(self.view)
+        }
+        
+        // Accounts button
+        headerView.addSubview(accountsButton)
+        accountsButton.snp.makeConstraints { make in
+            make.centerX.equalTo(headerView).multipliedBy(0.5)
+            make.top.equalTo(headerView).offset(5)
+        }
+        
+        // Transactions button
+        headerView.addSubview(transactionsButton)
+        transactionsButton.snp.makeConstraints { make in
+            make.centerX.equalTo(headerView).multipliedBy(1.5)
+            make.top.equalTo(headerView).offset(5)
         }
     }
     
@@ -325,18 +273,8 @@ class TabsViewController: NSViewController {
         }
     }
     
-    func showFeedTab() {
-        tabAction(tabButtons[Tab.feed.rawValue].button)
-    }
-    
     @objc func quitApp() {
         NSApp.terminate(nil)
-    }
-    
-    func updateFeedIcon() {
-        let unreadCount = defaults.unreadNotificationIds.count
-        let feedButton = tabButtons[Tab.feed.rawValue]
-        feedButton.altBehavior = unreadCount > 0
     }
     
     func showTab(tabIndex: Int) {
@@ -347,10 +285,8 @@ class TabsViewController: NSViewController {
         // Analytics
         var contentName = ""
         switch tabIndex {
-        case 0: contentName = "Accounts tab selected"
-        case 1: contentName = "Transactions tab selected"
-        case 2: contentName = "Feed tab selected"
-        case 3: contentName = "Insights tab selected"
+        case Tab.accounts.rawValue:     contentName = "Accounts tab selected"
+        case Tab.transactions.rawValue: contentName = "Transactions tab selected"
         default: break
         }
         BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: contentName)
@@ -362,14 +298,6 @@ class TabsViewController: NSViewController {
             } else {
                 tabButton.deactivate()
             }
-        }
-        
-        // TODO: Move this into the NotificationsTabViewController
-        // Clear notifications if needed
-        if currentVisibleTab == .feed {
-            defaults.unreadNotificationIds = Set<Int>()
-            updateFeedIcon()
-            notificationsViewController.reloadData()
         }
         
         // Constraints
@@ -414,14 +342,12 @@ class TabsViewController: NSViewController {
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(performSearch(_:)), name: Notifications.PerformSearch)
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(showSearch(_:)), name: Notifications.ShowSearch)
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(showTabIndex(_:)), name: Notifications.ShowTabIndex)
-        NotificationCenter.addObserverOnMainThread(self, selector: #selector(syncCompleted), name: Notifications.SyncCompleted)
     }
     
     fileprivate func unregisterForNotifications() {
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.PerformSearch)
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.ShowSearch)
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.ShowTabIndex)
-        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.SyncCompleted)
     }
 
     @objc fileprivate func performSearch(_ notification: Notification) {
@@ -447,10 +373,6 @@ class TabsViewController: NSViewController {
         if let tabIndex = notification.userInfo?[Notifications.Keys.TabIndex] as? Int {
             showTab(tabIndex: tabIndex)
         }
-    }
-    
-    @objc fileprivate func syncCompleted() {
-        updateFeedIcon()
     }
     
     //

@@ -167,10 +167,6 @@ class SignUpViewController: NSViewController {
         fatalError("unsupported")
     }
     
-    deinit {
-//        subscriptionManager.isShowingSignUpController = false
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         onePasswordButton.isHidden = !showOnePasswordButton

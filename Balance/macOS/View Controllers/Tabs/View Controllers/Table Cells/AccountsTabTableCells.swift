@@ -74,7 +74,7 @@ class AccountsTabGroupCell: View {
         model = updatedModel
         topColor = previousSectionColor
         
-        let sourceInstitutionId = debugging.disableSubscription ? updatedModel.source.description : updatedModel.sourceInstitutionId
+        let sourceInstitutionId = updatedModel.source.description
         if let logoDrawFunction = InstitutionLogos.drawingFunctionForId(sourceInstitutionId: sourceInstitutionId) {
             logoView.isHidden = false
             nameField.isHidden = true
