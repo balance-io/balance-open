@@ -117,7 +117,7 @@ extension Institution {
             return accessToken
         }
         set {
-            print("set accessTokenKey: \(accessTokenKey)  newValue: \(String(describing: newValue))")
+            //print("set accessTokenKey: \(accessTokenKey)  newValue: \(String(describing: newValue))")
             if let accessToken = newValue {
                 do {
                     try Locksmith.updateData(data: ["accessToken": accessToken], forUserAccount: accessTokenKey)

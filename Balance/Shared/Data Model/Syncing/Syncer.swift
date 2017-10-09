@@ -61,6 +61,7 @@ class Syncer {
         var syncingInstitutions = institutions
         
         if !canceled, let institution = syncingInstitutions.popLast() {
+            print("institutions: \(institutions) syncingInstitutions: \(syncingInstitutions)")
             if institution.passwordInvalid {
                 // Institution needs a PATCH, so skip
                 log.error("Tried to sync institution \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name) but the password was invalid")
