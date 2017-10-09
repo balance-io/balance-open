@@ -25,7 +25,11 @@ fileprivate let clientId = "a6e15fbb0c3362b74360895f261fb079672c10eef79dcb72308c
 // Save random state for current authentication request
 fileprivate var lastState: String? = nil
 
-struct CoinbaseApi {
+struct CoinbaseApi: ExchangeApi {
+    
+    func authenticationChallenge(loginStrings: [Field], closeBlock: @escaping (_ success: Bool, _ error: Error?, _ institution: Institution?) -> Void) {
+        
+    }
 
     @discardableResult static func authenticate() -> Bool {
         let redirectUri = "balancemymoney%3A%2F%2Fcoinbase"
@@ -248,8 +252,8 @@ struct CoinbaseApi {
         // Add/update accounts
         for ca in coinbaseAccounts {
             // Calculate the number of decimals
-            let decimals = Currency.rawValue(shortName: ca.currency).decimals
-            let altDecimals = Currency.rawValue(shortName: ca.nativeCurrency).decimals
+            let decimals = Currency.rawValue(ca.currency).decimals
+            let altDecimals = Currency.rawValue(ca.nativeCurrency).decimals
             
             // Calculate the integer value of the balance based on the decimals
             var balance = ca.balance

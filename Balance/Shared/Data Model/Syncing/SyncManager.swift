@@ -80,69 +80,13 @@ class SyncManager: NSObject {
             return
         }
         
-        // Make sure institutions are in sync before syncing
-        institutionsDatabase.checkForUpdate {
-            if validateReceipt {
-                // First validate receipt and sync access tokens
-                subscriptionManager.validateReceipt { code, _, accessTokens in
-                    if code == .success {
-                        if let accessTokens = accessTokens {
-                            self.syncAccessTokens(accessTokens)
-                        }
-                        self.performSync(userInitiated: userInitiated, completion: completion)
-                    }
-                }
-            } else {
-                self.performSync(userInitiated: userInitiated, completion: completion)
-            }
-        }
-    }
-    
-    func syncAccessTokens(_ accessTokens: [String: String]) {
-        let institutionsCount = InstitutionRepository.si.institutionsCount
-        
-        // Purge any orphaned local institutions
-        let localInstitutions = InstitutionRepository.si.allInstitutions()
-        for institution in localInstitutions {
-            if let token = institution.accessToken, !accessTokens.keys.contains(token) {
-                log.debug("Removing \(institution.sourceInstitutionId) because it was removed server-side")
-                
-                // This access token is not registered with the server, so delete the institution
-                institution.delete()
-            }
-        }
-        
-        // Add any new access tokens
-        // TODO: Generalize this to different data sources
-        var tokensAdded = 0
-        let localTokens: [String] = InstitutionRepository.si.allInstitutions().flatMap({$0.accessToken})
-        for remoteToken in accessTokens.keys {
-            if !localTokens.contains(remoteToken) {
-                tokensAdded += 1
-                // This institution doesn't exist, so add it
-                if let sourceInstitutionId = accessTokens[remoteToken], let plaidInstitution = institutionsDatabase.search(source: .plaid, sourceInstitutionId: sourceInstitutionId) {
-                    _ = InstitutionRepository.si.institution(source: .plaid, sourceInstitutionId: plaidInstitution.sourceInstitutionId, name: plaidInstitution.name, accessToken: remoteToken)
-                    log.debug("Created plaid institution with sourceInstitutionId: \(plaidInstitution.institutionId)")
-                } else {
-                    log.error("Somehow couldn't find the plaid institution in the database, deleting token from server")
-                    subscriptionManager.plaidDeleteAccessToken(accessToken: remoteToken)
-                }
-            }
-        }
-        
-        log.debug("Added \(tokensAdded) new tokens")
-        
-        if institutionsCount == 0 && tokensAdded > 0 {
-            NotificationCenter.postOnMainThread(name: Notifications.ShowTabs)
-        }
+        performSync(userInitiated: userInitiated, completion: completion)
     }
     
     fileprivate func performSync(userInitiated: Bool = false, completion: SuccessErrorsHandler? = nil) {
         // Cancel any automatic runs of this method in case it's called manually
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.automaticSync), object: nil)
        
-        hasSyncedSinceLaunch = true
-        
         hasSyncedSinceLaunch = true
         
         // Determine whether to do a full sync or not
@@ -170,20 +114,6 @@ class SyncManager: NSObject {
                     self.syncDefaults.lastSuccessfulFullSyncTime = now
                 }
             }
-            
-            // Notifications (perform regardless of success because some institutions could have succeeded)
-            if self.syncDefaults.lastSyncMaxTransactionId > 0 {
-                // Update unread notifications count
-                let existingUnreadTransactionIds = Set<Int>(defaults.unreadNotificationIds)
-                let newUnreadTransactionIds = feed.unreadTransactionIds(sinceTransactionId: self.syncDefaults.lastSyncMaxTransactionId)
-                let unreadTransactionIds = existingUnreadTransactionIds.union(newUnreadTransactionIds)
-                defaults.unreadNotificationIds = unreadTransactionIds
-                
-                // Notify the user about these transactions
-                let notifyTransactions = feed.allNotifyTransactions(sinceTransactionId: self.syncDefaults.lastSyncMaxTransactionId)
-                feed.sendTransactionNotifications(transactions: notifyTransactions)
-            }
-            self.syncDefaults.lastSyncMaxTransactionId = TransactionRepository.si.maxTransactionId
             
             // Notify observers
             NotificationCenter.postOnMainThread(name: Notifications.SyncCompleted)

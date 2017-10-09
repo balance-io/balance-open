@@ -59,7 +59,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Initialize UserDefaults
         defaults.setupDefaults()
-        print("feedRules: \(String(describing: defaults.feedRules))")
         
         // Initialize database
         database.create()
@@ -76,10 +75,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         log.debug("(\(institution)): \(accessToken)")
                     }
                 }
-            }
-            if debugging.logRealmCredentials {
-                log.debug("realmUser: \(String(describing: subscriptionManager.realmUser))")
-                log.debug("realmPass: \(String(describing: subscriptionManager.realmPass))")
             }
         }
         #endif

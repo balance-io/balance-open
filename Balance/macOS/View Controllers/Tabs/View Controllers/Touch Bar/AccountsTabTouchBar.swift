@@ -36,7 +36,7 @@ extension AccountsTabViewController : NSTouchBarDelegate {
         } else if identifier == .accountsScrollView {
             item.view = TouchBarShared.createAccountButtonsScrollview(target: self,
                                                                       accountButtonAction:  #selector(touchBarSearchAccount(_:)),
-                                                                      showAddAccountButton: subscriptionManager.remainingAccounts > 0,
+                                                                      showAddAccountButton: true,
                                                                       addAccountButtonAction: #selector(touchBarAddAccount(_:)))
         } else if let itemIndex = items.index(of: identifier) {
             let accountIndex = itemIndex - 1

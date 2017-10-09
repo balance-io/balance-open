@@ -8,7 +8,7 @@
 
 /// This data is duplicated in the sources database table for use in joins if needed
 enum Source: Int, CustomStringConvertible {
-    case plaid    = 1
+    //case plaid    = 1 // Disabled for now to allow for exhaustive switch statements
     case coinbase = 2
     case poloniex = 3
     case gdax     = 4
@@ -18,13 +18,24 @@ enum Source: Int, CustomStringConvertible {
     
     var description: String {
         switch self {
-        case .plaid:    return "Plaid"
+        //case .plaid:    return "Plaid"
         case .coinbase: return "Coinbase"
         case .poloniex: return "Poloniex"
         case .gdax:     return "GDAX"
         case .bitfinex: return "Bitfinex"
         case .kraken:   return "Kraken"
         case .wallet:   return "Wallet"
+        }
+    }
+    
+    var color: PXColor {
+        switch self {
+        case .coinbase: return PXColor(hexString: "#0667D0")!
+        case .poloniex: return PXColor(hexString: "#086166")!
+        case .gdax:     return PXColor(hexString: "#212D3D")!
+        case .bitfinex: return PXColor(hexString: "#97C653")!
+        case .kraken:   return PXColor(hexString: "#4F6E89")!
+        case .wallet:   return .gray
         }
     }
 }

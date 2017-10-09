@@ -230,7 +230,7 @@ class EthplorerApi: ExchangeApi {
         let currentBalance = balance
         let altCurrentBalance = altBalance
         
-        if let newAccount = AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: currency.name, sourceInstitutionId: "", accountTypeId: .wallet, accountSubTypeId: nil, name: currency.name, currency: currency.name, currentBalance: currentBalance, availableBalance: nil, number: nil, altCurrency: altCurrency.name, altCurrentBalance: altCurrentBalance, altAvailableBalance: nil) {
+        if let newAccount = AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: currency.code, sourceInstitutionId: "", accountTypeId: .wallet, accountSubTypeId: nil, name: currency.code, currency: currency.code, currentBalance: currentBalance, availableBalance: nil, number: nil, altCurrency: altCurrency.code, altCurrentBalance: altCurrentBalance, altAvailableBalance: nil) {
             
             // Hide unpoplular currencies that have a 0 balance
             if currency != Currency.btc && currency != Currency.eth {

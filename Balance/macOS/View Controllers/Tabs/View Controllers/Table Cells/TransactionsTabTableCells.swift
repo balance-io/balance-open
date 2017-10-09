@@ -230,8 +230,6 @@ class TransactionsTabTransactionCell: View {
             return
         }
         
-        let hasCategory = false//(model.categoryId != nil)
-        
         bottomContainer = View()
         self.addSubview(bottomContainer)
         bottomContainer.snp.makeConstraints { make in
@@ -241,74 +239,12 @@ class TransactionsTabTransactionCell: View {
             make.height.equalTo(229)
         }
         
-        var searchPreference = ""
-        var searchPreferenceIcon = NSImage()
-        switch (defaults.searchPreference) {
-        case SearchPreference.google:
-            searchPreference = "Google"
-            searchPreferenceIcon = NSImage(named: NSImage.Name(rawValue: "google-icon"))!
-        case SearchPreference.duckDuckGo:
-            searchPreference = "DuckDuckGo"
-            searchPreferenceIcon = NSImage(named: NSImage.Name(rawValue: "duck-duck-go-icon"))!
-        case SearchPreference.bing:
-            searchPreference = "Bing"
-            searchPreferenceIcon = NSImage(named: NSImage.Name(rawValue: "bing-icon"))!
-        }
-        
-        let webSearchTransactionsButton = Button()
-        webSearchTransactionsButton.bezelStyle = .rounded
-        searchPreferenceIcon.size = NSSize(width: 16, height: 16)
-        webSearchTransactionsButton.image = searchPreferenceIcon
-        webSearchTransactionsButton.imagePosition = .imageLeft
-        webSearchTransactionsButton.title = "Search \(searchPreference)"
-        webSearchTransactionsButton.toolTip = "Search \(searchPreference)"
-        webSearchTransactionsButton.setAccessibilityLabel(webSearchTransactionsButton.title)
-        webSearchTransactionsButton.font = CurrentTheme.accounts.cellExpansion.font
-        webSearchTransactionsButton.sizeToFit()
-        webSearchTransactionsButton.target = self
-        webSearchTransactionsButton.action = #selector(webSearchTransactionsAction)
-        bottomContainer.addSubview(webSearchTransactionsButton)
-        webSearchTransactionsButton.snp.makeConstraints { make in
-            make.height.equalTo(25)
-            make.leading.equalTo(bottomContainer)
-            make.top.equalTo(bottomContainer.snp.top)
-        }
-        
-        var emailPreference = ""
-        var emailSearchIcon = NSImage()
-        switch (defaults.emailPreference) {
-        case EmailPreference.gmail:
-            emailPreference = "Gmail"
-            emailSearchIcon = NSImage(named: NSImage.Name(rawValue: "gmail-icon"))!
-        case EmailPreference.googleInbox:
-            emailPreference = "Inbox"
-            emailSearchIcon = NSImage(named: NSImage.Name(rawValue: "google-inbox-icon"))!
-        }
-        
-        let emailSearchTransactionsButton = Button()
-        emailSearchTransactionsButton.bezelStyle = .rounded
-        emailSearchIcon.size = NSSize(width: 16, height: 16)
-        emailSearchTransactionsButton.image = emailSearchIcon
-        emailSearchTransactionsButton.imagePosition = .imageLeft
-        emailSearchTransactionsButton.title = "Search \(emailPreference)"
-        emailSearchTransactionsButton.toolTip = "Search \(emailPreference)"
-        emailSearchTransactionsButton.setAccessibilityLabel(emailSearchTransactionsButton.title)
-        emailSearchTransactionsButton.font = CurrentTheme.accounts.cellExpansion.font
-        emailSearchTransactionsButton.target = self
-        emailSearchTransactionsButton.action = #selector(receiptSearchTransactionsAction)
-        bottomContainer.addSubview(emailSearchTransactionsButton)
-        emailSearchTransactionsButton.snp.makeConstraints { make in
-            make.height.equalTo(25)
-            make.leading.equalTo(webSearchTransactionsButton.snp.trailing).offset(10)
-            make.top.equalTo(bottomContainer.snp.top)
-        }
-        
         infoContainer = View()
         bottomContainer.addSubview(infoContainer)
         infoContainer.snp.makeConstraints { make in
             make.leading.equalTo(bottomContainer)
             make.trailing.equalTo(bottomContainer)
-            make.top.equalTo(webSearchTransactionsButton.snp.bottom).offset(8)
+            make.top.equalToSuperview().offset(8)
             make.bottom.equalTo(bottomContainer)
         }
         
