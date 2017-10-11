@@ -70,10 +70,7 @@ internal final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Re
             return
         }
         
-        self.contentView.backgroundColor = unwrappedInstitution.displayColor
         self.nameLabel.text = unwrappedInstitution.displayName
         self.totalBalanceLabel.text = "TODO: $1,000,000"
-        
-        
     }
 }

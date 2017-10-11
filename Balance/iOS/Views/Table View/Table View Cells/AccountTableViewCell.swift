@@ -27,6 +27,9 @@ internal final class AccountTableViewCell: TableViewCell {
     internal override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
         
+        self.backgroundView = nil
+        self.backgroundColor = UIColor.clear
+        
         // Text label
         self.textLabel?.textColor = UIColor.white
         self.textLabel?.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
@@ -46,8 +49,6 @@ internal final class AccountTableViewCell: TableViewCell {
         guard let unwrappedAccount = self.account else {
             return
         }
-        
-        self.backgroundColor = unwrappedAccount.institution?.displayColor
         
         // Text label
         let currency = Currency.crypto(shortName: unwrappedAccount.currency)
