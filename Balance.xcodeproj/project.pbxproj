@@ -410,6 +410,7 @@
 		A44C76251F7BE5280024476E /* BitfinexTransactionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44C76241F7BE5280024476E /* BitfinexTransactionTests.swift */; };
 		A44C76271F7BE5A00024476E /* BitfinexMovement.json in Resources */ = {isa = PBXBuildFile; fileRef = A44C76261F7BE5A00024476E /* BitfinexMovement.json */; };
 		A453A5231F866CFF0002C6C8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A453A5221F866CFF0002C6C8 /* LoginViewController.swift */; };
+		A453A5261F8676F00002C6C8 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A453A5251F8676F00002C6C8 /* RegistrationViewController.swift */; };
 		A459EDA41F839D9800DC4B51 /* TransactionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A459EDA31F839D9800DC4B51 /* TransactionsListViewController.swift */; };
 		A459EDA61F83B90900DC4B51 /* TransactionsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A459EDA51F83B90900DC4B51 /* TransactionsListViewModel.swift */; };
 		A459EDA81F83D2BB00DC4B51 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A459EDA71F83D2BB00DC4B51 /* TransactionTableViewCell.swift */; };
@@ -837,6 +838,7 @@
 		A44C76241F7BE5280024476E /* BitfinexTransactionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexTransactionTests.swift; sourceTree = "<group>"; };
 		A44C76261F7BE5A00024476E /* BitfinexMovement.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BitfinexMovement.json; sourceTree = "<group>"; };
 		A453A5221F866CFF0002C6C8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		A453A5251F8676F00002C6C8 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		A459EDA31F839D9800DC4B51 /* TransactionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListViewController.swift; sourceTree = "<group>"; };
 		A459EDA51F83B90900DC4B51 /* TransactionsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListViewModel.swift; sourceTree = "<group>"; };
 		A459EDA71F83D2BB00DC4B51 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
@@ -1428,6 +1430,7 @@
 			isa = PBXGroup;
 			children = (
 				53561E9C1F82DD120043D4F9 /* RootViewController.swift */,
+				A453A5241F8676CA0002C6C8 /* Registration */,
 				A453A5211F866CEC0002C6C8 /* Login */,
 				53561E991F82DD120043D4F9 /* Accounts list */,
 				53561E9D1F82DD120043D4F9 /* Add Account */,
@@ -1888,6 +1891,14 @@
 				A453A5221F866CFF0002C6C8 /* LoginViewController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		A453A5241F8676CA0002C6C8 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				A453A5251F8676F00002C6C8 /* RegistrationViewController.swift */,
+			);
+			path = Registration;
 			sourceTree = "<group>";
 		};
 		A459EDA21F839D8200DC4B51 /* Transactions List */ = {
@@ -2399,6 +2410,7 @@
 				53552A091ED7251200DD95F9 /* Defaults.swift in Sources */,
 				537187DD1F4CC23B00E7F9D6 /* CoinbaseAccount.swift in Sources */,
 				537187E41F4CC23B00E7F9D6 /* GDAXWithdrawal.swift in Sources */,
+				A453A5261F8676F00002C6C8 /* RegistrationViewController.swift in Sources */,
 				53552A111ED7251200DD95F9 /* AppLock.swift in Sources */,
 				53F078661ED73F0F00E7EDF9 /* Color.swift in Sources */,
 				535529F71ED7250100DD95F9 /* SyncManager.swift in Sources */,
