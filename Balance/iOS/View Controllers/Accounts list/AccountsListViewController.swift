@@ -15,7 +15,13 @@ internal final class AccountsListViewController: UIViewController
     private let viewModel = AccountsTabViewModel()
     
     // Private
-    private let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+    private let collectionView: UICollectionView = {
+        let layout = StackedLayout()
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
+        return view
+    }()
+    
     private let titleView = MultilineTitleView()
     
     // MARK: Initialization
@@ -51,14 +57,15 @@ internal final class AccountsListViewController: UIViewController
         self.setupTitleView()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addAccountButtonTapped(_:)))
         
-        // Table view
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
-        self.tableView.register(reusableCell: AccountTableViewCell.self)
-        self.tableView.register(reusableView: InstitutionTableHeaderView.self)
-        self.view.addSubview(self.tableView)
+        // Collection view
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        self.collectionView.backgroundColor = UIColor.black
+        self.collectionView.alwaysBounceVertical = true
+        self.collectionView.register(reusableCell: InstitutionCollectionViewCell.self)
+        self.view.addSubview(self.collectionView)
         
-        self.tableView.snp.makeConstraints { (make) in
+        self.collectionView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
     }
@@ -75,12 +82,7 @@ internal final class AccountsListViewController: UIViewController
     private func reloadData()
     {
         self.viewModel.reloadData()
-        self.tableView.reloadData()
-        
-        // Background color
-        let lastInstitutionIndex = self.viewModel.numberOfSections() - 1
-        let lastInstitution = self.viewModel.institution(forSection: lastInstitutionIndex)
-        self.tableView.backgroundColor = lastInstitution?.displayColor
+        self.collectionView.reloadData()
         
         // Total balance
         self.titleView.detailLabel.attributedText = centsToStringFormatted(self.viewModel.totalBalance(), showNegative: true)
@@ -129,51 +131,32 @@ internal final class AccountsListViewController: UIViewController
     }
 }
 
-// MARK: UITableViewDataSource
+// MARK: UICollectionViewDataSource
 
-extension AccountsListViewController: UITableViewDataSource
+extension AccountsListViewController: UICollectionViewDataSource
 {
-    func numberOfSections(in tableView: UITableView) -> Int
-    {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.viewModel.numberOfSections()
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
-        return self.viewModel.numberOfRows(inSection: section)
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
-        return tableView.dequeueReusableCell(at: indexPath) as AccountTableViewCell
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableView() as InstitutionTableHeaderView
-        header.institution = self.viewModel.institution(forSection: section)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: InstitutionCollectionViewCell = collectionView.dequeueReusableCell(at: indexPath)
         
-        return header
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return InstitutionTableHeaderView.height
+        let institution = self.viewModel.institution(forSection: indexPath.row)!
+        let viewModel = InstitutionAccountsListViewModel(institution: institution)
+        cell.viewModel = viewModel
+        
+        return cell
     }
 }
 
-// MARK: UITableViewDelegate
+// MARK: UICollectionViewDelegate
 
-extension AccountsListViewController: UITableViewDelegate
+extension AccountsListViewController: UICollectionViewDelegate
 {
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let account = self.viewModel.account(forRow: indexPath.row, inSection: indexPath.section),
-              let cell = cell as? AccountTableViewCell else {
-            return
-        }
-        
-        cell.account = account
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return AccountTableViewCell.height
-    }
+
 }
