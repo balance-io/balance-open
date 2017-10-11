@@ -65,6 +65,6 @@ internal final class RegistrationViewController: UIViewController {
     // MARK: Action
     
     @objc private func registerButtonTapped(_ sender: Any) {
-        
+        self.dismiss(animated: true, completion: nil)
     }
 }

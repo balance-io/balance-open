@@ -65,7 +65,7 @@ internal final class LoginViewController: UIViewController {
     // MARK: Action
     
     @objc private func loginButtonTapped(_ sender: Any) {
-        
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
