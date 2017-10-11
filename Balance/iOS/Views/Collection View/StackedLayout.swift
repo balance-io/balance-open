@@ -12,8 +12,26 @@ import UIKit
 internal final class StackedLayout: UICollectionViewLayout {
     // Private
     private var layoutAttributes = [IndexPath : UICollectionViewLayoutAttributes]()
+    private let itemHeight: CGFloat = 120.0
+    private let cardRevealHeight: CGFloat = 40.0
+    private let stretchValue: CGFloat = 0.2
     
     // MARK: Layout
+    
+    override var collectionViewContentSize: CGSize {
+        guard let unwrappedCollectionView = self.collectionView else {
+            return CGSize.zero
+        }
+        
+        let numberOfItems = unwrappedCollectionView.numberOfItems(inSection: 0)
+        let contentHeight = CGFloat(numberOfItems) * cardRevealHeight
+        
+        return CGSize(width: unwrappedCollectionView.bounds.width, height: contentHeight)
+    }
+    
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        return true
+    }
     
     internal override func prepare() {
         guard let unwrappedCollection = self.collectionView else {
@@ -27,10 +45,17 @@ internal final class StackedLayout: UICollectionViewLayout {
             let indexPath = IndexPath(row: index, section: 0)
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
             
-            let yOrigin = 20.0 * CGFloat(index)
-            attributes.frame = CGRect(x: 0.0, y: yOrigin, width: unwrappedCollection.bounds.width, height: 50.0)
+            let yOrigin = self.cardRevealHeight * CGFloat(index)
+            attributes.frame = CGRect(x: 0.0, y: yOrigin, width: unwrappedCollection.bounds.width, height: self.itemHeight)
             attributes.zIndex = index
-            attributes.transform3D = CATransform3DMakeTranslation(0.0, 0.0, CGFloat(index - numberOfItems))
+            
+            // Collection view is at the top and the user continues to pull down
+            if (unwrappedCollection.contentOffset.y + unwrappedCollection.contentInset.top < 0.0) {
+                var frame = attributes.frame
+                frame.origin.y -= self.stretchValue * unwrappedCollection.contentOffset.y * CGFloat(index)
+                
+                attributes.frame = frame
+            }
             
             layoutAttributes[indexPath] = attributes
         }
@@ -43,8 +68,10 @@ internal final class StackedLayout: UICollectionViewLayout {
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        self.layoutAttributes.filter { (indexPath, attributes) -> Bool in
+        let attributes = self.layoutAttributes.filter { (indexPath, attributes) -> Bool in
             return rect.intersects(attributes.frame)
-        }
+        }.values
+        
+        return Array(attributes)
     }
 }
