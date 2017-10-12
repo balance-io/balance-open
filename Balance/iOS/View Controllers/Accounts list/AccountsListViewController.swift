@@ -12,16 +12,10 @@ import UIKit
 internal final class AccountsListViewController: UIViewController
 {
     // Fileprivate
-    private let viewModel = AccountsTabViewModel()
+    fileprivate let viewModel = AccountsTabViewModel()
     
     // Private
-    private let collectionView: UICollectionView = {
-        let layout = StackedLayout()
-        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
-        return view
-    }()
-    
+    private let collectionView = StackedCardCollectionView()
     private let titleView = MultilineTitleView()
     
     // MARK: Initialization
@@ -158,5 +152,11 @@ extension AccountsListViewController: UICollectionViewDataSource
 
 extension AccountsListViewController: UICollectionViewDelegate
 {
-
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        
+    }
 }

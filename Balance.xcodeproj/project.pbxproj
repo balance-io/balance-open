@@ -408,6 +408,7 @@
 		A42953CE1F8E179900729045 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42953CD1F8E179900729045 /* SplashScreenViewController.swift */; };
 		A42953D01F8E1EB300729045 /* StackedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42953CF1F8E1EB300729045 /* StackedLayout.swift */; };
 		A42953D41F8E255D00729045 /* InstitutionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42953D31F8E255D00729045 /* InstitutionCollectionViewCell.swift */; };
+		A4307A901F8F6EA800BBA8B4 /* StackedCardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4307A8F1F8F6EA800BBA8B4 /* StackedCardCollectionView.swift */; };
 		A44C76221F7BD9610024476E /* BitfinexTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44C76211F7BD9610024476E /* BitfinexTransaction.swift */; };
 		A44C76231F7BD9610024476E /* BitfinexTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44C76211F7BD9610024476E /* BitfinexTransaction.swift */; };
 		A44C76251F7BE5280024476E /* BitfinexTransactionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44C76241F7BE5280024476E /* BitfinexTransactionTests.swift */; };
@@ -465,6 +466,7 @@
 		A4ED56DE1F86378200E4CC42 /* InstitutionTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED56DD1F86378200E4CC42 /* InstitutionTableHeaderView.swift */; };
 		A4ED56E11F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED56E01F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift */; };
 		A4EF39E71F8E43A40032265E /* InstitutionAccountsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EF39E61F8E43A40032265E /* InstitutionAccountsListViewModel.swift */; };
+		A4EF39E91F8E5EC10032265E /* SelectedStackedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EF39E81F8E5EC10032265E /* SelectedStackedLayout.swift */; };
 		AA4776591DEA901900110685 /* InstitutionInitialsCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4776581DEA901900110685 /* InstitutionInitialsCircleView.swift */; };
 		AA5031A41DF2334000842A7D /* HeaderBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5031A31DF2334000842A7D /* HeaderBackgroundView.swift */; };
 		DC1A649F1B867B1F009356A0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1A649D1B867B1F009356A0 /* MainMenu.xib */; };
@@ -841,6 +843,7 @@
 		A42953CD1F8E179900729045 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		A42953CF1F8E1EB300729045 /* StackedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedLayout.swift; sourceTree = "<group>"; };
 		A42953D31F8E255D00729045 /* InstitutionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionCollectionViewCell.swift; sourceTree = "<group>"; };
+		A4307A8F1F8F6EA800BBA8B4 /* StackedCardCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedCardCollectionView.swift; sourceTree = "<group>"; };
 		A44C76211F7BD9610024476E /* BitfinexTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexTransaction.swift; sourceTree = "<group>"; };
 		A44C76241F7BE5280024476E /* BitfinexTransactionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexTransactionTests.swift; sourceTree = "<group>"; };
 		A44C76261F7BE5A00024476E /* BitfinexMovement.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BitfinexMovement.json; sourceTree = "<group>"; };
@@ -879,6 +882,7 @@
 		A4ED56DD1F86378200E4CC42 /* InstitutionTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionTableHeaderView.swift; sourceTree = "<group>"; };
 		A4ED56E01F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCurrencySelectionViewController.swift; sourceTree = "<group>"; };
 		A4EF39E61F8E43A40032265E /* InstitutionAccountsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionAccountsListViewModel.swift; sourceTree = "<group>"; };
+		A4EF39E81F8E5EC10032265E /* SelectedStackedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedStackedLayout.swift; sourceTree = "<group>"; };
 		AA4776581DEA901900110685 /* InstitutionInitialsCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionInitialsCircleView.swift; sourceTree = "<group>"; };
 		AA5031A31DF2334000842A7D /* HeaderBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderBackgroundView.swift; sourceTree = "<group>"; };
 		DC1A64941B867B1F009356A0 /* BalanceOpen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BalanceOpen.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1907,7 +1911,8 @@
 		A42953D11F8E252900729045 /* Collection View */ = {
 			isa = PBXGroup;
 			children = (
-				A42953CF1F8E1EB300729045 /* StackedLayout.swift */,
+				A4307A8F1F8F6EA800BBA8B4 /* StackedCardCollectionView.swift */,
+				A4EF39EC1F8F5F5B0032265E /* Layouts */,
 				A42953D21F8E253300729045 /* Cells */,
 			);
 			path = "Collection View";
@@ -2025,6 +2030,15 @@
 				A4ED56E01F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift */,
 			);
 			path = "Main Currency Selection";
+			sourceTree = "<group>";
+		};
+		A4EF39EC1F8F5F5B0032265E /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				A4EF39E81F8E5EC10032265E /* SelectedStackedLayout.swift */,
+				A42953CF1F8E1EB300729045 /* StackedLayout.swift */,
+			);
+			path = Layouts;
 			sourceTree = "<group>";
 		};
 		DC1A648B1B867B1F009356A0 = {
@@ -2469,6 +2483,7 @@
 				53552A0C1ED7251200DD95F9 /* Utils.swift in Sources */,
 				53552A271ED7252900DD95F9 /* Array.swift in Sources */,
 				53D441E31F44AA9F006967E1 /* GenericItemRepository.swift in Sources */,
+				A4307A901F8F6EA800BBA8B4 /* StackedCardCollectionView.swift in Sources */,
 				53561EA41F82DD260043D4F9 /* UserPreferences.swift in Sources */,
 				53552A161ED7251700DD95F9 /* Source.swift in Sources */,
 				535529F31ED724ED00DD95F9 /* TransactionsTabViewModel.swift in Sources */,
@@ -2559,6 +2574,7 @@
 				A493B93D1F6819600074ACCC /* BitfinexAuthHeaders.swift in Sources */,
 				53552A151ED7251200DD95F9 /* Swizzling.swift in Sources */,
 				53552A191ED7251700DD95F9 /* AccountType.swift in Sources */,
+				A4EF39E91F8E5EC10032265E /* SelectedStackedLayout.swift in Sources */,
 				53552A101ED7251200DD95F9 /* InstitutionsDatabase.swift in Sources */,
 				53552A291ED7252900DD95F9 /* Error.swift in Sources */,
 				53552A331ED72B5700DD95F9 /* FMDatabaseAdditionsVariadic.swift in Sources */,

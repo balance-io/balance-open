@@ -10,10 +10,12 @@ import UIKit
 
 
 internal final class StackedLayout: UICollectionViewLayout {
+    // Internal
+    
     // Private
     private var layoutAttributes = [IndexPath : UICollectionViewLayoutAttributes]()
     private let itemHeight: CGFloat = 120.0
-    private let cardRevealHeight: CGFloat = 40.0
+    private let openRevealHeight: CGFloat = 40.0
     private let stretchValue: CGFloat = 0.2
     
     // MARK: Layout
@@ -22,9 +24,9 @@ internal final class StackedLayout: UICollectionViewLayout {
         guard let unwrappedCollectionView = self.collectionView else {
             return CGSize.zero
         }
-        
+
         let numberOfItems = unwrappedCollectionView.numberOfItems(inSection: 0)
-        let contentHeight = CGFloat(numberOfItems) * cardRevealHeight
+        let contentHeight = CGFloat(numberOfItems) * openRevealHeight
         
         return CGSize(width: unwrappedCollectionView.bounds.width, height: contentHeight)
     }
@@ -45,9 +47,10 @@ internal final class StackedLayout: UICollectionViewLayout {
             let indexPath = IndexPath(row: index, section: 0)
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
             
-            let yOrigin = self.cardRevealHeight * CGFloat(index)
+            let yOrigin = self.openRevealHeight * CGFloat(index)
             attributes.frame = CGRect(x: 0.0, y: yOrigin, width: unwrappedCollection.bounds.width, height: self.itemHeight)
             attributes.zIndex = index
+            attributes.transform3D = CATransform3DMakeTranslation(0.0, 0.0, CGFloat(index - numberOfItems))
             
             // Collection view is at the top and the user continues to pull down
             if (unwrappedCollection.contentOffset.y + unwrappedCollection.contentInset.top < 0.0) {

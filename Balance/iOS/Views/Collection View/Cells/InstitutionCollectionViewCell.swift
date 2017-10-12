@@ -26,8 +26,10 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
     internal override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.selectedBackgroundView = nil
+        
         // Container
-        self.container.layer.cornerRadius = 10.0
+        self.container.layer.cornerRadius = 20.0
         self.container.layer.borderColor = UIColor.black.cgColor
         self.container.layer.borderWidth = 0.5
         self.contentView.addSubview(self.container)
@@ -37,6 +39,7 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
         }
         
         // Table view
+        self.tableView.isUserInteractionEnabled = false
         self.tableView.separatorStyle = .none
         self.tableView.backgroundView = nil
         self.tableView.backgroundColor = UIColor.clear
@@ -60,6 +63,12 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
     private func reloadData() {
         self.container.backgroundColor = self.viewModel?.institution.displayColor
         self.tableView.reloadData()
+    }
+    
+    // MARK: Autolayout
+    
+    override var intrinsicContentSize: CGSize {
+        return self.tableView.contentSize
     }
 }
 
