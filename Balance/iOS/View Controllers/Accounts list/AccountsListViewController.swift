@@ -47,10 +47,6 @@ internal final class AccountsListViewController: UIViewController
     {
         super.viewDidLoad()
         
-        // Navigation bar
-        self.setupTitleView()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addAccountButtonTapped(_:)))
-        
         // Collection view
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
@@ -68,6 +64,7 @@ internal final class AccountsListViewController: UIViewController
     {
         super.viewWillAppear(animated)
         
+        self.navigationController?.isNavigationBarHidden = true
         self.reloadData()
     }
     
@@ -77,44 +74,6 @@ internal final class AccountsListViewController: UIViewController
     {
         self.viewModel.reloadData()
         self.collectionView.reloadData()
-        
-        // Total balance
-        self.titleView.detailLabel.attributedText = centsToStringFormatted(self.viewModel.totalBalance(), showNegative: true)
-    }
-    
-    // MARK: UI
-    
-    private func setupTitleView()
-    {
-        if let navigationBar = self.navigationController?.navigationBar
-        {
-            let navigationBarBounds = navigationBar.bounds
-            
-            let containerView = UIView()
-            containerView.frame = navigationBarBounds
-            containerView.autoresizingMask = UIViewAutoresizing.flexibleWidth
-            self.navigationItem.titleView = containerView
-            
-            // Add the title view
-            self.titleView.titleLabel.text = "Total Balance"
-            navigationBar.addSubview(self.titleView)
-            
-            self.titleView.snp.makeConstraints({ (make) in
-                make.width.lessThanOrEqualToSuperview().multipliedBy(0.6)
-                make.height.equalToSuperview()
-                make.center.equalTo(navigationBar)
-            })
-        }
-    }
-    
-    // MARK: Actions
-    
-    @objc private func addAccountButtonTapped(_ sender: Any)
-    {
-        let addAccountViewController = AddAccountViewController()
-        let navigationController = UINavigationController(rootViewController: addAccountViewController)
-        
-        self.present(navigationController, animated: true, completion: nil)
     }
     
     // MARK: Notifications
