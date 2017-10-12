@@ -25,11 +25,19 @@ internal final class SettingsViewController: UIViewController
         super.init(nibName: nil, bundle: nil)
         self.title = "Settings"
         self.tabBarItem.image = UIImage(named: "Gear")
+        
+        // Notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(self.accountAddedNotification(_:)), name: Notifications.AccountAdded, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.accountRemovedNotification(_:)), name: Notifications.AccountRemoved, object: nil)
     }
     
     internal required init?(coder aDecoder: NSCoder)
     {
         fatalError()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: View lifecycle
@@ -55,13 +63,13 @@ internal final class SettingsViewController: UIViewController
             make.edges.equalToSuperview()
         }
         
-        self.buildTableData()
+        self.reloadData()
         self.tableView.reloadData()
     }
     
     // MARK: Data
     
-    private func buildTableData()
+    private func reloadData()
     {
         self.viewModel.reloadData()
         
@@ -111,7 +119,7 @@ internal final class SettingsViewController: UIViewController
             row.deletionHandler = { [unowned self] (indexPath) in
                 if institution.delete()
                 {
-                    self.buildTableData()
+                    self.reloadData()
                     self.tableView.deleteRows(at: [indexPath], with: .automatic)
                 }
             }
@@ -119,6 +127,25 @@ internal final class SettingsViewController: UIViewController
             institutionRows.append(row)
         }
         
+        // Add account row
+        var addAccountRow = TableRow(cellPreparationHandler: { (tableView, indexPath) -> UITableViewCell in
+            let cell: TableViewCell = tableView.dequeueReusableCell(at: indexPath)
+            cell.textLabel?.text = "Add Account"
+            cell.accessoryType = .disclosureIndicator
+            
+            return cell
+        })
+        
+        addAccountRow.actionHandler = { [unowned self] (indexPath) in
+            let addAccountViewController = AddAccountViewController()
+            let navigationController = UINavigationController(rootViewController: addAccountViewController)
+            
+            self.present(navigationController, animated: true, completion: nil)
+        }
+        
+        institutionRows.append(addAccountRow)
+        
+        // Accounts section
         let accountsSection = TableSection(title: "Accounts", rows: institutionRows)
         tableSections.append(accountsSection)
         
@@ -129,6 +156,18 @@ internal final class SettingsViewController: UIViewController
 
     @objc private func logoutButtonTapped(_ sender: Any) {
         // TODO: Logout
+    }
+    
+    // MARK: Notifications
+    
+    @objc private func accountAddedNotification(_ notification: Notification) {
+        self.reloadData()
+        self.tableView.reloadData()
+    }
+    
+    @objc private func accountRemovedNotification(_ notification: Notification) {
+        self.reloadData()
+        self.tableView.reloadData()
     }
 }
 
