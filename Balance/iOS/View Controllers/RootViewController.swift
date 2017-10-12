@@ -84,6 +84,13 @@ internal final class RootViewController: UIViewController
     
     // MARK: UI Defaults
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if self.rootTabBarController.selectedIndex == 0 {
+            return .lightContent
+        }
+        
+        return .default
+    }
     private func setUIDefaults()
     {
         UITableView.appearance().backgroundColor = UIColor(red: 237.0/255.0, green: 238.0/255.0, blue: 240.0/255.0, alpha: 1.0)
