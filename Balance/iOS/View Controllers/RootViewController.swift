@@ -39,6 +39,9 @@ internal final class RootViewController: UIViewController
         
         // Add as child view controller
         self.addChildViewController(self.rootTabBarController)
+        
+        // Notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(self.accountAddedNotification(_:)), name: Notifications.AccountAdded, object: nil)
     }
 
     internal required init?(coder aDecoder: NSCoder)
@@ -48,7 +51,7 @@ internal final class RootViewController: UIViewController
     
     deinit
     {
-        
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: View lifecycle
@@ -97,5 +100,10 @@ internal final class RootViewController: UIViewController
         UITabBar.appearance().barTintColor = UIColor.black
         UITabBar.appearance().tintColor = UIColor.white
     }
+    
+    // MARK: Notifications
+    
+    @objc private func accountAddedNotification(_ notification: Notification) {
+        syncManager.sync()
     }
 }
