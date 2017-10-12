@@ -91,8 +91,11 @@ internal final class RootViewController: UIViewController
         
         return .default
     }
+    
     private func setUIDefaults()
     {
-        UITableView.appearance().backgroundColor = UIColor(red: 237.0/255.0, green: 238.0/255.0, blue: 240.0/255.0, alpha: 1.0)
+        UITabBar.appearance().barTintColor = UIColor.black
+        UITabBar.appearance().tintColor = UIColor.white
+    }
     }
 }
