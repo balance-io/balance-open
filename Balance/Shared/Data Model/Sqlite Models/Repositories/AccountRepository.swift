@@ -49,6 +49,8 @@ struct AccountRepository: ItemRepository {
             }
             
             if let accountId = generatedId {
+                NotificationCenter.postOnMainThread(name: Notifications.AccountAdded)
+                
                 let account = self.account(accountId: accountId)
                 return account
             } else {
