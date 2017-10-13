@@ -74,16 +74,8 @@ struct TabsTheme {
     let footer: TabsTheme.FooterTheme
     
     struct HeaderTheme {
-        let backgroundColor: NSColor
-        let topColor: NSColor
-        let bottomColor: NSColor
         let tabFont: NSFont
         let tabFontColor: NSColor
-        let tabFontColorActive: NSColor
-        let tabIconBorderColor: NSColor
-        let tabIconColorActive: NSColor
-        let tabIconColorInactive: NSColor
-        let tabIconNotificationBubbleColor: NSColor
     }
     
     struct FooterTheme {

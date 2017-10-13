@@ -23,11 +23,9 @@ class TabsViewController: NSViewController {
     //
     
     // MARK: Header
-    let headerBackgroundView = HeaderBackgroundView()
     let headerView = View()
-//    var accountsButton: TabButton!
-//    var transactionsButton: TabButton!
-//    var tabButtons = [TabButton]()
+    let accountsButton = Button()
+    let transactionsButton = Button()
     
     // MARK: Tabs
     let tabContainerView = View()
@@ -54,25 +52,6 @@ class TabsViewController: NSViewController {
         super.init(nibName: nil, bundle: nil)
         
         self.defaultTab = defaultTab
-        
-        let inactive = CurrentTheme.tabs.header.tabIconColorInactive
-        let border = CurrentTheme.tabs.header.tabIconBorderColor
-        let active = CurrentTheme.tabs.header.tabIconColorActive
-        
-//        let accountsTabIcon = AccountsTabIcon(tabIconColor: inactive, tabIconBorderColor: border, tabIconSelectedColor: active)
-//        let transactionsTabIcon = TransactionsTabIcon(tabIconColor: inactive, tabIconBorderColor: border, tabIconSelectedColor: active)
-//
-//        accountsButton = TabButton(iconView: accountsTabIcon, labelText: "Accounts")
-//        transactionsButton = TabButton(iconView: transactionsTabIcon, labelText: "Transactions")
-//        tabButtons = [accountsButton, transactionsButton]
-//
-//        var i = 0
-//        for tabButton in tabButtons {
-//            tabButton.button.target = self
-//            tabButton.button.action = #selector(tabAction(_:))
-//            tabButton.button.tag = i
-//            i += 1
-//        }
         
         tabControllers = [accountsViewController, transactionsViewController]
         
@@ -125,38 +104,47 @@ class TabsViewController: NSViewController {
     }
     
     func createHeader() {
-        // Header container
-        headerBackgroundView.frame = NSRect(x: 0, y: 0, width: 400, height: 45)
-        headerBackgroundView.layer?.backgroundColor = NSColor.red.cgColor
-        self.view.addSubview(headerBackgroundView)
-        headerBackgroundView.snp.makeConstraints { make in
-            make.width.equalTo(400)
-            make.height.equalTo(45)
-            make.centerX.equalTo(self.view).offset(0)
-            make.top.equalTo(self.view)
-        }
-        
         self.view.addSubview(headerView)
         headerView.snp.makeConstraints { make in
-            make.width.equalTo(308)
-            make.height.equalTo(45)
-            make.centerX.equalTo(self.view).offset(1)
-            make.top.equalTo(self.view)
+            make.width.equalToSuperview()
+            make.height.equalTo(30)
+            make.left.equalToSuperview()
+            make.top.equalToSuperview()
         }
         
-//        // Accounts button
-//        headerView.addSubview(accountsButton)
-//        accountsButton.snp.makeConstraints { make in
-//            make.centerX.equalTo(headerView).multipliedBy(0.5)
-//            make.top.equalTo(headerView).offset(5)
-//        }
-//
-//        // Transactions button
-//        headerView.addSubview(transactionsButton)
-//        transactionsButton.snp.makeConstraints { make in
-//            make.centerX.equalTo(headerView).multipliedBy(1.5)
-//            make.top.equalTo(headerView).offset(5)
-//        }
+        accountsButton.target = self
+        accountsButton.action = #selector(tabAction(_:))
+        accountsButton.tag = Tab.accounts.rawValue
+        accountsButton.image = #imageLiteral(resourceName: "TabIconAccountsInactive")
+        //accountsButton.alternateImage = #imageLiteral(resourceName: "TabIconAccountsActive")
+        accountsButton.title = "Accounts"
+        //accountsButton.titleColor = CurrentTheme.tabs.header.tabFontColor
+        accountsButton.font = CurrentTheme.tabs.header.tabFont
+        accountsButton.setAccessibilityLabel("Accounts")
+        //accountsButton.setButtonType(.momentaryPushIn)
+        accountsButton.imagePosition = .imageLeft
+        accountsButton.isBordered = false
+        accountsButton.sizeToFit()
+        headerView.addSubview(accountsButton)
+        accountsButton.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(10)
+            make.centerY.equalToSuperview()
+        }
+        
+        transactionsButton.target = self
+        transactionsButton.action = #selector(tabAction(_:))
+        transactionsButton.tag = Tab.transactions.rawValue
+        transactionsButton.image = #imageLiteral(resourceName: "TabIconTransactionsInactive")
+        transactionsButton.alternateImage = #imageLiteral(resourceName: "TabIconTransactionsActive")
+        transactionsButton.title = "Transactions"
+        //transactionsButton.bezelStyle = .rounded
+        transactionsButton.setAccessibilityLabel("Transactions")
+        transactionsButton.sizeToFit()
+        headerView.addSubview(transactionsButton)
+        transactionsButton.snp.makeConstraints { make in
+            make.left.equalTo(accountsButton.snp.right).offset(10)
+            make.centerY.equalToSuperview()
+        }
     }
     
     func createFooter() {
@@ -213,28 +201,6 @@ class TabsViewController: NSViewController {
     }
     
     @objc func showPreferences() {
-//        // Prepare preferences button for spin animation
-//        // Adapted from: https://github.com/bansalvks/Mac-Dummies/blob/master/Rotate%20NSImageView/animationTrial/AppDelegate.m
-//        if spinAnimation == nil {
-//            if let layer = self.preferencesButton.layer {
-//                layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-//                let frame = layer.frame
-//                let x = frame.origin.x + frame.size.width
-//                let y = frame.origin.y + frame.size.height
-//                layer.position = CGPoint(x: x, y: y)
-//                layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-//            }
-//            
-//            let spin = CABasicAnimation(keyPath: "transform.rotation")
-//            spin.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-//            spin.fromValue = NSNumber(value: 0 as Float)
-//            spin.toValue = NSNumber(value: 180 as Float)
-//            spin.duration = 1
-//            spinAnimation = spin
-//        }
-//        
-//        preferencesButton.layer?.add(spinAnimation!, forKey: "transform")
-        
         AppDelegate.sharedInstance.showPreferences()
     }
     

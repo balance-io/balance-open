@@ -408,7 +408,6 @@
 		A4E768101F67F049002B1AE1 /* APICredentialsComponentsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E7680F1F67F049002B1AE1 /* APICredentialsComponentsError.swift */; };
 		A4E768111F67F049002B1AE1 /* APICredentialsComponentsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E7680F1F67F049002B1AE1 /* APICredentialsComponentsError.swift */; };
 		AA4776591DEA901900110685 /* InstitutionInitialsCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4776581DEA901900110685 /* InstitutionInitialsCircleView.swift */; };
-		AA5031A41DF2334000842A7D /* HeaderBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5031A31DF2334000842A7D /* HeaderBackgroundView.swift */; };
 		DC1A649F1B867B1F009356A0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1A649D1B867B1F009356A0 /* MainMenu.xib */; };
 		DC33D6D21CDDB22900E213FF /* ObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = DC33D6D11CDDB22900E213FF /* ObjC.m */; };
 		DC39E0001CD80D0E00B48F75 /* HoverButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC39DFFF1CD80D0E00B48F75 /* HoverButton.swift */; };
@@ -780,7 +779,6 @@
 		A4E7680B1F67E410002B1AE1 /* APICredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICredentials.swift; sourceTree = "<group>"; };
 		A4E7680F1F67F049002B1AE1 /* APICredentialsComponentsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICredentialsComponentsError.swift; sourceTree = "<group>"; };
 		AA4776581DEA901900110685 /* InstitutionInitialsCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionInitialsCircleView.swift; sourceTree = "<group>"; };
-		AA5031A31DF2334000842A7D /* HeaderBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderBackgroundView.swift; sourceTree = "<group>"; };
 		DC1A64941B867B1F009356A0 /* BalanceOpen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BalanceOpen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC1A64981B867B1F009356A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC1A64991B867B1F009356A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1047,7 +1045,6 @@
 			isa = PBXGroup;
 			children = (
 				5391A4D61CE5048500B9FBD9 /* CategoryView.swift */,
-				AA5031A31DF2334000842A7D /* HeaderBackgroundView.swift */,
 				DC39DFFF1CD80D0E00B48F75 /* HoverButton.swift */,
 				539085321CF97D00009D6E87 /* HoverTableRowView.swift */,
 				AA4776581DEA901900110685 /* InstitutionInitialsCircleView.swift */,
@@ -2463,7 +2460,6 @@
 				537187EA1F4CC23C00E7F9D6 /* GDAXAccount.swift in Sources */,
 				537187FA1F4CC3EE00E7F9D6 /* NumberUtils.swift in Sources */,
 				531E8D9C1C6A633800F765F7 /* Category.swift in Sources */,
-				AA5031A41DF2334000842A7D /* HeaderBackgroundView.swift in Sources */,
 				530F57CF1DCD72680083F3A7 /* FMDatabaseVariadic.swift in Sources */,
 				DC39E0001CD80D0E00B48F75 /* HoverButton.swift in Sources */,
 				533A3B1D1DF23C2B005D3C89 /* Array.swift in Sources */,

@@ -62,16 +62,8 @@ struct OpenTheme: Theme {
     
     var tabs: TabsTheme {
         let header = TabsTheme.HeaderTheme(
-            backgroundColor: NSColor(deviceRedInt: 46, green: 56, blue: 66),
-            topColor: NSColor(deviceRedInt: 39, green: 46, blue: 53),
-            bottomColor: NSColor(deviceRedInt: 37, green: 42, blue: 48),
             tabFont: NSFont.systemFont(ofSize: 10.5),
-            tabFontColor: NSColor(deviceRedInt: 132, green: 159, blue: 178),
-            tabFontColorActive: NSColor(deviceRedInt: 25, green: 167, blue: 255),
-            tabIconBorderColor: NSColor.white,
-            tabIconColorActive: NSColor(deviceRedInt: 36, green: 171, blue: 255),
-            tabIconColorInactive: NSColor(deviceRedInt: 132, green: 159, blue: 178),
-            tabIconNotificationBubbleColor: NSColor(deviceRedInt: 36, green: 171, blue: 255)
+            tabFontColor: NSColor(hexString: "#686C78")!
         )
     
         let footer = TabsTheme.FooterTheme(
