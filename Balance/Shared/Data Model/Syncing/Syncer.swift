@@ -142,8 +142,9 @@ class Syncer {
                     log.debug("Finished pulling accounts for \(institution)")
                 }
                 
-                for account in AccountRepository.si.accounts(institutionId: institution.institutionId)
-                {
+                let dispatchGroup = DispatchGroup()
+                for account in AccountRepository.si.accounts(institutionId: institution.institutionId) {
+                    dispatchGroup.enter()
                     CoinbaseApi.fetchTransactions(accountID: account.sourceAccountId, institution: institution, completionHandler: { (transactions, error) in
                         if let unwrappedTransactions = transactions {
                             for transaction in unwrappedTransactions
@@ -154,8 +155,12 @@ class Syncer {
                             }
                         }
                         
-                        performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                        dispatchGroup.leave()
                     })
+                }
+                
+                dispatchGroup.notify(queue: .main) {
+                    performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 }
             }
         case .gdax:
