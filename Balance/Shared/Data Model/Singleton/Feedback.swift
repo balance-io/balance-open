@@ -8,6 +8,12 @@
 
 import Foundation
 
+#if DEBUG
+let subServerBaseUrl = debugging.useLocalSubscriptionServer ? "http://localhost:8080" : "https://bal-subscription-server-beta.appspot.com"
+#else
+let subServerBaseUrl = betaOptionsEnabled ? "https://bal-subscription-server-beta.appspot.com" : "https://www.balancemysubscription.com"
+#endif
+
 struct Feedback {
     fileprivate static let emailIssueUrl  = subServerBaseUrl + "/emailConnectionIssue"
     fileprivate static let emailFeedbackUrl  = subServerBaseUrl + "/emailFeedback"
@@ -26,7 +32,6 @@ struct Feedback {
             dict["institutionName"] = apiInstitution?.name
             dict["errorType"] = errorType
             dict["errorCode"] = errorCode
-            dict["receiptData"] = subscriptionManager.receiptData?.base64EncodedString()
             if let logsZipUrl = logging.zipLogFiles(), let logsData = try? Data(contentsOf: logsZipUrl), logsData.count < 512 * 1024 {
                 dict["logs"] = logsData.base64EncodedString()
             }

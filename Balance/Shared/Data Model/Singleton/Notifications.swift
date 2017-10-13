@@ -34,7 +34,6 @@ struct Notifications {
     static let UnreadNotificationIdsUpdatedFromCloud  = Notification.Name("UnreadNotificationIdsUpdatedFromCloud")
     static let LockUserInterface                      = Notification.Name("LockUserInterface")
     static let UnlockUserInterface                    = Notification.Name("UnlockUserInterface")
-    static let ShowIntro                              = Notification.Name("ShowIntro")
     static let ShowPatchAccount                       = Notification.Name("ShowPatchAccount")
     static let AccountPatched                         = Notification.Name("AccountPatched")
     static let NetworkBecameReachable                 = Notification.Name("NetworkBecameReachable")

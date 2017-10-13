@@ -357,8 +357,6 @@ class Search {
             filtered = data.filter { item -> Bool in
                 if let transaction = item as? Transaction {
                     return transaction.name.lowercased().contains(searchString)
-                } else if let merchant = item as? Merchant {
-                    return merchant.name.lowercased().contains(searchString)
                 } else {
                     return true
                 }

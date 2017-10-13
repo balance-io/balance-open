@@ -161,13 +161,10 @@ extension Institution {
     }
     
     var displayName: String {
-        return source == .plaid ? name.capitalizedStringIfAllCaps : name
+        return name
     }
     
     var displayColor: PXColor {
-        if let color = institutionsDatabase.color(source: source, sourceInstitutionId: sourceInstitutionId) {
-            return color
-        }
         if let primaryColor = primaryColor {
             return primaryColor
         }

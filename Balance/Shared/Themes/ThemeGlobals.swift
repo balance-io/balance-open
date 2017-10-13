@@ -16,6 +16,7 @@ enum ThemeType: Int {
     case auto   = 0
     case light  = 1
     case dark   = 2
+    case open   = 3
 }
 
 let primaryDefaultInstitutionColors: [PXColor] = [PXColor(deviceRedInt: 68, green: 180, blue: 195),

@@ -30,7 +30,7 @@ struct EthplorerAccountObject {
     
     init(dictionary: [String: Any], currencyShortName: String, type: AccountType) throws {
         self.type = type
-        self.currency = Currency.rawValue(shortName: "ETH")
+        self.currency = Currency.rawValue("ETH")
     
         self.address = try checkType(dictionary["address"], name: "address")
         
@@ -109,25 +109,25 @@ struct EthplorerAccountObject {
         
         init (dictionary: [String: Any]) throws {
             self.rate = try checkType(dictionary["rate"], name: "rate")
-            self.currency = .common(traditional: .usd)
+            self.currency = .usd
             self.diff = try checkType(dictionary["diff"], name: "diff")
         }
     }
     
     var ethplorerAccounts: [EthplorerAccount] {
         var arrayOlder = [EthplorerAccount]()
-        let ethAccount = EthplorerAccount(type: .wallet, currency: self.currency, address: self.address, available: self.ETH.balance, altRate: 0, altCurrency: Currency.rawValue(shortName: "BTC"), decimals: 8)
+        let ethAccount = EthplorerAccount(type: .wallet, currency: self.currency, address: self.address, available: self.ETH.balance, altRate: 0, altCurrency: Currency.rawValue("BTC"), decimals: 8)
         arrayOlder.append(ethAccount)
         for ethplorerObject in self.tokens {
             var altRate: Double = 0
-            var altCurrency: Currency = Currency.common(traditional: .usd)
+            var altCurrency: Currency = .usd
             if let tokenPrice = ethplorerObject.tokenInfo.price {
                 altRate = tokenPrice.rate
                 altCurrency = tokenPrice.currency
             }
             let balance = ethplorerObject.balance.cientificToEightDecimals(decimals: ethplorerObject.tokenInfo.decimals)
             
-            let tokenAccount = EthplorerAccount(type: .wallet, currency: Currency.rawValue(shortName: ethplorerObject.tokenInfo.symbol), address: ethplorerObject.tokenInfo.address, available: balance, altRate: altRate, altCurrency: altCurrency, decimals: 8)
+            let tokenAccount = EthplorerAccount(type: .wallet, currency: Currency.rawValue(ethplorerObject.tokenInfo.symbol), address: ethplorerObject.tokenInfo.address, available: balance, altRate: altRate, altCurrency: altCurrency, decimals: 8)
             arrayOlder.append(tokenAccount)
         }
         return arrayOlder
