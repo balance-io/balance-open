@@ -25,9 +25,9 @@ class TabsViewController: NSViewController {
     // MARK: Header
     let headerBackgroundView = HeaderBackgroundView()
     let headerView = View()
-    var accountsButton: TabButton!
-    var transactionsButton: TabButton!
-    var tabButtons = [TabButton]()
+//    var accountsButton: TabButton!
+//    var transactionsButton: TabButton!
+//    var tabButtons = [TabButton]()
     
     // MARK: Tabs
     let tabContainerView = View()
@@ -44,7 +44,6 @@ class TabsViewController: NSViewController {
     // MARK: Footer
     let footerView = View()
     let refreshButton = Button()
-    let syncButton = SyncButton()
     let preferencesButton = Button()
     
     //
@@ -60,20 +59,20 @@ class TabsViewController: NSViewController {
         let border = CurrentTheme.tabs.header.tabIconBorderColor
         let active = CurrentTheme.tabs.header.tabIconColorActive
         
-        let accountsTabIcon = AccountsTabIcon(tabIconColor: inactive, tabIconBorderColor: border, tabIconSelectedColor: active)
-        let transactionsTabIcon = TransactionsTabIcon(tabIconColor: inactive, tabIconBorderColor: border, tabIconSelectedColor: active)
-        
-        accountsButton = TabButton(iconView: accountsTabIcon, labelText: "Accounts")
-        transactionsButton = TabButton(iconView: transactionsTabIcon, labelText: "Transactions")
-        tabButtons = [accountsButton, transactionsButton]
-        
-        var i = 0
-        for tabButton in tabButtons {
-            tabButton.button.target = self
-            tabButton.button.action = #selector(tabAction(_:))
-            tabButton.button.tag = i
-            i += 1
-        }
+//        let accountsTabIcon = AccountsTabIcon(tabIconColor: inactive, tabIconBorderColor: border, tabIconSelectedColor: active)
+//        let transactionsTabIcon = TransactionsTabIcon(tabIconColor: inactive, tabIconBorderColor: border, tabIconSelectedColor: active)
+//
+//        accountsButton = TabButton(iconView: accountsTabIcon, labelText: "Accounts")
+//        transactionsButton = TabButton(iconView: transactionsTabIcon, labelText: "Transactions")
+//        tabButtons = [accountsButton, transactionsButton]
+//
+//        var i = 0
+//        for tabButton in tabButtons {
+//            tabButton.button.target = self
+//            tabButton.button.action = #selector(tabAction(_:))
+//            tabButton.button.tag = i
+//            i += 1
+//        }
         
         tabControllers = [accountsViewController, transactionsViewController]
         
@@ -145,19 +144,19 @@ class TabsViewController: NSViewController {
             make.top.equalTo(self.view)
         }
         
-        // Accounts button
-        headerView.addSubview(accountsButton)
-        accountsButton.snp.makeConstraints { make in
-            make.centerX.equalTo(headerView).multipliedBy(0.5)
-            make.top.equalTo(headerView).offset(5)
-        }
-        
-        // Transactions button
-        headerView.addSubview(transactionsButton)
-        transactionsButton.snp.makeConstraints { make in
-            make.centerX.equalTo(headerView).multipliedBy(1.5)
-            make.top.equalTo(headerView).offset(5)
-        }
+//        // Accounts button
+//        headerView.addSubview(accountsButton)
+//        accountsButton.snp.makeConstraints { make in
+//            make.centerX.equalTo(headerView).multipliedBy(0.5)
+//            make.top.equalTo(headerView).offset(5)
+//        }
+//
+//        // Transactions button
+//        headerView.addSubview(transactionsButton)
+//        transactionsButton.snp.makeConstraints { make in
+//            make.centerX.equalTo(headerView).multipliedBy(1.5)
+//            make.top.equalTo(headerView).offset(5)
+//        }
     }
     
     func createFooter() {
@@ -185,15 +184,6 @@ class TabsViewController: NSViewController {
             make.trailing.equalTo(footerView).offset(-10)
             make.width.equalTo(16)
             make.height.equalTo(16)
-        }
-        
-        // Sync button
-        footerView.addSubview(syncButton)
-        syncButton.snp.makeConstraints { make in
-            make.leading.equalTo(footerView).offset(8)
-            make.centerY.equalTo(footerView)
-            make.width.equalTo(350)
-            make.height.equalTo(footerView)
         }
     }
     
@@ -291,14 +281,14 @@ class TabsViewController: NSViewController {
         }
         BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: contentName)
         
-        for i in 0...tabButtons.count-1 {
-            let tabButton = tabButtons[i]
-            if i == tabIndex {
-                tabButton.activate()
-            } else {
-                tabButton.deactivate()
-            }
-        }
+//        for i in 0...tabButtons.count-1 {
+//            let tabButton = tabButtons[i]
+//            if i == tabIndex {
+//                tabButton.activate()
+//            } else {
+//                tabButton.deactivate()
+//            }
+//        }
         
         // Constraints
         let constraints: (ConstraintMaker) -> Void = { make in
@@ -353,7 +343,7 @@ class TabsViewController: NSViewController {
     @objc fileprivate func performSearch(_ notification: Notification) {
         if let searchString = notification.userInfo?[Notifications.Keys.SearchString] as? String {
             if currentVisibleTab != .transactions {
-                tabAction(transactionsButton.button)
+//                tabAction(transactionsButton.button)
             }
             transactionsViewController.performSearch(searchString)
         }
@@ -361,7 +351,7 @@ class TabsViewController: NSViewController {
     
     @objc fileprivate func showSearch(_ notification: Notification) {
         if currentVisibleTab != .transactions {
-            tabAction(transactionsButton.button)
+//            tabAction(transactionsButton.button)
         }
         
         async(after: 0.25) {
@@ -410,11 +400,12 @@ class TabsViewController: NSViewController {
                 if !appLock.locked && event.window == self.view.window {
                     if let characters = event.charactersIgnoringModifiers {
                         if event.modifierFlags.contains(NSEvent.ModifierFlags.command) && characters.length == 1 {
-                            if let intValue = Int(characters), intValue > 0 && intValue <= self.tabButtons.count {
-                                // Select tab
-                                self.tabAction(self.tabButtons[intValue - 1].button)
-                                return nil
-                            } else if characters == "," {
+//                            if let intValue = Int(characters), intValue > 0 && intValue <= self.tabButtons.count {
+//                                // Select tab
+//                                self.tabAction(self.tabButtons[intValue - 1].button)
+//                                return nil
+//                            } else if characters == "," {
+                            if characters == "," {
                                 // Show Preferences
                                 self.showPreferences()
                                 return nil

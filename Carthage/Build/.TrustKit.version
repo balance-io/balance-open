@@ -1,8 +1,14 @@
 {
+  "iOS" : [
+    {
+      "hash" : "8b3f9e63cb87c6f07f248a0525309ac037cf76bec88eeaca465efbdaeb65c2c1",
+      "name" : "TrustKit"
+    }
+  ],
   "commitish" : "59a64973962627026209c7167331cb5a38af2c5e",
   "Mac" : [
     {
-      "hash" : "455ecbba7e4f84d131f05f997d65cd1932b9f27b7526fcc11057f697abc73416",
+      "hash" : "c457f982f2d1edc6fe1d8c78f30a1ce1372de641050b54f1cb836bb236a35bcc",
       "name" : "TrustKit"
     }
   ]

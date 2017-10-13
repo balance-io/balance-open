@@ -7,7 +7,6 @@
 //
 
 import XCGLogger
-import RealmSwift
 
 let keychain = Testing.runningTests ? MockedKeychainManagerFactory() : KeychainManagerFactory()
 let database = Testing.runningTests ? Testing.database : Database()
