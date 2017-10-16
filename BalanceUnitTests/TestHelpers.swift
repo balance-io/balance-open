@@ -18,7 +18,7 @@ class TestHelpers {
     static func dataToJSON(data: Data) -> [String: Any] {
         var dict = [String: Any]()
         do{
-            guard let parsed = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {
+            guard let parsed = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
                 XCTAssert(false)
                 return [String: Any]()
             }

@@ -135,7 +135,7 @@ class PoloniexApi: ExchangeApi {
     
     fileprivate func findError(data: Data) -> String? {
         do {
-            guard let dict = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] else {
+            guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] else {
                 throw PoloniexApi.CredentialsError.bodyNotValidJSON
             }
             if dict.keys.count == 1 {
@@ -229,7 +229,7 @@ class PoloniexApi: ExchangeApi {
     }
     
     fileprivate func parsePoloniexAccounts(data: Data) throws -> [PoloniexAccount] {
-        guard let dict = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] else {
+        guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] else {
             throw PoloniexApi.CredentialsError.bodyNotValidJSON
         }
         

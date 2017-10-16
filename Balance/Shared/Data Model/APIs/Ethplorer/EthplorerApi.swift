@@ -181,7 +181,7 @@ class EthplorerApi: ExchangeApi {
     }
     
     fileprivate func parseEthploreWallet(data: Data) throws -> EthplorerAccountObject {
-        guard let dict = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] else {
+        guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] else {
             throw EthplorerApi.CredentialsError.bodyNotValidJSON
         }
         let ethplorerAccount = try EthplorerAccountObject.init(dictionary: dict, currencyShortName: "ETH", type: .wallet)
@@ -190,7 +190,7 @@ class EthplorerApi: ExchangeApi {
     
     fileprivate func findError(data: Data) -> String? {
         do {
-            guard let dict = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] else {
+            guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] else {
                 throw EthplorerApi.CredentialsError.bodyNotValidJSON
             }
             if dict.keys.count == 1 {
