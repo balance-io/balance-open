@@ -10,34 +10,21 @@ import UIKit
 
 
 internal class StackedCardCollectionView: UICollectionView {
+    // Internal
+    
     // Private
-    private var stackedLayout = StackedLayout()
-    
-    private var selectedItemIndexPath: IndexPath? {
-        guard let selectedStackLayout = self.collectionViewLayout as? SelectedStackedLayout else {
-            return nil
-        }
-        
-        return selectedStackLayout.selectedIndexPath
-    }
-    
-    private var isItemSelected: Bool {
-        return self.selectedItemIndexPath != nil
-    }
+    private let stackedLayout = StackedLayout()
     
     // MARK: Initialization
     
     internal required init() {
         super.init(frame: .zero, collectionViewLayout: self.stackedLayout)
         
+        self.allowsMultipleSelection = true
+        
         // Select item gesture
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapGestureEngaged(_:)))
         self.addGestureRecognizer(tapGesture)
-        
-        // Dismiss with drag gesture
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.panGestureEngaged(_:)))
-        panGesture.delegate = self
-        self.addGestureRecognizer(panGesture)
     }
     
     internal required init?(coder aDecoder: NSCoder) {
@@ -46,51 +33,35 @@ internal class StackedCardCollectionView: UICollectionView {
     
     // MARK: Presentation
     
-    private func closeStack() {
-        self.setCollectionViewLayout(self.stackedLayout, animated: true)
-    }
-    
     // Gestures
     
     @objc private func tapGestureEngaged(_ gesture: UITapGestureRecognizer) {
-        guard let indexPath = self.indexPathForItem(at: gesture.location(in: self)) else {
-            if let indexPath = self.selectedItemIndexPath {
-                self.closeStack()
+        guard let indexPath = self.indexPathForItem(at: gesture.location(in: self)),
+              let selectedIndexPaths = self.indexPathsForSelectedItems else {
+            return
+        }
+        
+        if selectedIndexPaths.contains(indexPath)
+        {
+            self.deselectItem(at: indexPath, animated: false)
+            
+            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: [.curveEaseInOut, .allowUserInteraction], animations: {
+                self.collectionViewLayout.invalidateLayout()
+                self.layoutIfNeeded()
+            }, completion: { (_) in
                 self.delegate?.collectionView!(self, didDeselectItemAt: indexPath)
-            }
+            })
+        }
+        else
+        {
+            self.selectItem(at: indexPath, animated: false, scrollPosition: [])
             
-            return
+            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: [.curveEaseInOut, .allowUserInteraction], animations: {
+                self.collectionViewLayout.invalidateLayout()
+                self.layoutIfNeeded()
+            }, completion: { (_) in
+                self.delegate?.collectionView!(self, didSelectItemAt: indexPath)
+            })
         }
-        
-        if indexPath != self.selectedItemIndexPath {
-            let selectedStackedLayout = SelectedStackedLayout(indexPath: indexPath)
-            self.setCollectionViewLayout(selectedStackedLayout, animated: true)
-            
-            self.delegate?.collectionView!(self, didSelectItemAt: indexPath)
-        }
-    }
-    
-    @objc private func panGestureEngaged(_ gesture: UIPanGestureRecognizer) {
-        if !self.isItemSelected {
-            return
-        }
-        
-        switch gesture.state {
-        case .ended:
-            let translation = gesture.translation(in: self)
-            
-            if translation.y > 100.0 {
-                self.closeStack()
-            }
-        default:()
-        }
-    }
-}
-
-// MARK: UIGestureRecognizerDelegate
-
-extension StackedCardCollectionView: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
     }
 }

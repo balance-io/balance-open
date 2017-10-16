@@ -17,6 +17,16 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
         }
     }
     
+    override var isSelected: Bool {
+        set(newValue) { }
+        get { return false }
+    }
+    
+    override var isHighlighted: Bool {
+        set(newValue) { }
+        get { return false }
+    }
+    
     // Private
     private let container = UIView()
     private let tableView = UITableView(frame: CGRect.zero, style: .grouped)
