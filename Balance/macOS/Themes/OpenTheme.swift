@@ -14,7 +14,7 @@ struct OpenTheme: Theme {
     
     var defaults: DefaultsTheme {
         let appearance = NSAppearance(named: NSAppearance.Name.vibrantDark) ?? NSAppearance.current!
-        let backgroundColor = NSColor(deviceRedInt: 37, green: 42, blue: 48)
+        let backgroundColor = NSColor(hexString: "#ecedef")!
         let foregroundColor = NSColor(deviceWhiteInt: 255)
         let material = NSVisualEffectView.Material.dark
         let size = CGSize(width: 400, height: 600)
@@ -62,7 +62,7 @@ struct OpenTheme: Theme {
     
     var tabs: TabsTheme {
         let header = TabsTheme.HeaderTheme(
-            tabFont: NSFont.systemFont(ofSize: 10.5),
+            tabFont: NSFont.systemFont(ofSize: 14),
             tabFontColor: NSColor(hexString: "#686C78")!
         )
     
