@@ -142,10 +142,7 @@ class Database {
                               "ON categories (sourceId, name1, name2, name3)")
             
             // transaction table
-            let createTransactionsTable = """
-                    CREATE TABLE IF NOT EXISTS transactions (transactionId INTEGER PRIMARY KEY AUTOINCREMENT, sourceId INTEGER, sourceTransactionId TEXT, accountId INTEGER, name TEXT, currency TEXT, amount INTEGER, date REAL, institutionID INTEGER NOT NULL, sourceInstitutionID TEXT, categoryID INTEGER)
-            """
-            statements.append(createTransactionsTable)
+            statements.append("CREATE TABLE IF NOT EXISTS transactions (transactionId INTEGER PRIMARY KEY AUTOINCREMENT, sourceId INTEGER, sourceTransactionId TEXT, accountId INTEGER, name TEXT, currency TEXT, amount INTEGER, date REAL, institutionId INTEGER NOT NULL, sourceInstitutionId TEXT, categoryId INTEGER)")
             
             for statement in statements {
                 if !db.executeUpdate(statement, withArgumentsIn: nil) {

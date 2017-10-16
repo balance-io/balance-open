@@ -10,7 +10,6 @@ import Foundation
 #if os(OSX)
     import ServiceManagement
 #endif
-import RealmSwift
 
 //TODO - Research search URIs for native email Mac apps. Do they all have them?
 enum EmailPreference: Int {

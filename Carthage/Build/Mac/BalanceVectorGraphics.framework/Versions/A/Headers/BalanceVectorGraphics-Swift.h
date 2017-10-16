@@ -172,10 +172,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # define SWIFT_DEPRECATED_OBJC(Msg) SWIFT_DEPRECATED_MSG(Msg)
 #endif
 #if __has_feature(modules)
-@import AppKit;
-@import QuartzCore;
-@import CoreGraphics;
-@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -187,91 +183,5 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Wnullability"
 
 SWIFT_MODULE_NAMESPACE_PUSH("BalanceVectorGraphics")
-@class NSColor;
-
-SWIFT_PROTOCOL("_TtP21BalanceVectorGraphics7TabIcon_")
-@protocol TabIcon
-@property (nonatomic) CGFloat alphaValue;
-@property (nonatomic, strong) NSColor * _Null_unspecified tabIconColor;
-@property (nonatomic, strong) NSColor * _Null_unspecified tabIconBorderColor;
-@property (nonatomic, strong) NSColor * _Null_unspecified tabIconSelectedColor;
-- (void)addHighlightAnimationWithReverseAnimation:(BOOL)reverseAnimation completionBlock:(void (^ _Nullable)(BOOL))completionBlock;
-@end
-
-@class NSCoder;
-@class CAAnimation;
-
-SWIFT_CLASS("_TtC21BalanceVectorGraphics15AccountsTabIcon")
-@interface AccountsTabIcon : NSView <TabIcon, CAAnimationDelegate>
-@property (nonatomic, strong) NSColor * _Null_unspecified tabIconColor;
-@property (nonatomic, strong) NSColor * _Null_unspecified tabIconBorderColor;
-@property (nonatomic, strong) NSColor * _Null_unspecified tabIconSelectedColor;
-- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-- (void)addHighlightAnimationWithReverseAnimation:(BOOL)reverseAnimation completionBlock:(void (^ _Nullable)(BOOL))completionBlock;
-- (void)animationDidStop:(CAAnimation * _Nonnull)anim finished:(BOOL)flag;
-@end
-
-
-SWIFT_CLASS("_TtC21BalanceVectorGraphics11FeedTabIcon")
-@interface FeedTabIcon : NSView <TabIcon, CAAnimationDelegate>
-@property (nonatomic, strong) NSColor * _Null_unspecified tabIconColor;
-@property (nonatomic, strong) NSColor * _Null_unspecified tabIconBorderColor;
-@property (nonatomic, strong) NSColor * _Null_unspecified tabIconSelectedColor;
-- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-- (void)addHighlightAnimationWithReverseAnimation:(BOOL)reverseAnimation completionBlock:(void (^ _Nullable)(BOOL))completionBlock;
-- (void)animationDidStop:(CAAnimation * _Nonnull)anim finished:(BOOL)flag;
-@end
-
-
-SWIFT_CLASS("_TtC21BalanceVectorGraphics15InsightsTabIcon")
-@interface InsightsTabIcon : NSView <TabIcon, CAAnimationDelegate>
-@property (nonatomic, strong) NSColor * _Null_unspecified tabIconColor;
-@property (nonatomic, strong) NSColor * _Null_unspecified tabIconBorderColor;
-@property (nonatomic, strong) NSColor * _Null_unspecified tabIconSelectedColor;
-- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-- (void)addHighlightAnimationWithReverseAnimation:(BOOL)reverseAnimation completionBlock:(void (^ _Nullable)(BOOL))completionBlock;
-- (void)animationDidStop:(CAAnimation * _Nonnull)anim finished:(BOOL)flag;
-@end
-
-
-SWIFT_CLASS("_TtC21BalanceVectorGraphics21InstitutionHeaderBars")
-@interface InstitutionHeaderBars : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-
-
-
-
-
-
-
-
-
-
-SWIFT_CLASS("_TtC21BalanceVectorGraphics10SyncCircle")
-@interface SyncCircle : NSView <CAAnimationDelegate>
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-- (void)animationDidStop:(CAAnimation * _Nonnull)anim finished:(BOOL)flag;
-@end
-
-
-
-SWIFT_CLASS("_TtC21BalanceVectorGraphics19TransactionsTabIcon")
-@interface TransactionsTabIcon : NSView <TabIcon, CAAnimationDelegate>
-@property (nonatomic, strong) NSColor * _Null_unspecified tabIconColor;
-@property (nonatomic, strong) NSColor * _Null_unspecified tabIconBorderColor;
-@property (nonatomic, strong) NSColor * _Null_unspecified tabIconSelectedColor;
-- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-- (void)addHighlightAnimationWithReverseAnimation:(BOOL)reverseAnimation completionBlock:(void (^ _Nullable)(BOOL))completionBlock;
-- (void)animationDidStop:(CAAnimation * _Nonnull)anim finished:(BOOL)flag;
-@end
-
 SWIFT_MODULE_NAMESPACE_POP
 #pragma clang diagnostic pop

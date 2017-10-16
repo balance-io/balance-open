@@ -20,9 +20,9 @@ import Foundation
  [5] currency TEXT
  [6] amount INTEGER
  [7] date REAL
- [8] institutionID INTEGER NOT NULL
- [9] sourceInstitutionID TEXT
- [10] categoryID INTEGER
+ [8] institutionId INTEGER NOT NULL
+ [9] sourceInstitutionId TEXT
+ [10] categoryId INTEGER
  */
 
 
@@ -45,22 +45,13 @@ struct TransactionRepository: ItemRepository {
         // If the app has the old transactions table
         // drop it a build the new one
         database.write.inDatabase { db in
-            if !db.tableExists("transactions") {
-                return
-            }
-            
             let result = db.getTableSchema("transactions")
             
             // Old database schema. Update...
-            if db.columnExists("address", inTableWithName: "transactions")
-            {
+            if db.columnExists("address", inTableWithName: "transactions") {
                 var statements = [String]()
                 statements.append("DROP TABLE IF EXISTS transactions")
-                
-                let createTransactionsTable = """
-                    CREATE TABLE IF NOT EXISTS transactions (transactionId INTEGER PRIMARY KEY AUTOINCREMENT, sourceId INTEGER, sourceTransactionId TEXT, accountId INTEGER, name TEXT, currency TEXT, amount INTEGER, date REAL, institutionID INTEGER NOT NULL, sourceInstitutionID TEXT, categoryID INTEGER)
-                """
-                statements.append(createTransactionsTable)
+                statements.append("CREATE TABLE IF NOT EXISTS transactions (transactionId INTEGER PRIMARY KEY AUTOINCREMENT, sourceId INTEGER, sourceTransactionId TEXT, accountId INTEGER, name TEXT, currency TEXT, amount INTEGER, date REAL, institutionId INTEGER NOT NULL, sourceInstitutionId TEXT, categoryId INTEGER)")
                 
                 for statement in statements {
                     if !db.executeUpdate(statement, withArgumentsIn: nil) {
@@ -172,8 +163,7 @@ struct TransactionRepository: ItemRepository {
         return gr.delete(repository: self, item: transaction)
     }
     
-    // Pending = nil for all transactions, or true/false for just pending or not pending
-    func transactions(institutionId: Int, pending: Bool? = nil, includeHidden: Bool = false) -> [Transaction] {
+    func transactions(institutionId: Int, includeHidden: Bool = false) -> [Transaction] {
         var transactions = [Transaction]()
         
         let hiddenAccountIds = defaults.hiddenAccountIds
@@ -182,11 +172,8 @@ struct TransactionRepository: ItemRepository {
             do {
                 var statement = "SELECT transactions.*, accounts.sourceInstitutionId, accounts.institutionId " +
                                 "FROM transactions LEFT JOIN accounts ON transactions.accountId = accounts.accountId " +
-                                "WHERE accounts.institutionId = ? "
-                if let pending = pending {
-                    statement += "AND transactions.pending = \(pending ? 1 : 0) "
-                }
-                statement += "ORDER BY transactions.date DESC"
+                                "WHERE accounts.institutionId = ? " +
+                                "ORDER BY transactions.date DESC"
                 
                 let result = try db.executeQuery(statement, institutionId)
                 while result.next() {
@@ -227,11 +214,11 @@ struct TransactionRepository: ItemRepository {
                 let currency: Any = transaction.currency
                 let amount: Any = transaction.amount
                 let date: Any = transaction.date
-                let institutionID: Any = transaction.institutionId
-                let sourceInstitutionID: Any = transaction.sourceInstitutionId
-                let categoryID: Any = n2N(transaction.categoryId)
+                let institutionId: Any = transaction.institutionId
+                let sourceInstitutionId: Any = transaction.sourceInstitutionId
+                let categoryId: Any = n2N(transaction.categoryId)
                 
-                try db.executeUpdate(insert, transactionId, source, sourceTransactionId, accountId, name, currency, amount, date, institutionID, sourceInstitutionID, categoryID)
+                try db.executeUpdate(insert, transactionId, source, sourceTransactionId, accountId, name, currency, amount, date, institutionId, sourceInstitutionId, categoryId)
             } catch {
                 log.severe("Error replacing transaction \(transaction): " + db.lastErrorMessage())
                 success = false
@@ -248,13 +235,13 @@ struct TransactionRepository: ItemRepository {
                 var accountNameClause = ""
                 var accountNameValue = ""
                 if let accountName = accountName {
-                    accountNameClause = "AND accounts.name LIKE ? "
+                    accountNameClause = "accounts.name LIKE ? "
                     accountNameValue = "%\(accountName)%"
                 }
                 
                 var statement = "SELECT transactions.*, accounts.sourceInstitutionId, accounts.institutionId " +
                                 "FROM transactions LEFT JOIN accounts ON transactions.accountId = accounts.accountId " +
-                                "WHERE pending = 0 \(accountNameClause) "
+                                "\(accountNameClause) "
                 if !includeHidden {
                     statement += "AND transactions.accountId NOT IN \(defaults.hiddenAccountIdsQuerySet) "
                 }
@@ -274,8 +261,6 @@ struct TransactionRepository: ItemRepository {
         return transaction
     }
     
-    // Returns Transactions and pending and date groups
-    // NOTE: Pending is denoted by NSDate.distantFuture()
     func transactionsByDate(includeHidden: Bool = false) -> (transactions: OrderedDictionary<Date, [Transaction]>, counts: [Int]) {
         var transactionsByDate = OrderedDictionary<Date, [Transaction]>()
         var counts = [Int]()
@@ -283,59 +268,55 @@ struct TransactionRepository: ItemRepository {
         let hiddenAccountIds = defaults.hiddenAccountIds
         
         database.read.inDatabase { db in
-            func addTransactions() {
-                do {
-                    let statement = "SELECT transactions.*, accounts.sourceInstitutionId, accounts.institutionId " +
-                                    "FROM transactions LEFT JOIN accounts ON transactions.accountId = accounts.accountId " +
-                                    "ORDER BY transactions.date DESC"
-                    let result = try db.executeQuery(statement)
+            do {
+                let statement = "SELECT transactions.*, accounts.sourceInstitutionId, accounts.institutionId " +
+                    "FROM transactions LEFT JOIN accounts ON transactions.accountId = accounts.accountId " +
+                "ORDER BY transactions.date DESC"
+                let result = try db.executeQuery(statement)
+                
+                var firstRow = true
+                var previousDate = Date.distantFuture
+                var transactions = [Transaction]()
+                let calendar = Calendar.current
+                
+                while result.next() {
+                    // Process the transaction
+                    let transaction = Transaction(result: result, repository: self)
                     
-                    var firstRow = true
-                    var previousDate = Date.distantFuture
-                    var transactions = [Transaction]()
-                    let calendar = Calendar.current
+                    var belongsToHiddenAccount = false
+                    if let accountID = transaction.accountId {
+                        belongsToHiddenAccount = hiddenAccountIds.contains(accountID)
+                    }
                     
-                    while result.next() {
-                        // Process the transaction
-                        let transaction = Transaction(result: result, repository: self)
-                        
-                        var belongsToHiddenAccount = false
-                        if let accountID = transaction.accountId {
-                            belongsToHiddenAccount = hiddenAccountIds.contains(accountID)
+                    if includeHidden || !belongsToHiddenAccount {
+                        // Setup the dictionary key if first row
+                        if firstRow {
+                            previousDate = transaction.date
+                            firstRow = false
                         }
                         
-                        if includeHidden || !belongsToHiddenAccount {
-                            // Setup the dictionary key if first row
-                            if firstRow {
-                                previousDate = transaction.date
-                                firstRow = false
-                            }
-                            
-                            // If not pending and dates don't match, store the previous transactions in the dictionary
-                            if !calendar.isDate(previousDate, inSameDayAs: transaction.date) {
-                                transactionsByDate[previousDate] = transactions
-                                counts.append(transactions.count)
-                                transactions = [Transaction]()
-                                previousDate = transaction.date
-                            }
-                            
-                            // Append this transaction
-                            transactions.append(transaction)
+                        // If dates don't match, store the previous transactions in the dictionary
+                        if !calendar.isDate(previousDate, inSameDayAs: transaction.date) {
+                            transactionsByDate[previousDate] = transactions
+                            counts.append(transactions.count)
+                            transactions = [Transaction]()
+                            previousDate = transaction.date
                         }
+                        
+                        // Append this transaction
+                        transactions.append(transaction)
                     }
-                    result.close()
-                    
-                    // Insert the late date section
-                    if transactions.count > 0 {
-                        transactionsByDate[previousDate] = transactions
-                        counts.append(transactions.count)
-                    }
-                } catch {
-                    log.severe("Error getting transactions by date: " + db.lastErrorMessage())
                 }
+                result.close()
+                
+                // Insert the late date section
+                if transactions.count > 0 {
+                    transactionsByDate[previousDate] = transactions
+                    counts.append(transactions.count)
+                }
+            } catch {
+                log.severe("Error getting transactions by date: " + db.lastErrorMessage())
             }
-            
-            addTransactions()
         }
         
         return (transactionsByDate, counts)

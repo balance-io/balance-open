@@ -8,7 +8,7 @@
 
 import Foundation
 
-private let messageUrl = URL(string: "https://balancemy.money/institutions/message.json")!
+private let messageUrl = URL(string: "https://balance.nyc3.digitaloceanspaces.com/message/message.json")!
 
 class ServerMessage {
     func checkForMessage() {

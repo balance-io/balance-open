@@ -1,7 +1,6 @@
 import Cocoa
 import Locksmith
 import ServiceManagement
-import RealmSwift
 
 let autolaunchBundleId = "software.balanced.balance-open-autolaunch"
 
