@@ -202,18 +202,18 @@ fileprivate var amountFormatter: NumberFormatter = {
 }()
 
 // TODO: Add proper locale support for currency symbol location
-func amountToString(amount: Int, currency: Currency, showNegative: Bool = false)  -> String {
+func amountToString(amount: Int, currency: Currency, showNegative: Bool = false, showCodeAfterValue: Bool = false)  -> String {
     assert(Thread.isMainThread, "Must be used from main thread")
     
     let amount = Double(amount) / pow(10.0, Double(currency.decimals))
-    amountFormatter.currencySymbol = currency.symbol
+    amountFormatter.currencySymbol = showCodeAfterValue ? "" : currency.symbol
     amountFormatter.minimumFractionDigits = currency.decimals
     amountFormatter.maximumFractionDigits = currency.decimals
     
     let amountString = amountFormatter.string(from: NSNumber(value: amount))!
     let minusRemoved = showNegative ? amountString : amountString.replacingOccurrences(of: "-", with: "")
     
-    return minusRemoved
+    return showCodeAfterValue ? "\(minusRemoved) \(currency.code)" : minusRemoved
 }
 
 #if os(OSX)

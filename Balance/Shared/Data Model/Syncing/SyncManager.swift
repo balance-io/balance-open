@@ -24,16 +24,14 @@ class SyncManager: NSObject {
         return syncer.canceled
     }
     
-    var currentExchangeRates: CurrentExchangeRates {
-        let currentExchangeRates = CurrentExchangeRates()
-        currentExchangeRates.load()
-        return currentExchangeRates
-    }
+    let currentExchangeRates = CurrentExchangeRates()
     
     fileprivate var syncer = debugging.useMockSyncing ? MockSyncer() : Syncer()
     
     override init() {
         super.init()
+        
+        currentExchangeRates.load()
         
         #if os(OSX)
         // Register for wake notification

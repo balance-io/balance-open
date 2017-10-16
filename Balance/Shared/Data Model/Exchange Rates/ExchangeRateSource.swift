@@ -78,3 +78,15 @@ public enum ExchangeRateSource: Int { //, Codable {
         return allCrypto + allFiat
     }
 }
+
+extension Source {
+    public var exchangeRateSource: ExchangeRateSource {
+        switch self {
+        //case .plaid:    return "Plaid"
+        case .coinbase, .gdax, .wallet: return .coinbaseGdax
+        case .poloniex:                 return .poloniex
+        case .bitfinex:                 return .bitfinex
+        case .kraken:                   return .kraken
+        }
+    }
+}

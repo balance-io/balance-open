@@ -31,4 +31,22 @@ class CurrentExchangeRateTests: XCTestCase {
         XCTAssertEqual(krakenCount, 17)
         XCTAssertEqual(fixerCount, 31)
     }
+    
+    // Just test that we get any result from the conversion so that the exact rate doesn't matter
+    func testConvertPoloniex() {
+        //given
+        let currentExchangeRates = CurrentExchangeRates()
+        let data = TestHelpers.loadData(filename: "ExchangeRates.json")
+        currentExchangeRates.parse(data: data)
+        
+        //when
+        let ethUsd = currentExchangeRates.convert(amount: 1.0, from: .eth, to: .usd, source: .poloniex)
+        let btcUsd = currentExchangeRates.convert(amount: 1.0, from: .btc, to: .usd, source: .poloniex)
+        let ltcUsd = currentExchangeRates.convert(amount: 1.0, from: .ltc, to: .usd, source: .poloniex)
+        
+        //then
+        XCTAssertNotNil(ethUsd)
+        XCTAssertNotNil(btcUsd)
+        XCTAssertNotNil(ltcUsd)
+    }
 }

@@ -23,6 +23,15 @@ class CurrentExchangeRates {
         return cache.get(valueForKey: source)
     }
     
+    func convert(amount: Int, from: Currency, to: Currency, source: ExchangeRateSource) -> Int? {
+        let doubleAmount = Double(amount) / pow(10, Double(from.decimals))
+        if let doubleConvertedAmount = convert(amount: doubleAmount, from: from, to: to, source: source) {
+            let intConvertedAmount = Int(doubleConvertedAmount * pow(10, Double(to.decimals)))
+            return intConvertedAmount
+        }
+        return nil
+    }
+    
     func convert(amount: Double, from: Currency, to: Currency, source: ExchangeRateSource, iteration: Int = 0) -> Double? {
         guard iteration < 5 else {
             return nil
@@ -45,7 +54,7 @@ class CurrentExchangeRates {
                     if let rate = exchangeRates.rate(from: from, to: currency) {
                         log.debug("found intermediate conversion to \(currency)")
                         
-                        if to.isFiat {
+                        if from.isFiat && to.isFiat {
                             log.debug("trying \(currency.code) to \(to.code) using source \(ExchangeRateSource.fixer)")
                             return convert(amount: amount * rate, from: currency, to: to, source: .fixer, iteration: iteration + 1)
                         } else {
@@ -53,6 +62,13 @@ class CurrentExchangeRates {
                             return convert(amount: amount * rate, from: currency, to: to, source: .coinbaseGdax, iteration: iteration + 1)
                         }
                     }
+                }
+                
+                // No rate available from this source, so try a different one
+                if from.isFiat && to.isFiat {
+                    return convert(amount: amount, from: from, to: to, source: .fixer, iteration: iteration + 1)
+                } else if from.isCrypto && to.isFiat {
+                    return convert(amount: amount, from: from, to: to, source: .coinbaseGdax, iteration: iteration + 1)
                 }
             }
         }
