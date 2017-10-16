@@ -71,7 +71,7 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
     // MARK: Data
     
     private func reloadData() {
-        self.container.backgroundColor = self.viewModel?.institution.displayColor
+        self.container.backgroundColor = self.viewModel?.institution.source.color
         self.tableView.reloadData()
     }
     

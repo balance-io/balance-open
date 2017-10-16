@@ -317,10 +317,7 @@
 		53F63CDB1F82C2D000FD4B27 /* HockeySDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53F63CD91F82C2C800FD4B27 /* HockeySDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53FCE3411F06B5DC004EB25C /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3391F06B5DC004EB25C /* Locksmith.framework */; };
 		53FCE3421F06B5DC004EB25C /* NSDateTimeAgo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33A1F06B5DC004EB25C /* NSDateTimeAgo.framework */; };
-		53FCE3441F06B5DC004EB25C /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33C1F06B5DC004EB25C /* Realm.framework */; };
-		53FCE3451F06B5DC004EB25C /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33D1F06B5DC004EB25C /* RealmSwift.framework */; };
 		53FCE3461F06B5DC004EB25C /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33E1F06B5DC004EB25C /* SnapKit.framework */; };
-		53FCE3471F06B5DC004EB25C /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33F1F06B5DC004EB25C /* SwiftyStoreKit.framework */; };
 		53FCE3481F06B5DC004EB25C /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3401F06B5DC004EB25C /* XCGLogger.framework */; };
 		53FCE35A1F06B653004EB25C /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34D1F06B653004EB25C /* Locksmith.framework */; };
 		53FCE35B1F06B653004EB25C /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34E1F06B653004EB25C /* MASShortcut.framework */; };
@@ -363,6 +360,7 @@
 		A4430A901F94EE1700F2FFFA /* CoinbaseInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A8F1F94EE1700F2FFFA /* CoinbaseInstitution.swift */; };
 		A4430A911F94EE1700F2FFFA /* CoinbaseInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A8F1F94EE1700F2FFFA /* CoinbaseInstitution.swift */; };
 		A4430A931F94EFB300F2FFFA /* OpenTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A921F94EFB300F2FFFA /* OpenTheme.swift */; };
+		A4430A991F95004D00F2FFFA /* PaintCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A981F95004C00F2FFFA /* PaintCodeView.swift */; };
 		A44C76221F7BD9610024476E /* BitfinexTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44C76211F7BD9610024476E /* BitfinexTransaction.swift */; };
 		A44C76231F7BD9610024476E /* BitfinexTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44C76211F7BD9610024476E /* BitfinexTransaction.swift */; };
 		A44C76251F7BE5280024476E /* BitfinexTransactionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44C76241F7BE5280024476E /* BitfinexTransactionTests.swift */; };
@@ -766,6 +764,7 @@
 		A4307A8F1F8F6EA800BBA8B4 /* StackedCardCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedCardCollectionView.swift; sourceTree = "<group>"; };
 		A4430A8F1F94EE1700F2FFFA /* CoinbaseInstitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseInstitution.swift; sourceTree = "<group>"; };
 		A4430A921F94EFB300F2FFFA /* OpenTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTheme.swift; sourceTree = "<group>"; };
+		A4430A981F95004C00F2FFFA /* PaintCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaintCodeView.swift; sourceTree = "<group>"; };
 		A44C76211F7BD9610024476E /* BitfinexTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexTransaction.swift; sourceTree = "<group>"; };
 		A44C76241F7BE5280024476E /* BitfinexTransactionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexTransactionTests.swift; sourceTree = "<group>"; };
 		A44C76261F7BE5A00024476E /* BitfinexMovement.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BitfinexMovement.json; sourceTree = "<group>"; };
@@ -847,11 +846,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53FCE3441F06B5DC004EB25C /* Realm.framework in Frameworks */,
 				53FCE3411F06B5DC004EB25C /* Locksmith.framework in Frameworks */,
 				535BE39E1F05A14C00DEA4EF /* libz.tbd in Frameworks */,
-				53FCE3451F06B5DC004EB25C /* RealmSwift.framework in Frameworks */,
-				53FCE3471F06B5DC004EB25C /* SwiftyStoreKit.framework in Frameworks */,
 				53FCE3421F06B5DC004EB25C /* NSDateTimeAgo.framework in Frameworks */,
 				53F63CD81F82C2A100FD4B27 /* ObjcExceptionBridging.framework in Frameworks */,
 				53F0786C1ED747C700E7EDF9 /* libsqlcipher.a in Frameworks */,
@@ -1301,6 +1297,7 @@
 				A42953D11F8E252900729045 /* Collection View */,
 				53561E8B1F82DD120043D4F9 /* Table View */,
 				53561E931F82DD120043D4F9 /* MultilineTitleView.swift */,
+				A4430A981F95004C00F2FFFA /* PaintCodeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2289,10 +2286,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Locksmith.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/NSDateTimeAgo.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftyStoreKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/XCGLogger.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/TrustKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ObjcExceptionBridging.framework",
@@ -2329,6 +2323,7 @@
 				53552A091ED7251200DD95F9 /* Defaults.swift in Sources */,
 				537187DD1F4CC23B00E7F9D6 /* CoinbaseAccount.swift in Sources */,
 				A42953D41F8E255D00729045 /* InstitutionCollectionViewCell.swift in Sources */,
+				A4430A991F95004D00F2FFFA /* PaintCodeView.swift in Sources */,
 				537187E41F4CC23B00E7F9D6 /* GDAXWithdrawal.swift in Sources */,
 				A453A5261F8676F00002C6C8 /* RegistrationViewController.swift in Sources */,
 				53552A111ED7251200DD95F9 /* AppLock.swift in Sources */,

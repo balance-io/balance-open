@@ -6,6 +6,7 @@
 //  Copyright © 2017 Balanced Software, Inc. All rights reserved.
 //
 
+import BalanceVectorGraphics_iOS
 import UIKit
 
 
@@ -19,8 +20,10 @@ internal final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Re
             self.reloadData()
         }
     }
-    
+
     // Private
+    private let logoView = PaintCodeView()
+    
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.white
@@ -57,6 +60,18 @@ internal final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Re
             make.right.equalToSuperview().inset(15.0)
             make.centerY.equalToSuperview()
         }
+        
+        // Logo view
+        self.logoView.backgroundColor = UIColor.clear
+        self.logoView.isHidden = true
+        self.contentView.addSubview(self.logoView)
+        
+        self.logoView.snp.makeConstraints { (make) in
+            make.left.equalToSuperview()
+            make.width.equalTo(140.0)
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
     }
     
     internal required init?(coder aDecoder: NSCoder) {
@@ -72,5 +87,16 @@ internal final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Re
         
         self.nameLabel.text = unwrappedInstitution.displayName
         self.totalBalanceLabel.text = "TODO: $1,000,000"
+
+        let institutionID = unwrappedInstitution.source.description
+        if let logoDrawFunction = InstitutionLogos.drawingFunctionForId(sourceInstitutionId: institutionID) {
+            self.logoView.drawingBlock = logoDrawFunction
+            
+            self.nameLabel.isHidden = true
+            self.logoView.isHidden = false
+        } else {
+            self.nameLabel.isHidden = false
+            self.logoView.isHidden = true
+        }
     }
 }
