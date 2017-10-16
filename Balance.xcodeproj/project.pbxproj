@@ -247,6 +247,8 @@
 		53B5C1961D8637CE00323ACE /* Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B5C1951D8637CE00323ACE /* Testing.swift */; };
 		53BB42E71CE849E70002D473 /* Shortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BB42E61CE849E70002D473 /* Shortcut.swift */; };
 		53C078A61DFF7CEB00696666 /* CertValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C078A51DFF7CEB00696666 /* CertValidator.m */; };
+		53C086971F9542BC00C181F1 /* CurrentExchangeRatesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C086961F9542BC00C181F1 /* CurrentExchangeRatesTests.swift */; };
+		53C0869A1F9545ED00C181F1 /* ExchangeRates.json in Resources */ = {isa = PBXBuildFile; fileRef = 53C086991F9543EC00C181F1 /* ExchangeRates.json */; };
 		53C197171CB8714100F0A47B /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C197161CB8714100F0A47B /* SyncManager.swift */; };
 		53C23BDC1E5F988000DA1281 /* ComboBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C23BDB1E5F988000DA1281 /* ComboBox.swift */; };
 		53C3911F1F892C7C003577DE /* CoinbaseInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C3911E1F892C7C003577DE /* CoinbaseInstitution.swift */; };
@@ -269,6 +271,14 @@
 		53D441FB1F44D813006967E1 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D441FA1F44D813006967E1 /* CategoryRepository.swift */; };
 		53D441FC1F44D813006967E1 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D441FA1F44D813006967E1 /* CategoryRepository.swift */; };
 		53DC85B11E678223007C72EB /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DC85B01E678223007C72EB /* FileManager.swift */; };
+		53E48CEC1F95165B004292D7 /* ExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E48CEA1F951657004292D7 /* ExchangeRate.swift */; };
+		53E48CED1F95165B004292D7 /* ExchangeRateSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E48CEB1F951657004292D7 /* ExchangeRateSource.swift */; };
+		53E48CEE1F95165C004292D7 /* ExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E48CEA1F951657004292D7 /* ExchangeRate.swift */; };
+		53E48CEF1F95165C004292D7 /* ExchangeRateSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E48CEB1F951657004292D7 /* ExchangeRateSource.swift */; };
+		53E48CF11F951678004292D7 /* SimpleCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E48CF01F951678004292D7 /* SimpleCache.swift */; };
+		53E48CF21F951678004292D7 /* SimpleCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E48CF01F951678004292D7 /* SimpleCache.swift */; };
+		53E48CF41F9516B6004292D7 /* CurrentExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E48CF31F9516B6004292D7 /* CurrentExchangeRates.swift */; };
+		53E48CF51F9516B6004292D7 /* CurrentExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E48CF31F9516B6004292D7 /* CurrentExchangeRates.swift */; };
 		53E74A571DD53CCB00AD8876 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E74A561DD53CCB00AD8876 /* TimeInterval.swift */; };
 		53E7BC181D1805F600FD8613 /* Singletons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E7BC171D1805F600FD8613 /* Singletons.swift */; };
 		53E83CA71E40309800185975 /* SearchFilterButtonsDark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E83CA51E40309800185975 /* SearchFilterButtonsDark.swift */; };
@@ -661,6 +671,8 @@
 		53BB42E61CE849E70002D473 /* Shortcut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shortcut.swift; sourceTree = "<group>"; };
 		53C078A41DFF7CEB00696666 /* CertValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertValidator.h; sourceTree = "<group>"; };
 		53C078A51DFF7CEB00696666 /* CertValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertValidator.m; sourceTree = "<group>"; };
+		53C086961F9542BC00C181F1 /* CurrentExchangeRatesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentExchangeRatesTests.swift; sourceTree = "<group>"; };
+		53C086991F9543EC00C181F1 /* ExchangeRates.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ExchangeRates.json; sourceTree = "<group>"; };
 		53C197161CB8714100F0A47B /* SyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
 		53C23BDB1E5F988000DA1281 /* ComboBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComboBox.swift; sourceTree = "<group>"; };
 		53C3911E1F892C7C003577DE /* CoinbaseInstitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseInstitution.swift; sourceTree = "<group>"; };
@@ -675,6 +687,10 @@
 		53D441F71F44CD93006967E1 /* InstitutionRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionRepository.swift; sourceTree = "<group>"; };
 		53D441FA1F44D813006967E1 /* CategoryRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
 		53DC85B01E678223007C72EB /* FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		53E48CEA1F951657004292D7 /* ExchangeRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRate.swift; sourceTree = "<group>"; };
+		53E48CEB1F951657004292D7 /* ExchangeRateSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateSource.swift; sourceTree = "<group>"; };
+		53E48CF01F951678004292D7 /* SimpleCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCache.swift; sourceTree = "<group>"; };
+		53E48CF31F9516B6004292D7 /* CurrentExchangeRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentExchangeRates.swift; sourceTree = "<group>"; };
 		53E74A561DD53CCB00AD8876 /* TimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		53E7BC171D1805F600FD8613 /* Singletons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Singletons.swift; sourceTree = "<group>"; };
 		53E83CA51E40309800185975 /* SearchFilterButtonsDark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFilterButtonsDark.swift; sourceTree = "<group>"; };
@@ -1424,6 +1440,22 @@
 			path = Syncing;
 			sourceTree = "<group>";
 		};
+		53C086951F9542A400C181F1 /* Exchange Rates */ = {
+			isa = PBXGroup;
+			children = (
+				53C086961F9542BC00C181F1 /* CurrentExchangeRatesTests.swift */,
+			);
+			path = "Exchange Rates";
+			sourceTree = "<group>";
+		};
+		53C086981F9543B200C181F1 /* Exchange Rates Responses */ = {
+			isa = PBXGroup;
+			children = (
+				53C086991F9543EC00C181F1 /* ExchangeRates.json */,
+			);
+			path = "Exchange Rates Responses";
+			sourceTree = "<group>";
+		};
 		53C197151CB7488600F0A47B /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1454,6 +1486,16 @@
 				53D441F41F44C477006967E1 /* TransactionRepository.swift */,
 			);
 			path = Repositories;
+			sourceTree = "<group>";
+		};
+		53E48CE91F9515FE004292D7 /* Exchange Rates */ = {
+			isa = PBXGroup;
+			children = (
+				53E48CEA1F951657004292D7 /* ExchangeRate.swift */,
+				53E48CEB1F951657004292D7 /* ExchangeRateSource.swift */,
+				53E48CF31F9516B6004292D7 /* CurrentExchangeRates.swift */,
+			);
+			path = "Exchange Rates";
 			sourceTree = "<group>";
 		};
 		53E8C7831C64129B0085D64E /* Themes */ = {
@@ -1613,6 +1655,7 @@
 		53F078551F4F8EC800D0054C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				53C086981F9543B200C181F1 /* Exchange Rates Responses */,
 				A4E4572F1F7935F2002E2879 /* Poloniex API Responses */,
 				A41742951F73E8A3004A9B4F /* Coinbase API Responses */,
 				A41204C31F719CA300FD8078 /* Kraken API Responses */,
@@ -1639,6 +1682,7 @@
 				538B47BD1F4CA0200023CED5 /* Currency.swift */,
 				53F0785C1ED73B7D00E7EDF9 /* Element.swift */,
 				A4E457081F79010A002E2879 /* BalanceError.swift */,
+				53E48CF01F951678004292D7 /* SimpleCache.swift */,
 			);
 			path = "Other Models";
 			sourceTree = "<group>";
@@ -1655,6 +1699,7 @@
 			isa = PBXGroup;
 			children = (
 				5301A7641F17F42700668099 /* APIs */,
+				53E48CE91F9515FE004292D7 /* Exchange Rates */,
 				53EB77B91CF3DF5100F01903 /* Extensions */,
 				53F0785B1ED73B6E00E7EDF9 /* Other Models */,
 				53EB77B81CF3DED000F01903 /* Singleton */,
@@ -1934,6 +1979,7 @@
 		F1F948801D8049B800AB30B2 /* BalanceUnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				53C086951F9542A400C181F1 /* Exchange Rates */,
 				A4E457241F7921B5002E2879 /* Poloniex */,
 				A41742921F73E829004A9B4F /* CoinbaseAPIClient */,
 				A41D3E471F6BFC4100FD25B5 /* KrakenAPIClient */,
@@ -2147,6 +2193,7 @@
 				A41742971F73E8D2004A9B4F /* CoinbaseSendTransaction.json in Resources */,
 				53F0786D1F4F916800D0054C /* Account.json in Resources */,
 				53F0786A1F4F916500D0054C /* CompleteBalancesResponse.json in Resources */,
+				53C0869A1F9545ED00C181F1 /* ExchangeRates.json in Resources */,
 				53F0786E1F4F916800D0054C /* Error.json in Resources */,
 				53F0786B1F4F916500D0054C /* PoloniexAccount.json in Resources */,
 				A40ABBE31F6BBD1100383C62 /* FetchWallets.json in Resources */,
@@ -2251,6 +2298,7 @@
 				532121A21EE8B91600F4812A /* zip.c in Sources */,
 				537187E51F4CC23B00E7F9D6 /* PoloniexApi.swift in Sources */,
 				A4E768111F67F049002B1AE1 /* APICredentialsComponentsError.swift in Sources */,
+				53E48CF51F9516B6004292D7 /* CurrentExchangeRates.swift in Sources */,
 				53F0785E1ED73B7D00E7EDF9 /* Element.swift in Sources */,
 				53552A041ED7251200DD95F9 /* Debugging.swift in Sources */,
 				537504FE1F192D280062C11A /* TypeAliases.swift in Sources */,
@@ -2272,6 +2320,7 @@
 				532121A81EE8B91600F4812A /* ZipUtilities.swift in Sources */,
 				5301A77E1F17FDED00668099 /* Feedback.swift in Sources */,
 				53561EAA1F82DD260043D4F9 /* RootViewController.swift in Sources */,
+				53E48CF11F951678004292D7 /* SimpleCache.swift in Sources */,
 				537187E11F4CC23B00E7F9D6 /* GDAXCredentials.swift in Sources */,
 				A41742911F73C6BF004A9B4F /* CoinbaseTransaction.swift in Sources */,
 				53552A171ED7251700DD95F9 /* Institution.swift in Sources */,
@@ -2325,9 +2374,11 @@
 				53F078651ED73E6D00E7EDF9 /* ThemeGlobals.swift in Sources */,
 				537187E01F4CC23B00E7F9D6 /* GDAXAuthHeaders.swift in Sources */,
 				538B47BF1F4CA0200023CED5 /* Currency.swift in Sources */,
+				53E48CEF1F95165C004292D7 /* ExchangeRateSource.swift in Sources */,
 				535529FE1ED7250500DD95F9 /* KeychainManagement.swift in Sources */,
 				53561EAB1F82DD260043D4F9 /* AddAccountViewController.swift in Sources */,
 				A493B9401F681BA00074ACCC /* BitfinexWallet.swift in Sources */,
+				53E48CEE1F95165C004292D7 /* ExchangeRate.swift in Sources */,
 				53552A0F1ED7251200DD95F9 /* KeychainManager.swift in Sources */,
 				A40ABBE71F6BC0C000383C62 /* KrakenAPIClient.swift in Sources */,
 				53561EAC1F82DD260043D4F9 /* AddCredentialBasedAccountViewController.swift in Sources */,
@@ -2381,6 +2432,7 @@
 				53F47FCE1E3A78B70042AE06 /* DispatchQueue.swift in Sources */,
 				530422941ED39EE7001CA499 /* TransactionsTabViewModel.swift in Sources */,
 				5325508A1D06FB100045404E /* LabelField.swift in Sources */,
+				53E48CED1F95165B004292D7 /* ExchangeRateSource.swift in Sources */,
 				5371F6FA1D8524F4002264DF /* NSImage.swift in Sources */,
 				53D441E21F44AA9F006967E1 /* GenericItemRepository.swift in Sources */,
 				53B327C41E56AE0F009C7AFC /* Syncer.swift in Sources */,
@@ -2497,8 +2549,10 @@
 				532E392D1CD4521D001AFC31 /* Debugging.swift in Sources */,
 				53980CBF1D5CD6F80013B981 /* Pluralize.swift in Sources */,
 				5329FB731E3EA36F00A9CAF7 /* CwlSysctl.swift in Sources */,
+				53E48CF41F9516B6004292D7 /* CurrentExchangeRates.swift in Sources */,
 				2DD9B1F01EDDDFD10006268F /* TestingAppDelegate.swift in Sources */,
 				53C23BDC1E5F988000DA1281 /* ComboBox.swift in Sources */,
+				53E48CEC1F95165B004292D7 /* ExchangeRate.swift in Sources */,
 				53B327C61E56AEC2009C7AFC /* SyncDefaults.swift in Sources */,
 				53F638391C5FEAB800864346 /* Database.swift in Sources */,
 				53F078641ED73E6D00E7EDF9 /* ThemeGlobals.swift in Sources */,
@@ -2543,6 +2597,7 @@
 				530F57BD1DCD72680083F3A7 /* FMResultSet.m in Sources */,
 				531F590B1DDA4ABC0008E8BA /* DisablePasswordViewController.swift in Sources */,
 				A41D3E4B1F6C32E700FD25B5 /* KrakenAccount.swift in Sources */,
+				53E48CF21F951678004292D7 /* SimpleCache.swift in Sources */,
 				535769A01D5A4A7600013543 /* SectionedTableView.swift in Sources */,
 				530291321C6AA18F00C31CC1 /* AccountsTabViewController.swift in Sources */,
 				537187EE1F4CC23C00E7F9D6 /* GDAXServer.swift in Sources */,
@@ -2570,6 +2625,7 @@
 			files = (
 				53F078651F4F8F3C00D0054C /* AccountTests.swift in Sources */,
 				A41D3E491F6BFC5600FD25B5 /* KrakenAPIClientTests.swift in Sources */,
+				53C086971F9542BC00C181F1 /* CurrentExchangeRatesTests.swift in Sources */,
 				53F078641F4F8F3C00D0054C /* TestHelpers.swift in Sources */,
 				53F078691F4F8F3C00D0054C /* MockURLSession.swift in Sources */,
 				53F078661F4F8F3C00D0054C /* APIClientTests.swift in Sources */,
