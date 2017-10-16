@@ -123,7 +123,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         
         createTable()
         createFixPasswordPrompt()
-        //createTotalFooter()
+        createTotalFooter()
     }
     
     func createTable() {
@@ -132,8 +132,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         scrollView.hasHorizontalScroller = false
         scrollView.verticalScrollElasticity = .none
         scrollView.documentView = tableView
-        let bottomOffset = defaults.hideAddAccountPrompt ? 0 : 80
-        //let bottomOffset = defaults.hideAddAccountPrompt ? 30 : 110
+        let bottomOffset = defaults.hideAddAccountPrompt ? 50 : 130
         scrollView.contentInsets = NSEdgeInsetsMake(0, 0, CGFloat(bottomOffset), 0)
         self.view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
@@ -310,13 +309,13 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         totalFooterView.layerBackgroundColor = CurrentTheme.defaults.totalFooter.totalBackgroundColor
         self.view.addSubview(totalFooterView)
         totalFooterView.snp.makeConstraints { make in
-            make.height.equalTo(32)
+            make.height.equalTo(50)
             make.leading.equalTo(self.view)
             make.trailing.equalTo(self.view)
             make.bottom.equalTo(self.view)
         }
 
-        balanceField.stringValue = "Balance:"
+        balanceField.stringValue = "Balance"
         balanceField.alignment = .center
         balanceField.font = CurrentTheme.accounts.cell.nameFont
         balanceField.textColor = CurrentTheme.defaults.foregroundColor
@@ -327,7 +326,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
             make.centerY.equalTo(totalFooterView).offset(-1)
         }
         
-        totalField.stringValue = "$0.00"
         totalField.alignment = .right
         totalField.font = CurrentTheme.accounts.cell.amountFont
         totalField.usesSingleLineMode = true
@@ -529,7 +527,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     }
     
     func updateTotalBalance() {
-        totalField.attributedStringValue = centsToStringFormatted(viewModel.totalBalance(), showNegative: true)
+        totalField.stringValue = amountToString(amount: viewModel.totalBalance(), currency: defaults.masterCurrency, showNegative: true, showCodeAfterValue: true)
     }
     
     //
