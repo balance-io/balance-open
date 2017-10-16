@@ -51,7 +51,7 @@ internal final class AccountTableViewCell: TableViewCell {
         }
         
         // Text label
-        let currency = Currency.crypto(shortName: unwrappedAccount.currency)
+        let currency = Currency.rawValue(unwrappedAccount.currency)
         self.textLabel?.text = amountToString(amount: unwrappedAccount.displayBalance, currency: currency)
         
         // Detail label

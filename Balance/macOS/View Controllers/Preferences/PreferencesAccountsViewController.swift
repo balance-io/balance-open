@@ -18,9 +18,7 @@ class PreferencesAccountsViewController: NSViewController {
     
     let accountsScrollView = ScrollView()
     let accountsTableView = SectionedTableView()
-    
-    var statusField = LabelField()
-    
+        
     fileprivate var institutions = OrderedDictionary<Institution, [Account]>()
     fileprivate var selectedInstitution: Institution? {
         let selectedIndex = institutionsTableView.selectedIndex
@@ -190,22 +188,6 @@ class PreferencesAccountsViewController: NSViewController {
         accountsTableView.gridStyleMask = NSTableView.GridLineStyle.solidHorizontalGridLineMask
         accountsTableView.rowHeight = 5000
         
-        if debugging.disableSubscription {
-            statusField.isHidden = true
-        }
-        statusField.alignment = .left
-        statusField.verticalAlignment = .center
-        statusField.font = .systemFont(ofSize: 12)
-        statusField.textColor = NSColor(deviceWhite: 0, alpha: 0.4)
-        statusField.usesSingleLineMode = true
-        self.view.addSubview(statusField)
-        statusField.snp.makeConstraints { make in
-            make.leading.equalTo(institutionsBackgroundView)
-            make.trailing.equalTo(accountsBackgroundView)
-            make.top.equalTo(institutionsBackgroundView.snp.bottom).offset(8.5)
-            make.height.equalTo(17)
-        }
-        
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.InstitutionAdded)
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.InstitutionRemoved)
         
@@ -244,10 +226,6 @@ class PreferencesAccountsViewController: NSViewController {
         institutionsTableView.reloadData()
         selectFirstInstitution()
         accountsTableView.reloadData()
-        
-        let remaining = subscriptionManager.remainingAccounts
-        let pluralAccounts = "account".pluralize(remaining)
-        statusField.stringValue = "\(remaining) \(pluralAccounts) remaining on your current plan"
     }
     
     @objc fileprivate func reloadAccountsTable() {

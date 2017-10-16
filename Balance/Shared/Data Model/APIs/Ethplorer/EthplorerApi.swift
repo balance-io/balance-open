@@ -134,7 +134,7 @@ class EthplorerApi: ExchangeApi {
                     }
                     
                     //crete institution
-                    if let institution = InstitutionRepository.si.institution(source: .wallet, sourceInstitutionId: "", name: "\(name)") {
+                    if let institution = InstitutionRepository.si.institution(source: .ethplorer, sourceInstitutionId: "", name: "\(name)") {
                         institution.address = address
                         
                         //create accounts
@@ -184,7 +184,7 @@ class EthplorerApi: ExchangeApi {
         guard let dict = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] else {
             throw EthplorerApi.CredentialsError.bodyNotValidJSON
         }
-        let ethplorerAccount = try EthplorerAccountObject.init(dictionary: dict, currencyShortName: "ETH", type: .wallet)
+        let ethplorerAccount = try EthplorerAccountObject(dictionary: dict, currencyShortName: "ETH", type: .wallet)
         return ethplorerAccount
     }
     
@@ -230,7 +230,7 @@ class EthplorerApi: ExchangeApi {
         let currentBalance = balance
         let altCurrentBalance = altBalance
         
-        if let newAccount = AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: currency.name, sourceInstitutionId: "", accountTypeId: .wallet, accountSubTypeId: nil, name: currency.name, currency: currency.name, currentBalance: currentBalance, availableBalance: nil, number: nil, altCurrency: altCurrency.name, altCurrentBalance: altCurrentBalance, altAvailableBalance: nil) {
+        if let newAccount = AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: currency.code, sourceInstitutionId: "", accountTypeId: .wallet, accountSubTypeId: nil, name: currency.code, currency: currency.code, currentBalance: currentBalance, availableBalance: nil, number: nil, altCurrency: altCurrency.code, altCurrentBalance: altCurrentBalance, altAvailableBalance: nil) {
             
             // Hide unpoplular currencies that have a 0 balance
             if currency != Currency.btc && currency != Currency.eth {

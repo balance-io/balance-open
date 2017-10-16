@@ -40,7 +40,6 @@ class Defaults {
         static let accountsViewAccountsOrder            = "accountsViewAccountsOrder"
         static let hideAddAccountPrompt                 = "hideAddAccountPrompt"
         static let hideDefaultRulesPrompt               = "hideDefaultRulesPrompt"
-        static let selectedThemeType                    = "selectedThemeType"
         static let promptedForLaunchAtLogin             = "promptedForLaunchAtLogin"
         static let emailPreference                      = "emailPreference"
         static let searchPreference                     = "searchPreference"
@@ -53,7 +52,6 @@ class Defaults {
         static let logCount                             = "logCount"
         static let hiddenAccountIds                     = "hiddenAccountIds"
         static let unfinishedConnectionInstitutionIds   = "unfinishedConnectionInstitutionIds"
-        static let feedRules                            = "feedRules"
     }
     
     // First run defaults
@@ -61,8 +59,7 @@ class Defaults {
         let dict: [String: Any] = [Keys.crashOnExceptions:                  true,
                                          Keys.launchAtLogin:                false,
                                          Keys.accountIdsExcludedFromTotal:  NSArray(),
-                                         Keys.firstLaunch:                  true,
-                                         Keys.selectedThemeType:            ThemeType.auto.rawValue]
+                                         Keys.firstLaunch:                  true]
         defaults.register(defaults: dict)
         
         // Setup unread notification ids cache
@@ -257,21 +254,6 @@ class Defaults {
     
     //General Preferences
     
-    var selectedThemeType: ThemeType {
-        get {
-            let rawValue = defaults.integer(forKey: Keys.selectedThemeType)
-            if let themeType = ThemeType(rawValue: rawValue) {
-                return themeType
-            } else {
-                return .auto
-            }
-        }
-        set {
-            let rawValue = newValue.rawValue
-            defaults.set(rawValue, forKey: Keys.selectedThemeType)
-        }
-    }
-    
     var promptedForLaunchAtLogin: Bool {
         get {
             return defaults.bool(forKey: Keys.promptedForLaunchAtLogin)
@@ -331,33 +313,6 @@ class Defaults {
     }
 }
 
-// Deprecated
-extension Defaults {
-    var feedRules: [FeedRule]? {
-        get {
-            do {
-                var feedRules: [FeedRule]?
-                if let feedRulesData = defaults.data(forKey: Keys.feedRules) {
-                    try ObjC.catchException {
-                        feedRules = NSKeyedUnarchiver.unarchiveObject(with: feedRulesData) as? [FeedRule]
-                    }
-                }
-                return feedRules
-            } catch {
-                return nil
-            }
-        }
-        set {
-            if let newValue = newValue {
-                let feedRulesData = NSKeyedArchiver.archivedData(withRootObject: newValue)
-                defaults.set(feedRulesData, forKey: Keys.feedRules)
-            } else {
-                defaults.set(nil, forKey: Keys.feedRules)
-            }
-        }
-    }
-}
-
 extension Account {
     var isHidden: Bool {
         get {
@@ -370,114 +325,5 @@ extension Account {
                 defaults.unhideAccountId(accountId)
             }
         }
-    }
-}
-
-// Depricated
-class FeedRule: NSObject, NSCoding {
-    
-    var ruleId: Int
-    var name: String
-    var notify: Bool
-    
-    // Dictionary of search tags representing this rule, i.e. [.Name: "Uber", .More: "50"]
-    var searchTokens: [SearchToken: String]
-    
-    var displayName: String {
-        if name.length > 0 {
-            return name
-        }
-        
-        let orderedTokens: [SearchToken] = [.over, .under, .amount, .accountMatches, .name, .nameMatches, .nameNot, .nameMatchesNot, .categoryMatches]
-        
-        var displayNameParts = [String]()
-        for token in orderedTokens {
-            if let value = searchTokens[token] {
-                switch token {
-                case .over:
-                    if let cents = stringToCents(value) {
-                        let amount = centsToString(cents)
-                        displayNameParts.append("over \(amount)")
-                    }
-                case .under:
-                    if let cents = stringToCents(value) {
-                        let amount = centsToString(cents)
-                        displayNameParts.append("under \(amount)")
-                    }
-                case .amount:
-                    if let cents = stringToCents(value) {
-                        let amount = centsToString(cents)
-                        displayNameParts.append("exactly \(amount)")
-                    }
-                case .accountMatches:
-                    displayNameParts.append("in \(value)")
-                case .name:
-                    displayNameParts.append("containing \"\(value)\"")
-                case .nameMatches:
-                    displayNameParts.append("matching \"\(value)\"")
-                case .nameNot:
-                    displayNameParts.append("not containing \"\(value)\"")
-                case .nameMatchesNot:
-                    displayNameParts.append("not matching \"\(value)\"")
-                case .categoryMatches:
-                    displayNameParts.append("in category \"\(value)\"")
-                default:
-                    break
-                }
-            }
-        }
-        
-        if displayNameParts.count == 0 {
-            return "New Rule"
-        } else {
-            return (displayNameParts as NSArray).componentsJoined(by: ", ").capitalizedFirstLetterString
-        }
-    }
-    
-    init(ruleId: Int, name: String, notify: Bool, searchTokens: [SearchToken: String]) {
-        self.ruleId = ruleId
-        self.name = name
-        self.notify = notify
-        self.searchTokens = searchTokens
-    }
-    
-    override var hashValue: Int {
-        return ruleId.hashValue
-    }
-    
-    // MARK: - NSCoding -
-    
-    fileprivate struct Keys {
-        static let ruleId       = "ruleId"
-        static let name         = "name"
-        static let notify       = "notify"
-        static let searchTokens = "searchTokens"
-    }
-    
-    public required init?(coder aDecoder: NSCoder) {
-        ruleId = aDecoder.decodeInteger(forKey: Keys.ruleId)
-        name = aDecoder.decodeObject(forKey: Keys.name) as? String ?? ""
-        notify = aDecoder.decodeBool(forKey: Keys.notify)
-        
-        let searchTokensStrings = aDecoder.decodeObject(forKey: Keys.searchTokens) as? [String: String] ?? [String: String]()
-        var searchTokensEnums = [SearchToken: String]()
-        for item in searchTokensStrings {
-            if let token = SearchToken(rawValue: item.0) {
-                searchTokensEnums[token] = item.1
-            }
-        }
-        searchTokens = searchTokensEnums
-    }
-    
-    public func encode(with aCoder: NSCoder) {
-        aCoder.encode(ruleId, forKey: Keys.ruleId)
-        aCoder.encode(name, forKey: Keys.name)
-        aCoder.encode(notify, forKey: Keys.notify)
-        
-        var searchTokensStrings = [String: String]()
-        for item in searchTokens {
-            searchTokensStrings[item.0.rawValue] = item.1
-        }
-        aCoder.encode(searchTokensStrings, forKey: Keys.searchTokens)
     }
 }

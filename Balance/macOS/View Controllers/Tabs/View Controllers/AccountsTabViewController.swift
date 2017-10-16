@@ -36,12 +36,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     // MARK: Fix Password Prompt
     let fixPasswordPromptView = PaintCodeView()
     
-    // MARK: Prompt
-    let promptView = VisualEffectView()
-    let promptField = LabelField()
-    let promptAddAccountButton = Button()
-    let promptHideButton = Button()
-    
     // MARK: Footer
     let totalFooterView = VisualEffectView()
     let balanceField = LabelField()
@@ -86,7 +80,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         var finalHeight = CurrentTheme.defaults.size.height
         if let delegate = tableView.delegate {
             // Calculate the table rows total height
-            var tableHeight: CGFloat = debugging.disableTransactions ? 50 : 200 // Account for other UI elements
+            var tableHeight: CGFloat = 200 // Account for other UI elements
             let numberOfRows = tableView.numberOfRows
             
             if numberOfRows > 0 {
@@ -96,7 +90,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
             }
             
             // Calculate height
-            let minHeight: CGFloat = debugging.disableTransactions ? 370 : 520
+            let minHeight: CGFloat = 520
             let maxHeight: CGFloat = AppDelegate.sharedInstance.maxHeight
             var height = minHeight
             if tableHeight > minHeight && tableHeight < maxHeight {
@@ -129,7 +123,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         
         createTable()
         createFixPasswordPrompt()
-        createPrompt()
         //createTotalFooter()
     }
     
@@ -137,13 +130,14 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         scrollView.drawsBackground = false
         scrollView.hasVerticalScroller = true
         scrollView.hasHorizontalScroller = false
+        scrollView.verticalScrollElasticity = .none
         scrollView.documentView = tableView
         let bottomOffset = defaults.hideAddAccountPrompt ? 0 : 80
         //let bottomOffset = defaults.hideAddAccountPrompt ? 30 : 110
         scrollView.contentInsets = NSEdgeInsetsMake(0, 0, CGFloat(bottomOffset), 0)
         self.view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(self.view).offset(10)
+            make.top.equalTo(self.view)
             make.leading.equalTo(self.view)
             make.trailing.equalTo(self.view)
             make.bottom.equalTo(self.view)
@@ -154,8 +148,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         tableView.customDataSource = self
         tableView.displayEmptySectionRows = true
         tableView.intercellSpacing = NSZeroSize
-        tableView.gridColor = NSColor.clear
-        tableView.gridStyleMask = NSTableView.GridLineStyle()
         tableView.selectionHighlightStyle = .none
         
         tableView.reloadData()
@@ -164,9 +156,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     fileprivate func createFixPasswordPrompt() {
         let fixPasswordInstitutions = InstitutionRepository.si.institutionsWithInvalidPasswords()
         let count = fixPasswordInstitutions.count
-        if count > 0 {
-            promptHide(persist: false)
-            
+        if count > 0 {            
             for subview in fixPasswordPromptView.subviews {
                 subview.removeFromSuperview()
             }
@@ -313,87 +303,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         }
     }
     
-    fileprivate func createPrompt() {
-        if !defaults.hideAddAccountPrompt && InstitutionRepository.si.institutionsWithInvalidPasswords().count == 0 {
-            promptView.blendingMode = .withinWindow
-            promptView.material = CurrentTheme.defaults.material
-            //promptView.layer?.backgroundColor = NSColor.lightGrayColor().CGColor
-            promptView.state = .active
-            promptView.cornerRadius = 5
-            self.view.addSubview(promptView)
-            promptView.snp.makeConstraints { make in
-                make.height.equalTo(40)
-                make.leading.equalTo(self.view).offset(10)
-                make.trailing.equalTo(self.view).offset(-10)
-                make.bottom.equalTo(self.view).offset(-50)
-            }
-            
-            //Other prompts
-            //If you want to add another account, you can upgrade
-            //You have 23 days left of your trial.
-            promptField.alignment = .left
-            promptField.font = CurrentTheme.accounts.prompt.promptFont
-            promptField.textColor = CurrentTheme.defaults.foregroundColor
-            promptField.usesSingleLineMode = true
-            promptView.addSubview(promptField)
-            promptField.snp.makeConstraints { make in
-                make.centerY.equalTo(promptView.snp.centerY)
-                make.trailing.equalTo(promptView).offset(-35)
-            }
-            
-            promptAddAccountButton.bezelStyle = .rounded
-            promptAddAccountButton.font = CurrentTheme.addAccounts.buttonFont
-            promptAddAccountButton.title = "Add another"
-            promptAddAccountButton.sizeToFit()
-            promptAddAccountButton.target = self
-            promptAddAccountButton.action = #selector(promptAddAccount)
-            promptView.addSubview(promptAddAccountButton)
-            promptAddAccountButton.snp.makeConstraints { make in
-                make.height.equalTo(23)
-                make.centerY.equalTo(promptView.snp.centerY)
-                make.leading.equalTo(promptView).offset(10)
-            }
-            
-            promptHideButton.isBordered = false
-            promptHideButton.font = CurrentTheme.addAccounts.buttonFont
-            let hideIcon = NSImage(named: NSImage.Name.stopProgressTemplate)
-            promptHideButton.image = tintImageWithColor(hideIcon!, color: CurrentTheme.defaults.foregroundColor)
-            promptHideButton.imagePosition = .imageOnly
-            promptHideButton.title = ""
-            promptHideButton.sizeToFit()
-            promptHideButton.target = self
-            promptHideButton.action = #selector(promptHide)
-            promptView.addSubview(promptHideButton)
-            promptHideButton.snp.makeConstraints { make in
-                make.height.equalTo(15)
-                make.centerY.equalTo(promptView.snp.centerY)
-                make.trailing.equalTo(promptView).inset(10)
-            }
-            
-            updatePromptView()
-        }
-    }
-    
-    @objc fileprivate func promptAddAccount() {
-        NotificationCenter.postOnMainThread(name: Notifications.ShowAddAccount)
-    }
-    
-    @objc fileprivate func promptHide(persist: Bool = true) {
-        defaults.hideAddAccountPrompt = persist
-        promptView.removeFromSuperview()
-        scrollView.contentInsets = NSEdgeInsetsMake(0, 0, 30, 0)
-    }
-    
-    fileprivate func updatePromptView() {
-        let remainingAccounts = subscriptionManager.remainingAccounts
-        if remainingAccounts > 0 {
-            let accountsString = "account".pluralize(remainingAccounts)
-            promptField.stringValue = "You can add up to \(remainingAccounts) more \(accountsString)"
-        } else {
-            promptHide()
-        }
-    }
-    
     fileprivate func createTotalFooter() {
         totalFooterView.blendingMode = .withinWindow
         totalFooterView.material = CurrentTheme.defaults.material
@@ -476,7 +385,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
             if let institution = InstitutionRepository.si.institution(institutionId: institutionId) {
                 let oldData = viewModel.data
                 viewModel.institutionAdded(institution: institution)
-                updatePromptView()
                 reload = false
                 
                 self.invalidateTouchBar()
@@ -521,7 +429,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         if let institution = notification.userInfo?[Notifications.Keys.Institution] as? Institution {
             let oldData = viewModel.data
             viewModel.institutionRemoved(institution: institution)
-            updatePromptView()
             reload = false
             
             self.invalidateTouchBar()
@@ -560,7 +467,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         if let account = notification.userInfo?[Notifications.Keys.Account] as? Account {
             let oldData = viewModel.data
             viewModel.accountRemoved(account: account)
-            updatePromptView()
             reload = false
             
             do {
@@ -631,9 +537,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     //
 
     func tableView(_ tableView: SectionedTableView, clickedRow row: Int, inSection section: Int) {
-        if debugging.disableTransactions {
-            return
-        }
+        // Click to view transactions not implemented yet until we re-implement searching/filtering
+        return
         
         let selectedIndex = tableView.selectedIndex
         if selectedIndex.section >= 0 {
@@ -697,7 +602,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
             height -= 4
         }
         
-        if !debugging.disableTransactions && TableIndex(section: section, row: row) == tableView.selectedIndex {
+        if TableIndex(section: section, row: row) == tableView.selectedIndex {
             return height + 50.0
         } else {
             return height
@@ -705,36 +610,44 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     }
     
     func tableView(_ tableView: SectionedTableView, rowViewForSection section: Int) -> NSTableRowView? {
-        var row = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Institution Row"), owner: self) as? HoverTableRowView
-        if row == nil {
-            row = HoverTableRowView()
-            row?.identifier = NSUserInterfaceItemIdentifier(rawValue: "Institution Row")
-            row?.color = CurrentTheme.defaults.cell.backgroundColor
-            row?.hoverColor = CurrentTheme.defaults.cell.hoverBackgroundColor
-        }
-        return row
-    }
-    
-    func tableView(_ tableView: SectionedTableView, rowViewForRow row: Int, inSection section: Int) -> NSTableRowView? {
-        var row = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Account Row"), owner: self) as? HoverTableRowView
-        if row == nil {
-            row = HoverTableRowView()
-            row?.identifier = NSUserInterfaceItemIdentifier(rawValue: "Account Row")
-            row?.color = CurrentTheme.defaults.cell.backgroundColor
-            row?.hoverColor = CurrentTheme.defaults.cell.hoverBackgroundColor
-        }
-        return row
-    }
-    
-    func tableView(_ tableView: SectionedTableView, viewForSection section: Int) -> NSView? {
-        var cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Group Cell"), owner: self) as? AccountsTabGroupCell
-        if cell == nil {
-            cell = AccountsTabGroupCell()
-            cell?.identifier = NSUserInterfaceItemIdentifier(rawValue: "Group Cell")
+        var rowView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Institution Row"), owner: self) as? HoverTableRowView
+        if rowView == nil {
+            rowView = HoverTableRowView()
+            rowView?.identifier = NSUserInterfaceItemIdentifier(rawValue: "Institution Row")
         }
         
         if let institution = viewModel.institution(forSection: section) {
-            cell?.updateModel(institution)
+            let color = institution.source.color
+            rowView?.color = color
+            rowView?.hoverColor = color
+        }
+        
+        return rowView
+    }
+    
+    func tableView(_ tableView: SectionedTableView, rowViewForRow row: Int, inSection section: Int) -> NSTableRowView? {
+        var rowView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Account Row"), owner: self) as? HoverTableRowView
+        if rowView == nil {
+            rowView = HoverTableRowView()
+            rowView?.identifier = NSUserInterfaceItemIdentifier(rawValue: "Account Row")
+        }
+        
+        if let account = viewModel.account(forRow: row, inSection: section) {
+            let color = account.source.color
+            rowView?.color = color
+            rowView?.hoverColor = color
+        }
+        
+        return rowView
+    }
+    
+    func tableView(_ tableView: SectionedTableView, viewForSection section: Int) -> NSView? {
+        let cell = AccountsTabGroupCell()
+        cell.identifier = NSUserInterfaceItemIdentifier(rawValue: "Group Cell")
+        
+        if let institution = viewModel.institution(forSection: section) {
+            let previousSectionColor = viewModel.institution(forSection: section - 1)?.source.color ?? .clear
+            cell.updateModel(institution, previousSectionColor: previousSectionColor)
         }
         
         return cell

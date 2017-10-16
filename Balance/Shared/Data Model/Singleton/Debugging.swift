@@ -73,13 +73,6 @@ class Debugging {
         return false
     }
     
-    var showIntroOnLaunch: Bool {
-        if let showIntroOnLaunch = UserDefaults.standard.object(forKey: "showIntroOnLaunch") as? Bool {
-            return showIntroOnLaunch
-        }
-        return false
-    }
-    
     var useMockSyncing: Bool {
         if let useMockSyncing = UserDefaults.standard.object(forKey: "useMockSyncing") as? Bool {
             return useMockSyncing
@@ -175,20 +168,6 @@ class Debugging {
         }
         return ""
     }
-    
-    var disableSubscription: Bool {
-        if let disableSubscription = UserDefaults.standard.object(forKey: "disableSubscription") as? Bool {
-            return disableSubscription
-        }
-        return true
-    }
-    
-    var disableTransactions: Bool {
-        if let disableTransactions = UserDefaults.standard.object(forKey: "disableTransactions") as? Bool {
-            return disableTransactions
-        }
-        return true
-    }
 }
 
 #else
@@ -237,10 +216,6 @@ class Debugging {
     }
     
     var showAddAccountsOnLaunch: Bool {
-        return false
-    }
-    
-    var showIntroOnLaunch: Bool {
         return false
     }
     
@@ -321,14 +296,6 @@ class Debugging {
     
     var usePersonalAppStoreReceipt: Bool {
         return false
-    }
-    
-    var disableSubscription: Bool {
-        return true
-    }
-    
-    var disableTransactions: Bool {
-        return true
     }
 }
 

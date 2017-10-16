@@ -8,40 +8,89 @@
 
 import Foundation
 import BalanceVectorGraphics
+import SnapKit
+
+fileprivate let padding = 20
 
 class AccountsTabGroupCell: View {
-    var headerView: NSView?
+    var model: Institution?
+    var topColor = NSColor.clear
     
+    let logoView = PaintCodeView()
+    let nameField = LabelField()
+    let amountField = LabelField()
+    let lineView = View()
+
     init() {
         super.init(frame: NSZeroRect)
-        self.layerBackgroundColor = CurrentTheme.defaults.cell.backgroundColor
+        
+        self.addSubview(amountField)
+        amountField.font = CurrentTheme.accounts.headerCell.amountFont
+        amountField.textColor = CurrentTheme.accounts.headerCell.amountColor
+        amountField.verticalAlignment = .center
+        amountField.alignment = .right
+        amountField.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-padding)
+            make.top.equalToSuperview()
+            make.height.equalToSuperview().offset(-1)
+            make.width.equalTo(150)
+        }
+        
+        self.addSubview(nameField)
+        nameField.font = CurrentTheme.accounts.headerCell.nameFont
+        nameField.textColor = CurrentTheme.accounts.headerCell.nameColor
+        nameField.verticalAlignment = .center
+        nameField.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(padding)
+            make.top.equalToSuperview()
+            make.height.equalToSuperview().offset(-1)
+            make.right.equalTo(amountField.snp.left).offset(5)
+        }
+        
+        self.addSubview(logoView)
+        logoView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(-padding-12)
+            make.top.equalToSuperview()
+            make.height.equalToSuperview().offset(-1)
+            make.right.equalTo(amountField.snp.left).offset(-padding)
+        }
+        
+        lineView.layerBackgroundColor = .white
+        lineView.alphaValue = 0.06
+        self.addSubview(lineView)
+        lineView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(padding)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(1)
+            make.right.equalToSuperview()
+        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("unsupported")
     }
     
-    func updateModel(_ model: Institution) {
-        self.headerView?.removeFromSuperview()
-        self.headerView = nil
+    func updateModel(_ updatedModel: Institution, previousSectionColor: NSColor) {
+        model = updatedModel
+        topColor = previousSectionColor
         
-        let sourceInstitutionId: String
-        if debugging.disableSubscription {
-            sourceInstitutionId = model.source.description
+        let sourceInstitutionId = updatedModel.source.description
+        if let logoDrawFunction = InstitutionLogos.drawingFunctionForId(sourceInstitutionId: sourceInstitutionId) {
+            logoView.isHidden = false
+            nameField.isHidden = true
+            logoView.drawingBlock = logoDrawFunction
         } else {
-            sourceInstitutionId = institutionsDatabase.primarySourceInstitutionId(source: model.source, sourceInstitutionId: model.sourceInstitutionId) ?? model.sourceInstitutionId
-        }
-        if let headerView = InstitutionHeaders.headerViewForId(sourceInstitutionId: sourceInstitutionId) {
-            self.addSubview(headerView)
-            self.headerView = headerView
-        } else if let headerView = InstitutionHeaders.defaultHeaderView(backgroundColor: model.displayColor, foregroundColor: CurrentTheme.accounts.headerCell.genericInstitutionTextColor, font: CurrentTheme.accounts.headerCell.genericInstitutionFont, name: model.name) {
-            self.addSubview(headerView)
-            self.headerView = headerView
+            logoView.isHidden = true
+            nameField.isHidden = false
+            nameField.stringValue = updatedModel.name
         }
         
-        self.alphaValue = (debugging.showAllInstitutionsAsIncorrectPassword || model.passwordInvalid) ? CurrentTheme.accounts.cell.passwordInvalidDimmedAlpha : 1.0
+        amountField.stringValue = ""
         
-        self.setAccessibilityLabel("Section: " + model.name)
+        self.alphaValue = (debugging.showAllInstitutionsAsIncorrectPassword || updatedModel.passwordInvalid) ? CurrentTheme.accounts.cell.passwordInvalidDimmedAlpha : 1.0
+        
+        self.setAccessibilityLabel("Section: " + updatedModel.name)
+        self.needsDisplay = true
     }
 }
 
@@ -56,6 +105,7 @@ class AccountsTabAccountCell: View {
     let inclusionIndicator = ImageView()
     let amountField = LabelField()
     let altAmountField = LabelField()
+    let lineView = View()
     
     var bottomContainer: View!
     var transactionDetailsField: LabelField!
@@ -76,17 +126,6 @@ class AccountsTabAccountCell: View {
             make.height.equalTo(CurrentTheme.accounts.cell.height)
         }
         
-        amountField.setAccessibilityLabel("Account Total")
-        amountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
-        amountField.font = CurrentTheme.accounts.cell.amountFont
-        amountField.usesSingleLineMode = true
-        topContainer.addSubview(amountField)
-        amountField.snp.makeConstraints { make in
-            make.width.equalTo(100)
-            make.trailing.equalToSuperview().inset(12)
-            make.top.equalToSuperview().offset(8)
-        }
-        
         altAmountField.setAccessibilityLabel("Alternate Currency Amount Total")
         altAmountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
         altAmountField.font = CurrentTheme.accounts.cell.altAmountFont
@@ -95,7 +134,7 @@ class AccountsTabAccountCell: View {
         self.addSubview(altAmountField)
         altAmountField.snp.makeConstraints { make in
             make.width.equalTo(100)
-            make.trailing.equalToSuperview().inset(8)
+            make.trailing.equalToSuperview().inset(padding)
             make.bottom.equalToSuperview().offset(-8)
         }
         
@@ -104,11 +143,12 @@ class AccountsTabAccountCell: View {
         inclusionIndicator.snp.makeConstraints { make in
             make.width.equalTo(15)
             make.height.equalTo(15)
-            make.trailing.equalTo(amountField.snp.leading).offset(-5)
-            make.centerY.equalTo(amountField)
+            make.trailing.equalTo(altAmountField.snp.leading).offset(-5)
+            make.centerY.equalTo(altAmountField)
         }
         
         nameField.setAccessibilityLabel("Account Name")
+        nameField.alphaValue = 0.80
         nameField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
         nameField.alignment = .left
         nameField.font = CurrentTheme.accounts.cell.nameFont
@@ -117,9 +157,32 @@ class AccountsTabAccountCell: View {
         nameField.cell?.lineBreakMode = .byTruncatingTail
         topContainer.addSubview(nameField)
         nameField.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(10)
+            make.leading.equalToSuperview().inset(padding)
             make.trailing.equalTo(inclusionIndicator.snp.leading).inset(-5)
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(10)
+        }
+        
+        amountField.setAccessibilityLabel("Account Total")
+        amountField.alphaValue = 0.95
+        amountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
+        amountField.font = CurrentTheme.accounts.cell.amountFont
+        amountField.usesSingleLineMode = true
+        amountField.alignment = .left
+        topContainer.addSubview(amountField)
+        amountField.snp.makeConstraints { make in
+            make.leading.equalTo(nameField)
+            make.bottom.equalToSuperview().offset(-10)
+            make.width.equalTo(100)
+        }
+        
+        lineView.layerBackgroundColor = .white
+        lineView.alphaValue = 0.06
+        topContainer.addSubview(lineView)
+        lineView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(padding)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(1)
+            make.right.equalToSuperview()
         }
         
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(cellOpened(_:)), name: AccountsTabViewController.InternalNotifications.CellOpened)
@@ -138,9 +201,8 @@ class AccountsTabAccountCell: View {
     func updateModel(_ updatedModel: Account) {
         model = updatedModel
         
-        let currency = Currency.rawValue(shortName: updatedModel.currency)
+        let currency = Currency.rawValue(updatedModel.currency)
         amountField.attributedStringValue = amountToStringFormatted(amount: updatedModel.displayBalance, currency: currency, showNegative: true)
-        amountField.setAccessibilityLabel("Account Total")
         amountField.snp.updateConstraints { make in
             let width = amountField.stringValue.size(font: CurrentTheme.accounts.cell.amountFont)
             make.width.equalTo(width)
@@ -148,9 +210,8 @@ class AccountsTabAccountCell: View {
         
         if updatedModel.altCurrency != nil && updatedModel.currency != updatedModel.altCurrency {
             if let altCurrentBalance = updatedModel.altCurrentBalance {
-                let altCurrency = Currency.rawValue(shortName: updatedModel.altCurrency!)
+                let altCurrency = Currency.rawValue(updatedModel.altCurrency!)
                 altAmountField.stringValue = amountToString(amount: altCurrentBalance, currency: altCurrency, showNegative: true)
-                altAmountField.setAccessibilityLabel("Account Total")
                 altAmountField.snp.updateConstraints { make in
                     let width = altAmountField.stringValue.size(font: CurrentTheme.accounts.cell.amountFont)
                     make.width.equalTo(width)
@@ -158,14 +219,8 @@ class AccountsTabAccountCell: View {
             }
             
             altAmountField.isHidden = false
-            amountField.snp.updateConstraints { make in
-                make.top.equalToSuperview().offset(8)
-            }
         } else {
             altAmountField.isHidden = true
-            amountField.snp.updateConstraints { make in
-                make.top.equalToSuperview().offset(20)
-            }
         }
         
         nameField.stringValue = updatedModel.displayName
@@ -178,8 +233,18 @@ class AccountsTabAccountCell: View {
         
         self.alphaValue = (debugging.showAllInstitutionsAsIncorrectPassword || updatedModel.passwordInvalid)  ? CurrentTheme.accounts.cell.passwordInvalidDimmedAlpha : 1.0
         
+        updateBackgroundColors()
         updateTopContainerOffset()
         updateInclusionIndicator()
+    }
+    
+    func updateBackgroundColors() {
+        if let color = model?.source.color {
+            self.layerBackgroundColor = color
+            amountField.backgroundColor = color
+            altAmountField.backgroundColor = color
+            nameField.backgroundColor = color
+        }
     }
     
     func updateTopContainerOffset() {

@@ -94,22 +94,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         #endif
     }
     
-    fileprivate func storeInit() {
-        subscriptionManager.updatePrices()
-        subscriptionManager.completeTransactions()
-    }
-    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Make sure we're running from the Application folder or updates won't work
         #if !DEBUG
             PFMoveToApplicationsFolderIfNecessary()
-        #endif
-        
-        #if !DEBUG
-            // Check for existance of receipt data and exit with status code 173 if missing to refresh the receipt (App Store requirement)
-            if !betaOptionsEnabled && !debugging.disableSubscription && subscriptionManager.receiptData == nil {
-                exit(173)
-            }
         #endif
         
         // Register our app to get notified when launched via URL
@@ -120,10 +108,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         launchedAtLogin = isAutolaunchHelperRunning
         
         // Setup Realm options
-        RealmSwift.SyncManager.shared.logLevel = SyncLogLevel.all
-        RealmSwift.SyncManager.shared.errorHandler = { error, _ in
-            print("Realm error: \(error)")
-        }
+//        RealmSwift.SyncManager.shared.logLevel = SyncLogLevel.all
+//        RealmSwift.SyncManager.shared.errorHandler = { error, _ in
+//            print("Realm error: \(error)")
+//        }
         
         // Initialize singletons
         initializeSingletons()
@@ -133,7 +121,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Initialize UserDefaults
         defaults.setupDefaults()
-        print("feedRules: \(String(describing: defaults.feedRules))")
         //defaults.setupCloudSyncing()
         
         // Initialize local notifications delegate
@@ -141,11 +128,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Initialyze crash logging and analytics
         hockeyAppInit()
-        
-        if !debugging.disableSubscription {
-            // Initialize Store
-            storeInit()
-        }
         
         // Initialize database
         database.create()
@@ -162,10 +144,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                             }
                         }
                     }
-                }
-                if debugging.logRealmCredentials {
-                    log.debug("realmUser: \(String(describing: subscriptionManager.realmUser))")
-                    log.debug("realmPass: \(String(describing: subscriptionManager.realmPass))")
                 }
             }
         #endif
@@ -528,7 +506,7 @@ extension AppDelegate: NSUserNotificationCenterDelegate {
     }
     
     func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
-        NotificationCenter.postOnMainThread(name: Notifications.ShowTabIndex, object: nil, userInfo: [Notifications.Keys.TabIndex: Tab.feed.rawValue])
+        NotificationCenter.postOnMainThread(name: Notifications.ShowTabIndex, object: nil, userInfo: [Notifications.Keys.TabIndex: Tab.transactions.rawValue])
         async(after: 0.5) {
             self.showPopover()
         }

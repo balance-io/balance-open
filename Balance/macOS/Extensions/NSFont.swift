@@ -52,7 +52,7 @@ extension NSFont {
     // Cache fonts for performance
     fileprivate static var cachedMonospacedFonts = [CGFloat: NSFont]()
     static func monospacedDigitSystemFont(ofSize size: CGFloat) -> NSFont {
-        let yosemiteFont = NSFont(name: "HelveticaNeue", size: size)!
+        let yosemiteFont = NSFont(name: "Menlo", size: size)!
         if debugging.viewFontsAsYosemite {
             return yosemiteFont
         }
@@ -67,10 +67,10 @@ extension NSFont {
                         NSFontDescriptor.AttributeName.featureSettings: [
                             // Alternate 6 and 9
                             [ NSFontDescriptor.FeatureKey.typeIdentifier: kStylisticAlternativesType,
-                                NSFontDescriptor.FeatureKey.selectorIdentifier: kStylisticAltOneOnSelector ],
+                              NSFontDescriptor.FeatureKey.selectorIdentifier: kStylisticAltOneOnSelector ],
                             // Alternate 4
                             [ NSFontDescriptor.FeatureKey.typeIdentifier: kStylisticAlternativesType,
-                                NSFontDescriptor.FeatureKey.selectorIdentifier: kStylisticAltTwoOnSelector ]
+                              NSFontDescriptor.FeatureKey.selectorIdentifier: kStylisticAltTwoOnSelector ]
                         ]
                     ])
                 

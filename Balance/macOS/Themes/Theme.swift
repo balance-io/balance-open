@@ -9,14 +9,7 @@
 import AppKit
 
 var CurrentTheme: Theme {
-    switch defaults.selectedThemeType {
-    case .light:
-        return LightTheme()
-    case .dark:
-        return DarkTheme()
-    default:
-        return defaults.darkMode ? DarkTheme() : LightTheme()
-    }
+    return OpenTheme()
 }
 
 protocol Theme {
@@ -154,9 +147,10 @@ struct AccountsTheme {
     
     struct HeaderCellTheme {
         let height: CGFloat
-        let genericInstitutionBrandColor: NSColor
-        let genericInstitutionFont: NSFont
-        let genericInstitutionTextColor: NSColor
+        let nameFont: NSFont
+        let nameColor: NSColor
+        let amountFont: NSFont
+        let amountColor: NSColor
     }
     
     struct CellTheme {

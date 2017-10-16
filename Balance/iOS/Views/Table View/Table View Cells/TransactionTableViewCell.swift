@@ -108,7 +108,7 @@ internal final class TransactionTableViewCell: TableViewCell
         self.institutionNameLabel.textColor = unwrappedTransaction.institution?.displayColor
         
         // Amount
-        let currency = Currency.crypto(shortName: unwrappedTransaction.currency)
+        let currency = Currency.rawValue(unwrappedTransaction.currency)
         self.amountLabel.text = amountToString(amount: unwrappedTransaction.amount, currency: currency)
         
         // User currency amount

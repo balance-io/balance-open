@@ -105,7 +105,7 @@ internal final class NewAccountViewModel
             self.fieldTypes = [.key, .secretKey]
         case .bitfinex:
             self.fieldTypes = [.key, .secretKey]
-        case .wallet:
+        case .ethplorer:
             self.fieldTypes = [.key, .secretKey]
         default:
             self.fieldTypes = []
@@ -141,7 +141,7 @@ internal final class NewAccountViewModel
             self.krakenAPIClient.authenticationChallenge(loginStrings: loginStrings, closeBlock: { (success, error, _) in
                 completionHandler(success, error)
             })
-        case .wallet:
+        case .ethplorer:
             self.ethplorerAPIClient.authenticationChallenge(loginStrings: loginStrings, closeBlock: { (success, error, _) in
                 completionHandler(success, error)
             })

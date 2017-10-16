@@ -18,7 +18,7 @@ struct PoloniexAccount {
     
     init(dictionary: [String: Any], currencyShortName: String, type: AccountType) throws {
         self.type = type
-        self.currency = Currency.rawValue(shortName: currencyShortName)
+        self.currency = Currency.rawValue(currencyShortName)
         let availableAmount: String = try checkType(dictionary["available"], name: "available")
         let availableDecimal = NumberUtils.decimalFormatter.number(from: availableAmount)?.decimalValue
         self.available = try checkType(availableDecimal, name: "availableDecimal")

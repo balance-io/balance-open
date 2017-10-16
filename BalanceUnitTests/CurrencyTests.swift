@@ -23,7 +23,7 @@ class CurrencyTests: XCTestCase {
 
     func testNumberOfDecimalsForDollar() {
         //given
-        let currency = Currency.rawValue(shortName: "USD")
+        let currency = Currency.rawValue("USD")
         
         //then
         XCTAssertEqual(currency.decimals, 2)
@@ -31,7 +31,7 @@ class CurrencyTests: XCTestCase {
     
     func testNumberOfDecimalsForPound() {
         //given
-        let currency = Currency.rawValue(shortName: "GBP")
+        let currency = Currency.rawValue("GBP")
         
         //then
         XCTAssertEqual(currency.decimals, 2)
@@ -39,7 +39,7 @@ class CurrencyTests: XCTestCase {
     
     func testNumberOfDecimalsForBTC() {
         //given
-        let currency = Currency.rawValue(shortName: "BTC")
+        let currency = Currency.rawValue("BTC")
         
         //then 
         XCTAssertEqual(currency.decimals, 8)
@@ -47,7 +47,7 @@ class CurrencyTests: XCTestCase {
     
     func testNumberOfDecimalsForEther() {
         //given
-        let currency = Currency.rawValue(shortName: "ETH")
+        let currency = Currency.rawValue("ETH")
         
         //then
         XCTAssertEqual(currency.decimals, 8)
@@ -55,7 +55,7 @@ class CurrencyTests: XCTestCase {
     
     func testNumberOfDecimalsForOtherCryptoSC() {
         //given
-        let currency = Currency.rawValue(shortName: "SC")
+        let currency = Currency.rawValue("SC")
         
         //then
         XCTAssertEqual(currency.decimals, 8)
@@ -63,7 +63,7 @@ class CurrencyTests: XCTestCase {
     
     func testNumberOfDecimalsForOtherCryptoXRP() {
         //given
-        let currency = Currency.rawValue(shortName: "XRP")
+        let currency = Currency.rawValue("XRP")
         
         //then
         XCTAssertEqual(currency.decimals, 8)

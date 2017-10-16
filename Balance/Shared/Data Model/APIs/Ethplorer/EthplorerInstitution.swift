@@ -9,7 +9,7 @@
 import Foundation
 
 class EthplorerInstitution: ApiInstitution {
-    let source: Source = .wallet
+    let source: Source = .ethplorer
     let sourceInstitutionId: String = ""
     
     var currencyCode: String = ""
