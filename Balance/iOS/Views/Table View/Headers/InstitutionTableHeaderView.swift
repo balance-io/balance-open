@@ -98,5 +98,13 @@ internal final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Re
             self.nameLabel.isHidden = false
             self.logoView.isHidden = true
         }
+        
+        // Total balance
+        let accounts = AccountRepository.si.accounts(institutionId: unwrappedInstitution.institutionId, includeHidden: false)
+        let totalAmount = accounts.reduce(0) { (total, account) -> Int in
+            return total + (account.displayAltBalance ?? 0)
+        }
+        
+        self.totalBalanceLabel.text = amountToString(amount: totalAmount, currency: defaults.masterCurrency, showNegative: true, showCodeAfterValue: true)
     }
 }
