@@ -20,7 +20,7 @@ class ServerMessage {
         let task = URLSession.shared.dataTask(with: request) { maybeData, maybeResponse, maybeError in
             do {
                 // Make sure there's data
-                guard let data = maybeData, maybeError == nil, let JSONResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] else {
+                guard let data = maybeData, maybeError == nil, let JSONResult = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] else {
                     return
                 }
                 

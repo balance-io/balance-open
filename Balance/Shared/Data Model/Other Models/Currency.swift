@@ -106,6 +106,7 @@ public enum CryptoCurrency: String {
     case xmr  = "XMR"
     case gnt  = "GNT"
     case zrx  = "ZRX"
+    case usdt = "USDT"
     
     public var code: String {
         return rawValue
@@ -127,6 +128,7 @@ public enum CryptoCurrency: String {
         case .xmr:       return "Monero"
         case .gnt:       return "Golem"
         case .zrx:       return "0x"
+        case .usdt:      return "Tether"
         }
     }
     

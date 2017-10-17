@@ -85,7 +85,12 @@ class AccountsTabGroupCell: View {
             nameField.stringValue = updatedModel.name
         }
         
-        amountField.stringValue = ""
+        let accounts = AccountRepository.si.accounts(institutionId: updatedModel.institutionId, includeHidden: false)
+        var totalAmount = 0
+        for account in accounts {
+            totalAmount += (account.displayAltBalance ?? 0)
+        }
+        amountField.stringValue = amountToString(amount: totalAmount, currency: defaults.masterCurrency, showNegative: true, showCodeAfterValue: true)
         
         self.alphaValue = (debugging.showAllInstitutionsAsIncorrectPassword || updatedModel.passwordInvalid) ? CurrentTheme.accounts.cell.passwordInvalidDimmedAlpha : 1.0
         
@@ -208,14 +213,12 @@ class AccountsTabAccountCell: View {
             make.width.equalTo(width)
         }
         
-        if updatedModel.altCurrency != nil && updatedModel.currency != updatedModel.altCurrency {
-            if let altCurrentBalance = updatedModel.altCurrentBalance {
-                let altCurrency = Currency.rawValue(updatedModel.altCurrency!)
-                altAmountField.stringValue = amountToString(amount: altCurrentBalance, currency: altCurrency, showNegative: true)
-                altAmountField.snp.updateConstraints { make in
-                    let width = altAmountField.stringValue.size(font: CurrentTheme.accounts.cell.amountFont)
-                    make.width.equalTo(width)
-                }
+        let masterCurrency = defaults.masterCurrency
+        if let displayAltBalance = updatedModel.displayAltBalance {
+            altAmountField.stringValue = amountToString(amount: displayAltBalance, currency: masterCurrency, showNegative: true)
+            altAmountField.snp.updateConstraints { make in
+                let width = altAmountField.stringValue.size(font: CurrentTheme.accounts.cell.amountFont)
+                make.width.equalTo(width)
             }
             
             altAmountField.isHidden = false

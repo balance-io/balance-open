@@ -82,7 +82,7 @@ struct CoinbaseApi: ExchangeApi {
                 }
                 
                 // Try to parse the JSON
-                guard let JSONResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.length > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.length > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval, let scope = JSONResult["scope"] as? String else {
+                guard let JSONResult = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.length > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.length > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval, let scope = JSONResult["scope"] as? String else {
                     throw BalanceError.jsonDecoding
                 }
                 
@@ -143,7 +143,7 @@ struct CoinbaseApi: ExchangeApi {
                 }
                 
                 // Try to parse the JSON
-                guard let JSONResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.length > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.length > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval else {
+                guard let JSONResult = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.length > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.length > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval else {
                     throw BalanceError.jsonDecoding
                 }
                 
@@ -188,7 +188,7 @@ struct CoinbaseApi: ExchangeApi {
                 }
                 
                 // Try to parse the JSON
-                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject]
+                let jsonResult = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject]
                 
                 // Check for errors (they return an array, but as far as I know it's always one error
                 if let errorDicts = jsonResult?["errors"] as? [[String: AnyObject]] {

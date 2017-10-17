@@ -26,6 +26,8 @@ class TabsViewController: NSViewController {
     let headerView = View()
     let accountsButton = Button()
     let transactionsButton = Button()
+    let preferencesButton = Button()
+    var tabButtons = [Button]()
     
     // MARK: Tabs
     let tabContainerView = View()
@@ -39,11 +41,6 @@ class TabsViewController: NSViewController {
     var currentVisibleTab = Tab.none
     var defaultTab = Tab.accounts
     
-    // MARK: Footer
-    let footerView = View()
-    let refreshButton = Button()
-    let preferencesButton = Button()
-    
     //
     // MARK: - Lifecycle -
     //
@@ -53,6 +50,7 @@ class TabsViewController: NSViewController {
         
         self.defaultTab = defaultTab
         
+        tabButtons = [accountsButton, transactionsButton]
         tabControllers = [accountsViewController, transactionsViewController]
         
         registerForNotifications()
@@ -81,7 +79,6 @@ class TabsViewController: NSViewController {
         self.view = View()
         
         // Create the UI
-        createFooter()
         createHeader()
         
         tabContainerView.layerBackgroundColor = NSColor.clear
@@ -89,8 +86,8 @@ class TabsViewController: NSViewController {
         tabContainerView.snp.makeConstraints { make in
             make.leading.equalTo(self.view)
             make.trailing.equalTo(self.view)
-            make.top.equalTo(headerView.snp.bottom).offset(10)
-            make.bottom.equalTo(footerView.snp.top)
+            make.top.equalTo(headerView.snp.bottom)
+            make.bottom.equalToSuperview()
         }
         
         if debugging.defaultToTransactionsTab {
@@ -107,7 +104,7 @@ class TabsViewController: NSViewController {
         self.view.addSubview(headerView)
         headerView.snp.makeConstraints { make in
             make.width.equalToSuperview()
-            make.height.equalTo(30)
+            make.height.equalTo(40)
             make.left.equalToSuperview()
             make.top.equalToSuperview()
         }
@@ -116,13 +113,13 @@ class TabsViewController: NSViewController {
         accountsButton.action = #selector(tabAction(_:))
         accountsButton.tag = Tab.accounts.rawValue
         accountsButton.image = #imageLiteral(resourceName: "TabIconAccountsInactive")
-        //accountsButton.alternateImage = #imageLiteral(resourceName: "TabIconAccountsActive")
+        accountsButton.imagePosition = .imageLeft
+        accountsButton.alternateImage = #imageLiteral(resourceName: "TabIconAccountsActive")
         accountsButton.title = "Accounts"
         //accountsButton.titleColor = CurrentTheme.tabs.header.tabFontColor
         accountsButton.font = CurrentTheme.tabs.header.tabFont
         accountsButton.setAccessibilityLabel("Accounts")
-        //accountsButton.setButtonType(.momentaryPushIn)
-        accountsButton.imagePosition = .imageLeft
+        accountsButton.setButtonType(.toggle)
         accountsButton.isBordered = false
         accountsButton.sizeToFit()
         headerView.addSubview(accountsButton)
@@ -135,27 +132,19 @@ class TabsViewController: NSViewController {
         transactionsButton.action = #selector(tabAction(_:))
         transactionsButton.tag = Tab.transactions.rawValue
         transactionsButton.image = #imageLiteral(resourceName: "TabIconTransactionsInactive")
+        transactionsButton.imagePosition = .imageLeft
         transactionsButton.alternateImage = #imageLiteral(resourceName: "TabIconTransactionsActive")
         transactionsButton.title = "Transactions"
-        //transactionsButton.bezelStyle = .rounded
+        //transactionsButton.titleColor = CurrentTheme.tabs.header.tabFontColor
+        transactionsButton.font = CurrentTheme.tabs.header.tabFont
         transactionsButton.setAccessibilityLabel("Transactions")
+        transactionsButton.setButtonType(.toggle)
+        transactionsButton.isBordered = false
         transactionsButton.sizeToFit()
         headerView.addSubview(transactionsButton)
         transactionsButton.snp.makeConstraints { make in
             make.left.equalTo(accountsButton.snp.right).offset(10)
             make.centerY.equalToSuperview()
-        }
-    }
-    
-    func createFooter() {
-        // Footer container
-        footerView.layerBackgroundColor = CurrentTheme.tabs.footer.backgroundColor
-        self.view.addSubview(footerView)
-        footerView.snp.makeConstraints { make in
-            make.width.equalTo(self.view)
-            make.height.equalTo(38)
-            make.centerX.equalTo(self.view)
-            make.bottom.equalTo(self.view)
         }
         
         // Preferences button
@@ -166,10 +155,10 @@ class TabsViewController: NSViewController {
         preferencesButton.setButtonType(.momentaryChange)
         preferencesButton.setAccessibilityLabel("Preferences")
         preferencesButton.isBordered = false
-        footerView.addSubview(preferencesButton)
+        headerView.addSubview(preferencesButton)
         preferencesButton.snp.makeConstraints { make in
-            make.centerY.equalTo(footerView)
-            make.trailing.equalTo(footerView).offset(-10)
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-10)
             make.width.equalTo(16)
             make.height.equalTo(16)
         }
@@ -284,6 +273,14 @@ class TabsViewController: NSViewController {
         currentTableViewController = controller
         currentVisibleTab = Tab(rawValue: tabIndex)!
         self.view.window?.makeFirstResponder(currentTableViewController)
+        
+        for button in tabButtons {
+            if button.tag == tabIndex {
+                button.state = .on
+            } else {
+                button.state = .off
+            }
+        }
     }
     
     @objc fileprivate func tabAction(_ sender: Button) {

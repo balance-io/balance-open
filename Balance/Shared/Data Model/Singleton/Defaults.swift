@@ -51,6 +51,7 @@ class Defaults {
         static let logCount                             = "logCount"
         static let hiddenAccountIds                     = "hiddenAccountIds"
         static let unfinishedConnectionInstitutionIds   = "unfinishedConnectionInstitutionIds"
+        static let masterCurrency                       = "masterCurrency"
     }
     
     // First run defaults
@@ -287,6 +288,24 @@ class Defaults {
         }
         set {
             defaults.set(newValue.rawValue, forKey: Keys.searchPreference)
+        }
+    }
+    
+    var masterCurrency: Currency {
+        get {
+            if let raw = defaults.object(forKey: Keys.masterCurrency) as? String {
+                return Currency.rawValue(raw)
+            }
+            
+            // Default to current local if nothing is set
+            if let currencyCode = NSLocale.current.currencyCode {
+                return Currency.rawValue(currencyCode)
+            }
+            
+            return .usd
+        }
+        set {
+            defaults.set(newValue.code, forKey: Keys.masterCurrency)
         }
     }
     
