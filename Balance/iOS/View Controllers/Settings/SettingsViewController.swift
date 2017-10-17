@@ -62,6 +62,10 @@ internal final class SettingsViewController: UIViewController
         self.tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         self.reloadData()
         self.tableView.reloadData()
