@@ -357,6 +357,7 @@
 		A42953D01F8E1EB300729045 /* StackedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42953CF1F8E1EB300729045 /* StackedLayout.swift */; };
 		A42953D41F8E255D00729045 /* InstitutionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42953D31F8E255D00729045 /* InstitutionCollectionViewCell.swift */; };
 		A4307A901F8F6EA800BBA8B4 /* StackedCardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4307A8F1F8F6EA800BBA8B4 /* StackedCardCollectionView.swift */; };
+		A43ACE501F963035009F2AE9 /* CurrencySelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43ACE4F1F963035009F2AE9 /* CurrencySelectionViewModel.swift */; };
 		A4430A901F94EE1700F2FFFA /* CoinbaseInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A8F1F94EE1700F2FFFA /* CoinbaseInstitution.swift */; };
 		A4430A911F94EE1700F2FFFA /* CoinbaseInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A8F1F94EE1700F2FFFA /* CoinbaseInstitution.swift */; };
 		A4430A931F94EFB300F2FFFA /* OpenTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A921F94EFB300F2FFFA /* OpenTheme.swift */; };
@@ -369,6 +370,8 @@
 		A4430AA31F95F3ED00F2FFFA /* ExchangeRateSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A9D1F95F3E200F2FFFA /* ExchangeRateSource.swift */; };
 		A4430AA51F95F47300F2FFFA /* SimpleCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430AA41F95F47300F2FFFA /* SimpleCache.swift */; };
 		A4430AA61F95F47300F2FFFA /* SimpleCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430AA41F95F47300F2FFFA /* SimpleCache.swift */; };
+		A4430AA81F96118400F2FFFA /* EnumCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430AA71F96118400F2FFFA /* EnumCollection.swift */; };
+		A4430AA91F96118400F2FFFA /* EnumCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430AA71F96118400F2FFFA /* EnumCollection.swift */; };
 		A44C76221F7BD9610024476E /* BitfinexTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44C76211F7BD9610024476E /* BitfinexTransaction.swift */; };
 		A44C76231F7BD9610024476E /* BitfinexTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44C76211F7BD9610024476E /* BitfinexTransaction.swift */; };
 		A44C76251F7BE5280024476E /* BitfinexTransactionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44C76241F7BE5280024476E /* BitfinexTransactionTests.swift */; };
@@ -770,6 +773,7 @@
 		A42953CF1F8E1EB300729045 /* StackedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedLayout.swift; sourceTree = "<group>"; };
 		A42953D31F8E255D00729045 /* InstitutionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionCollectionViewCell.swift; sourceTree = "<group>"; };
 		A4307A8F1F8F6EA800BBA8B4 /* StackedCardCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedCardCollectionView.swift; sourceTree = "<group>"; };
+		A43ACE4F1F963035009F2AE9 /* CurrencySelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySelectionViewModel.swift; sourceTree = "<group>"; };
 		A4430A8F1F94EE1700F2FFFA /* CoinbaseInstitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseInstitution.swift; sourceTree = "<group>"; };
 		A4430A921F94EFB300F2FFFA /* OpenTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTheme.swift; sourceTree = "<group>"; };
 		A4430A981F95004C00F2FFFA /* PaintCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaintCodeView.swift; sourceTree = "<group>"; };
@@ -777,6 +781,7 @@
 		A4430A9C1F95F3E200F2FFFA /* ExchangeRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRate.swift; sourceTree = "<group>"; };
 		A4430A9D1F95F3E200F2FFFA /* ExchangeRateSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateSource.swift; sourceTree = "<group>"; };
 		A4430AA41F95F47300F2FFFA /* SimpleCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCache.swift; sourceTree = "<group>"; };
+		A4430AA71F96118400F2FFFA /* EnumCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumCollection.swift; sourceTree = "<group>"; };
 		A44C76211F7BD9610024476E /* BitfinexTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexTransaction.swift; sourceTree = "<group>"; };
 		A44C76241F7BE5280024476E /* BitfinexTransactionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexTransactionTests.swift; sourceTree = "<group>"; };
 		A44C76261F7BE5A00024476E /* BitfinexMovement.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BitfinexMovement.json; sourceTree = "<group>"; };
@@ -1150,6 +1155,7 @@
 			children = (
 				53F6383A1C5FF00900864346 /* Data Model */,
 				53552A2D1ED72B0700DD95F9 /* Frameworks */,
+				A43ACE511F9642A4009F2AE9 /* Protocols */,
 				53552A531ED72EFE00DD95F9 /* Supporting Files */,
 				53F078621ED73E5600E7EDF9 /* Themes */,
 				530422841ED38E1A001CA499 /* View Models */,
@@ -1299,6 +1305,7 @@
 				53561E891F82DD120043D4F9 /* NewAccountViewModel.swift */,
 				A459EDA51F83B90900DC4B51 /* TransactionsListViewModel.swift */,
 				A4EF39E61F8E43A40032265E /* InstitutionAccountsListViewModel.swift */,
+				A43ACE4F1F963035009F2AE9 /* CurrencySelectionViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1805,6 +1812,14 @@
 				A42953D31F8E255D00729045 /* InstitutionCollectionViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		A43ACE511F9642A4009F2AE9 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				A4430AA71F96118400F2FFFA /* EnumCollection.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		A4430A9A1F95F3E200F2FFFA /* Exchange Rates */ = {
@@ -2359,6 +2374,7 @@
 				A4E7680D1F67E410002B1AE1 /* APICredentials.swift in Sources */,
 				53552A2F1ED72B5700DD95F9 /* FMDatabaseAdditions.m in Sources */,
 				537187E61F4CC23B00E7F9D6 /* PoloniexAccount.swift in Sources */,
+				A43ACE501F963035009F2AE9 /* CurrencySelectionViewModel.swift in Sources */,
 				53552A7B1ED7347C00DD95F9 /* MockedDefaultsStorage.swift in Sources */,
 				53552A051ED7251200DD95F9 /* Logging.swift in Sources */,
 				53D441E61F44ABBD006967E1 /* Item.swift in Sources */,
@@ -2501,6 +2517,7 @@
 				53552A1B1ED7251700DD95F9 /* Transaction.swift in Sources */,
 				A459EDA41F839D9800DC4B51 /* TransactionsListViewController.swift in Sources */,
 				A4E4571D1F790388002E2879 /* CoinbaseError.swift in Sources */,
+				A4430AA91F96118400F2FFFA /* EnumCollection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2621,6 +2638,7 @@
 				530870EB1CE8175E005B591C /* Search.swift in Sources */,
 				53E83CA81E40309800185975 /* SearchFilterButtonsLight.swift in Sources */,
 				DC65EFA41CE3FDF8006C9373 /* Defaults.swift in Sources */,
+				A4430AA81F96118400F2FFFA /* EnumCollection.swift in Sources */,
 				532550881D06FA5C0045404E /* ScrollView.swift in Sources */,
 				53E7BC181D1805F600FD8613 /* Singletons.swift in Sources */,
 				532550941D0702980045404E /* TableRowView.swift in Sources */,
