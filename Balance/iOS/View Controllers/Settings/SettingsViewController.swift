@@ -83,7 +83,7 @@ internal final class SettingsViewController: UIViewController
         // Main currency
         var mainCurrencyRow = TableRow { (tableView, indexPath) -> UITableViewCell in
             let cell: TableViewCell = tableView.dequeueReusableCell(at: indexPath)
-            cell.textLabel?.text = "TODO: USD"
+            cell.textLabel?.text = defaults.masterCurrency.code
             cell.accessoryType = .disclosureIndicator
             
             return cell
