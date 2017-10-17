@@ -55,6 +55,12 @@ internal final class AccountTableViewCell: TableViewCell {
         self.textLabel?.text = amountToString(amount: unwrappedAccount.displayBalance, currency: currency)
         
         // Detail label
-        self.detailTextLabel?.text = "TODO: $100.00"
+        let masterCurrency = defaults.masterCurrency
+        if let displayAltBalance = unwrappedAccount.displayAltBalance {
+            self.detailTextLabel?.text = amountToString(amount: displayAltBalance, currency: masterCurrency, showNegative: true)
+            self.detailTextLabel?.isHidden = false
+        } else {
+            self.detailTextLabel?.isHidden = true
+        }
     }
 }
