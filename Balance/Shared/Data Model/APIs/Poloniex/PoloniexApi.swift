@@ -169,7 +169,6 @@ class PoloniexApi: ExchangeApi {
                 if let safeData = data {
                     //if error exists should be reported to UI data
                     if let error = self.findError(data: safeData) {
-                        print("\(error)")
                         throw PoloniexApi.CredentialsError.incorrectLoginCredentials
                     }
                     // Create the institution and finish (we do not have access tokens)
@@ -310,7 +309,7 @@ extension Institution {
                 apiKey = dictionary["apiKey"] as? String
             }
             
-            //print("get apiKeyKey: \(apiKeyKey)  APIKey: \(String(describing: apiKey))")
+            log.debug("get apiKeyKey: \(apiKeyKey)  APIKey: \(String(describing: apiKey))")
             if apiKey == nil {
                 // We should always be getting an apiKey becasuse we never read it until after it's been written
                 log.severe("Tried to read APIkey for institution [\(self)] but it didn't work! We must not have keychain access")
@@ -319,7 +318,7 @@ extension Institution {
             return apiKey
         }
         set {
-            //print("set apiKeyKey: \(apiKeyKey)  newValue: \(String(describing: newValue))")
+            log.debug("set apiKeyKey: \(apiKeyKey)  newValue: \(String(describing: newValue))")
             if let apiKey = newValue {
                 do {
                     try Locksmith.updateData(data: ["apiKey": apiKey], forUserAccount: apiKeyKey)
@@ -355,7 +354,7 @@ extension Institution {
                 secret = dictionary["secret"] as? String
             }
             
-            //print("get secretKey: \(secretKey)  secret: \(String(describing: secret))")
+            log.debug("get secretKey: \(secretKey)  secret: \(String(describing: secret))")
             if secret == nil {
                 // We should always be getting an secret becasuse we never read it until after it's been written
                 log.severe("Tried to read secretKey for institution [\(self)] but it didn't work! We must not have keychain access")
@@ -364,7 +363,7 @@ extension Institution {
             return secret
         }
         set {
-            //print("set secretKey: \(secretKey)  newValue: \(String(describing: newValue))")
+            log.debug("set secretKey: \(secretKey)  newValue: \(String(describing: newValue))")
             if let secret = newValue {
                 do {
                     try Locksmith.updateData(data: ["secret": secret], forUserAccount: secretKey)

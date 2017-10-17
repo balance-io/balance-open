@@ -12,7 +12,7 @@ import XCGLogger
 #if DEBUG
 let logLevel = XCGLogger.Level.debug
 #else
-let logLevel = XCGLogger.Level.debug
+let logLevel = XCGLogger.Level.info
 #endif
 
 class Logging {

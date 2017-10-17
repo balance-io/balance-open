@@ -172,7 +172,7 @@ extension AccountsListViewController: UITableViewDelegate
         
         cell.textLabel?.text = account.displayName
             
-        let currency = Currency.crypto(shortName: account.currency)
+        let currency = Currency.rawValue(account.currency)
         cell.detailTextLabel?.text = amountToString(amount: account.displayBalance, currency: currency)
     }
     

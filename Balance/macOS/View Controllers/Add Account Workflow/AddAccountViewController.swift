@@ -96,7 +96,7 @@ class AddAccountViewController: NSViewController {
                     self.hackDelay = 0.0
                 }
             }
-            print("going back \(self.allowSelection)")
+            log.debug("going back \(self.allowSelection)")
             if self.allowSelection {
                 AppDelegate.sharedInstance.resizeWindowHeight(self.windowHeight, animated: true)
             }
@@ -252,7 +252,7 @@ class AddAccountViewController: NSViewController {
             _ = try NSWorkspace.shared.open(URL(string: url)!, options: [], configuration: [:])
         } catch {
             // TODO: Better error handling
-            print("Error opening Github repo URL: \(error)")
+            log.error("Error opening Github repo URL: \(error)")
         }
     }
     

@@ -215,7 +215,6 @@ extension GDAXAPIClient: ExchangeApi {
                 }
                 
                 // TODO: Display error
-                print(unwrappedError)
                 async {
                     closeBlock(false, unwrappedError, nil)
                 }

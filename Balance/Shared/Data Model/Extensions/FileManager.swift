@@ -23,10 +23,10 @@ extension FileManager {
             if let size = attributes[FileAttributeKey.size] as? Int {
                 return size
             } else {
-                print("Failed to get a size attribute from path: \(path)")
+                log.error("Failed to get a size attribute from path: \(path)")
             }
         } catch {
-            print("Failed to get file attributes for local path: \(path) with error: \(error)")
+            log.error("Failed to get file attributes for local path: \(path) with error: \(error)")
         }
         
         return 0

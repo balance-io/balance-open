@@ -279,10 +279,10 @@ class Database {
     fileprivate func printCompileOptions() {
         read.inDatabase { db in
             do {
-                print("Sqlite version \(String(describing: db.stringForQuery("SELECT sqlite_version()"))) compile options:")
+                log.debug("Sqlite version \(String(describing: db.stringForQuery("SELECT sqlite_version()"))) compile options:")
                 let result = try db.executeQuery("PRAGMA compile_options")
                 while result.next() {
-                    print("\(result.string(forColumnIndex: 0))")
+                    log.debug("\(result.string(forColumnIndex: 0))")
                 }
                 result.close()
             } catch {
