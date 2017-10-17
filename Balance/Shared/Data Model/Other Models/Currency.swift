@@ -13,6 +13,19 @@ public enum Currency: Equatable {
     case crypto(enum: CryptoCurrency)
     case cryptoOther(code: String)
     
+    // Public
+    public static let all: [Currency] = {
+        let allFiatCurrencys = FiatCurrency.allCases.map({ (currency) -> Currency in
+            return Currency.fiat(enum: currency)
+        })
+        
+        let allCyptoCurrencys = CryptoCurrency.allCases.map({ (currency) -> Currency in
+            return Currency.crypto(enum: currency)
+        })
+        
+        return allFiatCurrencys + allCyptoCurrencys
+    }()
+    
     public static func rawValue(_ code: String) -> Currency {
         let uppercased = code.uppercased()
         
@@ -94,7 +107,7 @@ public enum Currency: Equatable {
 }
 
 // Known/popular crypto currencies
-public enum CryptoCurrency: String {
+public enum CryptoCurrency: String, EnumCollection {
     case btc  = "BTC"
     case xbt  = "XBT" // Alternate symbol for BTC
     case bch  = "BCH"
@@ -146,7 +159,7 @@ public enum CryptoCurrency: String {
     }
 }
 
-public enum FiatCurrency: String, Equatable {
+public enum FiatCurrency: String, Equatable, EnumCollection {
     case afn   = "AFN"
     case all   = "ALL"
     case ang   = "ANG"
