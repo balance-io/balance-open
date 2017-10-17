@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum ExchangeRateSource: Int { //, Codable {
+public enum ExchangeRateSource: Int {
     // Crypto
     case coinbaseGdax = 1
     case poloniex     = 2
