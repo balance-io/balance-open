@@ -10,6 +10,9 @@ import UIKit
 
 
 internal final class MainCurrencySelectionViewController: UIViewController {
+    // Fileprivate
+    fileprivate let viewModel = CurrencySelectionViewModel()
+    
     // Private
     private let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
@@ -17,6 +20,8 @@ internal final class MainCurrencySelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Main Currency"
         
         // Navigation bar
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -41,15 +46,23 @@ internal final class MainCurrencySelectionViewController: UIViewController {
 
 extension MainCurrencySelectionViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return self.viewModel.numberOfSections
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.viewModel.numberOfCurrencies(at: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return tableView.dequeueReusableCell(at: indexPath) as TableViewCell
+    }
+    
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return self.viewModel.sectionIndexTitles
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return self.viewModel.sectionIndexTitles[section]
     }
 }
 
@@ -62,15 +75,15 @@ extension MainCurrencySelectionViewController: UITableViewDelegate {
             return
         }
         
-        cell.textLabel?.text = "TODO: USD"
-        
-        if indexPath.row == 2 {
-            cell.accessoryType = .checkmark
-        }
+        let currency = self.viewModel.currency(at: indexPath)
+        cell.textLabel?.text = currency.code
+        cell.accessoryType = currency == defaults.masterCurrency ? .checkmark : .none
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: Save selection
+        let currency = self.viewModel.currency(at: indexPath)
+        defaults.masterCurrency = currency
+        
         self.navigationController?.popViewController(animated: true)
     }
 }
