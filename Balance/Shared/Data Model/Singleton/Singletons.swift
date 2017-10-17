@@ -13,6 +13,7 @@ let database = Testing.runningTests ? Testing.database : Database()
 let debugging = Debugging()
 let log = XCGLogger.default
 let logging = Logging()
+let currentExchangeRates = CurrentExchangeRates()
 let syncManager = SyncManager()
 let defaults: Defaults = Testing.runningTests ? Testing.defaults : Defaults()
 let appLock = AppLock()
@@ -27,6 +28,7 @@ func initializeSingletons() {
     _ = debugging
     _ = log
     _ = logging
+    _ = currentExchangeRates
     _ = syncManager
     _ = defaults
     

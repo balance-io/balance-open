@@ -224,6 +224,8 @@
 		537596401F50B90A00B36E6E /* TrustKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5375963E1F50B8FD00B36E6E /* TrustKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53762EB11ED793A200D34A1E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53762EB01ED793A200D34A1E /* main.swift */; };
 		53762EB31ED796F100D34A1E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53762EB21ED796F100D34A1E /* main.swift */; };
+		5377F3C81F96986E00F5624A /* CurrentExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5377F3C71F96986700F5624A /* CurrentExchangeRates.swift */; };
+		5377F3C91F96986E00F5624A /* CurrentExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5377F3C71F96986700F5624A /* CurrentExchangeRates.swift */; };
 		537B4B041D6B4AE500603060 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 537B4B021D6B4ADB00603060 /* Security.framework */; };
 		538B47BE1F4CA0200023CED5 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538B47BD1F4CA0200023CED5 /* Currency.swift */; };
 		538B47BF1F4CA0200023CED5 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538B47BD1F4CA0200023CED5 /* Currency.swift */; };
@@ -277,8 +279,6 @@
 		53E48CEF1F95165C004292D7 /* ExchangeRateSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E48CEB1F951657004292D7 /* ExchangeRateSource.swift */; };
 		53E48CF11F951678004292D7 /* SimpleCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E48CF01F951678004292D7 /* SimpleCache.swift */; };
 		53E48CF21F951678004292D7 /* SimpleCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E48CF01F951678004292D7 /* SimpleCache.swift */; };
-		53E48CF41F9516B6004292D7 /* CurrentExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E48CF31F9516B6004292D7 /* CurrentExchangeRates.swift */; };
-		53E48CF51F9516B6004292D7 /* CurrentExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E48CF31F9516B6004292D7 /* CurrentExchangeRates.swift */; };
 		53E74A571DD53CCB00AD8876 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E74A561DD53CCB00AD8876 /* TimeInterval.swift */; };
 		53E7BC181D1805F600FD8613 /* Singletons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E7BC171D1805F600FD8613 /* Singletons.swift */; };
 		53E83CA71E40309800185975 /* SearchFilterButtonsDark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E83CA51E40309800185975 /* SearchFilterButtonsDark.swift */; };
@@ -632,6 +632,7 @@
 		5375963E1F50B8FD00B36E6E /* TrustKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TrustKit.framework; path = Carthage/Build/Mac/TrustKit.framework; sourceTree = SOURCE_ROOT; };
 		53762EB01ED793A200D34A1E /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		53762EB21ED796F100D34A1E /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		5377F3C71F96986700F5624A /* CurrentExchangeRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentExchangeRates.swift; sourceTree = "<group>"; };
 		537B4B021D6B4ADB00603060 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		538B47B01F4C9FD60023CED5 /* CoinbaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseAccount.swift; sourceTree = "<group>"; };
 		538B47B11F4C9FD60023CED5 /* CoinbaseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseApi.swift; sourceTree = "<group>"; };
@@ -687,7 +688,6 @@
 		53E48CEA1F951657004292D7 /* ExchangeRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRate.swift; sourceTree = "<group>"; };
 		53E48CEB1F951657004292D7 /* ExchangeRateSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateSource.swift; sourceTree = "<group>"; };
 		53E48CF01F951678004292D7 /* SimpleCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCache.swift; sourceTree = "<group>"; };
-		53E48CF31F9516B6004292D7 /* CurrentExchangeRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentExchangeRates.swift; sourceTree = "<group>"; };
 		53E74A561DD53CCB00AD8876 /* TimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		53E7BC171D1805F600FD8613 /* Singletons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Singletons.swift; sourceTree = "<group>"; };
 		53E83CA51E40309800185975 /* SearchFilterButtonsDark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFilterButtonsDark.swift; sourceTree = "<group>"; };
@@ -1487,7 +1487,6 @@
 			children = (
 				53E48CEA1F951657004292D7 /* ExchangeRate.swift */,
 				53E48CEB1F951657004292D7 /* ExchangeRateSource.swift */,
-				53E48CF31F9516B6004292D7 /* CurrentExchangeRates.swift */,
 			);
 			path = "Exchange Rates";
 			sourceTree = "<group>";
@@ -1522,6 +1521,7 @@
 				53A179BC1DC923C0006442E4 /* AppLock.swift */,
 				53C078A41DFF7CEB00696666 /* CertValidator.h */,
 				53C078A51DFF7CEB00696666 /* CertValidator.m */,
+				5377F3C71F96986700F5624A /* CurrentExchangeRates.swift */,
 				53F638381C5FEAB800864346 /* Database.swift */,
 				532E392C1CD4521D001AFC31 /* Debugging.swift */,
 				DC65EFA31CE3FDF8006C9373 /* Defaults.swift */,
@@ -2289,7 +2289,7 @@
 				532121A21EE8B91600F4812A /* zip.c in Sources */,
 				537187E51F4CC23B00E7F9D6 /* PoloniexApi.swift in Sources */,
 				A4E768111F67F049002B1AE1 /* APICredentialsComponentsError.swift in Sources */,
-				53E48CF51F9516B6004292D7 /* CurrentExchangeRates.swift in Sources */,
+				5377F3C81F96986E00F5624A /* CurrentExchangeRates.swift in Sources */,
 				53F0785E1ED73B7D00E7EDF9 /* Element.swift in Sources */,
 				53552A041ED7251200DD95F9 /* Debugging.swift in Sources */,
 				537504FE1F192D280062C11A /* TypeAliases.swift in Sources */,
@@ -2540,7 +2540,7 @@
 				532E392D1CD4521D001AFC31 /* Debugging.swift in Sources */,
 				53980CBF1D5CD6F80013B981 /* Pluralize.swift in Sources */,
 				5329FB731E3EA36F00A9CAF7 /* CwlSysctl.swift in Sources */,
-				53E48CF41F9516B6004292D7 /* CurrentExchangeRates.swift in Sources */,
+				5377F3C91F96986E00F5624A /* CurrentExchangeRates.swift in Sources */,
 				2DD9B1F01EDDDFD10006268F /* TestingAppDelegate.swift in Sources */,
 				53C23BDC1E5F988000DA1281 /* ComboBox.swift in Sources */,
 				53E48CEC1F95165B004292D7 /* ExchangeRate.swift in Sources */,

@@ -360,7 +360,6 @@ class TabsViewController: NSViewController {
                                 self.showTab(tabIndex: tabIndex)
                                 return nil
                             } else if characters == "," {
-                            if characters == "," {
                                 // Show Preferences
                                 self.showPreferences()
                                 return nil

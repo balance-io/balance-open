@@ -23,9 +23,7 @@ class SyncManager: NSObject {
     var canceled: Bool {
         return syncer.canceled
     }
-    
-    let currentExchangeRates = CurrentExchangeRates()
-    
+        
     fileprivate var syncer = debugging.useMockSyncing ? MockSyncer() : Syncer()
     
     override init() {
