@@ -15,7 +15,7 @@ internal final class CurrencySelectionViewModel {
         return self.sectionIndexTitles.count
     }
     
-    internal let sectionIndexTitles: [String]
+    internal let sectionIndexTitles: [String] 
     
     // Private
     private let groupedCurrencies: [String : [Currency]]
