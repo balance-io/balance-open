@@ -18,6 +18,8 @@ internal final class AccountsListViewController: UIViewController
     private let collectionView = StackedCardCollectionView()
     private let titleView = MultilineTitleView()
     
+    private let blankStateView = UIView()
+    
     // MARK: Initialization
     
     internal required init()
@@ -58,6 +60,40 @@ internal final class AccountsListViewController: UIViewController
         self.collectionView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        
+        // Blank state view
+        self.blankStateView.isHidden = true
+        self.view.addSubview(self.blankStateView)
+        
+        self.blankStateView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        
+        let noAccountsLabel = UILabel()
+        noAccountsLabel.text = "Nothing to see here..."
+        noAccountsLabel.textColor = UIColor.white
+        noAccountsLabel.font = UIFont.systemFont(ofSize: 20.0, weight: .regular)
+        self.blankStateView.addSubview(noAccountsLabel)
+        
+        noAccountsLabel.snp.makeConstraints { (make) in
+            make.bottom.equalTo(self.blankStateView.snp.centerY).offset(-10.0)
+            make.centerX.equalToSuperview()
+        }
+        
+        let addAccountButton = UIButton(type: .system)
+        addAccountButton.layer.borderColor = UIColor.white.cgColor
+        addAccountButton.layer.cornerRadius = 4.0
+        addAccountButton.layer.borderWidth = 2.0
+        addAccountButton.setTitle("Add an account", for: .normal)
+        addAccountButton.setTitleColor(UIColor.white, for: .normal)
+        addAccountButton.contentEdgeInsets = UIEdgeInsets(top: 7.0, left: 10.0, bottom: 7.0, right: 10.0)
+        addAccountButton.addTarget(self, action: #selector(self.addAccountButtonTapped(_:)), for: .touchUpInside)
+        self.blankStateView.addSubview(addAccountButton)
+        
+        addAccountButton.snp.makeConstraints { (make) in
+            make.top.equalTo(self.blankStateView.snp.centerY).offset(10.0)
+            make.centerX.equalToSuperview()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -70,16 +106,25 @@ internal final class AccountsListViewController: UIViewController
     
     // MARK: Data
     
-    private func reloadData()
-    {
+    private func reloadData() {
         self.viewModel.reloadData()
         self.collectionView.reloadData()
+        
+        self.blankStateView.isHidden = self.viewModel.numberOfSections() > 0
+    }
+    
+    // MARK: Actions
+    
+    @objc private func addAccountButtonTapped(_ sender: Any) {
+        let addAccountViewController = AddAccountViewController()
+        let navigationController = UINavigationController(rootViewController: addAccountViewController)
+        
+        self.present(navigationController, animated: true, completion: nil)
     }
     
     // MARK: Notifications
     
-    @objc private func syncCompletedNotification(_ notification: Notification)
-    {
+    @objc private func syncCompletedNotification(_ notification: Notification) {
         self.reloadData()
     }
 }
