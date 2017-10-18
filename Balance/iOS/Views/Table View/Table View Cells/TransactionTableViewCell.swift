@@ -105,17 +105,23 @@ internal final class TransactionTableViewCell: TableViewCell
         }
         
         self.institutionNameLabel.text = unwrappedTransaction.institution?.displayName
-        self.institutionNameLabel.textColor = unwrappedTransaction.institution?.displayColor
+        self.institutionNameLabel.textColor = unwrappedTransaction.source.color
         
         // Amount
         let currency = Currency.rawValue(unwrappedTransaction.currency)
         self.amountLabel.text = amountToString(amount: unwrappedTransaction.amount, currency: currency)
         
         // User currency amount
-        self.userCurrencyAmountLabel.text = "TODO: $100"
+        let masterCurrency = defaults.masterCurrency
+        if let masterAmount = unwrappedTransaction.masterAltAmount {
+            self.userCurrencyAmountLabel.text = amountToString(amount: masterAmount, currency: masterCurrency, showNegative: true)
+            self.userCurrencyAmountLabel.isHidden = false
+        } else {
+            self.userCurrencyAmountLabel.isHidden = true
+        }
         
         // Transaction type
-        self.transactionTypeLabel.textColor = unwrappedTransaction.institution?.displayColor
+        self.transactionTypeLabel.textColor = unwrappedTransaction.source.color
         if unwrappedTransaction.amount > 0
         {
             self.transactionTypeLabel.text = "Received"
