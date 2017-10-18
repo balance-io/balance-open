@@ -1,4 +1,0 @@
-framework module SwiftyStoreKit {
-    header "SwiftyStoreKit-Swift.h"
-    requires objc
-}

@@ -23,11 +23,11 @@ class TabsViewController: NSViewController {
     //
     
     // MARK: Header
-    let headerBackgroundView = HeaderBackgroundView()
     let headerView = View()
-    var accountsButton: TabButton!
-    var transactionsButton: TabButton!
-    var tabButtons = [TabButton]()
+    let accountsButton = Button()
+    let transactionsButton = Button()
+    let preferencesButton = Button()
+    var tabButtons = [Button]()
     
     // MARK: Tabs
     let tabContainerView = View()
@@ -41,12 +41,6 @@ class TabsViewController: NSViewController {
     var currentVisibleTab = Tab.none
     var defaultTab = Tab.accounts
     
-    // MARK: Footer
-    let footerView = View()
-    let refreshButton = Button()
-    let syncButton = SyncButton()
-    let preferencesButton = Button()
-    
     //
     // MARK: - Lifecycle -
     //
@@ -56,25 +50,7 @@ class TabsViewController: NSViewController {
         
         self.defaultTab = defaultTab
         
-        let inactive = CurrentTheme.tabs.header.tabIconColorInactive
-        let border = CurrentTheme.tabs.header.tabIconBorderColor
-        let active = CurrentTheme.tabs.header.tabIconColorActive
-        
-        let accountsTabIcon = AccountsTabIcon(tabIconColor: inactive, tabIconBorderColor: border, tabIconSelectedColor: active)
-        let transactionsTabIcon = TransactionsTabIcon(tabIconColor: inactive, tabIconBorderColor: border, tabIconSelectedColor: active)
-        
-        accountsButton = TabButton(iconView: accountsTabIcon, labelText: "Accounts")
-        transactionsButton = TabButton(iconView: transactionsTabIcon, labelText: "Transactions")
         tabButtons = [accountsButton, transactionsButton]
-        
-        var i = 0
-        for tabButton in tabButtons {
-            tabButton.button.target = self
-            tabButton.button.action = #selector(tabAction(_:))
-            tabButton.button.tag = i
-            i += 1
-        }
-        
         tabControllers = [accountsViewController, transactionsViewController]
         
         registerForNotifications()
@@ -103,7 +79,6 @@ class TabsViewController: NSViewController {
         self.view = View()
         
         // Create the UI
-        createFooter()
         createHeader()
         
         tabContainerView.layerBackgroundColor = NSColor.clear
@@ -111,8 +86,8 @@ class TabsViewController: NSViewController {
         tabContainerView.snp.makeConstraints { make in
             make.leading.equalTo(self.view)
             make.trailing.equalTo(self.view)
-            make.top.equalTo(headerView.snp.bottom).offset(10)
-            make.bottom.equalTo(footerView.snp.top)
+            make.top.equalTo(headerView.snp.bottom)
+            make.bottom.equalToSuperview()
         }
         
         if debugging.defaultToTransactionsTab {
@@ -126,49 +101,50 @@ class TabsViewController: NSViewController {
     }
     
     func createHeader() {
-        // Header container
-        headerBackgroundView.frame = NSRect(x: 0, y: 0, width: 400, height: 45)
-        headerBackgroundView.layer?.backgroundColor = NSColor.red.cgColor
-        self.view.addSubview(headerBackgroundView)
-        headerBackgroundView.snp.makeConstraints { make in
-            make.width.equalTo(400)
-            make.height.equalTo(45)
-            make.centerX.equalTo(self.view).offset(0)
-            make.top.equalTo(self.view)
-        }
-        
         self.view.addSubview(headerView)
         headerView.snp.makeConstraints { make in
-            make.width.equalTo(308)
-            make.height.equalTo(45)
-            make.centerX.equalTo(self.view).offset(1)
-            make.top.equalTo(self.view)
+            make.width.equalToSuperview()
+            make.height.equalTo(40)
+            make.left.equalToSuperview()
+            make.top.equalToSuperview()
         }
         
-        // Accounts button
+        accountsButton.target = self
+        accountsButton.action = #selector(tabAction(_:))
+        accountsButton.tag = Tab.accounts.rawValue
+        accountsButton.image = #imageLiteral(resourceName: "TabIconAccountsInactive")
+        accountsButton.imagePosition = .imageLeft
+        accountsButton.alternateImage = #imageLiteral(resourceName: "TabIconAccountsActive")
+        accountsButton.title = "Accounts"
+        //accountsButton.titleColor = CurrentTheme.tabs.header.tabFontColor
+        accountsButton.font = CurrentTheme.tabs.header.tabFont
+        accountsButton.setAccessibilityLabel("Accounts")
+        accountsButton.setButtonType(.toggle)
+        accountsButton.isBordered = false
+        accountsButton.sizeToFit()
         headerView.addSubview(accountsButton)
         accountsButton.snp.makeConstraints { make in
-            make.centerX.equalTo(headerView).multipliedBy(0.5)
-            make.top.equalTo(headerView).offset(5)
+            make.left.equalToSuperview().offset(10)
+            make.centerY.equalToSuperview()
         }
         
-        // Transactions button
+        transactionsButton.target = self
+        transactionsButton.action = #selector(tabAction(_:))
+        transactionsButton.tag = Tab.transactions.rawValue
+        transactionsButton.image = #imageLiteral(resourceName: "TabIconTransactionsInactive")
+        transactionsButton.imagePosition = .imageLeft
+        transactionsButton.alternateImage = #imageLiteral(resourceName: "TabIconTransactionsActive")
+        transactionsButton.title = "Transactions"
+        //transactionsButton.titleColor = CurrentTheme.tabs.header.tabFontColor
+        transactionsButton.font = CurrentTheme.tabs.header.tabFont
+        transactionsButton.setAccessibilityLabel("Transactions")
+        transactionsButton.setButtonType(.toggle)
+        transactionsButton.isBordered = false
+        transactionsButton.sizeToFit()
         headerView.addSubview(transactionsButton)
         transactionsButton.snp.makeConstraints { make in
-            make.centerX.equalTo(headerView).multipliedBy(1.5)
-            make.top.equalTo(headerView).offset(5)
-        }
-    }
-    
-    func createFooter() {
-        // Footer container
-        footerView.layerBackgroundColor = CurrentTheme.tabs.footer.backgroundColor
-        self.view.addSubview(footerView)
-        footerView.snp.makeConstraints { make in
-            make.width.equalTo(self.view)
-            make.height.equalTo(38)
-            make.centerX.equalTo(self.view)
-            make.bottom.equalTo(self.view)
+            make.left.equalTo(accountsButton.snp.right).offset(10)
+            make.centerY.equalToSuperview()
         }
         
         // Preferences button
@@ -179,21 +155,12 @@ class TabsViewController: NSViewController {
         preferencesButton.setButtonType(.momentaryChange)
         preferencesButton.setAccessibilityLabel("Preferences")
         preferencesButton.isBordered = false
-        footerView.addSubview(preferencesButton)
+        headerView.addSubview(preferencesButton)
         preferencesButton.snp.makeConstraints { make in
-            make.centerY.equalTo(footerView)
-            make.trailing.equalTo(footerView).offset(-10)
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-10)
             make.width.equalTo(16)
             make.height.equalTo(16)
-        }
-        
-        // Sync button
-        footerView.addSubview(syncButton)
-        syncButton.snp.makeConstraints { make in
-            make.leading.equalTo(footerView).offset(8)
-            make.centerY.equalTo(footerView)
-            make.width.equalTo(350)
-            make.height.equalTo(footerView)
         }
     }
     
@@ -223,28 +190,6 @@ class TabsViewController: NSViewController {
     }
     
     @objc func showPreferences() {
-//        // Prepare preferences button for spin animation
-//        // Adapted from: https://github.com/bansalvks/Mac-Dummies/blob/master/Rotate%20NSImageView/animationTrial/AppDelegate.m
-//        if spinAnimation == nil {
-//            if let layer = self.preferencesButton.layer {
-//                layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-//                let frame = layer.frame
-//                let x = frame.origin.x + frame.size.width
-//                let y = frame.origin.y + frame.size.height
-//                layer.position = CGPoint(x: x, y: y)
-//                layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-//            }
-//            
-//            let spin = CABasicAnimation(keyPath: "transform.rotation")
-//            spin.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-//            spin.fromValue = NSNumber(value: 0 as Float)
-//            spin.toValue = NSNumber(value: 180 as Float)
-//            spin.duration = 1
-//            spinAnimation = spin
-//        }
-//        
-//        preferencesButton.layer?.add(spinAnimation!, forKey: "transform")
-        
         AppDelegate.sharedInstance.showPreferences()
     }
     
@@ -291,15 +236,6 @@ class TabsViewController: NSViewController {
         }
         BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: contentName)
         
-        for i in 0...tabButtons.count-1 {
-            let tabButton = tabButtons[i]
-            if i == tabIndex {
-                tabButton.activate()
-            } else {
-                tabButton.deactivate()
-            }
-        }
-        
         // Constraints
         let constraints: (ConstraintMaker) -> Void = { make in
             make.leading.equalTo(self.tabContainerView)
@@ -328,6 +264,14 @@ class TabsViewController: NSViewController {
         currentTableViewController = controller
         currentVisibleTab = Tab(rawValue: tabIndex)!
         self.view.window?.makeFirstResponder(currentTableViewController)
+        
+        for button in tabButtons {
+            if button.tag == tabIndex {
+                button.state = .on
+            } else {
+                button.state = .off
+            }
+        }
     }
     
     @objc fileprivate func tabAction(_ sender: Button) {
@@ -353,7 +297,7 @@ class TabsViewController: NSViewController {
     @objc fileprivate func performSearch(_ notification: Notification) {
         if let searchString = notification.userInfo?[Notifications.Keys.SearchString] as? String {
             if currentVisibleTab != .transactions {
-                tabAction(transactionsButton.button)
+                showTab(tabIndex: Tab.transactions.rawValue)
             }
             transactionsViewController.performSearch(searchString)
         }
@@ -361,7 +305,7 @@ class TabsViewController: NSViewController {
     
     @objc fileprivate func showSearch(_ notification: Notification) {
         if currentVisibleTab != .transactions {
-            tabAction(transactionsButton.button)
+            showTab(tabIndex: Tab.transactions.rawValue)
         }
         
         async(after: 0.25) {
@@ -412,7 +356,8 @@ class TabsViewController: NSViewController {
                         if event.modifierFlags.contains(NSEvent.ModifierFlags.command) && characters.length == 1 {
                             if let intValue = Int(characters), intValue > 0 && intValue <= self.tabButtons.count {
                                 // Select tab
-                                self.tabAction(self.tabButtons[intValue - 1].button)
+                                let tabIndex = intValue - 1
+                                self.showTab(tabIndex: tabIndex)
                                 return nil
                             } else if characters == "," {
                                 // Show Preferences

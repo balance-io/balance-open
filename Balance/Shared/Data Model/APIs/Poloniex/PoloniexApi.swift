@@ -114,8 +114,8 @@ class PoloniexApi: ExchangeApi {
                     let poloniexAccounts = try self.parsePoloniexAccounts(data: safeData)
                     self.processPoloniexAccounts(accounts: poloniexAccounts, institution: institution)
                 } else {
-                    print("Poloniex Error: \(String(describing: error))")
-                    print("Poloniex Data: \(String(describing: data))")
+                    log.error("Poloniex Error: \(String(describing: error))")
+                    log.error("Poloniex Data: \(String(describing: data))")
                 }
                 DispatchQueue.main.async {
                     completion(false, error)
@@ -135,7 +135,7 @@ class PoloniexApi: ExchangeApi {
     
     fileprivate func findError(data: Data) -> String? {
         do {
-            guard let dict = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] else {
+            guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] else {
                 throw PoloniexApi.CredentialsError.bodyNotValidJSON
             }
             if dict.keys.count == 1 {
@@ -169,7 +169,6 @@ class PoloniexApi: ExchangeApi {
                 if let safeData = data {
                     //if error exists should be reported to UI data
                     if let error = self.findError(data: safeData) {
-                        print("\(error)")
                         throw PoloniexApi.CredentialsError.incorrectLoginCredentials
                     }
                     // Create the institution and finish (we do not have access tokens)
@@ -187,8 +186,8 @@ class PoloniexApi: ExchangeApi {
                         throw "Error creating institution"
                     }
                 } else {
-                    print("Poloniex Error: \(String(describing: error))")
-                    print("Poloniex Data: \(String(describing: data))")
+                    log.error("Poloniex Error: \(String(describing: error))")
+                    log.error("Poloniex Data: \(String(describing: data))")
                     throw PoloniexApi.CredentialsError.bodyNotValidJSON
                 }
             } catch {
@@ -229,7 +228,7 @@ class PoloniexApi: ExchangeApi {
     }
     
     fileprivate func parsePoloniexAccounts(data: Data) throws -> [PoloniexAccount] {
-        guard let dict = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] else {
+        guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] else {
             throw PoloniexApi.CredentialsError.bodyNotValidJSON
         }
         
@@ -310,7 +309,7 @@ extension Institution {
                 apiKey = dictionary["apiKey"] as? String
             }
             
-            print("get apiKeyKey: \(apiKeyKey)  APIKey: \(String(describing: apiKey))")
+            log.debug("get apiKeyKey: \(apiKeyKey)  APIKey: \(String(describing: apiKey))")
             if apiKey == nil {
                 // We should always be getting an apiKey becasuse we never read it until after it's been written
                 log.severe("Tried to read APIkey for institution [\(self)] but it didn't work! We must not have keychain access")
@@ -319,7 +318,7 @@ extension Institution {
             return apiKey
         }
         set {
-            print("set apiKeyKey: \(apiKeyKey)  newValue: \(String(describing: newValue))")
+            log.debug("set apiKeyKey: \(apiKeyKey)  newValue: \(String(describing: newValue))")
             if let apiKey = newValue {
                 do {
                     try Locksmith.updateData(data: ["apiKey": apiKey], forUserAccount: apiKeyKey)
@@ -355,7 +354,7 @@ extension Institution {
                 secret = dictionary["secret"] as? String
             }
             
-            print("get secretKey: \(secretKey)  secret: \(String(describing: secret))")
+            log.debug("get secretKey: \(secretKey)  secret: \(String(describing: secret))")
             if secret == nil {
                 // We should always be getting an secret becasuse we never read it until after it's been written
                 log.severe("Tried to read secretKey for institution [\(self)] but it didn't work! We must not have keychain access")
@@ -364,7 +363,7 @@ extension Institution {
             return secret
         }
         set {
-            print("set secretKey: \(secretKey)  newValue: \(String(describing: newValue))")
+            log.debug("set secretKey: \(secretKey)  newValue: \(String(describing: newValue))")
             if let secret = newValue {
                 do {
                     try Locksmith.updateData(data: ["secret": secret], forUserAccount: secretKey)
@@ -417,8 +416,8 @@ internal extension PoloniexApi {
                         completion(true, error)
                     }
                 } else {
-                    print("Poloniex Error: \(String(describing: error))")
-                    print("Poloniex Data: \(String(describing: data))")
+                    log.error("Poloniex Error: \(String(describing: error))")
+                    log.error("Poloniex Data: \(String(describing: data))")
                     
                     DispatchQueue.main.async {
                         completion(false, error)

@@ -90,6 +90,6 @@ class TransactionContextMenu: NSObject, NSMenuDelegate {
      */
     
     @objc fileprivate func logTransactionId() {
-        print("transactionId: \(transaction.transactionId)  sourceTransactionId: \(transaction.sourceTransactionId)")
+        log.debug("transactionId: \(transaction.transactionId)  sourceTransactionId: \(transaction.sourceTransactionId)")
     }
 }

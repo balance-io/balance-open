@@ -1,7 +1,6 @@
 import Cocoa
 import Locksmith
 import ServiceManagement
-import RealmSwift
 
 let autolaunchBundleId = "software.balanced.balance-open-autolaunch"
 
@@ -107,12 +106,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Check for the helper app to see if we were auto launched
         launchedAtLogin = isAutolaunchHelperRunning
         
-        // Setup Realm options
-//        RealmSwift.SyncManager.shared.logLevel = SyncLogLevel.all
-//        RealmSwift.SyncManager.shared.errorHandler = { error, _ in
-//            print("Realm error: \(error)")
-//        }
-        
         // Initialize singletons
         initializeSingletons()
         
@@ -176,10 +169,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // Gets called when the App launches/opens via URL
     @objc func handleURLEvent(event: NSAppleEventDescriptor, withReply reply: NSAppleEventDescriptor) {
         if let urlString = event.paramDescriptor(forKeyword: AEKeyword(keyDirectObject))?.stringValue {
-            print("Handling URL: \(urlString)")
+            log.info("Handling URL: \(urlString)")
             if let url = URLComponents(string: urlString), let queryItems = url.queryItems, url.scheme == "balancemymoney" {
                 if url.host == "coinbase" {
-                    print("Handling coinbase callback")
+                    log.info("Handling coinbase callback")
                     
                     var code: String?
                     var state: String?
@@ -194,7 +187,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     if let code = code, let state = state {
                         CoinbaseApi.handleAuthenticationCallback(state: state, code: code) { success, error in
                             if !success {
-                                print("Error handling Coinbase authentication callback: \(String(describing: error))")
+                                log.error("Error handling Coinbase authentication callback: \(String(describing: error))")
                             }
                             
                             NotificationCenter.postOnMainThread(name: Notifications.ShowTabIndex, object: nil, userInfo: [Notifications.Keys.TabIndex: Tab.accounts.rawValue])
@@ -206,12 +199,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                             self.showPopover()
                         }
                     } else {
-                        print("Missing query items, code: \(String(describing: code)), state: \(String(describing: state))")
+                        log.error("Missing query items, code: \(String(describing: code)), state: \(String(describing: state))")
                     }
                 }
             }
         } else {
-            print("No valid URL to handle")
+            log.error("No valid URL to handle")
         }
     }
     

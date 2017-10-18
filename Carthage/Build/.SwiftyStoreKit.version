@@ -1,9 +1,0 @@
-{
-  "commitish" : "9a0a4632dcb07e6ed87ef73320a9be012ce09a87",
-  "Mac" : [
-    {
-      "hash" : "030d57357deb9771fc0bbf69c62ec4c4d40ccc0d3b602a7b529e3294488d0421",
-      "name" : "SwiftyStoreKit"
-    }
-  ]
-}

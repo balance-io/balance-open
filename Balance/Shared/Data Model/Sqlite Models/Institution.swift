@@ -112,12 +112,12 @@ extension Institution {
                 accessToken = dictionary["accessToken"] as? String
             }
             
-            //print("get accessTokenKey: \(accessTokenKey)  accessToken: \(String(describing: accessToken))")
+            log.debug("get accessTokenKey: \(accessTokenKey)  accessToken: \(String(describing: accessToken))")
 
             return accessToken
         }
         set {
-            print("set accessTokenKey: \(accessTokenKey)  newValue: \(String(describing: newValue))")
+            log.debug("set accessTokenKey: \(accessTokenKey)  newValue: \(String(describing: newValue))")
             if let accessToken = newValue {
                 do {
                     try Locksmith.updateData(data: ["accessToken": accessToken], forUserAccount: accessTokenKey)

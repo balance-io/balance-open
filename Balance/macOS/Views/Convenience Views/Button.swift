@@ -11,6 +11,17 @@ import AppKit
 class Button: NSButton {
     var object: Any?
     
+    var titleColor: NSColor? {
+        didSet {
+            if let titleColor = titleColor {
+                let attributedString = NSMutableAttributedString(attributedString: self.attributedStringValue)
+                let range = NSRange(location: 0, length: self.title.length)
+                attributedString.addAttribute(.foregroundColor, value: titleColor, range: range)
+                self.attributedTitle = attributedString
+            }
+        }
+    }
+    
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         commonInit()

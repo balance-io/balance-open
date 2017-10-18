@@ -93,8 +93,8 @@ class EthplorerApi: ExchangeApi {
                     let ethexploreWallet = try self.parseEthploreWallet(data: safeData)
                     self.processEthploreAccounts(ethplorerObject: ethexploreWallet, institution: institution)
                 } else {
-                    print("Ethplore Error: \(String(describing: error))")
-                    print("Ethplore Data: \(String(describing: data))")
+                    log.error("Ethplore Error: \(String(describing: error))")
+                    log.error("Ethplore Data: \(String(describing: data))")
                 }
                 DispatchQueue.main.async {
                     completion(false, error)
@@ -129,7 +129,6 @@ class EthplorerApi: ExchangeApi {
                 if let safeData = data {
                     
                     if let error = self.findError(data: safeData) {
-                        print("\(error)")
                         throw EthplorerApi.CredentialsError.incorrectLoginCredentials
                     }
                     
@@ -148,8 +147,8 @@ class EthplorerApi: ExchangeApi {
                         throw "Error creating institution"
                     }
                 } else {
-                    print("Ethplore Error: \(String(describing: error))")
-                    print("Ethplore Data: \(String(describing: data))")
+                    log.error("Ethplore Error: \(String(describing: error))")
+                    log.error("Ethplore Data: \(String(describing: data))")
                     throw EthplorerApi.CredentialsError.bodyNotValidJSON
                 }
             }
@@ -181,7 +180,7 @@ class EthplorerApi: ExchangeApi {
     }
     
     fileprivate func parseEthploreWallet(data: Data) throws -> EthplorerAccountObject {
-        guard let dict = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] else {
+        guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] else {
             throw EthplorerApi.CredentialsError.bodyNotValidJSON
         }
         let ethplorerAccount = try EthplorerAccountObject(dictionary: dict, currencyShortName: "ETH", type: .wallet)
@@ -190,7 +189,7 @@ class EthplorerApi: ExchangeApi {
     
     fileprivate func findError(data: Data) -> String? {
         do {
-            guard let dict = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] else {
+            guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] else {
                 throw EthplorerApi.CredentialsError.bodyNotValidJSON
             }
             if dict.keys.count == 1 {
@@ -252,7 +251,7 @@ extension Institution {
                 address = dictionary["address"] as? String
             }
             
-            print("get addressKey: \(addressKey)  address: \(String(describing: address))")
+            log.debug("get addressKey: \(addressKey)  address: \(String(describing: address))")
             if address == nil {
                 // We should always be getting an address becasuse we never read it until after it's been written
                 log.severe("Tried to read address for institution [\(self)] but it didn't work! We must not have keychain access")
@@ -261,7 +260,7 @@ extension Institution {
             return address
         }
         set {
-            print("set addressKey: \(addressKey)  newValue: \(String(describing: newValue))")
+            log.debug("set addressKey: \(addressKey)  newValue: \(String(describing: newValue))")
             if let address = newValue {
                 do {
                     try Locksmith.updateData(data: ["address": address], forUserAccount: addressKey)

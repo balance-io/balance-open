@@ -133,6 +133,62 @@ extension Account {
         return isCreditAccount
     }
     
+    var masterAltCurrentBalance: Int? {
+        let masterCurrency = defaults.masterCurrency
+        
+        // First check if an alt current balance was returned from the server. If so, either use that directly or convert it
+        if let altCurrentBalance = altCurrentBalance, let altCurrency = altCurrency {
+            if altCurrency == masterCurrency.code {
+                return altCurrentBalance
+            } else {
+                return currentExchangeRates.convert(amount: altCurrentBalance, from: Currency.rawValue(altCurrency), to: masterCurrency, source: source.exchangeRateSource)
+            }
+        }
+        
+        // If not, convert directly from the regular current balance
+        if currency == masterCurrency.code {
+            return currentBalance
+        } else {
+            return currentExchangeRates.convert(amount: currentBalance, from: Currency.rawValue(currency), to: masterCurrency, source: source.exchangeRateSource)
+        }
+    }
+    
+    var masterAltAvailableBalance: Int? {
+        let masterCurrency = defaults.masterCurrency
+        
+        // First check if an alt available balance was returned from the server. If so, either use that directly or convert it
+        if let altAvailableBalance = altAvailableBalance, let altCurrency = altCurrency {
+            if altCurrency == masterCurrency.code {
+                return altAvailableBalance
+            } else {
+                return currentExchangeRates.convert(amount: altAvailableBalance, from: Currency.rawValue(altCurrency), to: masterCurrency, source: source.exchangeRateSource)
+            }
+        }
+        
+        // If not, convert directly from the regular available balance if it exists
+        if let availableBalance = availableBalance {
+            if currency == masterCurrency.code {
+                return availableBalance
+            } else {
+                return currentExchangeRates.convert(amount: availableBalance, from: Currency.rawValue(currency), to: masterCurrency, source: source.exchangeRateSource)
+            }
+        }
+        return nil
+    }
+    
+    var displayAltBalance: Int? {
+        if isCreditAccount {
+            // Show negative balance for credit accounts
+            if let masterAltCurrentBalance = masterAltCurrentBalance {
+                return -masterAltCurrentBalance
+            }
+            return nil
+        } else {
+            // For deposit accounts, show the available balance if possible
+            return masterAltAvailableBalance ?? masterAltCurrentBalance
+        }
+    }
+    
     var displayBalance: Int {
         if isCreditAccount {
             // Show negative balance for credit accounts

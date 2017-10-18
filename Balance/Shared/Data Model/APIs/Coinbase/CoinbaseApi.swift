@@ -46,7 +46,7 @@ struct CoinbaseApi: ExchangeApi {
             #endif
         } catch {
             // TODO: Better error handling
-            print("Error opening Coinbase authentication URL: \(error)")
+            log.error("Error opening Coinbase authentication URL: \(error)")
             return false
         }
         
@@ -82,7 +82,7 @@ struct CoinbaseApi: ExchangeApi {
                 }
                 
                 // Try to parse the JSON
-                guard let JSONResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.length > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.length > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval, let scope = JSONResult["scope"] as? String else {
+                guard let JSONResult = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.length > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.length > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval, let scope = JSONResult["scope"] as? String else {
                     throw BalanceError.jsonDecoding
                 }
                 
@@ -97,7 +97,7 @@ struct CoinbaseApi: ExchangeApi {
                 if let institution = institution {
                     updateAccounts(institution: institution) { success, error in
                         if !success {
-                            print("Error updating accounts: \(String(describing: error))")
+                            log.error("Error updating accounts: \(String(describing: error))")
                         }
                         
                         DispatchQueue.main.async {
@@ -143,7 +143,7 @@ struct CoinbaseApi: ExchangeApi {
                 }
                 
                 // Try to parse the JSON
-                guard let JSONResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.length > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.length > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval else {
+                guard let JSONResult = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.length > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.length > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval else {
                     throw BalanceError.jsonDecoding
                 }
                 
@@ -188,7 +188,7 @@ struct CoinbaseApi: ExchangeApi {
                 }
                 
                 // Try to parse the JSON
-                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject]
+                let jsonResult = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject]
                 
                 // Check for errors (they return an array, but as far as I know it's always one error
                 if let errorDicts = jsonResult?["errors"] as? [[String: AnyObject]] {
@@ -296,7 +296,7 @@ extension Institution {
                 refreshToken = dictionary["refreshToken"] as? String
             }
             
-            print("get refreshTokenKey: \(refreshTokenKey)  refreshToken: \(String(describing: refreshToken))")
+            log.debug("get refreshTokenKey: \(refreshTokenKey)  refreshToken: \(String(describing: refreshToken))")
             if refreshToken == nil {
                 // We should always be getting an refresh token becasuse we never read it until after it's been written
                 log.severe("Tried to read refresh token for institution [\(self)] but it didn't work! We must not have keychain access")
@@ -305,7 +305,7 @@ extension Institution {
             return refreshToken
         }
         set {
-            print("set refreshTokenKey: \(refreshTokenKey)  newValue: \(String(describing: newValue))")
+            log.debug("set refreshTokenKey: \(refreshTokenKey)  newValue: \(String(describing: newValue))")
             if let refreshToken = newValue {
                 do {
                     try Locksmith.updateData(data: ["refreshToken": refreshToken], forUserAccount: refreshTokenKey)

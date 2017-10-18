@@ -142,10 +142,7 @@ class Database {
                               "ON categories (sourceId, name1, name2, name3)")
             
             // transaction table
-            let createTransactionsTable = """
-                    CREATE TABLE IF NOT EXISTS transactions (transactionId INTEGER PRIMARY KEY AUTOINCREMENT, sourceId INTEGER, sourceTransactionId TEXT, accountId INTEGER, name TEXT, currency TEXT, amount INTEGER, date REAL, institutionID INTEGER NOT NULL, sourceInstitutionID TEXT, categoryID INTEGER)
-            """
-            statements.append(createTransactionsTable)
+            statements.append("CREATE TABLE IF NOT EXISTS transactions (transactionId INTEGER PRIMARY KEY AUTOINCREMENT, sourceId INTEGER, sourceTransactionId TEXT, accountId INTEGER, name TEXT, currency TEXT, amount INTEGER, date REAL, institutionId INTEGER NOT NULL, sourceInstitutionId TEXT, categoryId INTEGER)")
             
             for statement in statements {
                 if !db.executeUpdate(statement, withArgumentsIn: nil) {
@@ -282,10 +279,10 @@ class Database {
     fileprivate func printCompileOptions() {
         read.inDatabase { db in
             do {
-                print("Sqlite version \(String(describing: db.stringForQuery("SELECT sqlite_version()"))) compile options:")
+                log.debug("Sqlite version \(String(describing: db.stringForQuery("SELECT sqlite_version()"))) compile options:")
                 let result = try db.executeQuery("PRAGMA compile_options")
                 while result.next() {
-                    print("\(result.string(forColumnIndex: 0))")
+                    log.debug("\(result.string(forColumnIndex: 0))")
                 }
                 result.close()
             } catch {

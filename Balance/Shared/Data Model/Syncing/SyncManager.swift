@@ -23,11 +23,13 @@ class SyncManager: NSObject {
     var canceled: Bool {
         return syncer.canceled
     }
-    
+        
     fileprivate var syncer = debugging.useMockSyncing ? MockSyncer() : Syncer()
     
     override init() {
         super.init()
+        
+        currentExchangeRates.load()
         
         #if os(OSX)
         // Register for wake notification
@@ -88,6 +90,9 @@ class SyncManager: NSObject {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.automaticSync), object: nil)
        
         hasSyncedSinceLaunch = true
+        
+        // Sync exchange rates
+        currentExchangeRates.updateExchangeRates()
         
         // Determine whether to do a full sync or not
         // Current algorithm is full sync (10 years) every 24 hours, partial sync (1 month) every hour
