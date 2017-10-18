@@ -85,6 +85,15 @@ internal final class RootViewController: UIViewController
         super.didReceiveMemoryWarning()
     }
     
+    // MARK: Presentation
+    
+    private func presentSplashScreen() {
+        let splashScreenViewController = SplashScreenViewController()
+        let navigationController = UINavigationController(rootViewController: splashScreenViewController)
+        
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
     // MARK: UI Defaults
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
