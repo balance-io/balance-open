@@ -11,6 +11,8 @@ import UIKit
 
 internal final class RegistrationViewController: UIViewController {
     // Private
+    private let container = UIView()
+    
     private let emailTextField: UITextField = {
         let textField = UITextField()
         textField.keyboardType = .emailAddress
@@ -33,6 +35,17 @@ internal final class RegistrationViewController: UIViewController {
         return textField
     }()
     
+    private let passwordConfirmationTextField: UITextField = {
+        let textField = UITextField()
+        textField.isSecureTextEntry = true
+        textField.placeholder = "Password Confirmation"
+        textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
+        
+        return textField
+    }()
+    
     // MARK: View lifecycle
     
     override func viewDidLoad() {
@@ -43,20 +56,38 @@ internal final class RegistrationViewController: UIViewController {
         // Navigation bar
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Register", style: .plain, target: self, action: #selector(self.registerButtonTapped(_:)))
         
+        // Container
+        self.view.addSubview(self.container)
+        
+        self.container.snp.makeConstraints { (make) in
+            make.width.equalToSuperview()
+            make.center.equalToSuperview()
+        }
+        
         // Email text field
-        self.view.addSubview(self.emailTextField)
+        self.container.addSubview(self.emailTextField)
         
         self.emailTextField.snp.makeConstraints { (make) in
-            make.bottom.equalTo(self.view.snp.centerY).offset(-5.0)
+            make.top.equalToSuperview()
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.75)
         }
         
         // Password text field
-        self.view.addSubview(self.passwordTextField)
+        self.container.addSubview(self.passwordTextField)
         
         self.passwordTextField.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view.snp.centerY).offset(5.0)
+            make.top.equalTo(self.emailTextField.snp.bottom).offset(10.0)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.75)
+        }
+        
+        // Password confirmation text field
+        self.container.addSubview(self.passwordConfirmationTextField)
+        
+        self.passwordConfirmationTextField.snp.makeConstraints { (make) in
+            make.top.equalTo(self.passwordTextField.snp.bottom).offset(10.0)
+            make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.75)
         }
