@@ -27,6 +27,8 @@ final class Transaction {
     
     var ruleNames: [String]?
     
+    // MARK: Initialization
+    
     required init(result: FMResultSet, repository: ItemRepository = TransactionRepository.si) {
         self.repository = repository as! TransactionRepository
         
@@ -134,5 +136,19 @@ extension Transaction {
     
     var displayName: String {
         return name.capitalizedStringIfAllCaps
+    }
+}
+
+// MARK: Master alternative amount
+
+internal extension Transaction {
+    internal var masterAltAmount: Int? {
+        let masterCurrency = defaults.masterCurrency
+        
+        if self.currency == masterCurrency.code {
+            return self.amount
+        } else {
+            return syncManager.currentExchangeRates.convert(amount: self.amount, from: Currency.rawValue(self.currency), to: masterCurrency, source: self.source.exchangeRateSource)
+        }
     }
 }
