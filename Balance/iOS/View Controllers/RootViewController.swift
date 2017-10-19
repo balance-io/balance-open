@@ -68,6 +68,9 @@ internal final class RootViewController: UIViewController
         self.rootTabBarController.view.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        
+        // Sync
+        syncManager.sync()
     }
     
     override func viewWillAppear(_ animated: Bool)
