@@ -14,7 +14,12 @@ internal final class TransactionsListViewController: UIViewController {
     private let viewModel = TransactionsListViewModel()
     
     // Private
-    private let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+    private let collectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        
+        return collectionView
+    }()
     
     // MARK: Initialization
     
@@ -39,13 +44,15 @@ internal final class TransactionsListViewController: UIViewController {
         // Navigation bar
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
-        // Table view
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
-        self.tableView.register(reusableCell: TransactionTableViewCell.self)
-        self.view.addSubview(self.tableView)
+        // Collection view
+        self.collectionView.backgroundColor = UIColor(red: 237.0/255.0, green: 238.0/255.0, blue: 240.0/255.0, alpha: 1.0)
+        self.collectionView.dataSource = self
+        self.collectionView.delegate = self
+        self.collectionView.register(reusableCell: TransactionCollectionViewCell.self)
+        self.collectionView.register(reusableSupplementaryView: TransactionsHeaderReusableView.self, kind: UICollectionElementKindSectionHeader)
+        self.view.addSubview(self.collectionView)
         
-        self.tableView.snp.makeConstraints { (make) in
+        self.collectionView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
     }
@@ -57,42 +64,49 @@ internal final class TransactionsListViewController: UIViewController {
 
 // MARK: UITableViewDataSource
 
-extension TransactionsListViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+extension TransactionsListViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return self.viewModel.numberOfSections
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.viewModel.numberOfRows(at: section)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(at: indexPath) as TransactionTableViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return collectionView.dequeueReusableCell(at: indexPath) as TransactionCollectionViewCell
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.viewModel.title(for: section)
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(at: indexPath, kind: kind) as TransactionsHeaderReusableView
+        header.textLabel.text = self.viewModel.title(for: indexPath.section)
+        
+        return header
     }
 }
 
-// MARK: UITableViewDelegate
+// MARK: UICollectionViewDelegate
 
-extension TransactionsListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let cell = cell as? TransactionTableViewCell else
+extension TransactionsListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell = cell as? TransactionCollectionViewCell else
         {
             return
         }
         
         cell.transaction = self.viewModel.transaction(at: indexPath)
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+}
+
+// MARK: UICollectionViewFlowLayout
+
+extension TransactionsListViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: TransactionCollectionViewCell.height)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return TransactionTableViewCell.height
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: 45.0)
     }
 }
 
@@ -100,6 +114,6 @@ extension TransactionsListViewController: UITableViewDelegate {
 
 extension TransactionsListViewController: TransactionsListViewModelDelegate {
     func didReloadData(in viewModel: TransactionsListViewModel) {
-        self.tableView.reloadData()
+        self.collectionView.reloadData()
     }
 }
