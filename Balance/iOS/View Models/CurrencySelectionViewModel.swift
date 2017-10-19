@@ -23,7 +23,7 @@ internal final class CurrencySelectionViewModel {
     // MARK: Initialization
     
     internal required init() {
-        self.groupedCurrencies = Currency.all.reduce([String : [Currency]]()) { (result, currency) -> [String : [Currency]] in
+        self.groupedCurrencies = Currency.masterCurrencies.reduce([String : [Currency]]()) { (result, currency) -> [String : [Currency]] in
             guard let firstCharacter = currency.code.first else {
                 return result
             }
