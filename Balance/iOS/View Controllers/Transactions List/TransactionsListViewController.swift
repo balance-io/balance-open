@@ -14,6 +14,8 @@ internal final class TransactionsListViewController: UIViewController {
     private let viewModel = TransactionsListViewModel()
     
     // Private
+    let refreshControl = UIRefreshControl()
+    
     private let collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
@@ -44,6 +46,10 @@ internal final class TransactionsListViewController: UIViewController {
         // Navigation bar
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
+        // Refresh control
+        self.refreshControl.addTarget(self, action: #selector(self.refreshControlValueChanged(_:)), for: .valueChanged)
+        self.collectionView.addSubview(self.refreshControl)
+        
         // Collection view
         self.collectionView.backgroundColor = UIColor(red: 237.0/255.0, green: 238.0/255.0, blue: 240.0/255.0, alpha: 1.0)
         self.collectionView.dataSource = self
@@ -59,6 +65,14 @@ internal final class TransactionsListViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    // MARK: Actions
+    
+    @objc private func refreshControlValueChanged(_ sender: Any) {
+        syncManager.sync(userInitiated: true, validateReceipt: true) { (_, _) in
+            self.refreshControl.endRefreshing()
+        }
     }
 }
 
