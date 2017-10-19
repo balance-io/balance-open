@@ -13,6 +13,8 @@ class CurrentExchangeRates {
         static let exchangeRatesUpdated = Notification.Name("exchangeRatesUpdated")
     }
     
+    fileprivate let exchangeRatesUrl = URL(string: "https://balance-server.appspot.com/exchangeRates")!
+    
     fileprivate let cache = SimpleCache<ExchangeRateSource, [ExchangeRate]>()
     fileprivate let persistedFileName = "currentExchangeRates.data"
     fileprivate var persistedFileUrl: URL {
@@ -77,8 +79,7 @@ class CurrentExchangeRates {
     }
     
     func updateExchangeRates() {
-        let url = URL(string: "https://balance-server.appspot.com/exchangeRates")!
-        let task = certValidatedSession.dataTask(with: url) { maybeData, maybeResponse, maybeError in
+        let task = certValidatedSession.dataTask(with: exchangeRatesUrl) { maybeData, maybeResponse, maybeError in
             // Make sure there's data
             guard let data = maybeData, maybeError == nil else {
                 log.error("Error updating exchange rates, either no data or error: \(String(describing: maybeError))")
@@ -98,6 +99,7 @@ class CurrentExchangeRates {
         // Try to parse the JSON
         guard let tryExchangeRatesJson = try? JSONSerialization.jsonObject(with: data) as? [String: Any], let exchangeRatesJson = tryExchangeRatesJson, exchangeRatesJson["code"] as? Int == BalanceError.success.rawValue else {
             log.error("Error parsing exchange rates, failed to parse json data")
+            BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Failed to parse exchange rates")
             return false
         }
         

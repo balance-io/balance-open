@@ -141,7 +141,7 @@ extension Account {
             if altCurrency == masterCurrency.code {
                 return altCurrentBalance
             } else {
-                return syncManager.currentExchangeRates.convert(amount: altCurrentBalance, from: Currency.rawValue(altCurrency), to: masterCurrency, source: source.exchangeRateSource)
+                return currentExchangeRates.convert(amount: altCurrentBalance, from: Currency.rawValue(altCurrency), to: masterCurrency, source: source.exchangeRateSource)
             }
         }
         
@@ -149,7 +149,7 @@ extension Account {
         if currency == masterCurrency.code {
             return currentBalance
         } else {
-            return syncManager.currentExchangeRates.convert(amount: currentBalance, from: Currency.rawValue(currency), to: masterCurrency, source: source.exchangeRateSource)
+            return currentExchangeRates.convert(amount: currentBalance, from: Currency.rawValue(currency), to: masterCurrency, source: source.exchangeRateSource)
         }
     }
     
@@ -161,7 +161,7 @@ extension Account {
             if altCurrency == masterCurrency.code {
                 return altAvailableBalance
             } else {
-                return syncManager.currentExchangeRates.convert(amount: altAvailableBalance, from: Currency.rawValue(altCurrency), to: masterCurrency, source: source.exchangeRateSource)
+                return currentExchangeRates.convert(amount: altAvailableBalance, from: Currency.rawValue(altCurrency), to: masterCurrency, source: source.exchangeRateSource)
             }
         }
         
@@ -170,7 +170,7 @@ extension Account {
             if currency == masterCurrency.code {
                 return availableBalance
             } else {
-                return syncManager.currentExchangeRates.convert(amount: availableBalance, from: Currency.rawValue(currency), to: masterCurrency, source: source.exchangeRateSource)
+                return currentExchangeRates.convert(amount: availableBalance, from: Currency.rawValue(currency), to: masterCurrency, source: source.exchangeRateSource)
             }
         }
         return nil

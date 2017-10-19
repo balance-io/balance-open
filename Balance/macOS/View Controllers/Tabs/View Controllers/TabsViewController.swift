@@ -236,15 +236,6 @@ class TabsViewController: NSViewController {
         }
         BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: contentName)
         
-//        for i in 0...tabButtons.count-1 {
-//            let tabButton = tabButtons[i]
-//            if i == tabIndex {
-//                tabButton.activate()
-//            } else {
-//                tabButton.deactivate()
-//            }
-//        }
-        
         // Constraints
         let constraints: (ConstraintMaker) -> Void = { make in
             make.leading.equalTo(self.tabContainerView)
@@ -306,7 +297,7 @@ class TabsViewController: NSViewController {
     @objc fileprivate func performSearch(_ notification: Notification) {
         if let searchString = notification.userInfo?[Notifications.Keys.SearchString] as? String {
             if currentVisibleTab != .transactions {
-//                tabAction(transactionsButton.button)
+                showTab(tabIndex: Tab.transactions.rawValue)
             }
             transactionsViewController.performSearch(searchString)
         }
@@ -314,7 +305,7 @@ class TabsViewController: NSViewController {
     
     @objc fileprivate func showSearch(_ notification: Notification) {
         if currentVisibleTab != .transactions {
-//            tabAction(transactionsButton.button)
+            showTab(tabIndex: Tab.transactions.rawValue)
         }
         
         async(after: 0.25) {
@@ -363,12 +354,12 @@ class TabsViewController: NSViewController {
                 if !appLock.locked && event.window == self.view.window {
                     if let characters = event.charactersIgnoringModifiers {
                         if event.modifierFlags.contains(NSEvent.ModifierFlags.command) && characters.length == 1 {
-//                            if let intValue = Int(characters), intValue > 0 && intValue <= self.tabButtons.count {
-//                                // Select tab
-//                                self.tabAction(self.tabButtons[intValue - 1].button)
-//                                return nil
-//                            } else if characters == "," {
-                            if characters == "," {
+                            if let intValue = Int(characters), intValue > 0 && intValue <= self.tabButtons.count {
+                                // Select tab
+                                let tabIndex = intValue - 1
+                                self.showTab(tabIndex: tabIndex)
+                                return nil
+                            } else if characters == "," {
                                 // Show Preferences
                                 self.showPreferences()
                                 return nil

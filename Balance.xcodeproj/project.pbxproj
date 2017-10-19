@@ -362,10 +362,8 @@
 		A4430A911F94EE1700F2FFFA /* CoinbaseInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A8F1F94EE1700F2FFFA /* CoinbaseInstitution.swift */; };
 		A4430A931F94EFB300F2FFFA /* OpenTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A921F94EFB300F2FFFA /* OpenTheme.swift */; };
 		A4430A991F95004D00F2FFFA /* PaintCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A981F95004C00F2FFFA /* PaintCodeView.swift */; };
-		A4430A9E1F95F3ED00F2FFFA /* CurrentExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A9B1F95F3E200F2FFFA /* CurrentExchangeRates.swift */; };
 		A4430A9F1F95F3ED00F2FFFA /* ExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A9C1F95F3E200F2FFFA /* ExchangeRate.swift */; };
 		A4430AA01F95F3ED00F2FFFA /* ExchangeRateSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A9D1F95F3E200F2FFFA /* ExchangeRateSource.swift */; };
-		A4430AA11F95F3ED00F2FFFA /* CurrentExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A9B1F95F3E200F2FFFA /* CurrentExchangeRates.swift */; };
 		A4430AA21F95F3ED00F2FFFA /* ExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A9C1F95F3E200F2FFFA /* ExchangeRate.swift */; };
 		A4430AA31F95F3ED00F2FFFA /* ExchangeRateSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A9D1F95F3E200F2FFFA /* ExchangeRateSource.swift */; };
 		A4430AA51F95F47300F2FFFA /* SimpleCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430AA41F95F47300F2FFFA /* SimpleCache.swift */; };
@@ -388,6 +386,9 @@
 		A493B93D1F6819600074ACCC /* BitfinexAuthHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B93B1F6819600074ACCC /* BitfinexAuthHeaders.swift */; };
 		A493B93F1F681BA00074ACCC /* BitfinexWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B93E1F681BA00074ACCC /* BitfinexWallet.swift */; };
 		A493B9401F681BA00074ACCC /* BitfinexWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B93E1F681BA00074ACCC /* BitfinexWallet.swift */; };
+		A495726D1F98B56400651C89 /* CurrentExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = A495726C1F98B54900651C89 /* CurrentExchangeRates.swift */; };
+		A495726E1F98B56500651C89 /* CurrentExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = A495726C1F98B54900651C89 /* CurrentExchangeRates.swift */; };
+		A49572701F98B62A00651C89 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A495726F1F98B5DE00651C89 /* HockeySDK.framework */; };
 		A4CB29E21F682C2D00128E48 /* BitfinexAPIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CB29E11F682C2D00128E48 /* BitfinexAPIClientTests.swift */; };
 		A4E457091F79010A002E2879 /* BalanceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E457081F79010A002E2879 /* BalanceError.swift */; };
 		A4E4570A1F79010A002E2879 /* BalanceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E457081F79010A002E2879 /* BalanceError.swift */; };
@@ -777,7 +778,6 @@
 		A4430A8F1F94EE1700F2FFFA /* CoinbaseInstitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseInstitution.swift; sourceTree = "<group>"; };
 		A4430A921F94EFB300F2FFFA /* OpenTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTheme.swift; sourceTree = "<group>"; };
 		A4430A981F95004C00F2FFFA /* PaintCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaintCodeView.swift; sourceTree = "<group>"; };
-		A4430A9B1F95F3E200F2FFFA /* CurrentExchangeRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentExchangeRates.swift; sourceTree = "<group>"; };
 		A4430A9C1F95F3E200F2FFFA /* ExchangeRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRate.swift; sourceTree = "<group>"; };
 		A4430A9D1F95F3E200F2FFFA /* ExchangeRateSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateSource.swift; sourceTree = "<group>"; };
 		A4430AA41F95F47300F2FFFA /* SimpleCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCache.swift; sourceTree = "<group>"; };
@@ -794,6 +794,8 @@
 		A493B9381F68137E0074ACCC /* APICredentialsComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICredentialsComponents.swift; sourceTree = "<group>"; };
 		A493B93B1F6819600074ACCC /* BitfinexAuthHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexAuthHeaders.swift; sourceTree = "<group>"; };
 		A493B93E1F681BA00074ACCC /* BitfinexWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexWallet.swift; sourceTree = "<group>"; };
+		A495726C1F98B54900651C89 /* CurrentExchangeRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentExchangeRates.swift; sourceTree = "<group>"; };
+		A495726F1F98B5DE00651C89 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		A4CB29E11F682C2D00128E48 /* BitfinexAPIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexAPIClientTests.swift; sourceTree = "<group>"; };
 		A4E457081F79010A002E2879 /* BalanceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceError.swift; sourceTree = "<group>"; };
 		A4E4570B1F79015D002E2879 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -871,6 +873,7 @@
 				53FCE3481F06B5DC004EB25C /* XCGLogger.framework in Frameworks */,
 				5313F9621F58CFB800DD6BDB /* TrustKit.framework in Frameworks */,
 				53FCE3461F06B5DC004EB25C /* SnapKit.framework in Frameworks */,
+				A49572701F98B62A00651C89 /* HockeySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1213,6 +1216,7 @@
 			children = (
 				532121901EE8B91600F4812A /* Zip */,
 				530F578A1DCD72680083F3A7 /* fmdb */,
+				A495726F1F98B5DE00651C89 /* HockeySDK.framework */,
 				5329FB721E3EA36F00A9CAF7 /* CwlSysctl.swift */,
 				534E83C51D3FB76200F76E8A /* OrderedDictionary.swift */,
 				53980CBE1D5CD6F80013B981 /* Pluralize.swift */,
@@ -1538,6 +1542,7 @@
 				53A179BC1DC923C0006442E4 /* AppLock.swift */,
 				53C078A41DFF7CEB00696666 /* CertValidator.h */,
 				53C078A51DFF7CEB00696666 /* CertValidator.m */,
+				A495726C1F98B54900651C89 /* CurrentExchangeRates.swift */,
 				53F638381C5FEAB800864346 /* Database.swift */,
 				532E392C1CD4521D001AFC31 /* Debugging.swift */,
 				DC65EFA31CE3FDF8006C9373 /* Defaults.swift */,
@@ -1825,7 +1830,6 @@
 		A4430A9A1F95F3E200F2FFFA /* Exchange Rates */ = {
 			isa = PBXGroup;
 			children = (
-				A4430A9B1F95F3E200F2FFFA /* CurrentExchangeRates.swift */,
 				A4430A9C1F95F3E200F2FFFA /* ExchangeRate.swift */,
 				A4430A9D1F95F3E200F2FFFA /* ExchangeRateSource.swift */,
 			);
@@ -2488,6 +2492,7 @@
 				53552A301ED72B5700DD95F9 /* FMDatabasePool.m in Sources */,
 				53552A241ED7252900DD95F9 /* TimeInterval.swift in Sources */,
 				53552A121ED7251200DD95F9 /* NetworkStatus.swift in Sources */,
+				A495726D1F98B56400651C89 /* CurrentExchangeRates.swift in Sources */,
 				535529F91ED7250100DD95F9 /* Syncer.swift in Sources */,
 				53F078651ED73E6D00E7EDF9 /* ThemeGlobals.swift in Sources */,
 				537187E01F4CC23B00E7F9D6 /* GDAXAuthHeaders.swift in Sources */,
@@ -2517,7 +2522,6 @@
 				53552A211ED7252900DD95F9 /* String.swift in Sources */,
 				53552A1A1ED7251700DD95F9 /* Category.swift in Sources */,
 				53561EA71F82DD260043D4F9 /* SettingsViewController.swift in Sources */,
-				A4430AA11F95F3ED00F2FFFA /* CurrentExchangeRates.swift in Sources */,
 				53552A341ED72B5700DD95F9 /* FMDatabaseVariadic.swift in Sources */,
 				53D441F01F44B34B006967E1 /* AccountRepository.swift in Sources */,
 				53762EB31ED796F100D34A1E /* main.swift in Sources */,
@@ -2600,6 +2604,7 @@
 				5321219F1EE8B91600F4812A /* unzip.c in Sources */,
 				537187EB1F4CC23C00E7F9D6 /* GDAXAuthHeaders.swift in Sources */,
 				530415C21DFEBE0200F0679C /* ServerMessage.swift in Sources */,
+				A495726E1F98B56500651C89 /* CurrentExchangeRates.swift in Sources */,
 				A4E457131F7901E6002E2879 /* EthplorerAccount.swift in Sources */,
 				53E8C7801C62F5D40085D64E /* Utils.swift in Sources */,
 				5334023A1DDFB8C4000236A0 /* NetworkStatus.swift in Sources */,
@@ -2611,7 +2616,6 @@
 				53EB77BB1CF3DF6E00F01903 /* Color.swift in Sources */,
 				53762EB11ED793A200D34A1E /* main.swift in Sources */,
 				539348BB1DEBB479009F4564 /* TokenSearchField.swift in Sources */,
-				A4430A9E1F95F3ED00F2FFFA /* CurrentExchangeRates.swift in Sources */,
 				537187F01F4CC23C00E7F9D6 /* PoloniexApi.swift in Sources */,
 				537187F11F4CC23C00E7F9D6 /* PoloniexAccount.swift in Sources */,
 				53EB77CA1CF3E5BC00F01903 /* String.swift in Sources */,
@@ -2827,6 +2831,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Balance/Shared/Frameworks",
 				);
 				INFOPLIST_FILE = "Balance/iOS/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2853,6 +2858,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Balance/Shared/Frameworks",
 				);
 				INFOPLIST_FILE = "Balance/iOS/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2879,6 +2885,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Balance/Shared/Frameworks",
 				);
 				INFOPLIST_FILE = "Balance/iOS/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

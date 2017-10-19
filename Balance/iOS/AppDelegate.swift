@@ -144,8 +144,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                let unwrappedState = state
             {
                 CoinbaseApi.handleAuthenticationCallback(state: unwrappedState, code: unwrappedCode, completion: { (success, error) in
-                    print(success)
-                    print(error)
+                    log.debug(success)
+                    log.debug(error)
                     
                     syncManager.sync()
                 })

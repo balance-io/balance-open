@@ -296,7 +296,7 @@ extension Institution {
                 refreshToken = dictionary["refreshToken"] as? String
             }
             
-            //print("get refreshTokenKey: \(refreshTokenKey)  refreshToken: \(String(describing: refreshToken))")
+            log.debug("get refreshTokenKey: \(refreshTokenKey)  refreshToken: \(String(describing: refreshToken))")
             if refreshToken == nil {
                 // We should always be getting an refresh token becasuse we never read it until after it's been written
                 log.severe("Tried to read refresh token for institution [\(self)] but it didn't work! We must not have keychain access")
@@ -305,7 +305,7 @@ extension Institution {
             return refreshToken
         }
         set {
-            //print("set refreshTokenKey: \(refreshTokenKey)  newValue: \(String(describing: newValue))")
+            log.debug("set refreshTokenKey: \(refreshTokenKey)  newValue: \(String(describing: newValue))")
             if let refreshToken = newValue {
                 do {
                     try Locksmith.updateData(data: ["refreshToken": refreshToken], forUserAccount: refreshTokenKey)
