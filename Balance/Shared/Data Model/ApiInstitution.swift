@@ -35,12 +35,12 @@ struct Field {
 extension Source {
     var apiInstitution: ApiInstitution {
         switch self {
-        case .coinbase: return CoinbaseInstitution()
-        case .gdax:     return GDAXAPIClient.gdaxInstitution
-        case .poloniex: return PoloniexInstitution()
-        case .bitfinex: return BitfinexAPIClient.institution
-        case .kraken:   return KrakenAPIClient.institution
-        case .wallet:   return EthplorerInstitution()
+        case .coinbase:  return CoinbaseInstitution()
+        case .gdax:      return GDAXAPIClient.gdaxInstitution
+        case .poloniex:  return PoloniexInstitution()
+        case .bitfinex:  return BitfinexAPIClient.institution
+        case .kraken:    return KrakenAPIClient.institution
+        case .ethplorer: return EthplorerInstitution()
         }
     }
 }

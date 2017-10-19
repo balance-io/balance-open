@@ -133,7 +133,7 @@ class EthplorerApi: ExchangeApi {
                     }
                     
                     //crete institution
-                    if let institution = InstitutionRepository.si.institution(source: .wallet, sourceInstitutionId: "", name: "\(name)") {
+                    if let institution = InstitutionRepository.si.institution(source: .ethplorer, sourceInstitutionId: "", name: "\(name)") {
                         institution.address = address
                         
                         //create accounts
@@ -183,7 +183,7 @@ class EthplorerApi: ExchangeApi {
         guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] else {
             throw EthplorerApi.CredentialsError.bodyNotValidJSON
         }
-        let ethplorerAccount = try EthplorerAccountObject.init(dictionary: dict, currencyShortName: "ETH", type: .wallet)
+        let ethplorerAccount = try EthplorerAccountObject(dictionary: dict, currencyShortName: "ETH", type: .wallet)
         return ethplorerAccount
     }
     

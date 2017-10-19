@@ -17,12 +17,12 @@ protocol ExchangeApi {
 extension Source {
     var exchangeApi: ExchangeApi {
         switch self {
-        case .coinbase: return CoinbaseApi()
-        case .gdax:     return GDAXAPIClient(server: .production)
-        case .poloniex: return PoloniexApi()
-        case .bitfinex: return BitfinexAPIClient()
-        case .kraken:   return KrakenAPIClient()
-        case .wallet:   return EthplorerApi()
+        case .coinbase:  return CoinbaseApi()
+        case .gdax:      return GDAXAPIClient(server: .production)
+        case .poloniex:  return PoloniexApi()
+        case .bitfinex:  return BitfinexAPIClient()
+        case .kraken:    return KrakenAPIClient()
+        case .ethplorer: return EthplorerApi()
         }
     }
 }

@@ -37,13 +37,13 @@ class AddAccountViewController: NSViewController {
     
     // Buttons
     fileprivate var buttons = [HoverButton]()
-    fileprivate let buttonDrawFunctions: [Source: ButtonFunction] = [.coinbase: InstitutionButtons.drawCoinbaseButton,
-                                                                     .gdax:     InstitutionButtons.drawGdaxButton,
-                                                                     .poloniex: InstitutionButtons.drawPoloniexButton,
-                                                                     .bitfinex: InstitutionButtons.drawBitfinexButton,
-                                                                     .kraken:   InstitutionButtons.drawKrakenButton,
-                                                                     .wallet:   InstitutionButtons.drawAddWalletAddressButton]
-    fileprivate let buttonSourceOrder: [Source] = [.coinbase, .gdax, .poloniex, .bitfinex, .kraken, .wallet]
+    fileprivate let buttonDrawFunctions: [Source: ButtonFunction] = [.coinbase:  InstitutionButtons.drawCoinbaseButton,
+                                                                     .gdax:      InstitutionButtons.drawGdaxButton,
+                                                                     .poloniex:  InstitutionButtons.drawPoloniexButton,
+                                                                     .bitfinex:  InstitutionButtons.drawBitfinexButton,
+                                                                     .kraken:    InstitutionButtons.drawKrakenButton,
+                                                                     .ethplorer: InstitutionButtons.drawAddWalletAddressButton]
+    fileprivate let buttonSourceOrder: [Source] = [.coinbase, .gdax, .poloniex, .bitfinex, .kraken, .ethplorer]
     fileprivate var signUpController: SignUpViewController?
 
     //
