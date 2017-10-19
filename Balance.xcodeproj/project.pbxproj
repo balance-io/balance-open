@@ -313,8 +313,6 @@
 		53F63CD31F82C26600FD4B27 /* ObjcExceptionBridging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F63CD21F82C25D00FD4B27 /* ObjcExceptionBridging.framework */; };
 		53F63CD41F82C26600FD4B27 /* ObjcExceptionBridging.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53F63CD21F82C25D00FD4B27 /* ObjcExceptionBridging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53F63CD81F82C2A100FD4B27 /* ObjcExceptionBridging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F63CD71F82C29700FD4B27 /* ObjcExceptionBridging.framework */; };
-		53F63CDA1F82C2D000FD4B27 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F63CD91F82C2C800FD4B27 /* HockeySDK.framework */; };
-		53F63CDB1F82C2D000FD4B27 /* HockeySDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53F63CD91F82C2C800FD4B27 /* HockeySDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53FCE3411F06B5DC004EB25C /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3391F06B5DC004EB25C /* Locksmith.framework */; };
 		53FCE3421F06B5DC004EB25C /* NSDateTimeAgo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33A1F06B5DC004EB25C /* NSDateTimeAgo.framework */; };
 		53FCE3461F06B5DC004EB25C /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33E1F06B5DC004EB25C /* SnapKit.framework */; };
@@ -388,7 +386,7 @@
 		A493B9401F681BA00074ACCC /* BitfinexWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B93E1F681BA00074ACCC /* BitfinexWallet.swift */; };
 		A495726D1F98B56400651C89 /* CurrentExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = A495726C1F98B54900651C89 /* CurrentExchangeRates.swift */; };
 		A495726E1F98B56500651C89 /* CurrentExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = A495726C1F98B54900651C89 /* CurrentExchangeRates.swift */; };
-		A49572701F98B62A00651C89 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A495726F1F98B5DE00651C89 /* HockeySDK.framework */; };
+		A49572761F98B85800651C89 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A49572751F98B84D00651C89 /* HockeySDK.framework */; };
 		A4CB29E21F682C2D00128E48 /* BitfinexAPIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CB29E11F682C2D00128E48 /* BitfinexAPIClientTests.swift */; };
 		A4E457091F79010A002E2879 /* BalanceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E457081F79010A002E2879 /* BalanceError.swift */; };
 		A4E4570A1F79010A002E2879 /* BalanceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E457081F79010A002E2879 /* BalanceError.swift */; };
@@ -479,7 +477,6 @@
 				53FCE37C1F06B819004EB25C /* XCGLogger.framework in Embed Frameworks */,
 				533674FE1F4CE0C40034040F /* Sparkle.framework in Embed Frameworks */,
 				537596401F50B90A00B36E6E /* TrustKit.framework in Embed Frameworks */,
-				53F63CDB1F82C2D000FD4B27 /* HockeySDK.framework in Embed Frameworks */,
 				53FCE36C1F06B819004EB25C /* Locksmith.framework in Embed Frameworks */,
 				53FCE3641F06B818004EB25C /* BalanceVectorGraphics.framework in Embed Frameworks */,
 				53FCE36A1F06B819004EB25C /* JMSRangeSlider.framework in Embed Frameworks */,
@@ -737,7 +734,6 @@
 		53F63CD21F82C25D00FD4B27 /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjcExceptionBridging.framework; path = Carthage/Build/Mac/ObjcExceptionBridging.framework; sourceTree = SOURCE_ROOT; };
 		53F63CD51F82C28400FD4B27 /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjcExceptionBridging.framework; path = Carthage/Build/iOS/ObjcExceptionBridging.framework; sourceTree = "<group>"; };
 		53F63CD71F82C29700FD4B27 /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjcExceptionBridging.framework; path = Carthage/Build/iOS/ObjcExceptionBridging.framework; sourceTree = SOURCE_ROOT; };
-		53F63CD91F82C2C800FD4B27 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		53FCE3391F06B5DC004EB25C /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/iOS/Locksmith.framework; sourceTree = SOURCE_ROOT; };
 		53FCE33A1F06B5DC004EB25C /* NSDateTimeAgo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NSDateTimeAgo.framework; path = Carthage/Build/iOS/NSDateTimeAgo.framework; sourceTree = SOURCE_ROOT; };
 		53FCE33C1F06B5DC004EB25C /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = SOURCE_ROOT; };
@@ -795,7 +791,8 @@
 		A493B93B1F6819600074ACCC /* BitfinexAuthHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexAuthHeaders.swift; sourceTree = "<group>"; };
 		A493B93E1F681BA00074ACCC /* BitfinexWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexWallet.swift; sourceTree = "<group>"; };
 		A495726C1F98B54900651C89 /* CurrentExchangeRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentExchangeRates.swift; sourceTree = "<group>"; };
-		A495726F1F98B5DE00651C89 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
+		A49572751F98B84D00651C89 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
+		A49572771F98B99500651C89 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		A4CB29E11F682C2D00128E48 /* BitfinexAPIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexAPIClientTests.swift; sourceTree = "<group>"; };
 		A4E457081F79010A002E2879 /* BalanceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceError.swift; sourceTree = "<group>"; };
 		A4E4570B1F79015D002E2879 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -865,6 +862,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A49572761F98B85800651C89 /* HockeySDK.framework in Frameworks */,
 				53FCE3411F06B5DC004EB25C /* Locksmith.framework in Frameworks */,
 				535BE39E1F05A14C00DEA4EF /* libz.tbd in Frameworks */,
 				53FCE3421F06B5DC004EB25C /* NSDateTimeAgo.framework in Frameworks */,
@@ -873,7 +871,6 @@
 				53FCE3481F06B5DC004EB25C /* XCGLogger.framework in Frameworks */,
 				5313F9621F58CFB800DD6BDB /* TrustKit.framework in Frameworks */,
 				53FCE3461F06B5DC004EB25C /* SnapKit.framework in Frameworks */,
-				A49572701F98B62A00651C89 /* HockeySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -886,7 +883,6 @@
 				5374D69D1CE194F100527388 /* QuartzCore.framework in Frameworks */,
 				537B4B041D6B4AE500603060 /* Security.framework in Frameworks */,
 				DC65EFA21CE3FC59006C9373 /* ServiceManagement.framework in Frameworks */,
-				53F63CDA1F82C2D000FD4B27 /* HockeySDK.framework in Frameworks */,
 				533674FD1F4CE0C40034040F /* Sparkle.framework in Frameworks */,
 				53FCE3691F06B819004EB25C /* JMSRangeSlider.framework in Frameworks */,
 				53FCE3771F06B819004EB25C /* SnapKit.framework in Frameworks */,
@@ -1201,7 +1197,7 @@
 		53552A2C1ED72AE600DD95F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				53F63CD91F82C2C800FD4B27 /* HockeySDK.framework */,
+				A49572771F98B99500651C89 /* HockeySDK.framework */,
 				533674FC1F4CE08A0034040F /* Sparkle.framework */,
 				533674FF1F4CE1500034040F /* LetsMove */,
 				53294F951D1DDD9500F08059 /* CCNStatusItem */,
@@ -1216,7 +1212,6 @@
 			children = (
 				532121901EE8B91600F4812A /* Zip */,
 				530F578A1DCD72680083F3A7 /* fmdb */,
-				A495726F1F98B5DE00651C89 /* HockeySDK.framework */,
 				5329FB721E3EA36F00A9CAF7 /* CwlSysctl.swift */,
 				534E83C51D3FB76200F76E8A /* OrderedDictionary.swift */,
 				53980CBE1D5CD6F80013B981 /* Pluralize.swift */,
@@ -1230,6 +1225,7 @@
 		53552A491ED72BE000DD95F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A49572751F98B84D00651C89 /* HockeySDK.framework */,
 				53552A571ED72F6C00DD95F9 /* Carthage */,
 			);
 			path = Frameworks;
@@ -2832,6 +2828,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Balance/Shared/Frameworks",
+					"$(PROJECT_DIR)/Balance/iOS/Frameworks",
 				);
 				INFOPLIST_FILE = "Balance/iOS/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2859,6 +2856,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Balance/Shared/Frameworks",
+					"$(PROJECT_DIR)/Balance/iOS/Frameworks",
 				);
 				INFOPLIST_FILE = "Balance/iOS/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2886,6 +2884,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Balance/Shared/Frameworks",
+					"$(PROJECT_DIR)/Balance/iOS/Frameworks",
 				);
 				INFOPLIST_FILE = "Balance/iOS/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
