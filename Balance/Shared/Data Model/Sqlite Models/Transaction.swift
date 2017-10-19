@@ -148,7 +148,7 @@ internal extension Transaction {
         if self.currency == masterCurrency.code {
             return self.amount
         } else {
-            return syncManager.currentExchangeRates.convert(amount: self.amount, from: Currency.rawValue(self.currency), to: masterCurrency, source: self.source.exchangeRateSource)
+            return currentExchangeRates.convert(amount: self.amount, from: Currency.rawValue(self.currency), to: masterCurrency, source: self.source.exchangeRateSource)
         }
     }
 }
