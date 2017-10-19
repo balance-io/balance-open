@@ -21,6 +21,12 @@ internal final class AccountTableViewCell: TableViewCell {
     }
     
     // Private
+    private let bottomBorder: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(white: 1.0, alpha: 0.06)
+        
+        return view
+    }()
     
     // MARK: Initialization
     
@@ -37,6 +43,16 @@ internal final class AccountTableViewCell: TableViewCell {
         // Detail label
         self.detailTextLabel?.textColor = UIColor.white
         self.detailTextLabel?.font = UIFont.systemFont(ofSize: 14.0, weight: .light)
+        
+        // Bottom border
+        self.contentView.addSubview(self.bottomBorder)
+        
+        self.bottomBorder.snp.makeConstraints { (make) in
+            make.height.equalTo(1.0)
+            make.bottom.equalToSuperview()
+            make.right.equalToSuperview()
+            make.left.equalToSuperview().inset(18.0)
+        }
     }
     
     internal required init?(coder aDecoder: NSCoder) {

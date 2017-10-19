@@ -40,6 +40,7 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
         
         // Container
         self.container.layer.cornerRadius = 20.0
+        self.container.layer.masksToBounds = true
         self.container.layer.borderColor = UIColor.black.cgColor
         self.container.layer.borderWidth = 0.5
         self.contentView.addSubview(self.container)
@@ -49,8 +50,8 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
         }
         
         // Table view
-        self.tableView.isUserInteractionEnabled = false
         self.tableView.separatorStyle = .none
+        self.tableView.isUserInteractionEnabled = false
         self.tableView.backgroundView = nil
         self.tableView.backgroundColor = UIColor.clear
         self.tableView.dataSource = self

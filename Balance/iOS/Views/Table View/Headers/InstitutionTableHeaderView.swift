@@ -40,6 +40,13 @@ internal final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Re
         return label
     }()
     
+    private let bottomBorder: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(white: 1.0, alpha: 0.06)
+        
+        return view
+    }()
+    
     // MARK: Initialization
     
     internal override init(reuseIdentifier: String?) {
@@ -71,6 +78,16 @@ internal final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Re
             make.width.equalTo(140.0)
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
+        }
+        
+        // Bottom border
+        self.contentView.addSubview(self.bottomBorder)
+        
+        self.bottomBorder.snp.makeConstraints { (make) in
+            make.height.equalTo(1.0)
+            make.bottom.equalToSuperview()
+            make.right.equalToSuperview()
+            make.left.equalToSuperview().inset(18.0)
         }
     }
     
