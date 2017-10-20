@@ -103,8 +103,17 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
 }
 
 - (void)updateWindowOrigin {
+    NSRect screenRect = [[NSScreen mainScreen] frame];
     CGRect statusItemRect = [[self.statusItemView.statusItem.button window] frame];
-    CGPoint windowOrigin = CGPointMake(NSMinX(statusItemRect) - NSWidth(self.window.frame) / 2 + NSWidth(statusItemRect) / 2,
+    
+    NSRect statusRectRelativeToScreen = [[self.statusItemView.statusItem.button window] convertRectToScreen:screenRect];
+    
+    CGFloat xOrigin = NSMinX(statusRectRelativeToScreen) - NSWidth(self.window.frame) / 2 + NSWidth(statusRectRelativeToScreen) / 2;
+    CGFloat screenOverflow = (xOrigin + NSWidth(self.window.frame)) - NSWidth(screenRect);
+    if (screenOverflow > 0) {
+        xOrigin = xOrigin - screenOverflow;
+    }
+    CGPoint windowOrigin = CGPointMake(xOrigin,
                                        NSMinY(statusItemRect) - NSHeight(self.window.frame) - self.windowConfiguration.windowToStatusItemMargin);
     [self.window setFrameOrigin:windowOrigin];
 }
