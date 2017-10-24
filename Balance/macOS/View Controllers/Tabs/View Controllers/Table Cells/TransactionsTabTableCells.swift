@@ -19,26 +19,13 @@ class TransactionsTabGroupCell: View {
     init() {
         super.init(frame: NSZeroRect)
         
-        //            blurryView.blendingMode = .withinWindow
-        //            blurryView.material = CurrentTheme.defaults.material
-        blurryView.wantsLayer = true
-        //            blurryView.state = .active
-        blurryView.layerBackgroundColor = CurrentTheme.transactions.headerCell.backgroundColor
-        self.addSubview(blurryView)
-        blurryView.snp.makeConstraints { make in
-            make.leading.equalTo(self)
-            make.trailing.equalTo(self)
-            make.top.equalTo(self)
-            make.bottom.equalTo(self)
-        }
-        
         dateField.textColor = CurrentTheme.transactions.headerCell.dateColor
         dateField.font = CurrentTheme.transactions.headerCell.dateFont
+        dateField.alphaValue = CurrentTheme.transactions.headerCell.dateAlpha
         self.addSubview(dateField)
         dateField.snp.makeConstraints { make in
-            make.centerX.equalTo(self)
-            make.centerY.equalTo(self).offset(1)
-            make.height.equalTo(14)
+            make.left.equalToSuperview().offset(10)
+            make.centerY.equalTo(self)
         }
     }
     
@@ -53,13 +40,7 @@ class TransactionsTabGroupCell: View {
         let calendar = Calendar.current
         let currentYear = (calendar as NSCalendar).component(.year, from: Date())
         
-        blurryView.layerBackgroundColor = CurrentTheme.transactions.headerCell.backgroundColor
-        dateField.textColor = CurrentTheme.transactions.headerCell.dateColor
-        if model == Date.distantFuture {
-            blurryView.layerBackgroundColor = CurrentTheme.transactions.headerCell.pendingBackgroundColor
-            dateField.textColor = CurrentTheme.transactions.headerCell.pendingDateColor
-            dateString = "Pending"
-        } else if calendar.isDateInToday(model) {
+        if calendar.isDateInToday(model) {
             dateString = "Today"
         } else if calendar.isDateInYesterday(model) {
             dateString = "Yesterday"
@@ -73,9 +54,8 @@ class TransactionsTabGroupCell: View {
             
             dateString = dateFormatter.string(from: model)
         }
-        dateString = dateString.uppercased()
         
-        dateField.attributedStringValue = NSAttributedString(string: dateString, attributes: [NSAttributedStringKey.kern: 0.82])
+        dateField.stringValue = dateString.uppercased()
     }
 }
 
@@ -91,11 +71,12 @@ class TransactionsTabTransactionCell: View {
     var index = TableIndex.none
     
     let topContainer = View()
-    let institutionInitialsCircleView = InstitutionInitialsCircleView()
+    let topBackgroundView = View()
+    let typeField = LabelField()
     let amountField = LabelField()
-    let centerNameField = LabelField()
-    let nameField = LabelField()
-    let addressField = LabelField()
+    let institutionLogo = PaintCodeView()
+    let institutionName = LabelField()
+    let altAmountField = LabelField()
     
     var bottomContainerOpened = false
     var bottomContainer: View!
@@ -111,18 +92,20 @@ class TransactionsTabTransactionCell: View {
         
         self.addSubview(topContainer)
         topContainer.snp.makeConstraints { make in
-            make.top.equalTo(self)
-            make.leading.equalTo(self)
-            make.trailing.equalTo(self)
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
             make.height.equalTo(CurrentTheme.transactions.cell.height)
         }
         
-        topContainer.addSubview(institutionInitialsCircleView)
-        institutionInitialsCircleView.snp.makeConstraints { make in
-            make.height.equalTo(22)
-            make.centerY.equalTo(topContainer)
-            make.leading.equalTo(topContainer).inset(10)
-            make.width.equalTo(22)
+        topBackgroundView.cornerRadius = 12
+        topBackgroundView.layerBackgroundColor = CurrentTheme.transactions.cell.backgroundViewColor
+        topContainer.addSubview(topBackgroundView)
+        topBackgroundView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.height.equalToSuperview().offset(-10)
         }
         
         amountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
@@ -135,45 +118,16 @@ class TransactionsTabTransactionCell: View {
             make.trailing.equalTo(topContainer).inset(10)
             make.bottom.equalTo(-14)
         }
-        
-        centerNameField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
-        centerNameField.alignment = .left
-        centerNameField.font = CurrentTheme.transactions.cell.nameFont
-        centerNameField.textColor = CurrentTheme.defaults.foregroundColor
-        centerNameField.usesSingleLineMode = true
-        centerNameField.cell?.lineBreakMode = .byTruncatingTail
-        topContainer.addSubview(centerNameField)
-        centerNameField.snp.makeConstraints { make in
-            make.leading.equalTo(institutionInitialsCircleView.snp.trailing).offset(7)
-            make.trailing.equalTo(amountField.snp.leading).inset(5)
-            make.centerY.equalTo(topContainer).offset(-0.5)
-        }
-        
-        nameField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
-        nameField.alignment = .left
-        nameField.font = CurrentTheme.transactions.cell.nameFont
-        nameField.textColor = CurrentTheme.defaults.foregroundColor
-        nameField.usesSingleLineMode = true
-        nameField.cell?.lineBreakMode = .byTruncatingTail
-        topContainer.addSubview(nameField)
-        nameField.snp.makeConstraints { make in
-            make.leading.equalTo(centerNameField)
-            make.trailing.equalTo(centerNameField)
-            make.top.equalTo(topContainer).offset(5)
-        }
-        
-        addressField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
-        addressField.alignment = .left
-        addressField.font = CurrentTheme.transactions.cell.addressFont
-        addressField.textColor = CurrentTheme.transactions.cell.addressColor
-        addressField.usesSingleLineMode = true
-        addressField.cell?.lineBreakMode = .byTruncatingTail
-        topContainer.addSubview(addressField)
-        addressField.snp.makeConstraints { make in
-            make.leading.equalTo(nameField)
-            make.trailing.equalTo(nameField)
-            make.height.equalTo(14).priority(0.1)
-            make.top.equalTo(nameField.snp.bottom).offset(2)
+
+        amountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
+        amountField.font = CurrentTheme.transactions.cell.amountFont
+        amountField.usesSingleLineMode = true
+        amountField.alignment = .right
+        topContainer.addSubview(amountField)
+        amountField.snp.makeConstraints { make in
+            make.width.equalTo(100)
+            make.trailing.equalTo(topContainer).inset(10)
+            make.bottom.equalTo(-14)
         }
         
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(cellOpened(_:)), name: TransactionsTabViewController.InternalNotifications.CellOpened)
@@ -194,19 +148,9 @@ class TransactionsTabTransactionCell: View {
         
         model = updatedModel
         
-        institutionInitialsCircleView.circleColor = updatedModel.institution?.displayColor
-        institutionInitialsCircleView.stringValue = updatedModel.institution?.initials ?? ""
-        
         //let masterCurrency = defaults.masterCurrency
         let currency = Currency.rawValue(updatedModel.currency)
         amountField.stringValue = amountToString(amount: -updatedModel.amount, currency: currency, showNegative: false, showCodeAfterValue: true)
-        centerNameField.stringValue = updatedModel.displayName
-        nameField.stringValue = ""
-        addressField.stringValue = ""
-        
-        centerNameField.isHidden = false
-        nameField.isHidden = true
-        addressField.isHidden = true
         
         self.toolTip = updatedModel.displayName
     }
@@ -221,7 +165,7 @@ class TransactionsTabTransactionCell: View {
         self.addSubview(bottomContainer)
         bottomContainer.snp.makeConstraints { make in
             make.top.equalTo(topContainer.snp.bottom)
-            make.leading.equalTo(institutionInitialsCircleView)
+            make.leading.equalToSuperview()
             make.trailing.equalTo(amountField)
             make.height.equalTo(229)
         }

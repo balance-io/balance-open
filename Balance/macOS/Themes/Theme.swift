@@ -20,7 +20,6 @@ protocol Theme {
     var addAccounts: AddAccountsTheme { get }
     var accounts: AccountsTheme { get }
     var transactions: TransactionsTheme { get }
-    var feed: FeedTheme { get }
 }
 
 struct DefaultsTheme {
@@ -185,103 +184,30 @@ struct AccountsTheme {
 }
 
 struct TransactionsTheme {
+    let noResultsFont: NSFont
     let headerCell: TransactionsTheme.HeaderCellTheme
     let cell: TransactionsTheme.CellTheme
     let cellExpansion: TransactionsTheme.CellExpansionTheme
     
     struct HeaderCellTheme {
         let height: CGFloat
-        let backgroundColor: NSColor
-        let pendingBackgroundColor: NSColor
         let dateFont: NSFont
         let dateColor: NSColor
-        let pendingDateColor: NSColor
+        let dateAlpha: CGFloat
     }
     
     struct CellTheme {
         let height: CGFloat
         let dimmedAlpha: CGFloat
         
+        let backgroundViewColor: NSColor
+        
         let nameFont: NSFont
-        
-        let addressFont: NSFont
-        let addressColor: NSColor
-        
+
         let amountFont: NSFont
         let amountColor: NSColor
         let amountColorCents: NSColor
         let amountColorPositive: NSColor
-        
-        let institutionCircleBackground: NSColor
-        let institutionInitialsFont: NSFont
-        let institutionInitialsColor: NSColor
-    }
-    
-    struct CellExpansionTheme {
-        let institutionFont: NSFont
-        let accountFont: NSFont
-        let fontColor: NSColor
-        let institutionBackground: NSColor
-    }
-}
-
-struct FeedTheme {
-    let emptyState: FeedTheme.EmptyState
-    let defaultRulesPrompt: FeedTheme.DefaultRulesPromptTheme
-    let notificationsBar: FeedTheme.NotificationsBar
-    let headerCell: FeedTheme.HeaderCellTheme
-    let cell: FeedTheme.CellTheme
-    let cellExpansion: FeedTheme.CellExpansionTheme
-    
-    struct EmptyState {
-        let icon: NSImage
-        let titleFont: NSFont
-        let bodyFont: NSFont
-    }
-    
-    struct DefaultRulesPromptTheme {
-        let headerFont: NSFont
-        let headerTextColor : NSColor
-        let buttonTextColor: NSColor
-        let nameFont: NSFont
-        let nameBoldFont: NSFont
-        let nameTextColor: NSColor
-        let categoryBackgroundColor: NSColor
-        let separatorColor: NSColor
-    }
-    
-    struct NotificationsBar {
-        let noUnreadColor1: NSColor
-        let noUnreadColor2: NSColor
-        
-        let unreadColor1: NSColor
-        let unreadColor2: NSColor
-        
-        let font: NSFont
-        let fontColor: NSColor
-    }
-    
-    struct HeaderCellTheme {
-        let height: CGFloat
-        let backgroundColor: NSColor
-        let dateFont: NSFont
-        let dateColor: NSColor
-    }
-    
-    struct CellTheme {
-        let height: CGFloat
-        let dimmedAlpha: CGFloat
-        
-        let nameFont: NSFont
-        let nameColor: NSColor
-        
-        let nameBoldFont: NSFont
-        let nameBoldColor: NSColor
-        
-        let ruleFont: NSFont
-        let ruleColor: NSColor
-        
-        let unreadIndicatorColor: NSColor
     }
     
     struct CellExpansionTheme {
