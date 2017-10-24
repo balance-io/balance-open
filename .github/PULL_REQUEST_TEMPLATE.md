@@ -2,7 +2,7 @@
  - [ ] Feature
  - [ ] Bug
 
-**Does this pull reqeust close an issue? If so, which one?**
+**Does this pull request close an issue? If so, which one?**
 
 
 **What does this pull request do? What does it change?**
