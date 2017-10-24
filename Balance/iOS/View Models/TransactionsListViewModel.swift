@@ -32,6 +32,7 @@ internal final class TransactionsListViewModel {
     internal required init() {
         // Notifications
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(self.syncCompletedNotification(_:)), name: Notifications.SyncCompleted)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(self.institutionRemovedNotification(_:)), name: Notifications.InstitutionRemoved)
         
         self.reloadData()
     }
@@ -70,6 +71,10 @@ internal final class TransactionsListViewModel {
     // MARK: Notifications
     
     @objc private func syncCompletedNotification(_ notification: Notification) {
+        self.reloadData()
+    }
+    
+    @objc private func institutionRemovedNotification(_ notification: Notification) {
         self.reloadData()
     }
 }
