@@ -137,6 +137,7 @@ struct OpenTheme: Theme {
             passwordInvalidDimmedAlpha: 0.50,
             
             nameFont: NSFont.systemFont(ofSize: 14),
+            nameColor: NSColor(deviceWhiteInt: 255, alpha: 1.0),
             
             amountFont: NSFont.monospacedDigitSystemFont(ofSize: 14),
             amountColor: NSColor(deviceWhiteInt: 255, alpha: 0.9),

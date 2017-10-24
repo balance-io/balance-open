@@ -151,7 +151,8 @@ struct AccountsTheme {
         let passwordInvalidDimmedAlpha: CGFloat
         
         let nameFont: NSFont
-        
+        let nameColor: NSColor
+
         let amountFont: NSFont
         let amountColor: NSColor
         let amountColorCents: NSColor
