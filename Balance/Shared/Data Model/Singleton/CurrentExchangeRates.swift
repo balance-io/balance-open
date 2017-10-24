@@ -49,17 +49,17 @@ class CurrentExchangeRates {
             } else {
                 //change currency and loop through all sources to get a connecting currency to use as middle point
                 for currency in source.mainCurrencies {
-                    var fromRate: Double? = directConvert(amount: amount, from: from, to: currency, source: source)
-                    var toRate: Double? = directConvert(amount: amount, from: currency, to: to, source: source)
+                    var fromRate: Double? = getRate(from: from, to: currency, source: source)
+                    var toRate: Double? = getRate(from: currency, to: to, source: source)
                     for source in ExchangeRateSource.all {
                         if currency == from || currency == to {
                             continue
                         }
-                        if fromRate == nil, let newfromRate = directConvert(amount: amount, from: from, to: currency, source: source) {
+                        if fromRate == nil, let newfromRate = getRate(from: from, to: currency, source: source) {
                             fromRate = newfromRate
                         }
                         
-                        if toRate == nil, let newtoRate = directConvert(amount: amount, from: currency, to: to, source: source) {
+                        if toRate == nil, let newtoRate = getRate(from: currency, to: to, source: source) {
                             toRate = newtoRate
                         }
                         if fromRate != nil && toRate != nil {
@@ -76,14 +76,23 @@ class CurrentExchangeRates {
         
         log.debug("converting from \(from) to \(to) source \(source)")
         
+        if let rate = getRate(from: from, to: to, source: source) {
+            return amount * rate
+        }
+        return nil
+    }
+    
+    public func getRate(from: Currency, to: Currency, source: ExchangeRateSource) -> Double? {
+        log.debug("converting from \(from) to \(to) source \(source)")
+        
         if let exchangeRates = exchangeRates(forSource: source) {
             // First check if the exact rate exists (either directly or reversed)
             if let rate = exchangeRates.rate(from: from, to: to) {
                 log.debug("found direct conversion")
-                return amount * rate
+                return rate
             } else if let rate = exchangeRates.rate(from: to, to: from) {
                 log.debug("found direct reverse conversion")
-                return amount * (1.0 / rate)
+                return (1.0 / rate)
             }
         }
         
