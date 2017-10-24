@@ -141,7 +141,9 @@ extension Account {
             if altCurrency == masterCurrency.code {
                 return altCurrentBalance
             } else {
-                return currentExchangeRates.convert(amount: altCurrentBalance, from: Currency.rawValue(altCurrency), to: masterCurrency, source: source.exchangeRateSource)
+                let amount: Double = Double(altCurrentBalance) / pow(10.0, Double(Currency.rawValue(altCurrency).decimals))
+                guard amount > 0 else { return 0 }
+                return currentExchangeRates.convert(amount: amount, from: Currency.rawValue(altCurrency), to: masterCurrency, source: source.exchangeRateSource)?.integerValueWith(decimals: masterCurrency.decimals)
             }
         }
         
@@ -149,7 +151,9 @@ extension Account {
         if currency == masterCurrency.code {
             return currentBalance
         } else {
-            return currentExchangeRates.convert(amount: currentBalance, from: Currency.rawValue(currency), to: masterCurrency, source: source.exchangeRateSource)
+            let amount: Double = Double(currentBalance) / pow(10.0, Double(Currency.rawValue(currency).decimals))
+            guard amount > 0 else { return 0 }
+            return currentExchangeRates.convert(amount: amount, from: Currency.rawValue(currency), to: masterCurrency, source: source.exchangeRateSource)?.integerValueWith(decimals: masterCurrency.decimals)
         }
     }
     
@@ -161,7 +165,9 @@ extension Account {
             if altCurrency == masterCurrency.code {
                 return altAvailableBalance
             } else {
-                return currentExchangeRates.convert(amount: altAvailableBalance, from: Currency.rawValue(altCurrency), to: masterCurrency, source: source.exchangeRateSource)
+                let amount: Double = Double(altAvailableBalance) / pow(10.0, Double(Currency.rawValue(altCurrency).decimals))
+                guard amount > 0 else { return 0 }
+                return currentExchangeRates.convert(amount: amount, from: Currency.rawValue(altCurrency), to: masterCurrency, source: source.exchangeRateSource)?.integerValueWith(decimals: masterCurrency.decimals)
             }
         }
         
@@ -170,7 +176,9 @@ extension Account {
             if currency == masterCurrency.code {
                 return availableBalance
             } else {
-                return currentExchangeRates.convert(amount: availableBalance, from: Currency.rawValue(currency), to: masterCurrency, source: source.exchangeRateSource)
+                let amount: Double = Double(availableBalance) / pow(10.0, Double(Currency.rawValue(currency).decimals))
+                guard amount > 0 else { return 0 }
+                return currentExchangeRates.convert(amount: amount, from: Currency.rawValue(currency), to: masterCurrency, source: source.exchangeRateSource)?.integerValueWith(decimals: masterCurrency.decimals)
             }
         }
         return nil
