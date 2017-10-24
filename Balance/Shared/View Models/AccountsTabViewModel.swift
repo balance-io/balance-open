@@ -44,7 +44,6 @@ class AccountsTabViewModel: TabViewModel {
             if let accounts = data[institution] {
                 for account in accounts {
                     if !excludedAccountIds.contains(account.accountId) {
-                        print("THIS SHIT: \(account.displayAltBalance) in currency \(account.altCurrency) from \(account.displayBalance)\(account.currency)")
                         runningTotal = runningTotal + (account.displayAltBalance ?? 0)
                     }
                 }
