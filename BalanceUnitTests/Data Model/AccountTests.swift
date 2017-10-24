@@ -46,17 +46,15 @@ class AccountTests: XCTestCase {
         XCTAssertEqual(account.displayBalance, 0)
     }
     
-    func testAccountConversionToEuro() {
+    func testAccountConversionToEuroWhenNoExchangeAltBalanceIsNil() {
         
         // given
         defaults.masterCurrency = .eur
         let account = Account.init(accountId: 659, institutionId: 9, source: .poloniex, sourceAccountId: "SYS", sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: "Syscoin", currency: "SYS", currentBalance: 89825000000, availableBalance: nil, number: nil, altCurrency: "BTC", altCurrentBalance: 2493450, altAvailableBalance: nil, repository: AccountRepository.si)
         
         // then
-        XCTAssertEqual(account.masterAltCurrentBalance, nil)
-        XCTAssertEqual(account.masterAltAvailableBalance, nil)
         XCTAssertEqual(account.displayAltBalance, nil)
-        XCTAssertEqual(account.displayBalance, nil)
-        XCTAssertEqual(account.displayName, nil)
+        XCTAssertEqual(account.displayBalance, 89825000000)
+        XCTAssertEqual(account.displayName, "SYS")
     }
 }
