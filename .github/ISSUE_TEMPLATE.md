@@ -6,7 +6,7 @@
 
 
 
-**If the current behavior is a bug, please provide the steps to reproduce. Use a screenshot, or a video as necessary.**
+**If the current behavior is a bug, please provide the steps to reproduce starting from "launch Balance". If possible, please include a screenshot or a video.**
 
 
 
@@ -14,6 +14,6 @@
 
 
 
-**Which version of Balance Open is affected by this issue? Did this work in previous versions of Balance Open?**
+**Which version of Balance is affected by this issue? Did this work in previous versions of Balance?**
 
 
