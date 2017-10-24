@@ -50,7 +50,7 @@ internal final class SettingsViewController: UIViewController
         
         // Navigation bar
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(self.logoutButtonTapped(_:)))
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(self.logoutButtonTapped(_:)))
         
         // Table view
         self.tableView.dataSource = self
