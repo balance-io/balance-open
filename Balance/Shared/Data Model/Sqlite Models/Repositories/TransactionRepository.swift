@@ -270,8 +270,8 @@ struct TransactionRepository: ItemRepository {
         database.read.inDatabase { db in
             do {
                 let statement = "SELECT transactions.*, accounts.sourceInstitutionId, accounts.institutionId " +
-                    "FROM transactions LEFT JOIN accounts ON transactions.accountId = accounts.accountId " +
-                "ORDER BY transactions.date DESC"
+                                "FROM transactions LEFT JOIN accounts ON transactions.accountId = accounts.accountId " +
+                                "ORDER BY transactions.date DESC"
                 let result = try db.executeQuery(statement)
                 
                 var firstRow = true

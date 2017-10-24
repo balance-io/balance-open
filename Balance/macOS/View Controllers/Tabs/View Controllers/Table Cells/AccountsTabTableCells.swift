@@ -157,7 +157,7 @@ class AccountsTabAccountCell: View {
         nameField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
         nameField.alignment = .left
         nameField.font = CurrentTheme.accounts.cell.nameFont
-        nameField.textColor = CurrentTheme.defaults.foregroundColor
+        nameField.textColor = CurrentTheme.accounts.cell.nameColor
         nameField.usesSingleLineMode = true
         nameField.cell?.lineBreakMode = .byTruncatingTail
         topContainer.addSubview(nameField)

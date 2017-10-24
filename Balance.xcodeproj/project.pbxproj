@@ -420,7 +420,6 @@
 		A4E7680D1F67E410002B1AE1 /* APICredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E7680B1F67E410002B1AE1 /* APICredentials.swift */; };
 		A4E768101F67F049002B1AE1 /* APICredentialsComponentsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E7680F1F67F049002B1AE1 /* APICredentialsComponentsError.swift */; };
 		A4E768111F67F049002B1AE1 /* APICredentialsComponentsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E7680F1F67F049002B1AE1 /* APICredentialsComponentsError.swift */; };
-		AA4776591DEA901900110685 /* InstitutionInitialsCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4776581DEA901900110685 /* InstitutionInitialsCircleView.swift */; };
 		DC1A649F1B867B1F009356A0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1A649D1B867B1F009356A0 /* MainMenu.xib */; };
 		DC33D6D21CDDB22900E213FF /* ObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = DC33D6D11CDDB22900E213FF /* ObjC.m */; };
 		DC39E0001CD80D0E00B48F75 /* HoverButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC39DFFF1CD80D0E00B48F75 /* HoverButton.swift */; };
@@ -804,7 +803,6 @@
 		A4E768081F67DDFE002B1AE1 /* BitfinexErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexErrors.swift; sourceTree = "<group>"; };
 		A4E7680B1F67E410002B1AE1 /* APICredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICredentials.swift; sourceTree = "<group>"; };
 		A4E7680F1F67F049002B1AE1 /* APICredentialsComponentsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICredentialsComponentsError.swift; sourceTree = "<group>"; };
-		AA4776581DEA901900110685 /* InstitutionInitialsCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionInitialsCircleView.swift; sourceTree = "<group>"; };
 		DC1A64941B867B1F009356A0 /* BalanceOpen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BalanceOpen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC1A64981B867B1F009356A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC1A64991B867B1F009356A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -830,7 +828,6 @@
 		F12B5E961D6CC8B600F26AAB /* Singletons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Singletons.swift; sourceTree = "<group>"; };
 		F13456D71D81614000C1443B /* AccountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
 		F13B19121D89576400DB1D4F /* AddFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFeed.swift; sourceTree = "<group>"; };
-		F14C80D41D646A7400D97E57 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		F153E4B11D7438B100DAE02C /* AddAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccount.swift; sourceTree = "<group>"; };
 		F194E3331D79E1AE005CA998 /* InfoTesting.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InfoTesting.plist; sourceTree = "<group>"; };
 		F19BF6711D8328DB00496A66 /* RearrangeAccounts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RearrangeAccounts.swift; sourceTree = "<group>"; };
@@ -1089,7 +1086,6 @@
 				5391A4D61CE5048500B9FBD9 /* CategoryView.swift */,
 				DC39DFFF1CD80D0E00B48F75 /* HoverButton.swift */,
 				539085321CF97D00009D6E87 /* HoverTableRowView.swift */,
-				AA4776581DEA901900110685 /* InstitutionInitialsCircleView.swift */,
 				28FD09C11D99F18500A395AB /* PaintCodeButton.swift */,
 				533402291DDD0E5E000236A0 /* PaintCodeView.swift */,
 				539348B81DEBA600009F4564 /* RoundedBackgroundAttributeView.swift */,
@@ -1875,7 +1871,6 @@
 		DC1A648B1B867B1F009356A0 = {
 			isa = PBXGroup;
 			children = (
-				F14C80D41D646A7400D97E57 /* Config.xcconfig */,
 				53328D731E0260720075EC92 /* get_pin_from_certificate.py */,
 				DC1A64961B867B1F009356A0 /* Balance */,
 				DC65EF901CE3E2CD006C9373 /* Bal Helper */,
@@ -2124,6 +2119,7 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = Q4G66XSS36;
 						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -2143,6 +2139,7 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = Q4G66XSS36;
 						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 0;
@@ -2615,7 +2612,6 @@
 				A41742901F73C6BF004A9B4F /* CoinbaseTransaction.swift in Sources */,
 				5302912D1C6A731F00C31CC1 /* Account.swift in Sources */,
 				53CED06A1D19B26000CE1B73 /* VisualEffectView.swift in Sources */,
-				AA4776591DEA901900110685 /* InstitutionInitialsCircleView.swift in Sources */,
 				530415BE1DFE1A6E00F0679C /* NSTextView.swift in Sources */,
 				53DC85B11E678223007C72EB /* FileManager.swift in Sources */,
 				532121A51EE8B91600F4812A /* Zip.swift in Sources */,
@@ -2734,7 +2730,6 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Q4G66XSS36;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2760,7 +2755,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = Q4G66XSS36;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2786,7 +2781,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = Q4G66XSS36;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2807,7 +2802,6 @@
 		};
 		DC1A64AC1B867B1F009356A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F14C80D41D646A7400D97E57 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -2831,7 +2825,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "$(inherited)";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2865,7 +2859,6 @@
 		};
 		DC1A64AD1B867B1F009356A0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F14C80D41D646A7400D97E57 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -2889,7 +2882,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "$(inherited)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2916,17 +2908,16 @@
 		};
 		DC1A64AF1B867B1F009356A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F14C80D41D646A7400D97E57 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Balance/macOS/Supporting Files/Balance.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = Q4G66XSS36;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -2940,6 +2931,7 @@
 				PRODUCT_MODULE_NAME = BalancemacOS;
 				PRODUCT_NAME = BalanceOpen;
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_INCLUDE_PATHS = "$(PROJECT_DIR)/Balance/Shared/Frameworks/Zip/minizip";
 				SWIFT_OBJC_BRIDGING_HEADER = "Balance/macOS/Supporting Files/Bal-Bridging-Header-macOS.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -2949,16 +2941,15 @@
 		};
 		DC1A64B01B867B1F009356A0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F14C80D41D646A7400D97E57 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Balance/macOS/Supporting Files/Balance.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = Q4G66XSS36;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -2972,6 +2963,7 @@
 				PRODUCT_MODULE_NAME = BalancemacOS;
 				PRODUCT_NAME = BalanceOpen;
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_INCLUDE_PATHS = "$(PROJECT_DIR)/Balance/Shared/Frameworks/Zip/minizip";
 				SWIFT_OBJC_BRIDGING_HEADER = "Balance/macOS/Supporting Files/Bal-Bridging-Header-macOS.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -2981,49 +2973,48 @@
 		};
 		DC65EF991CE3E2CD006C9373 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F14C80D41D646A7400D97E57 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = Q4G66XSS36;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Bal Helper/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "software.balanced.balancemac-autolaunch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
 		DC65EF9A1CE3E2CD006C9373 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F14C80D41D646A7400D97E57 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = Q4G66XSS36;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Bal Helper/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "software.balanced.balancemac-autolaunch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
 		F194E33B1D79E2A0005CA998 /* UITesting */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F14C80D41D646A7400D97E57 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -3047,7 +3038,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "$(inherited)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -3081,17 +3071,16 @@
 		};
 		F194E33C1D79E2A0005CA998 /* UITesting */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F14C80D41D646A7400D97E57 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Balance/macOS/Supporting Files/Balance.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = Q4G66XSS36;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -3105,6 +3094,7 @@
 				PRODUCT_MODULE_NAME = BalancemacOS;
 				PRODUCT_NAME = BalanceOpen;
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_INCLUDE_PATHS = "$(PROJECT_DIR)/Balance/Shared/Frameworks/Zip/minizip";
 				SWIFT_OBJC_BRIDGING_HEADER = "Balance/macOS/Supporting Files/Bal-Bridging-Header-macOS.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -3114,21 +3104,21 @@
 		};
 		F194E33F1D79E2A0005CA998 /* UITesting */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F14C80D41D646A7400D97E57 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = Q4G66XSS36;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Bal Helper/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "software.balanced.balancemac-autolaunch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 			};
 			name = UITesting;
@@ -3139,7 +3129,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3170,7 +3159,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3201,7 +3189,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (

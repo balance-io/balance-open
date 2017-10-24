@@ -15,7 +15,7 @@ struct OpenTheme: Theme {
     var defaults: DefaultsTheme {
         let appearance = NSAppearance(named: NSAppearance.Name.vibrantDark) ?? NSAppearance.current!
         let backgroundColor = NSColor(hexString: "#ecedef")!
-        let foregroundColor = NSColor(deviceWhiteInt: 255)
+        let foregroundColor = NSColor.black
         let material = NSVisualEffectView.Material.dark
         let size = CGSize(width: 400, height: 600)
         let touchBarFont = NSFont.systemFont(ofSize: 15)
@@ -82,7 +82,7 @@ struct OpenTheme: Theme {
         let welcomeFont = NSFont.lightSystemFont(ofSize: 21)
 
         let labelFont = NSFont.systemFont(ofSize: 13)
-        let textColor = NSColor.white
+        let textColor = NSColor.black
         
         let statusFont = NSFont.systemFont(ofSize: 14)
         let statusColor = NSColor(deviceWhiteInt: 255, alpha: 0.7)
@@ -137,6 +137,7 @@ struct OpenTheme: Theme {
             passwordInvalidDimmedAlpha: 0.50,
             
             nameFont: NSFont.systemFont(ofSize: 14),
+            nameColor: NSColor(deviceWhiteInt: 255, alpha: 1.0),
             
             amountFont: NSFont.monospacedDigitSystemFont(ofSize: 14),
             amountColor: NSColor(deviceWhiteInt: 255, alpha: 0.9),
@@ -172,32 +173,27 @@ struct OpenTheme: Theme {
     }
     
     var transactions: TransactionsTheme {
+        let noResultsFont = NSFont.systemFont(ofSize: 13.5)
+        
         let headerCell = TransactionsTheme.HeaderCellTheme(
-            height: 20.0,
-            backgroundColor: NSColor(deviceRedInt: 46, green: 56, blue: 66),
-            pendingBackgroundColor: NSColor(deviceRedInt: 219, green: 87, blue: 29),
-            dateFont: NSFont.semiboldSystemFont(ofSize: 9),
-            dateColor: NSColor(deviceRedInt: 171, green: 192, blue: 209),
-            pendingDateColor: NSColor(deviceWhiteInt: 255)
+            height: 40.0,
+            dateFont: NSFont.mediumSystemFont(ofSize: 11),
+            dateColor: NSColor(deviceRedInt: 60, green: 68, blue: 79),
+            dateAlpha: 0.40
         )
         
         let cell = TransactionsTheme.CellTheme(
-            height: 44.0,
+            height: 70.0,
             dimmedAlpha: 1.0,
+            
+            backgroundViewColor: NSColor.white,
             
             nameFont: NSFont.systemFont(ofSize: 13.5),
             
-            addressFont: NSFont.systemFont(ofSize: 11),
-            addressColor: NSColor(deviceRedInt: 153, green: 165, blue: 174),
-            
             amountFont: NSFont.monospacedDigitSystemFont(ofSize: 14),
-            amountColor: NSColor(deviceWhiteInt: 255, alpha: 0.9),
+            amountColor: NSColor(hexString: "#252A35")!,
             amountColorCents: NSColor(deviceRedInt: 153, green: 165, blue: 174),
-            amountColorPositive: NSColor(deviceRedInt: 88, green: 184, blue: 33),
-            
-            institutionCircleBackground: NSColor(deviceRedInt: 50, green: 61, blue: 71),
-            institutionInitialsFont: NSFont.mediumSystemFont(ofSize: 9),
-            institutionInitialsColor: NSColor(deviceRedInt: 172, green: 192, blue: 209)
+            amountColorPositive: NSColor(deviceRedInt: 88, green: 184, blue: 33)
         )
         
         let cellExpansion = TransactionsTheme.CellExpansionTheme(
@@ -207,72 +203,6 @@ struct OpenTheme: Theme {
             institutionBackground: NSColor(deviceWhiteInt: 255, alpha: 0.05)
         )
         
-        return TransactionsTheme(headerCell: headerCell, cell: cell, cellExpansion: cellExpansion)
-    }
-
-    var feed: FeedTheme {
-        let emptyState = FeedTheme.EmptyState(
-            icon: NSImage(named: NSImage.Name(rawValue: "feed-empty-state-icon-dark"))!,
-            titleFont: NSFont.systemFont(ofSize: 22),
-            bodyFont: NSFont.systemFont(ofSize: 13)
-        )
-        
-        let defaultRulesPrompt = FeedTheme.DefaultRulesPromptTheme(
-            headerFont: NSFont.mediumSystemFont(ofSize: 13),
-            headerTextColor: NSColor(deviceWhiteInt: 255, alpha: 1),
-            
-            buttonTextColor: NSColor(deviceRed: 0.333, green: 0.353, blue: 0.38, alpha: 1.0),
-            
-            nameFont: NSFont.systemFont(ofSize: 13),
-            nameBoldFont: NSFont.boldSystemFont(ofSize: 13),
-            nameTextColor: NSColor(deviceWhiteInt: 255, alpha: 1),
-            
-            categoryBackgroundColor: NSColor(deviceRedInt: 132, green: 61, blue: 147),
-            
-            separatorColor: NSColor(deviceWhiteInt: 255, alpha: 0.04)
-        )
-        
-        let notificationsBar = FeedTheme.NotificationsBar(
-            noUnreadColor1: NSColor(deviceRedInt: 81, green: 93, blue: 107, alpha: 1),
-            noUnreadColor2: NSColor(deviceRedInt: 81, green: 93, blue: 107, alpha: 0.9),
-            
-            unreadColor1: NSColor(deviceRedInt: 66, green: 158, blue: 255),
-            unreadColor2: NSColor(deviceRedInt: 66, green: 158, blue: 255, alpha: 0.9),
-            
-            font: NSFont.mediumSystemFont(ofSize: 12),
-            fontColor: NSColor(deviceWhiteInt: 255)
-        )
-        
-        let headerCell = FeedTheme.HeaderCellTheme(
-            height: transactions.headerCell.height,
-            backgroundColor: transactions.headerCell.backgroundColor,
-            dateFont: transactions.headerCell.dateFont,
-            dateColor: transactions.headerCell.dateColor
-        )
-        
-        let cell = FeedTheme.CellTheme(
-            height: 52,
-            dimmedAlpha: transactions.cell.dimmedAlpha,
-            
-            nameFont: defaults.cell.primaryFont,
-            nameColor: NSColor(deviceWhiteInt: 200),
-            
-            nameBoldFont: NSFont.mediumSystemFont(ofSize: defaults.cell.primaryFont.pointSize),
-            nameBoldColor: NSColor(deviceWhiteInt: 255),
-            
-            ruleFont: defaults.cell.primaryFont,
-            ruleColor: defaults.foregroundColor,
-            
-            unreadIndicatorColor: NSColor(deviceRedInt: 65, green: 155, blue: 249)
-        )
-        
-        let cellExpansion = FeedTheme.CellExpansionTheme(
-            institutionFont: NSFont.semiboldSystemFont(ofSize: 13),
-            accountFont: NSFont.systemFont(ofSize: 12),
-            fontColor: NSColor(deviceWhiteInt: 255),
-            institutionBackground: NSColor(deviceWhiteInt: 255, alpha: 0.05)
-        )
-        
-        return FeedTheme(emptyState: emptyState, defaultRulesPrompt: defaultRulesPrompt, notificationsBar: notificationsBar, headerCell: headerCell, cell: cell, cellExpansion: cellExpansion)
+        return TransactionsTheme(noResultsFont: noResultsFont, headerCell: headerCell, cell: cell, cellExpansion: cellExpansion)
     }
 }

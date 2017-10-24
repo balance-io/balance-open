@@ -318,7 +318,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         balanceField.stringValue = "Balance"
         balanceField.alignment = .center
         balanceField.font = CurrentTheme.accounts.cell.nameFont
-        balanceField.textColor = CurrentTheme.defaults.foregroundColor
+        balanceField.textColor = CurrentTheme.accounts.cell.nameColor
         balanceField.usesSingleLineMode = true
         totalFooterView.addSubview(balanceField)
         balanceField.snp.makeConstraints { make in
