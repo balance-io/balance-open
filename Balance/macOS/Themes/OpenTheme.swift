@@ -15,7 +15,7 @@ struct OpenTheme: Theme {
     var defaults: DefaultsTheme {
         let appearance = NSAppearance(named: NSAppearance.Name.vibrantDark) ?? NSAppearance.current!
         let backgroundColor = NSColor(hexString: "#ecedef")!
-        let foregroundColor = NSColor(deviceWhiteInt: 255)
+        let foregroundColor = NSColor.black
         let material = NSVisualEffectView.Material.dark
         let size = CGSize(width: 400, height: 600)
         let touchBarFont = NSFont.systemFont(ofSize: 15)
@@ -82,7 +82,7 @@ struct OpenTheme: Theme {
         let welcomeFont = NSFont.lightSystemFont(ofSize: 21)
 
         let labelFont = NSFont.systemFont(ofSize: 13)
-        let textColor = NSColor.white
+        let textColor = NSColor.black
         
         let statusFont = NSFont.systemFont(ofSize: 14)
         let statusColor = NSColor(deviceWhiteInt: 255, alpha: 0.7)
