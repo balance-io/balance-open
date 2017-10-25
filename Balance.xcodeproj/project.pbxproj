@@ -496,7 +496,6 @@
 		28A0DC121DCD010800601E87 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		28F678471DCB6E9600383D22 /* SetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPasswordViewController.swift; sourceTree = "<group>"; };
 		28FD09C11D99F18500A395AB /* PaintCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintCodeButton.swift; sourceTree = "<group>"; };
-		2D18CA6A1F9DE231002F8626 /* EthploreApiTests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EthploreApiTests; sourceTree = "<group>"; };
 		2D18CA6C1F9DE29C002F8626 /* EthploreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthploreTests.swift; sourceTree = "<group>"; };
 		2D18CA6F1F9DE43D002F8626 /* MultipleEthploreAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = MultipleEthploreAccountResponse.json; path = BalanceUnitTests/APIResponses/Ethplore/MultipleEthploreAccountResponse.json; sourceTree = SOURCE_ROOT; };
 		2D18CA701F9DE43D002F8626 /* EthploreAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = EthploreAccountResponse.json; path = BalanceUnitTests/APIResponses/Ethplore/EthploreAccountResponse.json; sourceTree = SOURCE_ROOT; };
@@ -504,6 +503,7 @@
 		2D18CA721F9DE43D002F8626 /* EthploreTwoDecimalCrypto.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = EthploreTwoDecimalCrypto.json; path = BalanceUnitTests/APIResponses/Ethplore/EthploreTwoDecimalCrypto.json; sourceTree = SOURCE_ROOT; };
 		2D18CA771F9F18E5002F8626 /* AccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTests.swift; sourceTree = "<group>"; };
 		2D326D251F5EA22900873286 /* PoloniexErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexErrors.swift; sourceTree = "<group>"; };
+		2DD4D0D71FA0E91200F484E1 /* Ethplore */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Ethplore; sourceTree = "<group>"; };
 		2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		5300D6251DCE5A1E00D02657 /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
 		5301A7601F17DC8B00668099 /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
@@ -1615,6 +1615,7 @@
 		53F0783B1F4F8EC700D0054C /* APIResponses */ = {
 			isa = PBXGroup;
 			children = (
+				2DD4D0D71FA0E91200F484E1 /* Ethplore */,
 				53F0783C1F4F8EC700D0054C /* Poloniex */,
 			);
 			path = APIResponses;
@@ -2003,7 +2004,6 @@
 			isa = PBXGroup;
 			children = (
 				2D18CA6B1F9DE270002F8626 /* EthploreTests */,
-				2D18CA6A1F9DE231002F8626 /* EthploreApiTests */,
 				53C086951F9542A400C181F1 /* Exchange Rates */,
 				A4E457241F7921B5002E2879 /* Poloniex */,
 				A41742921F73E829004A9B4F /* CoinbaseAPIClient */,
