@@ -55,23 +55,25 @@
     NSBezierPath *arrowPath      = [NSBezierPath bezierPath];
     NSBezierPath *backgroundPath = [NSBezierPath bezierPathWithRoundedRect:backgroundRect xRadius:cornerRadius yRadius:cornerRadius];
 
-    NSPoint leftPoint  = {NSWidth(backgroundRect) / 2 - arrowWidth / 2, NSMaxY(backgroundRect)};
-    NSPoint topPoint   = {NSWidth(backgroundRect) / 2, NSMaxY(backgroundRect) + arrowHeight};
-    NSPoint rightPoint = {NSWidth(backgroundRect) / 2 + arrowWidth / 2, NSMaxY(backgroundRect)};
+    CGRect statusItemFrame = [self.dataSource statusItemFrameForStatusItemWindowBackgroundView:self];
+    
+    NSPoint leftPoint  = {NSMidX(statusItemFrame) - arrowWidth, NSMaxY(backgroundRect)};
+    NSPoint topPoint   = {NSMidX(statusItemFrame), NSMaxY(backgroundRect) + arrowHeight};
+    NSPoint rightPoint = {NSMidX(statusItemFrame) + arrowWidth, NSMaxY(backgroundRect)};
 
     [arrowPath moveToPoint:leftPoint];
     [arrowPath curveToPoint:topPoint
-              controlPoint1:NSMakePoint(NSWidth(backgroundRect) / 2 - arrowWidth / 4, NSMaxY(backgroundRect))
-              controlPoint2:NSMakePoint(NSWidth(backgroundRect) / 2 - arrowWidth / 7, NSMaxY(backgroundRect) + arrowHeight)];
+              controlPoint1:NSMakePoint(NSMidX(statusItemFrame) - arrowWidth / 4, NSMaxY(backgroundRect))
+              controlPoint2:NSMakePoint(NSMidX(statusItemFrame) - arrowWidth / 7, NSMaxY(backgroundRect) + arrowHeight)];
     [arrowPath curveToPoint:rightPoint
-              controlPoint1:NSMakePoint(NSWidth(backgroundRect) / 2 + arrowWidth / 7, NSMaxY(backgroundRect) + arrowHeight)
-              controlPoint2:NSMakePoint(NSWidth(backgroundRect) / 2 + arrowWidth / 4, NSMaxY(backgroundRect))];
+              controlPoint1:NSMakePoint(NSMidX(statusItemFrame) + arrowWidth / 7, NSMaxY(backgroundRect) + arrowHeight)
+              controlPoint2:NSMakePoint(NSMidX(statusItemFrame) + arrowWidth / 4, NSMaxY(backgroundRect))];
     [arrowPath lineToPoint:leftPoint];
     [arrowPath closePath];
 
     [windowPath appendBezierPath:arrowPath];
     [windowPath appendBezierPath:backgroundPath];
-
+    
     [self.windowConfiguration.backgroundColor setFill];
     [windowPath fill];
     
