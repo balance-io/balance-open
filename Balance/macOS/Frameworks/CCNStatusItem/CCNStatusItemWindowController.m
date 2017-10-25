@@ -132,6 +132,7 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
     [self.window setAlphaValue:0.0];
     [self showWindow:nil];
 
+    [((CCNStatusItemWindow *)self.window).backgroundView setNeedsDisplay:YES];
     [self animateWindow:(CCNStatusItemWindow *) self.window withFadeDirection:CCNFadeDirectionFadeIn];
 }
 
