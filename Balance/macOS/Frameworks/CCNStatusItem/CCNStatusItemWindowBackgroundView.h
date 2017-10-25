@@ -31,10 +31,20 @@
 #import <Cocoa/Cocoa.h>
 #import "CCNStatusItemWindowConfiguration.h"
 
+
+@protocol CCNStatusItemWindowBackgroundViewDataSource;
+
+
 @interface CCNStatusItemWindowBackgroundView : NSView
 
+@property (weak, nonatomic) id <CCNStatusItemWindowBackgroundViewDataSource> dataSource;
 @property (strong, nonatomic) NSColor *arrowColor;
 
 - (instancetype)initWithFrame:(NSRect)frameRect windowConfiguration:(CCNStatusItemWindowConfiguration *)configuration;
 
+@end
+
+
+@protocol CCNStatusItemWindowBackgroundViewDataSource <NSObject>
+- (CGRect)statusItemFrameForStatusItemWindowBackgroundView:(CCNStatusItemWindowBackgroundView *)backgroundView;
 @end
