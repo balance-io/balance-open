@@ -203,11 +203,19 @@ struct TransactionsTheme {
         let backgroundViewColor: NSColor
         
         let nameFont: NSFont
+        
+        let typeFont: NSFont
+        let typeColorSent: NSColor
+        let typeColorReceived: NSColor
+        let typeColorTraded: NSColor
 
         let amountFont: NSFont
         let amountColor: NSColor
         let amountColorCents: NSColor
         let amountColorPositive: NSColor
+        
+        let altAmountFont: NSFont
+        let altAmountColor: NSColor
     }
     
     struct CellExpansionTheme {
