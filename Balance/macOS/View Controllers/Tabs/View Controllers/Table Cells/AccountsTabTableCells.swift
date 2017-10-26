@@ -213,9 +213,8 @@ class AccountsTabAccountCell: View {
             make.width.equalTo(width)
         }
         
-        let masterCurrency = defaults.masterCurrency
         if let displayAltBalance = updatedModel.displayAltBalance {
-            altAmountField.stringValue = amountToString(amount: displayAltBalance, currency: masterCurrency, showNegative: true)
+            altAmountField.stringValue = amountToString(amount: displayAltBalance, currency: defaults.masterCurrency, showNegative: true)
             altAmountField.snp.updateConstraints { make in
                 let width = altAmountField.stringValue.size(font: CurrentTheme.accounts.cell.amountFont)
                 make.width.equalTo(width)
