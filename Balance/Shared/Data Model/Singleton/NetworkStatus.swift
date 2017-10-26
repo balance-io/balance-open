@@ -14,12 +14,7 @@ class NetworkStatus {
     var checkHostTask: URLSessionDataTask?
     var checkHostTimer: Timer?
     
-    var isReachable: Bool {
-        if let reachability = reachability {
-            return reachability.isReachable
-        }
-        return true
-    }
+    var isReachable = false
     
     func startMonitoring() {
         reachability?.whenReachable = becameReachable
@@ -55,17 +50,20 @@ class NetworkStatus {
             let expectedResponse = "hello"
             self.checkHostTask = certValidatedSession.dataTask(with: url) { data, response, error in
                 // Check if we can connect at all
-                guard self.isReachable, error == nil, let data = data else {
+                guard self.reachability?.isReachable == true, error == nil, let data = data else {
+                    self.isReachable = false
                     self.scheduleCheckHost()
                     return
                 }
                 
                 // Check if we get the correct response
                 guard let response = String(data: data, encoding: .utf8), response == expectedResponse else {
+                    self.isReachable = false
                     self.scheduleCheckHost()
                     return
                 }
                 
+                self.isReachable = true
                 NotificationCenter.postOnMainThread(name: Notifications.NetworkBecameReachable)
             }
             self.checkHostTask?.resume()

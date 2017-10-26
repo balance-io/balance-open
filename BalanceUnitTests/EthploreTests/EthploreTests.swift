@@ -1,8 +1,8 @@
 //
-//  EthploreAccountTests.swift
+//  EthploreTests.swift
 //  BalanceUnitTests
 //
-//  Created by Raimon Lapuente Ferran on 18/09/2017.
+//  Created by Raimon Lapuente Ferran on 23/10/2017.
 //  Copyright © 2017 Balanced Software, Inc. All rights reserved.
 //
 
@@ -23,7 +23,7 @@ class EthploreAccountTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-
+    
     func testEthploreAccountObjectCreationAddress() {
         //when
         let account = try! EthplorerAccountObject.init(dictionary: self.json, currencyShortName: "ETH", type: .wallet)
@@ -75,7 +75,7 @@ class EthploreAccountTests: XCTestCase {
         
         //then
         XCTAssertEqual(tokenPrice?.rate, 0.32)
-        XCTAssertEqual(tokenPrice?.currency, Currency.common(traditional: .usd))
+        XCTAssertEqual(tokenPrice?.currency, .usd)
         XCTAssertEqual(tokenPrice?.diff, 28.82)
     }
     
@@ -88,8 +88,8 @@ class EthploreAccountTests: XCTestCase {
         //then
         XCTAssertEqual(ethploreAccount.altRate, 0.32)
         XCTAssertEqual(ethploreAccount.available, atof("39440.2043750082"))
-        XCTAssertEqual(ethploreAccount.currency, Currency.crypto(shortName: "ZRX"))
-        XCTAssertEqual(ethploreAccount.altCurrency, Currency.common(traditional: .usd))
+        XCTAssertEqual(ethploreAccount.currency, Currency.crypto(enum: .zrx))
+        XCTAssertEqual(ethploreAccount.altCurrency, .usd)
         XCTAssertEqual(ethploreAccount.decimals, 8)
     }
     
@@ -157,8 +157,8 @@ class EthploreAccountTests: XCTestCase {
         //then
         XCTAssertEqual(ethploreAccount.available, atof("15317"))
         XCTAssertEqual(ethploreAccount.balance, 1531700000000)
-        XCTAssertEqual(ethploreAccount.currency, Currency.crypto(shortName: "QJT"))
-        XCTAssertEqual(ethploreAccount.altCurrency, Currency.common(traditional: .usd))
+        XCTAssertEqual(ethploreAccount.currency, Currency.cryptoOther(code: "QJT"))
+        XCTAssertEqual(ethploreAccount.altCurrency, .usd)
         XCTAssertEqual(ethploreAccount.decimals, 8)
     }
     
@@ -173,5 +173,25 @@ class EthploreAccountTests: XCTestCase {
         //then
         XCTAssertEqual(account.tokens.count, 0)
     }
-
+    
+    func testAccountGUP() {
+        //given
+        let data = TestHelpers.loadData(filename: "MultipleEthploreAccountResponse.json")
+        self.json = TestHelpers.dataToJSON(data: data) as [String:AnyObject]
+        
+        //when
+        let account = try! EthplorerAccountObject.init(dictionary: self.json, currencyShortName: "ETH", type: .wallet)
+        XCTAssertEqual(account.tokens.count, 3)
+        let ethploreAccount: EthplorerAccount = account.ethplorerAccounts[2]
+        
+        //then
+        XCTAssertEqual(ethploreAccount.available, atof("91990")) // this is an error un Ethplore api should be 919.90
+        XCTAssertEqual(ethploreAccount.balance, 9199000000000)
+        XCTAssertEqual(ethploreAccount.currency, Currency.cryptoOther(code: "GUP"))
+        XCTAssertEqual(ethploreAccount.altCurrency, .usd)
+        XCTAssertEqual(ethploreAccount.decimals, 8)
+        XCTAssertEqual(ethploreAccount.altRate, 0.137338)
+    }
+    
 }
+

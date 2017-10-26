@@ -49,10 +49,11 @@ typedef NS_ENUM(NSUInteger, CCNFadeDirection) {
 typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
 
 
-@interface CCNStatusItemWindowController ()
+@interface CCNStatusItemWindowController () <CCNStatusItemWindowBackgroundViewDataSource>
 @property (strong) CCNStatusItem *statusItemView;
 @property (strong) CCNStatusItemWindowConfiguration *windowConfiguration;
 @end
+
 
 @implementation CCNStatusItemWindowController
 
@@ -69,9 +70,12 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
         self.windowIsOpen = NO;
         self.statusItemView = statusItem;
         self.windowConfiguration = windowConfiguration;
-
+        
         // StatusItem Window
-        self.window = [CCNStatusItemWindow statusItemWindowWithConfiguration:windowConfiguration];
+        CCNStatusItemWindow *window = [CCNStatusItemWindow statusItemWindowWithConfiguration:windowConfiguration];
+        window.backgroundView.dataSource = self;
+        
+        self.window = window;
         self.contentViewController = contentViewController;
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleWindowDidResignKeyNotification:) name:NSWindowDidResignKeyNotification object:nil];
@@ -103,8 +107,18 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
 }
 
 - (void)updateWindowOrigin {
-    CGRect statusItemRect = [[self.statusItemView.statusItem.button window] frame];
-    CGPoint windowOrigin = CGPointMake(NSMinX(statusItemRect) - NSWidth(self.window.frame) / 2 + NSWidth(statusItemRect) / 2,
+    NSStatusBarButton *button = self.statusItemView.statusItem.button;
+    NSRect screenRect = [[NSScreen mainScreen] frame];
+    CGRect statusItemRect = [[button window] frame];
+    
+    NSRect statusRectRelativeToScreen = [[button window] convertRectToScreen:screenRect];
+    
+    CGFloat xOrigin = NSMinX(statusRectRelativeToScreen) + (NSWidth(button.frame) / 2) - (NSWidth(self.window.frame) / 2);
+    CGFloat screenOverflow = (xOrigin + NSWidth(self.window.frame)) - NSWidth(screenRect);
+    if (screenOverflow > 0) {
+        xOrigin = xOrigin - screenOverflow;
+    }
+    CGPoint windowOrigin = CGPointMake(xOrigin,
                                        NSMinY(statusItemRect) - NSHeight(self.window.frame) - self.windowConfiguration.windowToStatusItemMargin);
     [self.window setFrameOrigin:windowOrigin];
 }
@@ -118,6 +132,7 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
     [self.window setAlphaValue:0.0];
     [self showWindow:nil];
 
+    [((CCNStatusItemWindow *)self.window).backgroundView setNeedsDisplay:YES];
     [self animateWindow:(CCNStatusItemWindow *) self.window withFadeDirection:CCNFadeDirectionFadeIn];
 }
 
@@ -280,6 +295,18 @@ void menuBarWillBeShownHidden (EventHandlerCallRef inHandlerRef, EventRef inEven
 
 - (void)handleAppleInterfaceThemeChangedNotification:(NSNotification *)note {
     [[NSNotificationCenter defaultCenter] postNotificationName:CCNSystemInterfaceThemeChangedNotification object:nil];
+}
+
+#pragma mark - CCNStatusItemWindowBackgroundViewDataSource
+
+- (CGRect)statusItemFrameForStatusItemWindowBackgroundView:(CCNStatusItemWindowBackgroundView *)backgroundView
+{
+    NSStatusBarButton *button = self.statusItemView.statusItem.button;
+    
+    CGRect rectInWindow = [button convertRect:button.bounds toView:nil];
+    CGRect rectInScreen = [button.window convertRectToScreen:rectInWindow];
+
+    return [self.window convertRectFromScreen:rectInScreen];
 }
 
 @end

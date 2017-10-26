@@ -12,33 +12,22 @@ import MapKit
 class TransactionsTabGroupCell: View {
     var section = -1
     
-    //        let blurryView = VisualEffectView()
-    let blurryView = View()
     let dateField = LabelField()
     
     init() {
         super.init(frame: NSZeroRect)
         
-        //            blurryView.blendingMode = .withinWindow
-        //            blurryView.material = CurrentTheme.defaults.material
-        blurryView.wantsLayer = true
-        //            blurryView.state = .active
-        blurryView.layerBackgroundColor = CurrentTheme.transactions.headerCell.backgroundColor
-        self.addSubview(blurryView)
-        blurryView.snp.makeConstraints { make in
-            make.leading.equalTo(self)
-            make.trailing.equalTo(self)
-            make.top.equalTo(self)
-            make.bottom.equalTo(self)
-        }
+        self.layerBackgroundColor = CurrentTheme.defaults.backgroundColor
         
         dateField.textColor = CurrentTheme.transactions.headerCell.dateColor
         dateField.font = CurrentTheme.transactions.headerCell.dateFont
+        dateField.alphaValue = CurrentTheme.transactions.headerCell.dateAlpha
+        dateField.backgroundColor = CurrentTheme.defaults.backgroundColor
+        dateField.layerBackgroundColor = CurrentTheme.defaults.backgroundColor
         self.addSubview(dateField)
         dateField.snp.makeConstraints { make in
-            make.centerX.equalTo(self)
-            make.centerY.equalTo(self).offset(1)
-            make.height.equalTo(14)
+            make.left.equalToSuperview().offset(10)
+            make.centerY.equalTo(self)
         }
     }
     
@@ -53,13 +42,7 @@ class TransactionsTabGroupCell: View {
         let calendar = Calendar.current
         let currentYear = (calendar as NSCalendar).component(.year, from: Date())
         
-        blurryView.layerBackgroundColor = CurrentTheme.transactions.headerCell.backgroundColor
-        dateField.textColor = CurrentTheme.transactions.headerCell.dateColor
-        if model == Date.distantFuture {
-            blurryView.layerBackgroundColor = CurrentTheme.transactions.headerCell.pendingBackgroundColor
-            dateField.textColor = CurrentTheme.transactions.headerCell.pendingDateColor
-            dateString = "Pending"
-        } else if calendar.isDateInToday(model) {
+        if calendar.isDateInToday(model) {
             dateString = "Today"
         } else if calendar.isDateInYesterday(model) {
             dateString = "Yesterday"
@@ -73,9 +56,8 @@ class TransactionsTabGroupCell: View {
             
             dateString = dateFormatter.string(from: model)
         }
-        dateString = dateString.uppercased()
         
-        dateField.attributedStringValue = NSAttributedString(string: dateString, attributes: [NSAttributedStringKey.kern: 0.82])
+        dateField.stringValue = dateString.uppercased()
     }
 }
 
@@ -91,11 +73,12 @@ class TransactionsTabTransactionCell: View {
     var index = TableIndex.none
     
     let topContainer = View()
-    let institutionInitialsCircleView = InstitutionInitialsCircleView()
+    let topBackgroundView = View()
+    let typeField = LabelField()
     let amountField = LabelField()
-    let centerNameField = LabelField()
-    let nameField = LabelField()
-    let addressField = LabelField()
+    let institutionLogo = PaintCodeView()
+    let institutionNameField = LabelField()
+    let altAmountField = LabelField()
     
     var bottomContainerOpened = false
     var bottomContainer: View!
@@ -111,69 +94,62 @@ class TransactionsTabTransactionCell: View {
         
         self.addSubview(topContainer)
         topContainer.snp.makeConstraints { make in
-            make.top.equalTo(self)
-            make.leading.equalTo(self)
-            make.trailing.equalTo(self)
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
             make.height.equalTo(CurrentTheme.transactions.cell.height)
         }
         
-        topContainer.addSubview(institutionInitialsCircleView)
-        institutionInitialsCircleView.snp.makeConstraints { make in
-            make.height.equalTo(22)
-            make.centerY.equalTo(topContainer)
-            make.leading.equalTo(topContainer).inset(10)
-            make.width.equalTo(22)
+        topBackgroundView.cornerRadius = 12
+        topBackgroundView.layerBackgroundColor = CurrentTheme.transactions.cell.backgroundViewColor
+        topContainer.addSubview(topBackgroundView)
+        topBackgroundView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.height.equalToSuperview().offset(-10)
+        }
+        
+        typeField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
+        typeField.font = CurrentTheme.transactions.cell.typeFont
+        typeField.usesSingleLineMode = true
+        typeField.alignment = .right
+        topContainer.addSubview(typeField)
+        typeField.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(16)
         }
         
         amountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
         amountField.font = CurrentTheme.transactions.cell.amountFont
+        amountField.textColor = CurrentTheme.transactions.cell.amountColor
         amountField.usesSingleLineMode = true
         amountField.alignment = .right
         topContainer.addSubview(amountField)
         amountField.snp.makeConstraints { make in
-            make.width.equalTo(100)
-            make.trailing.equalTo(topContainer).inset(10)
-            make.bottom.equalTo(-14)
+            make.leading.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview().offset(-16)
         }
         
-        centerNameField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
-        centerNameField.alignment = .left
-        centerNameField.font = CurrentTheme.transactions.cell.nameFont
-        centerNameField.textColor = CurrentTheme.defaults.foregroundColor
-        centerNameField.usesSingleLineMode = true
-        centerNameField.cell?.lineBreakMode = .byTruncatingTail
-        topContainer.addSubview(centerNameField)
-        centerNameField.snp.makeConstraints { make in
-            make.leading.equalTo(institutionInitialsCircleView.snp.trailing).offset(7)
-            make.trailing.equalTo(amountField.snp.leading).inset(5)
-            make.centerY.equalTo(topContainer).offset(-0.5)
+        institutionNameField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
+        institutionNameField.font = CurrentTheme.transactions.cell.typeFont
+        institutionNameField.usesSingleLineMode = true
+        institutionNameField.alignment = .right
+        topContainer.addSubview(institutionNameField)
+        institutionNameField.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-10)
+            make.top.equalToSuperview().offset(16)
         }
-        
-        nameField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
-        nameField.alignment = .left
-        nameField.font = CurrentTheme.transactions.cell.nameFont
-        nameField.textColor = CurrentTheme.defaults.foregroundColor
-        nameField.usesSingleLineMode = true
-        nameField.cell?.lineBreakMode = .byTruncatingTail
-        topContainer.addSubview(nameField)
-        nameField.snp.makeConstraints { make in
-            make.leading.equalTo(centerNameField)
-            make.trailing.equalTo(centerNameField)
-            make.top.equalTo(topContainer).offset(5)
-        }
-        
-        addressField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
-        addressField.alignment = .left
-        addressField.font = CurrentTheme.transactions.cell.addressFont
-        addressField.textColor = CurrentTheme.transactions.cell.addressColor
-        addressField.usesSingleLineMode = true
-        addressField.cell?.lineBreakMode = .byTruncatingTail
-        topContainer.addSubview(addressField)
-        addressField.snp.makeConstraints { make in
-            make.leading.equalTo(nameField)
-            make.trailing.equalTo(nameField)
-            make.height.equalTo(14).priority(0.1)
-            make.top.equalTo(nameField.snp.bottom).offset(2)
+
+        altAmountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
+        altAmountField.font = CurrentTheme.transactions.cell.altAmountFont
+        altAmountField.textColor = CurrentTheme.transactions.cell.altAmountColor
+        altAmountField.usesSingleLineMode = true
+        altAmountField.alignment = .right
+        topContainer.addSubview(altAmountField)
+        altAmountField.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-10)
+            make.bottom.equalToSuperview().offset(-16)
         }
         
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(cellOpened(_:)), name: TransactionsTabViewController.InternalNotifications.CellOpened)
@@ -194,32 +170,24 @@ class TransactionsTabTransactionCell: View {
         
         model = updatedModel
         
-        institutionInitialsCircleView.circleColor = updatedModel.institution?.displayColor
-        institutionInitialsCircleView.stringValue = updatedModel.institution?.initials ?? ""
+        if updatedModel.amount > 0 {
+            typeField.stringValue = "Received"
+            typeField.textColor = CurrentTheme.transactions.cell.typeColorReceived
+        } else {
+            typeField.stringValue = "Sent"
+            typeField.textColor = CurrentTheme.transactions.cell.typeColorSent
+        }
         
-        amountField.attributedStringValue = centsToStringFormatted(-updatedModel.amount)
-//        if updatedModel.hasLocation, let address = updatedModel.address {
-//            centerNameField.stringValue = ""
-//            nameField.stringValue = updatedModel.displayName
-//
-//            if let city = updatedModel.city, let state = updatedModel.state, let zip = updatedModel.zip {
-//                addressField.stringValue = "\(address.capitalizedStringIfAllCaps) \(city.capitalizedStringIfAllCaps) \(state) \(zip)"
-//            } else {
-//                addressField.stringValue = address.capitalizedStringIfAllCaps
-//            }
-//
-//            centerNameField.isHidden = true
-//            nameField.isHidden = false
-//            addressField.isHidden = false
-//        } else {
-            centerNameField.stringValue = updatedModel.displayName
-            nameField.stringValue = ""
-            addressField.stringValue = ""
-            
-            centerNameField.isHidden = false
-            nameField.isHidden = true
-            addressField.isHidden = true
-//        }
+        let currency = Currency.rawValue(updatedModel.currency)
+        amountField.stringValue = amountToString(amount: updatedModel.amount, currency: currency, showNegative: false, showCodeAfterValue: true)
+        
+        institutionNameField.stringValue = updatedModel.institution?.name ?? ""
+        
+        if let displayAltAmount = updatedModel.displayAltAmount {
+            altAmountField.stringValue = amountToString(amount: displayAltAmount, currency: defaults.masterCurrency, showNegative: true, showCodeAfterValue: true)
+        } else {
+            altAmountField.stringValue = ""
+        }
         
         self.toolTip = updatedModel.displayName
     }
@@ -234,7 +202,7 @@ class TransactionsTabTransactionCell: View {
         self.addSubview(bottomContainer)
         bottomContainer.snp.makeConstraints { make in
             make.top.equalTo(topContainer.snp.bottom)
-            make.leading.equalTo(institutionInitialsCircleView)
+            make.leading.equalToSuperview()
             make.trailing.equalTo(amountField)
             make.height.equalTo(229)
         }
@@ -253,10 +221,6 @@ class TransactionsTabTransactionCell: View {
         accountContainer = View()
         accountContainer.cornerRadius = 7.0
         accountContainer.layerBackgroundColor = displayColor.withAlphaComponent(1)
-        // TODO: Figure out why this shadow won't draw
-        //accountContainer.layer?.shadowOpacity = 0.7
-        //accountContainer.layer?.shadowRadius = 15.0
-        //accountContainer.layer?.shadowOffset = CGSize(width: 0, height: 2)
         infoContainer.addSubview(accountContainer)
         accountContainer.snp.makeConstraints { make in
             make.leading.equalTo(infoContainer)
@@ -281,8 +245,6 @@ class TransactionsTabTransactionCell: View {
         }
         
         accountField = LabelField()
-        //            accountField.backgroundColor = displayColor.lighterColor.withAlphaComponent(1)
-        //            accountField.layerBackgroundColor = displayColor.lighterColor.withAlphaComponent(1)
         accountField.alignment = .center
         accountField.verticalAlignment = .center
         accountField.font = CurrentTheme.transactions.cellExpansion.accountFont
@@ -295,60 +257,6 @@ class TransactionsTabTransactionCell: View {
             make.top.equalTo(institutionField.snp.bottom)
         }
         
-//        if hasCategory {
-//            categoryView = CategoryView()
-//            infoContainer.addSubview(categoryView)
-//            categoryView.buttonHandler = { name in
-//                let token = SearchToken.category.rawValue
-//                let searchString = "\(token):(\(name))"
-//                NotificationCenter.postOnMainThread(name: Notifications.PerformSearch, object: nil, userInfo: [Notifications.Keys.SearchString: searchString])
-//            }
-//        }
-        
-//        if model.hasLocation, let latitude = model.latitude, let longitude = model.longitude {
-//            accountContainer.cornerRadius = 0.0
-//            infoContainer.cornerRadius = 7.0
-//
-//            mapView = NoHitMapView()
-//            mapView.wantsLayer = true
-//            mapView.isZoomEnabled = false
-//            mapView.isScrollEnabled = false
-//            mapView.isPitchEnabled = false
-//            mapView.isRotateEnabled = false
-//            infoContainer.addSubview(mapView, positioned: .below, relativeTo: accountContainer)
-//            mapView.snp.makeConstraints { make in
-//                make.leading.equalTo(bottomContainer)
-//                make.trailing.equalTo(bottomContainer)
-//                make.top.equalTo(bottomContainer)
-//                make.bottom.equalTo(bottomContainer)
-//            }
-//
-//            var coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-//            let annotation = Annotation(coordinate: coordinate)
-//            mapView.addAnnotation(annotation)
-//            let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
-//            coordinate.latitude += 0.0025
-//            let region = MKCoordinateRegion(center: coordinate, span: span)
-//            mapView.setRegion(region, animated: false)
-//
-//            if hasCategory {
-//                categoryView.snp.makeConstraints { make in
-//                    make.bottom.equalTo(infoContainer)
-//                    make.leading.equalTo(infoContainer)
-//                    make.trailing.equalTo(infoContainer)
-//                    make.height.equalTo(30)
-//                }
-//            }
-//        } else if hasCategory {
-//            categoryView.snp.makeConstraints { make in
-//                make.top.equalTo(accountContainer.snp.bottom).offset(3)
-//                make.leading.equalTo(institutionInitialsCircleView).offset(-5)
-//                make.trailing.equalTo(infoContainer)
-//                make.height.equalTo(30)
-//            }
-//        }
-        
-//        categoryView?.category = model.category
         institutionField.stringValue = model.institution!.name
         accountField.stringValue = model.account!.name
     }

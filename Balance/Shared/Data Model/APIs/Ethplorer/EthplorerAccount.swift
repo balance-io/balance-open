@@ -108,7 +108,8 @@ struct EthplorerAccountObject {
         let diff: Double
         
         init (dictionary: [String: Any]) throws {
-            self.rate = try checkType(dictionary["rate"], name: "rate")
+            let rate:String = try checkType(dictionary["rate"], name: "rate")
+            self.rate = Double(rate)!
             self.currency = .usd
             self.diff = try checkType(dictionary["diff"], name: "diff")
         }

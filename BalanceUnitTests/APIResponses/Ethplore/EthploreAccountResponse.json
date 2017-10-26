@@ -19,7 +19,7 @@
         "issuancesCount": 0,
         "holdersCount": 14,
         "price": {
-            "rate": 0.32,
+            "rate": "0.32",
             "diff": 28.82,
             "ts": 1504803294,
             "currency": "USD"

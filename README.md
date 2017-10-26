@@ -37,7 +37,7 @@ If for some reason the sqlcipher needs to be updated (you should never need to d
 - If you **found a bug**, [open an issue](https://github.com/balancemymoney/balance-open/issues/new).
 - If you **have a feature request**, [open an issue](https://github.com/balancemymoney/balance-open/issues/new).
 - If you **want to contribute**, submit a pull request.
-
+- Extra: We removed Code signing. Since we use keychain you will be prompted on this screen 5 times. You should press "Always allow". We haven't found a better way for this yet. <img width="434" alt="screen shot 2017-10-25 at 17 15 19" src="https://user-images.githubusercontent.com/1092080/32006966-842eac82-b9a8-11e7-994e-57d0cf5d0d9c.png">
 [swift-image]:https://img.shields.io/badge/swift-3.0-orange.svg
 [swift-url]: https://swift.org/
 [license-image]: https://img.shields.io/aur/license/yaourt.svg

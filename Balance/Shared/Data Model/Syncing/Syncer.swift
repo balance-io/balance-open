@@ -13,7 +13,6 @@ class Syncer {
     fileprivate let bitfinexApiClient = BitfinexAPIClient()
     fileprivate let krakenApiClient = KrakenAPIClient()
     
-    fileprivate(set) var newInstitutionsOnly = false
     fileprivate(set) var syncing = false
     fileprivate(set) var canceled = false
     
@@ -23,23 +22,21 @@ class Syncer {
         canceled = true
     }
     
-    func sync(newInstitutionsOnly: Bool = false, startDate: Date, pruneTransactions: Bool = false, completion: SuccessErrorsHandler?) {
+    func sync(startDate: Date, pruneTransactions: Bool = false, completion: SuccessErrorsHandler?) {
         guard !syncing else {
             return
         }
         
-        self.newInstitutionsOnly = newInstitutionsOnly
         self.syncing = true
         self.completionBlock = completion
         
         log.debug("Syncing started")
         NotificationCenter.postOnMainThread(name: Notifications.SyncStarted)
         
-        let count = newInstitutionsOnly ? InstitutionRepository.si.allNewInstitutions().count : InstitutionRepository.si.institutionsCount
-        if count > 0 {
+        if InstitutionRepository.si.institutionsCount > 0 {
             // Grab the institutions again in case we've added one while syncing categories or we've been canceled
             // and sort them as they're displayed in the UI
-            let institutions = newInstitutionsOnly ? InstitutionRepository.si.allNewInstitutions(sorted: true) : InstitutionRepository.si.allInstitutions(sorted: true)
+            let institutions = InstitutionRepository.si.allInstitutions(sorted: true)
             
             let success = true
             let errors = [Error]()
@@ -405,7 +402,7 @@ class Syncer {
 }
 
 class MockSyncer: Syncer {
-    override func sync(newInstitutionsOnly: Bool, startDate: Date, pruneTransactions: Bool, completion: SuccessErrorsHandler?) {
+    override func sync(startDate: Date, pruneTransactions: Bool, completion: SuccessErrorsHandler?) {
         guard !syncing else {
             return
         }

@@ -137,6 +137,16 @@ extension Transaction {
     var displayName: String {
         return name.capitalizedStringIfAllCaps
     }
+    
+    var displayAltAmount: Int? {
+        let masterCurrency = defaults.masterCurrency
+        if currency == masterCurrency.code {
+            return amount
+        } else {
+            let altAmount: Double = Double(amount) / pow(10.0, Double(Currency.rawValue(currency).decimals))
+            return currentExchangeRates.convert(amount: altAmount, from: Currency.rawValue(currency), to: masterCurrency, source: source.exchangeRateSource)?.integerValueWith(decimals: masterCurrency.decimals)
+        }
+    }
 }
 
 // MARK: Master alternative amount

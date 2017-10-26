@@ -83,10 +83,10 @@ extension Source {
     public var exchangeRateSource: ExchangeRateSource {
         switch self {
         //case .plaid:    return "Plaid"
-        case .coinbase, .gdax, .ethplorer: return .coinbaseGdax
-        case .poloniex:                    return .poloniex
-        case .bitfinex:                    return .bitfinex
-        case .kraken:                      return .kraken
+        case .coinbase, .gdax, .ethplorer:  return .coinbaseGdax
+        case .poloniex:                     return .poloniex
+        case .bitfinex:                     return .bitfinex
+        case .kraken:                       return .kraken
         }
     }
 }

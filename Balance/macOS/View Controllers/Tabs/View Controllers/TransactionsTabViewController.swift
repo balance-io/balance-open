@@ -162,7 +162,7 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
     fileprivate let noResultsDateFormatter = DateFormatter()
     func createTable() {
         noResultsField.alignment = .center
-        noResultsField.font = CurrentTheme.transactions.cell.nameFont
+        noResultsField.font = CurrentTheme.transactions.noResultsFont
         noResultsField.textColor = CurrentTheme.defaults.foregroundColor
         noResultsField.usesSingleLineMode = false
         noResultsField.alphaValue = 0.0
@@ -639,19 +639,19 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
     }
     
     func updateNumberOfTransactionsAndTotal() {
-        var runningTotal: Int = 0
-        var numberOfTransactions: Int = 0
-        for date in viewModel.data.keys {
-            if let transactions = viewModel.data[date] {
-                for transaction in transactions {
-                    runningTotal = runningTotal + transaction.amount
-                    numberOfTransactions += 1
-                }
-            }
-        }
-
-        totalField.attributedStringValue = centsToStringFormatted(runningTotal, showNegative: false, showCents: true, colorPositive: false)
-        transactionCountField.stringValue = "\(numberOfTransactions) TRANSACTIONS"
+//        var runningTotal: Int = 0
+//        var numberOfTransactions: Int = 0
+//        for date in viewModel.data.keys {
+//            if let transactions = viewModel.data[date] {
+//                for transaction in transactions {
+//                    runningTotal = runningTotal + transaction.amount
+//                    numberOfTransactions += 1
+//                }
+//            }
+//        }
+//
+//        totalField.attributedStringValue = centsToStringFormatted(runningTotal, showNegative: false, showCents: true, colorPositive: false)
+//        transactionCountField.stringValue = "\(numberOfTransactions) TRANSACTIONS"
     }
     
     fileprivate var searchShortcutMonitor: AnyObject?
@@ -707,6 +707,9 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
     }
 
     func tableView(_ tableView: SectionedTableView, clickedRow row: Int, inSection section: Int) {
+        // Click to expand not yet supported
+        return
+        
         if isShowingSearchFilters && !viewModel.searching {
             hideSearchFilters()
             return
@@ -800,8 +803,8 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         if row == nil {
             row = HoverTableRowView()
             row?.identifier = NSUserInterfaceItemIdentifier(rawValue: "Transaction Row")
-            row?.color = CurrentTheme.defaults.cell.backgroundColor
-            row?.hoverColor = CurrentTheme.defaults.cell.hoverBackgroundColor
+            row?.color = NSColor.clear
+            row?.hoverColor = NSColor.clear
         }
         return row
     }

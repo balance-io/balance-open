@@ -13,7 +13,6 @@ class SyncManager: NSObject {
     let syncDefaults = SyncDefaults()
     var hasSyncedSinceLaunch = false // Ensure we always sync on launch
     
-    fileprivate let oneMonth: TimeInterval = 60 * 60 * 24 * 31
     fileprivate let tenYears: TimeInterval = 60 * 60 * 24 * 365 * 10
     
     var syncing: Bool {
@@ -94,30 +93,15 @@ class SyncManager: NSObject {
         // Sync exchange rates
         currentExchangeRates.updateExchangeRates()
         
-        // Determine whether to do a full sync or not
-        // Current algorithm is full sync (10 years) every 24 hours, partial sync (1 month) every hour
-        let lastFullSync = syncDefaults.lastSuccessfulFullSyncTime
-        let newInstitutionsOnly = !userInitiated && Date().timeIntervalSince(syncDefaults.lastSyncTime) < syncDefaults.normalSyncInterval
-        let performFullSync = newInstitutionsOnly || Date().timeIntervalSince(lastFullSync) > syncDefaults.fullSyncInterval
-        let startDate = performFullSync ? Date(timeIntervalSinceNow: -tenYears) : Date(timeIntervalSinceNow: -oneMonth)
-        log.debug(newInstitutionsOnly ? "Syncing new institutions only" : "Syncing all institutions")
-        log.debug(performFullSync ? "Performing full sync" : "Performing partial sync")
-        
         // Start the sync
+        log.debug("Performing full sync")
         self.syncer = debugging.useMockSyncing ? MockSyncer() : Syncer()
-        self.syncer.sync(newInstitutionsOnly: newInstitutionsOnly, startDate: startDate, pruneTransactions: performFullSync) { success, errors in
+        self.syncer.sync(startDate: Date(timeIntervalSinceNow: -tenYears), pruneTransactions: true) { success, errors in
             // Set the last sync dates, record all syncs using the lastSyncTime keys for ease of use then record full syncs separately
             let now = Date()
             self.syncDefaults.lastSyncTime = now
             if success {
                 self.syncDefaults.lastSuccessfulSyncTime = now
-            }
-            
-            if performFullSync {
-                self.syncDefaults.lastFullSyncTime = now
-                if success {
-                    self.syncDefaults.lastSuccessfulFullSyncTime = now
-                }
             }
             
             // Notify observers

@@ -34,44 +34,65 @@ class CurrentExchangeRates {
         return nil
     }
     
-    func convert(amount: Double, from: Currency, to: Currency, source: ExchangeRateSource, iteration: Int = 0) -> Double? {
-        guard iteration < 5 else {
-            return nil
-        }
+    public func convert(amount: Double, from: Currency, to: Currency, source: ExchangeRateSource) -> Double? {
+        var rate: Double?
         
+        if let newRate = directConvert(amount: amount, from: from, to: to, source: source) {
+            return newRate
+        }
+        for source in ExchangeRateSource.all {
+            if let newRate = directConvert(amount: amount, from: from, to: to, source: source) {
+                rate = newRate
+            }
+            if rate != nil {
+                return rate!
+            } else {
+                //change currency and loop through all sources to get a connecting currency to use as middle point
+                for currency in source.mainCurrencies {
+                    var fromRate: Double? = getRate(from: from, to: currency, source: source)
+                    var toRate: Double? = getRate(from: currency, to: to, source: source)
+                    for source in ExchangeRateSource.all {
+                        if currency == from || currency == to {
+                            continue
+                        }
+                        if fromRate == nil, let newfromRate = getRate(from: from, to: currency, source: source) {
+                            fromRate = newfromRate
+                        }
+                        
+                        if toRate == nil, let newtoRate = getRate(from: currency, to: to, source: source) {
+                            toRate = newtoRate
+                        }
+                        if fromRate != nil && toRate != nil {
+                            return amount * fromRate! * toRate!
+                        }
+                    }
+                }
+            }
+        }
+        return nil
+    }
+    
+    public func directConvert(amount: Double, from: Currency, to: Currency, source: ExchangeRateSource) -> Double? {
+        
+        log.debug("converting from \(from) to \(to) source \(source)")
+        
+        if let rate = getRate(from: from, to: to, source: source) {
+            return amount * rate
+        }
+        return nil
+    }
+    
+    public func getRate(from: Currency, to: Currency, source: ExchangeRateSource) -> Double? {
         log.debug("converting from \(from) to \(to) source \(source)")
         
         if let exchangeRates = exchangeRates(forSource: source) {
             // First check if the exact rate exists (either directly or reversed)
             if let rate = exchangeRates.rate(from: from, to: to) {
                 log.debug("found direct conversion")
-                return amount * rate
+                return rate
             } else if let rate = exchangeRates.rate(from: to, to: from) {
                 log.debug("found direct reverse conversion")
-                return amount * (1.0 / rate)
-            } else {
-                // If not, try to get to the main currency for that exchange and then work from there
-                for currency in source.mainCurrencies {
-                    // Get rate in main currency
-                    if let rate = exchangeRates.rate(from: from, to: currency) {
-                        log.debug("found intermediate conversion to \(currency)")
-                        
-                        if from.isFiat && to.isFiat {
-                            log.debug("trying \(currency.code) to \(to.code) using source \(ExchangeRateSource.fixer)")
-                            return convert(amount: amount * rate, from: currency, to: to, source: .fixer, iteration: iteration + 1)
-                        } else {
-                            log.debug("trying \(currency.code) to \(to.code) using source \(ExchangeRateSource.coinbaseGdax)")
-                            return convert(amount: amount * rate, from: currency, to: to, source: .coinbaseGdax, iteration: iteration + 1)
-                        }
-                    }
-                }
-                
-                // No rate available from this source, so try a different one
-                if from.isFiat && to.isFiat {
-                    return convert(amount: amount, from: from, to: to, source: .fixer, iteration: iteration + 1)
-                } else if from.isCrypto && to.isFiat {
-                    return convert(amount: amount, from: from, to: to, source: .coinbaseGdax, iteration: iteration + 1)
-                }
+                return (1.0 / rate)
             }
         }
         

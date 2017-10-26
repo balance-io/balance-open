@@ -10,7 +10,7 @@ import XCTest
 @testable import BalancemacOS
 
 
-internal final class AccountTests: XCTestCase
+internal final class GDAXAccountTests: XCTestCase
 {
     // Private
     private let accountJSON: [String : Any] = {
