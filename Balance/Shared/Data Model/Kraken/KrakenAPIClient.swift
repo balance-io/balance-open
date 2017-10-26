@@ -35,9 +35,9 @@ internal final class KrakenAPIClient
 
 internal extension KrakenAPIClient
 {
-    internal func fetchAccounts(_ completionHandler: @escaping (_ accounts: [Account]?, _ error: Error?) -> Void) throws
-    {
-        guard let unwrappedCredentials = self.credentials else
+    private func generateAccountRequest(credentials: Credentials?) throws -> URLRequest {
+        
+        guard let unwrappedCredentials = credentials else
         {
             throw APICredentialsComponents.Error.noCredentials
         }
@@ -47,7 +47,7 @@ internal extension KrakenAPIClient
         let nonce = String(Int(Date().timeIntervalSinceReferenceDate.rounded() * 1000))
         let body = [
             "nonce" : nonce
-        ].httpFormEncode()
+            ].httpFormEncode()
         
         let headers = try AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, nonce: nonce, body: body)
         let url = self.baseURL.appendingPathComponent(requestPath)
@@ -57,6 +57,14 @@ internal extension KrakenAPIClient
         request.httpBody = body.data(using: .utf8)
         request.add(headers: headers.dictionary)
         
+        return request
+    }
+    
+    
+    internal func fetchAccounts(_ completionHandler: @escaping (_ accounts: [Account]?, _ error: Error?) -> Void) throws
+    {
+        let request = try self.generateAccountRequest(credentials: self.credentials)
+
         // Perform request
         let task = self.session.dataTask(with: request) { (data, response, error) in
             guard let httpResponse = response as? HTTPURLResponse,
@@ -155,34 +163,89 @@ extension KrakenAPIClient: ExchangeApi {
 
         do {
             let credentials = try KrakenAPIClient.Credentials(key: key, secret: secret)
-
             self.credentials = credentials
-            try self.fetchAccounts { accounts, error in
-                guard let unwrappedError = error else {
-                    do {
-                        let credentialsIdentifier = "main"
-                        try credentials.save(identifier: credentialsIdentifier)
-                        let institution = InstitutionRepository.si.institution(source: .kraken, sourceInstitutionId: "", name: "Kraken")
-                        institution?.accessToken = credentialsIdentifier
-
-                        async {
-                            closeBlock(true, nil, institution)
-                        }
+            let request = try self.generateAccountRequest(credentials: credentials)
+            
+            // Perform request
+            let task = self.session.dataTask(with: request) { (data, response, error) in
+                guard let httpResponse = response as? HTTPURLResponse,
+                    let unwrappedData = data,
+                    let json = try? JSONSerialization.jsonObject(with: unwrappedData, options: [])
+                    
+                else {
+                    async {
+                        closeBlock(true, APIError.invalidJSON, nil)
                     }
-                    catch {
+                    return
+                }
+                
+                if case 200...299 = httpResponse.statusCode {
+                    guard let responseJSON = json as? [String : Any],
+                        let resultJSON = responseJSON["result"] as? [String : String] else
+                    {
+                        async {
+                            closeBlock(true, APIError.invalidJSON, nil)
+                        }
+                        return
+                    }
+                    //make institution
+                    let credentialsIdentifier = "main"
+                    var institution: Institution
+                    institution = InstitutionRepository.si.institution(source: .kraken, sourceInstitutionId: "", name: "Kraken")!
+                    institution.accessToken = credentialsIdentifier
+                    do {
+                        try credentials.save(identifier: credentialsIdentifier)
+                    } catch {
                         async {
                             closeBlock(false, error, nil)
                         }
                     }
-
-                    return
-                }
-
-                // TODO: Display error
-                async {
-                    closeBlock(false, unwrappedError, nil)
+                    
+                    // Build accounts
+                    var accounts = [KrakenAPIClient.Account]()
+                    for (currency, balance) in resultJSON {
+                        do {
+                            //refer to Parse Accounts comments
+                            var currencyCode = currency
+                            if currency.length == 4 && (currency.hasPrefix("Z") || currency.hasPrefix("X")) {
+                                currencyCode = currency.substring(from: 1)
+                            }
+                            
+                            let account = try Account(currency: currencyCode, balance: balance)
+                            accounts.append(account)
+                        } catch { }
+                    }
+                    for account in accounts {
+                        let currentBalance = self.paddedInteger(for: account.balance, currencyCode: account.currencyCode)
+                        let availableBalance = currentBalance
+                        
+                        // Initialize an Account object to insert the record
+                        AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: account.currencyCode, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: account.currencyCode, currency: account.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
+                    }
+                    async {
+                        closeBlock(true, nil, institution)
+                    }
+                } else if case 400...402 = httpResponse.statusCode {
+                    let error = APICredentialsComponents.Error.invalidSecret(message: "One or more of your credentials is invalid")
+                    async {
+                        closeBlock(false, error, nil)
+                    }
+                } else if case 403...499 = httpResponse.statusCode {
+                    let error = APICredentialsComponents.Error.missingPermissions
+                    async {
+                        closeBlock(false, error, nil)
+                    }
+                    
+                } else {
+                    let error = APIError.response(httpResponse: httpResponse, data: data)
+                    async {
+                        closeBlock(false, error, nil)
+                    }
+                    
                 }
             }
+            
+            task.resume()
         }
         catch APICredentialsComponents.Error.invalidSecret {
             // TODO: show alert
@@ -196,6 +259,14 @@ extension KrakenAPIClient: ExchangeApi {
                 closeBlock(false, error, nil)
             }
         }
+    }
+    private func paddedInteger(for amount: Double, currencyCode: String) -> Int {
+        let decimals = Currency.rawValue(currencyCode).decimals
+        
+        var amountDecimal = Decimal(amount)
+        amountDecimal = amountDecimal * Decimal(pow(10.0, Double(decimals)))
+        
+        return (amountDecimal as NSDecimalNumber).intValue
     }
 }
 
