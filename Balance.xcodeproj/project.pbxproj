@@ -747,7 +747,6 @@
 		53FCE33C1F06B5DC004EB25C /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = SOURCE_ROOT; };
 		53FCE33D1F06B5DC004EB25C /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = SOURCE_ROOT; };
 		53FCE33E1F06B5DC004EB25C /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = SOURCE_ROOT; };
-		53FCE33F1F06B5DC004EB25C /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = Carthage/Build/iOS/SwiftyStoreKit.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3401F06B5DC004EB25C /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/iOS/XCGLogger.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3491F06B653004EB25C /* BalanceVectorGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BalanceVectorGraphics.framework; path = Carthage/Build/Mac/BalanceVectorGraphics.framework; sourceTree = SOURCE_ROOT; };
 		53FCE34C1F06B653004EB25C /* JMSRangeSlider.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JMSRangeSlider.framework; path = Carthage/Build/Mac/JMSRangeSlider.framework; sourceTree = SOURCE_ROOT; };
@@ -757,7 +756,6 @@
 		53FCE3511F06B653004EB25C /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3521F06B653004EB25C /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/Mac/RealmSwift.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3531F06B653004EB25C /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/Mac/SnapKit.framework; sourceTree = SOURCE_ROOT; };
-		53FCE3541F06B653004EB25C /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = Carthage/Build/Mac/SwiftyStoreKit.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3551F06B653004EB25C /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/Mac/XCGLogger.framework; sourceTree = SOURCE_ROOT; };
 		676ED79E1D17AC5D00D03395 /* MockData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MockData; sourceTree = "<group>"; };
 		676ED7A41D17ACB400D03395 /* SampleResponses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleResponses.swift; sourceTree = "<group>"; };
@@ -1260,7 +1258,6 @@
 				53FCE3511F06B653004EB25C /* Realm.framework */,
 				53FCE3521F06B653004EB25C /* RealmSwift.framework */,
 				53FCE3531F06B653004EB25C /* SnapKit.framework */,
-				53FCE3541F06B653004EB25C /* SwiftyStoreKit.framework */,
 				5375963E1F50B8FD00B36E6E /* TrustKit.framework */,
 				53FCE3551F06B653004EB25C /* XCGLogger.framework */,
 			);
@@ -1289,7 +1286,6 @@
 				53FCE33C1F06B5DC004EB25C /* Realm.framework */,
 				53FCE33D1F06B5DC004EB25C /* RealmSwift.framework */,
 				53FCE33E1F06B5DC004EB25C /* SnapKit.framework */,
-				53FCE33F1F06B5DC004EB25C /* SwiftyStoreKit.framework */,
 				53FCE3401F06B5DC004EB25C /* XCGLogger.framework */,
 			);
 			path = Carthage;
@@ -2119,7 +2115,7 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = Q4G66XSS36;
 						LastSwiftMigration = 0900;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -2913,8 +2909,8 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Balance/macOS/Supporting Files/Balance.entitlements";
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
@@ -2946,8 +2942,8 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Balance/macOS/Supporting Files/Balance.entitlements";
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3076,8 +3072,8 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Balance/macOS/Supporting Files/Balance.entitlements";
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";

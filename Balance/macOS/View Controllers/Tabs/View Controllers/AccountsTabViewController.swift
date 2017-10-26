@@ -355,6 +355,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(syncCompleted(_:)), name: Notifications.SyncCompleted)
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(accountPatched(_:)), name: Notifications.AccountPatched)
+        
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(masterCurrencyChanged(_:)), name: Notifications.MasterCurrencyChanged)
     }
     
     func unregisterForNotifications() {
@@ -371,6 +373,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
 
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.SyncCompleted)
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.AccountPatched)
+        
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.MasterCurrencyChanged)
     }
     
     fileprivate let institutionUpdateDelay = 0.3
@@ -509,6 +513,10 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     }
     
     @objc fileprivate func accountPatched(_ notification: Notification) {
+        reloadData()
+    }
+    
+    @objc fileprivate func masterCurrencyChanged(_ notification: Notification) {
         reloadData()
     }
     
