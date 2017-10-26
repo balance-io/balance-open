@@ -393,7 +393,7 @@ fileprivate class InstitutionCell: View {
         
         nameField.textColor = isSelected ? .white : .black
         
-        let color = isSelected ? .white : (model?.displayColor ?? .gray)
+        let color = isSelected ? .white : (model?.source.color ?? .gray)
         var circleFrame = NSRect(x: 10, y: 0, width: 9, height: 9)
         circleFrame.origin.y = (self.frame.size.height - circleFrame.size.height) / 2
         PreferencesAccounts.drawAccountColorCircle(frame: circleFrame, color: color)
