@@ -1,6 +1,4 @@
-**Is this a feature request or bug report?**  
- - [ ] Feature
- - [ ] Bug
+**Is this a feature request or bug report? (please add a label and remove question)**  
 
 **What is the current behavior?**
 
