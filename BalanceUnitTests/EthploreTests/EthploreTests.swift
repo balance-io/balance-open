@@ -185,7 +185,7 @@ class EthploreAccountTests: XCTestCase {
         let ethploreAccount: EthplorerAccount = account.ethplorerAccounts[2]
         
         //then
-        XCTAssertEqual(ethploreAccount.available, atof("91990"))
+        XCTAssertEqual(ethploreAccount.available, atof("91990")) // this is an error un Ethplore api should be 919.90
         XCTAssertEqual(ethploreAccount.balance, 9199000000000)
         XCTAssertEqual(ethploreAccount.currency, Currency.cryptoOther(code: "GUP"))
         XCTAssertEqual(ethploreAccount.altCurrency, .usd)
