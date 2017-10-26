@@ -137,7 +137,7 @@ extension Transaction {
     }
     
     var displayAltAmount: Int? {
-        let masterCurrency = defaults.masterCurrency
+        let masterCurrency = defaults.masterCurrency!
         if currency == masterCurrency.code {
             return amount
         } else {
