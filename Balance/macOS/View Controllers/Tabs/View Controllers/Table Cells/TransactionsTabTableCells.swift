@@ -12,16 +12,18 @@ import MapKit
 class TransactionsTabGroupCell: View {
     var section = -1
     
-    //        let blurryView = VisualEffectView()
-    let blurryView = View()
     let dateField = LabelField()
     
     init() {
         super.init(frame: NSZeroRect)
         
+        self.layerBackgroundColor = CurrentTheme.defaults.backgroundColor
+        
         dateField.textColor = CurrentTheme.transactions.headerCell.dateColor
         dateField.font = CurrentTheme.transactions.headerCell.dateFont
         dateField.alphaValue = CurrentTheme.transactions.headerCell.dateAlpha
+        dateField.backgroundColor = CurrentTheme.defaults.backgroundColor
+        dateField.layerBackgroundColor = CurrentTheme.defaults.backgroundColor
         self.addSubview(dateField)
         dateField.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(10)
@@ -75,7 +77,7 @@ class TransactionsTabTransactionCell: View {
     let typeField = LabelField()
     let amountField = LabelField()
     let institutionLogo = PaintCodeView()
-    let institutionName = LabelField()
+    let institutionNameField = LabelField()
     let altAmountField = LabelField()
     
     var bottomContainerOpened = false
@@ -108,26 +110,46 @@ class TransactionsTabTransactionCell: View {
             make.height.equalToSuperview().offset(-10)
         }
         
+        typeField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
+        typeField.font = CurrentTheme.transactions.cell.typeFont
+        typeField.usesSingleLineMode = true
+        typeField.alignment = .right
+        topContainer.addSubview(typeField)
+        typeField.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(16)
+        }
+        
         amountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
         amountField.font = CurrentTheme.transactions.cell.amountFont
+        amountField.textColor = CurrentTheme.transactions.cell.amountColor
         amountField.usesSingleLineMode = true
         amountField.alignment = .right
         topContainer.addSubview(amountField)
         amountField.snp.makeConstraints { make in
-            make.width.equalTo(100)
-            make.trailing.equalTo(topContainer).inset(10)
-            make.bottom.equalTo(-14)
+            make.leading.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview().offset(-16)
+        }
+        
+        institutionNameField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
+        institutionNameField.font = CurrentTheme.transactions.cell.typeFont
+        institutionNameField.usesSingleLineMode = true
+        institutionNameField.alignment = .right
+        topContainer.addSubview(institutionNameField)
+        institutionNameField.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-10)
+            make.top.equalToSuperview().offset(16)
         }
 
-        amountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
-        amountField.font = CurrentTheme.transactions.cell.amountFont
-        amountField.usesSingleLineMode = true
-        amountField.alignment = .right
-        topContainer.addSubview(amountField)
-        amountField.snp.makeConstraints { make in
-            make.width.equalTo(100)
-            make.trailing.equalTo(topContainer).inset(10)
-            make.bottom.equalTo(-14)
+        altAmountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
+        altAmountField.font = CurrentTheme.transactions.cell.altAmountFont
+        altAmountField.textColor = CurrentTheme.transactions.cell.altAmountColor
+        altAmountField.usesSingleLineMode = true
+        altAmountField.alignment = .right
+        topContainer.addSubview(altAmountField)
+        altAmountField.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-10)
+            make.bottom.equalToSuperview().offset(-16)
         }
         
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(cellOpened(_:)), name: TransactionsTabViewController.InternalNotifications.CellOpened)
@@ -148,9 +170,24 @@ class TransactionsTabTransactionCell: View {
         
         model = updatedModel
         
-        //let masterCurrency = defaults.masterCurrency
+        if updatedModel.amount > 0 {
+            typeField.stringValue = "Received"
+            typeField.textColor = CurrentTheme.transactions.cell.typeColorReceived
+        } else {
+            typeField.stringValue = "Sent"
+            typeField.textColor = CurrentTheme.transactions.cell.typeColorSent
+        }
+        
         let currency = Currency.rawValue(updatedModel.currency)
-        amountField.stringValue = amountToString(amount: -updatedModel.amount, currency: currency, showNegative: false, showCodeAfterValue: true)
+        amountField.stringValue = amountToString(amount: updatedModel.amount, currency: currency, showNegative: false, showCodeAfterValue: true)
+        
+        institutionNameField.stringValue = updatedModel.institution?.name ?? ""
+        
+        if let displayAltAmount = updatedModel.displayAltAmount {
+            altAmountField.stringValue = amountToString(amount: displayAltAmount, currency: defaults.masterCurrency, showNegative: true, showCodeAfterValue: true)
+        } else {
+            altAmountField.stringValue = ""
+        }
         
         self.toolTip = updatedModel.displayName
     }

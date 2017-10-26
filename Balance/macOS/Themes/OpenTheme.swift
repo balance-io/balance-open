@@ -190,10 +190,18 @@ struct OpenTheme: Theme {
             
             nameFont: NSFont.systemFont(ofSize: 13.5),
             
+            typeFont: NSFont.mediumSystemFont(ofSize: 12),
+            typeColorSent: NSColor(hexString: "#667180")!,
+            typeColorReceived: NSColor(hexString: "#169299")!,
+            typeColorTraded: NSColor(hexString: "#187AE3")!,
+            
             amountFont: NSFont.monospacedDigitSystemFont(ofSize: 14),
             amountColor: NSColor(hexString: "#252A35")!,
             amountColorCents: NSColor(deviceRedInt: 153, green: 165, blue: 174),
-            amountColorPositive: NSColor(deviceRedInt: 88, green: 184, blue: 33)
+            amountColorPositive: NSColor(deviceRedInt: 88, green: 184, blue: 33),
+            
+            altAmountFont: NSFont.monospacedDigitSystemFont(ofSize: 14),
+            altAmountColor: NSColor(hexString: "#252A35")!
         )
         
         let cellExpansion = TransactionsTheme.CellExpansionTheme(
