@@ -174,5 +174,24 @@ class EthploreAccountTests: XCTestCase {
         XCTAssertEqual(account.tokens.count, 0)
     }
     
+    func testAccountGUP() {
+        //given
+        let data = TestHelpers.loadData(filename: "MultipleEthploreAccountResponse.json")
+        self.json = TestHelpers.dataToJSON(data: data) as [String:AnyObject]
+        
+        //when
+        let account = try! EthplorerAccountObject.init(dictionary: self.json, currencyShortName: "ETH", type: .wallet)
+        XCTAssertEqual(account.tokens.count, 3)
+        let ethploreAccount: EthplorerAccount = account.ethplorerAccounts[2]
+        
+        //then
+        XCTAssertEqual(ethploreAccount.available, atof("91990")) // this is an error un Ethplore api should be 919.90
+        XCTAssertEqual(ethploreAccount.balance, 9199000000000)
+        XCTAssertEqual(ethploreAccount.currency, Currency.cryptoOther(code: "GUP"))
+        XCTAssertEqual(ethploreAccount.altCurrency, .usd)
+        XCTAssertEqual(ethploreAccount.decimals, 8)
+        XCTAssertEqual(ethploreAccount.altRate, 0.137338)
+    }
+    
 }
 
