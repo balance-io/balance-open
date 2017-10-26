@@ -29,6 +29,34 @@
         "totalIn": 0,
         "totalOut": 0
     },
+   {
+       "tokenInfo": {
+       "address": "0xf7b098298f7c69fc14610bf71d5e02c60792894c",
+       "name": "Guppy",
+       "decimals": 3,
+       "symbol": "GUP",
+       "totalSupply": "98855149620",
+       "owner": "0x",
+       "lastUpdated": 1508941835,
+       "totalIn": 155247244020,
+       "totalOut": 155247244020,
+       "issuancesCount": 0,
+       "holdersCount": 1853,
+       "price": {
+           "rate": "0.137338",
+           "diff": -8.53,
+           "diff7d": 9.78,
+           "ts": "1508945956",
+           "marketCapUsd": "10300350.0",
+           "availableSupply": "75000000.0",
+           "volume24h": "607852.0",
+           "currency": "USD"
+       }
+   },
+       "balance": 91990,
+       "totalIn": 91990,
+       "totalOut": 0
+   },
        {
            "tokenInfo": {
            "address": "0xdd974d5c2e2928dea5f71b9825b8b646686bd200",
