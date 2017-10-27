@@ -188,6 +188,10 @@
 		535905691CC8482400DBC816 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535905681CC8482400DBC816 /* Logging.swift */; };
 		535AEA331D22D177003F13E2 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535AEA321D22D177003F13E2 /* NSAttributedString.swift */; };
 		535BE39E1F05A14C00DEA4EF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 535BE39D1F05A14C00DEA4EF /* libz.tbd */; };
+		535BECB31FA3640F0015A700 /* CardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535BECB21FA3631A0015A700 /* CardItem.swift */; };
+		535BECB41FA3640F0015A700 /* StackedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535BECAF1FA3631A0015A700 /* StackedLayout.swift */; };
+		535BECB51FA3640F0015A700 /* StackedCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535BECB01FA3631A0015A700 /* StackedCollectionView.swift */; };
+		535BECB71FA365ED0015A700 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535BECB61FA365EC0015A700 /* Reusable.swift */; };
 		5361BC9E1F562580009C3F07 /* PoloniexInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5361BC9D1F562580009C3F07 /* PoloniexInstitution.swift */; };
 		5361BC9F1F562580009C3F07 /* PoloniexInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5361BC9D1F562580009C3F07 /* PoloniexInstitution.swift */; };
 		536C6EEF1D864C9B00823688 /* MockedDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536C6EEE1D864C9B00823688 /* MockedDefaultsStorage.swift */; };
@@ -630,6 +634,10 @@
 		535905681CC8482400DBC816 /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		535AEA321D22D177003F13E2 /* NSAttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		535BE39D1F05A14C00DEA4EF /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
+		535BECAF1FA3631A0015A700 /* StackedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedLayout.swift; sourceTree = "<group>"; };
+		535BECB01FA3631A0015A700 /* StackedCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedCollectionView.swift; sourceTree = "<group>"; };
+		535BECB21FA3631A0015A700 /* CardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardItem.swift; sourceTree = "<group>"; };
+		535BECB61FA365EC0015A700 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		5361BC9D1F562580009C3F07 /* PoloniexInstitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexInstitution.swift; sourceTree = "<group>"; };
 		536C6EEE1D864C9B00823688 /* MockedDefaultsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockedDefaultsStorage.swift; sourceTree = "<group>"; };
 		536C6EF11D864CB900823688 /* DefaultsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsStorage.swift; sourceTree = "<group>"; };
@@ -1081,6 +1089,7 @@
 		532550861D06F9500045404E /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				535BECAD1FA3631A0015A700 /* Card Collection View */,
 				5391A4D61CE5048500B9FBD9 /* CategoryView.swift */,
 				DC39DFFF1CD80D0E00B48F75 /* HoverButton.swift */,
 				539085321CF97D00009D6E87 /* HoverTableRowView.swift */,
@@ -1392,6 +1401,33 @@
 				53561EA31F82DD120043D4F9 /* ApplicationConfiguration.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		535BECAD1FA3631A0015A700 /* Card Collection View */ = {
+			isa = PBXGroup;
+			children = (
+				535BECB11FA3631A0015A700 /* Items */,
+				535BECAE1FA3631A0015A700 /* Layouts */,
+				535BECB61FA365EC0015A700 /* Reusable.swift */,
+				535BECB01FA3631A0015A700 /* StackedCollectionView.swift */,
+			);
+			path = "Card Collection View";
+			sourceTree = "<group>";
+		};
+		535BECAE1FA3631A0015A700 /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				535BECAF1FA3631A0015A700 /* StackedLayout.swift */,
+			);
+			path = Layouts;
+			sourceTree = "<group>";
+		};
+		535BECB11FA3631A0015A700 /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				535BECB21FA3631A0015A700 /* CardItem.swift */,
+			);
+			path = Items;
 			sourceTree = "<group>";
 		};
 		538B47AF1F4C9FD60023CED5 /* Coinbase */ = {
@@ -2487,6 +2523,7 @@
 				A40ABBE61F6BC0C000383C62 /* KrakenAPIClient.swift in Sources */,
 				53F6383F1C5FFF3200864346 /* Transaction.swift in Sources */,
 				DCDF77BD1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift in Sources */,
+				535BECB41FA3640F0015A700 /* StackedLayout.swift in Sources */,
 				532550831D06F9090045404E /* View.swift in Sources */,
 				283D18351DC8F6240044BF51 /* PreferencesSecurityViewController.swift in Sources */,
 				539660151F858A8E0037A2B3 /* OpenTheme.swift in Sources */,
@@ -2560,6 +2597,7 @@
 				530F57C61DCD72680083F3A7 /* FMDatabaseAdditionsVariadic.swift in Sources */,
 				5372E96F1DF7E75C00DDE214 /* SignUpTextField.swift in Sources */,
 				A41D3E421F6BF75100FD25B5 /* KrakenErrors.swift in Sources */,
+				535BECB51FA3640F0015A700 /* StackedCollectionView.swift in Sources */,
 				A4E457161F7901E6002E2879 /* EthplorerInstitution.swift in Sources */,
 				53EB77CE1CF3E6F600F01903 /* NSFont.swift in Sources */,
 				537504FD1F192D280062C11A /* TypeAliases.swift in Sources */,
@@ -2607,11 +2645,13 @@
 				537187E91F4CC23C00E7F9D6 /* GDAXAPIClient.swift in Sources */,
 				A41742901F73C6BF004A9B4F /* CoinbaseTransaction.swift in Sources */,
 				5302912D1C6A731F00C31CC1 /* Account.swift in Sources */,
+				535BECB31FA3640F0015A700 /* CardItem.swift in Sources */,
 				53CED06A1D19B26000CE1B73 /* VisualEffectView.swift in Sources */,
 				530415BE1DFE1A6E00F0679C /* NSTextView.swift in Sources */,
 				53DC85B11E678223007C72EB /* FileManager.swift in Sources */,
 				532121A51EE8B91600F4812A /* Zip.swift in Sources */,
 				53E74A571DD53CCB00AD8876 /* TimeInterval.swift in Sources */,
+				535BECB71FA365ED0015A700 /* Reusable.swift in Sources */,
 				53368DD81E3FFD4200B7A199 /* PaintCodeDropdown.swift in Sources */,
 				530F57A21DCD72680083F3A7 /* FMDatabaseAdditions.m in Sources */,
 				53294FA21D1DDD9500F08059 /* CCNStatusItem.m in Sources */,
@@ -2921,6 +2961,7 @@
 				);
 				INFOPLIST_FILE = "Balance/macOS/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_CFLAGS = "";
 				OTHER_SWIFT_FLAGS = "-D DEBUG -D APPSTORE -Xfrontend -debug-time-function-bodies -Onone";
 				PRODUCT_BUNDLE_IDENTIFIER = "software.balanced.balance-open";
@@ -2953,6 +2994,7 @@
 				);
 				INFOPLIST_FILE = "Balance/macOS/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_CFLAGS = "";
 				OTHER_SWIFT_FLAGS = "-D RELEASE -D APPSTORE";
 				PRODUCT_BUNDLE_IDENTIFIER = "software.balanced.balance-open";
@@ -3084,6 +3126,7 @@
 				);
 				INFOPLIST_FILE = "Balance/macOS/Supporting Files/InfoTesting.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_CFLAGS = "";
 				OTHER_SWIFT_FLAGS = "-D DEBUG -D APPSTORE";
 				PRODUCT_BUNDLE_IDENTIFIER = "software.balanced.balance-open";

@@ -121,9 +121,43 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     override func loadView() {
         self.view = View()
         
-        createTable()
+        createCards()
+//        createTable()
         createFixPasswordPrompt()
         createTotalFooter()
+    }
+    
+    private let collectionView = StackedCollectionView(frame: .zero)
+    private let colors: [NSColor] = [.red, .green, .blue, .black, .yellow]
+    func createCards() {
+        // Scroll view
+        scrollView.drawsBackground = false
+        scrollView.hasVerticalScroller = true
+        scrollView.hasHorizontalScroller = false
+//        scrollView.verticalScrollElasticity = .none
+        scrollView.documentView = collectionView
+        let bottomOffset = defaults.hideAddAccountPrompt ? 50 : 130
+        scrollView.contentInsets = NSEdgeInsetsMake(0, 0, CGFloat(bottomOffset), 0)
+        self.view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(self.view)
+            make.leading.equalTo(self.view)
+            make.trailing.equalTo(self.view)
+            make.bottom.equalTo(self.view)
+        }
+        
+        // Collection view
+        let layout = StackedLayout()
+        layout.delegate = self
+        
+        collectionView.backgroundColors = [.clear]
+        collectionView.collectionViewLayout = layout
+        collectionView.allowsEmptySelection = true
+        collectionView.allowsMultipleSelection = true
+        collectionView.isSelectable = true
+        collectionView.register(reusableItem: CardItem.self)
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
     
     func createTable() {
@@ -790,5 +824,50 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         }
         
         return false
+    }
+}
+
+// MARK: NSCollectionViewDataSource
+
+extension AccountsTabViewController: NSCollectionViewDataSource {
+    func numberOfSections(in collectionView: NSCollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.colors.count
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
+        let item = collectionView.makeReusableItem(at: indexPath) as CardItem
+        item.view.layer?.backgroundColor = self.colors[indexPath.item].cgColor
+        
+        return item
+    }
+}
+
+// MARK: NSCollectionViewDelegate
+
+extension AccountsTabViewController: NSCollectionViewDelegate {
+    
+}
+
+// MARK: StackedLayoutDelegate
+
+extension AccountsTabViewController: StackedLayoutDelegate {
+    func closedHeightForItem(at indexPath: IndexPath, in collectionView: NSCollectionView) -> CGFloat {
+        guard let item = collectionView.item(at: indexPath) as? CardItem else {
+            return 150.0
+        }
+        
+        return item.closedContentHeight
+    }
+    
+    func expandedHeightForItem(at indexPath: IndexPath, in collectionView: NSCollectionView) -> CGFloat {
+        guard let item = collectionView.item(at: indexPath) as? CardItem else {
+            return 0.0
+        }
+        
+        return item.expandedContentHeight
     }
 }
