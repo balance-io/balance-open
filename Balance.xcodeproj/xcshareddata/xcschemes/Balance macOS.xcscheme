@@ -20,20 +20,6 @@
                ReferencedContainer = "container:Balance.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "NO"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DC1A64A31B867B1F009356A0"
-               BuildableName = "BalTests.xctest"
-               BlueprintName = "BalTests"
-               ReferencedContainer = "container:Balance.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
