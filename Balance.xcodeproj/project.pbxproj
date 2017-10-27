@@ -739,13 +739,10 @@
 		53F638381C5FEAB800864346 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		53F6383E1C5FFF3200864346 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		53F63CD21F82C25D00FD4B27 /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjcExceptionBridging.framework; path = Carthage/Build/Mac/ObjcExceptionBridging.framework; sourceTree = SOURCE_ROOT; };
-		53F63CD51F82C28400FD4B27 /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjcExceptionBridging.framework; path = Carthage/Build/iOS/ObjcExceptionBridging.framework; sourceTree = "<group>"; };
 		53F63CD71F82C29700FD4B27 /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjcExceptionBridging.framework; path = Carthage/Build/iOS/ObjcExceptionBridging.framework; sourceTree = SOURCE_ROOT; };
 		53F63CD91F82C2C800FD4B27 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		53FCE3391F06B5DC004EB25C /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/iOS/Locksmith.framework; sourceTree = SOURCE_ROOT; };
 		53FCE33A1F06B5DC004EB25C /* NSDateTimeAgo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NSDateTimeAgo.framework; path = Carthage/Build/iOS/NSDateTimeAgo.framework; sourceTree = SOURCE_ROOT; };
-		53FCE33C1F06B5DC004EB25C /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = SOURCE_ROOT; };
-		53FCE33D1F06B5DC004EB25C /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = SOURCE_ROOT; };
 		53FCE33E1F06B5DC004EB25C /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3401F06B5DC004EB25C /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/iOS/XCGLogger.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3491F06B653004EB25C /* BalanceVectorGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BalanceVectorGraphics.framework; path = Carthage/Build/Mac/BalanceVectorGraphics.framework; sourceTree = SOURCE_ROOT; };
@@ -753,8 +750,6 @@
 		53FCE34D1F06B653004EB25C /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/Mac/Locksmith.framework; sourceTree = SOURCE_ROOT; };
 		53FCE34E1F06B653004EB25C /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASShortcut.framework; path = Carthage/Build/Mac/MASShortcut.framework; sourceTree = SOURCE_ROOT; };
 		53FCE34F1F06B653004EB25C /* NSDateTimeAgo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NSDateTimeAgo.framework; path = Carthage/Build/Mac/NSDateTimeAgo.framework; sourceTree = SOURCE_ROOT; };
-		53FCE3511F06B653004EB25C /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = SOURCE_ROOT; };
-		53FCE3521F06B653004EB25C /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/Mac/RealmSwift.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3531F06B653004EB25C /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/Mac/SnapKit.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3551F06B653004EB25C /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/Mac/XCGLogger.framework; sourceTree = SOURCE_ROOT; };
 		676ED79E1D17AC5D00D03395 /* MockData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MockData; sourceTree = "<group>"; };
@@ -1024,14 +1019,6 @@
 			path = "Swift extensions";
 			sourceTree = "<group>";
 		};
-		5313F9611F58CFB800DD6BDB /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				53F63CD51F82C28400FD4B27 /* ObjcExceptionBridging.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		532121901EE8B91600F4812A /* Zip */ = {
 			isa = PBXGroup;
 			children = (
@@ -1255,8 +1242,6 @@
 				53FCE34D1F06B653004EB25C /* Locksmith.framework */,
 				53FCE34E1F06B653004EB25C /* MASShortcut.framework */,
 				53FCE34F1F06B653004EB25C /* NSDateTimeAgo.framework */,
-				53FCE3511F06B653004EB25C /* Realm.framework */,
-				53FCE3521F06B653004EB25C /* RealmSwift.framework */,
 				53FCE3531F06B653004EB25C /* SnapKit.framework */,
 				5375963E1F50B8FD00B36E6E /* TrustKit.framework */,
 				53FCE3551F06B653004EB25C /* XCGLogger.framework */,
@@ -1283,8 +1268,6 @@
 				5313F9601F58CFAC00DD6BDB /* TrustKit.framework */,
 				53FCE3391F06B5DC004EB25C /* Locksmith.framework */,
 				53FCE33A1F06B5DC004EB25C /* NSDateTimeAgo.framework */,
-				53FCE33C1F06B5DC004EB25C /* Realm.framework */,
-				53FCE33D1F06B5DC004EB25C /* RealmSwift.framework */,
 				53FCE33E1F06B5DC004EB25C /* SnapKit.framework */,
 				53FCE3401F06B5DC004EB25C /* XCGLogger.framework */,
 			);
@@ -1874,7 +1857,6 @@
 				F107D99F1D6B048800CEEF35 /* BalanceUITests */,
 				F1F948801D8049B800AB30B2 /* BalanceUnitTests */,
 				DC1A64951B867B1F009356A0 /* Products */,
-				5313F9611F58CFB800DD6BDB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
