@@ -218,6 +218,12 @@ extension Institution: PersistedItem {
     }
     
     @discardableResult func delete() -> Bool {
-        return repository.delete(institution: self)
+        let transactions = TransactionRepository.si.transactions(institutionId: self.institutionId)
+        for transaction in transactions
+        {
+            transaction.delete()
+        }
+        
+        return repository.delete(institution: self, notify: true)
     }
 }

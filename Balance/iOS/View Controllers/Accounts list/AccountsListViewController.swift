@@ -12,17 +12,22 @@ import UIKit
 internal final class AccountsListViewController: UIViewController
 {
     // Fileprivate
-    private let viewModel = AccountsTabViewModel()
+    fileprivate let viewModel = AccountsTabViewModel()
     
     // Private
-    private let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+    private let collectionView = StackedCardCollectionView()
     private let titleView = MultilineTitleView()
+    
+    private let blankStateView = UIView()
     
     // MARK: Initialization
     
     internal required init()
     {
         super.init(nibName: nil, bundle: nil)
+        
+        self.title = "Accounts"
+        self.tabBarItem.image = UIImage(named: "Library")
         
         // Notifications
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(self.syncCompletedNotification(_:)), name: Notifications.SyncCompleted)
@@ -44,19 +49,51 @@ internal final class AccountsListViewController: UIViewController
     {
         super.viewDidLoad()
         
-        // Navigation bar
-        self.setupTitleView()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addAccountButtonTapped(_:)))
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Gear"), style: .plain, target: self, action: #selector(self.settingsButtonTapped(_:)))
+        // Collection view
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        self.collectionView.stackedLayout.delegate = self
+        self.collectionView.backgroundColor = UIColor.black
+        self.collectionView.alwaysBounceVertical = true
+        self.collectionView.register(reusableCell: InstitutionCollectionViewCell.self)
+        self.view.addSubview(self.collectionView)
         
-        // Table view
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
-        self.tableView.register(reusableCell: Value1TableViewCell.self)
-        self.view.addSubview(self.tableView)
-        
-        self.tableView.snp.makeConstraints { (make) in
+        self.collectionView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
+        }
+        
+        // Blank state view
+        self.blankStateView.isHidden = true
+        self.view.addSubview(self.blankStateView)
+        
+        self.blankStateView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        
+        let noAccountsLabel = UILabel()
+        noAccountsLabel.text = "Nothing to see here..."
+        noAccountsLabel.textColor = UIColor.white
+        noAccountsLabel.font = UIFont.systemFont(ofSize: 20.0, weight: .regular)
+        self.blankStateView.addSubview(noAccountsLabel)
+        
+        noAccountsLabel.snp.makeConstraints { (make) in
+            make.bottom.equalTo(self.blankStateView.snp.centerY).offset(-10.0)
+            make.centerX.equalToSuperview()
+        }
+        
+        let addAccountButton = UIButton(type: .system)
+        addAccountButton.layer.borderColor = UIColor.white.cgColor
+        addAccountButton.layer.cornerRadius = 4.0
+        addAccountButton.layer.borderWidth = 2.0
+        addAccountButton.setTitle("Add an account", for: .normal)
+        addAccountButton.setTitleColor(UIColor.white, for: .normal)
+        addAccountButton.contentEdgeInsets = UIEdgeInsets(top: 7.0, left: 10.0, bottom: 7.0, right: 10.0)
+        addAccountButton.addTarget(self, action: #selector(self.addAccountButtonTapped(_:)), for: .touchUpInside)
+        self.blankStateView.addSubview(addAccountButton)
+        
+        addAccountButton.snp.makeConstraints { (make) in
+            make.top.equalTo(self.blankStateView.snp.centerY).offset(10.0)
+            make.centerX.equalToSuperview()
         }
     }
     
@@ -64,120 +101,90 @@ internal final class AccountsListViewController: UIViewController
     {
         super.viewWillAppear(animated)
         
+        self.navigationController?.isNavigationBarHidden = true
         self.reloadData()
     }
     
     // MARK: Data
     
-    private func reloadData()
-    {
+    private func reloadData() {
         self.viewModel.reloadData()
-        self.tableView.reloadData()
+        self.collectionView.reloadData()
         
-        // Total balance
-        self.titleView.detailLabel.attributedText = centsToStringFormatted(self.viewModel.totalBalance(), showNegative: true)
-    }
-    
-    // MARK: UI
-    
-    private func setupTitleView()
-    {
-        if let navigationBar = self.navigationController?.navigationBar
-        {
-            let navigationBarBounds = navigationBar.bounds
-            
-            let containerView = UIView()
-            containerView.frame = navigationBarBounds
-            containerView.autoresizingMask = UIViewAutoresizing.flexibleWidth
-            self.navigationItem.titleView = containerView
-            
-            // Add the title view
-            self.titleView.titleLabel.text = "Total Balance"
-            navigationBar.addSubview(self.titleView)
-            
-            self.titleView.snp.makeConstraints({ (make) in
-                make.width.lessThanOrEqualToSuperview().multipliedBy(0.6)
-                make.height.equalToSuperview()
-                make.center.equalTo(navigationBar)
-            })
-        }
+        self.blankStateView.isHidden = self.viewModel.numberOfSections() > 0
     }
     
     // MARK: Actions
     
-    @objc private func addAccountButtonTapped(_ sender: Any)
-    {
+    @objc private func addAccountButtonTapped(_ sender: Any) {
         let addAccountViewController = AddAccountViewController()
         let navigationController = UINavigationController(rootViewController: addAccountViewController)
         
         self.present(navigationController, animated: true, completion: nil)
     }
     
-    @objc private func settingsButtonTapped(_ sender: Any)
-    {
-        let settingsViewController = SettingsViewController()
-        let navigationController = UINavigationController(rootViewController: settingsViewController)
-        
-        self.present(navigationController, animated: true, completion: nil)
-    }
-    
     // MARK: Notifications
     
-    @objc private func syncCompletedNotification(_ notification: Notification)
-    {
+    @objc private func syncCompletedNotification(_ notification: Notification) {
         self.reloadData()
     }
 }
 
-// MARK: UITableViewDataSource
+// MARK: UICollectionViewDataSource
 
-extension AccountsListViewController: UITableViewDataSource
+extension AccountsListViewController: UICollectionViewDataSource
 {
-    func numberOfSections(in tableView: UITableView) -> Int
-    {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.viewModel.numberOfSections()
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
-        return self.viewModel.numberOfRows(inSection: section)
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
-        let cell: Value1TableViewCell = tableView.dequeueReusableCell(at: indexPath)
-        cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
-        cell.accessoryType = .disclosureIndicator
-
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: InstitutionCollectionViewCell = collectionView.dequeueReusableCell(at: indexPath)
+        
+        let institution = self.viewModel.institution(forSection: indexPath.row)!
+        let viewModel = InstitutionAccountsListViewModel(institution: institution)
+        cell.viewModel = viewModel
+        
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
-    {
-        return self.viewModel.institution(forSection: section)?.name
     }
 }
 
-// MARK: UITableViewDelegate
+// MARK: UICollectionViewDelegate
 
-extension AccountsListViewController: UITableViewDelegate
+extension AccountsListViewController: UICollectionViewDelegate
 {
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
-    {
-        guard let account = self.viewModel.account(forRow: indexPath.row, inSection: indexPath.section),
-              let cell = cell as? Value1TableViewCell else
-        {
-            return
-        }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        cell.textLabel?.text = account.displayName
-            
-        let currency = Currency.rawValue(account.currency)
-        cell.detailTextLabel?.text = amountToString(amount: account.displayBalance, currency: currency)
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
-        // TODO:
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        
+    }
+}
+
+// MARK: StackedLayoutDelegate
+
+extension AccountsListViewController: StackedLayoutDelegate
+{
+    func closedHeightForItem(at indexPath: IndexPath, in collectionView: UICollectionView) -> CGFloat {
+        let institution = self.viewModel.institution(forSection: indexPath.row)!
+        
+        let measurementCell = InstitutionCollectionViewCell.measurementCell
+        measurementCell.viewModel = InstitutionAccountsListViewModel(institution: institution)
+        
+        return measurementCell.closedContentHeight
+    }
+    
+    func expandedHeightForItem(at indexPath: IndexPath, in collectionView: UICollectionView) -> CGFloat {
+        let institution = self.viewModel.institution(forSection: indexPath.row)!
+        
+        let measurementCell = InstitutionCollectionViewCell.measurementCell
+        measurementCell.viewModel = InstitutionAccountsListViewModel(institution: institution)
+        
+        return measurementCell.expandedContentHeight
     }
 }

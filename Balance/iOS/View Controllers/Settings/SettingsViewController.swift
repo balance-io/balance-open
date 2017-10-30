@@ -18,22 +18,39 @@ internal final class SettingsViewController: UIViewController
     private let viewModel = AccountsTabViewModel()
     private let tableView = UITableView(frame: CGRect.zero, style: .grouped)
     
+    // MARK: Initialization
+    
+    internal required init()
+    {
+        super.init(nibName: nil, bundle: nil)
+        self.title = "Settings"
+        self.tabBarItem.image = UIImage(named: "Gear")
+        
+        // Notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(self.accountAddedNotification(_:)), name: Notifications.AccountAdded, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.accountRemovedNotification(_:)), name: Notifications.AccountRemoved, object: nil)
+    }
+    
+    internal required init?(coder aDecoder: NSCoder)
+    {
+        fatalError()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // MARK: View lifecycle
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        self.title = "Settings"
         self.view.backgroundColor = UIColor.white
         
         // Navigation bar
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneButtonTapped(_:)))
-        
-        if #available(iOS 11.0, *)
-        {
-            self.navigationController?.navigationBar.prefersLargeTitles = true
-        }
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(self.logoutButtonTapped(_:)))
         
         // Table view
         self.tableView.dataSource = self
@@ -45,47 +62,40 @@ internal final class SettingsViewController: UIViewController
         self.tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        self.buildTableData()
+        self.reloadData()
         self.tableView.reloadData()
     }
     
     // MARK: Data
     
-    private func buildTableData()
+    private func reloadData()
     {
         self.viewModel.reloadData()
         
         // Table sections
         var tableSections = [TableSection]()
         
-        // Theme
-        let themeRow = TableRow { (tableView, indexPath) -> UITableViewCell in
-            // Segmented control
-            let themeSegmentedControl = UISegmentedControl()
-            themeSegmentedControl.addTarget(self, action: #selector(self.themeSegmentedControlChanged(_:)), for: .valueChanged)
-            
-            for theme in UserPreferences.Theme.available
-            {
-                let index = themeSegmentedControl.numberOfSegments
-                themeSegmentedControl.insertSegment(withTitle: theme.title(), at: index, animated: false)
-                
-                if theme == ApplicationConfiguration.userPreferences.theme
-                {
-                    themeSegmentedControl.selectedSegmentIndex = index
-                }
-            }
-            
-            // Cell
-            let cell: SegmentedControlTableViewCell = tableView.dequeueReusableCell(at: indexPath)
-            cell.textLabel?.text = "Theme"
-            cell.segmentedControl = themeSegmentedControl
+        // Main currency
+        var mainCurrencyRow = TableRow { (tableView, indexPath) -> UITableViewCell in
+            let cell: TableViewCell = tableView.dequeueReusableCell(at: indexPath)
+            cell.textLabel?.text = defaults.masterCurrency.code
+            cell.accessoryType = .disclosureIndicator
             
             return cell
         }
         
-        let themeSection = TableSection(title: "Theme", rows: [themeRow])
-        tableSections.append(themeSection)
+        mainCurrencyRow.actionHandler = { [unowned self] (indexPath) in
+            let mainCurencySelectionViewController = MainCurrencySelectionViewController()
+            self.navigationController?.pushViewController(mainCurencySelectionViewController, animated: true)
+        }
+        
+        let currencySection = TableSection(title: "Main Currency", rows: [mainCurrencyRow])
+        tableSections.append(currencySection)
         
         // Insitutions
         var institutionRows = [TableRow]()
@@ -113,7 +123,7 @@ internal final class SettingsViewController: UIViewController
             row.deletionHandler = { [unowned self] (indexPath) in
                 if institution.delete()
                 {
-                    self.buildTableData()
+                    self.reloadData()
                     self.tableView.deleteRows(at: [indexPath], with: .automatic)
                 }
             }
@@ -121,6 +131,25 @@ internal final class SettingsViewController: UIViewController
             institutionRows.append(row)
         }
         
+        // Add account row
+        var addAccountRow = TableRow(cellPreparationHandler: { (tableView, indexPath) -> UITableViewCell in
+            let cell: TableViewCell = tableView.dequeueReusableCell(at: indexPath)
+            cell.textLabel?.text = "Add Account"
+            cell.accessoryType = .disclosureIndicator
+            
+            return cell
+        })
+        
+        addAccountRow.actionHandler = { [unowned self] (indexPath) in
+            let addAccountViewController = AddAccountViewController()
+            let navigationController = UINavigationController(rootViewController: addAccountViewController)
+            
+            self.present(navigationController, animated: true, completion: nil)
+        }
+        
+        institutionRows.append(addAccountRow)
+        
+        // Accounts section
         let accountsSection = TableSection(title: "Accounts", rows: institutionRows)
         tableSections.append(accountsSection)
         
@@ -128,21 +157,21 @@ internal final class SettingsViewController: UIViewController
     }
     
     // MARK: Actions
-    
-    @objc private func doneButtonTapped(_ sender: Any)
-    {
-        self.dismiss(animated: true, completion: nil)
+
+    @objc private func logoutButtonTapped(_ sender: Any) {
+        // TODO: Logout
     }
     
-    @objc private func themeSegmentedControlChanged(_ sender: Any)
-    {
-        guard let control = sender as? UISegmentedControl,
-              control.selectedSegmentIndex < UserPreferences.Theme.available.count else
-        {
-            return
-        }
-        
-        ApplicationConfiguration.userPreferences.theme = UserPreferences.Theme.available[control.selectedSegmentIndex]
+    // MARK: Notifications
+    
+    @objc private func accountAddedNotification(_ notification: Notification) {
+        self.reloadData()
+        self.tableView.reloadData()
+    }
+    
+    @objc private func accountRemovedNotification(_ notification: Notification) {
+        self.reloadData()
+        self.tableView.reloadData()
     }
 }
 

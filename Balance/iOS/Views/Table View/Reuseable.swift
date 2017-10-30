@@ -33,6 +33,16 @@ internal extension UITableView
     {
         return self.dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as! T
     }
+    
+    func register<T: UITableViewHeaderFooterView>(reusableView: T.Type) where T: Reusable
+    {
+        self.register(T.self, forHeaderFooterViewReuseIdentifier: T.reuseIdentifier)
+    }
+    
+    func dequeueReusableView<T: UITableViewHeaderFooterView>() -> T where T: Reusable
+    {
+        return self.dequeueReusableHeaderFooterView(withIdentifier: T.reuseIdentifier) as! T
+    }
 }
 
 

@@ -27,7 +27,7 @@ internal final class AddAccountViewController: UIViewController
         self.view.backgroundColor = UIColor.white
         
         // Navigation bar
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.cancelButtonTapped(_:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneButtonTapped(_:)))
         
         if #available(iOS 11.0, *)
         {
@@ -53,7 +53,7 @@ internal final class AddAccountViewController: UIViewController
     
     // MARK: Actions
     
-    @objc private func cancelButtonTapped(_ sender: Any)
+    @objc private func doneButtonTapped(_ sender: Any)
     {
         self.dismiss(animated: true, completion: nil)
     }

@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static fileprivate(set) var sharedInstance: AppDelegate!
     
     // Private
-    private let rootViewController = RootViewController()
+    private var rootViewController: RootViewController?
     
     // Internal
     var window: UIWindow?
@@ -37,12 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: UIApplicationDelegate
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Window
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = self.rootViewController
-        self.window?.backgroundColor = UIColor.white
-        self.window?.makeKeyAndVisible()
-        
         // Background fetch
         let hourInSeconds = 60.0 * 60.0
         application.setMinimumBackgroundFetchInterval(hourInSeconds)
@@ -81,6 +75,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Start monitoring network status
         networkStatus.startMonitoring()
+        
+        // Window
+        self.rootViewController = RootViewController()
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = self.rootViewController
+        self.window?.backgroundColor = UIColor.white
+        self.window?.makeKeyAndVisible()
         
         return true
     }

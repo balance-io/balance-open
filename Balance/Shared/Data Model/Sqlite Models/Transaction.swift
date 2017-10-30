@@ -27,6 +27,8 @@ final class Transaction {
     
     var ruleNames: [String]?
     
+    // MARK: Initialization
+    
     required init(result: FMResultSet, repository: ItemRepository = TransactionRepository.si) {
         self.repository = repository as! TransactionRepository
         
@@ -143,6 +145,20 @@ extension Transaction {
         } else {
             let altAmount: Double = Double(amount) / pow(10.0, Double(Currency.rawValue(currency).decimals))
             return currentExchangeRates.convert(amount: altAmount, from: Currency.rawValue(currency), to: masterCurrency, source: source.exchangeRateSource)?.integerValueWith(decimals: masterCurrency.decimals)
+        }
+    }
+}
+
+// MARK: Master alternative amount
+
+internal extension Transaction {
+    internal var masterAltAmount: Int? {
+        let masterCurrency = defaults.masterCurrency
+        
+        if self.currency == masterCurrency.code {
+            return self.amount
+        } else {
+            return currentExchangeRates.convert(amount: self.amount, from: Currency.rawValue(self.currency), to: masterCurrency, source: self.source.exchangeRateSource)
         }
     }
 }

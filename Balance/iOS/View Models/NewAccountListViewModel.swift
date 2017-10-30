@@ -17,13 +17,13 @@ internal final class NewAccountListViewModel
     }
     
     // Private
-    private let sources: [Source]
-    
+    private let sources: [Source] = [.coinbase, .gdax, .poloniex, .bitfinex, .kraken, .ethplorer]
+
     // MARK: Initialization
     
     internal required init()
     {
-        self.sources = [.coinbase, .gdax, .poloniex]
+        
     }
     
     // MARK: Data

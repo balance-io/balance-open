@@ -15,19 +15,33 @@ internal final class RootViewController: UIViewController
     // Internal
     
     // Private
+    private let rootTabBarController = UITabBarController()
     private let accountsListViewController = AccountsListViewController()
-    private let rootNavigationController: UINavigationController
+    private let transactionsListViewController = TransactionsListViewController()
+    private let settingsViewController = SettingsViewController()
     
     // MARK: Initialization
     
     internal required init()
     {
-        // Root navigation controller
-        self.rootNavigationController = UINavigationController(rootViewController: self.accountsListViewController)
-        
         super.init(nibName: nil, bundle: nil)
         
-        self.addChildViewController(self.rootNavigationController)
+        // Tab bar controller
+        let accountsListNavigationController = UINavigationController(rootViewController: self.accountsListViewController)
+        let transactionsListNavigationController = UINavigationController(rootViewController: self.transactionsListViewController)
+        let settingsNavigationController = UINavigationController(rootViewController: self.settingsViewController)
+        
+        self.rootTabBarController.viewControllers = [
+            accountsListNavigationController,
+            transactionsListNavigationController,
+            settingsNavigationController
+        ]
+        
+        // Add as child view controller
+        self.addChildViewController(self.rootTabBarController)
+        
+        // Notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(self.accountAddedNotification(_:)), name: Notifications.AccountAdded, object: nil)
     }
 
     internal required init?(coder aDecoder: NSCoder)
@@ -37,7 +51,7 @@ internal final class RootViewController: UIViewController
     
     deinit
     {
-        
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: View lifecycle
@@ -48,12 +62,15 @@ internal final class RootViewController: UIViewController
         
         self.setUIDefaults()
         
-        // Root navigation controller
-        self.view.addSubview(self.rootNavigationController.view)
+        // Root tab bar controller
+        self.view.addSubview(self.rootTabBarController.view)
 
-        self.rootNavigationController.view.snp.makeConstraints { (make) in
+        self.rootTabBarController.view.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        
+        // Sync
+        syncManager.sync()
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -71,10 +88,34 @@ internal final class RootViewController: UIViewController
         super.didReceiveMemoryWarning()
     }
     
+    // MARK: Presentation
+    
+    private func presentSplashScreen() {
+        let splashScreenViewController = SplashScreenViewController()
+        let navigationController = UINavigationController(rootViewController: splashScreenViewController)
+        
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
     // MARK: UI Defaults
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if self.rootTabBarController.selectedIndex == 0 {
+            return .lightContent
+        }
+        
+        return .default
+    }
     
     private func setUIDefaults()
     {
-        // TODO:
+        UITabBar.appearance().barTintColor = UIColor.black
+        UITabBar.appearance().tintColor = UIColor.white
+    }
+    
+    // MARK: Notifications
+    
+    @objc private func accountAddedNotification(_ notification: Notification) {
+        syncManager.sync()
     }
 }
