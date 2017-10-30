@@ -844,7 +844,6 @@
 		F12B5E961D6CC8B600F26AAB /* Singletons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Singletons.swift; sourceTree = "<group>"; };
 		F13456D71D81614000C1443B /* AccountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
 		F13B19121D89576400DB1D4F /* AddFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFeed.swift; sourceTree = "<group>"; };
-		F14C80D41D646A7400D97E57 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		F153E4B11D7438B100DAE02C /* AddAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccount.swift; sourceTree = "<group>"; };
 		F194E3331D79E1AE005CA998 /* InfoTesting.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InfoTesting.plist; sourceTree = "<group>"; };
 		F19BF6711D8328DB00496A66 /* RearrangeAccounts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RearrangeAccounts.swift; sourceTree = "<group>"; };
@@ -1947,7 +1946,6 @@
 		DC1A648B1B867B1F009356A0 = {
 			isa = PBXGroup;
 			children = (
-				F14C80D41D646A7400D97E57 /* Config.xcconfig */,
 				53328D731E0260720075EC92 /* get_pin_from_certificate.py */,
 				DC1A64961B867B1F009356A0 /* Balance */,
 				DC65EF901CE3E2CD006C9373 /* Bal Helper */,
@@ -2820,7 +2818,6 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Q4G66XSS36;
-				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -2849,7 +2846,6 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Q4G66XSS36;
-				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -2878,7 +2874,6 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Q4G66XSS36;
-				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -2900,7 +2895,6 @@
 		};
 		DC1A64AC1B867B1F009356A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F14C80D41D646A7400D97E57 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -2958,7 +2952,6 @@
 		};
 		DC1A64AD1B867B1F009356A0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F14C80D41D646A7400D97E57 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -3009,7 +3002,6 @@
 		};
 		DC1A64AF1B867B1F009356A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F14C80D41D646A7400D97E57 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
@@ -3042,7 +3034,6 @@
 		};
 		DC1A64B01B867B1F009356A0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F14C80D41D646A7400D97E57 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
@@ -3074,7 +3065,6 @@
 		};
 		DC65EF991CE3E2CD006C9373 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F14C80D41D646A7400D97E57 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -3095,7 +3085,6 @@
 		};
 		DC65EF9A1CE3E2CD006C9373 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F14C80D41D646A7400D97E57 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -3116,7 +3105,6 @@
 		};
 		F194E33B1D79E2A0005CA998 /* UITesting */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F14C80D41D646A7400D97E57 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -3174,7 +3162,6 @@
 		};
 		F194E33C1D79E2A0005CA998 /* UITesting */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F14C80D41D646A7400D97E57 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
@@ -3207,7 +3194,6 @@
 		};
 		F194E33F1D79E2A0005CA998 /* UITesting */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F14C80D41D646A7400D97E57 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
