@@ -9,13 +9,19 @@
 import UIKit
 
 
+internal protocol StackedLayoutDelegate: class {
+    func closedHeightForItem(at indexPath: IndexPath, in collectionView: UICollectionView) -> CGFloat
+    func expandedHeightForItem(at indexPath: IndexPath, in collectionView: UICollectionView) -> CGFloat
+}
+
+
 internal final class StackedLayout: UICollectionViewLayout {
     // Internal
+    internal weak var delegate: StackedLayoutDelegate?
     
     // Private
     private var layoutAttributes = [IndexPath : UICollectionViewLayoutAttributes]()
     private var previousLayoutAttributes = [IndexPath : UICollectionViewLayoutAttributes]()
-    private let closedItemHeight: CGFloat = 120.0
     private let stretchValue: CGFloat = 0.2
     
     private let afterSelectedItemOverlapHeight: CGFloat = 60.0
@@ -45,25 +51,32 @@ internal final class StackedLayout: UICollectionViewLayout {
             return
         }
         
+        unwrappedCollectionView.layoutIfNeeded()
+        
         var layoutAttributes = [IndexPath : UICollectionViewLayoutAttributes]()
         let numberOfItems = unwrappedCollectionView.numberOfItems(inSection: 0)
         var nextYCoor: CGFloat = 0.0
         
         for index in 0..<numberOfItems {
+            guard let unwrappedDelegate = self.delegate else
+            {
+                continue
+            }
+            
             let indexPath = IndexPath(row: index, section: 0)
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
             
             let height: CGFloat
             let nextOverlap: CGFloat
-            if selectedIndexPaths.contains(indexPath),
-               let cell = unwrappedCollectionView.cellForItem(at: indexPath)
+            
+            if !selectedIndexPaths.contains(indexPath)
             {
-                height = cell.intrinsicContentSize.height
+                height = unwrappedDelegate.expandedHeightForItem(at: indexPath, in: unwrappedCollectionView)
                 nextOverlap = 40.0
             }
             else
             {
-                height = self.closedItemHeight
+                height = unwrappedDelegate.closedHeightForItem(at: indexPath, in: unwrappedCollectionView)
                 nextOverlap = 60.0
             }
             

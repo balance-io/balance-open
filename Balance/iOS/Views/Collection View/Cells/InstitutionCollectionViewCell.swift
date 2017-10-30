@@ -10,6 +10,9 @@ import UIKit
 
 
 internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusable {
+    // Static
+    internal static let measurementCell = InstitutionCollectionViewCell()
+    
     // Internal
     internal var viewModel: InstitutionAccountsListViewModel? {
         didSet {
@@ -25,6 +28,15 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
     override var isHighlighted: Bool {
         set(newValue) { }
         get { return false }
+    }
+    
+    // Internal
+    internal var expandedContentHeight: CGFloat {
+        return self.tableView.contentSize.height
+    }
+    
+    internal var closedContentHeight: CGFloat {
+        return 120.0
     }
     
     // Private
@@ -74,12 +86,6 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
     private func reloadData() {
         self.container.backgroundColor = self.viewModel?.institution.source.color
         self.tableView.reloadData()
-    }
-    
-    // MARK: Autolayout
-    
-    override var intrinsicContentSize: CGSize {
-        return self.tableView.contentSize
     }
 }
 

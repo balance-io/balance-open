@@ -52,6 +52,7 @@ internal final class AccountsListViewController: UIViewController
         // Collection view
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+        self.collectionView.stackedLayout.delegate = self
         self.collectionView.backgroundColor = UIColor.black
         self.collectionView.alwaysBounceVertical = true
         self.collectionView.register(reusableCell: InstitutionCollectionViewCell.self)
@@ -162,5 +163,28 @@ extension AccountsListViewController: UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         
+    }
+}
+
+// MARK: StackedLayoutDelegate
+
+extension AccountsListViewController: StackedLayoutDelegate
+{
+    func closedHeightForItem(at indexPath: IndexPath, in collectionView: UICollectionView) -> CGFloat {
+        let institution = self.viewModel.institution(forSection: indexPath.row)!
+        
+        let measurementCell = InstitutionCollectionViewCell.measurementCell
+        measurementCell.viewModel = InstitutionAccountsListViewModel(institution: institution)
+        
+        return measurementCell.closedContentHeight
+    }
+    
+    func expandedHeightForItem(at indexPath: IndexPath, in collectionView: UICollectionView) -> CGFloat {
+        let institution = self.viewModel.institution(forSection: indexPath.row)!
+        
+        let measurementCell = InstitutionCollectionViewCell.measurementCell
+        measurementCell.viewModel = InstitutionAccountsListViewModel(institution: institution)
+        
+        return measurementCell.expandedContentHeight
     }
 }

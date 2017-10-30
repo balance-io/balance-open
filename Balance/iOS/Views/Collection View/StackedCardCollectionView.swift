@@ -11,9 +11,9 @@ import UIKit
 
 internal class StackedCardCollectionView: UICollectionView {
     // Internal
+    internal let stackedLayout = StackedLayout()
     
     // Private
-    private let stackedLayout = StackedLayout()
     
     // MARK: Initialization
     
