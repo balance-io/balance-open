@@ -117,7 +117,7 @@ struct EthplorerAccountObject {
     
     var ethplorerAccounts: [EthplorerAccount] {
         var arrayOlder = [EthplorerAccount]()
-        let ethAccount = EthplorerAccount(type: .wallet, currency: self.currency, address: self.address, available: self.ETH.balance, altRate: 0, altCurrency: Currency.rawValue("BTC"), decimals: 8)
+        let ethAccount = EthplorerAccount(type: .wallet, currency: self.currency, address: self.address, available: self.ETH.balance, altRate: 1, altCurrency: Currency.eth, decimals: 8)
         arrayOlder.append(ethAccount)
         for ethplorerObject in self.tokens {
             var altRate: Double = 0
