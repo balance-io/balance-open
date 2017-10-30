@@ -15,15 +15,24 @@ internal final class CurrencySelectionViewModel {
         return self.sectionIndexTitles.count
     }
     
-    internal let sectionIndexTitles: [String] 
+    internal let sectionIndexTitles: [String]
     
     // Private
     private let groupedCurrencies: [String : [Currency]]
     
+    private let autoCurrencySectionKey = "Auto"
+    private let autoCurrency: Currency = {
+        if let currencyCode = NSLocale.current.currencyCode {
+            return Currency.rawValue(currencyCode)
+        }
+        
+        return Currency.fiat(enum: .usd)
+    }()
+    
     // MARK: Initialization
     
     internal required init() {
-        self.groupedCurrencies = Currency.masterCurrencies.reduce([String : [Currency]]()) { (result, currency) -> [String : [Currency]] in
+        var groupedCurrencies = Currency.masterCurrencies.reduce([String : [Currency]]()) { (result, currency) -> [String : [Currency]] in
             guard let firstCharacter = currency.code.first else {
                 return result
             }
@@ -41,7 +50,13 @@ internal final class CurrencySelectionViewModel {
             return mutableResults
         }
         
-        self.sectionIndexTitles = self.groupedCurrencies.keys.sorted()
+        var sectionKeys = groupedCurrencies.keys.sorted()
+        
+        sectionKeys.insert(self.autoCurrencySectionKey, at: 0)
+        groupedCurrencies[self.autoCurrencySectionKey] = [self.autoCurrency]
+        
+        self.groupedCurrencies = groupedCurrencies
+        self.sectionIndexTitles = sectionKeys
     }
     
     // MARK: -
