@@ -235,7 +235,6 @@
 		53980CBF1D5CD6F80013B981 /* Pluralize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53980CBE1D5CD6F80013B981 /* Pluralize.swift */; };
 		53980CC41D5D0C1F0013B981 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53980CC31D5D0C1F0013B981 /* Date.swift */; };
 		539C8E931C73CB31005C72BC /* PreferencesAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539C8E921C73CB31005C72BC /* PreferencesAccountsViewController.swift */; };
-		539E0C201DC27A5D0038ACEC /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 539E0C1F1DC27A5D0038ACEC /* StoreKit.framework */; };
 		539F65D61D3D17EF00A22EF7 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539F65D51D3D17EF00A22EF7 /* ImageView.swift */; };
 		53A179BD1DC923C0006442E4 /* AppLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A179BC1DC923C0006442E4 /* AppLock.swift */; };
 		53B327C11E56AD72009C7AFC /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B327C01E56AD72009C7AFC /* AsyncOperation.swift */; };
@@ -877,7 +876,6 @@
 				533674FD1F4CE0C40034040F /* Sparkle.framework in Frameworks */,
 				53FCE3691F06B819004EB25C /* JMSRangeSlider.framework in Frameworks */,
 				53FCE3771F06B819004EB25C /* SnapKit.framework in Frameworks */,
-				539E0C201DC27A5D0038ACEC /* StoreKit.framework in Frameworks */,
 				53F63CD31F82C26600FD4B27 /* ObjcExceptionBridging.framework in Frameworks */,
 				53FCE37B1F06B819004EB25C /* XCGLogger.framework in Frameworks */,
 				53F0786B1ED747C700E7EDF9 /* libsqlcipher.a in Frameworks */,
@@ -2997,6 +2995,7 @@
 				);
 				INFOPLIST_FILE = "Balance/macOS/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_CFLAGS = "";
 				OTHER_SWIFT_FLAGS = "-D DEBUG -D APPSTORE -Xfrontend -debug-time-function-bodies -Onone";
 				PRODUCT_BUNDLE_IDENTIFIER = "software.balanced.balance-open";
@@ -3028,6 +3027,7 @@
 				);
 				INFOPLIST_FILE = "Balance/macOS/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_CFLAGS = "";
 				OTHER_SWIFT_FLAGS = "-D RELEASE -D APPSTORE";
 				PRODUCT_BUNDLE_IDENTIFIER = "software.balanced.balance-open";
@@ -3157,6 +3157,7 @@
 				);
 				INFOPLIST_FILE = "Balance/macOS/Supporting Files/InfoTesting.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_CFLAGS = "";
 				OTHER_SWIFT_FLAGS = "-D DEBUG -D APPSTORE";
 				PRODUCT_BUNDLE_IDENTIFIER = "software.balanced.balance-open";
