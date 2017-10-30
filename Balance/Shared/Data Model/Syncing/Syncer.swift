@@ -332,6 +332,7 @@ class Syncer {
             }
             
             poloniexApi.fetchTransactions(institution: institution, completion: { (success, error) in
+                
                 if let error = error {
                     syncingSuccess = false
                 
