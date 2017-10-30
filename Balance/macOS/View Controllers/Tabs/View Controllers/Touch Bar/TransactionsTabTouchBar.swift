@@ -36,6 +36,7 @@ fileprivate extension NSTouchBarItem.Identifier {
 @available(OSX 10.12.2, *)
 extension TransactionsTabViewController : NSTouchBarDelegate, NSScrubberDelegate, NSScrubberDataSource, NSScrubberFlowLayoutDelegate {
     override func makeTouchBar() -> NSTouchBar? {
+        return nil
         let touchBar = NSTouchBar()
         touchBar.delegate = self
         touchBar.customizationIdentifier = .main
