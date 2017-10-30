@@ -76,7 +76,7 @@ extension MainCurrencySelectionViewController: UITableViewDelegate {
         }
         
         let currency = self.viewModel.currency(at: indexPath)
-        cell.textLabel?.text = currency.code
+        cell.textLabel?.text = "\(currency.name) (\(currency.code))"
         cell.accessoryType = currency == defaults.masterCurrency ? .checkmark : .none
     }
     
