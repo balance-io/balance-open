@@ -5,9 +5,6 @@
 Balance Open: An app for all the world’s currencies.
 ==========================
 
-[![Swift Version][swift-image]][swift-url]
-[![License][license-image]][license-url]
-
 ## Installation
 1. Make sure you have Xcode 9 as the app is now written in Swift 4
 2. Clone the repository: `git clone git@github.com:balancemymoney/balance-open.git`
@@ -33,8 +30,5 @@ If for some reason the sqlcipher needs to be updated (you should never need to d
 - If you **found a bug**, [open an issue](https://github.com/balancemymoney/balance-open/issues/new).
 - If you **have a feature request**, [open an issue](https://github.com/balancemymoney/balance-open/issues/new).
 - If you **want to contribute**, submit a pull request.
-- Extra: If you choose to build with debug code signing disabled, since we use keychain you will be prompted on this screen at least once for every exchange you have connected. You should press "Always allow", though after about a minute or so it will forget the choice and prompt again on the next run. We haven't found a better way to do this yet. <img width="434" alt="screen shot 2017-10-25 at 17 15 19" src="https://user-images.githubusercontent.com/1092080/32006966-842eac82-b9a8-11e7-994e-57d0cf5d0d9c.png">
-[swift-image]:https://img.shields.io/badge/swift-3.0-orange.svg
-[swift-url]: https://swift.org/
-[license-image]: https://img.shields.io/aur/license/yaourt.svg
-[license-url]: LICENSE
+- Extra: If you choose to build with debug code signing disabled, since we use keychain you will be prompted on this screen at least once for every exchange you have connected. You should press "Always allow", though after about a minute or so it will forget the choice and prompt again on the next run. We haven't found a better way to do this yet.
+<img width="434" alt="screen shot 2017-10-25 at 17 15 19" src="https://user-images.githubusercontent.com/1092080/32006966-842eac82-b9a8-11e7-994e-57d0cf5d0d9c.png">
