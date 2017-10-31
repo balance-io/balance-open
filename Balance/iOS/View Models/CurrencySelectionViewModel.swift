@@ -72,4 +72,14 @@ internal final class CurrencySelectionViewModel {
         
         return section[indexPath.row]
     }
+    
+    internal func selectCurrency(at indexPath: IndexPath) {
+        let key = self.sectionIndexTitles[indexPath.section]
+        if key == self.autoCurrencySectionKey {
+            defaults.masterCurrency = nil
+        }
+        
+        let section = self.groupedCurrencies[key]!
+        defaults.masterCurrency = section[indexPath.row]
+    }
 }

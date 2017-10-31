@@ -81,9 +81,7 @@ extension MainCurrencySelectionViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let currency = self.viewModel.currency(at: indexPath)
-        defaults.masterCurrency = currency
-        
+        self.viewModel.selectCurrency(at: indexPath)
         self.navigationController?.popViewController(animated: true)
     }
 }
