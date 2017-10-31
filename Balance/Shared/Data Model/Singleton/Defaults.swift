@@ -291,7 +291,7 @@ class Defaults {
         }
     }
     
-    var masterCurrency: Currency {
+    var masterCurrency: Currency! {
         get {
             if let raw = defaults.object(forKey: Keys.masterCurrency) as? String {
                 return Currency.rawValue(raw)
@@ -305,7 +305,13 @@ class Defaults {
             return .usd
         }
         set {
-            defaults.set(newValue.code, forKey: Keys.masterCurrency)
+            if let newValue = newValue {
+                defaults.set(newValue.code, forKey: Keys.masterCurrency)
+            } else {
+                defaults.removeObject(forKey: Keys.masterCurrency)
+            }
+            
+            NotificationCenter.postOnMainThread(name: Notifications.MasterCurrencyChanged)
         }
     }
     

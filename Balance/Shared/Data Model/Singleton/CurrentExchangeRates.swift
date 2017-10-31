@@ -73,9 +73,6 @@ class CurrentExchangeRates {
     }
     
     public func directConvert(amount: Double, from: Currency, to: Currency, source: ExchangeRateSource) -> Double? {
-        
-        log.debug("converting from \(from) to \(to) source \(source)")
-        
         if let rate = getRate(from: from, to: to, source: source) {
             return amount * rate
         }
@@ -83,15 +80,11 @@ class CurrentExchangeRates {
     }
     
     public func getRate(from: Currency, to: Currency, source: ExchangeRateSource) -> Double? {
-        log.debug("converting from \(from) to \(to) source \(source)")
-        
         if let exchangeRates = exchangeRates(forSource: source) {
             // First check if the exact rate exists (either directly or reversed)
             if let rate = exchangeRates.rate(from: from, to: to) {
-                log.debug("found direct conversion")
                 return rate
             } else if let rate = exchangeRates.rate(from: to, to: from) {
-                log.debug("found direct reverse conversion")
                 return (1.0 / rate)
             }
         }

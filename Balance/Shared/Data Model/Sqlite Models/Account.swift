@@ -134,7 +134,7 @@ extension Account {
     }
     
     var masterAltCurrentBalance: Int? {
-        let masterCurrency = defaults.masterCurrency
+        let masterCurrency = defaults.masterCurrency!
         
         // First check if an alt current balance was returned from the server. If so, either use that directly or convert it
         if let altCurrentBalance = altCurrentBalance, let altCurrency = altCurrency {
@@ -158,7 +158,7 @@ extension Account {
     }
     
     var masterAltAvailableBalance: Int? {
-        let masterCurrency = defaults.masterCurrency
+        let masterCurrency = defaults.masterCurrency!
         
         // First check if an alt available balance was returned from the server. If so, either use that directly or convert it
         if let altAvailableBalance = altAvailableBalance, let altCurrency = altCurrency {

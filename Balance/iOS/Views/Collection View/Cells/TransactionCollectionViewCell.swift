@@ -153,7 +153,7 @@ internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusab
         self.amountLabel.text = amountToString(amount: unwrappedTransaction.amount, currency: currency)
         
         // User currency amount
-        let masterCurrency = defaults.masterCurrency
+        let masterCurrency = defaults.masterCurrency!
         if let masterAmount = unwrappedTransaction.masterAltAmount {
             self.userCurrencyAmountLabel.text = amountToString(amount: masterAmount, currency: masterCurrency, showNegative: true)
             self.userCurrencyAmountLabel.isHidden = false

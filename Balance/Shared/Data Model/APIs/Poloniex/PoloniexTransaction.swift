@@ -31,7 +31,12 @@ internal extension PoloniexApi {
             
             self.category = category
             self.amount = amount
-            self.identifier = try checkType(dictionary["txid"], name: "txid")
+            if dictionary["txid"] is String {
+                self.identifier = try checkType(dictionary["txid"], name: "txid")
+            } else {
+                //this means that it's not a transaction but deposit/withdrawl
+                self.identifier = ""
+            }
             self.address = try checkType(dictionary["address"], name: "address")
             self.currencyCode = try checkType(dictionary["currency"], name: "currency")
             self.status = try checkType(dictionary["status"], name: "status")

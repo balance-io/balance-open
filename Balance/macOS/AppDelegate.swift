@@ -154,6 +154,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Present the UI
         self.showWindow()
         
+        // Check for Update
+        SUUpdater.shared()?.checkForUpdatesInBackground()
+        
         // Check the debug flag for showing rules preferences on launch
         if debugging.showRulesPreferencesOnLaunch {
             self.showRulesPreferences()

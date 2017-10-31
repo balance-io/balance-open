@@ -1,35 +1,28 @@
 <h3 align="center">
-  <img src="https://cl.ly/453225333E0u/balance-open.png" alt="Balance Open Menubar App" />
+<img src="https://cl.ly/453225333E0u/balance-open.png" alt="Balance Open Menubar App" />
 </h3>
 
 Balance Open: An app for all the world’s currencies.
 ==========================
 
-[![Swift Version][swift-image]][swift-url]
-[![License][license-image]][license-url]
-
 ## Installation
-1. Make sure you have latest Xcode 9 Beta (at the time of writing, that's beta 6) as the app is now in Swift 4
+1. Make sure you have Xcode 9 as the app is now written in Swift 4
 2. Clone the repository: `git clone git@github.com:balancemymoney/balance-open.git`
 3. Open the project in Xcode
-4. Build and run
-5. There is no step 5, that's it!
+4. Disable signing for debug builds or alternatively change the app bundle ID and sign with your developer account
+5. Build and run from Xcode
 
 ## Updating dependencies
-We use carthage for dependency management, however we check in all built frameworks, so it is not necessary to run any carthage commands. 
+We use carthage for dependency management, however we check in all built frameworks, so it is not necessary to run any carthage commands.
 
-However, if moving to a new Swift version, or for other reasons, it may be necessary to rebuild them using `carthage update --platform "osx, ios"`. 
+However, if moving to a new Swift version, or for other reasons, it may be necessary to rebuild them using `carthage update --platform "osx, ios"`.
 
 The easiest way to install Carthage is to install Homebrew by running `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-` and then run `brew install carthage`. 
+` and then run `brew install carthage`.
 
 If you already have Homebrew installed, make sure to run `brew update && brew upgrade` first to to make sure you have the latest version of Carthage.
 
-If for some reason the sqlcipher needs to be updated (you should never need to do this), the following is the correct build command for that project to get the correct sqlite flags:
-
-```
-./configure --enable-tempstore=yes --with-crypto-lib=commoncrypto CFLAGS="-mmacosx-version-min=10.11 -DSQLITE_HAS_CODEC -DSQLITE_TEMP_STORE=2 -DSQLITE_SOUNDEX=1 -DSQLITE_ENABLE_API_ARMOR=1 -DSQLITE_ENABLE_FTS3=1 -DSQLITE_ENABLE_FTS3_PARENTHESIS=1 -DSQLITE_ENABLE_LOCKING_STYLE=1 -DSQLITE_ENABLE_RTREE=1 -DSQLITE_ENABLE_UPDATE_DELETE_LIMIT=1 -DSQLITE_OMIT_AUTORESET=1 -DSQLITE_OMIT_BUILTIN_TEST=1 -DSQLITE_OMIT_LOAD_EXTENSION=1 -DSQLITE_SYSTEM_MALLOC=1 -DSQLITE_THREADSAFE=2" LDFLAGS="-framework Security -framework CoreFoundation" && make
-```
+If for some reason the sqlcipher needs to be updated (you should never need to do this), run the `build_sqlcipher` script in the root of this repository and then move the `libsqlcipher.a` file that it creates on your desktop to the `./Balance/Shared/Frameworks/` folder.
 
 ## Contributing
 
@@ -37,8 +30,5 @@ If for some reason the sqlcipher needs to be updated (you should never need to d
 - If you **found a bug**, [open an issue](https://github.com/balancemymoney/balance-open/issues/new).
 - If you **have a feature request**, [open an issue](https://github.com/balancemymoney/balance-open/issues/new).
 - If you **want to contribute**, submit a pull request.
-- Extra: We removed Code signing. Since we use keychain you will be prompted on this screen 5 times. You should press "Always allow". We haven't found a better way for this yet. <img width="434" alt="screen shot 2017-10-25 at 17 15 19" src="https://user-images.githubusercontent.com/1092080/32006966-842eac82-b9a8-11e7-994e-57d0cf5d0d9c.png">
-[swift-image]:https://img.shields.io/badge/swift-3.0-orange.svg
-[swift-url]: https://swift.org/
-[license-image]: https://img.shields.io/aur/license/yaourt.svg
-[license-url]: LICENSE
+- Extra: If you choose to build with debug code signing disabled, since we use keychain you will be prompted on this screen at least once for every exchange you have connected. You should press "Always allow", though after about a minute or so it will forget the choice and prompt again on the next run. We haven't found a better way to do this yet.
+<img width="434" alt="screen shot 2017-10-25 at 17 15 19" src="https://user-images.githubusercontent.com/1092080/32006966-842eac82-b9a8-11e7-994e-57d0cf5d0d9c.png">

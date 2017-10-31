@@ -93,6 +93,11 @@ class SyncManager: NSObject {
         // Sync exchange rates
         currentExchangeRates.updateExchangeRates()
         
+        #if os(OSX)
+            // Check for updates
+            SUUpdater.shared()?.checkForUpdatesInBackground()
+        #endif
+            
         // Start the sync
         log.debug("Performing full sync")
         self.syncer = debugging.useMockSyncing ? MockSyncer() : Syncer()

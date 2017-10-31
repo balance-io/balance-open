@@ -725,6 +725,27 @@
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="cp3-tO-0fm" customClass="MASShortcutView">
                                 <rect key="frame" x="193" y="131" width="135" height="22"/>
                             </customView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qH3-pj-dbg">
+                                <rect key="frame" x="89" y="100" width="96" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Main Currency:" id="exz-Q7-4rZ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uvk-1t-VfS">
+                                <rect key="frame" x="191" y="94" width="140" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="CPQ-lp-TOw">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="gi9-JD-0Ft"/>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="mainCurrencyChanged:" target="Yil-VZ-ttf" id="Qft-uC-gfk"/>
+                                </connections>
+                            </popUpButton>
                         </subviews>
                         <constraints>
                             <constraint firstItem="hbn-Wg-xle" firstAttribute="top" secondItem="aKI-tT-xOh" secondAttribute="top" constant="24" id="3kP-dc-UHg"/>
@@ -739,6 +760,7 @@
                     </view>
                     <connections>
                         <outlet property="logInCheckBox" destination="hbn-Wg-xle" id="4mv-ic-c7s"/>
+                        <outlet property="mainCurrencyPopupButton" destination="Uvk-1t-VfS" id="Ojd-Zf-w1R"/>
                         <outlet property="shortcutView" destination="cp3-tO-0fm" id="x1e-HX-oJu"/>
                     </connections>
                 </viewController>

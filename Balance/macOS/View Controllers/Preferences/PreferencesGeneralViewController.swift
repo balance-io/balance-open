@@ -6,6 +6,17 @@ class PreferencesGeneralViewController: NSViewController {
 
     @IBOutlet weak var logInCheckBox: NSButton!
     @IBOutlet weak var shortcutView: MASShortcutView!
+    @IBOutlet weak var mainCurrencyPopupButton: NSPopUpButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let automaticCurrency = "Automatic - \(NSLocale.current.currencyCode ?? "USD")"
+        let currencies = [automaticCurrency, "USD", "EUR", "GBP", "BTC", "ETH"]
+        for currency in currencies {
+            mainCurrencyPopupButton.addItem(withTitle: currency)
+        }
+    }
     
     override func viewWillAppear() {
         super.viewWillAppear()
@@ -14,6 +25,8 @@ class PreferencesGeneralViewController: NSViewController {
         shortcutView.shortcutValue = Shortcut.defaultShortcut
         
         logInCheckBox.state = defaults.launchAtLogin ? .on : .off
+        
+        
     }
 
     @IBAction func logInCheckBoxPress(_ sender: NSButton) {
@@ -22,22 +35,11 @@ class PreferencesGeneralViewController: NSViewController {
         sender.state = defaults.launchAtLogin ? .on : .off
     }
     
-    @IBAction func emailPreferenceChanged(_ sender: NSPopUpButton) {
-        if let emailPreference = EmailPreference(rawValue: sender.selectedTag()) {
-            if defaults.emailPreference != emailPreference {
-                defaults.emailPreference = emailPreference
-                NotificationCenter.postOnMainThread(name: Notifications.ReloadPopoverController)
-            }
+    @IBAction func mainCurrencyChanged(_ sender: NSPopUpButton) {
+        if sender.indexOfSelectedItem == 0 {
+            defaults.masterCurrency = nil
+        } else if let currencyCode = sender.titleOfSelectedItem {
+            defaults.masterCurrency = Currency.rawValue(currencyCode)
         }
     }
-    
-    @IBAction func searchPreferenceChanged(_ sender: NSPopUpButton) {
-        if let searchPreference = SearchPreference(rawValue: sender.selectedTag()) {
-            if defaults.searchPreference != searchPreference {
-                defaults.searchPreference = searchPreference
-                NotificationCenter.postOnMainThread(name: Notifications.ReloadPopoverController)
-            }
-        }
-    }
-    
 }

@@ -246,6 +246,8 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(syncCompleted(_:)), name: Notifications.SyncCompleted)
         
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(popoverWillShow(_:)), name: Notifications.PopoverWillShow)
+        
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(masterCurrencyChanged(_:)), name: Notifications.MasterCurrencyChanged)
     }
     
     func unregisterForNotifications() {
@@ -258,6 +260,8 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.SyncCompleted)
         
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.PopoverWillShow)
+        
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.MasterCurrencyChanged)
     }
     
     @objc fileprivate func institutionAdded(_ notification: Notification) {
@@ -295,6 +299,10 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
                 self.accountsDropdown.items = self.viewModel.accounts
             }
         }
+    }
+    
+    @objc fileprivate func masterCurrencyChanged(_ notification: Notification) {
+        reloadDataIfInForeground()
     }
     
     @discardableResult fileprivate func reloadDataIfInForeground() -> Bool {

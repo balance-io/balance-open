@@ -219,9 +219,9 @@ class EthplorerApi: ExchangeApi {
     }
     
     var altBalance: Int {
-        let altValance = altRate * available
-        let altBalance = altValance.integerFixedFiatDecimals()
-        return altBalance
+        let altBalance = altRate * available
+        let balance = altBalance.integerValueWith(decimals: altCurrency.decimals)
+        return balance
     }
     
     @discardableResult func updateLocalAccount(institution: Institution) -> Account? {

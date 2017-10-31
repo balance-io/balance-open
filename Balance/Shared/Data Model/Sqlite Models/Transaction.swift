@@ -139,7 +139,7 @@ extension Transaction {
     }
     
     var displayAltAmount: Int? {
-        let masterCurrency = defaults.masterCurrency
+        let masterCurrency = defaults.masterCurrency!
         if currency == masterCurrency.code {
             return amount
         } else {
@@ -153,7 +153,7 @@ extension Transaction {
 
 internal extension Transaction {
     internal var masterAltAmount: Int? {
-        let masterCurrency = defaults.masterCurrency
+        let masterCurrency = defaults.masterCurrency!
         
         if self.currency == masterCurrency.code {
             return self.amount
