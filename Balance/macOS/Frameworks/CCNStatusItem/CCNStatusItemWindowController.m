@@ -116,9 +116,9 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
     CGRect rectInWindow = rectInButtonScreen;
     rectInWindow.origin.x -= (self.window.frame.size.width / 2.0) - NSMidX(self.statusItemView.statusItem.button.frame);
     
-    CGFloat overhang = (NSWidth(screen.frame) + NSMinX(screen.frame)) - NSMinX(rectInButtonScreen);
-    if (overhang > 0) {
-        rectInWindow.origin.x -= overhang;
+    CGFloat overhang = (NSWidth(screen.frame) + NSMinX(screen.frame)) - (NSMinX(rectInButtonScreen) + NSWidth(rectInButtonScreen) / 2.0 + self.window.frame.size.width / 2.0);
+    if (overhang < 0) {
+        rectInWindow.origin.x += overhang;
     }
     
     [self.window setFrameTopLeftPoint: rectInWindow.origin];
