@@ -20,7 +20,7 @@ internal final class CurrencySelectionViewModel {
     // Private
     private let groupedCurrencies: [String : [Currency]]
     
-    private let autoCurrencySectionKey = "Auto"
+    private let autoCurrencySectionKey = "Automatic"
     private let autoCurrency: Currency = {
         if let currencyCode = NSLocale.current.currencyCode {
             return Currency.rawValue(currencyCode)
