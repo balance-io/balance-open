@@ -107,17 +107,24 @@ internal extension KrakenAPIClient
                     }
                     catch { }
                 }
-                
-                completionHandler(accounts, nil)
+                async {
+                    completionHandler(accounts, nil)
+                }
             } else if case 400...402 = httpResponse.statusCode {
                 let error = APICredentialsComponents.Error.invalidSecret(message: "One or more of your credentials is invalid")
-                completionHandler(nil, error)
+                async {
+                    completionHandler(nil, error)
+                }
             } else if case 403...499 = httpResponse.statusCode {
                 let error = APICredentialsComponents.Error.missingPermissions
-                completionHandler(nil, error)
+                async {
+                    completionHandler(nil, error)
+                }
             } else {
                 let error = APIError.response(httpResponse: httpResponse, data: data)
-                completionHandler(nil, error)
+                async {
+                    completionHandler(nil, error)
+                }
             }
         }
         

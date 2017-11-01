@@ -271,7 +271,7 @@ class Syncer {
             do {
                 let credentials = try KrakenAPIClient.Credentials(identifier: accessToken)
                 
-                // Fetch data from Bitfinex
+                // Fetch data from Kraken
                 self.krakenApiClient.credentials = credentials
                 try! self.krakenApiClient.fetchAccounts { accounts, error in
                     guard let unwrappedAccounts = accounts else {
