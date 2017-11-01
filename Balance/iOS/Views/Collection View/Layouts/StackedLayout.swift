@@ -36,7 +36,8 @@ internal final class StackedLayout: UICollectionViewLayout {
             return CGSize.zero
         }
         
-        return CGSize(width: unwrappedCollectionView.bounds.width, height: max(self.contentHeight, unwrappedCollectionView.bounds.height))
+        let minimumHeight = unwrappedCollectionView.bounds.height - (unwrappedCollectionView.safeAreaInsets.bottom + unwrappedCollectionView.safeAreaInsets.top)
+        return CGSize(width: unwrappedCollectionView.bounds.width, height: max(self.contentHeight, minimumHeight))
     }
     
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {

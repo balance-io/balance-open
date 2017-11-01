@@ -16,6 +16,7 @@ internal final class SettingsViewController: UIViewController
     
     // Private
     private let viewModel = AccountsTabViewModel()
+    private let currencyViewModel = CurrencySelectionViewModel()
     private let tableView = UITableView(frame: CGRect.zero, style: .grouped)
     
     // MARK: Initialization
@@ -83,7 +84,7 @@ internal final class SettingsViewController: UIViewController
         // Main currency
         var mainCurrencyRow = TableRow { (tableView, indexPath) -> UITableViewCell in
             let cell: TableViewCell = tableView.dequeueReusableCell(at: indexPath)
-            cell.textLabel?.text = defaults.masterCurrency.code
+            cell.textLabel?.text = self.currencyViewModel.currentCurrencyDisplay
             cell.accessoryType = .disclosureIndicator
             
             return cell
