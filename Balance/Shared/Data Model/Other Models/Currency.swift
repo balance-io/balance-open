@@ -51,6 +51,10 @@ public enum Currency: Equatable {
         }
     }
     
+    public var longName: String {
+        return "\(self.name) (\(self.code))"
+    }
+    
     public var decimals: Int {
         switch self {
         case .fiat(let fiat):   return fiat.decimals
