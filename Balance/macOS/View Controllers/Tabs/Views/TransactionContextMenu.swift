@@ -24,9 +24,7 @@ class TransactionContextMenu: NSObject, NSMenuDelegate {
     }
     
     static func showMenu(transaction: Transaction, view: NSView) {
-        var items = [NSMenuItem(title: "Find Similar Transactions", action: #selector(searchTransactionsAction), keyEquivalent: ""),
-                     NSMenuItem.separator(),
-                     NSMenuItem(title: "Copy Transaction", action: #selector(copyTransactionToClipboard), keyEquivalent: ""),
+        var items = [NSMenuItem(title: "Copy Transaction", action: #selector(copyTransactionToClipboard), keyEquivalent: ""),
                      NSMenuItem(title: "Copy Merchant Name", action: #selector(copyNameToClipboard), keyEquivalent: ""),
                      NSMenuItem(title: "Copy Amount", action: #selector(copyAmountToClipboard), keyEquivalent: "")]
         
