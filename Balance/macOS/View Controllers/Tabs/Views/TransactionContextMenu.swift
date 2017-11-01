@@ -24,8 +24,10 @@ class TransactionContextMenu: NSObject, NSMenuDelegate {
     }
     
     static func showMenu(transaction: Transaction, view: NSView) {
-        var items = [NSMenuItem(title: "Copy Transaction", action: #selector(copyTransactionToClipboard), keyEquivalent: ""),
-                     NSMenuItem(title: "Copy Merchant Name", action: #selector(copyNameToClipboard), keyEquivalent: ""),
+        var items = [NSMenuItem(title: "Find Similar Transactions", action: #selector(searchTransactionsAction), keyEquivalent: ""),
+                     NSMenuItem.separator(),
+                     NSMenuItem(title: "Copy Transaction", action: #selector(copyTransactionToClipboard), keyEquivalent: ""),
+                     NSMenuItem(title: "Copy Transaction ID", action: #selector(copyTransactionIdToClipboard), keyEquivalent: ""),
                      NSMenuItem(title: "Copy Amount", action: #selector(copyAmountToClipboard), keyEquivalent: "")]
         
         #if DEBUG
@@ -55,21 +57,30 @@ class TransactionContextMenu: NSObject, NSMenuDelegate {
     
     @objc fileprivate func copyTransactionToClipboard() {
         let name = transaction.displayName
-        let amount = centsToStringFormatted(transaction.amount).string
+        let amount = amountToString(amount: transaction.amount, currency: Currency.rawValue(transaction.currency), showNegative: false, showCodeAfterValue: true)
+        var altAmount: String? = nil
+        if let displayAltAmount = transaction.displayAltAmount {
+            altAmount = amountToString(amount: displayAltAmount, currency: defaults.masterCurrency, showNegative: true, showCodeAfterValue: true)
+        }
+        var finalString = "\(name) \(amount)"
+        if let altAmount = altAmount {
+            finalString += " (\(altAmount))"
+        }
+        
         NSPasteboard.general.clearContents()
-        NSPasteboard.general.setString("\(name) \(amount)", forType: NSPasteboard.PasteboardType.string)
+        NSPasteboard.general.setString(finalString, forType: .string)
     }
     
-    @objc fileprivate func copyNameToClipboard() {
+    @objc fileprivate func copyTransactionIdToClipboard() {
         let name = transaction.displayName
         NSPasteboard.general.clearContents()
-        NSPasteboard.general.setString(name, forType: NSPasteboard.PasteboardType.string)
+        NSPasteboard.general.setString(name, forType: .string)
     }
     
     @objc fileprivate func copyAmountToClipboard() {
-        let amount = centsToStringFormatted(transaction.amount).string
+        let amount = amountToString(amount: transaction.amount, currency: Currency.rawValue(transaction.currency), showNegative: false, showCodeAfterValue: true)
         NSPasteboard.general.clearContents()
-        NSPasteboard.general.setString(amount, forType: NSPasteboard.PasteboardType.string)
+        NSPasteboard.general.setString(amount, forType: .string)
     }
 
     func menuDidClose(_ menu: NSMenu) {
