@@ -7,6 +7,7 @@ class PreferencesGeneralViewController: NSViewController {
     @IBOutlet weak var shortcutView: MASShortcutView!
     @IBOutlet weak var mainCurrencyPopupButton: NSPopUpButton!
     
+    let autoPlusSeparaterOffset = 2
     let currencyCodes = ["USD", "EUR", "GBP", "---", "AUD", "CAD", "CNY", "DKK", "HKD", "JPY", "---", "BTC", "ETH", "LTC"]
     
     override func viewDidLoad() {
@@ -35,7 +36,7 @@ class PreferencesGeneralViewController: NSViewController {
         logInCheckBox.state = defaults.launchAtLogin ? .on : .off
         
         if let masterCurrency = defaults.masterCurrency, let index = currencyCodes.index(of: masterCurrency.code) {
-            mainCurrencyPopupButton.selectItem(at: index + 2)
+            mainCurrencyPopupButton.selectItem(at: index + autoPlusSeparaterOffset)
         }
     }
 
@@ -50,7 +51,7 @@ class PreferencesGeneralViewController: NSViewController {
         if index == 0 {
             defaults.masterCurrency = nil
         } else {
-            let code = currencyCodes[index - 2]
+            let code = currencyCodes[index - autoPlusSeparaterOffset]
             defaults.masterCurrency = Currency.rawValue(code)
         }
     }
