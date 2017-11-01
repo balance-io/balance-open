@@ -25,10 +25,10 @@ internal final class CurrencySelectionViewModel {
     
     internal var currentCurrencyDisplay: String {
         if defaults.isMasterCurrencySet {
-            return currencies[0][0]
-        } else {
             let currency = defaults.masterCurrency!
             return "\(currency.name) (\(currency.code))"
+        } else {
+            return currencies[0][0]
         }
     }
     
@@ -67,9 +67,9 @@ internal final class CurrencySelectionViewModel {
     internal func selectCurrency(at indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == 0 {
             defaults.masterCurrency = nil
+        } else {
+            let code = currencies[indexPath.section][indexPath.row]
+            defaults.masterCurrency = Currency.rawValue(code)
         }
-        
-        let code = currencies[indexPath.section][indexPath.row]
-        defaults.masterCurrency = Currency.rawValue(code)
     }
 }
