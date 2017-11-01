@@ -33,7 +33,6 @@ class AccountsTabGroupCell: View {
             make.right.equalToSuperview().offset(-padding)
             make.top.equalToSuperview()
             make.height.equalToSuperview().offset(-1)
-            make.width.equalTo(150)
         }
         
         self.addSubview(nameField)
