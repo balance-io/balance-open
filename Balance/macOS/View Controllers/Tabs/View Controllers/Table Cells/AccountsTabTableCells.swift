@@ -24,6 +24,16 @@ class AccountsTabGroupCell: View {
     init() {
         super.init(frame: NSZeroRect)
         
+        lineView.layerBackgroundColor = .white
+        lineView.alphaValue = 0.06
+        self.addSubview(lineView)
+        lineView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(padding)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(1)
+            make.right.equalToSuperview()
+        }
+        
         self.addSubview(amountField)
         amountField.font = CurrentTheme.accounts.headerCell.amountFont
         amountField.textColor = CurrentTheme.accounts.headerCell.amountColor
@@ -32,7 +42,7 @@ class AccountsTabGroupCell: View {
         amountField.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-padding)
             make.top.equalToSuperview()
-            make.height.equalToSuperview().offset(-1)
+            make.bottom.equalTo(lineView.snp.top)
         }
         
         self.addSubview(nameField)
@@ -42,26 +52,16 @@ class AccountsTabGroupCell: View {
         nameField.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(padding)
             make.top.equalToSuperview()
-            make.height.equalToSuperview().offset(-1)
+            make.bottom.equalTo(lineView.snp.top)
             make.right.equalTo(amountField.snp.left).offset(5)
         }
         
         self.addSubview(logoView)
         logoView.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(-padding-12)
-            make.top.equalToSuperview()
-            make.height.equalToSuperview().offset(-1)
-            make.right.equalTo(amountField.snp.left).offset(-padding)
-        }
-        
-        lineView.layerBackgroundColor = .white
-        lineView.alphaValue = 0.06
-        self.addSubview(lineView)
-        lineView.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(padding)
-            make.bottom.equalToSuperview()
-            make.height.equalTo(1)
-            make.right.equalToSuperview()
+            make.left.equalToSuperview().offset(4)
+            make.width.equalTo(160)
+            make.height.equalTo(61)
+            make.centerY.equalToSuperview()
         }
     }
     
