@@ -18,6 +18,7 @@ fileprivate extension NSTouchBarItem.Identifier {
 @available(OSX 10.12.2, *)
 extension AccountsTabViewController : NSTouchBarDelegate {
     override func makeTouchBar() -> NSTouchBar? {
+        return nil
         let touchBar = NSTouchBar()
         touchBar.delegate = self
         touchBar.defaultItemIdentifiers = [.searchTransactions, .accountsScrollView]

@@ -16,8 +16,19 @@ class SyncDefaults {
     
     fileprivate let userDefaults = UserDefaults.standard
     
-    // Regularly sync every 20 minutes
-    var syncInterval = 20.0 * 60.0
+    // Sync every minute while visible
+    fileprivate let activeSyncInterval = 60.0
+    // Regularly sync every 30 minutes
+    fileprivate let inactiveSyncInterval = 60.0 * 30.0
+    
+    var syncInterval: Double {
+        #if os(OSX)
+            let isActive = AppDelegate.sharedInstance.statusItem.isStatusItemWindowVisible
+        #else
+            let isActive = (UIApplication.shared.applicationState == .active)
+        #endif
+        return isActive ? activeSyncInterval : inactiveSyncInterval
+    }
     
     var lastSyncTime: Date {
         get {

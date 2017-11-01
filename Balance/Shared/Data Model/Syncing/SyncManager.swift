@@ -31,12 +31,15 @@ class SyncManager: NSObject {
         currentExchangeRates.load()
         
         #if os(OSX)
-        // Register for wake notification
-        async {
-            NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.syncIfGreaterThanSyncInterval), name: NSWorkspace.didWakeNotification, object: nil)
-        }
+            // Register for system wake and popover open notifications
+            async {
+                NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.syncIfGreaterThanSyncInterval), name: NSWorkspace.didWakeNotification, object: nil)
+            }
+            NotificationCenter.addObserverOnMainThread(self, selector: #selector(automaticSync), name: Notifications.PopoverWillShow)
+            NotificationCenter.addObserverOnMainThread(self, selector: #selector(resetAutomaticSync), name: Notifications.PopoverWillHide)
         #else
-        NotificationCenter.addObserverOnMainThread(self, selector: #selector(syncIfGreaterThanSyncInterval), name: .UIApplicationDidBecomeActive)
+            // On iOS, always sync when the app becomes active
+            NotificationCenter.addObserverOnMainThread(self, selector: #selector(automaticSync), name: .UIApplicationDidBecomeActive)
         #endif
         
         // Network status notifications
@@ -46,9 +49,11 @@ class SyncManager: NSObject {
     
     deinit {
         #if os(OSX)
-        NSWorkspace.shared.notificationCenter.removeObserver(self, name: NSWorkspace.didWakeNotification, object: nil)
+            NSWorkspace.shared.notificationCenter.removeObserver(self, name: NSWorkspace.didWakeNotification, object: nil)
+            NotificationCenter.removeObserverOnMainThread(self, name: Notifications.PopoverWillShow)
+            NotificationCenter.removeObserverOnMainThread(self, name: Notifications.PopoverWillHide)
         #else
-        NotificationCenter.removeObserverOnMainThread(self, name: .UIApplicationDidBecomeActive)
+            NotificationCenter.removeObserverOnMainThread(self, name: .UIApplicationDidBecomeActive)
         #endif
 
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.NetworkBecameReachable)
@@ -64,7 +69,15 @@ class SyncManager: NSObject {
     }
     
     @objc func automaticSync() {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(automaticSync), object: nil)
         sync(userInitiated: false, validateReceipt: true, completion: nil)
+        log.debug("sync interval: \(syncDefaults.syncInterval)")
+    }
+    
+    @objc func resetAutomaticSync() {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(automaticSync), object: nil)
+        self.perform(#selector(automaticSync), with: nil, afterDelay: self.syncDefaults.syncInterval)
+        log.debug("sync interval: \(syncDefaults.syncInterval)")
     }
     
     @objc func syncIfGreaterThanSyncInterval() {        
@@ -113,7 +126,7 @@ class SyncManager: NSObject {
             NotificationCenter.postOnMainThread(name: Notifications.SyncCompleted)
             
             // Always run every sync interval. If we were manually run, this will reset the sync interval.
-            self.perform(#selector(self.automaticSync), with: nil, afterDelay: self.syncDefaults.syncInterval)
+            self.resetAutomaticSync()
             
             // Call the originally passed completion block if it exists
             completion?(success, errors)
