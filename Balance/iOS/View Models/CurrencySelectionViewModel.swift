@@ -15,71 +15,61 @@ internal final class CurrencySelectionViewModel {
         return self.sectionIndexTitles.count
     }
     
-    internal let sectionIndexTitles: [String]
+    internal let sectionIndexTitles: [String?] = [nil, "Fiat Currencies", "Crypto Currencies"]
     
-    // Private
-    private let groupedCurrencies: [String : [Currency]]
+    internal var currencies: [[String]] {
+        return [["Automatic - \(NSLocale.current.currencyCode ?? "USD")", "USD", "EUR", "GBP"],
+                ["AUD", "CAD", "CNY", "DKK", "HKD", "JPY"],
+                ["BTC", "ETH", "LTC"]]
+    }
     
-    private let autoCurrencySectionKey = "Automatic"
-    private let autoCurrency: Currency = {
-        if let currencyCode = NSLocale.current.currencyCode {
-            return Currency.rawValue(currencyCode)
+    internal var currentCurrencyDisplay: String {
+        if defaults.isMasterCurrencySet {
+            return currencies[0][0]
+        } else {
+            let currency = defaults.masterCurrency!
+            return "\(currency.name) (\(currency.code))"
         }
-        
-        return Currency.fiat(enum: .usd)
-    }()
-    
-    // MARK: Initialization
-    
-    internal required init() {
-        var groupedCurrencies = Currency.masterCurrencies.reduce([String : [Currency]]()) { (result, currency) -> [String : [Currency]] in
-            guard let firstCharacter = currency.code.first else {
-                return result
-            }
-            
-            let key = String(firstCharacter)
-            var currencyArray = result[key] ?? [Currency]()
-            currencyArray.append(currency)
-            currencyArray.sort(by: { (currencyA, currencyB) -> Bool in
-                return currencyA.code < currencyB.code
-            })
-            
-            var mutableResults = result
-            mutableResults[key] = currencyArray
-            
-            return mutableResults
-        }
-        
-        var sectionKeys = groupedCurrencies.keys.sorted()
-        
-        sectionKeys.insert(self.autoCurrencySectionKey, at: 0)
-        groupedCurrencies[self.autoCurrencySectionKey] = [self.autoCurrency]
-        
-        self.groupedCurrencies = groupedCurrencies
-        self.sectionIndexTitles = sectionKeys
     }
     
     // MARK: -
     
     internal func numberOfCurrencies(at section: Int) -> Int {
-        let key = self.sectionIndexTitles[section]
-        return self.groupedCurrencies[key]!.count
+        guard section >= 0 && section < currencies.count else {
+            return 0
+        }
+        
+        return currencies[section].count
     }
     
     internal func currency(at indexPath: IndexPath) -> Currency {
-        let key = self.sectionIndexTitles[indexPath.section]
-        let section = self.groupedCurrencies[key]!
-        
-        return section[indexPath.row]
+        let code = currencies[indexPath.section][indexPath.row]
+        return Currency.rawValue(code)
+    }
+    
+    internal func currencyDisplay(at indexPath: IndexPath) -> String {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            return currencies[0][0]
+        } else {
+            let currency = self.currency(at: indexPath)
+            return "\(currency.name) (\(currency.code))"
+        }
+    }
+    
+    internal func isCurrencySelected(at indexPath: IndexPath) -> Bool {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            return !defaults.isMasterCurrencySet
+        } else {
+            return defaults.isMasterCurrencySet && currency(at: indexPath) == defaults.masterCurrency
+        }
     }
     
     internal func selectCurrency(at indexPath: IndexPath) {
-        let key = self.sectionIndexTitles[indexPath.section]
-        if key == self.autoCurrencySectionKey {
+        if indexPath.section == 0 && indexPath.row == 0 {
             defaults.masterCurrency = nil
         }
         
-        let section = self.groupedCurrencies[key]!
-        defaults.masterCurrency = section[indexPath.row]
+        let code = currencies[indexPath.section][indexPath.row]
+        defaults.masterCurrency = Currency.rawValue(code)
     }
 }

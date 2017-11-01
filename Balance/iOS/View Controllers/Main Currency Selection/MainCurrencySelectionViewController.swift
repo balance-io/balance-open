@@ -58,7 +58,7 @@ extension MainCurrencySelectionViewController: UITableViewDataSource {
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return self.viewModel.sectionIndexTitles
+        return nil
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -70,14 +70,12 @@ extension MainCurrencySelectionViewController: UITableViewDataSource {
 
 extension MainCurrencySelectionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let cell = cell as? TableViewCell else
-        {
+        guard let cell = cell as? TableViewCell else {
             return
         }
         
-        let currency = self.viewModel.currency(at: indexPath)
-        cell.textLabel?.text = "\(currency.name) (\(currency.code))"
-        cell.accessoryType = currency == defaults.masterCurrency ? .checkmark : .none
+        cell.textLabel?.text = self.viewModel.currencyDisplay(at: indexPath)
+        cell.accessoryType = self.viewModel.isCurrencySelected(at: indexPath) ? .checkmark : .none
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
