@@ -109,14 +109,15 @@ typedef void (^CCNStatusItemWindowAnimationCompletion)(void);
 - (void)updateWindowOrigin {
     NSStatusBarButton *button = self.statusItemView.statusItem.button;
     NSScreen *screen = button.window.screen;
+    CGFloat windowWidth = self.window.frame.size.width;
     
     CGRect rectInButtonWindow = [button convertRect:button.frame toView:nil];
     CGRect rectInButtonScreen = [button.window convertRectToScreen:rectInButtonWindow];
     
     CGRect rectInWindow = rectInButtonScreen;
-    rectInWindow.origin.x -= (self.window.frame.size.width / 2.0) - NSMidX(self.statusItemView.statusItem.button.frame);
+    rectInWindow.origin.x -= (windowWidth / 2.0) - NSMidX(button.frame);
     
-    CGFloat overhang = (NSWidth(screen.frame) + NSMinX(screen.frame)) - (NSMinX(rectInButtonScreen) + NSWidth(rectInButtonScreen) / 2.0 + self.window.frame.size.width / 2.0);
+    CGFloat overhang = (NSWidth(screen.frame) + NSMinX(screen.frame)) - (NSMinX(rectInButtonScreen) + NSWidth(rectInButtonScreen) / 2.0 + windowWidth / 2.0);
     if (overhang < 0) {
         rectInWindow.origin.x += overhang;
     }
@@ -300,30 +301,7 @@ void menuBarWillBeShownHidden (EventHandlerCallRef inHandlerRef, EventRef inEven
 
 #pragma mark - CCNStatusItemWindowBackgroundViewDataSource
 
-- (CGRect)statusItemFrameForStatusItemWindowBackgroundView:(CCNStatusItemWindowBackgroundView *)backgroundView
-{
-    /*NSStatusBarButton *button = self.statusItemView.statusItem.button;
-    
-    CGRect rectInButtonWindow = [button convertRect:button.frame toView:nil];
-    CGRect rectInButtonScreen = [button.window convertRectToScreen:rectInButtonWindow];
-    //NSLog(@"button: %@  button.window: %@  button.window.screen: %@  self.window.screen: %@  rectInWindow: %@  rectInScreen: %@  last: %@", button, button.window, button.window.screen, self.window.screen, NSStringFromRect(rectInWindow), NSStringFromRect(rectInScreen), NSStringFromRect([self.window convertRectFromScreen:rectInScreen]));
-    //NSLog(@"windowRect: %@  last: %@", NSStringFromRect(self.window.frame), NSStringFromRect([self.window convertRectFromScreen:rectInScreen]));
-
-    CGRect screenFrame = button.window.screen.frame;
-    CGRect rectInButtonScreenNormalized = rectInButtonScreen;
-    rectInButtonScreenNormalized.origin.x -= screenFrame.origin.x;
-    rectInButtonScreenNormalized.origin.y -= screenFrame.origin.y;
-    
-    CGRect rectInWindow = rectInButtonScreenNormalized;
-    rectInWindow.origin.x -= (self.window.frame.size.width / 2.0) + NSMidX(self.statusItemView.statusItem.button.frame);
-    rectInWindow.origin.y -= self.window.frame.size.height;
-    
-    
-    //CGRect rectInWindow = [self.window convertRectFromScreen:rectInButtonScreen];
-    //rectInWindow.origin.x -= self.window.screen.frame.origin.x;
-    //rectInWindow.origin.y += self.window.screen.frame.origin.y;
-    return rectInWindow;*/
-    
+- (CGRect)statusItemFrameForStatusItemWindowBackgroundView:(CCNStatusItemWindowBackgroundView *)backgroundView {
     NSStatusBarButton *button = self.statusItemView.statusItem.button;
     
     CGRect rectInWindow = [button convertRect:button.bounds toView:nil];
