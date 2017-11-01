@@ -20,8 +20,7 @@ class PreferencesGeneralViewController: NSViewController {
             if code == "---" {
                 mainCurrencyPopupButton.menu?.addItem(NSMenuItem.separator())
             } else {
-                let currency = Currency.rawValue(code)
-                let title = "\(currency.name) (\(currency.code))"
+                let title = Currency.rawValue(code).longName
                 mainCurrencyPopupButton.addItem(withTitle: title)
             }
         }
@@ -35,7 +34,7 @@ class PreferencesGeneralViewController: NSViewController {
         
         logInCheckBox.state = defaults.launchAtLogin ? .on : .off
         
-        if let masterCurrency = defaults.masterCurrency, let index = currencyCodes.index(of: masterCurrency.code) {
+        if defaults.isMasterCurrencySet, let index = currencyCodes.index(of: defaults.masterCurrency.code) {
             mainCurrencyPopupButton.selectItem(at: index + autoPlusSeparaterOffset)
         }
     }
