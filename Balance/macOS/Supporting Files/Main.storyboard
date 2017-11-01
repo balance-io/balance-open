@@ -723,7 +723,7 @@
                                 </textFieldCell>
                             </textField>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="cp3-tO-0fm" customClass="MASShortcutView">
-                                <rect key="frame" x="193" y="131" width="135" height="22"/>
+                                <rect key="frame" x="193" y="131" width="200" height="22"/>
                             </customView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qH3-pj-dbg">
                                 <rect key="frame" x="89" y="100" width="96" height="17"/>
@@ -735,7 +735,7 @@
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uvk-1t-VfS">
-                                <rect key="frame" x="191" y="94" width="140" height="26"/>
+                                <rect key="frame" x="191" y="94" width="205" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="CPQ-lp-TOw">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -754,7 +754,7 @@
                             <constraint firstItem="cp3-tO-0fm" firstAttribute="centerY" secondItem="KLO-OE-sXB" secondAttribute="centerY" id="CVS-zo-iyT"/>
                             <constraint firstItem="cp3-tO-0fm" firstAttribute="leading" secondItem="KLO-OE-sXB" secondAttribute="trailing" constant="10" id="F92-6T-fjN"/>
                             <constraint firstItem="cp3-tO-0fm" firstAttribute="top" secondItem="hbn-Wg-xle" secondAttribute="bottom" constant="23" id="eEo-LK-s6u"/>
-                            <constraint firstAttribute="trailing" secondItem="cp3-tO-0fm" secondAttribute="trailing" constant="172" id="q4K-Ym-ZW1"/>
+                            <constraint firstAttribute="trailing" secondItem="cp3-tO-0fm" secondAttribute="trailing" constant="107" id="q4K-Ym-ZW1"/>
                             <constraint firstItem="KLO-OE-sXB" firstAttribute="top" secondItem="aKI-tT-xOh" secondAttribute="top" constant="63" id="xLV-5o-LAT"/>
                         </constraints>
                     </view>
