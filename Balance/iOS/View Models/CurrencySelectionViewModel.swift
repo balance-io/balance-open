@@ -15,46 +15,59 @@ internal final class CurrencySelectionViewModel {
         return self.sectionIndexTitles.count
     }
     
-    internal let sectionIndexTitles: [String] 
+    internal let sectionIndexTitles: [String?] = [nil, "Fiat Currencies", "Crypto Currencies"]
     
-    // Private
-    private let groupedCurrencies: [String : [Currency]]
+    internal var currencies: [[String]] {
+        return [["Automatic - \(NSLocale.current.currencyCode ?? "USD")", "USD", "EUR", "GBP"],
+                ["AUD", "CAD", "CNY", "DKK", "HKD", "JPY"],
+                ["BTC", "ETH", "LTC"]]
+    }
     
-    // MARK: Initialization
-    
-    internal required init() {
-        self.groupedCurrencies = Currency.masterCurrencies.reduce([String : [Currency]]()) { (result, currency) -> [String : [Currency]] in
-            guard let firstCharacter = currency.code.first else {
-                return result
-            }
-            
-            let key = String(firstCharacter)
-            var currencyArray = result[key] ?? [Currency]()
-            currencyArray.append(currency)
-            currencyArray.sort(by: { (currencyA, currencyB) -> Bool in
-                return currencyA.code < currencyB.code
-            })
-            
-            var mutableResults = result
-            mutableResults[key] = currencyArray
-            
-            return mutableResults
+    internal var currentCurrencyDisplay: String {
+        if defaults.isMasterCurrencySet {
+            return defaults.masterCurrency.longName
+        } else {
+            return currencies[0][0]
         }
-        
-        self.sectionIndexTitles = self.groupedCurrencies.keys.sorted()
     }
     
     // MARK: -
     
     internal func numberOfCurrencies(at section: Int) -> Int {
-        let key = self.sectionIndexTitles[section]
-        return self.groupedCurrencies[key]!.count
+        guard section >= 0 && section < currencies.count else {
+            return 0
+        }
+        
+        return currencies[section].count
     }
     
     internal func currency(at indexPath: IndexPath) -> Currency {
-        let key = self.sectionIndexTitles[indexPath.section]
-        let section = self.groupedCurrencies[key]!
-        
-        return section[indexPath.row]
+        let code = currencies[indexPath.section][indexPath.row]
+        return Currency.rawValue(code)
+    }
+    
+    internal func currencyDisplay(at indexPath: IndexPath) -> String {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            return currencies[0][0]
+        } else {
+            return self.currency(at: indexPath).longName
+        }
+    }
+    
+    internal func isCurrencySelected(at indexPath: IndexPath) -> Bool {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            return !defaults.isMasterCurrencySet
+        } else {
+            return defaults.isMasterCurrencySet && currency(at: indexPath) == defaults.masterCurrency
+        }
+    }
+    
+    internal func selectCurrency(at indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            defaults.masterCurrency = nil
+        } else {
+            let code = currencies[indexPath.section][indexPath.row]
+            defaults.masterCurrency = Currency.rawValue(code)
+        }
     }
 }

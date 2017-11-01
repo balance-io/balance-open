@@ -291,6 +291,10 @@ class Defaults {
         }
     }
     
+    var isMasterCurrencySet: Bool {
+        return defaults.object(forKey: Keys.masterCurrency) != nil
+    }
+    
     var masterCurrency: Currency! {
         get {
             if let raw = defaults.object(forKey: Keys.masterCurrency) as? String {
