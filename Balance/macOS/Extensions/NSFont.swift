@@ -37,7 +37,10 @@ extension NSFont {
                           NSFontDescriptor.FeatureKey.selectorIdentifier: kStylisticAltOneOnSelector ],
                         // Alternate 4
                         [ NSFontDescriptor.FeatureKey.typeIdentifier: kStylisticAlternativesType,
-                          NSFontDescriptor.FeatureKey.selectorIdentifier: kStylisticAltTwoOnSelector ]
+                          NSFontDescriptor.FeatureKey.selectorIdentifier: kStylisticAltTwoOnSelector ],
+                        // Alternate 0
+                        [ NSFontDescriptor.FeatureKey.typeIdentifier: kStylisticAlternativesType,
+                          NSFontDescriptor.FeatureKey.selectorIdentifier: kStylisticAltSixOnSelector ]
                     ]
                 ])
             
