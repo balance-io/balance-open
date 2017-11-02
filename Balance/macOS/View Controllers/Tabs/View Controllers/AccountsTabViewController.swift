@@ -608,14 +608,17 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     }
     
     func tableView(_ tableView: SectionedTableView, heightOfRow row: Int, inSection section: Int) -> CGFloat {
-        let height = CurrentTheme.accounts.cell.height
-        print("(\(section), \(row)): \(height))")
-        return height
-//        if TableIndex(section: section, row: row) == tableView.selectedIndex {
-//            return height + 50.0
-//        } else {
-//            return height
-//        }
+        var height = CurrentTheme.accounts.cell.height
+        if viewModel.isLastRow(row, inSection: section) {
+            // Make last row taller
+            height += 10.0
+        }
+        
+        if TableIndex(section: section, row: row) == tableView.selectedIndex {
+            return height + 50.0
+        } else {
+            return height
+        }
     }
     
     func tableView(_ tableView: SectionedTableView, rowViewForSection section: Int) -> NSTableRowView? {
@@ -670,7 +673,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         cell.index = index
         
         if let account = viewModel.account(forRow: row, inSection: section) {
-            cell.updateModel(account)
+            let isLastRowInSection =  viewModel.isLastRow(row, inSection: section)
+            cell.updateModel(account, isLastRowInSection: isLastRowInSection)
         }
         
         cell.rowBackgroundColor = { TableIndex -> NSColor? in

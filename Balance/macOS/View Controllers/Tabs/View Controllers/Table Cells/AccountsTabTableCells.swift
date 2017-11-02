@@ -10,7 +10,8 @@ import Foundation
 import BalanceVectorGraphics
 import SnapKit
 
-fileprivate let padding = 20
+fileprivate let padding = 18
+fileprivate let linePadding = padding - 2
 
 class AccountsTabGroupCell: View {
     var model: Institution?
@@ -28,7 +29,7 @@ class AccountsTabGroupCell: View {
         lineView.alphaValue = 0.06
         self.addSubview(lineView)
         lineView.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(padding)
+            make.left.equalToSuperview().offset(linePadding)
             make.bottom.equalToSuperview()
             make.height.equalTo(1)
             make.right.equalToSuperview()
@@ -40,7 +41,7 @@ class AccountsTabGroupCell: View {
         amountField.verticalAlignment = .center
         amountField.alignment = .right
         amountField.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-padding)
+            make.right.equalToSuperview().offset(-linePadding)
             make.top.equalToSuperview().offset(-2)
             make.bottom.equalTo(lineView.snp.top).offset(-2)
         }
@@ -58,7 +59,7 @@ class AccountsTabGroupCell: View {
         
         self.addSubview(logoView)
         logoView.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(4)
+            make.left.equalToSuperview()
             make.width.equalTo(160)
             make.height.equalTo(61)
             make.centerY.equalToSuperview().offset(-1)
@@ -139,9 +140,9 @@ class AccountsTabAccountCell: View {
         nameField.cell?.lineBreakMode = .byTruncatingTail
         topContainer.addSubview(nameField)
         nameField.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(padding)
-            make.trailing.equalToSuperview()
-            make.top.equalToSuperview().offset(13)
+            make.leading.equalToSuperview().offset(padding)
+            make.trailing.equalToSuperview().offset(-padding)
+            make.top.equalToSuperview().offset(11)
         }
         
         amountField.setAccessibilityLabel("Account Total")
@@ -154,7 +155,7 @@ class AccountsTabAccountCell: View {
         topContainer.addSubview(amountField)
         amountField.snp.makeConstraints { make in
             make.leading.equalTo(nameField)
-            make.top.equalToSuperview().offset(32)
+            make.top.equalToSuperview().offset(31)
         }
         
         altAmountField.setAccessibilityLabel("Alternate Currency Amount Total")
@@ -164,15 +165,15 @@ class AccountsTabAccountCell: View {
         altAmountField.usesSingleLineMode = true
         topContainer.addSubview(altAmountField)
         altAmountField.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(padding)
-            make.top.equalToSuperview().offset(32)
+            make.trailing.equalToSuperview().offset(-padding)
+            make.top.equalToSuperview().offset(31)
         }
         
         lineView.layerBackgroundColor = .white
         lineView.alphaValue = 0.06
         topContainer.addSubview(lineView)
         lineView.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(padding)
+            make.left.equalToSuperview().offset(linePadding)
             make.bottom.equalToSuperview().offset(-1)
             make.height.equalTo(1)
             make.right.equalToSuperview()
@@ -191,7 +192,7 @@ class AccountsTabAccountCell: View {
         NotificationCenter.removeObserverOnMainThread(self, name: AccountsTabViewController.InternalNotifications.CellClosed)
     }
     
-    func updateModel(_ updatedModel: Account) {
+    func updateModel(_ updatedModel: Account, isLastRowInSection: Bool) {
         model = updatedModel
         
         let currency = Currency.rawValue(updatedModel.currency)
@@ -214,6 +215,8 @@ class AccountsTabAccountCell: View {
         }
         
         self.alphaValue = (debugging.showAllInstitutionsAsIncorrectPassword || updatedModel.passwordInvalid)  ? CurrentTheme.accounts.cell.passwordInvalidDimmedAlpha : 1.0
+        
+        lineView.isHidden = isLastRowInSection
         
         updateBackgroundColors()
     }
@@ -305,10 +308,10 @@ class AccountsTabAccountCell: View {
         transactionDetailsField.cell?.lineBreakMode = .byTruncatingTail
         bottomContainer.addSubview(transactionDetailsField)
         transactionDetailsField.snp.makeConstraints { make in
-            make.leading.equalTo(bottomContainer).inset(2)
+            make.leading.equalTo(bottomContainer).offset(2)
             make.trailing.equalTo(bottomContainer)
             make.height.equalTo(15)
-            make.top.equalTo(includeInTotalButton.snp.bottom).inset(-5)
+            make.top.equalTo(includeInTotalButton.snp.bottom).offset(-5)
         }
         
         AccountsTabAccountCell.dateFormatter.dateFormat = "M/d/y"
