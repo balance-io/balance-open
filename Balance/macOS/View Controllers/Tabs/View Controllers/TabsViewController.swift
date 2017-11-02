@@ -14,6 +14,7 @@ enum Tab: Int {
     case none           = -1
     case accounts       = 0
     case transactions   = 1
+    case priceTicker    = 2
 }
 
 class TabsViewController: NSViewController {
@@ -26,6 +27,7 @@ class TabsViewController: NSViewController {
     let headerView = View()
     let accountsButton = Button()
     let transactionsButton = Button()
+    let priceTickerButton = Button()
     let preferencesButton = Button()
     var tabButtons = [Button]()
     
@@ -33,6 +35,7 @@ class TabsViewController: NSViewController {
     let tabContainerView = View()
     let accountsViewController = AccountsTabViewController()
     let transactionsViewController = TransactionsTabViewController()
+    let priceTickerViewController = PriceTickerTabViewController()
     var feedbackViewController: EmailIssueController?
     var tabControllers = [NSViewController]()
     let tabSwitchDelay = 1.0
@@ -51,7 +54,7 @@ class TabsViewController: NSViewController {
         self.defaultTab = defaultTab
         
         tabButtons = [accountsButton, transactionsButton]
-        tabControllers = [accountsViewController, transactionsViewController]
+        tabControllers = [accountsViewController, transactionsViewController, priceTickerViewController]
         
         registerForNotifications()
         addShortcutMonitor()
@@ -147,6 +150,25 @@ class TabsViewController: NSViewController {
             make.centerY.equalToSuperview()
         }
         
+        priceTickerButton.target = self
+        priceTickerButton.action = #selector(tabAction(_:))
+        priceTickerButton.tag = Tab.priceTicker.rawValue
+//        priceTickerButton.image = #imageLiteral(resourceName: "TabIconTransactionsInactive")
+//        priceTickerButton.imagePosition = .imageLeft
+//        priceTickerButton.alternateImage = #imageLiteral(resourceName: "TabIconTransactionsActive")
+        priceTickerButton.title = "Price Ticker"
+        //priceTickerButton.titleColor = CurrentTheme.tabs.header.tabFontColor
+        priceTickerButton.font = CurrentTheme.tabs.header.tabFont
+        priceTickerButton.setAccessibilityLabel("Transactions")
+        priceTickerButton.setButtonType(.toggle)
+        priceTickerButton.isBordered = false
+        priceTickerButton.sizeToFit()
+        headerView.addSubview(priceTickerButton)
+        priceTickerButton.snp.makeConstraints { make in
+            make.left.equalTo(transactionsButton.snp.right).offset(10)
+            make.centerY.equalToSuperview()
+        }
+        
         // Preferences button
         preferencesButton.target = self
         preferencesButton.action = #selector(showSettingsMenu(_:))
@@ -237,6 +259,7 @@ class TabsViewController: NSViewController {
         switch tabIndex {
         case Tab.accounts.rawValue:     contentName = "Accounts tab selected"
         case Tab.transactions.rawValue: contentName = "Transactions tab selected"
+        case Tab.priceTicker.rawValue:  contentName = "Price Ticker tab selected"
         default: break
         }
         BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: contentName)
