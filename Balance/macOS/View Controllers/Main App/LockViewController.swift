@@ -223,54 +223,45 @@ class LockViewController: NSViewController, NSTextFieldDelegate {
     }
     
     var userPasswordAvailable: Bool {
-        if #available(OSX 10.11, *) {
-            do {
-                var touchIdAvailable = false
-                try ObjC.catchException {
-                    var error: NSError?
-                    touchIdAvailable = LAContext().canEvaluatePolicy(.deviceOwnerAuthentication, error: &error)
-                    if let error = error {
-                        log.error("Error checking for touch id: \(error)")
-                    }
+        do {
+            var touchIdAvailable = false
+            try ObjC.catchException {
+                var error: NSError?
+                touchIdAvailable = LAContext().canEvaluatePolicy(.deviceOwnerAuthentication, error: &error)
+                if let error = error {
+                    log.error("Error checking for touch id: \(error)")
                 }
-                return touchIdAvailable
-            } catch let error {
-                // Policy doesn't exist
-                log.error("Error checking for touch id: \(error)")
-                return false
             }
+            return touchIdAvailable
+        } catch let error {
+            // Policy doesn't exist
+            log.error("Error checking for touch id: \(error)")
+            return false
         }
-        
-        return false
     }
     
     func authenticateUserPassword(reason: String, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
-        if #available(OSX 10.11, *) {
-            let context = LAContext()
-            do {
-                try ObjC.catchException {
-                    let policy: LAPolicy = .deviceOwnerAuthentication
-                    if context.canEvaluatePolicy(policy, error: nil) {
-                        context.evaluatePolicy(policy, localizedReason: reason) { success, evaluateError in
-                            if success {
-                                // User authenticated successfully, take appropriate action
-                                async { completion(true, nil) }
-                            } else {
-                                // User did not authenticate successfully, look at error and take appropriate action
-                                async { completion(false, evaluateError) }
-                            }
+        let context = LAContext()
+        do {
+            try ObjC.catchException {
+                let policy: LAPolicy = .deviceOwnerAuthentication
+                if context.canEvaluatePolicy(policy, error: nil) {
+                    context.evaluatePolicy(policy, localizedReason: reason) { success, evaluateError in
+                        if success {
+                            // User authenticated successfully, take appropriate action
+                            async { completion(true, nil) }
+                        } else {
+                            // User did not authenticate successfully, look at error and take appropriate action
+                            async { completion(false, evaluateError) }
                         }
-                    } else {
-                        // Could not evaluate policy; look at authError and present an appropriate message to user
-                        async { completion(false, nil) }
                     }
+                } else {
+                    // Could not evaluate policy; look at authError and present an appropriate message to user
+                    async { completion(false, nil) }
                 }
-            } catch {
-                // Policy doesn't exist
-                async { completion(false, nil) }
             }
-        }  else {
-            // Fail on earlier versions
+        } catch {
+            // Policy doesn't exist
             async { completion(false, nil) }
         }
     }
