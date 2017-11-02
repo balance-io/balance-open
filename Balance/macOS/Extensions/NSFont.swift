@@ -49,4 +49,20 @@ extension NSFont {
             return font
         }
     }
+    
+    static func monospacedSystemFont(ofSize size: CGFloat) -> NSFont {
+        return NSFont(name: "SFMono-Regular", size: size)!
+    }
+    
+    static func mediumMonospacedSystemFont(ofSize size: CGFloat) -> NSFont {
+        return NSFont(name: "SFMono-Medium", size: size)!
+    }
+    
+    static func semiboldMonospacedSystemFont(ofSize size: CGFloat) -> NSFont {
+        return NSFont(name: "SFMono-Semibold", size: size)!
+    }
+    
+    static func boldMonospacedSystemFont(ofSize size: CGFloat) -> NSFont {
+        return NSFont(name: "SFMono-Bold", size: size)!
+    }
 }

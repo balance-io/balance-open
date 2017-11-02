@@ -41,8 +41,8 @@ class AccountsTabGroupCell: View {
         amountField.alignment = .right
         amountField.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-padding)
-            make.top.equalToSuperview()
-            make.bottom.equalTo(lineView.snp.top)
+            make.top.equalToSuperview().offset(-2)
+            make.bottom.equalTo(lineView.snp.top).offset(-2)
         }
         
         self.addSubview(nameField)
@@ -61,7 +61,7 @@ class AccountsTabGroupCell: View {
             make.left.equalToSuperview().offset(4)
             make.width.equalTo(160)
             make.height.equalTo(61)
-            make.centerY.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-1)
         }
     }
     
@@ -106,7 +106,6 @@ class AccountsTabAccountCell: View {
     
     let topContainer = View()
     let nameField = LabelField()
-    let inclusionIndicator = ImageView()
     let amountField = LabelField()
     let altAmountField = LabelField()
     let lineView = View()
@@ -130,27 +129,6 @@ class AccountsTabAccountCell: View {
             make.height.equalTo(CurrentTheme.accounts.cell.height)
         }
         
-        altAmountField.setAccessibilityLabel("Alternate Currency Amount Total")
-        altAmountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
-        altAmountField.font = CurrentTheme.accounts.cell.altAmountFont
-        altAmountField.textColor = CurrentTheme.accounts.cell.altAmountColor
-        altAmountField.usesSingleLineMode = true
-        self.addSubview(altAmountField)
-        altAmountField.snp.makeConstraints { make in
-            make.width.equalTo(100)
-            make.trailing.equalToSuperview().inset(padding)
-            make.bottom.equalToSuperview().offset(-8)
-        }
-        
-        topContainer.addSubview(inclusionIndicator)
-        
-        inclusionIndicator.snp.makeConstraints { make in
-            make.width.equalTo(15)
-            make.height.equalTo(15)
-            make.trailing.equalTo(altAmountField.snp.leading).offset(-5)
-            make.centerY.equalTo(altAmountField)
-        }
-        
         nameField.setAccessibilityLabel("Account Name")
         nameField.alphaValue = 0.80
         nameField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
@@ -162,21 +140,32 @@ class AccountsTabAccountCell: View {
         topContainer.addSubview(nameField)
         nameField.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(padding)
-            make.trailing.equalTo(inclusionIndicator.snp.leading).inset(-5)
-            make.top.equalToSuperview().offset(10)
+            make.trailing.equalToSuperview()
+            make.top.equalToSuperview().offset(13)
         }
         
         amountField.setAccessibilityLabel("Account Total")
         amountField.alphaValue = 0.95
         amountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
         amountField.font = CurrentTheme.accounts.cell.amountFont
+        amountField.textColor = CurrentTheme.accounts.cell.amountColor
         amountField.usesSingleLineMode = true
         amountField.alignment = .left
         topContainer.addSubview(amountField)
         amountField.snp.makeConstraints { make in
             make.leading.equalTo(nameField)
-            make.bottom.equalToSuperview().offset(-10)
-            make.width.equalTo(100)
+            make.top.equalToSuperview().offset(32)
+        }
+        
+        altAmountField.setAccessibilityLabel("Alternate Currency Amount Total")
+        altAmountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
+        altAmountField.font = CurrentTheme.accounts.cell.altAmountFont
+        altAmountField.textColor = CurrentTheme.accounts.cell.altAmountColor
+        altAmountField.usesSingleLineMode = true
+        self.addSubview(altAmountField)
+        altAmountField.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(padding)
+            make.top.equalToSuperview().offset(32)
         }
         
         lineView.layerBackgroundColor = .white
@@ -184,7 +173,7 @@ class AccountsTabAccountCell: View {
         topContainer.addSubview(lineView)
         lineView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(padding)
-            make.bottom.equalToSuperview()
+            make.top.equalToSuperview().offset(CurrentTheme.accounts.cell.height - 1)
             make.height.equalTo(1)
             make.right.equalToSuperview()
         }
@@ -206,18 +195,10 @@ class AccountsTabAccountCell: View {
         model = updatedModel
         
         let currency = Currency.rawValue(updatedModel.currency)
-        amountField.attributedStringValue = amountToStringFormatted(amount: updatedModel.displayBalance, currency: currency, showNegative: true)
-        amountField.snp.updateConstraints { make in
-            let width = amountField.stringValue.size(font: CurrentTheme.accounts.cell.amountFont)
-            make.width.equalTo(width)
-        }
+        amountField.stringValue = amountToString(amount: updatedModel.displayBalance, currency: currency, showNegative: true, showCodeAfterValue: true)
         
         if let displayAltBalance = updatedModel.displayAltBalance {
             altAmountField.stringValue = amountToString(amount: displayAltBalance, currency: defaults.masterCurrency, showNegative: true)
-            altAmountField.snp.updateConstraints { make in
-                let width = altAmountField.stringValue.size(font: CurrentTheme.accounts.cell.amountFont)
-                make.width.equalTo(width)
-            }
             
             altAmountField.isHidden = false
         } else {
@@ -236,7 +217,6 @@ class AccountsTabAccountCell: View {
         
         updateBackgroundColors()
         updateTopContainerOffset()
-        updateInclusionIndicator()
     }
     
     func updateBackgroundColors() {
@@ -251,16 +231,6 @@ class AccountsTabAccountCell: View {
     func updateTopContainerOffset() {
         topContainer.snp.updateConstraints { make in
             make.top.equalTo(self).offset(index.row == 0 ? -4 : 0)
-        }
-    }
-    
-    func updateInclusionIndicator() {
-        let isItIncludedBool = defaults.accountIdsExcludedFromTotal.contains(model!.accountId)
-        if isItIncludedBool {
-            inclusionIndicator.setAccessibilityLabel("Account included in total?")
-            inclusionIndicator.image = tintImageWithColor(NSImage(named: NSImage.Name(rawValue: "CircleRemove"))!, color: CurrentTheme.defaults.foregroundColor)
-        } else {
-            inclusionIndicator.image = nil
         }
     }
     
@@ -393,8 +363,6 @@ class AccountsTabAccountCell: View {
                 includeInTotalButton.image = tintImageWithColor(circleAddImage, color: CurrentTheme.defaults.foregroundColor)
                 includeInTotalButton.title = "Include balance"
             }
-            
-            updateInclusionIndicator()
         }
     }
     

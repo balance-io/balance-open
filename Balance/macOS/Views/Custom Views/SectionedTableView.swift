@@ -435,7 +435,9 @@ class SectionedTableView: TableView, NSTableViewDelegate, NSTableViewDataSource 
         if let customDataSource = customDataSource {
             let index = convertRowToIndex(row)
             if index.row >= 0 {
-                return customDataSource.tableView(self, heightOfRow: index.row, inSection: index.section)
+                let height = customDataSource.tableView(self, heightOfRow: index.row, inSection: index.section)
+                print("height: \(height)")
+                return height
             } else {
                 if let height = customDataSource.tableView?(self, heightOfSection: index.section) {
                     return height

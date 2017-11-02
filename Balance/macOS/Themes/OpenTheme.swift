@@ -21,7 +21,11 @@ struct OpenTheme: Theme {
         let touchBarFont = NSFont.systemFont(ofSize: 15)
         
         let totalFooter = DefaultsTheme.TotalFooterTheme(
-            totalBackgroundColor: NSColor(deviceRedInt: 46, green: 56, blue: 66, alpha: 0.4)
+            totalBackgroundColor: NSColor(deviceRedInt: 46, green: 56, blue: 66, alpha: 0.4),
+            titleFont: NSFont.semiboldSystemFont(ofSize: 16),
+            titleColor: NSColor.white,
+            amountFont: NSFont.boldMonospacedSystemFont(ofSize: 16),
+            amountColor: NSColor.white
         )
     
         let cell = DefaultsTheme.CellTheme(
@@ -124,27 +128,27 @@ struct OpenTheme: Theme {
     
     var accounts: AccountsTheme {
         let headerCell = AccountsTheme.HeaderCellTheme(
-            height: 65.0,
-            nameFont: NSFont.systemFont(ofSize: 20),
+            height: 63.0,
+            nameFont: NSFont.semiboldSystemFont(ofSize: 16),
             nameColor: NSColor.white,
-            amountFont: NSFont.monospacedDigitSystemFont(ofSize: 20),
+            amountFont: NSFont.semiboldMonospacedSystemFont(ofSize: 16),
             amountColor: NSColor.white
         )
         
         let cell = AccountsTheme.CellTheme(
-            height: 65.0,
+            height: 62.0,
             dimmedAlpha: 0.65,
             passwordInvalidDimmedAlpha: 0.50,
             
-            nameFont: NSFont.systemFont(ofSize: 14),
+            nameFont: NSFont.monospacedSystemFont(ofSize: 12.5),
             nameColor: NSColor(deviceWhiteInt: 255, alpha: 1.0),
             
-            amountFont: NSFont.monospacedDigitSystemFont(ofSize: 14),
-            amountColor: NSColor(deviceWhiteInt: 255, alpha: 0.9),
+            amountFont: NSFont.monospacedSystemFont(ofSize: 14),
+            amountColor: NSColor(deviceWhiteInt: 255, alpha: 1.0),
             amountColorCents: NSColor.white,
             amountColorPositive: NSColor.white,
             
-            altAmountFont: NSFont.monospacedDigitSystemFont(ofSize: 14),
+            altAmountFont: NSFont.mediumMonospacedSystemFont(ofSize: 14),
             altAmountColor: NSColor.white,
             
             availableFont: NSFont.systemFont(ofSize: 10.5),

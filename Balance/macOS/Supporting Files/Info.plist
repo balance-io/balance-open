@@ -52,5 +52,7 @@
 	<string>https://balance.nyc3.digitaloceanspaces.com/sparkle/balanceopen.xml</string>
 	<key>SUEnableAutomaticChecks</key>
 	<false/>
+	<key>ATSApplicationFontsPath</key>
+	<string>Fonts</string>
 </dict>
 </plist>
