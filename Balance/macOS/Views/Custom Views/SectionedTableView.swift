@@ -436,7 +436,6 @@ class SectionedTableView: TableView, NSTableViewDelegate, NSTableViewDataSource 
             let index = convertRowToIndex(row)
             if index.row >= 0 {
                 let height = customDataSource.tableView(self, heightOfRow: index.row, inSection: index.section)
-                print("height: \(height)")
                 return height
             } else {
                 if let height = customDataSource.tableView?(self, heightOfSection: index.section) {
@@ -452,7 +451,8 @@ class SectionedTableView: TableView, NSTableViewDelegate, NSTableViewDataSource 
         if let customDataSource = customDataSource {
             let index = convertRowToIndex(row)
             if index.row >= 0 {
-                return customDataSource.tableView(self, rowViewForRow: index.row, inSection: index.section)
+                let rowView = customDataSource.tableView(self, rowViewForRow: index.row, inSection: index.section)
+                return rowView
             } else {
                 if let rowView = customDataSource.tableView?(self, rowViewForSection: index.section) {
                     return rowView

@@ -128,7 +128,7 @@ struct OpenTheme: Theme {
     
     var accounts: AccountsTheme {
         let headerCell = AccountsTheme.HeaderCellTheme(
-            height: 63.0,
+            height: 62.0,
             nameFont: NSFont.semiboldSystemFont(ofSize: 16),
             nameColor: NSColor.white,
             amountFont: NSFont.semiboldMonospacedSystemFont(ofSize: 16),
@@ -136,7 +136,7 @@ struct OpenTheme: Theme {
         )
         
         let cell = AccountsTheme.CellTheme(
-            height: 62.0,
+            height: 63.0,
             dimmedAlpha: 0.65,
             passwordInvalidDimmedAlpha: 0.50,
             

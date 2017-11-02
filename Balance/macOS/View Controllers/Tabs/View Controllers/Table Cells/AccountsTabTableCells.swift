@@ -162,7 +162,7 @@ class AccountsTabAccountCell: View {
         altAmountField.font = CurrentTheme.accounts.cell.altAmountFont
         altAmountField.textColor = CurrentTheme.accounts.cell.altAmountColor
         altAmountField.usesSingleLineMode = true
-        self.addSubview(altAmountField)
+        topContainer.addSubview(altAmountField)
         altAmountField.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(padding)
             make.top.equalToSuperview().offset(32)
@@ -173,7 +173,7 @@ class AccountsTabAccountCell: View {
         topContainer.addSubview(lineView)
         lineView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(padding)
-            make.top.equalToSuperview().offset(CurrentTheme.accounts.cell.height - 1)
+            make.bottom.equalToSuperview().offset(-1)
             make.height.equalTo(1)
             make.right.equalToSuperview()
         }
@@ -216,7 +216,6 @@ class AccountsTabAccountCell: View {
         self.alphaValue = (debugging.showAllInstitutionsAsIncorrectPassword || updatedModel.passwordInvalid)  ? CurrentTheme.accounts.cell.passwordInvalidDimmedAlpha : 1.0
         
         updateBackgroundColors()
-        updateTopContainerOffset()
     }
     
     func updateBackgroundColors() {
@@ -225,12 +224,6 @@ class AccountsTabAccountCell: View {
             amountField.backgroundColor = color
             altAmountField.backgroundColor = color
             nameField.backgroundColor = color
-        }
-    }
-    
-    func updateTopContainerOffset() {
-        topContainer.snp.updateConstraints { make in
-            make.top.equalTo(self).offset(index.row == 0 ? -4 : 0)
         }
     }
     
