@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum Currency: Equatable {
+public enum Currency: Equatable, Hashable {
     case fiat(enum: FiatCurrency)
     case crypto(enum: CryptoCurrency)
     case cryptoOther(code: String)
@@ -94,6 +94,11 @@ public enum Currency: Equatable {
         case (.crypto, _):      return false
         case (.cryptoOther, _): return false
         }
+    }
+    
+    // Hashable
+    public var hashValue: Int {
+        return code.hashValue
     }
 }
 

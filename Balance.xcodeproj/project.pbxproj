@@ -214,6 +214,10 @@
 		537187FD1F4CC43000E7F9D6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537187F91F4CC3E200E7F9D6 /* SignUpViewController.swift */; };
 		5371F6FA1D8524F4002264DF /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5371F6F91D8524F4002264DF /* NSImage.swift */; };
 		5372E96F1DF7E75C00DDE214 /* SignUpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5372E96E1DF7E75C00DDE214 /* SignUpTextField.swift */; };
+		5373B4741FAB708B007432DC /* PriceTickerTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5373B4731FAB708B007432DC /* PriceTickerTabViewModel.swift */; };
+		5373B4751FAB708B007432DC /* PriceTickerTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5373B4731FAB708B007432DC /* PriceTickerTabViewModel.swift */; };
+		5373B4771FAB7350007432DC /* PriceTickerTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5373B4761FAB7350007432DC /* PriceTickerTabViewController.swift */; };
+		5373B4791FAB7AD1007432DC /* PriceTickerTabTableCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5373B4781FAB7AD1007432DC /* PriceTickerTabTableCells.swift */; };
 		5374D69D1CE194F100527388 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5374D69C1CE194F100527388 /* QuartzCore.framework */; };
 		537504FA1F19237E0062C11A /* ProductId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537504F91F19237E0062C11A /* ProductId.swift */; };
 		537504FB1F19237E0062C11A /* ProductId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537504F91F19237E0062C11A /* ProductId.swift */; };
@@ -647,6 +651,9 @@
 		537187F91F4CC3E200E7F9D6 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		5371F6F91D8524F4002264DF /* NSImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
 		5372E96E1DF7E75C00DDE214 /* SignUpTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpTextField.swift; sourceTree = "<group>"; };
+		5373B4731FAB708B007432DC /* PriceTickerTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTickerTabViewModel.swift; sourceTree = "<group>"; };
+		5373B4761FAB7350007432DC /* PriceTickerTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTickerTabViewController.swift; sourceTree = "<group>"; };
+		5373B4781FAB7AD1007432DC /* PriceTickerTabTableCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTickerTabTableCells.swift; sourceTree = "<group>"; };
 		5374D69C1CE194F100527388 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		537504F91F19237E0062C11A /* ProductId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductId.swift; sourceTree = "<group>"; };
 		537504FC1F192D280062C11A /* TypeAliases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
@@ -952,9 +959,10 @@
 		530422841ED38E1A001CA499 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				532B6FF11E9613520010D81D /* AccountsTabViewModel.swift */,
 				530422891ED39742001CA499 /* TabViewModel.swift */,
+				532B6FF11E9613520010D81D /* AccountsTabViewModel.swift */,
 				530422931ED39EE7001CA499 /* TransactionsTabViewModel.swift */,
+				5373B4731FAB708B007432DC /* PriceTickerTabViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -964,9 +972,10 @@
 			children = (
 				530422901ED39B7A001CA499 /* Table Cells */,
 				5304228B1ED39A0B001CA499 /* Touch Bar */,
-				530291311C6AA18F00C31CC1 /* AccountsTabViewController.swift */,
 				53E8C77D1C62EB4C0085D64E /* TabsViewController.swift */,
+				530291311C6AA18F00C31CC1 /* AccountsTabViewController.swift */,
 				DCC684D71BD1080E00E95B90 /* TransactionsTabViewController.swift */,
+				5373B4761FAB7350007432DC /* PriceTickerTabViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -994,6 +1003,7 @@
 			children = (
 				530422911ED39BB7001CA499 /* AccountsTabTableCells.swift */,
 				530422971ED3A82A001CA499 /* TransactionsTabTableCells.swift */,
+				5373B4781FAB7AD1007432DC /* PriceTickerTabTableCells.swift */,
 			);
 			path = "Table Cells";
 			sourceTree = "<group>";
@@ -2526,6 +2536,7 @@
 				A4430AA21F95F3ED00F2FFFA /* ExchangeRate.swift in Sources */,
 				53561EAB1F82DD260043D4F9 /* AddAccountViewController.swift in Sources */,
 				A493B9401F681BA00074ACCC /* BitfinexWallet.swift in Sources */,
+				5373B4751FAB708B007432DC /* PriceTickerTabViewModel.swift in Sources */,
 				53552A0F1ED7251200DD95F9 /* KeychainManager.swift in Sources */,
 				A40ABBE71F6BC0C000383C62 /* KrakenAPIClient.swift in Sources */,
 				53561EAC1F82DD260043D4F9 /* AddCredentialBasedAccountViewController.swift in Sources */,
@@ -2588,9 +2599,11 @@
 				A467DFC51F98EBFD0063882C /* Currency+MasterCurrency.swift in Sources */,
 				53D441E21F44AA9F006967E1 /* GenericItemRepository.swift in Sources */,
 				53B327C41E56AE0F009C7AFC /* Syncer.swift in Sources */,
+				5373B4741FAB708B007432DC /* PriceTickerTabViewModel.swift in Sources */,
 				538B47BE1F4CA0200023CED5 /* Currency.swift in Sources */,
 				A4E457141F7901E6002E2879 /* EthplorerApi.swift in Sources */,
 				53D441E81F44B0DD006967E1 /* FMDatabasePoolAdditionsVariadic.swift in Sources */,
+				5373B4771FAB7350007432DC /* PriceTickerTabViewController.swift in Sources */,
 				A40ABBE91F6BC5A000383C62 /* KrakenCredentials.swift in Sources */,
 				530422981ED3A82A001CA499 /* TransactionsTabTableCells.swift in Sources */,
 				53D441E51F44ABBD006967E1 /* Item.swift in Sources */,
@@ -2742,6 +2755,7 @@
 				532121A51EE8B91600F4812A /* Zip.swift in Sources */,
 				53E74A571DD53CCB00AD8876 /* TimeInterval.swift in Sources */,
 				53368DD81E3FFD4200B7A199 /* PaintCodeDropdown.swift in Sources */,
+				5373B4791FAB7AD1007432DC /* PriceTickerTabTableCells.swift in Sources */,
 				530F57A21DCD72680083F3A7 /* FMDatabaseAdditions.m in Sources */,
 				53294FA21D1DDD9500F08059 /* CCNStatusItem.m in Sources */,
 				A4E768051F67DB2B002B1AE1 /* BitfinexCredentials.swift in Sources */,
