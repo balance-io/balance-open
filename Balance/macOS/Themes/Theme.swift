@@ -35,6 +35,10 @@ struct DefaultsTheme {
     
     struct TotalFooterTheme {
         let totalBackgroundColor: NSColor
+        let titleFont: NSFont
+        let titleColor: NSColor
+        let amountFont: NSFont
+        let amountColor: NSColor
     }
     
     struct CellTheme {

@@ -106,6 +106,10 @@ class AccountsTabViewModel: TabViewModel {
         return 0
     }
     
+    func isLastRow(_ row: Int, inSection section: Int) -> Bool {
+        return row == numberOfRows(inSection: section) - 1
+    }
+    
     func institution(forSection section: Int) -> Institution? {
         if section >= 0, data.keys.count > section {
             let institution = data.keys[section]
