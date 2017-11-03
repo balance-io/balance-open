@@ -30,6 +30,7 @@ extension KrakenAPIClient {
 extension KrakenAPIClient {
     enum APIError: LocalizedError {
         case invalidJSON
+        case keysPermissionError
         case response(httpResponse: HTTPURLResponse, data: Data?)
         
         // MARK: Message
@@ -38,6 +39,8 @@ extension KrakenAPIClient {
             switch self {
             case .invalidJSON:
                 return "Invalid JSON"
+            case .keysPermissionError:
+                return "Your login keys have incorrect permissions"
             case .response(_, let data):
                 guard let unwrappedData = data,
                     let json = try? JSONSerialization.jsonObject(with: unwrappedData, options: []) as? [String : Any],
