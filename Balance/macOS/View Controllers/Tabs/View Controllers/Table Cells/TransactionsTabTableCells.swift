@@ -26,7 +26,7 @@ class TransactionsTabGroupCell: View {
         dateField.layerBackgroundColor = CurrentTheme.defaults.backgroundColor
         self.addSubview(dateField)
         dateField.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(10)
+            make.left.equalToSuperview().offset(14)
             make.centerY.equalTo(self)
         }
     }
@@ -89,6 +89,13 @@ class TransactionsTabTransactionCell: View {
     var accountField: LabelField!
     var mapView: MKMapView!
     
+    private static var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss"
+        dateFormatter.timeZone = TimeZone.current
+        return dateFormatter
+    }()
+    
     init() {
         super.init(frame: NSZeroRect)
         
@@ -100,8 +107,27 @@ class TransactionsTabTransactionCell: View {
             make.height.equalTo(CurrentTheme.transactions.cell.height)
         }
         
-        topBackgroundView.cornerRadius = 12
+        let topBackgroundViewFirstShadowView = View()
+        topBackgroundViewFirstShadowView.layerBackgroundColor = CurrentTheme.transactions.cell.backgroundViewColor
+        let firstDropShadow = NSShadow()
+        firstDropShadow.shadowColor = NSColor(deviceWhiteInt: 0, alpha: 0.2)
+        firstDropShadow.shadowOffset = NSSize(width: 0, height: 0)
+        firstDropShadow.shadowBlurRadius = 0.5
+        topBackgroundViewFirstShadowView.shadow = firstDropShadow
+        topContainer.addSubview(topBackgroundViewFirstShadowView)
+        topBackgroundViewFirstShadowView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.height.equalToSuperview().offset(-10)
+        }
+        
         topBackgroundView.layerBackgroundColor = CurrentTheme.transactions.cell.backgroundViewColor
+        let secondDropShadow = NSShadow()
+        secondDropShadow.shadowColor = NSColor(deviceWhiteInt: 0, alpha: 0.2)
+        secondDropShadow.shadowOffset = NSSize(width: 0, height: -2)
+        secondDropShadow.shadowBlurRadius = 4
+        topBackgroundView.shadow = secondDropShadow
         topContainer.addSubview(topBackgroundView)
         topBackgroundView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
