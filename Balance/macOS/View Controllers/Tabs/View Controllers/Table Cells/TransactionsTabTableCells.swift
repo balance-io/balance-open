@@ -88,14 +88,7 @@ class TransactionsTabTransactionCell: View {
     var institutionField: LabelField!
     var accountField: LabelField!
     var mapView: MKMapView!
-    
-    private static var dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss"
-        dateFormatter.timeZone = TimeZone.current
-        return dateFormatter
-    }()
-    
+
     init() {
         super.init(frame: NSZeroRect)
         
@@ -215,7 +208,7 @@ class TransactionsTabTransactionCell: View {
             altAmountField.stringValue = ""
         }
         
-        self.toolTip = updatedModel.displayName
+        self.toolTip = DateFormatter.localizedString(from: updatedModel.date, dateStyle: .medium, timeStyle: .medium)
     }
     
     
