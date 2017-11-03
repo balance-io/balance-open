@@ -116,14 +116,23 @@ struct OpenTheme: Theme {
         let signUpFieldTextColor = NSColor.white
         let signUpFieldplaceHolderTextColor = NSColor(deviceRedInt: 235, green: 240, blue: 245, alpha: 0.8)
         let signUpFieldFont = NSFont.systemFont(ofSize: 13.5)
-        
-        let emailIssueInfoLabelNameFont = NSFont.boldSystemFont(ofSize: 12)
-        let emailIssueInfoLabelNameColor = NSColor.white
-        let emailIssueInfoLabelValueFont = NSFont.systemFont(ofSize: 12)
-        let emailIssueInfoLabelValueColor = NSColor.lightGray
-        let emailIssueMessageLabelFont = NSFont.systemFont(ofSize: 12)
     
-        return AddAccountsTheme(institutionNameFont: institutionNameFont,  welcomeFont: welcomeFont, labelFont: labelFont, textColor: textColor, statusFont: statusFont, statusColor: statusColor, buttonFont: buttonFont, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, lineColor: lineColor, onePasswordButtonImage: onePasswordButtonImage, waveImage: waveImage, padlockImage: padlockImage, searchHeaderBackgroundColor: searchHeaderBackgroundColor, searchHeaderFont: searchHeaderFont, searchHeaderPopularFont: searchHeaderPopularFont, searchHeaderColor: searchHeaderColor, searchPopularFont: searchPopularFont, searchPopularColor: searchPopularColor, searchMoreResultsFont: searchMoreResultsFont, searchMoreResultsColor: searchMoreResultsColor, signUpFieldActiveBorderColor: signUpFieldActiveBorderColor, signUpFieldInactiveBorderColor: signUpFieldInactiveBorderColor, signUpFieldBackgroundColor: signUpFieldBackgroundColor, signUpFieldTextColor: signUpFieldTextColor, signUpFieldplaceHolderTextColor: signUpFieldplaceHolderTextColor, signUpFieldFont: signUpFieldFont, emailIssueInfoLabelNameFont: emailIssueInfoLabelNameFont, emailIssueInfoLabelNameColor: emailIssueInfoLabelNameColor, emailIssueInfoLabelValueFont: emailIssueInfoLabelValueFont, emailIssueInfoLabelValueColor: emailIssueInfoLabelValueColor, emailIssueMessageLabelFont: emailIssueMessageLabelFont)
+        return AddAccountsTheme(institutionNameFont: institutionNameFont,  welcomeFont: welcomeFont, labelFont: labelFont, textColor: textColor, statusFont: statusFont, statusColor: statusColor, buttonFont: buttonFont, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, lineColor: lineColor, onePasswordButtonImage: onePasswordButtonImage, waveImage: waveImage, padlockImage: padlockImage, searchHeaderBackgroundColor: searchHeaderBackgroundColor, searchHeaderFont: searchHeaderFont, searchHeaderPopularFont: searchHeaderPopularFont, searchHeaderColor: searchHeaderColor, searchPopularFont: searchPopularFont, searchPopularColor: searchPopularColor, searchMoreResultsFont: searchMoreResultsFont, searchMoreResultsColor: searchMoreResultsColor, signUpFieldActiveBorderColor: signUpFieldActiveBorderColor, signUpFieldInactiveBorderColor: signUpFieldInactiveBorderColor, signUpFieldBackgroundColor: signUpFieldBackgroundColor, signUpFieldTextColor: signUpFieldTextColor, signUpFieldplaceHolderTextColor: signUpFieldplaceHolderTextColor, signUpFieldFont: signUpFieldFont)
+    }
+    
+    var emailIssue: EmailIssueTheme {
+        let infoLabelNameFont = NSFont.boldSystemFont(ofSize: 12)
+        let infoLabelNameColor = NSColor.black
+        let infoLabelValueFont = NSFont.systemFont(ofSize: 12)
+        let infoLabelValueColor = NSColor.darkGray
+        let messageLabelFont = NSFont.systemFont(ofSize: 12)
+        
+        let inputFieldActiveBorderColor = NSColor.gray
+        let inputFieldInactiveBorderColor = NSColor.lightGray
+        let inputFieldTextColor = NSColor.black
+        let inputFieldPlaceholderTextColor = NSColor.lightGray
+        
+        return EmailIssueTheme(infoLabelNameFont: infoLabelNameFont, infoLabelNameColor: infoLabelNameColor, infoLabelValueFont: infoLabelValueFont, infoLabelValueColor: infoLabelValueColor, messageLabelFont: messageLabelFont, inputFieldActiveBorderColor: inputFieldActiveBorderColor, inputFieldInactiveBorderColor: inputFieldInactiveBorderColor, inputFieldTextColor: inputFieldTextColor, inputFieldPlaceholderTextColor: inputFieldPlaceholderTextColor)
     }
     
     var accounts: AccountsTheme {

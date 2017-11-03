@@ -91,10 +91,10 @@ class SignUpTextField: View, TextFieldDelegate {
             iconImageSize = NSSize(width: 13, height: 13)
         // TODO: Better separate the light/dark ones from white only ones
         case .balancePassword:
-            iconImage = CurrentTheme.type == .light ? #imageLiteral(resourceName: "login-balancePassword"): #imageLiteral(resourceName: "login-password")
+            iconImage = #imageLiteral(resourceName: "login-balancePassword")
             iconImageSize = NSSize(width: 10, height: 12)
         case .email:
-            iconImage = CurrentTheme.type == .light ? #imageLiteral(resourceName: "login-mail-light") : #imageLiteral(resourceName: "login-mail-dark")
+            iconImage = #imageLiteral(resourceName: "login-mail-light")
             iconImageSize = NSSize(width: 13, height: 10)
         case .secret, .address:
             //needs a different icon
@@ -147,6 +147,11 @@ class SignUpTextField: View, TextFieldDelegate {
         
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(textFieldDidBeginEditing), name: NSControl.textDidBeginEditingNotification, object: textField)
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(textFieldDidEndEditing), name: NSControl.textDidEndEditingNotification, object: textField)
+    }
+    
+    override func viewDidMoveToWindow() {
+        super.viewDidMoveToWindow()
+        self.borderColor = inactiveBorderColor
     }
     
     deinit {

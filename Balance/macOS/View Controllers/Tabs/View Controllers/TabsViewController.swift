@@ -190,7 +190,7 @@ class TabsViewController: NSViewController {
         menu.items.first?.isEnabled = networkStatus.isReachable
         menu.addItem(withTitle: "Preferences...", action: #selector(showPreferences), keyEquivalent: ",")
         menu.addItem(NSMenuItem.separator())
-        //menu.addItem(withTitle: "Send Feedback", action: #selector(sendFeedback), keyEquivalent: "")
+        menu.addItem(withTitle: "Send Feedback", action: #selector(sendFeedback), keyEquivalent: "")
         menu.addItem(withTitle: "Check for Updates", action: #selector(checkForUpdates(sender:)), keyEquivalent: "")
         menu.addItem(NSMenuItem.separator())
         menu.addItem(withTitle: "Quit Balance", action: #selector(quitApp), keyEquivalent: "q")
