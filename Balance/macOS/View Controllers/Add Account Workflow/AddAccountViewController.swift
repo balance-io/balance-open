@@ -387,6 +387,10 @@ class AddAccountViewController: NSViewController {
     
     @objc func showSettingsMenu(_ sender: NSButton) {
         let menu = NSMenu()
+        let versionItem = NSMenuItem(title: appVersionString, action: nil, keyEquivalent: "")
+        versionItem.isEnabled = false
+        menu.addItem(versionItem)
+        menu.addItem(NSMenuItem.separator())
         menu.addItem(withTitle: "Send Feedback", action: #selector(sendFeedback), keyEquivalent: "")
         menu.addItem(withTitle: "Check for Updates", action: #selector(checkForUpdates(sender:)), keyEquivalent: "")
         menu.addItem(NSMenuItem.separator())

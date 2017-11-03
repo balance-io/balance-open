@@ -113,7 +113,7 @@ class EmailIssueController: NSViewController {
             make.height.equalTo(isConnectionIssue ? 20 : 0)
         }
         
-        versionLabel.attributedStringValue = attributedString(name: "Version", value: appVersionString)
+        versionLabel.attributedStringValue = attributedString(name: "Version", value: appVersionAndBuildString)
         versionLabel.alignment = .left
         versionLabel.verticalAlignment = .center
         versionLabel.usesSingleLineMode = true

@@ -16,10 +16,14 @@ var appBuildString: String = {
 }()
 
 var appVersionString: String = {
-    if let info = Bundle.main.infoDictionary, let version = info["CFBundleShortVersionString"] as? String, let build = info["CFBundleVersion"] as? String {
-        return "Balance \(version) (\(build))"
+    if let info = Bundle.main.infoDictionary, let version = info["CFBundleShortVersionString"] as? String {
+        return "Balance v\(version)"
     }
     return "Unknown"
+}()
+
+var appVersionAndBuildString: String = {
+    return "\(appVersionString) (build \(appBuildString))"
 }()
 
 var osVersionString: String = {

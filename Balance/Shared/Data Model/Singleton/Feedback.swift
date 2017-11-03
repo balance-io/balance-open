@@ -23,7 +23,7 @@ struct Feedback {
     static func email(apiInstitution: ApiInstitution?, errorType: String? = nil, errorCode: String? = nil, email: String, comment: String, completion: @escaping SuccessErrorHandler) {
         do {
             var dict: [String: Any] = ["email": email,
-                                       "balanceBuild": appVersionString,
+                                       "balanceBuild": appVersionAndBuildString,
                                        "macOSBuild": osVersionString,
                                        "hardwareVersion": hardwareModelString,
                                        "comment": comment]

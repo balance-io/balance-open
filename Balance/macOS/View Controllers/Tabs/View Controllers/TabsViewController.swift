@@ -185,7 +185,10 @@ class TabsViewController: NSViewController {
     
     @objc func showSettingsMenu(_ sender: NSButton) {
         let menu = NSMenu()
-        menu.autoenablesItems = false
+        let versionItem = NSMenuItem(title: appVersionString, action: nil, keyEquivalent: "")
+        versionItem.isEnabled = false
+        menu.addItem(versionItem)
+        menu.addItem(NSMenuItem.separator())
         menu.addItem(withTitle: "Add an Account          ", action: #selector(showAddAccount), keyEquivalent: "")
         menu.items.first?.isEnabled = networkStatus.isReachable
         menu.addItem(withTitle: "Preferences...", action: #selector(showPreferences), keyEquivalent: ",")
