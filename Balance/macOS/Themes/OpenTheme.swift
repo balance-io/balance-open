@@ -14,7 +14,7 @@ struct OpenTheme: Theme {
     
     var defaults: DefaultsTheme {
         let appearance = NSAppearance(named: NSAppearance.Name.vibrantDark) ?? NSAppearance.current!
-        let backgroundColor = NSColor(hexString: "#ecedef")!
+        let backgroundColor = NSColor(hexString: "#EDEEF0")!
         let foregroundColor = NSColor.black
         let material = NSVisualEffectView.Material.dark
         let size = CGSize(width: 400, height: 600)
@@ -182,7 +182,7 @@ struct OpenTheme: Theme {
         let headerCell = TransactionsTheme.HeaderCellTheme(
             height: 40.0,
             dateFont: NSFont.mediumSystemFont(ofSize: 11),
-            dateColor: NSColor(deviceRedInt: 60, green: 68, blue: 79),
+            dateColor: NSColor(hexString: "#3C444F")!,
             dateAlpha: 0.40
         )
         
