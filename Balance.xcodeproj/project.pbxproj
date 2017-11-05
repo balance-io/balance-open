@@ -265,6 +265,7 @@
 		53D441FC1F44D813006967E1 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D441FA1F44D813006967E1 /* CategoryRepository.swift */; };
 		53DC85B11E678223007C72EB /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DC85B01E678223007C72EB /* FileManager.swift */; };
 		53DE21061CD125F800C6628E /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DE21051CD125F800C6628E /* AddAccountViewController.swift */; };
+		53DE2E9A1FAF16B000AC9FCF /* KrakenTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7340F31FA9FC6F00020A3F /* KrakenTransaction.swift */; };
 		53E74A571DD53CCB00AD8876 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E74A561DD53CCB00AD8876 /* TimeInterval.swift */; };
 		53E7BC181D1805F600FD8613 /* Singletons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E7BC171D1805F600FD8613 /* Singletons.swift */; };
 		53E83CA71E40309800185975 /* SearchFilterButtonsDark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E83CA51E40309800185975 /* SearchFilterButtonsDark.swift */; };
@@ -2407,6 +2408,7 @@
 				53552A351ED72B5B00DD95F9 /* OrderedDictionary.swift in Sources */,
 				537187E31F4CC23B00E7F9D6 /* GDAXServer.swift in Sources */,
 				532121A81EE8B91600F4812A /* ZipUtilities.swift in Sources */,
+				53DE2E9A1FAF16B000AC9FCF /* KrakenTransaction.swift in Sources */,
 				A4ED56DE1F86378200E4CC42 /* InstitutionTableHeaderView.swift in Sources */,
 				5301A77E1F17FDED00668099 /* Feedback.swift in Sources */,
 				53561EAA1F82DD260043D4F9 /* RootViewController.swift in Sources */,
