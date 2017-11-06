@@ -705,7 +705,7 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
             hoverPreloadWorkItem = DispatchWorkItem {
                 hoveredCell.loadBottomContainer()
             }
-            DispatchQueue.main.async(after: 0.2, execute: hoverPreloadWorkItem!)
+            async(after: 0.2, execute: hoverPreloadWorkItem!)
         }
         
         // If we are no longer hovering over a cell when it has a location and is not already opened, unload the map to save memory

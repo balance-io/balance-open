@@ -96,13 +96,13 @@ class EthplorerApi: ExchangeApi {
                     log.error("Ethplore Error: \(String(describing: error))")
                     log.error("Ethplore Data: \(String(describing: data))")
                 }
-                DispatchQueue.main.async {
+                async {
                     completion(false, error)
                 }
             }
             catch {
                 log.error("Failed to Ethplore wallet data: \(error)")
-                DispatchQueue.main.async {
+                async {
                     completion(false, error)
                 }
             }
@@ -154,7 +154,7 @@ class EthplorerApi: ExchangeApi {
             }
             catch {
                 log.error("Failed to Ethplore wallet data: \(error)")
-                DispatchQueue.main.async {
+                async {
                     closeBlock(false, error, nil)
                 }
             }

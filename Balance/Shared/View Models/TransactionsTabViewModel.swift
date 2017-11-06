@@ -39,7 +39,7 @@ class TransactionsTabViewModel: TabViewModel {
         } else {
             DispatchQueue.userInteractive.async {
                 let allTransactions = TransactionRepository.si.transactionsByDate()
-                DispatchQueue.main.async {
+                async {
                     // Check again to see if we're searching just in case they just started
                     if self.searching {
                         self.reloadAfterSearch = true

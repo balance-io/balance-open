@@ -43,7 +43,7 @@ func callback(reachability:SCNetworkReachability, flags: SCNetworkReachabilityFl
     
     let reachability = Unmanaged<Reachability>.fromOpaque(info).takeUnretainedValue()
 
-    DispatchQueue.main.async { 
+    async { 
         reachability.reachabilityChanged()
     }
 }
