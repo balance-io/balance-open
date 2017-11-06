@@ -264,7 +264,7 @@ extension BitfinexAPIClient: ExchangeApi {
                                 let availableBalance = currentBalance
                                 
                                 // Initialize an Account object to insert the record
-                                AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: wallet.currencyCode, sourceInstitutionId: institution.sourceInstitutionId, accountTypeId: .exchange, accountSubTypeId: nil, name: wallet.currencyCode, currency: wallet.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
+                                AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: wallet.currencyCode, sourceInstitutionId: institution.sourceInstitutionId, accountTypeId: .exchange, accountSubTypeId: nil, name: Currency.rawValue(wallet.currencyCode).name, currency: wallet.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
                             }
                             async {
                                 closeBlock(true, error, institution)
