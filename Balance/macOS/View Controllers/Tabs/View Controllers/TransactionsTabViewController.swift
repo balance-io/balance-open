@@ -468,14 +468,10 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
             performSearch(searchString)
             self.view.window?.makeFirstResponder(self)
         }
-        
-        if #available(OSX 10.12.2, *) {
-            touchBarUpdateAllPopoverItems()
-        }
     }
     
     func updateSearchFilters() {
-        var tokens = searchField.stringValue.length == 0 ? [SearchToken: String]() : viewModel.searchTokens
+        var tokens = searchField.stringValue.count == 0 ? [SearchToken: String]() : viewModel.searchTokens
         
         let accountValue = tokens[.accountMatches] ?? ""
         let accountIndex = accountsDropdown.items.index(of: accountValue) ?? 0
@@ -538,11 +534,8 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
     
     override func controlTextDidChange(_ obj: Notification) {
         searchField.attributedStringValue = Search.styleSearchString(searchField.stringValue)
-        if searchField.attributedStringValue.string.length == 0 {
+        if searchField.attributedStringValue.string.count == 0 {
             updateSearchFilters()
-            if #available(OSX 10.12.2, *) {
-                touchBarUpdateAllPopoverItems()
-            }
         } else {
             showSearchFilters()
         }
@@ -577,18 +570,10 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
             hideSearchFilters()
             if lastSearchTokens.count > 0 {
                 updateSearchFilters()
-                
-                if #available(OSX 10.12.2, *) {
-                    touchBarUpdateAllPopoverItems()
-                }
             }
         } else {
             if lastSearchTokens != viewModel.searchTokens {
                 updateSearchFilters()
-                
-                if #available(OSX 10.12.2, *) {
-                    touchBarUpdateAllPopoverItems()
-                }
             }
         }
         
@@ -670,7 +655,7 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
             searchShortcutMonitor = NSEvent.addLocalMonitorForEvents(matching: NSEvent.EventTypeMask.keyDown) { event -> NSEvent? in
                 if event.window == self.view.window {
                     if let characters = event.charactersIgnoringModifiers {
-                        if event.modifierFlags.contains(NSEvent.ModifierFlags.command) && characters.length == 1 {
+                        if event.modifierFlags.contains(NSEvent.ModifierFlags.command) && characters.count == 1 {
                             if characters == "f" {
                                 self.view.window?.makeFirstResponder(self.searchField)
                                 return nil
@@ -717,53 +702,6 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
     func tableView(_ tableView: SectionedTableView, clickedRow row: Int, inSection section: Int) {
         // Click to expand not yet supported
         return
-        
-        if isShowingSearchFilters && !viewModel.searching {
-            hideSearchFilters()
-            return
-        }
-        
-        let selectedIndex = tableView.selectedIndex
-        let cell = tableView.viewAtIndex(selectedIndex, makeIfNecessary: false) as? TransactionsTabTransactionCell
-        
-        if previousSelectedIndex == selectedIndex {
-            cell?.hideBottomContainer()
-            tableView.deselectIndex(selectedIndex)
-            tableView.noteHeightOfIndex(selectedIndex)
-            previousSelectedIndex = TableIndex.none
-        } else {
-            var previousCell: TransactionsTabTransactionCell?
-            var indexes = [selectedIndex]
-            if previousSelectedIndex.section >= 0 {
-                previousCell = tableView.viewAtIndex(previousSelectedIndex, makeIfNecessary: false) as? TransactionsTabTransactionCell
-                indexes.append(previousSelectedIndex)
-            }
-            previousSelectedIndex = selectedIndex
-            
-            previousCell?.hideBottomContainer(notify: false)
-            
-            // Dispatch async so that it runs in the next run loop, otherwise the showBottomContainer() call will animate
-            async(after: 0.1) {
-                cell?.showBottomContainer()
-                tableView.noteHeightOfIndexes(indexes)
-                
-                
-                let visibleIndexes = self.tableView.visibleIndexes
-                let count = visibleIndexes.count
-                if count > 0 {
-                    let contains = visibleIndexes.contains { index -> Bool in
-                        return index == selectedIndex
-                    }
-                    
-                    if !contains || selectedIndex == visibleIndexes[0] || selectedIndex == visibleIndexes[count - 1] {
-                        NSAnimationContext.runAnimationGroup({ context in
-                            context.allowsImplicitAnimation = true
-                            self.tableView.scrollIndexToVisible(selectedIndex)
-                        }, completionHandler: nil)
-                    }
-                }
-            }
-        }
     }
     
     func numberOfSectionsInTableView(_ tableView: SectionedTableView) -> Int {

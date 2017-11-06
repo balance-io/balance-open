@@ -147,7 +147,7 @@ public class Zip {
             fileName[Int(fileInfo.size_filename)] = 0
             var pathString = String(cString: fileName)
             
-            guard pathString.characters.count > 0 else {
+            guard pathString.count > 0 else {
                 throw ZipError.unzipFail
             }
 

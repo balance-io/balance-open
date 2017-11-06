@@ -170,7 +170,7 @@ struct TransactionRepository: ItemRepository {
         
         database.read.inDatabase { db in
             do {
-                var statement = "SELECT transactions.*, accounts.sourceInstitutionId, accounts.institutionId " +
+                let statement = "SELECT transactions.*, accounts.sourceInstitutionId, accounts.institutionId " +
                                 "FROM transactions LEFT JOIN accounts ON transactions.accountId = accounts.accountId " +
                                 "WHERE accounts.institutionId = ? " +
                                 "ORDER BY transactions.date DESC"

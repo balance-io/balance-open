@@ -416,7 +416,7 @@ class AddAccountViewController: NSViewController {
         if shortcutMonitor == nil {
             shortcutMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event -> NSEvent? in
                 if let characters = event.charactersIgnoringModifiers {
-                    if event.modifierFlags.contains(.command) && characters.length == 1 {
+                    if event.modifierFlags.contains(.command) && characters.count == 1 {
                         if characters == "," {
                             // Return nil to eat the event
                             return nil

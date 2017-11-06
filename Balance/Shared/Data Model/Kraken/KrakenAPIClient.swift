@@ -277,7 +277,7 @@ extension KrakenAPIClient: ExchangeApi {
                         do {
                             //refer to Parse Accounts comments
                             var currencyCode = currency
-                            if currency.length == 4 && (currency.hasPrefix("Z") || currency.hasPrefix("X")) {
+                            if currency.count == 4 && (currency.hasPrefix("Z") || currency.hasPrefix("X")) {
                                 currencyCode = currency.substring(from: 1)
                             }
                             
@@ -402,7 +402,7 @@ internal extension Dictionary where Key: StringProtocol, Value: StringProtocol
 extension KrakenAPIClient {
     func transformKrakenCurrencyToCurrencyCode(currency: String) -> String {
         var currencyCode = currency
-        if currency.length == 4 && (currency.hasPrefix("Z") || currency.hasPrefix("X")) {
+        if currency.count == 4 && (currency.hasPrefix("Z") || currency.hasPrefix("X")) {
             currencyCode = currency.substring(from: 1)
         }
         return currencyCode

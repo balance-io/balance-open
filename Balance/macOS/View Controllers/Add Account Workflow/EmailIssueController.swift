@@ -283,7 +283,7 @@ extension EmailIssueController: NSTextFieldDelegate {
         if isConnectionIssue {
             submitButton.isEnabled = isEmailValid
         } else {
-            submitButton.isEnabled = isEmailValid && notesField.stringValue.length > 0
+            submitButton.isEnabled = isEmailValid && notesField.stringValue.count > 0
         }
     }
     

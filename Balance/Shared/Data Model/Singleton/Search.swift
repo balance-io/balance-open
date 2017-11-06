@@ -71,7 +71,7 @@ class Search {
         
         if let regex = regex {
             // Search the whole string
-            let range = NSRange(location: 0, length: searchString.length)
+            let range = NSRange(location: 0, length: searchString.count)
             
             // Find the matched ranges.
             // Notes: Each match should return 4 ranges, one of which is NSNotFound for some reason. The first range
@@ -99,8 +99,8 @@ class Search {
                         
                         var valueString = (searchString as NSString).substring(with: valueRange)
                         if hasTokenPrefix(string: searchString) {
-                            if valueString.length > 1 {
-                                let range = NSMakeRange(1, valueString.length - 2)
+                            if valueString.count > 1 {
+                                let range = NSMakeRange(1, valueString.count - 2)
                                 valueString = (valueString as NSString).substring(with: range)
                             }
                         }
@@ -440,7 +440,7 @@ class Search {
         let attributed = NSMutableAttributedString(string: searchString)
         let initialAttributes = [NSAttributedStringKey.foregroundColor: textColor,
                                  NSAttributedStringKey.font: font]
-        attributed.addAttributes(initialAttributes, range: NSRange(location: 0, length: searchString.length))
+        attributed.addAttributes(initialAttributes, range: NSRange(location: 0, length: searchString.count))
         
         if let tokens = Search.tokenizeSearch(searchString, includeEmpty: true) {
             for token in tokens {
@@ -513,7 +513,7 @@ class Search {
                     }
                     
                     // Add spacing at the end
-                    if searchString.length > totalRange.location + totalRange.length {
+                    if searchString.count > totalRange.location + totalRange.length {
                         let endSpacingAttributes = [NSAttributedStringKey.kern: 6.0]
                         var endRange = totalRange
                         endRange.location += endRange.length

@@ -149,7 +149,7 @@ func centsToStringFormatted(_ cents: Int, showNegative: Bool = false, showCents:
     
     let preparedString = NSMutableAttributedString(string: minusRemoved, attributes: [NSAttributedStringKey.paragraphStyle: rightParagraphStyle])
     
-    let count = preparedString.string.length
+    let count = preparedString.string.count
     let firstCharacters = NSRange(location: 0, length: showCents ? count - 3 : count)
     let lastTwoCharacters = NSRange(location: count - 3, length: 3)
     
@@ -223,7 +223,7 @@ func amountToStringFormatted(amount: Int, currency: Currency, showNegative: Bool
     let amountString = amountToString(amount: amount, currency: currency, showNegative: showNegative)
     let preparedString = NSMutableAttributedString(string: amountString, attributes: [NSAttributedStringKey.paragraphStyle: rightParagraphStyle])
     
-    let count = preparedString.string.length
+    let count = preparedString.string.count
     let decimalCharsCount = count - currency.decimals - 1
     let showDecimal = currency.decimals > 0
     let firstCharacters = NSRange(location: 0, length: showDecimal ? decimalCharsCount : count)

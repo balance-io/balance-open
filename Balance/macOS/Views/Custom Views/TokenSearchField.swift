@@ -177,7 +177,7 @@ class TokenSearchField: View, TextFieldDelegate {
     }
     
     fileprivate func updatePlaceholder() {
-        if let placeholderString = textField.placeholderString, placeholderString.length > 0 {
+        if let placeholderString = textField.placeholderString, placeholderString.count > 0 {
             let placeholderAttributes: [NSAttributedStringKey : Any] = [NSAttributedStringKey.foregroundColor: placeHolderStringColor,
                                                                         NSAttributedStringKey.font: CurrentTheme.defaults.searchField.font]
             textField.placeholderAttributedString = NSAttributedString(string: placeholderString, attributes: placeholderAttributes)
