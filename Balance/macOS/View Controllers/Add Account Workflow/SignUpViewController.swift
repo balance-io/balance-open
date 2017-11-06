@@ -711,11 +711,11 @@ class SignUpViewController: NSViewController {
             work()
             
             if let updateConnectLabelWorkItem = self.updateConnectLabelWorkItem {
-                DispatchQueue.main.async(after: 5.0, execute: updateConnectLabelWorkItem)
+                async(after: 5.0, execute: updateConnectLabelWorkItem)
             }
         }
         
-        DispatchQueue.main.async(after: 5.0, execute: updateConnectLabelWorkItem!)
+        async(after: 5.0, execute: updateConnectLabelWorkItem!)
     }
     
     fileprivate func stopAutoUpdatingConnectLabel() {

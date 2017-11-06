@@ -189,7 +189,7 @@ class AppLock {
             let waitUntilTime = Date().addingTimeInterval(5.0)
             while waitUntilTime.timeIntervalSince(waitUntilTime) > 0 {
                 if InstitutionRepository.si.institutionsCount == 0 {
-                    DispatchQueue.main.async {
+                    async {
                         self.lockEnabled = false
                         AppDelegate.sharedInstance.relaunch()
                     }
@@ -197,7 +197,7 @@ class AppLock {
                 }
                 usleep(100000)
             }
-            DispatchQueue.main.async {
+            async {
                 let alert = NSAlert()
                 alert.addButton(withTitle: "OK")
                 alert.messageText = "Unable to remove all accounts"

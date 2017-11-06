@@ -117,13 +117,13 @@ class PoloniexApi: ExchangeApi {
                     log.error("Poloniex Error: \(String(describing: error))")
                     log.error("Poloniex Data: \(String(describing: data))")
                 }
-                DispatchQueue.main.async {
+                async {
                     completion(false, error)
                 }
             }
             catch {
                 log.error("Failed to Poloniex balance data: \(error)")
-                DispatchQueue.main.async {
+                async {
                     completion(false, error)
                 }
             }
@@ -412,21 +412,21 @@ internal extension PoloniexApi {
                     let poloniexTransactions = try self.parsePoloniexTransactions(data: safeData)
                     self.processPoloniexTransactions(transactions: poloniexTransactions, institution: institution)
                     
-                    DispatchQueue.main.async {
+                    async {
                         completion(true, error)
                     }
                 } else {
                     log.error("Poloniex Error: \(String(describing: error))")
                     log.error("Poloniex Data: \(String(describing: data))")
                     
-                    DispatchQueue.main.async {
+                    async {
                         completion(false, error)
                     }
                 }
             }
             catch {
                 log.error("Failed to Poloniex balance data: \(error)")
-                DispatchQueue.main.async {
+                async {
                     completion(false, error)
                 }
             }
