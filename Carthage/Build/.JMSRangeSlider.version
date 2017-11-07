@@ -1,12 +1,12 @@
 {
-  "iOS" : [
-
-  ],
   "commitish" : "921acf66351227f7b28b58537b2470e9e8bc58f2",
   "Mac" : [
     {
-      "hash" : "f8510d0862c54d4bcd2b06d48063e315d32f30af2e2a50c2b9d192455e4daa59",
-      "name" : "JMSRangeSlider"
+      "name" : "JMSRangeSlider",
+      "hash" : "89cba18ec49cbef0acb324a1e2efffc4c41be2da56ff0dabc84b05beccf5c164"
     }
+  ],
+  "iOS" : [
+
   ]
 }
