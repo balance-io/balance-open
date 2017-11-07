@@ -31,9 +31,7 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
     }
     
     // Internal
-    internal var expandedContentHeight: CGFloat {
-        return self.tableView.contentSize.height
-    }
+    internal private(set) var expandedContentHeight: CGFloat = 0.0
     
     internal var closedContentHeight: CGFloat {
         return 120.0
@@ -86,6 +84,12 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
     private func reloadData() {
         self.container.backgroundColor = self.viewModel?.institution.source.color
         self.tableView.reloadData()
+        
+        guard let unwrappedViewModel = self.viewModel else {
+            return
+        }
+        
+        self.expandedContentHeight = CGFloat(unwrappedViewModel.numberOfAccounts) * AccountTableViewCell.height + InstitutionTableHeaderView.height
     }
 }
 
