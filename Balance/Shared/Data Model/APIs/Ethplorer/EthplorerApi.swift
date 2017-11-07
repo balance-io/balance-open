@@ -96,13 +96,13 @@ class EthplorerApi: ExchangeApi {
                     log.error("Ethplore Error: \(String(describing: error))")
                     log.error("Ethplore Data: \(String(describing: data))")
                 }
-                DispatchQueue.main.async {
+                async {
                     completion(false, error)
                 }
             }
             catch {
                 log.error("Failed to Ethplore wallet data: \(error)")
-                DispatchQueue.main.async {
+                async {
                     completion(false, error)
                 }
             }
@@ -128,7 +128,7 @@ class EthplorerApi: ExchangeApi {
             do {
                 if let safeData = data {
                     
-                    if let error = self.findError(data: safeData) {
+                    if let _ = self.findError(data: safeData) {
                         throw EthplorerApi.CredentialsError.incorrectLoginCredentials
                     }
                     
@@ -154,7 +154,7 @@ class EthplorerApi: ExchangeApi {
             }
             catch {
                 log.error("Failed to Ethplore wallet data: \(error)")
-                DispatchQueue.main.async {
+                async {
                     closeBlock(false, error, nil)
                 }
             }

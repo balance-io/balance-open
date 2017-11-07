@@ -57,7 +57,7 @@ struct CoinbaseApi: ExchangeApi {
     
     static func handleAuthenticationCallback(state: String, code: String, completion: @escaping SuccessErrorBlock) {
         guard lastState == state else {
-            DispatchQueue.main.async {
+            async {
                 completion(false, "state does not match saved state")
             }
             return
@@ -82,7 +82,7 @@ struct CoinbaseApi: ExchangeApi {
                 }
                 
                 // Try to parse the JSON
-                guard let JSONResult = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.length > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.length > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval, let scope = JSONResult["scope"] as? String else {
+                guard let JSONResult = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.count > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.count > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval, let scope = JSONResult["scope"] as? String else {
                     throw BalanceError.jsonDecoding
                 }
                 
@@ -100,17 +100,17 @@ struct CoinbaseApi: ExchangeApi {
                             log.error("Error updating accounts: \(String(describing: error))")
                         }
                         
-                        DispatchQueue.main.async {
+                        async {
                             completion(true, nil)
                         }
                     }
                 } else {
-                    DispatchQueue.main.async {
+                    async {
                         completion(false, "Couldn't create institution so couldn't sync accounts")
                     }
                 }
             } catch {
-                DispatchQueue.main.async {
+                async {
                     completion(false, error)
                 }
             }
@@ -143,7 +143,7 @@ struct CoinbaseApi: ExchangeApi {
                 }
                 
                 // Try to parse the JSON
-                guard let JSONResult = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.length > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.length > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval else {
+                guard let JSONResult = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.count > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.count > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval else {
                     throw BalanceError.jsonDecoding
                 }
                 
@@ -151,11 +151,11 @@ struct CoinbaseApi: ExchangeApi {
                 institution.accessToken = accessToken
                 institution.refreshToken = refreshToken
                 institution.tokenExpireDate = Date().addingTimeInterval(expiresIn - 10.0)
-                DispatchQueue.main.async {
+                async {
                     completion(true, nil)
                 }
             } catch {
-                DispatchQueue.main.async {
+                async {
                     completion(false, maybeError)
                 }
             }
@@ -235,11 +235,11 @@ struct CoinbaseApi: ExchangeApi {
                 // Create native Account objects and update them
                 self.processCoinbaseAccounts(coinbaseAccounts, institution: institution)
                 
-                DispatchQueue.main.async {
+                async {
                     completion(true, nil)
                 }
             } catch {
-                DispatchQueue.main.async {
+                async {
                     completion(false, error)
                 }
             }
@@ -401,11 +401,11 @@ internal extension CoinbaseApi {
                     }
                 }
                 
-                DispatchQueue.main.async {
+                async {
                     completionHandler(transactions, nil)
                 }
             } catch {
-                DispatchQueue.main.async {
+                async {
                     completionHandler(nil, error)
                 }
             }

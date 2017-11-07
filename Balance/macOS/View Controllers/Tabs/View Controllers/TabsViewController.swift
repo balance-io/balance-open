@@ -360,7 +360,7 @@ class TabsViewController: NSViewController {
                 // shortcut will take over even though I disabled it in the mainMenu.xib :/
                 if appLock.locked {
                     if let characters = event.charactersIgnoringModifiers {
-                        if event.modifierFlags.contains(NSEvent.ModifierFlags.command) && characters.length == 1 {
+                        if event.modifierFlags.contains(NSEvent.ModifierFlags.command) && characters.count == 1 {
                             if characters == "," {
                                 // Return nil to eat the event
                                 return nil
@@ -374,7 +374,7 @@ class TabsViewController: NSViewController {
                 
                 if !appLock.locked && event.window == self.view.window {
                     if let characters = event.charactersIgnoringModifiers {
-                        if event.modifierFlags.contains(NSEvent.ModifierFlags.command) && characters.length == 1 {
+                        if event.modifierFlags.contains(NSEvent.ModifierFlags.command) && characters.count == 1 {
                             if let intValue = Int(characters), intValue > 0 && intValue <= self.tabButtons.count {
                                 // Select tab
                                 let tabIndex = intValue - 1

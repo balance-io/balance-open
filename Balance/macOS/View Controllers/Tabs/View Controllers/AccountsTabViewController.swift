@@ -550,49 +550,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     func tableView(_ tableView: SectionedTableView, clickedRow row: Int, inSection section: Int) {
         // Click to view transactions not implemented yet until we re-implement searching/filtering
         return
-        
-        let selectedIndex = tableView.selectedIndex
-        if selectedIndex.section >= 0 {
-            let cell = tableView.viewAtIndex(selectedIndex, makeIfNecessary: false) as? AccountsTabAccountCell
-            
-            if previousSelectedIndex == selectedIndex {
-                cell?.hideBottomContainer()
-                tableView.deselectIndex(selectedIndex)
-                tableView.noteHeightOfIndex(selectedIndex)
-                previousSelectedIndex = TableIndex.none
-            } else {
-                var previousCell: AccountsTabAccountCell?
-                var indexes = [selectedIndex]
-                if previousSelectedIndex != TableIndex.none {
-                    previousCell = tableView.viewAtIndex(previousSelectedIndex, makeIfNecessary: false) as? AccountsTabAccountCell
-                    indexes.append(previousSelectedIndex)
-                }
-                previousSelectedIndex = selectedIndex
-                
-                previousCell?.hideBottomContainer(notify: false)
-                
-                // Dispatch async so that it runs in the next run loop, otherwise the showBottomContainer() call won't animate
-                async(after: 0.1) {
-                    cell?.showBottomContainer()
-                    tableView.noteHeightOfIndexes(indexes)
-                    
-                    let visibleIndexes = tableView.visibleIndexes
-                    let count = visibleIndexes.count
-                    if count > 0 {
-                        let contains = visibleIndexes.contains { index -> Bool in
-                            return index == selectedIndex
-                        }
-                        
-                        if !contains || selectedIndex == visibleIndexes[0] || selectedIndex == visibleIndexes[count - 1] {
-                            NSAnimationContext.runAnimationGroup({ context in
-                                context.allowsImplicitAnimation = true
-                                self.tableView.scrollIndexToVisible(selectedIndex)
-                            }, completionHandler: nil)
-                        }
-                    }
-                }
-            }
-        }
     }
     
     func numberOfSectionsInTableView(_ tableView: SectionedTableView) -> Int {

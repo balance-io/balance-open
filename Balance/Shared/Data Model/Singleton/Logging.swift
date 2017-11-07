@@ -35,7 +35,7 @@ class Logging {
     func logContents() -> String {
         do {
             let logContents = try String(contentsOfFile: logFilePath, encoding: String.Encoding.utf8)
-            if logContents.length > 0 {
+            if logContents.count > 0 {
                 return logContents
             } else {
                 return "Log file is empty"

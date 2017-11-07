@@ -1,0 +1,648 @@
+BCSymbolMap Version: 2.0
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/TSKTrustKitConfig.gcno
+Apple LLVM version 9.0.0 (clang-900.0.38)
+TrustKit/TSKTrustKitConfig.m
+/Users/reddavis/Documents/Projects/balance-open/Carthage/Checkouts/TrustKit
+_kStringTable
+_kLeafNodeTable
+_kNodeTable
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/init_registry_tables.gcno
+TrustKit/Dependencies/domain_registry/private/init_registry_tables.c
+InitializeDomainRegistry
+/Users/reddavis/Documents/Projects/balance-open/Carthage/Checkouts/TrustKit/TrustKit/Dependencies/domain_registry/private/init_registry_tables.c
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/ssl_pin_verifier.gcno
+TrustKit/Pinning/ssl_pin_verifier.m
+verifyPublicKeyPin
+/Users/reddavis/Documents/Projects/balance-open/Carthage/Checkouts/TrustKit/TrustKit/Pinning/ssl_pin_verifier.m
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/vendor_identifier.gcno
+TrustKit/Reporting/vendor_identifier.m
+identifier_for_vendor
+/Users/reddavis/Documents/Projects/balance-open/Carthage/Checkouts/TrustKit/TrustKit/Reporting/vendor_identifier.m
+-[TSKSPKIHashCache initWithIdentifier:]
+___39-[TSKSPKIHashCache initWithIdentifier:]_block_invoke
+___copy_helper_block_
+___destroy_helper_block_
+-[TSKSPKIHashCache hashSubjectPublicKeyInfoFromCertificate:publicKeyAlgorithm:]
+___Block_byref_object_copy_
+___Block_byref_object_dispose_
+___79-[TSKSPKIHashCache hashSubjectPublicKeyInfoFromCertificate:publicKeyAlgorithm:]_block_invoke
+___copy_helper_block_.25
+___destroy_helper_block_.26
+___79-[TSKSPKIHashCache hashSubjectPublicKeyInfoFromCertificate:publicKeyAlgorithm:]_block_invoke.43
+___copy_helper_block_.44
+___destroy_helper_block_.45
+-[TSKSPKIHashCache loadSPKICacheFromFileSystem]
+-[TSKSPKIHashCache getPublicKeyDataFromCertificate:]
+-[TSKSPKIHashCache SPKICachePath]
+-[TSKSPKIHashCache keychainQueue]
+-[TSKSPKIHashCache setKeychainQueue:]
+-[TSKSPKIHashCache subjectPublicKeyInfoHashesCache]
+-[TSKSPKIHashCache setSubjectPublicKeyInfoHashesCache:]
+-[TSKSPKIHashCache lockQueue]
+-[TSKSPKIHashCache setLockQueue:]
+-[TSKSPKIHashCache spkiCacheFilename]
+-[TSKSPKIHashCache setSpkiCacheFilename:]
+-[TSKSPKIHashCache .cxx_destruct]
+-[TSKSPKIHashCache(Unified) getPublicKeyDataFromCertificate_unified:]
+-[TSKSPKIHashCache(LegacyIOS) getPublicKeyDataFromCertificate_legacy_ios:]
+___74-[TSKSPKIHashCache(LegacyIOS) getPublicKeyDataFromCertificate_legacy_ios:]_block_invoke
+___copy_helper_block_.116
+___destroy_helper_block_.117
+-[TSKSPKIHashCache(TestSupport) resetSubjectPublicKeyInfoDiskCache]
+-[TSKSPKIHashCache(TestSupport) getSubjectPublicKeyInfoHashesCache]
+_OBJC_IVAR_$_TSKSPKIHashCache._lockQueue
+_OBJC_IVAR_$_TSKSPKIHashCache._spkiCacheFilename
+_OBJC_IVAR_$_TSKSPKIHashCache._subjectPublicKeyInfoHashesCache
+_OBJC_IVAR_$_TSKSPKIHashCache._keychainQueue
+___block_descriptor_tmp
+___block_descriptor_tmp.27
+_asn1HeaderBytes
+_asn1HeaderSizes
+___block_descriptor_tmp.46
+___block_descriptor_tmp.118
+_rsa2048Asn1Header
+_rsa4096Asn1Header
+_ecDsaSecp256r1Asn1Header
+_ecDsaSecp384r1Asn1Header
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/TSKSPKIHashCache.gcno
+TrustKit/Pinning/TSKSPKIHashCache.m
+/Users/reddavis/Documents/Projects/balance-open/Carthage/Checkouts/TrustKit/TrustKit/Pinning/TSKSPKIHashCache.m
+__destroy_helper_block_
+__copy_helper_block_
+__74-[TSKSPKIHashCache(LegacyIOS) getPublicKeyDataFromCertificate_legacy_ios:]_block_invoke
+__79-[TSKSPKIHashCache hashSubjectPublicKeyInfoFromCertificate:publicKeyAlgorithm:]_block_invoke.43
+__79-[TSKSPKIHashCache hashSubjectPublicKeyInfoFromCertificate:publicKeyAlgorithm:]_block_invoke
+__Block_byref_object_dispose_
+__Block_byref_object_copy_
+__39-[TSKSPKIHashCache initWithIdentifier:]_block_invoke
+-[TSKReportsRateLimiter init]
+-[TSKReportsRateLimiter shouldRateLimitReport:]
+___47-[TSKReportsRateLimiter shouldRateLimitReport:]_block_invoke
+-[TSKReportsRateLimiter setLastReportsCacheResetDate:]
+-[TSKReportsRateLimiter reportsCache]
+-[TSKReportsRateLimiter setReportsCache:]
+-[TSKReportsRateLimiter lastReportsCacheResetDate]
+-[TSKReportsRateLimiter reportsCacheQueue]
+-[TSKReportsRateLimiter setReportsCacheQueue:]
+-[TSKReportsRateLimiter .cxx_destruct]
+_OBJC_IVAR_$_TSKReportsRateLimiter._reportsCache
+_OBJC_IVAR_$_TSKReportsRateLimiter._lastReportsCacheResetDate
+_OBJC_IVAR_$_TSKReportsRateLimiter._reportsCacheQueue
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/TSKReportsRateLimiter.gcno
+TrustKit/Reporting/TSKReportsRateLimiter.m
+/Users/reddavis/Documents/Projects/balance-open/Carthage/Checkouts/TrustKit/TrustKit/Reporting/TSKReportsRateLimiter.m
+__47-[TSKReportsRateLimiter shouldRateLimitReport:]_block_invoke
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/parse_configuration.gcno
+TrustKit/parse_configuration.m
+parseTrustKitConfiguration
+/Users/reddavis/Documents/Projects/balance-open/Carthage/Checkouts/TrustKit/TrustKit/parse_configuration.m
+certificateFromPEM
+_FindNodeInRange
+_StrDupExceptionComponent
+_FindLeafNodeInRange
+_g_string_table
+_g_node_table
+_g_leaf_node_table
+_g_num_root_children
+_g_leaf_node_table_offset
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/trie_search.gcno
+TrustKit/Dependencies/domain_registry/private/trie_search.c
+SetRegistryTables
+/Users/reddavis/Documents/Projects/balance-open/Carthage/Checkouts/TrustKit/TrustKit/Dependencies/domain_registry/private/trie_search.c
+GetHostnamePart
+FindLeafNodeInRange
+HostnamePartCmp
+TrustKit/Dependencies/domain_registry/private/string_util.h
+FindRegistryLeafNode
+IsInvalidComponent
+HasLeafChildren
+StrDupExceptionComponent
+FindNodeInRange
+FindRegistryNode
+-[TSKBackgroundReporter initAndRateLimitReports:]
+-[TSKBackgroundReporter pinValidationFailedForHostname:port:certificateChain:notedHostname:reportURIs:includeSubdomains:enforcePinning:knownPins:validationResult:expirationDate:]
+-[TSKBackgroundReporter URLSession:task:didCompleteWithError:]
+-[TSKBackgroundReporter backgroundSession]
+-[TSKBackgroundReporter setBackgroundSession:]
+-[TSKBackgroundReporter appBundleId]
+-[TSKBackgroundReporter setAppBundleId:]
+-[TSKBackgroundReporter appVersion]
+-[TSKBackgroundReporter setAppVersion:]
+-[TSKBackgroundReporter appVendorId]
+-[TSKBackgroundReporter setAppVendorId:]
+-[TSKBackgroundReporter appPlatform]
+-[TSKBackgroundReporter setAppPlatform:]
+-[TSKBackgroundReporter appPlatformVersion]
+-[TSKBackgroundReporter setAppPlatformVersion:]
+-[TSKBackgroundReporter rateLimiter]
+-[TSKBackgroundReporter setRateLimiter:]
+-[TSKBackgroundReporter shouldRateLimitReports]
+-[TSKBackgroundReporter setShouldRateLimitReports:]
+-[TSKBackgroundReporter .cxx_destruct]
+_OBJC_IVAR_$_TSKBackgroundReporter._shouldRateLimitReports
+_OBJC_IVAR_$_TSKBackgroundReporter._rateLimiter
+_OBJC_IVAR_$_TSKBackgroundReporter._appPlatform
+_OBJC_IVAR_$_TSKBackgroundReporter._appPlatformVersion
+_OBJC_IVAR_$_TSKBackgroundReporter._appVersion
+_OBJC_IVAR_$_TSKBackgroundReporter._appBundleId
+_OBJC_IVAR_$_TSKBackgroundReporter._appVendorId
+_OBJC_IVAR_$_TSKBackgroundReporter._backgroundSession
+l_OBJC_PROTOCOL_$_NSObject
+l_OBJC_LABEL_PROTOCOL_$_NSObject
+l_OBJC_PROTOCOL_$_NSURLSessionDelegate
+l_OBJC_LABEL_PROTOCOL_$_NSURLSessionDelegate
+l_OBJC_PROTOCOL_$_NSURLSessionTaskDelegate
+l_OBJC_LABEL_PROTOCOL_$_NSURLSessionTaskDelegate
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/TSKBackgroundReporter.gcno
+TrustKit/Reporting/TSKBackgroundReporter.m
+/Users/reddavis/Documents/Projects/balance-open/Carthage/Checkouts/TrustKit/TrustKit/Reporting/TSKBackgroundReporter.m
++[TSKNSURLSessionDelegateProxy swizzleNSURLSessionConstructors:]
+___64+[TSKNSURLSessionDelegateProxy swizzleNSURLSessionConstructors:]_block_invoke
+___64+[TSKNSURLSessionDelegateProxy swizzleNSURLSessionConstructors:]_block_invoke_2
+___copy_helper_block_.15
+___destroy_helper_block_.16
+-[TSKNSURLSessionDelegateProxy initWithTrustKit:sessionDelegate:]
+-[TSKNSURLSessionDelegateProxy respondsToSelector:]
+-[TSKNSURLSessionDelegateProxy forwardingTargetForSelector:]
+-[TSKNSURLSessionDelegateProxy common_URLSession:challenge:completionHandler:]
+-[TSKNSURLSessionDelegateProxy URLSession:didReceiveChallenge:completionHandler:]
+-[TSKNSURLSessionDelegateProxy URLSession:task:didReceiveChallenge:completionHandler:]
+-[TSKNSURLSessionDelegateProxy originalDelegate]
+-[TSKNSURLSessionDelegateProxy setOriginalDelegate:]
+-[TSKNSURLSessionDelegateProxy trustKit]
+-[TSKNSURLSessionDelegateProxy setTrustKit:]
+-[TSKNSURLSessionDelegateProxy .cxx_destruct]
+___block_descriptor_tmp.18
+_OBJC_IVAR_$_TSKNSURLSessionDelegateProxy._originalDelegate
+_OBJC_IVAR_$_TSKNSURLSessionDelegateProxy._trustKit
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/TSKNSURLSessionDelegateProxy.gcno
+TrustKit/Swizzling/TSKNSURLSessionDelegateProxy.m
+/Users/reddavis/Documents/Projects/balance-open/Carthage/Checkouts/TrustKit/TrustKit/Swizzling/TSKNSURLSessionDelegateProxy.m
+__64+[TSKNSURLSessionDelegateProxy swizzleNSURLSessionConstructors:]_block_invoke_2
+__64+[TSKNSURLSessionDelegateProxy swizzleNSURLSessionConstructors:]_block_invoke
+_IsValidHostname
+_StrDup
+_GetRegistryLengthImpl
+_GetNextHostnamePart
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/registry_search.gcno
+TrustKit/Dependencies/domain_registry/private/registry_search.c
+GetNextHostnamePart
+/Users/reddavis/Documents/Projects/balance-open/Carthage/Checkouts/TrustKit/TrustKit/Dependencies/domain_registry/private/registry_search.c
+GetNextHostnamePartImpl
+GetRegistryLengthAllowUnknownRegistries
+ToLowerASCII
+ReplaceChar
+GetRegistryLengthImpl
+GetRegistryForHostname
+GetDomainRegistryStr
+IsExceptionComponent
+StrDup
+IsValidHostname
+IsStringASCII
+StrnLen
+GetRegistryLength
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/configuration_utils.gcno
+TrustKit/configuration_utils.m
+getPinningConfigurationKeyForDomain
+/Users/reddavis/Documents/Projects/balance-open/Carthage/Checkouts/TrustKit/TrustKit/configuration_utils.m
+isSubdomain
+_DefaultAssertHandler
+_g_assert_hander
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/assert.gcno
+TrustKit/Dependencies/domain_registry/private/assert.c
+DefaultAssertHandler
+/Users/reddavis/Documents/Projects/balance-open/Carthage/Checkouts/TrustKit/TrustKit/Dependencies/domain_registry/private/assert.c
+SetDomainRegistryAssertHandler
+DoAssert
+-[TSKPinFailureReport initWithAppBundleId:appVersion:appPlatform:appPlatformVersion:appVendorId:trustkitVersion:hostname:port:dateTime:notedHostname:includeSubdomains:enforcePinning:validatedCertificateChain:knownPins:validationResult:expirationDate:]
+-[TSKPinFailureReport json]
+___27-[TSKPinFailureReport json]_block_invoke
+-[TSKPinFailureReport requestToUri:]
+-[TSKPinFailureReport appBundleId]
+-[TSKPinFailureReport appVersion]
+-[TSKPinFailureReport appPlatform]
+-[TSKPinFailureReport appPlatformVersion]
+-[TSKPinFailureReport appVendorId]
+-[TSKPinFailureReport trustkitVersion]
+-[TSKPinFailureReport notedHostname]
+-[TSKPinFailureReport hostname]
+-[TSKPinFailureReport port]
+-[TSKPinFailureReport dateTime]
+-[TSKPinFailureReport includeSubdomains]
+-[TSKPinFailureReport validatedCertificateChain]
+-[TSKPinFailureReport knownPins]
+-[TSKPinFailureReport validationResult]
+-[TSKPinFailureReport enforcePinning]
+-[TSKPinFailureReport knownPinsExpirationDate]
+-[TSKPinFailureReport .cxx_destruct]
+_OBJC_IVAR_$_TSKPinFailureReport._appBundleId
+_OBJC_IVAR_$_TSKPinFailureReport._appVersion
+_OBJC_IVAR_$_TSKPinFailureReport._appPlatform
+_OBJC_IVAR_$_TSKPinFailureReport._appVendorId
+_OBJC_IVAR_$_TSKPinFailureReport._trustkitVersion
+_OBJC_IVAR_$_TSKPinFailureReport._appPlatformVersion
+_OBJC_IVAR_$_TSKPinFailureReport._hostname
+_OBJC_IVAR_$_TSKPinFailureReport._port
+_OBJC_IVAR_$_TSKPinFailureReport._dateTime
+_OBJC_IVAR_$_TSKPinFailureReport._notedHostname
+_OBJC_IVAR_$_TSKPinFailureReport._includeSubdomains
+_OBJC_IVAR_$_TSKPinFailureReport._enforcePinning
+_OBJC_IVAR_$_TSKPinFailureReport._validatedCertificateChain
+_OBJC_IVAR_$_TSKPinFailureReport._knownPins
+_OBJC_IVAR_$_TSKPinFailureReport._validationResult
+_OBJC_IVAR_$_TSKPinFailureReport._knownPinsExpirationDate
+_json.DateTimeFormatter
+_json.DateFormatter
+_json.onceToken
+___block_literal_global
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/TSKPinFailureReport.gcno
+TrustKit/Reporting/TSKPinFailureReport.m
+/Users/reddavis/Documents/Projects/balance-open/Carthage/Checkouts/TrustKit/TrustKit/Reporting/TSKPinFailureReport.m
+TrustKit/Reporting/TSKPinFailureReport.h
+__27-[TSKPinFailureReport json]_block_invoke
+_dispatch_once
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.1.sdk/usr/include/dispatch/once.h
++[TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors:]
+___70+[TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors:]_block_invoke
+___70+[TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors:]_block_invoke_2
+___70+[TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors:]_block_invoke.23
+___70+[TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors:]_block_invoke_2.24
+___copy_helper_block_.29
+___destroy_helper_block_.30
+___70+[TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors:]_block_invoke.34
+___70+[TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors:]_block_invoke_2.35
+___copy_helper_block_.42
+___destroy_helper_block_.43
+___70+[TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors:]_block_invoke.51
+___70+[TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors:]_block_invoke_2.52
+___copy_helper_block_.55
+___destroy_helper_block_.56
+-[TSKNSURLConnectionDelegateProxy initWithTrustKit:connectionDelegate:]
+-[TSKNSURLConnectionDelegateProxy respondsToSelector:]
+-[TSKNSURLConnectionDelegateProxy forwardingTargetForSelector:]
+-[TSKNSURLConnectionDelegateProxy forwardToOriginalDelegateAuthenticationChallenge:forConnection:]
+-[TSKNSURLConnectionDelegateProxy connection:willSendRequestForAuthenticationChallenge:]
+-[TSKNSURLConnectionDelegateProxy originalDelegate]
+-[TSKNSURLConnectionDelegateProxy setOriginalDelegate:]
+-[TSKNSURLConnectionDelegateProxy trustKit]
+-[TSKNSURLConnectionDelegateProxy setTrustKit:]
+-[TSKNSURLConnectionDelegateProxy .cxx_destruct]
+___block_descriptor_tmp.28
+___block_descriptor_tmp.31
+___block_descriptor_tmp.45
+___block_descriptor_tmp.58
+___block_descriptor_tmp.59
+___block_literal_global.60
+_OBJC_IVAR_$_TSKNSURLConnectionDelegateProxy._originalDelegate
+_OBJC_IVAR_$_TSKNSURLConnectionDelegateProxy._trustKit
+l_OBJC_PROTOCOL_$_NSURLConnectionDelegate
+l_OBJC_LABEL_PROTOCOL_$_NSURLConnectionDelegate
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/TSKNSURLConnectionDelegateProxy.gcno
+TrustKit/Swizzling/TSKNSURLConnectionDelegateProxy.m
+/Users/reddavis/Documents/Projects/balance-open/Carthage/Checkouts/TrustKit/TrustKit/Swizzling/TSKNSURLConnectionDelegateProxy.m
+__70+[TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors:]_block_invoke_2.52
+__70+[TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors:]_block_invoke.51
+__70+[TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors:]_block_invoke_2.35
+__70+[TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors:]_block_invoke.34
+__70+[TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors:]_block_invoke_2.24
+__70+[TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors:]_block_invoke.23
+__70+[TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors:]_block_invoke_2
+__70+[TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors:]_block_invoke
++[TrustKit sharedInstance]
++[TrustKit initSharedInstanceWithConfiguration:]
+___48+[TrustKit initSharedInstanceWithConfiguration:]_block_invoke
+-[TrustKit initWithConfiguration:]
+-[TrustKit initWithConfiguration:isSingleton:]
+___46-[TrustKit initWithConfiguration:isSingleton:]_block_invoke
+___46-[TrustKit initWithConfiguration:isSingleton:]_block_invoke_2
+___46-[TrustKit initWithConfiguration:isSingleton:]_block_invoke_3
+___copy_helper_block_.52
+___destroy_helper_block_.53
+___copy_helper_block_.57
+___destroy_helper_block_.58
+-[TrustKit sendValidationReport:notedHostname:pinningPolicy:]
+-[TrustKit setPinningValidatorCallbackQueue:]
++[TrustKit setLoggerBlock:]
+-[TrustKit pinningValidator]
+-[TrustKit setPinningValidator:]
+-[TrustKit pinningValidatorCallback]
+-[TrustKit setPinningValidatorCallback:]
+-[TrustKit pinningValidatorCallbackQueue]
+-[TrustKit pinFailureReporter]
+-[TrustKit setPinFailureReporter:]
+-[TrustKit pinFailureReporterQueue]
+-[TrustKit setPinFailureReporterQueue:]
+-[TrustKit configuration]
+-[TrustKit .cxx_destruct]
+_initializeWithInfoPlist
+_sharedTrustKit
+_initSharedInstanceWithConfiguration:.onceToken
+_OBJC_IVAR_$_TrustKit._configuration
+_OBJC_IVAR_$_TrustKit._pinningValidatorCallbackQueue
+_kTSKPinFailureReporterQueueLabel
+_OBJC_IVAR_$_TrustKit._pinFailureReporterQueue
+_OBJC_IVAR_$_TrustKit._pinFailureReporter
+_initWithConfiguration:isSingleton:.onceToken
+_sharedHashCache
+___block_descriptor_tmp.54
+___block_descriptor_tmp.60
+_OBJC_IVAR_$_TrustKit._pinningValidator
+_OBJC_IVAR_$_TrustKit._pinningValidatorCallback
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/TrustKit.gcno
+TrustKit/TrustKit.m
+initializeWithInfoPlist
+/Users/reddavis/Documents/Projects/balance-open/Carthage/Checkouts/TrustKit/TrustKit/TrustKit.m
+TrustKit/TrustKit.h
+__46-[TrustKit initWithConfiguration:isSingleton:]_block_invoke_3
+__46-[TrustKit initWithConfiguration:isSingleton:]_block_invoke_2
+__46-[TrustKit initWithConfiguration:isSingleton:]_block_invoke
+__48+[TrustKit initSharedInstanceWithConfiguration:]_block_invoke
+TSKLog
++[TSKPinningValidator allowsAdditionalTrustAnchors]
+-[TSKPinningValidator initWithDomainPinningPolicies:hashCache:ignorePinsForUserTrustAnchors:validationCallbackQueue:validationCallback:]
+-[TSKPinningValidator evaluateTrust:forHostname:]
+___49-[TSKPinningValidator evaluateTrust:forHostname:]_block_invoke
+-[TSKPinningValidator handleChallenge:completionHandler:]
+-[TSKPinningValidator spkiHashCache]
+-[TSKPinningValidator setSpkiHashCache:]
+-[TSKPinningValidator domainPinningPolicies]
+-[TSKPinningValidator ignorePinsForUserTrustAnchors]
+-[TSKPinningValidator validationCallback]
+-[TSKPinningValidator validationCallbackQueue]
+-[TSKPinningValidator .cxx_destruct]
+_OBJC_IVAR_$_TSKPinningValidator._domainPinningPolicies
+_OBJC_IVAR_$_TSKPinningValidator._ignorePinsForUserTrustAnchors
+_OBJC_IVAR_$_TSKPinningValidator._validationCallbackQueue
+_OBJC_IVAR_$_TSKPinningValidator._validationCallback
+_OBJC_IVAR_$_TSKPinningValidator._spkiHashCache
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/TSKPinningValidator.gcno
+TrustKit/TSKPinningValidator.m
+/Users/reddavis/Documents/Projects/balance-open/Carthage/Checkouts/TrustKit/TrustKit/TSKPinningValidator.m
+__49-[TSKPinningValidator evaluateTrust:forHostname:]_block_invoke
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/reporting_utils.gcno
+TrustKit/Reporting/reporting_utils.m
+convertPinsToHpkpPins
+/Users/reddavis/Documents/Projects/balance-open/Carthage/Checkouts/TrustKit/TrustKit/Reporting/reporting_utils.m
+convertTrustToPemArray
+-[TSKPinningValidatorResult initWithServerHostname:serverTrust:validationResult:finalTrustDecision:validationDuration:]
+-[TSKPinningValidatorResult serverHostname]
+-[TSKPinningValidatorResult evaluationResult]
+-[TSKPinningValidatorResult finalTrustDecision]
+-[TSKPinningValidatorResult validationDuration]
+-[TSKPinningValidatorResult certificateChain]
+-[TSKPinningValidatorResult .cxx_destruct]
+_OBJC_IVAR_$_TSKPinningValidatorResult._serverHostname
+_OBJC_IVAR_$_TSKPinningValidatorResult._evaluationResult
+_OBJC_IVAR_$_TSKPinningValidatorResult._finalTrustDecision
+_OBJC_IVAR_$_TSKPinningValidatorResult._validationDuration
+_OBJC_IVAR_$_TSKPinningValidatorResult._certificateChain
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/TSKPinningValidatorResult.gcno
+TrustKit/TSKPinningValidatorResult.m
+/Users/reddavis/Documents/Projects/balance-open/Carthage/Checkouts/TrustKit/TrustKit/TSKPinningValidatorResult.m
+TrustKit/TSKPinningValidatorResult.h
+-[RSSwizzleInfo getOriginalImplementation]
+-[RSSwizzleInfo selector]
+-[RSSwizzleInfo setSelector:]
+-[RSSwizzleInfo impProviderBlock]
+-[RSSwizzleInfo setImpProviderBlock:]
+-[RSSwizzleInfo .cxx_destruct]
++[RSSwizzle swizzleInstanceMethod:inClass:newImpFactory:mode:key:]
+_swizzledClassesForKey
++[RSSwizzle swizzleClassMethod:inClass:newImpFactory:]
+_swizzledClassesDictionary
+___swizzledClassesDictionary_block_invoke
+___swizzle_block_invoke
+_chooseLock
+_chooseUnlock
+_OBJC_IVAR_$_RSSwizzleInfo._impProviderBlock
+_OBJC_IVAR_$_RSSwizzleInfo._selector
+_swizzledClassesDictionary.swizzledClasses
+_swizzledClassesDictionary.onceToken
+___block_descriptor_tmp.41
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/RSSwizzle.gcno
+TrustKit/Dependencies/RSSwizzle/RSSwizzle.m
+chooseUnlock
+/Users/reddavis/Documents/Projects/balance-open/Carthage/Checkouts/TrustKit/TrustKit/Dependencies/RSSwizzle/RSSwizzle.m
+chooseLock
+__swizzle_block_invoke
+__swizzledClassesDictionary_block_invoke
+swizzledClassesDictionary
+swizzledClassesForKey
+swizzle
+TrustKit/Dependencies/RSSwizzle/RSSwizzle.h
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/Objects-normal/armv7/TrustKit_vers.gcno
+/Users/reddavis/Library/Caches/org.carthage.CarthageKit/DerivedData/9.1_9B55/TrustKit/59a64973962627026209c7167331cb5a38af2c5e/Build/Intermediates.noindex/ArchiveIntermediates/TrustKit/IntermediateBuildFilesPath/TrustKit.build/Release-iphoneos/TrustKit.build/DerivedSources/TrustKit_vers.c
+__ZL15__ARCLite__loadv
+__ZL30add_image_hook_autoreleasepoolPK11mach_headerl
+__ZL34__arclite_objc_autoreleasePoolPushv
+__ZL33__arclite_objc_autoreleasePoolPopPv
+__ZL19patch_lazy_pointersPK11mach_headerP7patch_tm
+__ZL42__arclite_NSArray_objectAtIndexedSubscriptP7NSArrayP13objc_selectorj
+__ZL53__arclite_NSMutableArray_setObject_atIndexedSubscriptP14NSMutableArrayP13objc_selectorP11objc_objectj
+__ZL46__arclite_NSDictionary_objectForKeyedSubscriptP12NSDictionaryP13objc_selectorP11objc_object
+__ZL47__arclite_NSOrderedSet_objectAtIndexedSubscriptP12NSOrderedSetP13objc_selectorj
+__ZL58__arclite_NSMutableOrderedSet_setObject_atIndexedSubscriptP19NSMutableOrderedSetP13objc_selectorP11objc_objectj
+__ZL58__arclite_NSMutableDictionary__setObject_forKeyedSubscriptP19NSMutableDictionaryP13objc_selectorP11objc_objectS4_
+__ZL18add_image_hook_ARCPK11mach_headerl
+__ZL36__arclite_object_setInstanceVariableP11objc_objectPKcPv
+__ZL24__arclite_object_setIvarP11objc_objectP9objc_ivarS0_
+__ZL21__arclite_object_copyP11objc_objectm
+__ZL21__arclite_objc_retainP11objc_object
+__ZL26__arclite_objc_retainBlockP11objc_object
+__ZL22__arclite_objc_releaseP11objc_object
+__ZL26__arclite_objc_autoreleaseP11objc_object
+__ZL32__arclite_objc_retainAutoreleaseP11objc_object
+__ZL37__arclite_objc_autoreleaseReturnValueP11objc_object
+__ZL43__arclite_objc_retainAutoreleaseReturnValueP11objc_object
+__ZL44__arclite_objc_retainAutoreleasedReturnValueP11objc_object
+__ZL26__arclite_objc_storeStrongPP11objc_objectS0_
+__ZL22add_image_hook_swiftV1PK11mach_headerl
+__ZL42__arclite_NSUndoManagerProxy_isKindOfClassP11objc_objectP13objc_selectorP10objc_class
+__ZL13replaceMethodP10objc_classP13objc_selectorPFP11objc_objectS4_S2_zEPS6_
+__ZL30__arclite_NSManagedObject_initP11objc_objectP13objc_selector
+__ZL41__arclite_NSManagedObject_allocWithEntityP11objc_objectP13objc_selectorS0_
+__ZL36__arclite_NSManagedObject_allocBatchP11objc_objectP13objc_selectorPS0_S0_j
+__ZL37__arclite_NSKKMS_fastIndexForKnownKeyP11objc_objectP13objc_selectorS0_
+__ZL28__arclite_NSKKMS_indexForKeyP11objc_objectP13objc_selectorS0_
+__ZL29__arclite_NSKKsD_objectForKeyP11objc_objectP13objc_selectorS0_
+__ZL35__arclite_NSKKsD_removeObjectForKeyP11objc_objectP13objc_selectorS0_
+__ZL33__arclite_NSKKsD_setObject_forKeyP11objc_objectP13objc_selectorS0_S0_
+__ZL41__arclite_NSKKsD_addEntriesFromDictionaryP11objc_objectP13objc_selectorP12NSDictionary
+__ZL28__arclite_objc_readClassPairP10objc_classPK15objc_image_info
+__ZL32__arclite_objc_allocateClassPairP10objc_classPKcm
+__ZL32__arclite_object_getIndexedIvarsP11objc_object
+__ZL23__arclite_objc_getClassPKc
+__ZL27__arclite_objc_getMetaClassPKc
+__ZL31__arclite_objc_getRequiredClassPKc
+__ZL26__arclite_objc_lookUpClassPKc
+__ZL26__arclite_objc_getProtocolPKc
+__ZL23__arclite_class_getNameP10objc_class
+__ZL26__arclite_protocol_getNameP8Protocol
+__ZL37__arclite_objc_copyClassNamesForImagePKcPj
+__ZL17transcribeMethodsP10objc_classP15glue_class_ro_t
+__ZL19transcribeProtocolsP10objc_classP15glue_class_ro_t
+__ZL20transcribePropertiesP10objc_classP15glue_class_ro_t
+__ZL14initialize_impP11objc_objectP13objc_selector
+__ZL18allocateMaybeSwiftP18glue_swift_class_tm
+__ZL22copySwiftV1MangledNamePKcb
+__ZL13demangledNamePKcb
+__ZL16scanMangledFieldRPKcS0_S1_Ri
+__ZL30arclite_uninitialized_functionv
+__ZL12cxxConstructP11objc_object
+__ZL20fixStringForCoreDataP11objc_object
+_OBJC_METACLASS_$___ARCLite__
+__ZL24OBJC_CLASS_$___ARCLite__
+__ZL31OBJC_METACLASS_RO_$___ARCLite__
+__non_lazy_classes
+__ZL27OBJC_CLASS_RO_$___ARCLite__
+__ZL11_class_name
+__ZL32OBJC_$_CLASS_METHODS___ARCLite__
+__ZL17_load_method_name
+__ZL17_load_method_type
+__ZL23NSAutoreleasePool_class
+__ZZL30add_image_hook_autoreleasepoolPK11mach_headerlE7patches
+__ZGVZL30add_image_hook_autoreleasepoolPK11mach_headerlE7patches
+l_OBJC_PROTOCOL_$___ARCLiteIndexedSubscripting__
+l_OBJC_LABEL_PROTOCOL_$___ARCLiteIndexedSubscripting__
+l_OBJC_PROTOCOL_REFERENCE_$___ARCLiteIndexedSubscripting__
+l_OBJC_PROTOCOL_$___ARCLiteKeyedSubscripting__
+l_OBJC_LABEL_PROTOCOL_$___ARCLiteKeyedSubscripting__
+l_OBJC_PROTOCOL_REFERENCE_$___ARCLiteKeyedSubscripting__
+__ZZL18add_image_hook_ARCPK11mach_headerlE7patches
+__ZGVZL18add_image_hook_ARCPK11mach_headerlE7patches
+__ZL30NSUndoManagerProxy_targetClass
+__ZL29original_NSManagedObject_init
+__ZL40original_NSManagedObject_allocWithEntity
+__ZL35original_NSManagedObject_allocBatch
+__ZL25NSMutableDictionary_class
+__ZL22NSConstantString_class
+__ZL14NSString_class
+__ZL36original_NSKKMS_fastIndexForKnownKey
+__ZL27original_NSKKMS_indexForKey
+__ZL28original_NSKKsD_objectForKey
+__ZL34original_NSKKsD_removeObjectForKey
+__ZL32original_NSKKsD_setObject_forKey
+__ZL40original_NSKKsD_addEntriesFromDictionary
+__ZZL22add_image_hook_swiftV1PK11mach_headerlE7patches
+__ZGVZL22add_image_hook_swiftV1PK11mach_headerlE7patches
+__ZL31original_objc_allocateClassPair
+__ZL31original_object_getIndexedIvars
+__ZL22original_objc_getClass
+__ZL26original_objc_getMetaClass
+__ZL30original_objc_getRequiredClass
+__ZL25original_objc_lookUpClass
+__ZL25original_objc_getProtocol
+__ZL22original_class_getName
+__ZL25original_protocol_getName
+__ZL36original_objc_copyClassNamesForImage
+__ZL12demangleLock
+__ZL9Demangled
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c++ -arch armv7 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=c++11 -Wno-trigraphs -fno-exceptions -fno-rtti -fno-sanitize=vptr -mpascal-strings -Os -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties -Wno-arc-repeated-use-of-weak -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -Wno-c++11-extensions -D NDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.1.Internal.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -Winvalid-offsetof -miphoneos-version-min=4.3 -g -fno-threadsafe-statics -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-range-loop-analysis -fembed-bitcode=all -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-generated-files.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-own-target-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-all-target-headers.hmap -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-project-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/Symbols/BuiltProducts/include -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources/armv7 -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources -F/Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/Symbols/BuiltProducts -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.1.Internal.sdk/System/Library/PrivateFrameworks -Wall -Wextra -Wno-gcc-compat -Wno-error=incomplete-umbrella -Wno-error=invalid-ios-deployment-target -Wno-error=incomplete-umbrella -Wno-error=invalid-ios-deployment-target -MMD -MT dependencies -MF /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/armv7/arclite.d --serialize-diagnostics /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/armv7/arclite.dia -c /Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-67/source/arclite.mm -o /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/armv7/arclite.o -mlinker-version=302.3.1 -march=armv7a
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-67/source/arclite.mm
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-67
+fixStringForCoreData
+cxxConstruct
+arclite_uninitialized_function
+scanMangledField
+isdigit
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.1.Internal.sdk/usr/include/ctype.h
+__isctype
+demangledName
+copySwiftV1DemangledName
+copySwiftV1MangledName
+allocateMaybeSwift
+word_align
+isSwift
+initialize_imp
+transcribeProperties
+property_list_nth
+transcribeProtocols
+transcribeMethods
+data
+method_list_nth
+__arclite_objc_copyClassNamesForImage
+__arclite_protocol_getName
+__arclite_class_getName
+__arclite_objc_getProtocol
+__arclite_objc_lookUpClass
+__arclite_objc_getRequiredClass
+__arclite_objc_getMetaClass
+__arclite_objc_getClass
+__arclite_object_getIndexedIvars
+__arclite_objc_allocateClassPair
+metaclass
+__arclite_objc_readClassPair
+transcribeIvars
+ivar_list_nth
+max
+alignment
+ro
+fastFlags
+__arclite_NSKKsD_addEntriesFromDictionary
+__arclite_NSKKsD_setObject_forKey
+__arclite_NSKKsD_removeObjectForKey
+__arclite_NSKKsD_objectForKey
+__arclite_NSKKMS_indexForKey
+__arclite_NSKKMS_fastIndexForKnownKey
+__arclite_NSManagedObject_allocBatch
+__arclite_NSManagedObject_allocWithEntity
+__arclite_NSManagedObject_init
+replaceMethod
+__arclite_NSUndoManagerProxy_isKindOfClass
+add_image_hook_swiftV1
+patch_t<const char **(const char *, unsigned int *)>
+patch_t<const char *(Protocol *)>
+patch_t<const char *(Class)>
+patch_t<Protocol *(const char *)>
+patch_t<Class (const char *)>
+patch_t<void *(id)>
+patch_t<Class (Class, const char *, unsigned long)>
+patch_t<Class (Class, const objc_image_info *)>
+__arclite_objc_storeStrong
+__arclite_objc_release
+__arclite_objc_retain
+__arclite_objc_retainAutoreleasedReturnValue
+__arclite_objc_retainAutoreleaseReturnValue
+__arclite_objc_autoreleaseReturnValue
+__arclite_objc_retainAutorelease
+__arclite_objc_autorelease
+__arclite_objc_retainBlock
+__arclite_object_copy
+fixupCopiedReferences
+_class_getInstanceStart
+alignedInstanceStart
+__arclite_class_usesAutomaticRetainRelease
+classOrSuperClassesUseARR
+__arclite_object_setIvar
+isScannedOffset
+_ivar_getClass
+__arclite_object_setInstanceVariable
+add_image_hook_ARC
+patch_t<void (id *, id)>
+patch_t<id (id)>
+patch_t<void (id)>
+patch_t<id (id, unsigned long)>
+patch_t<void (id, objc_ivar *, id)>
+patch_t<objc_ivar *(id, const char *, void *)>
+__arclite_NSMutableDictionary__setObject_forKeyedSubscript
+__arclite_NSMutableOrderedSet_setObject_atIndexedSubscript
+__arclite_NSOrderedSet_objectAtIndexedSubscript
+__arclite_NSDictionary_objectForKeyedSubscript
+__arclite_NSMutableArray_setObject_atIndexedSubscript
+__arclite_NSArray_objectAtIndexedSubscript
+patch_lazy_pointers
+__arclite_objc_autoreleasePoolPop
+__arclite_objc_autoreleasePoolPush
+add_image_hook_autoreleasepool
+patch_t<void (void *)>
+patch_t<void *()>
+__ARCLite__load
+install_swiftV1
+install_ARC
+install_dict_nil_value
+addOrReplaceMethod
+keyedGetter
+install_subscripting
+addMethod
+indexedGetter
+install_autoreleasepool

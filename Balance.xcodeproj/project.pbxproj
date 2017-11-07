@@ -27,10 +27,8 @@
 		530415BE1DFE1A6E00F0679C /* NSTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530415BD1DFE1A6E00F0679C /* NSTextView.swift */; };
 		530415C21DFEBE0200F0679C /* ServerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530415C11DFEBE0200F0679C /* ServerMessage.swift */; };
 		5304228A1ED39742001CA499 /* TabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530422891ED39742001CA499 /* TabViewModel.swift */; };
-		5304228D1ED39A20001CA499 /* AccountsTabTouchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5304228C1ED39A20001CA499 /* AccountsTabTouchBar.swift */; };
 		530422921ED39BB7001CA499 /* AccountsTabTableCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530422911ED39BB7001CA499 /* AccountsTabTableCells.swift */; };
 		530422941ED39EE7001CA499 /* TransactionsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530422931ED39EE7001CA499 /* TransactionsTabViewModel.swift */; };
-		530422961ED3A278001CA499 /* TransactionsTabTouchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530422951ED3A278001CA499 /* TransactionsTabTouchBar.swift */; };
 		530422981ED3A82A001CA499 /* TransactionsTabTableCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530422971ED3A82A001CA499 /* TransactionsTabTableCells.swift */; };
 		530870E71CE6823D005B591C /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530870E61CE6823D005B591C /* TextField.swift */; };
 		530870EB1CE8175E005B591C /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530870EA1CE8175E005B591C /* Search.swift */; };
@@ -155,7 +153,6 @@
 		53552A7B1ED7347C00DD95F9 /* MockedDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536C6EEE1D864C9B00823688 /* MockedDefaultsStorage.swift */; };
 		53552A7C1ED7347E00DD95F9 /* MockedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19BF68B1D880DA100496A66 /* MockedDefaults.swift */; };
 		5355749B1E299A4A0003ED7B /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5355749A1E299A4A0003ED7B /* Error.swift */; };
-		53560E641DFCBE9800547AF7 /* TouchBarShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53560E631DFCBE9800547AF7 /* TouchBarShared.swift */; };
 		53560E7F1DFCDF8A00547AF7 /* NSBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53560E7E1DFCDF8A00547AF7 /* NSBezierPath.swift */; };
 		53561EA41F82DD260043D4F9 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53561EA21F82DD120043D4F9 /* UserPreferences.swift */; };
 		53561EA51F82DD260043D4F9 /* ApplicationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53561EA31F82DD120043D4F9 /* ApplicationConfiguration.swift */; };
@@ -517,10 +514,8 @@
 		530415BD1DFE1A6E00F0679C /* NSTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTextView.swift; sourceTree = "<group>"; };
 		530415C11DFEBE0200F0679C /* ServerMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerMessage.swift; sourceTree = "<group>"; };
 		530422891ED39742001CA499 /* TabViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewModel.swift; sourceTree = "<group>"; };
-		5304228C1ED39A20001CA499 /* AccountsTabTouchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsTabTouchBar.swift; sourceTree = "<group>"; };
 		530422911ED39BB7001CA499 /* AccountsTabTableCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsTabTableCells.swift; sourceTree = "<group>"; };
 		530422931ED39EE7001CA499 /* TransactionsTabViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionsTabViewModel.swift; sourceTree = "<group>"; };
-		530422951ED3A278001CA499 /* TransactionsTabTouchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionsTabTouchBar.swift; sourceTree = "<group>"; };
 		530422971ED3A82A001CA499 /* TransactionsTabTableCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionsTabTableCells.swift; sourceTree = "<group>"; };
 		530870E61CE6823D005B591C /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		530870EA1CE8175E005B591C /* Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
@@ -604,7 +599,6 @@
 		535529E61ED723C600DD95F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53552A781ED7333100DD95F9 /* Bal-Bridging-Header-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bal-Bridging-Header-iOS.h"; sourceTree = "<group>"; };
 		5355749A1E299A4A0003ED7B /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
-		53560E631DFCBE9800547AF7 /* TouchBarShared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchBarShared.swift; sourceTree = "<group>"; };
 		53560E7E1DFCDF8A00547AF7 /* NSBezierPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSBezierPath.swift; sourceTree = "<group>"; };
 		53561E871F82DD120043D4F9 /* NewAccountListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAccountListViewModel.swift; sourceTree = "<group>"; };
 		53561E881F82DD120043D4F9 /* InstitutionSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionSettingsViewModel.swift; sourceTree = "<group>"; };
@@ -964,7 +958,6 @@
 				53368DD71E3FFD4200B7A199 /* PaintCodeDropdown.swift */,
 				53E83CA51E40309800185975 /* SearchFilterButtonsDark.swift */,
 				53E83CA61E40309800185975 /* SearchFilterButtonsLight.swift */,
-				53560E631DFCBE9800547AF7 /* TouchBarShared.swift */,
 				538DD1701DA2EDB600066288 /* TransactionContextMenu.swift */,
 			);
 			path = Views;
@@ -973,8 +966,6 @@
 		5304228B1ED39A0B001CA499 /* Touch Bar */ = {
 			isa = PBXGroup;
 			children = (
-				5304228C1ED39A20001CA499 /* AccountsTabTouchBar.swift */,
-				530422951ED3A278001CA499 /* TransactionsTabTouchBar.swift */,
 			);
 			path = "Touch Bar";
 			sourceTree = "<group>";
@@ -2653,7 +2644,6 @@
 				537504FD1F192D280062C11A /* TypeAliases.swift in Sources */,
 				A4E768021F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */,
 				532550901D06FEFE0045404E /* SearchField.swift in Sources */,
-				530422961ED3A278001CA499 /* TransactionsTabTouchBar.swift in Sources */,
 				539085331CF97D01009D6E87 /* HoverTableRowView.swift in Sources */,
 				DCDF77BF1BE6C703004AF8AE /* PreferencesViewController.swift in Sources */,
 				532550921D0700470045404E /* SecureField.swift in Sources */,
@@ -2687,7 +2677,6 @@
 				53EB77D21CF3EB9100F01903 /* PopoverViewController.swift in Sources */,
 				533558261DDA860C00D91F4D /* Data.swift in Sources */,
 				53EB77BD1CF3DFDB00F01903 /* NotificationCenter.swift in Sources */,
-				5304228D1ED39A20001CA499 /* AccountsTabTouchBar.swift in Sources */,
 				2D6B22DB1EDE238200356035 /* AppDelegate.swift in Sources */,
 				A4E768091F67DDFE002B1AE1 /* BitfinexErrors.swift in Sources */,
 				530F57AB1DCD72680083F3A7 /* FMDatabasePool.m in Sources */,
@@ -2702,7 +2691,6 @@
 				53368DD81E3FFD4200B7A199 /* PaintCodeDropdown.swift in Sources */,
 				530F57A21DCD72680083F3A7 /* FMDatabaseAdditions.m in Sources */,
 				53294FA21D1DDD9500F08059 /* CCNStatusItem.m in Sources */,
-				53560E641DFCBE9800547AF7 /* TouchBarShared.swift in Sources */,
 				A4E768051F67DB2B002B1AE1 /* BitfinexCredentials.swift in Sources */,
 				530F57BD1DCD72680083F3A7 /* FMResultSet.m in Sources */,
 				531F590B1DDA4ABC0008E8BA /* DisablePasswordViewController.swift in Sources */,
@@ -2924,6 +2912,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -2975,6 +2964,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -3136,6 +3126,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

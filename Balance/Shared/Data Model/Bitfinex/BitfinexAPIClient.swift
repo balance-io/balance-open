@@ -228,7 +228,9 @@ extension BitfinexAPIClient: ExchangeApi {
         guard let secret = secretField,
               let key = keyField else {
             assert(false, "wrong fields are passed into the Bitfinex auth, we require secret and key fields and values")
-            closeBlock(false, "wrong fields are passed into the Bitfinex auth, we require secret and key fields and values", nil)
+            async {
+                closeBlock(false, "wrong fields are passed into the Bitfinex auth, we require secret and key fields and values", nil)
+                }
                 
             return
         }
@@ -242,12 +244,32 @@ extension BitfinexAPIClient: ExchangeApi {
                     do {
                         let credentialsIdentifier = "main"
                         try credentials.save(identifier: credentialsIdentifier)
-                        let institution = InstitutionRepository.si.institution(source: .bitfinex, sourceInstitutionId: "", name: "Bitfinex")
-                        institution?.accessToken = credentialsIdentifier
-                        
-                        async {
-                            closeBlock(true, nil, institution)
+                        guard let institution = InstitutionRepository.si.institution(source: .bitfinex, sourceInstitutionId: "", name: "Bitfinex") else {
+                            async {
+                                closeBlock(false, error, nil)
+                            }
+                            return
                         }
+                        institution.accessToken = credentialsIdentifier
+                        
+                        try self.fetchWallets({ (wallets, error) in
+                            guard let unwrappedWallets = wallets else {
+                                async {
+                                    closeBlock(false, error, nil)
+                                }
+                                return
+                            }
+                            for wallet in unwrappedWallets {
+                                let currentBalance = wallet.balance.paddedIntegerFor(currencyCode: wallet.currencyCode)
+                                let availableBalance = currentBalance
+                                
+                                // Initialize an Account object to insert the record
+                                AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: wallet.currencyCode, sourceInstitutionId: institution.sourceInstitutionId, accountTypeId: .exchange, accountSubTypeId: nil, name: wallet.currencyCode, currency: wallet.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
+                            }
+                            async {
+                                closeBlock(true, error, institution)
+                            }
+                        })
                     }
                     catch {
                         async {

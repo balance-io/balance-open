@@ -11,11 +11,23 @@ import Foundation
 // Convenience functions for running things asynchronously on the main thread
 
 func async(_ work: @escaping @convention(block) () -> Swift.Void) {
-    DispatchQueue.main.async { work() }
+    DispatchQueue.main.async(execute: work)
 }
 
-public func async(after timeInterval: TimeInterval, execute work: @escaping @convention(block) () -> Swift.Void) {
-    DispatchQueue.main.async(after: timeInterval) { work() }
+func async(after timeInterval: TimeInterval, execute work: @escaping @convention(block) () -> Swift.Void) {
+    DispatchQueue.main.async(after: timeInterval, execute: work)
+}
+
+func async(afterWall timeInterval: TimeInterval, execute work: @escaping @convention(block) () -> Swift.Void) {
+    DispatchQueue.main.async(afterWall: timeInterval, execute: work)
+}
+
+func async(after timeInterval: TimeInterval, execute workItem: DispatchWorkItem) {
+    DispatchQueue.main.async(after: timeInterval, execute: workItem)
+}
+
+func asyncAfter(afterWall timeInterval: TimeInterval, execute workItem: DispatchWorkItem) {
+    DispatchQueue.main.async(afterWall: timeInterval, execute: workItem)
 }
 
 extension DispatchQueue {
@@ -47,15 +59,15 @@ extension DispatchQueue {
         asyncAfter(wallDeadline: deadline, execute: work)
     }
 
-    func async(after timeInterval: TimeInterval, execute: DispatchWorkItem) {
+    func async(after timeInterval: TimeInterval, execute workItem: DispatchWorkItem) {
         let milliseconds = Int(timeInterval * 1000)
         let deadline = DispatchTime.now() + .milliseconds(milliseconds)
-        asyncAfter(deadline: deadline, execute: execute)
+        asyncAfter(deadline: deadline, execute: workItem)
     }
     
-    fileprivate func asyncAfter(afterWall timeInterval: TimeInterval, execute: DispatchWorkItem) {
+    func async(afterWall timeInterval: TimeInterval, execute workItem: DispatchWorkItem) {
         let milliseconds = Int(timeInterval * 1000)
         let deadline = DispatchWallTime.now() + .milliseconds(milliseconds)
-        asyncAfter(wallDeadline: deadline, execute: execute)
+        asyncAfter(wallDeadline: deadline, execute: workItem)
     }
 }

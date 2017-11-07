@@ -209,10 +209,10 @@ extension Account {
     
     var displayName: String {
         switch source {
-        case .poloniex, .gdax, .kraken:
-            return Currency.rawValue(currency).name
-        default:
+        case .coinbase:
             return name.capitalizedStringIfAllCaps
+        default:
+            return Currency.rawValue(currency).name
         }
     }
     
