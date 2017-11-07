@@ -286,7 +286,7 @@ extension KrakenAPIClient: ExchangeApi {
                         } catch { }
                     }
                     for account in accounts {
-                        let currentBalance = self.paddedInteger(for: account.balance, currencyCode: account.currencyCode)
+                        let currentBalance = account.balance.paddedIntegerFor(currencyCode: account.currencyCode)
                         let availableBalance = currentBalance
                         
                         // Initialize an Account object to insert the record
@@ -329,14 +329,6 @@ extension KrakenAPIClient: ExchangeApi {
                 closeBlock(false, error, nil)
             }
         }
-    }
-    private func paddedInteger(for amount: Double, currencyCode: String) -> Int {
-        let decimals = Currency.rawValue(currencyCode).decimals
-        
-        var amountDecimal = Decimal(amount)
-        amountDecimal = amountDecimal * Decimal(pow(10.0, Double(decimals)))
-        
-        return (amountDecimal as NSDecimalNumber).intValue
     }
 }
 
