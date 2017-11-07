@@ -15,7 +15,7 @@ class Button: NSButton {
         didSet {
             if let titleColor = titleColor {
                 let attributedString = NSMutableAttributedString(attributedString: self.attributedStringValue)
-                let range = NSRange(location: 0, length: self.title.length)
+                let range = NSRange(location: 0, length: self.title.count)
                 attributedString.addAttribute(.foregroundColor, value: titleColor, range: range)
                 self.attributedTitle = attributedString
             }

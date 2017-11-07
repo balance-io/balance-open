@@ -128,7 +128,7 @@ class EthplorerApi: ExchangeApi {
             do {
                 if let safeData = data {
                     
-                    if let error = self.findError(data: safeData) {
+                    if let _ = self.findError(data: safeData) {
                         throw EthplorerApi.CredentialsError.incorrectLoginCredentials
                     }
                     

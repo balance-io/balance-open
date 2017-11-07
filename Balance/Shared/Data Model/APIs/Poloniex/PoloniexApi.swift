@@ -159,16 +159,16 @@ class PoloniexApi: ExchangeApi {
         let datatask = certValidatedSession.dataTask(with: urlRequest) { data, response, error in
             do {
                 if let httpResponse = response as? HTTPURLResponse {
-                    if case 400 = httpResponse.statusCode {
+                    switch httpResponse.statusCode {
+                    case 400, 403:
                         throw PoloniexApi.CredentialsError.incorrectLoginCredentials
-                    } else if case 403 = httpResponse.statusCode {
-                        throw PoloniexApi.CredentialsError.incorrectLoginCredentials
+                    default: break
                     }
                 }
                 
                 if let safeData = data {
                     //if error exists should be reported to UI data
-                    if let error = self.findError(data: safeData) {
+                    if let _ = self.findError(data: safeData) {
                         throw PoloniexApi.CredentialsError.incorrectLoginCredentials
                     }
                     // Create the institution and finish (we do not have access tokens)

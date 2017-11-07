@@ -136,7 +136,7 @@ open class Pluralize {
     }
 
     open class func apply(_ word: String) -> String {
-        guard !(sharedInstance.uncountables.contains(word.lowercased()) || word.length == 0) else {
+        guard !(sharedInstance.uncountables.contains(word.lowercased()) || word.count == 0) else {
             return word
         }
 
@@ -164,7 +164,7 @@ open class Pluralize {
 
     fileprivate class func regexReplace(_ input: String, pattern: String, template: String) -> String {
         let regex = try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
-        let range = NSRange(location: 0, length: input.length)
+        let range = NSRange(location: 0, length: input.count)
         let output = regex.stringByReplacingMatches(in: input, options: [], range: range, withTemplate: template)
         return output
     }
@@ -185,7 +185,7 @@ open class Pluralize {
 extension String {
     public func pluralize(_ count: Int = 2, with: String = "") -> String {
         guard !(count == 1) else { return self }
-        guard with.length != 0 else { return Pluralize.apply(self) }
+        guard with.count != 0 else { return Pluralize.apply(self) }
         return with
     }
 }

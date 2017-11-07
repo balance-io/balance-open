@@ -53,13 +53,13 @@ extension PXColor {
     
     // Adapted from http://stackoverflow.com/a/27203691/299262
     convenience init?(hexString: String) {
-        var cString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
+        var cString = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
         
         if cString.hasPrefix("#") {
             cString = cString.substring(from: 1)
         }
         
-        if cString.characters.count != 6 {
+        if cString.count != 6 {
             return nil
         }
         
