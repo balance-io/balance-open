@@ -47,8 +47,8 @@ internal final class TransactionsListViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         // Refresh control
+        self.collectionView.refreshControl = self.refreshControl
         self.refreshControl.addTarget(self, action: #selector(self.refreshControlValueChanged(_:)), for: .valueChanged)
-        self.collectionView.addSubview(self.refreshControl)
         
         // Collection view
         self.collectionView.backgroundColor = UIColor(red: 237.0/255.0, green: 238.0/255.0, blue: 240.0/255.0, alpha: 1.0)
