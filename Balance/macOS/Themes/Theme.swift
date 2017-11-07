@@ -18,6 +18,7 @@ protocol Theme {
     var lock: LockTheme { get }
     var tabs: TabsTheme { get }
     var addAccounts: AddAccountsTheme { get }
+    var emailIssue: EmailIssueTheme { get }
     var accounts: AccountsTheme { get }
     var transactions: TransactionsTheme { get }
 }
@@ -35,6 +36,10 @@ struct DefaultsTheme {
     
     struct TotalFooterTheme {
         let totalBackgroundColor: NSColor
+        let titleFont: NSFont
+        let titleColor: NSColor
+        let amountFont: NSFont
+        let amountColor: NSColor
     }
     
     struct CellTheme {
@@ -121,12 +126,19 @@ struct AddAccountsTheme {
     let signUpFieldTextColor: NSColor
     let signUpFieldplaceHolderTextColor: NSColor
     let signUpFieldFont: NSFont
+}
+
+struct EmailIssueTheme {
+    let infoLabelNameFont: NSFont
+    let infoLabelNameColor: NSColor
+    let infoLabelValueFont: NSFont
+    let infoLabelValueColor: NSColor
+    let messageLabelFont: NSFont
     
-    let emailIssueInfoLabelNameFont: NSFont
-    let emailIssueInfoLabelNameColor: NSColor
-    let emailIssueInfoLabelValueFont: NSFont
-    let emailIssueInfoLabelValueColor: NSColor
-    let emailIssueMessageLabelFont: NSFont
+    let inputFieldActiveBorderColor: NSColor
+    let inputFieldInactiveBorderColor: NSColor
+    let inputFieldTextColor: NSColor
+    let inputFieldPlaceholderTextColor: NSColor
 }
 
 struct AccountsTheme {

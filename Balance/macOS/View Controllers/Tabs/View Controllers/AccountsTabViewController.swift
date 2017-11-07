@@ -309,31 +309,36 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         totalFooterView.layerBackgroundColor = CurrentTheme.defaults.totalFooter.totalBackgroundColor
         self.view.addSubview(totalFooterView)
         totalFooterView.snp.makeConstraints { make in
-            make.height.equalTo(50)
+            make.height.equalTo(57)
             make.leading.equalTo(self.view)
             make.trailing.equalTo(self.view)
             make.bottom.equalTo(self.view)
         }
 
         balanceField.stringValue = "Balance"
-        balanceField.alignment = .center
-        balanceField.font = CurrentTheme.accounts.cell.nameFont
-        balanceField.textColor = CurrentTheme.accounts.cell.nameColor
+        balanceField.alignment = .left
+        balanceField.verticalAlignment = .center
+        balanceField.font = CurrentTheme.defaults.totalFooter.titleFont
+        balanceField.textColor = CurrentTheme.defaults.totalFooter.titleColor
         balanceField.usesSingleLineMode = true
         totalFooterView.addSubview(balanceField)
         balanceField.snp.makeConstraints { make in
-            make.leading.equalTo(totalFooterView).offset(10)
-            make.centerY.equalTo(totalFooterView).offset(-1)
+            make.leading.equalToSuperview().offset(16)
+            make.top.equalToSuperview().offset(-1)
+            make.height.equalToSuperview()
         }
         
         totalField.alignment = .right
-        totalField.font = CurrentTheme.accounts.cell.amountFont
+        totalField.verticalAlignment = .center
+        totalField.font = CurrentTheme.defaults.totalFooter.amountFont
+        totalField.textColor = CurrentTheme.defaults.totalFooter.amountColor
         totalField.usesSingleLineMode = true
         totalField.setAccessibilityLabel("Total Balance")
         totalFooterView.addSubview(totalField)
         totalField.snp.makeConstraints { make in
-            make.trailing.equalTo(totalFooterView).inset(12)
-            make.centerY.equalTo(totalFooterView).offset(-1)
+            make.trailing.equalTo(totalFooterView).offset(-16)
+            make.top.equalTo(totalFooterView).offset(2)
+            make.height.equalToSuperview()
         }
     }
     
@@ -561,8 +566,9 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     
     func tableView(_ tableView: SectionedTableView, heightOfRow row: Int, inSection section: Int) -> CGFloat {
         var height = CurrentTheme.accounts.cell.height
-        if row == 0 {
-            height -= 4
+        if viewModel.isLastRow(row, inSection: section) {
+            // Make last row taller
+            height += 10.0
         }
         
         if TableIndex(section: section, row: row) == tableView.selectedIndex {
@@ -624,7 +630,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         cell.index = index
         
         if let account = viewModel.account(forRow: row, inSection: section) {
-            cell.updateModel(account)
+            let isLastRowInSection =  viewModel.isLastRow(row, inSection: section)
+            cell.updateModel(account, isLastRowInSection: isLastRowInSection)
         }
         
         cell.rowBackgroundColor = { TableIndex -> NSColor? in

@@ -16,10 +16,14 @@ var appBuildString: String = {
 }()
 
 var appVersionString: String = {
-    if let info = Bundle.main.infoDictionary, let version = info["CFBundleShortVersionString"] as? String, let build = info["CFBundleVersion"] as? String {
-        return "Balance \(version) (\(build))"
+    if let info = Bundle.main.infoDictionary, let version = info["CFBundleShortVersionString"] as? String {
+        return "Balance v\(version)"
     }
     return "Unknown"
+}()
+
+var appVersionAndBuildString: String = {
+    return "\(appVersionString) (build \(appBuildString))"
 }()
 
 var osVersionString: String = {
@@ -76,34 +80,14 @@ let rightParagraphStyle: NSParagraphStyle = {
     return paragraphStyle
 }()
 
-// Takes a decimal dollar amount and converts it to an integer cents amount.
-// Using string conversion because Double/Int conversion is fuzzy
-func decimalDollarAmountToCents(_ amount: Double) -> Int {
-    let amountString = String(format: "%.2f", amount)
-    var amountParts = amountString.components(separatedBy: ".")
-    var amountCents = 0
-    if amountParts.count > 0 {
-        if let dollars = Int(amountParts[0]) {
-            amountCents = dollars * 100
-        }
-    }
-    if amountParts.count > 1 {
-        let isNegative = amountParts[0].hasPrefix("-")
-        if let cents = Int(amountParts[1]) {
-            amountCents += isNegative ? -cents : cents
-        }
-    }
-    return amountCents
-}
-
-fileprivate var centsFormatterNoDecimal: NumberFormatter = {
-    let centsFormatter = NumberFormatter()
-    centsFormatter.currencySymbol = "$"
-    centsFormatter.numberStyle = .currency
-    centsFormatter.maximumFractionDigits = 0
-    return centsFormatter
+fileprivate var decimalFormatter: NumberFormatter = {
+    let decimalFormatter = NumberFormatter()
+    decimalFormatter.numberStyle = .decimal
+    decimalFormatter.maximumFractionDigits = 2
+    return decimalFormatter
 }()
 
+@available(*, deprecated)
 fileprivate var centsFormatter: NumberFormatter = {
     let centsFormatter = NumberFormatter()
     centsFormatter.currencySymbol = "$"
@@ -112,14 +96,17 @@ fileprivate var centsFormatter: NumberFormatter = {
     return centsFormatter
 }()
 
-fileprivate var decimalFormatter: NumberFormatter = {
+@available(*, deprecated)
+fileprivate var centsFormatterNoDecimal: NumberFormatter = {
     let centsFormatter = NumberFormatter()
-    centsFormatter.numberStyle = .decimal
-    centsFormatter.maximumFractionDigits = 2
+    centsFormatter.currencySymbol = "$"
+    centsFormatter.numberStyle = .currency
+    centsFormatter.maximumFractionDigits = 0
     return centsFormatter
 }()
 
 // Takes in strings representing dollars like $300.00, $500, 40 and returns their value in cents
+@available(*, deprecated)
 func stringToCents(_ amountString: String) -> Int? {
     if let number = centsFormatter.number(from: amountString) {
         let cents = Int(number.doubleValue * 100.0)
@@ -131,6 +118,7 @@ func stringToCents(_ amountString: String) -> Int? {
     return nil
 }
 
+@available(*, deprecated)
 func centsToString(_ cents: Int, showNegative: Bool = false, showCents: Bool = true)  -> String {
     let amount = Double(cents) / 100.00
     let formatter = showCents ? centsFormatter : centsFormatterNoDecimal
@@ -138,61 +126,6 @@ func centsToString(_ cents: Int, showNegative: Bool = false, showCents: Bool = t
     let minusRemoved = showNegative ? amountString : amountString.replacingOccurrences(of: "-", with: "")
     
     return minusRemoved
-}
-
-
-func centsToStringFormatted(_ cents: Int, showNegative: Bool = false, showCents: Bool = true, colorPositive: Bool = true)  -> NSAttributedString {
-    let amount = Double(cents) / 100.00
-    let formatter = showCents ? centsFormatter : centsFormatterNoDecimal
-    let amountString = formatter.string(from: NSNumber(value: amount))!
-    let minusRemoved = showNegative ? amountString : amountString.replacingOccurrences(of: "-", with: "")
-    
-    let preparedString = NSMutableAttributedString(string: minusRemoved, attributes: [NSAttributedStringKey.paragraphStyle: rightParagraphStyle])
-    
-    let count = preparedString.string.count
-    let firstCharacters = NSRange(location: 0, length: showCents ? count - 3 : count)
-    let lastTwoCharacters = NSRange(location: count - 3, length: 3)
-    
-    // Negative numbers are presented as positive, and vice versa.
-    let isNegative = (cents == 0 || amountString.hasPrefix("-"))
-    if isNegative {
-        // Set the color to white if it is a negative amount
-        #if os(OSX)
-        preparedString.addAttribute(NSAttributedStringKey.foregroundColor, value: CurrentTheme.transactions.cell.amountColor, range: firstCharacters)
-        #else
-        // TODO: Use actual theme
-            preparedString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor(deviceWhiteInt: 255, alpha: 0.9), range: firstCharacters)
-        #endif
-            
-        if showCents {
-            // Add extra alpha to the cents
-            #if os(OSX)
-            preparedString.addAttribute(NSAttributedStringKey.foregroundColor, value: CurrentTheme.transactions.cell.amountColorCents, range: lastTwoCharacters)
-            #else
-            // TODO: Use actual theme
-                preparedString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor(deviceRedInt: 153, green: 165, blue: 174), range: lastTwoCharacters)
-            #endif
-        }
-    } else {
-        // Set the color to green if it is a positive amount
-        #if os(OSX)
-        let foregroundColor = colorPositive ? CurrentTheme.transactions.cell.amountColorPositive : CurrentTheme.transactions.cell.amountColor
-        #else
-        let foregroundColor = colorPositive ? UIColor(deviceRedInt: 88, green: 184, blue: 33) : UIColor(deviceWhiteInt: 255, alpha: 0.9)
-        #endif
-        preparedString.addAttribute(NSAttributedStringKey.foregroundColor, value: foregroundColor, range: firstCharacters)
-        
-        if showCents {
-            // Add extra alpha to the cents
-            preparedString.addAttribute(NSAttributedStringKey.foregroundColor, value: foregroundColor.withAlphaComponent(0.75), range: lastTwoCharacters)
-        }
-    }
-    
-    return preparedString
-}
-
-func roundCentsToNearestDollar(_ cents: Int) -> Int {
-    return Int(round((Double(cents) / 100.0)) * 100.0)
 }
 
 fileprivate var amountFormatter: NumberFormatter = {
@@ -215,53 +148,6 @@ func amountToString(amount: Int, currency: Currency, showNegative: Bool = false,
     
     return showCodeAfterValue ? "\(minusRemoved) \(currency.code)" : minusRemoved
 }
-
-#if os(OSX)
-func amountToStringFormatted(amount: Int, currency: Currency, showNegative: Bool = false, colorPositive: Bool = true)  -> NSAttributedString {
-    assert(Thread.isMainThread, "Must be used from main thread")
-    
-    let amountString = amountToString(amount: amount, currency: currency, showNegative: showNegative)
-    let preparedString = NSMutableAttributedString(string: amountString, attributes: [NSAttributedStringKey.paragraphStyle: rightParagraphStyle])
-    
-    let count = preparedString.string.count
-    let decimalCharsCount = count - currency.decimals - 1
-    let showDecimal = currency.decimals > 0
-    let firstCharacters = NSRange(location: 0, length: showDecimal ? decimalCharsCount : count)
-    let decimalCharacters = NSRange(location: decimalCharsCount, length: currency.decimals + 1)
-    
-    // Negative numbers are presented as positive, and vice versa.
-    let isNegative = (amount == 0 || amountString.hasPrefix("-"))
-    if isNegative {
-        // Set the color to white if it is a negative amount
-        preparedString.addAttribute(NSAttributedStringKey.foregroundColor, value: CurrentTheme.accounts.cell.amountColor, range: firstCharacters)
-        
-        if showDecimal {
-            // Add extra alpha to the cents
-            preparedString.addAttribute(NSAttributedStringKey.foregroundColor, value: CurrentTheme.accounts.cell.amountColorCents, range: decimalCharacters)
-        }
-    } else {
-        // Set the color to green if it is a positive amount
-        let foregroundColor = colorPositive ? CurrentTheme.accounts.cell.amountColorPositive : CurrentTheme.accounts.cell.amountColor
-        preparedString.addAttribute(NSAttributedStringKey.foregroundColor, value: foregroundColor, range: firstCharacters)
-        
-        if showDecimal {
-            // Add extra alpha to the cents
-            preparedString.addAttribute(NSAttributedStringKey.foregroundColor, value: foregroundColor.withAlphaComponent(0.75), range: decimalCharacters)
-        }
-    }
-    
-    return preparedString
-}
-#endif
-    
-//func powerCurve(value: Double, min x: Double, middle y: Double, max z: Double) -> Double {
-//    let a = (x * z - pow(y, 2)) / (x - 2.0 * y + z)
-//    let b = pow((y - x), 2) / (x - 2.0 * y + z)
-//    let c = 2 * Darwin.log((z-y) / (y-x))
-//    
-//    let final = a + b * exp(c * value)
-//    return final
-//}
 
 // Returns NSNull if the input is nil. Useful for things like db queries.
 // TODO: Figure out why FMDB in Swift won't take nil arguments in var args functions

@@ -95,11 +95,7 @@ class ChangePasswordViewController: NSViewController {
         }
 
         hintField.lineBreakMode = .byWordWrapping
-        if #available(OSX 10.11, *) {
-            hintField.maximumNumberOfLines = 4
-        } else {
-            // Fallback on earlier versions
-        }
+        hintField.maximumNumberOfLines = 4
         self.view.addSubview(hintField)
         hintField.snp.makeConstraints{ make in
             make.width.equalTo(280)

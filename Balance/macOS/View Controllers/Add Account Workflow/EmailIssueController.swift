@@ -72,6 +72,12 @@ class EmailIssueController: NSViewController {
         }
     }
     
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        
+        self.view.window?.makeFirstResponder(notesField)
+    }
+    
     override func loadView() {
         self.view = View()
         self.view.layerBackgroundColor = CurrentTheme.defaults.backgroundColor
@@ -107,7 +113,7 @@ class EmailIssueController: NSViewController {
             make.height.equalTo(isConnectionIssue ? 20 : 0)
         }
         
-        versionLabel.attributedStringValue = attributedString(name: "Version", value: appVersionString)
+        versionLabel.attributedStringValue = attributedString(name: "Version", value: appVersionAndBuildString)
         versionLabel.alignment = .left
         versionLabel.verticalAlignment = .center
         versionLabel.usesSingleLineMode = true
@@ -147,11 +153,11 @@ class EmailIssueController: NSViewController {
         }
         
         notesField.delegate = self
-        notesField.layerBackgroundColor = CurrentTheme.lock.passwordBackgroundColor
-        notesField.activeBorderColor = CurrentTheme.lock.passwordActiveBorderColor
-        notesField.inactiveBorderColor = CurrentTheme.lock.passwordInactiveBorderColor
-        notesField.textColor = CurrentTheme.lock.passwordTextColor
-        notesField.placeHolderStringColor = CurrentTheme.lock.passwordPlaceholderColor
+        notesField.layerBackgroundColor = CurrentTheme.defaults.backgroundColor
+        notesField.activeBorderColor = CurrentTheme.emailIssue.inputFieldActiveBorderColor
+        notesField.inactiveBorderColor = CurrentTheme.emailIssue.inputFieldInactiveBorderColor
+        notesField.textColor = CurrentTheme.emailIssue.inputFieldTextColor
+        notesField.placeHolderStringColor = CurrentTheme.emailIssue.inputFieldPlaceholderTextColor
         notesField.placeholderString = isConnectionIssue ? "Add your notes (optional)" : "Your feedback"
         notesField.usesSingleLineMode = false
         self.view.addSubview(notesField)
@@ -163,11 +169,11 @@ class EmailIssueController: NSViewController {
         }
         
         emailField.delegate = self
-        emailField.layerBackgroundColor = CurrentTheme.lock.passwordBackgroundColor
-        emailField.activeBorderColor = CurrentTheme.lock.passwordActiveBorderColor
-        emailField.inactiveBorderColor = CurrentTheme.lock.passwordInactiveBorderColor
-        emailField.textColor = CurrentTheme.lock.passwordTextColor
-        emailField.placeHolderStringColor = CurrentTheme.lock.passwordPlaceholderColor
+        emailField.layerBackgroundColor = CurrentTheme.defaults.backgroundColor
+        emailField.activeBorderColor = CurrentTheme.emailIssue.inputFieldActiveBorderColor
+        emailField.inactiveBorderColor = CurrentTheme.emailIssue.inputFieldInactiveBorderColor
+        emailField.textColor = CurrentTheme.emailIssue.inputFieldTextColor
+        emailField.placeHolderStringColor = CurrentTheme.emailIssue.inputFieldPlaceholderTextColor
         emailField.placeholderString = "Your email"
         self.view.addSubview(emailField)
         emailField.snp.makeConstraints { make in
@@ -177,7 +183,7 @@ class EmailIssueController: NSViewController {
             make.trailing.equalToSuperview().offset(-margin)
         }
         
-        messageLabel.font = CurrentTheme.addAccounts.emailIssueMessageLabelFont
+        messageLabel.font = CurrentTheme.emailIssue.messageLabelFont
         messageLabel.textColor = CurrentTheme.defaults.foregroundColor
         messageLabel.stringValue = isConnectionIssue ? "We will look into this problem and follow up within 24 hours." : "We will follow up within 24 hours."
         messageLabel.alignment = .center
@@ -221,12 +227,12 @@ class EmailIssueController: NSViewController {
     }
     
     fileprivate func attributedString(name: String, value: String) -> NSAttributedString {
-        let nameAttributes = [NSAttributedStringKey.font: CurrentTheme.addAccounts.emailIssueInfoLabelNameFont,
-                              NSAttributedStringKey.foregroundColor: CurrentTheme.addAccounts.emailIssueInfoLabelNameColor]
+        let nameAttributes = [NSAttributedStringKey.font: CurrentTheme.emailIssue.infoLabelNameFont,
+                              NSAttributedStringKey.foregroundColor: CurrentTheme.emailIssue.infoLabelNameColor]
         let nameAttributedString = NSAttributedString(string: name + ": ", attributes: nameAttributes)
         
-        let valueAttributes = [NSAttributedStringKey.font: CurrentTheme.addAccounts.emailIssueInfoLabelValueFont,
-                               NSAttributedStringKey.foregroundColor: CurrentTheme.addAccounts.emailIssueInfoLabelValueColor]
+        let valueAttributes = [NSAttributedStringKey.font: CurrentTheme.emailIssue.infoLabelValueFont,
+                               NSAttributedStringKey.foregroundColor: CurrentTheme.emailIssue.infoLabelValueColor]
         let valueAttributedString = NSAttributedString(string: value, attributes: valueAttributes)
         
         let attributedString = NSMutableAttributedString()

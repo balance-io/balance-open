@@ -26,6 +26,7 @@ class TabsViewController: NSViewController {
     let headerView = View()
     let accountsButton = Button()
     let transactionsButton = Button()
+    let addAccountButton = Button()
     let preferencesButton = Button()
     var tabButtons = [Button]()
     
@@ -147,18 +148,30 @@ class TabsViewController: NSViewController {
             make.centerY.equalToSuperview()
         }
         
-        // Preferences button
         preferencesButton.target = self
         preferencesButton.action = #selector(showSettingsMenu(_:))
-        let preferencesIcon = CurrentTheme.tabs.footer.preferencesIcon
-        preferencesButton.image = preferencesIcon
+        preferencesButton.image = CurrentTheme.tabs.footer.preferencesIcon
         preferencesButton.setButtonType(.momentaryChange)
         preferencesButton.setAccessibilityLabel("Preferences")
         preferencesButton.isBordered = false
         headerView.addSubview(preferencesButton)
         preferencesButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().offset(-10)
+            make.right.equalToSuperview().offset(-10)
+            make.width.equalTo(16)
+            make.height.equalTo(16)
+        }
+        
+        addAccountButton.target = self
+        addAccountButton.action = #selector(showAddAccount)
+        addAccountButton.image = NSImage(named: NSImage.Name.addTemplate)//CurrentTheme.tabs.footer.preferencesIcon
+        addAccountButton.setButtonType(.momentaryChange)
+        addAccountButton.setAccessibilityLabel("Add Account")
+        addAccountButton.isBordered = false
+        headerView.addSubview(addAccountButton)
+        addAccountButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.right.equalTo(preferencesButton.snp.left).offset(-10)
             make.width.equalTo(16)
             make.height.equalTo(16)
         }
@@ -172,12 +185,15 @@ class TabsViewController: NSViewController {
     
     @objc func showSettingsMenu(_ sender: NSButton) {
         let menu = NSMenu()
-        menu.autoenablesItems = false
+        let versionItem = NSMenuItem(title: appVersionString, action: nil, keyEquivalent: "")
+        versionItem.isEnabled = false
+        menu.addItem(versionItem)
+        menu.addItem(NSMenuItem.separator())
         menu.addItem(withTitle: "Add an Account          ", action: #selector(showAddAccount), keyEquivalent: "")
         menu.items.first?.isEnabled = networkStatus.isReachable
         menu.addItem(withTitle: "Preferences...", action: #selector(showPreferences), keyEquivalent: ",")
         menu.addItem(NSMenuItem.separator())
-        //menu.addItem(withTitle: "Send Feedback", action: #selector(sendFeedback), keyEquivalent: "")
+        menu.addItem(withTitle: "Send Feedback", action: #selector(sendFeedback), keyEquivalent: "")
         menu.addItem(withTitle: "Check for Updates", action: #selector(checkForUpdates(sender:)), keyEquivalent: "")
         menu.addItem(NSMenuItem.separator())
         menu.addItem(withTitle: "Quit Balance", action: #selector(quitApp), keyEquivalent: "q")

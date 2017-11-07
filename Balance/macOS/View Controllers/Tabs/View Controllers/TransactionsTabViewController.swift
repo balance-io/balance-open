@@ -100,10 +100,8 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
     }
     
     func createHeader() {
-        if #available(OSX 10.11, *) {
-            // Hack to separate tokens on El Cap and Sierra
-            searchField.textField.kerningOffset = 3.0
-        }
+        // Hack to separate tokens on El Cap and Sierra
+        searchField.textField.kerningOffset = 3.0
         searchField.delegate = self
         searchField.customDelegate = self
         self.view.addSubview(searchField)
