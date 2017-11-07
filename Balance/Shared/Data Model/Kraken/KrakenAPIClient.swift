@@ -35,28 +35,37 @@ internal final class KrakenAPIClient
 
 internal extension KrakenAPIClient
 {
-    private func generateAccountRequest(credentials: Credentials?) throws -> URLRequest {
-        
-        guard let unwrappedCredentials = credentials else
-        {
+    private func generateRequest(path:String, credentials: Credentials?, params: [String:String]? = nil) throws -> URLRequest {
+        guard let unwrappedCredentials = credentials else {
             throw APICredentialsComponents.Error.noCredentials
         }
-        
-        let requestPath = "/0/private/Balance"
-        
         let nonce = String(Int(Date().timeIntervalSinceReferenceDate.rounded() * 1000))
-        let body = [
-            "nonce" : nonce
-            ].httpFormEncode()
+        var parameters = [String:String]()
+        parameters.updateValue(nonce, forKey: "nonce")
+        if let params = params {
+            parameters.merge(params, uniquingKeysWith: +)
+        }
+        let body = parameters.httpFormEncode()
         
-        let headers = try AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, nonce: nonce, body: body)
-        let url = self.baseURL.appendingPathComponent(requestPath)
+        let headers = try AuthHeaders(credentials: unwrappedCredentials, requestPath: path, nonce: nonce, body: body)
+        let url: URL = self.baseURL.appendingPathComponent(path)
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = body.data(using: .utf8)
         request.add(headers: headers.dictionary)
-        
+        return request
+    }
+    
+    private func generateAccountRequest(credentials: Credentials?) throws -> URLRequest {
+        let requestPath = "/0/private/Balance"
+        let request = try self.generateRequest(path: requestPath, credentials: credentials)
+        return request
+    }
+    
+    private func generateTransactionRequest(credentials: Credentials?) throws -> URLRequest {
+        let requestPath = "/0/private/Ledgers"
+        let request = try self.generateRequest(path: requestPath, credentials: credentials)
         return request
     }
     
@@ -89,35 +98,96 @@ internal extension KrakenAPIClient
                 {
                     do
                     {
-                        // NOTE: Kraken standardizes all of their currency codes to 4 characters for some reason
-                        // so for example LTC is XLTC, USD is ZUSD, but USDT is just USDT. So we need to remove
-                        // the trailing characters. It appears that X is for crypto and Z is for fiat.
-                        
-                        // TODO: Right now, we're safe just removing trailing Z and X characters. However, in the
-                        // future, if there is a 4 letter symbol for a currency and it starts with X or Z, we will
-                        // run into issues. Thankfully they use XZEC for ZCASH tokens.
-                        
-                        var currencyCode = currency
-                        if currency.length == 4 && (currency.hasPrefix("Z") || currency.hasPrefix("X")) {
-                            currencyCode = currency.substring(from: 1)
-                        }
-                        
+                        let currencyCode = self.transformKrakenCurrencyToCurrencyCode(currency: currency)
                         let account = try Account(currency: currencyCode, balance: balance)
                         accounts.append(account)
                     }
                     catch { }
                 }
-                
-                completionHandler(accounts, nil)
+                async {
+                    completionHandler(accounts, nil)
+                }
             } else if case 400...402 = httpResponse.statusCode {
                 let error = APICredentialsComponents.Error.invalidSecret(message: "One or more of your credentials is invalid")
-                completionHandler(nil, error)
+                async {
+                    completionHandler(nil, error)
+                }
             } else if case 403...499 = httpResponse.statusCode {
                 let error = APICredentialsComponents.Error.missingPermissions
-                completionHandler(nil, error)
+                async {
+                    completionHandler(nil, error)
+                }
             } else {
                 let error = APIError.response(httpResponse: httpResponse, data: data)
-                completionHandler(nil, error)
+                async {
+                    completionHandler(nil, error)
+                }
+            }
+        }
+        
+        task.resume()
+    }
+    
+    func fetchTransactions(_ completionHandler: @escaping (_ accounts: [Transaction]?, _ error: Error?) -> Void) throws {
+        let request = try self.generateTransactionRequest(credentials: self.credentials)
+        
+        // Perform request
+        let task = self.session.dataTask(with: request) { (data, response, error) in
+            guard let httpResponse = response as? HTTPURLResponse,
+                let unwrappedData = data,
+                let json = try? JSONSerialization.jsonObject(with: unwrappedData, options: []) else
+            {
+                completionHandler(nil, APIError.invalidJSON)
+                return
+            }
+            
+            if case 200...299 = httpResponse.statusCode {
+                guard let responseJSON = json as? [String : Any] else {
+                    async {
+                        completionHandler(nil, APIError.invalidJSON)
+                    }
+                    return
+                }
+                guard let resultJSON = responseJSON["result"] as? [String: Any] else {
+                    async {
+                        if let error = responseJSON["error"] as? String, error == "Invalid key" {
+                            completionHandler(nil, APIError.keysPermissionError)
+                        } else {
+                            completionHandler(nil, APIError.invalidJSON)
+                        }
+                    }
+                    return
+                }
+                // Build accounts
+                var transactions = [KrakenAPIClient.Transaction]()
+                guard let allTransactions = resultJSON["ledger"] as? [String:Any] else {
+                    async {completionHandler(nil, APIError.invalidJSON)}
+                    return
+                }
+                for key in allTransactions.keys {
+                    do {
+                        let transaction = try KrakenAPIClient.Transaction(dictionary: allTransactions[key] as! [String : Any], ledgerId:key)
+                        transactions.append(transaction)
+                    } catch { }
+                }
+                async {
+                    completionHandler(transactions, nil)
+                }
+            } else if case 400...402 = httpResponse.statusCode {
+                let error = APICredentialsComponents.Error.invalidSecret(message: "One or more of your credentials is invalid")
+                async {
+                    completionHandler(nil, error)
+                }
+            } else if case 403...499 = httpResponse.statusCode {
+                let error = APICredentialsComponents.Error.missingPermissions
+                async {
+                    completionHandler(nil, error)
+                }
+            } else {
+                let error = APIError.response(httpResponse: httpResponse, data: data)
+                async {
+                    completionHandler(nil, error)
+                }
             }
         }
         
@@ -207,7 +277,7 @@ extension KrakenAPIClient: ExchangeApi {
                         do {
                             //refer to Parse Accounts comments
                             var currencyCode = currency
-                            if currency.length == 4 && (currency.hasPrefix("Z") || currency.hasPrefix("X")) {
+                            if currency.count == 4 && (currency.hasPrefix("Z") || currency.hasPrefix("X")) {
                                 currencyCode = currency.substring(from: 1)
                             }
                             
@@ -216,7 +286,7 @@ extension KrakenAPIClient: ExchangeApi {
                         } catch { }
                     }
                     for account in accounts {
-                        let currentBalance = self.paddedInteger(for: account.balance, currencyCode: account.currencyCode)
+                        let currentBalance = account.balance.paddedIntegerFor(currencyCode: account.currencyCode)
                         let availableBalance = currentBalance
                         
                         // Initialize an Account object to insert the record
@@ -259,14 +329,6 @@ extension KrakenAPIClient: ExchangeApi {
                 closeBlock(false, error, nil)
             }
         }
-    }
-    private func paddedInteger(for amount: Double, currencyCode: String) -> Int {
-        let decimals = Currency.rawValue(currencyCode).decimals
-        
-        var amountDecimal = Decimal(amount)
-        amountDecimal = amountDecimal * Decimal(pow(10.0, Double(decimals)))
-        
-        return (amountDecimal as NSDecimalNumber).intValue
     }
 }
 
@@ -316,5 +378,25 @@ internal extension Dictionary where Key: StringProtocol, Value: StringProtocol
         urlComponents.queryItems = queryItems
         
         return urlComponents.url?.query ?? ""
+    }
+}
+
+// Mark : Tools
+
+// NOTE: Kraken standardizes all of their currency codes to 4 characters for some reason
+// so for example LTC is XLTC, USD is ZUSD, but USDT is just USDT. So we need to remove
+// the trailing characters. It appears that X is for crypto and Z is for fiat.
+
+// TODO: Right now, we're safe just removing trailing Z and X characters. However, in the
+// future, if there is a 4 letter symbol for a currency and it starts with X or Z, we will
+// run into issues. Thankfully they use XZEC for ZCASH tokens.
+
+extension KrakenAPIClient {
+    func transformKrakenCurrencyToCurrencyCode(currency: String) -> String {
+        var currencyCode = currency
+        if currency.count == 4 && (currency.hasPrefix("Z") || currency.hasPrefix("X")) {
+            currencyCode = currency.substring(from: 1)
+        }
+        return currencyCode
     }
 }

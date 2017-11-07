@@ -145,21 +145,6 @@ extension Institution {
         }
     }
     
-    fileprivate static let initialsExcludedWords = Set(["OF", "THE", "AND", "AN"])
-    var initials: String {
-        let words = name.uppercased().components(separatedBy: " ").filter{!Institution.initialsExcludedWords.contains($0)}
-        
-        var initials = ""
-        for word in words {
-            initials += String(word.characters.first!)
-            if initials.length == 2 {
-                break
-            }
-        }
-        
-        return initials
-    }
-    
     var displayName: String {
         return name
     }

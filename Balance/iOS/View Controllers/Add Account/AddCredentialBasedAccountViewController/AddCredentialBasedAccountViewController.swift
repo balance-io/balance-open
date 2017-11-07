@@ -78,7 +78,7 @@ internal class AddCredentialBasedAccountViewController: UIViewController
         }
         
         self.viewModel.authenticate { (success, error) in
-            DispatchQueue.main.async {
+            async {
                 if success
                 {
                     self.navigationController?.popViewController(animated: true)

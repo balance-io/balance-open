@@ -222,10 +222,8 @@ class Syncer {
                         if let unwrappedError = error {
                             syncingErrors.append(unwrappedError)
                         }
-                        
                         syncingSuccess = false
                         performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
-                        
                         return
                     }
                     
@@ -236,27 +234,30 @@ class Syncer {
                         // Initialize an Account object to insert the record
                         AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: wallet.currencyCode, sourceInstitutionId: institution.sourceInstitutionId, accountTypeId: .exchange, accountSubTypeId: nil, name: wallet.currencyCode, currency: wallet.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
                     }
-                    
-                    // Sync transactions
-                    try! self.bitfinexApiClient.fetchTransactions({ (transactions, error) in
-                        if let unwrappedTransactions = transactions
-                        {
-                            for transaction in unwrappedTransactions
-                            {
-                                let amount = self.paddedInteger(for: transaction.amount, currencyCode: transaction.currencyCode)
-                                let identifier = "\(transaction.address)\(transaction.amount)\(transaction.movementTimestamp)"
-
-                                TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: identifier, sourceAccountId: transaction.currencyCode, name: identifier, currency: transaction.currencyCode, amount: amount, date: transaction.createdAt, categoryID: nil, institution: institution)
-                            }
-                        }
-                        
-                        performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
-                    })
                 }
+                // Sync transactions
+                try! self.bitfinexApiClient.fetchTransactions({ (transactions, error) in
+                    guard let unwrappedTransactions = transactions else {
+                        if let unwrappedError = error {
+                            syncingErrors.append(unwrappedError)
+                        }
+                        syncingSuccess = false
+                        performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                        return
+                    }
+                    for transaction in unwrappedTransactions
+                    {
+                        let amount = self.paddedInteger(for: transaction.amount, currencyCode: transaction.currencyCode)
+                        let identifier = "\(transaction.address)\(transaction.amount)\(transaction.movementTimestamp)"
+
+                        TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: identifier, sourceAccountId: transaction.currencyCode, name: identifier, currency: transaction.currencyCode, amount: amount, date: transaction.createdAt, categoryID: nil, institution: institution)
+                    }
+                    
+                    performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                })
             } catch {
                 syncingErrors.append(error)
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
-                
                 return
             }
         case .kraken:
@@ -271,7 +272,7 @@ class Syncer {
             do {
                 let credentials = try KrakenAPIClient.Credentials(identifier: accessToken)
                 
-                // Fetch data from Bitfinex
+                // Fetch data from Kraken
                 self.krakenApiClient.credentials = credentials
                 try! self.krakenApiClient.fetchAccounts { accounts, error in
                     guard let unwrappedAccounts = accounts else {
@@ -295,6 +296,19 @@ class Syncer {
                     
                     performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 }
+                try! self.krakenApiClient.fetchTransactions({ transactions, error in
+                    
+                    if let unwrappedTransactions = transactions {
+                        for transaction in unwrappedTransactions {
+                            let amount = self.paddedInteger(for: transaction.amount, currencyCode: transaction.asset.code)
+                            let identifier = "\(transaction.ledgerId)\(transaction.amount)\(transaction.time)"
+                            
+                            TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: identifier, sourceAccountId: transaction.asset.code, name: identifier, currency: transaction.asset.code, amount: amount, date: transaction.time, categoryID: nil, institution: institution)
+                        }
+                    }
+                    
+                    performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                })
             } catch {
                 syncingErrors.append(error)
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)

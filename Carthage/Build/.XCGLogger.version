@@ -1,22 +1,22 @@
 {
   "iOS" : [
     {
-      "hash" : "8e8ee8f564a4266385281481165f67fd6f39165d2419e72ed0b3f504eab70e40",
+      "hash" : "c3a1bcdc17338420b2325984336b92b198a7f6b95de632442bc0815e29b70617",
       "name" : "ObjcExceptionBridging"
     },
     {
-      "hash" : "944359437fd5761237fa9631a5bc170fe9d1d0f4e9a407cda5f3241be67a9290",
+      "hash" : "c93b7e371f6dee732b97e1f24f460f866f9c6a152fd1ff14d533b939b6913966",
       "name" : "XCGLogger"
     }
   ],
   "commitish" : "192730ffe6bb177c673ecf39750bd5c8814171d8",
   "Mac" : [
     {
-      "hash" : "49a3be74f224dcf56886c7752623ccd26e96636ca91a54e364c311b659905d5e",
+      "hash" : "1663bad1b5dc80a559291a1867f498a3c789acfc57e5fc42173ec9be96658ab8",
       "name" : "ObjcExceptionBridging"
     },
     {
-      "hash" : "8375bb90270a89b9e0bdc2002650af4fe2662917f93f8243dc27dc842ffda6f9",
+      "hash" : "dee730517199646e4fea857476828210fd82b6487460b540f2ce60765d3c1c09",
       "name" : "XCGLogger"
     }
   ]

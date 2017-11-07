@@ -34,5 +34,14 @@ extension Double {
         let decimal = self / pow(10.0, Double(decimals))
         return decimal
     }
+    
+    func paddedIntegerFor(currencyCode: String) -> Int {
+        let decimals = Currency.rawValue(currencyCode).decimals
+        
+        var amountDecimal = Decimal(self)
+        amountDecimal = amountDecimal * Decimal(pow(10.0, Double(decimals)))
+        
+        return (amountDecimal as NSDecimalNumber).intValue
+    }
 }
 

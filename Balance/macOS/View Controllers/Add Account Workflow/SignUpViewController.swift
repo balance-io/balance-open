@@ -594,7 +594,7 @@ class SignUpViewController: NSViewController {
         
         var filled = true
         for textField in textFields {
-            if textField.stringValue.length == 0 {
+            if textField.stringValue.count == 0 {
                 filled = false
                 break
             }
@@ -618,29 +618,11 @@ class SignUpViewController: NSViewController {
     }
     
     @objc fileprivate func finished() {
-        if !patch {
-            if let institutionId = institution?.institutionId {
-//                defaults.removeUnfinishedConnectionInstitutionId(institutionId)
-            }
-            
-            // TODO: Do this a different way
-            // Update the last new institution time so syncs happen faster
-//            syncManager.syncDefaults.lastNewInstitutionAddedTime = Date()
-            
-            // If this is a brand new install, sync categories right away
-//            if Category.allCategoryNames().count == 0 {
-//                plaidApi.pullCategories()
-//            }
-        }
-        
         callCloseBlock(finished: true)
     }
     
     @objc fileprivate func cancel() {
-        if !patch, let institution = institution {
-//            plaidApi.removeUser(institutionId: institution.institutionId, completion: nil)
-        }
-        log.severe("user presssed cancel")
+        log.info("user presssed cancel")
         
         close()
     }
@@ -711,11 +693,11 @@ class SignUpViewController: NSViewController {
             work()
             
             if let updateConnectLabelWorkItem = self.updateConnectLabelWorkItem {
-                DispatchQueue.main.async(after: 5.0, execute: updateConnectLabelWorkItem)
+                async(after: 5.0, execute: updateConnectLabelWorkItem)
             }
         }
         
-        DispatchQueue.main.async(after: 5.0, execute: updateConnectLabelWorkItem!)
+        async(after: 5.0, execute: updateConnectLabelWorkItem!)
     }
     
     fileprivate func stopAutoUpdatingConnectLabel() {

@@ -11,7 +11,7 @@ import Foundation
 extension String {
 
     static func random(_ length: Int = 32) -> String {
-        let chars = Array<Character>("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".characters)
+        let chars = Array("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
         let charsCount = UInt32(chars.count)
         
         var string = ""
@@ -52,7 +52,7 @@ extension String {
     }
     
     var capitalizedFirstLetterString: String {
-        if characters.count > 1 {
+        if count > 1 {
             return "\(substring(to: 1).uppercased())\(substring(from: 1))"
         } else {
             return capitalized
@@ -72,10 +72,6 @@ extension String {
     //
     // MARK: - Easier indexing -
     //
-    
-    var length: Int {
-        return characters.count
-    }
     
     func index(offset: Int) -> Index {
         return index(startIndex, offsetBy: offset)
