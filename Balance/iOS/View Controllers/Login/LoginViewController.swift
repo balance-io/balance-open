@@ -61,6 +61,7 @@ internal final class LoginViewController: UIViewController {
         }
         
         // Email text field
+        self.emailTextField.delegate = self
         self.container.addSubview(self.emailTextField)
         
         self.emailTextField.snp.makeConstraints { (make) in
@@ -70,6 +71,7 @@ internal final class LoginViewController: UIViewController {
         }
         
         // Password text field
+        self.passwordTextField.delegate = self
         self.container.addSubview(self.passwordTextField)
         
         self.passwordTextField.snp.makeConstraints { (make) in
@@ -117,6 +119,23 @@ internal final class LoginViewController: UIViewController {
         alertController.addAction(resetPasswordAction)
         
         self.present(alertController, animated: true, completion: nil)
+    }
+}
+
+// MARK: UITextFieldDelegate
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField
+        {
+        case self.emailTextField:
+            self.passwordTextField.becomeFirstResponder()
+        case self.passwordTextField:()
+            // TODO: Trigger API call
+        default:()
+        }
+        
+        return true
     }
 }
 

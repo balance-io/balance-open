@@ -65,6 +65,7 @@ internal final class RegistrationViewController: UIViewController {
         }
         
         // Email text field
+        self.emailTextField.delegate = self
         self.container.addSubview(self.emailTextField)
         
         self.emailTextField.snp.makeConstraints { (make) in
@@ -74,6 +75,7 @@ internal final class RegistrationViewController: UIViewController {
         }
         
         // Password text field
+        self.passwordTextField.delegate = self
         self.container.addSubview(self.passwordTextField)
         
         self.passwordTextField.snp.makeConstraints { (make) in
@@ -83,6 +85,7 @@ internal final class RegistrationViewController: UIViewController {
         }
         
         // Password confirmation text field
+        self.passwordConfirmationTextField.delegate = self
         self.container.addSubview(self.passwordConfirmationTextField)
         
         self.passwordConfirmationTextField.snp.makeConstraints { (make) in
@@ -99,3 +102,23 @@ internal final class RegistrationViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
 }
+
+// MARK: UITextFieldDelegate
+
+extension RegistrationViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField
+        {
+        case self.emailTextField:
+            self.passwordTextField.becomeFirstResponder()
+        case self.passwordTextField:
+            self.passwordConfirmationTextField.becomeFirstResponder()
+        case self.passwordConfirmationTextField:()
+            // TODO: Trigger API call
+        default:()
+        }
+        
+        return true
+    }
+}
+
