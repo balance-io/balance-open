@@ -374,6 +374,7 @@
 		A467DFC51F98EBFD0063882C /* Currency+MasterCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = A467DFC41F98EBFD0063882C /* Currency+MasterCurrency.swift */; };
 		A467DFC61F98EBFD0063882C /* Currency+MasterCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = A467DFC41F98EBFD0063882C /* Currency+MasterCurrency.swift */; };
 		A46DBC841F69B2C3006F4247 /* BitfinexCredentialsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46DBC831F69B2C3006F4247 /* BitfinexCredentialsTests.swift */; };
+		A478A9251FB204C800F4764A /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A478A9241FB204C800F4764A /* ResetPasswordViewController.swift */; };
 		A493B9391F68137E0074ACCC /* APICredentialsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B9381F68137E0074ACCC /* APICredentialsComponents.swift */; };
 		A493B93A1F68137E0074ACCC /* APICredentialsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B9381F68137E0074ACCC /* APICredentialsComponents.swift */; };
 		A493B93C1F6819600074ACCC /* BitfinexAuthHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B93B1F6819600074ACCC /* BitfinexAuthHeaders.swift */; };
@@ -775,6 +776,7 @@
 		A459EDA71F83D2BB00DC4B51 /* TransactionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCollectionViewCell.swift; sourceTree = "<group>"; };
 		A467DFC41F98EBFD0063882C /* Currency+MasterCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Currency+MasterCurrency.swift"; sourceTree = "<group>"; };
 		A46DBC831F69B2C3006F4247 /* BitfinexCredentialsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexCredentialsTests.swift; sourceTree = "<group>"; };
+		A478A9241FB204C800F4764A /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		A493B9381F68137E0074ACCC /* APICredentialsComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICredentialsComponents.swift; sourceTree = "<group>"; };
 		A493B93B1F6819600074ACCC /* BitfinexAuthHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexAuthHeaders.swift; sourceTree = "<group>"; };
 		A493B93E1F681BA00074ACCC /* BitfinexWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexWallet.swift; sourceTree = "<group>"; };
@@ -1319,6 +1321,7 @@
 				A42953CC1F8E175E00729045 /* Splash Screen */,
 				A453A5241F8676CA0002C6C8 /* Registration */,
 				A453A5211F866CEC0002C6C8 /* Login */,
+				A478A9231FB1FF5100F4764A /* Reset Password */,
 				53561E991F82DD120043D4F9 /* Accounts list */,
 				53561E9D1F82DD120043D4F9 /* Add Account */,
 				A459EDA21F839D8200DC4B51 /* Transactions List */,
@@ -1815,6 +1818,14 @@
 				A459EDA31F839D9800DC4B51 /* TransactionsListViewController.swift */,
 			);
 			path = "Transactions List";
+			sourceTree = "<group>";
+		};
+		A478A9231FB1FF5100F4764A /* Reset Password */ = {
+			isa = PBXGroup;
+			children = (
+				A478A9241FB204C800F4764A /* ResetPasswordViewController.swift */,
+			);
+			path = "Reset Password";
 			sourceTree = "<group>";
 		};
 		A49572781F98D9F700651C89 /* Supplementary Views */ = {
@@ -2363,6 +2374,7 @@
 				53561EA41F82DD260043D4F9 /* UserPreferences.swift in Sources */,
 				53552A161ED7251700DD95F9 /* Source.swift in Sources */,
 				535529F31ED724ED00DD95F9 /* TransactionsTabViewModel.swift in Sources */,
+				A478A9251FB204C800F4764A /* ResetPasswordViewController.swift in Sources */,
 				A44C76231F7BD9610024476E /* BitfinexTransaction.swift in Sources */,
 				A4430A911F94EE1700F2FFFA /* CoinbaseInstitution.swift in Sources */,
 				A4ED56DB1F86301A00E4CC42 /* AccountTableViewCell.swift in Sources */,
