@@ -386,6 +386,7 @@
 		A456ED0A1FB224EC006EE529 /* KrakenTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456ED081FB224EC006EE529 /* KrakenTransaction.swift */; };
 		A456ED0D1FB225A6006EE529 /* PriceTickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456ED0C1FB225A6006EE529 /* PriceTickerViewController.swift */; };
 		A456ED121FB3067D006EE529 /* CurrencyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456ED111FB3067D006EE529 /* CurrencyCollectionViewCell.swift */; };
+		A456ED151FB31A33006EE529 /* UIFont+Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456ED141FB31A33006EE529 /* UIFont+Balance.swift */; };
 		A459EDA41F839D9800DC4B51 /* TransactionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A459EDA31F839D9800DC4B51 /* TransactionsListViewController.swift */; };
 		A459EDA61F83B90900DC4B51 /* TransactionsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A459EDA51F83B90900DC4B51 /* TransactionsListViewModel.swift */; };
 		A459EDA81F83D2BB00DC4B51 /* TransactionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A459EDA71F83D2BB00DC4B51 /* TransactionCollectionViewCell.swift */; };
@@ -802,6 +803,7 @@
 		A456ED081FB224EC006EE529 /* KrakenTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KrakenTransaction.swift; sourceTree = "<group>"; };
 		A456ED0C1FB225A6006EE529 /* PriceTickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTickerViewController.swift; sourceTree = "<group>"; };
 		A456ED111FB3067D006EE529 /* CurrencyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCollectionViewCell.swift; sourceTree = "<group>"; };
+		A456ED141FB31A33006EE529 /* UIFont+Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Balance.swift"; sourceTree = "<group>"; };
 		A459EDA31F839D9800DC4B51 /* TransactionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListViewController.swift; sourceTree = "<group>"; };
 		A459EDA51F83B90900DC4B51 /* TransactionsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListViewModel.swift; sourceTree = "<group>"; };
 		A459EDA71F83D2BB00DC4B51 /* TransactionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1198,6 +1200,7 @@
 				53561E941F82DD120043D4F9 /* View Controllers */,
 				53561E8A1F82DD120043D4F9 /* Views */,
 				53561EA11F82DD120043D4F9 /* Utilities */,
+				A456ED131FB31A1A006EE529 /* Extensions */,
 				53552A491ED72BE000DD95F9 /* Frameworks */,
 				53552A4A1ED72BE900DD95F9 /* Supporting Files */,
 			);
@@ -1875,6 +1878,14 @@
 				A456ED0C1FB225A6006EE529 /* PriceTickerViewController.swift */,
 			);
 			path = "Price Ticker";
+			sourceTree = "<group>";
+		};
+		A456ED131FB31A1A006EE529 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A456ED141FB31A33006EE529 /* UIFont+Balance.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		A459EDA21F839D8200DC4B51 /* Transactions List */ = {
@@ -2569,6 +2580,7 @@
 				537187FB1F4CC3EF00E7F9D6 /* NumberUtils.swift in Sources */,
 				53561EAD1F82DD260043D4F9 /* NewAccountListViewModel.swift in Sources */,
 				53552A131ED7251200DD95F9 /* CertValidator.m in Sources */,
+				A456ED151FB31A33006EE529 /* UIFont+Balance.swift in Sources */,
 				53552A141ED7251200DD95F9 /* ServerMessage.swift in Sources */,
 				53561EA81F82DD260043D4F9 /* AccountsListViewController.swift in Sources */,
 				A41EE47D1FB9A98A00210038 /* GDAXTransaction.swift in Sources */,
