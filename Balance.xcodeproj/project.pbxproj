@@ -385,6 +385,7 @@
 		A456ED091FB224EC006EE529 /* KrakenTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456ED081FB224EC006EE529 /* KrakenTransaction.swift */; };
 		A456ED0A1FB224EC006EE529 /* KrakenTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456ED081FB224EC006EE529 /* KrakenTransaction.swift */; };
 		A456ED0D1FB225A6006EE529 /* PriceTickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456ED0C1FB225A6006EE529 /* PriceTickerViewController.swift */; };
+		A456ED121FB3067D006EE529 /* CurrencyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456ED111FB3067D006EE529 /* CurrencyCollectionViewCell.swift */; };
 		A459EDA41F839D9800DC4B51 /* TransactionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A459EDA31F839D9800DC4B51 /* TransactionsListViewController.swift */; };
 		A459EDA61F83B90900DC4B51 /* TransactionsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A459EDA51F83B90900DC4B51 /* TransactionsListViewModel.swift */; };
 		A459EDA81F83D2BB00DC4B51 /* TransactionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A459EDA71F83D2BB00DC4B51 /* TransactionCollectionViewCell.swift */; };
@@ -800,6 +801,7 @@
 		A453A5251F8676F00002C6C8 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		A456ED081FB224EC006EE529 /* KrakenTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KrakenTransaction.swift; sourceTree = "<group>"; };
 		A456ED0C1FB225A6006EE529 /* PriceTickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTickerViewController.swift; sourceTree = "<group>"; };
+		A456ED111FB3067D006EE529 /* CurrencyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCollectionViewCell.swift; sourceTree = "<group>"; };
 		A459EDA31F839D9800DC4B51 /* TransactionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListViewController.swift; sourceTree = "<group>"; };
 		A459EDA51F83B90900DC4B51 /* TransactionsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListViewModel.swift; sourceTree = "<group>"; };
 		A459EDA71F83D2BB00DC4B51 /* TransactionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1837,6 +1839,7 @@
 			children = (
 				A459EDA71F83D2BB00DC4B51 /* TransactionCollectionViewCell.swift */,
 				A42953D31F8E255D00729045 /* InstitutionCollectionViewCell.swift */,
+				A456ED111FB3067D006EE529 /* CurrencyCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -2435,6 +2438,7 @@
 				53552A051ED7251200DD95F9 /* Logging.swift in Sources */,
 				53D441E61F44ABBD006967E1 /* Item.swift in Sources */,
 				532121A01EE8B91600F4812A /* unzip.c in Sources */,
+				A456ED121FB3067D006EE529 /* CurrencyCollectionViewCell.swift in Sources */,
 				A4E457231F790EE5002E2879 /* PoloniexTransaction.swift in Sources */,
 				5321219E1EE8B91600F4812A /* ioapi.c in Sources */,
 				53552A0C1ED7251200DD95F9 /* Utils.swift in Sources */,
