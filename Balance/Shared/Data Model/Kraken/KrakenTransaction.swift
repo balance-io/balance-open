@@ -9,21 +9,21 @@
 import Foundation
 
 internal extension KrakenAPIClient {
-    internal struct Transaction {
+    struct Transaction {
         // Internal
-        internal let ledgerId: String //key for the other object
-        internal let refid: String
-        internal let time: Date
-        internal let type: TxType
-        internal let aclass: Aclass
-        internal let asset: Currency
-        internal let amount: Double
-        internal let fee: Double
-        internal let balance: Double
+        let ledgerId: String //key for the other object
+        let refid: String
+        let time: Date
+        let type: TxType
+        let aclass: Aclass
+        let asset: Currency
+        let amount: Double
+        let fee: Double
+        let balance: Double
         
         // MARK: Initialization
         
-        internal init(dictionary: [String : Any], ledgerId: String) throws {
+        init(dictionary: [String : Any], ledgerId: String) throws {
             self.ledgerId = ledgerId
             self.refid = try checkType(dictionary["refid"], name: "refid")
             let timestamp: Double = try checkType(dictionary["time"], name: "timestamp")
