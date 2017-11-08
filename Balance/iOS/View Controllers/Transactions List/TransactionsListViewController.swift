@@ -10,11 +10,9 @@ import UIKit
 
 
 internal final class TransactionsListViewController: UIViewController {
-    // Fileprivate
-    private let viewModel = TransactionsListViewModel()
-    
     // Private
-    let refreshControl = UIRefreshControl()
+    private let viewModel = TransactionsListViewModel()
+    private let refreshControl = UIRefreshControl()
     
     private let collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
