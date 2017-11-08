@@ -103,7 +103,7 @@ internal final class RootViewController: UIViewController
     // MARK: UI Defaults
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if self.rootTabBarController.selectedIndex == 0 {
+        if self.rootTabBarController.selectedIndex == self.rootTabBarController.viewControllers?.index(of: self.accountsListViewController) {
             return .lightContent
         }
         
