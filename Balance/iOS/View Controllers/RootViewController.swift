@@ -17,6 +17,7 @@ internal final class RootViewController: UIViewController
     
     // Private
     private let rootTabBarController = UITabBarController()
+    private let priceTickerViewController = PriceTickerViewController()
     private let accountsListViewController = AccountsListViewController()
     private let transactionsListViewController = TransactionsListViewController()
     private let settingsViewController = SettingsViewController()
@@ -28,11 +29,13 @@ internal final class RootViewController: UIViewController
         super.init(nibName: nil, bundle: nil)
         
         // Tab bar controller
+        let priceTickerNavigationController = UINavigationController(rootViewController: self.priceTickerViewController)
         let accountsListNavigationController = UINavigationController(rootViewController: self.accountsListViewController)
         let transactionsListNavigationController = UINavigationController(rootViewController: self.transactionsListViewController)
         let settingsNavigationController = UINavigationController(rootViewController: self.settingsViewController)
         
         self.rootTabBarController.viewControllers = [
+            priceTickerNavigationController,
             accountsListNavigationController,
             transactionsListNavigationController,
             settingsNavigationController
