@@ -24,14 +24,14 @@ internal final class CurrencyCollectionViewCell: UICollectionViewCell, Reusable 
     // Private
     private let currencyNameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)
+        label.font = UIFont.Balance.font(ofSize: 12.0, weight: .medium)
         
         return label
     }()
     
     private let amountLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
+        label.font = UIFont.Balance.font(ofSize: 14.0, weight: .medium)
         
         return label
     }()
