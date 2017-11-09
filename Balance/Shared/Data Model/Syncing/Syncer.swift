@@ -196,9 +196,9 @@ class Syncer {
                         AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: account.identifier, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: account.currencyCode, currency: account.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
                     }
                 }
-                let dispatchGroupExternal = DispatchGroup()
+                let dispatchGroup = DispatchGroup()
                 for account in AccountRepository.si.accounts(institutionId: institution.institutionId) {
-                    dispatchGroupExternal.enter()
+                    dispatchGroup.enter()
                         try self.gdaxApiClient.fetchTranactions(accountId: String(account.sourceAccountId), currencyCode: account.currency, { (transactions, error) in
                             if let unwrappedTransactions = transactions {
                                 for transaction in unwrappedTransactions {
@@ -207,10 +207,10 @@ class Syncer {
                                     TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: transaction.id, sourceAccountId: account.sourceAccountId, name: account.currency, currency: transaction.currencyCode, amount: amount, date: transaction.createdAt, categoryID: nil, institution: institution)
                                 }
                             }
-                            dispatchGroupExternal.leave()
+                            dispatchGroup.leave()
                         })
                 }
-                dispatchGroupExternal.notify(queue: .main) {
+                dispatchGroup.notify(queue: .main) {
                     performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 }
             } catch {
