@@ -15,6 +15,8 @@
 		2D6B22DB1EDE238200356035 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1A64991B867B1F009356A0 /* AppDelegate.swift */; };
 		2D7340F41FA9FC6F00020A3F /* KrakenTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7340F31FA9FC6F00020A3F /* KrakenTransaction.swift */; };
 		2DD9B1F01EDDDFD10006268F /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */; };
+		2DE6D9DC1FB1D016007DDCBD /* GDAXTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE6D9DB1FB1D016007DDCBD /* GDAXTransaction.swift */; };
+		2DE6D9DE1FB1D2AA007DDCBD /* Transactions.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DE6D9DD1FB1D2AA007DDCBD /* Transactions.json */; };
 		5300D6261DCE5A1E00D02657 /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5300D6251DCE5A1E00D02657 /* LockViewController.swift */; };
 		5301A7611F17DC8B00668099 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301A7601F17DC8B00668099 /* URL.swift */; };
 		5301A7771F17F86900668099 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301A7761F17F86900668099 /* HTTPMethod.swift */; };
@@ -505,6 +507,8 @@
 		2D326D251F5EA22900873286 /* PoloniexErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexErrors.swift; sourceTree = "<group>"; };
 		2D7340F31FA9FC6F00020A3F /* KrakenTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenTransaction.swift; sourceTree = "<group>"; };
 		2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
+		2DE6D9DB1FB1D016007DDCBD /* GDAXTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXTransaction.swift; sourceTree = "<group>"; };
+		2DE6D9DD1FB1D2AA007DDCBD /* Transactions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = Transactions.json; path = "BalanceUnitTests/Supporting Files/Resources/GDAX API Responses/Transactions.json"; sourceTree = SOURCE_ROOT; };
 		5300D6251DCE5A1E00D02657 /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
 		5301A7601F17DC8B00668099 /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		5301A7761F17F86900668099 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -1397,6 +1401,8 @@
 				538B47B71F4C9FD70023CED5 /* GDAXErrors.swift */,
 				538B47B81F4C9FD70023CED5 /* GDAXServer.swift */,
 				538B47B91F4C9FD70023CED5 /* GDAXWithdrawal.swift */,
+				2DE6D9DB1FB1D016007DDCBD /* GDAXTransaction.swift */,
+				2DE6D9DD1FB1D2AA007DDCBD /* Transactions.json */,
 			);
 			name = GDAX;
 			path = APIs/GDAX;
@@ -2254,6 +2260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC8DB3E41BE4EFF40015C204 /* Main.storyboard in Resources */,
+				2DE6D9DE1FB1D2AA007DDCBD /* Transactions.json in Resources */,
 				DC9C33DB1C6DA20A004C0ABC /* Images.xcassets in Resources */,
 				DC1A649F1B867B1F009356A0 /* MainMenu.xib in Resources */,
 			);
@@ -2652,6 +2659,7 @@
 				5372E96F1DF7E75C00DDE214 /* SignUpTextField.swift in Sources */,
 				A41D3E421F6BF75100FD25B5 /* KrakenErrors.swift in Sources */,
 				A4E457161F7901E6002E2879 /* EthplorerInstitution.swift in Sources */,
+				2DE6D9DC1FB1D016007DDCBD /* GDAXTransaction.swift in Sources */,
 				53EB77CE1CF3E6F600F01903 /* NSFont.swift in Sources */,
 				537504FD1F192D280062C11A /* TypeAliases.swift in Sources */,
 				A4E768021F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */,

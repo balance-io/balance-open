@@ -56,9 +56,9 @@ internal final class GDAXAPIClient
 
 // MARK: Accounts
 
-internal extension GDAXAPIClient
+extension GDAXAPIClient
 {
-    internal func fetchAccounts(_ completionHandler: @escaping (_ accounts: [Account]?, _ error: APIError?) -> Void) throws
+    func fetchAccounts(_ completionHandler: @escaping (_ accounts: [Account]?, _ error: APIError?) -> Void) throws
     {
         guard let unwrappedCredentials = self.credentials else
         {
@@ -97,8 +97,9 @@ internal extension GDAXAPIClient
                     }
                     catch { }
                 }
-                
-                completionHandler(accounts, nil)
+                async {
+                    completionHandler(accounts, nil)
+                }
             } else if case 400...402 = httpResponse.statusCode {
                 let error = APIError.response(httpResponse: httpResponse, data: data)
                 completionHandler(nil, error)
@@ -112,6 +113,69 @@ internal extension GDAXAPIClient
                 completionHandler(nil, error)
             }
             } catch {}
+        }
+        
+        task.resume()
+    }
+    
+    func fetchTranactions(accountId: String, currencyCode: String,_ completionHandler: @escaping (_ accounts: [Transaction]?, _ error: APIError?) -> Void) throws {
+        guard let unwrappedCredentials = self.credentials else {
+            throw APICredentialsComponents.Error.noCredentials
+        }
+        let requestPath = "/accounts/\(accountId)/ledger"
+        let headers = try AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, method: "GET", body: nil)
+        let url = self.server.url().appendingPathComponent(requestPath)
+        
+        var request = URLRequest(url: url)
+        request.add(headers: headers.dictionary)
+        
+        // Perform request
+        let task = self.session.dataTask(with: request) { (data, response, error) in
+            do {
+                guard let httpResponse = response as? HTTPURLResponse,
+                    let json = try? JSONSerialization.jsonObject(with: data!, options: []) else {
+                        async {
+                            completionHandler(nil, GDAXAPIClient.APIError.invalidJSON)
+                        }
+                    return
+                }
+                
+                if case 200...299 = httpResponse.statusCode {
+                    guard let transactionsJSON = json as? [[String : Any]] else {
+                        // return invalid json
+                        throw GDAXAPIClient.APIError.invalidJSON
+                    }
+                    
+                    // Build accounts
+                    var transactions = [GDAXAPIClient.Transaction]()
+                    for transaction in transactionsJSON {
+                        do {
+                            let transactoinObject = try Transaction.init(dictionary: transaction, currencyCode: currencyCode)
+                            transactions.append(transactoinObject)
+                        }
+                        catch {
+                            completionHandler(nil, error as? GDAXAPIClient.APIError)
+                        }
+                    }
+                    completionHandler(transactions, nil)
+                    // TO DO
+                    // change the institution boolean passwordInvalid to a bool and convert to enum and then modify here if an error happens with the appropiate enum
+                    // also port all api code errors to a single common error enum
+                } else if case 400...402 = httpResponse.statusCode {
+                    let error = APIError.response(httpResponse: httpResponse, data: data)
+                    completionHandler(nil, error)
+//                    throw APICredentialsComponents.Error.invalidSecret(message: "One or more of your credentials is invalid")
+                } else if case 403...499 = httpResponse.statusCode {
+                    let error = APIError.response(httpResponse: httpResponse, data: data)
+                    completionHandler(nil, error)
+//                    throw APICredentialsComponents.Error.missingPermissions
+                } else {
+                    let error = APIError.response(httpResponse: httpResponse, data: data)
+                    completionHandler(nil, error)
+                }
+            } catch {
+                completionHandler(nil, error as? GDAXAPIClient.APIError)
+            }
         }
         
         task.resume()
@@ -194,13 +258,27 @@ extension GDAXAPIClient: ExchangeApi {
             let credentials = try GDAXAPIClient.Credentials(key: key, secret: secret, passphrase: passphrase)
             
             self.credentials = credentials
-            try self.fetchAccounts { _, error in
+            try self.fetchAccounts { accounts, error in
                 guard let unwrappedError = error else {
                     do {
                         let credentialsIdentifier = "main"
                         try credentials.save(identifier: credentialsIdentifier)
-                        let institution = InstitutionRepository.si.institution(source: .gdax, sourceInstitutionId: "", name: "GDAX")
-                        institution?.accessToken = credentialsIdentifier
+                        let newInstitution = InstitutionRepository.si.institution(source: .gdax, sourceInstitutionId: "", name: "GDAX")
+                        newInstitution?.accessToken = credentialsIdentifier
+                        
+                        guard let unwrappedAccounts = accounts, let institution = newInstitution else {
+                            async {
+                                closeBlock(false, error, nil)
+                            }
+                            return
+                        }
+                        for account in unwrappedAccounts {
+                            let currentBalance = account.balance.paddedIntegerFor(currencyCode: account.currencyCode)
+                            let availableBalance = account.availableBalance.paddedIntegerFor(currencyCode: account.currencyCode)
+                            
+                            // Initialize an Account object to insert the record
+                            AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: account.identifier, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: account.currencyCode, currency: account.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
+                        }
                         
                         async {
                             closeBlock(true, nil, institution)

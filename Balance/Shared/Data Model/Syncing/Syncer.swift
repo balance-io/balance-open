@@ -175,7 +175,7 @@ class Syncer {
                 
                 // Fetch data from GDAX
                 self.gdaxApiClient.credentials = credentials
-                try! self.gdaxApiClient.fetchAccounts { accounts, error in
+                try self.gdaxApiClient.fetchAccounts { accounts, error in
                     guard let unwrappedAccounts = accounts else
                     {
                         if let unwrappedError = error
@@ -195,7 +195,22 @@ class Syncer {
                         // Initialize an Account object to insert the record
                         AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: account.identifier, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: account.currencyCode, currency: account.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
                     }
-                    
+                }
+                let dispatchGroup = DispatchGroup()
+                for account in AccountRepository.si.accounts(institutionId: institution.institutionId) {
+                    dispatchGroup.enter()
+                        try self.gdaxApiClient.fetchTranactions(accountId: String(account.sourceAccountId), currencyCode: account.currency, { (transactions, error) in
+                            if let unwrappedTransactions = transactions {
+                                for transaction in unwrappedTransactions {
+                                    let amount = self.paddedInteger(for: transaction.amount, currencyCode: transaction.currencyCode)
+                                    
+                                    TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: transaction.id, sourceAccountId: account.sourceAccountId, name: account.currency, currency: transaction.currencyCode, amount: amount, date: transaction.createdAt, categoryID: nil, institution: institution)
+                                }
+                            }
+                            dispatchGroup.leave()
+                        })
+                }
+                dispatchGroup.notify(queue: .main) {
                     performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 }
             } catch {
