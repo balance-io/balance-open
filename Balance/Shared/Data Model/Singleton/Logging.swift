@@ -9,12 +9,6 @@
 import Foundation
 import XCGLogger
 
-#if DEBUG
-let logLevel = XCGLogger.Level.debug
-#else
-let logLevel = XCGLogger.Level.info
-#endif
-
 class Logging {
     fileprivate static var defaultLogFileName: String {
         let logCount = defaults.logCount
@@ -47,13 +41,13 @@ class Logging {
     
     func setupLogging() {
         // Setup the log parameters
-        log.setup(level: logLevel,
+        log.setup(level: debugging.logLevel,
                   showThreadName: true,
                   showLevel: true,
                   showFileNames: true,
                   showLineNumbers: true,
                   writeToFile: logFilePath,
-                  fileLevel: logLevel)
+                  fileLevel: debugging.logLevel)
         
         // Use GMT time zone for logging
         log.dateFormatter = {

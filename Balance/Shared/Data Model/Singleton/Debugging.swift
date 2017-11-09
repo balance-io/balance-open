@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import XCGLogger
 
 // Options for release build
 let betaOptionsEnabled = false
@@ -168,6 +169,13 @@ class Debugging {
         }
         return ""
     }
+    
+    var logLevel: XCGLogger.Level {
+        if let logLevel = UserDefaults.standard.object(forKey: "logLevel") as? Int, let level = XCGLogger.Level(rawValue: logLevel) {
+            return level
+        }
+        return .debug
+    }
 }
 
 #else
@@ -296,6 +304,10 @@ class Debugging {
     
     var usePersonalAppStoreReceipt: Bool {
         return false
+    }
+    
+    var logLevel: XCGLogger.Level {
+        return .info
     }
 }
 
