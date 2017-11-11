@@ -2,7 +2,7 @@ import Cocoa
 import Locksmith
 import ServiceManagement
 
-let autolaunchBundleId = "software.balanced.balance-open-autolaunch"
+let autolaunchBundleId = "software.balanced.balancemac-autolaunch"
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     
