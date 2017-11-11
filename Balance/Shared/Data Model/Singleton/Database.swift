@@ -70,7 +70,7 @@ class Database {
         var success = true
         write.inDatabase { db in
             // Decrypt the database
-            db.executeStatements("PRAGMA key='\(database.password!)'")
+            db.executeStatements("PRAGMA key='\(self.password!)'")
             
             // Enable WAL mode for reads
             success = db.executeStatements("PRAGMA journal_mode=WAL")

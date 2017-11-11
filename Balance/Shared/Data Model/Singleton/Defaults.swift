@@ -49,7 +49,9 @@ class Defaults {
         static let institutionColors                    = "institutionColors"
         static let serverMessageReadIds                 = "serverMessageReadIds"
         static let logCount                             = "logCount"
-        static let hiddenAccountIds                     = "hiddenAccountIds"
+        static let manuallyHiddenAccountIds             = "manuallyHiddenAccountIds"
+        static let manuallyShownAccountIds              = "manuallyShownAccountIds"
+        static let autoHiddenAccountIds                 = "autoHiddenAccountIds"
         static let unfinishedConnectionInstitutionIds   = "unfinishedConnectionInstitutionIds"
         static let masterCurrency                       = "masterCurrency"
     }
@@ -122,10 +124,6 @@ class Defaults {
         set {
             defaults.set(newValue, forKey: Keys.firstLaunch)
         }
-    }
-    
-    var darkMode: Bool {
-        return UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark"
     }
     
     var accountsViewInstitutionsOrder: [Int]? {
@@ -213,43 +211,6 @@ class Defaults {
         set {
             defaults.set(newValue, forKey: Keys.logCount)
         }
-    }
-    
-    var hiddenAccountIds: Set<Int> {
-        if let accountIds = defaults.array(forKey: Keys.hiddenAccountIds) as? [Int] {
-            return Set(accountIds)
-        } else {
-            return Set<Int>()
-        }
-    }
-    
-    var hiddenAccountIdsQuerySet: String {
-        let accountIds = hiddenAccountIds
-        var string = "("
-        for (index, id) in accountIds.enumerated() {
-            if index > 0 {
-                string += ","
-            }
-            string += "\(id)"
-        }
-        string += ")"
-        return string
-    }
-    
-    func hideAccountId(_ accountId: Int) {
-        var accountIds = hiddenAccountIds
-        accountIds.insert(accountId)
-        defaults.set(Array(accountIds), forKey: Keys.hiddenAccountIds)
-        let userInfo = [Notifications.Keys.AccountId: accountId]
-        NotificationCenter.postOnMainThread(name: Notifications.AccountHidden, userInfo: userInfo)
-    }
-    
-    func unhideAccountId(_ accountId: Int) {
-        var accountIds = hiddenAccountIds
-        accountIds.remove(accountId)
-        defaults.set(Array(accountIds), forKey: Keys.hiddenAccountIds)
-        let userInfo = [Notifications.Keys.AccountId: accountId]
-        NotificationCenter.postOnMainThread(name: Notifications.AccountUnhidden, userInfo: userInfo)
     }
     
     //General Preferences
@@ -341,17 +302,134 @@ class Defaults {
     }
 }
 
+// MARK: - Account Hiding -
+
+extension Defaults {
+    var manuallyHiddenAccountIds: Set<Int> {
+        if let accountIds = defaults.array(forKey: Keys.manuallyHiddenAccountIds) as? [Int] {
+            return Set(accountIds)
+        } else {
+            return Set<Int>()
+        }
+    }
+    
+    var manuallyHiddenAccountIdsQuerySet: String {
+        let accountIds = manuallyHiddenAccountIds
+        var string = "("
+        for (index, id) in accountIds.enumerated() {
+            if index > 0 {
+                string += ","
+            }
+            string += "\(id)"
+        }
+        string += ")"
+        return string
+    }
+    
+    func manuallyHideAccountId(_ accountId: Int) {
+        var accountIds = manuallyHiddenAccountIds
+        if !accountIds.contains(accountId) {
+            accountIds.insert(accountId)
+            defaults.set(Array(accountIds), forKey: Keys.manuallyHiddenAccountIds)
+            
+            if shouldHideAccountInUI(accountId: accountId) {
+                let userInfo = [Notifications.Keys.AccountId: accountId]
+                NotificationCenter.postOnMainThread(name: Notifications.AccountHidden, userInfo: userInfo)
+            }
+        }
+    }
+    
+    func manuallyUnhideAccountId(_ accountId: Int) {
+        var accountIds = manuallyHiddenAccountIds
+        if accountIds.contains(accountId) {
+            accountIds.remove(accountId)
+            defaults.set(Array(accountIds), forKey: Keys.manuallyHiddenAccountIds)
+            let userInfo = [Notifications.Keys.AccountId: accountId]
+            NotificationCenter.postOnMainThread(name: Notifications.AccountUnhidden, userInfo: userInfo)
+        }
+    }
+    
+    var autoHiddenAccountIds: Set<Int> {
+        if let accountIds = defaults.array(forKey: Keys.autoHiddenAccountIds) as? [Int] {
+            return Set(accountIds)
+        } else {
+            return Set<Int>()
+        }
+    }
+    
+    var autoHiddenAccountIdsQuerySet: String {
+        let accountIds = autoHiddenAccountIds
+        var string = "("
+        for (index, id) in accountIds.enumerated() {
+            if index > 0 {
+                string += ","
+            }
+            string += "\(id)"
+        }
+        string += ")"
+        return string
+    }
+    
+    func autoHideAccountId(_ accountId: Int) {
+        var accountIds = autoHiddenAccountIds
+        if !accountIds.contains(accountId) {
+            accountIds.insert(accountId)
+            defaults.set(Array(accountIds), forKey: Keys.autoHiddenAccountIds)
+            let userInfo = [Notifications.Keys.AccountId: accountId]
+            NotificationCenter.postOnMainThread(name: Notifications.AccountHidden, userInfo: userInfo)
+        }
+    }
+    
+    func autoUnhideAccountId(_ accountId: Int) {
+        var accountIds = autoHiddenAccountIds
+        if accountIds.contains(accountId) {
+            accountIds.remove(accountId)
+            defaults.set(Array(accountIds), forKey: Keys.autoHiddenAccountIds)
+            let userInfo = [Notifications.Keys.AccountId: accountId]
+            NotificationCenter.postOnMainThread(name: Notifications.AccountUnhidden, userInfo: userInfo)
+        }
+    }
+    
+    func shouldHideAccountInUI(accountId: Int) -> Bool {
+        // Always hide manually hidden accounts
+        if manuallyHiddenAccountIds.contains(accountId) {
+            return true
+        } else if autoHiddenAccountIds.contains(accountId) {
+            return true
+        } else {
+            return false
+        }
+    }
+}
+
 extension Account {
     var isHidden: Bool {
         get {
-            return defaults.hiddenAccountIds.contains(accountId)
+            return defaults.manuallyHiddenAccountIds.contains(accountId)
         }
         set {
             if newValue {
-                defaults.hideAccountId(accountId)
+                defaults.manuallyHideAccountId(accountId)
             } else {
-                defaults.unhideAccountId(accountId)
+                defaults.manuallyUnhideAccountId(accountId)
             }
         }
+    }
+    
+    var isAutoHidden: Bool {
+        get {
+            return defaults.autoHiddenAccountIds.contains(accountId)
+        }
+        set {
+            if newValue {
+                defaults.autoHideAccountId(accountId)
+            } else {
+                defaults.autoUnhideAccountId(accountId)
+            }
+        }
+    }
+    
+    var isHiddenInUI: Bool {
+        return defaults.shouldHideAccountInUI(accountId: accountId)
     }
 }

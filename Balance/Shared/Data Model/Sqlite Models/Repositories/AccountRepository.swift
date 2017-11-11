@@ -65,15 +65,13 @@ struct AccountRepository: ItemRepository {
     func allAccounts(includeHidden: Bool = false) -> [Account] {
         var accounts = [Account]()
         
-        let hiddenAccountIds = defaults.hiddenAccountIds
-        
         database.read.inDatabase { db in
             do {
                 let statement = "SELECT * FROM accounts ORDER BY institutionId, name"
                 let result = try db.executeQuery(statement)
                 while result.next() {
                     let account = Account(result: result, repository: self)
-                    if includeHidden || !hiddenAccountIds.contains(account.accountId) {
+                    if includeHidden || !account.isHiddenInUI {
                         accounts.append(account)
                     }
                 }
@@ -90,8 +88,6 @@ struct AccountRepository: ItemRepository {
     func accountsByInstitution(includeHidden: Bool = false) -> OrderedDictionary<Institution, [Account]> {
         var accountsByInstitutionId = [Int: [Account]]()
         
-        let hiddenAccountIds = defaults.hiddenAccountIds
-        
         database.read.inDatabase { db in
             do {
                 let statement = "SELECT * FROM accounts ORDER BY institutionId, name"
@@ -99,7 +95,7 @@ struct AccountRepository: ItemRepository {
                 
                 while result.next() {
                     let account = Account(result: result, repository: self)
-                    if includeHidden || !hiddenAccountIds.contains(account.accountId) {
+                    if includeHidden || !account.isHiddenInUI {
                         if var accounts = accountsByInstitutionId[account.institutionId] {
                             accounts.append(account)
                             accountsByInstitutionId[account.institutionId] = accounts
@@ -191,16 +187,14 @@ struct AccountRepository: ItemRepository {
     
     func accounts(institutionId: Int, includeHidden: Bool = false) -> [Account] {
         var accounts = [Account]()
-        
-        let hiddenAccountIds = defaults.hiddenAccountIds
-        
+                
         database.read.inDatabase { db in
             do {
                 let statement = "SELECT * FROM accounts WHERE institutionId = ? ORDER BY name"
                 let result = try db.executeQuery(statement, institutionId)
                 while result.next() {
                     let account = Account(result: result, repository: self)
-                    if includeHidden || !hiddenAccountIds.contains(account.accountId) {
+                    if includeHidden || !account.isHiddenInUI {
                         accounts.append(account)
                     }
                 }
