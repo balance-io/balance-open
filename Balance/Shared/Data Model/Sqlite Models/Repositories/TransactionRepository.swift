@@ -163,7 +163,7 @@ struct TransactionRepository: ItemRepository {
         return gr.delete(repository: self, item: transaction)
     }
     
-    func transactions(institutionId: Int, includeHidden: Bool = false) -> [Transaction] {
+    func transactions(institutionId: Int, includeHidden: Bool = true) -> [Transaction] {
         var transactions = [Transaction]()
         
         let hiddenAccountIds = defaults.hiddenAccountIds
@@ -227,7 +227,7 @@ struct TransactionRepository: ItemRepository {
         return success
     }
     
-    func oldestTransaction(accountName: String? = nil, includeHidden: Bool = false) -> Transaction? {
+    func oldestTransaction(accountName: String? = nil, includeHidden: Bool = true) -> Transaction? {
         var transaction: Transaction?
         
         database.read.inDatabase { db in
@@ -261,7 +261,7 @@ struct TransactionRepository: ItemRepository {
         return transaction
     }
     
-    func transactionsByDate(includeHidden: Bool = false) -> (transactions: OrderedDictionary<Date, [Transaction]>, counts: [Int]) {
+    func transactionsByDate(includeHidden: Bool = true) -> (transactions: OrderedDictionary<Date, [Transaction]>, counts: [Int]) {
         var transactionsByDate = OrderedDictionary<Date, [Transaction]>()
         var counts = [Int]()
         
@@ -323,7 +323,7 @@ struct TransactionRepository: ItemRepository {
     }
     
     // Returns an array of transactions where a similarly named transaction does not exist before startDate
-    func transactionsFromNewMerchantsInDateRange(_ startDate: Date, endDate: Date, includeHidden: Bool = false) -> [Transaction] {
+    func transactionsFromNewMerchantsInDateRange(_ startDate: Date, endDate: Date, includeHidden: Bool = true) -> [Transaction] {
         var transactions = [Transaction]()
         
         let exceptions = ["uber"]
@@ -375,7 +375,7 @@ struct TransactionRepository: ItemRepository {
     }
     
     // Returns an absolute value
-    func minTransactionAmount(includeHidden: Bool = false) -> Int {
+    func minTransactionAmount(includeHidden: Bool = true) -> Int {
         var minTransactionAmount = 0
         database.read.inDatabase { db in
             var statement = "SELECT MIN(ABS(amount)) FROM transactions"
@@ -388,7 +388,7 @@ struct TransactionRepository: ItemRepository {
     }
     
     // Returns an absolute value
-    func maxTransactionAmount(includeHidden: Bool = false) -> Int {
+    func maxTransactionAmount(includeHidden: Bool = true) -> Int {
         var maxTransactionAmount = 0
         database.read.inDatabase { db in
             var statement = "SELECT MAX(ABS(amount)) FROM transactions"
