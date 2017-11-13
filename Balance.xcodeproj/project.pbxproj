@@ -14,6 +14,9 @@
 		2D326D261F5EA22900873286 /* PoloniexErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D326D251F5EA22900873286 /* PoloniexErrors.swift */; };
 		2D6B22DB1EDE238200356035 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1A64991B867B1F009356A0 /* AppDelegate.swift */; };
 		2D7340F41FA9FC6F00020A3F /* KrakenTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7340F31FA9FC6F00020A3F /* KrakenTransaction.swift */; };
+		2D9AA1E31FB5AED300058491 /* AnalyticsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AA1E21FB5AED300058491 /* AnalyticsWrapper.swift */; };
+		2D9AA1E41FB5AED300058491 /* AnalyticsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AA1E21FB5AED300058491 /* AnalyticsWrapper.swift */; };
+		2D9AA1E51FB9BFFF00058491 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1A64991B867B1F009356A0 /* AppDelegate.swift */; };
 		2DD9B1F01EDDDFD10006268F /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */; };
 		2DE6D9DC1FB1D016007DDCBD /* GDAXTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE6D9DB1FB1D016007DDCBD /* GDAXTransaction.swift */; };
 		2DE6D9DE1FB1D2AA007DDCBD /* Transactions.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DE6D9DD1FB1D2AA007DDCBD /* Transactions.json */; };
@@ -506,6 +509,7 @@
 		28FD09C11D99F18500A395AB /* PaintCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintCodeButton.swift; sourceTree = "<group>"; };
 		2D326D251F5EA22900873286 /* PoloniexErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexErrors.swift; sourceTree = "<group>"; };
 		2D7340F31FA9FC6F00020A3F /* KrakenTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenTransaction.swift; sourceTree = "<group>"; };
+		2D9AA1E21FB5AED300058491 /* AnalyticsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsWrapper.swift; sourceTree = "<group>"; };
 		2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		2DE6D9DB1FB1D016007DDCBD /* GDAXTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXTransaction.swift; sourceTree = "<group>"; };
 		2DE6D9DD1FB1D2AA007DDCBD /* Transactions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = Transactions.json; path = "BalanceUnitTests/Supporting Files/Resources/GDAX API Responses/Transactions.json"; sourceTree = SOURCE_ROOT; };
@@ -1198,6 +1202,7 @@
 				A4E4570B1F79015D002E2879 /* Reachability.swift */,
 				53F0786A1ED747C700E7EDF9 /* libsqlcipher.a */,
 				535BE39D1F05A14C00DEA4EF /* libz.tbd */,
+				2D9AA1E21FB5AED300058491 /* AnalyticsWrapper.swift */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -2394,6 +2399,7 @@
 				A478A9251FB204C800F4764A /* ResetPasswordViewController.swift in Sources */,
 				A44C76231F7BD9610024476E /* BitfinexTransaction.swift in Sources */,
 				A4430A911F94EE1700F2FFFA /* CoinbaseInstitution.swift in Sources */,
+				2D9AA1E51FB9BFFF00058491 /* AppDelegate.swift in Sources */,
 				A4ED56DB1F86301A00E4CC42 /* AccountTableViewCell.swift in Sources */,
 				53552A371ED72B5B00DD95F9 /* CwlSysctl.swift in Sources */,
 				A493B93A1F68137E0074ACCC /* APICredentialsComponents.swift in Sources */,
@@ -2483,6 +2489,7 @@
 				53552A031ED7251200DD95F9 /* Database.swift in Sources */,
 				535529F61ED724FA00DD95F9 /* AsyncOperation.swift in Sources */,
 				53552A001ED7251200DD95F9 /* ObjC.m in Sources */,
+				2D9AA1E41FB5AED300058491 /* AnalyticsWrapper.swift in Sources */,
 				53552A301ED72B5700DD95F9 /* FMDatabasePool.m in Sources */,
 				53552A241ED7252900DD95F9 /* TimeInterval.swift in Sources */,
 				53552A121ED7251200DD95F9 /* NetworkStatus.swift in Sources */,
@@ -2549,6 +2556,7 @@
 				537187F41F4CC37400E7F9D6 /* ExchangeApi.swift in Sources */,
 				53F47FCE1E3A78B70042AE06 /* DispatchQueue.swift in Sources */,
 				A4430AA01F95F3ED00F2FFFA /* ExchangeRateSource.swift in Sources */,
+				2D9AA1E31FB5AED300058491 /* AnalyticsWrapper.swift in Sources */,
 				530422941ED39EE7001CA499 /* TransactionsTabViewModel.swift in Sources */,
 				5325508A1D06FB100045404E /* LabelField.swift in Sources */,
 				5371F6FA1D8524F4002264DF /* NSImage.swift in Sources */,

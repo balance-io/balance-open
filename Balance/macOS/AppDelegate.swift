@@ -86,13 +86,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
-    fileprivate func hockeyAppInit() {
-        #if !DEBUG
-            BITHockeyManager.shared().configure(withIdentifier: "bca73ad39bdb4dda98870be89899e263")
-            BITHockeyManager.shared().start()
-        #endif
-    }
-    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Make sure we're running from the Application folder or updates won't work
         #if !DEBUG
@@ -120,7 +113,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSUserNotificationCenter.default.delegate = self
         
         // Initialyze crash logging and analytics
-        hockeyAppInit()
+        AnalyticsWrapper.setAnalytics()
         
         // Initialize database
         database.create()
@@ -316,7 +309,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     NSApp.activate(ignoringOtherApps: true)
                     
                     // Analytics
-                    BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Preferences opened")
+                    AnalyticsWrapper.trackEvent(withName: "Preferences opened")
                 } else {
                     prefsWindow.makeKeyAndOrderFront(nil)
                 }

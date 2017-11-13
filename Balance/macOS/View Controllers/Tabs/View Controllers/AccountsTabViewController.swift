@@ -719,7 +719,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
             invalidateTouchBar()
             
             // Analytics
-            BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Accounts tab institution rearranged")
+            AnalyticsWrapper.trackEvent(withName: "Accounts tab institution rearranged")
             
             return true
         } else {
@@ -747,7 +747,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
                 tableView.moveRowAtTableIndex(fromIndex, toIndex: toIndex)
                 
                 // Analytics
-                BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Accounts tab account rearranged")
+                AnalyticsWrapper.trackEvent(withName: "Accounts tab account rearranged")
                 
                 return true
             }

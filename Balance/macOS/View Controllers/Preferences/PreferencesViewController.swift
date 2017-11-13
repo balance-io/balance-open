@@ -22,7 +22,7 @@ class PreferencesViewController: NSTabViewController {
             resizeWindow()
             
             // Analytics
-            BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Preferences tab selected \(tabViewItem.label)")
+            AnalyticsWrapper.trackEvent(withName: "Preferences tab selected \(tabViewItem.label)")
         }
     }
     

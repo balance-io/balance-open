@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         database.create()
         
         // Initialyze crash logging and analytics
-        hockeyAppInit()
+        AnalyticsWrapper.setAnalytics()
         
         // Access tokens and Realm syncing credentials for debugging
         #if DEBUG
@@ -85,13 +85,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         
         return true
-    }
-    
-    fileprivate func hockeyAppInit() {
-        #if !DEBUG
-            BITHockeyManager.shared().configure(withIdentifier: "dd541e76abab4023ab1e045e21a4d60d")
-            BITHockeyManager.shared().start()
-        #endif
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

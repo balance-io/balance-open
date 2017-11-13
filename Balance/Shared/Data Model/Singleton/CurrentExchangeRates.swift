@@ -113,7 +113,7 @@ class CurrentExchangeRates {
         // Try to parse the JSON
         guard let tryExchangeRatesJson = try? JSONSerialization.jsonObject(with: data) as? [String: Any], let exchangeRatesJson = tryExchangeRatesJson, exchangeRatesJson["code"] as? Int == BalanceError.success.rawValue else {
             log.error("Error parsing exchange rates, failed to parse json data")
-            BITHockeyManager.shared().metricsManager.trackEvent(withName: "Failed to parse exchange rates")
+            AnalyticsWrapper.trackEvent(withName: "Failed to parse exchange rates")
             return false
         }
         
