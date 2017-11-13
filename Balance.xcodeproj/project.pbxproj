@@ -220,6 +220,8 @@
 		537504FB1F19237E0062C11A /* ProductId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537504F91F19237E0062C11A /* ProductId.swift */; };
 		537504FD1F192D280062C11A /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537504FC1F192D280062C11A /* TypeAliases.swift */; };
 		537504FE1F192D280062C11A /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537504FC1F192D280062C11A /* TypeAliases.swift */; };
+		537509D21FBA210D00AA88E2 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 537509D11FBA210D00AA88E2 /* Fonts */; };
+		537509D31FBA210D00AA88E2 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 537509D11FBA210D00AA88E2 /* Fonts */; };
 		5375963F1F50B90A00B36E6E /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5375963E1F50B8FD00B36E6E /* TrustKit.framework */; };
 		537596401F50B90A00B36E6E /* TrustKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5375963E1F50B8FD00B36E6E /* TrustKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53762EB11ED793A200D34A1E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53762EB01ED793A200D34A1E /* main.swift */; };
@@ -643,6 +645,7 @@
 		5374D69C1CE194F100527388 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		537504F91F19237E0062C11A /* ProductId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductId.swift; sourceTree = "<group>"; };
 		537504FC1F192D280062C11A /* TypeAliases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
+		537509D11FBA210D00AA88E2 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		5375963E1F50B8FD00B36E6E /* TrustKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TrustKit.framework; path = Carthage/Build/Mac/TrustKit.framework; sourceTree = SOURCE_ROOT; };
 		53762EB01ED793A200D34A1E /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		53762EB21ED796F100D34A1E /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -694,10 +697,6 @@
 		53D441F71F44CD93006967E1 /* InstitutionRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionRepository.swift; sourceTree = "<group>"; };
 		53D441FA1F44D813006967E1 /* CategoryRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
 		53DC85B01E678223007C72EB /* FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
-		53DD4E251FAB2D22001D5CBC /* SFMono-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFMono-Regular.otf"; sourceTree = "<group>"; };
-		53DD4E261FAB2D22001D5CBC /* SFMono-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFMono-Medium.otf"; sourceTree = "<group>"; };
-		53DD4E271FAB2E58001D5CBC /* SFMono-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFMono-Semibold.otf"; sourceTree = "<group>"; };
-		53DD4E281FAB2E87001D5CBC /* SFMono-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFMono-Bold.otf"; sourceTree = "<group>"; };
 		53DE21051CD125F800C6628E /* AddAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
 		53E74A561DD53CCB00AD8876 /* TimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		53E7BC171D1805F600FD8613 /* Singletons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Singletons.swift; sourceTree = "<group>"; };
@@ -1483,20 +1482,9 @@
 		53DD4E231FAB2CEE001D5CBC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				53DD4E241FAB2D12001D5CBC /* Fonts */,
+				537509D11FBA210D00AA88E2 /* Fonts */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		53DD4E241FAB2D12001D5CBC /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				53DD4E261FAB2D22001D5CBC /* SFMono-Medium.otf */,
-				53DD4E251FAB2D22001D5CBC /* SFMono-Regular.otf */,
-				53DD4E271FAB2E58001D5CBC /* SFMono-Semibold.otf */,
-				53DD4E281FAB2E87001D5CBC /* SFMono-Bold.otf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 		53E8C7831C64129B0085D64E /* Themes */ = {
@@ -2255,6 +2243,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				537509D31FBA210D00AA88E2 /* Fonts in Resources */,
 				535529E51ED723C600DD95F9 /* LaunchScreen.storyboard in Resources */,
 				535529E21ED723C600DD95F9 /* Assets.xcassets in Resources */,
 			);
@@ -2264,6 +2253,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				537509D21FBA210D00AA88E2 /* Fonts in Resources */,
 				DC8DB3E41BE4EFF40015C204 /* Main.storyboard in Resources */,
 				2DE6D9DE1FB1D2AA007DDCBD /* Transactions.json in Resources */,
 				DC9C33DB1C6DA20A004C0ABC /* Images.xcassets in Resources */,
