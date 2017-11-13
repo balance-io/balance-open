@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         database.create()
         
         // Initialyze crash logging and analytics
-        AnalyticsWrapper.setAnalytics()
+        Analytics.setupAnalytics()
         
         // Access tokens and Realm syncing credentials for debugging
         #if DEBUG

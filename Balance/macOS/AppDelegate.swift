@@ -113,7 +113,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSUserNotificationCenter.default.delegate = self
         
         // Initialyze crash logging and analytics
-        AnalyticsWrapper.setAnalytics()
+        analytics.setupAnalytics()
         
         // Initialize database
         database.create()
@@ -309,7 +309,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     NSApp.activate(ignoringOtherApps: true)
                     
                     // Analytics
-                    AnalyticsWrapper.trackEvent(withName: "Preferences opened")
+                    analytics.trackEvent(withName: "Preferences opened")
                 } else {
                     prefsWindow.makeKeyAndOrderFront(nil)
                 }

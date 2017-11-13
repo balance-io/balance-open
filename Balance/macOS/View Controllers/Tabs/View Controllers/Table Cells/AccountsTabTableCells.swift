@@ -236,7 +236,7 @@ class AccountsTabAccountCell: View {
         }
         
         // Analytics
-        AnalyticsWrapper.trackEvent(withName: "Accounts tab cell expanded")
+        analytics.trackEvent(withName: "Accounts tab cell expanded")
         
         let userInfo = [AccountsTabViewController.InternalNotifications.Keys.Cell: self]
         NotificationCenter.postOnMainThread(name: AccountsTabViewController.InternalNotifications.CellOpened, object: nil, userInfo: userInfo)
@@ -351,7 +351,7 @@ class AccountsTabAccountCell: View {
                 includeInTotalButton.title = "Exclude balance"
             } else {
                 // Analytics
-                AnalyticsWrapper.trackEvent(withName: "Accounts tab cell excluded from balance")
+                analytics.trackEvent(withName: "Accounts tab cell excluded from balance")
                 
                 defaults.excludeAccountIdFromTotal(model.accountId)
                 let circleAddImage = NSImage(named: NSImage.Name(rawValue: "CircleAdd"))!
@@ -367,7 +367,7 @@ class AccountsTabAccountCell: View {
             Search.searchTransactions(accountOrInstitutionName: model.name)
             
             // Analytics
-            AnalyticsWrapper.trackEvent(withName: "Accounts tab cell transactions searched")
+            analytics.trackEvent(withName: "Accounts tab cell transactions searched")
         }
     }
     

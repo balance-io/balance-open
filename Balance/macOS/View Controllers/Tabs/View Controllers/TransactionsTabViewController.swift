@@ -334,7 +334,7 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
     
     func textFieldDidBecomeFirstResponder(_ textField: NSTextField) {
         // Analytics
-        AnalyticsWrapper.trackEvent(withName: "Transactions tab search started")
+        analytics.trackEvent(withName: "Transactions tab search started")
         showSearchFilters()
     }
     

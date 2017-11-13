@@ -21,7 +21,7 @@ let networkStatus = NetworkStatus()
 let certValidator = CertValidator()
 let certValidatedSession = URLSession(configuration: .default, delegate: certValidator, delegateQueue: nil)
 let serverMessage = ServerMessage()
-let analytics = AnalyticsWrapper()
+let analytics = Analytics()
 
 func initializeSingletons() {
     _ = keychain

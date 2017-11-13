@@ -719,7 +719,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
             invalidateTouchBar()
             
             // Analytics
-            AnalyticsWrapper.trackEvent(withName: "Accounts tab institution rearranged")
+            analytics.trackEvent(withName: "Accounts tab institution rearranged")
             
             return true
         } else {
@@ -747,7 +747,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
                 tableView.moveRowAtTableIndex(fromIndex, toIndex: toIndex)
                 
                 // Analytics
-                AnalyticsWrapper.trackEvent(withName: "Accounts tab account rearranged")
+                analytics.trackEvent(withName: "Accounts tab account rearranged")
                 
                 return true
             }

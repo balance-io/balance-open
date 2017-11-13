@@ -22,7 +22,7 @@ class PreferencesViewController: NSTabViewController {
             resizeWindow()
             
             // Analytics
-            AnalyticsWrapper.trackEvent(withName: "Preferences tab selected \(tabViewItem.label)")
+            analytics.trackEvent(withName: "Preferences tab selected \(tabViewItem.label)")
         }
     }
     
