@@ -7,6 +7,7 @@
 //
 
 import SnapKit
+import SVProgressHUD
 import UIKit
 
 
@@ -78,8 +79,7 @@ internal final class RootViewController: UIViewController
         super.viewWillAppear(animated)
     }
     
-    override func viewDidAppear(_ animated: Bool)
-    {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
@@ -109,8 +109,14 @@ internal final class RootViewController: UIViewController
     
     private func setUIDefaults()
     {
+        // UITabBar
         UITabBar.appearance().barTintColor = UIColor.black
         UITabBar.appearance().tintColor = UIColor.white
+        
+        // SVProgressHUD
+        SVProgressHUD.setHapticsEnabled(true)
+        SVProgressHUD.setDefaultMaskType(.clear)
+        SVProgressHUD.setMinimumDismissTimeInterval(1.0)
     }
     
     // MARK: Notifications

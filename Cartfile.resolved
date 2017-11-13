@@ -1,4 +1,5 @@
 github "DaveWoodCom/XCGLogger" "192730ffe6bb177c673ecf39750bd5c8814171d8"
+github "SVProgressHUD/SVProgressHUD" "2.2.2"
 github "SnapKit/SnapKit" "c0f66e42be339f27e727da022518af362cca409b"
 github "balancemymoney/JMSRangeSlider" "921acf66351227f7b28b58537b2470e9e8bc58f2"
 github "balancemymoney/NSDate-TimeAgo" "a6d2749a8c4a1722363cce19672e006e0a4cb70d"
