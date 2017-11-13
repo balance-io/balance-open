@@ -30,6 +30,16 @@ internal final class NewAccountViewModel
         return true
     }
     
+    internal var loginWithQRCodeSupported: Bool {
+        switch self.source
+        {
+        case .bitfinex, .kraken:
+            return true
+        default:
+            return false
+        }
+    }
+    
     // Private
     private let source: Source
     private let fieldTypes: [FieldType]
@@ -114,35 +124,38 @@ internal final class NewAccountViewModel
     
     // MARK: Authenticate
     
-    internal func authenticate(_ completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void)
-    {
+    internal func authenticate(_ completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         if !self.isValid
         {
             completionHandler(false, nil)
             return
         }
         
-        let loginStrings = self.buildLoginFields()
+        let loginFields = self.buildLoginFields()
+        self.authenticate(with: loginFields, completionHandler: completionHandler)
+    }
+    
+    internal func authenticate(with fields: [Field], completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         switch self.source
         {
         case .gdax:
-            self.gdaxAPIClient.authenticationChallenge(loginStrings: loginStrings, closeBlock: { (success, error, _) in
+            self.gdaxAPIClient.authenticationChallenge(loginStrings: fields, closeBlock: { (success, error, _) in
                 completionHandler(success, error)
             })
         case .poloniex:
-            self.poloniexAPIClient.authenticationChallenge(loginStrings: loginStrings, closeBlock: { (success, error, _) in
+            self.poloniexAPIClient.authenticationChallenge(loginStrings: fields, closeBlock: { (success, error, _) in
                 completionHandler(success, error)
             })
         case .bitfinex:
-            self.bitfinexAPIClient.authenticationChallenge(loginStrings: loginStrings, closeBlock: { (success, error, _) in
+            self.bitfinexAPIClient.authenticationChallenge(loginStrings: fields, closeBlock: { (success, error, _) in
                 completionHandler(success, error)
             })
         case .kraken:
-            self.krakenAPIClient.authenticationChallenge(loginStrings: loginStrings, closeBlock: { (success, error, _) in
+            self.krakenAPIClient.authenticationChallenge(loginStrings: fields, closeBlock: { (success, error, _) in
                 completionHandler(success, error)
             })
         case .ethplorer:
-            self.ethplorerAPIClient.authenticationChallenge(loginStrings: loginStrings, closeBlock: { (success, error, _) in
+            self.ethplorerAPIClient.authenticationChallenge(loginStrings: fields, closeBlock: { (success, error, _) in
                 completionHandler(success, error)
             })
         default:
@@ -206,9 +219,9 @@ internal final class NewAccountViewModel
 
 // MARK: FieldType
 
-fileprivate extension NewAccountViewModel
+internal extension NewAccountViewModel
 {
-    fileprivate enum FieldType
+    internal enum FieldType
     {
         case key
         case secretKey

@@ -10,7 +10,15 @@ import AVFoundation
 import UIKit
 
 
+internal protocol QRCodeScannerViewControllerDelegate: class {
+    func didFind(value: String, in controller: QRCodeScannerViewController)
+}
+
+
 internal final  class QRCodeScannerViewController: UIViewController {
+    // Internal
+    internal weak var delegate: QRCodeScannerViewControllerDelegate?
+    
     // Private
     private let session: AVCaptureSession = {
         let session = AVCaptureSession()
@@ -25,7 +33,10 @@ internal final  class QRCodeScannerViewController: UIViewController {
     private let cancelButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Cancel", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.backgroundColor = UIColor.white
+        button.layer.cornerRadius = 4.0
+        button.contentEdgeInsets = UIEdgeInsets(top: 7.0, left: 10.0, bottom: 7.0, right: 10.0)
         
         return button
     }()
@@ -46,7 +57,6 @@ internal final  class QRCodeScannerViewController: UIViewController {
         }
         
         // Cancel button
-        self.cancelButton.isHidden = true
         self.cancelButton.addTarget(self, action: #selector(self.cancelButtonTapped(_:)), for: .touchUpInside)
         self.view.addSubview(self.cancelButton)
         
@@ -55,6 +65,7 @@ internal final  class QRCodeScannerViewController: UIViewController {
             make.right.equalToSuperview().inset(20.0)
             make.left.equalToSuperview().inset(20.0)
             make.height.equalTo(50.0)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(20.0)
         }
         
         // Capture configuration
@@ -79,8 +90,21 @@ internal final  class QRCodeScannerViewController: UIViewController {
     
     private func configureCapture()
     {
+        switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video, completionHandler: { (success) in
+                if success {
+                    DispatchQueue.main.async {
+                        self.configureCapture()
+                    }
+                }
+            })
+            
+            return
+        default:()
+        }
+        
         let metadataOutput = AVCaptureMetadataOutput()
-        metadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
         metadataOutput.setMetadataObjectsDelegate(self, queue: self.processingQueue)
         
         guard let backCamera = self.defaultBackCamera(),
@@ -92,6 +116,11 @@ internal final  class QRCodeScannerViewController: UIViewController {
         
         self.session.addInput(captureDeviceInput)
         self.session.addOutput(metadataOutput)
+        
+        // TODO: throw error if QR isnt supported
+        if metadataOutput.availableMetadataObjectTypes.contains(.qr) {
+            metadataOutput.metadataObjectTypes = [.qr]
+        }
         
         // Preview layer
         let previewLayer = AVCaptureVideoPreviewLayer(session: self.session)
@@ -127,11 +156,14 @@ internal final  class QRCodeScannerViewController: UIViewController {
 
 extension QRCodeScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        print(metadataObjects)
+        
         guard let object = metadataObjects.first as? AVMetadataMachineReadableCodeObject,
-                  object.type == .qr else {
+                  object.type == .qr,
+              let value = object.stringValue else {
             return
         }
         
-        print(object.stringValue)
+        self.delegate?.didFind(value: value, in: self)
     }
 }
