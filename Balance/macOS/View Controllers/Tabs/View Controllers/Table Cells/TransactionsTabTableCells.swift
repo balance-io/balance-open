@@ -299,7 +299,7 @@ class TransactionsTabTransactionCell: View {
         loadBottomContainer()
         
         // Analytics
-        BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: "Transactions tab cell expanded")
+        analytics.trackEvent(withName: "Transactions tab cell expanded")
         
         let userInfo = [TransactionsTabViewController.InternalNotifications.Keys.Cell: self]
         NotificationCenter.postOnMainThread(name: TransactionsTabViewController.InternalNotifications.CellOpened, object: nil, userInfo: userInfo)

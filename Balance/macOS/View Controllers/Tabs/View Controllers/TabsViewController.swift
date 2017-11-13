@@ -255,7 +255,7 @@ class TabsViewController: NSViewController {
         case Tab.transactions.rawValue: contentName = "Transactions tab selected"
         default: break
         }
-        BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: contentName)
+        analytics.trackEvent(withName: contentName)
         
         // Constraints
         let constraints: (ConstraintMaker) -> Void = { make in
