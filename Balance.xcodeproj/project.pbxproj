@@ -347,6 +347,7 @@
 		A41D3E491F6BFC5600FD25B5 /* KrakenAPIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41D3E481F6BFC5600FD25B5 /* KrakenAPIClientTests.swift */; };
 		A41D3E4B1F6C32E700FD25B5 /* KrakenAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41D3E4A1F6C32E700FD25B5 /* KrakenAccount.swift */; };
 		A41D3E4C1F6C32E700FD25B5 /* KrakenAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41D3E4A1F6C32E700FD25B5 /* KrakenAccount.swift */; };
+		A41EE47D1FB9A98A00210038 /* GDAXTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE6D9DB1FB1D016007DDCBD /* GDAXTransaction.swift */; };
 		A42953CE1F8E179900729045 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42953CD1F8E179900729045 /* SplashScreenViewController.swift */; };
 		A42953D01F8E1EB300729045 /* StackedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42953CF1F8E1EB300729045 /* StackedLayout.swift */; };
 		A42953D41F8E255D00729045 /* InstitutionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42953D31F8E255D00729045 /* InstitutionCollectionViewCell.swift */; };
@@ -2361,6 +2362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53552A1B1ED7251700DD95F9 /* Transaction.swift in Sources */,
 				A4E4571A1F7901E7002E2879 /* EthplorerInstitution.swift in Sources */,
 				53552A091ED7251200DD95F9 /* Defaults.swift in Sources */,
 				537187DD1F4CC23B00E7F9D6 /* CoinbaseAccount.swift in Sources */,
@@ -2510,6 +2512,7 @@
 				53552A131ED7251200DD95F9 /* CertValidator.m in Sources */,
 				53552A141ED7251200DD95F9 /* ServerMessage.swift in Sources */,
 				53561EA81F82DD260043D4F9 /* AccountsListViewController.swift in Sources */,
+				A41EE47D1FB9A98A00210038 /* GDAXTransaction.swift in Sources */,
 				535529FF1ED7250500DD95F9 /* DefaultsStorage.swift in Sources */,
 				53552A181ED7251700DD95F9 /* Account.swift in Sources */,
 				53552A201ED7252900DD95F9 /* NotificationCenter.swift in Sources */,
@@ -2521,7 +2524,6 @@
 				53D441F01F44B34B006967E1 /* AccountRepository.swift in Sources */,
 				53762EB31ED796F100D34A1E /* main.swift in Sources */,
 				53561EB11F82DD260043D4F9 /* Value1TableViewCell.swift in Sources */,
-				53552A1B1ED7251700DD95F9 /* Transaction.swift in Sources */,
 				A459EDA41F839D9800DC4B51 /* TransactionsListViewController.swift in Sources */,
 				A4E4571D1F790388002E2879 /* CoinbaseError.swift in Sources */,
 			);
