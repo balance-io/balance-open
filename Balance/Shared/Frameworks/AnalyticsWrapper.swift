@@ -25,10 +25,10 @@ class AnalyticsWrapper {
     }
     
     static func trackEvent(withName: String) {
-        AnalyticsWrapper.trackEvent(withName: withName)
+        BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: withName)
     }
     
     static func trackEvent(withName: String, info: [String:String]) {
-        AnalyticsWrapper.trackEvent(withName: withName, properties: info, measurements: nil)
+        BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: withName, properties: info, measurements: nil)
     }
 }
