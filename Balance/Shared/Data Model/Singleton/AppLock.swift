@@ -107,23 +107,20 @@ class AppLock {
             if debugging.fakeTouchId {
                 return true
             } else {
-                // Fix for OS X 10.12.1 build 16B2555
-                if !isBadSierraTouchIdRelease {
-                    do {
-                        var touchIdAvailable = false
-                        try ObjC.catchException {
-                            var error: NSError?
-                            touchIdAvailable = LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
-                            if let error = error {
-                                log.error("Error checking for touch id: \(error)")
-                            }
+                do {
+                    var touchIdAvailable = false
+                    try ObjC.catchException {
+                        var error: NSError?
+                        touchIdAvailable = LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
+                        if let error = error {
+                            log.error("Error checking for touch id: \(error)")
                         }
-                        return touchIdAvailable
-                    } catch let error {
-                        // Policy doesn't exist
-                        log.error("Error checking for touch id: \(error)")
-                        return false
                     }
+                    return touchIdAvailable
+                } catch let error {
+                    // Policy doesn't exist
+                    log.error("Error checking for touch id: \(error)")
+                    return false
                 }
             }
         }
@@ -209,19 +206,6 @@ class AppLock {
             }
         }
         
-    }
-    
-    // Apple released two versions of 10.12.1, 16B2555 and 16B2657. Only the latter supports deviceOwnerAuthenticationWithBiometrics.
-    // The former just crashes, yay.
-    // Hack for Apple's shitty ability to mark new features with correct OS versions
-    fileprivate var isBadSierraTouchIdRelease: Bool {
-        var size = 0
-        sysctlbyname("kern.osversion", nil, &size, nil, 0)
-        var machine = [CChar](repeating: 0,  count: Int(size))
-        sysctlbyname("kern.osversion", &machine, &size, nil, 0)
-        let string = String(cString: machine)
-        
-        return string.hasSuffix("16B2555")
     }
     #endif
 }
