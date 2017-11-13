@@ -348,6 +348,11 @@
 		A41D3E4B1F6C32E700FD25B5 /* KrakenAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41D3E4A1F6C32E700FD25B5 /* KrakenAccount.swift */; };
 		A41D3E4C1F6C32E700FD25B5 /* KrakenAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41D3E4A1F6C32E700FD25B5 /* KrakenAccount.swift */; };
 		A41EE47D1FB9A98A00210038 /* GDAXTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE6D9DB1FB1D016007DDCBD /* GDAXTransaction.swift */; };
+		A41EE4801FB9AA1A00210038 /* QRCodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41EE47F1FB9AA1A00210038 /* QRCodeScannerViewController.swift */; };
+		A41EE4821FB9B66D00210038 /* QRLoginCredentialsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41EE4811FB9B66D00210038 /* QRLoginCredentialsParser.swift */; };
+		A41EE4841FB9BC4400210038 /* QRLoginCredentialsParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41EE4831FB9BC4400210038 /* QRLoginCredentialsParserTests.swift */; };
+		A41EE4871FB9E4F100210038 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A41EE4861FB9E4F000210038 /* SVProgressHUD.framework */; };
+		A41EE4881FB9E9B100210038 /* QRLoginCredentialsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41EE4811FB9B66D00210038 /* QRLoginCredentialsParser.swift */; };
 		A42953CE1F8E179900729045 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42953CD1F8E179900729045 /* SplashScreenViewController.swift */; };
 		A42953D01F8E1EB300729045 /* StackedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42953CF1F8E1EB300729045 /* StackedLayout.swift */; };
 		A42953D41F8E255D00729045 /* InstitutionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42953D31F8E255D00729045 /* InstitutionCollectionViewCell.swift */; };
@@ -761,6 +766,10 @@
 		A41D3E441F6BF81A00FD25B5 /* KrakenAuthHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenAuthHeaders.swift; sourceTree = "<group>"; };
 		A41D3E481F6BFC5600FD25B5 /* KrakenAPIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenAPIClientTests.swift; sourceTree = "<group>"; };
 		A41D3E4A1F6C32E700FD25B5 /* KrakenAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenAccount.swift; sourceTree = "<group>"; };
+		A41EE47F1FB9AA1A00210038 /* QRCodeScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeScannerViewController.swift; sourceTree = "<group>"; };
+		A41EE4811FB9B66D00210038 /* QRLoginCredentialsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRLoginCredentialsParser.swift; sourceTree = "<group>"; };
+		A41EE4831FB9BC4400210038 /* QRLoginCredentialsParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRLoginCredentialsParserTests.swift; sourceTree = "<group>"; };
+		A41EE4861FB9E4F000210038 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		A42953CD1F8E179900729045 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		A42953CF1F8E1EB300729045 /* StackedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedLayout.swift; sourceTree = "<group>"; };
 		A42953D31F8E255D00729045 /* InstitutionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -859,6 +868,7 @@
 			files = (
 				A49572761F98B85800651C89 /* HockeySDK.framework in Frameworks */,
 				53FCE3411F06B5DC004EB25C /* Locksmith.framework in Frameworks */,
+				A41EE4871FB9E4F100210038 /* SVProgressHUD.framework in Frameworks */,
 				535BE39E1F05A14C00DEA4EF /* libz.tbd in Frameworks */,
 				53FCE3421F06B5DC004EB25C /* NSDateTimeAgo.framework in Frameworks */,
 				53F63CD81F82C2A100FD4B27 /* ObjcExceptionBridging.framework in Frameworks */,
@@ -1320,6 +1330,7 @@
 				A453A5211F866CEC0002C6C8 /* Login */,
 				A478A9231FB1FF5100F4764A /* Reset Password */,
 				53561E991F82DD120043D4F9 /* Accounts list */,
+				A41EE47E1FB9AA1A00210038 /* QR Code Scanner */,
 				53561E9D1F82DD120043D4F9 /* Add Account */,
 				A459EDA21F839D8200DC4B51 /* Transactions List */,
 				53561E951F82DD120043D4F9 /* Settings */,
@@ -1375,6 +1386,7 @@
 			children = (
 				53561EA21F82DD120043D4F9 /* UserPreferences.swift */,
 				53561EA31F82DD120043D4F9 /* ApplicationConfiguration.swift */,
+				A41EE4811FB9B66D00210038 /* QRLoginCredentialsParser.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1777,6 +1789,22 @@
 			path = KrakenAPIClient;
 			sourceTree = "<group>";
 		};
+		A41EE47E1FB9AA1A00210038 /* QR Code Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				A41EE47F1FB9AA1A00210038 /* QRCodeScannerViewController.swift */,
+			);
+			path = "QR Code Scanner";
+			sourceTree = "<group>";
+		};
+		A41EE4851FB9E4F000210038 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A41EE4861FB9E4F000210038 /* SVProgressHUD.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A42953CC1F8E175E00729045 /* Splash Screen */ = {
 			isa = PBXGroup;
 			children = (
@@ -1953,6 +1981,7 @@
 				F107D99F1D6B048800CEEF35 /* BalanceUITests */,
 				F1F948801D8049B800AB30B2 /* BalanceUnitTests */,
 				DC1A64951B867B1F009356A0 /* Products */,
+				A41EE4851FB9E4F000210038 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2090,6 +2119,7 @@
 				53F078421F4F8EC700D0054C /* TestHelpers.swift */,
 				53F078531F4F8EC800D0054C /* Supporting Files */,
 				53F078501F4F8EC800D0054C /* Utilities */,
+				A41EE4831FB9BC4400210038 /* QRLoginCredentialsParserTests.swift */,
 			);
 			path = BalanceUnitTests;
 			sourceTree = "<group>";
@@ -2326,6 +2356,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/TrustKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ObjcExceptionBridging.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/BalanceVectorGraphics_iOS.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SVProgressHUD.framework",
 			);
 			name = "Copy Carthage Frameworks";
 			outputPaths = (
@@ -2336,6 +2367,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TrustKit.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ObjcExceptionBridging.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/BalanceVectorGraphics_iOS.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2379,6 +2411,7 @@
 				A4E7680D1F67E410002B1AE1 /* APICredentials.swift in Sources */,
 				53552A2F1ED72B5700DD95F9 /* FMDatabaseAdditions.m in Sources */,
 				537187E61F4CC23B00E7F9D6 /* PoloniexAccount.swift in Sources */,
+				A41EE4801FB9AA1A00210038 /* QRCodeScannerViewController.swift in Sources */,
 				A43ACE501F963035009F2AE9 /* CurrencySelectionViewModel.swift in Sources */,
 				53552A7B1ED7347C00DD95F9 /* MockedDefaultsStorage.swift in Sources */,
 				53552A051ED7251200DD95F9 /* Logging.swift in Sources */,
@@ -2429,6 +2462,7 @@
 				5361BC9F1F562580009C3F07 /* PoloniexInstitution.swift in Sources */,
 				53552A351ED72B5B00DD95F9 /* OrderedDictionary.swift in Sources */,
 				537187E31F4CC23B00E7F9D6 /* GDAXServer.swift in Sources */,
+				A41EE4821FB9B66D00210038 /* QRLoginCredentialsParser.swift in Sources */,
 				532121A81EE8B91600F4812A /* ZipUtilities.swift in Sources */,
 				53DE2E9A1FAF16B000AC9FCF /* KrakenTransaction.swift in Sources */,
 				A4ED56DE1F86378200E4CC42 /* InstitutionTableHeaderView.swift in Sources */,
@@ -2553,6 +2587,7 @@
 				A4430AA01F95F3ED00F2FFFA /* ExchangeRateSource.swift in Sources */,
 				530422941ED39EE7001CA499 /* TransactionsTabViewModel.swift in Sources */,
 				5325508A1D06FB100045404E /* LabelField.swift in Sources */,
+				A41EE4881FB9E9B100210038 /* QRLoginCredentialsParser.swift in Sources */,
 				5371F6FA1D8524F4002264DF /* NSImage.swift in Sources */,
 				A467DFC51F98EBFD0063882C /* Currency+MasterCurrency.swift in Sources */,
 				53D441E21F44AA9F006967E1 /* GenericItemRepository.swift in Sources */,
@@ -2743,6 +2778,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A41D3E491F6BFC5600FD25B5 /* KrakenAPIClientTests.swift in Sources */,
+				A41EE4841FB9BC4400210038 /* QRLoginCredentialsParserTests.swift in Sources */,
 				53F078641F4F8F3C00D0054C /* TestHelpers.swift in Sources */,
 				53F078691F4F8F3C00D0054C /* MockURLSession.swift in Sources */,
 				53F078661F4F8F3C00D0054C /* APIClientTests.swift in Sources */,
