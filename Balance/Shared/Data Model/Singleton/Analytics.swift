@@ -27,6 +27,6 @@ class Analytics {
     }
     
     func trackEvent(withName: String, info: [String:String]? = nil) {
-        BITHockeyManager.shared()?.metricsManager?.trackEvent(withName: withName, properties: info, measurements: nil)
+        BITHockeyManager.shared().metricsManager.trackEvent(withName: withName, properties: info, measurements: nil)
     }
 }

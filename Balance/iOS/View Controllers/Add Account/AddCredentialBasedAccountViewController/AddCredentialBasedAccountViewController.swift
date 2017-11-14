@@ -46,11 +46,7 @@ internal class AddCredentialBasedAccountViewController: UIViewController
         
         // Navigation bar
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneButtonTapped(_:)))
-        
-        if #available(iOS 11.0, *)
-        {
-            self.navigationController?.navigationBar.prefersLargeTitles = true
-        }
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         
         // Table view
         self.tableView.dataSource = self
@@ -80,7 +76,7 @@ internal class AddCredentialBasedAccountViewController: UIViewController
             let row = TableRow(cellPreparationHandler: { [unowned self] (tableView, indexPath) -> UITableViewCell in
                 let cell: TextFieldTableViewCell = tableView.dequeueReusableCell(at: indexPath)
                 cell.textField = self.viewModel.textField(at: index)
-                cell.textLabel?.text = self.viewModel.title(at: index)
+                cell.titleLabel.text = self.viewModel.title(at: index)
                 
                 return cell
             })

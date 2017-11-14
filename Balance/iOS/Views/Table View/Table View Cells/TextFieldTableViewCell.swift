@@ -12,6 +12,13 @@ import UIKit
 internal final class TextFieldTableViewCell: TableViewCell
 {
     // Internal
+    internal let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 17.0, weight: .regular)
+        
+        return label
+    }()
+    
     internal var textField: UITextField? {
         willSet
         {
@@ -25,24 +32,20 @@ internal final class TextFieldTableViewCell: TableViewCell
                 return
             }
             
-            self.contentView.addSubview(unwrappedTextField)
+            unwrappedTextField.textAlignment = .right
+            self.container.addSubview(unwrappedTextField)
             
             unwrappedTextField.snp.makeConstraints { (make) in
-                make.right.equalToSuperview().inset(10.0)
+                make.right.equalTo(self.contentView.layoutMarginsGuide.snp.right)
                 make.top.equalToSuperview()
                 make.bottom.equalToSuperview()
-                
-                if let textLabel = self.textLabel
-                {
-                    make.left.equalTo(textLabel.snp.right).offset(15.0)
-                }
-                else
-                {
-                    make.left.equalToSuperview().inset(15.0)
-                }
+                make.left.equalTo(self.titleLabel.snp.right).offset(10.0)
             }
         }
     }
+    
+    // Private
+    private let container = UIView()
     
     // MARK: Initialization
     
@@ -52,16 +55,40 @@ internal final class TextFieldTableViewCell: TableViewCell
         
         self.selectionStyle = .none
         
-        // Text label
-        self.textLabel?.snp.makeConstraints({ (make) in
+        // Container
+        self.contentView.addSubview(self.container)
+        
+        self.container.snp.makeConstraints { (make) in
+            make.height.equalTo(44.0).priority(999)
+            make.edges.equalToSuperview()
+        }
+        
+        // Title label
+        self.titleLabel.setContentCompressionResistancePriority(UILayoutPriority(1000.0), for: .horizontal)
+        self.titleLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        
+        self.container.addSubview(self.titleLabel)
+        
+        self.titleLabel.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
             make.left.equalToSuperview().inset(15.0)
-        })
+        }
+        
+        // Tap gesture
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapGestureEngaged(_:)))
+        self.contentView.addGestureRecognizer(tapGesture)
     }
     
     internal required init?(coder aDecoder: NSCoder)
     {
-        super.init(coder: aDecoder)
+        fatalError()
+    }
+    
+    // MARK: Gestures
+    
+    @objc private func tapGestureEngaged(_ gesture: Any)
+    {
+        self.textField?.becomeFirstResponder()
     }
 }
