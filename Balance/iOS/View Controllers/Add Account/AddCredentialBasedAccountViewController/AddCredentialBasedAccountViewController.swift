@@ -76,7 +76,7 @@ internal class AddCredentialBasedAccountViewController: UIViewController
             let row = TableRow(cellPreparationHandler: { [unowned self] (tableView, indexPath) -> UITableViewCell in
                 let cell: TextFieldTableViewCell = tableView.dequeueReusableCell(at: indexPath)
                 cell.textField = self.viewModel.textField(at: index)
-                cell.textLabel?.text = self.viewModel.title(at: index)
+                cell.titleLabel.text = self.viewModel.title(at: index)
                 
                 return cell
             })
