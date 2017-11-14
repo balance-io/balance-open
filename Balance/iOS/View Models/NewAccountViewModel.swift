@@ -116,7 +116,7 @@ internal final class NewAccountViewModel
         case .bitfinex:
             self.fieldTypes = [.key, .secretKey]
         case .ethplorer:
-            self.fieldTypes = [.key, .secretKey]
+            self.fieldTypes = [.name, .address]
         default:
             self.fieldTypes = []
         }
