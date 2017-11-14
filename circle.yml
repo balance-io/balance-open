@@ -22,4 +22,4 @@ test:
       PROVISIONING_PROFILE=
       -sdk iphonesimulator11.1
       -scheme "Balance iOS"
-      clean build test | tee $CIRCLE_ARTIFACTS/xcode_raw.log | xcpretty --color --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml
+      clean build #test | tee $CIRCLE_ARTIFACTS/xcode_raw.log | xcpretty --color --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml
