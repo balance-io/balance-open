@@ -15,6 +15,7 @@ internal final class AccountsListViewController: UIViewController
     fileprivate let viewModel = AccountsTabViewModel()
     
     // Private
+    private let refreshControl = UIRefreshControl()
     private let collectionView = StackedCardCollectionView()
     private let titleView = MultilineTitleView()
     
@@ -49,7 +50,12 @@ internal final class AccountsListViewController: UIViewController
     {
         super.viewDidLoad()
         
+        // Refresh controler
+        self.refreshControl.tintColor = UIColor.white
+        self.refreshControl.addTarget(self, action: #selector(self.refreshControlValueChanged(_:)), for: .valueChanged)
+        
         // Collection view
+        self.collectionView.refreshControl = self.refreshControl
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.stackedLayout.delegate = self
@@ -121,6 +127,12 @@ internal final class AccountsListViewController: UIViewController
         let navigationController = UINavigationController(rootViewController: addAccountViewController)
         
         self.present(navigationController, animated: true, completion: nil)
+    }
+    
+    @objc private func refreshControlValueChanged(_ sender: Any) {
+        syncManager.sync(userInitiated: true, validateReceipt: true) { (success, _) in
+            self.refreshControl.endRefreshing()
+        }
     }
     
     // MARK: Notifications
