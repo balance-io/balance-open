@@ -48,9 +48,9 @@ internal final class TransactionsListViewController: UIViewController {
         
         // Refresh control
         self.refreshControl.addTarget(self, action: #selector(self.refreshControlValueChanged(_:)), for: .valueChanged)
-        self.collectionView.addSubview(self.refreshControl)
         
         // Collection view
+        self.collectionView.refreshControl = self.refreshControl
         self.collectionView.backgroundColor = UIColor(red: 237.0/255.0, green: 238.0/255.0, blue: 240.0/255.0, alpha: 1.0)
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
