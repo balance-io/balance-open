@@ -129,17 +129,6 @@ internal final class RootViewController: UIViewController
         UITabBar.appearance().barTintColor = UIColor.black
         UITabBar.appearance().tintColor = UIColor.white
         
-        // Tab bar item
-        UITabBarItem.appearance().setTitleTextAttributes([
-            .font : UIFont.Balance.monoFont(ofSize: 10.0, weight: .regular),
-            .foregroundColor : UIColor(white: 1.0, alpha: 0.5)
-        ], for: .normal)
-        
-        UITabBarItem.appearance().setTitleTextAttributes([
-            .font : UIFont.Balance.monoFont(ofSize: 10.0, weight: .regular),
-            .foregroundColor : UIColor.white
-        ], for: .selected)
-        
         // SVProgressHUD
         SVProgressHUD.setHapticsEnabled(true)
         SVProgressHUD.setDefaultMaskType(.clear)
