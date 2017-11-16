@@ -89,6 +89,8 @@
 		53368DD81E3FFD4200B7A199 /* PaintCodeDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53368DD71E3FFD4200B7A199 /* PaintCodeDropdown.swift */; };
 		533A3B1D1DF23C2B005D3C89 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533A3B1C1DF23C2B005D3C89 /* Array.swift */; };
 		5347B6A51DFD180E0046951D /* NSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347B6A41DFD180E0046951D /* NSViewController.swift */; };
+		53492AC01FBE38F100512239 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 53492ABF1FBE38F100512239 /* Fonts */; };
+		53492AC11FBE38F100512239 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 53492ABF1FBE38F100512239 /* Fonts */; };
 		534990991E0351AB0057C5C1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 534990981E0351AB0057C5C1 /* AppDelegate.m */; };
 		5349909C1E0354630057C5C1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5349909B1E0354630057C5C1 /* main.m */; };
 		534DDFD81F4CCE9400E6C37F /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534DDFD71F4CCE9400E6C37F /* URLRequest.swift */; };
@@ -223,8 +225,6 @@
 		537504FB1F19237E0062C11A /* ProductId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537504F91F19237E0062C11A /* ProductId.swift */; };
 		537504FD1F192D280062C11A /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537504FC1F192D280062C11A /* TypeAliases.swift */; };
 		537504FE1F192D280062C11A /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537504FC1F192D280062C11A /* TypeAliases.swift */; };
-		537509D21FBA210D00AA88E2 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 537509D11FBA210D00AA88E2 /* Fonts */; };
-		537509D31FBA210D00AA88E2 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 537509D11FBA210D00AA88E2 /* Fonts */; };
 		5375963F1F50B90A00B36E6E /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5375963E1F50B8FD00B36E6E /* TrustKit.framework */; };
 		537596401F50B90A00B36E6E /* TrustKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5375963E1F50B8FD00B36E6E /* TrustKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53762EB11ED793A200D34A1E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53762EB01ED793A200D34A1E /* main.swift */; };
@@ -365,6 +365,7 @@
 		A42953D01F8E1EB300729045 /* StackedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42953CF1F8E1EB300729045 /* StackedLayout.swift */; };
 		A42953D41F8E255D00729045 /* InstitutionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42953D31F8E255D00729045 /* InstitutionCollectionViewCell.swift */; };
 		A4307A901F8F6EA800BBA8B4 /* StackedCardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4307A8F1F8F6EA800BBA8B4 /* StackedCardCollectionView.swift */; };
+		A432F5E81FBDA09D00DDDAFF /* TotalBalanceBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432F5E71FBDA09D00DDDAFF /* TotalBalanceBar.swift */; };
 		A43ACE501F963035009F2AE9 /* CurrencySelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43ACE4F1F963035009F2AE9 /* CurrencySelectionViewModel.swift */; };
 		A4430A901F94EE1700F2FFFA /* CoinbaseInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A8F1F94EE1700F2FFFA /* CoinbaseInstitution.swift */; };
 		A4430A911F94EE1700F2FFFA /* CoinbaseInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A8F1F94EE1700F2FFFA /* CoinbaseInstitution.swift */; };
@@ -382,8 +383,6 @@
 		A44C76271F7BE5A00024476E /* BitfinexMovement.json in Resources */ = {isa = PBXBuildFile; fileRef = A44C76261F7BE5A00024476E /* BitfinexMovement.json */; };
 		A453A5231F866CFF0002C6C8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A453A5221F866CFF0002C6C8 /* LoginViewController.swift */; };
 		A453A5261F8676F00002C6C8 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A453A5251F8676F00002C6C8 /* RegistrationViewController.swift */; };
-		A456ED091FB224EC006EE529 /* KrakenTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456ED081FB224EC006EE529 /* KrakenTransaction.swift */; };
-		A456ED0A1FB224EC006EE529 /* KrakenTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456ED081FB224EC006EE529 /* KrakenTransaction.swift */; };
 		A456ED0D1FB225A6006EE529 /* PriceTickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456ED0C1FB225A6006EE529 /* PriceTickerViewController.swift */; };
 		A456ED121FB3067D006EE529 /* CurrencyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456ED111FB3067D006EE529 /* CurrencyCollectionViewCell.swift */; };
 		A456ED151FB31A33006EE529 /* UIFont+Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456ED141FB31A33006EE529 /* UIFont+Balance.swift */; };
@@ -609,6 +608,7 @@
 		53368DD71E3FFD4200B7A199 /* PaintCodeDropdown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintCodeDropdown.swift; sourceTree = "<group>"; };
 		533A3B1C1DF23C2B005D3C89 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		5347B6A41DFD180E0046951D /* NSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSViewController.swift; sourceTree = "<group>"; };
+		53492ABF1FBE38F100512239 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		534990971E0351AB0057C5C1 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		534990981E0351AB0057C5C1 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5349909B1E0354630057C5C1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -662,7 +662,6 @@
 		5374D69C1CE194F100527388 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		537504F91F19237E0062C11A /* ProductId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductId.swift; sourceTree = "<group>"; };
 		537504FC1F192D280062C11A /* TypeAliases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
-		537509D11FBA210D00AA88E2 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		5375963E1F50B8FD00B36E6E /* TrustKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TrustKit.framework; path = Carthage/Build/Mac/TrustKit.framework; sourceTree = SOURCE_ROOT; };
 		53762EB01ED793A200D34A1E /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		53762EB21ED796F100D34A1E /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -788,6 +787,7 @@
 		A42953CF1F8E1EB300729045 /* StackedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedLayout.swift; sourceTree = "<group>"; };
 		A42953D31F8E255D00729045 /* InstitutionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionCollectionViewCell.swift; sourceTree = "<group>"; };
 		A4307A8F1F8F6EA800BBA8B4 /* StackedCardCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedCardCollectionView.swift; sourceTree = "<group>"; };
+		A432F5E71FBDA09D00DDDAFF /* TotalBalanceBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalBalanceBar.swift; sourceTree = "<group>"; };
 		A43ACE4F1F963035009F2AE9 /* CurrencySelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySelectionViewModel.swift; sourceTree = "<group>"; };
 		A4430A8F1F94EE1700F2FFFA /* CoinbaseInstitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseInstitution.swift; sourceTree = "<group>"; };
 		A4430A921F94EFB300F2FFFA /* OpenTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTheme.swift; sourceTree = "<group>"; };
@@ -800,7 +800,6 @@
 		A44C76261F7BE5A00024476E /* BitfinexMovement.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BitfinexMovement.json; sourceTree = "<group>"; };
 		A453A5221F866CFF0002C6C8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A453A5251F8676F00002C6C8 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
-		A456ED081FB224EC006EE529 /* KrakenTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KrakenTransaction.swift; sourceTree = "<group>"; };
 		A456ED0C1FB225A6006EE529 /* PriceTickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTickerViewController.swift; sourceTree = "<group>"; };
 		A456ED111FB3067D006EE529 /* CurrencyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCollectionViewCell.swift; sourceTree = "<group>"; };
 		A456ED141FB31A33006EE529 /* UIFont+Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Balance.swift"; sourceTree = "<group>"; };
@@ -1316,6 +1315,7 @@
 				53561E8B1F82DD120043D4F9 /* Table View */,
 				53561E931F82DD120043D4F9 /* MultilineTitleView.swift */,
 				A4430A981F95004C00F2FFFA /* PaintCodeView.swift */,
+				A432F5E71FBDA09D00DDDAFF /* TotalBalanceBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1515,7 +1515,7 @@
 		53DD4E231FAB2CEE001D5CBC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				537509D11FBA210D00AA88E2 /* Fonts */,
+				53492ABF1FBE38F100512239 /* Fonts */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -2182,8 +2182,8 @@
 				DC1A64901B867B1F009356A0 /* Sources */,
 				DC1A64911B867B1F009356A0 /* Frameworks */,
 				DC1A64921B867B1F009356A0 /* Resources */,
-				53A866BB1C6AB39C00C411F2 /* Embed Frameworks */,
 				DC65EFA01CE3E3E1006C9373 /* Copy Bal Helper */,
+				53A866BB1C6AB39C00C411F2 /* Embed Frameworks */,
 				676ED7A81D17AF8F00D03395 /* Copy Mock Data and Databases If Needed */,
 				53BB513E1E466CD400384E7F /* Add Warnings For TODO And FIXME Comments */,
 			);
@@ -2311,7 +2311,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				537509D31FBA210D00AA88E2 /* Fonts in Resources */,
+				53492AC11FBE38F100512239 /* Fonts in Resources */,
 				535529E51ED723C600DD95F9 /* LaunchScreen.storyboard in Resources */,
 				535529E21ED723C600DD95F9 /* Assets.xcassets in Resources */,
 			);
@@ -2321,7 +2321,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				537509D21FBA210D00AA88E2 /* Fonts in Resources */,
+				53492AC01FBE38F100512239 /* Fonts in Resources */,
 				DC8DB3E41BE4EFF40015C204 /* Main.storyboard in Resources */,
 				2DE6D9DE1FB1D2AA007DDCBD /* Transactions.json in Resources */,
 				DC9C33DB1C6DA20A004C0ABC /* Images.xcassets in Resources */,
@@ -2469,6 +2469,7 @@
 				A4E7680A1F67DDFE002B1AE1 /* BitfinexErrors.swift in Sources */,
 				53561EAE1F82DD260043D4F9 /* InstitutionSettingsViewModel.swift in Sources */,
 				A41D3E461F6BF81A00FD25B5 /* KrakenAuthHeaders.swift in Sources */,
+				A432F5E81FBDA09D00DDDAFF /* TotalBalanceBar.swift in Sources */,
 				A41D3E4C1F6C32E700FD25B5 /* KrakenAccount.swift in Sources */,
 				53552A221ED7252900DD95F9 /* NSAttributedString.swift in Sources */,
 				A42953CE1F8E179900729045 /* SplashScreenViewController.swift in Sources */,

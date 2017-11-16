@@ -56,8 +56,17 @@ internal final class PriceTickerViewController: UIViewController {
         self.collectionView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.reloadData()
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: CurrentExchangeRates.Notifications.exchangeRatesUpdated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.removeObserverOnMainThread(self, name: CurrentExchangeRates.Notifications.exchangeRatesUpdated, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,7 +75,7 @@ internal final class PriceTickerViewController: UIViewController {
     
     // MARK: Data
     
-    private func reloadData() {
+    @objc private func reloadData() {
         self.viewModel.reloadData()
         self.collectionView.reloadData()
     }

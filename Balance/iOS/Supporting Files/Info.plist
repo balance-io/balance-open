@@ -2,6 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Fonts/SFMono-Regular.otf</string>
+		<string>Fonts/SFMono-Bold.otf</string>
+		<string>Fonts/SFMono-Semibold.otf</string>
+		<string>Fonts/SFMono-Medium.otf</string>
+	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>Read QR codes</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -52,7 +59,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>ATSApplicationFontsPath</key>
-	<string>Fonts</string>
 </dict>
 </plist>
