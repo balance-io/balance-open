@@ -34,25 +34,20 @@ internal final class RootViewController: UIViewController
         let transactionsListNavigationController = UINavigationController(rootViewController: self.transactionsListViewController)
         let settingsNavigationController = UINavigationController(rootViewController: self.settingsViewController)
         
-        var priceTickerDisabled = true
         #if DEBUG
-            priceTickerDisabled =  false
-        #endif
-        
-        if priceTickerDisabled {
-            self.rootTabBarController.viewControllers = [
-                accountsListNavigationController,
-                transactionsListNavigationController,
-                settingsNavigationController
-            ]
-        } else {
             self.rootTabBarController.viewControllers = [
                 priceTickerNavigationController,
                 accountsListNavigationController,
                 transactionsListNavigationController,
                 settingsNavigationController
             ]
-        }
+        #else
+            self.rootTabBarController.viewControllers = [
+                accountsListNavigationController,
+                transactionsListNavigationController,
+                settingsNavigationController
+            ]
+        #endif
         
         // Add as child view controller
         self.addChildViewController(self.rootTabBarController)
