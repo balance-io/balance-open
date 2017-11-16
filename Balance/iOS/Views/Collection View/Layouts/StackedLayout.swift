@@ -24,9 +24,7 @@ internal final class StackedLayout: UICollectionViewLayout {
     private var previousLayoutAttributes = [IndexPath : UICollectionViewLayoutAttributes]()
     private let stretchValue: CGFloat = 0.2
     
-    private let afterSelectedItemOverlapHeight: CGFloat = 60.0
-    private let afterUnselectedItemOverlapHeight: CGFloat = 40.0
-    
+    private let itemOverlap: CGFloat = 40.0
     private var contentHeight: CGFloat = 0.0
     
     // MARK: Layout
@@ -66,22 +64,23 @@ internal final class StackedLayout: UICollectionViewLayout {
             
             let indexPath = IndexPath(row: index, section: 0)
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+            let isLastItem = index == numberOfItems - 1
             
-            let height: CGFloat
-            let nextOverlap: CGFloat
-            
+            var height: CGFloat
             if !selectedIndexPaths.contains(indexPath)
             {
                 height = unwrappedDelegate.expandedHeightForItem(at: indexPath, in: unwrappedCollectionView)
-                nextOverlap = 40.0
+                
+                // If not the last item, add extra height so that the next cell
+                // has space to overlap and not obstruct the cell details
+                if !isLastItem {
+                    height += self.itemOverlap
+                }
             }
             else
             {
                 height = unwrappedDelegate.closedHeightForItem(at: indexPath, in: unwrappedCollectionView)
-                nextOverlap = 60.0
             }
-            
-            self.contentHeight = nextYCoor + height
             
             attributes.frame = CGRect(x: 0.0, y: nextYCoor, width: unwrappedCollectionView.bounds.width, height: height)
             attributes.zIndex = index
@@ -95,7 +94,8 @@ internal final class StackedLayout: UICollectionViewLayout {
                 attributes.frame = frame
             }
             
-            nextYCoor = nextYCoor + height - nextOverlap
+            self.contentHeight = nextYCoor + height
+            nextYCoor = nextYCoor + height - self.itemOverlap
             layoutAttributes[indexPath] = attributes
         }
         
