@@ -16,11 +16,6 @@ internal extension UIFont {
         }
         
         static func monoFont(ofSize size: CGFloat, weight: UIFont.Weight) -> UIFont {
-            for name in UIFont.familyNames {
-                print(name)
-                print(UIFont.fontNames(forFamilyName: name))
-            }
-            
             switch weight {
             case .regular:
                 return UIFont(name: "SFMono-Regular", size: size)!
