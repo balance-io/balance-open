@@ -28,16 +28,18 @@ internal extension KrakenAPIClient {
             self.refid = try checkType(dictionary["refid"], name: "refid")
             let timestamp: Double = try checkType(dictionary["time"], name: "timestamp")
             self.time = Date(timeIntervalSince1970: timestamp)
-            self.type = TxType.init(rawValue: dictionary["type"] as! String)!
-            self.aclass = Aclass.init(rawValue: dictionary["aclass"] as! String)!
+            let typeString: String = try checkType(dictionary["type"], name: "typeString")
+            self.type = try checkType(TxType(rawValue: typeString), name: "type")
+            let aclassString: String = try checkType(dictionary["aclass"], name: "aclassString")
+            self.aclass = try checkType(Aclass(rawValue: aclassString), name: "aclass")
             let krakenCurrencyCode: String = try checkType(dictionary["asset"], name: "krakenCurrencyCode")
-            self.asset = Currency.rawValue(KrakenAPIClient().transformKrakenCurrencyToCurrencyCode(currency: krakenCurrencyCode))
-            let fee: String = try checkType(dictionary["fee"], name: "fee")
-            self.fee = Double(fee)!
-            let balance: String = try checkType(dictionary["balance"], name: "balance")
-            self.balance = Double(balance)!
-            let amount: String = try checkType(dictionary["amount"], name: "amount")
-            self.amount = Double(amount)!
+            self.asset = Currency.rawValue(KrakenAPIClient.transformKrakenCurrencyToCurrencyCode(currency: krakenCurrencyCode))
+            let fee: String = try checkType(dictionary["fee"], name: "feeString")
+            self.fee = try checkType(Double(fee), name: "fee")
+            let balance: String = try checkType(dictionary["balance"], name: "balanceString")
+            self.balance = try checkType(Double(balance), name: "balance")
+            let amount: String = try checkType(dictionary["amount"], name: "amountString")
+            self.amount = try checkType(Double(amount), name: "amount")
         }
     }
     
@@ -47,7 +49,7 @@ internal extension KrakenAPIClient {
     
     enum TxType: String {
         case deposit
-        case withdrawl
+        case withdrawal
         case trade
         case margin
     }

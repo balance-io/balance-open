@@ -98,7 +98,7 @@ internal extension KrakenAPIClient
                 {
                     do
                     {
-                        let currencyCode = self.transformKrakenCurrencyToCurrencyCode(currency: currency)
+                        let currencyCode = KrakenAPIClient.transformKrakenCurrencyToCurrencyCode(currency: currency)
                         let account = try Account(currency: currencyCode, balance: balance)
                         accounts.append(account)
                     }
@@ -392,7 +392,7 @@ internal extension Dictionary where Key: StringProtocol, Value: StringProtocol
 // run into issues. Thankfully they use XZEC for ZCASH tokens.
 
 extension KrakenAPIClient {
-    func transformKrakenCurrencyToCurrencyCode(currency: String) -> String {
+    static func transformKrakenCurrencyToCurrencyCode(currency: String) -> String {
         var currencyCode = currency
         if currency.count == 4 && (currency.hasPrefix("Z") || currency.hasPrefix("X")) {
             currencyCode = currency.substring(from: 1)
