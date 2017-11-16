@@ -4,10 +4,10 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>SFMono-Regular.otf</string>
-		<string>SFMono-Bold.otf</string>
-		<string>SFMono-Semibold.otf</string>
-		<string>SFMono-Medium.otf</string>
+		<string>Fonts/SFMono-Regular.otf</string>
+		<string>Fonts/SFMono-Bold.otf</string>
+		<string>Fonts/SFMono-Semibold.otf</string>
+		<string>Fonts/SFMono-Medium.otf</string>
 	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>Read QR codes</string>
