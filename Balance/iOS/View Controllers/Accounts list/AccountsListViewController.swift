@@ -17,7 +17,7 @@ internal final class AccountsListViewController: UIViewController
     // Private
     private let refreshControl = UIRefreshControl()
     private let collectionView = StackedCardCollectionView()
-    private let titleView = MultilineTitleView()
+    private let totalBalanceBar = TotalBalanceBar()
     
     private let blankStateView = UIView()
     
@@ -101,6 +101,15 @@ internal final class AccountsListViewController: UIViewController
             make.top.equalTo(self.blankStateView.snp.centerY).offset(10.0)
             make.centerX.equalToSuperview()
         }
+        
+        // Total balance bar
+        self.view.addSubview(self.totalBalanceBar)
+        
+        self.totalBalanceBar.snp.makeConstraints { (make) in
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -111,6 +120,15 @@ internal final class AccountsListViewController: UIViewController
         self.reloadData()
     }
     
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        
+        var collectionViewContentInset = self.collectionView.contentInset
+        collectionViewContentInset.bottom = self.totalBalanceBar.bounds.height
+        self.collectionView.contentInset = collectionViewContentInset
+    }
+    
     // MARK: Data
     
     private func reloadData() {
@@ -118,6 +136,9 @@ internal final class AccountsListViewController: UIViewController
         self.collectionView.reloadData()
         
         self.blankStateView.isHidden = self.viewModel.numberOfSections() > 0
+        self.totalBalanceBar.isHidden = !self.blankStateView.isHidden
+        
+        self.totalBalanceBar.totalBalanceLabel.text = self.viewModel.formattedMasterCurrencyTotalBalance
     }
     
     // MARK: Actions

@@ -371,6 +371,7 @@
 		A432F5E41FBD982F00DDDAFF /* SFMono-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A432F5DD1FBD982F00DDDAFF /* SFMono-Semibold.otf */; };
 		A432F5E51FBD982F00DDDAFF /* SFMono-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A432F5DE1FBD982F00DDDAFF /* SFMono-Regular.otf */; };
 		A432F5E61FBD982F00DDDAFF /* SFMono-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A432F5DE1FBD982F00DDDAFF /* SFMono-Regular.otf */; };
+		A432F5E81FBDA09D00DDDAFF /* TotalBalanceBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432F5E71FBDA09D00DDDAFF /* TotalBalanceBar.swift */; };
 		A43ACE501F963035009F2AE9 /* CurrencySelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43ACE4F1F963035009F2AE9 /* CurrencySelectionViewModel.swift */; };
 		A4430A901F94EE1700F2FFFA /* CoinbaseInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A8F1F94EE1700F2FFFA /* CoinbaseInstitution.swift */; };
 		A4430A911F94EE1700F2FFFA /* CoinbaseInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A8F1F94EE1700F2FFFA /* CoinbaseInstitution.swift */; };
@@ -795,6 +796,7 @@
 		A432F5DC1FBD982F00DDDAFF /* SFMono-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFMono-Medium.otf"; sourceTree = "<group>"; };
 		A432F5DD1FBD982F00DDDAFF /* SFMono-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFMono-Semibold.otf"; sourceTree = "<group>"; };
 		A432F5DE1FBD982F00DDDAFF /* SFMono-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFMono-Regular.otf"; sourceTree = "<group>"; };
+		A432F5E71FBDA09D00DDDAFF /* TotalBalanceBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalBalanceBar.swift; sourceTree = "<group>"; };
 		A43ACE4F1F963035009F2AE9 /* CurrencySelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySelectionViewModel.swift; sourceTree = "<group>"; };
 		A4430A8F1F94EE1700F2FFFA /* CoinbaseInstitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseInstitution.swift; sourceTree = "<group>"; };
 		A4430A921F94EFB300F2FFFA /* OpenTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTheme.swift; sourceTree = "<group>"; };
@@ -1322,6 +1324,7 @@
 				53561E8B1F82DD120043D4F9 /* Table View */,
 				53561E931F82DD120043D4F9 /* MultilineTitleView.swift */,
 				A4430A981F95004C00F2FFFA /* PaintCodeView.swift */,
+				A432F5E71FBDA09D00DDDAFF /* TotalBalanceBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2492,6 +2495,7 @@
 				A4E7680A1F67DDFE002B1AE1 /* BitfinexErrors.swift in Sources */,
 				53561EAE1F82DD260043D4F9 /* InstitutionSettingsViewModel.swift in Sources */,
 				A41D3E461F6BF81A00FD25B5 /* KrakenAuthHeaders.swift in Sources */,
+				A432F5E81FBDA09D00DDDAFF /* TotalBalanceBar.swift in Sources */,
 				A41D3E4C1F6C32E700FD25B5 /* KrakenAccount.swift in Sources */,
 				53552A221ED7252900DD95F9 /* NSAttributedString.swift in Sources */,
 				A42953CE1F8E179900729045 /* SplashScreenViewController.swift in Sources */,

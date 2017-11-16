@@ -9,6 +9,13 @@
 import Foundation
 
 class AccountsTabViewModel: TabViewModel {
+    // MARK: Formatted values
+    internal var formattedMasterCurrencyTotalBalance: String {
+        let totalBalance = self.totalBalance()
+        let masterCurrency = defaults.masterCurrency!
+        
+        return amountToString(amount: totalBalance, currency: masterCurrency, showNegative: true)
+    }
     
     // MARK: Table Data
     var data = OrderedDictionary<Institution, [Account]>()
