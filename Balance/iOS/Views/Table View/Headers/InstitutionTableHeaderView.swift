@@ -27,7 +27,7 @@ internal final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Re
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 16.0, weight: .semibold)
+        label.font = UIFont.Balance.monoFont(ofSize: 16.0, weight: .semibold)
         
         return label
     }()
@@ -35,7 +35,7 @@ internal final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Re
     private let totalBalanceLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 16.0, weight: .semibold)
+        label.font = UIFont.Balance.monoFont(ofSize: 16.0, weight: .semibold)
         
         return label
     }()
