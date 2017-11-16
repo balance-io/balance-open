@@ -9,6 +9,16 @@
 import Foundation
 
 class CurrentExchangeRates {
+    
+    fileprivate struct Rate {
+        let from: Currency
+        let to: Currency
+        let rate: Double
+        var key: String {
+            return "\(from.code)-\(to.code)"
+        }
+    }
+    
     struct Notifications {
         static let exchangeRatesUpdated = Notification.Name("exchangeRatesUpdated")
     }
@@ -16,6 +26,7 @@ class CurrentExchangeRates {
     fileprivate let exchangeRatesUrl = URL(string: "https://balance-server.appspot.com/exchangeRates")!
     
     fileprivate let cache = SimpleCache<ExchangeRateSource, [ExchangeRate]>()
+    fileprivate let cachedRates = SimpleCache<String, Rate>()
     fileprivate let persistedFileName = "currentExchangeRates.data"
     fileprivate var persistedFileUrl: URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(persistedFileName)
@@ -23,6 +34,27 @@ class CurrentExchangeRates {
     
     func exchangeRates(forSource source: ExchangeRateSource) -> [ExchangeRate]? {
         return cache.get(valueForKey: source)
+    }
+    
+    func convertTicker(amount: Double, from:Currency, to: Currency) -> Double? {
+        if let exchangeRate = cachedRates.get(valueForKey: "\(from.code)-\(to.code)") {
+            return amount * exchangeRate.rate
+        } else {
+            for masterCurrency in ExchangeRateSource.all.flatMap({ $0.mainCurrencies }) {
+                if let fromRate = cachedRates.get(valueForKey: "\(from.code)-\(masterCurrency.code)"), let toRate = cachedRates.get(valueForKey: "\(masterCurrency.code)-\(to.code)") {
+                    return amount * fromRate.rate * toRate.rate
+                }
+            }
+            guard let rateBTC = cachedRates.get(valueForKey: "\(from.code)-\(Currency.btc.code)") else {
+                return nil
+            }
+            if let finalRate = cachedRates.get(valueForKey: "\(Currency.usd.code)-\(to.code)"), let dollarRate = cachedRates.get(valueForKey: "\(Currency.btc.code)-\(Currency.usd.code)") {
+                return amount * rateBTC.rate * dollarRate.rate * finalRate.rate
+            } else if let finalRate = cachedRates.get(valueForKey: "\(Currency.eth.code)-\(to.code)"), let etherRate = cachedRates.get(valueForKey: "\(Currency.btc.code)-\(Currency.eth.code)") {
+                return amount * rateBTC.rate * etherRate.rate * finalRate.rate
+            }
+        }
+        return nil
     }
     
     func convert(amount: Int, from: Currency, to: Currency, source: ExchangeRateSource) -> Int? {
@@ -104,6 +136,26 @@ class CurrentExchangeRates {
             if self.parse(data: data) {
                 self.persist(data: data)
                 NotificationCenter.postOnMainThread(name: Notifications.exchangeRatesUpdated)
+            }
+            //create hash of exchanges
+            for exchangeKey in self.cache.getAll().keys {
+                for exchangeRate in self.cache.get(valueForKey: exchangeKey)! {
+                    let rate = Rate(from: exchangeRate.from, to: exchangeRate.to, rate: exchangeRate.rate)
+                    self.cachedRates.set(value: rate, forKey: rate.key)
+                    let opositeRate = Rate(from: exchangeRate.to, to: exchangeRate.from, rate: 1/exchangeRate.rate)
+                    self.cachedRates.set(value: opositeRate, forKey: opositeRate.key)
+                }
+            }
+            //add hash for master currencies
+            let allMaster = ExchangeRateSource.all.flatMap({ $0.mainCurrencies })
+            for masterCurrency in allMaster {
+                for otherCurrency in allMaster {
+                    if otherCurrency.code == masterCurrency.code { continue }
+                    if let exchangeRate = self.convert(amount: 1.0, from: masterCurrency, to: otherCurrency, source: .poloniex) {
+                        let rate = Rate(from: masterCurrency, to: masterCurrency, rate: exchangeRate)
+                        self.cachedRates.set(value: rate, forKey: "\(masterCurrency.code)-\(otherCurrency.code)")
+                    }
+                }
             }
         }
         task.resume()

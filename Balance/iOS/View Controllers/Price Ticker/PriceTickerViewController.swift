@@ -1,17 +1,17 @@
 //
-//  TransactionsListViewController.swift
+//  PriceTickerViewController.swift
 //  BalanceiOS
 //
-//  Created by Red Davis on 03/10/2017.
+//  Created by Red Davis on 07/11/2017.
 //  Copyright © 2017 Balanced Software, Inc. All rights reserved.
 //
 
 import UIKit
 
 
-internal final class TransactionsListViewController: UIViewController {
+internal final class PriceTickerViewController: UIViewController {
     // Private
-    private let viewModel = TransactionsListViewModel()
+    private let viewModel = PriceTickerTabViewModel()
     private let refreshControl = UIRefreshControl()
     
     private let collectionView: UICollectionView = {
@@ -26,16 +26,14 @@ internal final class TransactionsListViewController: UIViewController {
     internal required init() {
         super.init(nibName: nil, bundle: nil)
         
-        self.title = "Transactions"
-        self.tabBarItem.image = UIImage(named: "Cash")
-        
-        self.viewModel.delegate = self
+        self.title = "Ticker"
+        self.tabBarItem.image = UIImage(named: "Activity")
     }
     
     internal required init?(coder aDecoder: NSCoder) {
         abort()
     }
-
+    
     // MARK: View lifecycle
     
     override func viewDidLoad() {
@@ -49,84 +47,78 @@ internal final class TransactionsListViewController: UIViewController {
         self.refreshControl.addTarget(self, action: #selector(self.refreshControlValueChanged(_:)), for: .valueChanged)
         
         // Collection view
-        self.collectionView.refreshControl = self.refreshControl
         self.collectionView.backgroundColor = UIColor(red: 237.0/255.0, green: 238.0/255.0, blue: 240.0/255.0, alpha: 1.0)
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
-        self.collectionView.register(reusableCell: TransactionCollectionViewCell.self)
-        self.collectionView.register(reusableSupplementaryView: TransactionsHeaderReusableView.self, kind: UICollectionElementKindSectionHeader)
+        self.collectionView.register(reusableCell: CurrencyCollectionViewCell.self)
         self.view.addSubview(self.collectionView)
         
         self.collectionView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        
+        self.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    // MARK: Data
+    
+    private func reloadData() {
+        self.viewModel.reloadData()
+        self.collectionView.reloadData()
+    }
+    
     // MARK: Actions
     
     @objc private func refreshControlValueChanged(_ sender: Any) {
-        syncManager.sync(userInitiated: true, validateReceipt: true) { (_, _) in
-            self.refreshControl.endRefreshing()
-        }
+        self.viewModel.reloadData()
+        self.refreshControl.endRefreshing()
     }
 }
 
-// MARK: UITableViewDataSource
+// MARK: UICollectionViewDataSource
 
-extension TransactionsListViewController: UICollectionViewDataSource {
+extension PriceTickerViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return self.viewModel.numberOfSections
+        return self.viewModel.numberOfSections()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.viewModel.numberOfRows(at: section)
+        return self.viewModel.numberOfRows(inSection: section)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(at: indexPath) as TransactionCollectionViewCell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(at: indexPath, kind: kind) as TransactionsHeaderReusableView
-        header.textLabel.text = self.viewModel.title(for: indexPath.section)
-        
-        return header
+        return collectionView.dequeueReusableCell(at: indexPath) as CurrencyCollectionViewCell
     }
 }
 
 // MARK: UICollectionViewDelegate
 
-extension TransactionsListViewController: UICollectionViewDelegate {
+extension PriceTickerViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? TransactionCollectionViewCell else
-        {
+        guard let currencyCell = cell as? CurrencyCollectionViewCell else {
             return
         }
         
-        cell.transaction = self.viewModel.transaction(at: indexPath)
+        currencyCell.currency = self.viewModel.currency(forRow: indexPath.row, inSection: indexPath.section)
     }
 }
 
 // MARK: UICollectionViewFlowLayout
 
-extension TransactionsListViewController: UICollectionViewDelegateFlowLayout {
+extension PriceTickerViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: TransactionCollectionViewCell.height)
+        return CGSize(width: collectionView.bounds.width, height: 50.0)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 45.0)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10.0, left: 0.0, bottom: 10.0, right: 0.0)
     }
-}
-
-// MARK: TransactionsListViewModelDelegate
-
-extension TransactionsListViewController: TransactionsListViewModelDelegate {
-    func didReloadData(in viewModel: TransactionsListViewModel) {
-        self.collectionView.reloadData()
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10.0
     }
 }
