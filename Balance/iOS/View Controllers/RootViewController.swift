@@ -17,6 +17,7 @@ internal final class RootViewController: UIViewController
     
     // Private
     private let rootTabBarController = UITabBarController()
+    private let priceTickerViewController = PriceTickerViewController()
     private let accountsListViewController = AccountsListViewController()
     private let transactionsListViewController = TransactionsListViewController()
     private let settingsViewController = SettingsViewController()
@@ -28,15 +29,30 @@ internal final class RootViewController: UIViewController
         super.init(nibName: nil, bundle: nil)
         
         // Tab bar controller
+        let priceTickerNavigationController = UINavigationController(rootViewController: self.priceTickerViewController)
         let accountsListNavigationController = UINavigationController(rootViewController: self.accountsListViewController)
         let transactionsListNavigationController = UINavigationController(rootViewController: self.transactionsListViewController)
         let settingsNavigationController = UINavigationController(rootViewController: self.settingsViewController)
         
-        self.rootTabBarController.viewControllers = [
-            accountsListNavigationController,
-            transactionsListNavigationController,
-            settingsNavigationController
-        ]
+        var priceTickerDisabled = true
+        #if DEBUG
+            priceTickerDisabled =  false
+        #endif
+        
+        if priceTickerDisabled {
+            self.rootTabBarController.viewControllers = [
+                accountsListNavigationController,
+                transactionsListNavigationController,
+                settingsNavigationController
+            ]
+        } else {
+            self.rootTabBarController.viewControllers = [
+                priceTickerNavigationController,
+                accountsListNavigationController,
+                transactionsListNavigationController,
+                settingsNavigationController
+            ]
+        }
         
         // Add as child view controller
         self.addChildViewController(self.rootTabBarController)
@@ -100,7 +116,7 @@ internal final class RootViewController: UIViewController
     // MARK: UI Defaults
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if self.rootTabBarController.selectedIndex == 0 {
+        if self.rootTabBarController.selectedIndex == self.rootTabBarController.viewControllers?.index(of: self.accountsListViewController) {
             return .lightContent
         }
         

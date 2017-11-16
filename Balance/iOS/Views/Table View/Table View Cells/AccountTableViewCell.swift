@@ -38,11 +38,11 @@ internal final class AccountTableViewCell: TableViewCell {
         
         // Text label
         self.textLabel?.textColor = UIColor.white
-        self.textLabel?.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
+        self.textLabel?.font = UIFont.Balance.font(ofSize: 14.0, weight: .regular)
         
         // Detail label
         self.detailTextLabel?.textColor = UIColor.white
-        self.detailTextLabel?.font = UIFont.systemFont(ofSize: 14.0, weight: .light)
+        self.detailTextLabel?.font = UIFont.Balance.font(ofSize: 14.0, weight: .light)
         
         // Bottom border
         self.contentView.addSubview(self.bottomBorder)
