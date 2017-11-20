@@ -15,6 +15,7 @@ internal final class RegistrationViewController: UIViewController {
     
     private let emailTextField: UITextField = {
         let textField = UITextField()
+        textField.tintColor = UIColor.white
         textField.keyboardType = .emailAddress
         textField.placeholder = "Email address"
         textField.borderStyle = .roundedRect
@@ -26,6 +27,7 @@ internal final class RegistrationViewController: UIViewController {
     
     private let passwordTextField: UITextField = {
         let textField = UITextField()
+        textField.tintColor = UIColor.white
         textField.isSecureTextEntry = true
         textField.placeholder = "Password"
         textField.borderStyle = .roundedRect
@@ -37,6 +39,7 @@ internal final class RegistrationViewController: UIViewController {
     
     private let passwordConfirmationTextField: UITextField = {
         let textField = UITextField()
+        textField.tintColor = UIColor.white
         textField.isSecureTextEntry = true
         textField.placeholder = "Password Confirmation"
         textField.borderStyle = .roundedRect
@@ -51,7 +54,7 @@ internal final class RegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor.black
         
         // Navigation bar
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Register", style: .plain, target: self, action: #selector(self.registerButtonTapped(_:)))
@@ -94,6 +97,12 @@ internal final class RegistrationViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.75)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     // MARK: Action

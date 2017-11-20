@@ -6,6 +6,7 @@
 //  Copyright © 2017 Balanced Software, Inc. All rights reserved.
 //
 
+import OnePasswordExtension
 import UIKit
 
 
@@ -15,6 +16,7 @@ internal final class LoginViewController: UIViewController {
     
     private let emailTextField: UITextField = {
         let textField = UITextField()
+        textField.tintColor = UIColor.white
         textField.keyboardType = .emailAddress
         textField.placeholder = "Email address"
         textField.borderStyle = .roundedRect
@@ -26,6 +28,7 @@ internal final class LoginViewController: UIViewController {
     
     private let passwordTextField: UITextField = {
         let textField = UITextField()
+        textField.tintColor = UIColor.white
         textField.isSecureTextEntry = true
         textField.placeholder = "Password"
         textField.borderStyle = .roundedRect
@@ -38,6 +41,16 @@ internal final class LoginViewController: UIViewController {
     private let forgottonPasswordButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Forgotton Password", for: .normal)
+        button.tintColor = UIColor.white
+        
+        return button
+    }()
+    
+    private let onePasswordButton: UIButton = {
+        let button = UIButton(type: .custom)
+        
+        let onePasswordBundle = Bundle(for: OnePasswordExtension.self)
+        button.setImage(UIImage(named: "onepassword-button-light", in: onePasswordBundle, compatibleWith: nil), for: .normal)
         
         return button
     }()
@@ -47,7 +60,7 @@ internal final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor.black
         
         // Navigation bar
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Login", style: .plain, target: self, action: #selector(self.loginButtonTapped(_:)))
@@ -70,7 +83,16 @@ internal final class LoginViewController: UIViewController {
             make.width.equalToSuperview().multipliedBy(0.75)
         }
         
+        // 1Password button
+        self.onePasswordButton.addTarget(self, action: #selector(self.onePasswordButtonTapped(_:)), for: .touchUpInside)
+        
+        self.onePasswordButton.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 30.0, height: 30.0))
+        }
+        
         // Password text field
+        self.passwordTextField.rightView = self.onePasswordButton
+        self.passwordTextField.rightViewMode = OnePasswordExtension.shared().isAppExtensionAvailable() ? .always : .never
         self.passwordTextField.delegate = self
         self.container.addSubview(self.passwordTextField)
         
@@ -89,6 +111,12 @@ internal final class LoginViewController: UIViewController {
             make.top.equalTo(self.passwordTextField.snp.bottom).offset(10.0)
             make.bottom.equalToSuperview()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     // MARK: Action
@@ -119,6 +147,18 @@ internal final class LoginViewController: UIViewController {
         alertController.addAction(resetPasswordAction)
         
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc private func onePasswordButtonTapped(_ sender: Any) {
+        OnePasswordExtension.shared().findLogin(forURLString: "https://balancemy.money", for: self, sender: sender) { (results, error) in
+            guard let unwrappedResults = results else
+            {
+                return
+            }
+            
+            self.emailTextField.text = unwrappedResults[AppExtensionUsernameKey] as? String
+            self.passwordTextField.text = unwrappedResults[AppExtensionPasswordKey] as? String
+        }
     }
 }
 
