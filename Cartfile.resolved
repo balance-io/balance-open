@@ -1,3 +1,4 @@
+github "AgileBits/onepassword-extension" "04f146abd3bd5e6f7ba8b18b916c55f3b3c85aed"
 github "DaveWoodCom/XCGLogger" "192730ffe6bb177c673ecf39750bd5c8814171d8"
 github "SVProgressHUD/SVProgressHUD" "2.2.2"
 github "SnapKit/SnapKit" "c0f66e42be339f27e727da022518af362cca409b"

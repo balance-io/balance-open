@@ -446,6 +446,7 @@
 		A4ED56DE1F86378200E4CC42 /* InstitutionTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED56DD1F86378200E4CC42 /* InstitutionTableHeaderView.swift */; };
 		A4ED56E11F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED56E01F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift */; };
 		A4EF39E71F8E43A40032265E /* InstitutionAccountsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EF39E61F8E43A40032265E /* InstitutionAccountsListViewModel.swift */; };
+		A4F273E01FC2DBF100493077 /* OnePasswordExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F273DF1FC2DBF000493077 /* OnePasswordExtension.framework */; };
 		DC1A649F1B867B1F009356A0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1A649D1B867B1F009356A0 /* MainMenu.xib */; };
 		DC33D6D21CDDB22900E213FF /* ObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = DC33D6D11CDDB22900E213FF /* ObjC.m */; };
 		DC39E0001CD80D0E00B48F75 /* HoverButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC39DFFF1CD80D0E00B48F75 /* HoverButton.swift */; };
@@ -842,6 +843,7 @@
 		A4ED56DD1F86378200E4CC42 /* InstitutionTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionTableHeaderView.swift; sourceTree = "<group>"; };
 		A4ED56E01F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCurrencySelectionViewController.swift; sourceTree = "<group>"; };
 		A4EF39E61F8E43A40032265E /* InstitutionAccountsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionAccountsListViewModel.swift; sourceTree = "<group>"; };
+		A4F273DF1FC2DBF000493077 /* OnePasswordExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OnePasswordExtension.framework; path = Carthage/Build/iOS/OnePasswordExtension.framework; sourceTree = "<group>"; };
 		DC1A64941B867B1F009356A0 /* BalanceOpen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BalanceOpen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC1A64981B867B1F009356A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC1A64991B867B1F009356A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -891,6 +893,7 @@
 				53F63CD81F82C2A100FD4B27 /* ObjcExceptionBridging.framework in Frameworks */,
 				53F0786C1ED747C700E7EDF9 /* libsqlcipher.a in Frameworks */,
 				53FCE3481F06B5DC004EB25C /* XCGLogger.framework in Frameworks */,
+				A4F273E01FC2DBF100493077 /* OnePasswordExtension.framework in Frameworks */,
 				5313F9621F58CFB800DD6BDB /* TrustKit.framework in Frameworks */,
 				53FCE3461F06B5DC004EB25C /* SnapKit.framework in Frameworks */,
 			);
@@ -1813,6 +1816,7 @@
 		A41EE4851FB9E4F000210038 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A4F273DF1FC2DBF000493077 /* OnePasswordExtension.framework */,
 				A41EE4861FB9E4F000210038 /* SVProgressHUD.framework */,
 			);
 			name = Frameworks;
@@ -2389,6 +2393,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/ObjcExceptionBridging.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/BalanceVectorGraphics_iOS.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SVProgressHUD.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/OnePasswordExtension.framework",
 			);
 			name = "Copy Carthage Frameworks";
 			outputPaths = (
@@ -2400,6 +2405,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ObjcExceptionBridging.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/BalanceVectorGraphics_iOS.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SVProgressHUD.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/OnePasswordExtension.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
