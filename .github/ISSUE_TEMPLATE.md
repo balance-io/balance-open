@@ -1,6 +1,6 @@
 **Is this a feature request or bug report? (please add a label and remove question)**  
 
-**What is the current behavior?**
+**What is the current behaviour?**
 
 
 
