@@ -6,6 +6,7 @@
 //  Copyright © 2017 Balanced Software, Inc. All rights reserved.
 //
 
+import OnePasswordExtension
 import UIKit
 
 
@@ -42,6 +43,15 @@ internal final class LoginViewController: UIViewController {
         return button
     }()
     
+    private let onePasswordButton: UIButton = {
+        let button = UIButton(type: .custom)
+        
+        let onePasswordBundle = Bundle(for: OnePasswordExtension.self)
+        button.setImage(UIImage(named: "onepassword-button", in: onePasswordBundle, compatibleWith: nil), for: .normal)
+        
+        return button
+    }()
+    
     // MARK: View lifecycle
     
     override func viewDidLoad() {
@@ -70,7 +80,16 @@ internal final class LoginViewController: UIViewController {
             make.width.equalToSuperview().multipliedBy(0.75)
         }
         
+        // 1Password button
+        self.onePasswordButton.addTarget(self, action: #selector(self.onePasswordButtonTapped(_:)), for: .touchUpInside)
+        
+        self.onePasswordButton.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 30.0, height: 30.0))
+        }
+        
         // Password text field
+        self.passwordTextField.rightView = self.onePasswordButton
+        self.passwordTextField.rightViewMode = OnePasswordExtension.shared().isAppExtensionAvailable() ? .always : .never
         self.passwordTextField.delegate = self
         self.container.addSubview(self.passwordTextField)
         
@@ -119,6 +138,19 @@ internal final class LoginViewController: UIViewController {
         alertController.addAction(resetPasswordAction)
         
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc private func onePasswordButtonTapped(_ sender: Any)
+    {
+        OnePasswordExtension.shared().findLogin(forURLString: "https://balancemy.money", for: self, sender: sender) { (results, error) in
+            guard let unwrappedResults = results else
+            {
+                return
+            }
+            
+            self.emailTextField.text = unwrappedResults[AppExtensionUsernameKey] as? String
+            self.passwordTextField.text = unwrappedResults[AppExtensionPasswordKey] as? String
+        }
     }
 }
 
