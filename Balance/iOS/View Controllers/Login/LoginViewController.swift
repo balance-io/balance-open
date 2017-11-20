@@ -16,6 +16,7 @@ internal final class LoginViewController: UIViewController {
     
     private let emailTextField: UITextField = {
         let textField = UITextField()
+        textField.tintColor = UIColor.white
         textField.keyboardType = .emailAddress
         textField.placeholder = "Email address"
         textField.borderStyle = .roundedRect
@@ -27,6 +28,7 @@ internal final class LoginViewController: UIViewController {
     
     private let passwordTextField: UITextField = {
         let textField = UITextField()
+        textField.tintColor = UIColor.white
         textField.isSecureTextEntry = true
         textField.placeholder = "Password"
         textField.borderStyle = .roundedRect
@@ -39,6 +41,7 @@ internal final class LoginViewController: UIViewController {
     private let forgottonPasswordButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Forgotton Password", for: .normal)
+        button.tintColor = UIColor.white
         
         return button
     }()
@@ -47,7 +50,7 @@ internal final class LoginViewController: UIViewController {
         let button = UIButton(type: .custom)
         
         let onePasswordBundle = Bundle(for: OnePasswordExtension.self)
-        button.setImage(UIImage(named: "onepassword-button", in: onePasswordBundle, compatibleWith: nil), for: .normal)
+        button.setImage(UIImage(named: "onepassword-button-light", in: onePasswordBundle, compatibleWith: nil), for: .normal)
         
         return button
     }()
@@ -57,7 +60,7 @@ internal final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor.black
         
         // Navigation bar
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Login", style: .plain, target: self, action: #selector(self.loginButtonTapped(_:)))
@@ -110,6 +113,12 @@ internal final class LoginViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
     // MARK: Action
     
     @objc private func loginButtonTapped(_ sender: Any) {
@@ -140,8 +149,7 @@ internal final class LoginViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    @objc private func onePasswordButtonTapped(_ sender: Any)
-    {
+    @objc private func onePasswordButtonTapped(_ sender: Any) {
         OnePasswordExtension.shared().findLogin(forURLString: "https://balancemy.money", for: self, sender: sender) { (results, error) in
             guard let unwrappedResults = results else
             {
