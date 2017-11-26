@@ -46,7 +46,9 @@ internal class AddCredentialBasedAccountViewController: UIViewController
         
         // Navigation bar
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneButtonTapped(_:)))
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+        }
         
         // Table view
         self.tableView.dataSource = self

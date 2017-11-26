@@ -65,7 +65,11 @@ internal final  class QRCodeScannerViewController: UIViewController {
             make.right.equalToSuperview().inset(20.0)
             make.left.equalToSuperview().inset(20.0)
             make.height.equalTo(50.0)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(20.0)
+            if #available(iOS 11.0, *) {
+                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(20.0)
+            } else {
+                make.bottom.equalTo(self.bottomLayoutGuide.snp.top).inset(20.0)
+            }
         }
         
         // Capture configuration

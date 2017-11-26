@@ -50,7 +50,9 @@ internal final class SettingsViewController: UIViewController
         self.view.backgroundColor = UIColor.white
         
         // Navigation bar
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+        }
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(self.logoutButtonTapped(_:)))
         
         // Table view

@@ -230,6 +230,8 @@
 		53762EB11ED793A200D34A1E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53762EB01ED793A200D34A1E /* main.swift */; };
 		53762EB31ED796F100D34A1E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53762EB21ED796F100D34A1E /* main.swift */; };
 		537B4B041D6B4AE500603060 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 537B4B021D6B4ADB00603060 /* Security.framework */; };
+		5384FDD81FCB529C00C19F3C /* libsqlcipher-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5384FDD71FCB529C00C19F3C /* libsqlcipher-ios.a */; };
+		5384FDDA1FCB52B500C19F3C /* libsqlcipher-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5384FDD91FCB52B400C19F3C /* libsqlcipher-mac.a */; };
 		538B47BE1F4CA0200023CED5 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538B47BD1F4CA0200023CED5 /* Currency.swift */; };
 		538B47BF1F4CA0200023CED5 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538B47BD1F4CA0200023CED5 /* Currency.swift */; };
 		538DD1711DA2EDB600066288 /* TransactionContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538DD1701DA2EDB600066288 /* TransactionContextMenu.swift */; };
@@ -303,9 +305,7 @@
 		53F078681F4F8F3C00D0054C /* HeadersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F0784F1F4F8EC700D0054C /* HeadersTests.swift */; };
 		53F078691F4F8F3C00D0054C /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078511F4F8EC800D0054C /* MockURLSession.swift */; };
 		53F0786A1F4F916500D0054C /* CompleteBalancesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 53F0783D1F4F8EC700D0054C /* CompleteBalancesResponse.json */; };
-		53F0786B1ED747C700E7EDF9 /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F0786A1ED747C700E7EDF9 /* libsqlcipher.a */; };
 		53F0786B1F4F916500D0054C /* PoloniexAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 53F0783E1F4F8EC700D0054C /* PoloniexAccount.json */; };
-		53F0786C1ED747C700E7EDF9 /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F0786A1ED747C700E7EDF9 /* libsqlcipher.a */; };
 		53F0786C1F4F916500D0054C /* PoloniexTradingError.json in Resources */ = {isa = PBXBuildFile; fileRef = 53F0783F1F4F8EC700D0054C /* PoloniexTradingError.json */; };
 		53F0786D1F4F916800D0054C /* Account.json in Resources */ = {isa = PBXBuildFile; fileRef = 53F078571F4F8EC800D0054C /* Account.json */; };
 		53F0786E1F4F916800D0054C /* Error.json in Resources */ = {isa = PBXBuildFile; fileRef = 53F078581F4F8EC800D0054C /* Error.json */; };
@@ -667,6 +667,8 @@
 		53762EB01ED793A200D34A1E /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		53762EB21ED796F100D34A1E /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		537B4B021D6B4ADB00603060 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		5384FDD71FCB529C00C19F3C /* libsqlcipher-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libsqlcipher-ios.a"; sourceTree = "<group>"; };
+		5384FDD91FCB52B400C19F3C /* libsqlcipher-mac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libsqlcipher-mac.a"; sourceTree = "<group>"; };
 		538B47B01F4C9FD60023CED5 /* CoinbaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseAccount.swift; sourceTree = "<group>"; };
 		538B47B11F4C9FD60023CED5 /* CoinbaseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseApi.swift; sourceTree = "<group>"; };
 		538B47B31F4C9FD70023CED5 /* GDAXAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAccount.swift; sourceTree = "<group>"; };
@@ -748,7 +750,6 @@
 		53F0785A1F4F8EC800D0054C /* WithdrawToCrypto.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = WithdrawToCrypto.json; sourceTree = "<group>"; };
 		53F0785C1ED73B7D00E7EDF9 /* Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Element.swift; sourceTree = "<group>"; };
 		53F078631ED73E6D00E7EDF9 /* ThemeGlobals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeGlobals.swift; sourceTree = "<group>"; };
-		53F0786A1ED747C700E7EDF9 /* libsqlcipher.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsqlcipher.a; sourceTree = "<group>"; };
 		53F47FCD1E3A78B70042AE06 /* DispatchQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
 		53F638381C5FEAB800864346 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		53F6383E1C5FFF3200864346 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -891,9 +892,9 @@
 				535BE39E1F05A14C00DEA4EF /* libz.tbd in Frameworks */,
 				53FCE3421F06B5DC004EB25C /* NSDateTimeAgo.framework in Frameworks */,
 				53F63CD81F82C2A100FD4B27 /* ObjcExceptionBridging.framework in Frameworks */,
-				53F0786C1ED747C700E7EDF9 /* libsqlcipher.a in Frameworks */,
 				53FCE3481F06B5DC004EB25C /* XCGLogger.framework in Frameworks */,
 				A4F273E01FC2DBF100493077 /* OnePasswordExtension.framework in Frameworks */,
+				5384FDD81FCB529C00C19F3C /* libsqlcipher-ios.a in Frameworks */,
 				5313F9621F58CFB800DD6BDB /* TrustKit.framework in Frameworks */,
 				53FCE3461F06B5DC004EB25C /* SnapKit.framework in Frameworks */,
 			);
@@ -904,6 +905,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5391A4DB1CE553F900B9FBD9 /* MapKit.framework in Frameworks */,
+				5384FDDA1FCB52B500C19F3C /* libsqlcipher-mac.a in Frameworks */,
 				5375963F1F50B90A00B36E6E /* TrustKit.framework in Frameworks */,
 				5374D69D1CE194F100527388 /* QuartzCore.framework in Frameworks */,
 				537B4B041D6B4AE500603060 /* Security.framework in Frameworks */,
@@ -913,7 +915,6 @@
 				53FCE3771F06B819004EB25C /* SnapKit.framework in Frameworks */,
 				53F63CD31F82C26600FD4B27 /* ObjcExceptionBridging.framework in Frameworks */,
 				53FCE37B1F06B819004EB25C /* XCGLogger.framework in Frameworks */,
-				53F0786B1ED747C700E7EDF9 /* libsqlcipher.a in Frameworks */,
 				53FCE36F1F06B819004EB25C /* NSDateTimeAgo.framework in Frameworks */,
 				53FCE3631F06B818004EB25C /* BalanceVectorGraphics.framework in Frameworks */,
 				53FCE35B1F06B653004EB25C /* MASShortcut.framework in Frameworks */,
@@ -1212,6 +1213,7 @@
 		53552A2C1ED72AE600DD95F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5384FDD91FCB52B400C19F3C /* libsqlcipher-mac.a */,
 				A49572771F98B99500651C89 /* HockeySDK.framework */,
 				533674FC1F4CE08A0034040F /* Sparkle.framework */,
 				533674FF1F4CE1500034040F /* LetsMove */,
@@ -1231,7 +1233,6 @@
 				534E83C51D3FB76200F76E8A /* OrderedDictionary.swift */,
 				53980CBE1D5CD6F80013B981 /* Pluralize.swift */,
 				A4E4570B1F79015D002E2879 /* Reachability.swift */,
-				53F0786A1ED747C700E7EDF9 /* libsqlcipher.a */,
 				535BE39D1F05A14C00DEA4EF /* libz.tbd */,
 			);
 			path = Frameworks;
@@ -1240,6 +1241,7 @@
 		53552A491ED72BE000DD95F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5384FDD71FCB529C00C19F3C /* libsqlcipher-ios.a */,
 				A49572751F98B84D00651C89 /* HockeySDK.framework */,
 				53552A571ED72F6C00DD95F9 /* Carthage */,
 			);
@@ -2911,8 +2913,12 @@
 					"$(PROJECT_DIR)/Balance/iOS/Frameworks",
 				);
 				INFOPLIST_FILE = "Balance/iOS/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Balance/iOS/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = software.balanced.balanceios;
 				PRODUCT_NAME = Balance;
 				SDKROOT = iphoneos;
@@ -2939,8 +2945,12 @@
 					"$(PROJECT_DIR)/Balance/iOS/Frameworks",
 				);
 				INFOPLIST_FILE = "Balance/iOS/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Balance/iOS/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = software.balanced.balanceios;
 				PRODUCT_NAME = Balance;
 				SDKROOT = iphoneos;
@@ -2967,8 +2977,12 @@
 					"$(PROJECT_DIR)/Balance/iOS/Frameworks",
 				);
 				INFOPLIST_FILE = "Balance/iOS/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Balance/iOS/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = software.balanced.balanceios;
 				PRODUCT_NAME = Balance;
 				SDKROOT = iphoneos;
@@ -3107,6 +3121,10 @@
 				);
 				INFOPLIST_FILE = "Balance/macOS/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Balance/macOS/Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_CFLAGS = "";
 				OTHER_SWIFT_FLAGS = "-D DEBUG -D APPSTORE -Xfrontend -debug-time-function-bodies -Onone";
@@ -3139,6 +3157,10 @@
 				);
 				INFOPLIST_FILE = "Balance/macOS/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Balance/macOS/Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_CFLAGS = "";
 				OTHER_SWIFT_FLAGS = "-D RELEASE -D APPSTORE";
@@ -3270,6 +3292,10 @@
 				);
 				INFOPLIST_FILE = "Balance/macOS/Supporting Files/InfoTesting.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Balance/macOS/Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_CFLAGS = "";
 				OTHER_SWIFT_FLAGS = "-D DEBUG -D APPSTORE";

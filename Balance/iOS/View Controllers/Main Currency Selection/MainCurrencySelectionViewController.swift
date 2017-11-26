@@ -24,7 +24,9 @@ internal final class MainCurrencySelectionViewController: UIViewController {
         self.title = "Main Currency"
         
         // Navigation bar
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+        }
         
         // Table view
         self.tableView.dataSource = self

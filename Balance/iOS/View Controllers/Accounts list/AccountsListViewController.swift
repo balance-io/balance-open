@@ -64,8 +64,17 @@ internal final class AccountsListViewController: UIViewController
         self.collectionView.register(reusableCell: InstitutionCollectionViewCell.self)
         self.view.addSubview(self.collectionView)
         
-        self.collectionView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+        if #available(iOS 11.0, *) {
+            self.collectionView.snp.makeConstraints { (make) in
+                make.edges.equalToSuperview()
+            }
+        } else {
+            self.collectionView.snp.makeConstraints { (make) in
+                make.top.equalToSuperview()//(self.topLayoutGuide.snp.bottom)
+                make.bottom.equalTo(self.bottomLayoutGuide.snp.top)
+                make.left.equalToSuperview()
+                make.right.equalToSuperview()
+            }
         }
         
         // Blank state view
@@ -108,7 +117,11 @@ internal final class AccountsListViewController: UIViewController
         self.totalBalanceBar.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            if #available(iOS 11.0, *) {
+                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            } else {
+                make.bottom.equalTo(self.bottomLayoutGuide.snp.top)
+            }
         }
     }
     

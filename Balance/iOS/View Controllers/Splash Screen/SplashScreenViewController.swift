@@ -94,7 +94,11 @@ internal final class SplashScreenViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.9)
             make.height.equalTo(44.0)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-10.0)
+            if #available(iOS 11.0, *) {
+                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-10.0)
+            } else {
+                make.bottom.equalTo(self.bottomLayoutGuide.snp.top).offset(-10.0)
+            }
         }
         
         // Login button

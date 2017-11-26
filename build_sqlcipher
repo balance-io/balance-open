@@ -8,14 +8,24 @@ rm -rf $TEMPDIR && mkdir $TEMPDIR
 cd $TEMPDIR && git clone https://github.com/sqlcipher/sqlcipher.git && cd $TEMPDIR/sqlcipher && git checkout v3.4.1
 
 # Build macOS version
-./configure --enable-tempstore=yes --with-crypto-lib=commoncrypto CFLAGS="-fembed-bitcode -mmacosx-version-min=10.11 -arch x86_64 -arch i386 -DSQLITE_HAS_CODEC -DSQLITE_TEMP_STORE=2 -DSQLITE_SOUNDEX=1 -DSQLITE_ENABLE_API_ARMOR=1 -DSQLITE_ENABLE_FTS3=1 -DSQLITE_ENABLE_FTS3_PARENTHESIS=1 -DSQLITE_ENABLE_LOCKING_STYLE=1 -DSQLITE_ENABLE_RTREE=1 -DSQLITE_ENABLE_UPDATE_DELETE_LIMIT=1 -DSQLITE_OMIT_AUTORESET=1 -DSQLITE_OMIT_BUILTIN_TEST=1 -DSQLITE_OMIT_LOAD_EXTENSION=1 -DSQLITE_SYSTEM_MALLOC=1 -DSQLITE_THREADSAFE=2" LDFLAGS="-framework Security -framework CoreFoundation" && make && mv ./.libs/libsqlcipher.a $TEMPDIR/libsqlcipher-mac.a && make clean
+./configure --enable-tempstore=yes --with-crypto-lib=commoncrypto CFLAGS="-fembed-bitcode -mmacosx-version-min=10.11 -arch x86_64 -DSQLITE_HAS_CODEC -DSQLITE_TEMP_STORE=2 -DSQLITE_SOUNDEX=1 -DSQLITE_ENABLE_API_ARMOR=1 -DSQLITE_ENABLE_FTS3=1 -DSQLITE_ENABLE_FTS3_PARENTHESIS=1 -DSQLITE_ENABLE_LOCKING_STYLE=1 -DSQLITE_ENABLE_RTREE=1 -DSQLITE_ENABLE_UPDATE_DELETE_LIMIT=1 -DSQLITE_OMIT_AUTORESET=1 -DSQLITE_OMIT_BUILTIN_TEST=1 -DSQLITE_OMIT_LOAD_EXTENSION=1 -DSQLITE_SYSTEM_MALLOC=1 -DSQLITE_THREADSAFE=2" LDFLAGS="-framework Security -framework CoreFoundation" && make ; mv ./.libs/libsqlcipher.a $TEMPDIR/libsqlcipher-mac.a && make clean
 
-# Build iOS version
-./configure --enable-tempstore=yes --with-crypto-lib=commoncrypto --host=arm-apple-darwin --enable-shared=no CFLAGS="-arch armv7s -arch armv7 -arch arm64 -fembed-bitcode -isysroot /Applications/XCode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk -mios-version-min=10.0 -DSQLITE_HAS_CODEC -DSQLITE_TEMP_STORE=2 -DSQLITE_SOUNDEX=1 -DSQLITE_ENABLE_API_ARMOR=1 -DSQLITE_ENABLE_FTS3=1 -DSQLITE_ENABLE_FTS3_PARENTHESIS=1 -DSQLITE_ENABLE_LOCKING_STYLE=1 -DSQLITE_ENABLE_RTREE=1 -DSQLITE_ENABLE_UPDATE_DELETE_LIMIT=1 -DSQLITE_OMIT_AUTORESET=1 -DSQLITE_OMIT_BUILTIN_TEST=1 -DSQLITE_OMIT_LOAD_EXTENSION=1 -DSQLITE_SYSTEM_MALLOC=1 -DSQLITE_THREADSAFE=2" LDFLAGS="-framework Security -framework CoreFoundation" && make ; mv ./.libs/libsqlcipher.a $TEMPDIR/libsqlcipher-ios.a && make clean
+# Build iOS device version
+./configure --enable-tempstore=yes --with-crypto-lib=commoncrypto --host=arm-apple-darwin --enable-shared=no CFLAGS="-arch armv7 -arch arm64 -fembed-bitcode -isysroot /Applications/XCode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk -mios-version-min=10.0 -DSQLITE_HAS_CODEC -DSQLITE_TEMP_STORE=2 -DSQLITE_SOUNDEX=1 -DSQLITE_ENABLE_API_ARMOR=1 -DSQLITE_ENABLE_FTS3=1 -DSQLITE_ENABLE_FTS3_PARENTHESIS=1 -DSQLITE_ENABLE_LOCKING_STYLE=1 -DSQLITE_ENABLE_RTREE=1 -DSQLITE_ENABLE_UPDATE_DELETE_LIMIT=1 -DSQLITE_OMIT_AUTORESET=1 -DSQLITE_OMIT_BUILTIN_TEST=1 -DSQLITE_OMIT_LOAD_EXTENSION=1 -DSQLITE_SYSTEM_MALLOC=1 -DSQLITE_THREADSAFE=2" LDFLAGS="-framework Security -framework CoreFoundation" && make ; mv ./.libs/libsqlcipher.a $TEMPDIR/libsqlcipher-ios.a && make clean
+
+# Build iOS simulator version
+./configure --enable-tempstore=yes --with-crypto-lib=commoncrypto --host=arm-apple-darwin --enable-shared=no CFLAGS="-arch i386 -arch x86_64 -fembed-bitcode -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk -mios-version-min=10.3 -DSQLITE_HAS_CODEC -DSQLITE_TEMP_STORE=2 -DSQLITE_SOUNDEX=1 -DSQLITE_ENABLE_API_ARMOR=1 -DSQLITE_ENABLE_FTS3=1 -DSQLITE_ENABLE_FTS3_PARENTHESIS=1 -DSQLITE_ENABLE_LOCKING_STYLE=1 -DSQLITE_ENABLE_RTREE=1 -DSQLITE_ENABLE_UPDATE_DELETE_LIMIT=1 -DSQLITE_OMIT_AUTORESET=1 -DSQLITE_OMIT_BUILTIN_TEST=1 -DSQLITE_OMIT_LOAD_EXTENSION=1 -DSQLITE_SYSTEM_MALLOC=1 -DSQLITE_THREADSAFE=2" LDFLAGS="-framework Security -framework CoreFoundation" && make ; mv ./.libs/libsqlcipher.a $TEMPDIR/libsqlcipher-iossim.a && make clean
 
 # Combine them into a fat binary
-lipo -create $TEMPDIR/libsqlcipher-mac.a $TEMPDIR/libsqlcipher-ios.a -output ~/Desktop/libsqlcipher.a
+lipo -create $TEMPDIR/libsqlcipher-ios.a $TEMPDIR/libsqlcipher-iossim.a -output ~/Desktop/libsqlcipher-ios.a
+cp $TEMPDIR/libsqlcipher-mac.a ~/Desktop/libsqlcipher-mac.a
 
 # Done!
-lipo -info ~/Desktop/libsqlcipher.a
-echo "The fat binary has been built and placed on your Desktop. It should be placed in ./Balance/Shared/Frameworks inside the Balance repository"
+echo " "
+echo " "
+echo "-----------------------------------"
+echo " "
+lipo -info ~/Desktop/libsqlcipher-ios.a
+lipo -info ~/Desktop/libsqlcipher-mac.a
+echo " "
+echo "The binaries for iOS (device and simulator) and macOS have been built and placed on your Desktop. Move them to the Balance repository in ./Balance/iOS/Frameworks and ./Balance/macOS/Frameworks respectively."
