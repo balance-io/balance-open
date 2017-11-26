@@ -286,7 +286,8 @@ extension KrakenAPIClient: ExchangeApi {
                         } catch { }
                     }
                     for account in accounts {
-                        let currentBalance = account.balance.paddedIntegerFor(currencyCode: account.currencyCode)
+                        let currency = Currency.rawValue(account.currencyCode)
+                        let currentBalance = account.balance.integerValueWith(decimals: currency.decimals)
                         let availableBalance = currentBalance
                         
                         // Initialize an Account object to insert the record

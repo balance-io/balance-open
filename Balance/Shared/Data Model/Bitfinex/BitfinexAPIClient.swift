@@ -260,7 +260,8 @@ extension BitfinexAPIClient: ExchangeApi {
                                 return
                             }
                             for wallet in unwrappedWallets {
-                                let currentBalance = wallet.balance.paddedIntegerFor(currencyCode: wallet.currencyCode)
+                                let currency = Currency.rawValue(wallet.currencyCode)
+                                let currentBalance = wallet.balance.integerValueWith(decimals: currency.decimals)
                                 let availableBalance = currentBalance
                                 
                                 // Initialize an Account object to insert the record
