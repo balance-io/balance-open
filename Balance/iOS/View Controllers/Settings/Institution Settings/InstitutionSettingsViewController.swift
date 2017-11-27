@@ -41,8 +41,7 @@ internal final class InstitutionSettingsViewController: UIViewController
         self.view.backgroundColor = UIColor.white
         
         // Navigation bar
-        if #available(iOS 11.0, *)
-        {
+        if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true
         }
         

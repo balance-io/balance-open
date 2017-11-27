@@ -42,7 +42,9 @@ internal final class TransactionsListViewController: UIViewController {
         super.viewDidLoad()
         
         // Navigation bar
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+        }
         
         // Refresh control
         self.collectionView.refreshControl = self.refreshControl

@@ -39,7 +39,7 @@ internal extension KrakenAPIClient
         guard let unwrappedCredentials = credentials else {
             throw APICredentialsComponents.Error.noCredentials
         }
-        let nonce = String(Int(Date().timeIntervalSinceReferenceDate.rounded() * 1000))
+        let nonce = String(Int64(Date().timeIntervalSinceReferenceDate.rounded() * 1000))
         var parameters = [String:String]()
         parameters.updateValue(nonce, forKey: "nonce")
         if let params = params {

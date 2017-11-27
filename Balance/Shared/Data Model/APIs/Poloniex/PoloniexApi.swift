@@ -201,7 +201,7 @@ class PoloniexApi: ExchangeApi {
     }
     
     fileprivate func createRequestBodyandHash(params: [String: String], secret: String, key: String) -> (body: String, signedBody: String) {
-        let nonce = Int(Date().timeIntervalSince1970 * 10000)
+        let nonce = Int64(Date().timeIntervalSince1970 * 10000)
 
         var queryItems = [URLQueryItem]()
         for (key, value) in params {

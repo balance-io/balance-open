@@ -29,8 +29,7 @@ internal final class AddAccountViewController: UIViewController
         // Navigation bar
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneButtonTapped(_:)))
         
-        if #available(iOS 11.0, *)
-        {
+        if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true
         }
         
