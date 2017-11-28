@@ -24,11 +24,25 @@ class Analytics {
             hockeyManager.configure(withIdentifier: identifier)
             hockeyManager.start()
         #endif
+        setupCountly()
+    }
+    
+    func setupCountly() {
+        let config: CountlyConfig = CountlyConfig()
+        config.appKey = "1807f895bbaa63752af11bc3f4ff6d4983f2e916"
+        config.features = ["CLYCrashReporting"]
+        config.host = "https://try.count.ly"
+        Countly.sharedInstance().start(with: config)
+        
+        #if DEBUG
+        config.enableDebug = true
+        #endif
     }
     
     func trackEvent(withName: String, info: [String:String]? = nil) {
         #if !DEBUG
         BITHockeyManager.shared().metricsManager.trackEvent(withName: withName, properties: info, measurements: nil)
         #endif
+        Countly.sharedInstance().recordEvent(withName, segmentation:info)
     }
 }

@@ -7,3 +7,4 @@
 #import "ObjC.h"
 #import "FMDB.h"
 #import "CertValidator.h"
+#import "Countly.h"

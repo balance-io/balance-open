@@ -138,8 +138,13 @@ struct CoinbaseApi: ExchangeApi {
         let task = certValidatedSession.dataTask(with: request) { maybeData, maybeResponse, maybeError in
             do {
                 // Make sure there's data
-                guard let data = maybeData, maybeError == nil else {
+                guard let data = maybeData else {
                     throw BalanceError.noData
+                }
+                
+                guard maybeError == nil else {
+                    log.error("Failed with network error: \(String(describing: maybeError))")
+                    throw BalanceError.unknownError
                 }
                 
                 // Try to parse the JSON
@@ -156,7 +161,7 @@ struct CoinbaseApi: ExchangeApi {
                 }
             } catch {
                 async {
-                    completion(false, maybeError)
+                    completion(false, error)
                 }
             }
         }

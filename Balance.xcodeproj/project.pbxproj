@@ -19,6 +19,44 @@
 		2DD9B1F01EDDDFD10006268F /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */; };
 		2DE6D9DC1FB1D016007DDCBD /* GDAXTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE6D9DB1FB1D016007DDCBD /* GDAXTransaction.swift */; };
 		2DE6D9DE1FB1D2AA007DDCBD /* Transactions.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DE6D9DD1FB1D2AA007DDCBD /* Transactions.json */; };
+		2DF8983A1FCC8F7500CCDFB9 /* Countly.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898181FCC8F7400CCDFB9 /* Countly.m */; };
+		2DF8983B1FCC8F7500CCDFB9 /* Countly.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898181FCC8F7400CCDFB9 /* Countly.m */; };
+		2DF8983C1FCC8F7500CCDFB9 /* Countly.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 2DF898191FCC8F7400CCDFB9 /* Countly.podspec */; };
+		2DF8983D1FCC8F7500CCDFB9 /* Countly.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 2DF898191FCC8F7400CCDFB9 /* Countly.podspec */; };
+		2DF8983E1FCC8F7500CCDFB9 /* countly_dsym_uploader.sh in Resources */ = {isa = PBXBuildFile; fileRef = 2DF8981A1FCC8F7400CCDFB9 /* countly_dsym_uploader.sh */; };
+		2DF8983F1FCC8F7500CCDFB9 /* countly_dsym_uploader.sh in Resources */ = {isa = PBXBuildFile; fileRef = 2DF8981A1FCC8F7400CCDFB9 /* countly_dsym_uploader.sh */; };
+		2DF898401FCC8F7500CCDFB9 /* Countly_OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF8981C1FCC8F7400CCDFB9 /* Countly_OpenUDID.m */; };
+		2DF898411FCC8F7500CCDFB9 /* Countly_OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF8981C1FCC8F7400CCDFB9 /* Countly_OpenUDID.m */; };
+		2DF898421FCC8F7500CCDFB9 /* CountlyAPM.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF8981E1FCC8F7400CCDFB9 /* CountlyAPM.m */; };
+		2DF898431FCC8F7500CCDFB9 /* CountlyAPM.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF8981E1FCC8F7400CCDFB9 /* CountlyAPM.m */; };
+		2DF898441FCC8F7500CCDFB9 /* CountlyAPMNetworkLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898201FCC8F7400CCDFB9 /* CountlyAPMNetworkLog.m */; };
+		2DF898451FCC8F7500CCDFB9 /* CountlyAPMNetworkLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898201FCC8F7400CCDFB9 /* CountlyAPMNetworkLog.m */; };
+		2DF898461FCC8F7500CCDFB9 /* CountlyCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898221FCC8F7400CCDFB9 /* CountlyCommon.m */; };
+		2DF898471FCC8F7500CCDFB9 /* CountlyCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898221FCC8F7400CCDFB9 /* CountlyCommon.m */; };
+		2DF898481FCC8F7500CCDFB9 /* CountlyConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898241FCC8F7400CCDFB9 /* CountlyConfig.m */; };
+		2DF898491FCC8F7500CCDFB9 /* CountlyConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898241FCC8F7400CCDFB9 /* CountlyConfig.m */; };
+		2DF8984A1FCC8F7500CCDFB9 /* CountlyConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898261FCC8F7400CCDFB9 /* CountlyConnectionManager.m */; };
+		2DF8984B1FCC8F7500CCDFB9 /* CountlyConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898261FCC8F7400CCDFB9 /* CountlyConnectionManager.m */; };
+		2DF8984C1FCC8F7500CCDFB9 /* CountlyCrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898281FCC8F7400CCDFB9 /* CountlyCrashReporter.m */; };
+		2DF8984D1FCC8F7500CCDFB9 /* CountlyCrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898281FCC8F7400CCDFB9 /* CountlyCrashReporter.m */; };
+		2DF8984E1FCC8F7500CCDFB9 /* CountlyDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF8982A1FCC8F7400CCDFB9 /* CountlyDeviceInfo.m */; };
+		2DF8984F1FCC8F7500CCDFB9 /* CountlyDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF8982A1FCC8F7400CCDFB9 /* CountlyDeviceInfo.m */; };
+		2DF898501FCC8F7500CCDFB9 /* CountlyEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF8982C1FCC8F7400CCDFB9 /* CountlyEvent.m */; };
+		2DF898511FCC8F7500CCDFB9 /* CountlyEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF8982C1FCC8F7400CCDFB9 /* CountlyEvent.m */; };
+		2DF898521FCC8F7500CCDFB9 /* CountlyNotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF8982E1FCC8F7400CCDFB9 /* CountlyNotificationService.m */; };
+		2DF898531FCC8F7500CCDFB9 /* CountlyNotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF8982E1FCC8F7400CCDFB9 /* CountlyNotificationService.m */; };
+		2DF898541FCC8F7500CCDFB9 /* CountlyPersistency.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898301FCC8F7400CCDFB9 /* CountlyPersistency.m */; };
+		2DF898551FCC8F7500CCDFB9 /* CountlyPersistency.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898301FCC8F7400CCDFB9 /* CountlyPersistency.m */; };
+		2DF898561FCC8F7500CCDFB9 /* CountlyPushNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898321FCC8F7400CCDFB9 /* CountlyPushNotifications.m */; };
+		2DF898571FCC8F7500CCDFB9 /* CountlyPushNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898321FCC8F7400CCDFB9 /* CountlyPushNotifications.m */; };
+		2DF898581FCC8F7500CCDFB9 /* CountlyStarRating.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898341FCC8F7400CCDFB9 /* CountlyStarRating.m */; };
+		2DF898591FCC8F7500CCDFB9 /* CountlyStarRating.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898341FCC8F7400CCDFB9 /* CountlyStarRating.m */; };
+		2DF8985A1FCC8F7500CCDFB9 /* CountlyUserDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898361FCC8F7500CCDFB9 /* CountlyUserDetails.m */; };
+		2DF8985B1FCC8F7500CCDFB9 /* CountlyUserDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898361FCC8F7500CCDFB9 /* CountlyUserDetails.m */; };
+		2DF8985C1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */; };
+		2DF8985D1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */; };
+		2DF8985E1FCC8F7500CCDFB9 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 2DF898391FCC8F7500CCDFB9 /* LICENSE */; };
+		2DF8985F1FCC8F7500CCDFB9 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 2DF898391FCC8F7500CCDFB9 /* LICENSE */; };
 		5300D6261DCE5A1E00D02657 /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5300D6251DCE5A1E00D02657 /* LockViewController.swift */; };
 		5301A7611F17DC8B00668099 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301A7601F17DC8B00668099 /* URL.swift */; };
 		5301A7771F17F86900668099 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301A7761F17F86900668099 /* HTTPMethod.swift */; };
@@ -529,6 +567,41 @@
 		2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		2DE6D9DB1FB1D016007DDCBD /* GDAXTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXTransaction.swift; sourceTree = "<group>"; };
 		2DE6D9DD1FB1D2AA007DDCBD /* Transactions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = Transactions.json; path = "BalanceUnitTests/Supporting Files/Resources/GDAX API Responses/Transactions.json"; sourceTree = SOURCE_ROOT; };
+		2DF898171FCC8F7400CCDFB9 /* Countly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Countly.h; sourceTree = "<group>"; };
+		2DF898181FCC8F7400CCDFB9 /* Countly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Countly.m; sourceTree = "<group>"; };
+		2DF898191FCC8F7400CCDFB9 /* Countly.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Countly.podspec; sourceTree = "<group>"; };
+		2DF8981A1FCC8F7400CCDFB9 /* countly_dsym_uploader.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = countly_dsym_uploader.sh; sourceTree = "<group>"; };
+		2DF8981B1FCC8F7400CCDFB9 /* Countly_OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Countly_OpenUDID.h; sourceTree = "<group>"; };
+		2DF8981C1FCC8F7400CCDFB9 /* Countly_OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Countly_OpenUDID.m; sourceTree = "<group>"; };
+		2DF8981D1FCC8F7400CCDFB9 /* CountlyAPM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyAPM.h; sourceTree = "<group>"; };
+		2DF8981E1FCC8F7400CCDFB9 /* CountlyAPM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyAPM.m; sourceTree = "<group>"; };
+		2DF8981F1FCC8F7400CCDFB9 /* CountlyAPMNetworkLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyAPMNetworkLog.h; sourceTree = "<group>"; };
+		2DF898201FCC8F7400CCDFB9 /* CountlyAPMNetworkLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyAPMNetworkLog.m; sourceTree = "<group>"; };
+		2DF898211FCC8F7400CCDFB9 /* CountlyCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyCommon.h; sourceTree = "<group>"; };
+		2DF898221FCC8F7400CCDFB9 /* CountlyCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyCommon.m; sourceTree = "<group>"; };
+		2DF898231FCC8F7400CCDFB9 /* CountlyConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyConfig.h; sourceTree = "<group>"; };
+		2DF898241FCC8F7400CCDFB9 /* CountlyConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyConfig.m; sourceTree = "<group>"; };
+		2DF898251FCC8F7400CCDFB9 /* CountlyConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyConnectionManager.h; sourceTree = "<group>"; };
+		2DF898261FCC8F7400CCDFB9 /* CountlyConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyConnectionManager.m; sourceTree = "<group>"; };
+		2DF898271FCC8F7400CCDFB9 /* CountlyCrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyCrashReporter.h; sourceTree = "<group>"; };
+		2DF898281FCC8F7400CCDFB9 /* CountlyCrashReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyCrashReporter.m; sourceTree = "<group>"; };
+		2DF898291FCC8F7400CCDFB9 /* CountlyDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyDeviceInfo.h; sourceTree = "<group>"; };
+		2DF8982A1FCC8F7400CCDFB9 /* CountlyDeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyDeviceInfo.m; sourceTree = "<group>"; };
+		2DF8982B1FCC8F7400CCDFB9 /* CountlyEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyEvent.h; sourceTree = "<group>"; };
+		2DF8982C1FCC8F7400CCDFB9 /* CountlyEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyEvent.m; sourceTree = "<group>"; };
+		2DF8982D1FCC8F7400CCDFB9 /* CountlyNotificationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyNotificationService.h; sourceTree = "<group>"; };
+		2DF8982E1FCC8F7400CCDFB9 /* CountlyNotificationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyNotificationService.m; sourceTree = "<group>"; };
+		2DF8982F1FCC8F7400CCDFB9 /* CountlyPersistency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyPersistency.h; sourceTree = "<group>"; };
+		2DF898301FCC8F7400CCDFB9 /* CountlyPersistency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyPersistency.m; sourceTree = "<group>"; };
+		2DF898311FCC8F7400CCDFB9 /* CountlyPushNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyPushNotifications.h; sourceTree = "<group>"; };
+		2DF898321FCC8F7400CCDFB9 /* CountlyPushNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyPushNotifications.m; sourceTree = "<group>"; };
+		2DF898331FCC8F7400CCDFB9 /* CountlyStarRating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyStarRating.h; sourceTree = "<group>"; };
+		2DF898341FCC8F7400CCDFB9 /* CountlyStarRating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyStarRating.m; sourceTree = "<group>"; };
+		2DF898351FCC8F7500CCDFB9 /* CountlyUserDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyUserDetails.h; sourceTree = "<group>"; };
+		2DF898361FCC8F7500CCDFB9 /* CountlyUserDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyUserDetails.m; sourceTree = "<group>"; };
+		2DF898371FCC8F7500CCDFB9 /* CountlyViewTracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyViewTracking.h; sourceTree = "<group>"; };
+		2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyViewTracking.m; sourceTree = "<group>"; };
+		2DF898391FCC8F7500CCDFB9 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		5300D6251DCE5A1E00D02657 /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
 		5301A7601F17DC8B00668099 /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		5301A7761F17F86900668099 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -951,6 +1024,48 @@
 			path = Modals;
 			sourceTree = "<group>";
 		};
+		2DF898161FCC8F7400CCDFB9 /* countly-sdk-ios-master */ = {
+			isa = PBXGroup;
+			children = (
+				2DF898171FCC8F7400CCDFB9 /* Countly.h */,
+				2DF898181FCC8F7400CCDFB9 /* Countly.m */,
+				2DF898191FCC8F7400CCDFB9 /* Countly.podspec */,
+				2DF8981A1FCC8F7400CCDFB9 /* countly_dsym_uploader.sh */,
+				2DF8981B1FCC8F7400CCDFB9 /* Countly_OpenUDID.h */,
+				2DF8981C1FCC8F7400CCDFB9 /* Countly_OpenUDID.m */,
+				2DF8981D1FCC8F7400CCDFB9 /* CountlyAPM.h */,
+				2DF8981E1FCC8F7400CCDFB9 /* CountlyAPM.m */,
+				2DF8981F1FCC8F7400CCDFB9 /* CountlyAPMNetworkLog.h */,
+				2DF898201FCC8F7400CCDFB9 /* CountlyAPMNetworkLog.m */,
+				2DF898211FCC8F7400CCDFB9 /* CountlyCommon.h */,
+				2DF898221FCC8F7400CCDFB9 /* CountlyCommon.m */,
+				2DF898231FCC8F7400CCDFB9 /* CountlyConfig.h */,
+				2DF898241FCC8F7400CCDFB9 /* CountlyConfig.m */,
+				2DF898251FCC8F7400CCDFB9 /* CountlyConnectionManager.h */,
+				2DF898261FCC8F7400CCDFB9 /* CountlyConnectionManager.m */,
+				2DF898271FCC8F7400CCDFB9 /* CountlyCrashReporter.h */,
+				2DF898281FCC8F7400CCDFB9 /* CountlyCrashReporter.m */,
+				2DF898291FCC8F7400CCDFB9 /* CountlyDeviceInfo.h */,
+				2DF8982A1FCC8F7400CCDFB9 /* CountlyDeviceInfo.m */,
+				2DF8982B1FCC8F7400CCDFB9 /* CountlyEvent.h */,
+				2DF8982C1FCC8F7400CCDFB9 /* CountlyEvent.m */,
+				2DF8982D1FCC8F7400CCDFB9 /* CountlyNotificationService.h */,
+				2DF8982E1FCC8F7400CCDFB9 /* CountlyNotificationService.m */,
+				2DF8982F1FCC8F7400CCDFB9 /* CountlyPersistency.h */,
+				2DF898301FCC8F7400CCDFB9 /* CountlyPersistency.m */,
+				2DF898311FCC8F7400CCDFB9 /* CountlyPushNotifications.h */,
+				2DF898321FCC8F7400CCDFB9 /* CountlyPushNotifications.m */,
+				2DF898331FCC8F7400CCDFB9 /* CountlyStarRating.h */,
+				2DF898341FCC8F7400CCDFB9 /* CountlyStarRating.m */,
+				2DF898351FCC8F7500CCDFB9 /* CountlyUserDetails.h */,
+				2DF898361FCC8F7500CCDFB9 /* CountlyUserDetails.m */,
+				2DF898371FCC8F7500CCDFB9 /* CountlyViewTracking.h */,
+				2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */,
+				2DF898391FCC8F7500CCDFB9 /* LICENSE */,
+			);
+			path = "countly-sdk-ios-master";
+			sourceTree = "<group>";
+		};
 		5301A7641F17F42700668099 /* APIs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1225,6 +1340,7 @@
 		53552A2D1ED72B0700DD95F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2DF898161FCC8F7400CCDFB9 /* countly-sdk-ios-master */,
 				532121901EE8B91600F4812A /* Zip */,
 				530F578A1DCD72680083F3A7 /* fmdb */,
 				5329FB721E3EA36F00A9CAF7 /* CwlSysctl.swift */,
@@ -2315,9 +2431,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DF8985F1FCC8F7500CCDFB9 /* LICENSE in Resources */,
 				53492AC11FBE38F100512239 /* Fonts in Resources */,
+				2DF8983D1FCC8F7500CCDFB9 /* Countly.podspec in Resources */,
 				535529E51ED723C600DD95F9 /* LaunchScreen.storyboard in Resources */,
 				535529E21ED723C600DD95F9 /* Assets.xcassets in Resources */,
+				2DF8983F1FCC8F7500CCDFB9 /* countly_dsym_uploader.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2327,8 +2446,11 @@
 			files = (
 				53492AC01FBE38F100512239 /* Fonts in Resources */,
 				DC8DB3E41BE4EFF40015C204 /* Main.storyboard in Resources */,
+				2DF8985E1FCC8F7500CCDFB9 /* LICENSE in Resources */,
 				2DE6D9DE1FB1D2AA007DDCBD /* Transactions.json in Resources */,
+				2DF8983C1FCC8F7500CCDFB9 /* Countly.podspec in Resources */,
 				DC9C33DB1C6DA20A004C0ABC /* Images.xcassets in Resources */,
+				2DF8983E1FCC8F7500CCDFB9 /* countly_dsym_uploader.sh in Resources */,
 				DC1A649F1B867B1F009356A0 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2441,6 +2563,7 @@
 				537187E41F4CC23B00E7F9D6 /* GDAXWithdrawal.swift in Sources */,
 				A453A5261F8676F00002C6C8 /* RegistrationViewController.swift in Sources */,
 				53552A111ED7251200DD95F9 /* AppLock.swift in Sources */,
+				2DF898511FCC8F7500CCDFB9 /* CountlyEvent.m in Sources */,
 				53F078661ED73F0F00E7EDF9 /* Color.swift in Sources */,
 				535529F71ED7250100DD95F9 /* SyncManager.swift in Sources */,
 				53D441E91F44B0DD006967E1 /* FMDatabasePoolAdditionsVariadic.swift in Sources */,
@@ -2453,13 +2576,16 @@
 				A43ACE501F963035009F2AE9 /* CurrencySelectionViewModel.swift in Sources */,
 				53552A7B1ED7347C00DD95F9 /* MockedDefaultsStorage.swift in Sources */,
 				53552A051ED7251200DD95F9 /* Logging.swift in Sources */,
+				2DF898551FCC8F7500CCDFB9 /* CountlyPersistency.m in Sources */,
 				53D441E61F44ABBD006967E1 /* Item.swift in Sources */,
 				532121A01EE8B91600F4812A /* unzip.c in Sources */,
 				A456ED121FB3067D006EE529 /* CurrencyCollectionViewCell.swift in Sources */,
+				2DF898431FCC8F7500CCDFB9 /* CountlyAPM.m in Sources */,
 				A4E457231F790EE5002E2879 /* PoloniexTransaction.swift in Sources */,
 				5321219E1EE8B91600F4812A /* ioapi.c in Sources */,
 				53552A0C1ED7251200DD95F9 /* Utils.swift in Sources */,
 				53552A271ED7252900DD95F9 /* Array.swift in Sources */,
+				2DF898591FCC8F7500CCDFB9 /* CountlyStarRating.m in Sources */,
 				53D441E31F44AA9F006967E1 /* GenericItemRepository.swift in Sources */,
 				A456ED0D1FB225A6006EE529 /* PriceTickerViewController.swift in Sources */,
 				A4307A901F8F6EA800BBA8B4 /* StackedCardCollectionView.swift in Sources */,
@@ -2472,6 +2598,7 @@
 				A4ED56DB1F86301A00E4CC42 /* AccountTableViewCell.swift in Sources */,
 				53552A371ED72B5B00DD95F9 /* CwlSysctl.swift in Sources */,
 				A493B93A1F68137E0074ACCC /* APICredentialsComponents.swift in Sources */,
+				2DF898451FCC8F7500CCDFB9 /* CountlyAPMNetworkLog.m in Sources */,
 				A4E7680A1F67DDFE002B1AE1 /* BitfinexErrors.swift in Sources */,
 				53561EAE1F82DD260043D4F9 /* InstitutionSettingsViewModel.swift in Sources */,
 				A41D3E461F6BF81A00FD25B5 /* KrakenAuthHeaders.swift in Sources */,
@@ -2487,6 +2614,7 @@
 				53F0785E1ED73B7D00E7EDF9 /* Element.swift in Sources */,
 				53552A041ED7251200DD95F9 /* Debugging.swift in Sources */,
 				537504FE1F192D280062C11A /* TypeAliases.swift in Sources */,
+				2DF8983B1FCC8F7500CCDFB9 /* Countly.m in Sources */,
 				537187F51F4CC37400E7F9D6 /* ExchangeApi.swift in Sources */,
 				53561EB01F82DD260043D4F9 /* Reuseable.swift in Sources */,
 				53552A0A1ED7251200DD95F9 /* Notifications.swift in Sources */,
@@ -2496,6 +2624,7 @@
 				53561EB51F82DD260043D4F9 /* TextFieldTableViewCell.swift in Sources */,
 				53D441ED1F44B224006967E1 /* FMDatabasePoolAdditions.m in Sources */,
 				5301A7781F17F86900668099 /* HTTPMethod.swift in Sources */,
+				2DF8985B1FCC8F7500CCDFB9 /* CountlyUserDetails.m in Sources */,
 				537187DF1F4CC23B00E7F9D6 /* GDAXAccount.swift in Sources */,
 				53552A7C1ED7347E00DD95F9 /* MockedDefaults.swift in Sources */,
 				53F078671ED740E500E7EDF9 /* SampleResponses.swift in Sources */,
@@ -2503,11 +2632,13 @@
 				5361BC9F1F562580009C3F07 /* PoloniexInstitution.swift in Sources */,
 				53552A351ED72B5B00DD95F9 /* OrderedDictionary.swift in Sources */,
 				537187E31F4CC23B00E7F9D6 /* GDAXServer.swift in Sources */,
+				2DF898411FCC8F7500CCDFB9 /* Countly_OpenUDID.m in Sources */,
 				A41EE4821FB9B66D00210038 /* QRLoginCredentialsParser.swift in Sources */,
 				532121A81EE8B91600F4812A /* ZipUtilities.swift in Sources */,
 				53DE2E9A1FAF16B000AC9FCF /* KrakenTransaction.swift in Sources */,
 				A4ED56DE1F86378200E4CC42 /* InstitutionTableHeaderView.swift in Sources */,
 				5301A77E1F17FDED00668099 /* Feedback.swift in Sources */,
+				2DF8985D1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */,
 				53561EAA1F82DD260043D4F9 /* RootViewController.swift in Sources */,
 				537187E11F4CC23B00E7F9D6 /* GDAXCredentials.swift in Sources */,
 				A41742911F73C6BF004A9B4F /* CoinbaseTransaction.swift in Sources */,
@@ -2518,18 +2649,21 @@
 				537187DC1F4CC23B00E7F9D6 /* CoinbaseApi.swift in Sources */,
 				A4E4570D1F79018A002E2879 /* Reachability.swift in Sources */,
 				53561EB21F82DD260043D4F9 /* SegmentedControlTableViewCell.swift in Sources */,
+				2DF898531FCC8F7500CCDFB9 /* CountlyNotificationService.m in Sources */,
 				A4E768031F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */,
 				53552A231ED7252900DD95F9 /* Date.swift in Sources */,
 				A495727A1F98DA3100651C89 /* TransactionsHeaderReusableView.swift in Sources */,
 				A4E768071F67DC60002B1AE1 /* PoloniexErrors.swift in Sources */,
 				A4EF39E71F8E43A40032265E /* InstitutionAccountsListViewModel.swift in Sources */,
 				532121A41EE8B91600F4812A /* QuickZip.swift in Sources */,
+				2DF8984B1FCC8F7500CCDFB9 /* CountlyConnectionManager.m in Sources */,
 				A40ABBEA1F6BC5A000383C62 /* KrakenCredentials.swift in Sources */,
 				53552A2A1ED7252900DD95F9 /* DispatchQueue.swift in Sources */,
 				53552A0D1ED7251200DD95F9 /* Search.swift in Sources */,
 				53D441F61F44C477006967E1 /* TransactionRepository.swift in Sources */,
 				535529F11ED724ED00DD95F9 /* TabViewModel.swift in Sources */,
 				532121A61EE8B91600F4812A /* Zip.swift in Sources */,
+				2DF898571FCC8F7500CCDFB9 /* CountlyPushNotifications.m in Sources */,
 				53552A321ED72B5700DD95F9 /* FMResultSet.m in Sources */,
 				53552A311ED72B5700DD95F9 /* FMDatabaseQueue.m in Sources */,
 				A4ED56E11F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift in Sources */,
@@ -2551,6 +2685,7 @@
 				A4E457201F79045A002E2879 /* Double.swift in Sources */,
 				A453A5231F866CFF0002C6C8 /* LoginViewController.swift in Sources */,
 				537187E21F4CC23B00E7F9D6 /* GDAXErrors.swift in Sources */,
+				2DF8984F1FCC8F7500CCDFB9 /* CountlyDeviceInfo.m in Sources */,
 				A493B93D1F6819600074ACCC /* BitfinexAuthHeaders.swift in Sources */,
 				53552A151ED7251200DD95F9 /* Swizzling.swift in Sources */,
 				53552A191ED7251700DD95F9 /* AccountType.swift in Sources */,
@@ -2566,6 +2701,7 @@
 				53552A121ED7251200DD95F9 /* NetworkStatus.swift in Sources */,
 				A495726D1F98B56400651C89 /* CurrentExchangeRates.swift in Sources */,
 				535529F91ED7250100DD95F9 /* Syncer.swift in Sources */,
+				2DF8984D1FCC8F7500CCDFB9 /* CountlyCrashReporter.m in Sources */,
 				53F078651ED73E6D00E7EDF9 /* ThemeGlobals.swift in Sources */,
 				537187E01F4CC23B00E7F9D6 /* GDAXAuthHeaders.swift in Sources */,
 				538B47BF1F4CA0200023CED5 /* Currency.swift in Sources */,
@@ -2576,6 +2712,7 @@
 				5373B4751FAB708B007432DC /* PriceTickerTabViewModel.swift in Sources */,
 				53552A0F1ED7251200DD95F9 /* KeychainManager.swift in Sources */,
 				A40ABBE71F6BC0C000383C62 /* KrakenAPIClient.swift in Sources */,
+				2DF898491FCC8F7500CCDFB9 /* CountlyConfig.m in Sources */,
 				53561EAC1F82DD260043D4F9 /* AddCredentialBasedAccountViewController.swift in Sources */,
 				53552A7A1ED7347900DD95F9 /* MockedKeychainManager.swift in Sources */,
 				535529FD1ED7250500DD95F9 /* PlaidDataMockingProtocol.swift in Sources */,
@@ -2590,6 +2727,7 @@
 				A456ED151FB31A33006EE529 /* UIFont+Balance.swift in Sources */,
 				53552A141ED7251200DD95F9 /* ServerMessage.swift in Sources */,
 				53561EA81F82DD260043D4F9 /* AccountsListViewController.swift in Sources */,
+				2DF898471FCC8F7500CCDFB9 /* CountlyCommon.m in Sources */,
 				A41EE47D1FB9A98A00210038 /* GDAXTransaction.swift in Sources */,
 				535529FF1ED7250500DD95F9 /* DefaultsStorage.swift in Sources */,
 				53552A181ED7251700DD95F9 /* Account.swift in Sources */,
@@ -2613,11 +2751,15 @@
 			files = (
 				53EB77BF1CF3E02400F01903 /* NSTableView.swift in Sources */,
 				532121A31EE8B91600F4812A /* QuickZip.swift in Sources */,
+				2DF898401FCC8F7500CCDFB9 /* Countly_OpenUDID.m in Sources */,
 				53E8C77E1C62EB4C0085D64E /* TabsViewController.swift in Sources */,
 				A4E457091F79010A002E2879 /* BalanceError.swift in Sources */,
 				53D441F81F44CD93006967E1 /* InstitutionRepository.swift in Sources */,
+				2DF8983A1FCC8F7500CCDFB9 /* Countly.m in Sources */,
 				A44C76221F7BD9610024476E /* BitfinexTransaction.swift in Sources */,
+				2DF898521FCC8F7500CCDFB9 /* CountlyNotificationService.m in Sources */,
 				A41D3E451F6BF81A00FD25B5 /* KrakenAuthHeaders.swift in Sources */,
+				2DF898501FCC8F7500CCDFB9 /* CountlyEvent.m in Sources */,
 				5361BC9E1F562580009C3F07 /* PoloniexInstitution.swift in Sources */,
 				536C6EEF1D864C9B00823688 /* MockedDefaultsStorage.swift in Sources */,
 				537187EF1F4CC23C00E7F9D6 /* GDAXWithdrawal.swift in Sources */,
@@ -2628,6 +2770,7 @@
 				F19BF68C1D880DA100496A66 /* MockedDefaults.swift in Sources */,
 				537187F41F4CC37400E7F9D6 /* ExchangeApi.swift in Sources */,
 				53F47FCE1E3A78B70042AE06 /* DispatchQueue.swift in Sources */,
+				2DF898441FCC8F7500CCDFB9 /* CountlyAPMNetworkLog.m in Sources */,
 				A4430AA01F95F3ED00F2FFFA /* ExchangeRateSource.swift in Sources */,
 				2D9AA1E31FB5AED300058491 /* Analytics.swift in Sources */,
 				530422941ED39EE7001CA499 /* TransactionsTabViewModel.swift in Sources */,
@@ -2637,6 +2780,7 @@
 				A467DFC51F98EBFD0063882C /* Currency+MasterCurrency.swift in Sources */,
 				53D441E21F44AA9F006967E1 /* GenericItemRepository.swift in Sources */,
 				53B327C41E56AE0F009C7AFC /* Syncer.swift in Sources */,
+				2DF8984C1FCC8F7500CCDFB9 /* CountlyCrashReporter.m in Sources */,
 				5373B4741FAB708B007432DC /* PriceTickerTabViewModel.swift in Sources */,
 				538B47BE1F4CA0200023CED5 /* Currency.swift in Sources */,
 				A4E457141F7901E6002E2879 /* EthplorerApi.swift in Sources */,
@@ -2698,9 +2842,12 @@
 				539348BB1DEBB479009F4564 /* TokenSearchField.swift in Sources */,
 				537187F01F4CC23C00E7F9D6 /* PoloniexApi.swift in Sources */,
 				537187F11F4CC23C00E7F9D6 /* PoloniexAccount.swift in Sources */,
+				2DF898481FCC8F7500CCDFB9 /* CountlyConfig.m in Sources */,
 				53EB77CA1CF3E5BC00F01903 /* String.swift in Sources */,
+				2DF898421FCC8F7500CCDFB9 /* CountlyAPM.m in Sources */,
 				5325508C1D06FBB60045404E /* Button.swift in Sources */,
 				539F65D61D3D17EF00A22EF7 /* ImageView.swift in Sources */,
+				2DF8984E1FCC8F7500CCDFB9 /* CountlyDeviceInfo.m in Sources */,
 				DC33D6D21CDDB22900E213FF /* ObjC.m in Sources */,
 				53294FA31D1DDD9500F08059 /* CCNStatusItemDropView.m in Sources */,
 				53BB42E71CE849E70002D473 /* Shortcut.swift in Sources */,
@@ -2711,6 +2858,7 @@
 				A4E768101F67F049002B1AE1 /* APICredentialsComponentsError.swift in Sources */,
 				537187ED1F4CC23C00E7F9D6 /* GDAXErrors.swift in Sources */,
 				5300D6261DCE5A1E00D02657 /* LockViewController.swift in Sources */,
+				2DF8985A1FCC8F7500CCDFB9 /* CountlyUserDetails.m in Sources */,
 				535315261F4CEBF2008D6890 /* ApiInstitution.swift in Sources */,
 				A4E4570C1F79018A002E2879 /* Reachability.swift in Sources */,
 				53980CC41D5D0C1F0013B981 /* Date.swift in Sources */,
@@ -2721,7 +2869,9 @@
 				530F57CF1DCD72680083F3A7 /* FMDatabaseVariadic.swift in Sources */,
 				DC39E0001CD80D0E00B48F75 /* HoverButton.swift in Sources */,
 				533A3B1D1DF23C2B005D3C89 /* Array.swift in Sources */,
+				2DF898581FCC8F7500CCDFB9 /* CountlyStarRating.m in Sources */,
 				5329FB751E3EB5C400A9CAF7 /* EmailIssueController.swift in Sources */,
+				2DF898561FCC8F7500CCDFB9 /* CountlyPushNotifications.m in Sources */,
 				676ED7A51D17ACB400D03395 /* SampleResponses.swift in Sources */,
 				5301A7611F17DC8B00668099 /* URL.swift in Sources */,
 				53A179BD1DC923C0006442E4 /* AppLock.swift in Sources */,
@@ -2758,11 +2908,14 @@
 				5329FB731E3EA36F00A9CAF7 /* CwlSysctl.swift in Sources */,
 				2DD9B1F01EDDDFD10006268F /* TestingAppDelegate.swift in Sources */,
 				53C23BDC1E5F988000DA1281 /* ComboBox.swift in Sources */,
+				2DF898541FCC8F7500CCDFB9 /* CountlyPersistency.m in Sources */,
 				53B327C61E56AEC2009C7AFC /* SyncDefaults.swift in Sources */,
+				2DF8984A1FCC8F7500CCDFB9 /* CountlyConnectionManager.m in Sources */,
 				A4430A901F94EE1700F2FFFA /* CoinbaseInstitution.swift in Sources */,
 				53F638391C5FEAB800864346 /* Database.swift in Sources */,
 				53F078641ED73E6D00E7EDF9 /* ThemeGlobals.swift in Sources */,
 				28F678481DCB6E9600383D22 /* SetPasswordViewController.swift in Sources */,
+				2DF8985C1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */,
 				538DD1711DA2EDB600066288 /* TransactionContextMenu.swift in Sources */,
 				5313F9631F58D76500DD6BDB /* PFMoveApplication.m in Sources */,
 				A4E4571C1F790388002E2879 /* CoinbaseError.swift in Sources */,
@@ -2773,6 +2926,7 @@
 				537187E71F4CC23C00E7F9D6 /* CoinbaseApi.swift in Sources */,
 				536C6EF21D864CB900823688 /* DefaultsStorage.swift in Sources */,
 				DCC684D81BD1080E00E95B90 /* TransactionsTabViewController.swift in Sources */,
+				2DF898461FCC8F7500CCDFB9 /* CountlyCommon.m in Sources */,
 				530291241C6A6B7200C31CC1 /* AccountType.swift in Sources */,
 				53294FA51D1DDD9500F08059 /* CCNStatusItemWindowBackgroundView.m in Sources */,
 				F1253E611D75D55D001BD48C /* KeychainManagement.swift in Sources */,
