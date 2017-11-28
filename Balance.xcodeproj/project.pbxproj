@@ -443,6 +443,7 @@
 		A495727A1F98DA3100651C89 /* TransactionsHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49572791F98DA3100651C89 /* TransactionsHeaderReusableView.swift */; };
 		A4B262BB1FA37D2300AADCBE /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A49572771F98B99500651C89 /* HockeySDK.framework */; };
 		A4B262BC1FA37D2300AADCBE /* HockeySDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A49572771F98B99500651C89 /* HockeySDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A4BDE9991FCD706D002D958D /* UnlockApplicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDE9981FCD706D002D958D /* UnlockApplicationViewController.swift */; };
 		A4CB29E21F682C2D00128E48 /* BitfinexAPIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CB29E11F682C2D00128E48 /* BitfinexAPIClientTests.swift */; };
 		A4E457091F79010A002E2879 /* BalanceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E457081F79010A002E2879 /* BalanceError.swift */; };
 		A4E4570A1F79010A002E2879 /* BalanceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E457081F79010A002E2879 /* BalanceError.swift */; };
@@ -891,6 +892,7 @@
 		A49572751F98B84D00651C89 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		A49572771F98B99500651C89 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		A49572791F98DA3100651C89 /* TransactionsHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsHeaderReusableView.swift; sourceTree = "<group>"; };
+		A4BDE9981FCD706D002D958D /* UnlockApplicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockApplicationViewController.swift; sourceTree = "<group>"; };
 		A4CB29E11F682C2D00128E48 /* BitfinexAPIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexAPIClientTests.swift; sourceTree = "<group>"; };
 		A4E457081F79010A002E2879 /* BalanceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceError.swift; sourceTree = "<group>"; };
 		A4E4570B1F79015D002E2879 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -1479,6 +1481,7 @@
 				53561E951F82DD120043D4F9 /* Settings */,
 				A456ED0B1FB22589006EE529 /* Price Ticker */,
 				A4ED56DF1F865ECC00E4CC42 /* Main Currency Selection */,
+				A4BDE9971FCD7049002D958D /* Unlock Application */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -2032,6 +2035,14 @@
 				A49572791F98DA3100651C89 /* TransactionsHeaderReusableView.swift */,
 			);
 			path = "Supplementary Views";
+			sourceTree = "<group>";
+		};
+		A4BDE9971FCD7049002D958D /* Unlock Application */ = {
+			isa = PBXGroup;
+			children = (
+				A4BDE9981FCD706D002D958D /* UnlockApplicationViewController.swift */,
+			);
+			path = "Unlock Application";
 			sourceTree = "<group>";
 		};
 		A4CB29E01F68209E00128E48 /* BitfinexAPIClient */ = {
@@ -2643,6 +2654,7 @@
 				2DF8985D1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */,
 				53561EAA1F82DD260043D4F9 /* RootViewController.swift in Sources */,
 				537187E11F4CC23B00E7F9D6 /* GDAXCredentials.swift in Sources */,
+				A4BDE9991FCD706D002D958D /* UnlockApplicationViewController.swift in Sources */,
 				A41742911F73C6BF004A9B4F /* CoinbaseTransaction.swift in Sources */,
 				53552A171ED7251700DD95F9 /* Institution.swift in Sources */,
 				53552A021ED7251200DD95F9 /* Singletons.swift in Sources */,

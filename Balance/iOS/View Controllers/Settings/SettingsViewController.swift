@@ -6,6 +6,7 @@
 //  Copyright © 2017 Balanced Software, Inc. All rights reserved.
 //
 
+import LocalAuthentication
 import UIKit
 
 
@@ -17,7 +18,9 @@ internal final class SettingsViewController: UIViewController
     // Private
     private let viewModel = AccountsTabViewModel()
     private let currencyViewModel = CurrencySelectionViewModel()
+    
     private let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+    private let biometricLockEnabledSwitch = UISwitch()
     
     // MARK: Initialization
     
@@ -65,6 +68,9 @@ internal final class SettingsViewController: UIViewController
         self.tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        
+        // Biometric lock switch
+        self.biometricLockEnabledSwitch.addTarget(self, action: #selector(self.biometricLockEnabledSwitchValueChanged(_:)), for: .valueChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,6 +88,27 @@ internal final class SettingsViewController: UIViewController
         
         // Table sections
         var tableSections = [TableSection]()
+        
+        // Biometrics
+        let localAuthContext = LAContext()
+        var localAuthError: NSError?
+        localAuthContext.canEvaluatePolicy(LAPolicy.deviceOwnerAuthentication, error: &localAuthError)
+        
+        if localAuthError == nil {
+            self.biometricLockEnabledSwitch.setOn(appLock.lockEnabled, animated: false)
+            
+            let biometricRow = TableRow { [weak self] (tableView, indexPath) -> UITableViewCell in
+                let cell: TableViewCell = tableView.dequeueReusableCell(at: indexPath)
+                cell.textLabel?.text = "Touch/Face ID"
+                cell.accessoryView = self?.biometricLockEnabledSwitch
+                cell.selectionStyle = .none
+                
+                return cell
+            }
+            
+            let biometricSection = TableSection(title: "Security", rows: [biometricRow])
+            tableSections.append(biometricSection)
+        }
         
         // Main currency
         var mainCurrencyRow = TableRow { (tableView, indexPath) -> UITableViewCell in
@@ -163,6 +190,10 @@ internal final class SettingsViewController: UIViewController
 
     @objc private func logoutButtonTapped(_ sender: Any) {
         // TODO: Logout
+    }
+    
+    @objc private func biometricLockEnabledSwitchValueChanged(_ sender: Any) {
+        appLock.lockEnabled = self.biometricLockEnabledSwitch.isOn
     }
     
     // MARK: Notifications
