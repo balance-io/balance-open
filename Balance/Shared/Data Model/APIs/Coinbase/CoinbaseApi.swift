@@ -144,7 +144,7 @@ struct CoinbaseApi: ExchangeApi {
                 
                 guard maybeError == nil else {
                     log.error("Failed with network error: \(String(describing: maybeError))")
-                    throw BalanceError.unknownError
+                    throw BalanceError.networkError
                 }
                 
                 // Try to parse the JSON
