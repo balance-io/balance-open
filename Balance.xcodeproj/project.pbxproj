@@ -21,10 +21,6 @@
 		2DE6D9DE1FB1D2AA007DDCBD /* Transactions.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DE6D9DD1FB1D2AA007DDCBD /* Transactions.json */; };
 		2DF8983A1FCC8F7500CCDFB9 /* Countly.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898181FCC8F7400CCDFB9 /* Countly.m */; };
 		2DF8983B1FCC8F7500CCDFB9 /* Countly.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898181FCC8F7400CCDFB9 /* Countly.m */; };
-		2DF8983C1FCC8F7500CCDFB9 /* Countly.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 2DF898191FCC8F7400CCDFB9 /* Countly.podspec */; };
-		2DF8983D1FCC8F7500CCDFB9 /* Countly.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 2DF898191FCC8F7400CCDFB9 /* Countly.podspec */; };
-		2DF8983E1FCC8F7500CCDFB9 /* countly_dsym_uploader.sh in Resources */ = {isa = PBXBuildFile; fileRef = 2DF8981A1FCC8F7400CCDFB9 /* countly_dsym_uploader.sh */; };
-		2DF8983F1FCC8F7500CCDFB9 /* countly_dsym_uploader.sh in Resources */ = {isa = PBXBuildFile; fileRef = 2DF8981A1FCC8F7400CCDFB9 /* countly_dsym_uploader.sh */; };
 		2DF898401FCC8F7500CCDFB9 /* Countly_OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF8981C1FCC8F7400CCDFB9 /* Countly_OpenUDID.m */; };
 		2DF898411FCC8F7500CCDFB9 /* Countly_OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF8981C1FCC8F7400CCDFB9 /* Countly_OpenUDID.m */; };
 		2DF898421FCC8F7500CCDFB9 /* CountlyAPM.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF8981E1FCC8F7400CCDFB9 /* CountlyAPM.m */; };
@@ -55,8 +51,6 @@
 		2DF8985B1FCC8F7500CCDFB9 /* CountlyUserDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898361FCC8F7500CCDFB9 /* CountlyUserDetails.m */; };
 		2DF8985C1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */; };
 		2DF8985D1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */; };
-		2DF8985E1FCC8F7500CCDFB9 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 2DF898391FCC8F7500CCDFB9 /* LICENSE */; };
-		2DF8985F1FCC8F7500CCDFB9 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 2DF898391FCC8F7500CCDFB9 /* LICENSE */; };
 		5300D6261DCE5A1E00D02657 /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5300D6251DCE5A1E00D02657 /* LockViewController.swift */; };
 		5301A7611F17DC8B00668099 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301A7601F17DC8B00668099 /* URL.swift */; };
 		5301A7771F17F86900668099 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301A7761F17F86900668099 /* HTTPMethod.swift */; };
@@ -566,8 +560,6 @@
 		2DE6D9DD1FB1D2AA007DDCBD /* Transactions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = Transactions.json; path = "BalanceUnitTests/Supporting Files/Resources/GDAX API Responses/Transactions.json"; sourceTree = SOURCE_ROOT; };
 		2DF898171FCC8F7400CCDFB9 /* Countly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Countly.h; sourceTree = "<group>"; };
 		2DF898181FCC8F7400CCDFB9 /* Countly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Countly.m; sourceTree = "<group>"; };
-		2DF898191FCC8F7400CCDFB9 /* Countly.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Countly.podspec; sourceTree = "<group>"; };
-		2DF8981A1FCC8F7400CCDFB9 /* countly_dsym_uploader.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = countly_dsym_uploader.sh; sourceTree = "<group>"; };
 		2DF8981B1FCC8F7400CCDFB9 /* Countly_OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Countly_OpenUDID.h; sourceTree = "<group>"; };
 		2DF8981C1FCC8F7400CCDFB9 /* Countly_OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Countly_OpenUDID.m; sourceTree = "<group>"; };
 		2DF8981D1FCC8F7400CCDFB9 /* CountlyAPM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyAPM.h; sourceTree = "<group>"; };
@@ -598,7 +590,6 @@
 		2DF898361FCC8F7500CCDFB9 /* CountlyUserDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyUserDetails.m; sourceTree = "<group>"; };
 		2DF898371FCC8F7500CCDFB9 /* CountlyViewTracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyViewTracking.h; sourceTree = "<group>"; };
 		2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyViewTracking.m; sourceTree = "<group>"; };
-		2DF898391FCC8F7500CCDFB9 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		5300D6251DCE5A1E00D02657 /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
 		5301A7601F17DC8B00668099 /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		5301A7761F17F86900668099 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -1024,8 +1015,6 @@
 			children = (
 				2DF898171FCC8F7400CCDFB9 /* Countly.h */,
 				2DF898181FCC8F7400CCDFB9 /* Countly.m */,
-				2DF898191FCC8F7400CCDFB9 /* Countly.podspec */,
-				2DF8981A1FCC8F7400CCDFB9 /* countly_dsym_uploader.sh */,
 				2DF8981B1FCC8F7400CCDFB9 /* Countly_OpenUDID.h */,
 				2DF8981C1FCC8F7400CCDFB9 /* Countly_OpenUDID.m */,
 				2DF8981D1FCC8F7400CCDFB9 /* CountlyAPM.h */,
@@ -1056,7 +1045,6 @@
 				2DF898361FCC8F7500CCDFB9 /* CountlyUserDetails.m */,
 				2DF898371FCC8F7500CCDFB9 /* CountlyViewTracking.h */,
 				2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */,
-				2DF898391FCC8F7500CCDFB9 /* LICENSE */,
 			);
 			path = "countly-sdk-ios-master";
 			sourceTree = "<group>";
@@ -2434,12 +2422,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DF8985F1FCC8F7500CCDFB9 /* LICENSE in Resources */,
 				53492AC11FBE38F100512239 /* Fonts in Resources */,
-				2DF8983D1FCC8F7500CCDFB9 /* Countly.podspec in Resources */,
 				535529E51ED723C600DD95F9 /* LaunchScreen.storyboard in Resources */,
 				535529E21ED723C600DD95F9 /* Assets.xcassets in Resources */,
-				2DF8983F1FCC8F7500CCDFB9 /* countly_dsym_uploader.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2449,11 +2434,8 @@
 			files = (
 				53492AC01FBE38F100512239 /* Fonts in Resources */,
 				DC8DB3E41BE4EFF40015C204 /* Main.storyboard in Resources */,
-				2DF8985E1FCC8F7500CCDFB9 /* LICENSE in Resources */,
 				2DE6D9DE1FB1D2AA007DDCBD /* Transactions.json in Resources */,
-				2DF8983C1FCC8F7500CCDFB9 /* Countly.podspec in Resources */,
 				DC9C33DB1C6DA20A004C0ABC /* Images.xcassets in Resources */,
-				2DF8983E1FCC8F7500CCDFB9 /* countly_dsym_uploader.sh in Resources */,
 				DC1A649F1B867B1F009356A0 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
