@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "welcome.png",
+      "filename" : "addAccount.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "welcome@2x.png",
+      "filename" : "addAccount@2x.png",
       "scale" : "2x"
     },
     {

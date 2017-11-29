@@ -75,18 +75,11 @@ struct LockTheme {
 
 struct TabsTheme {
     let header: TabsTheme.HeaderTheme
-    let footer: TabsTheme.FooterTheme
     
     struct HeaderTheme {
         let tabFont: NSFont
-        let tabFontColor: NSColor
-    }
-    
-    struct FooterTheme {
-        let backgroundColor: NSColor
-        let textColor: NSColor
+        let addAccountIcon: NSImage
         let preferencesIcon: NSImage
-        let syncButtonColor: NSColor
     }
 }
 

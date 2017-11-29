@@ -170,10 +170,9 @@ class TabsViewController: NSViewController {
             make.centerY.equalToSuperview()
         }
         
-        // Preferences button
         preferencesButton.target = self
         preferencesButton.action = #selector(showSettingsMenu(_:))
-        preferencesButton.image = CurrentTheme.tabs.footer.preferencesIcon
+        preferencesButton.image = CurrentTheme.tabs.header.preferencesIcon
         preferencesButton.setButtonType(.momentaryChange)
         preferencesButton.setAccessibilityLabel("Preferences")
         preferencesButton.isBordered = false
@@ -187,7 +186,7 @@ class TabsViewController: NSViewController {
         
         addAccountButton.target = self
         addAccountButton.action = #selector(showAddAccount)
-        addAccountButton.image = NSImage(named: NSImage.Name.addTemplate)//CurrentTheme.tabs.footer.preferencesIcon
+        addAccountButton.image = CurrentTheme.tabs.header.addAccountIcon
         addAccountButton.setButtonType(.momentaryChange)
         addAccountButton.setAccessibilityLabel("Add Account")
         addAccountButton.isBordered = false
