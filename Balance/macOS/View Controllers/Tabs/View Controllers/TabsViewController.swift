@@ -151,30 +151,23 @@ class TabsViewController: NSViewController {
             make.centerY.equalToSuperview()
         }
         
-        var priceTickerDisabled = false
-        #if DEBUG
-            priceTickerDisabled =  true
-        #endif
-        
-        if priceTickerDisabled {
-            priceTickerButton.target = self
-            priceTickerButton.action = #selector(tabAction(_:))
-            priceTickerButton.tag = Tab.priceTicker.rawValue
-    //        priceTickerButton.image = #imageLiteral(resourceName: "TabIconTransactionsInactive")
-    //        priceTickerButton.imagePosition = .imageLeft
-    //        priceTickerButton.alternateImage = #imageLiteral(resourceName: "TabIconTransactionsActive")
-            priceTickerButton.title = "Price Ticker"
-            //priceTickerButton.titleColor = CurrentTheme.tabs.header.tabFontColor
-            priceTickerButton.font = CurrentTheme.tabs.header.tabFont
-            priceTickerButton.setAccessibilityLabel("Transactions")
-            priceTickerButton.setButtonType(.toggle)
-            priceTickerButton.isBordered = false
-            priceTickerButton.sizeToFit()
-            headerView.addSubview(priceTickerButton)
-            priceTickerButton.snp.makeConstraints { make in
-                make.left.equalTo(transactionsButton.snp.right).offset(10)
-                make.centerY.equalToSuperview()
-            }
+        priceTickerButton.target = self
+        priceTickerButton.action = #selector(tabAction(_:))
+        priceTickerButton.tag = Tab.priceTicker.rawValue
+        //        priceTickerButton.image = #imageLiteral(resourceName: "TabIconTransactionsInactive")
+        //        priceTickerButton.imagePosition = .imageLeft
+        //        priceTickerButton.alternateImage = #imageLiteral(resourceName: "TabIconTransactionsActive")
+        priceTickerButton.title = "Prices"
+        //priceTickerButton.titleColor = CurrentTheme.tabs.header.tabFontColor
+        priceTickerButton.font = CurrentTheme.tabs.header.tabFont
+        priceTickerButton.setAccessibilityLabel("Transactions")
+        priceTickerButton.setButtonType(.toggle)
+        priceTickerButton.isBordered = false
+        priceTickerButton.sizeToFit()
+        headerView.addSubview(priceTickerButton)
+        priceTickerButton.snp.makeConstraints { make in
+            make.left.equalTo(transactionsButton.snp.right).offset(10)
+            make.centerY.equalToSuperview()
         }
         
         // Preferences button

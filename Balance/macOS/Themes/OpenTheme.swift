@@ -32,8 +32,7 @@ struct OpenTheme: Theme {
             primaryFont: NSFont.systemFont(ofSize: 13),
             secondaryFont: NSFont.systemFont(ofSize: 11),
             
-            backgroundColor: NSColor(deviceRedInt: 30, green: 35, blue: 41),
-            hoverBackgroundColor: NSColor(deviceRedInt: 36, green: 43, blue: 51),
+            backgroundColor: backgroundColor,
             spacerColor: backgroundColor,
             
             intercellSpacing: NSSize(width: 0.5, height: 0.5)
@@ -225,5 +224,22 @@ struct OpenTheme: Theme {
         )
         
         return TransactionsTheme(noResultsFont: noResultsFont, headerCell: headerCell, cell: cell, cellExpansion: cellExpansion)
+    }
+    
+    var priceTicker: PriceTickerTheme {
+        let cell = PriceTickerTheme.CellTheme(
+            height: 63.0,
+            
+            codeFont: NSFont.monospacedSystemFont(ofSize: 12.5),
+            codeColor: NSColor(hexString: "#696D7A")!,
+            
+            nameFont: NSFont.monospacedSystemFont(ofSize: 14),
+            nameColor: NSColor(hexString: "#2F343E")!,
+            
+            rateFont: NSFont.mediumMonospacedSystemFont(ofSize: 14),
+            rateColor: NSColor(hexString: "#2F343E")!
+        )
+        
+        return PriceTickerTheme(cell: cell)
     }
 }

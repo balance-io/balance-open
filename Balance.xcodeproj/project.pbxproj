@@ -1080,7 +1080,6 @@
 			isa = PBXGroup;
 			children = (
 				530422901ED39B7A001CA499 /* Table Cells */,
-				5304228B1ED39A0B001CA499 /* Touch Bar */,
 				53E8C77D1C62EB4C0085D64E /* TabsViewController.swift */,
 				530291311C6AA18F00C31CC1 /* AccountsTabViewController.swift */,
 				DCC684D71BD1080E00E95B90 /* TransactionsTabViewController.swift */,
@@ -1098,13 +1097,6 @@
 				538DD1701DA2EDB600066288 /* TransactionContextMenu.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		5304228B1ED39A0B001CA499 /* Touch Bar */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Touch Bar";
 			sourceTree = "<group>";
 		};
 		530422901ED39B7A001CA499 /* Table Cells */ = {
