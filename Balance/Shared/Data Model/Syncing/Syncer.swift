@@ -78,7 +78,7 @@ class Syncer {
                         if success {
                             self.syncAccountsAndTransactions(institution: institution, remainingInstitutions: syncingInstitutions, startDate: startDate, success: success, errors: errors, pruneTransactions: pruneTransactions)
                         } else {
-                            log.error("Failed to refresh token for institution \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name) error: \(error?.localizedDescription) error code:\(error?.code)")
+                            log.error("Failed to refresh token for institution \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name) error: \(String(describing: error?.localizedDescription)) error code:\(String(describing: error?.code))")
                             NotificationCenter.postOnMainThread(name: Notifications.SyncError, object: institution,  userInfo: nil)
                             self.syncInstitutions(syncingInstitutions, startDate: startDate, success: success, errors: errors, pruneTransactions: pruneTransactions)
                         }

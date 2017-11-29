@@ -6,7 +6,11 @@
 //  Copyright © 2017 Balanced Software, Inc. All rights reserved.
 //
 
+#if os(OSX)
 import Foundation
+#else
+import UIKit
+#endif
 
 class SyncDefaults {
     fileprivate struct Keys {
