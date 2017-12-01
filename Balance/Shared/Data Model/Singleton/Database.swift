@@ -6,7 +6,11 @@
 //  Copyright © 2016 Balanced Software, Inc. All rights reserved.
 //
 
-import Foundation
+#if os(OSX)
+    import Foundation
+#else
+    import UIKit
+#endif
 
 private class FMDatabasePoolDelegate: NSObject {
     override func databasePool(_ pool: FMDatabasePool!, didAdd db: FMDatabase!) {
@@ -66,29 +70,42 @@ class Database {
         }
         
         // Check for keychain problem
-        guard password != nil else {
+        //guard password != nil else {
             // It looks like we are unable to read from and write to the keychain. This issue seems to affect a small percentage of users.
             // At this point, rather than force unwrapping and crashing, let's show a message and send the logs.
-            Feedback.email(apiInstitution: nil, email: "noreply@balancemy.money", comment: "Failed to read/write database password. Ben testing something, please ignore :)", completion: { _, _ in
+            Feedback.email(apiInstitution: nil, email: "noreply@balancemy.money", comment: "Failed to read/write database password. Debug logs attached.", completion: { _, _ in
                 self.debugEmailSendComplete = true
                 if self.debugCanCloseApp {
-                    NSApp.terminate(nil)
+                    fatalError()
                 }
             })
             
-            let alert = NSAlert()
-            alert.addButton(withTitle: "OK")
-            alert.messageText = "Unable to remove all accounts"
-            alert.informativeText = "It looks like we are unable to read from and write to the keychain. This issue seems to affect a small percentage of users. In previous betas, this would cause the app to crash on launch. We've added extra logging to debug the issue before the 1.0 release. We're uploading your logs now (don't worry, no API key or other sensitive information is included.\n\nThe app will close automatically when the logs finish uploading."
-            alert.alertStyle = .informational
-            if alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn {
-                self.debugOkButtonPressed = true
-                if self.debugCanCloseApp {
-                    NSApp.terminate(nil)
+            #if os(OSX)
+                let alert = NSAlert()
+                alert.addButton(withTitle: "OK")
+                alert.messageText = "Unable to read database password"
+                alert.informativeText = "It looks like we are unable to read from and write to the keychain. This issue seems to affect a small percentage of users. In previous betas, this would cause the app to crash on launch. We've added extra logging to debug the issue before the 1.0 release. We're uploading your logs now (don't worry, no API key or other sensitive information is included.\n\nThe app will close automatically when the logs finish uploading."
+                alert.alertStyle = .informational
+                if alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn {
+                    self.debugOkButtonPressed = true
+                    if self.debugCanCloseApp {
+                        fatalError()
+                    }
                 }
-            }
-            return false
-        }
+            #else
+                let alert = UIAlertController(title: "Unable to read database password", message: "It looks like we are unable to read from and write to the keychain. This issue seems to affect a small percentage of users. In previous betas, this would cause the app to crash on launch. We've added extra logging to debug the issue before the 1.0 release. We're uploading your logs now (don't worry, no API key or other sensitive information is included.\n\nThe app will close automatically when the logs finish uploading.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                    self.debugOkButtonPressed = true
+                    if self.debugCanCloseApp {
+                        fatalError()
+                    }
+                })
+                async(after: 1.5) {
+                    AppDelegate.sharedInstance.window?.rootViewController?.present(alert, animated: true)
+                }
+                return false
+            #endif
+        //}
         
         #if DEBUG
         log.debug("\nsqlcipher \"\(self.databasePath)\" -cmd \"PRAGMA key='\(self.password!)';\"")

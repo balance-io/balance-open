@@ -322,6 +322,7 @@
 		53EB77D21CF3EB9100F01903 /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB77D11CF3EB9100F01903 /* PopoverViewController.swift */; };
 		53EB77D61CF3EFAA00F01903 /* NSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB77D51CF3EFAA00F01903 /* NSView.swift */; };
 		53ED3BD51FD1902800557AB1 /* KeychainWrapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ED3BD41FD1902800557AB1 /* KeychainWrapperTests.swift */; };
+		53ED3BD61FD1941000557AB1 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53178C5A1FD07273003E1707 /* KeychainWrapper.swift */; };
 		53F078381F4F54C500D0054C /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 533674FC1F4CE08A0034040F /* Sparkle.framework */; };
 		53F0785B1F4F8F2E00D0054C /* BalanceOpenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078401F4F8EC700D0054C /* BalanceOpenTests.swift */; };
 		53F0785C1F4F8F3100D0054C /* CoinbaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078471F4F8EC700D0054C /* CoinbaseTests.swift */; };
@@ -2704,6 +2705,7 @@
 				535529FF1ED7250500DD95F9 /* DefaultsStorage.swift in Sources */,
 				53552A181ED7251700DD95F9 /* Account.swift in Sources */,
 				53552A201ED7252900DD95F9 /* NotificationCenter.swift in Sources */,
+				53ED3BD61FD1941000557AB1 /* KeychainWrapper.swift in Sources */,
 				53552A211ED7252900DD95F9 /* String.swift in Sources */,
 				53552A1A1ED7251700DD95F9 /* Category.swift in Sources */,
 				A467DFC61F98EBFD0063882C /* Currency+MasterCurrency.swift in Sources */,

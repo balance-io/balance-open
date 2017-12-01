@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         defaults.setupDefaults()
         
         // Initialize database
-        database.create()
+        _ = database.create()
         
         // Initialyze crash logging and analytics
         analytics.setupAnalytics()

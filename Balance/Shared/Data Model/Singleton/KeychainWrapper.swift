@@ -14,10 +14,15 @@ import Security
 
 struct KeychainWrapper {
     static func errorMessage(status: OSStatus) -> String {
-        if let message = SecCopyErrorMessageString(status, nil) {
-            return message as String
-        }
-        return "Unknown status code"
+        #if os(OSX)
+            if let message = SecCopyErrorMessageString(status, nil) {
+                return message as String
+            }
+            return "Unknown status code"
+        #else
+            let nsError = NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
+            return nsError.localizedDescription
+        #endif
     }
     
     static func setDictionary(_ dictionary: [String: Any], forIdentifier identifier: String) throws {
