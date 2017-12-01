@@ -56,10 +56,38 @@ class Database {
         self.write = FMDatabaseQueue(path: databasePath)
     }
     
-    func create() {
+    var debugEmailSendComplete = false
+    var debugOkButtonPressed = false
+    var debugCanCloseApp: Bool { return debugEmailSendComplete && debugOkButtonPressed }
+    func create() -> Bool {
         // Generate a per-device database password, and store it in the keychain
         if password == nil {
             password = String.random(32)
+        }
+        
+        // Check for keychain problem
+        guard password != nil else {
+            // It looks like we are unable to read from and write to the keychain. This issue seems to affect a small percentage of users.
+            // At this point, rather than force unwrapping and crashing, let's show a message and send the logs.
+            Feedback.email(apiInstitution: nil, email: "noreply@balancemy.money", comment: "Failed to read/write database password. Ben testing something, please ignore :)", completion: { _, _ in
+                self.debugEmailSendComplete = true
+                if self.debugCanCloseApp {
+                    NSApp.terminate(nil)
+                }
+            })
+            
+            let alert = NSAlert()
+            alert.addButton(withTitle: "OK")
+            alert.messageText = "Unable to remove all accounts"
+            alert.informativeText = "It looks like we are unable to read from and write to the keychain. This issue seems to affect a small percentage of users. In previous betas, this would cause the app to crash on launch. We've added extra logging to debug the issue before the 1.0 release. We're uploading your logs now (don't worry, no API key or other sensitive information is included.\n\nThe app will close automatically when the logs finish uploading."
+            alert.alertStyle = .informational
+            if alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn {
+                self.debugOkButtonPressed = true
+                if self.debugCanCloseApp {
+                    NSApp.terminate(nil)
+                }
+            }
+            return false
         }
         
         #if DEBUG
@@ -82,7 +110,7 @@ class Database {
         guard success else {
             log.severe("Resetting database and restarting")
             self.resetDatabase()
-            return
+            return false
         }
         
         // Create default tables if needed
@@ -160,6 +188,8 @@ class Database {
         #if DEBUG
         printCompileOptions()
         #endif
+        
+        return true
     }
     
     fileprivate func updateDatabase(_ db: FMDatabase) {

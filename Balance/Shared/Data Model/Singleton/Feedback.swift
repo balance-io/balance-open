@@ -32,7 +32,7 @@ struct Feedback {
             dict["institutionName"] = apiInstitution?.name
             dict["errorType"] = errorType
             dict["errorCode"] = errorCode
-            if let logsZipUrl = logging.zipLogFiles(), let logsData = try? Data(contentsOf: logsZipUrl), logsData.count < 512 * 1024 {
+            if let logsZipUrl = logging.zipLogFiles(), let logsData = try? Data(contentsOf: logsZipUrl), logsData.count < 2 * 1024 * 1024 {
                 dict["logs"] = logsData.base64EncodedString()
             }
             
