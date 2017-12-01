@@ -21,6 +21,7 @@ protocol Theme {
     var emailIssue: EmailIssueTheme { get }
     var accounts: AccountsTheme { get }
     var transactions: TransactionsTheme { get }
+    var priceTicker: PriceTickerTheme { get }
 }
 
 struct DefaultsTheme {
@@ -47,7 +48,6 @@ struct DefaultsTheme {
         let secondaryFont: NSFont
         
         let backgroundColor: NSColor
-        let hoverBackgroundColor: NSColor
         let spacerColor: NSColor
         
         let intercellSpacing: NSSize
@@ -75,18 +75,11 @@ struct LockTheme {
 
 struct TabsTheme {
     let header: TabsTheme.HeaderTheme
-    let footer: TabsTheme.FooterTheme
     
     struct HeaderTheme {
         let tabFont: NSFont
-        let tabFontColor: NSColor
-    }
-    
-    struct FooterTheme {
-        let backgroundColor: NSColor
-        let textColor: NSColor
+        let addAccountIcon: NSImage
         let preferencesIcon: NSImage
-        let syncButtonColor: NSColor
     }
 }
 
@@ -235,5 +228,22 @@ struct TransactionsTheme {
         let accountFont: NSFont
         let fontColor: NSColor
         let institutionBackground: NSColor
+    }
+}
+
+struct PriceTickerTheme {
+    let cell: PriceTickerTheme.CellTheme
+    
+    struct CellTheme {
+        let height: CGFloat
+        
+        let codeFont: NSFont
+        let codeColor: NSColor
+        
+        let nameFont: NSFont
+        let nameColor: NSColor
+        
+        let rateFont: NSFont
+        let rateColor: NSColor
     }
 }

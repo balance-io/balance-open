@@ -25,12 +25,15 @@ class TabsViewController: NSViewController {
     
     // MARK: Header
     let headerView = View()
-    let accountsButton = Button()
-    let transactionsButton = Button()
-    let priceTickerButton = Button()
+    let buttonBackground = PaintCodeView()
+    let accountsButton = PaintCodeButton()
+    let transactionsButton = PaintCodeButton()
+    let priceTickerButton = PaintCodeButton()
+    var tabButtons = [PaintCodeButton]()
+    
     let addAccountButton = Button()
     let preferencesButton = Button()
-    var tabButtons = [Button]()
+    
     
     // MARK: Tabs
     let tabContainerView = View()
@@ -54,7 +57,7 @@ class TabsViewController: NSViewController {
         
         self.defaultTab = defaultTab
         
-        tabButtons = [accountsButton, transactionsButton]
+        tabButtons = [accountsButton, transactionsButton, priceTickerButton]
         tabControllers = [accountsViewController, transactionsViewController, priceTickerViewController]
         
         registerForNotifications()
@@ -113,74 +116,51 @@ class TabsViewController: NSViewController {
             make.top.equalToSuperview()
         }
         
+        buttonBackground.drawingBlock = TabButtons.drawBackground
+        headerView.addSubview(buttonBackground)
+        
+        accountsButton.textDrawingFunction = TabButtons.drawAccounts
+        accountsButton.buttonText = "Accounts"
         accountsButton.target = self
         accountsButton.action = #selector(tabAction(_:))
         accountsButton.tag = Tab.accounts.rawValue
-        accountsButton.image = #imageLiteral(resourceName: "TabIconAccountsInactive")
-        accountsButton.imagePosition = .imageLeft
-        accountsButton.alternateImage = #imageLiteral(resourceName: "TabIconAccountsActive")
-        accountsButton.title = "Accounts"
-        //accountsButton.titleColor = CurrentTheme.tabs.header.tabFontColor
-        accountsButton.font = CurrentTheme.tabs.header.tabFont
-        accountsButton.setAccessibilityLabel("Accounts")
-        accountsButton.setButtonType(.toggle)
-        accountsButton.isBordered = false
-        accountsButton.sizeToFit()
         headerView.addSubview(accountsButton)
         accountsButton.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(10)
             make.centerY.equalToSuperview()
+            make.width.equalTo(99)
+            make.height.equalTo(29)
         }
         
+        transactionsButton.textDrawingFunction = TabButtons.drawTransactions
+        transactionsButton.buttonText = "Transactions"
         transactionsButton.target = self
         transactionsButton.action = #selector(tabAction(_:))
         transactionsButton.tag = Tab.transactions.rawValue
-        transactionsButton.image = #imageLiteral(resourceName: "TabIconTransactionsInactive")
-        transactionsButton.imagePosition = .imageLeft
-        transactionsButton.alternateImage = #imageLiteral(resourceName: "TabIconTransactionsActive")
-        transactionsButton.title = "Transactions"
-        //transactionsButton.titleColor = CurrentTheme.tabs.header.tabFontColor
-        transactionsButton.font = CurrentTheme.tabs.header.tabFont
-        transactionsButton.setAccessibilityLabel("Transactions")
-        transactionsButton.setButtonType(.toggle)
-        transactionsButton.isBordered = false
-        transactionsButton.sizeToFit()
         headerView.addSubview(transactionsButton)
         transactionsButton.snp.makeConstraints { make in
-            make.left.equalTo(accountsButton.snp.right).offset(10)
+            make.left.equalTo(accountsButton.snp.right)
             make.centerY.equalToSuperview()
+            make.width.equalTo(120)
+            make.height.equalTo(29)
         }
         
-        var priceTickerDisabled = false
-        #if DEBUG
-            priceTickerDisabled =  true
-        #endif
-        
-        if priceTickerDisabled {
-            priceTickerButton.target = self
-            priceTickerButton.action = #selector(tabAction(_:))
-            priceTickerButton.tag = Tab.priceTicker.rawValue
-    //        priceTickerButton.image = #imageLiteral(resourceName: "TabIconTransactionsInactive")
-    //        priceTickerButton.imagePosition = .imageLeft
-    //        priceTickerButton.alternateImage = #imageLiteral(resourceName: "TabIconTransactionsActive")
-            priceTickerButton.title = "Price Ticker"
-            //priceTickerButton.titleColor = CurrentTheme.tabs.header.tabFontColor
-            priceTickerButton.font = CurrentTheme.tabs.header.tabFont
-            priceTickerButton.setAccessibilityLabel("Transactions")
-            priceTickerButton.setButtonType(.toggle)
-            priceTickerButton.isBordered = false
-            priceTickerButton.sizeToFit()
-            headerView.addSubview(priceTickerButton)
-            priceTickerButton.snp.makeConstraints { make in
-                make.left.equalTo(transactionsButton.snp.right).offset(10)
-                make.centerY.equalToSuperview()
-            }
+        priceTickerButton.textDrawingFunction = TabButtons.drawPrices
+        priceTickerButton.buttonText = "Prices"
+        priceTickerButton.target = self
+        priceTickerButton.action = #selector(tabAction(_:))
+        priceTickerButton.tag = Tab.priceTicker.rawValue
+        headerView.addSubview(priceTickerButton)
+        priceTickerButton.snp.makeConstraints { make in
+            make.left.equalTo(transactionsButton.snp.right)
+            make.centerY.equalToSuperview()
+            make.width.equalTo(79)
+            make.height.equalTo(29)
         }
         
-        // Preferences button
         preferencesButton.target = self
         preferencesButton.action = #selector(showSettingsMenu(_:))
-        preferencesButton.image = CurrentTheme.tabs.footer.preferencesIcon
+        preferencesButton.image = CurrentTheme.tabs.header.preferencesIcon
         preferencesButton.setButtonType(.momentaryChange)
         preferencesButton.setAccessibilityLabel("Preferences")
         preferencesButton.isBordered = false
@@ -194,7 +174,7 @@ class TabsViewController: NSViewController {
         
         addAccountButton.target = self
         addAccountButton.action = #selector(showAddAccount)
-        addAccountButton.image = NSImage(named: NSImage.Name.addTemplate)//CurrentTheme.tabs.footer.preferencesIcon
+        addAccountButton.image = CurrentTheme.tabs.header.addAccountIcon
         addAccountButton.setButtonType(.momentaryChange)
         addAccountButton.setAccessibilityLabel("Add Account")
         addAccountButton.isBordered = false
@@ -276,6 +256,16 @@ class TabsViewController: NSViewController {
     func showTab(tabIndex: Int) {
         guard currentVisibleTab.rawValue != tabIndex && feedbackViewController == nil else {
             return
+        }
+        
+        // Move the button background
+        let button = tabButtons[tabIndex]
+        buttonBackground.snp.removeConstraints()
+        buttonBackground.snp.makeConstraints { make in
+            make.left.equalTo(button)
+            make.centerY.equalToSuperview()
+            make.width.equalTo(button)
+            make.height.equalTo(button)
         }
         
         // Analytics

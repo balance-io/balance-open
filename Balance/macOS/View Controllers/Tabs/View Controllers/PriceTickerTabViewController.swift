@@ -128,7 +128,7 @@ class PriceTickerTabViewController: NSViewController, SectionedTableViewDelegate
     }
     
     func tableView(_ tableView: SectionedTableView, heightOfRow row: Int, inSection section: Int) -> CGFloat {
-        return 44
+        return CurrentTheme.priceTicker.cell.height
     }
     
     func tableView(_ tableView: SectionedTableView, rowViewForRow row: Int, inSection section: Int) -> NSTableRowView? {
@@ -136,6 +136,8 @@ class PriceTickerTabViewController: NSViewController, SectionedTableViewDelegate
         if rowView == nil {
             rowView = HoverTableRowView()
             rowView?.identifier = NSUserInterfaceItemIdentifier(rawValue: "Exchange Rate Row")
+            rowView?.color = CurrentTheme.defaults.cell.backgroundColor
+            rowView?.hoverColor = CurrentTheme.defaults.cell.backgroundColor
         }
         
         return rowView
@@ -148,7 +150,7 @@ class PriceTickerTabViewController: NSViewController, SectionedTableViewDelegate
         if let currency = viewModel.currency(forRow: row, inSection: section) {
             let convertedAmount = currentExchangeRates.convertTicker(amount: 1.0, from: currency, to: defaults.masterCurrency)?.integerValueWith(decimals: defaults.masterCurrency.decimals) ?? 0
             let convertedAmountString = amountToString(amount: convertedAmount, currency: defaults.masterCurrency, showNegative: true)
-            cell.updateModel("\(currency.longName): \(convertedAmountString)")
+            cell.updateModel(currency: currency, rate: convertedAmountString)
         }
         return cell
     }

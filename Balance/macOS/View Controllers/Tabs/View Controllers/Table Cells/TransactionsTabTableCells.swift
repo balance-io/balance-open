@@ -147,7 +147,7 @@ class TransactionsTabTransactionCell: View {
         topContainer.addSubview(amountField)
         amountField.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(10)
-            make.bottom.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(-17)
         }
         
         institutionNameField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
@@ -168,7 +168,7 @@ class TransactionsTabTransactionCell: View {
         topContainer.addSubview(altAmountField)
         altAmountField.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-10)
-            make.bottom.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(-17)
         }
         
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(cellOpened(_:)), name: TransactionsTabViewController.InternalNotifications.CellOpened)

@@ -13,13 +13,22 @@ class PriceTickerTabViewModel: TabViewModel {
     var currencies = [Currency]()
     
     func reloadData() {
-        var currencySet = Set<Currency>()
+        let topCurrencyCodes = ["BTC", "ETH", "LTC", "BCH", "XRP", "DASH", "MIOTA", "ETC", "XMR", "LSK", "STEEM", "GNT", "ZRX"]
+        let topCurrencyCodesSet = Set<String>(topCurrencyCodes)
+        
+        var otherCurrenciesSet = Set<Currency>()
         if let rates = currentExchangeRates.exchangeRates(forSource: .poloniex) {
             for rate in rates {
-                currencySet.insert(rate.from)
+                if !topCurrencyCodesSet.contains(rate.from.code) {
+                    otherCurrenciesSet.insert(rate.from)
+                }
             }
         }
-        currencies = Array(currencySet).sorted(by: { $0.code < $1.code })
+        
+        let topCurrencies = topCurrencyCodes.map({ Currency.rawValue($0) })
+        let otherCurrencies = Array(otherCurrenciesSet).sorted(by: { $0.code < $1.code })
+        
+        currencies = topCurrencies + otherCurrencies
     }
     
     func numberOfSections() -> Int {

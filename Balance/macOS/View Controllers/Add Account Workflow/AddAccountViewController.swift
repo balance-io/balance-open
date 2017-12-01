@@ -231,7 +231,7 @@ class AddAccountViewController: NSViewController {
             // Preferences button
             preferencesButton.target = self
             preferencesButton.action = #selector(showSettingsMenu(_:))
-            let preferencesIcon = CurrentTheme.tabs.footer.preferencesIcon
+            let preferencesIcon = CurrentTheme.tabs.header.preferencesIcon
             preferencesButton.image = preferencesIcon
             preferencesButton.setButtonType(.momentaryChange)
             preferencesButton.setAccessibilityLabel("Preferences")

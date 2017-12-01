@@ -32,8 +32,7 @@ struct OpenTheme: Theme {
             primaryFont: NSFont.systemFont(ofSize: 13),
             secondaryFont: NSFont.systemFont(ofSize: 11),
             
-            backgroundColor: NSColor(deviceRedInt: 30, green: 35, blue: 41),
-            hoverBackgroundColor: NSColor(deviceRedInt: 36, green: 43, blue: 51),
+            backgroundColor: backgroundColor,
             spacerColor: backgroundColor,
             
             intercellSpacing: NSSize(width: 0.5, height: 0.5)
@@ -67,17 +66,11 @@ struct OpenTheme: Theme {
     var tabs: TabsTheme {
         let header = TabsTheme.HeaderTheme(
             tabFont: NSFont.systemFont(ofSize: 14),
-            tabFontColor: NSColor(hexString: "#686C78")!
-        )
-    
-        let footer = TabsTheme.FooterTheme(
-            backgroundColor: NSColor(deviceRedInt: 46, green: 56, blue: 66),
-            textColor: NSColor(deviceRedInt: 151, green: 182, blue: 204),
-            preferencesIcon: NSImage(named: NSImage.Name(rawValue: "gear-icon-dark"))!,
-            syncButtonColor: NSColor(deviceRedInt: 151, green: 182, blue: 204)
+            addAccountIcon: NSImage(named: NSImage.Name(rawValue: "tabs-add-account"))!,
+            preferencesIcon: NSImage(named: NSImage.Name(rawValue: "tabs-preferences"))!
         )
         
-        return TabsTheme(header: header, footer: footer)
+        return TabsTheme(header: header)
     }
     
     var addAccounts: AddAccountsTheme {
@@ -204,9 +197,9 @@ struct OpenTheme: Theme {
             nameFont: NSFont.systemFont(ofSize: 13.5),
             
             typeFont: NSFont.mediumSystemFont(ofSize: 12),
-            typeColorSent: NSColor(hexString: "#667180")!,
-            typeColorReceived: NSColor(hexString: "#169299")!,
-            typeColorTraded: NSColor(hexString: "#187AE3")!,
+            typeColorSent: NSColor(hexString: "#70737A")!,
+            typeColorReceived: NSColor(hexString: "#70737A")!,
+            typeColorTraded: NSColor(hexString: "#70737A")!,
             
             amountFont: NSFont.monospacedDigitSystemFont(ofSize: 14),
             amountColor: NSColor(hexString: "#252A35")!,
@@ -225,5 +218,22 @@ struct OpenTheme: Theme {
         )
         
         return TransactionsTheme(noResultsFont: noResultsFont, headerCell: headerCell, cell: cell, cellExpansion: cellExpansion)
+    }
+    
+    var priceTicker: PriceTickerTheme {
+        let cell = PriceTickerTheme.CellTheme(
+            height: 63.0,
+            
+            codeFont: NSFont.monospacedSystemFont(ofSize: 12.5),
+            codeColor: NSColor(hexString: "#696D7A")!,
+            
+            nameFont: NSFont.monospacedSystemFont(ofSize: 14),
+            nameColor: NSColor(hexString: "#2F343E")!,
+            
+            rateFont: NSFont.mediumMonospacedSystemFont(ofSize: 14),
+            rateColor: NSColor(hexString: "#2F343E")!
+        )
+        
+        return PriceTickerTheme(cell: cell)
     }
 }
