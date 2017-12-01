@@ -29,7 +29,7 @@ class CurrentExchangeRates {
     fileprivate let cachedRates = SimpleCache<String, Rate>()
     fileprivate let persistedFileName = "currentExchangeRates.data"
     fileprivate var persistedFileUrl: URL {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(persistedFileName)
+        return appSupportPathUrl.appendingPathComponent(persistedFileName)
     }
     
     func exchangeRates(forSource source: ExchangeRateSource) -> [ExchangeRate]? {
