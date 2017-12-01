@@ -92,6 +92,7 @@ class Database {
                         fatalError()
                     }
                 }
+                return false
             #else
                 let alert = UIAlertController(title: "Unable to read database password", message: "It looks like we are unable to read from and write to the keychain. This issue seems to affect a small percentage of users. In previous betas, this would cause the app to crash on launch. We've added extra logging to debug the issue before the 1.0 release. We're uploading your logs now (don't worry, no API key or other sensitive information is included.\n\nThe app will close automatically when the logs finish uploading.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
