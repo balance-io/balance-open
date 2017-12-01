@@ -321,6 +321,7 @@
 		53EB77CE1CF3E6F600F01903 /* NSFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB77CD1CF3E6F600F01903 /* NSFont.swift */; };
 		53EB77D21CF3EB9100F01903 /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB77D11CF3EB9100F01903 /* PopoverViewController.swift */; };
 		53EB77D61CF3EFAA00F01903 /* NSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB77D51CF3EFAA00F01903 /* NSView.swift */; };
+		53ED3BD51FD1902800557AB1 /* KeychainWrapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ED3BD41FD1902800557AB1 /* KeychainWrapperTests.swift */; };
 		53F078381F4F54C500D0054C /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 533674FC1F4CE08A0034040F /* Sparkle.framework */; };
 		53F0785B1F4F8F2E00D0054C /* BalanceOpenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078401F4F8EC700D0054C /* BalanceOpenTests.swift */; };
 		53F0785C1F4F8F3100D0054C /* CoinbaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078471F4F8EC700D0054C /* CoinbaseTests.swift */; };
@@ -790,6 +791,7 @@
 		53EB77CD1CF3E6F600F01903 /* NSFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSFont.swift; sourceTree = "<group>"; };
 		53EB77D11CF3EB9100F01903 /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
 		53EB77D51CF3EFAA00F01903 /* NSView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSView.swift; sourceTree = "<group>"; };
+		53ED3BD41FD1902800557AB1 /* KeychainWrapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapperTests.swift; sourceTree = "<group>"; };
 		53F0783D1F4F8EC700D0054C /* CompleteBalancesResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CompleteBalancesResponse.json; sourceTree = "<group>"; };
 		53F0783E1F4F8EC700D0054C /* PoloniexAccount.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PoloniexAccount.json; sourceTree = "<group>"; };
 		53F0783F1F4F8EC700D0054C /* PoloniexTradingError.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PoloniexTradingError.json; sourceTree = "<group>"; };
@@ -1732,6 +1734,7 @@
 			isa = PBXGroup;
 			children = (
 				53F078461F4F8EC700D0054C /* SearchTest.swift */,
+				53ED3BD41FD1902800557AB1 /* KeychainWrapperTests.swift */,
 			);
 			path = Singleton;
 			sourceTree = "<group>";
@@ -2964,6 +2967,7 @@
 				A41742941F73E84B004A9B4F /* CoinbaseTransactionTests.swift in Sources */,
 				53F0785D1F4F8F3C00D0054C /* CurrencyTests.swift in Sources */,
 				A4E457291F7921BC002E2879 /* InstitutionTests.swift in Sources */,
+				53ED3BD51FD1902800557AB1 /* KeychainWrapperTests.swift in Sources */,
 				53F0785C1F4F8F3100D0054C /* CoinbaseTests.swift in Sources */,
 				53F078671F4F8F3C00D0054C /* CredentialsTest.swift in Sources */,
 				A4CB29E21F682C2D00128E48 /* BitfinexAPIClientTests.swift in Sources */,
