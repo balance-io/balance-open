@@ -8,14 +8,14 @@
 
 import XCGLogger
 
-let keychain = Testing.runningTests ? MockedKeychainManagerFactory() : KeychainManagerFactory()
-let database = Testing.runningTests ? Testing.database : Database()
+let keychain = Testing.runningUiTests ? MockedKeychainManagerFactory() : KeychainManagerFactory()
+let database = Testing.runningUiTests ? Testing.database : Database()
 let debugging = Debugging()
 let log = XCGLogger.default
 let logging = Logging()
 let currentExchangeRates = CurrentExchangeRates()
 let syncManager = SyncManager()
-let defaults: Defaults = Testing.runningTests ? Testing.defaults : Defaults()
+let defaults: Defaults = Testing.runningUiTests ? Testing.defaults : Defaults()
 let appLock = AppLock()
 let networkStatus = NetworkStatus()
 let certValidator = CertValidator()
