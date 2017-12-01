@@ -1,5 +1,4 @@
 import Cocoa
-import Locksmith
 import ServiceManagement
 
 let autolaunchBundleId = "software.balanced.balancemac-autolaunch"

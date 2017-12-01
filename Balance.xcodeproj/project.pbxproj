@@ -350,17 +350,14 @@
 		53F63CD31F82C26600FD4B27 /* ObjcExceptionBridging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F63CD21F82C25D00FD4B27 /* ObjcExceptionBridging.framework */; };
 		53F63CD41F82C26600FD4B27 /* ObjcExceptionBridging.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53F63CD21F82C25D00FD4B27 /* ObjcExceptionBridging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53F63CD81F82C2A100FD4B27 /* ObjcExceptionBridging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F63CD71F82C29700FD4B27 /* ObjcExceptionBridging.framework */; };
-		53FCE3411F06B5DC004EB25C /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3391F06B5DC004EB25C /* Locksmith.framework */; };
 		53FCE3421F06B5DC004EB25C /* NSDateTimeAgo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33A1F06B5DC004EB25C /* NSDateTimeAgo.framework */; };
 		53FCE3461F06B5DC004EB25C /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33E1F06B5DC004EB25C /* SnapKit.framework */; };
 		53FCE3481F06B5DC004EB25C /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3401F06B5DC004EB25C /* XCGLogger.framework */; };
-		53FCE35A1F06B653004EB25C /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34D1F06B653004EB25C /* Locksmith.framework */; };
 		53FCE35B1F06B653004EB25C /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34E1F06B653004EB25C /* MASShortcut.framework */; };
 		53FCE3631F06B818004EB25C /* BalanceVectorGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3491F06B653004EB25C /* BalanceVectorGraphics.framework */; };
 		53FCE3641F06B818004EB25C /* BalanceVectorGraphics.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3491F06B653004EB25C /* BalanceVectorGraphics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53FCE3691F06B819004EB25C /* JMSRangeSlider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34C1F06B653004EB25C /* JMSRangeSlider.framework */; };
 		53FCE36A1F06B819004EB25C /* JMSRangeSlider.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34C1F06B653004EB25C /* JMSRangeSlider.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		53FCE36C1F06B819004EB25C /* Locksmith.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34D1F06B653004EB25C /* Locksmith.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53FCE36E1F06B819004EB25C /* MASShortcut.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34E1F06B653004EB25C /* MASShortcut.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53FCE36F1F06B819004EB25C /* NSDateTimeAgo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34F1F06B653004EB25C /* NSDateTimeAgo.framework */; };
 		53FCE3701F06B819004EB25C /* NSDateTimeAgo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34F1F06B653004EB25C /* NSDateTimeAgo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -526,7 +523,6 @@
 				53FCE37C1F06B819004EB25C /* XCGLogger.framework in Embed Frameworks */,
 				533674FE1F4CE0C40034040F /* Sparkle.framework in Embed Frameworks */,
 				537596401F50B90A00B36E6E /* TrustKit.framework in Embed Frameworks */,
-				53FCE36C1F06B819004EB25C /* Locksmith.framework in Embed Frameworks */,
 				53FCE3641F06B818004EB25C /* BalanceVectorGraphics.framework in Embed Frameworks */,
 				53FCE36A1F06B819004EB25C /* JMSRangeSlider.framework in Embed Frameworks */,
 				53FCE3701F06B819004EB25C /* NSDateTimeAgo.framework in Embed Frameworks */,
@@ -818,13 +814,11 @@
 		53F6383E1C5FFF3200864346 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		53F63CD21F82C25D00FD4B27 /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjcExceptionBridging.framework; path = Carthage/Build/Mac/ObjcExceptionBridging.framework; sourceTree = SOURCE_ROOT; };
 		53F63CD71F82C29700FD4B27 /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjcExceptionBridging.framework; path = Carthage/Build/iOS/ObjcExceptionBridging.framework; sourceTree = SOURCE_ROOT; };
-		53FCE3391F06B5DC004EB25C /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/iOS/Locksmith.framework; sourceTree = SOURCE_ROOT; };
 		53FCE33A1F06B5DC004EB25C /* NSDateTimeAgo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NSDateTimeAgo.framework; path = Carthage/Build/iOS/NSDateTimeAgo.framework; sourceTree = SOURCE_ROOT; };
 		53FCE33E1F06B5DC004EB25C /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3401F06B5DC004EB25C /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/iOS/XCGLogger.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3491F06B653004EB25C /* BalanceVectorGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BalanceVectorGraphics.framework; path = Carthage/Build/Mac/BalanceVectorGraphics.framework; sourceTree = SOURCE_ROOT; };
 		53FCE34C1F06B653004EB25C /* JMSRangeSlider.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JMSRangeSlider.framework; path = Carthage/Build/Mac/JMSRangeSlider.framework; sourceTree = SOURCE_ROOT; };
-		53FCE34D1F06B653004EB25C /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/Mac/Locksmith.framework; sourceTree = SOURCE_ROOT; };
 		53FCE34E1F06B653004EB25C /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASShortcut.framework; path = Carthage/Build/Mac/MASShortcut.framework; sourceTree = SOURCE_ROOT; };
 		53FCE34F1F06B653004EB25C /* NSDateTimeAgo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NSDateTimeAgo.framework; path = Carthage/Build/Mac/NSDateTimeAgo.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3531F06B653004EB25C /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/Mac/SnapKit.framework; sourceTree = SOURCE_ROOT; };
@@ -948,7 +942,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53FCE3411F06B5DC004EB25C /* Locksmith.framework in Frameworks */,
 				A41EE4871FB9E4F100210038 /* SVProgressHUD.framework in Frameworks */,
 				535BE39E1F05A14C00DEA4EF /* libz.tbd in Frameworks */,
 				53FCE3421F06B5DC004EB25C /* NSDateTimeAgo.framework in Frameworks */,
@@ -979,7 +972,6 @@
 				53FCE36F1F06B819004EB25C /* NSDateTimeAgo.framework in Frameworks */,
 				53FCE3631F06B818004EB25C /* BalanceVectorGraphics.framework in Frameworks */,
 				53FCE35B1F06B653004EB25C /* MASShortcut.framework in Frameworks */,
-				53FCE35A1F06B653004EB25C /* Locksmith.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1355,7 +1347,6 @@
 				53F63CD21F82C25D00FD4B27 /* ObjcExceptionBridging.framework */,
 				53FCE3491F06B653004EB25C /* BalanceVectorGraphics.framework */,
 				53FCE34C1F06B653004EB25C /* JMSRangeSlider.framework */,
-				53FCE34D1F06B653004EB25C /* Locksmith.framework */,
 				53FCE34E1F06B653004EB25C /* MASShortcut.framework */,
 				53FCE34F1F06B653004EB25C /* NSDateTimeAgo.framework */,
 				53FCE3531F06B653004EB25C /* SnapKit.framework */,
@@ -1382,7 +1373,6 @@
 			children = (
 				53F63CD71F82C29700FD4B27 /* ObjcExceptionBridging.framework */,
 				5313F9601F58CFAC00DD6BDB /* TrustKit.framework */,
-				53FCE3391F06B5DC004EB25C /* Locksmith.framework */,
 				53FCE33A1F06B5DC004EB25C /* NSDateTimeAgo.framework */,
 				53FCE33E1F06B5DC004EB25C /* SnapKit.framework */,
 				53FCE3401F06B5DC004EB25C /* XCGLogger.framework */,
@@ -2487,7 +2477,6 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Locksmith.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/NSDateTimeAgo.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/XCGLogger.framework",
@@ -2499,7 +2488,6 @@
 			);
 			name = "Copy Carthage Frameworks";
 			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Locksmith.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/NSDateTimeAgo.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SnapKit.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/XCGLogger.framework",

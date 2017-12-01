@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Locksmith
 
 final class Institution {
     let repository: InstitutionRepository
@@ -107,41 +106,11 @@ extension Institution {
     
     var accessToken: String? {
         get {
-            var accessToken: String? = nil
-            if let dictionary = Locksmith.loadDataForUserAccount(userAccount: accessTokenKey) {
-                accessToken = dictionary["accessToken"] as? String
-            }
-            
-            log.debug("get accessTokenKey: \(accessTokenKey)  accessToken: \(String(describing: accessToken))")
-
-            return accessToken
+            return keychain[accessTokenKey, "accessToken"]
         }
         set {
             log.debug("set accessTokenKey: \(accessTokenKey)  newValue: \(String(describing: newValue))")
-            if let accessToken = newValue {
-                do {
-                    try Locksmith.updateData(data: ["accessToken": accessToken], forUserAccount: accessTokenKey)
-                } catch {
-                    log.severe("Couldn't update accessToken keychain data for institution [\(self)]: \(error)")
-                }
-                
-                // Double check that it saved correctly
-                if accessToken != self.accessToken {
-                    log.severe("Saved access token for institution [\(self)] but it didn't work! We must not have keychain access")
-                }
-            } else {
-                do {
-                    try Locksmith.deleteDataForUserAccount(userAccount: accessTokenKey)
-                } catch {
-                    log.severe("Couldn't delete accessToken keychain data for institution [\(self)]: \(error)")
-                }
-                
-                // Double check that it deleted correctly
-                let dictionary = Locksmith.loadDataForUserAccount(userAccount: accessTokenKey)
-                if dictionary != nil {
-                    log.severe("Deleted access token for institution [\(self)] but it didn't work! We must not have keychain access")
-                }
-            }
+            keychain[accessTokenKey, "accessToken"] = newValue
         }
     }
     
