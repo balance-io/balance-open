@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Locksmith
 
 class EthplorerApi: ExchangeApi {
     
@@ -246,45 +245,11 @@ extension Institution {
     fileprivate var addressKey: String { return "address institutionId: \(institutionId)" }
     var address: String? {
         get {
-            var address: String? = nil
-            if let dictionary = Locksmith.loadDataForUserAccount(userAccount: addressKey) {
-                address = dictionary["address"] as? String
-            }
-            
-            log.debug("get addressKey: \(addressKey)  address: \(String(describing: address))")
-            if address == nil {
-                // We should always be getting an address becasuse we never read it until after it's been written
-                log.severe("Tried to read address for institution [\(self)] but it didn't work! We must not have keychain access")
-            }
-            
-            return address
+            return keychain[addressKey, "address"]
         }
         set {
             log.debug("set addressKey: \(addressKey)  newValue: \(String(describing: newValue))")
-            if let address = newValue {
-                do {
-                    try Locksmith.updateData(data: ["address": address], forUserAccount: addressKey)
-                } catch {
-                    log.severe("Couldn't update address keychain data for institution [\(self)]: \(error)")
-                }
-                
-                // Double check that it saved correctly
-                if address != self.address {
-                    log.severe("Saved addressKey for institution [\(self)] but it didn't work! We must not have keychain access")
-                }
-            } else {
-                do {
-                    try Locksmith.deleteDataForUserAccount(userAccount: addressKey)
-                } catch {
-                    log.severe("Couldn't delete address keychain data for institution [\(self)]: \(error)")
-                }
-                
-                // Double check that it deleted correctly
-                let dictionary = Locksmith.loadDataForUserAccount(userAccount: addressKey)
-                if dictionary != nil {
-                    log.severe("Deleted address for institution [\(self)] but it didn't work! We must not have keychain access")
-                }
-            }
+            keychain[addressKey, "address"] = address
         }
     }
 }

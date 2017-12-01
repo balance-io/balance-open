@@ -1,6 +1,5 @@
 github "datatheorem/TrustKit" "master"
 github "SnapKit/SnapKit" "master"
-github "matthewpalmer/Locksmith" "master"
 github "DaveWoodCom/XCGLogger" "master"
 github "shpakovski/MASShortcut" "master"
 github "marmelroy/Zip" "master"

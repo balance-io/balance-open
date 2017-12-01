@@ -6,7 +6,6 @@
 //  Copyright © 2017 Balanced Software, Inc. All rights reserved.
 //
 
-import Locksmith
 #if os(OSX)
     import AppKit
 #else
@@ -296,45 +295,11 @@ extension Institution {
     
     var refreshToken: String? {
         get {
-            var refreshToken: String? = nil
-            if let dictionary = Locksmith.loadDataForUserAccount(userAccount: refreshTokenKey) {
-                refreshToken = dictionary["refreshToken"] as? String
-            }
-            
-            log.debug("get refreshTokenKey: \(refreshTokenKey)  refreshToken: \(String(describing: refreshToken))")
-            if refreshToken == nil {
-                // We should always be getting an refresh token becasuse we never read it until after it's been written
-                log.severe("Tried to read refresh token for institution [\(self)] but it didn't work! We must not have keychain access")
-            }
-            
-            return refreshToken
+            return keychain[refreshTokenKey, "refreshToken"]
         }
         set {
             log.debug("set refreshTokenKey: \(refreshTokenKey)  newValue: \(String(describing: newValue))")
-            if let refreshToken = newValue {
-                do {
-                    try Locksmith.updateData(data: ["refreshToken": refreshToken], forUserAccount: refreshTokenKey)
-                } catch {
-                    log.severe("Couldn't update refreshToken keychain data for institution [\(self)]: \(error)")
-                }
-                
-                // Double check that it saved correctly
-                if refreshToken != self.refreshToken {
-                    log.severe("Saved access token for institution [\(self)] but it didn't work! We must not have keychain access")
-                }
-            } else {
-                do {
-                    try Locksmith.deleteDataForUserAccount(userAccount: refreshTokenKey)
-                } catch {
-                    log.severe("Couldn't delete refreshToken keychain data for institution [\(self)]: \(error)")
-                }
-                
-                // Double check that it deleted correctly
-                let dictionary = Locksmith.loadDataForUserAccount(userAccount: refreshTokenKey)
-                if dictionary != nil {
-                    log.severe("Deleted access token for institution [\(self)] but it didn't work! We must not have keychain access")
-                }
-            }
+            keychain[refreshTokenKey, "refreshToken"] = newValue
         }
     }
     

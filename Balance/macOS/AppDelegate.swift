@@ -1,5 +1,4 @@
 import Cocoa
-import Locksmith
 import ServiceManagement
 
 let autolaunchBundleId = "software.balanced.balancemac-autolaunch"
@@ -116,7 +115,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         analytics.setupAnalytics()
         
         // Initialize database
-        database.create()
+        guard database.create() else {
+            return
+        }
         
         // Access tokens and Realm syncing credentials for debugging
         #if DEBUG

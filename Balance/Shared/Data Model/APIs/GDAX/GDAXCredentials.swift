@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import Locksmith
-
 
 internal extension GDAXAPIClient
 {
