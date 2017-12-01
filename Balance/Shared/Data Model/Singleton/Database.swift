@@ -70,7 +70,7 @@ class Database {
         }
         
         // Check for keychain problem
-        //guard password != nil else {
+        guard password != nil else {
             // It looks like we are unable to read from and write to the keychain. This issue seems to affect a small percentage of users.
             // At this point, rather than force unwrapping and crashing, let's show a message and send the logs.
             Feedback.email(apiInstitution: nil, email: "noreply@balancemy.money", comment: "Failed to read/write database password. Debug logs attached.", completion: { _, _ in
@@ -105,7 +105,7 @@ class Database {
                 }
                 return false
             #endif
-        //}
+        }
         
         #if DEBUG
         log.debug("\nsqlcipher \"\(self.databasePath)\" -cmd \"PRAGMA key='\(self.password!)';\"")
