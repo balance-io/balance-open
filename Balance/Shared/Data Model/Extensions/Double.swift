@@ -34,5 +34,9 @@ extension Double {
         let decimal = self / pow(10.0, Double(decimals))
         return decimal
     }
+    
+    func milisecondsToSeconds() -> Double {
+        return self/1000.0
+    }
 }
 
