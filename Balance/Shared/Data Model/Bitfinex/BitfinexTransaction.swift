@@ -65,8 +65,8 @@ internal extension BitfinexAPIClient
                   let address = data[16] as? String,
                   let status = data[9] as? String,
                   let amount = data[12] as? Double,
-                  let createdAtTimeInterval = data[6] as? TimeInterval,
-                  let movementTimeInterval = data[5] as? TimeInterval else
+                  let createdAtTimeInterval = data[6] as? Double,
+                  let movementTimeInterval = data[5] as? Double else
             {
                 throw BitfinexAPIClient.ModelError.invalidJSON(json: data)
             }
@@ -75,8 +75,9 @@ internal extension BitfinexAPIClient
             self.address = address
             self.status = status
             self.amount = amount
-            self.createdAt = Date(timeIntervalSince1970: createdAtTimeInterval)
-            self.movementTimestamp = Date(timeIntervalSince1970: movementTimeInterval)
+            // Dates in bitfinex are in miliseconds and Date only accepts timestamp in seconds
+            self.createdAt = Date(timeIntervalSince1970: createdAtTimeInterval.milisecondsToSeconds())
+            self.movementTimestamp = Date(timeIntervalSince1970: movementTimeInterval.milisecondsToSeconds())
         }
     }
 }
