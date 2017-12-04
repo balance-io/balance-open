@@ -15,9 +15,13 @@ class Analytics {
     
     func setupCountly() {
         let config: CountlyConfig = CountlyConfig()
-        config.appKey = "1807f895bbaa63752af11bc3f4ff6d4983f2e916"
+        #if os(OSX)
+            config.appKey = "1081ada3bebaec706d02253579237e8c243e6b29"
+        #else
+            config.appKey = "dcf554028cf742764b85e5c0b7b2ccb6dbafa156"
+        #endif
         config.features = ["CLYCrashReporting"]
-        config.host = "https://try.count.ly"
+        config.host = "http://countly.balancemy.money"
         Countly.sharedInstance().start(with: config)
         
         #if DEBUG
