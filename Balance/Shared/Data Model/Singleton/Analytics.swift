@@ -21,7 +21,7 @@ class Analytics {
             config.appKey = "dcf554028cf742764b85e5c0b7b2ccb6dbafa156"
         #endif
         config.features = ["CLYCrashReporting"]
-        config.host = "http://countly.balancemy.money"
+        config.host = "https://countly.balancemy.money"
         Countly.sharedInstance().start(with: config)
         
         #if DEBUG
