@@ -36,7 +36,7 @@ class CurrentExchangeRates {
         return cache.get(valueForKey: source)
     }
     
-    func convertTicker(amount: Double, from:Currency, to: Currency) -> Double? {
+    func convertTicker(amount: Double, from: Currency, to: Currency) -> Double? {
         if let exchangeRate = cachedRates.get(valueForKey: "\(from.code)-\(to.code)") {
             return amount * exchangeRate.rate
         } else {
@@ -101,7 +101,9 @@ class CurrentExchangeRates {
                 }
             }
         }
-        return nil
+        
+        // If we fail to convert, then use the non-source-specific convertTicker function
+        return convertTicker(amount: amount, from: from, to: to)
     }
     
     public func directConvert(amount: Double, from: Currency, to: Currency, source: ExchangeRateSource) -> Double? {

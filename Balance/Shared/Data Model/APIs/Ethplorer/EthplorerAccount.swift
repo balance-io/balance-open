@@ -14,8 +14,8 @@ struct EthplorerAccount {
     
     let address: String
     let available: Double
-    let altRate: Double
-    let altCurrency: Currency
+    let altRate: Double?
+    let altCurrency: Currency?
     let decimals: Int
 }
 
@@ -121,7 +121,7 @@ struct EthplorerAccountObject {
         arrayOlder.append(ethAccount)
         for ethplorerObject in self.tokens {
             var altRate: Double = 0
-            var altCurrency: Currency = .usd
+            var altCurrency: Currency?
             if let tokenPrice = ethplorerObject.tokenInfo.price {
                 altRate = tokenPrice.rate
                 altCurrency = tokenPrice.currency

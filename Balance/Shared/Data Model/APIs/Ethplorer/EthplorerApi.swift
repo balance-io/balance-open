@@ -217,22 +217,22 @@ class EthplorerApi: ExchangeApi {
         return balance
     }
     
-    var altBalance: Int {
-        let altBalance = altRate * available
-        let balance = altBalance.integerValueWith(decimals: altCurrency.decimals)
-        return balance
+    var altBalance: Int? {
+        if let altRate = altRate, let altCurrency = altCurrency {
+            let altBalance = altRate * available
+            let balance = altBalance.integerValueWith(decimals: altCurrency.decimals)
+            return balance
+        }
+        return nil
     }
     
     @discardableResult func updateLocalAccount(institution: Institution) -> Account? {
         // Calculate the integer value of the balance based on the decimals
-        let currentBalance = balance
-        let altCurrentBalance = altBalance
-        
-        if let newAccount = AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: currency.code, sourceInstitutionId: "", accountTypeId: .wallet, accountSubTypeId: nil, name: currency.name, currency: currency.code, currentBalance: currentBalance, availableBalance: nil, number: nil, altCurrency: altCurrency.code, altCurrentBalance: altCurrentBalance, altAvailableBalance: nil) {
+        if let newAccount = AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: currency.code, sourceInstitutionId: "", accountTypeId: .wallet, accountSubTypeId: nil, name: currency.name, currency: currency.code, currentBalance: balance, availableBalance: nil, number: nil, altCurrency: altCurrency?.code, altCurrentBalance: altBalance, altAvailableBalance: nil) {
             
             // Hide unpoplular currencies that have a 0 balance
             if currency != Currency.btc && currency != Currency.eth {
-                newAccount.isHidden = (currentBalance == 0)
+                newAccount.isHidden = (balance == 0)
             }
             
             return newAccount
