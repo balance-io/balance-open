@@ -10,7 +10,9 @@ import Foundation
 
 class Analytics {
     func setupAnalytics() {
-        setupCountly()
+        #if RELEASE
+            setupCountly()
+        #endif
     }
     
     func setupCountly() {
@@ -23,13 +25,11 @@ class Analytics {
         config.features = ["CLYCrashReporting"]
         config.host = "https://countly.balancemy.money"
         Countly.sharedInstance().start(with: config)
-        
-        #if DEBUG
-        config.enableDebug = true
-        #endif
     }
     
     func trackEvent(withName: String, info: [String:String]? = nil) {
-        Countly.sharedInstance().recordEvent(withName, segmentation:info)
+        #if RELEASE
+            Countly.sharedInstance().recordEvent(withName, segmentation:info)
+        #endif
     }
 }
