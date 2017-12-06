@@ -75,8 +75,14 @@ struct CoinbaseApi: ExchangeApi {
         // TODO: Create enum types for each error
         let task = certValidatedSession.dataTask(with: request) { maybeData, maybeResponse, maybeError in
             do {
+                // Check for network errors
+                guard maybeError == nil else {
+                    log.error("Failed with network error: \(String(describing: maybeError))")
+                    throw BalanceError.networkError
+                }
+                
                 // Make sure there's data
-                guard let data = maybeData, maybeError == nil else {
+                guard let data = maybeData else {
                     throw BalanceError.noData
                 }
                 
@@ -136,14 +142,15 @@ struct CoinbaseApi: ExchangeApi {
         // TODO: Create enum types for each error
         let task = certValidatedSession.dataTask(with: request) { maybeData, maybeResponse, maybeError in
             do {
-                // Make sure there's data
-                guard let data = maybeData else {
-                    throw BalanceError.noData
-                }
-                
+                // Check for network errors
                 guard maybeError == nil else {
                     log.error("Failed with network error: \(String(describing: maybeError))")
                     throw BalanceError.networkError
+                }
+                
+                // Make sure there's data
+                guard let data = maybeData else {
+                    throw BalanceError.noData
                 }
                 
                 // Try to parse the JSON
@@ -186,8 +193,14 @@ struct CoinbaseApi: ExchangeApi {
         // TODO: Create enum types for each error
         let task = certValidatedSession.dataTask(with: request) { maybeData, maybeResponse, maybeError in
             do {
+                // Check for network errors
+                guard maybeError == nil else {
+                    log.error("Failed with network error: \(String(describing: maybeError))")
+                    throw BalanceError.networkError
+                }
+                
                 // Make sure there's data
-                guard let data = maybeData, maybeError == nil else {
+                guard let data = maybeData else {
                     throw BalanceError.noData
                 }
                 
