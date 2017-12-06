@@ -10,6 +10,12 @@ import SnapKit
 import SVProgressHUD
 import UIKit
 
+private enum TabIndex: Int {
+    case accounts = 0
+    case transactions = 1
+    case priceTicker = 2
+    case settings = 3
+}
 
 internal final class RootViewController: UIViewController
 {
@@ -37,31 +43,22 @@ internal final class RootViewController: UIViewController
         super.init(nibName: nil, bundle: nil)
         
         // Tab bar controller
-        let priceTickerNavigationController = UINavigationController(rootViewController: self.priceTickerViewController)
         let accountsListNavigationController = UINavigationController(rootViewController: self.accountsListViewController)
         let transactionsListNavigationController = UINavigationController(rootViewController: self.transactionsListViewController)
+        let priceTickerNavigationController = UINavigationController(rootViewController: self.priceTickerViewController)
         let settingsNavigationController = UINavigationController(rootViewController: self.settingsViewController)
         
-        #if DEBUG
-            self.rootTabBarController.viewControllers = [
-                priceTickerNavigationController,
-                accountsListNavigationController,
-                transactionsListNavigationController,
-                settingsNavigationController
-            ]
-        #else
-            self.rootTabBarController.viewControllers = [
-                accountsListNavigationController,
-                transactionsListNavigationController,
-                settingsNavigationController
-            ]
-        #endif
+        self.rootTabBarController.viewControllers = [
+            accountsListNavigationController,
+            transactionsListNavigationController,
+            priceTickerNavigationController,
+            settingsNavigationController
+        ]
         
         // Add as child view controller
         self.addChildViewController(self.rootTabBarController)
         
         // Notifications
-        NotificationCenter.default.addObserver(self, selector: #selector(self.accountAddedNotification(_:)), name: Notifications.AccountAdded, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillEnterForegroundNotification(_:)), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
     }
 
@@ -90,13 +87,16 @@ internal final class RootViewController: UIViewController
             make.edges.equalToSuperview()
         }
         
-        // Sync
-        syncManager.sync()
+        
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
+        if !viewHasAppeared {
+            // Show the price ticker if there are no institutions
+            rootTabBarController.selectedIndex = InstitutionRepository.si.hasInstitutions ? TabIndex.accounts.rawValue : TabIndex.priceTicker.rawValue
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -162,10 +162,6 @@ internal final class RootViewController: UIViewController
     }
     
     // MARK: Notifications
-    
-    @objc private func accountAddedNotification(_ notification: Notification) {
-        syncManager.sync()
-    }
     
     @objc private func applicationWillEnterForegroundNotification(_ notification: Notification) {
         if self.shouldPresentUnlockViewController {
