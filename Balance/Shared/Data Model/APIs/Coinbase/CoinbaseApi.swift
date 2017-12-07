@@ -358,7 +358,7 @@ internal extension CoinbaseApi {
         request.cachePolicy = .reloadIgnoringLocalCacheData
         request.httpMethod = "GET"
         request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
-        request.setValue("2017-06-14", forHTTPHeaderField: "CB-VERSION")
+        request.setValue("2017-05-19", forHTTPHeaderField: "CB-VERSION")
         
         let task = certValidatedSession.dataTask(with: request) { data, response, error in
             do {
