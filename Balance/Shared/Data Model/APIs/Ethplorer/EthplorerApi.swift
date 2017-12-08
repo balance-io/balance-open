@@ -162,15 +162,15 @@ class EthplorerApi: ExchangeApi {
 	}
     
     fileprivate func processEthploreAccounts(ethplorerObject: EthplorerAccountObject, institution: Institution) {
-        let accounts = ethplorerObject.ethplorerAccounts
-        for localAccount in accounts {
+        let responseAccounts = ethplorerObject.ethplorerAccounts
+        for localAccount in responseAccounts {
             // Create or upload the local account object
             localAccount.updateLocalAccount(institution: institution)
         }
         
-        let customAccounts = AccountRepository.si.accounts(institutionId: institution.institutionId)
-        for account in customAccounts {
-            let index = customAccounts.index(where: {$0.currency == account.currency})
+        let accounts = AccountRepository.si.accounts(institutionId: institution.institutionId)
+        for account in accounts {
+            let index = responseAccounts.index(where: {$0.currency.code == account.currency})
             if index == nil {
                 // This account doesn't exist in the response, so remove it
                 AccountRepository.si.delete(account: account)
