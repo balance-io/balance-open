@@ -116,6 +116,7 @@ public enum CryptoCurrency: String {
     case gnt  = "GNT"
     case zrx  = "ZRX"
     case usdt = "USDT"
+    case iot  = "IOT" // Alternate symbol for IOTA
     
     public var code: String {
         return rawValue
@@ -138,6 +139,7 @@ public enum CryptoCurrency: String {
         case .gnt:       return "Golem"
         case .zrx:       return "0x"
         case .usdt:      return "Tether"
+        case .iot:       return "IOTA"
         }
     }
     
@@ -148,6 +150,11 @@ public enum CryptoCurrency: String {
     public static func ==(lhs: CryptoCurrency, rhs: CryptoCurrency) -> Bool {
         // Connect alternate BTC symbol XBT
         if (lhs.code == "BTC" || lhs.code == "XBT") && (rhs.code == "BTC" || rhs.code == "XBT") {
+            return true
+        }
+        
+        // Connect alternate IOTA sumbol IOT
+        if (lhs.code == "IOTA" || lhs.code == "IOT") && (rhs.code == "IOTA" || rhs.code == "IOT") {
             return true
         }
         
