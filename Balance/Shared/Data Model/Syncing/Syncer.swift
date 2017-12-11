@@ -62,7 +62,6 @@ class Syncer {
             if institution.passwordInvalid {
                 // Institution needs a PATCH, so skip -> we should delete and prompt to log in again
                 log.error("Tried to sync institution \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name) but the password was invalid")
-                NotificationCenter.postOnMainThread(name: Notifications.SyncError, object: institution,  userInfo: nil)
                 syncInstitutions(syncingInstitutions, startDate: startDate, success: success, errors: errors, pruneTransactions: pruneTransactions)
             } else if institution.accessToken == nil && institution.source == .coinbase {
                 // No access token somehow, so move on to the next one
@@ -80,7 +79,6 @@ class Syncer {
                             self.syncAccountsAndTransactions(institution: institution, remainingInstitutions: syncingInstitutions, startDate: startDate, success: success, errors: errors, pruneTransactions: pruneTransactions)
                         } else {
                             log.error("Failed to refresh token for institution \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name) error: \(String(describing: error?.localizedDescription)) error code:\(String(describing: error?.code))")
-                            NotificationCenter.postOnMainThread(name: Notifications.SyncError, object: institution,  userInfo: nil)
                             self.syncInstitutions(syncingInstitutions, startDate: startDate, success: success, errors: errors, pruneTransactions: pruneTransactions)
                         }
                     }
