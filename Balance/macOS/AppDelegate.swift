@@ -489,7 +489,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         alert.alertStyle = .critical
         alert.beginSheetModal(for: preferencesWindowController.window!) { returnCode in
             if returnCode == NSApplication.ModalResponse.alertFirstButtonReturn {
-                institution.remove(notify:true)
+                institution.delete()
                 _ = CoinbaseApi.authenticate()
             }
         }
