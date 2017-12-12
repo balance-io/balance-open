@@ -41,9 +41,49 @@ struct Feedback {
             request.httpBody = try JSONSerialization.data(withJSONObject: dict)
             
             let task = session.dataTask(with: request) { data, _, error in
-                let success = data != nil && error == nil
+                guard let data = data else {
+                    log.error("Error sending feedback email, no data")
+                    async {
+                        completion(false, BalanceError.noData)
+                    }
+                    return
+                }
+                
+                guard error == nil else {
+                    log.error("Error sending feedback email, network error: \(error!)")
+                    async {
+                        completion(false, BalanceError.networkError)
+                    }
+                    return
+                }
+                
+                guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any], let jsonDict = json else {
+                    log.error("Error sending feedback email, error parsing json")
+                    async {
+                        completion(false, BalanceError.jsonDecoding)
+                    }
+                    return
+                }
+                
+                guard let code = jsonDict["code"] as? Int else {
+                    log.error("Error sending feedback email, unexpected data returned")
+                    async {
+                        completion(false, BalanceError.unexpectedData)
+                    }
+                    return
+                }
+                
+                guard code == BalanceError.success.rawValue else {
+                    let error = BalanceError(rawValue: code)
+                    log.error("Error sending feedback email, \(String(describing: error)): \(String(describing: jsonDict["message"]))")
+                    async {
+                        completion(false, error ?? BalanceError.unknownError)
+                    }
+                    return
+                }
+                
                 async {
-                    completion(success, error)
+                    completion(true, nil)
                 }
             }
             task.resume()
