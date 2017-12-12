@@ -8,37 +8,33 @@
 
 import Foundation
 
-#if DEBUG
-let subServerBaseUrl = debugging.useLocalSubscriptionServer ? "http://localhost:8080" : "https://bal-subscription-server-beta.appspot.com"
-#else
-let subServerBaseUrl = betaOptionsEnabled ? "https://bal-subscription-server-beta.appspot.com" : "https://www.balancemysubscription.com"
-#endif
+let subServerBaseUrl = debugging.useLocalSubscriptionServer ? "http://localhost:8080" : "https://balance-server.appspot.com"
 
 struct Feedback {
-    fileprivate static let emailIssueUrl  = subServerBaseUrl + "/emailConnectionIssue"
-    fileprivate static let emailFeedbackUrl  = subServerBaseUrl + "/emailFeedback"
+    fileprivate static let sendFeedbackUrl = URL(string: "\(subServerBaseUrl)/feedback/send")!
     
     fileprivate static let session = URLSession(configuration: .default, delegate: certValidator, delegateQueue: nil)
     
-    static func email(apiInstitution: ApiInstitution?, errorType: String? = nil, errorCode: String? = nil, email: String, comment: String, completion: @escaping SuccessErrorHandler) {
+    static func send(apiInstitution: ApiInstitution? = nil, errorType: String? = nil, errorCode: String? = nil, email: String, comment: String, completion: @escaping SuccessErrorHandler) {
         do {
+            // Required parameters
             var dict: [String: Any] = ["email": email,
-                                       "balanceBuild": appVersionAndBuildString,
-                                       "macOSBuild": osVersionString,
+                                       "appVersion": appVersionAndBuildString,
+                                       "osVersion": osVersionString,
                                        "hardwareVersion": hardwareModelString,
                                        "comment": comment]
+            
+            // Optional parameters
+            dict["errorType"] = errorType
+            dict["errorCode"] = errorCode
             dict["source"] = apiInstitution?.source.rawValue
             dict["sourceInstitutionId"] = apiInstitution?.sourceInstitutionId
             dict["institutionName"] = apiInstitution?.name
-            dict["errorType"] = errorType
-            dict["errorCode"] = errorCode
             if let logsZipUrl = logging.zipLogFiles(), let logsData = try? Data(contentsOf: logsZipUrl), logsData.count < 2 * 1024 * 1024 {
                 dict["logs"] = logsData.base64EncodedString()
             }
             
-            let isConnectionIssue = apiInstitution != nil
-            let url = isConnectionIssue ? URL(string: emailIssueUrl)! : URL(string: emailFeedbackUrl)!
-            var request = URLRequest(url: url)
+            var request = URLRequest(url: sendFeedbackUrl)
             request.timeoutInterval = 60.0
             request.cachePolicy = .reloadIgnoringLocalCacheData
             request.httpMethod = HTTPMethod.POST
@@ -46,12 +42,16 @@ struct Feedback {
             
             let task = session.dataTask(with: request) { data, _, error in
                 let success = data != nil && error == nil
-                async { completion(success, error) }
+                async {
+                    completion(success, error)
+                }
             }
             task.resume()
         } catch {
             log.error("Error sending email: \(error)")
-            async { completion(false, error) }
+            async {
+                completion(false, error)
+            }
         }
     }
 }
