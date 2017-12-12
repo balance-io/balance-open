@@ -182,7 +182,7 @@ struct CoinbaseApi: ExchangeApi {
                     completion(true, nil)
                 }
             } catch {
-                if [CoinbaseError.authenticationError, .invalidToken, .revokedToken, .expiredToken].contains(error as! CoinbaseError) {
+                if isInvalidCoinbaseCredentials(error: error) {
                     institution.passwordInvalid = true
                 }
                 async {
@@ -207,7 +207,7 @@ struct CoinbaseApi: ExchangeApi {
         request.cachePolicy = .reloadIgnoringLocalCacheData
         request.httpMethod = "GET"
         request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
-        request.setValue("2017-06-14", forHTTPHeaderField: "CB-VERSION")
+        request.setValue("2017-05-19", forHTTPHeaderField: "CB-VERSION")
         
         let task = certValidatedSession.dataTask(with: request) { data, response, error in
             do {
@@ -244,7 +244,7 @@ struct CoinbaseApi: ExchangeApi {
                     completionHandler(transactions, nil)
                 }
             } catch {
-                if [CoinbaseError.authenticationError, .invalidToken, .revokedToken, .expiredToken].contains(error as! CoinbaseError) {
+                if isInvalidCoinbaseCredentials(error: error) {
                     institution.passwordInvalid = true
                 }
                 async {
@@ -254,6 +254,13 @@ struct CoinbaseApi: ExchangeApi {
         }
         
         task.resume()
+    }
+    
+    static func isInvalidCoinbaseCredentials(error: Error) -> Bool {
+        if let coinbaseError = error as? CoinbaseError, [CoinbaseError.authenticationError, .invalidToken, .revokedToken, .expiredToken].contains(coinbaseError)  {
+            return true
+        }
+        return false
     }
     
     static func checkErrors(jsonResult: [String: AnyObject]?) throws {
