@@ -9,6 +9,7 @@ import Foundation
 
 public enum ExchangeRateSource: Int {
     // Crypto
+    case average      = 0
     case coinbaseGdax = 1
     case poloniex     = 2
     case bitfinex     = 3
@@ -21,7 +22,7 @@ public enum ExchangeRateSource: Int {
     case fixer        = 10001
     
     // These are the currencies that values are stored in for this exchange (i.e. Poloniex only has BTC and ETC, but not fiat currencies)
-    public var mainCurrencies: [Currency] {
+    public static var mainCurrencies: [Currency] {
         switch self {
             //        case .poloniex: return [.btc, .eth]
         //        case .kraken: return [.usd, .btc]
@@ -30,7 +31,7 @@ public enum ExchangeRateSource: Int {
     }
     
     public static var allCrypto: [ExchangeRateSource] {
-        return [.coinbaseGdax, .poloniex, .bitfinex, .kraken, .kucoin, .hitbtc, .binance]
+        return [.average, .coinbaseGdax, .poloniex, .bitfinex, .kraken, .kucoin, .hitbtc, .binance]
     }
     
     public static var allFiat: [ExchangeRateSource] {
