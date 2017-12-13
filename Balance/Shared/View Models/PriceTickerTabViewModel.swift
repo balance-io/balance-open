@@ -14,12 +14,11 @@ class PriceTickerTabViewModel: TabViewModel {
     
     func reloadData() {
         let topCurrencyCodes = ["BTC", "ETH", "LTC", "BCH", "XRP", "DASH", "MIOTA", "ETC", "XMR", "LSK", "STEEM", "GNT", "ZRX"]
-        let topCurrencyCodesSet = Set<String>(topCurrencyCodes)
         
         var otherCurrenciesSet = Set<Currency>()
-        if let rates = currentExchangeRates.exchangeRates(forSource: .poloniex) {
+        if let rates = currentExchangeRates.allExchangeRates() {
             for rate in rates {
-                if !topCurrencyCodesSet.contains(rate.from.code) {
+                if !topCurrencyCodes.contains(rate.from.code) {
                     otherCurrenciesSet.insert(rate.from)
                 }
             }

@@ -88,8 +88,8 @@ internal final class CurrencyCollectionViewCell: UICollectionViewCell, Reusable 
         guard let unwrappedCurrency = self.currency else {
             return
         }
-        
-        let convertedAmount = currentExchangeRates.convert(amount: 1.0, from: unwrappedCurrency, to: defaults.masterCurrency, source: .poloniex)?.integerValueWith(decimals: defaults.masterCurrency.decimals) ?? 0
+
+        let convertedAmount = currentExchangeRates.convertTicker(amount: 1.0, from: unwrappedCurrency, to: defaults.masterCurrency)?.integerValueWith(decimals: defaults.masterCurrency.decimals) ?? 0
         let convertedAmountString = amountToString(amount: convertedAmount, currency: defaults.masterCurrency, showNegative: true)
         
         self.currencyNameLabel.text = unwrappedCurrency.longName
