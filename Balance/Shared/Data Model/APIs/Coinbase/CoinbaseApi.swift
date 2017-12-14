@@ -15,15 +15,13 @@
 typealias SuccessErrorBlock = (_ success: Bool, _ error: Error?) -> Void
 
 fileprivate let connectionTimeout = 30.0
-//fileprivate let subServerUrl = "http://localhost:8080/"
-//fileprivate let subServerUrl = "https://bal-subscription-server-beta.appspot.com/"
-//fileprivate let subServerUrl = "https://www.balancemysubscription.com/"
-fileprivate let subServerUrl = "https://balance-server.appspot.com/"
+fileprivate let subServerUrl = debugging.useLocalSubscriptionServer ? "http://localhost:8080/" : "https://balance-server-eur.appspot.com/"
 fileprivate let clientId = "a6e15fbb0c3362b74360895f261fb079672c10eef79dcb72308c974408c5ce43"
 
 // Save random state for current authentication request
-fileprivate var lastState: String? = nil
 
+fileprivate var lastState: String? = nil
+// MARK: Coinbase Servers
 struct CoinbaseApi: ExchangeApi {
     
     func authenticationChallenge(loginStrings: [Field], closeBlock: @escaping (_ success: Bool, _ error: Error?, _ institution: Institution?) -> Void) {
@@ -124,57 +122,6 @@ struct CoinbaseApi: ExchangeApi {
         task.resume()
     }
     
-    static func refreshAccessToken(institution: Institution, completion: @escaping SuccessErrorBlock) {
-        guard let refreshToken = institution.refreshToken else {
-            completion(false, "missing refreshToken")
-            return
-        }
-        
-        let urlString = "\(subServerUrl)coinbase/refreshToken"
-        let url = URL(string: urlString)!
-        var request = URLRequest(url: url)
-        request.timeoutInterval = connectionTimeout
-        request.cachePolicy = .reloadIgnoringLocalCacheData
-        request.httpMethod = "POST"
-        let parameters = "{\"refreshToken\":\"\(refreshToken)\"}"
-        request.httpBody = parameters.data(using: .utf8)
-        
-        // TODO: Create enum types for each error
-        let task = certValidatedSession.dataTask(with: request) { maybeData, maybeResponse, maybeError in
-            do {
-                // Check for network errors
-                guard maybeError == nil else {
-                    log.error("Failed with network error: \(String(describing: maybeError))")
-                    throw BalanceError.networkError
-                }
-                
-                // Make sure there's data
-                guard let data = maybeData else {
-                    throw BalanceError.noData
-                }
-                
-                // Try to parse the JSON
-                guard let JSONResult = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.count > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.count > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval else {
-                    throw BalanceError.jsonDecoding
-                }
-                
-                // Update the model
-                institution.accessToken = accessToken
-                institution.refreshToken = refreshToken
-                institution.tokenExpireDate = Date().addingTimeInterval(expiresIn - 10.0)
-                async {
-                    completion(true, nil)
-                }
-            } catch {
-                async {
-                    completion(false, error)
-                }
-            }
-        }
-        
-        task.resume()
-    }
-    
     static func updateAccounts(institution: Institution, completion: @escaping SuccessErrorBlock) {
         guard let accessToken = institution.accessToken else {
             completion(false, "missing access token")
@@ -200,38 +147,14 @@ struct CoinbaseApi: ExchangeApi {
                 }
                 
                 // Make sure there's data
-                guard let data = maybeData else {
+                guard let data = maybeData, maybeError == nil else {
                     throw BalanceError.noData
                 }
                 
                 // Try to parse the JSON
                 let jsonResult = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject]
                 
-                // Check for errors (they return an array, but as far as I know it's always one error
-                if let errorDicts = jsonResult?["errors"] as? [[String: AnyObject]] {
-                    for errorDict in errorDicts {
-                        if let id = errorDict["id"] as? String, let coinbaseError = CoinbaseError(rawValue: id) {
-                            switch coinbaseError {
-                            case .personalDetailsRequired:
-                                // TODO: Display message to user
-                                throw coinbaseError
-                            case .unverifiedEmail:
-                                // TODO: Display message to user
-                                throw coinbaseError
-                            case .invalidScope:
-                                // TODO: Display message to user
-                                throw coinbaseError
-                            case .authenticationError, .invalidToken, .revokedToken, .expiredToken:
-                                institution.passwordInvalid = true
-                                throw coinbaseError
-                            default:
-                                throw coinbaseError
-                            }
-                        } else {
-                            throw (errorDict["id"] as? String) ?? BalanceError.unknownError
-                        }
-                    }
-                }
+                try checkErrors(jsonResult: jsonResult)
                 
                 // Check for account data
                 guard let accountDicts = jsonResult?["data"] as? [[String: AnyObject]] else {
@@ -256,6 +179,9 @@ struct CoinbaseApi: ExchangeApi {
                     completion(true, nil)
                 }
             } catch {
+                if isInvalidCoinbaseCredentials(error: error) {
+                    institution.passwordInvalid = true
+                }
                 async {
                     completion(false, error)
                 }
@@ -263,6 +189,103 @@ struct CoinbaseApi: ExchangeApi {
         }
         
         task.resume()
+    }
+    
+    static func fetchTransactions(accountID: String, institution: Institution, completionHandler: @escaping (_ transactions: [CoinbaseApi.Transaction]?, _ error: Error?) -> Void) {
+        guard let accessToken = institution.accessToken else {
+            completionHandler(nil, "missing access token")
+            return
+        }
+        
+        let urlString = "https://api.coinbase.com/v2/accounts/\(accountID)/transactions"
+        let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        request.timeoutInterval = connectionTimeout
+        request.cachePolicy = .reloadIgnoringLocalCacheData
+        request.httpMethod = "GET"
+        request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+        request.setValue("2017-05-19", forHTTPHeaderField: "CB-VERSION")
+        
+        let task = certValidatedSession.dataTask(with: request) { data, response, error in
+            do {
+                guard let unwrappedData = data else {
+                    throw BalanceError.noData
+                }
+                
+                guard error == nil else {
+                    log.error("Failed with network error: \(String(describing: error))")
+                    throw BalanceError.networkError
+                }
+                
+                // Try to parse the JSON
+                let jsonResult = try JSONSerialization.jsonObject(with: unwrappedData) as? [String: AnyObject]
+                
+                try checkErrors(jsonResult: jsonResult)
+                
+                // Check for account data
+                guard let transactionsJSON = jsonResult?["data"] as? [[String: AnyObject]] else {
+                    throw BalanceError.jsonDecoding
+                }
+                
+                // Transactions
+                var transactions = [CoinbaseApi.Transaction]()
+                for transactionJSON in transactionsJSON {
+                    do {
+                        let transaction = try CoinbaseApi.Transaction(dictionary: transactionJSON)
+                        transactions.append(transaction)
+                    } catch {
+                        log.error("Failed to parse account data: \(error)")
+                    }
+                }
+                async {
+                    completionHandler(transactions, nil)
+                }
+            } catch {
+                if isInvalidCoinbaseCredentials(error: error) {
+                    institution.passwordInvalid = true
+                }
+                async {
+                    completionHandler(nil, error)
+                }
+            }
+        }
+        
+        task.resume()
+    }
+    
+    static func isInvalidCoinbaseCredentials(error: Error) -> Bool {
+        if let coinbaseError = error as? CoinbaseError, [CoinbaseError.authenticationError, .invalidToken, .revokedToken, .expiredToken].contains(coinbaseError)  {
+            return true
+        }
+        return false
+    }
+    
+    static func checkErrors(jsonResult: [String: AnyObject]?) throws {
+        // Check for errors (they return an array, but as far as I know it's always one error
+        if let errorDicts = jsonResult?["errors"] as? [[String: AnyObject]] {
+            for errorDict in errorDicts {
+                if let id = errorDict["id"] as? String, let coinbaseError = CoinbaseError(rawValue: id), let errorMessage = errorDict["message"] as? String {
+                    log.error("Coinbase error: \(errorMessage)")
+                    switch coinbaseError {
+                    case .personalDetailsRequired:
+                        // TODO: Display message to user
+                        throw coinbaseError
+                    case .unverifiedEmail:
+                        // TODO: Display message to user
+                        throw coinbaseError
+                    case .invalidScope:
+                        // TODO: Display message to user
+                        throw coinbaseError
+                    case .authenticationError, .invalidToken, .revokedToken, .expiredToken:
+                        throw coinbaseError
+                    default:
+                        throw coinbaseError
+                    }
+                } else {
+                    throw (errorDict["id"] as? String) ?? BalanceError.unknownError
+                }
+            }
+        }
     }
     
     static func processCoinbaseAccounts(_ coinbaseAccounts: [CoinbaseAccount], institution: Institution) {
@@ -342,54 +365,51 @@ extension Institution {
     }
 }
 
-// MARK: Transactions
-
-internal extension CoinbaseApi {
-    internal static func fetchTransactions(accountID: String, institution: Institution, completionHandler: @escaping (_ transactions: [CoinbaseApi.Transaction]?, _ error: Error?) -> Void) {
-        guard let accessToken = institution.accessToken else {
-            completionHandler(nil, "missing access token")
+// MARK: Balance Servers
+extension CoinbaseApi {
+    static func refreshAccessToken(institution: Institution, completion: @escaping SuccessErrorBlock) {
+        guard let refreshToken = institution.refreshToken else {
+            completion(false, "missing refreshToken")
             return
         }
         
-        let urlString = "https://api.coinbase.com/v2/accounts/\(accountID)/transactions"
+        let urlString = "\(subServerUrl)coinbase/refreshToken"
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.timeoutInterval = connectionTimeout
         request.cachePolicy = .reloadIgnoringLocalCacheData
-        request.httpMethod = "GET"
-        request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
-        request.setValue("2017-05-19", forHTTPHeaderField: "CB-VERSION")
+        request.httpMethod = "POST"
+        let parameters = "{\"refreshToken\":\"\(refreshToken)\"}"
+        request.httpBody = parameters.data(using: .utf8)
         
-        let task = certValidatedSession.dataTask(with: request) { data, response, error in
+        // TODO: Create enum types for each error
+        let task = certValidatedSession.dataTask(with: request) { maybeData, maybeResponse, maybeError in
             do {
-                guard let unwrappedData = data,
-                          error == nil else {
-                    throw "No data"
+                // Make sure there's data
+                guard let data = maybeData else {
+                    throw BalanceError.noData
+                }
+                
+                guard maybeError == nil else {
+                    log.error("Failed with network error: \(String(describing: maybeError))")
+                    throw BalanceError.networkError
                 }
                 
                 // Try to parse the JSON
-                guard let JSONResult = try JSONSerialization.jsonObject(with: unwrappedData, options: []) as? [String : Any],
-                      let transactionsJSON = JSONResult["data"] as? [[String: AnyObject]] else {
-                    throw "JSON decoding failed"
+                guard let JSONResult = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.count > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.count > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval else {
+                    throw BalanceError.jsonDecoding
                 }
                 
-                // Transactions
-                var transactions = [CoinbaseApi.Transaction]()
-                for transactionJSON in transactionsJSON {
-                    do {
-                        let transaction = try CoinbaseApi.Transaction(dictionary: transactionJSON)
-                        transactions.append(transaction)
-                    } catch {
-                        log.error("Failed to parse account data: \(error)")
-                    }
-                }
-                
+                // Update the model
+                institution.accessToken = accessToken
+                institution.refreshToken = refreshToken
+                institution.tokenExpireDate = Date().addingTimeInterval(expiresIn - 10.0)
                 async {
-                    completionHandler(transactions, nil)
+                    completion(true, nil)
                 }
             } catch {
                 async {
-                    completionHandler(nil, error)
+                    completion(false, error)
                 }
             }
         }
