@@ -199,9 +199,6 @@ class CurrentExchangeRates {
             var exchangeRates = [ExchangeRate]()
             for rateGroup in rates {
                 if let from = rateGroup["from"] as? String, let to = rateGroup["to"] as? String, let rate = rateGroup["rate"] as? Double {
-                    if from == "btc" && to == "usd" {
-                        print("source \(source) rates: \(rate)")
-                    }
                     let exchangeRate = ExchangeRate(source: source, from: Currency.rawValue(from), to: Currency.rawValue(to), rate: rate)
                     exchangeRates.append(exchangeRate)
                 }
