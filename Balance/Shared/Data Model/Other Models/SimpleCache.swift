@@ -40,4 +40,10 @@ public class SimpleCache<KeyType: Hashable, ValueType: Any> {
         cache.removeAll()
         lock.unlock()
     }
+    
+    public func replaceAll(values: [KeyType: ValueType]) {
+        for (key, value) in values {
+            self.set(value: value, forKey: key)
+        }
+    }
 }
