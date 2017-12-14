@@ -241,8 +241,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     defaults.firstLaunch = false
                 }
             }
-            statusItem.windowConfiguration.presentationTransition = .slideAndFade
-            statusItem.windowConfiguration.animationDuration = 0.13
+            statusItem.windowConfiguration.presentationTransition = .fade
+            statusItem.windowConfiguration.animationDuration = 0.0
             statusItem.windowConfiguration.toolTip = "Balance"
             statusItem.windowConfiguration.backgroundColor = CurrentTheme.defaults.backgroundColor
             statusItem.present(with: NSImage(named: NSImage.Name(rawValue: "statusIcon")), contentViewController: contentViewController)
