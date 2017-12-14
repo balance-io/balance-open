@@ -30,7 +30,9 @@ class PreferencesGeneralViewController: NSViewController {
         super.viewWillAppear()
         
         shortcutView.associatedUserDefaultsKey = Shortcut.shortcutUserDefaultsKey
-        shortcutView.shortcutValue = Shortcut.defaultShortcut
+        if shortcutView.shortcutValue == nil {
+            shortcutView.shortcutValue = Shortcut.defaultShortcut
+        }
         
         logInCheckBox.state = defaults.launchAtLogin ? .on : .off
         
