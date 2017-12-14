@@ -356,8 +356,8 @@ internal extension KrakenAPIClient
         // MARK: Initialization
         
         init() {
-            let keyField = Field(name: "Key", label: "Key", type: "key", value: nil)
-            let secretField = Field(name: "Secret", label: "Secret", type: "secret", value: nil)
+            let keyField = Field(name: "API Key", type: "key", value: nil)
+            let secretField = Field(name: "Private Key", type: "secret", value: nil)
             self.fields = [keyField, secretField]
         }
     }

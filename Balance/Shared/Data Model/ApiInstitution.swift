@@ -27,7 +27,6 @@ protocol ApiInstitution {
 
 struct Field {
     var name: String
-    var label: String
     var type: String
     var value: String?
 }

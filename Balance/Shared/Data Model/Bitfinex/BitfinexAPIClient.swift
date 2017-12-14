@@ -48,8 +48,8 @@ internal final class BitfinexAPIClient
         // MARK: Initialization
         
         init() {
-            let keyField = Field(name: "Key", label: "Key", type: "key", value: nil)
-            let secretField = Field(name: "Secret", label: "Secret", type: "secret", value: nil)
+            let keyField = Field(name: "API key", type: "key", value: nil)
+            let secretField = Field(name: "API key secret", type: "secret", value: nil)
             self.fields = [keyField, secretField]
         }
     }
