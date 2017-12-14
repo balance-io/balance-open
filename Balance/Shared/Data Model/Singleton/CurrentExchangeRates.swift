@@ -41,15 +41,26 @@ class CurrentExchangeRates {
     }
     
     func convertTicker(amount: Double, from: Currency, to: Currency) -> Double? {
-        if let exchangeRate = cachedRates.get(valueForKey: "\(from.code)-\(to.code)") {
+        // TODO: Fix MIOTA conversions properly, no time for 1.0 release
+        var fromCode = from.code
+        switch from {
+        case .crypto(let crypto):
+            if crypto == .miota {
+                fromCode = "IOT"
+            }
+        default:
+            break
+        }
+        
+        if let exchangeRate = cachedRates.get(valueForKey: "\(fromCode)-\(to.code)") {
             return amount * exchangeRate.rate
         } else {
             for masterCurrency in ExchangeRateSource.mainCurrencies {
-                if let fromRate = cachedRates.get(valueForKey: "\(from.code)-\(masterCurrency.code)"), let toRate = cachedRates.get(valueForKey: "\(masterCurrency.code)-\(to.code)") {
+                if let fromRate = cachedRates.get(valueForKey: "\(fromCode)-\(masterCurrency.code)"), let toRate = cachedRates.get(valueForKey: "\(masterCurrency.code)-\(to.code)") {
                     return amount * fromRate.rate * toRate.rate
                 }
             }
-            guard let rateBTC = cachedRates.get(valueForKey: "\(from.code)-\(Currency.btc.code)") else {
+            guard let rateBTC = cachedRates.get(valueForKey: "\(fromCode)-\(Currency.btc.code)") else {
                 return nil
             }
             if let finalRate = cachedRates.get(valueForKey: "\(Currency.usd.code)-\(to.code)"), let dollarRate = cachedRates.get(valueForKey: "\(Currency.btc.code)-\(Currency.usd.code)") {
@@ -143,30 +154,6 @@ class CurrentExchangeRates {
                 self.persist(data: data)
                 NotificationCenter.postOnMainThread(name: Notifications.exchangeRatesUpdated)
             }
-            //create hash of exchanges
-            for exchangeKey in self.cache.getAll().keys {
-                for exchangeRate in self.cache.get(valueForKey: exchangeKey)! {
-                    let rate = Rate(from: exchangeRate.from, to: exchangeRate.to, rate: exchangeRate.rate)
-                    self.cachedRates.set(value: rate, forKey: rate.key)
-                    let opositeRate = Rate(from: exchangeRate.to, to: exchangeRate.from, rate: 1/exchangeRate.rate)
-                    self.cachedRates.set(value: opositeRate, forKey: opositeRate.key)
-                }
-            }
-            
-            // filter all exchanges from cache to remain only the ones between main currencies
-            let allMainRates = self.cache.getAll().flatMap({$0.value.filter({ExchangeRateSource.mainCurrencies.contains($0.from) && ExchangeRateSource.mainCurrencies.contains($0.to) })})
-            
-            //add hash for master currencies -> for each currency pair we average the available options
-            for masterCurrency in ExchangeRateSource.mainCurrencies {
-                for otherCurrency in ExchangeRateSource.mainCurrencies {
-                    if otherCurrency.code == masterCurrency.code { continue }
-                    let groupedExchangeRates = allMainRates.filter({$0.from == masterCurrency && $0.to == otherCurrency})
-                    let groupedRates = groupedExchangeRates.map({$0.rate})
-                    let averageRate = groupedRates.reduce(0, +)/Double(groupedRates.count)
-                    let rate = Rate(from: masterCurrency, to: otherCurrency, rate: averageRate)
-                    self.cachedRates.set(value: rate, forKey: "\(masterCurrency.code)-\(otherCurrency.code)")
-                }
-            }
         }
         task.resume()
     }
@@ -206,7 +193,30 @@ class CurrentExchangeRates {
             }
         }
         
-        //set cacheRates
+        //create hash of exchanges
+        for exchangeKey in self.cache.getAll().keys {
+            for exchangeRate in self.cache.get(valueForKey: exchangeKey)! {
+                let rate = Rate(from: exchangeRate.from, to: exchangeRate.to, rate: exchangeRate.rate)
+                self.cachedRates.set(value: rate, forKey: rate.key)
+                let opositeRate = Rate(from: exchangeRate.to, to: exchangeRate.from, rate: 1/exchangeRate.rate)
+                self.cachedRates.set(value: opositeRate, forKey: opositeRate.key)
+            }
+        }
+        
+        // filter all exchanges from cache to remain only the ones between main currencies
+        let allMainRates = self.cache.getAll().flatMap({$0.value.filter({ExchangeRateSource.mainCurrencies.contains($0.from) && ExchangeRateSource.mainCurrencies.contains($0.to) })})
+        
+        //add hash for master currencies -> for each currency pair we average the available options
+        for masterCurrency in ExchangeRateSource.mainCurrencies {
+            for otherCurrency in ExchangeRateSource.mainCurrencies {
+                if otherCurrency.code == masterCurrency.code { continue }
+                let groupedExchangeRates = allMainRates.filter({$0.from == masterCurrency && $0.to == otherCurrency})
+                let groupedRates = groupedExchangeRates.map({$0.rate})
+                let averageRate = groupedRates.reduce(0, +)/Double(groupedRates.count)
+                let rate = Rate(from: masterCurrency, to: otherCurrency, rate: averageRate)
+                self.cachedRates.set(value: rate, forKey: "\(masterCurrency.code)-\(otherCurrency.code)")
+            }
+        }
         
         return true
     }
