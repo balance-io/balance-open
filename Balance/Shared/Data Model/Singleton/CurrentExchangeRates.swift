@@ -41,17 +41,27 @@ class CurrentExchangeRates {
     }
     
     func convertTicker(amount: Double, from: Currency, to: Currency) -> Double? {
+        // TODO: Fix MIOTA conversions properly, no time for 1.0 release
+        var fromCode = from.code
+        switch from {
+        case .crypto(let crypto):
+            if crypto == .miota {
+                fromCode = "IOT"
+            }
+        default:
+            break
+        }
         
         if from == to { return 1 }
         if let exchangeRate = cachedRates.get(valueForKey: "\(from.code)-\(to.code)") {
             return amount * exchangeRate.rate
         } else {
             for masterCurrency in ExchangeRateSource.mainCurrencies {
-                if let fromRate = cachedRates.get(valueForKey: "\(from.code)-\(masterCurrency.code)"), let toRate = cachedRates.get(valueForKey: "\(masterCurrency.code)-\(to.code)") {
+                if let fromRate = cachedRates.get(valueForKey: "\(fromCode)-\(masterCurrency.code)"), let toRate = cachedRates.get(valueForKey: "\(masterCurrency.code)-\(to.code)") {
                     return amount * fromRate.rate * toRate.rate
                 }
             }
-            guard let rateBTC = cachedRates.get(valueForKey: "\(from.code)-\(Currency.btc.code)") else {
+            guard let rateBTC = cachedRates.get(valueForKey: "\(fromCode)-\(Currency.btc.code)") else {
                 return nil
             }
             if let finalRate = cachedRates.get(valueForKey: "\(Currency.usd.code)-\(to.code)"), let dollarRate = cachedRates.get(valueForKey: "\(Currency.btc.code)-\(Currency.usd.code)") {
@@ -145,25 +155,6 @@ class CurrentExchangeRates {
                 self.persist(data: data)
                 NotificationCenter.postOnMainThread(name: Notifications.exchangeRatesUpdated)
             }
-            
-            let tempCachedRates = SimpleCache<String, Rate>()
-            let allRates = self.cache.getAll().flatMap({$0.value})
-            
-            //create hash of exchanges averaging all exchanges rates
-            for exchangeKey in self.cache.getAll().keys {
-                for exchangeRate in self.cache.get(valueForKey: exchangeKey)! {
-                    if tempCachedRates.get(valueForKey: "\(exchangeRate.from.code)-\(exchangeRate.to.code)") != nil { continue }
-                    let sameRates = allRates.filter({$0.from == exchangeRate.from && $0.to == exchangeRate.to})
-                    guard let averageRate = self.average(rates: sameRates) else { continue }
-                    
-                    let rate = Rate(from: exchangeRate.from, to: exchangeRate.to, rate: averageRate)
-                    tempCachedRates.set(value: rate, forKey: rate.key)
-                    
-                    let opositeRate = Rate(from: exchangeRate.to, to: exchangeRate.from, rate: 1/exchangeRate.rate)
-                    tempCachedRates.set(value: opositeRate, forKey: opositeRate.key)
-                }
-            }
-            self.cachedRates.replaceAll(values: tempCachedRates.getAll())
         }
         task.resume()
     }
@@ -209,8 +200,25 @@ class CurrentExchangeRates {
                 self.cache.set(value: exchangeRates, forKey: source)
             }
         }
-        
-        //set cacheRates
+      
+        let tempCachedRates = SimpleCache<String, Rate>()
+        let allRates = self.cache.getAll().flatMap({$0.value})
+
+        //create hash of exchanges averaging all exchanges rates
+        for exchangeKey in self.cache.getAll().keys {
+            for exchangeRate in self.cache.get(valueForKey: exchangeKey)! {
+                if tempCachedRates.get(valueForKey: "\(exchangeRate.from.code)-\(exchangeRate.to.code)") != nil { continue }
+                let sameRates = allRates.filter({$0.from == exchangeRate.from && $0.to == exchangeRate.to})
+                guard let averageRate = self.average(rates: sameRates) else { continue }
+
+                let rate = Rate(from: exchangeRate.from, to: exchangeRate.to, rate: averageRate)
+                tempCachedRates.set(value: rate, forKey: rate.key)
+
+                let opositeRate = Rate(from: exchangeRate.to, to: exchangeRate.from, rate: 1/exchangeRate.rate)
+                tempCachedRates.set(value: opositeRate, forKey: opositeRate.key)
+            }
+        }
+        self.cachedRates.replaceAll(values: tempCachedRates.getAll())
         
         return true
     }

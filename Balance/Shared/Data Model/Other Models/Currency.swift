@@ -104,19 +104,21 @@ public enum Currency: Equatable, Hashable {
 
 // Known/popular crypto currencies
 public enum CryptoCurrency: String {
-    case btc  = "BTC"
-    case xbt  = "XBT" // Alternate symbol for BTC
-    case bch  = "BCH"
-    case eth  = "ETH"
-    case ltc  = "LTC"
-    case zec  = "ZEC"
-    case dash = "DASH"
-    case xrp  = "XRP"
-    case xmr  = "XMR"
-    case gnt  = "GNT"
-    case zrx  = "ZRX"
-    case usdt = "USDT"
-    case iot  = "IOT" // Alternate symbol for IOTA
+    case btc   = "BTC"
+    case xbt   = "XBT" // Alternate symbol for BTC
+    case bch   = "BCH"
+    case eth   = "ETH"
+    case ltc   = "LTC"
+    case zec   = "ZEC"
+    case dash  = "DASH"
+    case xrp   = "XRP"
+    case xmr   = "XMR"
+    case gnt   = "GNT"
+    case zrx   = "ZRX"
+    case usdt  = "USDT"
+    case miota = "MIOTA"
+    case iota  = "IOTA" // Alternate symbol for MIOTA
+    case iot   = "IOT"  // Alternate symbol for MIOTA
     
     public var code: String {
         return rawValue
@@ -128,18 +130,18 @@ public enum CryptoCurrency: String {
     
     public var name: String {
         switch self {
-        case .btc, .xbt: return "Bitcoin"
-        case .bch:       return "Bitcoin Cash"
-        case .eth:       return "Ether"
-        case .ltc:       return "Litecoin"
-        case .zec:       return "Zcash"
-        case .dash:      return "Dash"
-        case .xrp:       return "Ripple"
-        case .xmr:       return "Monero"
-        case .gnt:       return "Golem"
-        case .zrx:       return "0x"
-        case .usdt:      return "Tether"
-        case .iot:       return "IOTA"
+        case .btc, .xbt:          return "Bitcoin"
+        case .bch:                return "Bitcoin Cash"
+        case .eth:                return "Ether"
+        case .ltc:                return "Litecoin"
+        case .zec:                return "Zcash"
+        case .dash:               return "Dash"
+        case .xrp:                return "Ripple"
+        case .xmr:                return "Monero"
+        case .gnt:                return "Golem"
+        case .zrx:                return "0x"
+        case .usdt:               return "Tether"
+        case .miota, .iota, .iot: return "IOTA"
         }
     }
     
@@ -153,8 +155,8 @@ public enum CryptoCurrency: String {
             return true
         }
         
-        // Connect alternate IOTA sumbol IOT
-        if (lhs.code == "IOTA" || lhs.code == "IOT") && (rhs.code == "IOTA" || rhs.code == "IOT") {
+        // Connect alternate MIOTA symbols IOT and IOTA
+        if (lhs.code == "IOTA" || lhs.code == "IOT" || lhs.code == "MIOTA") && (rhs.code == "IOTA" || rhs.code == "IOT" || rhs.code == "MIOTA") {
             return true
         }
         
