@@ -66,7 +66,7 @@ extension GDAXAPIClient
         }
         
         let requestPath = "/accounts"
-        let headers = try AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, method: "GET", body: nil)
+        let headers = try AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, method: HTTPMethod.GET, body: nil)
         let url = self.server.url().appendingPathComponent(requestPath)
         
         var request = URLRequest(url: url)
@@ -123,7 +123,7 @@ extension GDAXAPIClient
             throw APICredentialsComponents.Error.noCredentials
         }
         let requestPath = "/accounts/\(accountId)/ledger"
-        let headers = try AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, method: "GET", body: nil)
+        let headers = try AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, method: HTTPMethod.GET, body: nil)
         let url = self.server.url().appendingPathComponent(requestPath)
         
         var request = URLRequest(url: url)
@@ -193,11 +193,11 @@ internal extension GDAXAPIClient {
         let requestPath = "/withdrawals/crypto"
         let body = try withdrawal.jsonData()
         
-        let headers = try AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, method: "POST", body: body)
+        let headers = try AuthHeaders(credentials: unwrappedCredentials, requestPath: requestPath, method: HTTPMethod.POST, body: body)
         let url = self.server.url().appendingPathComponent(requestPath)
         
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = HTTPMethod.POST
         request.httpBody = body
         
         request.add(headers: headers.dictionary)

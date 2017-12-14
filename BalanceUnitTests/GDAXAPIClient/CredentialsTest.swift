@@ -51,7 +51,7 @@ internal final class CredentialsTest: XCTestCase
         let timestamp = Date(timeIntervalSince1970: 1)
         let body = ["bo" : "dy"]
         let bodyData = try! JSONSerialization.data(withJSONObject: body, options: [])
-        let method = "GET"
+        let method = HTTPMethod.GET
         let requestPath = "/accounts"
         
         let signature = try! credentials.generateSignature(timestamp: timestamp, requestPath: requestPath, body: bodyData, method: method)
