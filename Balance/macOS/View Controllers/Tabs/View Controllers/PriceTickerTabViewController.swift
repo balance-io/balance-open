@@ -148,9 +148,8 @@ class PriceTickerTabViewController: NSViewController, SectionedTableViewDelegate
         cell.identifier = NSUserInterfaceItemIdentifier(rawValue: "Exchange Rate Cell")
         
         if let currency = viewModel.currency(forRow: row, inSection: section) {
-            let convertedAmount = currentExchangeRates.convertTicker(amount: 1.0, from: currency, to: defaults.masterCurrency)?.integerValueWith(decimals: defaults.masterCurrency.decimals) ?? 0
-            let convertedAmountString = amountToString(amount: convertedAmount, currency: defaults.masterCurrency, showNegative: true)
-            cell.updateModel(currency: currency, rate: convertedAmountString)
+            let rate = viewModel.ratesString(forRow: row, inSection: section)
+            cell.updateModel(currency: currency, rate: rate)
         }
         return cell
     }

@@ -114,7 +114,10 @@ extension PriceTickerViewController: UICollectionViewDelegate {
             return
         }
         
-        currencyCell.currency = self.viewModel.currency(forRow: indexPath.row, inSection: indexPath.section)
+        if let currency = self.viewModel.currency(forRow: indexPath.row, inSection: indexPath.section) {
+            let rate = viewModel.ratesString(forRow: indexPath.row, inSection: indexPath.section)
+            currencyCell.update(currency: currency, rate: rate)
+        }
     }
 }
 
