@@ -23,7 +23,7 @@ class CurrentExchangeRates {
         static let exchangeRatesUpdated = Notification.Name("exchangeRatesUpdated")
     }
     
-    fileprivate let exchangeRatesUrl = URL(string: "https://balance-server.appspot.com/exchangeRates")!
+    fileprivate let exchangeRatesUrl = URL(string: "https://balance-server-eur.appspot.com/exchangeRates")!
     
     fileprivate let cache = SimpleCache<ExchangeRateSource, [ExchangeRate]>()
     fileprivate let cachedRates = SimpleCache<String, Rate>()
@@ -36,11 +36,15 @@ class CurrentExchangeRates {
         return cache.get(valueForKey: source)
     }
     
+    func allExchangeRates() -> [ExchangeRate]? {
+        return cache.getAll().flatMap({$0.value}) as [ExchangeRate]?
+    }
+    
     func convertTicker(amount: Double, from: Currency, to: Currency) -> Double? {
         if let exchangeRate = cachedRates.get(valueForKey: "\(from.code)-\(to.code)") {
             return amount * exchangeRate.rate
         } else {
-            for masterCurrency in ExchangeRateSource.all.flatMap({ $0.mainCurrencies }) {
+            for masterCurrency in ExchangeRateSource.mainCurrencies {
                 if let fromRate = cachedRates.get(valueForKey: "\(from.code)-\(masterCurrency.code)"), let toRate = cachedRates.get(valueForKey: "\(masterCurrency.code)-\(to.code)") {
                     return amount * fromRate.rate * toRate.rate
                 }
@@ -80,7 +84,7 @@ class CurrentExchangeRates {
                 return rate!
             } else {
                 //change currency and loop through all sources to get a connecting currency to use as middle point
-                for currency in source.mainCurrencies {
+                for currency in ExchangeRateSource.mainCurrencies {
                     var fromRate: Double? = getRate(from: from, to: currency, source: source)
                     var toRate: Double? = getRate(from: currency, to: to, source: source)
                     for source in ExchangeRateSource.all {
@@ -148,15 +152,19 @@ class CurrentExchangeRates {
                     self.cachedRates.set(value: opositeRate, forKey: opositeRate.key)
                 }
             }
-            //add hash for master currencies
-            let allMaster = ExchangeRateSource.all.flatMap({ $0.mainCurrencies })
-            for masterCurrency in allMaster {
-                for otherCurrency in allMaster {
+            
+            // filter all exchanges from cache to remain only the ones between main currencies
+            let allMainRates = self.cache.getAll().flatMap({$0.value.filter({ExchangeRateSource.mainCurrencies.contains($0.from) && ExchangeRateSource.mainCurrencies.contains($0.to) })})
+            
+            //add hash for master currencies -> for each currency pair we average the available options
+            for masterCurrency in ExchangeRateSource.mainCurrencies {
+                for otherCurrency in ExchangeRateSource.mainCurrencies {
                     if otherCurrency.code == masterCurrency.code { continue }
-                    if let exchangeRate = self.convert(amount: 1.0, from: masterCurrency, to: otherCurrency, source: .poloniex) {
-                        let rate = Rate(from: masterCurrency, to: masterCurrency, rate: exchangeRate)
-                        self.cachedRates.set(value: rate, forKey: "\(masterCurrency.code)-\(otherCurrency.code)")
-                    }
+                    let groupedExchangeRates = allMainRates.filter({$0.from == masterCurrency && $0.to == otherCurrency})
+                    let groupedRates = groupedExchangeRates.map({$0.rate})
+                    let averageRate = groupedRates.reduce(0, +)/Double(groupedRates.count)
+                    let rate = Rate(from: masterCurrency, to: otherCurrency, rate: averageRate)
+                    self.cachedRates.set(value: rate, forKey: "\(masterCurrency.code)-\(otherCurrency.code)")
                 }
             }
         }
@@ -197,6 +205,8 @@ class CurrentExchangeRates {
                 self.cache.set(value: exchangeRates, forKey: source)
             }
         }
+        
+        //set cacheRates
         
         return true
     }

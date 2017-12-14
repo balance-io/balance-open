@@ -13,14 +13,6 @@ internal final class CurrencyCollectionViewCell: UICollectionViewCell, Reusable 
     // Static
     static let height: CGFloat = 60.0
     
-    // Internal
-    internal var currency: Currency? {
-        didSet
-        {
-            self.reloadData()
-        }
-    }
-    
     // Private
     private let currencyNameLabel: UILabel = {
         let label = UILabel()
@@ -84,15 +76,8 @@ internal final class CurrencyCollectionViewCell: UICollectionViewCell, Reusable 
     
     // MARK: Data
     
-    private func reloadData() {
-        guard let unwrappedCurrency = self.currency else {
-            return
-        }
-        
-        let convertedAmount = currentExchangeRates.convert(amount: 1.0, from: unwrappedCurrency, to: defaults.masterCurrency, source: .poloniex)?.integerValueWith(decimals: defaults.masterCurrency.decimals) ?? 0
-        let convertedAmountString = amountToString(amount: convertedAmount, currency: defaults.masterCurrency, showNegative: true)
-        
-        self.currencyNameLabel.text = unwrappedCurrency.longName
-        self.amountLabel.text = convertedAmountString
+    func update(currency: Currency, rate: String) {
+        self.currencyNameLabel.text = currency.longName
+        self.amountLabel.text = rate
     }
 }
