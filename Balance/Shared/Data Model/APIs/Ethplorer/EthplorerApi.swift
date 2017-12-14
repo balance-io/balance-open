@@ -52,9 +52,9 @@ class EthplorerApi: ExchangeApi {
         var nameField : String?
         var addressField : String?
         for field in loginStrings {
-            if field.type == "name" {
+            if field.type == .name {
                 nameField = field.value
-            } else if field.type == "address" {
+            } else if field.type == .address {
                 addressField = field.value
             } else {
                 assert(false, "wrong fields are passed into the Ethplore auth, we require secret and key fields and values")

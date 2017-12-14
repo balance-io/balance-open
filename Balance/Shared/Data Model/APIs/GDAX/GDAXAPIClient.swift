@@ -46,9 +46,9 @@ internal final class GDAXAPIClient
         var fields: [Field]
         
         init() {
-            let keyField = Field(name: "API Key", type: "key", value: nil)
-            let secretField = Field(name: "API Secret", type: "secret", value: nil)
-            let passphraseField = Field(name: "Passphrase", type: "passphrase", value: nil)
+            let keyField = Field(name: "API Key", type: .key, value: nil)
+            let secretField = Field(name: "API Secret", type: .secret, value: nil)
+            let passphraseField = Field(name: "Passphrase", type: .passphrase, value: nil)
             self.fields = [keyField, secretField, passphraseField]
         }
     }
@@ -237,11 +237,11 @@ extension GDAXAPIClient: ExchangeApi {
         var keyField : String?
         var passphrasField: String?
         for field in loginStrings {
-            if field.type == "key" {
+            if field.type == .key {
                 keyField = field.value
-            } else if field.type == "secret" {
+            } else if field.type == .secret {
                 secretField = field.value
-            } else if field.type == "passphrase" {
+            } else if field.type == .passphrase {
                 passphrasField = field.value
             } else {
                 assert(false, "wrong fields are passed into the poloniex auth, we require secret and key fields and values")

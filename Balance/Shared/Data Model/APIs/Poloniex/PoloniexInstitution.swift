@@ -22,8 +22,8 @@ class PoloniexInstitution: ApiInstitution {
     var fields: [Field]
     
     init() {
-        let keyField = Field(name: "API Key", type: "key", value: nil)
-        let secretField = Field(name: "Secret", type: "secret", value: nil)
+        let keyField = Field(name: "API Key", type: .key, value: nil)
+        let secretField = Field(name: "Secret", type: .secret, value: nil)
         self.fields = [keyField, secretField]
     }
 }

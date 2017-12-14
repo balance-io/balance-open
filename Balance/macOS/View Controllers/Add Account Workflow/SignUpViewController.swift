@@ -8,17 +8,6 @@
 
 import Cocoa
 
-private enum FieldType: String {
-    case username   = "username"
-    case password   = "password"
-    case pin        = "pin"
-    case key        = "key"
-    case secret     = "secret"
-    case passphrase = "passphrase"
-    case name       = "name"
-    case address    = "address"
-}
-
 private enum Step: String {
     case connect    = "connect"
     case question   = "question"
@@ -42,13 +31,17 @@ func ==(lhs: Device, rhs: Device) -> Bool {
 }
 
 extension SignUpTextField {
-    var field: Field {
+    var field: Field? {
+        guard let fieldType = FieldType(rawValue: type.rawValue) else {
+            return nil
+        }
+        
         let value = textField.stringValue
         switch self.type {
         case .none:
-            return Field(name: type.rawValue, type: type.rawValue, value: nil)
+            return Field(name: type.rawValue, type: fieldType, value: nil)
         default:
-            return Field(name: type.rawValue, type: type.rawValue, value: value)
+            return Field(name: type.rawValue, type: fieldType, value: value)
         }
     }
 }
@@ -435,21 +428,21 @@ class SignUpViewController: NSViewController {
         var previousTextField: SignUpTextField?
         for field in apiInstitution.fields {
             var type: SignUpTextFieldType = .username
-            if field.type == FieldType.username.rawValue {
+            if field.type == FieldType.username {
                 type = .username
-            } else if field.type == FieldType.password.rawValue {
+            } else if field.type == FieldType.password {
                 type = .password
-            } else if field.type == FieldType.pin.rawValue {
+            } else if field.type == FieldType.pin {
                 type = .pin
-            } else if field.type == FieldType.passphrase.rawValue {
+            } else if field.type == FieldType.passphrase {
                 type = .passphrase
-            } else if field.type == FieldType.key.rawValue {
+            } else if field.type == FieldType.key {
                 type = .key
-            } else if field.type == FieldType.secret.rawValue {
+            } else if field.type == FieldType.secret {
                 type = .secret
-            }else if field.type == FieldType.name.rawValue {
+            }else if field.type == FieldType.name {
                 type = .name
-            } else if field.type == FieldType.address.rawValue {
+            } else if field.type == FieldType.address {
                 type = .address
             }
             
@@ -616,7 +609,9 @@ class SignUpViewController: NSViewController {
 
         var loginFields = [Field]()
         for textField in connectFields {
-            loginFields.append(textField.field)
+            if let field = textField.field {
+                loginFields.append(field)
+            }
         }
         // try login with loginFields
         loginService.authenticationChallenge(loginStrings: loginFields) { success, error, institution in

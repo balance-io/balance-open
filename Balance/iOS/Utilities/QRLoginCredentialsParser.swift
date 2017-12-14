@@ -54,8 +54,8 @@ internal final class QRLoginCredentialsParser {
         }
         
         // Build fields
-        let keyField = Field(name: "Key", type: "key", value: key)
-        let secretField = Field(name: "Secret", type: "secret", value: secret)
+        let keyField = Field(name: "Key", type: .key, value: key)
+        let secretField = Field(name: "Secret", type: .secret, value: secret)
         
         return [keyField, secretField]
     }
@@ -87,8 +87,8 @@ internal final class QRLoginCredentialsParser {
         }
         
         // Build fields
-        let keyField = Field(name: "Key", type: "key", value: unwrappedBitfinexKey)
-        let secretField = Field(name: "Secret", type: "secret", value: unwrappedBitfinexSecret)
+        let keyField = Field(name: "Key", type: .key, value: unwrappedBitfinexKey)
+        let secretField = Field(name: "Secret", type: .secret, value: unwrappedBitfinexSecret)
         
         return [keyField, secretField]
     }

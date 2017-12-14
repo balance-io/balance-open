@@ -22,8 +22,8 @@ class EthplorerInstitution: ApiInstitution {
     var fields: [Field]
     
     init() {
-        let addressField = Field(name: "Public Address", type: "address", value: nil)
-        let nameField = Field(name: "Name", type: "name", value: nil)
+        let addressField = Field(name: "Public Address", type: .address, value: nil)
+        let nameField = Field(name: "Name", type: .name, value: nil)
         self.fields = [nameField, addressField]
     }
 }
