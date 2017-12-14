@@ -149,12 +149,12 @@ class CurrentExchangeRates {
             let tempCachedRates = SimpleCache<String, Rate>()
             let allRates = self.cache.getAll().flatMap({$0.value})
             
-            //create hash of exchanges
+            //create hash of exchanges averaging all exchanges rates
             for exchangeKey in self.cache.getAll().keys {
                 for exchangeRate in self.cache.get(valueForKey: exchangeKey)! {
-                    guard tempCachedRates.get(valueForKey: "\(exchangeRate.from.code)-\(exchangeRate.to.code)") != nil else { continue }
+                    if tempCachedRates.get(valueForKey: "\(exchangeRate.from.code)-\(exchangeRate.to.code)") != nil { continue }
                     let sameRates = allRates.filter({$0.from == exchangeRate.from && $0.to == exchangeRate.to})
-                    let averageRate = self.average(rates: sameRates)
+                    guard let averageRate = self.average(rates: sameRates) else { continue }
                     
                     let rate = Rate(from: exchangeRate.from, to: exchangeRate.to, rate: averageRate)
                     tempCachedRates.set(value: rate, forKey: rate.key)
@@ -164,29 +164,12 @@ class CurrentExchangeRates {
                 }
             }
             self.cachedRates.replaceAll(values: tempCachedRates.getAll())
-            
-            // filter all exchanges from cache to remain only the ones between main currencies
-            let allMainRates = self.cache.getAll().flatMap({$0.value.filter({ExchangeRateSource.mainCurrencies.contains($0.from) && ExchangeRateSource.mainCurrencies.contains($0.to)})})
-            
-            //add hash for master currencies -> for each currency pair we average the available options
-            for masterCurrency in ExchangeRateSource.mainCurrencies {
-                for otherCurrency in ExchangeRateSource.mainCurrencies {
-                    if otherCurrency.code == masterCurrency.code { continue }
-                    let groupedExchangeRates = allMainRates.filter({$0.from == masterCurrency && $0.to == otherCurrency})
-                    let averageRate = self.average(rates: groupedExchangeRates)
-                    
-                    let rate = Rate(from: masterCurrency, to: otherCurrency, rate: averageRate)
-                    self.cachedRates.set(value: rate, forKey: rate.key)
-                    
-                    let opositeRate = Rate(from: otherCurrency, to: masterCurrency, rate: 1/averageRate)
-                    self.cachedRates.set(value: opositeRate, forKey: opositeRate.key)
-                }
-            }
         }
         task.resume()
     }
     
-    fileprivate func average(rates:[ExchangeRate]) -> Double {
+    fileprivate func average(rates:[ExchangeRate]) -> Double? {
+        guard rates.count > 0 else { return nil }
         let groupedRates = rates.map({$0.rate})
         let averageRate = groupedRates.reduce(0, +)/Double(groupedRates.count)
         return averageRate
@@ -216,6 +199,9 @@ class CurrentExchangeRates {
             var exchangeRates = [ExchangeRate]()
             for rateGroup in rates {
                 if let from = rateGroup["from"] as? String, let to = rateGroup["to"] as? String, let rate = rateGroup["rate"] as? Double {
+                    if from == "btc" && to == "usd" {
+                        print("source \(source) rates: \(rate)")
+                    }
                     let exchangeRate = ExchangeRate(source: source, from: Currency.rawValue(from), to: Currency.rawValue(to), rate: rate)
                     exchangeRates.append(exchangeRate)
                 }
