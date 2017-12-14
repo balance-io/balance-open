@@ -23,6 +23,7 @@ enum BalanceError: Int, LocalizedError {
     case jsonEncoding        = 11
     case noData              = 12
     case noReceipt           = 13
+    case unexpectedData      = 14
     
     var errorDescription: String? {
         switch self {
@@ -40,6 +41,7 @@ enum BalanceError: Int, LocalizedError {
         case .jsonEncoding:        return "JSON encoding error"
         case .noData:              return "No data"
         case .noReceipt:           return "No app store receipt"
+        case .unexpectedData:      return "Unexpected data"
         }
     }
 }

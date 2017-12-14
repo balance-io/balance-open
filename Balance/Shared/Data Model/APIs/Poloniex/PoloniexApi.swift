@@ -219,7 +219,7 @@ class PoloniexApi: ExchangeApi {
     
     fileprivate func assembleTradingRequest(key: String, body: String, hashBody: String) -> URLRequest {
         var request = URLRequest(url: tradingURL)
-        request.httpMethod = "POST"
+        request.httpMethod = HTTPMethod.POST
         request.setValue(key, forHTTPHeaderField: "Key")
         request.setValue(hashBody, forHTTPHeaderField: "Sign")
         request.httpBody = body.data(using: .utf8)!

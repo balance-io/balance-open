@@ -51,7 +51,7 @@ internal extension KrakenAPIClient
         let url: URL = self.baseURL.appendingPathComponent(path)
         
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = HTTPMethod.POST
         request.httpBody = body.data(using: .utf8)
         request.add(headers: headers.dictionary)
         return request

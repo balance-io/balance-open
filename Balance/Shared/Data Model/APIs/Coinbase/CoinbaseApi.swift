@@ -14,17 +14,17 @@
 
 typealias SuccessErrorBlock = (_ success: Bool, _ error: Error?) -> Void
 
+fileprivate let cbVersion = "2017-05-19"
 fileprivate let connectionTimeout = 30.0
-//fileprivate let subServerUrl = "http://localhost:8080/"
-//fileprivate let subServerUrl = "https://bal-subscription-server-beta.appspot.com/"
-//fileprivate let subServerUrl = "https://www.balancemysubscription.com/"
-fileprivate let subServerUrl = "https://balance-server.appspot.com/"
+fileprivate let subServerUrl = debugging.useLocalSubscriptionServer ? "http://localhost:8080/" : "https://balance-server-eur.appspot.com/"
 fileprivate let clientId = "a6e15fbb0c3362b74360895f261fb079672c10eef79dcb72308c974408c5ce43"
 
 // Save random state for current authentication request
 
 fileprivate var lastState: String? = nil
+
 // MARK: Coinbase Servers
+
 struct CoinbaseApi: ExchangeApi {
     
     func authenticationChallenge(loginStrings: [Field], closeBlock: @escaping (_ success: Bool, _ error: Error?, _ institution: Institution?) -> Void) {
@@ -69,7 +69,7 @@ struct CoinbaseApi: ExchangeApi {
         var request = URLRequest(url: url)
         request.timeoutInterval = connectionTimeout
         request.cachePolicy = .reloadIgnoringLocalCacheData
-        request.httpMethod = "POST"
+        request.httpMethod = HTTPMethod.POST
         let parameters = "{\"code\":\"\(code)\"}"
         request.httpBody = parameters.data(using: .utf8)
         
@@ -136,9 +136,9 @@ struct CoinbaseApi: ExchangeApi {
         var request = URLRequest(url: url)
         request.timeoutInterval = connectionTimeout
         request.cachePolicy = .reloadIgnoringLocalCacheData
-        request.httpMethod = "GET"
+        request.httpMethod = HTTPMethod.GET
         request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
-        request.setValue("2017-05-19", forHTTPHeaderField: "CB-VERSION")
+        request.setValue(cbVersion, forHTTPHeaderField: "CB-VERSION")
         
         // TODO: Create enum types for each error
         let task = certValidatedSession.dataTask(with: request) { maybeData, maybeResponse, maybeError in
@@ -205,9 +205,9 @@ struct CoinbaseApi: ExchangeApi {
         var request = URLRequest(url: url)
         request.timeoutInterval = connectionTimeout
         request.cachePolicy = .reloadIgnoringLocalCacheData
-        request.httpMethod = "GET"
+        request.httpMethod = HTTPMethod.GET
         request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
-        request.setValue("2017-05-19", forHTTPHeaderField: "CB-VERSION")
+        request.setValue(cbVersion, forHTTPHeaderField: "CB-VERSION")
         
         let task = certValidatedSession.dataTask(with: request) { data, response, error in
             do {
@@ -381,7 +381,7 @@ extension CoinbaseApi {
         var request = URLRequest(url: url)
         request.timeoutInterval = connectionTimeout
         request.cachePolicy = .reloadIgnoringLocalCacheData
-        request.httpMethod = "POST"
+        request.httpMethod = HTTPMethod.POST
         let parameters = "{\"refreshToken\":\"\(refreshToken)\"}"
         request.httpBody = parameters.data(using: .utf8)
         

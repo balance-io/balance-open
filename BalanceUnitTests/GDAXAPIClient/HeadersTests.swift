@@ -34,7 +34,7 @@ internal final class HeadersTests: XCTestCase
         let credentials = try! GDAXAPIClient.Credentials(key: key, secret: "YmFsYW5jZWlzYXdlc29tZQ==", passphrase: passPhrase)
         let body = ["bo" : "dy"]
         let bodyData = try! JSONSerialization.data(withJSONObject: body, options: [])
-        let method = "GET"
+        let method = HTTPMethod.GET
         let requestPath = "/accounts"
         
         let header = try! GDAXAPIClient.AuthHeaders(credentials: credentials, requestPath: requestPath, method: method, body: bodyData)

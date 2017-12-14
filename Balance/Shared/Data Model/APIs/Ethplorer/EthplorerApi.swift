@@ -204,7 +204,7 @@ class EthplorerApi: ExchangeApi {
     
     fileprivate func assembleRequest(components: URLComponents) -> URLRequest {
         var request = URLRequest(url:components.url!)
-        request.httpMethod = "GET"
+        request.httpMethod = HTTPMethod.GET
         return request
     }
     

@@ -252,7 +252,7 @@ class EmailIssueController: NSViewController {
         
         submitButton.isEnabled = false
         
-        Feedback.email(apiInstitution: apiInstitution, errorType: errorType, errorCode: errorCode, email: emailField.stringValue, comment: notesField.stringValue) { success, error in
+        Feedback.send(apiInstitution: apiInstitution, errorType: errorType, errorCode: errorCode, email: emailField.stringValue, comment: notesField.stringValue) { success, error in
             AppDelegate.sharedInstance.pinned = true
             if success {
                 let alert = NSAlert()

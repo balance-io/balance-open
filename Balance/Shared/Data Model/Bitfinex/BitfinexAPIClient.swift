@@ -71,7 +71,7 @@ internal extension BitfinexAPIClient
         let url = self.baseURL.appendingPathComponent(requestPath)
         
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = HTTPMethod.POST
         request.add(headers: headers.dictionary)
         request.setValue("application/json", forHTTPHeaderField: "content-type")
         
@@ -142,7 +142,7 @@ internal extension BitfinexAPIClient
         let url = self.baseURL.appendingPathComponent(requestPath)
         
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = HTTPMethod.POST
         request.add(headers: headers.dictionary)
         request.setValue("application/json", forHTTPHeaderField: "content-type")
         
