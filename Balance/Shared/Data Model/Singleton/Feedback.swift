@@ -8,11 +8,7 @@
 
 import Foundation
 
-#if DEBUG
-let subServerBaseUrl = debugging.useLocalSubscriptionServer ? "http://localhost:8080" : "https://bal-subscription-server-beta.appspot.com"
-#else
-let subServerBaseUrl = betaOptionsEnabled ? "https://bal-subscription-server-beta.appspot.com" : "https://www.balancemysubscription.com"
-#endif
+let subServerBaseUrl = debugging.useLocalSubscriptionServer ? "http://localhost:8080" : "https://balance-server-eur.appspot.com"
 
 struct Feedback {
     fileprivate static let emailIssueUrl  = subServerBaseUrl + "/emailConnectionIssue"
