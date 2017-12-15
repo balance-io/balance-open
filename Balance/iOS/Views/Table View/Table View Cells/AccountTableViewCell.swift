@@ -99,12 +99,11 @@ internal final class AccountTableViewCell: TableViewCell {
         self.currencyNameLabel.text = currency.name
         
         // Amount label
-        self.amountLabel.text = amountToString(amount: unwrappedAccount.displayBalance, currency: currency)
+        self.amountLabel.text = amountToString(amount: unwrappedAccount.displayBalance, currency: currency, showNegative: true, showCodeAfterValue: true)
         
         // Detail label
-        let masterCurrency = defaults.masterCurrency!
         if let displayAltBalance = unwrappedAccount.displayAltBalance {
-            self.detailTextLabel?.text = amountToString(amount: displayAltBalance, currency: masterCurrency, showNegative: true)
+            self.detailTextLabel?.text = amountToString(amount: displayAltBalance, currency: defaults.masterCurrency, showNegative: true, showCodeAfterValue: defaults.masterCurrency.isCrypto)
             self.detailTextLabel?.isHidden = false
         } else {
             self.detailTextLabel?.isHidden = true
