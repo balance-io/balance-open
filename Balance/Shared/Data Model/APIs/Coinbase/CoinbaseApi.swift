@@ -27,7 +27,7 @@ fileprivate var lastState: String? = nil
 
 struct CoinbaseApi: ExchangeApi {
     
-    func authenticationChallenge(loginStrings: [Field], closeBlock: @escaping (_ success: Bool, _ error: Error?, _ institution: Institution?) -> Void) {
+    func authenticationChallenge(loginStrings: [Field], existingInstitution: Institution? = nil, closeBlock: @escaping (_ success: Bool, _ error: Error?, _ institution: Institution?) -> Void) {
         
     }
 

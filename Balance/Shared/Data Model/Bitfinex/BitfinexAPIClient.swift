@@ -208,7 +208,7 @@ extension BitfinexAPIClient: ExchangeApi {
         assert(false, "implement")
     }
     
-    func authenticationChallenge(loginStrings: [Field], closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
+    func authenticationChallenge(loginStrings: [Field], existingInstitution: Institution? = nil, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
         assert(loginStrings.count == 2, "number of auth fields should be 2 for Bitfinex")
         
         var secretField: String?
@@ -244,33 +244,41 @@ extension BitfinexAPIClient: ExchangeApi {
                     do {
                         let credentialsIdentifier = "main"
                         try credentials.save(identifier: credentialsIdentifier)
-                        guard let institution = InstitutionRepository.si.institution(source: .bitfinex, sourceInstitutionId: "", name: "Bitfinex") else {
-                            async {
-                                closeBlock(false, error, nil)
-                            }
-                            return
-                        }
-                        institution.accessToken = credentialsIdentifier
                         
-                        try self.fetchWallets({ (wallets, error) in
-                            guard let unwrappedWallets = wallets else {
+                        if let existingInstitution = existingInstitution {
+                            existingInstitution.accessToken = credentialsIdentifier
+                            async {
+                                closeBlock(true, error, existingInstitution)
+                            }
+                        } else {
+                            guard let institution = InstitutionRepository.si.institution(source: .bitfinex, sourceInstitutionId: "", name: "Bitfinex") else {
                                 async {
                                     closeBlock(false, error, nil)
                                 }
                                 return
                             }
-                            for wallet in unwrappedWallets {
-                                let currency = Currency.rawValue(wallet.currencyCode)
-                                let currentBalance = wallet.balance.integerValueWith(decimals: currency.decimals)
-                                let availableBalance = currentBalance
-                                
-                                // Initialize an Account object to insert the record
-                                AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: wallet.currencyCode, sourceInstitutionId: institution.sourceInstitutionId, accountTypeId: .exchange, accountSubTypeId: nil, name: wallet.currencyCode, currency: wallet.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
-                            }
-                            async {
-                                closeBlock(true, error, institution)
-                            }
-                        })
+                            institution.accessToken = credentialsIdentifier
+                            
+                            try self.fetchWallets({ (wallets, error) in
+                                guard let unwrappedWallets = wallets else {
+                                    async {
+                                        closeBlock(false, error, nil)
+                                    }
+                                    return
+                                }
+                                for wallet in unwrappedWallets {
+                                    let currency = Currency.rawValue(wallet.currencyCode)
+                                    let currentBalance = wallet.balance.integerValueWith(decimals: currency.decimals)
+                                    let availableBalance = currentBalance
+                                    
+                                    // Initialize an Account object to insert the record
+                                    AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: wallet.currencyCode, sourceInstitutionId: institution.sourceInstitutionId, accountTypeId: .exchange, accountSubTypeId: nil, name: wallet.currencyCode, currency: wallet.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
+                                }
+                                async {
+                                    closeBlock(true, error, institution)
+                                }
+                            })
+                        }
                     }
                     catch {
                         async {

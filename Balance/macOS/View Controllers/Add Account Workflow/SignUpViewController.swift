@@ -254,7 +254,7 @@ class SignUpViewController: NSViewController {
             make.height.equalTo(30)
         }
         
-        titleField.stringValue = "Connect your account"
+        titleField.stringValue = patch ? "Reconnect your account" : "Connect your account"
         titleField.font = CurrentTheme.addAccounts.welcomeFont
         titleField.textColor = CurrentTheme.addAccounts.textColor
         titleField.alignment = .center
@@ -651,7 +651,7 @@ class SignUpViewController: NSViewController {
             loginFields.append(textField.field)
         }
         // try login with loginFields
-        loginService.authenticationChallenge(loginStrings: loginFields) { success, error, institution in
+        loginService.authenticationChallenge(loginStrings: loginFields, existingInstitution: institution) { success, error, institution in
             if success, let institution = institution {
                 self.completeConnect(institution: institution)
             } else {

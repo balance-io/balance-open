@@ -76,7 +76,7 @@ class PoloniexApi: ExchangeApi {
     
     // MARK: - Public -
     
-    func authenticationChallenge(loginStrings: [Field], closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
+    func authenticationChallenge(loginStrings: [Field], existingInstitution: Institution? = nil, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
         assert(loginStrings.count == 2, "number of auth fields should be 2 for Poloniex")
         var secretField : String?
         var keyField : String?
@@ -96,7 +96,7 @@ class PoloniexApi: ExchangeApi {
             return
         }
         do {
-            try authenticate(secret: secret, key: key, closeBlock: closeBlock)
+            try authenticate(secret: secret, key: key, existingInstitution: existingInstitution, closeBlock: closeBlock)
         } catch {
         
         }
@@ -149,7 +149,7 @@ class PoloniexApi: ExchangeApi {
     }
     
     // Poloniex doesn't have an authenticate method "per-se" so we use the returnBalances call to validate the key-secret pair for login
-    fileprivate func authenticate(secret: String, key: String, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) throws {
+    fileprivate func authenticate(secret: String, key: String, existingInstitution: Institution?, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) throws {
         self.secret = secret
         self.key = key
         
@@ -170,19 +170,28 @@ class PoloniexApi: ExchangeApi {
                     if let _ = self.findError(data: safeData) {
                         throw PoloniexApi.CredentialsError.incorrectLoginCredentials
                     }
-                    // Create the institution and finish (we do not have access tokens)
-                    if let institution = InstitutionRepository.si.institution(source: .poloniex, sourceInstitutionId: "", name: "Poloniex") {
-                        institution.secret = secret
-                        institution.apiKey = key
-                        
-                        //create accounts
-                        let poloniexAccounts = try self.parsePoloniexAccounts(data: safeData)
-                        self.processPoloniexAccounts(accounts: poloniexAccounts, institution: institution)
+                    
+                    if let existingInstitution = existingInstitution {
+                        existingInstitution.secret = secret
+                        existingInstitution.apiKey = key
                         async {
-                            closeBlock(true, nil, institution)
+                            closeBlock(true, nil, existingInstitution)
                         }
                     } else {
-                        throw "Error creating institution"
+                        // Create the institution and finish (we do not have access tokens)
+                        if let institution = InstitutionRepository.si.institution(source: .poloniex, sourceInstitutionId: "", name: "Poloniex") {
+                            institution.secret = secret
+                            institution.apiKey = key
+                            
+                            //create accounts
+                            let poloniexAccounts = try self.parsePoloniexAccounts(data: safeData)
+                            self.processPoloniexAccounts(accounts: poloniexAccounts, institution: institution)
+                            async {
+                                closeBlock(true, nil, institution)
+                            }
+                        } else {
+                            throw "Error creating institution"
+                        }
                     }
                 } else {
                     log.error("Poloniex Error: \(String(describing: error))")

@@ -160,14 +160,13 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
                 subview.removeFromSuperview()
             }
             
-            let isLight = (CurrentTheme.type == .light)
             let backgroundInset = 20
             let rowInset = 12
             let headerRowHeight = 39
             let rowHeight = 44
             
             fixPasswordPromptView.isClickingEnabled = false
-            fixPasswordPromptView.drawingBlock = isLight ? AccountConnectionErrors.drawConnectionErrorsLight : AccountConnectionErrors.drawConnectionErrorsDark
+            fixPasswordPromptView.drawingBlock = AccountConnectionErrors.drawConnectionErrorsLight
             self.view.addSubview(fixPasswordPromptView)
             fixPasswordPromptView.snp.makeConstraints { make in
                 let height = (backgroundInset * 2) + headerRowHeight + (rowHeight * count) - 1
@@ -196,7 +195,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
             }
             
             let headerIcon = ImageView()
-            headerIcon.image = isLight ? #imageLiteral(resourceName: "errorAlertLight") : #imageLiteral(resourceName: "errorAlertDark")
+            headerIcon.image = #imageLiteral(resourceName: "errorAlertLight")
             headerRow.addSubview(headerIcon)
             headerIcon.snp.makeConstraints { make in
                 make.width.equalTo(headerIcon.image?.size.width ?? 0)
@@ -230,19 +229,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
                     make.trailing.equalTo(containerView).offset(-rowInset)
                 }
                 
-                let colorBox = View()
-                colorBox.cornerRadius = 3.0
-                colorBox.layerBackgroundColor = institution.displayColor
-                rowView.addSubview(colorBox)
-                colorBox.snp.makeConstraints { make in
-                    make.width.equalTo(10)
-                    make.height.equalTo(10)
-                    make.leading.equalTo(rowView).offset(1)
-                    make.centerY.equalTo(rowView)
-                }
-                
                 let reconnectButton = PaintCodeButton()
-                reconnectButton.textDrawingFunction = isLight ? AccountConnectionErrors.drawReconnectButtonLight : AccountConnectionErrors.drawReconnectButtonDark
+                reconnectButton.textDrawingFunction = AccountConnectionErrors.drawReconnectButtonLight
                 reconnectButton.buttonText = "Reconnect"
                 reconnectButton.buttonTextColor = CurrentTheme.accounts.fixPasswordPrompt.buttonTextColor
                 reconnectButton.object = institution
@@ -264,7 +252,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
                 rowView.addSubview(nameLabel)
                 nameLabel.snp.makeConstraints { make in
                     make.height.equalTo(rowView)
-                    make.leading.equalTo(colorBox.snp.trailing).offset(8)
+                    make.leading.equalTo(rowView).offset(1)
                     make.trailing.equalTo(reconnectButton.snp.leading).offset(-5)
                     make.centerY.equalTo(rowView).offset(-1)
                 }
