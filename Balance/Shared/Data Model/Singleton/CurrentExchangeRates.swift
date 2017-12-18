@@ -130,6 +130,9 @@ class CurrentExchangeRates {
     }
     
     public func getRate(from: Currency, to: Currency, source: ExchangeRateSource) -> Double? {
+        if source == .average {
+            return convertTicker(amount: 1, from: from, to: to)
+        }
         if let exchangeRates = exchangeRates(forSource: source) {
             // First check if the exact rate exists (either directly or reversed)
             if let rate = exchangeRates.rate(from: from, to: to) {
