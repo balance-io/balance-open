@@ -17,6 +17,7 @@ public enum ExchangeRateSource: Int {
     case kucoin       = 5
     case hitbtc       = 6
     case binance      = 7
+    case bittrex      = 8
     
     // Fiat
     case fixer        = 10001
@@ -52,6 +53,7 @@ extension Source {
         case .bitfinex:         return .bitfinex
         case .kraken:           return .kraken
         case .ethplorer:        return .hitbtc
+        case .bittrex:          return .bittrex
         }
     }
 }

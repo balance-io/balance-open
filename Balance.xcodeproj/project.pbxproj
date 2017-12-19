@@ -490,6 +490,35 @@
 		DCC684D81BD1080E00E95B90 /* TransactionsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC684D71BD1080E00E95B90 /* TransactionsTabViewController.swift */; };
 		DCDF77BD1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDF77BC1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift */; };
 		DCDF77BF1BE6C703004AF8AE /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDF77BE1BE6C703004AF8AE /* PreferencesViewController.swift */; };
+		E653123E1FE8C20700F57977 /* NewExchangeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E653123D1FE8C20600F57977 /* NewExchangeAPI.swift */; };
+		E65312451FE8C22E00F57977 /* BITTREXApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312411FE8C22D00F57977 /* BITTREXApi.swift */; };
+		E653124C1FE8C28D00F57977 /* BITTREXCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312491FE8C28D00F57977 /* BITTREXCurrency.swift */; };
+		E653124D1FE8C28D00F57977 /* BITTREXBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E653124A1FE8C28D00F57977 /* BITTREXBalance.swift */; };
+		E653124E1FE8C28D00F57977 /* BITTREXDataBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E653124B1FE8C28D00F57977 /* BITTREXDataBuilder.swift */; };
+		E653124F1FE8C2A500F57977 /* BITTREXBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E653124A1FE8C28D00F57977 /* BITTREXBalance.swift */; };
+		E65312501FE8C2A900F57977 /* BITTREXCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312491FE8C28D00F57977 /* BITTREXCurrency.swift */; };
+		E65312511FE8C2AC00F57977 /* BITTREXDataBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E653124B1FE8C28D00F57977 /* BITTREXDataBuilder.swift */; };
+		E65312521FE8C2B000F57977 /* BITTREXApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312411FE8C22D00F57977 /* BITTREXApi.swift */; };
+		E65312561FE8C2C500F57977 /* NewExchangeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E653123D1FE8C20600F57977 /* NewExchangeAPI.swift */; };
+		E65312741FE8C3E400F57977 /* balances.json in Resources */ = {isa = PBXBuildFile; fileRef = E65312701FE8C3E400F57977 /* balances.json */; };
+		E65312751FE8C3E400F57977 /* currencies.json in Resources */ = {isa = PBXBuildFile; fileRef = E65312711FE8C3E400F57977 /* currencies.json */; };
+		E65312761FE8C3E400F57977 /* BITTREXDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312721FE8C3E400F57977 /* BITTREXDataHelper.swift */; };
+		E65312771FE8C3E400F57977 /* invalid_api_key.json in Resources */ = {isa = PBXBuildFile; fileRef = E65312731FE8C3E400F57977 /* invalid_api_key.json */; };
+		E653127B1FE8C40A00F57977 /* ExchangeAPIURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312781FE8C40900F57977 /* ExchangeAPIURLSession.swift */; };
+		E653127E1FE8C41900F57977 /* balances.json in Resources */ = {isa = PBXBuildFile; fileRef = E65312701FE8C3E400F57977 /* balances.json */; };
+		E653127F1FE8C41F00F57977 /* BITTREXDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312721FE8C3E400F57977 /* BITTREXDataHelper.swift */; };
+		E65312801FE8C41F00F57977 /* currencies.json in Resources */ = {isa = PBXBuildFile; fileRef = E65312711FE8C3E400F57977 /* currencies.json */; };
+		E65312811FE8C41F00F57977 /* invalid_api_key.json in Resources */ = {isa = PBXBuildFile; fileRef = E65312731FE8C3E400F57977 /* invalid_api_key.json */; };
+		E65312841FE8C42300F57977 /* ExchangeAPIURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312781FE8C40900F57977 /* ExchangeAPIURLSession.swift */; };
+		E653128B1FE8C4D100F57977 /* BITTREXApiAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312871FE8C47F00F57977 /* BITTREXApiAction.swift */; };
+		E653128C1FE8C4D200F57977 /* BITTREXApiAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312871FE8C47F00F57977 /* BITTREXApiAction.swift */; };
+		E653128D1FE8C4DA00F57977 /* BITTREXApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312851FE8C47F00F57977 /* BITTREXApiError.swift */; };
+		E653128E1FE8C4DA00F57977 /* BITTREXApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312851FE8C47F00F57977 /* BITTREXApiError.swift */; };
+		E653128F1FE8C4E000F57977 /* BITTREXInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312861FE8C47F00F57977 /* BITTREXInstitution.swift */; };
+		E65312901FE8C4E100F57977 /* BITTREXInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312861FE8C47F00F57977 /* BITTREXInstitution.swift */; };
+		E65312911FE8C53B00F57977 /* BITTREXApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E653127A1FE8C40A00F57977 /* BITTREXApiTest.swift */; };
+		E65312921FE8C53C00F57977 /* BITTREXApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E653127A1FE8C40A00F57977 /* BITTREXApiTest.swift */; };
+		E65312931FE8C69800F57977 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078421F4F8EC700D0054C /* TestHelpers.swift */; };
 		F1253E5E1D75D2D0001BD48C /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1253E5D1D75D2D0001BD48C /* KeychainManager.swift */; };
 		F1253E611D75D55D001BD48C /* KeychainManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1253E601D75D55D001BD48C /* KeychainManagement.swift */; };
 		F19BF68C1D880DA100496A66 /* MockedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19BF68B1D880DA100496A66 /* MockedDefaults.swift */; };
@@ -503,6 +532,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = DC65EF8E1CE3E2CD006C9373;
 			remoteInfo = "Bal Helper";
+		};
+		E65312601FE8C2EF00F57977 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC1A648C1B867B1F009356A0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 535529D71ED723C600DD95F9;
+			remoteInfo = BalanceiOS;
 		};
 		F1F948841D8049B800AB30B2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -922,6 +958,22 @@
 		DCC684D71BD1080E00E95B90 /* TransactionsTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionsTabViewController.swift; sourceTree = "<group>"; };
 		DCDF77BC1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesGeneralViewController.swift; sourceTree = "<group>"; };
 		DCDF77BE1BE6C703004AF8AE /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		E653123D1FE8C20600F57977 /* NewExchangeAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewExchangeAPI.swift; sourceTree = "<group>"; };
+		E65312411FE8C22D00F57977 /* BITTREXApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXApi.swift; sourceTree = "<group>"; };
+		E65312491FE8C28D00F57977 /* BITTREXCurrency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BITTREXCurrency.swift; path = "Balance/Shared/Data Model/APIs/BITTREX/DTO/BITTREXCurrency.swift"; sourceTree = SOURCE_ROOT; };
+		E653124A1FE8C28D00F57977 /* BITTREXBalance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BITTREXBalance.swift; path = "Balance/Shared/Data Model/APIs/BITTREX/DTO/BITTREXBalance.swift"; sourceTree = SOURCE_ROOT; };
+		E653124B1FE8C28D00F57977 /* BITTREXDataBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BITTREXDataBuilder.swift; path = "Balance/Shared/Data Model/APIs/BITTREX/DTO/BITTREXDataBuilder.swift"; sourceTree = SOURCE_ROOT; };
+		E653125B1FE8C2EF00F57977 /* BalanceUnitTestsiOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceUnitTestsiOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E653125F1FE8C2EF00F57977 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E65312701FE8C3E400F57977 /* balances.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = balances.json; sourceTree = "<group>"; };
+		E65312711FE8C3E400F57977 /* currencies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = currencies.json; sourceTree = "<group>"; };
+		E65312721FE8C3E400F57977 /* BITTREXDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXDataHelper.swift; sourceTree = "<group>"; };
+		E65312731FE8C3E400F57977 /* invalid_api_key.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = invalid_api_key.json; sourceTree = "<group>"; };
+		E65312781FE8C40900F57977 /* ExchangeAPIURLSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeAPIURLSession.swift; sourceTree = "<group>"; };
+		E653127A1FE8C40A00F57977 /* BITTREXApiTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXApiTest.swift; sourceTree = "<group>"; };
+		E65312851FE8C47F00F57977 /* BITTREXApiError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXApiError.swift; sourceTree = "<group>"; };
+		E65312861FE8C47F00F57977 /* BITTREXInstitution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXInstitution.swift; sourceTree = "<group>"; };
+		E65312871FE8C47F00F57977 /* BITTREXApiAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXApiAction.swift; sourceTree = "<group>"; };
 		F107D9A21D6B048800CEEF35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1253E5D1D75D2D0001BD48C /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		F1253E601D75D55D001BD48C /* KeychainManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManagement.swift; sourceTree = "<group>"; };
@@ -983,6 +1035,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC65EF9F1CE3E32E006C9373 /* ServiceManagement.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E65312581FE8C2EF00F57977 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1049,8 +1108,10 @@
 		5301A7641F17F42700668099 /* APIs */ = {
 			isa = PBXGroup;
 			children = (
+				E653123F1FE8C21600F57977 /* BITTREX */,
 				A4E4570E1F7901DD002E2879 /* Ethplorer */,
 				537187F31F4CC37400E7F9D6 /* ExchangeApi.swift */,
+				E653123D1FE8C20600F57977 /* NewExchangeAPI.swift */,
 				535315251F4CEBF2008D6890 /* ApiInstitution.swift */,
 				A4E7680E1F67F034002B1AE1 /* API Credentials */,
 				A4E768001F67DACC002B1AE1 /* Bitfinex */,
@@ -2110,6 +2171,7 @@
 				DC65EF901CE3E2CD006C9373 /* Bal Helper */,
 				F107D99F1D6B048800CEEF35 /* BalanceUITests */,
 				F1F948801D8049B800AB30B2 /* BalanceUnitTests */,
+				E653125C1FE8C2EF00F57977 /* BalanceUnitTestsiOS */,
 				DC1A64951B867B1F009356A0 /* Products */,
 				A41EE4851FB9E4F000210038 /* Frameworks */,
 			);
@@ -2122,6 +2184,7 @@
 				DC65EF8F1CE3E2CD006C9373 /* Bal Helper.app */,
 				F1F9487F1D8049B800AB30B2 /* BalanceUnitTests.xctest */,
 				535529D81ED723C600DD95F9 /* Balance.app */,
+				E653125B1FE8C2EF00F57977 /* BalanceUnitTestsiOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2163,6 +2226,75 @@
 				5349909B1E0354630057C5C1 /* main.m */,
 			);
 			path = "Bal Helper";
+			sourceTree = "<group>";
+		};
+		E653123F1FE8C21600F57977 /* BITTREX */ = {
+			isa = PBXGroup;
+			children = (
+				E65312411FE8C22D00F57977 /* BITTREXApi.swift */,
+				E65312871FE8C47F00F57977 /* BITTREXApiAction.swift */,
+				E65312851FE8C47F00F57977 /* BITTREXApiError.swift */,
+				E65312861FE8C47F00F57977 /* BITTREXInstitution.swift */,
+				E65312481FE8C23700F57977 /* DTO */,
+			);
+			name = BITTREX;
+			path = APIs/BITTREX;
+			sourceTree = "<group>";
+		};
+		E65312481FE8C23700F57977 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				E653124A1FE8C28D00F57977 /* BITTREXBalance.swift */,
+				E65312491FE8C28D00F57977 /* BITTREXCurrency.swift */,
+				E653124B1FE8C28D00F57977 /* BITTREXDataBuilder.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		E653125C1FE8C2EF00F57977 /* BalanceUnitTestsiOS */ = {
+			isa = PBXGroup;
+			children = (
+				E653126B1FE8C37500F57977 /* API */,
+				E653125F1FE8C2EF00F57977 /* Info.plist */,
+			);
+			path = BalanceUnitTestsiOS;
+			sourceTree = "<group>";
+		};
+		E653126B1FE8C37500F57977 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				E653126E1FE8C39900F57977 /* Response */,
+				E653126C1FE8C38700F57977 /* BITTREX */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		E653126C1FE8C38700F57977 /* BITTREX */ = {
+			isa = PBXGroup;
+			children = (
+				E653127A1FE8C40A00F57977 /* BITTREXApiTest.swift */,
+				E65312781FE8C40900F57977 /* ExchangeAPIURLSession.swift */,
+			);
+			path = BITTREX;
+			sourceTree = "<group>";
+		};
+		E653126E1FE8C39900F57977 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				E653126F1FE8C3A100F57977 /* BITTREX */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		E653126F1FE8C3A100F57977 /* BITTREX */ = {
+			isa = PBXGroup;
+			children = (
+				E65312701FE8C3E400F57977 /* balances.json */,
+				E65312721FE8C3E400F57977 /* BITTREXDataHelper.swift */,
+				E65312711FE8C3E400F57977 /* currencies.json */,
+				E65312731FE8C3E400F57977 /* invalid_api_key.json */,
+			);
+			path = BITTREX;
 			sourceTree = "<group>";
 		};
 		F107D99F1D6B048800CEEF35 /* BalanceUITests */ = {
@@ -2314,6 +2446,24 @@
 			productReference = DC65EF8F1CE3E2CD006C9373 /* Bal Helper.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E653125A1FE8C2EF00F57977 /* BalanceUnitTestsiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E65312621FE8C2EF00F57977 /* Build configuration list for PBXNativeTarget "BalanceUnitTestsiOS" */;
+			buildPhases = (
+				E65312571FE8C2EF00F57977 /* Sources */,
+				E65312581FE8C2EF00F57977 /* Frameworks */,
+				E65312591FE8C2EF00F57977 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E65312611FE8C2EF00F57977 /* PBXTargetDependency */,
+			);
+			name = BalanceUnitTestsiOS;
+			productName = BalanceUnitTestsiOS;
+			productReference = E653125B1FE8C2EF00F57977 /* BalanceUnitTestsiOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		F1F9487E1D8049B800AB30B2 /* BalanceUnitTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F1F9488F1D8049B800AB30B2 /* Build configuration list for PBXNativeTarget "BalanceUnitTests" */;
@@ -2339,7 +2489,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Balanced Software, Inc.";
 				TargetAttributes = {
@@ -2377,6 +2527,12 @@
 							};
 						};
 					};
+					E653125A1FE8C2EF00F57977 = {
+						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 535529D71ED723C600DD95F9;
+					};
 					F1F9487E1D8049B800AB30B2 = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0900;
@@ -2402,6 +2558,7 @@
 				535529D71ED723C600DD95F9 /* BalanceiOS */,
 				DC65EF8E1CE3E2CD006C9373 /* Bal Helper */,
 				F1F9487E1D8049B800AB30B2 /* BalanceUnitTests */,
+				E653125A1FE8C2EF00F57977 /* BalanceUnitTestsiOS */,
 			);
 		};
 /* End PBXProject section */
@@ -2438,6 +2595,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E65312591FE8C2EF00F57977 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E65312751FE8C3E400F57977 /* currencies.json in Resources */,
+				E65312741FE8C3E400F57977 /* balances.json in Resources */,
+				E65312771FE8C3E400F57977 /* invalid_api_key.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F1F9487D1D8049B800AB30B2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2446,10 +2613,13 @@
 				53F0786F1F4F916800D0054C /* FetchAccounts.json in Resources */,
 				A4E457311F79362F002E2879 /* PoloniexDeposit.json in Resources */,
 				A41204C51F719CB800FD8078 /* KrakenFetchAccounts.json in Resources */,
+				E65312811FE8C41F00F57977 /* invalid_api_key.json in Resources */,
 				53F078701F4F916800D0054C /* WithdrawToCrypto.json in Resources */,
 				A44C76271F7BE5A00024476E /* BitfinexMovement.json in Resources */,
 				53F0786C1F4F916500D0054C /* PoloniexTradingError.json in Resources */,
 				A41742971F73E8D2004A9B4F /* CoinbaseSendTransaction.json in Resources */,
+				E65312801FE8C41F00F57977 /* currencies.json in Resources */,
+				E653127E1FE8C41900F57977 /* balances.json in Resources */,
 				53F0786D1F4F916800D0054C /* Account.json in Resources */,
 				53F0786A1F4F916500D0054C /* CompleteBalancesResponse.json in Resources */,
 				53F0786E1F4F916800D0054C /* Error.json in Resources */,
@@ -2539,6 +2709,7 @@
 				53F078661ED73F0F00E7EDF9 /* Color.swift in Sources */,
 				535529F71ED7250100DD95F9 /* SyncManager.swift in Sources */,
 				53D441E91F44B0DD006967E1 /* FMDatabasePoolAdditionsVariadic.swift in Sources */,
+				E653124F1FE8C2A500F57977 /* BITTREXBalance.swift in Sources */,
 				53552A2B1ED7252900DD95F9 /* FileManager.swift in Sources */,
 				A4430AA61F95F47300F2FFFA /* SimpleCache.swift in Sources */,
 				A4E7680D1F67E410002B1AE1 /* APICredentials.swift in Sources */,
@@ -2554,6 +2725,7 @@
 				A456ED121FB3067D006EE529 /* CurrencyCollectionViewCell.swift in Sources */,
 				2DF898431FCC8F7500CCDFB9 /* CountlyAPM.m in Sources */,
 				A4E457231F790EE5002E2879 /* PoloniexTransaction.swift in Sources */,
+				E65312501FE8C2A900F57977 /* BITTREXCurrency.swift in Sources */,
 				5321219E1EE8B91600F4812A /* ioapi.c in Sources */,
 				53552A0C1ED7251200DD95F9 /* Utils.swift in Sources */,
 				53552A271ED7252900DD95F9 /* Array.swift in Sources */,
@@ -2584,6 +2756,7 @@
 				537187E51F4CC23B00E7F9D6 /* PoloniexApi.swift in Sources */,
 				A4E768111F67F049002B1AE1 /* APICredentialsComponentsError.swift in Sources */,
 				53F0785E1ED73B7D00E7EDF9 /* Element.swift in Sources */,
+				E653128E1FE8C4DA00F57977 /* BITTREXApiError.swift in Sources */,
 				53552A041ED7251200DD95F9 /* Debugging.swift in Sources */,
 				537504FE1F192D280062C11A /* TypeAliases.swift in Sources */,
 				2DF8983B1FCC8F7500CCDFB9 /* Countly.m in Sources */,
@@ -2618,6 +2791,7 @@
 				53552A171ED7251700DD95F9 /* Institution.swift in Sources */,
 				53552A021ED7251200DD95F9 /* Singletons.swift in Sources */,
 				534DDFD91F4CCE9400E6C37F /* URLRequest.swift in Sources */,
+				E65312511FE8C2AC00F57977 /* BITTREXDataBuilder.swift in Sources */,
 				53561EA61F82DD260043D4F9 /* InstitutionSettingsViewController.swift in Sources */,
 				537187DC1F4CC23B00E7F9D6 /* CoinbaseApi.swift in Sources */,
 				A4E4570D1F79018A002E2879 /* Reachability.swift in Sources */,
@@ -2638,6 +2812,7 @@
 				532121A61EE8B91600F4812A /* Zip.swift in Sources */,
 				2DF898571FCC8F7500CCDFB9 /* CountlyPushNotifications.m in Sources */,
 				53552A321ED72B5700DD95F9 /* FMResultSet.m in Sources */,
+				E653128C1FE8C4D200F57977 /* BITTREXApiAction.swift in Sources */,
 				53552A311ED72B5700DD95F9 /* FMDatabaseQueue.m in Sources */,
 				A4ED56E11F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift in Sources */,
 				A4E457181F7901E7002E2879 /* EthplorerApi.swift in Sources */,
@@ -2658,6 +2833,7 @@
 				A4E457201F79045A002E2879 /* Double.swift in Sources */,
 				A453A5231F866CFF0002C6C8 /* LoginViewController.swift in Sources */,
 				537187E21F4CC23B00E7F9D6 /* GDAXErrors.swift in Sources */,
+				E65312521FE8C2B000F57977 /* BITTREXApi.swift in Sources */,
 				2DF8984F1FCC8F7500CCDFB9 /* CountlyDeviceInfo.m in Sources */,
 				A493B93D1F6819600074ACCC /* BitfinexAuthHeaders.swift in Sources */,
 				53552A151ED7251200DD95F9 /* Swizzling.swift in Sources */,
@@ -2677,6 +2853,7 @@
 				2DF8984D1FCC8F7500CCDFB9 /* CountlyCrashReporter.m in Sources */,
 				53F078651ED73E6D00E7EDF9 /* ThemeGlobals.swift in Sources */,
 				537187E01F4CC23B00E7F9D6 /* GDAXAuthHeaders.swift in Sources */,
+				E65312901FE8C4E100F57977 /* BITTREXInstitution.swift in Sources */,
 				538B47BF1F4CA0200023CED5 /* Currency.swift in Sources */,
 				535529FE1ED7250500DD95F9 /* KeychainManagement.swift in Sources */,
 				A4430AA21F95F3ED00F2FFFA /* ExchangeRate.swift in Sources */,
@@ -2689,6 +2866,7 @@
 				53561EAC1F82DD260043D4F9 /* AddCredentialBasedAccountViewController.swift in Sources */,
 				53552A7A1ED7347900DD95F9 /* MockedKeychainManager.swift in Sources */,
 				535529FD1ED7250500DD95F9 /* PlaidDataMockingProtocol.swift in Sources */,
+				E65312561FE8C2C500F57977 /* NewExchangeAPI.swift in Sources */,
 				A4E457171F7901E7002E2879 /* EthplorerAccount.swift in Sources */,
 				53552A2E1ED72B5700DD95F9 /* FMDatabase.m in Sources */,
 				A4E4570A1F79010A002E2879 /* BalanceError.swift in Sources */,
@@ -2742,12 +2920,14 @@
 				53D441FB1F44D813006967E1 /* CategoryRepository.swift in Sources */,
 				53294FA71D1DDD9500F08059 /* CCNStatusItemWindowController.m in Sources */,
 				F19BF68C1D880DA100496A66 /* MockedDefaults.swift in Sources */,
+				E653124D1FE8C28D00F57977 /* BITTREXBalance.swift in Sources */,
 				537187F41F4CC37400E7F9D6 /* ExchangeApi.swift in Sources */,
 				53F47FCE1E3A78B70042AE06 /* DispatchQueue.swift in Sources */,
 				2DF898441FCC8F7500CCDFB9 /* CountlyAPMNetworkLog.m in Sources */,
 				A4430AA01F95F3ED00F2FFFA /* ExchangeRateSource.swift in Sources */,
 				2D9AA1E31FB5AED300058491 /* Analytics.swift in Sources */,
 				530422941ED39EE7001CA499 /* TransactionsTabViewModel.swift in Sources */,
+				E653124E1FE8C28D00F57977 /* BITTREXDataBuilder.swift in Sources */,
 				5325508A1D06FB100045404E /* LabelField.swift in Sources */,
 				A41EE4881FB9E9B100210038 /* QRLoginCredentialsParser.swift in Sources */,
 				5371F6FA1D8524F4002264DF /* NSImage.swift in Sources */,
@@ -2779,12 +2959,15 @@
 				5321219D1EE8B91600F4812A /* ioapi.c in Sources */,
 				530422921ED39BB7001CA499 /* AccountsTabTableCells.swift in Sources */,
 				5358F5441C7FFD9700AB7420 /* Notifications.swift in Sources */,
+				E653128D1FE8C4DA00F57977 /* BITTREXApiError.swift in Sources */,
+				E653128B1FE8C4D100F57977 /* BITTREXApiAction.swift in Sources */,
 				5391A4D71CE5048500B9FBD9 /* CategoryView.swift in Sources */,
 				537187EC1F4CC23C00E7F9D6 /* GDAXCredentials.swift in Sources */,
 				531E8D9A1C6A598500F765F7 /* Source.swift in Sources */,
 				A40ABBE61F6BC0C000383C62 /* KrakenAPIClient.swift in Sources */,
 				53F6383F1C5FFF3200864346 /* Transaction.swift in Sources */,
 				DCDF77BD1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift in Sources */,
+				E653123E1FE8C20700F57977 /* NewExchangeAPI.swift in Sources */,
 				A4430A931F94EFB300F2FFFA /* OpenTheme.swift in Sources */,
 				532550831D06F9090045404E /* View.swift in Sources */,
 				283D18351DC8F6240044BF51 /* PreferencesSecurityViewController.swift in Sources */,
@@ -2792,6 +2975,7 @@
 				532121A11EE8B91600F4812A /* zip.c in Sources */,
 				A4E457151F7901E6002E2879 /* EthplorerErrors.swift in Sources */,
 				53E8C78C1C6412A90085D64E /* Theme.swift in Sources */,
+				E653124C1FE8C28D00F57977 /* BITTREXCurrency.swift in Sources */,
 				53294FA61D1DDD9500F08059 /* CCNStatusItemWindowConfiguration.m in Sources */,
 				A493B9391F68137E0074ACCC /* APICredentialsComponents.swift in Sources */,
 				537504FA1F19237E0062C11A /* ProductId.swift in Sources */,
@@ -2805,6 +2989,7 @@
 				A4E457131F7901E6002E2879 /* EthplorerAccount.swift in Sources */,
 				53E8C7801C62F5D40085D64E /* Utils.swift in Sources */,
 				5334023A1DDFB8C4000236A0 /* NetworkStatus.swift in Sources */,
+				E65312451FE8C22E00F57977 /* BITTREXApi.swift in Sources */,
 				2D7340F41FA9FC6F00020A3F /* KrakenTransaction.swift in Sources */,
 				A4E7680C1F67E410002B1AE1 /* APICredentials.swift in Sources */,
 				534E83C61D3FB76200F76E8A /* OrderedDictionary.swift in Sources */,
@@ -2929,6 +3114,7 @@
 				530F57BD1DCD72680083F3A7 /* FMResultSet.m in Sources */,
 				531F590B1DDA4ABC0008E8BA /* DisablePasswordViewController.swift in Sources */,
 				A41D3E4B1F6C32E700FD25B5 /* KrakenAccount.swift in Sources */,
+				E653128F1FE8C4E000F57977 /* BITTREXInstitution.swift in Sources */,
 				535769A01D5A4A7600013543 /* SectionedTableView.swift in Sources */,
 				530291321C6AA18F00C31CC1 /* AccountsTabViewController.swift in Sources */,
 				537187EE1F4CC23C00E7F9D6 /* GDAXServer.swift in Sources */,
@@ -2950,6 +3136,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E65312571FE8C2EF00F57977 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E653127B1FE8C40A00F57977 /* ExchangeAPIURLSession.swift in Sources */,
+				E65312761FE8C3E400F57977 /* BITTREXDataHelper.swift in Sources */,
+				E65312921FE8C53C00F57977 /* BITTREXApiTest.swift in Sources */,
+				E65312931FE8C69800F57977 /* TestHelpers.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F1F9487B1D8049B800AB30B2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2966,6 +3163,8 @@
 				A46DBC841F69B2C3006F4247 /* BitfinexCredentialsTests.swift in Sources */,
 				53F0785B1F4F8F2E00D0054C /* BalanceOpenTests.swift in Sources */,
 				A4E4572A1F7921BC002E2879 /* PoloniexAccountTests.swift in Sources */,
+				E65312841FE8C42300F57977 /* ExchangeAPIURLSession.swift in Sources */,
+				E653127F1FE8C41F00F57977 /* BITTREXDataHelper.swift in Sources */,
 				A41742941F73E84B004A9B4F /* CoinbaseTransactionTests.swift in Sources */,
 				53F0785D1F4F8F3C00D0054C /* CurrencyTests.swift in Sources */,
 				A4E457291F7921BC002E2879 /* InstitutionTests.swift in Sources */,
@@ -2976,6 +3175,7 @@
 				A4E4572E1F792206002E2879 /* PoloniexTransactionTests.swift in Sources */,
 				53F0785F1F4F8F3C00D0054C /* SearchTest.swift in Sources */,
 				A44C76251F7BE5280024476E /* BitfinexTransactionTests.swift in Sources */,
+				E65312911FE8C53B00F57977 /* BITTREXApiTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2986,6 +3186,11 @@
 			isa = PBXTargetDependency;
 			target = DC65EF8E1CE3E2CD006C9373 /* Bal Helper */;
 			targetProxy = 539E0C1B1DC278C40038ACEC /* PBXContainerItemProxy */;
+		};
+		E65312611FE8C2EF00F57977 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 535529D71ED723C600DD95F9 /* BalanceiOS */;
+			targetProxy = E65312601FE8C2EF00F57977 /* PBXContainerItemProxy */;
 		};
 		F1F948851D8049B800AB30B2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3343,6 +3548,86 @@
 			};
 			name = Release;
 		};
+		E65312631FE8C2EF00F57977 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = BalanceUnitTestsiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = software.balanced.balanceios.BalanceUnitTestsiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Balance.app/Balance";
+			};
+			name = Debug;
+		};
+		E65312641FE8C2EF00F57977 /* UITesting */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = BalanceUnitTestsiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = software.balanced.balanceios.BalanceUnitTestsiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Balance.app/Balance";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = UITesting;
+		};
+		E65312651FE8C2EF00F57977 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = BalanceUnitTestsiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = software.balanced.balanceios.BalanceUnitTestsiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Balance.app/Balance";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		F194E33B1D79E2A0005CA998 /* UITesting */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3589,6 +3874,16 @@
 				DC65EF991CE3E2CD006C9373 /* Debug */,
 				F194E33F1D79E2A0005CA998 /* UITesting */,
 				DC65EF9A1CE3E2CD006C9373 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E65312621FE8C2EF00F57977 /* Build configuration list for PBXNativeTarget "BalanceUnitTestsiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E65312631FE8C2EF00F57977 /* Debug */,
+				E65312641FE8C2EF00F57977 /* UITesting */,
+				E65312651FE8C2EF00F57977 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
