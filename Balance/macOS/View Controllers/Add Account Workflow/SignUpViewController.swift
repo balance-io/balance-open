@@ -427,23 +427,13 @@ class SignUpViewController: NSViewController {
     fileprivate func displayConnectFields() {
         var previousTextField: SignUpTextField?
         for field in apiInstitution.fields {
-            var type: SignUpTextFieldType = .username
-            if field.type == FieldType.username {
-                type = .username
-            } else if field.type == FieldType.password {
-                type = .password
-            } else if field.type == FieldType.pin {
-                type = .pin
-            } else if field.type == FieldType.passphrase {
-                type = .passphrase
-            } else if field.type == FieldType.key {
-                type = .key
-            } else if field.type == FieldType.secret {
-                type = .secret
-            }else if field.type == FieldType.name {
-                type = .name
-            } else if field.type == FieldType.address {
-                type = .address
+            let type: SignUpTextFieldType
+            switch field.type {
+            case .passphrase: type = .passphrase
+            case .key:        type = .key
+            case .secret:     type = .secret
+            case .name:       type = .name
+            case .address:    type = .address
             }
             
             let textField = SignUpTextField(type: type)

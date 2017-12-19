@@ -32,9 +32,6 @@ struct Field {
 }
 
 enum FieldType: String {
-    case username   = "username"
-    case password   = "password"
-    case pin        = "pin"
     case key        = "key"
     case secret     = "secret"
     case passphrase = "passphrase"

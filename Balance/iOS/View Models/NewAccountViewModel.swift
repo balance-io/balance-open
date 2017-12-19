@@ -18,7 +18,7 @@ final class NewAccountViewModel {
     var isValid: Bool {
         for index in 0 ..< fields.count {
             let textField = self.textField(at: index)
-            guard let text = textField?.text, text.lengthOfBytes(using: .utf8) > 0 else {
+            guard let text = textField.text, text.lengthOfBytes(using: .utf8) > 0 else {
                 return false
             }
         }
@@ -143,14 +143,13 @@ final class NewAccountViewModel {
     
     // MARK: Table data
     
-    func textField(at index: Int) -> UITextField? {
+    func textField(at index: Int) -> UITextField {
         switch fields[index].type {
         case .key:        return apiKeyTextField
         case .passphrase: return passphraseKeyTextField
         case .secret:     return secretKeyKeyTextField
         case .name:       return nameTextField
         case .address:    return addressTextField
-        default: return nil
         }
     }
     
