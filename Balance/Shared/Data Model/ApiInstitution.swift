@@ -27,9 +27,16 @@ protocol ApiInstitution {
 
 struct Field {
     var name: String
-    var label: String
-    var type: String
+    var type: FieldType
     var value: String?
+}
+
+enum FieldType: String {
+    case key        = "key"
+    case secret     = "secret"
+    case passphrase = "passphrase"
+    case name       = "name"
+    case address    = "address"
 }
 
 extension Source {

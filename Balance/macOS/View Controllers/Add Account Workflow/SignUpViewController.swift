@@ -8,17 +8,6 @@
 
 import Cocoa
 
-private enum FieldType: String {
-    case username   = "username"
-    case password   = "password"
-    case pin        = "pin"
-    case key        = "key"
-    case secret     = "secret"
-    case passphrase = "passphrase"
-    case name       = "name"
-    case address    = "address"
-}
-
 private enum Step: String {
     case connect    = "connect"
     case question   = "question"
@@ -42,13 +31,17 @@ func ==(lhs: Device, rhs: Device) -> Bool {
 }
 
 extension SignUpTextField {
-    var field: Field {
+    var field: Field? {
+        guard let fieldType = FieldType(rawValue: type.rawValue) else {
+            return nil
+        }
+        
         let value = textField.stringValue
         switch self.type {
         case .none:
-            return Field(name: type.rawValue, label: type.rawValue, type: type.rawValue, value: nil)
+            return Field(name: type.rawValue, type: fieldType, value: nil)
         default:
-            return Field(name: type.rawValue, label: type.rawValue, type: type.rawValue, value: value)
+            return Field(name: type.rawValue, type: fieldType, value: value)
         }
     }
 }
@@ -430,66 +423,24 @@ class SignUpViewController: NSViewController {
         reportFailureField.removeFromSuperview()
     }
     
-    fileprivate func generatePlaceholder(field: Field) -> String {
-        let lowercaseLabel = field.label.lowercased()
-        if lowercaseLabel == "account number/userid" {
-            return "Account Number or User ID"
-        } else if lowercaseLabel == "account number" {
-            return "02610642"
-        } else if lowercaseLabel.contains("email") {
-            return "Email"
-        } else if lowercaseLabel.contains("password") {
-            return "Password"
-        } else if lowercaseLabel.contains("pin") {
-            return "PIN"
-        } else if lowercaseLabel.contains("user") || lowercaseLabel.contains("id") {
-            return "User ID"
-        } else {
-            if let type = FieldType(rawValue: field.type) {
-                switch type {
-                case .username: return "User ID"
-                case .password: return "Password"
-                case .pin: return "PIN"
-                case .passphrase: return "Passphrase"
-                case .key: return "Key"
-                case .secret: return "Secret"
-                case .address: return "Address"
-                case .name: return "Name"
-                }
-            } else {
-                return ""
-            }
-        }
-    }
-    
     //show the fields
     fileprivate func displayConnectFields() {
         var previousTextField: SignUpTextField?
         for field in apiInstitution.fields {
-            var type: SignUpTextFieldType = .username
-            if field.type == FieldType.username.rawValue {
-                type = .username
-            } else if field.type == FieldType.password.rawValue {
-                type = .password
-            } else if field.type == FieldType.pin.rawValue {
-                type = .pin
-            } else if field.type == FieldType.passphrase.rawValue {
-                type = .passphrase
-            } else if field.type == FieldType.key.rawValue {
-                type = .key
-            } else if field.type == FieldType.secret.rawValue {
-                type = .secret
-            }else if field.type == FieldType.name.rawValue {
-                type = .name
-            } else if field.type == FieldType.address.rawValue {
-                type = .address
+            let type: SignUpTextFieldType
+            switch field.type {
+            case .passphrase: type = .passphrase
+            case .key:        type = .key
+            case .secret:     type = .secret
+            case .name:       type = .name
+            case .address:    type = .address
             }
             
             let textField = SignUpTextField(type: type)
             textField.delegate = self
             textField.alphaValue = 0.9
             containerView.addSubview(textField)
-            textField.placeholderString = generatePlaceholder(field: field)
+            textField.placeholderString = field.name
             textField.snp.makeConstraints { make in
                 make.leading.equalToSuperview().offset(margin)
                 make.trailing.equalToSuperview().offset(-margin)
@@ -648,7 +599,9 @@ class SignUpViewController: NSViewController {
 
         var loginFields = [Field]()
         for textField in connectFields {
-            loginFields.append(textField.field)
+            if let field = textField.field {
+                loginFields.append(field)
+            }
         }
         // try login with loginFields
         loginService.authenticationChallenge(loginStrings: loginFields) { success, error, institution in

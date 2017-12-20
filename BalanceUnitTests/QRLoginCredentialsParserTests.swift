@@ -46,14 +46,14 @@ internal final class QRLoginCredentialsParserTests: XCTestCase {
         let fields = try! self.parser.parse(value: urlString, for: .kraken)
         
         let keyField = fields.first { (field) -> Bool in
-            return field.type == "key"
+            return field.type == .key
         }
         
         XCTAssertNotNil(keyField)
         XCTAssertEqual(keyField?.value, key)
         
         let secretField = fields.first { (field) -> Bool in
-            return field.type == "secret"
+            return field.type == .secret
         }
         
         XCTAssertNotNil(secretField)
@@ -69,14 +69,14 @@ internal final class QRLoginCredentialsParserTests: XCTestCase {
         let fields = try! self.parser.parse(value: urlString, for: .bitfinex)
         
         let keyField = fields.first { (field) -> Bool in
-            return field.type == "key"
+            return field.type == .key
         }
         
         XCTAssertNotNil(keyField)
         XCTAssertEqual(keyField?.value, key)
         
         let secretField = fields.first { (field) -> Bool in
-            return field.type == "secret"
+            return field.type == .secret
         }
         
         XCTAssertNotNil(secretField)
