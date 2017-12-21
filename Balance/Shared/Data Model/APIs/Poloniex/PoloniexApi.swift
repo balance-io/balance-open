@@ -171,27 +171,19 @@ class PoloniexApi: ExchangeApi {
                         throw PoloniexApi.CredentialsError.incorrectLoginCredentials
                     }
                     
-                    if let existingInstitution = existingInstitution {
-                        existingInstitution.secret = secret
-                        existingInstitution.apiKey = key
+                    // Create (or update) the institution and finish (we do not have access tokens)
+                    if let institution = existingInstitution ?? InstitutionRepository.si.institution(source: .poloniex, sourceInstitutionId: "", name: "Poloniex") {
+                        institution.secret = secret
+                        institution.apiKey = key
+                        
+                        //create accounts
+                        let poloniexAccounts = try self.parsePoloniexAccounts(data: safeData)
+                        self.processPoloniexAccounts(accounts: poloniexAccounts, institution: institution)
                         async {
-                            closeBlock(true, nil, existingInstitution)
+                            closeBlock(true, nil, institution)
                         }
                     } else {
-                        // Create the institution and finish (we do not have access tokens)
-                        if let institution = InstitutionRepository.si.institution(source: .poloniex, sourceInstitutionId: "", name: "Poloniex") {
-                            institution.secret = secret
-                            institution.apiKey = key
-                            
-                            //create accounts
-                            let poloniexAccounts = try self.parsePoloniexAccounts(data: safeData)
-                            self.processPoloniexAccounts(accounts: poloniexAccounts, institution: institution)
-                            async {
-                                closeBlock(true, nil, institution)
-                            }
-                        } else {
-                            throw "Error creating institution"
-                        }
+                        throw "Error creating institution"
                     }
                 } else {
                     log.error("Poloniex Error: \(String(describing: error))")
@@ -256,7 +248,7 @@ class PoloniexApi: ExchangeApi {
     
     fileprivate func processPoloniexAccounts(accounts: [PoloniexAccount], institution: Institution) {
         for account in accounts {
-            // Create or upload the local account object
+            // Create or update the local account object
             account.updateLocalAccount(institution: institution)
         }
         
