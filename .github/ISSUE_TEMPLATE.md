@@ -1,6 +1,6 @@
-**Is this a feature request or bug report?** (if it's a bug, please add a label and remove question, if it's a feature request, please head to https://trello.com/b/Hbg05zQO/feature-request and create or upvote an existing feature requwest)  
+**Is this a feature request or bug report?** (if it's a bug, please add a label and remove question, if it's a feature request, please head to https://trello.com/b/Hbg05zQO/feature-request and create or upvote an existing feature request)  
 
-**What is the current behaviour?**
+**What is the current behavior?**
 
 
 

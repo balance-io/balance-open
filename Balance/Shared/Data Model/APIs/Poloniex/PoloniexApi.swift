@@ -81,9 +81,9 @@ class PoloniexApi: ExchangeApi {
         var secretField : String?
         var keyField : String?
         for field in loginStrings {
-            if field.type == "key" {
+            if field.type == .key {
                 keyField = field.value
-            } else if field.type == "secret" {
+            } else if field.type == .secret {
                 secretField = field.value
             } else {
                 assert(false, "wrong fields are passed into the poloniex auth, we require secret and key fields and values")

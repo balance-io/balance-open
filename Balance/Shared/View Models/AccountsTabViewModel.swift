@@ -11,10 +11,7 @@ import Foundation
 class AccountsTabViewModel: TabViewModel {
     // MARK: Formatted values
     internal var formattedMasterCurrencyTotalBalance: String {
-        let totalBalance = self.totalBalance()
-        let masterCurrency = defaults.masterCurrency!
-        
-        return amountToString(amount: totalBalance, currency: masterCurrency, showNegative: true)
+        return amountToString(amount: totalBalance(), currency: defaults.masterCurrency, showNegative: true, showCodeAfterValue: true)
     }
     
     // MARK: Table Data

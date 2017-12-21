@@ -394,19 +394,38 @@ extension CoinbaseApi {
         // TODO: Create enum types for each error
         let task = certValidatedSession.dataTask(with: request) { maybeData, maybeResponse, maybeError in
             do {
-                // Make sure there's data
-                guard let data = maybeData else {
-                    throw BalanceError.noData
-                }
-                
+                // Check for URLSession error
                 guard maybeError == nil else {
                     log.error("Failed with network error: \(String(describing: maybeError))")
                     throw BalanceError.networkError
                 }
                 
+                // Make sure there's data
+                guard let data = maybeData else {
+                    throw BalanceError.noData
+                }
+                
                 // Try to parse the JSON
-                guard let JSONResult = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.count > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.count > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval else {
+                guard let JSONResult = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] else {
                     throw BalanceError.jsonDecoding
+                }
+                
+                // Check for response code
+                guard let code = JSONResult["code"] as? Int, let balanceError = BalanceError(rawValue: code) else {
+                    throw BalanceError.unexpectedData
+                }
+                
+                // Check for BalanceError
+                guard balanceError == .success else {
+                    if balanceError == .authenticationError {
+                        institution.passwordInvalid = true
+                    }
+                    throw balanceError
+                }
+                
+                // Check for expected fields
+                guard let accessToken = JSONResult["accessToken"] as? String, accessToken.count > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.count > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval else {
+                    throw BalanceError.unexpectedData
                 }
                 
                 // Update the model

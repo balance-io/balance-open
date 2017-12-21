@@ -199,8 +199,7 @@ class AccountsTabAccountCell: View {
         amountField.stringValue = amountToString(amount: updatedModel.displayBalance, currency: currency, showNegative: true, showCodeAfterValue: true)
         
         if let displayAltBalance = updatedModel.displayAltBalance {
-            altAmountField.stringValue = amountToString(amount: displayAltBalance, currency: defaults.masterCurrency, showNegative: true)
-            
+            altAmountField.stringValue = amountToString(amount: displayAltBalance, currency: defaults.masterCurrency, showNegative: true, showCodeAfterValue: defaults.masterCurrency.isCrypto)
             altAmountField.isHidden = false
         } else {
             altAmountField.isHidden = true

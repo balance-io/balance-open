@@ -214,9 +214,9 @@ extension KrakenAPIClient: ExchangeApi {
 
         for field in loginStrings {
             switch field.type {
-            case "key":
+            case .key:
                 keyField = field.value
-            case "secret":
+            case .secret:
                 secretField = field.value
             default:
                 assert(false, "wrong fields are passed into the Kraken auth, we require secret and key fields and values")
@@ -375,8 +375,8 @@ internal extension KrakenAPIClient
         // MARK: Initialization
         
         init() {
-            let keyField = Field(name: "Key", label: "Key", type: "key", value: nil)
-            let secretField = Field(name: "Secret", label: "Secret", type: "secret", value: nil)
+            let keyField = Field(name: "API Key", type: .key, value: nil)
+            let secretField = Field(name: "Private Key", type: .secret, value: nil)
             self.fields = [keyField, secretField]
         }
     }

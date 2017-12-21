@@ -111,7 +111,7 @@ class TabsViewController: NSViewController {
         self.view.addSubview(headerView)
         headerView.snp.makeConstraints { make in
             make.width.equalToSuperview()
-            make.height.equalTo(40)
+            make.height.equalTo(49)
             make.left.equalToSuperview()
             make.top.equalToSuperview()
         }

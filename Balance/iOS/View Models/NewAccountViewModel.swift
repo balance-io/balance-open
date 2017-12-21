@@ -9,20 +9,16 @@
 import UIKit
 
 
-internal final class NewAccountViewModel
-{
+final class NewAccountViewModel {
     // Internal
-    internal var numberOfTextFields: Int {
-        return self.fieldTypes.count
+    var numberOfTextFields: Int {
+        return self.fields.count
     }
     
-    internal var isValid: Bool {
-        for index in 0..<self.fieldTypes.count
-        {
+    var isValid: Bool {
+        for index in 0 ..< fields.count {
             let textField = self.textField(at: index)
-            guard let text = textField.text,
-                  text.lengthOfBytes(using: .utf8) > 0 else
-            {
+            guard let text = textField.text, text.lengthOfBytes(using: .utf8) > 0 else {
                 return false
             }
         }
@@ -30,9 +26,8 @@ internal final class NewAccountViewModel
         return true
     }
     
-    internal var loginWithQRCodeSupported: Bool {
-        switch self.source
-        {
+    var loginWithQRCodeSupported: Bool {
+        switch self.source {
         case .bitfinex, .kraken:
             return true
         default:
@@ -42,7 +37,7 @@ internal final class NewAccountViewModel
     
     // Private
     private let source: Source
-    private let fieldTypes: [FieldType]
+    private let fields: [Field]
     
     private let gdaxAPIClient = GDAXAPIClient(server: .production)
     private let poloniexAPIClient = PoloniexApi()
@@ -104,40 +99,22 @@ internal final class NewAccountViewModel
     internal init(source: Source)
     {
         self.source = source
-        
-        switch source
-        {
-        case .gdax:
-            self.fieldTypes = [.key, .secretKey, .passphrase]
-        case .poloniex:
-            self.fieldTypes = [.key, .secretKey]
-        case .kraken:
-            self.fieldTypes = [.key, .secretKey]
-        case .bitfinex:
-            self.fieldTypes = [.key, .secretKey]
-        case .ethplorer:
-            self.fieldTypes = [.name, .address]
-        default:
-            self.fieldTypes = []
-        }
+        self.fields = source.apiInstitution.fields
     }
     
     // MARK: Authenticate
     
     internal func authenticate(_ completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void) {
-        if !self.isValid
-        {
+        guard isValid else {
             completionHandler(false, nil)
             return
         }
         
-        let loginFields = self.buildLoginFields()
-        self.authenticate(with: loginFields, completionHandler: completionHandler)
+        self.authenticate(with: fields, completionHandler: completionHandler)
     }
     
     internal func authenticate(with fields: [Field], completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void) {
-        switch self.source
-        {
+        switch self.source {
         case .gdax:
             self.gdaxAPIClient.authenticationChallenge(loginStrings: fields, closeBlock: { (success, error, _) in
                 completionHandler(success, error)
@@ -163,89 +140,21 @@ internal final class NewAccountViewModel
         }
     }
     
-    private func buildLoginFields() -> [Field]
-    {
-        var fields = [Field]()
-        for type in self.fieldTypes
-        {
-            let field: Field
-            switch type
-            {
-            case .key:
-                field = Field(name: "Key", label: "Key", type: "key", value: self.apiKeyTextField.text)
-            case .secretKey:
-                field = Field(name: "Secret", label: "Secret", type: "secret", value: self.secretKeyKeyTextField.text)
-            case .passphrase:
-                field = Field(name: "Passphrase", label: "Passphrase", type: "passphrase", value: self.passphraseKeyTextField.text)
-            case .name:
-                field = Field(name: "Name", label: "Name", type: "name", value: self.nameTextField.text)
-            case .address:
-                field = Field(name: "Address", label: "Address", type: "address", value: self.addressTextField.text)
-            }
-            
-            fields.append(field)
-        }
-        
-        return fields
-    }
     
     // MARK: Table data
     
-    internal func textField(at index: Int) -> UITextField
-    {
-        let type = self.fieldTypes[index]
-        
-        switch type
-        {
-        case .key:
-            return self.apiKeyTextField
-        case .passphrase:
-            return self.passphraseKeyTextField
-        case .secretKey:
-            return self.secretKeyKeyTextField
-        case .name:
-            return self.nameTextField
-        case .address:
-            return self.addressTextField
+    func textField(at index: Int) -> UITextField {
+        switch fields[index].type {
+        case .key:        return apiKeyTextField
+        case .passphrase: return passphraseKeyTextField
+        case .secret:     return secretKeyKeyTextField
+        case .name:       return nameTextField
+        case .address:    return addressTextField
         }
     }
     
-    internal func title(at index: Int) -> String
-    {
-        let type = self.fieldTypes[index]
-        return type.title()
-    }
-}
-
-// MARK: FieldType
-
-internal extension NewAccountViewModel
-{
-    internal enum FieldType
-    {
-        case key
-        case secretKey
-        case passphrase
-        case name
-        case address
-        
-        // MARK: Description
-        
-        internal func title() -> String
-        {
-            switch self
-            {
-            case .key:
-                return "Key"
-            case .secretKey:
-                return "Secret"
-            case .passphrase:
-                return "Passphrase"
-            case .name:
-                return "Name"
-            case .address:
-                return "Address"
-            }
-        }
+    func title(at index: Int) -> String {
+        let field = fields[index]
+        return field.name
     }
 }
