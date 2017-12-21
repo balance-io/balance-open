@@ -27,11 +27,16 @@ fileprivate var lastState: String? = nil
 
 struct CoinbaseApi: ExchangeApi {
     
+    // Temporarily store the institution when patching. I would have just used the path in the URL but OAuth doesn't allow that. Hence this hack...
+    static var existingInstitution: Institution? = nil
+    
     func authenticationChallenge(loginStrings: [Field], existingInstitution: Institution? = nil, closeBlock: @escaping (_ success: Bool, _ error: Error?, _ institution: Institution?) -> Void) {
         
     }
 
-    @discardableResult static func authenticate() -> Bool {
+    @discardableResult static func authenticate(existingInstitution: Institution? = nil) -> Bool {
+        self.existingInstitution = existingInstitution
+        
         let redirectUri = "balancemymoney%3A%2F%2Fcoinbase"
         let responseType = "code"
         let scope = "wallet%3Auser%3Aread,wallet%3Aaccounts%3Aread,wallet%3Atransactions%3Aread"
@@ -92,8 +97,9 @@ struct CoinbaseApi: ExchangeApi {
                     throw BalanceError.jsonDecoding
                 }
                 
-                // Create the institution and finish
-                let institution = InstitutionRepository.si.institution(source: .coinbase, sourceInstitutionId: "", name: "Coinbase")
+                // Create the institution (or use the existing one) and finish
+                let institution = existingInstitution ?? InstitutionRepository.si.institution(source: .coinbase, sourceInstitutionId: "", name: "Coinbase")
+                existingInstitution = nil
                 institution?.accessToken = accessToken
                 institution?.refreshToken = refreshToken
                 institution?.tokenExpireDate = Date().addingTimeInterval(expiresIn - 10.0)

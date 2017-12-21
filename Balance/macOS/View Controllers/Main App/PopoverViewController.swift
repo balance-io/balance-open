@@ -128,20 +128,24 @@ class PopoverViewController: NSViewController {
     }
     
     func showPatchAccount(institution: Institution, animated: Bool) {
-        let oldController = appLock.locked ? lockController : currentController
-        if currentControllerType != .patchAccount, let oldController = oldController {
-            if patchController == nil {
-                patchController = SignUpViewController(apiInstitution: institution.source.apiInstitution, patch: true, institution: institution, loginService: institution.source.exchangeApi) { _, _ in
-                    self.showTabs(animated: true)
-                    self.patchController = nil
+        if institution.source == .coinbase {
+            CoinbaseApi.authenticate(existingInstitution: institution)
+        } else {
+            let oldController = appLock.locked ? lockController : currentController
+            if currentControllerType != .patchAccount, let oldController = oldController {
+                if patchController == nil {
+                    patchController = SignUpViewController(apiInstitution: institution.source.apiInstitution, patch: true, institution: institution, loginService: institution.source.exchangeApi) { _, _ in
+                        self.showTabs(animated: true)
+                        self.patchController = nil
+                    }
                 }
-            }
-            
-            if let patchController = patchController {
-                currentControllerType = .patchAccount
-                currentController = patchController
-                let animation: ViewAnimation = animated ? .slideInFromRight : .none
-                self.view.replaceSubview(oldController.view, with: currentController!.view, animation: animation)
+                
+                if let patchController = patchController {
+                    currentControllerType = .patchAccount
+                    currentController = patchController
+                    let animation: ViewAnimation = animated ? .slideInFromRight : .none
+                    self.view.replaceSubview(oldController.view, with: currentController!.view, animation: animation)
+                }
             }
         }
     }
