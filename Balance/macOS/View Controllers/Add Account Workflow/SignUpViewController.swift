@@ -247,7 +247,7 @@ class SignUpViewController: NSViewController {
             make.height.equalTo(30)
         }
         
-        titleField.stringValue = "Connect your account"
+        titleField.stringValue = patch ? "Reconnect your account" : "Connect your account"
         titleField.font = CurrentTheme.addAccounts.welcomeFont
         titleField.textColor = CurrentTheme.addAccounts.textColor
         titleField.alignment = .center
@@ -604,7 +604,7 @@ class SignUpViewController: NSViewController {
             }
         }
         // try login with loginFields
-        loginService.authenticationChallenge(loginStrings: loginFields) { success, error, institution in
+        loginService.authenticationChallenge(loginStrings: loginFields, existingInstitution: institution) { success, error, institution in
             if success, let institution = institution {
                 self.completeConnect(institution: institution)
             } else {
@@ -663,10 +663,9 @@ class SignUpViewController: NSViewController {
         connectionFailures = 0
         
         // Success, so close the window
-        if !patch {
-            let userInfo = Notifications.userInfoForInstitution(institution)
-            NotificationCenter.postOnMainThread(name: Notifications.InstitutionAdded, object: nil, userInfo: userInfo)
-        }
+        let userInfo = Notifications.userInfoForInstitution(institution)
+        let notificationName = patch ? Notifications.InstitutionPatched : Notifications.InstitutionAdded
+        NotificationCenter.postOnMainThread(name: notificationName, object: nil, userInfo: userInfo)
         
         self.finished()
     }

@@ -27,11 +27,16 @@ fileprivate var lastState: String? = nil
 
 struct CoinbaseApi: ExchangeApi {
     
-    func authenticationChallenge(loginStrings: [Field], closeBlock: @escaping (_ success: Bool, _ error: Error?, _ institution: Institution?) -> Void) {
+    // Temporarily store the institution when patching. I would have just used the path in the URL but OAuth doesn't allow that. Hence this hack...
+    static var existingInstitution: Institution? = nil
+    
+    func authenticationChallenge(loginStrings: [Field], existingInstitution: Institution? = nil, closeBlock: @escaping (_ success: Bool, _ error: Error?, _ institution: Institution?) -> Void) {
         
     }
 
-    @discardableResult static func authenticate() -> Bool {
+    @discardableResult static func authenticate(existingInstitution: Institution? = nil) -> Bool {
+        self.existingInstitution = existingInstitution
+        
         let redirectUri = "balancemymoney%3A%2F%2Fcoinbase"
         let responseType = "code"
         let scope = "wallet%3Auser%3Aread,wallet%3Aaccounts%3Aread,wallet%3Atransactions%3Aread"
@@ -63,6 +68,7 @@ struct CoinbaseApi: ExchangeApi {
             return
         }
         
+        let patch = (existingInstitution != nil)
         lastState = nil
         let urlString = "\(subServerUrl)coinbase/requestToken"
         let url = URL(string: urlString)!
@@ -92,18 +98,28 @@ struct CoinbaseApi: ExchangeApi {
                     throw BalanceError.jsonDecoding
                 }
                 
-                // Create the institution and finish
-                let institution = InstitutionRepository.si.institution(source: .coinbase, sourceInstitutionId: "", name: "Coinbase")
+                // Create the institution (or use the existing one) and finish
+                let institution = existingInstitution ?? InstitutionRepository.si.institution(source: .coinbase, sourceInstitutionId: "", name: "Coinbase")
+                existingInstitution = nil
                 institution?.accessToken = accessToken
                 institution?.refreshToken = refreshToken
                 institution?.tokenExpireDate = Date().addingTimeInterval(expiresIn - 10.0)
                 institution?.apiScope = scope
+                if patch {
+                    institution?.passwordInvalid = false
+                    institution?.replace()
+                }
                 
                 // Sync accounts
                 if let institution = institution {
                     updateAccounts(institution: institution) { success, error in
                         if !success {
                             log.error("Error updating accounts: \(String(describing: error))")
+                        }
+                        
+                        if patch {
+                            let userInfo = Notifications.userInfoForInstitution(institution)
+                            NotificationCenter.postOnMainThread(name: Notifications.InstitutionPatched, object: nil, userInfo: userInfo)
                         }
                         
                         async {
@@ -184,6 +200,7 @@ struct CoinbaseApi: ExchangeApi {
             } catch {
                 if isInvalidCoinbaseCredentials(error: error) {
                     institution.passwordInvalid = true
+                    institution.replace()
                 }
                 async {
                     completion(false, error)
@@ -246,6 +263,7 @@ struct CoinbaseApi: ExchangeApi {
             } catch {
                 if isInvalidCoinbaseCredentials(error: error) {
                     institution.passwordInvalid = true
+                    institution.replace()
                 }
                 async {
                     completionHandler(nil, error)
@@ -413,6 +431,7 @@ extension CoinbaseApi {
                 guard balanceError == .success else {
                     if balanceError == .authenticationError {
                         institution.passwordInvalid = true
+                        institution.replace()
                     }
                     throw balanceError
                 }

@@ -160,14 +160,13 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
                 subview.removeFromSuperview()
             }
             
-            let isLight = (CurrentTheme.type == .light)
             let backgroundInset = 20
             let rowInset = 12
             let headerRowHeight = 39
             let rowHeight = 44
             
             fixPasswordPromptView.isClickingEnabled = false
-            fixPasswordPromptView.drawingBlock = isLight ? AccountConnectionErrors.drawConnectionErrorsLight : AccountConnectionErrors.drawConnectionErrorsDark
+            fixPasswordPromptView.drawingBlock = AccountConnectionErrors.drawConnectionErrorsLight
             self.view.addSubview(fixPasswordPromptView)
             fixPasswordPromptView.snp.makeConstraints { make in
                 let height = (backgroundInset * 2) + headerRowHeight + (rowHeight * count) - 1
@@ -196,7 +195,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
             }
             
             let headerIcon = ImageView()
-            headerIcon.image = isLight ? #imageLiteral(resourceName: "errorAlertLight") : #imageLiteral(resourceName: "errorAlertDark")
+            headerIcon.image = #imageLiteral(resourceName: "errorAlertLight")
             headerRow.addSubview(headerIcon)
             headerIcon.snp.makeConstraints { make in
                 make.width.equalTo(headerIcon.image?.size.width ?? 0)
@@ -230,19 +229,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
                     make.trailing.equalTo(containerView).offset(-rowInset)
                 }
                 
-                let colorBox = View()
-                colorBox.cornerRadius = 3.0
-                colorBox.layerBackgroundColor = institution.displayColor
-                rowView.addSubview(colorBox)
-                colorBox.snp.makeConstraints { make in
-                    make.width.equalTo(10)
-                    make.height.equalTo(10)
-                    make.leading.equalTo(rowView).offset(1)
-                    make.centerY.equalTo(rowView)
-                }
-                
                 let reconnectButton = PaintCodeButton()
-                reconnectButton.textDrawingFunction = isLight ? AccountConnectionErrors.drawReconnectButtonLight : AccountConnectionErrors.drawReconnectButtonDark
+                reconnectButton.textDrawingFunction = AccountConnectionErrors.drawReconnectButtonLight
                 reconnectButton.buttonText = "Reconnect"
                 reconnectButton.buttonTextColor = CurrentTheme.accounts.fixPasswordPrompt.buttonTextColor
                 reconnectButton.object = institution
@@ -264,7 +252,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
                 rowView.addSubview(nameLabel)
                 nameLabel.snp.makeConstraints { make in
                     make.height.equalTo(rowView)
-                    make.leading.equalTo(colorBox.snp.trailing).offset(8)
+                    make.leading.equalTo(rowView).offset(1)
                     make.trailing.equalTo(reconnectButton.snp.leading).offset(-5)
                     make.centerY.equalTo(rowView).offset(-1)
                 }
@@ -349,6 +337,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     func registerForNotifications() {
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(institutionAdded(_:)), name: Notifications.InstitutionAdded)
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(institutionRemoved(_:)), name: Notifications.InstitutionRemoved)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(institutionPatched(_:)), name: Notifications.InstitutionPatched)
         
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(accountRemoved(_:)), name: Notifications.AccountRemoved)
         
@@ -359,7 +348,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(accountUnhidden(_:)), name: Notifications.AccountUnhidden)
         
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(syncCompleted(_:)), name: Notifications.SyncCompleted)
-        NotificationCenter.addObserverOnMainThread(self, selector: #selector(accountPatched(_:)), name: Notifications.AccountPatched)
         
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(masterCurrencyChanged(_:)), name: Notifications.MasterCurrencyChanged)
     }
@@ -367,7 +355,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     func unregisterForNotifications() {
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.InstitutionAdded)
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.InstitutionRemoved)
-    
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.InstitutionPatched)
+        
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.AccountRemoved)
         
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.AccountExcludedFromTotal)
@@ -377,7 +366,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.AccountUnhidden)
 
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.SyncCompleted)
-        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.AccountPatched)
         
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.MasterCurrencyChanged)
     }
@@ -467,6 +455,10 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         }
     }
     
+    @objc fileprivate func institutionPatched(_ notification: Notification) {
+        reloadData()
+    }
+    
     // Have to do all this because tableView.updateRows equality checks don't work for Swift objects, so we need to make sure
     // that the references are equal or the animation is broken
     @objc fileprivate func accountRemoved(_ notification: Notification) {
@@ -514,10 +506,6 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     }
     
     @objc fileprivate func syncCompleted(_ notification: Notification) {
-        reloadData()
-    }
-    
-    @objc fileprivate func accountPatched(_ notification: Notification) {
         reloadData()
     }
     

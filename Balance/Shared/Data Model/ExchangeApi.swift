@@ -11,7 +11,7 @@ import Foundation
 protocol ExchangeApi {
     //    func authenticate(secret: String, key: String)
     //    func authenticate(secret: String, key: String, passphrase: String)
-    func authenticationChallenge(loginStrings: [Field], closeBlock: @escaping (_ success: Bool, _ error: Error?, _ institution: Institution?) -> Void)
+    func authenticationChallenge(loginStrings: [Field], existingInstitution: Institution?, closeBlock: @escaping (_ success: Bool, _ error: Error?, _ institution: Institution?) -> Void)
 }
 
 extension Source {
