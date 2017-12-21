@@ -51,7 +51,7 @@ extension Source {
         case .poloniex:         return .poloniex
         case .bitfinex:         return .bitfinex
         case .kraken:           return .kraken
-        case .ethplorer:        return .hitbtc
+        case .ethplorer:        return .average
         }
     }
 }
