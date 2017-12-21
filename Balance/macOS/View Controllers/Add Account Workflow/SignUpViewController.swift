@@ -663,10 +663,9 @@ class SignUpViewController: NSViewController {
         connectionFailures = 0
         
         // Success, so close the window
-        if !patch {
-            let userInfo = Notifications.userInfoForInstitution(institution)
-            NotificationCenter.postOnMainThread(name: Notifications.InstitutionAdded, object: nil, userInfo: userInfo)
-        }
+        let userInfo = Notifications.userInfoForInstitution(institution)
+        let notificationName = patch ? Notifications.InstitutionPatched : Notifications.InstitutionAdded
+        NotificationCenter.postOnMainThread(name: notificationName, object: nil, userInfo: userInfo)
         
         self.finished()
     }
