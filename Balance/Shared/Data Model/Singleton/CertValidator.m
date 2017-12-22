@@ -32,16 +32,10 @@ const NSString *geoTrustGlobalCA                        = @"7HIpactkIAq2Y49orFOO
 const NSString *COMODOECCCertificationAuthority         = @"58qRu/uxh4gFezqAcERupSkRYBlBAvfcw7mEjGPLnNU="; // COMODO ECC Certification Authority (note this uses kTSKAlgorithmEcDsaSecp384r1)
 const NSString *COMODOECCDomainValidationSecureServerCA = @"EohwrK1N7rr3bRQphPj4j2cel+B2d0NNbM9PWHNDXpM="; // COMODO ECC Domain Validation Secure Server CA 2 (note this uses kTSKAlgorithmEcDsaSecp256r1)
 
-@interface CertValidator() {
-    TSKPinningValidator *_pinningValidator;
-}
-@end
-
 @implementation CertValidator
     
 - (instancetype)init {
     if (self = [super init]) {
-        _pinningValidator = [[TSKPinningValidator alloc] init];
         NSDictionary *trustKitConfig =
         @{kTSKSwizzleNetworkDelegates: @NO,
           kTSKPinnedDomains : @{
@@ -133,7 +127,7 @@ const NSString *COMODOECCDomainValidationSecureServerCA = @"EohwrK1N7rr3bRQphPj4
 }
     
 - (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler {
-    [_pinningValidator handleChallenge:challenge completionHandler:completionHandler];
+    [[[TrustKit sharedInstance] pinningValidator] handleChallenge:challenge completionHandler:completionHandler];
 }
     
 @end
