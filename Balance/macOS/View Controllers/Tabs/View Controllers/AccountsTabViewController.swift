@@ -518,6 +518,11 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     //
     
     func reloadData() {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(reloadDataDelayed), object: nil)
+        self.perform(#selector(reloadDataDelayed), with: nil, afterDelay: 0.5)
+    }
+    
+    @objc func reloadDataDelayed() {
         // Load the sort order
         viewModel.reloadData()
         updateTotalBalance()
