@@ -75,8 +75,8 @@ extension NSView {
                 if let constraints = constraints {
                     constraints(make)
                 } else {
-                    make.leading.equalTo(self)
-                    make.trailing.equalTo(self)
+                    make.left.equalTo(self)
+                    make.right.equalTo(self)
                     make.top.equalTo(self)
                     make.bottom.equalTo(self)
                 }

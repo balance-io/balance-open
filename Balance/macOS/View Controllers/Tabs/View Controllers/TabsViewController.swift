@@ -91,8 +91,8 @@ class TabsViewController: NSViewController {
         tabContainerView.layerBackgroundColor = NSColor.clear
         self.view.addSubview(tabContainerView)
         tabContainerView.snp.makeConstraints { make in
-            make.leading.equalTo(self.view)
-            make.trailing.equalTo(self.view)
+            make.left.equalTo(self.view)
+            make.right.equalTo(self.view)
             make.top.equalTo(headerView.snp.bottom)
             make.bottom.equalToSuperview()
         }
@@ -280,8 +280,8 @@ class TabsViewController: NSViewController {
         
         // Constraints
         let constraints: (ConstraintMaker) -> Void = { make in
-            make.leading.equalTo(self.tabContainerView)
-            make.trailing.equalTo(self.tabContainerView)
+            make.left.equalTo(self.tabContainerView)
+            make.right.equalTo(self.tabContainerView)
             make.top.equalTo(self.tabContainerView)
             make.bottom.equalTo(self.tabContainerView)
         }

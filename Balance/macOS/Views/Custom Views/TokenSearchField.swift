@@ -65,7 +65,7 @@ class TokenSearchField: View, TextFieldDelegate {
             make.width.equalTo(self)
             make.height.equalTo(self)
             make.top.equalTo(self)
-            make.leading.equalTo(self)
+            make.left.equalTo(self)
         }
         
         let secondShadow = NSShadow()
@@ -78,7 +78,7 @@ class TokenSearchField: View, TextFieldDelegate {
         searchIcon.image = searchIconImage
         self.addSubview(searchIcon)
         searchIcon.snp.makeConstraints { make in
-            //make.leading.equalTo(offset)
+            //make.left.equalTo(offset)
             //make.centerX.equalTo(self).offset(-50).labeled("centerX")
             make.centerY.equalTo(self)
             make.width.equalTo(searchIconImage.size.width)
@@ -104,7 +104,7 @@ class TokenSearchField: View, TextFieldDelegate {
         closeButton.alphaValue = 0.0
         self.addSubview(closeButton)
         closeButton.snp.makeConstraints { make in
-            make.trailing.equalTo(self).offset(-offset)
+            make.right.equalTo(self).offset(-offset)
             make.centerY.equalTo(self)
             make.width.equalTo(closeButtonImage.size.width)
             make.height.equalTo(closeButtonImage.size.height)
@@ -123,8 +123,8 @@ class TokenSearchField: View, TextFieldDelegate {
         textField.focusRingType = .none
         self.addSubview(textField)
         textField.snp.makeConstraints { make in
-            make.leading.equalTo(searchIcon.snp.trailing).offset(offset)
-            make.trailing.equalTo(closeButton.snp.leading).offset(-offset)
+            make.left.equalTo(searchIcon.snp.right).offset(offset)
+            make.right.equalTo(closeButton.snp.left).offset(-offset)
             make.height.equalTo(19)
             make.top.equalTo(self).offset(5)
         }

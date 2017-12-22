@@ -137,8 +137,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         self.view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(self.view)
-            make.leading.equalTo(self.view)
-            make.trailing.equalTo(self.view)
+            make.left.equalTo(self.view)
+            make.right.equalTo(self.view)
             make.bottom.equalTo(self.view)
         }
         
@@ -179,8 +179,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
             let containerView = View()
             fixPasswordPromptView.addSubview(containerView)
             containerView.snp.makeConstraints { make in
-                make.leading.equalTo(fixPasswordPromptView).offset(backgroundInset)
-                make.trailing.equalTo(fixPasswordPromptView).offset(-backgroundInset)
+                make.left.equalTo(fixPasswordPromptView).offset(backgroundInset)
+                make.right.equalTo(fixPasswordPromptView).offset(-backgroundInset)
                 make.top.equalTo(fixPasswordPromptView).offset(backgroundInset)
                 make.bottom.equalTo(fixPasswordPromptView).offset(-backgroundInset)
             }
@@ -190,8 +190,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
             headerRow.snp.makeConstraints { make in
                 make.height.equalTo(headerRowHeight)
                 make.top.equalTo(containerView)
-                make.leading.equalTo(containerView).offset(rowInset)
-                make.trailing.equalTo(containerView).offset(-rowInset)
+                make.left.equalTo(containerView).offset(rowInset)
+                make.right.equalTo(containerView).offset(-rowInset)
             }
             
             let headerIcon = ImageView()
@@ -200,7 +200,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
             headerIcon.snp.makeConstraints { make in
                 make.width.equalTo(headerIcon.image?.size.width ?? 0)
                 make.height.equalTo(headerIcon.image?.size.width ?? 0)
-                make.leading.equalTo(headerRow)
+                make.left.equalTo(headerRow)
                 make.centerY.equalTo(headerRow)
             }
             
@@ -212,8 +212,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
             headerRow.addSubview(headerLabel)
             headerLabel.snp.makeConstraints { make in
                 make.height.equalTo(headerRow)
-                make.leading.equalTo(headerIcon.snp.trailing).offset(7)
-                make.trailing.equalTo(headerRow)
+                make.left.equalTo(headerIcon.snp.right).offset(7)
+                make.right.equalTo(headerRow)
                 make.top.equalTo(headerRow).offset(-1)
             }
             
@@ -225,8 +225,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
                     make.height.equalTo(rowHeight)
                     let top = headerRowHeight + (rowHeight * row)
                     make.top.equalTo(top)
-                    make.leading.equalTo(containerView).offset(rowInset)
-                    make.trailing.equalTo(containerView).offset(-rowInset)
+                    make.left.equalTo(containerView).offset(rowInset)
+                    make.right.equalTo(containerView).offset(-rowInset)
                 }
                 
                 let reconnectButton = PaintCodeButton()
@@ -240,7 +240,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
                 reconnectButton.snp.makeConstraints { make in
                     make.width.equalTo(82)
                     make.height.equalTo(27)
-                    make.trailing.equalTo(rowView).offset(1)
+                    make.right.equalTo(rowView).offset(1)
                     make.centerY.equalTo(rowView)
                 }
                 
@@ -252,8 +252,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
                 rowView.addSubview(nameLabel)
                 nameLabel.snp.makeConstraints { make in
                     make.height.equalTo(rowView)
-                    make.leading.equalTo(rowView).offset(1)
-                    make.trailing.equalTo(reconnectButton.snp.leading).offset(-5)
+                    make.left.equalTo(rowView).offset(1)
+                    make.right.equalTo(reconnectButton.snp.left).offset(-5)
                     make.centerY.equalTo(rowView).offset(-1)
                 }
                 
@@ -263,8 +263,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
                     containerView.addSubview(separator)
                     separator.snp.makeConstraints { make in
                         make.height.equalTo(1)
-                        make.leading.equalTo(containerView)
-                        make.trailing.equalTo(containerView)
+                        make.left.equalTo(containerView)
+                        make.right.equalTo(containerView)
                         make.top.equalTo(rowView)
                     }
                 }
@@ -298,8 +298,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         self.view.addSubview(totalFooterView)
         totalFooterView.snp.makeConstraints { make in
             make.height.equalTo(57)
-            make.leading.equalTo(self.view)
-            make.trailing.equalTo(self.view)
+            make.left.equalTo(self.view)
+            make.right.equalTo(self.view)
             make.bottom.equalTo(self.view)
         }
 
@@ -311,7 +311,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         balanceField.usesSingleLineMode = true
         totalFooterView.addSubview(balanceField)
         balanceField.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
+            make.left.equalToSuperview().offset(16)
             make.top.equalToSuperview().offset(-1)
             make.height.equalToSuperview()
         }
@@ -324,7 +324,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         totalField.setAccessibilityLabel("Total Balance")
         totalFooterView.addSubview(totalField)
         totalField.snp.makeConstraints { make in
-            make.trailing.equalTo(totalFooterView).offset(-16)
+            make.right.equalTo(totalFooterView).offset(-16)
             make.top.equalTo(totalFooterView).offset(2)
             make.height.equalToSuperview()
         }
