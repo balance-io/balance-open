@@ -125,8 +125,8 @@ class AccountsTabAccountCell: View {
         self.addSubview(topContainer)
         topContainer.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
             make.height.equalTo(CurrentTheme.accounts.cell.height)
         }
         
@@ -140,8 +140,8 @@ class AccountsTabAccountCell: View {
         nameField.cell?.lineBreakMode = .byTruncatingTail
         topContainer.addSubview(nameField)
         nameField.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(padding)
-            make.trailing.equalToSuperview().offset(-padding)
+            make.left.equalToSuperview().offset(padding)
+            make.right.equalToSuperview().offset(-padding)
             make.top.equalToSuperview().offset(11)
         }
         
@@ -154,7 +154,7 @@ class AccountsTabAccountCell: View {
         amountField.alignment = .left
         topContainer.addSubview(amountField)
         amountField.snp.makeConstraints { make in
-            make.leading.equalTo(nameField)
+            make.left.equalTo(nameField)
             make.top.equalToSuperview().offset(31)
         }
         
@@ -165,7 +165,7 @@ class AccountsTabAccountCell: View {
         altAmountField.usesSingleLineMode = true
         topContainer.addSubview(altAmountField)
         altAmountField.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-padding)
+            make.right.equalToSuperview().offset(-padding)
             make.top.equalToSuperview().offset(31)
         }
         
@@ -244,8 +244,8 @@ class AccountsTabAccountCell: View {
         self.addSubview(bottomContainer)
         bottomContainer.snp.makeConstraints { make in
             make.top.equalTo(topContainer.snp.bottom)
-            make.leading.equalTo(nameField)
-            make.trailing.equalTo(amountField)
+            make.left.equalTo(nameField)
+            make.right.equalTo(amountField)
             make.height.equalTo(50)
         }
         
@@ -264,7 +264,7 @@ class AccountsTabAccountCell: View {
         bottomContainer.addSubview(searchTransactionsButton)
         searchTransactionsButton.snp.makeConstraints { make in
             make.height.equalTo(25)
-            make.leading.equalTo(bottomContainer)
+            make.left.equalTo(bottomContainer)
             make.top.equalTo(bottomContainer.snp.top)
             
         }
@@ -293,7 +293,7 @@ class AccountsTabAccountCell: View {
         bottomContainer.addSubview(includeInTotalButton)
         includeInTotalButton.snp.makeConstraints { make in
             make.height.equalTo(25)
-            make.leading.equalTo(searchTransactionsButton.snp.trailing).offset(10)
+            make.left.equalTo(searchTransactionsButton.snp.right).offset(10)
             make.top.equalTo(bottomContainer.snp.top)
         }
         
@@ -307,8 +307,8 @@ class AccountsTabAccountCell: View {
         transactionDetailsField.cell?.lineBreakMode = .byTruncatingTail
         bottomContainer.addSubview(transactionDetailsField)
         transactionDetailsField.snp.makeConstraints { make in
-            make.leading.equalTo(bottomContainer).offset(2)
-            make.trailing.equalTo(bottomContainer)
+            make.left.equalTo(bottomContainer).offset(2)
+            make.right.equalTo(bottomContainer)
             make.height.equalTo(15)
             make.top.equalTo(includeInTotalButton.snp.bottom).offset(-5)
         }

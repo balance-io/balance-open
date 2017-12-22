@@ -11,6 +11,52 @@ import Foundation
 fileprivate let padding = 18
 fileprivate let linePadding = padding - 2
 
+class PriceTickerSectionCell: View {
+    var model: ExchangeRate?
+    
+    let nameField = LabelField()
+    let lineView = View()
+    
+    init() {
+        super.init(frame: NSZeroRect)
+        self.layerBackgroundColor = CurrentTheme.defaults.cell.backgroundColor
+        
+        nameField.alphaValue = 0.95
+        nameField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
+        nameField.font = CurrentTheme.priceTicker.headerCell.nameFont
+        nameField.textColor = CurrentTheme.priceTicker.headerCell.nameColor
+        nameField.usesSingleLineMode = true
+        nameField.alignment = .left
+        nameField.verticalAlignment = .center
+        self.addSubview(nameField)
+        nameField.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(padding)
+            make.right.equalToSuperview().offset(-padding)
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        lineView.layerBackgroundColor = NSColor(hexString: "#B0B5BC")
+        lineView.alphaValue = 0.08
+        self.addSubview(lineView)
+        lineView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(linePadding)
+            make.bottom.equalToSuperview().offset(-1)
+            make.height.equalTo(1)
+            make.right.equalToSuperview()
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("unsupported")
+    }
+    
+    func updateModel(name: String) {
+        nameField.stringValue = name
+        nameField.setAccessibilityLabel(name)
+    }
+}
+
 class PriceTickerRateCell: View {
     var model: ExchangeRate?
     
@@ -27,8 +73,8 @@ class PriceTickerRateCell: View {
         self.addSubview(topContainer)
         topContainer.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
             make.height.equalTo(CurrentTheme.priceTicker.cell.height)
         }
         
@@ -42,8 +88,8 @@ class PriceTickerRateCell: View {
         codeField.cell?.lineBreakMode = .byTruncatingTail
         topContainer.addSubview(codeField)
         codeField.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(padding)
-            make.trailing.equalToSuperview().offset(-padding)
+            make.left.equalToSuperview().offset(padding)
+            make.right.equalToSuperview().offset(-padding)
             make.top.equalToSuperview().offset(11)
         }
         
@@ -56,7 +102,7 @@ class PriceTickerRateCell: View {
         nameField.alignment = .left
         topContainer.addSubview(nameField)
         nameField.snp.makeConstraints { make in
-            make.leading.equalTo(codeField)
+            make.left.equalTo(codeField)
             make.top.equalToSuperview().offset(31)
         }
         
@@ -67,7 +113,7 @@ class PriceTickerRateCell: View {
         rateField.usesSingleLineMode = true
         topContainer.addSubview(rateField)
         rateField.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-padding)
+            make.right.equalToSuperview().offset(-padding)
             make.top.equalToSuperview().offset(31)
         }
         

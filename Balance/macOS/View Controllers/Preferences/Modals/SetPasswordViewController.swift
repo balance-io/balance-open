@@ -47,7 +47,7 @@ class SetPasswordViewController: NSViewController {
         passwordField.snp.makeConstraints{ make in
             make.width.equalTo(260)
             make.top.equalTo(self.view).offset(20)
-            make.leading.equalTo(120)
+            make.left.equalTo(120)
         }
         
         passwordLabelField.stringValue = "Password:"
@@ -57,14 +57,14 @@ class SetPasswordViewController: NSViewController {
         self.view.addSubview(passwordLabelField)
         passwordLabelField.snp.makeConstraints{ make in
             make.centerY.equalTo(passwordField)
-            make.trailing.equalTo(passwordField.snp.leading).offset(-10)
+            make.right.equalTo(passwordField.snp.left).offset(-10)
         }
         
         self.view.addSubview(confirmField)
         confirmField.snp.makeConstraints{ make in
             make.width.equalTo(260)
             make.top.equalTo(passwordField.snp.bottom).offset(10)
-            make.leading.equalTo(120)
+            make.left.equalTo(120)
         }
         
         confirmLabelField.stringValue = "Confirm:"
@@ -74,7 +74,7 @@ class SetPasswordViewController: NSViewController {
         self.view.addSubview(confirmLabelField)
         confirmLabelField.snp.makeConstraints{ make in
             make.centerY.equalTo(confirmField)
-            make.trailing.equalTo(confirmField.snp.leading).offset(-10)
+            make.right.equalTo(confirmField.snp.left).offset(-10)
         }
         
         hintField.placeholderString = "optional"
@@ -85,7 +85,7 @@ class SetPasswordViewController: NSViewController {
             make.width.equalTo(260)
             make.height.equalTo(40)
             make.top.equalTo(confirmField.snp.bottom).offset(10)
-            make.leading.equalTo(120)
+            make.left.equalTo(120)
         }
         
         hintLabelField.stringValue = "Password Hint:"
@@ -95,7 +95,7 @@ class SetPasswordViewController: NSViewController {
         self.view.addSubview(hintLabelField)
         hintLabelField.snp.makeConstraints{ make in
             make.top.equalTo(hintField).offset(4)
-            make.trailing.equalTo(hintField.snp.leading).offset(-10)
+            make.right.equalTo(hintField.snp.left).offset(-10)
         }
         
         cancelButton.wantsLayer = true
@@ -107,7 +107,7 @@ class SetPasswordViewController: NSViewController {
         self.view.addSubview(cancelButton)
         cancelButton.snp.makeConstraints { make in
             make.width.equalTo(100)
-            make.leading.equalTo(self.view).offset(20)
+            make.left.equalTo(self.view).offset(20)
             make.bottom.equalTo(self.view).offset(-20)
         }
         
@@ -122,7 +122,7 @@ class SetPasswordViewController: NSViewController {
         self.view.addSubview(createButton)
         createButton.snp.makeConstraints { make in
             make.width.equalTo(190)
-            make.trailing.equalTo(self.view).offset(-20)
+            make.right.equalTo(self.view).offset(-20)
             make.bottom.equalTo(self.view).offset(-20)
         }
     }

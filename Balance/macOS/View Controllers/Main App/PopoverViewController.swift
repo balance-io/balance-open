@@ -23,7 +23,7 @@ class PopoverViewController: NSViewController {
 
     fileprivate(set) var currentControllerType: ContentControllerType = .none
     fileprivate var currentController: NSViewController!
-    fileprivate var tabsController = TabsViewController()
+    fileprivate var tabsController = TabsViewController(defaultTab: InstitutionRepository.si.hasInstitutions ? .accounts : .priceTicker)
     fileprivate var lockController = LockViewController()
     fileprivate var patchController: SignUpViewController?
     
@@ -66,15 +66,10 @@ class PopoverViewController: NSViewController {
             currentControllerType = .addAccount
             currentController = AddAccountViewController()
         } else {
-            if InstitutionRepository.si.hasInstitutions {
-                currentControllerType = .tabs
-                currentController = tabsController
-                if appLock.lockEnabled {
-                    appLock.locked = true
-                }
-            } else {
-                currentControllerType = .addAccount
-                currentController = AddAccountViewController()
+            currentControllerType = .tabs
+            currentController = tabsController
+            if appLock.lockEnabled {
+                appLock.locked = true
             }
         }
         
@@ -82,8 +77,8 @@ class PopoverViewController: NSViewController {
         if let currentControllerView = currentControllerView {
             self.view.addSubview(currentControllerView)
             currentControllerView.snp.makeConstraints { make in
-                make.leading.equalTo(self.view)
-                make.trailing.equalTo(self.view)
+                make.left.equalTo(self.view)
+                make.right.equalTo(self.view)
                 make.top.equalTo(self.view)
                 make.bottom.equalTo(self.view)
             }
@@ -190,8 +185,8 @@ class PopoverViewController: NSViewController {
         if appLock.locked {
             self.view.addSubview(lockController.view)
             lockController.view.snp.makeConstraints { make in
-                make.leading.equalTo(self.view)
-                make.trailing.equalTo(self.view)
+                make.left.equalTo(self.view)
+                make.right.equalTo(self.view)
                 make.width.equalTo(self.view)
                 make.height.equalTo(self.view)
             }
@@ -199,8 +194,8 @@ class PopoverViewController: NSViewController {
             if let currentControllerView = currentController?.view {
                 self.view.addSubview(currentControllerView)
                 currentControllerView.snp.makeConstraints { make in
-                    make.leading.equalTo(self.view)
-                    make.trailing.equalTo(self.view)
+                    make.left.equalTo(self.view)
+                    make.right.equalTo(self.view)
                     make.width.equalTo(self.view)
                     make.height.equalTo(self.view)
                 }

@@ -69,8 +69,8 @@ class PriceTickerTabViewController: NSViewController, SectionedTableViewDelegate
         self.view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
         
@@ -127,8 +127,21 @@ class PriceTickerTabViewController: NSViewController, SectionedTableViewDelegate
         return viewModel.numberOfRows(inSection: section)
     }
     
+    func tableView(_ tableView: SectionedTableView, heightOfSection section: Int) -> CGFloat {
+        return CurrentTheme.priceTicker.headerCell.height
+    }
+    
     func tableView(_ tableView: SectionedTableView, heightOfRow row: Int, inSection section: Int) -> CGFloat {
         return CurrentTheme.priceTicker.cell.height
+    }
+    
+    func tableView(_ tableView: SectionedTableView, rowViewForSection section: Int) -> NSTableRowView? {
+        var row = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Exchange Rate Section Row"), owner: self) as? NSTableRowView
+        if row == nil {
+            row = TableRowView()
+            row?.identifier = NSUserInterfaceItemIdentifier(rawValue: "Exchange Rate Section Row")
+        }
+        return row
     }
     
     func tableView(_ tableView: SectionedTableView, rowViewForRow row: Int, inSection section: Int) -> NSTableRowView? {
@@ -141,6 +154,16 @@ class PriceTickerTabViewController: NSViewController, SectionedTableViewDelegate
         }
         
         return rowView
+    }
+    
+    func tableView(_ tableView: SectionedTableView, viewForSection section: Int) -> NSView? {
+        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Exchange Rate Section Cell"), owner: self) as? PriceTickerSectionCell ?? PriceTickerSectionCell()
+        cell.identifier = NSUserInterfaceItemIdentifier(rawValue: "Exchange Rate Section Cell")
+        
+        let name = viewModel.name(forSection: section)
+        cell.updateModel(name: name)
+        
+        return cell
     }
     
     func tableView(_ tableView: SectionedTableView, viewForRow row: Int, inSection section: Int) -> NSView? {

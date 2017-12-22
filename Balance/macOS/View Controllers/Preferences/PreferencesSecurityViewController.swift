@@ -41,7 +41,7 @@ class PreferencesSecurityViewController: NSViewController {
         passwordTitleField.snp.makeConstraints{ make in
             make.width.equalTo(80)
             make.top.equalTo(self.view).offset(20)
-            make.leading.equalTo(self.view).offset(20)
+            make.left.equalTo(self.view).offset(20)
         }
         
         passwordExplanationField.stringValue = "Lock Balance with a password"
@@ -51,7 +51,7 @@ class PreferencesSecurityViewController: NSViewController {
         self.view.addSubview(passwordExplanationField)
         passwordExplanationField.snp.makeConstraints{ make in
             make.centerY.equalTo(passwordTitleField.snp.centerY)
-            make.leading.equalTo(passwordTitleField.snp.trailing).offset(20)
+            make.left.equalTo(passwordTitleField.snp.right).offset(20)
         }
 
         togglePasswordButton.wantsLayer = true
@@ -60,7 +60,7 @@ class PreferencesSecurityViewController: NSViewController {
         self.view.addSubview(togglePasswordButton)
         togglePasswordButton.snp.makeConstraints { make in
             make.centerY.equalTo(passwordExplanationField)
-            make.trailing.equalTo(self.view).offset(-20)
+            make.right.equalTo(self.view).offset(-20)
         }
         
         changePasswordButton.wantsLayer = true
@@ -77,7 +77,7 @@ class PreferencesSecurityViewController: NSViewController {
         self.view.addSubview(changePasswordButton)
         changePasswordButton.snp.makeConstraints { make in
             make.centerY.equalTo(passwordExplanationField)
-            make.trailing.equalTo(togglePasswordButton.snp.leading).offset(-10)
+            make.right.equalTo(togglePasswordButton.snp.left).offset(-10)
         }
         
         firstDividerBox.title = ""
@@ -86,8 +86,8 @@ class PreferencesSecurityViewController: NSViewController {
         firstDividerBox.snp.makeConstraints { make in
             make.height.equalTo(1)
             make.top.equalTo(passwordExplanationField.snp.bottom).offset(15)
-            make.leading.equalTo(self.view).offset(20)
-            make.trailing.equalTo(self.view).offset(-20)
+            make.left.equalTo(self.view).offset(20)
+            make.right.equalTo(self.view).offset(-20)
         }
         
         //Auto-Lock
@@ -100,7 +100,7 @@ class PreferencesSecurityViewController: NSViewController {
         autoLockTitleField.snp.makeConstraints{ make in
             make.width.equalTo(80)
             make.top.equalTo(firstDividerBox.snp.bottom).offset(15)
-            make.leading.equalTo(self.view).offset(20)
+            make.left.equalTo(self.view).offset(20)
         }
         
         lockQuitTitleField.stringValue = "Balance locks when you quit the app. Also:"
@@ -111,7 +111,7 @@ class PreferencesSecurityViewController: NSViewController {
         lockQuitTitleField.snp.makeConstraints{ make in
             make.width.equalTo(250)
             make.centerY.equalTo(autoLockTitleField.snp.centerY)
-            make.leading.equalTo(autoLockTitleField.snp.trailing).offset(20)
+            make.left.equalTo(autoLockTitleField.snp.right).offset(20)
         }
         
         lockSleepCheckBox.setButtonType(.switch)
@@ -124,7 +124,7 @@ class PreferencesSecurityViewController: NSViewController {
         self.view.addSubview(lockSleepCheckBox)
         lockSleepCheckBox.snp.makeConstraints{ make in
             make.top.equalTo(lockQuitTitleField.snp.bottom).offset(12)
-            make.leading.equalTo(lockQuitTitleField)
+            make.left.equalTo(lockQuitTitleField)
         }
         
         lockScreenSaverCheckBox.setButtonType(.switch)
@@ -137,7 +137,7 @@ class PreferencesSecurityViewController: NSViewController {
         self.view.addSubview(lockScreenSaverCheckBox)
         lockScreenSaverCheckBox.snp.makeConstraints{ make in
             make.top.equalTo(lockSleepCheckBox.snp.bottom).offset(12)
-            make.leading.equalTo(lockSleepCheckBox)
+            make.left.equalTo(lockSleepCheckBox)
         }
 
         lockCloseCheckBox.setButtonType(.switch)
@@ -150,7 +150,7 @@ class PreferencesSecurityViewController: NSViewController {
         self.view.addSubview(lockCloseCheckBox)
         lockCloseCheckBox.snp.makeConstraints{ make in
             make.top.equalTo(lockScreenSaverCheckBox.snp.bottom).offset(12)
-            make.leading.equalTo(lockScreenSaverCheckBox)
+            make.left.equalTo(lockScreenSaverCheckBox)
         }
         
         if appLock.touchIdAvailable {
@@ -160,8 +160,8 @@ class PreferencesSecurityViewController: NSViewController {
             secondDividerBox.snp.makeConstraints { make in
                 make.height.equalTo(1)
                 make.top.equalTo(lockCloseCheckBox.snp.bottom).offset(15)
-                make.leading.equalTo(self.view).offset(20)
-                make.trailing.equalTo(self.view).offset(-20)
+                make.left.equalTo(self.view).offset(20)
+                make.right.equalTo(self.view).offset(-20)
             }
             
             touchIDTitleField.stringValue = "Touch ID"
@@ -172,7 +172,7 @@ class PreferencesSecurityViewController: NSViewController {
             touchIDTitleField.snp.makeConstraints{ make in
                 make.width.equalTo(80)
                 make.top.equalTo(secondDividerBox.snp.bottom).offset(25)
-                make.leading.equalTo(self.view).offset(20)
+                make.left.equalTo(self.view).offset(20)
             }
             
             touchIDIconImageView.image = NSImage(named: NSImage.Name(rawValue: "touch-id-preferences-icon"))
@@ -182,7 +182,7 @@ class PreferencesSecurityViewController: NSViewController {
                 make.width.equalTo(36)
                 make.height.equalTo(36)
                 make.centerY.equalTo(touchIDTitleField)
-                make.leading.equalTo(touchIDTitleField.snp.trailing).offset(20)
+                make.left.equalTo(touchIDTitleField.snp.right).offset(20)
             }
             
             touchIDExplanationField.stringValue = "Unlock Balance with your fingerprint"
@@ -192,7 +192,7 @@ class PreferencesSecurityViewController: NSViewController {
             self.view.addSubview(touchIDExplanationField)
             touchIDExplanationField.snp.makeConstraints{ make in
                 make.centerY.equalTo(touchIDIconImageView.snp.centerY)
-                make.leading.equalTo(touchIDIconImageView.snp.trailing).offset(15)
+                make.left.equalTo(touchIDIconImageView.snp.right).offset(15)
             }
             
             toggleTouchIDButton.wantsLayer = true
@@ -202,7 +202,7 @@ class PreferencesSecurityViewController: NSViewController {
             self.view.addSubview(toggleTouchIDButton)
             toggleTouchIDButton.snp.makeConstraints { make in
                 make.centerY.equalTo(touchIDExplanationField)
-                make.trailing.equalTo(self.view).offset(-20)
+                make.right.equalTo(self.view).offset(-20)
             }
         } else {
             self.view.setFrameSize(NSSize(width: 500, height: 190))

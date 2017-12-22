@@ -219,8 +219,8 @@ class SignUpViewController: NSViewController {
         brandHeaderView.snp.makeConstraints { make in
             make.height.equalTo(400)
             make.top.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
         }
         
         let waves = ImageView()
@@ -241,8 +241,8 @@ class SignUpViewController: NSViewController {
         institutionNameField.cell?.lineBreakMode = .byTruncatingTail
         containerView.addSubview(institutionNameField)
         institutionNameField.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(margin)
-            make.trailing.equalToSuperview().inset(margin)
+            make.left.equalToSuperview().inset(margin)
+            make.right.equalToSuperview().inset(margin)
             make.top.equalToSuperview().inset(23)
             make.height.equalTo(30)
         }
@@ -255,8 +255,8 @@ class SignUpViewController: NSViewController {
         containerView.addSubview(titleField)
         titleField.snp.makeConstraints { make in
             make.height.equalTo(30)
-            make.leading.equalToSuperview().inset(margin)
-            make.trailing.equalToSuperview().inset(margin)
+            make.left.equalToSuperview().inset(margin)
+            make.right.equalToSuperview().inset(margin)
             make.top.equalToSuperview().inset(55)
         }
         
@@ -268,8 +268,8 @@ class SignUpViewController: NSViewController {
         loadingFieldScrollView.snp.makeConstraints { make in
             make.height.equalTo(60)
             make.top.equalTo(titleField.snp.bottom).offset(5)
-            make.leading.equalToSuperview().inset(margin)
-            make.trailing.equalToSuperview().inset(margin)
+            make.left.equalToSuperview().inset(margin)
+            make.right.equalToSuperview().inset(margin)
         }
         
         loadingField.drawsBackground = false
@@ -289,8 +289,8 @@ class SignUpViewController: NSViewController {
         loadingField.snp.makeConstraints { make in
             //make.height.equalTo(60)
             make.top.equalToSuperview()//(titleField.snp.bottom).offset(5)
-            make.leading.equalToSuperview()//.inset(margin)
-            make.trailing.equalToSuperview()//.inset(margin)
+            make.left.equalToSuperview()//.inset(margin)
+            make.right.equalToSuperview()//.inset(margin)
         }
         
         displayConnectFields()
@@ -304,7 +304,7 @@ class SignUpViewController: NSViewController {
         containerView.addSubview(backButton)
         backButton.snp.makeConstraints { make in
             make.height.equalTo(25)
-            make.leading.equalToSuperview().offset(margin)
+            make.left.equalToSuperview().offset(margin)
             if let last = connectFields.last {
                 make.top.equalTo(last.snp.bottom).offset(25)
             } else {
@@ -322,7 +322,7 @@ class SignUpViewController: NSViewController {
         containerView.addSubview(submitButton)
         submitButton.snp.makeConstraints { make in
             make.height.equalTo(25)
-            make.trailing.equalToSuperview().inset(margin)
+            make.right.equalToSuperview().inset(margin)
             make.top.equalTo(backButton)
         }
         
@@ -361,8 +361,8 @@ class SignUpViewController: NSViewController {
         containerView.addSubview(line)
         line.snp.makeConstraints { make in
             make.height.equalTo(1)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
             make.top.equalTo(backButton.snp.bottom).offset(20)
         }
         
@@ -372,8 +372,8 @@ class SignUpViewController: NSViewController {
         containerView.addSubview(offsetColor)
         offsetColor.snp.makeConstraints{ make in
             make.top.equalTo(line.snp.bottom).offset(0)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
     }
@@ -407,8 +407,8 @@ class SignUpViewController: NSViewController {
         reportFailureField.lineBreakMode = .byWordWrapping
         containerView.addSubview(reportFailureField)
         reportFailureField.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(margin)
-            make.trailing.equalTo(reportFailureButton.snp.leading).offset(-10)
+            make.left.equalToSuperview().offset(margin)
+            make.right.equalTo(reportFailureButton.snp.left).offset(-10)
             make.top.equalTo(line.snp.bottom).offset(16)
             make.height.equalTo(30)
         }
@@ -442,8 +442,8 @@ class SignUpViewController: NSViewController {
             containerView.addSubview(textField)
             textField.placeholderString = field.name
             textField.snp.makeConstraints { make in
-                make.leading.equalToSuperview().offset(margin)
-                make.trailing.equalToSuperview().offset(-margin)
+                make.left.equalToSuperview().offset(margin)
+                make.right.equalToSuperview().offset(-margin)
                 make.height.equalTo(30)
                 if let previousTextField = previousTextField {
                     make.top.equalTo(previousTextField.snp.bottom).offset(15)

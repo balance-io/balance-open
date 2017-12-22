@@ -82,7 +82,12 @@ internal final class SettingsViewController: UIViewController
     
     // MARK: Data
     
-    private func reloadData()
+    private func reloadData() {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(reloadDataDelayed), object: nil)
+        self.perform(#selector(reloadDataDelayed), with: nil, afterDelay: 0.5)
+    }
+    
+    @objc private func reloadDataDelayed()
     {
         self.viewModel.reloadData()
         
