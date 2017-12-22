@@ -222,6 +222,11 @@ class PreferencesAccountsViewController: NSViewController {
     }
     
     @objc fileprivate func reloadData() {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(reloadDataDelayed), object: nil)
+        self.perform(#selector(reloadDataDelayed), with: nil, afterDelay: 0.5)
+    }
+    
+    @objc fileprivate func reloadDataDelayed() {
         institutions = AccountRepository.si.accountsByInstitution(includeHidden: true)
         institutionsTableView.reloadData()
         selectFirstInstitution()
