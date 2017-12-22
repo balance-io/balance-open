@@ -68,6 +68,7 @@ fileprivate class NoHitMapView: MKMapView {
     }
 }
 
+fileprivate let hideConvertedAmounts = true
 class TransactionsTabTransactionCell: View {
     var model: Transaction?
     var index = TableIndex.none
@@ -170,6 +171,7 @@ class TransactionsTabTransactionCell: View {
             make.right.equalToSuperview().offset(-10)
             make.bottom.equalToSuperview().offset(-17)
         }
+        altAmountField.isHidden = hideConvertedAmounts
         
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(cellOpened(_:)), name: TransactionsTabViewController.InternalNotifications.CellOpened)
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(cellClosed(_:)), name: TransactionsTabViewController.InternalNotifications.CellClosed)
@@ -202,10 +204,12 @@ class TransactionsTabTransactionCell: View {
         
         institutionNameField.stringValue = updatedModel.institution?.name ?? ""
         
-        if let displayAltAmount = updatedModel.displayAltAmount {
-            altAmountField.stringValue = amountToString(amount: displayAltAmount, currency: defaults.masterCurrency, showNegative: true, showCodeAfterValue: true)
-        } else {
-            altAmountField.stringValue = ""
+        if !hideConvertedAmounts {
+            if let displayAltAmount = updatedModel.displayAltAmount {
+                altAmountField.stringValue = amountToString(amount: displayAltAmount, currency: defaults.masterCurrency, showNegative: true, showCodeAfterValue: true)
+            } else {
+                altAmountField.stringValue = ""
+            }
         }
         
         self.toolTip = DateFormatter.localizedString(from: updatedModel.date, dateStyle: .medium, timeStyle: .medium)

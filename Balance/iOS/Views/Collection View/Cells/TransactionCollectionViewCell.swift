@@ -9,7 +9,7 @@
 import BalanceVectorGraphics_iOS
 import UIKit
 
-
+fileprivate let hideConvertedAmounts = true
 internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusable
 {
     // Static
@@ -123,6 +123,7 @@ internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusab
             make.top.equalTo(self.contentView.snp.centerY).offset(2.0)
             make.right.equalToSuperview().inset(15.0)
         }
+        self.userCurrencyAmountLabel.isHidden = hideConvertedAmounts
     }
     
     internal required init?(coder aDecoder: NSCoder)
@@ -153,12 +154,14 @@ internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusab
         self.amountLabel.text = amountToString(amount: unwrappedTransaction.amount, currency: currency)
         
         // User currency amount
-        let masterCurrency = defaults.masterCurrency!
-        if let masterAmount = unwrappedTransaction.masterAltAmount {
-            self.userCurrencyAmountLabel.text = amountToString(amount: masterAmount, currency: masterCurrency, showNegative: true)
-            self.userCurrencyAmountLabel.isHidden = false
-        } else {
-            self.userCurrencyAmountLabel.isHidden = true
+        if !hideConvertedAmounts {
+            let masterCurrency = defaults.masterCurrency!
+            if let masterAmount = unwrappedTransaction.masterAltAmount {
+                self.userCurrencyAmountLabel.text = amountToString(amount: masterAmount, currency: masterCurrency, showNegative: true)
+                self.userCurrencyAmountLabel.isHidden = false
+            } else {
+                self.userCurrencyAmountLabel.isHidden = true
+            }
         }
         
         // Transaction type
