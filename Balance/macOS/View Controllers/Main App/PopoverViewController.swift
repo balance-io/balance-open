@@ -69,7 +69,7 @@ class PopoverViewController: NSViewController {
             currentControllerType = .tabs
             currentController = tabsController
             if appLock.lockEnabled {
-                appLock.locked = true
+                appLock.lockImmediately()
             }
         }
         
@@ -205,21 +205,22 @@ class PopoverViewController: NSViewController {
     
     func lockUserInterface(animated: Bool) {
         if !appLock.locked {
-            appLock.locked = true
-            let animation: ViewAnimation = animated ? .fade : .none
-            lockController.viewWillAppear()
-            currentController.viewWillDisappear()
-            self.view.replaceSubview(currentController.view, with: lockController.view, animation: animation)
-            lockController.viewDidAppear()
-            currentController.viewDidDisappear()
-            
-            AppDelegate.sharedInstance.preferencesWindowController.close()
+            if appLock.lock() {
+                let animation: ViewAnimation = animated ? .fade : .none
+                lockController.viewWillAppear()
+                currentController.viewWillDisappear()
+                self.view.replaceSubview(currentController.view, with: lockController.view, animation: animation)
+                lockController.viewDidAppear()
+                currentController.viewDidDisappear()
+                
+                AppDelegate.sharedInstance.preferencesWindowController.close()
+            }
         }
     }
     
     func unlockUserInterface(animated: Bool, delayViewAppearCalls: Bool = false) {
         if appLock.locked {
-            appLock.locked = false
+            appLock.unlock()
             
             let animation: ViewAnimation = animated ? .fade : .none
             lockController.viewWillDisappear()

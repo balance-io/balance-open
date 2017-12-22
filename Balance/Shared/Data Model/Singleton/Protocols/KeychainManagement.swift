@@ -21,6 +21,7 @@ struct KeychainKeys {
     static let LockOnSleep = "lockOnSleep"
     static let LockOnScreenSaver = "lockOnScreenSaver"
     static let LockOnPopoverClose = "lockOnPopoverClose"
+    static let LockDelay = "lockDelay"
     static let KeychainEnabled = "keychainEnabled"
     static let TouchIdEnabled = "touchIdEnabled"
     static let InfoDictionary = "infoDictionary"

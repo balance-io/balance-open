@@ -10,7 +10,7 @@ import Foundation
 import LocalAuthentication
 
 class AppLock {
-    var locked = false
+    private(set) var locked = false
     
     var password: String? {
         get {
@@ -88,6 +88,20 @@ class AppLock {
         }
     }
     
+    var lockDelay: Double {
+        get {
+            if let string = keychain[KeychainAccounts.AppLock, KeychainKeys.LockDelay] {
+                return Double(string) ?? 0.0
+            }
+            
+            // Default to no delay
+            return 0.0
+        }
+        set {
+            keychain[KeychainAccounts.AppLock, KeychainKeys.LockDelay] = "\(newValue)"
+        }
+    }
+    
     var touchIdEnabled: Bool {
         get {
             if let string = keychain[KeychainAccounts.AppLock, KeychainKeys.TouchIdEnabled] {
@@ -142,6 +156,19 @@ class AppLock {
             return false
         }
         #endif
+    }
+    
+    func lock() -> Bool {
+        lockImmediately()
+        return true
+    }
+    
+    func lockImmediately() {
+        locked = true
+    }
+    
+    func unlock() {
+        locked = false
     }
     
     func authenticateTouchId(reason: String, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
