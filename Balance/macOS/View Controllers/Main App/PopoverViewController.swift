@@ -23,7 +23,7 @@ class PopoverViewController: NSViewController {
 
     fileprivate(set) var currentControllerType: ContentControllerType = .none
     fileprivate var currentController: NSViewController!
-    fileprivate var tabsController = TabsViewController()
+    fileprivate var tabsController = TabsViewController(defaultTab: InstitutionRepository.si.hasInstitutions ? .accounts : .priceTicker)
     fileprivate var lockController = LockViewController()
     fileprivate var patchController: SignUpViewController?
     
@@ -66,15 +66,10 @@ class PopoverViewController: NSViewController {
             currentControllerType = .addAccount
             currentController = AddAccountViewController()
         } else {
-            if InstitutionRepository.si.hasInstitutions {
-                currentControllerType = .tabs
-                currentController = tabsController
-                if appLock.lockEnabled {
-                    appLock.locked = true
-                }
-            } else {
-                currentControllerType = .addAccount
-                currentController = AddAccountViewController()
+            currentControllerType = .tabs
+            currentController = tabsController
+            if appLock.lockEnabled {
+                appLock.locked = true
             }
         }
         
