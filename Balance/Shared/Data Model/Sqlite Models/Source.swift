@@ -38,4 +38,15 @@ enum Source: Int, CustomStringConvertible {
         case .ethplorer: return PXColor(hexString: "#333D4E")!
         }
     }
+    
+    var helpUrl: URL {
+        switch self {
+        case .coinbase:  return URL(string: "https://coinbase.com")!
+        case .poloniex:  return URL(string: "https://github.com/balancemymoney/balance-open/wiki/Poloniex-Guide")!
+        case .gdax:      return URL(string: "https://github.com/balancemymoney/balance-open/wiki/Gdax-Manual")!
+        case .bitfinex:  return URL(string: "https://github.com/balancemymoney/balance-open/wiki/Bitfinex-Guide")!
+        case .kraken:    return URL(string: "https://github.com/balancemymoney/balance-open/wiki/Kraken-Login-Manual")!
+        case .ethplorer: return URL(string: "https://etherscanio.freshdesk.com/support/solutions/articles/16000046111-what-is-an-ethereum-address-and-how-to-do-i-get-one-")!
+        }
+    }
 }

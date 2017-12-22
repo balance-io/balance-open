@@ -113,6 +113,8 @@ struct AddAccountsTheme {
     let searchMoreResultsFont: NSFont
     let searchMoreResultsColor: NSColor
     
+    let signUpFieldHeight: CGFloat
+    let signUpFieldSpacing: CGFloat
     let signUpFieldActiveBorderColor: NSColor
     let signUpFieldInactiveBorderColor: NSColor
     let signUpFieldBackgroundColor: NSColor

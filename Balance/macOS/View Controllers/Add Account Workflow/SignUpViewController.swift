@@ -7,13 +7,8 @@
 //
 
 import Cocoa
-
-private enum Step: String {
-    case connect    = "connect"
-    case question   = "question"
-    case deviceList = "deviceList"
-    case codeEntry  = "codeEntry"
-}
+import QuartzCore
+import BalanceVectorGraphics
 
 // TODO: Make this and the == overload private again once the LLDB bug is fixed
 // http://stackoverflow.com/questions/38357114/unable-to-use-swift-debugger-in-one-particular-class-file
@@ -54,7 +49,6 @@ class SignUpViewController: NSViewController {
     // MARK: - Properties -
     //
     
-    fileprivate var currentStep = Step.connect
     fileprivate var institution: Institution?
     
     fileprivate let apiInstitution: ApiInstitution
@@ -81,14 +75,11 @@ class SignUpViewController: NSViewController {
     fileprivate let containerView = View()
     
     fileprivate var connectFields = [SignUpTextField]() // These match the order of apiInstitution.fields
-    fileprivate var questionField = SignUpTextField(type: .mfaAnswer)
     fileprivate var deviceButtons = [NSButton]()
     fileprivate var devices = [Device]()
-    fileprivate var codeField = SignUpTextField(type: .mfaCode)
     
+    fileprivate let institutionLogoField = PaintCodeView()
     fileprivate let institutionNameField = LabelField()
-    
-    fileprivate let titleField = LabelField()
     
     fileprivate let loadingFieldScrollView = ScrollView()
     fileprivate let loadingField = LabelField()
@@ -100,6 +91,7 @@ class SignUpViewController: NSViewController {
         return shadow
     }()
     
+    fileprivate let helpButton = Button()
     fileprivate let backButton = Button()
     fileprivate let onePasswordButton = Button()
     fileprivate let spinner = NSProgressIndicator()
@@ -131,14 +123,7 @@ class SignUpViewController: NSViewController {
     }
     
     fileprivate var height: CGFloat {
-        switch currentStep {
-        case .connect:
-            return 270.0 + (CGFloat(apiInstitution.fields.count) * 45.0)
-        case .question, .codeEntry:
-            return 315.0
-        case .deviceList:
-            return 295.0 + (CGFloat(devices.count - 1) * 33.0)
-        }
+        return 200.0 + (CGFloat(apiInstitution.fields.count) * (CurrentTheme.addAccounts.signUpFieldHeight + CurrentTheme.addAccounts.signUpFieldSpacing))
     }
     fileprivate var previousScreenSize: CGFloat = 0
     
@@ -152,6 +137,7 @@ class SignUpViewController: NSViewController {
         self.patch = patch
         self.institution = institution
         self.loginService = loginService
+        self.primaryColor = apiInstitution.source.color
         log.info("Opened sign up controller for \(apiInstitution.type): \(apiInstitution.name)")
         super.init(nibName: nil, bundle: nil)
     }
@@ -193,6 +179,7 @@ class SignUpViewController: NSViewController {
     
     override func loadView() {
         self.view = View()
+        self.view.layerBackgroundColor = primaryColor
         self.view.snp.makeConstraints { make in
             make.width.equalTo(CurrentTheme.defaults.size.width)
         }
@@ -205,36 +192,25 @@ class SignUpViewController: NSViewController {
             make.centerY.equalToSuperview()
         }
         
-        if let institutionColor = institution?.primaryColor {
-            primaryColor = institutionColor
+        let sourceInstitutionId = apiInstitution.source.description
+        if let logoDrawFunction = InstitutionLogos.drawingFunctionForId(sourceInstitutionId: sourceInstitutionId) {
+            institutionLogoField.isHidden = false
+            institutionNameField.isHidden = true
+            institutionLogoField.drawingBlock = logoDrawFunction
+        } else {
+            institutionLogoField.isHidden = true
+            institutionNameField.isHidden = false
         }
-        
-        let brandHeaderView = View()
-        let brandBackgroundLayer = CAGradientLayer()
-        brandBackgroundLayer.frame = CGRect(x: 0, y: 0, width: 400, height: 400)
-        brandBackgroundLayer.colors = [NSColor.clear.cgColor, primaryColor.cgColor]
-        brandBackgroundLayer.locations = [0.0, 0.9]
-        brandHeaderView.layer?.addSublayer(brandBackgroundLayer)
-        containerView.addSubview(brandHeaderView)
-        brandHeaderView.snp.makeConstraints { make in
-            make.height.equalTo(400)
-            make.top.equalToSuperview()
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-        }
-        
-        let waves = ImageView()
-        waves.image = CurrentTheme.addAccounts.waveImage
-        containerView.addSubview(waves)
-        waves.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(72)
-            make.centerX.equalToSuperview()
+        containerView.addSubview(institutionLogoField)
+        institutionLogoField.snp.makeConstraints { make in
+            make.width.equalTo(160)
+            make.height.equalTo(61)
+            make.centerX.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(-5)
         }
         
         institutionNameField.stringValue = apiInstitution.name
         institutionNameField.font = CurrentTheme.addAccounts.institutionNameFont
-        institutionNameField.textColor = CurrentTheme.defaults.foregroundColor
-        //institutionNameField.textColor = primaryColor.brightnessComponent > 0.90 ? NSColor.black : NSColor.white
         institutionNameField.textColor = CurrentTheme.addAccounts.textColor
         institutionNameField.alignment = .center
         institutionNameField.usesSingleLineMode = true
@@ -243,21 +219,30 @@ class SignUpViewController: NSViewController {
         institutionNameField.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(margin)
             make.right.equalToSuperview().inset(margin)
-            make.top.equalToSuperview().inset(23)
+            make.top.equalToSuperview().offset(10)
             make.height.equalTo(30)
         }
         
-        titleField.stringValue = patch ? "Reconnect your account" : "Connect your account"
-        titleField.font = CurrentTheme.addAccounts.welcomeFont
-        titleField.textColor = CurrentTheme.addAccounts.textColor
-        titleField.alignment = .center
-        titleField.usesSingleLineMode = true
-        containerView.addSubview(titleField)
-        titleField.snp.makeConstraints { make in
-            make.height.equalTo(30)
-            make.left.equalToSuperview().inset(margin)
-            make.right.equalToSuperview().inset(margin)
-            make.top.equalToSuperview().inset(55)
+        backButton.isBordered = false
+        backButton.image = #imageLiteral(resourceName: "addAccountBackArrow")
+        backButton.imagePosition = .imageOnly
+        backButton.target = self
+        backButton.action = #selector(cancel)
+        containerView.addSubview(backButton)
+        backButton.snp.makeConstraints { make in
+            make.height.equalTo(25)
+            make.width.equalTo(25)
+            make.left.equalToSuperview().offset(5)
+            make.centerY.equalTo(institutionNameField)
+        }
+        
+        line.layerBackgroundColor = CurrentTheme.addAccounts.lineColor
+        containerView.addSubview(line)
+        line.snp.makeConstraints { make in
+            make.height.equalTo(1)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.top.equalTo(institutionNameField.snp.bottom).offset(10)
         }
         
         loadingFieldScrollView.frame.size.height = 60
@@ -267,42 +252,35 @@ class SignUpViewController: NSViewController {
         containerView.addSubview(loadingFieldScrollView)
         loadingFieldScrollView.snp.makeConstraints { make in
             make.height.equalTo(60)
-            make.top.equalTo(titleField.snp.bottom).offset(5)
+            make.top.equalTo(institutionNameField.snp.bottom).offset(15)
             make.left.equalToSuperview().inset(margin)
             make.right.equalToSuperview().inset(margin)
         }
         
         loadingField.drawsBackground = false
         loadingField.isHidden = false
-        // TODO: Remove this hack for PayPal issues
-        if apiInstitution.type == "ins_100020" {
-            setLoadingFieldString("If unsuccessful, please try again in 24 to 48 hours")
-        } else {
-            setLoadingFieldString("Please enter your credentials")
-        }
+        setLoadingFieldString("")
         loadingField.alignment = .center
         loadingField.usesSingleLineMode = false
         loadingField.font = CurrentTheme.addAccounts.labelFont
         loadingField.textColor = CurrentTheme.addAccounts.textColor
         loadingField.sizeToFit()
-        //containerView.addSubview(loadingField)
         loadingField.snp.makeConstraints { make in
-            //make.height.equalTo(60)
-            make.top.equalToSuperview()//(titleField.snp.bottom).offset(5)
-            make.left.equalToSuperview()//.inset(margin)
-            make.right.equalToSuperview()//.inset(margin)
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
         }
         
         displayConnectFields()
         
-        backButton.bezelStyle = .rounded
-        backButton.font = CurrentTheme.addAccounts.buttonFont
-        backButton.title = "Back"
-        backButton.sizeToFit()
-        backButton.target = self
-        backButton.action = #selector(cancel)
-        containerView.addSubview(backButton)
-        backButton.snp.makeConstraints { make in
+        helpButton.bezelStyle = .rounded
+        helpButton.font = CurrentTheme.addAccounts.buttonFont
+        helpButton.title = "Help"
+        helpButton.sizeToFit()
+        helpButton.target = self
+        helpButton.action = #selector(help)
+        containerView.addSubview(helpButton)
+        helpButton.snp.makeConstraints { make in
             make.height.equalTo(25)
             make.left.equalToSuperview().offset(margin)
             if let last = connectFields.last {
@@ -323,7 +301,11 @@ class SignUpViewController: NSViewController {
         submitButton.snp.makeConstraints { make in
             make.height.equalTo(25)
             make.right.equalToSuperview().inset(margin)
-            make.top.equalTo(backButton)
+            if let last = connectFields.last {
+                make.top.equalTo(last.snp.bottom).offset(25)
+            } else {
+                make.top.equalTo(loadingFieldScrollView.snp.bottom).offset(25)
+            }
         }
         
         onePasswordButton.bezelStyle = .texturedSquare
@@ -345,6 +327,11 @@ class SignUpViewController: NSViewController {
         }
         onePasswordButton.sizeToFit()
         
+        if let lighten = CIFilter(name: "CIColorControls") {
+            lighten.setDefaults()
+            lighten.setValue(1, forKey: "inputBrightness")
+            spinner.contentFilters = [lighten]
+        }
         spinner.wantsLayer = true
         spinner.alphaValue = 0.6
         spinner.style = .spinning
@@ -355,26 +342,6 @@ class SignUpViewController: NSViewController {
             make.width.equalTo(15)
             make.centerX.equalToSuperview()
             make.centerY.equalTo(submitButton)
-        }
-        
-        line.layerBackgroundColor = CurrentTheme.addAccounts.lineColor
-        containerView.addSubview(line)
-        line.snp.makeConstraints { make in
-            make.height.equalTo(1)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.top.equalTo(backButton.snp.bottom).offset(20)
-        }
-        
-        let offsetColor = View()
-        offsetColor.layerBackgroundColor = CurrentTheme.defaults.foregroundColor
-        offsetColor.alphaValue = 0.04
-        containerView.addSubview(offsetColor)
-        offsetColor.snp.makeConstraints{ make in
-            make.top.equalTo(line.snp.bottom).offset(0)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
         }
     }
     
@@ -444,9 +411,9 @@ class SignUpViewController: NSViewController {
             textField.snp.makeConstraints { make in
                 make.left.equalToSuperview().offset(margin)
                 make.right.equalToSuperview().offset(-margin)
-                make.height.equalTo(30)
+                make.height.equalTo(CurrentTheme.addAccounts.signUpFieldHeight)
                 if let previousTextField = previousTextField {
-                    make.top.equalTo(previousTextField.snp.bottom).offset(15)
+                    make.top.equalTo(previousTextField.snp.bottom).offset(CurrentTheme.addAccounts.signUpFieldSpacing)
                 } else {
                     make.top.equalTo(loadingFieldScrollView.snp.bottom).offset(10)
                 }
@@ -529,22 +496,13 @@ class SignUpViewController: NSViewController {
     fileprivate func submitConnectionFailedEvent(_ errorDescription: String) {
         let attributes = ["Institution Type":  apiInstitution.type,
                           "Institution name":  apiInstitution.name,
-                          "Step":              currentStep.rawValue,
                           "Error Description": errorDescription]
         log.error("Connection Failed: \(attributes)")
     }
     
     fileprivate func allFieldsFilled() -> Bool {
-        var textFields = [SignUpTextField]()
-        switch currentStep {
-        case .connect: textFields = connectFields
-        case .question: textFields = [questionField]
-        case .codeEntry: textFields = [codeField]
-        default: break
-        }
-        
         var filled = true
-        for textField in textFields {
+        for textField in connectFields {
             if textField.stringValue.count == 0 {
                 filled = false
                 break
@@ -584,6 +542,10 @@ class SignUpViewController: NSViewController {
         let url = URL(string: "onepassword://search/\(name.URLQueryStringEncodedValue)") ?? URL(string: "onepassword://search/")!
         NSWorkspace.shared.open(url)
     }
+        
+    @objc private func help() {
+        NSWorkspace.shared.open(apiInstitution.source.helpUrl)
+    }
     
     //
     // MARK: - Connecting -
@@ -597,20 +559,20 @@ class SignUpViewController: NSViewController {
         
         prepareViewsForSubmit(loadingText: "Connecting to \(apiInstitution.name)...")
 
-        var loginFields = [Field]()
-        for textField in connectFields {
-            if let field = textField.field {
-                loginFields.append(field)
-            }
-        }
-        // try login with loginFields
-        loginService.authenticationChallenge(loginStrings: loginFields, existingInstitution: institution) { success, error, institution in
-            if success, let institution = institution {
-                self.completeConnect(institution: institution)
-            } else {
-                self.failConnect(error: error)
-            }
-        }
+//        var loginFields = [Field]()
+//        for textField in connectFields {
+//            if let field = textField.field {
+//                loginFields.append(field)
+//            }
+//        }
+//        // try login with loginFields
+//        loginService.authenticationChallenge(loginStrings: loginFields, existingInstitution: institution) { success, error, institution in
+//            if success, let institution = institution {
+//                self.completeConnect(institution: institution)
+//            } else {
+//                self.failConnect(error: error)
+//            }
+//        }
     }
     
     fileprivate func setLoadingFieldString(_ stringValue: String) {
@@ -701,19 +663,8 @@ class SignUpViewController: NSViewController {
     }
     
     fileprivate func prepareViewsForSubmit(loadingText: String) {
-        switch currentStep {
-        case .connect:
-            for textField in connectFields {
-                textField.isEnabled = false
-            }
-        case .codeEntry:
-            codeField.isEnabled = false
-        case .deviceList:
-            for button in deviceButtons {
-                button.isEnabled = false
-            }
-        case .question:
-            questionField.isEnabled = false
+        for textField in connectFields {
+            textField.isEnabled = false
         }
         backButton.isEnabled = false
         submitButton.isEnabled = false
@@ -750,25 +701,18 @@ extension SignUpViewController: NSTextFieldDelegate {
     }
     
     func handleEnterKey(_ currentField: NSTextField) -> Bool {
-        if currentStep == .connect {
-            if currentField == connectFields.last?.textField {
-                if allFieldsFilled() {
-                    connect()
-                    return true
-                }
-            } else {
-                let index = connectFields.index { signUpTextField in
-                    return signUpTextField.textField == currentField
-                }
-                if let window = self.view.window, let index = index, connectFields.count > index + 1 {
-                    let nextField = connectFields[index + 1]
-                    return window.makeFirstResponder(nextField)
-                }
-            }
-        } else if currentStep == .question || currentStep == .codeEntry {
+        if currentField == connectFields.last?.textField {
             if allFieldsFilled() {
-                submitButton.title = "Submit"
+                connect()
                 return true
+            }
+        } else {
+            let index = connectFields.index { signUpTextField in
+                return signUpTextField.textField == currentField
+            }
+            if let window = self.view.window, let index = index, connectFields.count > index + 1 {
+                let nextField = connectFields[index + 1]
+                return window.makeFirstResponder(nextField)
             }
         }
         
@@ -776,16 +720,14 @@ extension SignUpViewController: NSTextFieldDelegate {
     }
     
     func handleBackTabKey(_ currentField: NSTextField) -> Bool {
-        if currentStep == .connect {
-            let index = connectFields.index { signUpTextField in
-                return signUpTextField.textField == currentField
-            }
-            if let window = self.view.window, let index = index, index > 0 {
-                let previousField = connectFields[index - 1]
-                if window.makeFirstResponder(previousField) {
-                    previousField.textField.currentEditor()?.moveToEndOfLine(nil)
-                    return true
-                }
+        let index = connectFields.index { signUpTextField in
+            return signUpTextField.textField == currentField
+        }
+        if let window = self.view.window, let index = index, index > 0 {
+            let previousField = connectFields[index - 1]
+            if window.makeFirstResponder(previousField) {
+                previousField.textField.currentEditor()?.moveToEndOfLine(nil)
+                return true
             }
         }
         
