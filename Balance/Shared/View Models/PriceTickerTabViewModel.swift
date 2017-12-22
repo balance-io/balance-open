@@ -23,6 +23,9 @@ class PriceTickerTabViewModel: TabViewModel {
                                             Currency.rawValue("ZRX")]
     
     var currencies = [[Currency]]()
+    var showPortfolio: Bool {
+        return currencies.count > 0 && currencies[0].count > 0
+    }
     
     func reloadData() {
         // Find all currencies owned by the user
@@ -59,15 +62,17 @@ class PriceTickerTabViewModel: TabViewModel {
     }
     
     func numberOfSections() -> Int {
-        return 3
+        return showPortfolio ? 3 : 2
     }
     
     func numberOfRows(inSection section: Int) -> Int {
-        return currencies[section].count
+        let adjustedSection = showPortfolio ? section : section + 1
+        return currencies[adjustedSection].count
     }
     
     func name(forSection section: Int) -> String {
-        guard let priceTickerSection = PriceTickerSection(rawValue: section) else {
+        let adjustedSection = showPortfolio ? section : section + 1
+        guard let priceTickerSection = PriceTickerSection(rawValue: adjustedSection) else {
             return ""
         }
         
@@ -79,8 +84,9 @@ class PriceTickerTabViewModel: TabViewModel {
     }
     
     func currency(forRow row: Int, inSection section: Int) -> Currency? {
-        if section < currencies.count && row < currencies[section].count {
-            return currencies[section][row]
+        let adjustedSection = showPortfolio ? section : section + 1
+        if adjustedSection < currencies.count && row < currencies[adjustedSection].count {
+            return currencies[adjustedSection][row]
         }
         return nil
     }
