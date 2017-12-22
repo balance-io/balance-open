@@ -47,7 +47,7 @@ class ChangePasswordViewController: NSViewController {
         currentPasswordField.snp.makeConstraints{ make in
             make.width.equalTo(280)
             make.top.equalTo(self.view).offset(20)
-            make.leading.equalTo(140)
+            make.left.equalTo(140)
         }
         
         currentPasswordLabelField.stringValue = "Current Password:"
@@ -57,14 +57,14 @@ class ChangePasswordViewController: NSViewController {
         self.view.addSubview(currentPasswordLabelField)
         currentPasswordLabelField.snp.makeConstraints{ make in
             make.centerY.equalTo(currentPasswordField)
-            make.trailing.equalTo(currentPasswordField.snp.leading).offset(-10)
+            make.right.equalTo(currentPasswordField.snp.left).offset(-10)
         }
         
         self.view.addSubview(passwordField)
         passwordField.snp.makeConstraints{ make in
             make.width.equalTo(280)
             make.top.equalTo(currentPasswordField.snp.bottom).offset(15)
-            make.leading.equalTo(140)
+            make.left.equalTo(140)
         }
         
         passwordLabelField.stringValue = "New Password:"
@@ -74,14 +74,14 @@ class ChangePasswordViewController: NSViewController {
         self.view.addSubview(passwordLabelField)
         passwordLabelField.snp.makeConstraints{ make in
             make.centerY.equalTo(passwordField)
-            make.trailing.equalTo(passwordField.snp.leading).offset(-10)
+            make.right.equalTo(passwordField.snp.left).offset(-10)
         }
 
         self.view.addSubview(confirmField)
         confirmField.snp.makeConstraints{ make in
             make.width.equalTo(280)
             make.top.equalTo(passwordField.snp.bottom).offset(10)
-            make.leading.equalTo(140)
+            make.left.equalTo(140)
         }
         
         confirmLabelField.stringValue = "Confirm:"
@@ -91,7 +91,7 @@ class ChangePasswordViewController: NSViewController {
         self.view.addSubview(confirmLabelField)
         confirmLabelField.snp.makeConstraints{ make in
             make.centerY.equalTo(confirmField)
-            make.trailing.equalTo(confirmField.snp.leading).offset(-10)
+            make.right.equalTo(confirmField.snp.left).offset(-10)
         }
 
         hintField.lineBreakMode = .byWordWrapping
@@ -101,7 +101,7 @@ class ChangePasswordViewController: NSViewController {
             make.width.equalTo(280)
             make.height.equalTo(40)
             make.top.equalTo(confirmField.snp.bottom).offset(10)
-            make.leading.equalTo(140)
+            make.left.equalTo(140)
         }
         
         hintLabelField.stringValue = "Password Hint:"
@@ -111,7 +111,7 @@ class ChangePasswordViewController: NSViewController {
         self.view.addSubview(hintLabelField)
         hintLabelField.snp.makeConstraints{ make in
             make.top.equalTo(hintField).offset(4)
-            make.trailing.equalTo(hintField.snp.leading).offset(-10)
+            make.right.equalTo(hintField.snp.left).offset(-10)
         }
         
         cancelButton.wantsLayer = true
@@ -123,7 +123,7 @@ class ChangePasswordViewController: NSViewController {
         self.view.addSubview(cancelButton)
         cancelButton.snp.makeConstraints { make in
             make.width.equalTo(100)
-            make.leading.equalTo(self.view).offset(20)
+            make.left.equalTo(self.view).offset(20)
             make.bottom.equalTo(self.view).offset(-20)
         }
         
@@ -138,7 +138,7 @@ class ChangePasswordViewController: NSViewController {
         self.view.addSubview(createButton)
         createButton.snp.makeConstraints { make in
             make.width.equalTo(190)
-            make.trailing.equalTo(self.view).offset(-20)
+            make.right.equalTo(self.view).offset(-20)
             make.bottom.equalTo(self.view).offset(-20)
         }
     }

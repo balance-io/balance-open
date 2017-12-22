@@ -27,8 +27,8 @@ class PriceTickerRateCell: View {
         self.addSubview(topContainer)
         topContainer.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
             make.height.equalTo(CurrentTheme.priceTicker.cell.height)
         }
         
@@ -42,8 +42,8 @@ class PriceTickerRateCell: View {
         codeField.cell?.lineBreakMode = .byTruncatingTail
         topContainer.addSubview(codeField)
         codeField.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(padding)
-            make.trailing.equalToSuperview().offset(-padding)
+            make.left.equalToSuperview().offset(padding)
+            make.right.equalToSuperview().offset(-padding)
             make.top.equalToSuperview().offset(11)
         }
         
@@ -56,7 +56,7 @@ class PriceTickerRateCell: View {
         nameField.alignment = .left
         topContainer.addSubview(nameField)
         nameField.snp.makeConstraints { make in
-            make.leading.equalTo(codeField)
+            make.left.equalTo(codeField)
             make.top.equalToSuperview().offset(31)
         }
         
@@ -67,7 +67,7 @@ class PriceTickerRateCell: View {
         rateField.usesSingleLineMode = true
         topContainer.addSubview(rateField)
         rateField.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-padding)
+            make.right.equalToSuperview().offset(-padding)
             make.top.equalToSuperview().offset(31)
         }
         

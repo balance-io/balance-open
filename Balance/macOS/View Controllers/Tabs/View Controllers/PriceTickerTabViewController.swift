@@ -69,8 +69,8 @@ class PriceTickerTabViewController: NSViewController, SectionedTableViewDelegate
         self.view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
         

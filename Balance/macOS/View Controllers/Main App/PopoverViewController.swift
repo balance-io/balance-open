@@ -82,8 +82,8 @@ class PopoverViewController: NSViewController {
         if let currentControllerView = currentControllerView {
             self.view.addSubview(currentControllerView)
             currentControllerView.snp.makeConstraints { make in
-                make.leading.equalTo(self.view)
-                make.trailing.equalTo(self.view)
+                make.left.equalTo(self.view)
+                make.right.equalTo(self.view)
                 make.top.equalTo(self.view)
                 make.bottom.equalTo(self.view)
             }
@@ -190,8 +190,8 @@ class PopoverViewController: NSViewController {
         if appLock.locked {
             self.view.addSubview(lockController.view)
             lockController.view.snp.makeConstraints { make in
-                make.leading.equalTo(self.view)
-                make.trailing.equalTo(self.view)
+                make.left.equalTo(self.view)
+                make.right.equalTo(self.view)
                 make.width.equalTo(self.view)
                 make.height.equalTo(self.view)
             }
@@ -199,8 +199,8 @@ class PopoverViewController: NSViewController {
             if let currentControllerView = currentController?.view {
                 self.view.addSubview(currentControllerView)
                 currentControllerView.snp.makeConstraints { make in
-                    make.leading.equalTo(self.view)
-                    make.trailing.equalTo(self.view)
+                    make.left.equalTo(self.view)
+                    make.right.equalTo(self.view)
                     make.width.equalTo(self.view)
                     make.height.equalTo(self.view)
                 }

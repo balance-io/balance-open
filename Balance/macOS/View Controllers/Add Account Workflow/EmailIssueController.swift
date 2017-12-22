@@ -93,8 +93,8 @@ class EmailIssueController: NSViewController {
         self.view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.height.equalTo(30)
-            make.leading.equalToSuperview().offset(margin)
-            make.trailing.equalToSuperview().offset(-margin)
+            make.left.equalToSuperview().offset(margin)
+            make.right.equalToSuperview().offset(-margin)
             make.top.equalToSuperview().inset(23)
         }
         
@@ -107,8 +107,8 @@ class EmailIssueController: NSViewController {
         institutionLabel.cell?.lineBreakMode = .byTruncatingTail
         self.view.addSubview(institutionLabel)
         institutionLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(margin)
-            make.trailing.equalToSuperview().offset(-margin)
+            make.left.equalToSuperview().offset(margin)
+            make.right.equalToSuperview().offset(-margin)
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.height.equalTo(isConnectionIssue ? 20 : 0)
         }
@@ -120,8 +120,8 @@ class EmailIssueController: NSViewController {
         versionLabel.cell?.lineBreakMode = .byTruncatingTail
         self.view.addSubview(versionLabel)
         versionLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(margin)
-            make.trailing.equalToSuperview().offset(-margin)
+            make.left.equalToSuperview().offset(margin)
+            make.right.equalToSuperview().offset(-margin)
             make.top.equalTo(institutionLabel.snp.bottom)
             make.height.equalTo(20)
         }
@@ -133,8 +133,8 @@ class EmailIssueController: NSViewController {
         hardwareLabel.cell?.lineBreakMode = .byTruncatingTail
         self.view.addSubview(hardwareLabel)
         hardwareLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(margin)
-            make.trailing.equalToSuperview().offset(-margin)
+            make.left.equalToSuperview().offset(margin)
+            make.right.equalToSuperview().offset(-margin)
             make.top.equalTo(versionLabel.snp.bottom)
             make.height.equalTo(20)
         }
@@ -146,8 +146,8 @@ class EmailIssueController: NSViewController {
         operatingSystemLabel.cell?.lineBreakMode = .byTruncatingTail
         self.view.addSubview(operatingSystemLabel)
         operatingSystemLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(margin)
-            make.trailing.equalToSuperview().offset(-margin)
+            make.left.equalToSuperview().offset(margin)
+            make.right.equalToSuperview().offset(-margin)
             make.top.equalTo(hardwareLabel.snp.bottom)
             make.height.equalTo(20)
         }
@@ -164,8 +164,8 @@ class EmailIssueController: NSViewController {
         notesField.snp.makeConstraints { make in
             make.top.equalTo(operatingSystemLabel.snp.bottom).offset(10)
             make.height.equalTo(60)
-            make.leading.equalToSuperview().offset(margin)
-            make.trailing.equalToSuperview().offset(-margin)
+            make.left.equalToSuperview().offset(margin)
+            make.right.equalToSuperview().offset(-margin)
         }
         
         emailField.delegate = self
@@ -179,8 +179,8 @@ class EmailIssueController: NSViewController {
         emailField.snp.makeConstraints { make in
             make.top.equalTo(notesField.snp.bottom).offset(10)
             make.height.equalTo(30)
-            make.leading.equalToSuperview().offset(margin)
-            make.trailing.equalToSuperview().offset(-margin)
+            make.left.equalToSuperview().offset(margin)
+            make.right.equalToSuperview().offset(-margin)
         }
         
         messageLabel.font = CurrentTheme.emailIssue.messageLabelFont
@@ -192,8 +192,8 @@ class EmailIssueController: NSViewController {
         messageLabel.cell?.lineBreakMode = .byTruncatingTail
         self.view.addSubview(messageLabel)
         messageLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(margin)
-            make.trailing.equalToSuperview().offset(-margin)
+            make.left.equalToSuperview().offset(margin)
+            make.right.equalToSuperview().offset(-margin)
             make.top.equalTo(emailField.snp.bottom).offset(5)
             make.height.equalTo(20)
         }
@@ -207,7 +207,7 @@ class EmailIssueController: NSViewController {
         self.view.addSubview(backButton)
         backButton.snp.makeConstraints { make in
             make.height.equalTo(25)
-            make.leading.equalToSuperview().offset(margin)
+            make.left.equalToSuperview().offset(margin)
             make.bottom.equalToSuperview().offset(-20)
         }
         
@@ -221,7 +221,7 @@ class EmailIssueController: NSViewController {
         self.view.addSubview(submitButton)
         submitButton.snp.makeConstraints { make in
             make.height.equalTo(backButton)
-            make.trailing.equalToSuperview().inset(margin)
+            make.right.equalToSuperview().inset(margin)
             make.top.equalTo(backButton)
         }
     }

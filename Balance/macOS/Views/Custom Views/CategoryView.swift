@@ -64,9 +64,9 @@ class CategoryView: View {
                     make.height.equalTo(19)
                     make.centerY.equalTo(self)
                     if let previousButton = buttons.last {
-                        make.leading.equalTo(previousButton.snp.trailing).offset(6)
+                        make.left.equalTo(previousButton.snp.right).offset(6)
                     } else {
-                        make.leading.equalTo(self).offset(5)
+                        make.left.equalTo(self).offset(5)
                     }
                 }
                 
