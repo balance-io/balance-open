@@ -27,8 +27,8 @@ class PriceTickerTabViewModel: TabViewModel {
         return currencies.count > 0 && currencies[0].count > 0
     }
     
-    func reloadData() {
-        // Find all currencies owned by the user
+    // All currencies owned by the user that have an exchange rate
+    var portfolioCurrencies: [Currency] {
         var portfolioCurrenciesSet = Set<Currency>()
         let allAcounts = AccountRepository.si.allAccounts()
         for account in allAcounts {
@@ -37,28 +37,34 @@ class PriceTickerTabViewModel: TabViewModel {
                 portfolioCurrenciesSet.insert(currency.primaryCurrency)
             }
         }
+        
         let portfolioCurrencies = Array(portfolioCurrenciesSet).sorted(by: { $0.code < $1.code })
+        return portfolioCurrencies
+    }
+    
+    func reloadData() {
+        let portfolio = portfolioCurrencies
         
         // Find the popular currencies not owned by the user
-        var popularCurrencies = [Currency]()
+        var popular = [Currency]()
         for currency in allPopularCurrencies {
-            if !portfolioCurrenciesSet.contains(currency) {
-                popularCurrencies.append(currency)
+            if !portfolio.contains(currency) {
+                popular.append(currency)
             }
         }
         
         // Find all other currencies not owned by the user
-        var otherCurrenciesSet = Set<Currency>()
+        var otherSet = Set<Currency>()
         if let rates = currentExchangeRates.allExchangeRates() {
             for rate in rates {
-                if !portfolioCurrenciesSet.contains(rate.from) && !popularCurrencies.contains(rate.from) {
-                    otherCurrenciesSet.insert(rate.from)
+                if !portfolio.contains(rate.from) && !popular.contains(rate.from) {
+                    otherSet.insert(rate.from)
                 }
             }
         }
-        let otherCurrencies = Array(otherCurrenciesSet).sorted(by: { $0.code < $1.code })
+        let other = Array(otherSet).sorted(by: { $0.code < $1.code })
         
-        currencies = [portfolioCurrencies, popularCurrencies, otherCurrencies]
+        currencies = [portfolio, popular, other]
     }
     
     func numberOfSections() -> Int {
@@ -70,9 +76,12 @@ class PriceTickerTabViewModel: TabViewModel {
         return currencies[adjustedSection].count
     }
     
+    func adjustedSection(_ section: Int) -> Int {
+        return showPortfolio ? section : section + 1
+    }
+    
     func name(forSection section: Int) -> String {
-        let adjustedSection = showPortfolio ? section : section + 1
-        guard let priceTickerSection = PriceTickerSection(rawValue: adjustedSection) else {
+        guard let priceTickerSection = PriceTickerSection(rawValue: adjustedSection(section)) else {
             return ""
         }
         
@@ -84,7 +93,7 @@ class PriceTickerTabViewModel: TabViewModel {
     }
     
     func currency(forRow row: Int, inSection section: Int) -> Currency? {
-        let adjustedSection = showPortfolio ? section : section + 1
+        let adjustedSection = self.adjustedSection(section)
         if adjustedSection < currencies.count && row < currencies[adjustedSection].count {
             return currencies[adjustedSection][row]
         }
