@@ -221,6 +221,13 @@ struct OpenTheme: Theme {
     }
     
     var priceTicker: PriceTickerTheme {
+        let headerCell = PriceTickerTheme.HeaderCellTheme(
+            height: 30.0,
+            
+            nameFont: NSFont.boldSystemFont(ofSize: 14),
+            nameColor: NSColor(hexString: "#2F343E")!
+        )
+        
         let cell = PriceTickerTheme.CellTheme(
             height: 63.0,
             
@@ -234,6 +241,6 @@ struct OpenTheme: Theme {
             rateColor: NSColor(hexString: "#2F343E")!
         )
         
-        return PriceTickerTheme(cell: cell)
+        return PriceTickerTheme(headerCell: headerCell, cell: cell)
     }
 }

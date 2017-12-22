@@ -11,6 +11,52 @@ import Foundation
 fileprivate let padding = 18
 fileprivate let linePadding = padding - 2
 
+class PriceTickerSectionCell: View {
+    var model: ExchangeRate?
+    
+    let nameField = LabelField()
+    let lineView = View()
+    
+    init() {
+        super.init(frame: NSZeroRect)
+        self.layerBackgroundColor = CurrentTheme.defaults.cell.backgroundColor
+        
+        nameField.alphaValue = 0.95
+        nameField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
+        nameField.font = CurrentTheme.priceTicker.headerCell.nameFont
+        nameField.textColor = CurrentTheme.priceTicker.headerCell.nameColor
+        nameField.usesSingleLineMode = true
+        nameField.alignment = .left
+        nameField.verticalAlignment = .center
+        self.addSubview(nameField)
+        nameField.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(padding)
+            make.right.equalToSuperview().offset(-padding)
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        lineView.layerBackgroundColor = NSColor(hexString: "#B0B5BC")
+        lineView.alphaValue = 0.08
+        self.addSubview(lineView)
+        lineView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(linePadding)
+            make.bottom.equalToSuperview().offset(-1)
+            make.height.equalTo(1)
+            make.right.equalToSuperview()
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("unsupported")
+    }
+    
+    func updateModel(name: String) {
+        nameField.stringValue = name
+        nameField.setAccessibilityLabel(name)
+    }
+}
+
 class PriceTickerRateCell: View {
     var model: ExchangeRate?
     

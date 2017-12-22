@@ -8,39 +8,79 @@
 
 import Foundation
 
+enum PriceTickerSection: Int {
+    case portfolio = 0
+    case popular = 1
+    case other = 2
+}
+
 class PriceTickerTabViewModel: TabViewModel {
     
-    var currencies = [Currency]()
+    let allPopularCurrencies: [Currency] = [Currency.rawValue("BTC"), Currency.rawValue("ETH"), Currency.rawValue("LTC"),
+                                            Currency.rawValue("BCH"), Currency.rawValue("XRP"), Currency.rawValue("DASH"),
+                                            Currency.rawValue("MIOTA"), Currency.rawValue("ETC"), Currency.rawValue("XMR"),
+                                            Currency.rawValue("LSK"), Currency.rawValue("STEEM"), Currency.rawValue("GNT"),
+                                            Currency.rawValue("ZRX")]
+    
+    var currencies = [[Currency]]()
     
     func reloadData() {
-        let topCurrencyCodes = ["BTC", "ETH", "LTC", "BCH", "XRP", "DASH", "MIOTA", "ETC", "XMR", "LSK", "STEEM", "GNT", "ZRX"]
+        // Find all currencies owned by the user
+        var portfolioCurrenciesSet = Set<Currency>()
+        let allAcounts = AccountRepository.si.allAccounts()
+        for account in allAcounts {
+            let currency = Currency.rawValue(account.currency)
+            if currency.isCrypto && currentExchangeRates.convertTicker(amount: 1.0, from: currency, to: defaults.masterCurrency) != nil {
+                portfolioCurrenciesSet.insert(currency.primaryCurrency)
+            }
+        }
+        let portfolioCurrencies = Array(portfolioCurrenciesSet).sorted(by: { $0.code < $1.code })
         
+        // Find the popular currencies not owned by the user
+        var popularCurrencies = [Currency]()
+        for currency in allPopularCurrencies {
+            if !portfolioCurrenciesSet.contains(currency) {
+                popularCurrencies.append(currency)
+            }
+        }
+        
+        // Find all other currencies not owned by the user
         var otherCurrenciesSet = Set<Currency>()
         if let rates = currentExchangeRates.allExchangeRates() {
             for rate in rates {
-                if !topCurrencyCodes.contains(rate.from.code) {
+                if !portfolioCurrenciesSet.contains(rate.from) && !popularCurrencies.contains(rate.from) {
                     otherCurrenciesSet.insert(rate.from)
                 }
             }
         }
-        
-        let topCurrencies = topCurrencyCodes.map({ Currency.rawValue($0) })
         let otherCurrencies = Array(otherCurrenciesSet).sorted(by: { $0.code < $1.code })
         
-        currencies = topCurrencies + otherCurrencies
+        currencies = [portfolioCurrencies, popularCurrencies, otherCurrencies]
     }
     
     func numberOfSections() -> Int {
-        return 1
+        return 3
     }
     
     func numberOfRows(inSection section: Int) -> Int {
-        return currencies.count
+        return currencies[section].count
+    }
+    
+    func name(forSection section: Int) -> String {
+        guard let priceTickerSection = PriceTickerSection(rawValue: section) else {
+            return ""
+        }
+        
+        switch priceTickerSection {
+        case .portfolio: return "Portfolio"
+        case .popular:   return "Popular"
+        case .other:     return "Other"
+        }
     }
     
     func currency(forRow row: Int, inSection section: Int) -> Currency? {
-        if row < currencies.count {
-            return currencies[row]
+        if section < currencies.count && row < currencies[section].count {
+            return currencies[section][row]
         }
         return nil
     }
