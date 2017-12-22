@@ -71,13 +71,12 @@ class PriceTickerTabViewModel: TabViewModel {
         return showPortfolio ? 3 : 2
     }
     
-    func numberOfRows(inSection section: Int) -> Int {
-        let adjustedSection = showPortfolio ? section : section + 1
-        return currencies[adjustedSection].count
-    }
-    
     func adjustedSection(_ section: Int) -> Int {
         return showPortfolio ? section : section + 1
+    }
+    
+    func numberOfRows(inSection section: Int) -> Int {
+        return currencies[adjustedSection(section)].count
     }
     
     func name(forSection section: Int) -> String {
