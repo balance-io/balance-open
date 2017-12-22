@@ -63,6 +63,13 @@ public enum Currency: Equatable, Hashable {
         }
     }
     
+    public var primaryCurrency: Currency {
+        switch self {
+        case .crypto(let crypto): return crypto.primaryCurrency
+        default: return self
+        }
+    }
+    
     public var isFiat: Bool {
         switch self {
         case .fiat: return true
@@ -98,12 +105,16 @@ public enum Currency: Equatable, Hashable {
     
     // Hashable
     public var hashValue: Int {
-        return code.hashValue
+        switch self {
+        case let .fiat(fiat):               return fiat.hashValue
+        case let .crypto(crypto):           return crypto.hashValue
+        case let .cryptoOther(cryptoOther): return cryptoOther.hashValue
+        }
     }
 }
 
 // Known/popular crypto currencies
-public enum CryptoCurrency: String {
+public enum CryptoCurrency: String, Equatable, Hashable {
     case btc   = "BTC"
     case xbt   = "XBT" // Alternate symbol for BTC
     case bch   = "BCH"
@@ -149,6 +160,22 @@ public enum CryptoCurrency: String {
         return 8
     }
     
+    // For cases like XBT, we want to be able to easily standardize to BTC
+    public var primaryCurrency: Currency {
+        // Connect alternate BTC symbol XBT
+        if code == "BTC" || code == "XBT" {
+            return .btc
+        }
+        
+        // Connect alternate MIOTA symbols IOT and IOTA
+        if code == "IOTA" || code == "IOT" || code == "MIOTA" {
+            return Currency.rawValue("MIOTA")
+        }
+        
+        return Currency.rawValue(code)
+    }
+    
+    // Equatable
     public static func ==(lhs: CryptoCurrency, rhs: CryptoCurrency) -> Bool {
         // Connect alternate BTC symbol XBT
         if (lhs.code == "BTC" || lhs.code == "XBT") && (rhs.code == "BTC" || rhs.code == "XBT") {
@@ -162,9 +189,24 @@ public enum CryptoCurrency: String {
         
         return lhs.code == rhs.code
     }
+    
+    // Hashable
+    public var hashValue: Int {
+        // Connect alternate BTC symbol XBT
+        if code == "BTC" || code == "XBT" {
+            return "BTC".hashValue
+        }
+        
+        // Connect alternate MIOTA symbols IOT and IOTA
+        if code == "IOTA" || code == "IOT" || code == "MIOTA" {
+            return "MIOTA".hashValue
+        }
+        
+        return code.hashValue
+    }
 }
 
-public enum FiatCurrency: String, Equatable {
+public enum FiatCurrency: String, Equatable, Hashable {
     case afn   = "AFN"
     case all   = "ALL"
     case ang   = "ANG"
@@ -515,7 +557,13 @@ public enum FiatCurrency: String, Equatable {
         }
     }
     
+    // Equatable
     public static func ==(lhs: FiatCurrency, rhs: FiatCurrency) -> Bool {
         return lhs.code == rhs.code
+    }
+    
+    // Hashable
+    public var hashValue: Int {
+        return code.hashValue
     }
 }

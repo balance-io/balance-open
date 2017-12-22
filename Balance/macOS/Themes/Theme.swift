@@ -232,7 +232,15 @@ struct TransactionsTheme {
 }
 
 struct PriceTickerTheme {
+    let headerCell: PriceTickerTheme.HeaderCellTheme
     let cell: PriceTickerTheme.CellTheme
+    
+    struct HeaderCellTheme {
+        let height: CGFloat
+        
+        let nameFont: NSFont
+        let nameColor: NSColor
+    }
     
     struct CellTheme {
         let height: CGFloat
