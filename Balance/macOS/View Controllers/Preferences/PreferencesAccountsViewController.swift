@@ -238,14 +238,18 @@ class PreferencesAccountsViewController: NSViewController {
     }
     
     @IBAction func removeAccount(_ sender: NSButton) {
+        let institution = self.institutions.keys[self.institutionsTableView.selectedIndex.row]
+        let messageText = "Are you sure you want to remove \"\(institution.displayName)\"?"
+        let informativeText = "This will permanently delete all related coins, tokens, transactions, and API keys from Balance."
+        
         let alert = NSAlert()
         alert.addButton(withTitle: "Cancel")
-        alert.addButton(withTitle: "OK")
-        alert.messageText = "Are you sure you want to remove this account?"
+        alert.addButton(withTitle: "Remove Account")
+        alert.messageText = messageText
+        alert.informativeText = informativeText
         alert.alertStyle = .critical
         alert.beginSheetModal(for: self.view.window!) { returnCode in
             if returnCode == NSApplication.ModalResponse.alertSecondButtonReturn {
-                let institution = self.institutions.keys[self.institutionsTableView.selectedIndex.row]
                 institution.delete()
             }
         }
