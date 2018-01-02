@@ -1,9 +1,25 @@
-<h3 align="center">
-<img src="https://cl.ly/453225333E0u/balance-open.png" alt="Balance Open Menubar App" />
-</h3>
+<p align="center">
+  <a href="https://balancemy.money">
+    <img src="assets/img/balance-header.svg" />
+  </a>
+  <br>
+  <strong>An app for all the world’s currencies</strong>
+</p>
+<p align="center">
+  <a href="https://circleci.com/gh/balancemymoney/balance-open/">
+    <img src="https://img.shields.io/circleci/project/github/balancemymoney/balance-open.svg?style=flat-square"/>
+  </a>
+  <a href="https://github.com/balancemymoney/balance-open/releases/">
+    <img src="https://img.shields.io/github/release/balancemymoney/balance-open/all.svg?style=flat-square"/>
+  </a>
+  <img src="https://img.shields.io/github/license/balancemymoney/balance-open.svg?style=flat-square"/>
+</p>
 
-Balance Open: An app for all the world’s currencies.
-==========================
+<p align="center">
+  <br><br>
+  <img src="https://cl.ly/453225333E0u/balance-open.png" alt="Balance Open Menubar App" />
+  <br><br>
+</p>
 
 ## Installation
 1. Make sure you have Xcode 9 as the app is now written in Swift 4
