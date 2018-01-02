@@ -189,6 +189,7 @@ internal final class SettingsViewController: UIViewController
         tableSections.append(accountsSection)
         
         self.tableData = tableSections
+        self.tableView.reloadData()
     }
     
     // MARK: Actions
