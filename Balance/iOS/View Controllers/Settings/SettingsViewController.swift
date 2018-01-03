@@ -155,12 +155,8 @@ internal final class SettingsViewController: UIViewController
                 self.navigationController?.pushViewController(institutionSettingsViewController, animated: true)
             }
             
-            row.deletionHandler = { [unowned self] (indexPath) in
-                if institution.delete()
-                {
-                    self.reloadData()
-                    self.tableView.deleteRows(at: [indexPath], with: .automatic)
-                }
+            row.deletionHandler = { [weak self] (indexPath) in
+                self?.deleteAccount(at: indexPath)
             }
             
             institutionRows.append(row)
@@ -212,6 +208,18 @@ internal final class SettingsViewController: UIViewController
     @objc private func accountRemovedNotification(_ notification: Notification) {
         self.reloadData()
         self.tableView.reloadData()
+    }
+    
+    private func deleteAccount(at indexPath: IndexPath) {
+        guard viewModel.removeInstitution(at: indexPath.row) else {
+            log.error("Cant delete intitution for indexpath \(indexPath)")
+            return
+        }
+        
+        var sectionData = self.tableData[indexPath.section]
+        sectionData.rows.remove(at: indexPath.row)
+        tableData[indexPath.section] = sectionData
+        tableView.deleteRows(at: [indexPath], with: .automatic)
     }
 }
 
