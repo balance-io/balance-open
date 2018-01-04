@@ -131,6 +131,8 @@ public enum CryptoCurrency: String, Equatable, Hashable {
     case iota  = "IOTA" // Alternate symbol for MIOTA
     case iot   = "IOT"  // Alternate symbol for MIOTA
     case votes = "VOTES"
+    case amm   = "AMM"
+    case qash  = "QASH"
     
     public var code: String {
         return rawValue
@@ -155,6 +157,8 @@ public enum CryptoCurrency: String, Equatable, Hashable {
         case .usdt:               return "Tether"
         case .miota, .iota, .iot: return "IOTA"
         case .votes:              return "VOTES"
+        case .amm:                return "MicroMoney"
+        case .qash:               return "QASH"
         }
     }
     
@@ -162,6 +166,8 @@ public enum CryptoCurrency: String, Equatable, Hashable {
         switch self {
         case .votes:
             return 10
+        case .amm, .qash:
+            return 14
         default:
             return 8
         }
