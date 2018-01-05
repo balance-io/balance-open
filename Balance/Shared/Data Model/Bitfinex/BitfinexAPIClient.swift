@@ -207,7 +207,7 @@ extension BitfinexAPIClient: ExchangeApi {
     func authenticate(secret: String, key: String, passphrase: String) {
         assert(false, "implement")
     }
-    
+
     func authenticationChallenge(loginStrings: [Field], existingInstitution: Institution? = nil, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
         assert(loginStrings.count == 2, "number of auth fields should be 2 for Bitfinex")
         
@@ -242,11 +242,9 @@ extension BitfinexAPIClient: ExchangeApi {
             try self.fetchWallets { _, error in
                 guard let unwrappedError = error else {
                     do {
-                        let credentialsIdentifier = "main"
-                        try credentials.save(identifier: credentialsIdentifier)
-                        
                         if let existingInstitution = existingInstitution {
-                            existingInstitution.accessToken = credentialsIdentifier
+                            try credentials.save(identifier: "\(existingInstitution.institutionId)")
+                            existingInstitution.accessToken = "\(existingInstitution.institutionId)"
                             async {
                                 closeBlock(true, error, existingInstitution)
                             }
@@ -257,7 +255,7 @@ extension BitfinexAPIClient: ExchangeApi {
                                 }
                                 return
                             }
-                            institution.accessToken = credentialsIdentifier
+                            institution.accessToken = "\(institution.institutionId)"
                             
                             try self.fetchWallets({ (wallets, error) in
                                 guard let unwrappedWallets = wallets else {
