@@ -39,7 +39,8 @@ internal extension KrakenAPIClient
         guard let unwrappedCredentials = credentials else {
             throw APICredentialsComponents.Error.noCredentials
         }
-        let nonce = String(Int64((Date().timeIntervalSince1970 + 15) * 1000000000))
+        
+        let nonce = String(Int64(Date().timeIntervalSince1970 * 1000000000))
         var parameters = [String:String]()
         parameters.updateValue(nonce, forKey: "nonce")
         if let params = params {
@@ -75,7 +76,7 @@ internal extension KrakenAPIClient
         let request = try self.generateAccountRequest(credentials: self.credentials)
 
         // Perform request
-        let task = self.session.dataTask(with: request) { (data, response, error) in
+        let task = self.session.dataTask(with: request) { [weak self] (data, response, error) in
             guard let httpResponse = response as? HTTPURLResponse,
                   let unwrappedData = data,
                   let json = try? JSONSerialization.jsonObject(with: unwrappedData, options: []) else
@@ -85,10 +86,13 @@ internal extension KrakenAPIClient
             }
             
             if case 200...299 = httpResponse.statusCode {
+                let krakenAPIError = self?.validateKrakenAPIError(on: json)
+                
                 guard let responseJSON = json as? [String : Any],
-                      let resultJSON = responseJSON["result"] as? [String : String] else
+                    let resultJSON = responseJSON["result"] as? [String : String],
+                    krakenAPIError == nil else
                 {
-                    completionHandler(nil, APIError.invalidJSON)
+                    completionHandler(nil, krakenAPIError)
                     return
                 }
                 
@@ -132,7 +136,7 @@ internal extension KrakenAPIClient
         let request = try self.generateTransactionRequest(credentials: self.credentials)
         
         // Perform request
-        let task = self.session.dataTask(with: request) { (data, response, error) in
+        let task = self.session.dataTask(with: request) { [weak self] (data, response, error) in
             guard let httpResponse = response as? HTTPURLResponse,
                 let unwrappedData = data,
                 let json = try? JSONSerialization.jsonObject(with: unwrappedData, options: []) else
@@ -148,20 +152,21 @@ internal extension KrakenAPIClient
                     }
                     return
                 }
-                guard let resultJSON = responseJSON["result"] as? [String: Any] else {
+                
+                let krakenAPIError = self?.validateKrakenAPIError(on: responseJSON)
+                
+                guard let resultJSON = responseJSON["result"] as? [String: Any],
+                    krakenAPIError == nil else {
                     async {
-                        if let error = responseJSON["error"] as? String, error == "Invalid key" {
-                            completionHandler(nil, APIError.keysPermissionError)
-                        } else {
-                            completionHandler(nil, APIError.invalidJSON)
-                        }
+                        completionHandler(nil, krakenAPIError)
                     }
+                    
                     return
                 }
                 // Build accounts
                 var transactions = [KrakenAPIClient.Transaction]()
                 guard let allTransactions = resultJSON["ledger"] as? [String:Any] else {
-                    async {completionHandler(nil, APIError.invalidJSON)}
+                    async {completionHandler(nil, ModelError.invalidJSON(json: responseJSON))}
                     return
                 }
                 for key in allTransactions.keys {
@@ -237,7 +242,7 @@ extension KrakenAPIClient: ExchangeApi {
             let request = try self.generateAccountRequest(credentials: credentials)
             
             // Perform request
-            let task = self.session.dataTask(with: request) { (data, response, error) in
+            let task = self.session.dataTask(with: request) { [weak self] (data, response, error) in
                 guard let httpResponse = response as? HTTPURLResponse,
                     let unwrappedData = data,
                     let json = try? JSONSerialization.jsonObject(with: unwrappedData, options: [])
@@ -250,13 +255,15 @@ extension KrakenAPIClient: ExchangeApi {
                 }
                 
                 if case 200...299 = httpResponse.statusCode {
+                    let krakenAPIError = self?.validateKrakenAPIError(on: json)
+                    
                     guard let responseJSON = json as? [String : Any],
-                        let resultJSON = responseJSON["result"] as? [String : String] else
-                    {
-                        async {
-                            closeBlock(true, APIError.invalidJSON, nil)
-                        }
-                        return
+                        let resultJSON = responseJSON["result"] as? [String : String],
+                        krakenAPIError == nil else {
+                            async {
+                                closeBlock(true, krakenAPIError, nil)
+                            }
+                            return
                     }
                     
                     if let existingInstitution = existingInstitution {
