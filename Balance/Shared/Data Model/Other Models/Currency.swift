@@ -130,6 +130,9 @@ public enum CryptoCurrency: String, Equatable, Hashable {
     case miota = "MIOTA"
     case iota  = "IOTA" // Alternate symbol for MIOTA
     case iot   = "IOT"  // Alternate symbol for MIOTA
+    case votes = "VOTES"
+    case amm   = "AMM"
+    case qash  = "QASH"
     
     public var code: String {
         return rawValue
@@ -153,11 +156,21 @@ public enum CryptoCurrency: String, Equatable, Hashable {
         case .zrx:                return "0x"
         case .usdt:               return "Tether"
         case .miota, .iota, .iot: return "IOTA"
+        case .votes:              return "VOTES"
+        case .amm:                return "MicroMoney"
+        case .qash:               return "QASH"
         }
     }
     
     public var decimals: Int {
-        return 8
+        switch self {
+        case .votes:
+            return 10
+        case .amm, .qash:
+            return 14
+        default:
+            return 8
+        }
     }
     
     // For cases like XBT, we want to be able to easily standardize to BTC
