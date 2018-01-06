@@ -147,8 +147,8 @@ class AddAccountViewController: NSViewController {
         welcomeField.usesSingleLineMode = true
         containerView.addSubview(welcomeField)
         welcomeField.snp.makeConstraints { make in
-            make.leading.equalTo(containerView).inset(10)
-            make.trailing.equalTo(containerView).inset(10)
+            make.left.equalTo(containerView).inset(10)
+            make.right.equalTo(containerView).inset(10)
             make.top.equalTo(logoImageView.snp.bottom).offset(25)
         }
         
@@ -159,8 +159,8 @@ class AddAccountViewController: NSViewController {
         subtitleField.usesSingleLineMode = true
         containerView.addSubview(subtitleField)
         subtitleField.snp.makeConstraints { make in
-            make.leading.equalTo(containerView).inset(10)
-            make.trailing.equalTo(containerView).inset(10)
+            make.left.equalTo(containerView).inset(10)
+            make.right.equalTo(containerView).inset(10)
             make.top.equalTo(welcomeField.snp.bottom).offset(10)
         }
         
@@ -172,8 +172,8 @@ class AddAccountViewController: NSViewController {
         requestExplanationField.usesSingleLineMode = true
         containerView.addSubview(requestExplanationField)
         requestExplanationField.snp.makeConstraints { make in
-            make.leading.equalTo(containerView).inset(10)
-            make.trailing.equalTo(containerView).inset(10)
+            make.left.equalTo(containerView).inset(10)
+            make.right.equalTo(containerView).inset(10)
             make.top.equalTo(subtitleField.snp.bottom).offset(10)
         }
         
@@ -239,7 +239,7 @@ class AddAccountViewController: NSViewController {
             self.view.addSubview(preferencesButton)
             preferencesButton.snp.makeConstraints { make in
                 make.bottom.equalTo(self.view).offset(-11)
-                make.trailing.equalTo(self.view).offset(-11)
+                make.right.equalTo(self.view).offset(-11)
                 make.width.equalTo(16)
                 make.height.equalTo(16)
             }

@@ -11,6 +11,7 @@ import Foundation
 struct Notifications {
     static let InstitutionAdded                       = Notification.Name("InstitutionAdded")
     static let InstitutionRemoved                     = Notification.Name("InstitutionRemoved")
+    static let InstitutionPatched                     = Notification.Name("InstitutionPatched")
     static let SyncStarted                            = Notification.Name("SyncStarted")
     static let SyncingInstitution                     = Notification.Name("SyncingInstitution")
     static let SyncCompleted                          = Notification.Name("SyncCompleted")
@@ -35,7 +36,6 @@ struct Notifications {
     static let LockUserInterface                      = Notification.Name("LockUserInterface")
     static let UnlockUserInterface                    = Notification.Name("UnlockUserInterface")
     static let ShowPatchAccount                       = Notification.Name("ShowPatchAccount")
-    static let AccountPatched                         = Notification.Name("AccountPatched")
     static let NetworkBecameReachable                 = Notification.Name("NetworkBecameReachable")
     static let NetworkBecameUnreachable               = Notification.Name("NetworkBecameUnreachable")
     static let DisplayServerMessage                   = Notification.Name("DisplayServerMessage")

@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 internal class StackedCardCollectionView: UICollectionView {
     // Internal
     internal let stackedLayout = StackedLayout()
@@ -18,13 +17,14 @@ internal class StackedCardCollectionView: UICollectionView {
     // MARK: Initialization
     
     internal required init() {
-        super.init(frame: .zero, collectionViewLayout: self.stackedLayout)
+        super.init(frame: .zero, collectionViewLayout: stackedLayout)
         
-        self.allowsMultipleSelection = true
+        allowsMultipleSelection = true
         
         // Select item gesture
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapGestureEngaged(_:)))
-        self.addGestureRecognizer(tapGesture)
+        let tapGesture = UITapGestureRecognizer(target: self,
+                                                action: #selector(tapGestureEngaged))
+        addGestureRecognizer(tapGesture)
     }
     
     internal required init?(coder aDecoder: NSCoder) {
@@ -36,32 +36,27 @@ internal class StackedCardCollectionView: UICollectionView {
     // Gestures
     
     @objc private func tapGestureEngaged(_ gesture: UITapGestureRecognizer) {
-        guard let indexPath = self.indexPathForItem(at: gesture.location(in: self)),
-              let selectedIndexPaths = self.indexPathsForSelectedItems else {
+        guard let indexPath = indexPathForItem(at: gesture.location(in: self)),
+              let selectedIndexPaths = indexPathsForSelectedItems else {
             return
         }
         
-        if selectedIndexPaths.contains(indexPath)
-        {
-            self.deselectItem(at: indexPath, animated: false)
-            
-            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: [.curveEaseInOut, .allowUserInteraction], animations: {
-                self.collectionViewLayout.invalidateLayout()
-                self.layoutIfNeeded()
-            }, completion: { (_) in
-                self.delegate?.collectionView!(self, didDeselectItemAt: indexPath)
-            })
+        if selectedIndexPaths.contains(indexPath) {
+            deselectItem(at: indexPath, animated: false)
+        } else {
+            selectItem(at: indexPath, animated: false, scrollPosition: [])
         }
-        else
-        {
-            self.selectItem(at: indexPath, animated: false, scrollPosition: [])
-            
-            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: [.curveEaseInOut, .allowUserInteraction], animations: {
-                self.collectionViewLayout.invalidateLayout()
-                self.layoutIfNeeded()
-            }, completion: { (_) in
-                self.delegate?.collectionView!(self, didSelectItemAt: indexPath)
-            })
+        
+        UIView.animate(withDuration: 0.5,
+                       delay: 0.0,
+                       usingSpringWithDamping: 0.8,
+                       initialSpringVelocity: 0.0,
+                       options: [.curveEaseInOut, .allowUserInteraction],
+                       animations: {
+                        self.collectionViewLayout.invalidateLayout()
+                        self.layoutIfNeeded()
+        }) { _ in
+            self.delegate?.collectionView!(self, didSelectItemAt: indexPath)
         }
     }
 }

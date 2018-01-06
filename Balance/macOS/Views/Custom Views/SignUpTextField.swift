@@ -71,7 +71,7 @@ class SignUpTextField: View, TextFieldDelegate {
             make.width.equalTo(30)
             make.height.equalTo(30)
             make.top.equalToSuperview()
-            make.leading.equalTo(self)
+            make.left.equalTo(self)
         }
         
         var iconImage = #imageLiteral(resourceName: "login-user")
@@ -135,11 +135,11 @@ class SignUpTextField: View, TextFieldDelegate {
         self.addSubview(textField)
         textField.snp.makeConstraints { make in
             if iconImageSize.width == 0 {
-                make.leading.equalToSuperview().offset(offset)
+                make.left.equalToSuperview().offset(offset)
             } else {
-                make.leading.equalTo(iconContainer.snp.trailing)
+                make.left.equalTo(iconContainer.snp.right)
             }
-            make.trailing.equalToSuperview().offset(-offset)
+            make.right.equalToSuperview().offset(-offset)
             make.top.equalToSuperview().offset(5.5)
             make.height.equalToSuperview().offset(-11)
         }

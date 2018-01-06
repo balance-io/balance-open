@@ -32,9 +32,9 @@ class LockViewController: NSViewController, NSTextFieldDelegate {
         touchIdButton.isHidden = !appLock.touchIdEnabled
         passwordField.snp.updateConstraints { make in
             if appLock.touchIdEnabled {
-                make.leading.equalTo(self.view).offset(80)
+                make.left.equalTo(self.view).offset(80)
             } else {
-                make.leading.equalTo(self.view).offset(40)
+                make.left.equalTo(self.view).offset(40)
             }
         }
     }
@@ -49,8 +49,8 @@ class LockViewController: NSViewController, NSTextFieldDelegate {
         titleField.usesSingleLineMode = true
         self.view.addSubview(titleField)
         titleField.snp.makeConstraints { make in
-            make.leading.equalTo(self.view).inset(10)
-            make.trailing.equalTo(self.view).inset(10)
+            make.left.equalTo(self.view).inset(10)
+            make.right.equalTo(self.view).inset(10)
             make.top.equalTo(self.view).inset(19)
         }
         
@@ -67,8 +67,8 @@ class LockViewController: NSViewController, NSTextFieldDelegate {
         explanationField.snp.makeConstraints { make in
             make.centerX.equalTo(titleField)
             make.top.equalTo(titleField.snp.bottom).offset(12)
-            make.leading.equalTo(self.view).offset(20)
-            make.trailing.equalTo(self.view).offset(-20)
+            make.left.equalTo(self.view).offset(20)
+            make.right.equalTo(self.view).offset(-20)
         }
         
         passwordField.delegate = self
@@ -82,11 +82,11 @@ class LockViewController: NSViewController, NSTextFieldDelegate {
             make.height.equalTo(30)
             make.top.equalTo(explanationField.snp.bottom).offset(20)
             if appLock.touchIdEnabled {
-                make.leading.equalTo(self.view).offset(80)
+                make.left.equalTo(self.view).offset(80)
             } else {
-                make.leading.equalTo(self.view).offset(40)
+                make.left.equalTo(self.view).offset(40)
             }
-            make.trailing.equalTo(self.view).offset(-110)
+            make.right.equalTo(self.view).offset(-110)
         }
         
         let button = Button()
@@ -100,7 +100,7 @@ class LockViewController: NSViewController, NSTextFieldDelegate {
             make.width.equalTo(60)
             make.height.equalTo(25)
             make.centerY.equalTo(passwordField.snp.centerY)
-            make.leading.equalTo(passwordField.snp.trailing).offset(10)
+            make.left.equalTo(passwordField.snp.right).offset(10)
 //            make.centerX.equalTo(self.view)
 //            make.bottom.equalTo(self.view).offset(-30)
         }
@@ -118,8 +118,8 @@ class LockViewController: NSViewController, NSTextFieldDelegate {
             make.width.equalTo(25)
             make.height.equalTo(25)
             make.centerY.equalTo(passwordField)
-            make.trailing.equalTo(passwordField.snp.leading).offset(-10)
-            //            make.leading.equalTo(touchIDTitleField.snp.trailing).offset(20)
+            make.right.equalTo(passwordField.snp.left).offset(-10)
+            //            make.left.equalTo(touchIDTitleField.snp.right).offset(20)
         }
         
         hintField.font = NSFont.systemFont(ofSize: 11)

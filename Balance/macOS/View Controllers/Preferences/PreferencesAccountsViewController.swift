@@ -34,7 +34,7 @@ class PreferencesAccountsViewController: NSViewController {
         institutionsBackgroundView.drawingBlock = PreferencesAccounts.drawAccountPreferencesBackground
         self.view.addSubview(institutionsBackgroundView)
         institutionsBackgroundView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(15)
+            make.left.equalToSuperview().offset(15)
             make.top.equalToSuperview().offset(15)
             make.width.equalTo(193)
             make.height.equalTo(252)
@@ -62,8 +62,8 @@ class PreferencesAccountsViewController: NSViewController {
         institutionFooterHorizLine.layerBackgroundColor = NSColor(deviceWhiteInt: 235)
         institutionsBackgroundView.addSubview(institutionFooterHorizLine)
         institutionFooterHorizLine.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(1)
-            make.trailing.equalToSuperview().offset(-1)
+            make.left.equalToSuperview().offset(1)
+            make.right.equalToSuperview().offset(-1)
             make.bottom.equalToSuperview().offset(-33)
             make.height.equalTo(1)
         }
@@ -92,7 +92,7 @@ class PreferencesAccountsViewController: NSViewController {
         
         institutionsBackgroundView.addSubview(addAccountButton)
         addAccountButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
+            make.left.equalToSuperview()
             make.bottom.equalToSuperview().offset(-3.5)
             make.width.equalTo(115)
             make.height.equalTo(30)
@@ -111,7 +111,7 @@ class PreferencesAccountsViewController: NSViewController {
         removeAccountButton.attributedAlternateTitle = NSAttributedString(string: "Remove", attributes: removeAccountAttributes)
         institutionsBackgroundView.addSubview(removeAccountButton)
         removeAccountButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview()
+            make.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(-3.5)
             make.width.equalToSuperview().offset(-115)
             make.height.equalTo(30)
@@ -123,7 +123,7 @@ class PreferencesAccountsViewController: NSViewController {
         accountsBackgroundView.drawingBlock = PreferencesAccounts.drawAccountPreferencesBackground
         self.view.addSubview(accountsBackgroundView)
         accountsBackgroundView.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-15)
+            make.right.equalToSuperview().offset(-15)
             make.top.equalToSuperview().offset(15)
             make.width.equalTo(269)
             make.height.equalTo(252)
@@ -138,7 +138,7 @@ class PreferencesAccountsViewController: NSViewController {
         nameField.stringValue = "Account"
         accountsBackgroundView.addSubview(nameField)
         nameField.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(9)
+            make.left.equalToSuperview().offset(9)
             make.width.equalTo(100)
             make.top.equalToSuperview()
             make.height.equalTo(24)
@@ -153,7 +153,7 @@ class PreferencesAccountsViewController: NSViewController {
         showField.stringValue = "Show"
         accountsBackgroundView.addSubview(showField)
         showField.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-9)
+            make.right.equalToSuperview().offset(-9)
             make.width.equalTo(100)
             make.top.equalToSuperview()
             make.height.equalTo(24)
@@ -163,8 +163,8 @@ class PreferencesAccountsViewController: NSViewController {
         accountHeaderLine.layerBackgroundColor = NSColor(deviceWhiteInt: 235)
         accountsBackgroundView.addSubview(accountHeaderLine)
         accountHeaderLine.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(1)
-            make.trailing.equalToSuperview().offset(-1)
+            make.left.equalToSuperview().offset(1)
+            make.right.equalToSuperview().offset(-1)
             make.top.equalToSuperview().offset(24)
             make.height.equalTo(1)
         }
@@ -222,6 +222,11 @@ class PreferencesAccountsViewController: NSViewController {
     }
     
     @objc fileprivate func reloadData() {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(reloadDataDelayed), object: nil)
+        self.perform(#selector(reloadDataDelayed), with: nil, afterDelay: 0.5)
+    }
+    
+    @objc fileprivate func reloadDataDelayed() {
         institutions = AccountRepository.si.accountsByInstitution(includeHidden: true)
         institutionsTableView.reloadData()
         selectFirstInstitution()
@@ -238,14 +243,18 @@ class PreferencesAccountsViewController: NSViewController {
     }
     
     @IBAction func removeAccount(_ sender: NSButton) {
+        let institution = self.institutions.keys[self.institutionsTableView.selectedIndex.row]
+        let messageText = "Are you sure you want to remove \"\(institution.displayName)\"?"
+        let informativeText = "This will permanently delete all related coins, tokens, transactions, and API keys from Balance."
+        
         let alert = NSAlert()
         alert.addButton(withTitle: "Cancel")
-        alert.addButton(withTitle: "OK")
-        alert.messageText = "Are you sure you want to remove this account?"
+        alert.addButton(withTitle: "Remove Account")
+        alert.messageText = messageText
+        alert.informativeText = informativeText
         alert.alertStyle = .critical
         alert.beginSheetModal(for: self.view.window!) { returnCode in
             if returnCode == NSApplication.ModalResponse.alertSecondButtonReturn {
-                let institution = self.institutions.keys[self.institutionsTableView.selectedIndex.row]
                 institution.delete()
             }
         }
@@ -369,8 +378,8 @@ fileprivate class InstitutionCell: View {
         nameField.cell?.lineBreakMode = .byTruncatingTail
         self.addSubview(nameField)
         nameField.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(24)
-            make.trailing.equalToSuperview().offset(-10)
+            make.left.equalToSuperview().offset(24)
+            make.right.equalToSuperview().offset(-10)
             make.top.equalToSuperview()
             make.height.equalToSuperview().offset(-2)
         }
@@ -418,8 +427,8 @@ fileprivate class AccountCell: View {
         nameField.cell?.lineBreakMode = .byTruncatingTail
         self.addSubview(nameField)
         nameField.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10)
-            make.trailing.equalToSuperview().offset(-30)
+            make.left.equalToSuperview().offset(10)
+            make.right.equalToSuperview().offset(-30)
             make.top.equalToSuperview()
             make.height.equalToSuperview().offset(-1)
         }
@@ -430,7 +439,7 @@ fileprivate class AccountCell: View {
         showButton.action = #selector(showButtonAction(button:))
         self.addSubview(showButton)
         showButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-10)
+            make.right.equalToSuperview().offset(-10)
             make.centerY.equalToSuperview()
         }
     }

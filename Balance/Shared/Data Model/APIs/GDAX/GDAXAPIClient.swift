@@ -46,9 +46,9 @@ internal final class GDAXAPIClient
         var fields: [Field]
         
         init() {
-            let keyField = Field(name: "Key", label: "Key", type: "key", value: nil)
-            let secretField = Field(name: "Secret", label: "Secret", type: "secret", value: nil)
-            let passphraseField = Field(name: "Passphrase", label: "Passphrase", type: "passphrase", value: nil)
+            let keyField = Field(name: "API Key", type: .key, value: nil)
+            let secretField = Field(name: "API Secret", type: .secret, value: nil)
+            let passphraseField = Field(name: "Passphrase", type: .passphrase, value: nil)
             self.fields = [keyField, secretField, passphraseField]
         }
     }
@@ -230,18 +230,18 @@ extension GDAXAPIClient: ExchangeApi {
         assert(false, "implement")
     }
     
-    func authenticationChallenge(loginStrings: [Field], closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
+    func authenticationChallenge(loginStrings: [Field], existingInstitution: Institution? = nil, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
         
         assert(loginStrings.count == 3, "number of auth fields should be 3 for GDAX")
         var secretField : String?
         var keyField : String?
         var passphrasField: String?
         for field in loginStrings {
-            if field.type == "key" {
+            if field.type == .key {
                 keyField = field.value
-            } else if field.type == "secret" {
+            } else if field.type == .secret {
                 secretField = field.value
-            } else if field.type == "passphrase" {
+            } else if field.type == .passphrase {
                 passphrasField = field.value
             } else {
                 assert(false, "wrong fields are passed into the poloniex auth, we require secret and key fields and values")
@@ -263,26 +263,35 @@ extension GDAXAPIClient: ExchangeApi {
                     do {
                         let credentialsIdentifier = "main"
                         try credentials.save(identifier: credentialsIdentifier)
-                        let newInstitution = InstitutionRepository.si.institution(source: .gdax, sourceInstitutionId: "", name: "GDAX")
-                        newInstitution?.accessToken = credentialsIdentifier
                         
-                        guard let unwrappedAccounts = accounts, let institution = newInstitution else {
-                            async {
-                                closeBlock(false, error, nil)
-                            }
-                            return
-                        }
-                        for account in unwrappedAccounts {
-                            let currency = Currency.rawValue(account.currencyCode)
-                            let currentBalance = account.balance.integerValueWith(decimals: currency.decimals)
-                            let availableBalance = account.availableBalance.integerValueWith(decimals: currency.decimals)
+                        if let existingInstitution = existingInstitution {
+                            existingInstitution.accessToken = credentialsIdentifier
                             
-                            // Initialize an Account object to insert the record
-                            AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: account.identifier, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: account.currencyCode, currency: account.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
-                        }
-                        
-                        async {
-                            closeBlock(true, nil, institution)
+                            async {
+                                closeBlock(true, nil, existingInstitution)
+                            }
+                        } else {
+                            let newInstitution = InstitutionRepository.si.institution(source: .gdax, sourceInstitutionId: "", name: "GDAX")
+                            newInstitution?.accessToken = credentialsIdentifier
+                            
+                            guard let unwrappedAccounts = accounts, let institution = newInstitution else {
+                                async {
+                                    closeBlock(false, error, nil)
+                                }
+                                return
+                            }
+                            for account in unwrappedAccounts {
+                                let currency = Currency.rawValue(account.currencyCode)
+                                let currentBalance = account.balance.integerValueWith(decimals: currency.decimals)
+                                let availableBalance = account.availableBalance.integerValueWith(decimals: currency.decimals)
+                                
+                                // Initialize an Account object to insert the record
+                                AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: account.identifier, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: account.currencyCode, currency: account.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
+                            }
+                            
+                            async {
+                                closeBlock(true, nil, institution)
+                            }
                         }
                     }
                     catch {

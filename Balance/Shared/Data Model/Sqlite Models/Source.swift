@@ -25,7 +25,7 @@ enum Source: Int, CustomStringConvertible {
         case .gdax:      return "GDAX"
         case .bitfinex:  return "Bitfinex"
         case .kraken:    return "Kraken"
-        case .ethplorer: return "Ethplorer"
+        case .ethplorer: return "Ethereum Wallet"
         case .bittrex:   return "BITTREX"
         }
     }

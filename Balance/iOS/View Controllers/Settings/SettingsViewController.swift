@@ -82,7 +82,12 @@ internal final class SettingsViewController: UIViewController
     
     // MARK: Data
     
-    private func reloadData()
+    private func reloadData() {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(reloadDataDelayed), object: nil)
+        self.perform(#selector(reloadDataDelayed), with: nil, afterDelay: 0.5)
+    }
+    
+    @objc private func reloadDataDelayed()
     {
         self.viewModel.reloadData()
         
@@ -150,12 +155,8 @@ internal final class SettingsViewController: UIViewController
                 self.navigationController?.pushViewController(institutionSettingsViewController, animated: true)
             }
             
-            row.deletionHandler = { [unowned self] (indexPath) in
-                if institution.delete()
-                {
-                    self.reloadData()
-                    self.tableView.deleteRows(at: [indexPath], with: .automatic)
-                }
+            row.deletionHandler = { [weak self] (indexPath) in
+                self?.deleteAccount(at: indexPath)
             }
             
             institutionRows.append(row)
@@ -184,6 +185,7 @@ internal final class SettingsViewController: UIViewController
         tableSections.append(accountsSection)
         
         self.tableData = tableSections
+        self.tableView.reloadData()
     }
     
     // MARK: Actions
@@ -206,6 +208,18 @@ internal final class SettingsViewController: UIViewController
     @objc private func accountRemovedNotification(_ notification: Notification) {
         self.reloadData()
         self.tableView.reloadData()
+    }
+    
+    private func deleteAccount(at indexPath: IndexPath) {
+        guard viewModel.removeInstitution(at: indexPath.row) else {
+            log.error("Cant delete intitution for indexpath \(indexPath)")
+            return
+        }
+        
+        var sectionData = self.tableData[indexPath.section]
+        sectionData.rows.remove(at: indexPath.row)
+        tableData[indexPath.section] = sectionData
+        tableView.deleteRows(at: [indexPath], with: .automatic)
     }
 }
 

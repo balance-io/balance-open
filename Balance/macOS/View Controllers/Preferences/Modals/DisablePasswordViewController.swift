@@ -48,7 +48,7 @@ class DisablePasswordViewController: NSViewController {
         self.view.addSubview(cancelButton)
         cancelButton.snp.makeConstraints { make in
             make.width.equalTo(100)
-            make.leading.equalTo(self.view).offset(20)
+            make.left.equalTo(self.view).offset(20)
             make.bottom.equalTo(self.view).offset(-20)
         }
         
@@ -63,7 +63,7 @@ class DisablePasswordViewController: NSViewController {
         self.view.addSubview(disableButton)
         disableButton.snp.makeConstraints { make in
             make.width.equalTo(190)
-            make.trailing.equalTo(self.view).offset(-20)
+            make.right.equalTo(self.view).offset(-20)
             make.bottom.equalTo(self.view).offset(-20)
         }
         
@@ -71,7 +71,7 @@ class DisablePasswordViewController: NSViewController {
         currentPasswordField.snp.makeConstraints{ make in
             make.width.equalTo(260)
             make.top.equalTo(self.view).offset(20)
-            make.trailing.equalTo(disableButton)
+            make.right.equalTo(disableButton)
         }
         
         currentPasswordLabelField.stringValue = "Current Password:"
@@ -81,7 +81,7 @@ class DisablePasswordViewController: NSViewController {
         self.view.addSubview(currentPasswordLabelField)
         currentPasswordLabelField.snp.makeConstraints{ make in
             make.centerY.equalTo(currentPasswordField)
-            make.trailing.equalTo(currentPasswordField.snp.leading).offset(-10)
+            make.right.equalTo(currentPasswordField.snp.left).offset(-10)
         }
     }
     

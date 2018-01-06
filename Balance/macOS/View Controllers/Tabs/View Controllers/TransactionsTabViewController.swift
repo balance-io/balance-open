@@ -108,8 +108,8 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         searchField.snp.makeConstraints { make in
             make.top.equalTo(self.view).offset(10)
             make.height.equalTo(29)
-            make.leading.equalTo(self.view).inset(12)
-            make.trailing.equalTo(self.view).inset(12)
+            make.left.equalTo(self.view).inset(12)
+            make.right.equalTo(self.view).inset(12)
         }
         
         categoriesDropdown.delegate = self
@@ -119,7 +119,7 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         self.view.addSubview(categoriesDropdown)
         categoriesDropdown.snp.makeConstraints { make in
             make.top.equalTo(searchField.snp.bottom).offset(44)
-            make.leading.equalTo(self.view).inset(9)
+            make.left.equalTo(self.view).inset(9)
             make.width.equalTo(191)
         }
         
@@ -130,7 +130,7 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         self.view.addSubview(accountsDropdown)
         accountsDropdown.snp.makeConstraints { make in
             make.top.equalTo(searchField.snp.bottom).offset(8)
-            make.leading.equalTo(self.view).inset(9)
+            make.left.equalTo(self.view).inset(9)
             make.width.equalTo(191)
         }
         
@@ -141,7 +141,7 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         self.view.addSubview(amountDropdown)
         amountDropdown.snp.makeConstraints { make in
             make.top.equalTo(searchField.snp.bottom).offset(44)
-            make.trailing.equalTo(self.view).inset(9)
+            make.right.equalTo(self.view).inset(9)
             make.width.equalTo(191)
         }
         
@@ -152,7 +152,7 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         self.view.addSubview(timeDropdown)
         timeDropdown.snp.makeConstraints { make in
             make.top.equalTo(searchField.snp.bottom).offset(8)
-            make.trailing.equalTo(self.view).inset(9)
+            make.right.equalTo(self.view).inset(9)
             make.width.equalTo(191)
         }
     }
@@ -176,8 +176,8 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         scrollView.documentView = tableView
         self.view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
             make.bottom.equalToSuperview()
             make.top.equalToSuperview()
         }
@@ -204,8 +204,8 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         self.view.addSubview(footerView)
         footerView.snp.makeConstraints { make in
             make.height.equalTo(0)
-            make.leading.equalTo(self.view)
-            make.trailing.equalTo(self.view)
+            make.left.equalTo(self.view)
+            make.right.equalTo(self.view)
             make.bottom.equalTo(self.view)
         }
         
@@ -215,7 +215,7 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         transactionCountField.usesSingleLineMode = true
         footerView.addSubview(transactionCountField)
         transactionCountField.snp.makeConstraints { make in
-            make.leading.equalTo(footerView).offset(10)
+            make.left.equalTo(footerView).offset(10)
             make.centerY.equalTo(footerView).offset(-1)
         }
         
@@ -225,7 +225,7 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         totalField.usesSingleLineMode = true
         footerView.addSubview(totalField)
         totalField.snp.makeConstraints { make in
-            make.trailing.equalTo(footerView).inset(12)
+            make.right.equalTo(footerView).inset(12)
             make.centerY.equalTo(footerView).offset(-1)
         }
     }
@@ -313,7 +313,12 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         }
     }
     
-    fileprivate func reloadData() {
+    func reloadData() {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(reloadDataDelayed), object: nil)
+        self.perform(#selector(reloadDataDelayed), with: nil, afterDelay: 0.5)
+    }
+    
+    @objc private func reloadDataDelayed() {
         viewModel.reloadData()
     }
     

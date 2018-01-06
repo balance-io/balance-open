@@ -505,18 +505,12 @@
 		E65312761FE8C3E400F57977 /* BITTREXDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312721FE8C3E400F57977 /* BITTREXDataHelper.swift */; };
 		E65312771FE8C3E400F57977 /* invalid_api_key.json in Resources */ = {isa = PBXBuildFile; fileRef = E65312731FE8C3E400F57977 /* invalid_api_key.json */; };
 		E653127B1FE8C40A00F57977 /* ExchangeAPIURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312781FE8C40900F57977 /* ExchangeAPIURLSession.swift */; };
-		E653127E1FE8C41900F57977 /* balances.json in Resources */ = {isa = PBXBuildFile; fileRef = E65312701FE8C3E400F57977 /* balances.json */; };
-		E653127F1FE8C41F00F57977 /* BITTREXDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312721FE8C3E400F57977 /* BITTREXDataHelper.swift */; };
-		E65312801FE8C41F00F57977 /* currencies.json in Resources */ = {isa = PBXBuildFile; fileRef = E65312711FE8C3E400F57977 /* currencies.json */; };
-		E65312811FE8C41F00F57977 /* invalid_api_key.json in Resources */ = {isa = PBXBuildFile; fileRef = E65312731FE8C3E400F57977 /* invalid_api_key.json */; };
-		E65312841FE8C42300F57977 /* ExchangeAPIURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312781FE8C40900F57977 /* ExchangeAPIURLSession.swift */; };
 		E653128B1FE8C4D100F57977 /* BITTREXApiAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312871FE8C47F00F57977 /* BITTREXApiAction.swift */; };
 		E653128C1FE8C4D200F57977 /* BITTREXApiAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312871FE8C47F00F57977 /* BITTREXApiAction.swift */; };
 		E653128D1FE8C4DA00F57977 /* BITTREXApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312851FE8C47F00F57977 /* BITTREXApiError.swift */; };
 		E653128E1FE8C4DA00F57977 /* BITTREXApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312851FE8C47F00F57977 /* BITTREXApiError.swift */; };
 		E653128F1FE8C4E000F57977 /* BITTREXInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312861FE8C47F00F57977 /* BITTREXInstitution.swift */; };
 		E65312901FE8C4E100F57977 /* BITTREXInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312861FE8C47F00F57977 /* BITTREXInstitution.swift */; };
-		E65312911FE8C53B00F57977 /* BITTREXApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E653127A1FE8C40A00F57977 /* BITTREXApiTest.swift */; };
 		E65312921FE8C53C00F57977 /* BITTREXApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E653127A1FE8C40A00F57977 /* BITTREXApiTest.swift */; };
 		E65312931FE8C69800F57977 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078421F4F8EC700D0054C /* TestHelpers.swift */; };
 		F1253E5E1D75D2D0001BD48C /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1253E5D1D75D2D0001BD48C /* KeychainManager.swift */; };
@@ -2613,13 +2607,10 @@
 				53F0786F1F4F916800D0054C /* FetchAccounts.json in Resources */,
 				A4E457311F79362F002E2879 /* PoloniexDeposit.json in Resources */,
 				A41204C51F719CB800FD8078 /* KrakenFetchAccounts.json in Resources */,
-				E65312811FE8C41F00F57977 /* invalid_api_key.json in Resources */,
 				53F078701F4F916800D0054C /* WithdrawToCrypto.json in Resources */,
 				A44C76271F7BE5A00024476E /* BitfinexMovement.json in Resources */,
 				53F0786C1F4F916500D0054C /* PoloniexTradingError.json in Resources */,
 				A41742971F73E8D2004A9B4F /* CoinbaseSendTransaction.json in Resources */,
-				E65312801FE8C41F00F57977 /* currencies.json in Resources */,
-				E653127E1FE8C41900F57977 /* balances.json in Resources */,
 				53F0786D1F4F916800D0054C /* Account.json in Resources */,
 				53F0786A1F4F916500D0054C /* CompleteBalancesResponse.json in Resources */,
 				53F0786E1F4F916800D0054C /* Error.json in Resources */,
@@ -3163,8 +3154,6 @@
 				A46DBC841F69B2C3006F4247 /* BitfinexCredentialsTests.swift in Sources */,
 				53F0785B1F4F8F2E00D0054C /* BalanceOpenTests.swift in Sources */,
 				A4E4572A1F7921BC002E2879 /* PoloniexAccountTests.swift in Sources */,
-				E65312841FE8C42300F57977 /* ExchangeAPIURLSession.swift in Sources */,
-				E653127F1FE8C41F00F57977 /* BITTREXDataHelper.swift in Sources */,
 				A41742941F73E84B004A9B4F /* CoinbaseTransactionTests.swift in Sources */,
 				53F0785D1F4F8F3C00D0054C /* CurrencyTests.swift in Sources */,
 				A4E457291F7921BC002E2879 /* InstitutionTests.swift in Sources */,
@@ -3175,7 +3164,6 @@
 				A4E4572E1F792206002E2879 /* PoloniexTransactionTests.swift in Sources */,
 				53F0785F1F4F8F3C00D0054C /* SearchTest.swift in Sources */,
 				A44C76251F7BE5280024476E /* BitfinexTransactionTests.swift in Sources */,
-				E65312911FE8C53B00F57977 /* BITTREXApiTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

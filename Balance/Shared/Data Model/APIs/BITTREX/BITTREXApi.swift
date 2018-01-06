@@ -9,7 +9,7 @@
 import Foundation
 import Security
 
-class BITTREXApi: NewExchangeApi, ExchangeApi {    
+class BITTREXApi: NewExchangeApi, ExchangeApi {
     
     private var apiKey: String = ""
     private var secretKey: String = ""
@@ -22,7 +22,7 @@ class BITTREXApi: NewExchangeApi, ExchangeApi {
         self.urlSession = urlSession ?? certValidatedSession
     }
     
-    func authenticationChallenge(loginStrings: [Field], closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
+    func authenticationChallenge(loginStrings: [Field], existingInstitution: Institution?, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
         //This should be removed by the new ExchangeApi Protocol
     }
     

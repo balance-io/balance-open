@@ -76,14 +76,14 @@ class PoloniexApi: ExchangeApi {
     
     // MARK: - Public -
     
-    func authenticationChallenge(loginStrings: [Field], closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
+    func authenticationChallenge(loginStrings: [Field], existingInstitution: Institution? = nil, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
         assert(loginStrings.count == 2, "number of auth fields should be 2 for Poloniex")
         var secretField : String?
         var keyField : String?
         for field in loginStrings {
-            if field.type == "key" {
+            if field.type == .key {
                 keyField = field.value
-            } else if field.type == "secret" {
+            } else if field.type == .secret {
                 secretField = field.value
             } else {
                 assert(false, "wrong fields are passed into the poloniex auth, we require secret and key fields and values")
@@ -96,7 +96,7 @@ class PoloniexApi: ExchangeApi {
             return
         }
         do {
-            try authenticate(secret: secret, key: key, closeBlock: closeBlock)
+            try authenticate(secret: secret, key: key, existingInstitution: existingInstitution, closeBlock: closeBlock)
         } catch {
         
         }
@@ -149,7 +149,7 @@ class PoloniexApi: ExchangeApi {
     }
     
     // Poloniex doesn't have an authenticate method "per-se" so we use the returnBalances call to validate the key-secret pair for login
-    fileprivate func authenticate(secret: String, key: String, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) throws {
+    fileprivate func authenticate(secret: String, key: String, existingInstitution: Institution?, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) throws {
         self.secret = secret
         self.key = key
         
@@ -170,8 +170,9 @@ class PoloniexApi: ExchangeApi {
                     if let _ = self.findError(data: safeData) {
                         throw PoloniexApi.CredentialsError.incorrectLoginCredentials
                     }
-                    // Create the institution and finish (we do not have access tokens)
-                    if let institution = InstitutionRepository.si.institution(source: .poloniex, sourceInstitutionId: "", name: "Poloniex") {
+                    
+                    // Create (or update) the institution and finish (we do not have access tokens)
+                    if let institution = existingInstitution ?? InstitutionRepository.si.institution(source: .poloniex, sourceInstitutionId: "", name: "Poloniex") {
                         institution.secret = secret
                         institution.apiKey = key
                         
@@ -247,7 +248,7 @@ class PoloniexApi: ExchangeApi {
     
     fileprivate func processPoloniexAccounts(accounts: [PoloniexAccount], institution: Institution) {
         for account in accounts {
-            // Create or upload the local account object
+            // Create or update the local account object
             account.updateLocalAccount(institution: institution)
         }
         

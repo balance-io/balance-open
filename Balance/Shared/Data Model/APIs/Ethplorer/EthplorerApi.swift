@@ -47,14 +47,14 @@ class EthplorerApi: ExchangeApi {
 
     // MARK: - Public -
     
-    func authenticationChallenge(loginStrings: [Field], closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
+    func authenticationChallenge(loginStrings: [Field], existingInstitution: Institution? = nil, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
         assert(loginStrings.count == 2, "number of auth fields should be 2 for Ethplorer")
         var nameField : String?
         var addressField : String?
         for field in loginStrings {
-            if field.type == "name" {
+            if field.type == .name {
                 nameField = field.value
-            } else if field.type == "address" {
+            } else if field.type == .address {
                 addressField = field.value
             } else {
                 assert(false, "wrong fields are passed into the Ethplore auth, we require secret and key fields and values")
@@ -66,7 +66,7 @@ class EthplorerApi: ExchangeApi {
             return
         }
         do {
-            try authenticate(name: name, address: address, closeBlock: closeBlock)
+            try authenticate(name: name, address: address, existingInstitution: existingInstitution, closeBlock: closeBlock)
         } catch {
             log.error("Failed to Ethplore wallet data: \(error)")
         }
@@ -111,7 +111,7 @@ class EthplorerApi: ExchangeApi {
     
     // MARK: - Private -
     
-    fileprivate func authenticate(name: String, address: String, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) throws {
+    fileprivate func authenticate(name: String, address: String, existingInstitution: Institution?, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) throws {
         self.address = address
         self.name = name
         
@@ -131,19 +131,26 @@ class EthplorerApi: ExchangeApi {
                         throw EthplorerApi.CredentialsError.incorrectLoginCredentials
                     }
                     
-                    //crete institution
-                    if let institution = InstitutionRepository.si.institution(source: .ethplorer, sourceInstitutionId: "", name: "\(name)") {
-                        institution.address = address
-                        
-                        //create accounts
-                        let ethexploreWallet = try self.parseEthploreWallet(data: safeData)
-                        self.processEthploreAccounts(ethplorerObject: ethexploreWallet, institution: institution)
-                        
+                    if let existingInstitution = existingInstitution {
+                        existingInstitution.address = address
                         async {
-                            closeBlock(true, nil, institution)
+                            closeBlock(true, nil, existingInstitution)
                         }
                     } else {
-                        throw "Error creating institution"
+                        //create institution
+                        if let institution = InstitutionRepository.si.institution(source: .ethplorer, sourceInstitutionId: "", name: "\(name)") {
+                            institution.address = address
+                            
+                            //create accounts
+                            let ethexploreWallet = try self.parseEthploreWallet(data: safeData)
+                            self.processEthploreAccounts(ethplorerObject: ethexploreWallet, institution: institution)
+                            
+                            async {
+                                closeBlock(true, nil, institution)
+                            }
+                        } else {
+                            throw "Error creating institution"
+                        }
                     }
                 } else {
                     log.error("Ethplore Error: \(String(describing: error))")
@@ -229,12 +236,6 @@ class EthplorerApi: ExchangeApi {
     @discardableResult func updateLocalAccount(institution: Institution) -> Account? {
         // Calculate the integer value of the balance based on the decimals
         if let newAccount = AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: currency.code, sourceInstitutionId: "", accountTypeId: .wallet, accountSubTypeId: nil, name: currency.name, currency: currency.code, currentBalance: balance, availableBalance: nil, number: nil, altCurrency: altCurrency?.code, altCurrentBalance: altBalance, altAvailableBalance: nil) {
-            
-            // Hide unpoplular currencies that have a 0 balance
-            if currency != Currency.btc && currency != Currency.eth {
-                newAccount.isHidden = (balance == 0)
-            }
-            
             return newAccount
         }
         return nil

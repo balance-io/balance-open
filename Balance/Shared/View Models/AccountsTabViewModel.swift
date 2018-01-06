@@ -64,6 +64,22 @@ class AccountsTabViewModel: TabViewModel {
         persistSortOrder()
     }
     
+    func removeInstitution(at index: Int) -> Bool {
+        guard let institution = institution(forSection: index) else {
+            log.error("Cant delete a row without an institution")
+            return false
+        }
+        
+        guard institution.delete() else {
+            log.error("Intitution with \(institution.institutionId) id, can't be deleted")
+            return false
+        }
+        
+        institutionRemoved(institution: institution)
+        
+        return true
+    }
+    
     func institutionRemoved(institution: Institution) {
         var newData = data
         newData[institution] = nil

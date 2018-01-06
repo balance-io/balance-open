@@ -8,29 +8,26 @@
 
 import UIKit
 
-
 @objc protocol StackedLayoutDelegate: class {
     func closedHeightForItem(at indexPath: IndexPath, in collectionView: UICollectionView) -> CGFloat
     func expandedHeightForItem(at indexPath: IndexPath, in collectionView: UICollectionView) -> CGFloat
 }
-
 
 internal final class StackedLayout: UICollectionViewLayout {
     // Internal
     internal weak var delegate: StackedLayoutDelegate?
     
     // Private
+    private let stretchValue: CGFloat = 0.2
+    private let itemOverlap: CGFloat = 40.0
     private var layoutAttributes = [IndexPath : UICollectionViewLayoutAttributes]()
     private var previousLayoutAttributes = [IndexPath : UICollectionViewLayoutAttributes]()
-    private let stretchValue: CGFloat = 0.2
-    
-    private let itemOverlap: CGFloat = 40.0
     private var contentHeight: CGFloat = 0.0
     
     // MARK: Layout
     
     override var collectionViewContentSize: CGSize {
-        guard let unwrappedCollectionView = self.collectionView else {
+        guard let unwrappedCollectionView = collectionView else {
             return CGSize.zero
         }
         
@@ -40,7 +37,7 @@ internal final class StackedLayout: UICollectionViewLayout {
         } else {
             minimumHeight = unwrappedCollectionView.bounds.height
         }
-        return CGSize(width: unwrappedCollectionView.bounds.width, height: max(self.contentHeight, minimumHeight))
+        return CGSize(width: unwrappedCollectionView.bounds.width, height: max(contentHeight, minimumHeight))
     }
     
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
@@ -50,7 +47,7 @@ internal final class StackedLayout: UICollectionViewLayout {
     internal override func prepare() {
         super.prepare()
         
-        guard let unwrappedCollectionView = self.collectionView,
+        guard let unwrappedCollectionView = collectionView,
               let selectedIndexPaths = unwrappedCollectionView.indexPathsForSelectedItems else {
             return
         }
@@ -62,8 +59,7 @@ internal final class StackedLayout: UICollectionViewLayout {
         var nextYCoor: CGFloat = 0.0
         
         for index in 0..<numberOfItems {
-            guard let unwrappedDelegate = self.delegate else
-            {
+            guard let unwrappedDelegate = delegate else {
                 continue
             }
             
@@ -72,8 +68,7 @@ internal final class StackedLayout: UICollectionViewLayout {
             let isLastItem = index == numberOfItems - 1
             
             var height: CGFloat
-            if !selectedIndexPaths.contains(indexPath)
-            {
+            if !selectedIndexPaths.contains(indexPath) {
                 height = unwrappedDelegate.expandedHeightForItem(at: indexPath, in: unwrappedCollectionView)
                 
                 // If not the last item, add extra height so that the next cell
@@ -81,9 +76,7 @@ internal final class StackedLayout: UICollectionViewLayout {
                 if !isLastItem {
                     height += self.itemOverlap
                 }
-            }
-            else
-            {
+            } else {
                 height = unwrappedDelegate.closedHeightForItem(at: indexPath, in: unwrappedCollectionView)
             }
             
@@ -109,20 +102,20 @@ internal final class StackedLayout: UICollectionViewLayout {
     }
     
     override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return self.previousLayoutAttributes[itemIndexPath]
+        return previousLayoutAttributes[itemIndexPath]
     }
     
     override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return self.layoutAttributes[itemIndexPath]
+        return layoutAttributes[itemIndexPath]
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return self.layoutAttributes[indexPath]
+        return layoutAttributes[indexPath]
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        let attributes = self.layoutAttributes.filter { (indexPath, attributes) -> Bool in
-            return rect.intersects(attributes.frame)
+        let attributes = layoutAttributes.filter {
+            rect.intersects($1.frame)
         }.values
         
         return Array(attributes)

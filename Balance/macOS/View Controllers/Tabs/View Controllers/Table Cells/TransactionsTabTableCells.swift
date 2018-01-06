@@ -68,6 +68,7 @@ fileprivate class NoHitMapView: MKMapView {
     }
 }
 
+fileprivate let hideConvertedAmounts = true
 class TransactionsTabTransactionCell: View {
     var model: Transaction?
     var index = TableIndex.none
@@ -95,8 +96,8 @@ class TransactionsTabTransactionCell: View {
         self.addSubview(topContainer)
         topContainer.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
             make.height.equalTo(CurrentTheme.transactions.cell.height)
         }
         
@@ -110,8 +111,8 @@ class TransactionsTabTransactionCell: View {
         topContainer.addSubview(topBackgroundViewFirstShadowView)
         topBackgroundViewFirstShadowView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
             make.height.equalToSuperview().offset(-10)
         }
         
@@ -124,8 +125,8 @@ class TransactionsTabTransactionCell: View {
         topContainer.addSubview(topBackgroundView)
         topBackgroundView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
             make.height.equalToSuperview().offset(-10)
         }
         
@@ -135,7 +136,7 @@ class TransactionsTabTransactionCell: View {
         typeField.alignment = .right
         topContainer.addSubview(typeField)
         typeField.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10)
+            make.left.equalToSuperview().offset(10)
             make.top.equalToSuperview().offset(16)
         }
         
@@ -146,7 +147,7 @@ class TransactionsTabTransactionCell: View {
         amountField.alignment = .right
         topContainer.addSubview(amountField)
         amountField.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10)
+            make.left.equalToSuperview().offset(10)
             make.bottom.equalToSuperview().offset(-17)
         }
         
@@ -156,7 +157,7 @@ class TransactionsTabTransactionCell: View {
         institutionNameField.alignment = .right
         topContainer.addSubview(institutionNameField)
         institutionNameField.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-10)
+            make.right.equalToSuperview().offset(-10)
             make.top.equalToSuperview().offset(16)
         }
 
@@ -167,9 +168,10 @@ class TransactionsTabTransactionCell: View {
         altAmountField.alignment = .right
         topContainer.addSubview(altAmountField)
         altAmountField.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-10)
+            make.right.equalToSuperview().offset(-10)
             make.bottom.equalToSuperview().offset(-17)
         }
+        altAmountField.isHidden = hideConvertedAmounts
         
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(cellOpened(_:)), name: TransactionsTabViewController.InternalNotifications.CellOpened)
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(cellClosed(_:)), name: TransactionsTabViewController.InternalNotifications.CellClosed)
@@ -202,10 +204,12 @@ class TransactionsTabTransactionCell: View {
         
         institutionNameField.stringValue = updatedModel.institution?.name ?? ""
         
-        if let displayAltAmount = updatedModel.displayAltAmount {
-            altAmountField.stringValue = amountToString(amount: displayAltAmount, currency: defaults.masterCurrency, showNegative: true, showCodeAfterValue: true)
-        } else {
-            altAmountField.stringValue = ""
+        if !hideConvertedAmounts {
+            if let displayAltAmount = updatedModel.displayAltAmount {
+                altAmountField.stringValue = amountToString(amount: displayAltAmount, currency: defaults.masterCurrency, showNegative: true, showCodeAfterValue: true)
+            } else {
+                altAmountField.stringValue = ""
+            }
         }
         
         self.toolTip = DateFormatter.localizedString(from: updatedModel.date, dateStyle: .medium, timeStyle: .medium)
@@ -221,16 +225,16 @@ class TransactionsTabTransactionCell: View {
         self.addSubview(bottomContainer)
         bottomContainer.snp.makeConstraints { make in
             make.top.equalTo(topContainer.snp.bottom)
-            make.leading.equalToSuperview()
-            make.trailing.equalTo(amountField)
+            make.left.equalToSuperview()
+            make.right.equalTo(amountField)
             make.height.equalTo(229)
         }
         
         infoContainer = View()
         bottomContainer.addSubview(infoContainer)
         infoContainer.snp.makeConstraints { make in
-            make.leading.equalTo(bottomContainer)
-            make.trailing.equalTo(bottomContainer)
+            make.left.equalTo(bottomContainer)
+            make.right.equalTo(bottomContainer)
             make.top.equalToSuperview().offset(8)
             make.bottom.equalTo(bottomContainer)
         }
@@ -242,8 +246,8 @@ class TransactionsTabTransactionCell: View {
         accountContainer.layerBackgroundColor = displayColor.withAlphaComponent(1)
         infoContainer.addSubview(accountContainer)
         accountContainer.snp.makeConstraints { make in
-            make.leading.equalTo(infoContainer)
-            make.trailing.equalTo(infoContainer)
+            make.left.equalTo(infoContainer)
+            make.right.equalTo(infoContainer)
             make.top.equalTo(infoContainer)
             make.height.equalTo(50)
         }
@@ -257,8 +261,8 @@ class TransactionsTabTransactionCell: View {
         institutionField.textColor = CurrentTheme.transactions.cellExpansion.fontColor
         accountContainer.addSubview(institutionField)
         institutionField.snp.makeConstraints { make in
-            make.leading.equalTo(accountContainer)
-            make.trailing.equalTo(accountContainer)
+            make.left.equalTo(accountContainer)
+            make.right.equalTo(accountContainer)
             make.height.equalTo(27)
             make.top.equalTo(accountContainer).offset(-2)
         }
@@ -270,8 +274,8 @@ class TransactionsTabTransactionCell: View {
         accountField.textColor = CurrentTheme.transactions.cellExpansion.fontColor.withAlphaComponent(0.9)
         accountContainer.addSubview(accountField)
         accountField.snp.makeConstraints { make in
-            make.leading.equalTo(accountContainer)
-            make.trailing.equalTo(accountContainer)
+            make.left.equalTo(accountContainer)
+            make.right.equalTo(accountContainer)
             make.height.equalTo(22)
             make.top.equalTo(institutionField.snp.bottom)
         }

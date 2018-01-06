@@ -27,11 +27,16 @@ fileprivate var lastState: String? = nil
 
 struct CoinbaseApi: ExchangeApi {
     
-    func authenticationChallenge(loginStrings: [Field], closeBlock: @escaping (_ success: Bool, _ error: Error?, _ institution: Institution?) -> Void) {
+    // Temporarily store the institution when patching. I would have just used the path in the URL but OAuth doesn't allow that. Hence this hack...
+    static var existingInstitution: Institution? = nil
+    
+    func authenticationChallenge(loginStrings: [Field], existingInstitution: Institution? = nil, closeBlock: @escaping (_ success: Bool, _ error: Error?, _ institution: Institution?) -> Void) {
         
     }
 
-    @discardableResult static func authenticate() -> Bool {
+    @discardableResult static func authenticate(existingInstitution: Institution? = nil) -> Bool {
+        self.existingInstitution = existingInstitution
+        
         let redirectUri = "balancemymoney%3A%2F%2Fcoinbase"
         let responseType = "code"
         let scope = "wallet%3Auser%3Aread,wallet%3Aaccounts%3Aread,wallet%3Atransactions%3Aread"
@@ -63,6 +68,7 @@ struct CoinbaseApi: ExchangeApi {
             return
         }
         
+        let patch = (existingInstitution != nil)
         lastState = nil
         let urlString = "\(subServerUrl)coinbase/requestToken"
         let url = URL(string: urlString)!
@@ -92,18 +98,28 @@ struct CoinbaseApi: ExchangeApi {
                     throw BalanceError.jsonDecoding
                 }
                 
-                // Create the institution and finish
-                let institution = InstitutionRepository.si.institution(source: .coinbase, sourceInstitutionId: "", name: "Coinbase")
+                // Create the institution (or use the existing one) and finish
+                let institution = existingInstitution ?? InstitutionRepository.si.institution(source: .coinbase, sourceInstitutionId: "", name: "Coinbase")
+                existingInstitution = nil
                 institution?.accessToken = accessToken
                 institution?.refreshToken = refreshToken
                 institution?.tokenExpireDate = Date().addingTimeInterval(expiresIn - 10.0)
                 institution?.apiScope = scope
+                if patch {
+                    institution?.passwordInvalid = false
+                    institution?.replace()
+                }
                 
                 // Sync accounts
                 if let institution = institution {
                     updateAccounts(institution: institution) { success, error in
                         if !success {
                             log.error("Error updating accounts: \(String(describing: error))")
+                        }
+                        
+                        if patch {
+                            let userInfo = Notifications.userInfoForInstitution(institution)
+                            NotificationCenter.postOnMainThread(name: Notifications.InstitutionPatched, object: nil, userInfo: userInfo)
                         }
                         
                         async {
@@ -184,6 +200,7 @@ struct CoinbaseApi: ExchangeApi {
             } catch {
                 if isInvalidCoinbaseCredentials(error: error) {
                     institution.passwordInvalid = true
+                    institution.replace()
                 }
                 async {
                     completion(false, error)
@@ -246,6 +263,7 @@ struct CoinbaseApi: ExchangeApi {
             } catch {
                 if isInvalidCoinbaseCredentials(error: error) {
                     institution.passwordInvalid = true
+                    institution.replace()
                 }
                 async {
                     completionHandler(nil, error)
@@ -388,19 +406,39 @@ extension CoinbaseApi {
         // TODO: Create enum types for each error
         let task = certValidatedSession.dataTask(with: request) { maybeData, maybeResponse, maybeError in
             do {
-                // Make sure there's data
-                guard let data = maybeData else {
-                    throw BalanceError.noData
-                }
-                
+                // Check for URLSession error
                 guard maybeError == nil else {
                     log.error("Failed with network error: \(String(describing: maybeError))")
                     throw BalanceError.networkError
                 }
                 
+                // Make sure there's data
+                guard let data = maybeData else {
+                    throw BalanceError.noData
+                }
+                
                 // Try to parse the JSON
-                guard let JSONResult = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject], let accessToken = JSONResult["accessToken"] as? String, accessToken.count > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.count > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval else {
+                guard let JSONResult = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] else {
                     throw BalanceError.jsonDecoding
+                }
+                
+                // Check for response code
+                guard let code = JSONResult["code"] as? Int, let balanceError = BalanceError(rawValue: code) else {
+                    throw BalanceError.unexpectedData
+                }
+                
+                // Check for BalanceError
+                guard balanceError == .success else {
+                    if balanceError == .authenticationError {
+                        institution.passwordInvalid = true
+                        institution.replace()
+                    }
+                    throw balanceError
+                }
+                
+                // Check for expected fields
+                guard let accessToken = JSONResult["accessToken"] as? String, accessToken.count > 0, let refreshToken = JSONResult["refreshToken"] as? String, refreshToken.count > 0, let expiresIn = JSONResult["expiresIn"] as? TimeInterval else {
+                    throw BalanceError.unexpectedData
                 }
                 
                 // Update the model

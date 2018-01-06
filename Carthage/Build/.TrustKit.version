@@ -1,15 +1,15 @@
 {
-  "commitish" : "59a64973962627026209c7167331cb5a38af2c5e",
+  "commitish" : "50d72f7fc58cbe2766342018f4023fbed6435cc1",
   "Mac" : [
     {
       "name" : "TrustKit",
-      "hash" : "06c5eb9610ecba53e65b89ad5ba288adcd8b9829b1989e21f8bfaae85abf0bb0"
+      "hash" : "3c53d7576cc31753cf2d48f9485ac1c489a8511c8845d4aafeef070b50861d58"
     }
   ],
   "iOS" : [
     {
       "name" : "TrustKit",
-      "hash" : "a0594fa9711e5e66973111a1bad615688e92116b5712c796ebf29fc4a060a975"
+      "hash" : "1665fb04ad66768889a84bc9f91b3673b3978c872e2b7c22c6bcead3725056c7"
     }
   ]
 }
