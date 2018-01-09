@@ -9,13 +9,13 @@
 import SVProgressHUD
 import UIKit
 
-
 internal class AddCredentialBasedAccountViewController: UIViewController
 {
     // Private
     private let source: Source
     private let viewModel: NewAccountViewModel
     private let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+    weak var delegate: AddAccountDelegate?
     
     private var tableSections = [TableSection]()
     
@@ -211,11 +211,12 @@ extension AddCredentialBasedAccountViewController: QRCodeScannerViewControllerDe
                 controller.dismiss(animated: true, completion: {
                     self.viewModel.authenticate(with: fields, completionHandler: { (success, error) in
                         async {
-                            if success
+                            if success && error == nil
                             {
                                 SVProgressHUD.showSuccess(withStatus: "\(self.source.description) account added!")
-
                                 self.navigationController?.popViewController(animated: true)
+                                self.delegate?.didAddAccount()
+                                
                                 return
                             }
 
@@ -223,8 +224,8 @@ extension AddCredentialBasedAccountViewController: QRCodeScannerViewControllerDe
 
                             // Show error message
                             let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
-
-                            let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                            let errorMessage = (error as? LocalizedError)?.recoverySuggestion ?? error?.localizedDescription
+                            let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
                             alertController.addAction(okAction)
                             self.present(alertController, animated: true, completion: nil)
                         }
