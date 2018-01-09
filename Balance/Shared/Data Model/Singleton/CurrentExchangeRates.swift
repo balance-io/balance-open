@@ -23,7 +23,7 @@ class CurrentExchangeRates {
         static let exchangeRatesUpdated = Notification.Name("exchangeRatesUpdated")
     }
     
-    fileprivate let exchangeRatesUrl = URL(string: "https://balance-server-eur.appspot.com/exchangeRates")!
+    fileprivate let exchangeRatesUrl = URL(string: "https://exchangerates.balancemy.money/exchangeRates")!
     
     fileprivate let cache = SimpleCache<ExchangeRateSource, [ExchangeRate]>()
     fileprivate let cachedRates = SimpleCache<String, Rate>()
