@@ -9,11 +9,11 @@
 import UIKit
 
 
-internal final class TransactionsHeaderReusableView: UICollectionReusableView, Reusable {
-    // Intenral
+internal final class CustomHeaderReusableView: UICollectionReusableView, Reusable {
+    
     internal let textLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 11.0, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 11.0, weight: .bold)
         label.textColor = UIColor(red: 60.0/255.0, green: 68.0/255.0, blue: 79.0/255.0, alpha: 0.4)
         
         return label
@@ -26,7 +26,7 @@ internal final class TransactionsHeaderReusableView: UICollectionReusableView, R
         
         // Text label
         self.addSubview(self.textLabel)
-        
+        self.backgroundColor = .groupTableViewBackground
         self.textLabel.snp.makeConstraints { (make) in
             make.left.equalToSuperview().inset(14.0)
             make.bottom.equalToSuperview().inset(9.0)

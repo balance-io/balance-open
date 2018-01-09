@@ -10,15 +10,16 @@ import UIKit
 
 
 internal final class PriceTickerViewController: UIViewController {
+    
     // Private
     private let viewModel = PriceTickerTabViewModel()
     private let refreshControl = UIRefreshControl()
-    
     private let collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        
-        return collectionView
+        flowLayout.sectionHeadersPinToVisibleBounds = true
+        flowLayout.sectionInset = UIEdgeInsetsMake(20, 0, 20, 0);
+        flowLayout.headerReferenceSize = CGSize(width: 30, height: 30)
+        return UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     }()
     
     // MARK: Initialization
@@ -35,29 +36,10 @@ internal final class PriceTickerViewController: UIViewController {
     }
     
     // MARK: View lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Navigation bar
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = true
-        }
-        
-        // Refresh control
-        self.collectionView.refreshControl = self.refreshControl
-        self.refreshControl.addTarget(self, action: #selector(self.refreshControlValueChanged(_:)), for: .valueChanged)
-        
-        // Collection view
-        self.collectionView.backgroundColor = UIColor(red: 237.0/255.0, green: 238.0/255.0, blue: 240.0/255.0, alpha: 1.0)
-        self.collectionView.dataSource = self
-        self.collectionView.delegate = self
-        self.collectionView.register(reusableCell: CurrencyCollectionViewCell.self)
-        self.view.addSubview(self.collectionView)
-        
-        self.collectionView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
+        setupView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,23 +53,48 @@ internal final class PriceTickerViewController: UIViewController {
         NotificationCenter.removeObserverOnMainThread(self, name: CurrentExchangeRates.Notifications.exchangeRatesUpdated, object: nil)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+}
+
+// MARK: Private Methods
+private extension PriceTickerViewController {
+    
+    func setupView() {
+        // Navigation bar
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+        }
+        
+        // Refresh control
+        refreshControl.addTarget(self, action: #selector(refreshControlValueChanged), for: .valueChanged)
+        
+        collectionView.backgroundColor = UIColor(red: 237.0/255.0, green: 238.0/255.0, blue: 240.0/255.0, alpha: 1.0)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(reusableCell: CurrencyCollectionViewCell.self)
+        collectionView.register(reusableSupplementaryView: CustomHeaderReusableView.self,
+                                kind: UICollectionElementKindSectionHeader)
+        collectionView.refreshControl = self.refreshControl
+        
+        view.addSubview(collectionView)
+        
+        collectionView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
     }
     
-    // MARK: Data
     
-    @objc private func reloadData() {
-        self.viewModel.reloadData()
-        self.collectionView.reloadData()
+    // MARK: Data
+    @objc func reloadData() {
+        viewModel.reloadData()
+        collectionView.reloadData()
     }
     
     // MARK: Actions
-    
-    @objc private func refreshControlValueChanged(_ sender: Any) {
-        self.viewModel.reloadData()
-        self.refreshControl.endRefreshing()
+    @objc func refreshControlValueChanged(_ sender: Any) {
+        viewModel.reloadData()
+        refreshControl.endRefreshing()
     }
+    
 }
 
 // MARK: UICollectionViewDataSource
@@ -119,6 +126,14 @@ extension PriceTickerViewController: UICollectionViewDelegate {
             currencyCell.update(currency: currency, rate: rate)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(at: indexPath, kind: kind) as CustomHeaderReusableView
+        header.textLabel.text = viewModel.name(forSection: indexPath.section)
+        
+        return header
+    }
+    
 }
 
 // MARK: UICollectionViewFlowLayout
