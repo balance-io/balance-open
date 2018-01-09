@@ -168,4 +168,9 @@ final class NewAccountViewModel {
         let field = fields[index]
         return field.name
     }
+    
+    func testValue(at index: Int) -> String? {
+        let field = fields[index]
+        return field.testValue
+    }
 }

@@ -31,7 +31,7 @@ struct InstitutionRepository: ItemRepository {
                 do {
                     let query = "INSERT INTO institutions " +
                                  "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-                    try db.executeUpdate(query, NSNull(), source.rawValue, sourceInstitutionId, name, n2N(nameBreak), n2N(primaryColor?.hexString), n2N(secondaryColor?.hexString), n2N(logoData), false, dateAdded)
+                    try db.executeUpdate(query, NSNull(), source.rawValue, sourceInstitutionId, name, n2N(nameBreak), n2N(primaryColor?.hexString), n2N(secondaryColor?.hexString), n2N(logoData), true, dateAdded)
                     
                     generatedId = Int(db.lastInsertRowId())
                 } catch {
