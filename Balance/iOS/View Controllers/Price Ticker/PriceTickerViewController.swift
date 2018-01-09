@@ -8,10 +8,10 @@
 
 import UIKit
 
-
 internal final class PriceTickerViewController: UIViewController {
     
     // Private
+    
     private let viewModel = PriceTickerTabViewModel()
     private let refreshControl = UIRefreshControl()
     private let collectionView: UICollectionView = {
@@ -101,11 +101,11 @@ private extension PriceTickerViewController {
 
 extension PriceTickerViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return self.viewModel.numberOfSections()
+        return viewModel.numberOfSections()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.viewModel.numberOfRows(inSection: section)
+        return viewModel.numberOfRows(inSection: section)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -121,7 +121,7 @@ extension PriceTickerViewController: UICollectionViewDelegate {
             return
         }
         
-        if let currency = self.viewModel.currency(forRow: indexPath.row, inSection: indexPath.section) {
+        if let currency = viewModel.currency(forRow: indexPath.row, inSection: indexPath.section) {
             let rate = viewModel.ratesString(forRow: indexPath.row, inSection: indexPath.section)
             currencyCell.update(currency: currency, rate: rate)
         }
