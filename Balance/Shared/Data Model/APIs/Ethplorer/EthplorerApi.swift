@@ -250,7 +250,7 @@ extension Institution {
         }
         set {
             log.debug("set addressKey: \(addressKey)  newValue: \(String(describing: newValue))")
-            keychain[addressKey, "address"] = address
+            keychain[addressKey, "address"] = newValue
         }
     }
 }
