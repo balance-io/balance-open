@@ -56,7 +56,7 @@ internal final class TransactionsListViewController: UIViewController {
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         self.collectionView.register(reusableCell: TransactionCollectionViewCell.self)
-        self.collectionView.register(reusableSupplementaryView: TransactionsHeaderReusableView.self, kind: UICollectionElementKindSectionHeader)
+        self.collectionView.register(reusableSupplementaryView: CustomHeaderReusableView.self, kind: UICollectionElementKindSectionHeader)
         self.view.addSubview(self.collectionView)
         
         self.collectionView.snp.makeConstraints { (make) in
@@ -93,7 +93,7 @@ extension TransactionsListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(at: indexPath, kind: kind) as TransactionsHeaderReusableView
+        let header = collectionView.dequeueReusableSupplementaryView(at: indexPath, kind: kind) as CustomHeaderReusableView
         header.textLabel.text = self.viewModel.title(for: indexPath.section)
         
         return header
