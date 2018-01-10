@@ -124,7 +124,7 @@ internal final class AccountsListViewController: UIViewController
             }
         }
         
-        
+        presentReconnectViewIfNeeded()
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -154,6 +154,18 @@ internal final class AccountsListViewController: UIViewController
         self.totalBalanceBar.isHidden = !self.blankStateView.isHidden
         
         self.totalBalanceBar.totalBalanceLabel.text = self.viewModel.formattedMasterCurrencyTotalBalance
+    }
+    
+    func presentReconnectViewIfNeeded() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            guard !InstitutionRepository.si.institutionsWithInvalidPasswords().isEmpty else {
+                return
+            }
+            
+            let reconnectVC = ReconnectAccountViewController()
+            reconnectVC.modalPresentationStyle = .overFullScreen
+            self.present(reconnectVC, animated: true)
+        }
     }
     
     // MARK: Actions

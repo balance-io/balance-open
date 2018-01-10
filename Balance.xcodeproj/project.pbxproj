@@ -492,6 +492,8 @@
 		DCDF77BF1BE6C703004AF8AE /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDF77BE1BE6C703004AF8AE /* PreferencesViewController.swift */; };
 		E6B0416C1FFECFB200192319 /* AddAccountDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */; };
 		E6B0416D1FFED03300192319 /* AddAccountDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */; };
+		E6C1AC4620057ABE0018D6AA /* ReconnectAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */; };
+		E6C1AC49200590070018D6AA /* ReconnectAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */; };
 		F1253E5E1D75D2D0001BD48C /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1253E5D1D75D2D0001BD48C /* KeychainManager.swift */; };
 		F1253E611D75D55D001BD48C /* KeychainManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1253E601D75D55D001BD48C /* KeychainManagement.swift */; };
 		F19BF68C1D880DA100496A66 /* MockedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19BF68B1D880DA100496A66 /* MockedDefaults.swift */; };
@@ -925,6 +927,8 @@
 		DCDF77BC1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesGeneralViewController.swift; sourceTree = "<group>"; };
 		DCDF77BE1BE6C703004AF8AE /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddAccountDelegate.swift; path = AddCredentialBasedAccountViewController/AddAccountDelegate.swift; sourceTree = "<group>"; };
+		E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountViewController.swift; sourceTree = "<group>"; };
+		E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountCell.swift; sourceTree = "<group>"; };
 		F107D9A21D6B048800CEEF35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1253E5D1D75D2D0001BD48C /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		F1253E601D75D55D001BD48C /* KeychainManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManagement.swift; sourceTree = "<group>"; };
@@ -1482,9 +1486,10 @@
 		53561E9D1F82DD120043D4F9 /* Add Account */ = {
 			isa = PBXGroup;
 			children = (
+				E6C1AC45200578C00018D6AA /* Reconnect */,
+				E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */,
 				53561E9E1F82DD120043D4F9 /* AddAccountViewController.swift */,
 				53561E9F1F82DD120043D4F9 /* AddCredentialBasedAccountViewController */,
-				E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */,
 			);
 			path = "Add Account";
 			sourceTree = "<group>";
@@ -2169,6 +2174,15 @@
 			path = "Bal Helper";
 			sourceTree = "<group>";
 		};
+		E6C1AC45200578C00018D6AA /* Reconnect */ = {
+			isa = PBXGroup;
+			children = (
+				E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */,
+				E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */,
+			);
+			path = Reconnect;
+			sourceTree = "<group>";
+		};
 		F107D99F1D6B048800CEEF35 /* BalanceUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -2654,6 +2668,7 @@
 				A41D3E431F6BF75100FD25B5 /* KrakenErrors.swift in Sources */,
 				A4E457191F7901E7002E2879 /* EthplorerErrors.swift in Sources */,
 				E6B0416D1FFED03300192319 /* AddAccountDelegate.swift in Sources */,
+				E6C1AC49200590070018D6AA /* ReconnectAccountCell.swift in Sources */,
 				53561EAF1F82DD260043D4F9 /* NewAccountViewModel.swift in Sources */,
 				A459EDA61F83B90900DC4B51 /* TransactionsListViewModel.swift in Sources */,
 				537504FB1F19237E0062C11A /* ProductId.swift in Sources */,
@@ -2702,6 +2717,7 @@
 				537187FB1F4CC3EF00E7F9D6 /* NumberUtils.swift in Sources */,
 				53561EAD1F82DD260043D4F9 /* NewAccountListViewModel.swift in Sources */,
 				53552A131ED7251200DD95F9 /* CertValidator.m in Sources */,
+				E6C1AC4620057ABE0018D6AA /* ReconnectAccountViewController.swift in Sources */,
 				A456ED151FB31A33006EE529 /* UIFont+Balance.swift in Sources */,
 				53552A141ED7251200DD95F9 /* ServerMessage.swift in Sources */,
 				53561EA81F82DD260043D4F9 /* AccountsListViewController.swift in Sources */,
