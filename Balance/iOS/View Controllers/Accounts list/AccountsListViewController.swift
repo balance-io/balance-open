@@ -157,13 +157,17 @@ internal final class AccountsListViewController: UIViewController
     }
     
     func presentReconnectViewIfNeeded() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            guard !InstitutionRepository.si.institutionsWithInvalidPasswords().isEmpty else {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+            guard let `self` = self,
+                !InstitutionRepository.si.institutionsWithInvalidPasswords().isEmpty else {
                 return
             }
             
-            let reconnectVC = ReconnectAccountViewController()
+            let reconnectServices = AccountServiceProvider()
+            let reconnectVM = ReconnectAccountViewModel(services: reconnectServices)
+            let reconnectVC = ReconnectAccountViewController(viewModel: reconnectVM)
             reconnectVC.modalPresentationStyle = .overFullScreen
+            
             self.present(reconnectVC, animated: true)
         }
     }

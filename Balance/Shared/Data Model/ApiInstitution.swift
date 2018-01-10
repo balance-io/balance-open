@@ -33,9 +33,9 @@ struct Field {
     var testValue: String? {
         switch type {
         case .key:
-            return ""
+            return "u+MAeGoxTIJuVlYmWvKsX+hy47VvXGOFntH7sI+7gYse9XFjrOeIfu3I"
         case .secret:
-            return ""
+            return "6vrJLWsH/J3tvqI1KkpfSlarNCPzI2vHGB3BGu0uUgh7auqPdEaxT1oUKajc4Jmek9YIOyxP8uLZYO7InbpO/g=="
         default:
             return nil
         }

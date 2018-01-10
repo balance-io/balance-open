@@ -490,6 +490,12 @@
 		DCC684D81BD1080E00E95B90 /* TransactionsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC684D71BD1080E00E95B90 /* TransactionsTabViewController.swift */; };
 		DCDF77BD1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDF77BC1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift */; };
 		DCDF77BF1BE6C703004AF8AE /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDF77BE1BE6C703004AF8AE /* PreferencesViewController.swift */; };
+		E605EF7F20065F3700A95632 /* UIView+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605EF7D20065EFA00A95632 /* UIView+Size.swift */; };
+		E605EF8320065FE700A95632 /* ReconnectAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605EF8120065FDD00A95632 /* ReconnectAccountViewModel.swift */; };
+		E605EF862006851300A95632 /* Collection+Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605EF852006851300A95632 /* Collection+Index.swift */; };
+		E605EF882006AC8F00A95632 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E605EF872006AC8E00A95632 /* RxSwift.framework */; };
+		E605EF8A2006B6BF00A95632 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E605EF892006B6BF00A95632 /* RxCocoa.framework */; };
+		E605EF8F2006BF3C00A95632 /* UIViewController+Present.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605EF8D2006BF3600A95632 /* UIViewController+Present.swift */; };
 		E6B0416C1FFECFB200192319 /* AddAccountDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */; };
 		E6B0416D1FFED03300192319 /* AddAccountDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */; };
 		E6C1AC4620057ABE0018D6AA /* ReconnectAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */; };
@@ -926,6 +932,12 @@
 		DCC684D71BD1080E00E95B90 /* TransactionsTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionsTabViewController.swift; sourceTree = "<group>"; };
 		DCDF77BC1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesGeneralViewController.swift; sourceTree = "<group>"; };
 		DCDF77BE1BE6C703004AF8AE /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		E605EF7D20065EFA00A95632 /* UIView+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Size.swift"; sourceTree = "<group>"; };
+		E605EF8120065FDD00A95632 /* ReconnectAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountViewModel.swift; sourceTree = "<group>"; };
+		E605EF852006851300A95632 /* Collection+Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Index.swift"; sourceTree = "<group>"; };
+		E605EF872006AC8E00A95632 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		E605EF892006B6BF00A95632 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		E605EF8D2006BF3600A95632 /* UIViewController+Present.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Present.swift"; sourceTree = "<group>"; };
 		E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddAccountDelegate.swift; path = AddCredentialBasedAccountViewController/AddAccountDelegate.swift; sourceTree = "<group>"; };
 		E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountViewController.swift; sourceTree = "<group>"; };
 		E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountCell.swift; sourceTree = "<group>"; };
@@ -952,6 +964,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E605EF8A2006B6BF00A95632 /* RxCocoa.framework in Frameworks */,
+				E605EF882006AC8F00A95632 /* RxSwift.framework in Frameworks */,
 				A41EE4871FB9E4F100210038 /* SVProgressHUD.framework in Frameworks */,
 				535BE39E1F05A14C00DEA4EF /* libz.tbd in Frameworks */,
 				53FCE3421F06B5DC004EB25C /* NSDateTimeAgo.framework in Frameworks */,
@@ -1393,9 +1407,8 @@
 		53561E861F82DD120043D4F9 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				53561E871F82DD120043D4F9 /* NewAccountListViewModel.swift */,
+				E605EF8020065FBC00A95632 /* Accounts */,
 				53561E881F82DD120043D4F9 /* InstitutionSettingsViewModel.swift */,
-				53561E891F82DD120043D4F9 /* NewAccountViewModel.swift */,
 				A459EDA51F83B90900DC4B51 /* TransactionsListViewModel.swift */,
 				A4EF39E61F8E43A40032265E /* InstitutionAccountsListViewModel.swift */,
 				A43ACE4F1F963035009F2AE9 /* CurrencySelectionViewModel.swift */,
@@ -1913,6 +1926,8 @@
 		A41EE4851FB9E4F000210038 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E605EF892006B6BF00A95632 /* RxCocoa.framework */,
+				E605EF872006AC8E00A95632 /* RxSwift.framework */,
 				A4F273DF1FC2DBF000493077 /* OnePasswordExtension.framework */,
 				A41EE4861FB9E4F000210038 /* SVProgressHUD.framework */,
 			);
@@ -1984,7 +1999,8 @@
 		A456ED131FB31A1A006EE529 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				A456ED141FB31A33006EE529 /* UIFont+Balance.swift */,
+				E605EF8C2006BEFD00A95632 /* Foundation */,
+				E605EF8B2006BEF700A95632 /* UIKit */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2172,6 +2188,34 @@
 				5349909B1E0354630057C5C1 /* main.m */,
 			);
 			path = "Bal Helper";
+			sourceTree = "<group>";
+		};
+		E605EF8020065FBC00A95632 /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				53561E891F82DD120043D4F9 /* NewAccountViewModel.swift */,
+				53561E871F82DD120043D4F9 /* NewAccountListViewModel.swift */,
+				E605EF8120065FDD00A95632 /* ReconnectAccountViewModel.swift */,
+			);
+			path = Accounts;
+			sourceTree = "<group>";
+		};
+		E605EF8B2006BEF700A95632 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				A456ED141FB31A33006EE529 /* UIFont+Balance.swift */,
+				E605EF7D20065EFA00A95632 /* UIView+Size.swift */,
+				E605EF8D2006BF3600A95632 /* UIViewController+Present.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		E605EF8C2006BEFD00A95632 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				E605EF852006851300A95632 /* Collection+Index.swift */,
+			);
+			path = Foundation;
 			sourceTree = "<group>";
 		};
 		E6C1AC45200578C00018D6AA /* Reconnect */ = {
@@ -2507,6 +2551,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/BalanceVectorGraphics_iOS.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SVProgressHUD.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/OnePasswordExtension.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 			);
 			name = "Copy Carthage Frameworks";
 			outputPaths = (
@@ -2518,6 +2564,8 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/BalanceVectorGraphics_iOS.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SVProgressHUD.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/OnePasswordExtension.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2559,7 +2607,9 @@
 				53D441E91F44B0DD006967E1 /* FMDatabasePoolAdditionsVariadic.swift in Sources */,
 				53552A2B1ED7252900DD95F9 /* FileManager.swift in Sources */,
 				A4430AA61F95F47300F2FFFA /* SimpleCache.swift in Sources */,
+				E605EF8F2006BF3C00A95632 /* UIViewController+Present.swift in Sources */,
 				A4E7680D1F67E410002B1AE1 /* APICredentials.swift in Sources */,
+				E605EF862006851300A95632 /* Collection+Index.swift in Sources */,
 				53552A2F1ED72B5700DD95F9 /* FMDatabaseAdditions.m in Sources */,
 				537187E61F4CC23B00E7F9D6 /* PoloniexAccount.swift in Sources */,
 				A41EE4801FB9AA1A00210038 /* QRCodeScannerViewController.swift in Sources */,
@@ -2693,6 +2743,7 @@
 				53552A241ED7252900DD95F9 /* TimeInterval.swift in Sources */,
 				53552A121ED7251200DD95F9 /* NetworkStatus.swift in Sources */,
 				A495726D1F98B56400651C89 /* CurrentExchangeRates.swift in Sources */,
+				E605EF7F20065F3700A95632 /* UIView+Size.swift in Sources */,
 				535529F91ED7250100DD95F9 /* Syncer.swift in Sources */,
 				2DF8984D1FCC8F7500CCDFB9 /* CountlyCrashReporter.m in Sources */,
 				53F078651ED73E6D00E7EDF9 /* ThemeGlobals.swift in Sources */,
@@ -2700,6 +2751,7 @@
 				538B47BF1F4CA0200023CED5 /* Currency.swift in Sources */,
 				535529FE1ED7250500DD95F9 /* KeychainManagement.swift in Sources */,
 				A4430AA21F95F3ED00F2FFFA /* ExchangeRate.swift in Sources */,
+				E605EF8320065FE700A95632 /* ReconnectAccountViewModel.swift in Sources */,
 				53561EAB1F82DD260043D4F9 /* AddAccountViewController.swift in Sources */,
 				A493B9401F681BA00074ACCC /* BitfinexWallet.swift in Sources */,
 				5373B4751FAB708B007432DC /* PriceTickerTabViewModel.swift in Sources */,

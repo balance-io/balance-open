@@ -1,9 +1,9 @@
 {
-  "commitish" : "dedcd9df99fa1daf3f33963452df10f31a5d937a",
-  "Mac" : [
+  "commitish" : "1cf210a514f873d77d6fc67e9fe3dbee11e2aca7",
+  "iOS" : [
     {
-      "name" : "BalanceVectorGraphics",
-      "hash" : "7985f552f683828a5e85da0599ce6d8fb6bb383735df6eefbd0a3c4cbd94135c"
+      "name" : "BalanceVectorGraphics_iOS",
+      "hash" : "2014cac4bb7cf8118d848add3d86bfa8e3ddc8126e8e6ef634c91d4152261488"
     }
   ]
 }
