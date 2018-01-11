@@ -236,12 +236,6 @@ class EthplorerApi: ExchangeApi {
     @discardableResult func updateLocalAccount(institution: Institution) -> Account? {
         // Calculate the integer value of the balance based on the decimals
         if let newAccount = AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: currency.code, sourceInstitutionId: "", accountTypeId: .wallet, accountSubTypeId: nil, name: currency.name, currency: currency.code, currentBalance: balance, availableBalance: nil, number: nil, altCurrency: altCurrency?.code, altCurrentBalance: altBalance, altAvailableBalance: nil) {
-            
-            // Hide unpoplular currencies that have a 0 balance
-            if currency != Currency.btc && currency != Currency.eth {
-                newAccount.isHidden = (balance == 0)
-            }
-            
             return newAccount
         }
         return nil
@@ -256,7 +250,7 @@ extension Institution {
         }
         set {
             log.debug("set addressKey: \(addressKey)  newValue: \(String(describing: newValue))")
-            keychain[addressKey, "address"] = address
+            keychain[addressKey, "address"] = newValue
         }
     }
 }

@@ -14,7 +14,7 @@ import UIKit
 internal struct TableSection
 {
     let title: String?
-    let rows: [TableRow]
+    var rows: [TableRow]
 }
 
 

@@ -16,6 +16,7 @@
 		2D7340F41FA9FC6F00020A3F /* KrakenTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7340F31FA9FC6F00020A3F /* KrakenTransaction.swift */; };
 		2D9AA1E31FB5AED300058491 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AA1E21FB5AED300058491 /* Analytics.swift */; };
 		2D9AA1E41FB5AED300058491 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AA1E21FB5AED300058491 /* Analytics.swift */; };
+		2DC5EB9A20079FE100FB1ED4 /* DoubleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5EB9920079FE000FB1ED4 /* DoubleTests.swift */; };
 		2DD9B1F01EDDDFD10006268F /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */; };
 		2DE6D9DC1FB1D016007DDCBD /* GDAXTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE6D9DB1FB1D016007DDCBD /* GDAXTransaction.swift */; };
 		2DE6D9DE1FB1D2AA007DDCBD /* Transactions.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DE6D9DD1FB1D2AA007DDCBD /* Transactions.json */; };
@@ -490,6 +491,8 @@
 		DCC684D81BD1080E00E95B90 /* TransactionsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC684D71BD1080E00E95B90 /* TransactionsTabViewController.swift */; };
 		DCDF77BD1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDF77BC1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift */; };
 		DCDF77BF1BE6C703004AF8AE /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDF77BE1BE6C703004AF8AE /* PreferencesViewController.swift */; };
+		E6B0416C1FFECFB200192319 /* AddAccountDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */; };
+		E6B0416D1FFED03300192319 /* AddAccountDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */; };
 		F1253E5E1D75D2D0001BD48C /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1253E5D1D75D2D0001BD48C /* KeychainManager.swift */; };
 		F1253E611D75D55D001BD48C /* KeychainManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1253E601D75D55D001BD48C /* KeychainManagement.swift */; };
 		F19BF68C1D880DA100496A66 /* MockedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19BF68B1D880DA100496A66 /* MockedDefaults.swift */; };
@@ -554,6 +557,7 @@
 		2D326D251F5EA22900873286 /* PoloniexErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexErrors.swift; sourceTree = "<group>"; };
 		2D7340F31FA9FC6F00020A3F /* KrakenTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenTransaction.swift; sourceTree = "<group>"; };
 		2D9AA1E21FB5AED300058491 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
+		2DC5EB9920079FE000FB1ED4 /* DoubleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleTests.swift; sourceTree = "<group>"; };
 		2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		2DE6D9DB1FB1D016007DDCBD /* GDAXTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXTransaction.swift; sourceTree = "<group>"; };
 		2DE6D9DD1FB1D2AA007DDCBD /* Transactions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = Transactions.json; path = "BalanceUnitTests/Supporting Files/Resources/GDAX API Responses/Transactions.json"; sourceTree = SOURCE_ROOT; };
@@ -922,6 +926,7 @@
 		DCC684D71BD1080E00E95B90 /* TransactionsTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionsTabViewController.swift; sourceTree = "<group>"; };
 		DCDF77BC1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesGeneralViewController.swift; sourceTree = "<group>"; };
 		DCDF77BE1BE6C703004AF8AE /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddAccountDelegate.swift; path = AddCredentialBasedAccountViewController/AddAccountDelegate.swift; sourceTree = "<group>"; };
 		F107D9A21D6B048800CEEF35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1253E5D1D75D2D0001BD48C /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		F1253E601D75D55D001BD48C /* KeychainManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManagement.swift; sourceTree = "<group>"; };
@@ -1005,6 +1010,14 @@
 				28F678471DCB6E9600383D22 /* SetPasswordViewController.swift */,
 			);
 			path = Modals;
+			sourceTree = "<group>";
+		};
+		2DC5EB9820079FE000FB1ED4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2DC5EB9920079FE000FB1ED4 /* DoubleTests.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		2DF898161FCC8F7400CCDFB9 /* countly-sdk-ios-master */ = {
@@ -1481,6 +1494,7 @@
 			children = (
 				53561E9E1F82DD120043D4F9 /* AddAccountViewController.swift */,
 				53561E9F1F82DD120043D4F9 /* AddCredentialBasedAccountViewController */,
+				E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */,
 			);
 			path = "Add Account";
 			sourceTree = "<group>";
@@ -2237,6 +2251,7 @@
 		F1F948801D8049B800AB30B2 /* BalanceUnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				2DC5EB9820079FE000FB1ED4 /* Extensions */,
 				A4E457241F7921B5002E2879 /* Poloniex */,
 				A41742921F73E829004A9B4F /* CoinbaseAPIClient */,
 				A41D3E471F6BFC4100FD25B5 /* KrakenAPIClient */,
@@ -2649,6 +2664,7 @@
 				A4E768061F67DB2B002B1AE1 /* BitfinexCredentials.swift in Sources */,
 				A41D3E431F6BF75100FD25B5 /* KrakenErrors.swift in Sources */,
 				A4E457191F7901E7002E2879 /* EthplorerErrors.swift in Sources */,
+				E6B0416D1FFED03300192319 /* AddAccountDelegate.swift in Sources */,
 				53561EAF1F82DD260043D4F9 /* NewAccountViewModel.swift in Sources */,
 				A459EDA61F83B90900DC4B51 /* TransactionsListViewModel.swift in Sources */,
 				537504FB1F19237E0062C11A /* ProductId.swift in Sources */,
@@ -2903,6 +2919,7 @@
 				DCC684D81BD1080E00E95B90 /* TransactionsTabViewController.swift in Sources */,
 				2DF898461FCC8F7500CCDFB9 /* CountlyCommon.m in Sources */,
 				530291241C6A6B7200C31CC1 /* AccountType.swift in Sources */,
+				E6B0416C1FFECFB200192319 /* AddAccountDelegate.swift in Sources */,
 				53294FA51D1DDD9500F08059 /* CCNStatusItemWindowBackgroundView.m in Sources */,
 				F1253E611D75D55D001BD48C /* KeychainManagement.swift in Sources */,
 				535905691CC8482400DBC816 /* Logging.swift in Sources */,
@@ -2972,6 +2989,7 @@
 				53ED3BD51FD1902800557AB1 /* KeychainWrapperTests.swift in Sources */,
 				53F0785C1F4F8F3100D0054C /* CoinbaseTests.swift in Sources */,
 				53F078671F4F8F3C00D0054C /* CredentialsTest.swift in Sources */,
+				2DC5EB9A20079FE100FB1ED4 /* DoubleTests.swift in Sources */,
 				A4CB29E21F682C2D00128E48 /* BitfinexAPIClientTests.swift in Sources */,
 				A4E4572E1F792206002E2879 /* PoloniexTransactionTests.swift in Sources */,
 				53F0785F1F4F8F3C00D0054C /* SearchTest.swift in Sources */,

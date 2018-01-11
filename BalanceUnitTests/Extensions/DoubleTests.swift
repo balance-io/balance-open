@@ -133,4 +133,16 @@ class DoubleTests: XCTestCase {
         //then
         XCTAssertEqual(3422300000000, noDecimals)
     }
+    
+    func testFrom6DecimalsToFixedCrypto() {
+        //given
+        let double = Double(130049000000)
+        
+        //where
+        let balance = double.cientificToEightDecimals(decimals: 6)
+        let noDecimals = balance.integerFixedCryptoDecimals()
+        
+        //then
+        XCTAssertEqual(13004900000000, noDecimals)
+    }
 }

@@ -26,6 +26,17 @@ final class NewAccountViewModel {
         return true
     }
     
+    func mapFieldsData() -> [Field] {
+        var newFields = [Field]()
+        for index in 0 ..< fields.count {
+            let textField = self.textField(at: index)
+            var sourceField = fields[index]
+            sourceField.value = textField.text
+            newFields.append(sourceField)
+        }
+        return newFields
+    }
+    
     var loginWithQRCodeSupported: Bool {
         switch self.source {
         case .bitfinex, .kraken:
@@ -109,8 +120,8 @@ final class NewAccountViewModel {
             completionHandler(false, nil)
             return
         }
-        
-        self.authenticate(with: fields, completionHandler: completionHandler)
+        let loginFields = mapFieldsData()
+        self.authenticate(with: loginFields, completionHandler: completionHandler)
     }
     
     internal func authenticate(with fields: [Field], completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void) {

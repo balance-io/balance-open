@@ -84,6 +84,12 @@ const NSString *COMODOECCDomainValidationSecureServerCA = @"EohwrK1N7rr3bRQphPj4
                           kTSKPublicKeyHashes : @[letsEncryptAuthorityX3, dstRootCAX3],
                           kTSKReportUris : @[balanceReportUri]
                           },
+                  @"exchangerates.balancemy.money" : @{
+                          kTSKEnforcePinning : @YES,
+                          kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                          kTSKPublicKeyHashes : @[letsEncryptAuthorityX3, dstRootCAX3],
+                          kTSKReportUris : @[balanceReportUri]
+                          },
                   
                   // Exchange API Servers
                   @"api.bitfinex.com" : @{
