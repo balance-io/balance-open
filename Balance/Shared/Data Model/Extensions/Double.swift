@@ -21,9 +21,6 @@ extension Double {
     }
     
     func integerValueWith(decimals: Int) -> Int {
-        if decimals > 8 {
-            print("stop")
-        }
         let balanceString = String(format:"%f", self * Double(pow(10.0, Double(decimals))))
         let integerPart = balanceString.components(separatedBy: ".")[0]
         let availableDecimal = NumberUtils.decimalFormatter.number(from: integerPart)?.decimalValue
