@@ -510,11 +510,7 @@ class SignUpViewController: NSViewController {
     
     // NOTE: Do not call directly, use close, cancel, or finished instead
     fileprivate func callCloseBlock(finished: Bool) {
-        // Hack to color the popover arrow during the push animation
-        async(after: 0.12) {
-            AppDelegate.sharedInstance.statusItem.arrowColor = NSColor.clear
-        }
-        
+        AppDelegate.sharedInstance.statusItem.arrowColor = NSColor.clear
         closeBlock(false, self)
     }
     
