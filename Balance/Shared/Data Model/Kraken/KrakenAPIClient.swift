@@ -278,6 +278,9 @@ extension KrakenAPIClient: ExchangeApi {
                             return
                         }
                         
+                        existingInstitution.passwordInvalid = false
+                        existingInstitution.replace()
+                        
                         async {
                             closeBlock(true, nil, existingInstitution)
                         }

@@ -46,8 +46,13 @@ final class NewAccountViewModel {
         }
     }
     
+    var existingInstitutionId: Int? {
+        return existingInstitution?.institutionId
+    }
+    
     // Private
-    private let source: Source
+    let source: Source
+    private let existingInstitution: Institution?
     private let fields: [Field]
     
     private let gdaxAPIClient = GDAXAPIClient(server: .production)
@@ -107,9 +112,10 @@ final class NewAccountViewModel {
     
     // MARK: Initialization
     
-    internal init(source: Source)
+    internal init(source: Source, existingInstitution: Institution?)
     {
         self.source = source
+        self.existingInstitution = existingInstitution
         self.fields = source.apiInstitution.fields
     }
     
@@ -127,25 +133,25 @@ final class NewAccountViewModel {
     internal func authenticate(with fields: [Field], completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         switch self.source {
         case .gdax:
-            self.gdaxAPIClient.authenticationChallenge(loginStrings: fields, closeBlock: { (success, error, _) in
+            self.gdaxAPIClient.authenticationChallenge(loginStrings: fields, existingInstitution: existingInstitution) { (success, error, _) in
                 completionHandler(success, error)
-            })
+            }
         case .poloniex:
-            self.poloniexAPIClient.authenticationChallenge(loginStrings: fields, closeBlock: { (success, error, _) in
+            self.poloniexAPIClient.authenticationChallenge(loginStrings: fields, existingInstitution: existingInstitution) { (success, error, _) in
                 completionHandler(success, error)
-            })
+            }
         case .bitfinex:
-            self.bitfinexAPIClient.authenticationChallenge(loginStrings: fields, closeBlock: { (success, error, _) in
+            self.bitfinexAPIClient.authenticationChallenge(loginStrings: fields, existingInstitution: existingInstitution) { (success, error, _) in
                 completionHandler(success, error)
-            })
+            }
         case .kraken:
-            self.krakenAPIClient.authenticationChallenge(loginStrings: fields, closeBlock: { (success, error, _) in
+            self.krakenAPIClient.authenticationChallenge(loginStrings: fields, existingInstitution: existingInstitution) { (success, error, _) in
                 completionHandler(success, error)
-            })
+            }
         case .ethplorer:
-            self.ethplorerAPIClient.authenticationChallenge(loginStrings: fields, closeBlock: { (success, error, _) in
+            self.ethplorerAPIClient.authenticationChallenge(loginStrings: fields, existingInstitution: existingInstitution) { (success, error, _) in
                 completionHandler(success, error)
-            })
+            }
         default:
             completionHandler(false, nil)
         }

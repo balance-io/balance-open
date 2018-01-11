@@ -12,7 +12,6 @@ import UIKit
 internal class AddCredentialBasedAccountViewController: UIViewController
 {
     // Private
-    private let source: Source
     private let viewModel: NewAccountViewModel
     private let tableView = UITableView(frame: CGRect.zero, style: .grouped)
     weak var delegate: AddAccountDelegate?
@@ -21,14 +20,10 @@ internal class AddCredentialBasedAccountViewController: UIViewController
     
     // MARK: Initialization
     
-    internal required init(source: Source)
+    internal required init(viewModel: NewAccountViewModel)
     {
-        self.source = source
-        self.viewModel = NewAccountViewModel(source: source)
-        
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        
-        self.title = source.description
     }
     
     internal required init?(coder aDecoder: NSCoder)
@@ -41,7 +36,8 @@ internal class AddCredentialBasedAccountViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+     
+        self.title = viewModel.source.description
         self.view.backgroundColor = UIColor.white
         
         // Navigation bar
@@ -120,14 +116,8 @@ internal class AddCredentialBasedAccountViewController: UIViewController
     @objc private func doneButtonTapped(_ sender: Any)
     {
         // Validate
-        guard self.viewModel.isValid else
-        {
-            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
-
-            let alertController = UIAlertController(title: "Error", message: "All fields are required", preferredStyle: .alert)
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
-
+        guard self.viewModel.isValid else {
+            showSimpleMessage(title: "Error", message: "All fields are required")
             return
         }
         
@@ -154,18 +144,14 @@ private extension AddCredentialBasedAccountViewController {
     func showErrorLogin(with error: Error?) {
         SVProgressHUD.dismiss()
         
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
         let errorMessage = (error as? LocalizedError)?.recoverySuggestion ?? error?.localizedDescription
-        let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
-        alertController.addAction(okAction)
-        
-        self.present(alertController, animated: true, completion: nil)
+        showSimpleMessage(title: "Error", message: errorMessage ?? "Something was wrong, please try later")
     }
     
     func showSuccessLogin() {
-        SVProgressHUD.showSuccess(withStatus: "\(self.source.description) account added!")
+        SVProgressHUD.showSuccess(withStatus: "\(self.viewModel.source.description) account added!")
         self.navigationController?.popViewController(animated: true)
-        self.delegate?.didAddAccount()
+        self.delegate?.didAddAccount(wasSucceeded: true, institutionId: viewModel.existingInstitutionId)
     }
     
 }
@@ -217,7 +203,7 @@ extension AddCredentialBasedAccountViewController: QRCodeScannerViewControllerDe
     
     func didFind(value: String, in controller: QRCodeScannerViewController) {
         let parser = QRLoginCredentialsParser()
-        guard let fields = try? parser.parse(value: value, for: self.source) else {
+        guard let fields = try? parser.parse(value: value, for: self.viewModel.source) else {
             print("There is an error parsing fields")
             return
         }
@@ -234,5 +220,3 @@ extension AddCredentialBasedAccountViewController: QRCodeScannerViewControllerDe
     }
     
 }
-
-

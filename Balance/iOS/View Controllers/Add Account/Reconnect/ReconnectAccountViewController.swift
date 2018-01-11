@@ -38,6 +38,11 @@ class ReconnectAccountViewController: UIViewController {
         registerCells()
         bindViewStates()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -128,18 +133,16 @@ private extension ReconnectAccountViewController {
                     self.finishValidation(succeeded: false, at: index, with: message)
                 case .validationWasSucceeded(let index, let message):
                     self.finishValidation(succeeded: true, at: index, with: message)
-                case .validating(let index):
-                    self.startValidation(at: index)
+                case .validating(let index, let institution):
+                    self.startValidation(indexToRefresh: index, institution: institution)
                 default:
                     return
                 }
             }).disposed(by: disposeBag)
     }
     
-    func startValidation(at index: Int) {
-        let indexPaths = [IndexPath(row: index, section: 0)]
-
-        invalidAccountsTableView?.reloadRows(at: indexPaths, with: .automatic)
+    func startValidation(indexToRefresh: Int, institution: Institution) {
+        showAddAccount(with: institution)
     }
     
     func finishValidation(succeeded: Bool, at index: Int, with message: String? = nil) {
@@ -161,6 +164,22 @@ private extension ReconnectAccountViewController {
         }
         
         invalidAccountsTableView?.reloadRows(at: indexPaths, with: .automatic)
+    }
+    
+    func showAddAccount(with institution: Institution) {
+        let source = institution.source
+        
+        switch source {
+        case .coinbase:
+            self.dismiss(animated: true, completion: nil)
+            CoinbaseApi.authenticate()
+        default:
+            let addCredentialVM = NewAccountViewModel(source: source, existingInstitution: institution)
+            let newCredentialBasedAccountViewController = AddCredentialBasedAccountViewController.init(viewModel: addCredentialVM)
+            newCredentialBasedAccountViewController.delegate = self
+            navigationController?.setNavigationBarHidden(false, animated: true)
+            navigationController?.pushViewController(newCredentialBasedAccountViewController, animated: true)
+        }
     }
     
     @objc func dismiss(sender: UIButton) {
@@ -207,6 +226,18 @@ extension ReconnectAccountViewController: ReconnectDelegate {
         }
         
         viewModel.reconnect(at: index.row)
+    }
+    
+}
+
+extension ReconnectAccountViewController: AddAccountDelegate {
+    
+    func didAddAccount(wasSucceeded: Bool, institutionId: Int?) {
+        guard let institutionId = institutionId else {
+            return
+        }
+        
+        viewModel.updateReconnectedAccount(with: institutionId, wasSucceeded: wasSucceeded)
     }
     
 }

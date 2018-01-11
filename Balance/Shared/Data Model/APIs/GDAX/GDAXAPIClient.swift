@@ -266,6 +266,8 @@ extension GDAXAPIClient: ExchangeApi {
                         
                         if let existingInstitution = existingInstitution {
                             existingInstitution.accessToken = credentialsIdentifier
+                            existingInstitution.passwordInvalid = false
+                            existingInstitution.replace()
                             
                             async {
                                 closeBlock(true, nil, existingInstitution)

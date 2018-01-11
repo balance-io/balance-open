@@ -17,7 +17,7 @@ enum ReconnectStatus {
 
 enum RecconectViewState {
     case idle
-    case validating(at: Int)
+    case validating(accountIndex: Int, institution: Institution)
     case validationWasSucceeded(at: Int, message: String?)
     case validationWasFailed(at: Int, message: String?)
 }
@@ -81,23 +81,22 @@ class ReconnectAccountViewModel {
         return reconnectAccounts[safe: index]
     }
     
+    func updateReconnectedAccount(with institutionId: Int, wasSucceeded: Bool) {
+        processResult(institutionId: institutionId, validationWasSucceeded: wasSucceeded)
+    }
+    
     func reconnect(at index: Int) {
         guard let invalidInstitution = invalidInstitutions[safe: index] else {
             print("Can't reconnect account at index: \(index)")
             return
         }
         
-        invalidInstitution.onValidate = true
-        reconnectAccountState.onNext(.validating(at: index))
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-            
-            self.processResult(institutionId: invalidInstitution.institutionId, validationWasSucceeded: true)
-        }
+        reconnectAccountState.onNext(.validating(accountIndex: index, institution: invalidInstitution))
     }
+    
+}
+
+private extension ReconnectAccountViewModel {
     
     func processResult(institutionId: Int, validationWasSucceeded: Bool) {
         let institutionIndexBlock: (Institution) -> Bool = { $0.institutionId == institutionId }

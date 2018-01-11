@@ -176,6 +176,11 @@ class PoloniexApi: ExchangeApi {
                         institution.secret = secret
                         institution.apiKey = key
                         
+                        if existingInstitution != nil {
+                            institution.passwordInvalid = false
+                            institution.replace()
+                        }
+                        
                         //create accounts
                         let poloniexAccounts = try self.parsePoloniexAccounts(data: safeData)
                         self.processPoloniexAccounts(accounts: poloniexAccounts, institution: institution)

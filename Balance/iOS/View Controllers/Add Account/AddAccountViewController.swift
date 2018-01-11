@@ -86,11 +86,13 @@ extension AddAccountViewController: UITableViewDataSource
 
 //MARK: AddAccountDelegate
 extension AddAccountViewController: AddAccountDelegate {
-    func didAddAccount() {
+    
+    func didAddAccount(wasSucceeded: Bool, institutionId: Int?) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.dismiss(animated: true, completion: nil)
         }
     }
+
 }
 
 // MARK: UITableViewDelegate
@@ -108,7 +110,8 @@ extension AddAccountViewController: UITableViewDelegate
             self.dismiss(animated: true, completion: nil)
             CoinbaseApi.authenticate()
         default:
-            let newCredentialBasedAccountViewController = AddCredentialBasedAccountViewController(source: source)
+            let addCredentialVM = NewAccountViewModel(source: source, existingInstitution: nil)
+            let newCredentialBasedAccountViewController = AddCredentialBasedAccountViewController(viewModel: addCredentialVM)
             newCredentialBasedAccountViewController.delegate = self
             self.navigationController?.pushViewController(newCredentialBasedAccountViewController, animated: true)
         }

@@ -123,8 +123,6 @@ internal final class AccountsListViewController: UIViewController
                 make.bottom.equalTo(self.bottomLayoutGuide.snp.top)
             }
         }
-        
-        presentReconnectViewIfNeeded()
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -133,6 +131,10 @@ internal final class AccountsListViewController: UIViewController
         
         self.navigationController?.isNavigationBarHidden = true
         self.reloadData()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            self?.presentReconnectViewIfNeeded()
+        }
     }
     
     override func viewDidLayoutSubviews()
@@ -157,19 +159,17 @@ internal final class AccountsListViewController: UIViewController
     }
     
     func presentReconnectViewIfNeeded() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
-            guard let `self` = self,
-                !InstitutionRepository.si.institutionsWithInvalidPasswords().isEmpty else {
-                return
-            }
-            
-            let reconnectServices = AccountServiceProvider()
-            let reconnectVM = ReconnectAccountViewModel(services: reconnectServices)
-            let reconnectVC = ReconnectAccountViewController(viewModel: reconnectVM)
-            reconnectVC.modalPresentationStyle = .overFullScreen
-            
-            self.present(reconnectVC, animated: true)
+        guard !InstitutionRepository.si.institutionsWithInvalidPasswords().isEmpty else {
+            return
         }
+        
+        let reconnectServices = AccountServiceProvider()
+        let reconnectVM = ReconnectAccountViewModel(services: reconnectServices)
+        let reconnectVC = ReconnectAccountViewController(viewModel: reconnectVM)
+        let reconnectNavVC = UINavigationController(rootViewController: reconnectVC)
+        reconnectNavVC.modalPresentationStyle = .overFullScreen
+        
+        self.present(reconnectNavVC, animated: true)
     }
     
     // MARK: Actions
