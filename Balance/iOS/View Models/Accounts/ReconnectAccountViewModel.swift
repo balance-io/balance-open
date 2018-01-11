@@ -47,36 +47,26 @@ struct ReconnectAccount {
     var status: ReconnectStatus
 }
 
-struct ReconnectAccountViewModel {
+class ReconnectAccountViewModel {
     
     var reconnectAccountViewModelState: Driver<RecconectViewState> {
         return reconnectAccountState.asDriver(onErrorJustReturn: .idle)
     }
     
     var totalReconnectAccounts: Int {
-        return invalidInstitutions.reduce(0) { $0 + ($1.passwordInvalid ? 1 : 0) }
+        return invalidInstitutions.count
     }
     
     private var reconnectAccounts: [ReconnectAccount] {
         return invalidInstitutions.map { ReconnectAccount(name: $0.displayName,
                                                           status:  $0.onValidate ? .validating : .reconnect) }
     }
-    
+
+    private var invalidInstitutions: [Institution]
     private let reconnectAccountState = BehaviorSubject<RecconectViewState>(value: .idle)
-    private var invalidInstitutions: [Institution] = {
-        var array = [
-            Institution.init(institutionId: 1, source: .kraken, sourceInstitutionId: "kraken", name: "kraken"),
-            Institution.init(institutionId: 2, source: .poloniex, sourceInstitutionId: "poloniex", name: "poloniex"),
-            Institution.init(institutionId: 3, source: .bitfinex, sourceInstitutionId: "bitfinex", name: "bitfinex")
-        ]
-        
-        array.forEach { $0.passwordInvalid = true }
-        
-        return array
-    }()
     
     init(services: AccountServices = AccountServiceProvider()) {
-//        invalidInstitutions = services.invalidInstitutions
+        invalidInstitutions = services.invalidInstitutions
     }
     
     func action(at index: Int) -> (() -> Void)? {
@@ -100,11 +90,33 @@ struct ReconnectAccountViewModel {
         invalidInstitution.onValidate = true
         reconnectAccountState.onNext(.validating(at: index))
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            invalidInstitution.onValidate = false
-            invalidInstitution.passwordInvalid = false
-            self.reconnectAccountState.onNext(.validationWasSucceeded(at: index, message: "Example"))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            
+            self.processResult(institutionId: invalidInstitution.institutionId, validationWasSucceeded: true)
         }
+    }
+    
+    func processResult(institutionId: Int, validationWasSucceeded: Bool) {
+        let institutionIndexBlock: (Institution) -> Bool = { $0.institutionId == institutionId }
+        guard let institutionIndex = invalidInstitutions.index(where: institutionIndexBlock) else {
+            print("Can't update institution with id: \(institutionId)")
+            return
+        }
+        
+        if !validationWasSucceeded {
+            let invalidInstitution = invalidInstitutions[institutionIndex]
+            invalidInstitution.onValidate = false
+            reconnectAccountState.onNext(.validationWasFailed(at: institutionIndex,
+                                                              message: "We can't update your account, please valid your fields and try again."))
+            
+            return
+        }
+        
+        invalidInstitutions.remove(at: institutionIndex)
+        reconnectAccountState.onNext(.validationWasSucceeded(at: institutionIndex, message: "Example"))
     }
     
 }

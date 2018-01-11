@@ -52,7 +52,6 @@ private extension ReconnectAccountViewController {
     func createUI() {
         addDismissButton()
         createInvalidAccountsView()
-        createInvalidAccountsTableView()
     }
     
     func addDismissButton() {
@@ -75,24 +74,21 @@ private extension ReconnectAccountViewController {
         view.addSubview(invalidAccountsView)
         
         invalidAccountsView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view.snp.centerY)
+            make.height.equalTo(UIView.getVerticalSize(with: 30))
             make.leading.equalToSuperview().offset(UIView.getHorizontalSize(with: 10))
             make.trailing.equalToSuperview().offset(-UIView.getHorizontalSize(with: 10))
             make.bottom.equalToSuperview().offset(-UIView.getHorizontalSize(with: 10))
         }
         
-        invalidAccountsView.backgroundColor = UIColor.yellow
+        invalidAccountsView.backgroundColor = UIColor.clear
         
         self.invalidAccountsView = invalidAccountsView
+        self.invalidAccountsTableView = createInvalidAccountsTableView(on: invalidAccountsView)
     }
     
-    func createInvalidAccountsTableView() {
-        guard let invalidAccountsView = invalidAccountsView else {
-            return
-        }
-        
+    func createInvalidAccountsTableView(on containerView: UIView) -> UITableView {
         let invalidAccountsTableView = UITableView(frame: .zero)
-        invalidAccountsView.addSubview(invalidAccountsTableView)
+        containerView.addSubview(invalidAccountsTableView)
         
         invalidAccountsTableView.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
@@ -102,11 +98,12 @@ private extension ReconnectAccountViewController {
         }
         
         invalidAccountsTableView.tableFooterView = UIView(frame: .zero)
-        invalidAccountsTableView.backgroundColor = UIColor.cyan
         invalidAccountsTableView.delegate = self
         invalidAccountsTableView.dataSource = self
+        invalidAccountsTableView.layer.cornerRadius = 8
+        invalidAccountsTableView.separatorStyle = .none
         
-        self.invalidAccountsTableView = invalidAccountsTableView
+        return invalidAccountsTableView
     }
     
 }
@@ -139,7 +136,7 @@ private extension ReconnectAccountViewController {
             }).disposed(by: disposeBag)
     }
     
-    func startValidation(at index: Int, with message: String? = nil) {
+    func startValidation(at index: Int) {
         let indexPaths = [IndexPath(row: index, section: 0)]
 
         invalidAccountsTableView?.reloadRows(at: indexPaths, with: .automatic)
@@ -147,6 +144,11 @@ private extension ReconnectAccountViewController {
     
     func finishValidation(succeeded: Bool, at index: Int, with message: String? = nil) {
         let indexPaths = [IndexPath(row: index, section: 0)]
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            guard let message = message else { return }
+            self?.showSimpleMessage(title: succeeded ? "Balance" : "Error", message: message)
+        }
         
         if succeeded {
             guard viewModel.totalReconnectAccounts > 0 else {
@@ -188,6 +190,10 @@ extension ReconnectAccountViewController: UITableViewDelegate, UITableViewDataSo
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }
