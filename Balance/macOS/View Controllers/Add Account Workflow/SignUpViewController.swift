@@ -36,7 +36,7 @@ extension SignUpTextField {
             return nil
         }
         
-        let value = textField.stringValue
+        let value = textField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
         switch self.type {
         case .none:
             return Field(name: type.rawValue, type: fieldType, value: nil)
