@@ -555,20 +555,20 @@ class SignUpViewController: NSViewController {
         
         prepareViewsForSubmit(loadingText: "Connecting to \(apiInstitution.name)...")
 
-//        var loginFields = [Field]()
-//        for textField in connectFields {
-//            if let field = textField.field {
-//                loginFields.append(field)
-//            }
-//        }
-//        // try login with loginFields
-//        loginService.authenticationChallenge(loginStrings: loginFields, existingInstitution: institution) { success, error, institution in
-//            if success, let institution = institution {
-//                self.completeConnect(institution: institution)
-//            } else {
-//                self.failConnect(error: error)
-//            }
-//        }
+        var loginFields = [Field]()
+        for textField in connectFields {
+            if let field = textField.field {
+                loginFields.append(field)
+            }
+        }
+        // try login with loginFields
+        loginService.authenticationChallenge(loginStrings: loginFields, existingInstitution: institution) { success, error, institution in
+            if success, let institution = institution {
+                self.completeConnect(institution: institution)
+            } else {
+                self.failConnect(error: error)
+            }
+        }
     }
     
     fileprivate func setLoadingFieldString(_ stringValue: String) {
