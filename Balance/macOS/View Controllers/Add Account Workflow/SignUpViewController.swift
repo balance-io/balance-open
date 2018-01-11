@@ -94,7 +94,7 @@ class SignUpViewController: NSViewController {
     fileprivate let helpButton = Button()
     fileprivate let backButton = Button()
     fileprivate let onePasswordButton = Button()
-    fileprivate let spinner = NSProgressIndicator()
+    fileprivate let spinner = YRKSpinningProgressIndicator()
     fileprivate let line = View()
     fileprivate let submitButton = Button()
     
@@ -327,15 +327,11 @@ class SignUpViewController: NSViewController {
         }
         onePasswordButton.sizeToFit()
         
-        if let lighten = CIFilter(name: "CIColorControls") {
-            lighten.setDefaults()
-            lighten.setValue(1, forKey: "inputBrightness")
-            spinner.contentFilters = [lighten]
-        }
         spinner.wantsLayer = true
         spinner.alphaValue = 0.6
-        spinner.style = .spinning
+        spinner.color = .white
         spinner.isDisplayedWhenStopped = false
+        spinner.usesThreadedAnimation = false
         containerView.addSubview(spinner)
         spinner.snp.makeConstraints { make in
             make.height.equalTo(15)
