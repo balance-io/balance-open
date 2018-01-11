@@ -83,6 +83,7 @@ struct EthplorerAccountObject {
         let price: ExchangePrice?
         
         init (dictionary: [String: Any]) throws {
+            
             self.address = try checkType(dictionary["address"], name: "address")
             self.name = try checkType(dictionary["name"], name: "name")
             if dictionary["decimals"] is String {
@@ -120,9 +121,6 @@ struct EthplorerAccountObject {
         let ethAccount = EthplorerAccount(type: .wallet, currency: self.currency, address: self.address, available: self.ETH.balance, altRate: 1, altCurrency: Currency.eth, decimals: 8)
         arrayOlder.append(ethAccount)
         for ethplorerObject in self.tokens {
-            if ethplorerObject.tokenInfo.symbol == "QASH" {
-                print("stop")
-            }
             var altRate: Double = 0
             var altCurrency: Currency?
             if let tokenPrice = ethplorerObject.tokenInfo.price {

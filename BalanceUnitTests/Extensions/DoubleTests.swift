@@ -135,27 +135,14 @@ class DoubleTests: XCTestCase {
     }
     
     func testFrom6DecimalsToFixedCrypto() {
+        //given
+        let double = Double(130049000000)
         
+        //where
+        let balance = double.cientificToEightDecimals(decimals: 6)
+        let noDecimals = balance.integerFixedCryptoDecimals()
+        
+        //then
+        XCTAssertEqual(13004900000000, noDecimals)
     }
-    
-//    "tokenInfo": {
-//    "address": "0x618e75ac90b12c6049ba3b27f5d5f8651b0037f6",
-//    "name": "QASH",
-//    "decimals": "6",
-//    "symbol": "QASH",
-//    "totalSupply": "1000000000000000",
-//    "owner": "0x9fa8a9cd0bd7cbfc503513bc94cd3b3a9ca90e35",
-//    "lastUpdated": 1515678240,
-//    "issuancesCount": 0,
-//    "holdersCount": 7355,
-//    "price": {
-//    "rate": "1.68567",
-//    "diff": -3.72,
-//    "diff7d": 57.06,
-//    "ts": "1515677658",
-//    "marketCapUsd": "589984500.0",
-//    "availableSupply": "350000000.0",
-//    "volume24h": "37090000.0",
-//    "currency": "USD"
-//    }
 }

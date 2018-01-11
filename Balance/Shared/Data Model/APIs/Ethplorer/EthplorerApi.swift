@@ -235,9 +235,6 @@ class EthplorerApi: ExchangeApi {
     
     @discardableResult func updateLocalAccount(institution: Institution) -> Account? {
         // Calculate the integer value of the balance based on the decimals
-        if currency.code == "QASH" {
-            print("stop")
-        }
         if let newAccount = AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: currency.code, sourceInstitutionId: "", accountTypeId: .wallet, accountSubTypeId: nil, name: currency.name, currency: currency.code, currentBalance: balance, availableBalance: nil, number: nil, altCurrency: altCurrency?.code, altCurrentBalance: altBalance, altAvailableBalance: nil) {
             return newAccount
         }
