@@ -163,14 +163,7 @@ public enum CryptoCurrency: String, Equatable, Hashable {
     }
     
     public var decimals: Int {
-        switch self {
-        case .votes:
-            return 10
-        case .amm, .qash:
-            return 14
-        default:
-            return 8
-        }
+        return 8
     }
     
     // For cases like XBT, we want to be able to easily standardize to BTC
