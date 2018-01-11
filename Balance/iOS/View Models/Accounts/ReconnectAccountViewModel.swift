@@ -67,6 +67,10 @@ class ReconnectAccountViewModel {
     
     init(services: AccountServices = AccountServiceProvider()) {
         invalidInstitutions = services.invalidInstitutions
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ReconnectAccountViewModel.updateCoinbaseReconnectAccount(with:)),
+                                               name: CoinbaseNotifications.autenticationDidFinish,
+                                               object: nil)
     }
     
     func action(at index: Int) -> (() -> Void)? {
@@ -98,7 +102,7 @@ class ReconnectAccountViewModel {
 
 private extension ReconnectAccountViewModel {
     
-    func processResult(institutionId: Int, validationWasSucceeded: Bool) {
+    func processResult(institutionId: Int, validationWasSucceeded: Bool, resultMessage: String? = nil) {
         let institutionIndexBlock: (Institution) -> Bool = { $0.institutionId == institutionId }
         guard let institutionIndex = invalidInstitutions.index(where: institutionIndexBlock) else {
             print("Can't update institution with id: \(institutionId)")
@@ -108,14 +112,30 @@ private extension ReconnectAccountViewModel {
         if !validationWasSucceeded {
             let invalidInstitution = invalidInstitutions[institutionIndex]
             invalidInstitution.onValidate = false
+            let message = resultMessage ?? "We can't update your account, please valid your fields and try again."
+            
             reconnectAccountState.onNext(.validationWasFailed(at: institutionIndex,
-                                                              message: "We can't update your account, please valid your fields and try again."))
+                                                              message: message))
             
             return
         }
         
         invalidInstitutions.remove(at: institutionIndex)
-        reconnectAccountState.onNext(.validationWasSucceeded(at: institutionIndex, message: "Example"))
+        reconnectAccountState.onNext(.validationWasSucceeded(at: institutionIndex, message: "Your account was reconnected"))
+    }
+    
+    @objc func updateCoinbaseReconnectAccount(with notification: Notification) {
+        guard let result = CoinbaseNotifications.result(from: notification),
+            let institutionId = result.institutionId else {
+            print("Can't extract institution from notification with user info \((notification.userInfo ?? [:]))")
+            return
+        }
+        
+        let error = result.error
+        let errorMessage = (error as? LocalizedError)?.recoverySuggestion ?? error?.localizedDescription
+        let message = result.succeeded ? nil : errorMessage
+        
+        processResult(institutionId: institutionId, validationWasSucceeded: result.succeeded, resultMessage: message)
     }
     
 }
