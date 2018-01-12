@@ -83,6 +83,7 @@ struct EthplorerAccountObject {
         let price: ExchangePrice?
         
         init (dictionary: [String: Any]) throws {
+            
             self.address = try checkType(dictionary["address"], name: "address")
             self.name = try checkType(dictionary["name"], name: "name")
             if dictionary["decimals"] is String {

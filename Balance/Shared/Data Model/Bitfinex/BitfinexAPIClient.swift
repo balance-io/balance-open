@@ -217,9 +217,9 @@ extension BitfinexAPIClient: ExchangeApi {
         for field in loginStrings {
             switch field.type {
             case .key:
-                keyField = field.value
+                keyField = field.value?.trimmingCharacters(in: .whitespacesAndNewlines)
             case .secret:
-                secretField = field.value
+                secretField = field.value?.trimmingCharacters(in: .whitespacesAndNewlines)
             default:
                 assert(false, "wrong fields are passed into the Bitfinex auth, we require secret and key fields and values")
             }
@@ -242,11 +242,9 @@ extension BitfinexAPIClient: ExchangeApi {
             try self.fetchWallets { _, error in
                 guard let unwrappedError = error else {
                     do {
-                        let credentialsIdentifier = "main"
-                        try credentials.save(identifier: credentialsIdentifier)
-                        
                         if let existingInstitution = existingInstitution {
-                            existingInstitution.accessToken = credentialsIdentifier
+                            try credentials.save(identifier: "\(existingInstitution.institutionId)")
+                            existingInstitution.accessToken = "\(existingInstitution.institutionId)"
                             existingInstitution.passwordInvalid = false
                             existingInstitution.replace()
                             
@@ -260,7 +258,7 @@ extension BitfinexAPIClient: ExchangeApi {
                                 }
                                 return
                             }
-                            institution.accessToken = credentialsIdentifier
+                            institution.accessToken = "\(institution.institutionId)"
                             
                             try self.fetchWallets({ (wallets, error) in
                                 guard let unwrappedWallets = wallets else {

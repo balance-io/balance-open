@@ -41,6 +41,7 @@ internal struct APICredentialsComponents
     internal init(identifier: String) throws
     {
         guard let key = keychain[identifier, "key"], let secret = keychain[identifier, "secret"] else {
+            
             throw Error.dataNotFound(identifier: identifier)
         }
 

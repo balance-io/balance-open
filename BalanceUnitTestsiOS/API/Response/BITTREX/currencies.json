@@ -1,0 +1,22 @@
+{
+	"success" : true,
+	"message" : "",
+	"result" : [{
+			"Currency" : "BTC",
+			"CurrencyLong" : "Bitcoin",
+			"MinConfirmation" : 2,
+			"TxFee" : 0.00020000,
+			"IsActive" : true,
+			"CoinType" : "BITCOIN",
+			"BaseAddress" : null
+		}, {
+			"Currency" : "LTC",
+			"CurrencyLong" : "Litecoin",
+			"MinConfirmation" : 5,
+			"TxFee" : 0.00200000,
+			"IsActive" : true,
+			"CoinType" : "BITCOIN",
+			"BaseAddress" : null
+		}
+    ]
+}

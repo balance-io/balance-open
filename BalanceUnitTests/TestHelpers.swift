@@ -10,7 +10,8 @@ import Foundation
 import XCTest
 
 class TestHelpers {
-    static func loadData(filename: String) -> Data {
+    
+    static func loadData(filename: String, bundle: Bundle? = nil) -> Data {
         let fileURL = Bundle(for: TestHelpers.self).url(forResource: filename, withExtension: "")!
         return try! Data(contentsOf: fileURL)
     }

@@ -238,11 +238,11 @@ extension GDAXAPIClient: ExchangeApi {
         var passphrasField: String?
         for field in loginStrings {
             if field.type == .key {
-                keyField = field.value
+                keyField = field.value?.trimmingCharacters(in: .whitespacesAndNewlines)
             } else if field.type == .secret {
-                secretField = field.value
+                secretField = field.value?.trimmingCharacters(in: .whitespacesAndNewlines)
             } else if field.type == .passphrase {
-                passphrasField = field.value
+                passphrasField = field.value?.trimmingCharacters(in: .whitespacesAndNewlines)
             } else {
                 assert(false, "wrong fields are passed into the poloniex auth, we require secret and key fields and values")
             }
@@ -261,11 +261,9 @@ extension GDAXAPIClient: ExchangeApi {
             try self.fetchAccounts { accounts, error in
                 guard let unwrappedError = error else {
                     do {
-                        let credentialsIdentifier = "main"
-                        try credentials.save(identifier: credentialsIdentifier)
-                        
                         if let existingInstitution = existingInstitution {
-                            existingInstitution.accessToken = credentialsIdentifier
+                            try credentials.save(identifier: "\(existingInstitution.institutionId)")
+                            existingInstitution.accessToken = "\(existingInstitution.institutionId)"
                             existingInstitution.passwordInvalid = false
                             existingInstitution.replace()
                             
@@ -273,10 +271,15 @@ extension GDAXAPIClient: ExchangeApi {
                                 closeBlock(true, nil, existingInstitution)
                             }
                         } else {
-                            let newInstitution = InstitutionRepository.si.institution(source: .gdax, sourceInstitutionId: "", name: "GDAX")
-                            newInstitution?.accessToken = credentialsIdentifier
+                            guard let institution = InstitutionRepository.si.institution(source: .gdax, sourceInstitutionId: "", name: "GDAX") else {
+                                async {
+                                    closeBlock(false, error, nil)
+                                }
+                                return
+                            }
+                            institution.accessToken = "\(institution.institutionId)"
                             
-                            guard let unwrappedAccounts = accounts, let institution = newInstitution else {
+                            guard let unwrappedAccounts = accounts else {
                                 async {
                                     closeBlock(false, error, nil)
                                 }

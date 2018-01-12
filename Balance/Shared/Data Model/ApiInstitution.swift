@@ -59,6 +59,7 @@ extension Source {
         case .bitfinex:  return BitfinexAPIClient.institution
         case .kraken:    return KrakenAPIClient.institution
         case .ethplorer: return EthplorerInstitution()
+        case .bittrex:   return BITTREXInstitution()
         }
     }
 }

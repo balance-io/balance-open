@@ -220,9 +220,9 @@ extension KrakenAPIClient: ExchangeApi {
         for field in loginStrings {
             switch field.type {
             case .key:
-                keyField = field.value
+                keyField = field.value?.trimmingCharacters(in: .whitespacesAndNewlines)
             case .secret:
-                secretField = field.value
+                secretField = field.value?.trimmingCharacters(in: .whitespacesAndNewlines)
             default:
                 assert(false, "wrong fields are passed into the Kraken auth, we require secret and key fields and values")
             }
@@ -267,31 +267,24 @@ extension KrakenAPIClient: ExchangeApi {
                     }
                     
                     if let existingInstitution = existingInstitution {
-                        let credentialsIdentifier = "main"
-                        existingInstitution.accessToken = credentialsIdentifier
                         do {
-                            try credentials.save(identifier: credentialsIdentifier)
-                        } catch {
-                            async {
-                                closeBlock(false, error, nil)
-                            }
-                            return
-                        }
-                        
+                        try credentials.save(identifier: "\(existingInstitution.institutionId)")
+                        existingInstitution.accessToken = "\(existingInstitution.institutionId)"
                         existingInstitution.passwordInvalid = false
                         existingInstitution.replace()
-                        
-                        async {
-                            closeBlock(true, nil, existingInstitution)
+                            async {
+                                closeBlock(true, error, existingInstitution)
+                            }
+                        } catch {
+                            closeBlock(false, error, nil)
                         }
                     } else {
                         //make institution
-                        let credentialsIdentifier = "main"
                         var institution: Institution
                         institution = InstitutionRepository.si.institution(source: .kraken, sourceInstitutionId: "", name: "Kraken")!
-                        institution.accessToken = credentialsIdentifier
+                        institution.accessToken = "\(institution.institutionId)"
                         do {
-                            try credentials.save(identifier: credentialsIdentifier)
+                            try credentials.save(identifier: "\(institution.institutionId)")
                         } catch {
                             async {
                                 closeBlock(false, error, nil)

@@ -280,8 +280,8 @@ class TransactionsTabTransactionCell: View {
             make.top.equalTo(institutionField.snp.bottom)
         }
         
-        institutionField.stringValue = model.institution!.name
-        accountField.stringValue = model.account!.name
+        institutionField.stringValue = model.institution?.name ?? ""
+        accountField.stringValue = model.account?.name ?? ""
     }
     
     func unloadBottomContainer() {

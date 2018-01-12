@@ -150,8 +150,8 @@ class PoloniexApi: ExchangeApi {
     
     // Poloniex doesn't have an authenticate method "per-se" so we use the returnBalances call to validate the key-secret pair for login
     fileprivate func authenticate(secret: String, key: String, existingInstitution: Institution?, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) throws {
-        self.secret = secret
-        self.key = key
+        self.secret = secret.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.key = key.trimmingCharacters(in: .whitespacesAndNewlines)
         
         let requestInfo = createRequestBodyandHash(params: ["command": Commands.returnCompleteBalances.rawValue], secret: secret, key: key)
         let urlRequest = assembleTradingRequest(key: key, body: requestInfo.body, hashBody: requestInfo.signedBody)
