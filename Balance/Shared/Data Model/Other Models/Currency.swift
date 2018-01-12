@@ -558,7 +558,7 @@ public enum FiatCurrency: String, Equatable, Hashable {
     public var decimals: Int {
         switch self {
         case .clp, .irr, .isk, .jpy, .kpw, .krw, .lak, .lbp, .mkd, .pyg, .vnd: return 0
-        case .omr: return 3
+        case .omr, .cop: return 3
         default: return 2
         }
     }
