@@ -267,26 +267,16 @@ extension KrakenAPIClient: ExchangeApi {
                     }
                     
                     if let existingInstitution = existingInstitution {
-                        let credentialsIdentifier = "main"
-                        existingInstitution.accessToken = credentialsIdentifier
-                        do {
-                            try credentials.save(identifier: credentialsIdentifier)
-                        } catch {
-                            async {
-                                closeBlock(false, error, nil)
-                            }
-                            return
-                        }
-                        
+                        try credentials.save(identifier: "\(existingInstitution.institutionId)")
+                        existingInstitution.accessToken = "\(existingInstitution.institutionId)"
                         async {
-                            closeBlock(true, nil, existingInstitution)
+                            closeBlock(true, error, existingInstitution)
                         }
                     } else {
                         //make institution
-                        let credentialsIdentifier = "main"
                         var institution: Institution
                         institution = InstitutionRepository.si.institution(source: .kraken, sourceInstitutionId: "", name: "Kraken")!
-                        institution.accessToken = credentialsIdentifier
+                        institution.accessToken = "\(existingInstitution.institutionId)"
                         do {
                             try credentials.save(identifier: credentialsIdentifier)
                         } catch {
