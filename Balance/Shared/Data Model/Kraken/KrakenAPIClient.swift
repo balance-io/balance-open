@@ -220,9 +220,9 @@ extension KrakenAPIClient: ExchangeApi {
         for field in loginStrings {
             switch field.type {
             case .key:
-                keyField = field.value
+                keyField = field.value?.trimmingCharacters(in: .whitespacesAndNewlines)
             case .secret:
-                secretField = field.value
+                secretField = field.value?.trimmingCharacters(in: .whitespacesAndNewlines)
             default:
                 assert(false, "wrong fields are passed into the Kraken auth, we require secret and key fields and values")
             }

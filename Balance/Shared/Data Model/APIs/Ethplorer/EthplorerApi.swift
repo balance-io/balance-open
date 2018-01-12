@@ -112,8 +112,8 @@ class EthplorerApi: ExchangeApi {
     // MARK: - Private -
     
     fileprivate func authenticate(name: String, address: String, existingInstitution: Institution?, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) throws {
-        self.address = address
-        self.name = name
+        self.address = address.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.name = name.trimmingCharacters(in: .whitespacesAndNewlines)
         
         let addressURL = EthplorerUrl.appendingPathComponent("\(Commands.getAddressInfo.rawValue)/\(address)")
         var urlComponent = URLComponents(url: addressURL, resolvingAgainstBaseURL: false)
