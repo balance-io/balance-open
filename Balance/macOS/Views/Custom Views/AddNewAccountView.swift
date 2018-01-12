@@ -10,8 +10,8 @@ import Cocoa
 
 class AddNewAccountView: View {
     
-    let nothingToSeeLabel = LabelField()
-    let addAccountButton = Button()
+    private let nothingToSeeLabel = LabelField()
+    private let addAccountButton = Button()
     
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
