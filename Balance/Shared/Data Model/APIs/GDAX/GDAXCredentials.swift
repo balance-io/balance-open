@@ -45,12 +45,10 @@ internal extension GDAXAPIClient
             // as we can't call self before intialization, making this brital.
             // There are tests to catch this being an issue though.
             let namespacedIdentifier = "com.GDAXAPIClient.Credentials.\(identifier)"
-            var components: APICredentialsComponents?
-            do {
-                try components = APICredentialsComponents(identifier: namespacedIdentifier)
-            } catch {
+            var components = try? APICredentialsComponents(identifier: namespacedIdentifier)
+            if components == nil {
                 let oldNamespacedIdentifier = "com.GDAXAPIClient.Credentials.main"
-                components = try APICredentialsComponents(identifier: oldNamespacedIdentifier)
+                components = try? APICredentialsComponents(identifier: oldNamespacedIdentifier)
                 //one time run if the fetching of the old credentials succeeds to delete old ones
                 keychain[oldNamespacedIdentifier, "key"] = nil
                 keychain[oldNamespacedIdentifier, "secret"] = nil
