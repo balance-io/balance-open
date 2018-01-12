@@ -45,9 +45,19 @@ internal extension KrakenAPIClient
             // as we can't call self before intialization, making this brital.
             // There are tests to catch this being an issue though.
             let namespacedIdentifier = "com.KrakenAPIClient.Credentials.\(identifier)"
-            let components = try APICredentialsComponents(identifier: namespacedIdentifier)
+            var components = try? APICredentialsComponents(identifier: namespacedIdentifier)
+            if components == nil {
+                let oldNamespacedIdentifier = "com.GDAXAPIClient.Credentials.main"
+                components = try? APICredentialsComponents(identifier: oldNamespacedIdentifier)
+                //one time run if the fetching of the old credentials succeeds to delete old ones
+                keychain[oldNamespacedIdentifier].clear()
+            }
             
-            try self.init(component: components)
+            guard let unwrapedComponents = components else {
+                throw APICredentialsComponents.Error.dataNotFound(identifier: identifier)
+            }
+            
+            try self.init(component: unwrapedComponents)
         }
         
         // MARK: Signature

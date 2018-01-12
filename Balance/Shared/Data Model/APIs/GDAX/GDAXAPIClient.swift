@@ -261,20 +261,22 @@ extension GDAXAPIClient: ExchangeApi {
             try self.fetchAccounts { accounts, error in
                 guard let unwrappedError = error else {
                     do {
-                        let credentialsIdentifier = "main"
-                        try credentials.save(identifier: credentialsIdentifier)
-                        
                         if let existingInstitution = existingInstitution {
-                            existingInstitution.accessToken = credentialsIdentifier
-                            
+                            try credentials.save(identifier: "\(existingInstitution.institutionId)")
+                            existingInstitution.accessToken = "\(existingInstitution.institutionId)"
                             async {
                                 closeBlock(true, nil, existingInstitution)
                             }
                         } else {
-                            let newInstitution = InstitutionRepository.si.institution(source: .gdax, sourceInstitutionId: "", name: "GDAX")
-                            newInstitution?.accessToken = credentialsIdentifier
+                            guard let institution = InstitutionRepository.si.institution(source: .gdax, sourceInstitutionId: "", name: "GDAX") else {
+                                async {
+                                    closeBlock(false, error, nil)
+                                }
+                                return
+                            }
+                            institution.accessToken = "\(institution.institutionId)"
                             
-                            guard let unwrappedAccounts = accounts, let institution = newInstitution else {
+                            guard let unwrappedAccounts = accounts else {
                                 async {
                                     closeBlock(false, error, nil)
                                 }
