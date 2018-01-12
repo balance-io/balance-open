@@ -195,7 +195,6 @@
 		5355749B1E299A4A0003ED7B /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5355749A1E299A4A0003ED7B /* Error.swift */; };
 		53560E7F1DFCDF8A00547AF7 /* NSBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53560E7E1DFCDF8A00547AF7 /* NSBezierPath.swift */; };
 		53561EA41F82DD260043D4F9 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53561EA21F82DD120043D4F9 /* UserPreferences.swift */; };
-		53561EA51F82DD260043D4F9 /* ApplicationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53561EA31F82DD120043D4F9 /* ApplicationConfiguration.swift */; };
 		53561EA61F82DD260043D4F9 /* InstitutionSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53561E971F82DD120043D4F9 /* InstitutionSettingsViewController.swift */; };
 		53561EA71F82DD260043D4F9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53561E981F82DD120043D4F9 /* SettingsViewController.swift */; };
 		53561EA81F82DD260043D4F9 /* AccountsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53561E9A1F82DD120043D4F9 /* AccountsListViewController.swift */; };
@@ -708,7 +707,6 @@
 		53561E9E1F82DD120043D4F9 /* AddAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
 		53561EA01F82DD120043D4F9 /* AddCredentialBasedAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCredentialBasedAccountViewController.swift; sourceTree = "<group>"; };
 		53561EA21F82DD120043D4F9 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
-		53561EA31F82DD120043D4F9 /* ApplicationConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationConfiguration.swift; sourceTree = "<group>"; };
 		5357699F1D5A4A7600013543 /* SectionedTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionedTableView.swift; sourceTree = "<group>"; };
 		5358F5431C7FFD9700AB7420 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		535905681CC8482400DBC816 /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
@@ -1511,7 +1509,6 @@
 			isa = PBXGroup;
 			children = (
 				53561EA21F82DD120043D4F9 /* UserPreferences.swift */,
-				53561EA31F82DD120043D4F9 /* ApplicationConfiguration.swift */,
 				A41EE4811FB9B66D00210038 /* QRLoginCredentialsParser.swift */,
 			);
 			path = Utilities;
@@ -2670,7 +2667,6 @@
 				537504FB1F19237E0062C11A /* ProductId.swift in Sources */,
 				53552A361ED72B5B00DD95F9 /* Pluralize.swift in Sources */,
 				535529DB1ED723C600DD95F9 /* AppDelegate.swift in Sources */,
-				53561EA51F82DD260043D4F9 /* ApplicationConfiguration.swift in Sources */,
 				A4E457201F79045A002E2879 /* Double.swift in Sources */,
 				A453A5231F866CFF0002C6C8 /* LoginViewController.swift in Sources */,
 				537187E21F4CC23B00E7F9D6 /* GDAXErrors.swift in Sources */,
