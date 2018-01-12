@@ -133,7 +133,8 @@ class EthplorerApi: ExchangeApi {
                     
                     if let existingInstitution = existingInstitution {
                         existingInstitution.address = address
-                        
+                        existingInstitution.passwordInvalid = false
+                        existingInstitution.replace()
                         async {
                             closeBlock(true, nil, existingInstitution)
                         }

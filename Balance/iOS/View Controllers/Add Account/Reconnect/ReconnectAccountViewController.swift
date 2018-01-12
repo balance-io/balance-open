@@ -135,8 +135,6 @@ private extension ReconnectAccountViewController {
                     self.finishValidation(succeeded: true, at: index, with: message)
                 case .validating(let index, let institution):
                     self.startValidation(indexToRefresh: index, institution: institution)
-                case .refresh:
-                    self.invalidAccountsTableView?.reloadData()
                 default:
                     return
                 }

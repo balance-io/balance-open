@@ -20,7 +20,6 @@ enum RecconectViewState {
     case validating(accountIndex: Int, institution: Institution)
     case validationWasSucceeded(at: Int, message: String?)
     case validationWasFailed(at: Int, message: String?)
-    case refresh
 }
 
 protocol AccountServices {
@@ -76,12 +75,6 @@ class ReconnectAccountViewModel {
                                                selector: updateCoinbaseReconnectSelector,
                                                name: CoinbaseNotifications.autenticationDidFinish,
                                                object: nil)
-        
-        let refreshDataSelector =  #selector(ReconnectAccountViewModel.refreshData(with:))
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: refreshDataSelector,
-//                                               name: Notifications.SyncCompleted,
-//                                               object: nil)
     }
     
     func action(at index: Int) -> (() -> Void)? {
@@ -147,17 +140,6 @@ private extension ReconnectAccountViewModel {
         let message = result.succeeded ? nil : errorMessage
         
         processResult(institutionId: institutionId, validationWasSucceeded: result.succeeded, resultMessage: message)
-    }
-    
-    @objc func refreshData(with notification: Notification) {
-//        let invalidInstitutionRefreshed = services.invalidInstitutions
-//        
-//        guard invalidInstitutionRefreshed != invalidInstitutions else {
-//            return
-//        }
-//        
-//        invalidInstitutions = invalidInstitutionRefreshed
-//        reconnectAccountState.onNext(.refresh)
     }
     
 }
