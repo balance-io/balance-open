@@ -175,10 +175,8 @@ class Syncer {
                 // Fetch data from GDAX
                 self.gdaxApiClient.credentials = credentials
                 try self.gdaxApiClient.fetchAccounts { accounts, error in
-                    guard let unwrappedAccounts = accounts else
-                    {
-                        if let unwrappedError = error
-                        {
+                    guard let unwrappedAccounts = accounts else {
+                        if let unwrappedError = error {
                             syncingErrors.append(unwrappedError)
                         }
                         
@@ -221,7 +219,6 @@ class Syncer {
             guard let accessToken = institution.accessToken else {
                 syncingSuccess = false
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
-                
                 return
             }
             
@@ -231,7 +228,7 @@ class Syncer {
                 
                 // Fetch data from Bitfinex
                 self.bitfinexApiClient.credentials = credentials
-                try! self.bitfinexApiClient.fetchWallets { wallets, error in
+                try self.bitfinexApiClient.fetchWallets { wallets, error in
                     guard let unwrappedWallets = wallets else {
                         if let unwrappedError = error {
                             syncingErrors.append(unwrappedError)
@@ -250,7 +247,7 @@ class Syncer {
                     }
                 }
                 // Sync transactions
-                try! self.bitfinexApiClient.fetchTransactions({ (transactions, error) in
+                try self.bitfinexApiClient.fetchTransactions({ (transactions, error) in
                     guard let unwrappedTransactions = transactions else {
                         if let unwrappedError = error {
                             syncingErrors.append(unwrappedError)
@@ -278,7 +275,6 @@ class Syncer {
             guard let accessToken = institution.accessToken else {
                 syncingSuccess = false
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
-                
                 return
             }
             
