@@ -238,11 +238,11 @@ extension GDAXAPIClient: ExchangeApi {
         var passphrasField: String?
         for field in loginStrings {
             if field.type == .key {
-                keyField = field.value
+                keyField = field.value?.trimmingCharacters(in: .whitespacesAndNewlines)
             } else if field.type == .secret {
-                secretField = field.value
+                secretField = field.value?.trimmingCharacters(in: .whitespacesAndNewlines)
             } else if field.type == .passphrase {
-                passphrasField = field.value
+                passphrasField = field.value?.trimmingCharacters(in: .whitespacesAndNewlines)
             } else {
                 assert(false, "wrong fields are passed into the poloniex auth, we require secret and key fields and values")
             }
