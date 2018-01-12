@@ -35,7 +35,8 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
     // MARK: Body
     let scrollView = ScrollView()
     let tableView = SectionedTableView()
-    let noResultsField = LabelField()
+    let addAccountView = AddNewAccountView()
+    
     // Hack for SnapKit bug, must use NSLayoutConstraint instead of the SnapKit Constraint object
     var scrollViewTopConstraint: NSLayoutConstraint!
     
@@ -97,6 +98,7 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         //createHeader()
         createTable()
         createFooter()
+        showAddAccountIfNeeded()
     }
     
     func createHeader() {
@@ -159,19 +161,6 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
     
     fileprivate let noResultsDateFormatter = DateFormatter()
     func createTable() {
-        noResultsField.alignment = .center
-        noResultsField.font = CurrentTheme.transactions.noResultsFont
-        noResultsField.textColor = CurrentTheme.defaults.foregroundColor
-        noResultsField.usesSingleLineMode = false
-        noResultsField.alphaValue = 0.0
-        self.view.addSubview(noResultsField)
-        noResultsField.snp.makeConstraints { make in
-            //make.top.equalTo(searchField.snp.bottom).offset(35 + 70)
-            make.top.equalToSuperview().offset(35 + 70)
-            make.height.equalTo(100)
-            make.width.equalTo(250)
-            make.centerX.equalTo(self.view)
-        }
         
         scrollView.documentView = tableView
         self.view.addSubview(scrollView)
@@ -194,6 +183,11 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         tableView.selectionHighlightStyle = .none
         
         tableView.reloadData()
+     
+        view.addSubview(addAccountView)
+        addAccountView.snp.makeConstraints{ make in
+            make.size.equalToSuperview()
+        }
     }
     
     func createFooter() {
@@ -320,6 +314,7 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
     
     @objc private func reloadDataDelayed() {
         viewModel.reloadData()
+        showAddAccountIfNeeded()
     }
     
     func reloadDataFinished() {
@@ -331,6 +326,10 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
             categoriesDropdown.items = viewModel.categories
             invalidateTouchBar()
         }
+    }
+    
+    func showAddAccountIfNeeded() {
+        addAccountView.hideView(viewModel.accounts.count > 1)
     }
     
     //
@@ -351,8 +350,6 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         guard !isShowingSearchFilters && !isAnimatingSearchFilters else {
             return
         }
-        
-        noResultsField.alphaValue = 0.0
         
         tableView.isHoveringEnabled = false
         isAnimatingSearchFilters = true
@@ -585,41 +582,7 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         tableView.updateRows(oldObjects: lastSearch.flattened as NSArray, newObjects: viewModel.data.flattened as NSArray, animationOptions: [NSTableView.AnimationOptions.effectFade, NSTableView.AnimationOptions.slideDown])
         
         tableView.scrollToBeginningOfDocument(nil)
-        
-        let showNoResultsField = (viewModel.data.count == 0)
-        if showNoResultsField {
-            var noResultsString = "No results found."
-            if let tokens = Search.tokenizeSearch(searchString) {
-                if tokens.keys.contains(.in) || tokens.keys.contains(.account) {
-                    let accountName = tokens[.in]?.value ?? tokens[.account]!.value
-                    if let oldestTransaction = TransactionRepository.si.oldestTransaction(accountName: accountName) {
-                        noResultsDateFormatter.dateFormat = "MMM d, y"
-                        let date = noResultsDateFormatter.string(from: oldestTransaction.date)
-                        noResultsString = "No results found.\n\nThe earliest transaction we have for this account is from \(date)."
-                    } else {
-                        noResultsString = "We have no transactions for this account."
-                    }
-                }
-            } else if let oldestTransaction = TransactionRepository.si.oldestTransaction() {
-                noResultsDateFormatter.dateFormat = "MMM d, y"
-                let date = noResultsDateFormatter.string(from: oldestTransaction.date as Date)
-                noResultsString = "No results found.\n\nThe earliest transaction we have is from \(date)."
-            }
-            noResultsField.stringValue = noResultsString
-        }
-        
-        let alphaValue = CGFloat(showNoResultsField ? 1.0 : 0.0)
-        if noResultsField.alphaValue != alphaValue {
-            if showNoResultsField {
-                NSAnimationContext.runAnimationGroup({ context in
-                    context.duration = 0.8
-                    self.noResultsField.animator().alphaValue = alphaValue
-                }, completionHandler: nil)
-            } else {
-                self.noResultsField.animator().alphaValue = alphaValue
-            }
-        }
-        
+
         if viewModel.searching && viewModel.data.count > 0 {
             scrollView.contentInsets = NSEdgeInsetsMake(0, 0, 30, 0)
             footerView.snp.updateConstraints { make in
