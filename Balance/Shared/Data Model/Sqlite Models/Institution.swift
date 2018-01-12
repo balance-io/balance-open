@@ -76,8 +76,14 @@ final class Institution {
 }
 
 extension Institution: Item, Equatable {
+    
     var itemId: Int { return institutionId }
     var itemName: String { return name }
+    
+    static func ==(left: Institution, right: Institution) -> Bool {
+        return left.institutionId == right.institutionId
+    }
+    
 }
 
 extension Institution: Hashable {

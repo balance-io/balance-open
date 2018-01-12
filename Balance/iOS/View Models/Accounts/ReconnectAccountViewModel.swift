@@ -20,6 +20,7 @@ enum RecconectViewState {
     case validating(accountIndex: Int, institution: Institution)
     case validationWasSucceeded(at: Int, message: String?)
     case validationWasFailed(at: Int, message: String?)
+    case refresh
 }
 
 protocol AccountServices {
@@ -64,13 +65,23 @@ class ReconnectAccountViewModel {
 
     private var invalidInstitutions: [Institution]
     private let reconnectAccountState = BehaviorSubject<RecconectViewState>(value: .idle)
+    private let services: AccountServices
     
     init(services: AccountServices = AccountServiceProvider()) {
+        self.services = services
         invalidInstitutions = services.invalidInstitutions
         
-        NotificationCenter.default.addObserver(self, selector: #selector(ReconnectAccountViewModel.updateCoinbaseReconnectAccount(with:)),
+        let updateCoinbaseReconnectSelector = #selector(ReconnectAccountViewModel.updateCoinbaseReconnectAccount(with:))
+        NotificationCenter.default.addObserver(self,
+                                               selector: updateCoinbaseReconnectSelector,
                                                name: CoinbaseNotifications.autenticationDidFinish,
                                                object: nil)
+        
+        let refreshDataSelector =  #selector(ReconnectAccountViewModel.refreshData(with:))
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: refreshDataSelector,
+//                                               name: Notifications.SyncCompleted,
+//                                               object: nil)
     }
     
     func action(at index: Int) -> (() -> Void)? {
@@ -136,6 +147,17 @@ private extension ReconnectAccountViewModel {
         let message = result.succeeded ? nil : errorMessage
         
         processResult(institutionId: institutionId, validationWasSucceeded: result.succeeded, resultMessage: message)
+    }
+    
+    @objc func refreshData(with notification: Notification) {
+//        let invalidInstitutionRefreshed = services.invalidInstitutions
+//        
+//        guard invalidInstitutionRefreshed != invalidInstitutions else {
+//            return
+//        }
+//        
+//        invalidInstitutions = invalidInstitutionRefreshed
+//        reconnectAccountState.onNext(.refresh)
     }
     
 }
