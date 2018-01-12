@@ -15,6 +15,7 @@ enum Source: Int, CustomStringConvertible {
     case bitfinex  = 5
     case kraken    = 6
     case ethplorer = 7
+    case bittrex = 8
     
     var description: String {
         switch self {
@@ -25,6 +26,7 @@ enum Source: Int, CustomStringConvertible {
         case .bitfinex:  return "Bitfinex"
         case .kraken:    return "Kraken"
         case .ethplorer: return "Ethereum Wallet"
+        case .bittrex:   return "BITTREX"
         }
     }
     
@@ -36,6 +38,7 @@ enum Source: Int, CustomStringConvertible {
         case .bitfinex:  return PXColor(hexString: "#58AD03")!
         case .kraken:    return PXColor(hexString: "#4F6E89")!
         case .ethplorer: return PXColor(hexString: "#333D4E")!
+        case .bittrex:   return PXColor(hexString: "#29333D")!
         }
     }
 }

@@ -23,6 +23,7 @@ extension Source {
         case .bitfinex:  return BitfinexAPIClient()
         case .kraken:    return KrakenAPIClient()
         case .ethplorer: return EthplorerApi()
+        case .bittrex:   return BITTREXApi()
         }
     }
 }
