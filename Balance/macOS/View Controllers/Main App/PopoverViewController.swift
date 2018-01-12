@@ -292,8 +292,7 @@ class PopoverViewController: NSViewController {
     
     @objc fileprivate func institutionRemoved() {
         if !InstitutionRepository.si.hasInstitutions {
-            AppDelegate.sharedInstance.preferencesWindowController.close()
-            showAddAccount(animated: true)
+            NotificationCenter.postOnMainThread(name: Notifications.ShowTabIndex, object: nil, userInfo: [Notifications.Keys.TabIndex: Tab.priceTicker.rawValue])
         }
     }
     
