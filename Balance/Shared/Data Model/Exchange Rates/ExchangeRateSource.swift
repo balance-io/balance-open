@@ -9,25 +9,22 @@ import Foundation
 
 public enum ExchangeRateSource: Int {
     // Crypto
-    case average      = 0
-    case coinbaseGdax = 1
-    case poloniex     = 2
-    case bitfinex     = 3
-    case kraken       = 4
-    case kucoin       = 5
-    case hitbtc       = 6
-    case binance      = 7
+    case average       = 0
+    case coinbaseGdax  = 1
+    case poloniex      = 2
+    case bitfinex      = 3
+    case kraken        = 4
+    case kucoin        = 5
+    case hitbtc        = 6
+    case binance       = 7
     
     // Fiat
-    case fixer        = 10001
+    case fixer         = 10001
+    case currencylayer = 10002
     
-    // These are the currencies that values are stored in for this exchange (i.e. Poloniex only has BTC and ETC, but not fiat currencies)
+    // These are the currencies that we try to convert as an in between step
     public static var mainCurrencies: [Currency] {
-        switch self {
-            //        case .poloniex: return [.btc, .eth]
-        //        case .kraken: return [.usd, .btc]
-        default: return [.btc, .eth, .usd]
-        }
+        return [.btc, .eth, .usd]
     }
     
     public static var allCrypto: [ExchangeRateSource] {
@@ -35,7 +32,7 @@ public enum ExchangeRateSource: Int {
     }
     
     public static var allFiat: [ExchangeRateSource] {
-        return [.fixer]
+        return [.fixer, .currencylayer]
     }
     
     public static var all: [ExchangeRateSource] {
