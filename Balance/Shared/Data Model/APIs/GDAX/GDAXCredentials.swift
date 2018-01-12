@@ -39,8 +39,7 @@ internal extension GDAXAPIClient
             self.components = component
         }
         
-        internal init(identifier: String) throws
-        {
+        internal init(identifier: String) throws {
             // :( Unable to use the namespacing function (self.namespacedKeychainIdentifier())
             // as we can't call self before intialization, making this brital.
             // There are tests to catch this being an issue though.
@@ -50,13 +49,13 @@ internal extension GDAXAPIClient
                 let oldNamespacedIdentifier = "com.GDAXAPIClient.Credentials.main"
                 components = try? APICredentialsComponents(identifier: oldNamespacedIdentifier)
                 //one time run if the fetching of the old credentials succeeds to delete old ones
-                keychain[oldNamespacedIdentifier, "key"] = nil
-                keychain[oldNamespacedIdentifier, "secret"] = nil
-                keychain[oldNamespacedIdentifier, "passphrase"] = nil
+                keychain[oldNamespacedIdentifier].clear()
             }
+            
             guard let unwrapedComponents = components else {
                 throw APICredentialsComponents.Error.dataNotFound(identifier: identifier)
             }
+            
             try self.init(component: unwrapedComponents)
         }
         

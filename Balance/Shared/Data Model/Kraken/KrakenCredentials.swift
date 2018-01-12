@@ -50,13 +50,13 @@ internal extension KrakenAPIClient
                 let oldNamespacedIdentifier = "com.GDAXAPIClient.Credentials.main"
                 components = try? APICredentialsComponents(identifier: oldNamespacedIdentifier)
                 //one time run if the fetching of the old credentials succeeds to delete old ones
-                keychain[oldNamespacedIdentifier, "key"] = nil
-                keychain[oldNamespacedIdentifier, "secret"] = nil
-                keychain[oldNamespacedIdentifier, "passphrase"] = nil
+                keychain[oldNamespacedIdentifier].clear()
             }
+            
             guard let unwrapedComponents = components else {
                 throw APICredentialsComponents.Error.dataNotFound(identifier: identifier)
             }
+            
             try self.init(component: unwrapedComponents)
         }
         
