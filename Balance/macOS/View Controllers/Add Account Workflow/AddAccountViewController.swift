@@ -356,10 +356,10 @@ class AddAccountViewController: NSViewController {
                 self.back()
             } else {
                 self.removeSignUpController(animated: true)
-            }
-            async() {
-                if self.allowSelection {
-                    AppDelegate.sharedInstance.resizeWindowHeight(self.windowHeight, animated: true)
+                async() {
+                    if self.allowSelection {
+                        AppDelegate.sharedInstance.resizeWindowHeight(self.windowHeight, animated: true)
+                    }
                 }
             }
         })

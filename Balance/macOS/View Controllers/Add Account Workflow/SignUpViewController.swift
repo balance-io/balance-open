@@ -511,7 +511,7 @@ class SignUpViewController: NSViewController {
     // NOTE: Do not call directly, use close, cancel, or finished instead
     fileprivate func callCloseBlock(finished: Bool) {
         AppDelegate.sharedInstance.statusItem.arrowColor = NSColor.clear
-        closeBlock(false, self)
+        closeBlock(finished, self)
     }
     
     @objc fileprivate func close() {
