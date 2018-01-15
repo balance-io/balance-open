@@ -12,7 +12,6 @@ import UIKit
 internal class AddCredentialBasedAccountViewController: UIViewController
 {
     // Private
-    private let source: Source
     private let viewModel: NewAccountViewModel
     private let tableView = UITableView(frame: CGRect.zero, style: .grouped)
     weak var delegate: AddAccountDelegate?
@@ -21,14 +20,10 @@ internal class AddCredentialBasedAccountViewController: UIViewController
     
     // MARK: Initialization
     
-    internal required init(source: Source)
+    internal required init(viewModel: NewAccountViewModel)
     {
-        self.source = source
-        self.viewModel = NewAccountViewModel(source: source)
-        
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        
-        self.title = source.description
     }
     
     internal required init?(coder aDecoder: NSCoder)
@@ -41,7 +36,8 @@ internal class AddCredentialBasedAccountViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+     
+        self.title = viewModel.source.description
         self.view.backgroundColor = UIColor.white
         
         // Navigation bar
@@ -79,6 +75,7 @@ internal class AddCredentialBasedAccountViewController: UIViewController
                 let cell: TextFieldTableViewCell = tableView.dequeueReusableCell(at: indexPath)
                 cell.textField = self.viewModel.textField(at: index)
                 cell.titleLabel.text = self.viewModel.title(at: index)
+                cell.textField?.text = self.viewModel.testValue(at: index)
                 
                 return cell
             })
@@ -119,40 +116,44 @@ internal class AddCredentialBasedAccountViewController: UIViewController
     @objc private func doneButtonTapped(_ sender: Any)
     {
         // Validate
-        guard self.viewModel.isValid else
-        {
-            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
-
-            let alertController = UIAlertController(title: "Error", message: "All fields are required", preferredStyle: .alert)
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
-
+        guard self.viewModel.isValid else {
+            showSimpleMessage(title: "Error", message: "All fields are required")
             return
         }
         
         SVProgressHUD.show()
         
         // Auth
-        self.viewModel.authenticate { (success, error) in
-            async {
-                if success
-                {
-                    SVProgressHUD.showSuccess(withStatus: "\(self.source.description) account added!")
-                    self.navigationController?.popViewController(animated: true)
-                    return
-                }
-                
-                SVProgressHUD.dismiss()
-                
-                // Show error message
-                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
-                
-                let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
-                alertController.addAction(okAction)
-                self.present(alertController, animated: true, completion: nil)
-            }
+        self.viewModel.authenticate { [weak self] (success, error) in
+            self?.processLoginResult((success, error))
         }
     }
+}
+
+private extension AddCredentialBasedAccountViewController {
+    
+    func processLoginResult(_ result: (success: Bool, error: Error?)) {
+        guard result.success && result.error == nil else {
+            showErrorLogin(with: result.error)
+            return
+        }
+        
+        showSuccessLogin()
+    }
+    
+    func showErrorLogin(with error: Error?) {
+        SVProgressHUD.dismiss()
+        
+        let errorMessage = (error as? LocalizedError)?.recoverySuggestion ?? error?.localizedDescription
+        showSimpleMessage(title: "Error", message: errorMessage ?? "Something was wrong, please try later")
+    }
+    
+    func showSuccessLogin() {
+        SVProgressHUD.showSuccess(withStatus: "\(self.viewModel.source.description) account added!")
+        self.navigationController?.popViewController(animated: true)
+        self.delegate?.didAddAccount(succeeded: true, institutionId: viewModel.existingInstitutionId)
+    }
+    
 }
 
 // MARK: UITableViewDataSource
@@ -199,40 +200,23 @@ extension AddCredentialBasedAccountViewController: UITableViewDelegate {
 // MARK: QRCodeScannerViewControllerDelegate
 
 extension AddCredentialBasedAccountViewController: QRCodeScannerViewControllerDelegate {
-    func didFind(value: String, in controller: QRCodeScannerViewController)
-    {
-        do {
-            let parser = QRLoginCredentialsParser()
-            let fields = try parser.parse(value: value, for: self.source)
-
-            DispatchQueue.main.async {
-                SVProgressHUD.show()
-
-                controller.dismiss(animated: true, completion: {
-                    self.viewModel.authenticate(with: fields, completionHandler: { (success, error) in
-                        async {
-                            if success && error == nil
-                            {
-                                SVProgressHUD.showSuccess(withStatus: "\(self.source.description) account added!")
-                                self.navigationController?.popViewController(animated: true)
-                                self.delegate?.didAddAccount()
-                                
-                                return
-                            }
-
-                            SVProgressHUD.dismiss()
-
-                            // Show error message
-                            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
-                            let errorMessage = (error as? LocalizedError)?.recoverySuggestion ?? error?.localizedDescription
-                            let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
-                            alertController.addAction(okAction)
-                            self.present(alertController, animated: true, completion: nil)
-                        }
-                    })
-                })
-            }
+    
+    func didFind(value: String, in controller: QRCodeScannerViewController) {
+        let parser = QRLoginCredentialsParser()
+        guard let fields = try? parser.parse(value: value, for: self.viewModel.source) else {
+            print("There is an error parsing fields")
+            return
         }
-        catch { }
+        
+        DispatchQueue.main.async {
+            SVProgressHUD.show()
+            
+            controller.dismiss(animated: true, completion: {
+                self.viewModel.authenticate(with: fields, completionHandler: { [weak self] (success, error) in
+                    self?.processLoginResult((success, error))
+                })
+            })
+        }
     }
+    
 }

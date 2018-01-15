@@ -1,15 +1,9 @@
 {
   "commitish" : "c0f66e42be339f27e727da022518af362cca409b",
-  "Mac" : [
-    {
-      "name" : "SnapKit",
-      "hash" : "22c7008f424be8fd1546636278891fd488fc4eafdb9b90a01eb1c0dcfc5ecd44"
-    }
-  ],
   "iOS" : [
     {
       "name" : "SnapKit",
-      "hash" : "0b0e345670b400178f106276c6e62ca02f1faaf760eb19bcb02f8458b402d571"
+      "hash" : "1f5004f1bd85cb03ce7099e5499ecbe57e9b062fa820dc3c933b167ecf5c2cbd"
     }
   ]
 }

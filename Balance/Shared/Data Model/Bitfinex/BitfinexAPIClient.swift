@@ -239,6 +239,7 @@ extension BitfinexAPIClient: ExchangeApi {
         do {
             let credentials = try BitfinexAPIClient.Credentials(key: key, secret: secret)
             self.credentials = credentials
+
             institution = existingInstitution ?? InstitutionRepository.si.institution(source: .bitfinex, sourceInstitutionId: "", name: "Bitfinex")
             guard let unwrappedInstitution = institution else {
                 async {
@@ -250,6 +251,10 @@ extension BitfinexAPIClient: ExchangeApi {
             let accessToken = String(unwrappedInstitution.institutionId)
             try credentials.save(identifier: accessToken)
             unwrappedInstitution.accessToken = accessToken
+            if let existingInstitution = existingInstitution {
+                existingInstitution.passwordInvalid = false
+                existingInstitution.replace()  
+            }
             
             try self.fetchWallets { wallets, error in
                 guard let unwrappedWallets = wallets else {

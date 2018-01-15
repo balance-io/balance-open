@@ -271,6 +271,9 @@ extension KrakenAPIClient: ExchangeApi {
                             let accessToken = String(existingInstitution.institutionId)
                             try credentials.save(identifier: accessToken)
                             existingInstitution.accessToken = accessToken
+                            existingInstitution.passwordInvalid = false
+                            existingInstitution.replace()
+                          
                             async {
                                 closeBlock(true, error, existingInstitution)
                             }

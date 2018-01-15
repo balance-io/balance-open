@@ -270,6 +270,10 @@ extension GDAXAPIClient: ExchangeApi {
             let accessToken = String(unwrappedInstitution.institutionId)
             try credentials.save(identifier: accessToken)
             unwrappedInstitution.accessToken = accessToken
+            if let existingInstitution = existingInstitution {
+                  existingInstitution.passwordInvalid = false
+                  existingInstitution.replace()
+            }
             
             try self.fetchAccounts { accounts, error in
                 guard let unwrappedAccounts = accounts else {

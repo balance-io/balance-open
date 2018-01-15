@@ -50,6 +50,7 @@ enum Source: Int, CustomStringConvertible {
         case .bitfinex:  return URL(string: "https://github.com/balancemymoney/balance-open/wiki/Bitfinex-Guide")!
         case .kraken:    return URL(string: "https://github.com/balancemymoney/balance-open/wiki/Kraken-Login-Manual")!
         case .ethplorer: return URL(string: "https://etherscanio.freshdesk.com/support/solutions/articles/16000046111-what-is-an-ethereum-address-and-how-to-do-i-get-one-")!
+        case .bittrex:   return URL(string: "https://github.com/balancemymoney/balance-open/wiki")!
         }
     }
 }

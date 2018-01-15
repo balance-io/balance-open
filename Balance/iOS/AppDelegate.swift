@@ -136,10 +136,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let unwrappedCode = code,
                let unwrappedState = state
             {
+                let exitingInstitutionId = CoinbaseApi.existingInstitution?.institutionId
+                
                 CoinbaseApi.handleAuthenticationCallback(state: unwrappedState, code: unwrappedCode, completion: { (success, error) in
                     log.debug(success)
                     log.debug(error)
                     
+                    let autenticationResult = CoinbaseAutenticationResult(succeeded: success,
+                                                                          error: error,
+                                                                          institutionId: exitingInstitutionId)
+                    let coinbaseUserInfo: [AnyHashable: Any] = [
+                        CoinbaseNotifications.key.auntenticationResult.rawValue: autenticationResult
+                    ]
+                    
+                    NotificationCenter.default.post(name: CoinbaseNotifications.autenticationDidFinish,
+                                                    object: nil,
+                                                    userInfo: coinbaseUserInfo)
                     syncManager.sync()
                 })
             }
