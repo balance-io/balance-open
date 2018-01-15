@@ -310,7 +310,7 @@ extension KrakenAPIClient: ExchangeApi {
                         }
                     } catch {
                         async {
-                            closeBlock(false, error, nil)
+                            closeBlock(false, error, institution)
                         }
                         return
                     }
