@@ -346,6 +346,21 @@ struct CoinbaseApi: ExchangeApi {
 
 //THIS NEEDS TESTING
 extension Institution {
+    
+    fileprivate var accessTokenKey: String {
+        return "accessTokenn institutionId: \(institutionId)"
+    }
+    
+    var accessToken: String? {
+        get {
+            return keychain[accessTokenKey, "accessToken"]
+        }
+        set {
+            log.debug("set accessTokenKey: \(accessTokenKey)  newValue: \(String(describing: newValue))")
+            keychain[accessTokenKey, "accessToken"] = newValue
+        }
+    }
+    
     fileprivate var refreshTokenKey: String {
         return "refreshToken institutionId: \(institutionId)"
     }

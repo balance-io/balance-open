@@ -100,20 +100,6 @@ extension Institution {
         return Date().timeIntervalSince(dateAdded) <= Date.dayInterval
     }
     
-    fileprivate var accessTokenKey: String {
-        return "institutionId: \(institutionId)"
-    }
-    
-    var accessToken: String? {
-        get {
-            return keychain[accessTokenKey, "accessToken"]
-        }
-        set {
-            log.debug("set accessTokenKey: \(accessTokenKey)  newValue: \(String(describing: newValue))")
-            keychain[accessTokenKey, "accessToken"] = newValue
-        }
-    }
-    
     var displayName: String {
         return name
     }

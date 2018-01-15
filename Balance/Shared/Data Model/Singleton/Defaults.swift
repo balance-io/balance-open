@@ -52,6 +52,7 @@ class Defaults {
         static let hiddenAccountIds                     = "hiddenAccountIds"
         static let unfinishedConnectionInstitutionIds   = "unfinishedConnectionInstitutionIds"
         static let masterCurrency                       = "masterCurrency"
+        static let keychainNeedsUpdate                  = "keychainNeedsUpdate"
     }
     
     // First run defaults
@@ -338,6 +339,15 @@ class Defaults {
     
     func setAccountIdsExcludedFromTotal(_ accountIds: [Int]) {
         defaults.set(accountIds, forKey: Keys.accountIdsExcludedFromTotal)
+    }
+    
+    var keychainNeedsUpdate: Bool {
+        get {
+            return defaults.object(forKey: Keys.keychainNeedsUpdate) as? Bool ?? true
+        }
+        set {
+            defaults.set(newValue, forKey: Keys.keychainNeedsUpdate)
+        }
     }
 }
 

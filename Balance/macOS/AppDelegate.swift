@@ -161,6 +161,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } else if debugging.showBillingPreferencesOnLaunch {
             self.showBillingPreferences()
         }
+        
+        // Update legacy keychain permissions
+        // TODO: Remove this call/function when is no longer needed
+        updateKeychainPersmissionsIfNeeded()
+       
     }
     
     // Gets called when the App launches/opens via URL
@@ -475,6 +480,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 alert.runModal()
             }
         }
+    }
+    
+    func updateKeychainPersmissionsIfNeeded() {
+        guard defaults.keychainNeedsUpdate else {
+            print("Keychain is currently up to date")
+            return
+        }
+        
+        InstitutionRepository.si.allInstitutions().forEach {
+            if let accessToken = $0.accessToken {
+                $0.accessToken = accessToken
+            } else if let refreshToken = $0.refreshToken {
+                $0.refreshToken = refreshToken
+            } else if let apiKey = $0.apiKey {
+                $0.apiKey = apiKey
+            } else if let secret = $0.secret {
+                $0.secret = secret
+            } else if let address = $0.address {
+                $0.address = address
+            }
+        }
+        
+        defaults.keychainNeedsUpdate = false
     }
 }
 
