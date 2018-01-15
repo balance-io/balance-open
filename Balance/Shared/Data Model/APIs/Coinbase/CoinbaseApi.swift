@@ -16,7 +16,7 @@ typealias SuccessErrorBlock = (_ success: Bool, _ error: Error?) -> Void
 
 fileprivate let cbVersion = "2017-05-19"
 fileprivate let connectionTimeout = 30.0
-fileprivate let subServerUrl = debugging.useLocalSubscriptionServer ? "http://localhost:8080/" : "https://balance-server-eur.appspot.com/"
+fileprivate let subServerUrl = debugging.useLocalSubscriptionServer ? "http://localhost:8080/" : "https://api.balancemy.money/"
 fileprivate let clientId = "a6e15fbb0c3362b74360895f261fb079672c10eef79dcb72308c974408c5ce43"
 
 // Save random state for current authentication request
