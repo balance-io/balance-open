@@ -695,7 +695,6 @@
 		532B6FF11E9613520010D81D /* AccountsTabViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsTabViewModel.swift; sourceTree = "<group>"; };
 		532E392C1CD4521D001AFC31 /* Debugging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debugging.swift; sourceTree = "<group>"; };
 		532F37DE1D5A5FFC00145BAA /* NSWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSWindow.swift; sourceTree = "<group>"; };
-		53328D731E0260720075EC92 /* get_pin_from_certificate.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = get_pin_from_certificate.py; sourceTree = "<group>"; };
 		533402291DDD0E5E000236A0 /* PaintCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintCodeView.swift; sourceTree = "<group>"; };
 		533402391DDFB8C4000236A0 /* NetworkStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
 		533558251DDA860C00D91F4D /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -2187,7 +2186,6 @@
 		DC1A648B1B867B1F009356A0 = {
 			isa = PBXGroup;
 			children = (
-				53328D731E0260720075EC92 /* get_pin_from_certificate.py */,
 				DC1A64961B867B1F009356A0 /* Balance */,
 				DC65EF901CE3E2CD006C9373 /* Bal Helper */,
 				F107D99F1D6B048800CEEF35 /* BalanceUITests */,
