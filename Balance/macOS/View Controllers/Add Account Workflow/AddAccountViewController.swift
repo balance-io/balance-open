@@ -97,7 +97,7 @@ class AddAccountViewController: NSViewController {
                 }
             }
             log.debug("going back \(self.allowSelection)")
-            if self.allowSelection {
+            if self.allowSelection && self.signUpController == nil {
                 AppDelegate.sharedInstance.resizeWindowHeight(self.windowHeight, animated: true)
             }
         }
