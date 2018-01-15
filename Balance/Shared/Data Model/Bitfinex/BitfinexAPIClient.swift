@@ -251,7 +251,7 @@ extension BitfinexAPIClient: ExchangeApi {
             let accessToken = String(unwrappedInstitution.institutionId)
             try credentials.save(identifier: accessToken)
             unwrappedInstitution.accessToken = accessToken
-            if existingInstitution != nil {
+            if let existingInstitution = existingInstitution {
                 existingInstitution.passwordInvalid = false
                 existingInstitution.replace()  
             }
