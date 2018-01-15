@@ -151,7 +151,7 @@ private extension AddCredentialBasedAccountViewController {
     func showSuccessLogin() {
         SVProgressHUD.showSuccess(withStatus: "\(self.viewModel.source.description) account added!")
         self.navigationController?.popViewController(animated: true)
-        self.delegate?.didAddAccount(wasSucceeded: true, institutionId: viewModel.existingInstitutionId)
+        self.delegate?.didAddAccount(succeeded: true, institutionId: viewModel.existingInstitutionId)
     }
     
 }

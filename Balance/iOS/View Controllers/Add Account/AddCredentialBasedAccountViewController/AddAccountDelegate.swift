@@ -9,5 +9,5 @@
 import Foundation
 
 protocol AddAccountDelegate: class {
-    func didAddAccount(wasSucceeded: Bool, institutionId: Int?)
+    func didAddAccount(succeeded: Bool, institutionId: Int?)
 }

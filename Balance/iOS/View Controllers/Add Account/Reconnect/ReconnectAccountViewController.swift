@@ -129,9 +129,9 @@ private extension ReconnectAccountViewController {
                 }
                 
                 switch state {
-                case .validationWasFailed(let index, let message):
+                case .validationFailed(let index, let message):
                     self.finishValidation(succeeded: false, at: index, with: message)
-                case .validationWasSucceeded(let index, let message):
+                case .validationSucceeded(let index, let message):
                     self.finishValidation(succeeded: true, at: index, with: message)
                 case .validating(let index, let institution):
                     self.startValidation(indexToRefresh: index, institution: institution)
@@ -231,12 +231,12 @@ extension ReconnectAccountViewController: ReconnectDelegate {
 
 extension ReconnectAccountViewController: AddAccountDelegate {
     
-    func didAddAccount(wasSucceeded: Bool, institutionId: Int?) {
+    func didAddAccount(succeeded: Bool, institutionId: Int?) {
         guard let institutionId = institutionId else {
             return
         }
         
-        viewModel.updateReconnectedAccount(with: institutionId, wasSucceeded: wasSucceeded)
+        viewModel.updateReconnectedAccount(institutionId: institutionId, succeeded: succeeded)
     }
     
 }

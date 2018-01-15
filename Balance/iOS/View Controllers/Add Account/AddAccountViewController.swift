@@ -87,7 +87,7 @@ extension AddAccountViewController: UITableViewDataSource
 //MARK: AddAccountDelegate
 extension AddAccountViewController: AddAccountDelegate {
     
-    func didAddAccount(wasSucceeded: Bool, institutionId: Int?) {
+    func didAddAccount(succeeded: Bool, institutionId: Int?) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.dismiss(animated: true, completion: nil)
         }

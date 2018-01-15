@@ -18,8 +18,8 @@ enum ReconnectStatus {
 enum RecconectViewState {
     case idle
     case validating(accountIndex: Int, institution: Institution)
-    case validationWasSucceeded(at: Int, message: String?)
-    case validationWasFailed(at: Int, message: String?)
+    case validationSucceeded(at: Int, message: String?)
+    case validationFailed(at: Int, message: String?)
 }
 
 protocol AccountServices {
@@ -89,8 +89,8 @@ class ReconnectAccountViewModel {
         return reconnectAccounts[safe: index]
     }
     
-    func updateReconnectedAccount(with institutionId: Int, wasSucceeded: Bool) {
-        processResult(institutionId: institutionId, validationWasSucceeded: wasSucceeded)
+    func updateReconnectedAccount(institutionId: Int, succeeded: Bool) {
+        processResult(institutionId: institutionId, validationSucceeded: succeeded)
     }
     
     func reconnect(at index: Int) {
@@ -106,26 +106,26 @@ class ReconnectAccountViewModel {
 
 private extension ReconnectAccountViewModel {
     
-    func processResult(institutionId: Int, validationWasSucceeded: Bool, resultMessage: String? = nil) {
+    func processResult(institutionId: Int, validationSucceeded: Bool, resultMessage: String? = nil) {
         let institutionIndexBlock: (Institution) -> Bool = { $0.institutionId == institutionId }
         guard let institutionIndex = invalidInstitutions.index(where: institutionIndexBlock) else {
             print("Can't update institution with id: \(institutionId)")
             return
         }
         
-        if !validationWasSucceeded {
+        if !validationSucceeded {
             let invalidInstitution = invalidInstitutions[institutionIndex]
             invalidInstitution.onValidate = false
             let message = resultMessage ?? "We can't update your account, please valid your fields and try again."
             
-            reconnectAccountState.onNext(.validationWasFailed(at: institutionIndex,
+            reconnectAccountState.onNext(.validationFailed(at: institutionIndex,
                                                               message: message))
             
             return
         }
         
         invalidInstitutions.remove(at: institutionIndex)
-        reconnectAccountState.onNext(.validationWasSucceeded(at: institutionIndex, message: "Your account was reconnected"))
+        reconnectAccountState.onNext(.validationSucceeded(at: institutionIndex, message: "Your account was reconnected"))
     }
     
     @objc func updateCoinbaseReconnectAccount(with notification: Notification) {
@@ -139,7 +139,7 @@ private extension ReconnectAccountViewModel {
         let errorMessage = (error as? LocalizedError)?.recoverySuggestion ?? error?.localizedDescription
         let message = result.succeeded ? nil : errorMessage
         
-        processResult(institutionId: institutionId, validationWasSucceeded: result.succeeded, resultMessage: message)
+        processResult(institutionId: institutionId, validationSucceeded: result.succeeded, resultMessage: message)
     }
     
 }
