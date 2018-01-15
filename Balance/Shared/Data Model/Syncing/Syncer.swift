@@ -71,6 +71,7 @@ class Syncer {
                 if institution.refreshToken == nil {
                     // No refresh token somehow, so move on to the next one
                     log.severe("Tried to refresh access token for institution \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name) but did not find a refresh token")
+                    institution.passwordInvalid = true
                     syncInstitutions(syncingInstitutions, startDate: startDate, success: success, errors: errors, pruneTransactions: pruneTransactions)
                 } else {
                     // Refresh the token
@@ -83,9 +84,6 @@ class Syncer {
                         }
                     }
                 }
-            } else if institution.accessToken != nil  {
-                // Valid institution, so sync it
-                syncAccountsAndTransactions(institution: institution, remainingInstitutions: syncingInstitutions, startDate: startDate, success: success, errors: errors, pruneTransactions: pruneTransactions)
             } else if institution.source == .poloniex {
                 if let apiKey = institution.apiKey, let secret = institution.secret {
                     syncPoloniexAccountsAndTransactions(secret: secret, key: apiKey, institution: institution, remainingInstitutions: syncingInstitutions, startDate: startDate, success: success, errors: errors)
@@ -101,6 +99,9 @@ class Syncer {
                 } else {
                     log.error("Failed to get the stored Address for the wallet")
                     self.syncInstitutions(syncingInstitutions, startDate: startDate, success: success, errors: errors, pruneTransactions: pruneTransactions)                }
+            } else if institution.accessToken != nil  {
+                // Valid institution, so sync it
+                syncAccountsAndTransactions(institution: institution, remainingInstitutions: syncingInstitutions, startDate: startDate, success: success, errors: errors, pruneTransactions: pruneTransactions)
             }
         } else {
             // No more institutions
@@ -175,10 +176,8 @@ class Syncer {
                 // Fetch data from GDAX
                 self.gdaxApiClient.credentials = credentials
                 try self.gdaxApiClient.fetchAccounts { accounts, error in
-                    guard let unwrappedAccounts = accounts else
-                    {
-                        if let unwrappedError = error
-                        {
+                    guard let unwrappedAccounts = accounts else {
+                        if let unwrappedError = error {
                             syncingErrors.append(unwrappedError)
                         }
                         
@@ -221,7 +220,6 @@ class Syncer {
             guard let accessToken = institution.accessToken else {
                 syncingSuccess = false
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
-                
                 return
             }
             
@@ -231,7 +229,7 @@ class Syncer {
                 
                 // Fetch data from Bitfinex
                 self.bitfinexApiClient.credentials = credentials
-                try! self.bitfinexApiClient.fetchWallets { wallets, error in
+                try self.bitfinexApiClient.fetchWallets { wallets, error in
                     guard let unwrappedWallets = wallets else {
                         if let unwrappedError = error {
                             syncingErrors.append(unwrappedError)
@@ -250,7 +248,7 @@ class Syncer {
                     }
                 }
                 // Sync transactions
-                try! self.bitfinexApiClient.fetchTransactions({ (transactions, error) in
+                try self.bitfinexApiClient.fetchTransactions({ (transactions, error) in
                     guard let unwrappedTransactions = transactions else {
                         if let unwrappedError = error {
                             syncingErrors.append(unwrappedError)
@@ -278,7 +276,6 @@ class Syncer {
             guard let accessToken = institution.accessToken else {
                 syncingSuccess = false
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
-                
                 return
             }
             

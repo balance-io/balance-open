@@ -52,6 +52,7 @@
 		2DF8985B1FCC8F7500CCDFB9 /* CountlyUserDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898361FCC8F7500CCDFB9 /* CountlyUserDetails.m */; };
 		2DF8985C1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */; };
 		2DF8985D1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */; };
+		40A90EA5200959840063B2F5 /* AddNewAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA4200959840063B2F5 /* AddNewAccountView.swift */; };
 		5300D6261DCE5A1E00D02657 /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5300D6251DCE5A1E00D02657 /* LockViewController.swift */; };
 		5301A7611F17DC8B00668099 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301A7601F17DC8B00668099 /* URL.swift */; };
 		5301A7771F17F86900668099 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301A7761F17F86900668099 /* HTTPMethod.swift */; };
@@ -283,6 +284,7 @@
 		53B327C41E56AE0F009C7AFC /* Syncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B327C31E56AE0F009C7AFC /* Syncer.swift */; };
 		53B327C61E56AEC2009C7AFC /* SyncDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B327C51E56AEC2009C7AFC /* SyncDefaults.swift */; };
 		53B5C1961D8637CE00323ACE /* Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B5C1951D8637CE00323ACE /* Testing.swift */; };
+		53BA743320082D4F00912C81 /* YRKSpinningProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 53BA743220082D4F00912C81 /* YRKSpinningProgressIndicator.m */; };
 		53BB42E71CE849E70002D473 /* Shortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BB42E61CE849E70002D473 /* Shortcut.swift */; };
 		53C078A61DFF7CEB00696666 /* CertValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C078A51DFF7CEB00696666 /* CertValidator.m */; };
 		53C197171CB8714100F0A47B /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C197161CB8714100F0A47B /* SyncManager.swift */; };
@@ -630,6 +632,7 @@
 		2DF898361FCC8F7500CCDFB9 /* CountlyUserDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyUserDetails.m; sourceTree = "<group>"; };
 		2DF898371FCC8F7500CCDFB9 /* CountlyViewTracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyViewTracking.h; sourceTree = "<group>"; };
 		2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyViewTracking.m; sourceTree = "<group>"; };
+		40A90EA4200959840063B2F5 /* AddNewAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewAccountView.swift; sourceTree = "<group>"; };
 		5300D6251DCE5A1E00D02657 /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
 		5301A7601F17DC8B00668099 /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		5301A7761F17F86900668099 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -700,7 +703,6 @@
 		532B6FF11E9613520010D81D /* AccountsTabViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsTabViewModel.swift; sourceTree = "<group>"; };
 		532E392C1CD4521D001AFC31 /* Debugging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debugging.swift; sourceTree = "<group>"; };
 		532F37DE1D5A5FFC00145BAA /* NSWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSWindow.swift; sourceTree = "<group>"; };
-		53328D731E0260720075EC92 /* get_pin_from_certificate.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = get_pin_from_certificate.py; sourceTree = "<group>"; };
 		533402291DDD0E5E000236A0 /* PaintCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintCodeView.swift; sourceTree = "<group>"; };
 		533402391DDFB8C4000236A0 /* NetworkStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
 		533558251DDA860C00D91F4D /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -801,6 +803,8 @@
 		53B327C31E56AE0F009C7AFC /* Syncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Syncer.swift; sourceTree = "<group>"; };
 		53B327C51E56AEC2009C7AFC /* SyncDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncDefaults.swift; sourceTree = "<group>"; };
 		53B5C1951D8637CE00323ACE /* Testing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Testing.swift; sourceTree = "<group>"; };
+		53BA743120082D4F00912C81 /* YRKSpinningProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YRKSpinningProgressIndicator.h; sourceTree = "<group>"; };
+		53BA743220082D4F00912C81 /* YRKSpinningProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YRKSpinningProgressIndicator.m; sourceTree = "<group>"; };
 		53BB42E61CE849E70002D473 /* Shortcut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shortcut.swift; sourceTree = "<group>"; };
 		53C078A41DFF7CEB00696666 /* CertValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertValidator.h; sourceTree = "<group>"; };
 		53C078A51DFF7CEB00696666 /* CertValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertValidator.m; sourceTree = "<group>"; };
@@ -1280,6 +1284,7 @@
 				5372E96E1DF7E75C00DDE214 /* SignUpTextField.swift */,
 				539348BA1DEBB479009F4564 /* TokenSearchField.swift */,
 				539348C41DECD94B009F4564 /* TokenTextField.swift */,
+				40A90EA4200959840063B2F5 /* AddNewAccountView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -1387,6 +1392,7 @@
 				533674FC1F4CE08A0034040F /* Sparkle.framework */,
 				533674FF1F4CE1500034040F /* LetsMove */,
 				53294F951D1DDD9500F08059 /* CCNStatusItem */,
+				53BA743420082D5300912C81 /* YRKSpinningProgressIndicator */,
 				53552A541ED72F2400DD95F9 /* Carthage */,
 				53552A551ED72F5200DD95F9 /* System */,
 			);
@@ -1651,6 +1657,15 @@
 				53B327C31E56AE0F009C7AFC /* Syncer.swift */,
 			);
 			path = Syncing;
+			sourceTree = "<group>";
+		};
+		53BA743420082D5300912C81 /* YRKSpinningProgressIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				53BA743120082D4F00912C81 /* YRKSpinningProgressIndicator.h */,
+				53BA743220082D4F00912C81 /* YRKSpinningProgressIndicator.m */,
+			);
+			path = YRKSpinningProgressIndicator;
 			sourceTree = "<group>";
 		};
 		53C197151CB7488600F0A47B /* Views */ = {
@@ -2192,7 +2207,6 @@
 		DC1A648B1B867B1F009356A0 = {
 			isa = PBXGroup;
 			children = (
-				53328D731E0260720075EC92 /* get_pin_from_certificate.py */,
 				DC1A64961B867B1F009356A0 /* Balance */,
 				DC65EF901CE3E2CD006C9373 /* Bal Helper */,
 				F107D99F1D6B048800CEEF35 /* BalanceUITests */,
@@ -2984,6 +2998,7 @@
 				A41D3E451F6BF81A00FD25B5 /* KrakenAuthHeaders.swift in Sources */,
 				2DF898501FCC8F7500CCDFB9 /* CountlyEvent.m in Sources */,
 				5361BC9E1F562580009C3F07 /* PoloniexInstitution.swift in Sources */,
+				40A90EA5200959840063B2F5 /* AddNewAccountView.swift in Sources */,
 				536C6EEF1D864C9B00823688 /* MockedDefaultsStorage.swift in Sources */,
 				537187EF1F4CC23C00E7F9D6 /* GDAXWithdrawal.swift in Sources */,
 				5304228A1ED39742001CA499 /* TabViewModel.swift in Sources */,
@@ -3028,6 +3043,7 @@
 				28A0DC131DCD010800601E87 /* ChangePasswordViewController.swift in Sources */,
 				5347B6A51DFD180E0046951D /* NSViewController.swift in Sources */,
 				5321219D1EE8B91600F4812A /* ioapi.c in Sources */,
+				53BA743320082D4F00912C81 /* YRKSpinningProgressIndicator.m in Sources */,
 				530422921ED39BB7001CA499 /* AccountsTabTableCells.swift in Sources */,
 				5358F5441C7FFD9700AB7420 /* Notifications.swift in Sources */,
 				E653128D1FE8C4DA00F57977 /* BITTREXApiError.swift in Sources */,

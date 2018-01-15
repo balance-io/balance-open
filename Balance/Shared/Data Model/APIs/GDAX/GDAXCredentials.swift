@@ -8,28 +8,29 @@
 
 import Foundation
 
-internal extension GDAXAPIClient
-{
-    internal struct Credentials: APICredentials
-    {
+// Private global function so we can call it from init
+fileprivate func keychainIdentifier(_ identifier: String) -> String {
+    return "com.GDAXAPIClient.Credentials.\(identifier)"
+}
+
+extension GDAXAPIClient {
+    struct Credentials: APICredentials {
         // Internal
-        internal let components: APICredentialsComponents
-        internal let hmacAlgorithm = CCHmacAlgorithm(kCCHmacAlgSHA256)
-        internal let hmacAlgorithmDigestLength = Int(CC_SHA256_DIGEST_LENGTH)
+        let components: APICredentialsComponents
+        let hmacAlgorithm = CCHmacAlgorithm(kCCHmacAlgSHA256)
+        let hmacAlgorithmDigestLength = Int(CC_SHA256_DIGEST_LENGTH)
         
         // Private
         private let secretKeyData: Data
         
         // MARK: Initialization
         
-        internal init(key: String, secret: String, passphrase: String) throws
-        {
+        init(key: String, secret: String, passphrase: String) throws {
             let components = try APICredentialsComponents(key: key, secret: secret, passphrase: passphrase)
             try self.init(component: components)
         }
         
-        internal init(component: APICredentialsComponents) throws
-        {
+        init(component: APICredentialsComponents) throws {
             guard let decodedSecretData = Data(base64Encoded: component.secret) else
             {
                 throw APICredentialsComponents.Error.invalidSecret(message: "Secret is not base64 encoded")
@@ -39,17 +40,14 @@ internal extension GDAXAPIClient
             self.components = component
         }
         
-        internal init(identifier: String) throws {
-            // :( Unable to use the namespacing function (self.namespacedKeychainIdentifier())
-            // as we can't call self before intialization, making this brital.
-            // There are tests to catch this being an issue though.
-            let namespacedIdentifier = "com.GDAXAPIClient.Credentials.\(identifier)"
+        init(identifier: String) throws {
+            var updatedCredentials = false
+            let namespacedIdentifier = keychainIdentifier(identifier)
+            let oldNamespacedIdentifier = keychainIdentifier("main")
             var components = try? APICredentialsComponents(identifier: namespacedIdentifier)
             if components == nil {
-                let oldNamespacedIdentifier = "com.GDAXAPIClient.Credentials.main"
                 components = try? APICredentialsComponents(identifier: oldNamespacedIdentifier)
-                //one time run if the fetching of the old credentials succeeds to delete old ones
-                keychain[oldNamespacedIdentifier].clear()
+                updatedCredentials = true
             }
             
             guard let unwrapedComponents = components else {
@@ -57,21 +55,22 @@ internal extension GDAXAPIClient
             }
             
             try self.init(component: unwrapedComponents)
+            
+            // If the fetching of the old credentials succeeds, save the new ones and delete the old ones
+            if updatedCredentials {
+                try save(identifier: identifier)
+                keychain[oldNamespacedIdentifier].clear()
+            }
         }
         
         // MARK: Signature
         
-        internal func generateSignature(timestamp: Date, requestPath: String, body: Data?, method: String) throws -> String
-        {
+        func generateSignature(timestamp: Date, requestPath: String, body: Data?, method: String) throws -> String {
             // Turn body into JSON string
             let bodyString: String
-            if let unwrappedBody = body,
-               let dataString = String(data: unwrappedBody, encoding: .utf8)
-            {
+            if let body = body, let dataString = String(data: body, encoding: .utf8) {
                 bodyString = dataString
-            }
-            else
-            {
+            } else {
                 bodyString = ""
             }
 
@@ -87,9 +86,8 @@ internal extension GDAXAPIClient
         
         // MARK: Keychain
         
-        internal func namespacedKeychainIdentifier(_ identifier: String) -> String
-        {
-            return "com.GDAXAPIClient.Credentials.\(identifier)"
+        func namespacedKeychainIdentifier(_ identifier: String) -> String {
+            return keychainIdentifier(identifier)
         }
     }
 }

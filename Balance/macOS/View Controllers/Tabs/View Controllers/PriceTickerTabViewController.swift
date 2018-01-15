@@ -47,6 +47,10 @@ class PriceTickerTabViewController: NSViewController, SectionedTableViewDelegate
     override func viewWillAppear() {
         super.viewWillAppear()
         
+        async {
+            AppDelegate.sharedInstance.resizeWindowToMaxHeight(animated: true)
+        }
+        
         reloadData()
     }
     

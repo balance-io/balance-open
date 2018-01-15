@@ -8,30 +8,30 @@
 
 import Foundation
 
-internal extension KrakenAPIClient
-{
-    internal struct Credentials: APICredentials
-    {
+// Private global function so we can call it from init
+fileprivate func keychainIdentifier(_ identifier: String) -> String {
+    return "com.KrakenAPIClient.Credentials.\(identifier)"
+}
+
+extension KrakenAPIClient {
+    struct Credentials: APICredentials {
         // Internal
-        internal let components: APICredentialsComponents
-        internal let hmacAlgorithm = CCHmacAlgorithm(kCCHmacAlgSHA512)
-        internal let hmacAlgorithmDigestLength = Int(CC_SHA512_DIGEST_LENGTH)
+        let components: APICredentialsComponents
+        let hmacAlgorithm = CCHmacAlgorithm(kCCHmacAlgSHA512)
+        let hmacAlgorithmDigestLength = Int(CC_SHA512_DIGEST_LENGTH)
         
         // Private
         private let secretKeyData: Data
         
         // MARK: Initialization
         
-        internal init(key: String, secret: String) throws
-        {
+        init(key: String, secret: String) throws {
             let components = try APICredentialsComponents(key: key, secret: secret, passphrase: nil)
             try self.init(component: components)
         }
         
-        internal init(component: APICredentialsComponents) throws
-        {
-            guard let decodedSecretData = Data(base64Encoded: component.secret) else
-            {
+        init(component: APICredentialsComponents) throws {
+            guard let decodedSecretData = Data(base64Encoded: component.secret) else {
                 throw APICredentialsComponents.Error.invalidSecret(message: "Secret is not base64 encoded")
             }
             
@@ -39,18 +39,14 @@ internal extension KrakenAPIClient
             self.components = component
         }
         
-        internal init(identifier: String) throws
-        {
-            // :( Unable to use the namespacing function (self.namespacedKeychainIdentifier())
-            // as we can't call self before intialization, making this brital.
-            // There are tests to catch this being an issue though.
-            let namespacedIdentifier = "com.KrakenAPIClient.Credentials.\(identifier)"
+        internal init(identifier: String) throws {
+            var updatedCredentials = false
+            let namespacedIdentifier = keychainIdentifier(identifier)
+            let oldNamespacedIdentifier = keychainIdentifier("main")
             var components = try? APICredentialsComponents(identifier: namespacedIdentifier)
             if components == nil {
-                let oldNamespacedIdentifier = "com.GDAXAPIClient.Credentials.main"
                 components = try? APICredentialsComponents(identifier: oldNamespacedIdentifier)
-                //one time run if the fetching of the old credentials succeeds to delete old ones
-                keychain[oldNamespacedIdentifier].clear()
+                updatedCredentials = true
             }
             
             guard let unwrapedComponents = components else {
@@ -58,15 +54,19 @@ internal extension KrakenAPIClient
             }
             
             try self.init(component: unwrapedComponents)
+            
+            // If the fetching of the old credentials succeeds, save the new ones and delete the old ones
+            if updatedCredentials {
+                try save(identifier: identifier)
+                keychain[oldNamespacedIdentifier].clear()
+            }
         }
         
         // MARK: Signature
         
-        internal func generateSignature(nonce: String, requestPath: String, body: String) throws -> String
-        {
+        func generateSignature(nonce: String, requestPath: String, body: String) throws -> String {
             // sha256(nonce + body data)
-            guard let sha256NonceBody = (nonce + body).sha256() else
-            {
+            guard let sha256NonceBody = (nonce + body).sha256() else {
                 throw APICredentialsError.creatingSignature(message: "SHA256 failed")
             }
             
@@ -79,9 +79,8 @@ internal extension KrakenAPIClient
         
         // MARK: Keychain
         
-        func namespacedKeychainIdentifier(_ identifier: String) -> String
-        {
-            return "com.KrakenAPIClient.Credentials.\(identifier)"
+        func namespacedKeychainIdentifier(_ identifier: String) -> String {
+            return keychainIdentifier(identifier)
         }
     }
 }

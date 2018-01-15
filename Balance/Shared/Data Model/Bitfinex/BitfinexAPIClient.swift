@@ -235,66 +235,47 @@ extension BitfinexAPIClient: ExchangeApi {
             return
         }
         
+        var institution: Institution?
         do {
             let credentials = try BitfinexAPIClient.Credentials(key: key, secret: secret)
-            
             self.credentials = credentials
-            try self.fetchWallets { _, error in
-                guard let unwrappedError = error else {
-                    do {
-                        if let existingInstitution = existingInstitution {
-                            try credentials.save(identifier: "\(existingInstitution.institutionId)")
-                            existingInstitution.accessToken = "\(existingInstitution.institutionId)"
-                            existingInstitution.passwordInvalid = false
-                            existingInstitution.replace()
-                            
-                            async {
-                                closeBlock(true, error, existingInstitution)
-                            }
-                        } else {
-                            guard let institution = InstitutionRepository.si.institution(source: .bitfinex, sourceInstitutionId: "", name: "Bitfinex") else {
-                                async {
-                                    closeBlock(false, error, nil)
-                                }
-                                return
-                            }
-                            institution.accessToken = "\(institution.institutionId)"
-                            
-                            try self.fetchWallets({ (wallets, error) in
-                                guard let unwrappedWallets = wallets else {
-                                    async {
-                                        closeBlock(false, error, nil)
-                                    }
-                                    return
-                                }
-                                for wallet in unwrappedWallets {
-                                    let currency = Currency.rawValue(wallet.currencyCode)
-                                    let currentBalance = wallet.balance.integerValueWith(decimals: currency.decimals)
-                                    let availableBalance = currentBalance
-                                    
-                                    // Initialize an Account object to insert the record
-                                    AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: wallet.currencyCode, sourceInstitutionId: institution.sourceInstitutionId, accountTypeId: .exchange, accountSubTypeId: nil, name: wallet.currencyCode, currency: wallet.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
-                                }
-                                async {
-                                    closeBlock(true, error, institution)
-                                }
-                            })
-                        }
+
+            institution = existingInstitution ?? InstitutionRepository.si.institution(source: .bitfinex, sourceInstitutionId: "", name: "Bitfinex")
+            guard let unwrappedInstitution = institution else {
+                async {
+                    closeBlock(false, BalanceError.databaseError, nil)
+                }
+                return
+            }
+            
+            let accessToken = String(unwrappedInstitution.institutionId)
+            try credentials.save(identifier: accessToken)
+            unwrappedInstitution.accessToken = accessToken
+            if existingInstitution != nil {
+                existingInstitution.passwordInvalid = false
+                existingInstitution.replace()  
+            }
+            
+            try self.fetchWallets { wallets, error in
+                guard let unwrappedWallets = wallets else {
+                    async {
+                        closeBlock(false, error, nil)
                     }
-                    catch {
-                        async {
-                            closeBlock(false, error, nil)
-                        }
-                    }
-                    
                     return
                 }
                 
-                // TODO: Display error
-                async {
-                    closeBlock(false, unwrappedError, nil)
+                for wallet in unwrappedWallets {
+                    let currency = Currency.rawValue(wallet.currencyCode)
+                    let currentBalance = wallet.balance.integerValueWith(decimals: currency.decimals)
+                    let availableBalance = currentBalance
+                    
+                    // Initialize an Account object to insert the record
+                    AccountRepository.si.account(institutionId: unwrappedInstitution.institutionId, source: unwrappedInstitution.source, sourceAccountId: wallet.currencyCode, sourceInstitutionId: unwrappedInstitution.sourceInstitutionId, accountTypeId: .exchange, accountSubTypeId: nil, name: wallet.currencyCode, currency: wallet.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
                 }
                 
+                async {
+                    closeBlock(true, error, institution)
+                }
             }
         }
         catch APICredentialsComponents.Error.invalidSecret {
@@ -306,7 +287,7 @@ extension BitfinexAPIClient: ExchangeApi {
         catch {
             // TODO: show alert
             async {
-                closeBlock(false, error, nil)
+                closeBlock(false, error, institution)
             }
         }
     }
