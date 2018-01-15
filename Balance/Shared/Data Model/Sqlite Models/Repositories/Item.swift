@@ -11,13 +11,6 @@ import Foundation
 protocol Item: CustomStringConvertible {
     var itemId: Int { get }
     var itemName: String { get }
-    
-//    var institutionId: String { get }
-//    var source: Source { get }
-//    var sourceItemId: String { get }
-//    var sourceInstitutionId: String { get }
-    
-    
 }
 
 extension Item {
@@ -39,7 +32,3 @@ protocol PersistedItem: Item {
 func ==<T: Item>(lhs: T, rhs: T) -> Bool {
     return lhs.itemId == rhs.itemId
 }
-
-//func ==<T: Item, U:Item>(lhs: T, rhs: U) -> Bool {
-//    return lhs.itemId == rhs.itemId
-//}
