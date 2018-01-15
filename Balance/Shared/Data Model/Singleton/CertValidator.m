@@ -24,9 +24,13 @@ const NSString *digiCertGlobalRootCA                    = @"r/mIkG3eEpVdm+u/ko/c
 const NSString *alphaSSLCASHA256G2                      = @"amMeV6gb9QNx0Zf7FtJ19Wa/t2B7KpCF/1n2Js3UuSU="; // AlphaSSL CA - SHA256 - G2
 const NSString *globalSignRootR1                        = @"K87oWBWM9UZfyddvDfoxL+8lpNyoUB2ptGtn0fv6G2Q="; // GlobalSign Root R1 (note this shows up as GlobalSign Root CA in Safari, but according to GlobalSign, AlphaSSL uses their R1 root cert: https://support.globalsign.com/customer/portal/articles/1426602-globalsign-root-certificates
 
-// Google App Engine
+// Google App Engine (Old)
 const NSString *googleInternetAuthorityG2               = @"h6801m+z8v3zbgkRHpq6L29Esgfzhj89C1SyUCOQmqU="; // Google Internet Authority G2
 const NSString *geoTrustGlobalCA                        = @"7HIpactkIAq2Y49orFOOQKurWxmmSFZhBCoQYcRhJ3Y="; // GeoTrust Global CA
+
+// Google App Engine (New)
+const NSString *googleInternetAuthorityG3               = @"f8NnEFZxQ4ExFOhSN7EiFWtiudZQVD2oY60uauV/n78="; // Google Internet Authority G3
+const NSString *globalSign                              = @"7HIpactkIAq2Y49orFOOQKurWxmmSFZhBCoQYcRhJ3Y="; // GlobalSign
 
 // Comodo ECC (Cloudflare SSL)
 const NSString *COMODOECCCertificationAuthority         = @"58qRu/uxh4gFezqAcERupSkRYBlBAvfcw7mEjGPLnNU="; // COMODO ECC Certification Authority (note this uses kTSKAlgorithmEcDsaSecp384r1)
@@ -63,7 +67,7 @@ const NSString *COMODOECCDomainValidationSecureServerCA = @"EohwrK1N7rr3bRQphPj4
                   @"balance-server-eur.appspot.com" : @{
                           kTSKEnforcePinning : @YES,
                           kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                          kTSKPublicKeyHashes : @[googleInternetAuthorityG2, geoTrustGlobalCA],
+                          kTSKPublicKeyHashes : @[googleInternetAuthorityG3, globalSign],
                           kTSKReportUris : @[balanceReportUri]
                           },
                   @"balancemy.money" : @{
