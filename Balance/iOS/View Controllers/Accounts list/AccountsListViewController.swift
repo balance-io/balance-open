@@ -146,7 +146,7 @@ internal final class AccountsListViewController: UIViewController
     
     private func reloadData() {
         self.viewModel.reloadData()
-        self.collectionView.reloadData()
+        self.collectionView.reloadData(shouldPersistSelection: true)
         
         self.blankStateView.isHidden = self.viewModel.numberOfSections() > 0
         self.totalBalanceBar.isHidden = !self.blankStateView.isHidden
