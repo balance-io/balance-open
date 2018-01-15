@@ -17,6 +17,14 @@ class AccountsTabViewModel: TabViewModel {
     // MARK: Table Data
     var data = OrderedDictionary<Institution, [Account]>()
     
+    var selectedCardIndexes: [IndexPath] {
+        return InstitutionRepository.si.selectedCardIndexes
+    }
+    
+    func updateSelectedCards(with selection: [IndexPath]) {
+        InstitutionRepository.si.saveSelectedCards(selection)
+    }
+    
     func persistSortOrder() {
         // Institutions
         defaults.accountsViewInstitutionsOrder = data.keys.map({$0.institutionId})

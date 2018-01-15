@@ -15,6 +15,10 @@ struct InstitutionRepository: ItemRepository {
     let table = "institutions"
     let itemIdField = "institutionId"
     
+    var selectedCardIndexes: [IndexPath] {
+        return defaults.selectedCards
+    }
+    
     func institution(institutionId: Int) -> Institution? {
         return gr.item(repository: self, itemId: institutionId)
     }
@@ -202,6 +206,12 @@ struct InstitutionRepository: ItemRepository {
         let invalidPasswordInstitutions = allInstitutions().filter({$0.passwordInvalid})
         return invalidPasswordInstitutions
     }
+    
+    func saveSelectedCards(_ indexPaths: [IndexPath]) {
+        defaults.selectedCards = indexPaths
+        print("Saving cards state")
+    }
+    
 }
 
 extension Institution: PersistedItem {

@@ -52,6 +52,7 @@ class Defaults {
         static let hiddenAccountIds                     = "hiddenAccountIds"
         static let unfinishedConnectionInstitutionIds   = "unfinishedConnectionInstitutionIds"
         static let masterCurrency                       = "masterCurrency"
+        static let selectedCardIndexes                  = "selectedCardIndexes"
     }
     
     // First run defaults
@@ -316,6 +317,16 @@ class Defaults {
             }
             
             NotificationCenter.postOnMainThread(name: Notifications.MasterCurrencyChanged)
+        }
+    }
+    
+    var selectedCards: [IndexPath] {
+        get {
+            return defaults.object(forKey: Keys.selectedCardIndexes) as? [IndexPath] ?? []
+        }
+        
+        set {
+           defaults.set(selectedCards, forKey: Keys.selectedCardIndexes)
         }
     }
     
