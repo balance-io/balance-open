@@ -10,11 +10,7 @@ import Cocoa
 import SnapKit
 
 enum SignUpTextFieldType: String {
-    case username
-    case password
     case pin
-    case mfaCode
-    case mfaAnswer
     case balancePassword
     case email
     case key
@@ -70,36 +66,25 @@ class SignUpTextField: View, TextFieldDelegate {
         iconContainer.snp.makeConstraints { make in
             make.width.equalTo(30)
             make.height.equalTo(30)
-            make.top.equalToSuperview()
+            make.centerY.equalToSuperview()
             make.left.equalTo(self)
         }
         
         var iconImage = #imageLiteral(resourceName: "login-user")
         var iconImageSize = NSZeroSize
         switch type {
-        case .username, .name:
-            iconImage = #imageLiteral(resourceName: "login-user")
-            iconImageSize = NSSize(width: 13, height: 13)
-        case .password, .key:
+        case .secret, .passphrase:
             iconImage = #imageLiteral(resourceName: "login-password")
             iconImageSize = NSSize(width: 10, height: 12)
-        case .pin, .mfaCode, .passphrase:
+        case .pin, .key, .address, .name:
             iconImage = #imageLiteral(resourceName: "login-pin")
             iconImageSize = NSSize(width: 12, height: 12)
-        case .mfaAnswer:
-            iconImage = #imageLiteral(resourceName: "login-mfa")
-            iconImageSize = NSSize(width: 13, height: 13)
-        // TODO: Better separate the light/dark ones from white only ones
         case .balancePassword:
             iconImage = #imageLiteral(resourceName: "login-balancePassword")
             iconImageSize = NSSize(width: 10, height: 12)
         case .email:
             iconImage = #imageLiteral(resourceName: "login-mail-light")
             iconImageSize = NSSize(width: 13, height: 10)
-        case .secret, .address:
-            //needs a different icon
-            iconImage = #imageLiteral(resourceName: "login-password")
-            iconImageSize = NSSize(width: 10, height: 12)
         case .none:
             iconImage = NSImage()
             iconImageSize = NSZeroSize
@@ -114,7 +99,7 @@ class SignUpTextField: View, TextFieldDelegate {
             make.height.equalTo(iconImageSize.height)
         }
         
-        if type == .password || type == .balancePassword {
+        if type == .balancePassword {
             let field = SecureField()
             field.customDelegate = self
             field.drawsBackground = false
@@ -140,8 +125,7 @@ class SignUpTextField: View, TextFieldDelegate {
                 make.left.equalTo(iconContainer.snp.right)
             }
             make.right.equalToSuperview().offset(-offset)
-            make.top.equalToSuperview().offset(5.5)
-            make.height.equalToSuperview().offset(-11)
+            make.centerY.equalToSuperview().offset(-2)
         }
         updatePlaceholder()
         

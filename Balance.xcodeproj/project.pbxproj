@@ -284,6 +284,7 @@
 		53B327C41E56AE0F009C7AFC /* Syncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B327C31E56AE0F009C7AFC /* Syncer.swift */; };
 		53B327C61E56AEC2009C7AFC /* SyncDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B327C51E56AEC2009C7AFC /* SyncDefaults.swift */; };
 		53B5C1961D8637CE00323ACE /* Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B5C1951D8637CE00323ACE /* Testing.swift */; };
+		53BA743320082D4F00912C81 /* YRKSpinningProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 53BA743220082D4F00912C81 /* YRKSpinningProgressIndicator.m */; };
 		53BB42E71CE849E70002D473 /* Shortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BB42E61CE849E70002D473 /* Shortcut.swift */; };
 		53C078A61DFF7CEB00696666 /* CertValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C078A51DFF7CEB00696666 /* CertValidator.m */; };
 		53C197171CB8714100F0A47B /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C197161CB8714100F0A47B /* SyncManager.swift */; };
@@ -795,6 +796,8 @@
 		53B327C31E56AE0F009C7AFC /* Syncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Syncer.swift; sourceTree = "<group>"; };
 		53B327C51E56AEC2009C7AFC /* SyncDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncDefaults.swift; sourceTree = "<group>"; };
 		53B5C1951D8637CE00323ACE /* Testing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Testing.swift; sourceTree = "<group>"; };
+		53BA743120082D4F00912C81 /* YRKSpinningProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YRKSpinningProgressIndicator.h; sourceTree = "<group>"; };
+		53BA743220082D4F00912C81 /* YRKSpinningProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YRKSpinningProgressIndicator.m; sourceTree = "<group>"; };
 		53BB42E61CE849E70002D473 /* Shortcut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shortcut.swift; sourceTree = "<group>"; };
 		53C078A41DFF7CEB00696666 /* CertValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertValidator.h; sourceTree = "<group>"; };
 		53C078A51DFF7CEB00696666 /* CertValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertValidator.m; sourceTree = "<group>"; };
@@ -1372,6 +1375,7 @@
 				533674FC1F4CE08A0034040F /* Sparkle.framework */,
 				533674FF1F4CE1500034040F /* LetsMove */,
 				53294F951D1DDD9500F08059 /* CCNStatusItem */,
+				53BA743420082D5300912C81 /* YRKSpinningProgressIndicator */,
 				53552A541ED72F2400DD95F9 /* Carthage */,
 				53552A551ED72F5200DD95F9 /* System */,
 			);
@@ -1636,6 +1640,15 @@
 				53B327C31E56AE0F009C7AFC /* Syncer.swift */,
 			);
 			path = Syncing;
+			sourceTree = "<group>";
+		};
+		53BA743420082D5300912C81 /* YRKSpinningProgressIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				53BA743120082D4F00912C81 /* YRKSpinningProgressIndicator.h */,
+				53BA743220082D4F00912C81 /* YRKSpinningProgressIndicator.m */,
+			);
+			path = YRKSpinningProgressIndicator;
 			sourceTree = "<group>";
 		};
 		53C197151CB7488600F0A47B /* Views */ = {
@@ -2964,6 +2977,7 @@
 				28A0DC131DCD010800601E87 /* ChangePasswordViewController.swift in Sources */,
 				5347B6A51DFD180E0046951D /* NSViewController.swift in Sources */,
 				5321219D1EE8B91600F4812A /* ioapi.c in Sources */,
+				53BA743320082D4F00912C81 /* YRKSpinningProgressIndicator.m in Sources */,
 				530422921ED39BB7001CA499 /* AccountsTabTableCells.swift in Sources */,
 				5358F5441C7FFD9700AB7420 /* Notifications.swift in Sources */,
 				E653128D1FE8C4DA00F57977 /* BITTREXApiError.swift in Sources */,
