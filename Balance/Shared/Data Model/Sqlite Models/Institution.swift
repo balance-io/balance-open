@@ -9,23 +9,20 @@
 import Foundation
 
 final class Institution {
-    let repository: InstitutionRepository
     
+    let repository: InstitutionRepository
     let institutionId: Int
     let source: Source
     let sourceInstitutionId: String
-    
     let name: String
     let nameBreak: Int?
-    
+    let logoData: Data?
+    let dateAdded: Date
     let primaryColor: PXColor?
     let secondaryColor: PXColor?
     
-    let logoData: Data?
-    
     var passwordInvalid: Bool
-    
-    let dateAdded: Date
+    var onValidate: Bool = false
     
     required init(result: FMResultSet, repository: ItemRepository = InstitutionRepository.si) {
         self.repository = repository as! InstitutionRepository

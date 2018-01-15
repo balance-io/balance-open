@@ -8,7 +8,7 @@
 
 import Foundation
 
-let subServerBaseUrl = debugging.useLocalSubscriptionServer ? "http://localhost:8080" : "https://balance-server-eur.appspot.com"
+let subServerBaseUrl = debugging.useLocalSubscriptionServer ? "http://localhost:8080" : "https://api.balancemy.money"
 
 struct Feedback {
     fileprivate static let sendFeedbackUrl = URL(string: "\(subServerBaseUrl)/feedback/send")!

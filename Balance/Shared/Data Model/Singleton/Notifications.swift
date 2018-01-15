@@ -79,3 +79,24 @@ struct Notifications {
         return userInfo
     }
 }
+
+typealias CoinbaseAutenticationResult = (succeeded: Bool, error: Error?, institutionId: Int?)
+
+struct CoinbaseNotifications {
+    
+    static let autenticationDidFinish = Notification.Name("autenticationWasFinished")
+    
+    enum key: String {
+        case auntenticationResult
+    }
+    
+    static func result(from notification: Notification) -> CoinbaseAutenticationResult? {
+        guard let userInfo = notification.userInfo,
+            let result = userInfo[key.auntenticationResult.rawValue] as? CoinbaseAutenticationResult else {
+            return nil
+        }
+        
+        return result
+    }
+    
+}

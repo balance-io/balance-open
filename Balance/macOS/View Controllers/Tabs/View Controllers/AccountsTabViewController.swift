@@ -32,6 +32,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     // MARK: Body
     let scrollView = ScrollView()
     let tableView = SectionedTableView()
+    let addNewAccountView = AddNewAccountView()
     
     // MARK: Fix Password Prompt
     let fixPasswordPromptView = PaintCodeView()
@@ -124,6 +125,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         createTable()
         createFixPasswordPrompt()
         createTotalFooter()
+        showAddAccountIfNeeded()
     }
     
     func createTable() {
@@ -148,6 +150,11 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         tableView.displayEmptySectionRows = true
         tableView.intercellSpacing = NSZeroSize
         tableView.selectionHighlightStyle = .none
+    
+        view.addSubview(addNewAccountView)
+        addNewAccountView.snp.makeConstraints { make in
+            make.size.equalToSuperview()
+        }
         
         tableView.reloadData()
     }
@@ -534,6 +541,11 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     
     func updateTotalBalance() {
         totalField.stringValue = amountToString(amount: viewModel.totalBalance(), currency: defaults.masterCurrency, showNegative: true, showCodeAfterValue: true)
+        showAddAccountIfNeeded()
+    }
+    
+    func showAddAccountIfNeeded() {
+        addNewAccountView.hideView(viewModel.data.count > 0)
     }
     
     //

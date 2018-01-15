@@ -46,7 +46,7 @@ class NetworkStatus {
         cancelCheckHost()
         
         async {
-            let url = URL(string: "https://balance-server-eur.appspot.com/hello")!
+            let url = URL(string: "https://api.balancemy.money/hello")!
             let expectedResponse = "hello"
             self.checkHostTask = certValidatedSession.dataTask(with: url) { data, response, error in
                 // Check if we can connect at all

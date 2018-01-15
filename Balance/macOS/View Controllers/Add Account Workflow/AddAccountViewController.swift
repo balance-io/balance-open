@@ -365,7 +365,10 @@ class AddAccountViewController: NSViewController {
         })
         preferencesButton.isEnabled = false
         preferencesButton.animator().alphaValue = 0.0
-        self.view.replaceSubview(containerView, with: (signUpController?.view)!, animation: .slideInFromRight)
+        
+        if let signUpController = signUpController {
+            self.view.replaceSubview(containerView, with: signUpController.view, animation: .slideInFromRight)
+        }
     }
     
     func removeSignUpController(animated: Bool) {

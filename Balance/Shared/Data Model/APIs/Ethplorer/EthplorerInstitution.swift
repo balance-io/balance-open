@@ -15,7 +15,7 @@ class EthplorerInstitution: ApiInstitution {
     var currencyCode: String = ""
     var usernameLabel: String = ""
     var passwordLabel: String = ""
-    var name: String = "Wallet"
+    var name: String = "Ethereum Address"
     var products: [String] = []
     var type: String = ""
     var url: String? = "https://ethplorer.io"

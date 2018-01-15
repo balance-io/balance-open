@@ -10,7 +10,11 @@
 #import <TrustKit/TrustKit.h>
 
 //const NSString *balanceReportUri = @"http://localhost:8080/certReport";
-const NSString *balanceReportUri = @"https://balance-server-eur.appspot.com/certReport";
+const NSString *balanceReportUri = @"https://api.balancemy.money/certReport";
+
+// NOTE: To get the intermediate and root cert hashes, go to https://www.ssllabs.com/ssltest/analyze.html
+//       and enter the URL you want to check. Expand the Certificate #1 section and in the Certification Paths
+//       section, use the Pin SHA256 value for each certificate.
 
 // Let's Encrypt
 const NSString *letsEncryptAuthorityX3                  = @"YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg="; // Let's Encrypt Authority X3
@@ -43,40 +47,14 @@ const NSString *COMODOECCDomainValidationSecureServerCA = @"EohwrK1N7rr3bRQphPj4
         NSDictionary *trustKitConfig =
         @{kTSKSwizzleNetworkDelegates: @NO,
           kTSKPinnedDomains : @{
-                  // Plaid
-                  @"sandbox.plaid.com" : @{
-                          kTSKEnforcePinning : @YES,
-                          kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                          kTSKPublicKeyHashes : @[digiCertSHA2SecureServerCA, digiCertGlobalRootCA],
-                          kTSKReportUris : @[balanceReportUri]
-                          },
-                  @"production.plaid.com" : @{
-                          kTSKEnforcePinning : @YES,
-                          kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                          kTSKPublicKeyHashes : @[digiCertSHA2SecureServerCA, digiCertGlobalRootCA],
-                          kTSKReportUris : @[balanceReportUri]
-                          },
-                  
                   // Balance backend servers
-                  @"www.balancemysubscription.com" : @{
-                          kTSKEnforcePinning : @YES,
-                          kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                          kTSKPublicKeyHashes : @[letsEncryptAuthorityX3, dstRootCAX3],
-                          kTSKReportUris : @[balanceReportUri]
-                          },
-                  @"balance-server-eur.appspot.com" : @{
-                          kTSKEnforcePinning : @YES,
-                          kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                          kTSKPublicKeyHashes : @[googleInternetAuthorityG3, globalSign],
-                          kTSKReportUris : @[balanceReportUri]
-                          },
                   @"balancemy.money" : @{
                           kTSKEnforcePinning : @YES,
                           kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                           kTSKPublicKeyHashes : @[letsEncryptAuthorityX3, dstRootCAX3],
                           kTSKReportUris : @[balanceReportUri]
                           },
-                  @"sync.balancemy.money" : @{
+                  @"api.balancemy.money" : @{
                           kTSKEnforcePinning : @YES,
                           kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                           kTSKPublicKeyHashes : @[letsEncryptAuthorityX3, dstRootCAX3],
@@ -89,6 +67,12 @@ const NSString *COMODOECCDomainValidationSecureServerCA = @"EohwrK1N7rr3bRQphPj4
                           kTSKReportUris : @[balanceReportUri]
                           },
                   @"exchangerates.balancemy.money" : @{
+                          kTSKEnforcePinning : @YES,
+                          kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                          kTSKPublicKeyHashes : @[letsEncryptAuthorityX3, dstRootCAX3],
+                          kTSKReportUris : @[balanceReportUri]
+                          },
+                  @"sync.balancemy.money" : @{
                           kTSKEnforcePinning : @YES,
                           kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                           kTSKPublicKeyHashes : @[letsEncryptAuthorityX3, dstRootCAX3],
