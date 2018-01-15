@@ -117,11 +117,10 @@ struct CoinbaseApi: ExchangeApi {
                             log.error("Error updating accounts: \(String(describing: error))")
                         }
                         
-                        if patch {
-                            let userInfo = Notifications.userInfoForInstitution(institution)
-                            NotificationCenter.postOnMainThread(name: Notifications.InstitutionPatched, object: nil, userInfo: userInfo)
-                        }
-                        
+                        let userInfo = Notifications.userInfoForInstitution(institution)
+                        let name = patch ? Notifications.InstitutionPatched : Notifications.InstitutionAdded
+                        NotificationCenter.postOnMainThread(name: name, object: nil, userInfo: userInfo)
+
                         async {
                             completion(true, nil)
                         }
