@@ -266,45 +266,28 @@ extension KrakenAPIClient: ExchangeApi {
                             return
                     }
                     
-                    if let existingInstitution = existingInstitution {
-                        do {
-                            let accessToken = String(existingInstitution.institutionId)
-                            try credentials.save(identifier: accessToken)
-                            existingInstitution.accessToken = accessToken
-                            existingInstitution.passwordInvalid = false
-                            existingInstitution.replace()
-                          
-                            async {
-                                closeBlock(true, error, existingInstitution)
-                            }
-                        } catch {
-                            closeBlock(false, error, nil)
-                        }
-                    } else {
-                        // Create new institution
-                        guard let institution = InstitutionRepository.si.institution(source: .kraken, sourceInstitutionId: "", name: "Kraken") else {
+                    var institution: Institution?
+                    do {
+                        institution = existingInstitution ?? InstitutionRepository.si.institution(source: .kraken, sourceInstitutionId: "", name: "Kraken")
+                        guard let unwrappedInstitution = institution else {
                             async {
                                 closeBlock(false, BalanceError.databaseError, nil)
                             }
                             return
                         }
                         
-                        let accessToken = String(institution.institutionId)
-                        do {
-                            try credentials.save(identifier: accessToken)
-                            institution.accessToken = accessToken
-                        } catch {
-                            async {
-                                closeBlock(false, error, nil)
-                            }
-                            return
+                        let accessToken = String(unwrappedInstitution.institutionId)
+                        try credentials.save(identifier: accessToken)
+                        unwrappedInstitution.accessToken = accessToken
+                        if let existingInstitution = existingInstitution {
+                            existingInstitution.passwordInvalid = false
+                            existingInstitution.replace()
                         }
                         
-                        // Build accounts
                         var accounts = [KrakenAPIClient.Account]()
                         for (currency, balance) in resultJSON {
                             do {
-                                //refer to Parse Accounts comments
+                                // NOTE: Refer to Parse Accounts comments
                                 var currencyCode = currency
                                 if currency.count == 4 && (currency.hasPrefix("Z") || currency.hasPrefix("X")) {
                                     currencyCode = currency.substring(from: 1)
@@ -320,11 +303,16 @@ extension KrakenAPIClient: ExchangeApi {
                             let availableBalance = currentBalance
                             
                             // Initialize an Account object to insert the record
-                            AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: account.currencyCode, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: account.currencyCode, currency: account.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
+                            AccountRepository.si.account(institutionId: unwrappedInstitution.institutionId, source: unwrappedInstitution.source, sourceAccountId: account.currencyCode, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: account.currencyCode, currency: account.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
                         }
                         async {
                             closeBlock(true, nil, institution)
                         }
+                    } catch {
+                        async {
+                            closeBlock(false, error, nil)
+                        }
+                        return
                     }
                 } else if case 400...402 = httpResponse.statusCode {
                     let error = APICredentialsComponents.Error.invalidSecret(message: "One or more of your credentials is invalid")
