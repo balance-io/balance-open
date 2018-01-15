@@ -268,10 +268,12 @@ extension KrakenAPIClient: ExchangeApi {
                     
                     if let existingInstitution = existingInstitution {
                         do {
-                        try credentials.save(identifier: "\(existingInstitution.institutionId)")
-                        existingInstitution.accessToken = "\(existingInstitution.institutionId)"
-                        existingInstitution.passwordInvalid = false
-                        existingInstitution.replace()
+                            let accessToken = String(existingInstitution.institutionId)
+                            try credentials.save(identifier: accessToken)
+                            existingInstitution.accessToken = accessToken
+                            existingInstitution.passwordInvalid = false
+                            existingInstitution.replace()
+                          
                             async {
                                 closeBlock(true, error, existingInstitution)
                             }
@@ -279,12 +281,18 @@ extension KrakenAPIClient: ExchangeApi {
                             closeBlock(false, error, nil)
                         }
                     } else {
-                        //make institution
-                        var institution: Institution
-                        institution = InstitutionRepository.si.institution(source: .kraken, sourceInstitutionId: "", name: "Kraken")!
-                        institution.accessToken = "\(institution.institutionId)"
+                        // Create new institution
+                        guard let institution = InstitutionRepository.si.institution(source: .kraken, sourceInstitutionId: "", name: "Kraken") else {
+                            async {
+                                closeBlock(false, BalanceError.databaseError, nil)
+                            }
+                            return
+                        }
+                        
+                        let accessToken = String(institution.institutionId)
                         do {
-                            try credentials.save(identifier: "\(institution.institutionId)")
+                            try credentials.save(identifier: accessToken)
+                            institution.accessToken = accessToken
                         } catch {
                             async {
                                 closeBlock(false, error, nil)
