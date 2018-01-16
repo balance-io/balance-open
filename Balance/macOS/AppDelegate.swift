@@ -187,12 +187,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                 log.error("Error handling Coinbase authentication callback: \(String(describing: error))")
                             }
                             
-                            NotificationCenter.postOnMainThread(name: Notifications.ShowTabIndex, object: nil, userInfo: [Notifications.Keys.TabIndex: Tab.accounts.rawValue])
-                            NotificationCenter.postOnMainThread(name: Notifications.ShowTabs)
-                            
-                            // Temporary hack to get Accounts tab showing correct data
-                            NotificationCenter.postOnMainThread(name: Notifications.SyncCompleted)
-                            
                             self.showPopover()
                         }
                     } else {

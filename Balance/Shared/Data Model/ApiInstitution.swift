@@ -29,6 +29,19 @@ struct Field {
     var name: String
     var type: FieldType
     var value: String?
+    
+    var testValue: String? {
+        switch type {
+        case .key:
+            return "3hWuNxSQkiMquhMVSjOouukS3tANoCoBOmtjuEqsOPs"
+        case .secret:
+            return "VWpoU8zUlPtpZ84R53YsgK5Q2U7AtWeLWQFRM6aOA9b"
+        case .address:
+            return "0x6748F50f686bfbcA6Fe8ad62b22228b87F31ff2b"
+        default:
+            return ""
+        }
+    }
 }
 
 enum FieldType: String {

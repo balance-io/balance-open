@@ -51,6 +51,7 @@ class AccountsTabViewModel: TabViewModel {
             })
         }
         
+        
         defaults.selectedCards = validInstitutions.map { $0.element }
     }
     

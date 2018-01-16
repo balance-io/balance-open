@@ -79,7 +79,7 @@ struct OpenTheme: Theme {
         let welcomeFont = NSFont.lightSystemFont(ofSize: 21)
 
         let labelFont = NSFont.systemFont(ofSize: 13)
-        let textColor = NSColor.black
+        let textColor = NSColor.white
         
         let statusFont = NSFont.systemFont(ofSize: 14)
         let statusColor = NSColor(deviceWhiteInt: 255, alpha: 0.7)
@@ -103,14 +103,16 @@ struct OpenTheme: Theme {
         let searchMoreResultsFont = NSFont.systemFont(ofSize: 13)
         let searchMoreResultsColor = NSColor(deviceWhiteInt: 255, alpha: 0.72)
         
-        let signUpFieldActiveBorderColor = NSColor(deviceRedInt: 203, green: 226, blue: 255, alpha: 0.5)
+        let signUpFieldHeight: CGFloat = 45
+        let signUpFieldSpacing: CGFloat = 15
+        let signUpFieldActiveBorderColor = NSColor.white
         let signUpFieldInactiveBorderColor = NSColor.clear
-        let signUpFieldBackgroundColor = NSColor(deviceWhiteInt: 255, alpha: 0.16)
-        let signUpFieldTextColor = NSColor.white
-        let signUpFieldplaceHolderTextColor = NSColor(deviceRedInt: 235, green: 240, blue: 245, alpha: 0.8)
+        let signUpFieldBackgroundColor = NSColor.white
+        let signUpFieldTextColor = NSColor(hexString: "#343E46")!
+        let signUpFieldplaceHolderTextColor = NSColor(hexString: "#AEB2B5")!
         let signUpFieldFont = NSFont.systemFont(ofSize: 13.5)
     
-        return AddAccountsTheme(institutionNameFont: institutionNameFont,  welcomeFont: welcomeFont, labelFont: labelFont, textColor: textColor, statusFont: statusFont, statusColor: statusColor, buttonFont: buttonFont, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, lineColor: lineColor, onePasswordButtonImage: onePasswordButtonImage, waveImage: waveImage, padlockImage: padlockImage, searchHeaderBackgroundColor: searchHeaderBackgroundColor, searchHeaderFont: searchHeaderFont, searchHeaderPopularFont: searchHeaderPopularFont, searchHeaderColor: searchHeaderColor, searchPopularFont: searchPopularFont, searchPopularColor: searchPopularColor, searchMoreResultsFont: searchMoreResultsFont, searchMoreResultsColor: searchMoreResultsColor, signUpFieldActiveBorderColor: signUpFieldActiveBorderColor, signUpFieldInactiveBorderColor: signUpFieldInactiveBorderColor, signUpFieldBackgroundColor: signUpFieldBackgroundColor, signUpFieldTextColor: signUpFieldTextColor, signUpFieldplaceHolderTextColor: signUpFieldplaceHolderTextColor, signUpFieldFont: signUpFieldFont)
+        return AddAccountsTheme(institutionNameFont: institutionNameFont, welcomeFont: welcomeFont, labelFont: labelFont, textColor: textColor, statusFont: statusFont, statusColor: statusColor, buttonFont: buttonFont, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, lineColor: lineColor, onePasswordButtonImage: onePasswordButtonImage, waveImage: waveImage, padlockImage: padlockImage, searchHeaderBackgroundColor: searchHeaderBackgroundColor, searchHeaderFont: searchHeaderFont, searchHeaderPopularFont: searchHeaderPopularFont, searchHeaderColor: searchHeaderColor, searchPopularFont: searchPopularFont, searchPopularColor: searchPopularColor, searchMoreResultsFont: searchMoreResultsFont, searchMoreResultsColor: searchMoreResultsColor, signUpFieldHeight: signUpFieldHeight, signUpFieldSpacing: signUpFieldSpacing, signUpFieldActiveBorderColor: signUpFieldActiveBorderColor, signUpFieldInactiveBorderColor: signUpFieldInactiveBorderColor, signUpFieldBackgroundColor: signUpFieldBackgroundColor, signUpFieldTextColor: signUpFieldTextColor, signUpFieldplaceHolderTextColor: signUpFieldplaceHolderTextColor, signUpFieldFont: signUpFieldFont)
     }
     
     var emailIssue: EmailIssueTheme {

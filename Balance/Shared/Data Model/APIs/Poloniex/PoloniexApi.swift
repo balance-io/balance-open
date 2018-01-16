@@ -175,6 +175,10 @@ class PoloniexApi: ExchangeApi {
                     if let institution = existingInstitution ?? InstitutionRepository.si.institution(source: .poloniex, sourceInstitutionId: "", name: "Poloniex") {
                         institution.secret = secret
                         institution.apiKey = key
+                        if let existingInstitution = existingInstitution {
+                            existingInstitution.passwordInvalid = false
+                            existingInstitution.replace()
+                        }
                         
                         //create accounts
                         let poloniexAccounts = try self.parsePoloniexAccounts(data: safeData)

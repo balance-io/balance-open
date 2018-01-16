@@ -246,6 +246,9 @@ struct AccountRepository: ItemRepository {
     }
     
     @discardableResult func delete(account: Account) -> Bool {
+        // Unhide the accountId in case it was hidden or a future account may be hidden because it has the same ID
+        account.isHidden = false
+        
         var success = true
         database.write.inDatabase { db in
             do {

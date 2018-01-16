@@ -130,7 +130,11 @@ internal final class AccountsListViewController: UIViewController
         super.viewWillAppear(animated)
         
         self.navigationController?.isNavigationBarHidden = true
-        self.collectionView.reloadData(shouldPersistSelection: true, with: viewModel.selectedCardIndexes)
+        self.reloadData()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            self?.presentReconnectViewIfNeeded()
+        }
     }
     
     override func viewDidLayoutSubviews()
@@ -152,6 +156,20 @@ internal final class AccountsListViewController: UIViewController
         self.totalBalanceBar.isHidden = !self.blankStateView.isHidden
         
         self.totalBalanceBar.totalBalanceLabel.text = self.viewModel.formattedMasterCurrencyTotalBalance
+    }
+    
+    func presentReconnectViewIfNeeded() {
+        guard !InstitutionRepository.si.institutionsWithInvalidPasswords().isEmpty else {
+            return
+        }
+        
+        let reconnectServices = AccountServiceProvider()
+        let reconnectVM = ReconnectAccountViewModel(services: reconnectServices)
+        let reconnectVC = ReconnectAccountViewController(viewModel: reconnectVM)
+        let reconnectNavVC = UINavigationController(rootViewController: reconnectVC)
+        reconnectNavVC.modalPresentationStyle = .overFullScreen
+        
+        self.present(reconnectNavVC, animated: true)
     }
     
     // MARK: Actions

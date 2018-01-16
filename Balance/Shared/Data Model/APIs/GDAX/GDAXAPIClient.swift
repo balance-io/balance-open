@@ -244,71 +244,57 @@ extension GDAXAPIClient: ExchangeApi {
             } else if field.type == .passphrase {
                 passphrasField = field.value?.trimmingCharacters(in: .whitespacesAndNewlines)
             } else {
-                assert(false, "wrong fields are passed into the poloniex auth, we require secret and key fields and values")
+                assert(false, "wrong fields are passed into the gdax auth, we require secret and key fields and values")
             }
         }
         guard let secret = secretField, let key = keyField, let passphrase = passphrasField else {
-            assert(false, "wrong fields are passed into the poloniex auth, we require secret and key fields and values")
-            closeBlock(false, "wrong fields are passed into the poloniex auth, we require secret and key fields and values", nil)
+            assert(false, "wrong fields are passed into the gdax auth, we require secret and key fields and values")
+            closeBlock(false, "wrong fields are passed into the gdax auth, we require secret and key fields and values", nil)
             
             return
         }
         
+        var institution: Institution?
         do {
             let credentials = try GDAXAPIClient.Credentials(key: key, secret: secret, passphrase: passphrase)
             
             self.credentials = credentials
+            institution = existingInstitution ?? InstitutionRepository.si.institution(source: .gdax, sourceInstitutionId: "", name: "GDAX")
+            guard let unwrappedInstitution = institution else {
+                async {
+                    closeBlock(false, BalanceError.databaseError, nil)
+                }
+                return
+            }
+            
+            let accessToken = String(unwrappedInstitution.institutionId)
+            try credentials.save(identifier: accessToken)
+            unwrappedInstitution.accessToken = accessToken
+            if let existingInstitution = existingInstitution {
+                  existingInstitution.passwordInvalid = false
+                  existingInstitution.replace()
+            }
+            
             try self.fetchAccounts { accounts, error in
-                guard let unwrappedError = error else {
-                    do {
-                        if let existingInstitution = existingInstitution {
-                            try credentials.save(identifier: "\(existingInstitution.institutionId)")
-                            existingInstitution.accessToken = "\(existingInstitution.institutionId)"
-                            async {
-                                closeBlock(true, nil, existingInstitution)
-                            }
-                        } else {
-                            guard let institution = InstitutionRepository.si.institution(source: .gdax, sourceInstitutionId: "", name: "GDAX") else {
-                                async {
-                                    closeBlock(false, error, nil)
-                                }
-                                return
-                            }
-                            institution.accessToken = "\(institution.institutionId)"
-                            
-                            guard let unwrappedAccounts = accounts else {
-                                async {
-                                    closeBlock(false, error, nil)
-                                }
-                                return
-                            }
-                            for account in unwrappedAccounts {
-                                let currency = Currency.rawValue(account.currencyCode)
-                                let currentBalance = account.balance.integerValueWith(decimals: currency.decimals)
-                                let availableBalance = account.availableBalance.integerValueWith(decimals: currency.decimals)
-                                
-                                // Initialize an Account object to insert the record
-                                AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: account.identifier, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: account.currencyCode, currency: account.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
-                            }
-                            
-                            async {
-                                closeBlock(true, nil, institution)
-                            }
-                        }
-                    }
-                    catch {
-                        async {
-                            closeBlock(false, error, nil)
-                        }
+                guard let unwrappedAccounts = accounts else {
+                    async {
+                        closeBlock(false, error, nil)
                     }
                     return
                 }
                 
-                // TODO: Display error
-                async {
-                    closeBlock(false, unwrappedError, nil)
+                for account in unwrappedAccounts {
+                    let currency = Currency.rawValue(account.currencyCode)
+                    let currentBalance = account.balance.integerValueWith(decimals: currency.decimals)
+                    let availableBalance = account.availableBalance.integerValueWith(decimals: currency.decimals)
+                    
+                    // Initialize an Account object to insert the record
+                    AccountRepository.si.account(institutionId: unwrappedInstitution.institutionId, source: unwrappedInstitution.source, sourceAccountId: account.identifier, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: account.currencyCode, currency: account.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
                 }
                 
+                async {
+                    closeBlock(true, error, institution)
+                }
             }
         }
         catch APICredentialsComponents.Error.invalidSecret {
@@ -320,7 +306,7 @@ extension GDAXAPIClient: ExchangeApi {
         catch {
             // TODO: show alert
             async {
-                closeBlock(false, error, nil)
+                closeBlock(false, error, institution)
             }
         }
     }

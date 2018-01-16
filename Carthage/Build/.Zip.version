@@ -1,15 +1,9 @@
 {
-  "commitish" : "993f5652867a4ebbe080504b84af00a841d8695f",
-  "Mac" : [
-    {
-      "name" : "Zip",
-      "hash" : "9a6ec7a685e82882a5f3394ef2878e23b3ebb4ab1b130334d5e31748d44e9dd9"
-    }
-  ],
+  "commitish" : "e0935dcb2c99f4511ecf95cab5dcec0f25335829",
   "iOS" : [
     {
       "name" : "Zip",
-      "hash" : "838eb2fa6d92560d492f9566f302feb26f054b3895f20b20888fe853a34b2582"
+      "hash" : "2bfd6e9c85324ea74875bd0f09e4231c3d0bd1b190ed41b8096ffac4a055a610"
     }
   ]
 }

@@ -52,6 +52,7 @@
 		2DF8985B1FCC8F7500CCDFB9 /* CountlyUserDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898361FCC8F7500CCDFB9 /* CountlyUserDetails.m */; };
 		2DF8985C1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */; };
 		2DF8985D1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */; };
+		40A90EA5200959840063B2F5 /* AddNewAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA4200959840063B2F5 /* AddNewAccountView.swift */; };
 		5300D6261DCE5A1E00D02657 /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5300D6251DCE5A1E00D02657 /* LockViewController.swift */; };
 		5301A7611F17DC8B00668099 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301A7601F17DC8B00668099 /* URL.swift */; };
 		5301A7771F17F86900668099 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301A7761F17F86900668099 /* HTTPMethod.swift */; };
@@ -283,6 +284,7 @@
 		53B327C41E56AE0F009C7AFC /* Syncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B327C31E56AE0F009C7AFC /* Syncer.swift */; };
 		53B327C61E56AEC2009C7AFC /* SyncDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B327C51E56AEC2009C7AFC /* SyncDefaults.swift */; };
 		53B5C1961D8637CE00323ACE /* Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B5C1951D8637CE00323ACE /* Testing.swift */; };
+		53BA743320082D4F00912C81 /* YRKSpinningProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 53BA743220082D4F00912C81 /* YRKSpinningProgressIndicator.m */; };
 		53BB42E71CE849E70002D473 /* Shortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BB42E61CE849E70002D473 /* Shortcut.swift */; };
 		53C078A61DFF7CEB00696666 /* CertValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C078A51DFF7CEB00696666 /* CertValidator.m */; };
 		53C197171CB8714100F0A47B /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C197161CB8714100F0A47B /* SyncManager.swift */; };
@@ -490,6 +492,12 @@
 		DCC684D81BD1080E00E95B90 /* TransactionsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC684D71BD1080E00E95B90 /* TransactionsTabViewController.swift */; };
 		DCDF77BD1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDF77BC1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift */; };
 		DCDF77BF1BE6C703004AF8AE /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDF77BE1BE6C703004AF8AE /* PreferencesViewController.swift */; };
+		E605EF7F20065F3700A95632 /* UIView+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605EF7D20065EFA00A95632 /* UIView+Size.swift */; };
+		E605EF8320065FE700A95632 /* ReconnectAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605EF8120065FDD00A95632 /* ReconnectAccountViewModel.swift */; };
+		E605EF862006851300A95632 /* Collection+Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605EF852006851300A95632 /* Collection+Index.swift */; };
+		E605EF882006AC8F00A95632 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E605EF872006AC8E00A95632 /* RxSwift.framework */; };
+		E605EF8A2006B6BF00A95632 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E605EF892006B6BF00A95632 /* RxCocoa.framework */; };
+		E605EF8F2006BF3C00A95632 /* UIViewController+Present.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605EF8D2006BF3600A95632 /* UIViewController+Present.swift */; };
 		E653123E1FE8C20700F57977 /* NewExchangeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E653123D1FE8C20600F57977 /* NewExchangeAPI.swift */; };
 		E65312451FE8C22E00F57977 /* BITTREXApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312411FE8C22D00F57977 /* BITTREXApi.swift */; };
 		E653124C1FE8C28D00F57977 /* BITTREXCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312491FE8C28D00F57977 /* BITTREXCurrency.swift */; };
@@ -515,6 +523,8 @@
 		E65312931FE8C69800F57977 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078421F4F8EC700D0054C /* TestHelpers.swift */; };
 		E6B0416C1FFECFB200192319 /* AddAccountDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */; };
 		E6B0416D1FFED03300192319 /* AddAccountDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */; };
+		E6C1AC4620057ABE0018D6AA /* ReconnectAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */; };
+		E6C1AC49200590070018D6AA /* ReconnectAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */; };
 		F1253E5E1D75D2D0001BD48C /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1253E5D1D75D2D0001BD48C /* KeychainManager.swift */; };
 		F1253E611D75D55D001BD48C /* KeychainManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1253E601D75D55D001BD48C /* KeychainManagement.swift */; };
 		F19BF68C1D880DA100496A66 /* MockedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19BF68B1D880DA100496A66 /* MockedDefaults.swift */; };
@@ -622,6 +632,7 @@
 		2DF898361FCC8F7500CCDFB9 /* CountlyUserDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyUserDetails.m; sourceTree = "<group>"; };
 		2DF898371FCC8F7500CCDFB9 /* CountlyViewTracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyViewTracking.h; sourceTree = "<group>"; };
 		2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyViewTracking.m; sourceTree = "<group>"; };
+		40A90EA4200959840063B2F5 /* AddNewAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewAccountView.swift; sourceTree = "<group>"; };
 		5300D6251DCE5A1E00D02657 /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
 		5301A7601F17DC8B00668099 /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		5301A7761F17F86900668099 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -692,7 +703,6 @@
 		532B6FF11E9613520010D81D /* AccountsTabViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsTabViewModel.swift; sourceTree = "<group>"; };
 		532E392C1CD4521D001AFC31 /* Debugging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debugging.swift; sourceTree = "<group>"; };
 		532F37DE1D5A5FFC00145BAA /* NSWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSWindow.swift; sourceTree = "<group>"; };
-		53328D731E0260720075EC92 /* get_pin_from_certificate.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = get_pin_from_certificate.py; sourceTree = "<group>"; };
 		533402291DDD0E5E000236A0 /* PaintCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintCodeView.swift; sourceTree = "<group>"; };
 		533402391DDFB8C4000236A0 /* NetworkStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
 		533558251DDA860C00D91F4D /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -793,6 +803,8 @@
 		53B327C31E56AE0F009C7AFC /* Syncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Syncer.swift; sourceTree = "<group>"; };
 		53B327C51E56AEC2009C7AFC /* SyncDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncDefaults.swift; sourceTree = "<group>"; };
 		53B5C1951D8637CE00323ACE /* Testing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Testing.swift; sourceTree = "<group>"; };
+		53BA743120082D4F00912C81 /* YRKSpinningProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YRKSpinningProgressIndicator.h; sourceTree = "<group>"; };
+		53BA743220082D4F00912C81 /* YRKSpinningProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YRKSpinningProgressIndicator.m; sourceTree = "<group>"; };
 		53BB42E61CE849E70002D473 /* Shortcut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shortcut.swift; sourceTree = "<group>"; };
 		53C078A41DFF7CEB00696666 /* CertValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertValidator.h; sourceTree = "<group>"; };
 		53C078A51DFF7CEB00696666 /* CertValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertValidator.m; sourceTree = "<group>"; };
@@ -954,6 +966,12 @@
 		DCC684D71BD1080E00E95B90 /* TransactionsTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionsTabViewController.swift; sourceTree = "<group>"; };
 		DCDF77BC1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesGeneralViewController.swift; sourceTree = "<group>"; };
 		DCDF77BE1BE6C703004AF8AE /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		E605EF7D20065EFA00A95632 /* UIView+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Size.swift"; sourceTree = "<group>"; };
+		E605EF8120065FDD00A95632 /* ReconnectAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountViewModel.swift; sourceTree = "<group>"; };
+		E605EF852006851300A95632 /* Collection+Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Index.swift"; sourceTree = "<group>"; };
+		E605EF872006AC8E00A95632 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		E605EF892006B6BF00A95632 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		E605EF8D2006BF3600A95632 /* UIViewController+Present.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Present.swift"; sourceTree = "<group>"; };
 		E653123D1FE8C20600F57977 /* NewExchangeAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewExchangeAPI.swift; sourceTree = "<group>"; };
 		E65312411FE8C22D00F57977 /* BITTREXApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXApi.swift; sourceTree = "<group>"; };
 		E65312491FE8C28D00F57977 /* BITTREXCurrency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BITTREXCurrency.swift; path = "Balance/Shared/Data Model/APIs/BITTREX/DTO/BITTREXCurrency.swift"; sourceTree = SOURCE_ROOT; };
@@ -971,6 +989,8 @@
 		E65312861FE8C47F00F57977 /* BITTREXInstitution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXInstitution.swift; sourceTree = "<group>"; };
 		E65312871FE8C47F00F57977 /* BITTREXApiAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXApiAction.swift; sourceTree = "<group>"; };
 		E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddAccountDelegate.swift; path = AddCredentialBasedAccountViewController/AddAccountDelegate.swift; sourceTree = "<group>"; };
+		E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountViewController.swift; sourceTree = "<group>"; };
+		E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountCell.swift; sourceTree = "<group>"; };
 		F107D9A21D6B048800CEEF35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1253E5D1D75D2D0001BD48C /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		F1253E601D75D55D001BD48C /* KeychainManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManagement.swift; sourceTree = "<group>"; };
@@ -994,6 +1014,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E605EF8A2006B6BF00A95632 /* RxCocoa.framework in Frameworks */,
+				E605EF882006AC8F00A95632 /* RxSwift.framework in Frameworks */,
 				A41EE4871FB9E4F100210038 /* SVProgressHUD.framework in Frameworks */,
 				535BE39E1F05A14C00DEA4EF /* libz.tbd in Frameworks */,
 				53FCE3421F06B5DC004EB25C /* NSDateTimeAgo.framework in Frameworks */,
@@ -1262,6 +1284,7 @@
 				5372E96E1DF7E75C00DDE214 /* SignUpTextField.swift */,
 				539348BA1DEBB479009F4564 /* TokenSearchField.swift */,
 				539348C41DECD94B009F4564 /* TokenTextField.swift */,
+				40A90EA4200959840063B2F5 /* AddNewAccountView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -1369,6 +1392,7 @@
 				533674FC1F4CE08A0034040F /* Sparkle.framework */,
 				533674FF1F4CE1500034040F /* LetsMove */,
 				53294F951D1DDD9500F08059 /* CCNStatusItem */,
+				53BA743420082D5300912C81 /* YRKSpinningProgressIndicator */,
 				53552A541ED72F2400DD95F9 /* Carthage */,
 				53552A551ED72F5200DD95F9 /* System */,
 			);
@@ -1452,9 +1476,8 @@
 		53561E861F82DD120043D4F9 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				53561E871F82DD120043D4F9 /* NewAccountListViewModel.swift */,
+				E605EF8020065FBC00A95632 /* Accounts */,
 				53561E881F82DD120043D4F9 /* InstitutionSettingsViewModel.swift */,
-				53561E891F82DD120043D4F9 /* NewAccountViewModel.swift */,
 				A459EDA51F83B90900DC4B51 /* TransactionsListViewModel.swift */,
 				A4EF39E61F8E43A40032265E /* InstitutionAccountsListViewModel.swift */,
 				A43ACE4F1F963035009F2AE9 /* CurrencySelectionViewModel.swift */,
@@ -1545,9 +1568,10 @@
 		53561E9D1F82DD120043D4F9 /* Add Account */ = {
 			isa = PBXGroup;
 			children = (
+				E6C1AC45200578C00018D6AA /* Reconnect */,
+				E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */,
 				53561E9E1F82DD120043D4F9 /* AddAccountViewController.swift */,
 				53561E9F1F82DD120043D4F9 /* AddCredentialBasedAccountViewController */,
-				E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */,
 			);
 			path = "Add Account";
 			sourceTree = "<group>";
@@ -1633,6 +1657,15 @@
 				53B327C31E56AE0F009C7AFC /* Syncer.swift */,
 			);
 			path = Syncing;
+			sourceTree = "<group>";
+		};
+		53BA743420082D5300912C81 /* YRKSpinningProgressIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				53BA743120082D4F00912C81 /* YRKSpinningProgressIndicator.h */,
+				53BA743220082D4F00912C81 /* YRKSpinningProgressIndicator.m */,
+			);
+			path = YRKSpinningProgressIndicator;
 			sourceTree = "<group>";
 		};
 		53C197151CB7488600F0A47B /* Views */ = {
@@ -1970,6 +2003,8 @@
 		A41EE4851FB9E4F000210038 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E605EF892006B6BF00A95632 /* RxCocoa.framework */,
+				E605EF872006AC8E00A95632 /* RxSwift.framework */,
 				A4F273DF1FC2DBF000493077 /* OnePasswordExtension.framework */,
 				A41EE4861FB9E4F000210038 /* SVProgressHUD.framework */,
 			);
@@ -2041,7 +2076,8 @@
 		A456ED131FB31A1A006EE529 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				A456ED141FB31A33006EE529 /* UIFont+Balance.swift */,
+				E605EF8C2006BEFD00A95632 /* Foundation */,
+				E605EF8B2006BEF700A95632 /* UIKit */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2171,7 +2207,6 @@
 		DC1A648B1B867B1F009356A0 = {
 			isa = PBXGroup;
 			children = (
-				53328D731E0260720075EC92 /* get_pin_from_certificate.py */,
 				DC1A64961B867B1F009356A0 /* Balance */,
 				DC65EF901CE3E2CD006C9373 /* Bal Helper */,
 				F107D99F1D6B048800CEEF35 /* BalanceUITests */,
@@ -2231,6 +2266,43 @@
 				5349909B1E0354630057C5C1 /* main.m */,
 			);
 			path = "Bal Helper";
+			sourceTree = "<group>";
+		};
+		E605EF8020065FBC00A95632 /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				53561E891F82DD120043D4F9 /* NewAccountViewModel.swift */,
+				53561E871F82DD120043D4F9 /* NewAccountListViewModel.swift */,
+				E605EF8120065FDD00A95632 /* ReconnectAccountViewModel.swift */,
+			);
+			path = Accounts;
+			sourceTree = "<group>";
+		};
+		E605EF8B2006BEF700A95632 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				A456ED141FB31A33006EE529 /* UIFont+Balance.swift */,
+				E605EF7D20065EFA00A95632 /* UIView+Size.swift */,
+				E605EF8D2006BF3600A95632 /* UIViewController+Present.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		E605EF8C2006BEFD00A95632 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				E605EF852006851300A95632 /* Collection+Index.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		E6C1AC45200578C00018D6AA /* Reconnect */ = {
+			isa = PBXGroup;
+			children = (
+				E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */,
+				E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */,
+			);
+			path = Reconnect;
 			sourceTree = "<group>";
 		};
 		E653123F1FE8C21600F57977 /* BITTREX */ = {
@@ -2662,6 +2734,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/BalanceVectorGraphics_iOS.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SVProgressHUD.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/OnePasswordExtension.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 			);
 			name = "Copy Carthage Frameworks";
 			outputPaths = (
@@ -2673,6 +2747,8 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/BalanceVectorGraphics_iOS.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SVProgressHUD.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/OnePasswordExtension.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2715,7 +2791,9 @@
 				E653124F1FE8C2A500F57977 /* BITTREXBalance.swift in Sources */,
 				53552A2B1ED7252900DD95F9 /* FileManager.swift in Sources */,
 				A4430AA61F95F47300F2FFFA /* SimpleCache.swift in Sources */,
+				E605EF8F2006BF3C00A95632 /* UIViewController+Present.swift in Sources */,
 				A4E7680D1F67E410002B1AE1 /* APICredentials.swift in Sources */,
+				E605EF862006851300A95632 /* Collection+Index.swift in Sources */,
 				53552A2F1ED72B5700DD95F9 /* FMDatabaseAdditions.m in Sources */,
 				537187E61F4CC23B00E7F9D6 /* PoloniexAccount.swift in Sources */,
 				A41EE4801FB9AA1A00210038 /* QRCodeScannerViewController.swift in Sources */,
@@ -2828,6 +2906,7 @@
 				A41D3E431F6BF75100FD25B5 /* KrakenErrors.swift in Sources */,
 				A4E457191F7901E7002E2879 /* EthplorerErrors.swift in Sources */,
 				E6B0416D1FFED03300192319 /* AddAccountDelegate.swift in Sources */,
+				E6C1AC49200590070018D6AA /* ReconnectAccountCell.swift in Sources */,
 				53561EAF1F82DD260043D4F9 /* NewAccountViewModel.swift in Sources */,
 				A459EDA61F83B90900DC4B51 /* TransactionsListViewModel.swift in Sources */,
 				537504FB1F19237E0062C11A /* ProductId.swift in Sources */,
@@ -2852,6 +2931,7 @@
 				53552A241ED7252900DD95F9 /* TimeInterval.swift in Sources */,
 				53552A121ED7251200DD95F9 /* NetworkStatus.swift in Sources */,
 				A495726D1F98B56400651C89 /* CurrentExchangeRates.swift in Sources */,
+				E605EF7F20065F3700A95632 /* UIView+Size.swift in Sources */,
 				535529F91ED7250100DD95F9 /* Syncer.swift in Sources */,
 				2DF8984D1FCC8F7500CCDFB9 /* CountlyCrashReporter.m in Sources */,
 				53F078651ED73E6D00E7EDF9 /* ThemeGlobals.swift in Sources */,
@@ -2860,6 +2940,7 @@
 				538B47BF1F4CA0200023CED5 /* Currency.swift in Sources */,
 				535529FE1ED7250500DD95F9 /* KeychainManagement.swift in Sources */,
 				A4430AA21F95F3ED00F2FFFA /* ExchangeRate.swift in Sources */,
+				E605EF8320065FE700A95632 /* ReconnectAccountViewModel.swift in Sources */,
 				53561EAB1F82DD260043D4F9 /* AddAccountViewController.swift in Sources */,
 				A493B9401F681BA00074ACCC /* BitfinexWallet.swift in Sources */,
 				5373B4751FAB708B007432DC /* PriceTickerTabViewModel.swift in Sources */,
@@ -2878,6 +2959,7 @@
 				537187FB1F4CC3EF00E7F9D6 /* NumberUtils.swift in Sources */,
 				53561EAD1F82DD260043D4F9 /* NewAccountListViewModel.swift in Sources */,
 				53552A131ED7251200DD95F9 /* CertValidator.m in Sources */,
+				E6C1AC4620057ABE0018D6AA /* ReconnectAccountViewController.swift in Sources */,
 				A456ED151FB31A33006EE529 /* UIFont+Balance.swift in Sources */,
 				53552A141ED7251200DD95F9 /* ServerMessage.swift in Sources */,
 				53561EA81F82DD260043D4F9 /* AccountsListViewController.swift in Sources */,
@@ -2916,6 +2998,7 @@
 				A41D3E451F6BF81A00FD25B5 /* KrakenAuthHeaders.swift in Sources */,
 				2DF898501FCC8F7500CCDFB9 /* CountlyEvent.m in Sources */,
 				5361BC9E1F562580009C3F07 /* PoloniexInstitution.swift in Sources */,
+				40A90EA5200959840063B2F5 /* AddNewAccountView.swift in Sources */,
 				536C6EEF1D864C9B00823688 /* MockedDefaultsStorage.swift in Sources */,
 				537187EF1F4CC23C00E7F9D6 /* GDAXWithdrawal.swift in Sources */,
 				5304228A1ED39742001CA499 /* TabViewModel.swift in Sources */,
@@ -2960,6 +3043,7 @@
 				28A0DC131DCD010800601E87 /* ChangePasswordViewController.swift in Sources */,
 				5347B6A51DFD180E0046951D /* NSViewController.swift in Sources */,
 				5321219D1EE8B91600F4812A /* ioapi.c in Sources */,
+				53BA743320082D4F00912C81 /* YRKSpinningProgressIndicator.m in Sources */,
 				530422921ED39BB7001CA499 /* AccountsTabTableCells.swift in Sources */,
 				5358F5441C7FFD9700AB7420 /* Notifications.swift in Sources */,
 				E653128D1FE8C4DA00F57977 /* BITTREXApiError.swift in Sources */,

@@ -5,6 +5,7 @@
 #import <CommonCrypto/CommonCrypto.h>
 #import <Sparkle/Sparkle.h>
 #import "CCNStatusItem.h"
+#import "YRKSpinningProgressIndicator.h"
 #import "ObjC.h"
 #import "FMDB.h"
 #import "CertValidator.h"
