@@ -52,7 +52,7 @@ class Defaults {
         static let hiddenAccountIds                     = "hiddenAccountIds"
         static let unfinishedConnectionInstitutionIds   = "unfinishedConnectionInstitutionIds"
         static let masterCurrency                       = "masterCurrency"
-        static let selectedCardIndexes                  = "selectedCardIndexes"
+        static let selectedCards                  = "selectedCardIndexes"
     }
     
     // First run defaults
@@ -320,13 +320,19 @@ class Defaults {
         }
     }
     
-    var selectedCards: [Int] {
+    var selectedCards: [Int]? {
         get {
-            return defaults.array(forKey: Keys.selectedCardIndexes) as? [Int] ?? []
+            return defaults.array(forKey: Keys.selectedCards) as? [Int]
         }
         
         set {
-            defaults.set(newValue, forKey: Keys.selectedCardIndexes)
+            guard let newValue = newValue,
+                !newValue.isEmpty else {
+                    defaults.removeObject(forKey: Keys.selectedCards)
+                    return
+            }
+            
+            defaults.set(newValue, forKey: Keys.selectedCards)
         }
     }
     

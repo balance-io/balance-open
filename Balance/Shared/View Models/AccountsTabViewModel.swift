@@ -17,44 +17,6 @@ class AccountsTabViewModel: TabViewModel {
     // MARK: Table Data
     var data = OrderedDictionary<Institution, [Account]>()
     
-    var selectedCardIndexes: [IndexPath] {
-        let institutionIds = data.values.map { $0.key.institutionId }
-        let institutionIdsSet = Set(institutionIds)
-        let selectedIndexes = InstitutionRepository.si.selectedCardIndexes
-        let selectedIndexesSet = Set(selectedIndexes)
-        
-        guard !institutionIdsSet.isEmpty,
-            !institutionIdsSet.isEmpty else {
-                cleanSelectedCardsIfNeeded(with: institutionIdsSet)
-                return []
-        }
-        
-        let indexesToDelete = selectedIndexesSet.subtracting(institutionIdsSet)
-        cleanSelectedCardsIfNeeded(with: indexesToDelete)
-        let indexesToTransform = selectedIndexesSet.intersection(institutionIdsSet)
-        
-        return indexesToTransform.enumerated().map { IndexPath(item: $0.offset, section: 0) }
-    }
-    
-    func cleanSelectedCardsIfNeeded(with set: Set<Int>) {
-        //TODO: Remove from user default the institutions not mapped, put the functionality inside InstitutionRepository
-        //Becuase that function should be called when an account is deleted so it can be called out from this class
-    }
-    
-    func updateSelectedCards(with selection: [IndexPath]) {
-        let institutionsIds = data.keys.map { $0.institutionId }
-        let institutionsIdsWithIndexes = institutionsIds.enumerated().map { $0 }
-        let validInstitutions = institutionsIdsWithIndexes.filter {
-            (offset, id) in
-            return selection.contains(where: { (indexpath) -> Bool in
-                return indexpath.row == offset
-            })
-        }
-        
-        
-        defaults.selectedCards = validInstitutions.map { $0.element }
-    }
-    
     func persistSortOrder() {
         // Institutions
         defaults.accountsViewInstitutionsOrder = data.keys.map({$0.institutionId})
@@ -104,7 +66,6 @@ class AccountsTabViewModel: TabViewModel {
     
     func removeInstitution(at index: Int) -> Bool {
         guard let institution = institution(forSection: index) else {
-            log.error("Cant delete a row without an institution")
             return false
         }
         
@@ -113,6 +74,7 @@ class AccountsTabViewModel: TabViewModel {
             return false
         }
         
+        InstitutionRepository.si.removeUnSelectedCards(with: [institution.institutionId])
         institutionRemoved(institution: institution)
         
         return true
@@ -183,4 +145,46 @@ class AccountsTabViewModel: TabViewModel {
         }
         return nil
     }
+}
+
+//mark: Selected Cards Methods
+extension AccountsTabViewModel {
+    
+    var selectedCardIndexes: [IndexPath] {
+        let availableInstitutionIds = data.keys.map { $0.institutionId }
+        let availableInstitutionIdsSet = Set(availableInstitutionIds)
+        let savedInstitutionIdsSet = Set(InstitutionRepository.si.selectedCards)
+        let institutionIdsToRemove =  savedInstitutionIdsSet.subtracting(availableInstitutionIdsSet)
+        
+        guard !availableInstitutionIdsSet.isEmpty,
+            !savedInstitutionIdsSet.isEmpty else {
+                InstitutionRepository.si.removeUnSelectedCards()
+                return []
+        }
+        
+        if !institutionIdsToRemove.isEmpty {
+            InstitutionRepository.si.removeUnSelectedCards(with: Array(institutionIdsToRemove))
+        }
+        
+        let institutionIdsTrasformed = savedInstitutionIdsSet
+            .intersection(availableInstitutionIdsSet)
+            .flatMap { availableInstitutionIds.index(of: $0) }
+            .map { IndexPath(item: $0, section: 0) }
+        
+        return institutionIdsTrasformed
+    }
+    
+    func updateSelectedCards(with selection: [IndexPath]) {
+        let institutionsIds = data.keys.map { $0.institutionId }
+        let institutionsIdsWithIndexes = institutionsIds.enumerated().map { $0 }
+        let validInstitutions = institutionsIdsWithIndexes.filter {
+            (offset, id) in
+            return selection.contains(where: { (indexpath) -> Bool in
+                return indexpath.row == offset
+            })
+        }
+        
+        InstitutionRepository.si.saveSelectedCards(validInstitutions.map { $0.element })
+    }
+    
 }

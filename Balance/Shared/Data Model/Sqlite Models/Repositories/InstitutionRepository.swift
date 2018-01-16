@@ -15,10 +15,6 @@ struct InstitutionRepository: ItemRepository {
     let table = "institutions"
     let itemIdField = "institutionId"
     
-    var selectedCardIndexes: [Int] {
-        return defaults.selectedCards
-    }
-    
     func institution(institutionId: Int) -> Institution? {
         return gr.item(repository: self, itemId: institutionId)
     }
@@ -207,8 +203,35 @@ struct InstitutionRepository: ItemRepository {
         return invalidPasswordInstitutions
     }
     
-    func saveSelectedCards(_ indexPaths: [Int]) {
-        defaults.selectedCards = indexPaths
+}
+
+//mark: Selected Cards Methods
+extension InstitutionRepository {
+    
+    var selectedCards: [Int] {
+        return defaults.selectedCards ?? []
+    }
+    
+    func removeUnSelectedCards(with institutionsToRemove: [Int]? = nil) {
+        guard let institutionsToRemove = institutionsToRemove else {
+            defaults.selectedCards = nil
+            return
+        }
+        
+        guard let savedInstitutions = defaults.selectedCards,
+            !savedInstitutions.isEmpty else {
+            return
+        }
+        
+        let savedInstitutionIdsSet = Set(savedInstitutions)
+        let institutionsToRemoveSet = Set(institutionsToRemove)
+        let newInstitutionsSet = savedInstitutionIdsSet.subtracting(institutionsToRemoveSet)
+        
+        defaults.selectedCards = newInstitutionsSet.isEmpty ? nil : Array(newInstitutionsSet)
+    }
+    
+    func saveSelectedCards(_ institutionIds: [Int]) {
+        defaults.selectedCards = institutionIds
         print("Saving cards state")
     }
     
