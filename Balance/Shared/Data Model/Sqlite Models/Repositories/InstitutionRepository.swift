@@ -214,7 +214,7 @@ extension InstitutionRepository {
     
     func removeUnSelectedCards(with institutionsToRemove: [Int]? = nil) {
         guard let institutionsToRemove = institutionsToRemove else {
-            defaults.selectedCards = nil
+            DispatchQueue.global().async { defaults.selectedCards = nil }
             return
         }
         
@@ -227,12 +227,11 @@ extension InstitutionRepository {
         let institutionsToRemoveSet = Set(institutionsToRemove)
         let newInstitutionsSet = savedInstitutionIdsSet.subtracting(institutionsToRemoveSet)
         
-        defaults.selectedCards = newInstitutionsSet.isEmpty ? nil : Array(newInstitutionsSet)
+        DispatchQueue.global().async { defaults.selectedCards = newInstitutionsSet.isEmpty ? nil : Array(newInstitutionsSet) }
     }
     
     func saveSelectedCards(_ institutionIds: [Int]) {
-        defaults.selectedCards = institutionIds
-        print("Saving cards state")
+        DispatchQueue.global().async { defaults.selectedCards = institutionIds }
     }
     
 }

@@ -176,15 +176,17 @@ extension AccountsTabViewModel {
     
     func updateSelectedCards(with selection: [IndexPath]) {
         let institutionsIds = data.keys.map { $0.institutionId }
-        let institutionsIdsWithIndexes = institutionsIds.enumerated().map { $0 }
-        let validInstitutions = institutionsIdsWithIndexes.filter {
-            (offset, id) in
-            return selection.contains(where: { (indexpath) -> Bool in
-                return indexpath.row == offset
-            })
+        
+        var validInstitutions: [Int] = []
+        for (index, institutionId) in institutionsIds.enumerated() {
+            let indexPath = IndexPath(item: index, section: 0)
+            let shouldSelectInstitutionId = selection.contains(indexPath)
+            
+            guard shouldSelectInstitutionId else { continue }
+            validInstitutions.append(institutionId)
         }
         
-        InstitutionRepository.si.saveSelectedCards(validInstitutions.map { $0.element })
+        InstitutionRepository.si.saveSelectedCards(validInstitutions)
     }
     
 }
