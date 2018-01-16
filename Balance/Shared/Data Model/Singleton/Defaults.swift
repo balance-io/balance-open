@@ -320,13 +320,13 @@ class Defaults {
         }
     }
     
-    var selectedCards: [IndexPath] {
+    var selectedCards: [Int] {
         get {
-            return defaults.object(forKey: Keys.selectedCardIndexes) as? [IndexPath] ?? []
+            return defaults.array(forKey: Keys.selectedCardIndexes) as? [Int] ?? []
         }
         
         set {
-           defaults.set(selectedCards, forKey: Keys.selectedCardIndexes)
+            defaults.set(newValue, forKey: Keys.selectedCardIndexes)
         }
     }
     

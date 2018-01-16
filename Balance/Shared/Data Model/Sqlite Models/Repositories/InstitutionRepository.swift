@@ -15,7 +15,7 @@ struct InstitutionRepository: ItemRepository {
     let table = "institutions"
     let itemIdField = "institutionId"
     
-    var selectedCardIndexes: [IndexPath] {
+    var selectedCardIndexes: [Int] {
         return defaults.selectedCards
     }
     
@@ -207,7 +207,7 @@ struct InstitutionRepository: ItemRepository {
         return invalidPasswordInstitutions
     }
     
-    func saveSelectedCards(_ indexPaths: [IndexPath]) {
+    func saveSelectedCards(_ indexPaths: [Int]) {
         defaults.selectedCards = indexPaths
         print("Saving cards state")
     }

@@ -18,11 +18,40 @@ class AccountsTabViewModel: TabViewModel {
     var data = OrderedDictionary<Institution, [Account]>()
     
     var selectedCardIndexes: [IndexPath] {
-        return InstitutionRepository.si.selectedCardIndexes
+        let institutionIds = data.values.map { $0.key.institutionId }
+        let institutionIdsSet = Set(institutionIds)
+        let selectedIndexes = InstitutionRepository.si.selectedCardIndexes
+        let selectedIndexesSet = Set(selectedIndexes)
+        
+        guard !institutionIdsSet.isEmpty,
+            !institutionIdsSet.isEmpty else {
+                cleanSelectedCardsIfNeeded(with: institutionIdsSet)
+                return []
+        }
+        
+        let indexesToDelete = selectedIndexesSet.subtracting(institutionIdsSet)
+        cleanSelectedCardsIfNeeded(with: indexesToDelete)
+        let indexesToTransform = selectedIndexesSet.intersection(institutionIdsSet)
+        
+        return indexesToTransform.enumerated().map { IndexPath(item: $0.offset, section: 0) }
+    }
+    
+    func cleanSelectedCardsIfNeeded(with set: Set<Int>) {
+        //TODO: Remove from user default the institutions not mapped, put the functionality inside InstitutionRepository
+        //Becuase that function should be called when an account is deleted so it can be called out from this class
     }
     
     func updateSelectedCards(with selection: [IndexPath]) {
-        InstitutionRepository.si.saveSelectedCards(selection)
+        let institutionsIds = data.keys.map { $0.institutionId }
+        let institutionsIdsWithIndexes = institutionsIds.enumerated().map { $0 }
+        let validInstitutions = institutionsIdsWithIndexes.filter {
+            (offset, id) in
+            return selection.contains(where: { (indexpath) -> Bool in
+                return indexpath.row == offset
+            })
+        }
+        
+        defaults.selectedCards = validInstitutions.map { $0.element }
     }
     
     func persistSortOrder() {
