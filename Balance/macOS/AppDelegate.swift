@@ -369,29 +369,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem.resizeWindowHeight(maxHeight, animated: animated)
     }
     
-//    // Resize only if the view is in the view hierarchy
-//    func resizeWindow(sender: AnyObject, size: NSSize, animated: Bool = true) {
-//        var view: NSView?
-//        if let vc = sender as? NSViewController {
-//            view = vc.view
-//        } else if let v = sender as? NSView {
-//            view = v
-//        }
-//        
-//        if let view = view {
-//            if view.window != nil {
-//                statusItem.resizeWindow(size, animated: animated)
-//            }
-//        } else {
-//            statusItem.resizeWindow(size, animated: animated)
-//        }
-//    }
-//    
-//    func resizeWindowHeight(sender: AnyObject, height: CGFloat, animated: Bool = true) {
-//        let size = NSSize(width: contentViewController.view.window!.frame.size.width, height: height)
-//        resizeWindow(sender: sender, size: size, animated: animated)
-//    }
-    
     func relaunch() {
         let task = Process()
         task.launchPath = "/bin/sh"
