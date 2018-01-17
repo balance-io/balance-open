@@ -6,7 +6,7 @@ class PreferencesViewController: NSTabViewController {
     
     var originalSizes: [String: NSSize] = ["General": NSSize(width: 500, height: 150),
                                            "Accounts": NSSize(width: 500, height: 300),
-                                           "Security": NSSize(width: 500, height: 250)]
+                                           "Security": NSSize(width: 500, height: 270)]
     
     // MARK: - NSTabViewDelegate -
     
