@@ -78,7 +78,7 @@ class SignUpViewController: NSViewController {
     fileprivate var deviceButtons = [NSButton]()
     fileprivate var devices = [Device]()
     
-    fileprivate let institutionLogoField = PaintCodeView()
+    fileprivate let institutionLogoField = ImageView()
     fileprivate let institutionNameField = LabelField()
     
     fileprivate let loadingFieldScrollView = ScrollView()
@@ -123,7 +123,7 @@ class SignUpViewController: NSViewController {
     }
     
     fileprivate var height: CGFloat {
-        return 200.0 + (CGFloat(apiInstitution.fields.count) * (CurrentTheme.addAccounts.signUpFieldHeight + CurrentTheme.addAccounts.signUpFieldSpacing))
+        return 150.0 + (CGFloat(apiInstitution.fields.count) * (CurrentTheme.addAccounts.signUpFieldHeight + CurrentTheme.addAccounts.signUpFieldSpacing))
     }
     fileprivate var previousScreenSize: CGFloat = 0
     
@@ -192,23 +192,6 @@ class SignUpViewController: NSViewController {
             make.centerY.equalToSuperview()
         }
         
-        let sourceInstitutionId = apiInstitution.source.description
-        if let logoDrawFunction = InstitutionLogos.drawingFunctionForId(sourceInstitutionId: sourceInstitutionId) {
-            institutionLogoField.isHidden = false
-            institutionNameField.isHidden = true
-            institutionLogoField.drawingBlock = logoDrawFunction
-        } else {
-            institutionLogoField.isHidden = true
-            institutionNameField.isHidden = false
-        }
-        containerView.addSubview(institutionLogoField)
-        institutionLogoField.snp.makeConstraints { make in
-            make.width.equalTo(160)
-            make.height.equalTo(61)
-            make.centerX.equalToSuperview().offset(20)
-            make.top.equalToSuperview().offset(-5)
-        }
-        
         institutionNameField.stringValue = apiInstitution.name
         institutionNameField.font = CurrentTheme.addAccounts.institutionNameFont
         institutionNameField.textColor = CurrentTheme.addAccounts.textColor
@@ -232,27 +215,43 @@ class SignUpViewController: NSViewController {
         backButton.snp.makeConstraints { make in
             make.height.equalTo(25)
             make.width.equalTo(25)
-            make.left.equalToSuperview().offset(5)
+            make.left.equalToSuperview().offset(18)
             make.centerY.equalTo(institutionNameField)
+        }
+        
+        if let logo = apiInstitution.source.signUpLogo {
+            institutionLogoField.isHidden = false
+            institutionNameField.isHidden = true
+            institutionLogoField.image = logo
+            containerView.addSubview(institutionLogoField)
+            institutionLogoField.snp.makeConstraints { make in
+                make.width.equalTo(logo.size.width)
+                make.height.equalTo(logo.size.height)
+                make.centerX.equalToSuperview()
+                make.centerY.equalTo(institutionNameField)
+            }
+        } else {
+            institutionLogoField.isHidden = true
+            institutionNameField.isHidden = false
         }
         
         line.layerBackgroundColor = CurrentTheme.addAccounts.lineColor
         containerView.addSubview(line)
         line.snp.makeConstraints { make in
             make.height.equalTo(1)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
+            make.left.equalToSuperview().offset(10)
+            make.right.equalToSuperview().offset(-10)
             make.top.equalTo(institutionNameField.snp.bottom).offset(10)
         }
         
-        loadingFieldScrollView.frame.size.height = 60
+        loadingFieldScrollView.frame.size.height = 25
         loadingFieldScrollView.hasVerticalScroller = true
         loadingFieldScrollView.hasHorizontalScroller = false
         loadingFieldScrollView.documentView = loadingField
         containerView.addSubview(loadingFieldScrollView)
         loadingFieldScrollView.snp.makeConstraints { make in
-            make.height.equalTo(60)
-            make.top.equalTo(institutionNameField.snp.bottom).offset(15)
+            make.height.equalTo(25)
+            make.top.equalTo(line.snp.bottom).offset(5)
             make.left.equalToSuperview().inset(margin)
             make.right.equalToSuperview().inset(margin)
         }
@@ -724,5 +723,18 @@ extension SignUpViewController: NSTextFieldDelegate {
         }
         
         return false
+    }
+}
+
+fileprivate extension Source {
+    var signUpLogo: NSImage? {
+        switch self {
+        case .coinbase: return #imageLiteral(resourceName: "coinbaseSignup")
+        case .poloniex: return #imageLiteral(resourceName: "poloniexSignup")
+        case .gdax:     return #imageLiteral(resourceName: "gdaxSignup")
+        case .bitfinex: return #imageLiteral(resourceName: "bitfinexSignup")
+        case .kraken:   return #imageLiteral(resourceName: "krakenSignup")
+        default:        return nil
+        }
     }
 }

@@ -75,9 +75,10 @@ class TransactionsTabTransactionCell: View {
     
     let topContainer = View()
     let topBackgroundView = View()
+    let typeImage = ImageView()
     let typeField = LabelField()
     let amountField = LabelField()
-    let institutionLogo = PaintCodeView()
+    let institutionLogo = ImageView()
     let institutionNameField = LabelField()
     let altAmountField = LabelField()
     
@@ -130,14 +131,22 @@ class TransactionsTabTransactionCell: View {
             make.height.equalToSuperview().offset(-10)
         }
         
+        topContainer.addSubview(typeImage)
+        typeImage.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(16)
+            make.width.equalTo(11)
+            make.height.equalTo(11)
+        }
+        
         typeField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
         typeField.font = CurrentTheme.transactions.cell.typeFont
         typeField.usesSingleLineMode = true
-        typeField.alignment = .right
+        typeField.alignment = .left
         topContainer.addSubview(typeField)
         typeField.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(10)
-            make.top.equalToSuperview().offset(16)
+            make.left.equalTo(typeImage.snp.right).offset(8)
+            make.top.equalToSuperview().offset(12)
         }
         
         amountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
@@ -149,6 +158,14 @@ class TransactionsTabTransactionCell: View {
         amountField.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(10)
             make.bottom.equalToSuperview().offset(-17)
+        }
+        
+        topContainer.addSubview(institutionLogo)
+        institutionLogo.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-10)
+            make.top.equalToSuperview().offset(16)
+            make.width.equalTo(0)
+            make.height.equalTo(0)
         }
         
         institutionNameField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
@@ -192,9 +209,11 @@ class TransactionsTabTransactionCell: View {
         model = updatedModel
         
         if updatedModel.amount > 0 {
+            typeImage.image = #imageLiteral(resourceName: "transactionReceived")
             typeField.stringValue = "Received"
             typeField.textColor = CurrentTheme.transactions.cell.typeColorReceived
         } else {
+            typeImage.image = #imageLiteral(resourceName: "transactionSent")
             typeField.stringValue = "Sent"
             typeField.textColor = CurrentTheme.transactions.cell.typeColorSent
         }
@@ -202,7 +221,19 @@ class TransactionsTabTransactionCell: View {
         let currency = Currency.rawValue(updatedModel.currency)
         amountField.stringValue = amountToString(amount: updatedModel.amount, currency: currency, showNegative: false, showCodeAfterValue: true)
         
-        institutionNameField.stringValue = updatedModel.institution?.name ?? ""
+        if let logo = updatedModel.source.transactionsLogo {
+            institutionLogo.image = logo
+            institutionLogo.snp.updateConstraints { make in
+                make.width.equalTo(logo.size.width)
+                make.height.equalTo(logo.size.height)
+            }
+            institutionNameField.isHidden = true
+            institutionLogo.isHidden = false
+        } else {
+            institutionNameField.stringValue = updatedModel.institution?.name ?? ""
+            institutionNameField.isHidden = false
+            institutionLogo.isHidden = true
+        }
         
         if !hideConvertedAmounts {
             if let displayAltAmount = updatedModel.displayAltAmount {
@@ -415,5 +446,18 @@ fileprivate class Annotation: NSObject, MKAnnotation {
     
     init(coordinate: CLLocationCoordinate2D) {
         self.coordinate = coordinate
+    }
+}
+
+fileprivate extension Source {
+    var transactionsLogo: NSImage? {
+        switch self {
+        case .coinbase: return #imageLiteral(resourceName: "coinbaseTransactions")
+        case .poloniex: return #imageLiteral(resourceName: "poloniexTransactions")
+        case .gdax:     return #imageLiteral(resourceName: "gdaxTransactions")
+        case .bitfinex: return #imageLiteral(resourceName: "bitfinexTransactions")
+        case .kraken:   return #imageLiteral(resourceName: "krakenTransactions")
+        default:        return nil
+        }
     }
 }
