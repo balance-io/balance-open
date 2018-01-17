@@ -53,6 +53,8 @@
 		2DF8985C1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */; };
 		2DF8985D1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */; };
 		40A90EA5200959840063B2F5 /* AddNewAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA4200959840063B2F5 /* AddNewAccountView.swift */; };
+		40A90EA7200EA7C60063B2F5 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA6200EA7C60063B2F5 /* UIView+Shadow.swift */; };
+		40A90EA9200F9A4C0063B2F5 /* BlankStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA8200F9A4C0063B2F5 /* BlankStateView.swift */; };
 		5300D6261DCE5A1E00D02657 /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5300D6251DCE5A1E00D02657 /* LockViewController.swift */; };
 		5301A7611F17DC8B00668099 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301A7601F17DC8B00668099 /* URL.swift */; };
 		5301A7771F17F86900668099 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301A7761F17F86900668099 /* HTTPMethod.swift */; };
@@ -435,7 +437,7 @@
 		A493B9401F681BA00074ACCC /* BitfinexWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A493B93E1F681BA00074ACCC /* BitfinexWallet.swift */; };
 		A495726D1F98B56400651C89 /* CurrentExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = A495726C1F98B54900651C89 /* CurrentExchangeRates.swift */; };
 		A495726E1F98B56500651C89 /* CurrentExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = A495726C1F98B54900651C89 /* CurrentExchangeRates.swift */; };
-		A495727A1F98DA3100651C89 /* TransactionsHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49572791F98DA3100651C89 /* TransactionsHeaderReusableView.swift */; };
+		A495727A1F98DA3100651C89 /* CustomHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49572791F98DA3100651C89 /* CustomHeaderReusableView.swift */; };
 		A4BDE9991FCD706D002D958D /* UnlockApplicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDE9981FCD706D002D958D /* UnlockApplicationViewController.swift */; };
 		A4CB29E21F682C2D00128E48 /* BitfinexAPIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CB29E11F682C2D00128E48 /* BitfinexAPIClientTests.swift */; };
 		A4E457091F79010A002E2879 /* BalanceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E457081F79010A002E2879 /* BalanceError.swift */; };
@@ -633,6 +635,8 @@
 		2DF898371FCC8F7500CCDFB9 /* CountlyViewTracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyViewTracking.h; sourceTree = "<group>"; };
 		2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyViewTracking.m; sourceTree = "<group>"; };
 		40A90EA4200959840063B2F5 /* AddNewAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewAccountView.swift; sourceTree = "<group>"; };
+		40A90EA6200EA7C60063B2F5 /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
+		40A90EA8200F9A4C0063B2F5 /* BlankStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankStateView.swift; sourceTree = "<group>"; };
 		5300D6251DCE5A1E00D02657 /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
 		5301A7601F17DC8B00668099 /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		5301A7761F17F86900668099 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -919,7 +923,7 @@
 		A493B93B1F6819600074ACCC /* BitfinexAuthHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexAuthHeaders.swift; sourceTree = "<group>"; };
 		A493B93E1F681BA00074ACCC /* BitfinexWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexWallet.swift; sourceTree = "<group>"; };
 		A495726C1F98B54900651C89 /* CurrentExchangeRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentExchangeRates.swift; sourceTree = "<group>"; };
-		A49572791F98DA3100651C89 /* TransactionsHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsHeaderReusableView.swift; sourceTree = "<group>"; };
+		A49572791F98DA3100651C89 /* CustomHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderReusableView.swift; sourceTree = "<group>"; };
 		A4BDE9981FCD706D002D958D /* UnlockApplicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockApplicationViewController.swift; sourceTree = "<group>"; };
 		A4CB29E11F682C2D00128E48 /* BitfinexAPIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexAPIClientTests.swift; sourceTree = "<group>"; };
 		A4E457081F79010A002E2879 /* BalanceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceError.swift; sourceTree = "<group>"; };
@@ -1493,6 +1497,7 @@
 				53561E931F82DD120043D4F9 /* MultilineTitleView.swift */,
 				A4430A981F95004C00F2FFFA /* PaintCodeView.swift */,
 				A432F5E71FBDA09D00DDDAFF /* TotalBalanceBar.swift */,
+				40A90EA8200F9A4C0063B2F5 /* BlankStateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2101,7 +2106,7 @@
 		A49572781F98D9F700651C89 /* Supplementary Views */ = {
 			isa = PBXGroup;
 			children = (
-				A49572791F98DA3100651C89 /* TransactionsHeaderReusableView.swift */,
+				A49572791F98DA3100651C89 /* CustomHeaderReusableView.swift */,
 			);
 			path = "Supplementary Views";
 			sourceTree = "<group>";
@@ -2284,6 +2289,7 @@
 				A456ED141FB31A33006EE529 /* UIFont+Balance.swift */,
 				E605EF7D20065EFA00A95632 /* UIView+Size.swift */,
 				E605EF8D2006BF3600A95632 /* UIViewController+Present.swift */,
+				40A90EA6200EA7C60063B2F5 /* UIView+Shadow.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -2294,15 +2300,6 @@
 				E605EF852006851300A95632 /* Collection+Index.swift */,
 			);
 			path = Foundation;
-			sourceTree = "<group>";
-		};
-		E6C1AC45200578C00018D6AA /* Reconnect */ = {
-			isa = PBXGroup;
-			children = (
-				E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */,
-				E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */,
-			);
-			path = Reconnect;
 			sourceTree = "<group>";
 		};
 		E653123F1FE8C21600F57977 /* BITTREX */ = {
@@ -2372,6 +2369,15 @@
 				E65312731FE8C3E400F57977 /* invalid_api_key.json */,
 			);
 			path = BITTREX;
+			sourceTree = "<group>";
+		};
+		E6C1AC45200578C00018D6AA /* Reconnect */ = {
+			isa = PBXGroup;
+			children = (
+				E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */,
+				E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */,
+			);
+			path = Reconnect;
 			sourceTree = "<group>";
 		};
 		F107D99F1D6B048800CEEF35 /* BalanceUITests */ = {
@@ -2851,6 +2857,7 @@
 				53D441ED1F44B224006967E1 /* FMDatabasePoolAdditions.m in Sources */,
 				5301A7781F17F86900668099 /* HTTPMethod.swift in Sources */,
 				2DF8985B1FCC8F7500CCDFB9 /* CountlyUserDetails.m in Sources */,
+				40A90EA7200EA7C60063B2F5 /* UIView+Shadow.swift in Sources */,
 				537187DF1F4CC23B00E7F9D6 /* GDAXAccount.swift in Sources */,
 				53552A7C1ED7347E00DD95F9 /* MockedDefaults.swift in Sources */,
 				53F078671ED740E500E7EDF9 /* SampleResponses.swift in Sources */,
@@ -2880,7 +2887,7 @@
 				2DF898531FCC8F7500CCDFB9 /* CountlyNotificationService.m in Sources */,
 				A4E768031F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */,
 				53552A231ED7252900DD95F9 /* Date.swift in Sources */,
-				A495727A1F98DA3100651C89 /* TransactionsHeaderReusableView.swift in Sources */,
+				A495727A1F98DA3100651C89 /* CustomHeaderReusableView.swift in Sources */,
 				A4E768071F67DC60002B1AE1 /* PoloniexErrors.swift in Sources */,
 				A4EF39E71F8E43A40032265E /* InstitutionAccountsListViewModel.swift in Sources */,
 				532121A41EE8B91600F4812A /* QuickZip.swift in Sources */,
@@ -2920,6 +2927,7 @@
 				A493B93D1F6819600074ACCC /* BitfinexAuthHeaders.swift in Sources */,
 				53552A151ED7251200DD95F9 /* Swizzling.swift in Sources */,
 				53552A191ED7251700DD95F9 /* AccountType.swift in Sources */,
+				40A90EA9200F9A4C0063B2F5 /* BlankStateView.swift in Sources */,
 				53552A291ED7252900DD95F9 /* Error.swift in Sources */,
 				53552A331ED72B5700DD95F9 /* FMDatabaseAdditionsVariadic.swift in Sources */,
 				53552A011ED7251200DD95F9 /* Testing.swift in Sources */,

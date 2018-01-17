@@ -18,7 +18,7 @@ internal final class StackedLayout: UICollectionViewLayout {
     internal weak var delegate: StackedLayoutDelegate?
     
     // Private
-    private let stretchValue: CGFloat = 0.2
+    private let stretchValue: CGFloat = 0
     private let itemOverlap: CGFloat = 40.0
     private var layoutAttributes = [IndexPath : UICollectionViewLayoutAttributes]()
     private var previousLayoutAttributes = [IndexPath : UICollectionViewLayoutAttributes]()
@@ -93,7 +93,7 @@ internal final class StackedLayout: UICollectionViewLayout {
             }
             
             self.contentHeight = nextYCoor + height
-            nextYCoor = nextYCoor + height - self.itemOverlap
+            nextYCoor += (height - self.itemOverlap)
             layoutAttributes[indexPath] = attributes
         }
         
