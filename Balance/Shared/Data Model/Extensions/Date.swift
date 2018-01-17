@@ -136,4 +136,15 @@ extension Date {
         
         return todayComps.year! - 1 == comps.year!
     }
+    
+    var localTimeZone: Date {
+        if let timeZone = TimeZone(abbreviation: "GMT") {
+            let targetOffset = TimeInterval(timeZone.secondsFromGMT(for: self))
+            let localOffeset = TimeInterval(TimeZone.autoupdatingCurrent.secondsFromGMT(for: self))
+            
+            return self.addingTimeInterval(localOffeset - targetOffset)
+        }
+        
+        return self
+    }
 }
