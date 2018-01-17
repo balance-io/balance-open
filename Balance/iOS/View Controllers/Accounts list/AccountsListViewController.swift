@@ -150,7 +150,7 @@ internal final class AccountsListViewController: UIViewController
     
     private func reloadData() {
         self.viewModel.reloadData()
-        self.collectionView.reloadData()
+        self.collectionView.reloadData(shouldPersistSelection: true, with: viewModel.selectedCardIndexes)
         
         self.blankStateView.isHidden = self.viewModel.numberOfSections() > 0
         self.totalBalanceBar.isHidden = !self.blankStateView.isHidden
@@ -222,11 +222,11 @@ extension AccountsListViewController: UICollectionViewDataSource
 extension AccountsListViewController: UICollectionViewDelegate
 {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        viewModel.updateSelectedCards(with: collectionView.indexPathsForSelectedItems ?? [])
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        
+        viewModel.updateSelectedCards(with: collectionView.indexPathsForSelectedItems ?? [])
     }
 }
 

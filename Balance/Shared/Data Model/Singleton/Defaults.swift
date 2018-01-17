@@ -52,6 +52,7 @@ class Defaults {
         static let hiddenAccountIds                     = "hiddenAccountIds"
         static let unfinishedConnectionInstitutionIds   = "unfinishedConnectionInstitutionIds"
         static let masterCurrency                       = "masterCurrency"
+        static let selectedCards                  = "selectedCardIndexes"
     }
     
     // First run defaults
@@ -316,6 +317,22 @@ class Defaults {
             }
             
             NotificationCenter.postOnMainThread(name: Notifications.MasterCurrencyChanged)
+        }
+    }
+    
+    var selectedCards: [Int]? {
+        get {
+            return defaults.array(forKey: Keys.selectedCards) as? [Int]
+        }
+        
+        set {
+            guard let newValue = newValue,
+                !newValue.isEmpty else {
+                    defaults.removeObject(forKey: Keys.selectedCards)
+                    return
+            }
+            
+            defaults.set(newValue, forKey: Keys.selectedCards)
         }
     }
     

@@ -36,6 +36,8 @@ struct Field {
             return ""
         case .secret:
             return ""
+        case .address:
+            return ""
         default:
             return ""
         }

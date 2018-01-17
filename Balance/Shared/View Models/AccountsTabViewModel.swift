@@ -66,7 +66,6 @@ class AccountsTabViewModel: TabViewModel {
     
     func removeInstitution(at index: Int) -> Bool {
         guard let institution = institution(forSection: index) else {
-            log.error("Cant delete a row without an institution")
             return false
         }
         
@@ -75,6 +74,7 @@ class AccountsTabViewModel: TabViewModel {
             return false
         }
         
+        InstitutionRepository.si.removeUnSelectedCards(with: [institution.institutionId])
         institutionRemoved(institution: institution)
         
         return true
@@ -145,4 +145,48 @@ class AccountsTabViewModel: TabViewModel {
         }
         return nil
     }
+}
+
+//mark: Selected Cards Methods
+extension AccountsTabViewModel {
+    
+    var selectedCardIndexes: [IndexPath] {
+        let availableInstitutionIds = data.keys.map { $0.institutionId }
+        let availableInstitutionIdsSet = Set(availableInstitutionIds)
+        let savedInstitutionIdsSet = Set(InstitutionRepository.si.selectedCards)
+        let institutionIdsToRemove =  savedInstitutionIdsSet.subtracting(availableInstitutionIdsSet)
+        
+        guard !availableInstitutionIdsSet.isEmpty,
+            !savedInstitutionIdsSet.isEmpty else {
+                InstitutionRepository.si.removeUnSelectedCards()
+                return []
+        }
+        
+        if !institutionIdsToRemove.isEmpty {
+            InstitutionRepository.si.removeUnSelectedCards(with: Array(institutionIdsToRemove))
+        }
+        
+        let institutionIdsTrasformed = savedInstitutionIdsSet
+            .intersection(availableInstitutionIdsSet)
+            .flatMap { availableInstitutionIds.index(of: $0) }
+            .map { IndexPath(item: $0, section: 0) }
+        
+        return institutionIdsTrasformed
+    }
+    
+    func updateSelectedCards(with selection: [IndexPath]) {
+        let institutionsIds = data.keys.map { $0.institutionId }
+        
+        var validInstitutions: [Int] = []
+        for (index, institutionId) in institutionsIds.enumerated() {
+            let indexPath = IndexPath(item: index, section: 0)
+            let shouldSelectInstitutionId = selection.contains(indexPath)
+            
+            guard shouldSelectInstitutionId else { continue }
+            validInstitutions.append(institutionId)
+        }
+        
+        InstitutionRepository.si.saveSelectedCards(validInstitutions)
+    }
+    
 }

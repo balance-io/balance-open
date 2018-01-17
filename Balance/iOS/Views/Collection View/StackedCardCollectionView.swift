@@ -31,6 +31,19 @@ internal class StackedCardCollectionView: UICollectionView {
         fatalError()
     }
     
+    func reloadData(shouldPersistSelection: Bool, with indexes: [IndexPath]) {
+        reloadData()
+        
+        guard !indexes.isEmpty,
+            shouldPersistSelection else {
+            return
+        }
+        
+        indexes.forEach {
+            self.selectItem(at: $0, animated: false, scrollPosition: [])
+        }
+    }
+    
     // MARK: Presentation
     
     // Gestures
