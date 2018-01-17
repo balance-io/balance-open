@@ -123,7 +123,7 @@ class SignUpViewController: NSViewController {
     }
     
     fileprivate var height: CGFloat {
-        return 200.0 + (CGFloat(apiInstitution.fields.count) * (CurrentTheme.addAccounts.signUpFieldHeight + CurrentTheme.addAccounts.signUpFieldSpacing))
+        return 150.0 + (CGFloat(apiInstitution.fields.count) * (CurrentTheme.addAccounts.signUpFieldHeight + CurrentTheme.addAccounts.signUpFieldSpacing))
     }
     fileprivate var previousScreenSize: CGFloat = 0
     
@@ -244,14 +244,14 @@ class SignUpViewController: NSViewController {
             make.top.equalTo(institutionNameField.snp.bottom).offset(10)
         }
         
-        loadingFieldScrollView.frame.size.height = 60
+        loadingFieldScrollView.frame.size.height = 25
         loadingFieldScrollView.hasVerticalScroller = true
         loadingFieldScrollView.hasHorizontalScroller = false
         loadingFieldScrollView.documentView = loadingField
         containerView.addSubview(loadingFieldScrollView)
         loadingFieldScrollView.snp.makeConstraints { make in
-            make.height.equalTo(60)
-            make.top.equalTo(institutionNameField.snp.bottom).offset(15)
+            make.height.equalTo(25)
+            make.top.equalTo(line.snp.bottom).offset(5)
             make.left.equalToSuperview().inset(margin)
             make.right.equalToSuperview().inset(margin)
         }
