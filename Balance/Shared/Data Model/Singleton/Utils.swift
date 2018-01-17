@@ -136,7 +136,7 @@ func amountToString(amount: Int, currency: Currency, decimalsOverride: Int? = ni
     
     let amount = Double(amount) / pow(10.0, Double(decimals))
     amountFormatter.currencySymbol = showCodeAfterValue ? "" : currency.symbol
-    amountFormatter.minimumFractionDigits = currency.isFiat ? currency.decimals : 0
+    amountFormatter.minimumFractionDigits = currency.isFiat ? currency.decimals : 1
     amountFormatter.maximumFractionDigits = decimals
     
     let amountString = amountFormatter.string(from: NSNumber(value: amount))!
