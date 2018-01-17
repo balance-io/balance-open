@@ -18,7 +18,7 @@ internal final class AccountsListViewController: UIViewController {
     private let collectionView = StackedCardCollectionView()
     private let totalBalanceBar = TotalBalanceBar()
     
-    private let blankStateView = BlankStateView(with: .dark, showAddButton: false)
+    private let blankStateView = BlankStateView(with: .dark)
     private let titleLabel = UILabel()
     private let headerAddAcountButton = UIButton()
     
@@ -29,6 +29,7 @@ internal final class AccountsListViewController: UIViewController {
         
         self.title = "Accounts"
         self.tabBarItem.image = UIImage(named: "Library")
+       
         
         // Notifications
         NotificationCenter.addObserverOnMainThread(self,
