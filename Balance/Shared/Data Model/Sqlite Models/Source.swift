@@ -15,7 +15,7 @@ enum Source: Int, CustomStringConvertible {
     case bitfinex  = 5
     case kraken    = 6
     case ethplorer = 7
-    case bittrex = 8
+    case bittrex   = 8
     
     var description: String {
         switch self {
