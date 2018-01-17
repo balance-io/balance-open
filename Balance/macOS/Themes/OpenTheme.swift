@@ -13,7 +13,7 @@ struct OpenTheme: Theme {
     var type: ThemeType = .open
     
     var defaults: DefaultsTheme {
-        let appearance = NSAppearance(named: NSAppearance.Name.vibrantDark) ?? NSAppearance.current!
+        let appearance = NSAppearance(named: NSAppearance.Name.vibrantLight)!
         let backgroundColor = NSColor(hexString: "#EDEEF0")!
         let foregroundColor = NSColor.black
         let material = NSVisualEffectView.Material.dark

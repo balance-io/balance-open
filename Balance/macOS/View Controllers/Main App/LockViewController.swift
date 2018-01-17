@@ -90,7 +90,6 @@ class LockViewController: NSViewController, NSTextFieldDelegate {
         }
         
         let button = Button()
-        button.bezelStyle = .rounded
         button.title = "Unlock"
         button.setAccessibilityLabel("Unlock")
         button.target = self
