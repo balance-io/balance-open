@@ -34,7 +34,7 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
     internal private(set) var expandedContentHeight: CGFloat = 0.0
     
     internal var closedContentHeight: CGFloat {
-        return 120.0
+        return 100.0
     }
     
     // Private
@@ -51,8 +51,7 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
         // Container
         self.container.layer.cornerRadius = 20.0
         self.container.layer.masksToBounds = true
-        self.container.layer.borderColor = UIColor.black.cgColor
-        self.container.layer.borderWidth = 0.5
+       
         self.contentView.addSubview(self.container)
         
         self.container.snp.makeConstraints { (make) in
@@ -73,6 +72,8 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
         self.tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+    
+        self.contentView.dropShadow()
     }
     
     internal required init?(coder aDecoder: NSCoder) {
@@ -139,3 +140,4 @@ extension InstitutionCollectionViewCell: UITableViewDelegate {
         return AccountTableViewCell.height
     }
 }
+
