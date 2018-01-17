@@ -202,6 +202,38 @@ struct InstitutionRepository: ItemRepository {
         let invalidPasswordInstitutions = allInstitutions().filter({$0.passwordInvalid})
         return invalidPasswordInstitutions
     }
+    
+}
+
+//mark: Selected Cards Methods
+extension InstitutionRepository {
+    
+    var selectedCards: [Int] {
+        return defaults.selectedCards ?? []
+    }
+    
+    func removeUnSelectedCards(with institutionsToRemove: [Int]? = nil) {
+        guard let institutionsToRemove = institutionsToRemove else {
+            DispatchQueue.global().async { defaults.selectedCards = nil }
+            return
+        }
+        
+        guard let savedInstitutions = defaults.selectedCards,
+            !savedInstitutions.isEmpty else {
+            return
+        }
+        
+        let savedInstitutionIdsSet = Set(savedInstitutions)
+        let institutionsToRemoveSet = Set(institutionsToRemove)
+        let newInstitutionsSet = savedInstitutionIdsSet.subtracting(institutionsToRemoveSet)
+        
+        DispatchQueue.global().async { defaults.selectedCards = newInstitutionsSet.isEmpty ? nil : Array(newInstitutionsSet) }
+    }
+    
+    func saveSelectedCards(_ institutionIds: [Int]) {
+        DispatchQueue.global().async { defaults.selectedCards = institutionIds }
+    }
+    
 }
 
 extension Institution: PersistedItem {

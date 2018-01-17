@@ -75,7 +75,6 @@ internal class AddCredentialBasedAccountViewController: UIViewController
                 let cell: TextFieldTableViewCell = tableView.dequeueReusableCell(at: indexPath)
                 cell.textField = self.viewModel.textField(at: index)
                 cell.titleLabel.text = self.viewModel.title(at: index)
-                cell.textField?.text = self.viewModel.testValue(at: index)
                 
                 return cell
             })

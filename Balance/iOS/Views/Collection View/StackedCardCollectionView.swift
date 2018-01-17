@@ -11,7 +11,7 @@ import UIKit
 internal class StackedCardCollectionView: UICollectionView {
     // Internal
     internal let stackedLayout = StackedLayout()
-
+    
     // Private
     
     // MARK: Initialization
@@ -31,19 +31,28 @@ internal class StackedCardCollectionView: UICollectionView {
     internal required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
-
     
-}
-
-private extension StackedCardCollectionView {
+    func reloadData(shouldPersistSelection: Bool, with indexes: [IndexPath]) {
+        reloadData()
+        
+        guard !indexes.isEmpty,
+            shouldPersistSelection else {
+            return
+        }
+        
+        indexes.forEach {
+            self.selectItem(at: $0, animated: false, scrollPosition: [])
+        }
+    }
+    
     // MARK: Presentation
     
     // Gestures
     
     @objc private func tapGestureEngaged(_ gesture: UITapGestureRecognizer) {
         guard let indexPath = indexPathForItem(at: gesture.location(in: self)),
-            let selectedIndexPaths = indexPathsForSelectedItems else {
-                return
+              let selectedIndexPaths = indexPathsForSelectedItems else {
+            return
         }
         
         if selectedIndexPaths.contains(indexPath) {
@@ -64,5 +73,4 @@ private extension StackedCardCollectionView {
             self.delegate?.collectionView!(self, didSelectItemAt: indexPath)
         }
     }
-
 }

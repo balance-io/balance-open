@@ -98,7 +98,7 @@ internal final class AccountsListViewController: UIViewController {
         view.addSubview(collectionView)
         
         collectionView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.titleLabel.snp.bottom)//(self.topLayoutGuide.snp.bottom)
+            make.top.equalTo(self.titleLabel.snp.bottom)
             make.bottom.equalTo(self.bottomLayoutGuide.snp.bottom)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
@@ -161,7 +161,7 @@ internal final class AccountsListViewController: UIViewController {
     
     private func reloadData() {
         self.viewModel.reloadData()
-        self.collectionView.reloadData()
+        self.collectionView.reloadData(shouldPersistSelection: true, with: viewModel.selectedCardIndexes)
         
         self.blankStateView.isHidden = viewModel.numberOfSections() > 0
         self.totalBalanceBar.isHidden = !blankStateView.isHidden
@@ -231,12 +231,15 @@ extension AccountsListViewController: UICollectionViewDataSource {
 
 // MARK: UICollectionViewDelegate
 
-extension AccountsListViewController: UICollectionViewDelegate {
+extension AccountsListViewController: UICollectionViewDelegate
+{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.updateSelectedCards(with: collectionView.indexPathsForSelectedItems ?? [])
+    }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) { }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) { }
-    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        viewModel.updateSelectedCards(with: collectionView.indexPathsForSelectedItems ?? [])
+    }
 }
 
 // MARK: StackedLayoutDelegate

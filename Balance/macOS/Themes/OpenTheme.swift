@@ -13,7 +13,7 @@ struct OpenTheme: Theme {
     var type: ThemeType = .open
     
     var defaults: DefaultsTheme {
-        let appearance = NSAppearance(named: NSAppearance.Name.vibrantDark) ?? NSAppearance.current!
+        let appearance = NSAppearance(named: NSAppearance.Name.vibrantLight)!
         let backgroundColor = NSColor(hexString: "#EDEEF0")!
         let foregroundColor = NSColor.black
         let material = NSVisualEffectView.Material.dark
@@ -88,7 +88,7 @@ struct OpenTheme: Theme {
         let buttonBackgroundColor = NSColor(deviceWhiteInt: 255, alpha: 0.15)
         let buttonBorderColor = NSColor(deviceWhiteInt: 255, alpha: 0.7)
         
-        let lineColor = NSColor(deviceWhiteInt: 255, alpha: 0.1)
+        let lineColor = NSColor(deviceWhiteInt: 255, alpha: 0.06)
         
         let onePasswordButtonImage = NSImage(named: NSImage.Name(rawValue: "onepassword-button-light"))!
         let waveImage = NSImage(named: NSImage.Name(rawValue: "waves-light"))!

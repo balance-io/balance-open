@@ -110,6 +110,21 @@ final class NewAccountViewModel {
         return textField
     }()
     
+    func testValue(at index: Int) -> String {
+        let type = fields[index].type
+        
+        switch type {
+        case .key:
+            return ""
+        case .secret:
+            return ""
+        case .address:
+            return ""
+        default:
+            return ""
+        }
+    }
+    
     // MARK: Initialization
     
     internal init(source: Source, existingInstitution: Institution?)

@@ -29,6 +29,7 @@ class ScrollView: NSScrollView {
         self.hasVerticalScroller = true
         self.hasHorizontalScroller = false
         self.automaticallyAdjustsContentInsets = false
+        self.scrollerStyle = .overlay
     }
     
     override func hitTest(_ point: NSPoint) -> NSView? {
@@ -41,6 +42,15 @@ class ScrollView: NSScrollView {
     override func scrollWheel(with event: NSEvent) {
         if isScrollingEnabled {
             super.scrollWheel(with: event)
+        }
+    }
+    
+    override var scrollerStyle: NSScroller.Style {
+        didSet {
+            // Force overlay style
+            if scrollerStyle != .overlay {
+                scrollerStyle = .overlay
+            }
         }
     }
 }

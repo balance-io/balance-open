@@ -125,7 +125,7 @@ class SignUpTextField: View, TextFieldDelegate {
                 make.left.equalTo(iconContainer.snp.right)
             }
             make.right.equalToSuperview().offset(-offset)
-            make.centerY.equalToSuperview().offset(-2)
+            make.centerY.equalToSuperview().offset(-0.5)
         }
         updatePlaceholder()
         
