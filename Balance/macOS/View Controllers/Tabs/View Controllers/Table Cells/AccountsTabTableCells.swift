@@ -17,7 +17,7 @@ class AccountsTabGroupCell: View {
     var model: Institution?
     var topColor = NSColor.clear
     
-    let logoView = PaintCodeView()
+    let logoImage = ImageView()
     let nameField = LabelField()
     let amountField = LabelField()
     let lineView = View()
@@ -57,12 +57,12 @@ class AccountsTabGroupCell: View {
             make.right.equalTo(amountField.snp.left).offset(5)
         }
         
-        self.addSubview(logoView)
-        logoView.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.width.equalTo(160)
-            make.height.equalTo(61)
+        self.addSubview(logoImage)
+        logoImage.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(padding)
             make.centerY.equalToSuperview().offset(-1)
+            make.width.equalTo(0)
+            make.height.equalTo(0)
         }
     }
     
@@ -74,13 +74,16 @@ class AccountsTabGroupCell: View {
         model = updatedModel
         topColor = previousSectionColor
         
-        let sourceInstitutionId = updatedModel.source.description
-        if let logoDrawFunction = InstitutionLogos.drawingFunctionForId(sourceInstitutionId: sourceInstitutionId) {
-            logoView.isHidden = false
+        if let logo = updatedModel.source.accountsLogo {
+            logoImage.isHidden = false
             nameField.isHidden = true
-            logoView.drawingBlock = logoDrawFunction
+            logoImage.image = logo
+            logoImage.snp.updateConstraints { make in
+                make.width.equalTo(logo.size.width)
+                make.height.equalTo(logo.size.height)
+            }
         } else {
-            logoView.isHidden = true
+            logoImage.isHidden = true
             nameField.isHidden = false
             nameField.stringValue = updatedModel.name
         }
@@ -96,6 +99,19 @@ class AccountsTabGroupCell: View {
         
         self.setAccessibilityLabel("Section: " + updatedModel.name)
         self.needsDisplay = true
+    }
+}
+
+fileprivate extension Source {
+    var accountsLogo: NSImage? {
+        switch self {
+        case .coinbase: return #imageLiteral(resourceName: "coinbaseAccounts")
+        case .poloniex: return #imageLiteral(resourceName: "poloniexAccounts")
+        case .gdax:     return #imageLiteral(resourceName: "gdaxAccounts")
+        case .bitfinex: return #imageLiteral(resourceName: "bitfinexAccounts")
+        case .kraken:   return #imageLiteral(resourceName: "krakenAccounts")
+        default:        return nil
+        }
     }
 }
 
