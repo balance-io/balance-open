@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 internal final class TotalBalanceBar: UIView {
     // Internal
     internal let totalBalanceLabel: UILabel = {
@@ -34,7 +33,7 @@ internal final class TotalBalanceBar: UIView {
     internal required init() {
         super.init(frame: .zero)
         
-        self.backgroundColor = UIColor(red: 39.0/255.0, green: 45.0/255.0, blue: 54.0/255.0, alpha: 1.0)
+        self.backgroundColor = UIColor(red: 39.0/255.0, green: 45.0/255.0, blue: 54.0/255.0, alpha: 0.6)
         
         // Container
         let container = UIView()

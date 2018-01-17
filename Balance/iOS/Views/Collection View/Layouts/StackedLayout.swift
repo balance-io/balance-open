@@ -93,7 +93,7 @@ internal final class StackedLayout: UICollectionViewLayout {
             }
             
             self.contentHeight = nextYCoor + height
-            nextYCoor = nextYCoor + height - self.itemOverlap
+            nextYCoor += (height - self.itemOverlap)
             layoutAttributes[indexPath] = attributes
         }
         
