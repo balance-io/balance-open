@@ -138,11 +138,22 @@ extension Date {
     }
     
     var localTimeZone: Date {
-        if let timeZone = TimeZone(abbreviation: "GMT") {
+        if let timeZone = TimeZone(abbreviation: "UTC") {
             let targetOffset = TimeInterval(timeZone.secondsFromGMT(for: self))
             let localOffeset = TimeInterval(TimeZone.autoupdatingCurrent.secondsFromGMT(for: self))
             
             return self.addingTimeInterval(localOffeset - targetOffset)
+        }
+        
+        return self
+    }
+    
+    var serverTimeZone: Date {
+        if let timeZone = TimeZone(abbreviation: "UTC") {
+            let targetOffset = TimeInterval(timeZone.secondsFromGMT(for: self))
+            let localOffeset = TimeInterval(TimeZone.autoupdatingCurrent.secondsFromGMT(for: self))
+            
+            return self.addingTimeInterval(targetOffset - localOffeset)
         }
         
         return self

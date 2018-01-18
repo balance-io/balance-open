@@ -243,7 +243,8 @@ class TransactionsTabTransactionCell: View {
             }
         }
         
-        self.toolTip = DateFormatter.localizedString(from: updatedModel.date.localTimeZone, dateStyle: .medium, timeStyle: .medium)
+        self.toolTip = DateFormatter.localizedString(from: updatedModel.date, dateStyle: .medium, timeStyle: .medium)
+
     }
     
     

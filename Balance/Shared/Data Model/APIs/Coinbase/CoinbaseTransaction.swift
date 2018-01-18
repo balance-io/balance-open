@@ -39,9 +39,9 @@ internal extension CoinbaseApi {
                   let nativeAmount = Double(nativeAmountString),
                   let nativeCurrencyCode = nativeAmountDictionary["currency"] as? String,
                   let createdAtString = dictionary["created_at"] as? String,
-                  let createdAt = jsonDateFormatter.date(from: createdAtString),
+                  let createdAt = jsonDateFormatter.date(from: createdAtString)?.localTimeZone,
                   let updatedAtString = dictionary["updated_at"] as? String,
-                  let updatedAt = jsonDateFormatter.date(from: updatedAtString) else
+                  let updatedAt = jsonDateFormatter.date(from: updatedAtString)?.localTimeZone else
             {
                 throw "Invalid dictionary \(dictionary)"
             }
