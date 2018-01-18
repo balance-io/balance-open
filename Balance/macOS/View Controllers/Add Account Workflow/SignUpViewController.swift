@@ -588,7 +588,7 @@ class SignUpViewController: NSViewController {
             if interval < 15.0 {
                 self.setLoadingFieldString(initialText)
             } else if interval < 60.0 {
-                self.setLoadingFieldString("\(initialText). Please hang on, this can take a while.")
+                self.setLoadingFieldString("\(initialText). Slower than usual...")
             } else if interval < 90.0 {
                 self.setLoadingFieldString("\(initialText). Almost there...")
             }
