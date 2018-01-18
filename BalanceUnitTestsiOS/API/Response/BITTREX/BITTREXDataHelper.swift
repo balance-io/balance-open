@@ -22,6 +22,14 @@ class BITTREXDataHelper {
         return TestHelpers.loadData(filename: "currencies.json", bundle: targetBundle)
     }
     
+    static func loadDeposits() -> Data {
+        return TestHelpers.loadData(filename: "deposits.json", bundle: targetBundle)
+    }
+    
+    static func loadWithdrawals() -> Data {
+        return TestHelpers.loadData(filename: "withdrawals.json", bundle: targetBundle)
+    }
+    
     static func loadInvalidApiKey() -> Data {
         return TestHelpers.loadData(filename: "invalid_api_key.json", bundle: targetBundle)
     }

@@ -10,13 +10,13 @@ import Foundation
 
 struct BITTREXBalance: Codable {
     
-    var currency: String
-    var balance: Float
-    var available: Float
-    var pending: Float
-    var cryptoAddress: String
-    var requested: Bool
-    var uuid: String?
+    let currency: String
+    let balance: Double
+    let available: Double
+    let pending: Double
+    let cryptoAddress: String
+    let requested: Bool
+    let uuid: String?
     
     enum CodingKeys: String, CodingKey {
         case currency = "Currency"

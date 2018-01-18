@@ -9,13 +9,13 @@
 import Foundation
 
 class BITTREXInstitution: ApiInstitution {
-    let source: Source = .poloniex
+    let source: Source = .bittrex
     let sourceInstitutionId: String = ""
     
     var currencyCode: String = ""
     var usernameLabel: String = ""
     var passwordLabel: String = ""
-    var name: String = "BITTREX"
+    var name: String = "Bittrex"
     var products: [String] = []
     var type: String = ""
     var url: String? = "https://bittrex.com/api/v1.1/"
