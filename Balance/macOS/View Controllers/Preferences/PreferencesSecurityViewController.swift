@@ -327,7 +327,7 @@ class PreferencesSecurityViewController: NSViewController, NSComboBoxDelegate {
     
     @objc func lockEveryTime(_ sender:NSButton) {
         let enabled = (sender.state == .on)
-        print("\(enabled)")
+        comboBox.isEnabled = enabled
     }
     
     @objc func disableTouchID() {
@@ -358,8 +358,6 @@ class PreferencesSecurityViewController: NSViewController, NSComboBoxDelegate {
         }
         
         let selectedIndex = comboBox.indexOfSelectedItem
-        //        let selecteTimeInterval = viewModel.timeIntervals[selectedIndex]
-        
-        print(selectedIndex)
+        viewModel.selectTimeInterval(at: selectedIndex)
     }
 }
