@@ -521,6 +521,8 @@
 		E65312901FE8C4E100F57977 /* BITTREXInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312861FE8C47F00F57977 /* BITTREXInstitution.swift */; };
 		E65312921FE8C53C00F57977 /* BITTREXApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E653127A1FE8C40A00F57977 /* BITTREXApiTest.swift */; };
 		E65312931FE8C69800F57977 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078421F4F8EC700D0054C /* TestHelpers.swift */; };
+		E66017B62011587C0093C70A /* PreferencesSecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66017B52011587C0093C70A /* PreferencesSecurityViewModel.swift */; };
+		E66017B72011589C0093C70A /* PreferencesSecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66017B52011587C0093C70A /* PreferencesSecurityViewModel.swift */; };
 		E6B0416C1FFECFB200192319 /* AddAccountDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */; };
 		E6B0416D1FFED03300192319 /* AddAccountDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */; };
 		E6C1AC4620057ABE0018D6AA /* ReconnectAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */; };
@@ -988,6 +990,7 @@
 		E65312851FE8C47F00F57977 /* BITTREXApiError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXApiError.swift; sourceTree = "<group>"; };
 		E65312861FE8C47F00F57977 /* BITTREXInstitution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXInstitution.swift; sourceTree = "<group>"; };
 		E65312871FE8C47F00F57977 /* BITTREXApiAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXApiAction.swift; sourceTree = "<group>"; };
+		E66017B52011587C0093C70A /* PreferencesSecurityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesSecurityViewModel.swift; sourceTree = "<group>"; };
 		E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddAccountDelegate.swift; path = AddCredentialBasedAccountViewController/AddAccountDelegate.swift; sourceTree = "<group>"; };
 		E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountViewController.swift; sourceTree = "<group>"; };
 		E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountCell.swift; sourceTree = "<group>"; };
@@ -1153,6 +1156,7 @@
 		530422841ED38E1A001CA499 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				E66017B42011585A0093C70A /* Preferences */,
 				530422891ED39742001CA499 /* TabViewModel.swift */,
 				532B6FF11E9613520010D81D /* AccountsTabViewModel.swift */,
 				530422931ED39EE7001CA499 /* TransactionsTabViewModel.swift */,
@@ -1355,6 +1359,7 @@
 		535529EC1ED7241F00DD95F9 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
+				E66017B3201158040093C70A /* ViewModels */,
 				532F37E31D5A600200145BAA /* Extensions */,
 				53552A2C1ED72AE600DD95F9 /* Frameworks */,
 				DC1A64971B867B1F009356A0 /* Supporting Files */,
@@ -2296,15 +2301,6 @@
 			path = Foundation;
 			sourceTree = "<group>";
 		};
-		E6C1AC45200578C00018D6AA /* Reconnect */ = {
-			isa = PBXGroup;
-			children = (
-				E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */,
-				E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */,
-			);
-			path = Reconnect;
-			sourceTree = "<group>";
-		};
 		E653123F1FE8C21600F57977 /* BITTREX */ = {
 			isa = PBXGroup;
 			children = (
@@ -2372,6 +2368,30 @@
 				E65312731FE8C3E400F57977 /* invalid_api_key.json */,
 			);
 			path = BITTREX;
+			sourceTree = "<group>";
+		};
+		E66017B3201158040093C70A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E66017B42011585A0093C70A /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				E66017B52011587C0093C70A /* PreferencesSecurityViewModel.swift */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
+		E6C1AC45200578C00018D6AA /* Reconnect */ = {
+			isa = PBXGroup;
+			children = (
+				E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */,
+				E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */,
+			);
+			path = Reconnect;
 			sourceTree = "<group>";
 		};
 		F107D99F1D6B048800CEEF35 /* BalanceUITests */ = {
@@ -2922,6 +2942,7 @@
 				53552A191ED7251700DD95F9 /* AccountType.swift in Sources */,
 				53552A291ED7252900DD95F9 /* Error.swift in Sources */,
 				53552A331ED72B5700DD95F9 /* FMDatabaseAdditionsVariadic.swift in Sources */,
+				E66017B72011589C0093C70A /* PreferencesSecurityViewModel.swift in Sources */,
 				53552A011ED7251200DD95F9 /* Testing.swift in Sources */,
 				53552A031ED7251200DD95F9 /* Database.swift in Sources */,
 				535529F61ED724FA00DD95F9 /* AsyncOperation.swift in Sources */,
@@ -3098,6 +3119,7 @@
 				53294FA31D1DDD9500F08059 /* CCNStatusItemDropView.m in Sources */,
 				53BB42E71CE849E70002D473 /* Shortcut.swift in Sources */,
 				53F0785D1ED73B7D00E7EDF9 /* Element.swift in Sources */,
+				E66017B62011587C0093C70A /* PreferencesSecurityViewModel.swift in Sources */,
 				532B6FE51E95D5C40010D81D /* Swizzling.swift in Sources */,
 				530F57B41DCD72680083F3A7 /* FMDatabaseQueue.m in Sources */,
 				A4430AA51F95F47300F2FFFA /* SimpleCache.swift in Sources */,

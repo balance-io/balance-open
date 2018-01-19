@@ -5,7 +5,9 @@
 
 import Foundation
 
-class PreferencesSecurityViewController: NSViewController {
+class PreferencesSecurityViewController: NSViewController, NSComboBoxDelegate {
+    
+    fileprivate let viewModel = PreferencesSecurityViewModel()
     
     //Password
     fileprivate let passwordTitleField = LabelField()
@@ -21,6 +23,8 @@ class PreferencesSecurityViewController: NSViewController {
     fileprivate let lockSleepCheckBox = Button()
     fileprivate let lockScreenSaverCheckBox = Button()
     fileprivate let lockCloseCheckBox = Button()
+    private let lockEveryTimeCheckBox = Button()
+    private let comboBox = ComboBox()
     
     fileprivate let secondDividerBox = NSBox()
     
@@ -153,13 +157,39 @@ class PreferencesSecurityViewController: NSViewController {
             make.left.equalTo(lockScreenSaverCheckBox)
         }
         
+        
+        lockEveryTimeCheckBox.setButtonType(.switch)
+        lockEveryTimeCheckBox.font = NSFont.systemFont(ofSize: 12)
+        lockEveryTimeCheckBox.title = "Lock password every"
+        lockEveryTimeCheckBox.setAccessibilityLabel("Lock password every")
+        lockEveryTimeCheckBox.action = #selector(lockEveryTime)
+        lockEveryTimeCheckBox.target = self
+        lockEveryTimeCheckBox.state = appLock.lockOnPopoverClose ? .on : .off
+        self.view.addSubview(lockEveryTimeCheckBox)
+        lockEveryTimeCheckBox.snp.makeConstraints{ make in
+            make.top.equalTo(lockCloseCheckBox.snp.bottom).offset(12)
+            make.left.equalTo(lockCloseCheckBox)
+        }
+        
+        
+        comboBox.addItems(withObjectValues: viewModel.timeIntervals)
+        comboBox.selectItem(at: viewModel.selectedTimeInterval)
+        comboBox.delegate = self
+        comboBox.isEditable = false
+        self.view.addSubview(comboBox)
+        comboBox.snp.makeConstraints { make in
+            make.centerY.equalTo(lockEveryTimeCheckBox.snp.centerY)
+            make.right.equalToSuperview().inset(30)
+            make.width.equalTo(100)
+        }
+        
         if appLock.touchIdAvailable {
             secondDividerBox.title = ""
             secondDividerBox.boxType = .separator
             self.view.addSubview(secondDividerBox)
             secondDividerBox.snp.makeConstraints { make in
                 make.height.equalTo(1)
-                make.top.equalTo(lockCloseCheckBox.snp.bottom).offset(15)
+                make.top.equalTo(lockEveryTimeCheckBox.snp.bottom).offset(15)
                 make.left.equalTo(self.view).offset(20)
                 make.right.equalTo(self.view).offset(-20)
             }
@@ -205,7 +235,7 @@ class PreferencesSecurityViewController: NSViewController {
                 make.right.equalTo(self.view).offset(-20)
             }
         } else {
-            self.view.setFrameSize(NSSize(width: 500, height: 190))
+            self.view.setFrameSize(NSSize(width: 500, height: 230))
         }
         
         updateButtonStates()
@@ -295,6 +325,11 @@ class PreferencesSecurityViewController: NSViewController {
         sender.state = appLock.lockOnPopoverClose ? .on : .off
     }
     
+    @objc func lockEveryTime(_ sender:NSButton) {
+        let enabled = (sender.state == .on)
+        print("\(enabled)")
+    }
+    
     @objc func disableTouchID() {
         appLock.authenticateTouchId(reason: "disable Touch ID unlocking") { success, error in
             if success {
@@ -315,5 +350,16 @@ class PreferencesSecurityViewController: NSViewController {
     
     @objc func windowDidEndSheet(notification: Notification) {
         updateButtonStates()
+    }
+    
+    func comboBoxSelectionDidChange(_ notification: Notification) {
+        guard let comboBox = notification.object as? NSComboBox else {
+            return
+        }
+        
+        let selectedIndex = comboBox.indexOfSelectedItem
+        //        let selecteTimeInterval = viewModel.timeIntervals[selectedIndex]
+        
+        print(selectedIndex)
     }
 }
