@@ -30,11 +30,11 @@ class CoinbaseErrorsTests: XCTestCase {
             return
         }
         do {
-            let coinbaseError = try decoder.decode(CoinbaseWarnings.self, from: errorMockbData)
-            XCTAssertEqual(coinbaseError.warnings?.first?.id, "validation_error")
-            XCTAssertEqual(coinbaseError.warnings?.first?.message, "Please enter a valid email or bitcoin address")
-            XCTAssertEqual(coinbaseError.warnings?.first?.errorDescription, "Please enter a valid email or bitcoin address")
-            XCTAssertNil(coinbaseError.warnings?.first?.url)
+            let coinbaseError = try decoder.decode(CoinbaseErrors.self, from: errorMockbData)
+            XCTAssertEqual(coinbaseError.errors?.first?.id, "validation_error")
+            XCTAssertEqual(coinbaseError.errors?.first?.message, "Please enter a valid email or bitcoin address")
+            XCTAssertEqual(coinbaseError.errors?.first?.errorDescription, "Please enter a valid email or bitcoin address")
+            XCTAssertNil(coinbaseError.errors?.first?.url)
         } catch {
             XCTFail("Error decoding warning")
         }
@@ -58,11 +58,11 @@ class CoinbaseErrorsTests: XCTestCase {
             return
         }
         do {
-            let coinbaseError = try decoder.decode(CoinbaseWarnings.self, from: errorMockData)
-            XCTAssertEqual(coinbaseError.warnings?.first?.id, "invalid_scope")
-            XCTAssertEqual(coinbaseError.warnings?.first?.message, "Invalid scope")
-            XCTAssertEqual(coinbaseError.warnings?.first?.errorDescription, "Invalid scope")
-            XCTAssertEqual(coinbaseError.warnings?.first?.url, URL(string: "http://developers.coinbase.com/api#permissions"))
+            let coinbaseError = try decoder.decode(CoinbaseErrors.self, from: errorMockData)
+            XCTAssertEqual(coinbaseError.errors?.first?.id, "invalid_scope")
+            XCTAssertEqual(coinbaseError.errors?.first?.message, "Invalid scope")
+            XCTAssertEqual(coinbaseError.errors?.first?.errorDescription, "Invalid scope")
+            XCTAssertEqual(coinbaseError.errors?.first?.url, URL(string: "http://developers.coinbase.com/api#permissions"))
         } catch {
             XCTFail("Error decoding warning")
         }
