@@ -450,8 +450,8 @@
 		A4E457181F7901E7002E2879 /* EthplorerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E457101F7901DD002E2879 /* EthplorerApi.swift */; };
 		A4E457191F7901E7002E2879 /* EthplorerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E457111F7901DD002E2879 /* EthplorerErrors.swift */; };
 		A4E4571A1F7901E7002E2879 /* EthplorerInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E457121F7901DD002E2879 /* EthplorerInstitution.swift */; };
-		A4E4571C1F790388002E2879 /* CoinbaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4571B1F790388002E2879 /* CoinbaseError.swift */; };
-		A4E4571D1F790388002E2879 /* CoinbaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4571B1F790388002E2879 /* CoinbaseError.swift */; };
+		A4E4571C1F790388002E2879 /* CoinbaseOldError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4571B1F790388002E2879 /* CoinbaseOldError.swift */; };
+		A4E4571D1F790388002E2879 /* CoinbaseOldError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4571B1F790388002E2879 /* CoinbaseOldError.swift */; };
 		A4E4571F1F79045A002E2879 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4571E1F790442002E2879 /* Double.swift */; };
 		A4E457201F79045A002E2879 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4571E1F790442002E2879 /* Double.swift */; };
 		A4E457221F790EE5002E2879 /* PoloniexTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E457211F790EE5002E2879 /* PoloniexTransaction.swift */; };
@@ -525,6 +525,14 @@
 		E6B0416D1FFED03300192319 /* AddAccountDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */; };
 		E6C1AC4620057ABE0018D6AA /* ReconnectAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */; };
 		E6C1AC49200590070018D6AA /* ReconnectAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */; };
+		E6F18C332012CCB100254246 /* CoinbaseErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F18C322012CCB100254246 /* CoinbaseErrors.swift */; };
+		E6F18C342012CCB100254246 /* CoinbaseErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F18C322012CCB100254246 /* CoinbaseErrors.swift */; };
+		E6F18C362012CF0D00254246 /* CoinbaseWarnings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F18C352012CF0D00254246 /* CoinbaseWarnings.swift */; };
+		E6F18C372012CF0D00254246 /* CoinbaseWarnings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F18C352012CF0D00254246 /* CoinbaseWarnings.swift */; };
+		E6F18C3F2012D04D00254246 /* CoinbaseErrorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F18C3E2012D04D00254246 /* CoinbaseErrorsTests.swift */; };
+		E6F18C412012D05E00254246 /* CoinbaseWarningsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F18C402012D05E00254246 /* CoinbaseWarningsTests.swift */; };
+		E6F18C422012D2C900254246 /* CoinbaseWarnings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F18C352012CF0D00254246 /* CoinbaseWarnings.swift */; };
+		E6F18C432012D2CE00254246 /* CoinbaseErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F18C322012CCB100254246 /* CoinbaseErrors.swift */; };
 		F1253E5E1D75D2D0001BD48C /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1253E5D1D75D2D0001BD48C /* KeychainManager.swift */; };
 		F1253E611D75D55D001BD48C /* KeychainManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1253E601D75D55D001BD48C /* KeychainManagement.swift */; };
 		F19BF68C1D880DA100496A66 /* MockedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19BF68B1D880DA100496A66 /* MockedDefaults.swift */; };
@@ -928,7 +936,7 @@
 		A4E457101F7901DD002E2879 /* EthplorerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthplorerApi.swift; sourceTree = "<group>"; };
 		A4E457111F7901DD002E2879 /* EthplorerErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthplorerErrors.swift; sourceTree = "<group>"; };
 		A4E457121F7901DD002E2879 /* EthplorerInstitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthplorerInstitution.swift; sourceTree = "<group>"; };
-		A4E4571B1F790388002E2879 /* CoinbaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseError.swift; sourceTree = "<group>"; };
+		A4E4571B1F790388002E2879 /* CoinbaseOldError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseOldError.swift; sourceTree = "<group>"; };
 		A4E4571E1F790442002E2879 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		A4E457211F790EE5002E2879 /* PoloniexTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexTransaction.swift; sourceTree = "<group>"; };
 		A4E457251F7921B5002E2879 /* InstitutionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionTests.swift; sourceTree = "<group>"; };
@@ -991,6 +999,10 @@
 		E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddAccountDelegate.swift; path = AddCredentialBasedAccountViewController/AddAccountDelegate.swift; sourceTree = "<group>"; };
 		E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountViewController.swift; sourceTree = "<group>"; };
 		E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountCell.swift; sourceTree = "<group>"; };
+		E6F18C322012CCB100254246 /* CoinbaseErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseErrors.swift; sourceTree = "<group>"; };
+		E6F18C352012CF0D00254246 /* CoinbaseWarnings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseWarnings.swift; sourceTree = "<group>"; };
+		E6F18C3E2012D04D00254246 /* CoinbaseErrorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseErrorsTests.swift; sourceTree = "<group>"; };
+		E6F18C402012D05E00254246 /* CoinbaseWarningsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseWarningsTests.swift; sourceTree = "<group>"; };
 		F107D9A21D6B048800CEEF35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1253E5D1D75D2D0001BD48C /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		F1253E601D75D55D001BD48C /* KeychainManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManagement.swift; sourceTree = "<group>"; };
@@ -1596,11 +1608,12 @@
 		538B47AF1F4C9FD60023CED5 /* Coinbase */ = {
 			isa = PBXGroup;
 			children = (
+				E6F18C312012CC9600254246 /* Models */,
 				538B47B11F4C9FD60023CED5 /* CoinbaseApi.swift */,
 				538B47B01F4C9FD60023CED5 /* CoinbaseAccount.swift */,
 				A417428F1F73C6BF004A9B4F /* CoinbaseTransaction.swift */,
 				A4430A8F1F94EE1700F2FFFA /* CoinbaseInstitution.swift */,
-				A4E4571B1F790388002E2879 /* CoinbaseError.swift */,
+				A4E4571B1F790388002E2879 /* CoinbaseOldError.swift */,
 			);
 			name = Coinbase;
 			path = APIs/Coinbase;
@@ -2296,15 +2309,6 @@
 			path = Foundation;
 			sourceTree = "<group>";
 		};
-		E6C1AC45200578C00018D6AA /* Reconnect */ = {
-			isa = PBXGroup;
-			children = (
-				E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */,
-				E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */,
-			);
-			path = Reconnect;
-			sourceTree = "<group>";
-		};
 		E653123F1FE8C21600F57977 /* BITTREX */ = {
 			isa = PBXGroup;
 			children = (
@@ -2372,6 +2376,65 @@
 				E65312731FE8C3E400F57977 /* invalid_api_key.json */,
 			);
 			path = BITTREX;
+			sourceTree = "<group>";
+		};
+		E6C1AC45200578C00018D6AA /* Reconnect */ = {
+			isa = PBXGroup;
+			children = (
+				E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */,
+				E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */,
+			);
+			path = Reconnect;
+			sourceTree = "<group>";
+		};
+		E6F18C312012CC9600254246 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E6F18C322012CCB100254246 /* CoinbaseErrors.swift */,
+				E6F18C352012CF0D00254246 /* CoinbaseWarnings.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E6F18C382012CF8600254246 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				E6F18C392012CFA100254246 /* Data Model */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		E6F18C392012CFA100254246 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				E6F18C3A2012CFAC00254246 /* APIs */,
+			);
+			path = "Data Model";
+			sourceTree = "<group>";
+		};
+		E6F18C3A2012CFAC00254246 /* APIs */ = {
+			isa = PBXGroup;
+			children = (
+				E6F18C3B2012CFFC00254246 /* Coinbase */,
+			);
+			path = APIs;
+			sourceTree = "<group>";
+		};
+		E6F18C3B2012CFFC00254246 /* Coinbase */ = {
+			isa = PBXGroup;
+			children = (
+				E6F18C3C2012D00400254246 /* Models */,
+			);
+			path = Coinbase;
+			sourceTree = "<group>";
+		};
+		E6F18C3C2012D00400254246 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E6F18C3E2012D04D00254246 /* CoinbaseErrorsTests.swift */,
+				E6F18C402012D05E00254246 /* CoinbaseWarningsTests.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		F107D99F1D6B048800CEEF35 /* BalanceUITests */ = {
@@ -2446,6 +2509,7 @@
 		F1F948801D8049B800AB30B2 /* BalanceUnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				E6F18C382012CF8600254246 /* Shared */,
 				2DC5EB9820079FE000FB1ED4 /* Extensions */,
 				A4E457241F7921B5002E2879 /* Poloniex */,
 				A41742921F73E829004A9B4F /* CoinbaseAPIClient */,
@@ -2831,6 +2895,7 @@
 				A41D3E4C1F6C32E700FD25B5 /* KrakenAccount.swift in Sources */,
 				53552A221ED7252900DD95F9 /* NSAttributedString.swift in Sources */,
 				A42953CE1F8E179900729045 /* SplashScreenViewController.swift in Sources */,
+				E6F18C372012CF0D00254246 /* CoinbaseWarnings.swift in Sources */,
 				53561EB41F82DD260043D4F9 /* TableData.swift in Sources */,
 				535529F21ED724ED00DD95F9 /* AccountsTabViewModel.swift in Sources */,
 				532121A21EE8B91600F4812A /* zip.c in Sources */,
@@ -2936,6 +3001,7 @@
 				2DF8984D1FCC8F7500CCDFB9 /* CountlyCrashReporter.m in Sources */,
 				53F078651ED73E6D00E7EDF9 /* ThemeGlobals.swift in Sources */,
 				537187E01F4CC23B00E7F9D6 /* GDAXAuthHeaders.swift in Sources */,
+				E6F18C342012CCB100254246 /* CoinbaseErrors.swift in Sources */,
 				E65312901FE8C4E100F57977 /* BITTREXInstitution.swift in Sources */,
 				538B47BF1F4CA0200023CED5 /* Currency.swift in Sources */,
 				535529FE1ED7250500DD95F9 /* KeychainManagement.swift in Sources */,
@@ -2978,7 +3044,7 @@
 				53762EB31ED796F100D34A1E /* main.swift in Sources */,
 				53561EB11F82DD260043D4F9 /* Value1TableViewCell.swift in Sources */,
 				A459EDA41F839D9800DC4B51 /* TransactionsListViewController.swift in Sources */,
-				A4E4571D1F790388002E2879 /* CoinbaseError.swift in Sources */,
+				A4E4571D1F790388002E2879 /* CoinbaseOldError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3043,6 +3109,7 @@
 				28A0DC131DCD010800601E87 /* ChangePasswordViewController.swift in Sources */,
 				5347B6A51DFD180E0046951D /* NSViewController.swift in Sources */,
 				5321219D1EE8B91600F4812A /* ioapi.c in Sources */,
+				E6F18C332012CCB100254246 /* CoinbaseErrors.swift in Sources */,
 				53BA743320082D4F00912C81 /* YRKSpinningProgressIndicator.m in Sources */,
 				530422921ED39BB7001CA499 /* AccountsTabTableCells.swift in Sources */,
 				5358F5441C7FFD9700AB7420 /* Notifications.swift in Sources */,
@@ -3127,6 +3194,7 @@
 				53E83CA81E40309800185975 /* SearchFilterButtonsLight.swift in Sources */,
 				DC65EFA41CE3FDF8006C9373 /* Defaults.swift in Sources */,
 				532550881D06FA5C0045404E /* ScrollView.swift in Sources */,
+				E6F18C362012CF0D00254246 /* CoinbaseWarnings.swift in Sources */,
 				53E7BC181D1805F600FD8613 /* Singletons.swift in Sources */,
 				532550941D0702980045404E /* TableRowView.swift in Sources */,
 				5334022A1DDD0E5E000236A0 /* PaintCodeView.swift in Sources */,
@@ -3165,7 +3233,7 @@
 				538DD1711DA2EDB600066288 /* TransactionContextMenu.swift in Sources */,
 				5313F9631F58D76500DD6BDB /* PFMoveApplication.m in Sources */,
 				53178C5B1FD07273003E1707 /* KeychainWrapper.swift in Sources */,
-				A4E4571C1F790388002E2879 /* CoinbaseError.swift in Sources */,
+				A4E4571C1F790388002E2879 /* CoinbaseOldError.swift in Sources */,
 				539348B91DEBA600009F4564 /* RoundedBackgroundAttributeView.swift in Sources */,
 				53B327C11E56AD72009C7AFC /* AsyncOperation.swift in Sources */,
 				535AEA331D22D177003F13E2 /* NSAttributedString.swift in Sources */,
@@ -3250,17 +3318,21 @@
 				A4E4572C1F7921BC002E2879 /* PoloniexAPITests.swift in Sources */,
 				A46DBC841F69B2C3006F4247 /* BitfinexCredentialsTests.swift in Sources */,
 				53F0785B1F4F8F2E00D0054C /* BalanceOpenTests.swift in Sources */,
+				E6F18C412012D05E00254246 /* CoinbaseWarningsTests.swift in Sources */,
 				A4E4572A1F7921BC002E2879 /* PoloniexAccountTests.swift in Sources */,
 				A41742941F73E84B004A9B4F /* CoinbaseTransactionTests.swift in Sources */,
 				53F0785D1F4F8F3C00D0054C /* CurrencyTests.swift in Sources */,
 				A4E457291F7921BC002E2879 /* InstitutionTests.swift in Sources */,
 				53ED3BD51FD1902800557AB1 /* KeychainWrapperTests.swift in Sources */,
+				E6F18C3F2012D04D00254246 /* CoinbaseErrorsTests.swift in Sources */,
+				E6F18C422012D2C900254246 /* CoinbaseWarnings.swift in Sources */,
 				53F0785C1F4F8F3100D0054C /* CoinbaseTests.swift in Sources */,
 				53F078671F4F8F3C00D0054C /* CredentialsTest.swift in Sources */,
 				2DC5EB9A20079FE100FB1ED4 /* DoubleTests.swift in Sources */,
 				A4CB29E21F682C2D00128E48 /* BitfinexAPIClientTests.swift in Sources */,
 				A4E4572E1F792206002E2879 /* PoloniexTransactionTests.swift in Sources */,
 				53F0785F1F4F8F3C00D0054C /* SearchTest.swift in Sources */,
+				E6F18C432012D2CE00254246 /* CoinbaseErrors.swift in Sources */,
 				A44C76251F7BE5280024476E /* BitfinexTransactionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

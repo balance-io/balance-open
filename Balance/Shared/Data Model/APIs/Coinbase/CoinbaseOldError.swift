@@ -11,7 +11,7 @@ import Foundation
 // NOTE: According to the Coinbase docs, all token requests (i.e. requestToken and refreshToken) always return
 //       an invalidRequest with a description. These errors are only relevant for other Coinbase API calls.
 //       https://developers.coinbase.com/api/v2#error-response
-enum CoinbaseError: String, LocalizedError {
+enum CoinbaseOldError: String, LocalizedError {
     case twoFactorRequired       = "two_factor_required"
     case paramRequired           = "param_required"
     case validationError         = "validation_error"

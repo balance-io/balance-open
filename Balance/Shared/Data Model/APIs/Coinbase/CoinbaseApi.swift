@@ -274,7 +274,7 @@ struct CoinbaseApi: ExchangeApi {
     }
     
     static func isInvalidCoinbaseCredentials(error: Error) -> Bool {
-        if let coinbaseError = error as? CoinbaseError, [CoinbaseError.authenticationError, .invalidToken, .revokedToken, .expiredToken].contains(coinbaseError)  {
+        if let coinbaseError = error as? CoinbaseOldError, [CoinbaseOldError.authenticationError, .invalidToken, .revokedToken, .expiredToken].contains(coinbaseError)  {
             return true
         }
         return false
@@ -284,7 +284,7 @@ struct CoinbaseApi: ExchangeApi {
         // Check for errors (they return an array, but as far as I know it's always one error
         if let errorDicts = jsonResult?["errors"] as? [[String: AnyObject]] {
             for errorDict in errorDicts {
-                if let id = errorDict["id"] as? String, let coinbaseError = CoinbaseError(rawValue: id), let errorMessage = errorDict["message"] as? String {
+                if let id = errorDict["id"] as? String, let coinbaseError = CoinbaseOldError(rawValue: id), let errorMessage = errorDict["message"] as? String {
                     log.error("Coinbase error: \(errorMessage)")
                     switch coinbaseError {
                     case .personalDetailsRequired:
