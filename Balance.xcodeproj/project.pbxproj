@@ -18,6 +18,7 @@
 		2D9AA1E41FB5AED300058491 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AA1E21FB5AED300058491 /* Analytics.swift */; };
 		2DC5EB9A20079FE100FB1ED4 /* DoubleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5EB9920079FE000FB1ED4 /* DoubleTests.swift */; };
 		2DD9B1F01EDDDFD10006268F /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */; };
+		2DE6294520164332005C4DC2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 539E0C1F1DC27A5D0038ACEC /* StoreKit.framework */; };
 		2DE6D9DC1FB1D016007DDCBD /* GDAXTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE6D9DB1FB1D016007DDCBD /* GDAXTransaction.swift */; };
 		2DE6D9DE1FB1D2AA007DDCBD /* Transactions.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DE6D9DD1FB1D2AA007DDCBD /* Transactions.json */; };
 		2DF8983A1FCC8F7500CCDFB9 /* Countly.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898181FCC8F7400CCDFB9 /* Countly.m */; };
@@ -1048,6 +1049,7 @@
 				53F63CD31F82C26600FD4B27 /* ObjcExceptionBridging.framework in Frameworks */,
 				53FCE37B1F06B819004EB25C /* XCGLogger.framework in Frameworks */,
 				53FCE36F1F06B819004EB25C /* NSDateTimeAgo.framework in Frameworks */,
+				2DE6294520164332005C4DC2 /* StoreKit.framework in Frameworks */,
 				53FCE3631F06B818004EB25C /* BalanceVectorGraphics.framework in Frameworks */,
 				53FCE35B1F06B653004EB25C /* MASShortcut.framework in Frameworks */,
 			);
@@ -2588,7 +2590,7 @@
 						LastSwiftMigration = 0900;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.Push = {
 								enabled = 1;
