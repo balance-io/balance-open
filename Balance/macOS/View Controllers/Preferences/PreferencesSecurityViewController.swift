@@ -157,20 +157,17 @@ class PreferencesSecurityViewController: NSViewController, NSComboBoxDelegate {
             make.left.equalTo(lockScreenSaverCheckBox)
         }
         
-        
         lockEveryTimeCheckBox.setButtonType(.switch)
         lockEveryTimeCheckBox.font = NSFont.systemFont(ofSize: 12)
-        lockEveryTimeCheckBox.title = "Lock password every"
-        lockEveryTimeCheckBox.setAccessibilityLabel("Lock password every")
+        lockEveryTimeCheckBox.title = "Lock after"
+        lockEveryTimeCheckBox.setAccessibilityLabel("Lock password after")
         lockEveryTimeCheckBox.action = #selector(lockEveryTime)
         lockEveryTimeCheckBox.target = self
-        lockEveryTimeCheckBox.state = appLock.lockOnPopoverClose ? .on : .off
         self.view.addSubview(lockEveryTimeCheckBox)
         lockEveryTimeCheckBox.snp.makeConstraints{ make in
             make.top.equalTo(lockCloseCheckBox.snp.bottom).offset(12)
             make.left.equalTo(lockCloseCheckBox)
         }
-        
         
         comboBox.addItems(withObjectValues: viewModel.timeIntervals)
         comboBox.selectItem(at: viewModel.selectedTimeInterval)
@@ -235,7 +232,7 @@ class PreferencesSecurityViewController: NSViewController, NSComboBoxDelegate {
                 make.right.equalTo(self.view).offset(-20)
             }
         } else {
-            self.view.setFrameSize(NSSize(width: 500, height: 230))
+            self.view.setFrameSize(NSSize(width: 500, height: appLock.touchIdEnabled ? 230 : 190))
         }
         
         updateButtonStates()
@@ -269,7 +266,9 @@ class PreferencesSecurityViewController: NSViewController, NSComboBoxDelegate {
         lockSleepCheckBox.isEnabled = appLock.lockEnabled
         lockScreenSaverCheckBox.isEnabled = appLock.lockEnabled
         lockCloseCheckBox.isEnabled = appLock.lockEnabled
-        
+        lockEveryTimeCheckBox.state = viewModel.isLockAfterMinutesSelected ? .on : .off
+        comboBox.isEnabled = viewModel.isLockAfterMinutesSelected ? true : false
+
         toggleTouchIDButton.isEnabled = lockEnabled
         if appLock.touchIdEnabled {
             toggleTouchIDButton.title = "Disable"
@@ -286,6 +285,8 @@ class PreferencesSecurityViewController: NSViewController, NSComboBoxDelegate {
             touchIDIconImageView.alphaValue = appLock.lockEnabled ? 1.0 : 0.4
             touchIDExplanationField.alphaValue = appLock.lockEnabled ? 1.0 : 0.4
         }
+        
+        
     }
     
     @objc func showSetPasswordSheet(){
@@ -328,6 +329,12 @@ class PreferencesSecurityViewController: NSViewController, NSComboBoxDelegate {
     @objc func lockEveryTime(_ sender:NSButton) {
         let enabled = (sender.state == .on)
         comboBox.isEnabled = enabled
+        
+        if enabled {
+            viewModel.selectTimeInterval(at: 0)
+        } else {
+            viewModel.removeSkipBlock()
+        }
     }
     
     @objc func disableTouchID() {

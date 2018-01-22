@@ -6,10 +6,15 @@
 //  Copyright © 2018 Balanced Software, Inc. All rights reserved.
 //
 
-protocol TimeServicesProtocol {
+protocol AppLockServices {
+    var lockAfterMinutes: Bool { get }
+    var lockInterval: TimeInterval? { get }
+    func lock(until timeInterval: TimeInterval?)
+}
+
+protocol TimeServicesProtocol: AppLockServices {
     var currentTime: Date? { get }
     var timeIntervals: [String] { get }
-    func createInterval(for key: String) -> (from: Date, to: Date)?
 }
 
 extension TimeServicesProtocol {
@@ -37,16 +42,17 @@ class TimeServices: TimeServicesProtocol {
     var timeIntervals: [String] {
         return intervals.sortedByValue.map { $0.0 }
     }
-
-    func createInterval(for key: String) -> (from: Date, to: Date)? {
-        guard let timeInterval = intervals[key] else {
-            return nil
-        }
-        
-        let fromDate = Date()
-        let toDate = fromDate.addingTimeInterval(timeInterval)
-        
-        return (from: fromDate, to: toDate)
+    
+    var lockInterval: TimeInterval? {
+        return appLock.lockInterval
+    }
+    
+    var lockAfterMinutes: Bool {
+        return appLock.lockAfterMinutes
+    }
+    
+    func lock(until timeInterval: TimeInterval?) {
+        appLock.lock(until: timeInterval)
     }
     
 }
@@ -63,7 +69,21 @@ class PreferencesSecurityViewModel {
         return timeIntervals[selectedTimeInterval]
     }
     
+    var isLockAfterMinutesSelected: Bool {
+        return timeServices.lockAfterMinutes
+    }
+    
     var selectedTimeInterval: Int {
+        guard let lockInterval = timeServices.lockInterval else {
+            return 0
+        }
+        
+        for (index, intervalKey) in timeIntervals.enumerated() {
+            if timeServices.intervals[intervalKey] == lockInterval {
+                return index
+            }
+        }
+        
         return 0
     }
     
@@ -73,14 +93,16 @@ class PreferencesSecurityViewModel {
     
     func selectTimeInterval(at index: Int) {
         guard let selectedInterval = timeIntervals[safe: index],
-            let interval = timeServices.createInterval(for: selectedInterval)
-            else {
-                print("Cant create interval for seleted option")
+            let timeInterval = timeServices.intervals[selectedInterval] else {
+                print("Cant create interval for selected option")
                 return
         }
         
-        print("From: \(interval.from)")
-        print("To: \(interval.to)")
+        timeServices.lock(until: timeInterval)
+    }
+    
+    func removeSkipBlock() {
+        timeServices.lock(until: nil)
     }
     
 }

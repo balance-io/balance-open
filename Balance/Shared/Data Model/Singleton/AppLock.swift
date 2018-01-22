@@ -9,8 +9,47 @@
 import Foundation
 import LocalAuthentication
 
-class AppLock {
-    var locked = false
+fileprivate struct AutenticationInterval {
+    
+    let interval: TimeInterval
+    let fromDate: Date
+    
+    var toDate: Date {
+        return fromDate.addingTimeInterval(interval)
+    }
+    
+    var isValid: Bool {
+        let currentDate = Date()
+        
+        return currentDate.compare(fromDate) == .orderedDescending &&
+            currentDate.compare(toDate) == .orderedAscending
+    }
+    
+    init(timeInterval: Double) {
+        fromDate = Date()
+        interval = timeInterval
+    }
+    
+}
+
+class AppLock: AppLockServices {
+
+    private var interval: AutenticationInterval?
+    private var appLocked = false
+    
+    var locked: Bool {
+        set {
+            appLocked = newValue
+        }
+        
+        get {
+            guard skipBlock else {
+                return appLocked
+            }
+
+            return false
+        }
+    }
     
     var password: String? {
         get {
@@ -35,6 +74,7 @@ class AppLock {
             if let string = keychain[KeychainAccounts.AppLock, KeychainKeys.LockEnabled] {
                 return string == "true"
             }
+            
             return false
         }
         set {
@@ -45,6 +85,10 @@ class AppLock {
     
     var lockOnSleep: Bool {
         get {
+            guard !skipBlock else {
+                return false
+            }
+            
             if let string = keychain[KeychainAccounts.AppLock, KeychainKeys.LockOnSleep] {
                 return string == "true"
             }
@@ -60,6 +104,10 @@ class AppLock {
     
     var lockOnScreenSaver: Bool {
         get {
+            guard !skipBlock else {
+                return false
+            }
+            
             if let string = keychain[KeychainAccounts.AppLock, KeychainKeys.LockOnScreenSaver] {
                 return string == "true"
             }
@@ -75,6 +123,10 @@ class AppLock {
     
     var lockOnPopoverClose: Bool {
         get {
+            guard !skipBlock else {
+                return false
+            }
+            
             if let string = keychain[KeychainAccounts.AppLock, KeychainKeys.LockOnPopoverClose] {
                 return string == "true"
             }
@@ -90,9 +142,14 @@ class AppLock {
     
     var touchIdEnabled: Bool {
         get {
+            guard !skipBlock else {
+                return false
+            }
+            
             if let string = keychain[KeychainAccounts.AppLock, KeychainKeys.TouchIdEnabled] {
                 return string == "true"
             }
+            
             return false
         }
         set {
@@ -142,6 +199,21 @@ class AppLock {
             return false
         }
         #endif
+    }
+    
+    func lock(until timeInterval: TimeInterval?) {
+        guard let timeInterval = timeInterval else {
+            self.interval = nil
+            return
+        }
+        
+        let interval = AutenticationInterval(timeInterval: timeInterval)
+        guard interval.isValid else {
+            self.interval = nil
+            return
+        }
+        
+        self.interval = interval
     }
     
     func authenticateTouchId(reason: String, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
@@ -208,4 +280,37 @@ class AppLock {
         
     }
     #endif
+    
+}
+
+extension AppLock {
+    
+    var lockAfterMinutes: Bool {
+        return interval?.isValid ?? false
+    }
+    
+    var lockInterval: TimeInterval? {
+        return interval?.interval
+    }
+    
+    var shouldPrepareBlock: Bool {
+        guard let interval = interval else {
+            return appLocked
+        }
+        
+        return !interval.isValid
+    }
+    
+    private var  skipBlock: Bool {
+        guard let interval = interval else {
+            return false
+        }
+        
+        guard interval.isValid else {
+            return false
+        }
+        
+        return true
+    }
+    
 }
