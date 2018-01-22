@@ -85,7 +85,7 @@ struct TransactionRepository: ItemRepository {
         return transaction
     }
     
-    @discardableResult func transaction(source: Source, sourceTransactionId: String, sourceAccountId: String, name: String, currency: String, amount: Int, date: Date, categoryID: Int?, institution: Institution) -> Transaction? {
+    @discardableResult func transaction(source: Source, sourceTransactionId: String, sourceAccountId: String, name: String, currency: String, amount: Int, date: Date, categoryID: Int?, sourceInstitutionId: String, institutionId: Int) -> Transaction? {
         // First check if a record for this transaction already exists
         var transactionIdFromDb: Int?
         var accountIdFromDb: Int?
@@ -95,7 +95,7 @@ struct TransactionRepository: ItemRepository {
                              "FROM transactions LEFT JOIN accounts ON transactions.accountId = accounts.accountId " +
                              "WHERE transactions.sourceId = ? AND transactions.sourceTransactionId = ? " +
                              "AND accounts.institutionId = ?"
-                let result = try db.executeQuery(select, source.rawValue, sourceTransactionId, institution.institutionId)
+                let result = try db.executeQuery(select, source.rawValue, sourceTransactionId, institutionId)
                 if result.next() {
                     transactionIdFromDb = result.object(forColumnIndex: 0) as? Int
                     accountIdFromDb = result.object(forColumnIndex: 1) as? Int
@@ -107,7 +107,7 @@ struct TransactionRepository: ItemRepository {
         }
         
         if let transactionId = transactionIdFromDb, let accountId = accountIdFromDb {
-            let transaction = Transaction(transactionId: transactionId, source: source, sourceTransactionId: sourceTransactionId, sourceAccountId: sourceAccountId, accountId: accountId, name: name, currency: currency, amount: amount, date: date, categoryID: categoryID, institution: institution, repository: self)
+            let transaction = Transaction(transactionId: transactionId, source: source, sourceTransactionId: sourceTransactionId, sourceAccountId: sourceAccountId, accountId: accountId, name: name, currency: currency, amount: amount, date: date, categoryID: categoryID, sourceInstitutionId: sourceInstitutionId, institutionId: institutionId, repository: self)
             transaction.replace()
             
             return transaction
@@ -117,7 +117,7 @@ struct TransactionRepository: ItemRepository {
             database.write.inDatabase { db in
                 do {
                     let select = "SELECT accountId FROM accounts WHERE sourceAccountId = ? AND institutionId = ?"
-                    let result = try db.executeQuery(select, sourceAccountId, institution.institutionId)
+                    let result = try db.executeQuery(select, sourceAccountId, institutionId)
                     if result.next() {
                         accountIdFromDb = result.object(forColumnIndex: 0) as? Int
                     }
@@ -126,7 +126,7 @@ struct TransactionRepository: ItemRepository {
                     if let accountIdFromDb = accountIdFromDb {
                         let insert = "INSERT INTO transactions " +
                                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-                        try db.executeUpdate(insert, NSNull(), source.rawValue, sourceTransactionId, accountIdFromDb, name, currency, amount, date, institution.institutionId, institution.sourceInstitutionId, n2N(categoryID))
+                        try db.executeUpdate(insert, NSNull(), source.rawValue, sourceTransactionId, accountIdFromDb, name, currency, amount, date, institutionId, sourceInstitutionId, n2N(categoryID))
                         
                         generatedId = Int(db.lastInsertRowId())
                     }
@@ -136,7 +136,7 @@ struct TransactionRepository: ItemRepository {
             }
             
             if let transactionId = generatedId, let accountId = accountIdFromDb {
-                let transaction = Transaction(transactionId: transactionId, source: source, sourceTransactionId: sourceTransactionId, sourceAccountId: sourceAccountId, accountId: accountId, name: name, currency: currency, amount: amount, date: date, categoryID: categoryID, institution: institution, repository: self)
+                let transaction = Transaction(transactionId: transactionId, source: source, sourceTransactionId: sourceTransactionId, sourceAccountId: sourceAccountId, accountId: accountId, name: name, currency: currency, amount: amount, date: date, categoryID: categoryID, sourceInstitutionId: sourceInstitutionId, institutionId: institutionId, repository: self)
                 return transaction
             } else {
                 // Something went really wrong and we didn't get a transaction id

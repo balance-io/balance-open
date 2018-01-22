@@ -48,7 +48,7 @@ final class Transaction {
         self.categoryId = result.object(forColumnIndex: 10) as? Int
     }
     
-    init(transactionId: Int, source: Source, sourceTransactionId: String, sourceAccountId: String, accountId: Int, name: String, currency: String, amount: Int, date: Date, categoryID: Int?, institution: Institution, repository: TransactionRepository = TransactionRepository.si) {
+    init(transactionId: Int, source: Source, sourceTransactionId: String, sourceAccountId: String, accountId: Int, name: String, currency: String, amount: Int, date: Date, categoryID: Int?, sourceInstitutionId: String, institutionId: Int, repository: TransactionRepository = TransactionRepository.si) {
         self.repository = repository
         
         self.transactionId = transactionId
@@ -63,8 +63,8 @@ final class Transaction {
         self.date = date
         self.categoryId = categoryID
         
-        self.sourceInstitutionId = institution.sourceInstitutionId
-        self.institutionId = institution.institutionId
+        self.sourceInstitutionId = sourceInstitutionId
+        self.institutionId = institutionId
     }
 }
 

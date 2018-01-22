@@ -7,7 +7,7 @@
 //
 
 /// This data is duplicated in the sources database table for use in joins if needed
-enum Source: Int, CustomStringConvertible {
+public enum Source: Int, CustomStringConvertible {
 //    case plaid     = 1 // Disabled for now to allow for exhaustive switch statements
     case coinbase  = 2
     case poloniex  = 3
@@ -17,7 +17,7 @@ enum Source: Int, CustomStringConvertible {
     case ethplorer = 7
     case bittrex   = 8
     
-    var description: String {
+    public var description: String {
         switch self {
 //        case .plaid:     return "Plaid"
         case .coinbase:  return "Coinbase"
@@ -30,7 +30,7 @@ enum Source: Int, CustomStringConvertible {
         }
     }
     
-    var color: PXColor {
+    public var color: PXColor {
         switch self {
         case .coinbase:  return PXColor(hexString: "#0667D0")!
         case .poloniex:  return PXColor(hexString: "#086166")!
@@ -42,7 +42,7 @@ enum Source: Int, CustomStringConvertible {
         }
     }
     
-    var helpUrl: URL {
+    public var helpUrl: URL {
         switch self {
         case .coinbase:  return URL(string: "https://coinbase.com")!
         case .poloniex:  return URL(string: "https://github.com/balancemymoney/balance-open/wiki/Poloniex-Guide")!

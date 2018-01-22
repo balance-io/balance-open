@@ -403,7 +403,7 @@ internal extension PoloniexApi {
     fileprivate func processPoloniexTransactions(transactions: [PoloniexApi.Transaction], institution: Institution) {
         for transaction in transactions {
             let amount = transaction.amount.integerValueWith(decimals: Currency.rawValue(transaction.currencyCode).decimals)
-            TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: transaction.identifier, sourceAccountId: transaction.currencyCode, name: transaction.identifier, currency: transaction.currencyCode, amount: amount, date: transaction.timestamp, categoryID: nil, institution: institution)
+            TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: transaction.identifier, sourceAccountId: transaction.currencyCode, name: transaction.identifier, currency: transaction.currencyCode, amount: amount, date: transaction.timestamp, categoryID: nil, sourceInstitutionId: institution.sourceInstitutionId, institutionId: institution.institutionId)
         }
 
     }

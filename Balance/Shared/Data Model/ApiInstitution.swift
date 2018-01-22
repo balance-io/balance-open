@@ -25,7 +25,7 @@ protocol ApiInstitution {
     var fields: [Field] { get }
 }
 
-struct Field {
+public struct Field {
     var name: String
     var type: FieldType
     var value: String?

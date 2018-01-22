@@ -150,7 +150,7 @@ class Syncer {
                             {
                                 let amount = self.paddedInteger(for: transaction.amount, currencyCode: transaction.currencyCode)
                                 
-                                TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: transaction.identifier, sourceAccountId: account.sourceAccountId, name: transaction.identifier, currency: transaction.currencyCode, amount: amount, date: transaction.createdAt, categoryID: nil, institution: institution)
+                                TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: transaction.identifier, sourceAccountId: account.sourceAccountId, name: transaction.identifier, currency: transaction.currencyCode, amount: amount, date: transaction.createdAt, categoryID: nil, sourceInstitutionId: institution.sourceInstitutionId, institutionId: institution.institutionId)
                             }
                         }
                         
@@ -202,7 +202,7 @@ class Syncer {
                                 for transaction in unwrappedTransactions {
                                     let amount = self.paddedInteger(for: transaction.amount, currencyCode: transaction.currencyCode)
                                     
-                                    TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: transaction.id, sourceAccountId: account.sourceAccountId, name: account.currency, currency: transaction.currencyCode, amount: amount, date: transaction.createdAt, categoryID: nil, institution: institution)
+                                    TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: transaction.id, sourceAccountId: account.sourceAccountId, name: account.currency, currency: transaction.currencyCode, amount: amount, date: transaction.createdAt, categoryID: nil, sourceInstitutionId: institution.sourceInstitutionId, institutionId: institution.institutionId)
                                 }
                             }
                             dispatchGroup.leave()
@@ -262,7 +262,7 @@ class Syncer {
                         let amount = self.paddedInteger(for: transaction.amount, currencyCode: transaction.currencyCode)
                         let identifier = "\(transaction.address)\(transaction.amount)\(transaction.movementTimestamp)"
 
-                        TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: identifier, sourceAccountId: transaction.currencyCode, name: identifier, currency: transaction.currencyCode, amount: amount, date: transaction.createdAt, categoryID: nil, institution: institution)
+                        TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: identifier, sourceAccountId: transaction.currencyCode, name: identifier, currency: transaction.currencyCode, amount: amount, date: transaction.createdAt, categoryID: nil, sourceInstitutionId: institution.sourceInstitutionId, institutionId: institution.institutionId)
                     }
                     
                     performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
@@ -314,7 +314,7 @@ class Syncer {
                             let amount = self.paddedInteger(for: transaction.amount, currencyCode: transaction.asset.code)
                             let identifier = "\(transaction.ledgerId)\(transaction.amount)\(transaction.time)"
                             
-                            TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: identifier, sourceAccountId: transaction.asset.code, name: identifier, currency: transaction.asset.code, amount: amount, date: transaction.time, categoryID: nil, institution: institution)
+                            TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: identifier, sourceAccountId: transaction.asset.code, name: identifier, currency: transaction.asset.code, amount: amount, date: transaction.time, categoryID: nil, sourceInstitutionId: institution.sourceInstitutionId, institutionId: institution.institutionId)
                         }
                     }
                     
