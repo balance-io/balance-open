@@ -20,9 +20,12 @@ fileprivate struct AutenticationInterval {
     
     var isValid: Bool {
         let currentDate = Date()
+        let fromDatePosition = currentDate.compare(fromDate)
+        let isValidFromDate = fromDatePosition == .orderedDescending || fromDatePosition == .orderedSame
+        let isValidToDate = currentDate.compare(toDate) == .orderedAscending
         
-        return currentDate.compare(fromDate) == .orderedDescending &&
-            currentDate.compare(toDate) == .orderedAscending
+        return isValidFromDate && isValidToDate
+        
     }
     
     init(timeInterval: Double) {
@@ -32,7 +35,7 @@ fileprivate struct AutenticationInterval {
     
 }
 
-class AppLock: AppLockServices {
+class AppLock: AppLockServicesProtocol {
 
     private var interval: AutenticationInterval?
     private var appLocked = false

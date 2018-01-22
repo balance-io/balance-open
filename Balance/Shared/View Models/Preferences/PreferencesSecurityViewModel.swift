@@ -6,13 +6,13 @@
 //  Copyright © 2018 Balanced Software, Inc. All rights reserved.
 //
 
-protocol AppLockServices {
+protocol AppLockServicesProtocol {
     var lockAfterMinutes: Bool { get }
     var lockInterval: TimeInterval? { get }
     func lock(until timeInterval: TimeInterval?)
 }
 
-protocol TimeServicesProtocol: AppLockServices {
+protocol TimeServicesProtocol {
     var currentTime: Date? { get }
     var timeIntervals: [String] { get }
 }
@@ -27,7 +27,10 @@ extension TimeServicesProtocol {
             "50 Minutes" : TimeInterval.minute * Double(50),
             "1 Hour" : TimeInterval.hour,
             "2 Hour" : TimeInterval.hour * Double(2),
-            "3 Hour" : TimeInterval.hour * Double(5)
+            "3 Hour" : TimeInterval.hour * Double(3),
+            "5 Hour" : TimeInterval.hour * Double(5),
+            "8 Hour" : TimeInterval.hour * Double(8),
+            "1 Day" : TimeInterval.day
         ]
     }
     
@@ -60,6 +63,7 @@ class TimeServices: TimeServicesProtocol {
 class PreferencesSecurityViewModel {
     
     let timeServices: TimeServicesProtocol
+    let appLockServices: AppLockServicesProtocol
     
     var timeIntervals: [String] {
         return timeServices.timeIntervals
@@ -70,11 +74,11 @@ class PreferencesSecurityViewModel {
     }
     
     var isLockAfterMinutesSelected: Bool {
-        return timeServices.lockAfterMinutes
+        return appLockServices.lockAfterMinutes
     }
     
     var selectedTimeInterval: Int {
-        guard let lockInterval = timeServices.lockInterval else {
+        guard let lockInterval = appLockServices.lockInterval else {
             return 0
         }
         
@@ -87,8 +91,9 @@ class PreferencesSecurityViewModel {
         return 0
     }
     
-    init(timeServices: TimeServicesProtocol? = nil) {
+    init(timeServices: TimeServicesProtocol? = nil, appLockServices: AppLockServicesProtocol? = nil) {
         self.timeServices = timeServices ?? TimeServices()
+        self.appLockServices = appLockServices ?? appLock
     }
     
     func selectTimeInterval(at index: Int) {
@@ -98,11 +103,11 @@ class PreferencesSecurityViewModel {
                 return
         }
         
-        timeServices.lock(until: timeInterval)
+        appLockServices.lock(until: timeInterval)
     }
     
     func removeSkipBlock() {
-        timeServices.lock(until: nil)
+        appLockServices.lock(until: nil)
     }
     
 }
