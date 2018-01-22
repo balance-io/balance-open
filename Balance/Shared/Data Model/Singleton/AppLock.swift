@@ -295,7 +295,11 @@ extension AppLock {
     
     var shouldPrepareBlock: Bool {
         guard let interval = interval else {
-            return appLocked
+            #if os(OSX)
+                return appLocked
+            #else
+                return lockEnabled
+            #endif
         }
         
         return !interval.isValid
