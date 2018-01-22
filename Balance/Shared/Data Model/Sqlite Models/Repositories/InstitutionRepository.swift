@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct InstitutionRepository: ItemRepository {
+class InstitutionRepository: ItemRepository {
     static let si = InstitutionRepository()
     fileprivate let gr = GenericItemRepository.si
     
