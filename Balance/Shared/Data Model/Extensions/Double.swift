@@ -28,9 +28,6 @@ extension Double {
     }
     
     func cientificToEightDecimals(decimals: Int) -> Double {
-        if decimals == 2 {
-            return self
-        }
         let decimal = self / pow(10.0, Double(decimals))
         return decimal
     }

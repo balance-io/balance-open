@@ -90,7 +90,7 @@ class DoubleTests: XCTestCase {
     
     func testFromTwoDecimals() {
         //given
-        let double = 342.23
+        let double = 34223.0
         
         // where
         let balance = double.cientificToEightDecimals(decimals: 2)
@@ -101,7 +101,7 @@ class DoubleTests: XCTestCase {
     
     func testFromZeroDecimals() {
         //given
-        let double = Double(34223)
+        let double = Double(3422300)
         
         // where
         let balance = double.cientificToEightDecimals(decimals: 2)
@@ -112,7 +112,7 @@ class DoubleTests: XCTestCase {
     
     func testFromTwoDecimalsToFixedCrypto() {
         //given
-        let double = 342.23
+        let double = 34223.0
         
         // where
         let balance = double.cientificToEightDecimals(decimals: 2)
@@ -120,6 +120,18 @@ class DoubleTests: XCTestCase {
         
         //then
         XCTAssertEqual(34223000000, noDecimals)
+    }
+    
+    func testFromTwoDecimalsToFixedCryptoNoDecimals() {
+        //given
+        let double = 4530000.0
+        
+        // where
+        let balance = double.cientificToEightDecimals(decimals: 2)
+        let noDecimals = balance.integerFixedCryptoDecimals()
+        
+        //then
+        XCTAssertEqual(4530000000000, noDecimals)
     }
     
     func testFromZeroDecimalsToFixedCrypto() {
@@ -131,7 +143,7 @@ class DoubleTests: XCTestCase {
         let noDecimals = balance.integerFixedCryptoDecimals()
         
         //then
-        XCTAssertEqual(3422300000000, noDecimals)
+        XCTAssertEqual(34223000000, noDecimals)
     }
     
     func testFrom6DecimalsToFixedCrypto() {
