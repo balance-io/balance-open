@@ -500,6 +500,9 @@
 		E605EF882006AC8F00A95632 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E605EF872006AC8E00A95632 /* RxSwift.framework */; };
 		E605EF8A2006B6BF00A95632 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E605EF892006B6BF00A95632 /* RxCocoa.framework */; };
 		E605EF8F2006BF3C00A95632 /* UIViewController+Present.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605EF8D2006BF3600A95632 /* UIViewController+Present.swift */; };
+		E62D5129201269B3009289CF /* Collection+Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605EF852006851300A95632 /* Collection+Index.swift */; };
+		E62D512B2012846E009289CF /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62D512A2012846E009289CF /* Dictionary.swift */; };
+		E62D512C2012846E009289CF /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62D512A2012846E009289CF /* Dictionary.swift */; };
 		E653123E1FE8C20700F57977 /* NewExchangeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E653123D1FE8C20600F57977 /* NewExchangeAPI.swift */; };
 		E65312451FE8C22E00F57977 /* BITTREXApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312411FE8C22D00F57977 /* BITTREXApi.swift */; };
 		E653124C1FE8C28D00F57977 /* BITTREXCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312491FE8C28D00F57977 /* BITTREXCurrency.swift */; };
@@ -523,6 +526,8 @@
 		E65312901FE8C4E100F57977 /* BITTREXInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312861FE8C47F00F57977 /* BITTREXInstitution.swift */; };
 		E65312921FE8C53C00F57977 /* BITTREXApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E653127A1FE8C40A00F57977 /* BITTREXApiTest.swift */; };
 		E65312931FE8C69800F57977 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078421F4F8EC700D0054C /* TestHelpers.swift */; };
+		E66017B62011587C0093C70A /* PreferencesSecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66017B52011587C0093C70A /* PreferencesSecurityViewModel.swift */; };
+		E66017B72011589C0093C70A /* PreferencesSecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66017B52011587C0093C70A /* PreferencesSecurityViewModel.swift */; };
 		E6B0416C1FFECFB200192319 /* AddAccountDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */; };
 		E6B0416D1FFED03300192319 /* AddAccountDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */; };
 		E6C1AC4620057ABE0018D6AA /* ReconnectAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */; };
@@ -976,6 +981,7 @@
 		E605EF872006AC8E00A95632 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		E605EF892006B6BF00A95632 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		E605EF8D2006BF3600A95632 /* UIViewController+Present.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Present.swift"; sourceTree = "<group>"; };
+		E62D512A2012846E009289CF /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		E653123D1FE8C20600F57977 /* NewExchangeAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewExchangeAPI.swift; sourceTree = "<group>"; };
 		E65312411FE8C22D00F57977 /* BITTREXApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXApi.swift; sourceTree = "<group>"; };
 		E65312491FE8C28D00F57977 /* BITTREXCurrency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BITTREXCurrency.swift; path = "Balance/Shared/Data Model/APIs/BITTREX/DTO/BITTREXCurrency.swift"; sourceTree = SOURCE_ROOT; };
@@ -992,6 +998,7 @@
 		E65312851FE8C47F00F57977 /* BITTREXApiError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXApiError.swift; sourceTree = "<group>"; };
 		E65312861FE8C47F00F57977 /* BITTREXInstitution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXInstitution.swift; sourceTree = "<group>"; };
 		E65312871FE8C47F00F57977 /* BITTREXApiAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXApiAction.swift; sourceTree = "<group>"; };
+		E66017B52011587C0093C70A /* PreferencesSecurityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesSecurityViewModel.swift; sourceTree = "<group>"; };
 		E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddAccountDelegate.swift; path = AddCredentialBasedAccountViewController/AddAccountDelegate.swift; sourceTree = "<group>"; };
 		E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountViewController.swift; sourceTree = "<group>"; };
 		E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountCell.swift; sourceTree = "<group>"; };
@@ -1157,6 +1164,7 @@
 		530422841ED38E1A001CA499 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				E66017B42011585A0093C70A /* Preferences */,
 				530422891ED39742001CA499 /* TabViewModel.swift */,
 				532B6FF11E9613520010D81D /* AccountsTabViewModel.swift */,
 				530422931ED39EE7001CA499 /* TransactionsTabViewModel.swift */,
@@ -1771,6 +1779,7 @@
 		53EB77B91CF3DF5100F01903 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E605EF852006851300A95632 /* Collection+Index.swift */,
 				533A3B1C1DF23C2B005D3C89 /* Array.swift */,
 				53EB77BA1CF3DF6E00F01903 /* Color.swift */,
 				533558251DDA860C00D91F4D /* Data.swift */,
@@ -1786,6 +1795,7 @@
 				534DDFD71F4CCE9400E6C37F /* URLRequest.swift */,
 				A4E4571E1F790442002E2879 /* Double.swift */,
 				A467DFC41F98EBFD0063882C /* Currency+MasterCurrency.swift */,
+				E62D512A2012846E009289CF /* Dictionary.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2081,7 +2091,6 @@
 		A456ED131FB31A1A006EE529 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				E605EF8C2006BEFD00A95632 /* Foundation */,
 				E605EF8B2006BEF700A95632 /* UIKit */,
 			);
 			path = Extensions;
@@ -2369,6 +2378,14 @@
 				E65312731FE8C3E400F57977 /* invalid_api_key.json */,
 			);
 			path = BITTREX;
+			sourceTree = "<group>";
+		};
+		E66017B42011585A0093C70A /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				E66017B52011587C0093C70A /* PreferencesSecurityViewModel.swift */,
+			);
+			path = Preferences;
 			sourceTree = "<group>";
 		};
 		E6C1AC45200578C00018D6AA /* Reconnect */ = {
@@ -2930,9 +2947,11 @@
 				40A90EA9200F9A4C0063B2F5 /* BlankStateView.swift in Sources */,
 				53552A291ED7252900DD95F9 /* Error.swift in Sources */,
 				53552A331ED72B5700DD95F9 /* FMDatabaseAdditionsVariadic.swift in Sources */,
+				E66017B72011589C0093C70A /* PreferencesSecurityViewModel.swift in Sources */,
 				53552A011ED7251200DD95F9 /* Testing.swift in Sources */,
 				53552A031ED7251200DD95F9 /* Database.swift in Sources */,
 				535529F61ED724FA00DD95F9 /* AsyncOperation.swift in Sources */,
+				E62D512C2012846E009289CF /* Dictionary.swift in Sources */,
 				53552A001ED7251200DD95F9 /* ObjC.m in Sources */,
 				2D9AA1E41FB5AED300058491 /* Analytics.swift in Sources */,
 				53552A301ED72B5700DD95F9 /* FMDatabasePool.m in Sources */,
@@ -3063,6 +3082,7 @@
 				53F6383F1C5FFF3200864346 /* Transaction.swift in Sources */,
 				DCDF77BD1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift in Sources */,
 				E653123E1FE8C20700F57977 /* NewExchangeAPI.swift in Sources */,
+				E62D512B2012846E009289CF /* Dictionary.swift in Sources */,
 				A4430A931F94EFB300F2FFFA /* OpenTheme.swift in Sources */,
 				532550831D06F9090045404E /* View.swift in Sources */,
 				283D18351DC8F6240044BF51 /* PreferencesSecurityViewController.swift in Sources */,
@@ -3106,6 +3126,7 @@
 				53294FA31D1DDD9500F08059 /* CCNStatusItemDropView.m in Sources */,
 				53BB42E71CE849E70002D473 /* Shortcut.swift in Sources */,
 				53F0785D1ED73B7D00E7EDF9 /* Element.swift in Sources */,
+				E66017B62011587C0093C70A /* PreferencesSecurityViewModel.swift in Sources */,
 				532B6FE51E95D5C40010D81D /* Swizzling.swift in Sources */,
 				530F57B41DCD72680083F3A7 /* FMDatabaseQueue.m in Sources */,
 				A4430AA51F95F47300F2FFFA /* SimpleCache.swift in Sources */,
@@ -3201,6 +3222,7 @@
 				530415BE1DFE1A6E00F0679C /* NSTextView.swift in Sources */,
 				53DC85B11E678223007C72EB /* FileManager.swift in Sources */,
 				532121A51EE8B91600F4812A /* Zip.swift in Sources */,
+				E62D5129201269B3009289CF /* Collection+Index.swift in Sources */,
 				53E74A571DD53CCB00AD8876 /* TimeInterval.swift in Sources */,
 				53368DD81E3FFD4200B7A199 /* PaintCodeDropdown.swift in Sources */,
 				5373B4791FAB7AD1007432DC /* PriceTickerTabTableCells.swift in Sources */,

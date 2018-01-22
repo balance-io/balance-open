@@ -33,7 +33,7 @@ internal final class RootViewController: UIViewController
     private var viewHasAppeared = false
     
     private var shouldPresentUnlockViewController: Bool {
-        return appLock.lockEnabled // TODO: && check if logged in
+        return appLock.shouldPrepareBlock // TODO: && check if logged in
     }
     
     // MARK: Initialization

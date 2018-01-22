@@ -244,7 +244,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             statusItem.drawBorder = CurrentTheme.type == .light
             
             statusItem.shouldShowHandler = { statusItem in
-                if appLock.locked && appLock.touchIdAvailable && appLock.touchIdEnabled {
+                if appLock.shouldPrepareBlock && appLock.touchIdAvailable && appLock.touchIdEnabled {
                     self.promptTouchId()
                     return false
                 }
@@ -340,7 +340,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func promptTouchId() {
-        if appLock.locked && appLock.touchIdAvailable && appLock.touchIdEnabled {
+        if appLock.shouldPrepareBlock && appLock.touchIdAvailable && appLock.touchIdEnabled {
             appLock.authenticateTouchId(reason: "unlock Balance") { success, error in
                 async(after: 0.1) {
                     self.showPopover(force: true)

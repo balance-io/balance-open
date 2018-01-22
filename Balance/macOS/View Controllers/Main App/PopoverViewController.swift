@@ -93,7 +93,8 @@ class PopoverViewController: NSViewController {
         
         NotificationCenter.postOnMainThread(name: Notifications.PopoverWillShow)
         
-        if appLock.locked {
+        if appLock.shouldPrepareBlock {
+            lockUserInterface(animated: false)
             lockController.willDisplayPopover()
         }
     }
