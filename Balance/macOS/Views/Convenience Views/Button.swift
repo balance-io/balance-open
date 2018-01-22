@@ -35,5 +35,6 @@ class Button: NSButton {
     fileprivate func commonInit() {
         self.wantsLayer = true
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.bezelStyle = .texturedRounded
     }
 }

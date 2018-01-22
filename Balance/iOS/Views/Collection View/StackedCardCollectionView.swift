@@ -25,6 +25,7 @@ internal class StackedCardCollectionView: UICollectionView {
         let tapGesture = UITapGestureRecognizer(target: self,
                                                 action: #selector(tapGestureEngaged))
         addGestureRecognizer(tapGesture)
+        layer.cornerRadius = 20
     }
     
     internal required init?(coder aDecoder: NSCoder) {

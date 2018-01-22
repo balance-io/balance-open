@@ -69,7 +69,7 @@ class PreferencesSecurityViewController: NSViewController, NSComboBoxDelegate {
         
         changePasswordButton.wantsLayer = true
         changePasswordButton.bezelStyle = .texturedRounded
-        changePasswordButton.title = "Change..."
+        changePasswordButton.title = "Change"
         changePasswordButton.setAccessibilityLabel("Change Password")
         changePasswordButton.action = #selector(showChangePasswordSheet)
         if appLock.lockEnabled {
