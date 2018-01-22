@@ -309,11 +309,8 @@ extension AppLock {
     }
     
     private var  skipBlock: Bool {
-        guard let interval = interval else {
-            return false
-        }
-        
-        guard interval.isValid else {
+        guard let interval = interval,
+            interval.isValid else {
             return false
         }
         
