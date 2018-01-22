@@ -15,11 +15,13 @@ class BITTREXApi: NewExchangeApi, ExchangeApi {
     private var secretKey: String = ""
     private let dataBuilder = BITTREXDataBuilder()
     private let urlSession: URLSession
+    private let institutionRepository: InstitutionRepository
     
     let source = Source.bittrex
     
-    init(urlSession: URLSession? = nil) {
+    init(urlSession: URLSession? = nil, institutionRepository: InstitutionRepository? = nil) {
         self.urlSession = urlSession ?? certValidatedSession
+        self.institutionRepository = institutionRepository ?? InstitutionRepository.si
     }
     
     func authenticationChallenge(loginStrings: [Field], existingInstitution: Institution?, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
@@ -77,12 +79,12 @@ class BITTREXApi: NewExchangeApi, ExchangeApi {
             return callResultTaskWithError(APIBasicError.dataNotPresented, completionBlock: completionBlock)
         }
         
-        guard let institution = InstitutionRepository.si.institution(source: source,
-                                                                     sourceInstitutionId: "",
-                                                                     name: source.description) else {
-                                                                        let error = APIBasicError.repositoryNotCreated(onExchange: source)
-                                                                        callResultTaskWithError(error, completionBlock: completionBlock)
-                                                                        return
+        guard let institution = institutionRepository.institution(source: source,
+                                                                  sourceInstitutionId: "",
+                                                                  name: source.description) else {
+                                                                    let error = APIBasicError.repositoryNotCreated(onExchange: source)
+                                                                    callResultTaskWithError(error, completionBlock: completionBlock)
+                                                                    return
         }
         
         institution.apiKey = apiKey
