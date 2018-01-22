@@ -2588,7 +2588,7 @@
 						LastSwiftMigration = 0900;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Push = {
 								enabled = 1;
