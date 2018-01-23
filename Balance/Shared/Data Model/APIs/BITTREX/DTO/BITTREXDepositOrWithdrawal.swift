@@ -18,7 +18,7 @@ struct BITTREXDepositOrWithdrawal: Codable {
     let authorized: Bool
     let pendingPayment: Bool
     let txCost: Double
-    let txId: String
+    let txId: String?
     let canceled: Bool
     let invalidAddress: Bool
     

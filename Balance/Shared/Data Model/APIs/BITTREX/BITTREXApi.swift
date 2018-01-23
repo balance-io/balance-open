@@ -15,11 +15,13 @@ class BITTREXApi: NewExchangeApi, ExchangeApi {
     private var secretKey: String = ""
     private let dataBuilder = BITTREXDataBuilder()
     private let urlSession: URLSession
+    private let institutionRepository: InstitutionRepository
     
     let source = Source.bittrex
     
-    init(urlSession: URLSession? = nil) {
+    init(urlSession: URLSession? = nil, institutionRepository: InstitutionRepository? = nil) {
         self.urlSession = urlSession ?? certValidatedSession
+        self.institutionRepository = institutionRepository ?? InstitutionRepository.si
     }
     
     func authenticationChallenge(loginStrings: [Field], existingInstitution: Institution?, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {

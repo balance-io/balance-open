@@ -8,20 +8,22 @@
 
 import Foundation
 import XCTest
-@testable import Balance
+@testable import BalancemacOS
 
 class BITTREXApiTest: XCTestCase {
+    
+    private let mockInstitutionRepository = MockInstitutionRepository()
     
     func testShouldGetBalances() {
         let asyncTaskExpectation = expectation(description: "\(#function)\(#line)")
         
-        BITTREXApi(urlSession: balancesMockURLSession)
+        BITTREXApi(urlSession: balancesMockURLSession, institutionRepository: mockInstitutionRepository)
             .performAction(for: .getBalances,
                            apiKey: "mockAPIKey123",
                            secretKey: "mockSecretKey") { (result) in
                             guard let balances = result.object as? [BITTREXBalance],
                                 let balance = balances.first else {
-                                    assertionFailure("Invalid balance Response")
+                                    XCTFail("Invalid balance Response")
                                     return
                             }
                             
@@ -38,13 +40,13 @@ class BITTREXApiTest: XCTestCase {
     func testShouldGetCurrencies() {
         let asyncTaskExpectation = expectation(description: "\(#function)\(#line)")
         
-        BITTREXApi(urlSession: currenciesMockURLSession)
+        BITTREXApi(urlSession: currenciesMockURLSession, institutionRepository: mockInstitutionRepository)
             .performAction(for: .getCurrencies,
                            apiKey: "mockAPIKey123",
                            secretKey: "mockSecretKey") { (result) in
                             guard let currencies = result.object as? [BITTREXCurrency],
                                 let currency = currencies.first else {
-                                    assertionFailure("Invalid balance Response")
+                                    XCTFail("Invalid balance Response")
                                     return
                             }
                             
@@ -90,10 +92,9 @@ class BITTREXApiTest: XCTestCase {
             .performAction(for: .getAllWithdrawalHistory,
                            apiKey: "mockAPIKey123",
                            secretKey: "mockSecretKey") { (result) in
-                            guard let withdrawals = result.object as? [BITTREXDepositOrWithdrawal],
-                                let withdrawal = withdrawals.first else {
-                                    assertionFailure("Invalid withdrawals Response")
-                                    return
+                            guard let withdrawals = result.object as? [BITTREXDepositOrWithdrawal], let withdrawal = withdrawals.first else {
+                                XCTFail("Invalid withdrawals Response")
+                                return
                             }
                             
                             XCTAssertTrue(withdrawal.paymentUuid == "b52c7a5c-90c6-4c6e-835c-e16df12708b1", "Invalid payment UUID")
@@ -116,7 +117,7 @@ class BITTREXApiTest: XCTestCase {
                            apiKey: "mockAPIKey123",
                            secretKey: "mockSecretKey") { (result) in
                             guard case let .message(errorDescription)? = result.error as? BITTREXApiError else {
-                                assertionFailure("ApiKey should be invalid")
+                                XCTFail("ApiKey should be invalid")
                                 return
                             }
                             
