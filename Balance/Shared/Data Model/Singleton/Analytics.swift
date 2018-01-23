@@ -48,7 +48,7 @@ import Foundation
     
     func unregisterNotifications() {
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.PopoverWillShow)
-        NotificationCenter.addObserverOnMainThread(self, selector: #selector(endSession), name: Notifications.PopoverWillHide)
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.PopoverWillHide)
     }
     
     @objc func beginSession() {
