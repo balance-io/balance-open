@@ -230,7 +230,7 @@ extension BitfinexAPIClient: ExchangeApi {
             assert(false, "wrong fields are passed into the Bitfinex auth, we require secret and key fields and values")
             async {
                 closeBlock(false, "wrong fields are passed into the Bitfinex auth, we require secret and key fields and values", nil)
-                }
+            }
                 
             return
         }

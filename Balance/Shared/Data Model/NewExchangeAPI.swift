@@ -78,13 +78,6 @@ extension NewExchangeApi {
     }
     
     func validateBaseAPIErrors(data: Data?, error: Error?, response: URLResponse?, completionBlock: @escaping ExchangeAPIResultTask) -> [String: Any]? {
-        guard let response = response as? HTTPURLResponse,
-            (response.statusCode != 400 && response.statusCode != 403) else {
-                callResultTaskWithError(APIBasicError.incorrectLoginCredentials,
-                                        completionBlock: completionBlock)
-                return nil
-        }
-        
         guard let data = data,
             let dict = self.createDict(from: data) else {
                 self.callResultTaskWithError(APIBasicError.bodyNotValidJSON,
