@@ -171,6 +171,10 @@ class Syncer {
             
             // Load credentials
             do {
+                if verify(accessToken: accessToken) == nil {
+                    let accessToken = String(institution.institutionId)
+                    institution.accessToken = accessToken
+                }
                 let credentials = try GDAXAPIClient.Credentials(identifier: accessToken)
                 
                 // Fetch data from GDAX
@@ -212,6 +216,12 @@ class Syncer {
                     performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 }
             } catch {
+                switch error as! APICredentialsComponents.Error {
+                    case .dataNotReachable:
+                        institution.passwordInvalid = true
+                    default:
+                        log.debug("Unaccounted for error: \(error)")
+                }
                 syncingErrors.append(error)
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 return
@@ -420,6 +430,13 @@ class Syncer {
     private func paddedInteger(for amount: Double, currencyCode: String) -> Int {
         let decimals = Currency.rawValue(currencyCode).decimals
         return amount.integerValueWith(decimals: decimals)
+    }
+    
+    // If not nil then means is not calidated and the token needs to be replaced
+    func verify(accessToken: String) -> String? {
+        if accessToken == "main" {
+            return nil
+        } else { return accessToken }
     }
 }
 
