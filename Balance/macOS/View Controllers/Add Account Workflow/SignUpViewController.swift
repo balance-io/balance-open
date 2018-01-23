@@ -215,7 +215,7 @@ class SignUpViewController: NSViewController {
         backButton.snp.makeConstraints { make in
             make.height.equalTo(25)
             make.width.equalTo(25)
-            make.left.equalToSuperview().offset(18)
+            make.left.equalToSuperview().offset(10)
             make.centerY.equalTo(institutionNameField)
         }
         
@@ -400,7 +400,7 @@ class SignUpViewController: NSViewController {
             
             let textField = SignUpTextField(type: type)
             textField.delegate = self
-            textField.alphaValue = 0.9
+            textField.alphaValue = 1.0
             containerView.addSubview(textField)
             textField.placeholderString = field.name
             textField.snp.makeConstraints { make in
