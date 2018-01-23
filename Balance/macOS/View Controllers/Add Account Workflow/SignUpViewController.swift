@@ -588,7 +588,7 @@ class SignUpViewController: NSViewController {
             if interval < 15.0 {
                 self.setLoadingFieldString(initialText)
             } else if interval < 60.0 {
-                self.setLoadingFieldString("\(initialText). Please hang on, this can take a while.")
+                self.setLoadingFieldString("\(initialText). Slower than usual...")
             } else if interval < 90.0 {
                 self.setLoadingFieldString("\(initialText). Almost there...")
             }
@@ -734,6 +734,7 @@ fileprivate extension Source {
         case .gdax:     return #imageLiteral(resourceName: "gdaxSignup")
         case .bitfinex: return #imageLiteral(resourceName: "bitfinexSignup")
         case .kraken:   return #imageLiteral(resourceName: "krakenSignup")
+        case .bittrex:  return #imageLiteral(resourceName: "bittrexSignup")
         default:        return nil
         }
     }

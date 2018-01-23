@@ -60,6 +60,55 @@ class BITTREXApiTest: XCTestCase {
         }
     }
     
+    func testShouldGetDeposits() {
+        let asyncTaskExpectation = expectation(description: "\(#function)\(#line)")
+        
+        BITTREXApi(urlSession: depositsMockURLSession)
+            .performAction(for: .getAllDepositHistory,
+                           apiKey: "mockAPIKey123",
+                           secretKey: "mockSecretKey") { (result) in
+                            guard let deposits = result.object as? [BITTREXDepositOrWithdrawal],
+                                let deposit = deposits.first else {
+                                    assertionFailure("Invalid deposits Response")
+                                    return
+                            }
+                            
+                            XCTAssertTrue(deposit.paymentUuid == "554ec664-8842-4fe9-b491-06225becbd59", "Invalid payment UUID")
+                            XCTAssertTrue(deposit.currency == "BTC", "Invalid currency")
+                            XCTAssertTrue(deposit.amount == 0.00156121, "Invalid amount")
+                            
+                            asyncTaskExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5) { (error) in
+            print(error ?? "Error waiting expectation")
+        }
+    }
+    
+    func testShouldGetWithdrawals() {
+        let asyncTaskExpectation = expectation(description: "\(#function)\(#line)")
+        
+        BITTREXApi(urlSession: withdrawalsMockURLSession)
+            .performAction(for: .getAllWithdrawalHistory,
+                           apiKey: "mockAPIKey123",
+                           secretKey: "mockSecretKey") { (result) in
+                            guard let withdrawals = result.object as? [BITTREXDepositOrWithdrawal], let withdrawal = withdrawals.first else {
+                                XCTFail("Invalid withdrawals Response")
+                                return
+                            }
+                            
+                            XCTAssertTrue(withdrawal.paymentUuid == "b52c7a5c-90c6-4c6e-835c-e16df12708b1", "Invalid payment UUID")
+                            XCTAssertTrue(withdrawal.currency == "BTC", "Invalid currency")
+                            XCTAssertTrue(withdrawal.amount == 17, "Invalid amount")
+                            
+                            asyncTaskExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5) { (error) in
+            print(error ?? "Error waiting expectation")
+        }
+    }
+    
     func testShouldGetAPIInvalidAPIKeyError() {
         let asyncTaskExpectation = expectation(description: "\(#function)\(#line)")
         
@@ -95,9 +144,19 @@ private extension BITTREXApiTest {
         return createMockURLSession(with: currenciesData)
     }
     
+    var depositsMockURLSession: URLSession {
+        let depositsData = BITTREXDataHelper.loadDeposits()
+        return createMockURLSession(with: depositsData)
+    }
+    
+    var withdrawalsMockURLSession: URLSession {
+        let withdrawalsData = BITTREXDataHelper.loadWithdrawals()
+        return createMockURLSession(with: withdrawalsData)
+    }
+    
     var messageErrorMockURLSession: URLSession {
-        let currenciesData = BITTREXDataHelper.loadInvalidApiKey()
-        return createMockURLSession(with: currenciesData)
+        let invalidKeyData = BITTREXDataHelper.loadInvalidApiKey()
+        return createMockURLSession(with: invalidKeyData)
     }
     
     func createMockURLSession(with responseData: Data?, statusCode: Int? = nil) -> URLSession {

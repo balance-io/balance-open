@@ -42,8 +42,9 @@ class AddAccountViewController: NSViewController {
                                                                      .poloniex:  InstitutionButtons.drawPoloniexButton,
                                                                      .bitfinex:  InstitutionButtons.drawBitfinexButton,
                                                                      .kraken:    InstitutionButtons.drawKrakenButton,
+                                                                     .bittrex:   InstitutionButtons.drawBittrexButton,
                                                                      .ethplorer: InstitutionButtons.drawAddWalletAddressButton]
-    fileprivate let buttonSourceOrder: [Source] = [.coinbase, .gdax, .poloniex, .bitfinex, .kraken, .ethplorer]
+    fileprivate let buttonSourceOrder: [Source] = [.coinbase, .gdax, .poloniex, .bitfinex, .kraken, .bittrex, .ethplorer]
     fileprivate var signUpController: SignUpViewController?
 
     //

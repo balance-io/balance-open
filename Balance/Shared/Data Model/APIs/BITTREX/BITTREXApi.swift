@@ -25,7 +25,68 @@ class BITTREXApi: NewExchangeApi, ExchangeApi {
     }
     
     func authenticationChallenge(loginStrings: [Field], existingInstitution: Institution?, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
-        //This should be removed by the new ExchangeApi Protocol
+        assert(loginStrings.count == 2, "number of auth fields should be 2 for Bittrex")
+        var secretField : String?
+        var keyField : String?
+        for field in loginStrings {
+            if field.type == .key {
+                keyField = field.value
+            } else if field.type == .secret {
+                secretField = field.value
+            } else {
+                assert(false, "wrong fields are passed into the Bittrex auth, we require secret and key fields and values")
+            }
+        }
+        guard let secret = secretField, let key = keyField else {
+            assert(false, "wrong fields are passed into the Bittrex auth, we require secret and key fields and values")
+            
+            closeBlock(false, "wrong fields are passed into the Bittrex auth, we require secret and key fields and values", nil)
+            return
+        }
+        
+        var institution: Institution? = existingInstitution
+        performAction(for: .getBalances, apiKey: key, secretKey: secret) { result in
+            guard result.error == nil else {
+                async {
+                    closeBlock(false, result.error, institution)
+                }
+                return
+            }
+            
+            institution = existingInstitution ?? InstitutionRepository.si.institution(source: .bittrex, sourceInstitutionId: "", name: "Bittrex")
+            if let existingInstitution = existingInstitution {
+                existingInstitution.passwordInvalid = false
+                existingInstitution.replace()
+            }
+            guard let unwrappedInstitution = institution else {
+                async {
+                    closeBlock(false, BalanceError.databaseError, nil)
+                }
+                return
+            }
+            
+            // Try to parse the Balances. Normally we would throw an error if this failed, but
+            // Bittrex can return 0 records here if you have no accounts, so we only check if there
+            // was an API error, otherwise we consider it success.
+            guard let balances = result.object as? [BITTREXBalance] else {
+                async {
+                    closeBlock(true, nil, institution)
+                }
+                return
+            }
+            
+            for balance in balances {
+                let currentBalance = paddedInteger(for: balance.balance, currencyCode: balance.currency)
+                let availableBalance = currentBalance
+                
+                // Initialize an Account object to insert the record
+                AccountRepository.si.account(institutionId: unwrappedInstitution.institutionId, source: unwrappedInstitution.source, sourceAccountId: balance.currency, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: balance.currency, currency: balance.currency, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
+            }
+            
+            async {
+                closeBlock(true, nil, institution)
+            }
+        }
     }
     
     func performAction(for action: BITTREXApiAction, apiKey: String, secretKey: String, completionBlock: @escaping ExchangeAPIResultTask) {
@@ -79,17 +140,7 @@ class BITTREXApi: NewExchangeApi, ExchangeApi {
             return callResultTaskWithError(APIBasicError.dataNotPresented, completionBlock: completionBlock)
         }
         
-        guard let institution = institutionRepository.institution(source: source,
-                                                                  sourceInstitutionId: "",
-                                                                  name: source.description) else {
-                                                                    let error = APIBasicError.repositoryNotCreated(onExchange: source)
-                                                                    callResultTaskWithError(error, completionBlock: completionBlock)
-                                                                    return
-        }
-        
-        institution.apiKey = apiKey
-        institution.secret = secretKey
-        callResultTask(object: object, institution: institution, completionBlock: completionBlock)
+        callResultTask(object: object, institution: nil, completionBlock: completionBlock)
     }
     
 }
@@ -146,8 +197,7 @@ private extension BITTREXApi {
     }
     
     func validateBITTREXResponseErrors(on dict: [String: Any]) -> (result: Any?, error: Error?) {
-        if let success = dict[BITTREXResponseConstants.success.rawValue] as? Bool
-            ,success {
+        if let success = dict[BITTREXResponseConstants.success.rawValue] as? Bool, success {
             
             if let collectionResult = dict[BITTREXResponseConstants.result.rawValue] as? [[String: Any]],
                 !collectionResult.isEmpty {
@@ -161,8 +211,11 @@ private extension BITTREXApi {
             
         }
         
-        if let message = dict[BITTREXResponseConstants.message.rawValue] as? String,
-            !message.isEmpty {
+        if let message = dict[BITTREXResponseConstants.message.rawValue] as? String, !message.isEmpty {
+            if message == "APIKEY_INVALID" || message == "INVALID_SIGNATURE" {
+                return (result: nil, error: BITTREXApiError.invalidCredentials)
+            }
+            
             return (result: nil, error: BITTREXApiError.message(errorDescription: message))
         }
         
@@ -185,6 +238,13 @@ private extension BITTREXApi {
             }
             
             return currencies
+        case .getAllDepositHistory, .getDepositHistory(_), .getAllWithdrawalHistory, .getWithdrawalHistory(_):
+            let depositsOrWithdrawals = dataBuilder.createDepositsOrWithdrawals(from: data)
+            guard !depositsOrWithdrawals.isEmpty else {
+                return nil
+            }
+            
+            return depositsOrWithdrawals
         }
     }
     

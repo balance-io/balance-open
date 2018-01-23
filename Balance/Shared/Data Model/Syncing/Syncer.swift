@@ -148,7 +148,7 @@ class Syncer {
                         if let unwrappedTransactions = transactions {
                             for transaction in unwrappedTransactions
                             {
-                                let amount = self.paddedInteger(for: transaction.amount, currencyCode: transaction.currencyCode)
+                                let amount = paddedInteger(for: transaction.amount, currencyCode: transaction.currencyCode)
                                 
                                 TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: transaction.identifier, sourceAccountId: account.sourceAccountId, name: transaction.identifier, currency: transaction.currencyCode, amount: amount, date: transaction.createdAt, categoryID: nil, institution: institution)
                             }
@@ -164,7 +164,10 @@ class Syncer {
             }
         case .gdax:
             guard let accessToken = institution.accessToken else {
+                institution.passwordInvalid = true
+                institution.replace()
                 syncingSuccess = false
+                syncingErrors.append(BalanceError.authenticationError)
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 return
             }
@@ -187,8 +190,8 @@ class Syncer {
                     }
                     
                     for account in unwrappedAccounts {
-                        let currentBalance = self.paddedInteger(for: account.balance, currencyCode: account.currencyCode)
-                        let availableBalance = self.paddedInteger(for: account.availableBalance, currencyCode: account.currencyCode)
+                        let currentBalance = paddedInteger(for: account.balance, currencyCode: account.currencyCode)
+                        let availableBalance = paddedInteger(for: account.availableBalance, currencyCode: account.currencyCode)
                         
                         // Initialize an Account object to insert the record
                         AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: account.identifier, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: account.currencyCode, currency: account.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
@@ -200,7 +203,7 @@ class Syncer {
                         try self.gdaxApiClient.fetchTranactions(accountId: String(account.sourceAccountId), currencyCode: account.currency, { (transactions, error) in
                             if let unwrappedTransactions = transactions {
                                 for transaction in unwrappedTransactions {
-                                    let amount = self.paddedInteger(for: transaction.amount, currencyCode: transaction.currencyCode)
+                                    let amount = paddedInteger(for: transaction.amount, currencyCode: transaction.currencyCode)
                                     
                                     TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: transaction.id, sourceAccountId: account.sourceAccountId, name: account.currency, currency: transaction.currencyCode, amount: amount, date: transaction.createdAt, categoryID: nil, institution: institution)
                                 }
@@ -212,13 +215,17 @@ class Syncer {
                     performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 }
             } catch {
+                syncingSuccess = false
                 syncingErrors.append(error)
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 return
             }
         case .bitfinex:
             guard let accessToken = institution.accessToken else {
+                institution.passwordInvalid = true
+                institution.replace()
                 syncingSuccess = false
+                syncingErrors.append(BalanceError.authenticationError)
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 return
             }
@@ -240,7 +247,7 @@ class Syncer {
                     }
                     
                     for wallet in unwrappedWallets {
-                        let currentBalance = self.paddedInteger(for: wallet.balance, currencyCode: wallet.currencyCode)
+                        let currentBalance = paddedInteger(for: wallet.balance, currencyCode: wallet.currencyCode)
                         let availableBalance = currentBalance
                         
                         // Initialize an Account object to insert the record
@@ -259,7 +266,7 @@ class Syncer {
                     }
                     for transaction in unwrappedTransactions
                     {
-                        let amount = self.paddedInteger(for: transaction.amount, currencyCode: transaction.currencyCode)
+                        let amount = paddedInteger(for: transaction.amount, currencyCode: transaction.currencyCode)
                         let identifier = "\(transaction.address)\(transaction.amount)\(transaction.movementTimestamp)"
 
                         TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: identifier, sourceAccountId: transaction.currencyCode, name: identifier, currency: transaction.currencyCode, amount: amount, date: transaction.createdAt, categoryID: nil, institution: institution)
@@ -268,13 +275,17 @@ class Syncer {
                     performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 })
             } catch {
+                syncingSuccess = false
                 syncingErrors.append(error)
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 return
             }
         case .kraken:
             guard let accessToken = institution.accessToken else {
+                institution.passwordInvalid = true
+                institution.replace()
                 syncingSuccess = false
+                syncingErrors.append(BalanceError.authenticationError)
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 return
             }
@@ -285,7 +296,7 @@ class Syncer {
                 
                 // Fetch data from Kraken
                 self.krakenApiClient.credentials = credentials
-                try! self.krakenApiClient.fetchAccounts { accounts, error in
+                try self.krakenApiClient.fetchAccounts { accounts, error in
                     guard let unwrappedAccounts = accounts else {
                         if let unwrappedError = error {
                             syncingErrors.append(unwrappedError)
@@ -298,7 +309,7 @@ class Syncer {
                     }
                     
                     for account in unwrappedAccounts {
-                        let currentBalance = self.paddedInteger(for: account.balance, currencyCode: account.currencyCode)
+                        let currentBalance = paddedInteger(for: account.balance, currencyCode: account.currencyCode)
                         let availableBalance = currentBalance
                         
                         // Initialize an Account object to insert the record
@@ -307,11 +318,11 @@ class Syncer {
                     
                     performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 }
-                try! self.krakenApiClient.fetchTransactions({ transactions, error in
+                try self.krakenApiClient.fetchTransactions({ transactions, error in
                     
                     if let unwrappedTransactions = transactions {
                         for transaction in unwrappedTransactions {
-                            let amount = self.paddedInteger(for: transaction.amount, currencyCode: transaction.asset.code)
+                            let amount = paddedInteger(for: transaction.amount, currencyCode: transaction.asset.code)
                             let identifier = "\(transaction.ledgerId)\(transaction.amount)\(transaction.time)"
                             
                             TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: identifier, sourceAccountId: transaction.asset.code, name: identifier, currency: transaction.asset.code, amount: amount, date: transaction.time, categoryID: nil, institution: institution)
@@ -321,11 +332,76 @@ class Syncer {
                     performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 })
             } catch {
+                syncingSuccess = false
                 syncingErrors.append(error)
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 
                 return
             }
+        case .bittrex:
+            guard let apiKey = institution.apiKey, let secretKey = institution.secret else {
+                institution.passwordInvalid = true
+                institution.replace()
+                syncingSuccess = false
+                syncingErrors.append(BalanceError.authenticationError)
+                performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                return
+            }
+            
+            let dispatchGroup = DispatchGroup()
+            
+            dispatchGroup.enter()
+            BITTREXApi().performAction(for: .getBalances, apiKey: apiKey, secretKey: secretKey) { result in
+                guard let balances = result.object as? [BITTREXBalance] else {
+                    syncingSuccess = false
+                    syncingErrors.append(BalanceError.unexpectedData)
+                    dispatchGroup.leave()
+                    return
+                }
+                
+                for balance in balances {
+                    let currentBalance = paddedInteger(for: balance.balance, currencyCode: balance.currency)
+                    let availableBalance = currentBalance
+                    
+                    // Initialize an Account object to insert the record
+                    AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: balance.currency, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: balance.currency, currency: balance.currency, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
+                }
+                
+                dispatchGroup.leave()
+            }
+            dispatchGroup.wait()
+            
+            func transactionCompletion(result: ExchangeAPIResult) {
+                guard let transactions = result.object as? [BITTREXDepositOrWithdrawal] else {
+                    syncingSuccess = false
+                    syncingErrors.append(BalanceError.unexpectedData)
+                    dispatchGroup.leave()
+                    return
+                }
+                
+                for transaction in transactions {
+                    guard let date = transaction.date else {
+                        log.error("Failed to format date for Bittrex transaction \(transaction.paymentUuid) with date string \(transaction.opened)")
+                        continue
+                    }
+                    
+                    let amount = paddedInteger(for: transaction.amount, currencyCode: transaction.currency)
+                    
+                    TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: transaction.paymentUuid, sourceAccountId: transaction.currency, name: transaction.paymentUuid, currency: transaction.currency, amount: amount, date: date, categoryID: nil, institution: institution)
+                }
+                
+                dispatchGroup.leave()
+            }
+            
+            dispatchGroup.enter()
+            BITTREXApi().performAction(for: .getAllDepositHistory, apiKey: apiKey, secretKey: secretKey, completionBlock: transactionCompletion)
+            dispatchGroup.wait()
+            
+            dispatchGroup.enter()
+            BITTREXApi().performAction(for: .getAllWithdrawalHistory, apiKey: apiKey, secretKey: secretKey, completionBlock: transactionCompletion)
+            dispatchGroup.wait()
+            
+            performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
         default:
             break
         }
@@ -413,13 +489,6 @@ class Syncer {
             
             log.debug("Syncing completed")
         }
-    }
-    
-    // MARK: Helpers
-    
-    private func paddedInteger(for amount: Double, currencyCode: String) -> Int {
-        let decimals = Currency.rawValue(currencyCode).decimals
-        return amount.integerValueWith(decimals: decimals)
     }
 }
 
