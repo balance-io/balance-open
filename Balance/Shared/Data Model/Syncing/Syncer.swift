@@ -174,6 +174,10 @@ class Syncer {
             
             // Load credentials
             do {
+                if verify(accessToken: accessToken) == nil {
+                    let accessToken = String(institution.institutionId)
+                    institution.accessToken = accessToken
+                }
                 let credentials = try GDAXAPIClient.Credentials(identifier: accessToken)
                 
                 // Fetch data from GDAX
@@ -215,6 +219,14 @@ class Syncer {
                     performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 }
             } catch {
+                if let credentialsError = error as? APICredentialsComponents.Error {
+                    switch credentialsError {
+                    case .dataNotReachable:
+                        institution.passwordInvalid = true
+                    default:
+                        log.debug("Unaccounted for error: \(error)")
+                    }
+                }
                 syncingSuccess = false
                 syncingErrors.append(error)
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
@@ -232,6 +244,10 @@ class Syncer {
             
             // Load credentials
             do {
+                if verify(accessToken: accessToken) == nil {
+                    let accessToken = String(institution.institutionId)
+                    institution.accessToken = accessToken
+                }
                 let credentials = try BitfinexAPIClient.Credentials(identifier: accessToken)
                 
                 // Fetch data from Bitfinex
@@ -275,6 +291,15 @@ class Syncer {
                     performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 })
             } catch {
+                if let credentialsError = error as? APICredentialsComponents.Error {
+                    switch credentialsError {
+                    case .dataNotReachable:
+                        institution.passwordInvalid = true
+                    default:
+                        log.debug("Unaccounted for error: \(error)")
+                    }
+                }
+                
                 syncingSuccess = false
                 syncingErrors.append(error)
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
@@ -292,6 +317,10 @@ class Syncer {
             
             // Load credentials
             do {
+                if verify(accessToken: accessToken) == nil {
+                    let accessToken = String(institution.institutionId)
+                    institution.accessToken = accessToken
+                }
                 let credentials = try KrakenAPIClient.Credentials(identifier: accessToken)
                 
                 // Fetch data from Kraken
@@ -332,6 +361,15 @@ class Syncer {
                     performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 })
             } catch {
+                if let credentialsError = error as? APICredentialsComponents.Error {
+                    switch credentialsError {
+                    case .dataNotReachable:
+                        institution.passwordInvalid = true
+                    default:
+                        log.debug("Unaccounted for error: \(error)")
+                    }
+                }
+                
                 syncingSuccess = false
                 syncingErrors.append(error)
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
@@ -489,6 +527,15 @@ class Syncer {
             
             log.debug("Syncing completed")
         }
+    }
+  
+    // MARK: Helpers
+    
+    // If not nil then means is not validated and the token needs to be replaced
+    func verify(accessToken: String) -> String? {
+        if accessToken == "main" {
+            return nil
+        } else { return accessToken }
     }
 }
 
