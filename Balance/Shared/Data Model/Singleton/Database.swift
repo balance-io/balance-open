@@ -317,10 +317,10 @@ class Database {
             #if os(OSX)
             AppDelegate.sharedInstance.relaunch()
             #else
-            // TODO: Implement for iOS
+            fatalError("Database was reset")
             #endif
         } catch {
-            log.severe("Unable to remove database")
+            log.severe("Unable to remove database: \(error)")
         }
     }
     

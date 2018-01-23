@@ -13,6 +13,15 @@ import Foundation
 import Security
 
 struct KeychainWrapper {
+    static func serviceIdentifier() throws -> String {
+        guard let bundleIdentifier = Bundle.main.bundleIdentifier else {
+            throw "Bundle identifier was nil"
+        }
+        
+        let serviceIdentifier = bundleIdentifier + defaults.uniqueKeychainString
+        return serviceIdentifier
+    }
+    
     static func errorMessage(status: OSStatus) -> String {
         #if os(OSX)
             if let message = SecCopyErrorMessageString(status, nil) {
@@ -26,13 +35,9 @@ struct KeychainWrapper {
     }
     
     static func setDictionary(_ dictionary: [String: Any], forIdentifier identifier: String) throws {
-        guard let bundleIdentifier = Bundle.main.bundleIdentifier else {
-            throw "Bundle identifier was nil"
-        }
-        
         let data = NSKeyedArchiver.archivedData(withRootObject: dictionary)
         var keychainQuery: [CFString: Any] = [kSecClass: kSecClassGenericPassword,
-                                              kSecAttrService: bundleIdentifier,
+                                              kSecAttrService: try serviceIdentifier(),
                                               kSecAttrAccount: identifier,
                                               kSecValueData: data]
         #if os(iOS)
@@ -49,12 +54,8 @@ struct KeychainWrapper {
     }
     
     static func getDictionary(forIdentifier identifier: String) throws -> [String: Any]? {
-        guard let bundleIdentifier = Bundle.main.bundleIdentifier else {
-            throw "Bundle identifier was nil"
-        }
-        
         let keychainQuery = [kSecClass: kSecClassGenericPassword,
-                             kSecAttrService: bundleIdentifier,
+                             kSecAttrService: try serviceIdentifier(),
                              kSecAttrAccount: identifier,
                              kSecReturnData: kCFBooleanTrue,
                              kSecMatchLimit: kSecMatchLimitOne] as CFDictionary
@@ -72,18 +73,30 @@ struct KeychainWrapper {
     }
     
     static func deleteDictionary(forIdentifier identifier: String) throws {
-        guard let bundleIdentifier = Bundle.main.bundleIdentifier else {
-            throw "Bundle identifier was nil"
-        }
-        
         let keychainQuery = [kSecClass: kSecClassGenericPassword,
-                             kSecAttrService: bundleIdentifier,
+                             kSecAttrService: try serviceIdentifier(),
                              kSecAttrAccount: identifier]  as CFDictionary
         
         let status = SecItemDelete(keychainQuery as CFDictionary)
         
         if status != errSecSuccess {
             throw "\(status) - \(errorMessage(status: status))"
+        }
+    }
+    
+    static func resetKeychain() throws {
+        try deleteAllKeysForSecClass(kSecClassGenericPassword)
+        try deleteAllKeysForSecClass(kSecClassInternetPassword)
+        try deleteAllKeysForSecClass(kSecClassCertificate)
+        try deleteAllKeysForSecClass(kSecClassKey)
+        try deleteAllKeysForSecClass(kSecClassIdentity)
+    }
+    
+    static func deleteAllKeysForSecClass(_ secClass: CFString) throws {
+        let dict: [NSString : Any] = [kSecClass : secClass]
+        let status = SecItemDelete(dict as CFDictionary)
+        if status != errSecSuccess {
+            throw "Error deleting all items for security class \(secClass): \(status) - \(errorMessage(status: status))"
         }
     }
 }
