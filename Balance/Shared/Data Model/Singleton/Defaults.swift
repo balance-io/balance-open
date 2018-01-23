@@ -32,6 +32,7 @@ enum SearchPreference: Int {
 class Defaults {
     internal struct Keys {
         static let crashOnExceptions                    = "NSApplicationCrashOnExceptions"
+        static let uniqueKeychainString                 = "uniqueKeychainString"
         static let launchAtLogin                        = "launchAtLogin"
         static let accountIdsExcludedFromTotal          = "excludedFromAccountBalanceTotal"
         static let firstLaunch                          = "firstLaunch"
@@ -52,25 +53,49 @@ class Defaults {
         static let hiddenAccountIds                     = "hiddenAccountIds"
         static let unfinishedConnectionInstitutionIds   = "unfinishedConnectionInstitutionIds"
         static let masterCurrency                       = "masterCurrency"
-        static let selectedCards                  = "selectedCardIndexes"
+        static let selectedCards                        = "selectedCardIndexes"
     }
     
     // First run defaults
     func setupDefaults() {
-        let dict: [String: Any] = [Keys.crashOnExceptions:                  true,
-                                         Keys.launchAtLogin:                false,
-                                         Keys.accountIdsExcludedFromTotal:  NSArray(),
-                                         Keys.firstLaunch:                  true]
+        let dict: [String: Any] = [Keys.crashOnExceptions:            true,
+                                   Keys.launchAtLogin:                false,
+                                   Keys.accountIdsExcludedFromTotal:  NSArray(),
+                                   Keys.firstLaunch:                  true]
         defaults.register(defaults: dict)
         
         // Setup unread notification ids cache
         Defaults.unreadNotificationIdsCache = unreadNotificationIds
+        
+        // Generate a unique keychain string if needed
+        generateUniqueKeychainString()
+    }
+    
+    // Creates a keychain identifier for this installation only, changes on reinstall.
+    // This allows us to reset the keychain for each install. Only used on iOS because
+    // macOS users can delete keychain items using Keychain Access and are more likely
+    // to accidentally clear their preferences causing data loss.
+    func generateUniqueKeychainString() {
+        #if DEBUG && os(iOS)
+            if firstLaunch {
+                uniqueKeychainString = String.random(16)
+            }
+        #endif
     }
 
     let defaults: DefaultsStorage
     
     required init(defaults: DefaultsStorage = UserDefaults.standard) {
         self.defaults = defaults
+    }
+    
+    var uniqueKeychainString: String {
+        get {
+            return defaults.string(forKey: Keys.uniqueKeychainString) ?? ""
+        }
+        set {
+            defaults.set(newValue, forKey: Keys.uniqueKeychainString)
+        }
     }
     
     #if os(OSX)

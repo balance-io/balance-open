@@ -76,6 +76,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Start monitoring network status
         networkStatus.startMonitoring()
         
+        // Set first launch flag
+        if defaults.firstLaunch {
+            defaults.firstLaunch = false
+        }
+        
         // Window
         self.rootViewController = RootViewController()
         
