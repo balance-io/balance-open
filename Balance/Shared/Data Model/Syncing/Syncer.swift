@@ -235,6 +235,10 @@ class Syncer {
             
             // Load credentials
             do {
+                if verify(accessToken: accessToken) == nil {
+                    let accessToken = String(institution.institutionId)
+                    institution.accessToken = accessToken
+                }
                 let credentials = try BitfinexAPIClient.Credentials(identifier: accessToken)
                 
                 // Fetch data from Bitfinex
@@ -278,6 +282,12 @@ class Syncer {
                     performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 })
             } catch {
+                switch error as! APICredentialsComponents.Error {
+                case .dataNotReachable:
+                    institution.passwordInvalid = true
+                default:
+                    log.debug("Unaccounted for error: \(error)")
+                }
                 syncingErrors.append(error)
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 return
@@ -291,6 +301,10 @@ class Syncer {
             
             // Load credentials
             do {
+                if verify(accessToken: accessToken) == nil {
+                    let accessToken = String(institution.institutionId)
+                    institution.accessToken = accessToken
+                }
                 let credentials = try KrakenAPIClient.Credentials(identifier: accessToken)
                 
                 // Fetch data from Kraken
@@ -331,6 +345,12 @@ class Syncer {
                     performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 })
             } catch {
+                switch error as! APICredentialsComponents.Error {
+                case .dataNotReachable:
+                    institution.passwordInvalid = true
+                default:
+                    log.debug("Unaccounted for error: \(error)")
+                }
                 syncingErrors.append(error)
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 
