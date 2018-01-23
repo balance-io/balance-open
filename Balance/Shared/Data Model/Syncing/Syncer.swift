@@ -216,12 +216,15 @@ class Syncer {
                     performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 }
             } catch {
-                switch error as! APICredentialsComponents.Error {
+                if let credentialsError = error as? APICredentialsComponents.Error {
+                    switch credentialsError {
                     case .dataNotReachable:
                         institution.passwordInvalid = true
                     default:
                         log.debug("Unaccounted for error: \(error)")
+                    }
                 }
+                
                 syncingErrors.append(error)
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 return
@@ -282,12 +285,15 @@ class Syncer {
                     performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 })
             } catch {
-                switch error as! APICredentialsComponents.Error {
-                case .dataNotReachable:
-                    institution.passwordInvalid = true
-                default:
-                    log.debug("Unaccounted for error: \(error)")
+                if let credentialsError = error as? APICredentialsComponents.Error {
+                    switch credentialsError {
+                    case .dataNotReachable:
+                        institution.passwordInvalid = true
+                    default:
+                        log.debug("Unaccounted for error: \(error)")
+                    }
                 }
+                
                 syncingErrors.append(error)
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 return
@@ -309,7 +315,7 @@ class Syncer {
                 
                 // Fetch data from Kraken
                 self.krakenApiClient.credentials = credentials
-                try! self.krakenApiClient.fetchAccounts { accounts, error in
+                try self.krakenApiClient.fetchAccounts { accounts, error in
                     guard let unwrappedAccounts = accounts else {
                         if let unwrappedError = error {
                             syncingErrors.append(unwrappedError)
@@ -331,7 +337,7 @@ class Syncer {
                     
                     performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 }
-                try! self.krakenApiClient.fetchTransactions({ transactions, error in
+                try self.krakenApiClient.fetchTransactions({ transactions, error in
                     
                     if let unwrappedTransactions = transactions {
                         for transaction in unwrappedTransactions {
@@ -345,12 +351,15 @@ class Syncer {
                     performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 })
             } catch {
-                switch error as! APICredentialsComponents.Error {
-                case .dataNotReachable:
-                    institution.passwordInvalid = true
-                default:
-                    log.debug("Unaccounted for error: \(error)")
+                if let credentialsError = error as? APICredentialsComponents.Error {
+                    switch credentialsError {
+                    case .dataNotReachable:
+                        institution.passwordInvalid = true
+                    default:
+                        log.debug("Unaccounted for error: \(error)")
+                    }
                 }
+                
                 syncingErrors.append(error)
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                 
@@ -452,7 +461,7 @@ class Syncer {
         return amount.integerValueWith(decimals: decimals)
     }
     
-    // If not nil then means is not calidated and the token needs to be replaced
+    // If not nil then means is not validated and the token needs to be replaced
     func verify(accessToken: String) -> String? {
         if accessToken == "main" {
             return nil
