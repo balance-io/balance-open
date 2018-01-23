@@ -10,14 +10,17 @@ import Foundation
 
 enum BITTREXApiError: LocalizedError {
     case resultRawData
+    case invalidCredentials
     case message(errorDescription: String)
 
     var errorDescription: String? {
         switch self {
         case .resultRawData:
             return "Result object cant not be transformed to a Data object"
+        case .invalidCredentials:
+            return "Invalid api key or secret"
         case .message(let errorDescription):
-            return "Api fails wiht error: \(errorDescription)"
+            return "Api fails with error: \(errorDescription)"
         }
     }
 }

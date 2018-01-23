@@ -734,6 +734,7 @@ fileprivate extension Source {
         case .gdax:     return #imageLiteral(resourceName: "gdaxSignup")
         case .bitfinex: return #imageLiteral(resourceName: "bitfinexSignup")
         case .kraken:   return #imageLiteral(resourceName: "krakenSignup")
+        case .bittrex:  return #imageLiteral(resourceName: "bittrexSignup")
         default:        return nil
         }
     }
