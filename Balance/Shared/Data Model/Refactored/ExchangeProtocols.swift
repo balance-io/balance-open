@@ -8,17 +8,45 @@
 
 import Foundation
 
-public typealias ExchangeApiOperationCompletionHandler = (_ success: Bool, _ error: ExchangeError?, _ data: [Any]) -> Void
-
-public enum ExchangeError: Error {
-    case invalidCredentials
-    case other
-}
+public typealias ExchangeApiOperationCompletionHandler = (_ success: Bool, _ error: BaseError?, _ data: [Any]) -> Void
 
 public protocol ExchangeApi2 {
     func getAccounts(completion: @escaping ExchangeApiOperationCompletionHandler) -> Operation
     func getTransactions(completion: @escaping ExchangeApiOperationCompletionHandler) -> Operation
 }
+
+extension ExchangeApi2 {
+    
+    func processBaseErrors(response: HTTPURLResponse?, error: Error?) -> Error? {
+        if let error = error as NSError?, error.code == -1009 {
+            return BaseError.internetConnection
+        }
+        
+        guard let statusCode = response?.statusCode else {
+            return nil
+        }
+        
+        switch statusCode {
+        case 400...499:
+            return BaseError.invalidCredentials(statusCode: statusCode)
+        case 500...599:
+            return BaseError.invalidServer(statusCode: statusCode)
+        default:
+            return nil
+        }
+    }
+    
+    func dataToJSON(data: Data?) -> [AnyHashable: Any]? {
+        guard let data = data,
+            let rawData = try? JSONSerialization.jsonObject(with: data) else {
+            return nil
+        }
+        
+        return rawData as? [AnyHashable: Any]
+    }
+    
+}
+
 
 public protocol ExchangeInstitution {
     var source: Source { get }

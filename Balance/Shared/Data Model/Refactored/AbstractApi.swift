@@ -30,6 +30,26 @@ public enum ApiRequestDataFormat {
     case json
 }
 
+public enum BaseError: Error {
+    case internetConnection
+    case invalidCredentials(statusCode: Int?)
+    case invalidServer(statusCode: Int)
+    case other(message: String)
+    
+    var localizedDescription: String {
+        switch self {
+        case .internetConnection:
+            return "No Internet Connection"
+        case .invalidCredentials(_):
+            return "Invalid credentials, try again"
+        case .invalidServer(_):
+            return "We have problems with the server, please try later"
+        case .other(let message):
+            return "Error: \(message)"
+        }
+    }
+}
+
 public enum ApiRequestEncoding {
     case none
     case hmac512
@@ -56,7 +76,7 @@ open class AbstractApi: ExchangeApi2 {
     
     // Look for api specific errors (some use http status codes, some use info in the data) and return either
     // a standardized error or nil if no error
-    open func processErrors(requestType: ApiRequestType, response: HTTPURLResponse, data: Data) -> ExchangeError? {
+    open func processErrors(requestType: ApiRequestType, response: HTTPURLResponse, data: Data, error: Error?) -> Error? {
         fatalError("Must override")
     }
     

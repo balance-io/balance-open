@@ -52,6 +52,8 @@
 		2DF8985B1FCC8F7500CCDFB9 /* CountlyUserDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898361FCC8F7500CCDFB9 /* CountlyUserDetails.m */; };
 		2DF8985C1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */; };
 		2DF8985D1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */; };
+		404737D72017ED0300787FD7 /* CredentialsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404737D62017ED0300787FD7 /* CredentialsApi.swift */; };
+		404737D82017ED0300787FD7 /* CredentialsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404737D62017ED0300787FD7 /* CredentialsApi.swift */; };
 		40A90EA5200959840063B2F5 /* AddNewAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA4200959840063B2F5 /* AddNewAccountView.swift */; };
 		40A90EA7200EA7C60063B2F5 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA6200EA7C60063B2F5 /* UIView+Shadow.swift */; };
 		40A90EA9200F9A4C0063B2F5 /* BlankStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA8200F9A4C0063B2F5 /* BlankStateView.swift */; };
@@ -640,6 +642,7 @@
 		2DF898361FCC8F7500CCDFB9 /* CountlyUserDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyUserDetails.m; sourceTree = "<group>"; };
 		2DF898371FCC8F7500CCDFB9 /* CountlyViewTracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyViewTracking.h; sourceTree = "<group>"; };
 		2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyViewTracking.m; sourceTree = "<group>"; };
+		404737D62017ED0300787FD7 /* CredentialsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsApi.swift; sourceTree = "<group>"; };
 		40A90EA4200959840063B2F5 /* AddNewAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewAccountView.swift; sourceTree = "<group>"; };
 		40A90EA6200EA7C60063B2F5 /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
 		40A90EA8200F9A4C0063B2F5 /* BlankStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankStateView.swift; sourceTree = "<group>"; };
@@ -1957,6 +1960,7 @@
 				53F696632016879F00D28B23 /* ExchangeProtocols.swift */,
 				53F6966620168D4400D28B23 /* AbstractApi.swift */,
 				53F69669201691E100D28B23 /* ExampleApi.swift */,
+				404737D62017ED0300787FD7 /* CredentialsApi.swift */,
 			);
 			path = Refactored;
 			sourceTree = "<group>";
@@ -2874,6 +2878,7 @@
 				53D441FC1F44D813006967E1 /* CategoryRepository.swift in Sources */,
 				53561EB31F82DD260043D4F9 /* TableViewCell.swift in Sources */,
 				53561EB51F82DD260043D4F9 /* TextFieldTableViewCell.swift in Sources */,
+				404737D82017ED0300787FD7 /* CredentialsApi.swift in Sources */,
 				53D441ED1F44B224006967E1 /* FMDatabasePoolAdditions.m in Sources */,
 				5301A7781F17F86900668099 /* HTTPMethod.swift in Sources */,
 				2DF8985B1FCC8F7500CCDFB9 /* CountlyUserDetails.m in Sources */,
@@ -3090,6 +3095,7 @@
 				A4430A931F94EFB300F2FFFA /* OpenTheme.swift in Sources */,
 				532550831D06F9090045404E /* View.swift in Sources */,
 				283D18351DC8F6240044BF51 /* PreferencesSecurityViewController.swift in Sources */,
+				404737D72017ED0300787FD7 /* CredentialsApi.swift in Sources */,
 				539348C51DECD94B009F4564 /* TokenTextField.swift in Sources */,
 				532121A11EE8B91600F4812A /* zip.c in Sources */,
 				A4E457151F7901E6002E2879 /* EthplorerErrors.swift in Sources */,

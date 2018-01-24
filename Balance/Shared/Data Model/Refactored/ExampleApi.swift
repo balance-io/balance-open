@@ -14,10 +14,17 @@ class PoloniexExampleApi: AbstractApi {
     override var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
     override var requestEncoding: ApiRequestEncoding { return .hmac512 }
     
-    override func processErrors(requestType: ApiRequestType, response: HTTPURLResponse, data: Data) -> ExchangeError? {
-        // In this example, look for 400 or 403 errors and return .invalidCredentials, then look for
-        // correct data format and either return .other or nil
-        fatalError("not implemented")
+    override func processErrors(requestType: ApiRequestType, response: HTTPURLResponse, data: Data?, error: Error?) -> Error? {
+
+        if let error = processBaseErrors(response: response, error: error) {
+            return error
+        }
+        
+        if let dict = dataToJSON(data: data) {
+            return nil
+        }
+        
+        return nil
     }
     
     override func processData(requestType: ApiRequestType, data: Data) -> [Any] {
