@@ -56,7 +56,7 @@ class SignUpViewController: NSViewController {
     fileprivate let closeBlock: (_ finished: Bool, _ signUpController: SignUpViewController) -> Void
     
     fileprivate var primaryColor = NSColor.gray
-    fileprivate let margin = 25
+    fileprivate let margin = 20
     fileprivate var emailIssueController: EmailIssueController?
     fileprivate var connectionFailures = 0 {
         didSet {
@@ -250,8 +250,8 @@ class SignUpViewController: NSViewController {
         loadingFieldScrollView.documentView = loadingField
         containerView.addSubview(loadingFieldScrollView)
         loadingFieldScrollView.snp.makeConstraints { make in
-            make.height.equalTo(25)
-            make.top.equalTo(line.snp.bottom).offset(5)
+            make.height.equalTo(20)
+            make.top.equalTo(line.snp.bottom).offset(4)
             make.left.equalToSuperview().inset(margin)
             make.right.equalToSuperview().inset(margin)
         }
