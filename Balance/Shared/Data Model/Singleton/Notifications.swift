@@ -28,6 +28,8 @@ struct Notifications {
     static let ReloadPopoverController                = Notification.Name("ReloadPopoverController")
     static let PopoverWillShow                        = Notification.Name("PopoverWillShow")
     static let PopoverWillHide                        = Notification.Name("PopoverWillHide")
+    static let PopoverDidShow                         = Notification.Name("CCNStatusItemWindowDidShowNotification")
+    static let PopoverDidHide                         = Notification.Name("CCNStatusItemWindowDidDismissNotification")
     static let ShowTabIndex                           = Notification.Name("ShowTabIndex")
     static let AccountAdded                           = Notification.Name("AccountAdded")
     static let AccountRemoved                         = Notification.Name("AccountRemoved")

@@ -54,10 +54,13 @@ class BITTREXApi: NewExchangeApi, ExchangeApi {
             }
             
             institution = existingInstitution ?? InstitutionRepository.si.institution(source: .bittrex, sourceInstitutionId: "", name: "Bittrex")
+            institution?.apiKey = key
+            institution?.secret = secret
             if let existingInstitution = existingInstitution {
                 existingInstitution.passwordInvalid = false
                 existingInstitution.replace()
             }
+            
             guard let unwrappedInstitution = institution else {
                 async {
                     closeBlock(false, BalanceError.databaseError, nil)
@@ -94,8 +97,7 @@ class BITTREXApi: NewExchangeApi, ExchangeApi {
             return callResultTaskWithError(APIBasicError.incorrectLoginCredentials, completionBlock: completionBlock)
         }
         
-        let dataTask = urlSession.dataTask(with: request) { [weak self] (data, response, error) in
-            guard let `self` = self else { return }
+        let dataTask = urlSession.dataTask(with: request) { (data, response, error) in
             guard let dict = self.validateBaseAPIErrors(data: data,
                                                         error: error,
                                                         response: response,

@@ -35,8 +35,8 @@ class SyncManager: NSObject {
             async {
                 NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.syncIfGreaterThanSyncInterval), name: NSWorkspace.didWakeNotification, object: nil)
             }
-            NotificationCenter.addObserverOnMainThread(self, selector: #selector(automaticSync), name: Notifications.PopoverWillShow)
-            NotificationCenter.addObserverOnMainThread(self, selector: #selector(resetAutomaticSync), name: Notifications.PopoverWillHide)
+            NotificationCenter.addObserverOnMainThread(self, selector: #selector(automaticSync), name: Notifications.PopoverDidShow)
+            NotificationCenter.addObserverOnMainThread(self, selector: #selector(resetAutomaticSync), name: Notifications.PopoverDidHide)
         #else
             // On iOS, always sync when the app becomes active
             NotificationCenter.addObserverOnMainThread(self, selector: #selector(automaticSync), name: .UIApplicationDidBecomeActive)
@@ -50,8 +50,8 @@ class SyncManager: NSObject {
     deinit {
         #if os(OSX)
             NSWorkspace.shared.notificationCenter.removeObserver(self, name: NSWorkspace.didWakeNotification, object: nil)
-            NotificationCenter.removeObserverOnMainThread(self, name: Notifications.PopoverWillShow)
-            NotificationCenter.removeObserverOnMainThread(self, name: Notifications.PopoverWillHide)
+            NotificationCenter.removeObserverOnMainThread(self, name: Notifications.PopoverDidShow)
+            NotificationCenter.removeObserverOnMainThread(self, name: Notifications.PopoverDidHide)
         #else
             NotificationCenter.removeObserverOnMainThread(self, name: .UIApplicationDidBecomeActive)
         #endif

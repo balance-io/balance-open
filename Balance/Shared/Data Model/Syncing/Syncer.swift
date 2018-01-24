@@ -72,6 +72,7 @@ class Syncer {
                     // No refresh token somehow, so move on to the next one
                     log.severe("Tried to refresh access token for institution \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name) but did not find a refresh token")
                     institution.passwordInvalid = true
+                    institution.replace()
                     syncInstitutions(syncingInstitutions, startDate: startDate, success: success, errors: errors, pruneTransactions: pruneTransactions)
                 } else {
                     // Refresh the token
@@ -83,6 +84,14 @@ class Syncer {
                             self.syncInstitutions(syncingInstitutions, startDate: startDate, success: success, errors: errors, pruneTransactions: pruneTransactions)
                         }
                     }
+                }
+            } else if institution.source == .bittrex {
+                if institution.apiKey == nil || institution.secret == nil {
+                    institution.passwordInvalid = true
+                    institution.replace()
+                    syncInstitutions(syncingInstitutions, startDate: startDate, success: success, errors: errors, pruneTransactions: pruneTransactions)
+                } else {
+                    syncAccountsAndTransactions(institution: institution, remainingInstitutions: syncingInstitutions, startDate: startDate, success: success, errors: errors, pruneTransactions: pruneTransactions)
                 }
             } else if institution.source == .poloniex {
                 if let apiKey = institution.apiKey, let secret = institution.secret {
@@ -223,6 +232,7 @@ class Syncer {
                     switch credentialsError {
                     case .dataNotReachable:
                         institution.passwordInvalid = true
+                        institution.replace()
                     default:
                         log.debug("Unaccounted for error: \(error)")
                     }
@@ -295,6 +305,7 @@ class Syncer {
                     switch credentialsError {
                     case .dataNotReachable:
                         institution.passwordInvalid = true
+                        institution.replace()
                     default:
                         log.debug("Unaccounted for error: \(error)")
                     }
@@ -332,8 +343,6 @@ class Syncer {
                         }
                         
                         syncingSuccess = false
-                        performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
-                        
                         return
                     }
                     
@@ -345,26 +354,38 @@ class Syncer {
                         AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: account.currencyCode, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: account.currencyCode, currency: account.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
                     }
                     
-                    performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
-                }
-                try self.krakenApiClient.fetchTransactions({ transactions, error in
-                    
-                    if let unwrappedTransactions = transactions {
-                        for transaction in unwrappedTransactions {
-                            let amount = paddedInteger(for: transaction.amount, currencyCode: transaction.asset.code)
-                            let identifier = "\(transaction.ledgerId)\(transaction.amount)\(transaction.time)"
+                    do {
+                        try self.krakenApiClient.fetchTransactions { transactions, error in
+                            guard let unwrappedTransactions = transactions else {
+                                if let unwrappedError = error {
+                                    syncingErrors.append(unwrappedError)
+                                }
+                                
+                                syncingSuccess = false
+                                return
+                            }
                             
-                            TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: identifier, sourceAccountId: transaction.asset.code, name: identifier, currency: transaction.asset.code, amount: amount, date: transaction.time, categoryID: nil, institution: institution)
+                            for transaction in unwrappedTransactions {
+                                let amount = paddedInteger(for: transaction.amount, currencyCode: transaction.asset.code)
+                                let identifier = "\(transaction.ledgerId)\(transaction.amount)\(transaction.time)"
+                                
+                                TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: identifier, sourceAccountId: transaction.asset.code, name: identifier, currency: transaction.asset.code, amount: amount, date: transaction.time, categoryID: nil, institution: institution)
+                            }
+                            
+                            performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                         }
+                    } catch {
+                        syncingSuccess = false
+                        syncingErrors.append(error)
+                        performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                     }
-                    
-                    performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
-                })
+                }
             } catch {
                 if let credentialsError = error as? APICredentialsComponents.Error {
                     switch credentialsError {
                     case .dataNotReachable:
                         institution.passwordInvalid = true
+                        institution.replace()
                     default:
                         log.debug("Unaccounted for error: \(error)")
                     }
@@ -386,14 +407,10 @@ class Syncer {
                 return
             }
             
-            let dispatchGroup = DispatchGroup()
-            
-            dispatchGroup.enter()
-            BITTREXApi().performAction(for: .getBalances, apiKey: apiKey, secretKey: secretKey) { result in
+            func processBalances(result: ExchangeAPIResult) {
                 guard let balances = result.object as? [BITTREXBalance] else {
                     syncingSuccess = false
                     syncingErrors.append(BalanceError.unexpectedData)
-                    dispatchGroup.leave()
                     return
                 }
                 
@@ -404,16 +421,12 @@ class Syncer {
                     // Initialize an Account object to insert the record
                     AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: balance.currency, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: balance.currency, currency: balance.currency, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
                 }
-                
-                dispatchGroup.leave()
             }
-            dispatchGroup.wait()
             
-            func transactionCompletion(result: ExchangeAPIResult) {
+            func processTransactions(result: ExchangeAPIResult) {
                 guard let transactions = result.object as? [BITTREXDepositOrWithdrawal] else {
                     syncingSuccess = false
                     syncingErrors.append(BalanceError.unexpectedData)
-                    dispatchGroup.leave()
                     return
                 }
                 
@@ -427,19 +440,21 @@ class Syncer {
                     
                     TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: transaction.paymentUuid, sourceAccountId: transaction.currency, name: transaction.paymentUuid, currency: transaction.currency, amount: amount, date: date, categoryID: nil, institution: institution)
                 }
-                
-                dispatchGroup.leave()
             }
             
-            dispatchGroup.enter()
-            BITTREXApi().performAction(for: .getAllDepositHistory, apiKey: apiKey, secretKey: secretKey, completionBlock: transactionCompletion)
-            dispatchGroup.wait()
-            
-            dispatchGroup.enter()
-            BITTREXApi().performAction(for: .getAllWithdrawalHistory, apiKey: apiKey, secretKey: secretKey, completionBlock: transactionCompletion)
-            dispatchGroup.wait()
-            
-            performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+            BITTREXApi().performAction(for: .getBalances, apiKey: apiKey, secretKey: secretKey) { result in
+                processBalances(result: result)
+                
+                BITTREXApi().performAction(for: .getAllDepositHistory, apiKey: apiKey, secretKey: secretKey) { depositResult in
+                    processTransactions(result: depositResult)
+                    
+                    BITTREXApi().performAction(for: .getAllWithdrawalHistory, apiKey: apiKey, secretKey: secretKey) { withdrawalResult in
+                        processTransactions(result: withdrawalResult)
+                        
+                        performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                    }
+                }
+            }
         default:
             break
         }
