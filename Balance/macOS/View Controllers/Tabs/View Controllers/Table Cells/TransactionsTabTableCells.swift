@@ -27,7 +27,7 @@ class TransactionsTabGroupCell: View {
         self.addSubview(dateField)
         dateField.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(14)
-            make.centerY.equalTo(self)
+            make.centerY.equalTo(self).offset(6)
         }
     }
     
@@ -114,7 +114,7 @@ class TransactionsTabTransactionCell: View {
             make.centerY.equalToSuperview()
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.height.equalToSuperview().offset(-10)
+            make.height.equalToSuperview().offset(-11)
         }
         
         topBackgroundView.layerBackgroundColor = CurrentTheme.transactions.cell.backgroundViewColor
@@ -128,13 +128,13 @@ class TransactionsTabTransactionCell: View {
             make.centerY.equalToSuperview()
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.height.equalToSuperview().offset(-10)
+            make.height.equalToSuperview().offset(-11)
         }
         
         topContainer.addSubview(typeImage)
         typeImage.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(10)
-            make.top.equalToSuperview().offset(16)
+            make.left.equalToSuperview().offset(14)
+            make.top.equalToSuperview().offset(18)
             make.width.equalTo(11)
             make.height.equalTo(11)
         }
@@ -145,8 +145,8 @@ class TransactionsTabTransactionCell: View {
         typeField.alignment = .left
         topContainer.addSubview(typeField)
         typeField.snp.makeConstraints { make in
-            make.left.equalTo(typeImage.snp.right).offset(8)
-            make.top.equalToSuperview().offset(12)
+            make.left.equalTo(typeImage.snp.right).offset(4)
+            make.top.equalToSuperview().offset(15)
         }
         
         amountField.backgroundColor = CurrentTheme.defaults.cell.backgroundColor
@@ -156,14 +156,14 @@ class TransactionsTabTransactionCell: View {
         amountField.alignment = .right
         topContainer.addSubview(amountField)
         amountField.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(10)
-            make.bottom.equalToSuperview().offset(-17)
+            make.left.equalToSuperview().offset(14)
+            make.bottom.equalToSuperview().offset(-18)
         }
         
         topContainer.addSubview(institutionLogo)
         institutionLogo.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-10)
-            make.top.equalToSuperview().offset(16)
+            make.right.equalToSuperview().offset(-14)
+            make.top.equalToSuperview().offset(15)
             make.width.equalTo(0)
             make.height.equalTo(0)
         }

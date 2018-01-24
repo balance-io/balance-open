@@ -60,7 +60,7 @@ class SignUpTextField: View, TextFieldDelegate {
         self.layerBackgroundColor = CurrentTheme.addAccounts.signUpFieldBackgroundColor
         self.borderColor = inactiveBorderColor
         self.borderWidth = 2.0
-        self.cornerRadius = 6.0
+        self.cornerRadius = 10.0
         
         self.addSubview(iconContainer)
         iconContainer.snp.makeConstraints { make in
@@ -94,7 +94,7 @@ class SignUpTextField: View, TextFieldDelegate {
         iconContainer.addSubview(icon)
         icon.snp.makeConstraints { make in
             make.centerX.equalTo(iconContainer)
-            make.centerY.equalTo(iconContainer)
+            make.centerY.equalTo(iconContainer).offset(-0.5)
             make.width.equalTo(iconImageSize.width)
             make.height.equalTo(iconImageSize.height)
         }
@@ -125,7 +125,7 @@ class SignUpTextField: View, TextFieldDelegate {
                 make.left.equalTo(iconContainer.snp.right)
             }
             make.right.equalToSuperview().offset(-offset)
-            make.centerY.equalToSuperview().offset(-0.5)
+            make.centerY.equalToSuperview().offset(-1.0)
         }
         updatePlaceholder()
         

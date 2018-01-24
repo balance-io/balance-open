@@ -104,7 +104,7 @@ struct OpenTheme: Theme {
         let searchMoreResultsColor = NSColor(deviceWhiteInt: 255, alpha: 0.72)
         
         let signUpFieldHeight: CGFloat = 45
-        let signUpFieldSpacing: CGFloat = 15
+        let signUpFieldSpacing: CGFloat = 12
         let signUpFieldActiveBorderColor = NSColor.white
         let signUpFieldInactiveBorderColor = NSColor.clear
         let signUpFieldBackgroundColor = NSColor.white
