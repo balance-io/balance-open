@@ -145,6 +145,11 @@ func amountToString(amount: Int, currency: Currency, decimalsOverride: Int? = ni
     return showCodeAfterValue ? "\(minusRemoved) \(currency.code)" : minusRemoved
 }
 
+func paddedInteger(for amount: Double, currencyCode: String) -> Int {
+    let decimals = Currency.rawValue(currencyCode).decimals
+    return amount.integerValueWith(decimals: decimals)
+}
+
 // Returns NSNull if the input is nil. Useful for things like db queries.
 // TODO: Figure out why FMDB in Swift won't take nil arguments in var args functions
 func n2N(_ nullableObject: Any?) -> AnyObject {

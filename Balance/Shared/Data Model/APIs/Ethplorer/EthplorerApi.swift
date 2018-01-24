@@ -98,8 +98,7 @@ class EthplorerApi: ExchangeApi {
                 async {
                     completion(false, error)
                 }
-            }
-            catch {
+            } catch {
                 log.error("Failed to Ethplore wallet data: \(error)")
                 async {
                     completion(false, error)
