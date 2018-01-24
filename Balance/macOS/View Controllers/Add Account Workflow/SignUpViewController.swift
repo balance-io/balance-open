@@ -56,7 +56,7 @@ class SignUpViewController: NSViewController {
     fileprivate let closeBlock: (_ finished: Bool, _ signUpController: SignUpViewController) -> Void
     
     fileprivate var primaryColor = NSColor.gray
-    fileprivate let margin = 25
+    fileprivate let margin = 20
     fileprivate var emailIssueController: EmailIssueController?
     fileprivate var connectionFailures = 0 {
         didSet {
@@ -215,7 +215,7 @@ class SignUpViewController: NSViewController {
         backButton.snp.makeConstraints { make in
             make.height.equalTo(25)
             make.width.equalTo(25)
-            make.left.equalToSuperview().offset(18)
+            make.left.equalToSuperview().offset(10)
             make.centerY.equalTo(institutionNameField)
         }
         
@@ -250,8 +250,8 @@ class SignUpViewController: NSViewController {
         loadingFieldScrollView.documentView = loadingField
         containerView.addSubview(loadingFieldScrollView)
         loadingFieldScrollView.snp.makeConstraints { make in
-            make.height.equalTo(25)
-            make.top.equalTo(line.snp.bottom).offset(5)
+            make.height.equalTo(20)
+            make.top.equalTo(line.snp.bottom).offset(4)
             make.left.equalToSuperview().inset(margin)
             make.right.equalToSuperview().inset(margin)
         }
@@ -400,7 +400,7 @@ class SignUpViewController: NSViewController {
             
             let textField = SignUpTextField(type: type)
             textField.delegate = self
-            textField.alphaValue = 0.9
+            textField.alphaValue = 1.0
             containerView.addSubview(textField)
             textField.placeholderString = field.name
             textField.snp.makeConstraints { make in
@@ -588,7 +588,7 @@ class SignUpViewController: NSViewController {
             if interval < 15.0 {
                 self.setLoadingFieldString(initialText)
             } else if interval < 60.0 {
-                self.setLoadingFieldString("\(initialText). Please hang on, this can take a while.")
+                self.setLoadingFieldString("\(initialText). Slower than usual...")
             } else if interval < 90.0 {
                 self.setLoadingFieldString("\(initialText). Almost there...")
             }
@@ -734,6 +734,7 @@ fileprivate extension Source {
         case .gdax:     return #imageLiteral(resourceName: "gdaxSignup")
         case .bitfinex: return #imageLiteral(resourceName: "bitfinexSignup")
         case .kraken:   return #imageLiteral(resourceName: "krakenSignup")
+        case .bittrex:  return #imageLiteral(resourceName: "bittrexSignup")
         default:        return nil
         }
     }

@@ -50,14 +50,13 @@ extension KrakenAPIClient {
             }
             
             guard let unwrapedComponents = components else {
-                throw APICredentialsComponents.Error.dataNotFound(identifier: identifier)
+                throw APICredentialsComponents.Error.dataNotReachable
             }
             
             try self.init(component: unwrapedComponents)
             
-            // If the fetching of the old credentials succeeds, save the new ones and delete the old ones
+            try save(identifier: identifier)
             if updatedCredentials {
-                try save(identifier: identifier)
                 keychain[oldNamespacedIdentifier].clear()
             }
         }

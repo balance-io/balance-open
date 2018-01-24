@@ -19,6 +19,7 @@ extension APICredentialsComponents
         case dataNotFound(identifier: String)
         case missingPermissions
         case standard(message: String)
+        case dataNotReachable
         
         var errorDescription: String? {
             switch self {
@@ -34,6 +35,8 @@ extension APICredentialsComponents
                 return "Your API key needs more permission, please create a new one with more permissions"
             case .standard(let message):
                 return message
+            case .dataNotReachable:
+                return "We can't find any data for this keychain identifier"
             }
         }
     }

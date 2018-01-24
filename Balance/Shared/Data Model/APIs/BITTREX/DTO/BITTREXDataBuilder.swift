@@ -26,4 +26,11 @@ class BITTREXDataBuilder {
         return currencies
     }
     
+    func createDepositsOrWithdrawals(from jsonData: Data) -> [BITTREXDepositOrWithdrawal] {
+        guard let depositsOrWithdrawals = try? JSONDecoder().decode([BITTREXDepositOrWithdrawal].self, from: jsonData) else {
+            return []
+        }
+        
+        return depositsOrWithdrawals
+    }
 }
