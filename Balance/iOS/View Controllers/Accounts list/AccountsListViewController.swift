@@ -136,12 +136,17 @@ internal final class AccountsListViewController: UIViewController {
         
         navigationController?.isNavigationBarHidden = true
         UIApplication.shared.statusBarStyle = .lightContent
-        
-        reloadData()
-
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             self?.presentReconnectViewIfNeeded()
         }
+        syncManager.sync(userInitiated: true, validateReceipt: true) { (success, _) in
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        reloadData()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -162,10 +167,10 @@ internal final class AccountsListViewController: UIViewController {
     
     private func reloadData() {
         self.viewModel.reloadData()
+        let accountsNotEmpty = self.viewModel.numberOfSections() > 0
         self.collectionView.reloadData(shouldPersistSelection: true, with: viewModel.selectedCardIndexes)
-        
-        self.blankStateView.isHidden = viewModel.numberOfSections() > 0
-        self.totalBalanceBar.isHidden = !blankStateView.isHidden
+        self.blankStateView.isHidden = accountsNotEmpty
+        self.totalBalanceBar.isHidden = !accountsNotEmpty
         
         self.totalBalanceBar.totalBalanceLabel.text = viewModel.formattedMasterCurrencyTotalBalance
     }
