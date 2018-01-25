@@ -22,6 +22,18 @@ public enum ApiRequestMethod: String {
     case delete = "DELETE"
 }
 
+public enum TransactionType {
+    case unknown
+    case deposit
+    case withdrawal
+    case trade
+    case margin
+    case fee
+    case transfer
+    case match
+    case rebate
+}
+
 public enum ApiRequestDataFormat {
     // Always used for GET requests, can be used for POST requests when using "application/x-www-form-urlencoded" content type
     case urlEncoded

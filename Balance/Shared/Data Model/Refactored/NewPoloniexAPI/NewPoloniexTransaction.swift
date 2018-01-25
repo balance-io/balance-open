@@ -8,20 +8,28 @@
 
 import Foundation
 
-struct NewPoloniexTransaction: ExchangeTransaction, Codable {
+class NewPoloniexTransaction: ExchangeTransaction, Codable {
     
+    var category: TransactionType = .unknown
     var institutionId: Int = 0
     var source: Source = .poloniex
     var sourceInstitutionId: String = ""
-    var sourceAccountId: String = ""
+    var currencyCode: String
     var sourceTransactionId: String
+    
+    var sourceAccountId: String {
+        return currencyCode
+    }
+    
     var name: String {
         return sourceTransactionId
     }
-    var currencyCode: String = ""
+    
     var amount: Int {
-        return Int(amountString) ?? 0
+        return Double(amountString)?
+            .integerValueWith(decimals: Currency.rawValue(currencyCode).decimals) ?? 0
     }
+    
     var date: Date {
         return Date(timeIntervalSince1970: timestamp)
     }
@@ -34,7 +42,7 @@ struct NewPoloniexTransaction: ExchangeTransaction, Codable {
     let amountString: String
     
     enum CodingKeys: String, CodingKey {
-        case sourceTransactionId = "idtx"
+        case sourceTransactionId = "txid"
         case amountString = "amount"
         case currencyCode = "currency"
         case address

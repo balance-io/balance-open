@@ -33,22 +33,22 @@ class NewPoloniexAPI: AbstractApi {
         fatalError("not implemented")
     }
     
-    func buildObject(from data: Data, and type: ApiRequestType) -> [Any] {
+    class func buildObject(from data: Data, for type: ApiRequestType) -> [Any] {
         return type == .accounts ? buildAccounts(from: data) : buildTransacionts(from: data)
     }
 }
 
 private extension NewPoloniexAPI {
     
-    func buildTransacionts(from data: Data) -> [Any] {
+    class func buildTransacionts(from data: Data) -> [Any] {
         guard let transactions = try? JSONDecoder().decode([NewPoloniexTransaction].self, from: data) else {
             return []
         }
-        
+
         return transactions
     }
     
-    func buildAccounts(from data: Data) -> [Any] {
+    class func buildAccounts(from data: Data) -> [Any] {
         guard let accounts = try? JSONDecoder().decode([NewPoloniexAccount].self, from: data) else {
             return []
         }

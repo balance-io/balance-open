@@ -346,7 +346,11 @@ internal extension PoloniexApi {
                 if let safeData = data {
                     //create accounts
                     let poloniexTransactions = try self.parsePoloniexTransactions(data: safeData)
-                    self.processPoloniexTransactions(transactions: poloniexTransactions, institution: institution)
+                    poloniexTransactions.forEach {
+                        $0.institutionId = institution.institutionId
+                        $0.sourceInstitutionId = institution.sourceInstitutionId
+                    }
+                    self.processPoloniexTransactions(transactions: poloniexTransactions)
                     
                     async {
                         completion(true, error)
@@ -370,41 +374,37 @@ internal extension PoloniexApi {
         datatask.resume()
     }
     
-    fileprivate func parsePoloniexTransactions(data: Data) throws -> [PoloniexApi.Transaction] {
+    fileprivate func parsePoloniexTransactions(data: Data) throws -> [NewPoloniexTransaction] {
         guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String : AnyObject] else {
             throw PoloniexApi.CredentialsError.bodyNotValidJSON
         }
         
-        var transactions = [PoloniexApi.Transaction]()
+        var transactions = [NewPoloniexTransaction]()
         
-        if let depositsJSON = json["deposits"] as? [[String : Any]] {
-            for depositJSON in depositsJSON {
-                do {
-                    let deposit = try Transaction(depositDictionary: depositJSON)
-                    transactions.append(deposit)
-                }
-                catch { }
-            }
+        if let depositsJSON = json["deposits"] as? [[String : Any]],
+            let serialized = try? JSONSerialization.data(withJSONObject: depositsJSON, options: .prettyPrinted),
+            let deposits = NewPoloniexAPI.buildObject(from: serialized, for: .transactions) as? [NewPoloniexTransaction] {
+            
+            deposits.forEach { $0.category = .deposit }
+            transactions += deposits
+            
         }
         
-        if let withdrawalsJSON = json["withdrawals"] as? [[String : Any]] {
-            for withdrawalJSON in withdrawalsJSON {
-                do {
-                    let withdrawal = try Transaction(withdrawalDictionary: withdrawalJSON)
-                    transactions.append(withdrawal)
-                }
-                catch { }
-            }
+        if let withdrawalsJSON = json["withdrawals"] as? [[String : Any]],
+            let serialized = try? JSONSerialization.data(withJSONObject: withdrawalsJSON, options: .prettyPrinted),
+            let withdrawals = NewPoloniexAPI.buildObject(from: serialized, for: .transactions) as? [NewPoloniexTransaction] {
+            
+            withdrawals.forEach { $0.category = .withdrawal }
+            transactions += withdrawals
+            
         }
         
         return transactions
     }
     
-    fileprivate func processPoloniexTransactions(transactions: [PoloniexApi.Transaction], institution: Institution) {
+    fileprivate func processPoloniexTransactions(transactions: [NewPoloniexTransaction]) {
         for transaction in transactions {
-            let amount = transaction.amount.integerValueWith(decimals: Currency.rawValue(transaction.currencyCode).decimals)
-            TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: transaction.identifier, sourceAccountId: transaction.currencyCode, name: transaction.identifier, currency: transaction.currencyCode, amount: amount, date: transaction.timestamp, categoryID: nil, sourceInstitutionId: institution.sourceInstitutionId, institutionId: institution.institutionId)
+            TransactionRepository.si.transaction(source: transaction.source, sourceTransactionId: transaction.sourceTransactionId, sourceAccountId: transaction.sourceAccountId, name: transaction.name, currency: transaction.currencyCode, amount: transaction.amount, date: transaction.date, categoryID: nil, sourceInstitutionId: transaction.sourceInstitutionId, institutionId: transaction.institutionId)
         }
-
     }
 }
