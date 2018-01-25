@@ -119,21 +119,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
         
-        // Access tokens and Realm syncing credentials for debugging
-        #if DEBUG
-            if !Testing.runningUiTests {
-                if debugging.logAccessTokens {
-                    for institution in InstitutionRepository.si.allInstitutions() {
-                        if let accessToken = institution.accessToken {
-                            log.debug("(\(institution)): accessToken: \(accessToken)")
-                            if let refreshToken = institution.refreshToken {
-                                log.debug("(\(institution)): refreshToken: \(refreshToken)")
-                            }
-                        }
-                    }
-                }
-            }
-        #endif
+        // Access tokens and Realm syncing credentials for debugging (only Xcode builds)
+        debugPrintInstitutionKeys()
         
         // Start monitoring network status
         networkStatus.startMonitoring()
