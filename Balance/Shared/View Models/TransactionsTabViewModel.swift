@@ -70,6 +70,47 @@ class TransactionsTabViewModel: TabViewModel {
         return 0
     }
     
+    func sectionTitle(for section: Int) -> String {
+        guard section < data.keys.count else {
+            return ""
+        }
+        
+        let date = data.keys[section]
+        return sectionDateToString(date: date)
+    }
+    
+    func transaction(forRow row: Int, inSection section: Int) -> Transaction? {
+        guard let section = data[section] else {
+            return nil
+        }
+        
+        guard row < section.count else {
+            return nil
+        }
+        
+        return section[row]
+    }
+    
+    private let dateFormatter = DateFormatter()
+    private func sectionDateToString(date: Date) -> String {
+        var dateString = ""
+        
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: Date())
+        
+        if calendar.isDateInToday(date) {
+            dateString = "Today"
+        } else if calendar.isDateInYesterday(date) {
+            dateString = "Yesterday"
+        } else {
+            let year = calendar.component(.year, from: date)
+            dateFormatter.dateFormat = year < currentYear ? "EEEE MMM d y" : "EEEE MMM d"
+            dateString = dateFormatter.string(from: date)
+        }
+        
+        return dateString.uppercased()
+    }
+    
     func performSearchNow(searchString: String) {
         searching = true
         

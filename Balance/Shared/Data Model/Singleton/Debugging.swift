@@ -312,3 +312,20 @@ class Debugging {
 }
 
 #endif
+
+func debugPrintInstitutionKeys() {
+    #if DEBUG
+        guard !Testing.runningUiTests && debugging.logAccessTokens else {
+            return
+        }
+        
+        for institution in InstitutionRepository.si.allInstitutions() {
+            if let accessToken = institution.accessToken {
+                log.debug("(\(institution)): accessToken: \(accessToken)")
+                if let refreshToken = institution.refreshToken {
+                    log.debug("(\(institution)): refreshToken: \(refreshToken)")
+                }
+            }
+        }
+    #endif
+}

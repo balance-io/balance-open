@@ -29,20 +29,10 @@ internal final class AccountsListViewController: UIViewController {
         
         self.title = "Accounts"
         self.tabBarItem.image = UIImage(named: "Library")
-       
-        
-        // Notifications
-        NotificationCenter.addObserverOnMainThread(self,
-                                                   selector: #selector(syncCompletedNotification),
-                                                   name: Notifications.SyncCompleted)
     }
     
     internal required init?(coder aDecoder: NSCoder) {
         abort()
-    }
-    
-    deinit {
-        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.SyncCompleted)
     }
     
     // MARK: View lifecycle
@@ -138,15 +128,18 @@ internal final class AccountsListViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .lightContent
         
         reloadData()
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            self?.presentReconnectViewIfNeeded()
+        
+        DispatchQueue.main.async(after: 1.0) {
+            self.presentReconnectViewIfNeeded()
         }
+        
+        registerForNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UIApplication.shared.statusBarStyle = .default
+        unregisterForNotifications()
     }
     
     override func viewDidLayoutSubviews() {
@@ -155,19 +148,74 @@ internal final class AccountsListViewController: UIViewController {
         var collectionViewContentInset = collectionView.contentInset
         collectionViewContentInset.bottom = totalBalanceBar.bounds.height
         collectionView.contentInset = collectionViewContentInset
-
     }
     
-    // MARK: Data
+    //
+    // MARK: - Notifications -
+    //
     
-    private func reloadData() {
-        self.viewModel.reloadData()
-        self.collectionView.reloadData(shouldPersistSelection: true, with: viewModel.selectedCardIndexes)
+    func registerForNotifications() {
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.InstitutionAdded)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.InstitutionRemoved)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.InstitutionPatched)
         
-        self.blankStateView.isHidden = viewModel.numberOfSections() > 0
-        self.totalBalanceBar.isHidden = !blankStateView.isHidden
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.AccountRemoved)
         
-        self.totalBalanceBar.totalBalanceLabel.text = viewModel.formattedMasterCurrencyTotalBalance
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.AccountExcludedFromTotal)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.AccountIncludedInTotal)
+        
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.AccountHidden)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.AccountUnhidden)
+        
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.SyncCompleted)
+        
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.MasterCurrencyChanged)
+    }
+    
+    func unregisterForNotifications() {
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.InstitutionAdded)
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.InstitutionRemoved)
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.InstitutionPatched)
+        
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.AccountRemoved)
+        
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.AccountExcludedFromTotal)
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.AccountIncludedInTotal)
+        
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.AccountHidden)
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.AccountUnhidden)
+        
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.SyncCompleted)
+        
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.MasterCurrencyChanged)
+    }
+    
+    // MARK: Reload Data
+    
+    @objc func reloadData() {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(reloadDataDelayed), object: nil)
+        self.perform(#selector(reloadDataDelayed), with: nil, afterDelay: 0.5)
+    }
+    
+    @objc private func reloadDataDelayed() {
+        DispatchQueue.userInteractive.async {
+            self.viewModel.reloadData()
+ 
+            async {
+                self.reloadDataFinished()
+            }
+        }
+    }
+    
+    func reloadDataFinished() {
+        collectionView.reloadData(shouldPersistSelection: true, with: viewModel.selectedCardIndexes)
+        
+        blankStateView.isHidden = viewModel.numberOfSections() > 0
+        totalBalanceBar.isHidden = !blankStateView.isHidden
+        
+        totalBalanceBar.totalBalanceLabel.text = viewModel.formattedMasterCurrencyTotalBalance
+        
+        refreshControl.endRefreshing()
     }
     
     func presentReconnectViewIfNeeded() {
@@ -194,15 +242,7 @@ internal final class AccountsListViewController: UIViewController {
     }
     
     @objc private func refreshControlValueChanged(_ sender: Any) {
-        syncManager.sync(userInitiated: true, validateReceipt: true) { (success, _) in
-            self.refreshControl.endRefreshing()
-        }
-    }
-    
-    // MARK: Notifications
-    
-    @objc private func syncCompletedNotification(_ notification: Notification) {
-        reloadData()
+        syncManager.sync(userInitiated: true, validateReceipt: true)
     }
 }
 

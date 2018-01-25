@@ -44,13 +44,27 @@ internal final class PriceTickerViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.reloadData()
-        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: CurrentExchangeRates.Notifications.exchangeRatesUpdated)
+        reloadData()
+        registerForNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.removeObserverOnMainThread(self, name: CurrentExchangeRates.Notifications.exchangeRatesUpdated, object: nil)
+        unregisterForNotifications()
+    }
+    
+    //
+    // MARK: - Notifications -
+    //
+    
+    func registerForNotifications() {
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: CurrentExchangeRates.Notifications.exchangeRatesUpdated)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.MasterCurrencyChanged)
+    }
+    
+    func unregisterForNotifications() {
+        NotificationCenter.removeObserverOnMainThread(self, name: CurrentExchangeRates.Notifications.exchangeRatesUpdated)
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.MasterCurrencyChanged)
     }
 
 }
@@ -87,14 +101,13 @@ private extension PriceTickerViewController {
     @objc func reloadData() {
         viewModel.reloadData()
         collectionView.reloadData()
+        refreshControl.endRefreshing()
     }
     
     // MARK: Actions
     @objc func refreshControlValueChanged(_ sender: Any) {
-        viewModel.reloadData()
-        refreshControl.endRefreshing()
+        currentExchangeRates.updateExchangeRates()
     }
-    
 }
 
 // MARK: UICollectionViewDataSource

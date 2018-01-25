@@ -23,12 +23,13 @@ class CurrentExchangeRates {
         static let exchangeRatesUpdated = Notification.Name("exchangeRatesUpdated")
     }
     
-    fileprivate let exchangeRatesUrl = URL(string: "https://exchangerates.balancemy.money/exchangeRates")!
+    private let exchangeRatesUrl = URL(string: "https://exchangerates.balancemy.money/exchangeRates")!
+    private var isUpdatingExchangeRates = false
     
-    fileprivate let cache = SimpleCache<ExchangeRateSource, [ExchangeRate]>()
-    fileprivate let cachedRates = SimpleCache<String, Rate>()
-    fileprivate let persistedFileName = "currentExchangeRates.data"
-    fileprivate var persistedFileUrl: URL {
+    private let cache = SimpleCache<ExchangeRateSource, [ExchangeRate]>()
+    private let cachedRates = SimpleCache<String, Rate>()
+    private let persistedFileName = "currentExchangeRates.data"
+    private var persistedFileUrl: URL {
         return appSupportPathUrl.appendingPathComponent(persistedFileName)
     }
     
@@ -146,10 +147,18 @@ class CurrentExchangeRates {
     }
     
     func updateExchangeRates() {
+        guard !isUpdatingExchangeRates else {
+            log.debug("updateExchangeRates called but already updating so returning")
+            return
+        }
+        
+        log.debug("Updating exchange rates")
+        isUpdatingExchangeRates = true
         let task = certValidatedSession.dataTask(with: exchangeRatesUrl) { maybeData, maybeResponse, maybeError in
             // Make sure there's data
             guard let data = maybeData, maybeError == nil else {
                 log.error("Error updating exchange rates, either no data or error: \(String(describing: maybeError))")
+                self.isUpdatingExchangeRates = false
                 return
             }
             
@@ -158,6 +167,9 @@ class CurrentExchangeRates {
                 self.persist(data: data)
                 NotificationCenter.postOnMainThread(name: Notifications.exchangeRatesUpdated)
             }
+            
+            self.isUpdatingExchangeRates = false
+            log.debug("Exchange rates updated")
         }
         task.resume()
     }

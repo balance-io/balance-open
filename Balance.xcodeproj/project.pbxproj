@@ -428,7 +428,6 @@
 		A456ED121FB3067D006EE529 /* CurrencyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456ED111FB3067D006EE529 /* CurrencyCollectionViewCell.swift */; };
 		A456ED151FB31A33006EE529 /* UIFont+Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456ED141FB31A33006EE529 /* UIFont+Balance.swift */; };
 		A459EDA41F839D9800DC4B51 /* TransactionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A459EDA31F839D9800DC4B51 /* TransactionsListViewController.swift */; };
-		A459EDA61F83B90900DC4B51 /* TransactionsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A459EDA51F83B90900DC4B51 /* TransactionsListViewModel.swift */; };
 		A459EDA81F83D2BB00DC4B51 /* TransactionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A459EDA71F83D2BB00DC4B51 /* TransactionCollectionViewCell.swift */; };
 		A467DFC51F98EBFD0063882C /* Currency+MasterCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = A467DFC41F98EBFD0063882C /* Currency+MasterCurrency.swift */; };
 		A467DFC61F98EBFD0063882C /* Currency+MasterCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = A467DFC41F98EBFD0063882C /* Currency+MasterCurrency.swift */; };
@@ -923,7 +922,6 @@
 		A456ED111FB3067D006EE529 /* CurrencyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCollectionViewCell.swift; sourceTree = "<group>"; };
 		A456ED141FB31A33006EE529 /* UIFont+Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Balance.swift"; sourceTree = "<group>"; };
 		A459EDA31F839D9800DC4B51 /* TransactionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListViewController.swift; sourceTree = "<group>"; };
-		A459EDA51F83B90900DC4B51 /* TransactionsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListViewModel.swift; sourceTree = "<group>"; };
 		A459EDA71F83D2BB00DC4B51 /* TransactionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCollectionViewCell.swift; sourceTree = "<group>"; };
 		A467DFC41F98EBFD0063882C /* Currency+MasterCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Currency+MasterCurrency.swift"; sourceTree = "<group>"; };
 		A46DBC831F69B2C3006F4247 /* BitfinexCredentialsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexCredentialsTests.swift; sourceTree = "<group>"; };
@@ -1491,9 +1489,8 @@
 		53561E861F82DD120043D4F9 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				E605EF8020065FBC00A95632 /* Accounts */,
+				E605EF8020065FBC00A95632 /* Add Account */,
 				53561E881F82DD120043D4F9 /* InstitutionSettingsViewModel.swift */,
-				A459EDA51F83B90900DC4B51 /* TransactionsListViewModel.swift */,
 				A4EF39E61F8E43A40032265E /* InstitutionAccountsListViewModel.swift */,
 				A43ACE4F1F963035009F2AE9 /* CurrencySelectionViewModel.swift */,
 			);
@@ -1540,16 +1537,14 @@
 			isa = PBXGroup;
 			children = (
 				53561E9C1F82DD120043D4F9 /* RootViewController.swift */,
+				5383C53C201A760200B45DED /* Tabs */,
 				A42953CC1F8E175E00729045 /* Splash Screen */,
 				A453A5241F8676CA0002C6C8 /* Registration */,
 				A453A5211F866CEC0002C6C8 /* Login */,
 				A478A9231FB1FF5100F4764A /* Reset Password */,
-				53561E991F82DD120043D4F9 /* Accounts list */,
 				A41EE47E1FB9AA1A00210038 /* QR Code Scanner */,
 				53561E9D1F82DD120043D4F9 /* Add Account */,
-				A459EDA21F839D8200DC4B51 /* Transactions List */,
 				53561E951F82DD120043D4F9 /* Settings */,
-				A456ED0B1FB22589006EE529 /* Price Ticker */,
 				A4ED56DF1F865ECC00E4CC42 /* Main Currency Selection */,
 				A4BDE9971FCD7049002D958D /* Unlock Application */,
 			);
@@ -1571,14 +1566,6 @@
 				53561E971F82DD120043D4F9 /* InstitutionSettingsViewController.swift */,
 			);
 			path = "Institution Settings";
-			sourceTree = "<group>";
-		};
-		53561E991F82DD120043D4F9 /* Accounts list */ = {
-			isa = PBXGroup;
-			children = (
-				53561E9A1F82DD120043D4F9 /* AccountsListViewController.swift */,
-			);
-			path = "Accounts list";
 			sourceTree = "<group>";
 		};
 		53561E9D1F82DD120043D4F9 /* Add Account */ = {
@@ -1607,6 +1594,16 @@
 				A41EE4811FB9B66D00210038 /* QRLoginCredentialsParser.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		5383C53C201A760200B45DED /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				53561E9A1F82DD120043D4F9 /* AccountsListViewController.swift */,
+				A459EDA31F839D9800DC4B51 /* TransactionsListViewController.swift */,
+				A456ED0C1FB225A6006EE529 /* PriceTickerViewController.swift */,
+			);
+			path = Tabs;
 			sourceTree = "<group>";
 		};
 		538B47AF1F4C9FD60023CED5 /* Coinbase */ = {
@@ -2083,14 +2080,6 @@
 			path = Registration;
 			sourceTree = "<group>";
 		};
-		A456ED0B1FB22589006EE529 /* Price Ticker */ = {
-			isa = PBXGroup;
-			children = (
-				A456ED0C1FB225A6006EE529 /* PriceTickerViewController.swift */,
-			);
-			path = "Price Ticker";
-			sourceTree = "<group>";
-		};
 		A456ED131FB31A1A006EE529 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -2098,14 +2087,6 @@
 				E605EF8B2006BEF700A95632 /* UIKit */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		A459EDA21F839D8200DC4B51 /* Transactions List */ = {
-			isa = PBXGroup;
-			children = (
-				A459EDA31F839D9800DC4B51 /* TransactionsListViewController.swift */,
-			);
-			path = "Transactions List";
 			sourceTree = "<group>";
 		};
 		A478A9231FB1FF5100F4764A /* Reset Password */ = {
@@ -2286,14 +2267,14 @@
 			path = "Bal Helper";
 			sourceTree = "<group>";
 		};
-		E605EF8020065FBC00A95632 /* Accounts */ = {
+		E605EF8020065FBC00A95632 /* Add Account */ = {
 			isa = PBXGroup;
 			children = (
 				53561E891F82DD120043D4F9 /* NewAccountViewModel.swift */,
 				53561E871F82DD120043D4F9 /* NewAccountListViewModel.swift */,
 				E605EF8120065FDD00A95632 /* ReconnectAccountViewModel.swift */,
 			);
-			path = Accounts;
+			path = "Add Account";
 			sourceTree = "<group>";
 		};
 		E605EF8B2006BEF700A95632 /* UIKit */ = {
@@ -2917,7 +2898,6 @@
 				E6B0416D1FFED03300192319 /* AddAccountDelegate.swift in Sources */,
 				E6C1AC49200590070018D6AA /* ReconnectAccountCell.swift in Sources */,
 				53561EAF1F82DD260043D4F9 /* NewAccountViewModel.swift in Sources */,
-				A459EDA61F83B90900DC4B51 /* TransactionsListViewModel.swift in Sources */,
 				537504FB1F19237E0062C11A /* ProductId.swift in Sources */,
 				53552A361ED72B5B00DD95F9 /* Pluralize.swift in Sources */,
 				535529DB1ED723C600DD95F9 /* AppDelegate.swift in Sources */,

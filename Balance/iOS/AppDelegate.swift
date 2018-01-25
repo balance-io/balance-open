@@ -60,18 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialyze crash logging and analytics
         analytics.setupAnalytics()
         
-        // Access tokens and Realm syncing credentials for debugging
-        #if DEBUG
-        if !Testing.runningUiTests {
-            if debugging.logAccessTokens {
-                for institution in InstitutionRepository.si.allInstitutions() {
-                    if let accessToken = institution.accessToken {
-                        log.debug("(\(institution)): \(accessToken)")
-                    }
-                }
-            }
-        }
-        #endif
+        // Access tokens and Realm syncing credentials for debugging (only Xcode builds)
+        debugPrintInstitutionKeys()
         
         // Start monitoring network status
         networkStatus.startMonitoring()

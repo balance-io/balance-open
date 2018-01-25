@@ -35,29 +35,8 @@ class TransactionsTabGroupCell: View {
         fatalError("unsupported")
     }
     
-    fileprivate let dateFormatter = DateFormatter()
-    func updateModel(_ model: Date) {
-        var dateString = ""
-        
-        let calendar = Calendar.current
-        let currentYear = (calendar as NSCalendar).component(.year, from: Date())
-        
-        if calendar.isDateInToday(model) {
-            dateString = "Today"
-        } else if calendar.isDateInYesterday(model) {
-            dateString = "Yesterday"
-        } else {
-            let year = (Calendar.current as NSCalendar).component(.year, from: model)
-            if year < currentYear {
-                dateFormatter.dateFormat = "EEEE MMM d y"
-            } else {
-                dateFormatter.dateFormat = "EEEE MMM d"
-            }
-            
-            dateString = dateFormatter.string(from: model)
-        }
-        
-        dateField.stringValue = dateString.uppercased()
+    func updateModel(_ model: String) {
+        dateField.stringValue = model
     }
 }
 
