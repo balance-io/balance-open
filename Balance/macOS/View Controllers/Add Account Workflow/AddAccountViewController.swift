@@ -86,8 +86,6 @@ class AddAccountViewController: NSViewController {
         super.viewWillAppear()
         
         let hasInstitutions = InstitutionRepository.si.hasInstitutions
-        backButton.isHidden = !hasInstitutions && allowSelection
-        githubButton.isHidden = hasInstitutions
         
         // TODO: Remove delay hack. Currently there to allow for the resize to work on app launch
         async(after: hackDelay) {
@@ -178,7 +176,6 @@ class AddAccountViewController: NSViewController {
             make.top.equalTo(subtitleField.snp.bottom).offset(10)
         }
         
-        backButton.isHidden = true
         backButton.bezelStyle = .rounded
         backButton.font = NSFont.systemFont(ofSize: 14)
         backButton.title = "Back"
@@ -224,8 +221,8 @@ class AddAccountViewController: NSViewController {
         containerView.addSubview(githubButton)
         githubButton.snp.makeConstraints { make in
             make.height.equalTo(20)
-            make.left.equalToSuperview().offset(13)
-            make.bottom.equalToSuperview().inset(10)
+            make.left.equalToSuperview().offset(backButton.frame.size.width + 25)
+            make.centerY.equalTo(backButton)
         }
         
         if allowSelection && InstitutionRepository.si.institutionsCount == 0 {
