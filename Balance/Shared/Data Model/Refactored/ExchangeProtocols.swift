@@ -16,39 +16,7 @@ public enum ExchangeError: Error {
 }
 
 public protocol ExchangeApi2 {
-    func getAccounts(completion: @escaping ExchangeApiOperationCompletionHandler) -> Operation
-    func getTransactions(completion: @escaping ExchangeApiOperationCompletionHandler) -> Operation
-}
-
-public protocol ExchangeInstitution {
-    var source: Source { get }
-    var name: String { get}
-    var fields: [Field] { get }
-}
-
-public protocol ExchangeAccount {
-    var institutionId: Int { get }
-    var source: Source { get }
-    var sourceAccountId: String { get }
-    var name: String { get }
-    var currencyCode: String { get }
-    var currentBalance: Int { get }
-    var availableBalance: Int { get }
-    var altCurrencyCode: String? { get }
-    var altCurrentBalance: Int? { get }
-    var altAvailableBalance: Int? { get }
-}
-
-public protocol ExchangeTransaction {
-    var institutionId: Int { get }
-    var source: Source { get }
-    var sourceInstitutionId: String { get }
-    var sourceAccountId: String { get }
-    var sourceTransactionId: String { get }
-    var name: String { get }
-    var date: Date { get } // UTC
-    var currencyCode: String { get }
-    var amount: Int { get }
+    func fetchData(for action: APIAction, completion: @escaping ExchangeApiOperationCompletionHandler) -> Operation
 }
 
 /*
