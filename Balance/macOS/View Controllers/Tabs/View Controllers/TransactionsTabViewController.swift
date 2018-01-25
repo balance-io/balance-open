@@ -746,13 +746,16 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
             previousSelectedIndex = TableIndex.none
         }
         
-        let transaction = viewModel.transaction(forRow: row, inSection: section)
-        cell.updateModel(transaction)
-        cell.index = TableIndex(section: section, row: row)
-        
-        let selectedIndex = tableView.selectedIndex
-        if selectedIndex != TableIndex.none {
-            cell.alphaValue = cell.index == selectedIndex ? 1.0 : CurrentTheme.transactions.cell.dimmedAlpha
+        if let transaction = viewModel.transaction(forRow: row, inSection: section) {
+            cell.updateModel(transaction)
+            cell.index = TableIndex(section: section, row: row)
+            
+            let selectedIndex = tableView.selectedIndex
+            if selectedIndex != TableIndex.none {
+                cell.alphaValue = cell.index == selectedIndex ? 1.0 : CurrentTheme.transactions.cell.dimmedAlpha
+            }
+        } else {
+            log.error("Couldn't find transaction for row \(row) in section \(section)")
         }
         
         return cell

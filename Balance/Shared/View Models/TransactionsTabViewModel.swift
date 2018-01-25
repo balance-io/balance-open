@@ -71,15 +71,24 @@ class TransactionsTabViewModel: TabViewModel {
     }
     
     func sectionTitle(for section: Int) -> String {
-        if section < data.keys.count {
-            let date = data.keys[section]
-            return sectionDateToString(date: date)
+        guard section < data.keys.count else {
+            return ""
         }
-        return ""
+        
+        let date = data.keys[section]
+        return sectionDateToString(date: date)
     }
     
-    func transaction(forRow row: Int, inSection section: Int) -> Transaction {
-        return data[section]![row]
+    func transaction(forRow row: Int, inSection section: Int) -> Transaction? {
+        guard let section = data[section] else {
+            return nil
+        }
+        
+        guard row < section.count else {
+            return nil
+        }
+        
+        return section[row]
     }
     
     private let dateFormatter = DateFormatter()
@@ -87,20 +96,15 @@ class TransactionsTabViewModel: TabViewModel {
         var dateString = ""
         
         let calendar = Calendar.current
-        let currentYear = (calendar as NSCalendar).component(.year, from: Date())
+        let currentYear = calendar.component(.year, from: Date())
         
         if calendar.isDateInToday(date) {
             dateString = "Today"
         } else if calendar.isDateInYesterday(date) {
             dateString = "Yesterday"
         } else {
-            let year = (Calendar.current as NSCalendar).component(.year, from: date)
-            if year < currentYear {
-                dateFormatter.dateFormat = "EEEE MMM d y"
-            } else {
-                dateFormatter.dateFormat = "EEEE MMM d"
-            }
-            
+            let year = calendar.component(.year, from: date)
+            dateFormatter.dateFormat = year < currentYear ? "EEEE MMM d y" : "EEEE MMM d"
             dateString = dateFormatter.string(from: date)
         }
         
