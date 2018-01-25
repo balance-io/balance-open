@@ -15,7 +15,6 @@
 typealias SuccessErrorBlock = (_ success: Bool, _ error: Error?) -> Void
 
 fileprivate let cbVersion = "2017-05-19"
-fileprivate let connectionTimeout = 30.0
 fileprivate let subServerUrl = debugging.useLocalSubscriptionServer ? "http://localhost:8080/" : "https://api.balancemy.money/"
 fileprivate let clientId = "a6e15fbb0c3362b74360895f261fb079672c10eef79dcb72308c974408c5ce43"
 
@@ -73,7 +72,6 @@ struct CoinbaseApi: ExchangeApi {
         let urlString = "\(subServerUrl)coinbase/requestToken"
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
-        request.timeoutInterval = connectionTimeout
         request.cachePolicy = .reloadIgnoringLocalCacheData
         request.httpMethod = HTTPMethod.POST
         let parameters = "{\"code\":\"\(code)\"}"
@@ -149,7 +147,6 @@ struct CoinbaseApi: ExchangeApi {
         let urlString = "https://api.coinbase.com/v2/accounts"
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
-        request.timeoutInterval = connectionTimeout
         request.cachePolicy = .reloadIgnoringLocalCacheData
         request.httpMethod = HTTPMethod.GET
         request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
@@ -219,7 +216,6 @@ struct CoinbaseApi: ExchangeApi {
         let urlString = "https://api.coinbase.com/v2/accounts/\(accountID)/transactions"
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
-        request.timeoutInterval = connectionTimeout
         request.cachePolicy = .reloadIgnoringLocalCacheData
         request.httpMethod = HTTPMethod.GET
         request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
@@ -396,7 +392,6 @@ extension CoinbaseApi {
         let urlString = "\(subServerUrl)coinbase/refreshToken"
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
-        request.timeoutInterval = connectionTimeout
         request.cachePolicy = .reloadIgnoringLocalCacheData
         request.httpMethod = HTTPMethod.POST
         let parameters = "{\"refreshToken\":\"\(refreshToken)\"}"
