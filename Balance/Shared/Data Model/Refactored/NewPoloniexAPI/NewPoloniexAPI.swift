@@ -9,7 +9,7 @@
 import Foundation
 
 // This is for example Poloniex
-class PoloniexExampleApi: AbstractApi {
+class NewPoloniexAPI: AbstractApi {
     override var requestMethod: ApiRequestMethod { return .post }
     override var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
     override var requestEncoding: ApiRequestEncoding { return .hmac512 }
@@ -32,5 +32,28 @@ class PoloniexExampleApi: AbstractApi {
         // and return for handling in the completion block by the app
         fatalError("not implemented")
     }
+    
+    func buildObject(from data: Data, and type: ApiRequestType) -> [Any] {
+        return type == .accounts ? buildAccounts(from: data) : buildTransacionts(from: data)
+    }
 }
 
+private extension NewPoloniexAPI {
+    
+    func buildTransacionts(from data: Data) -> [Any] {
+        guard let transactions = try? JSONDecoder().decode([NewPoloniexTransaction].self, from: data) else {
+            return []
+        }
+        
+        return transactions
+    }
+    
+    func buildAccounts(from data: Data) -> [Any] {
+        guard let accounts = try? JSONDecoder().decode([NewPoloniexAccount].self, from: data) else {
+            return []
+        }
+        
+        return accounts
+    }
+    
+}

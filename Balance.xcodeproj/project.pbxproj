@@ -55,6 +55,12 @@
 		2DF8985D1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */; };
 		404737D72017ED0300787FD7 /* CredentialsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404737D62017ED0300787FD7 /* CredentialsApi.swift */; };
 		404737D82017ED0300787FD7 /* CredentialsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404737D62017ED0300787FD7 /* CredentialsApi.swift */; };
+		409BF84A201A31FD00E2D30D /* NewPoloniexAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409BF849201A31FD00E2D30D /* NewPoloniexAccount.swift */; };
+		409BF84B201A31FD00E2D30D /* NewPoloniexAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409BF849201A31FD00E2D30D /* NewPoloniexAccount.swift */; };
+		409BF84D201A349900E2D30D /* NewPoloniexInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409BF84C201A349900E2D30D /* NewPoloniexInstitution.swift */; };
+		409BF84E201A349900E2D30D /* NewPoloniexInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409BF84C201A349900E2D30D /* NewPoloniexInstitution.swift */; };
+		409BF850201A353800E2D30D /* NewPoloniexTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409BF84F201A353800E2D30D /* NewPoloniexTransaction.swift */; };
+		409BF851201A353800E2D30D /* NewPoloniexTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409BF84F201A353800E2D30D /* NewPoloniexTransaction.swift */; };
 		40A90EA5200959840063B2F5 /* AddNewAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA4200959840063B2F5 /* AddNewAccountView.swift */; };
 		40A90EA7200EA7C60063B2F5 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA6200EA7C60063B2F5 /* UIView+Shadow.swift */; };
 		40A90EA9200F9A4C0063B2F5 /* BlankStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA8200F9A4C0063B2F5 /* BlankStateView.swift */; };
@@ -367,8 +373,8 @@
 		53F696652016879F00D28B23 /* ExchangeProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F696632016879F00D28B23 /* ExchangeProtocols.swift */; };
 		53F6966720168D4400D28B23 /* AbstractApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F6966620168D4400D28B23 /* AbstractApi.swift */; };
 		53F6966820168D4400D28B23 /* AbstractApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F6966620168D4400D28B23 /* AbstractApi.swift */; };
-		53F6966A201691E100D28B23 /* ExampleApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F69669201691E100D28B23 /* ExampleApi.swift */; };
-		53F6966B201691E100D28B23 /* ExampleApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F69669201691E100D28B23 /* ExampleApi.swift */; };
+		53F6966A201691E100D28B23 /* NewPoloniexAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F69669201691E100D28B23 /* NewPoloniexAPI.swift */; };
+		53F6966B201691E100D28B23 /* NewPoloniexAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F69669201691E100D28B23 /* NewPoloniexAPI.swift */; };
 		53FCE3421F06B5DC004EB25C /* NSDateTimeAgo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33A1F06B5DC004EB25C /* NSDateTimeAgo.framework */; };
 		53FCE3461F06B5DC004EB25C /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33E1F06B5DC004EB25C /* SnapKit.framework */; };
 		53FCE3481F06B5DC004EB25C /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3401F06B5DC004EB25C /* XCGLogger.framework */; };
@@ -649,6 +655,9 @@
 		2DF898371FCC8F7500CCDFB9 /* CountlyViewTracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyViewTracking.h; sourceTree = "<group>"; };
 		2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyViewTracking.m; sourceTree = "<group>"; };
 		404737D62017ED0300787FD7 /* CredentialsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsApi.swift; sourceTree = "<group>"; };
+		409BF849201A31FD00E2D30D /* NewPoloniexAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPoloniexAccount.swift; sourceTree = "<group>"; };
+		409BF84C201A349900E2D30D /* NewPoloniexInstitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPoloniexInstitution.swift; sourceTree = "<group>"; };
+		409BF84F201A353800E2D30D /* NewPoloniexTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPoloniexTransaction.swift; sourceTree = "<group>"; };
 		40A90EA4200959840063B2F5 /* AddNewAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewAccountView.swift; sourceTree = "<group>"; };
 		40A90EA6200EA7C60063B2F5 /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
 		40A90EA8200F9A4C0063B2F5 /* BlankStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankStateView.swift; sourceTree = "<group>"; };
@@ -885,7 +894,7 @@
 		53F6965B2011322F00D28B23 /* BITTREXDepositOrWithdrawal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BITTREXDepositOrWithdrawal.swift; sourceTree = "<group>"; };
 		53F696632016879F00D28B23 /* ExchangeProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeProtocols.swift; sourceTree = "<group>"; };
 		53F6966620168D4400D28B23 /* AbstractApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractApi.swift; sourceTree = "<group>"; };
-		53F69669201691E100D28B23 /* ExampleApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApi.swift; sourceTree = "<group>"; };
+		53F69669201691E100D28B23 /* NewPoloniexAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPoloniexAPI.swift; sourceTree = "<group>"; };
 		53FCE33A1F06B5DC004EB25C /* NSDateTimeAgo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NSDateTimeAgo.framework; path = Carthage/Build/iOS/NSDateTimeAgo.framework; sourceTree = SOURCE_ROOT; };
 		53FCE33E1F06B5DC004EB25C /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3401F06B5DC004EB25C /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/iOS/XCGLogger.framework; sourceTree = SOURCE_ROOT; };
@@ -1157,6 +1166,17 @@
 				2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */,
 			);
 			path = "countly-sdk-ios-master";
+			sourceTree = "<group>";
+		};
+		409BF848201A2A0600E2D30D /* NewPoloniexAPI */ = {
+			isa = PBXGroup;
+			children = (
+				53F69669201691E100D28B23 /* NewPoloniexAPI.swift */,
+				409BF849201A31FD00E2D30D /* NewPoloniexAccount.swift */,
+				409BF84C201A349900E2D30D /* NewPoloniexInstitution.swift */,
+				409BF84F201A353800E2D30D /* NewPoloniexTransaction.swift */,
+			);
+			path = NewPoloniexAPI;
 			sourceTree = "<group>";
 		};
 		5301A7641F17F42700668099 /* APIs */ = {
@@ -1970,9 +1990,9 @@
 		53F696622016876A00D28B23 /* Refactored */ = {
 			isa = PBXGroup;
 			children = (
+				409BF848201A2A0600E2D30D /* NewPoloniexAPI */,
 				53F696632016879F00D28B23 /* ExchangeProtocols.swift */,
 				53F6966620168D4400D28B23 /* AbstractApi.swift */,
-				53F69669201691E100D28B23 /* ExampleApi.swift */,
 				404737D62017ED0300787FD7 /* CredentialsApi.swift */,
 			);
 			path = Refactored;
@@ -2850,6 +2870,7 @@
 				53552A161ED7251700DD95F9 /* Source.swift in Sources */,
 				535529F31ED724ED00DD95F9 /* TransactionsTabViewModel.swift in Sources */,
 				A478A9251FB204C800F4764A /* ResetPasswordViewController.swift in Sources */,
+				409BF84B201A31FD00E2D30D /* NewPoloniexAccount.swift in Sources */,
 				A44C76231F7BD9610024476E /* BitfinexTransaction.swift in Sources */,
 				A4430A911F94EE1700F2FFFA /* CoinbaseInstitution.swift in Sources */,
 				A4ED56DB1F86301A00E4CC42 /* AccountTableViewCell.swift in Sources */,
@@ -2910,6 +2931,7 @@
 				53561EA61F82DD260043D4F9 /* InstitutionSettingsViewController.swift in Sources */,
 				537187DC1F4CC23B00E7F9D6 /* CoinbaseApi.swift in Sources */,
 				A4E4570D1F79018A002E2879 /* Reachability.swift in Sources */,
+				409BF851201A353800E2D30D /* NewPoloniexTransaction.swift in Sources */,
 				53561EB21F82DD260043D4F9 /* SegmentedControlTableViewCell.swift in Sources */,
 				2DF898531FCC8F7500CCDFB9 /* CountlyNotificationService.m in Sources */,
 				A4E768031F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */,
@@ -2954,6 +2976,7 @@
 				A493B93D1F6819600074ACCC /* BitfinexAuthHeaders.swift in Sources */,
 				53552A151ED7251200DD95F9 /* Swizzling.swift in Sources */,
 				53552A191ED7251700DD95F9 /* AccountType.swift in Sources */,
+				409BF84E201A349900E2D30D /* NewPoloniexInstitution.swift in Sources */,
 				40A90EA9200F9A4C0063B2F5 /* BlankStateView.swift in Sources */,
 				53552A291ED7252900DD95F9 /* Error.swift in Sources */,
 				53552A331ED72B5700DD95F9 /* FMDatabaseAdditionsVariadic.swift in Sources */,
@@ -2967,7 +2990,7 @@
 				53552A121ED7251200DD95F9 /* NetworkStatus.swift in Sources */,
 				A495726D1F98B56400651C89 /* CurrentExchangeRates.swift in Sources */,
 				E605EF7F20065F3700A95632 /* UIView+Size.swift in Sources */,
-				53F6966B201691E100D28B23 /* ExampleApi.swift in Sources */,
+				53F6966B201691E100D28B23 /* NewPoloniexAPI.swift in Sources */,
 				535529F91ED7250100DD95F9 /* Syncer.swift in Sources */,
 				2DF8984D1FCC8F7500CCDFB9 /* CountlyCrashReporter.m in Sources */,
 				53F078651ED73E6D00E7EDF9 /* ThemeGlobals.swift in Sources */,
@@ -3072,6 +3095,7 @@
 				53EB77D61CF3EFAA00F01903 /* NSView.swift in Sources */,
 				2D326D261F5EA22900873286 /* PoloniexErrors.swift in Sources */,
 				537187E81F4CC23C00E7F9D6 /* CoinbaseAccount.swift in Sources */,
+				409BF84A201A31FD00E2D30D /* NewPoloniexAccount.swift in Sources */,
 				A4E4571F1F79045A002E2879 /* Double.swift in Sources */,
 				537187FD1F4CC43000E7F9D6 /* SignUpViewController.swift in Sources */,
 				53D441EC1F44B224006967E1 /* FMDatabasePoolAdditions.m in Sources */,
@@ -3169,9 +3193,10 @@
 				532550881D06FA5C0045404E /* ScrollView.swift in Sources */,
 				53E7BC181D1805F600FD8613 /* Singletons.swift in Sources */,
 				532550941D0702980045404E /* TableRowView.swift in Sources */,
-				53F6966A201691E100D28B23 /* ExampleApi.swift in Sources */,
+				53F6966A201691E100D28B23 /* NewPoloniexAPI.swift in Sources */,
 				5334022A1DDD0E5E000236A0 /* PaintCodeView.swift in Sources */,
 				28FD09C21D99F18500A395AB /* PaintCodeButton.swift in Sources */,
+				409BF850201A353800E2D30D /* NewPoloniexTransaction.swift in Sources */,
 				532121A71EE8B91600F4812A /* ZipUtilities.swift in Sources */,
 				533626601D54E5F80090656F /* FlippedView.swift in Sources */,
 				53F6965C2011322F00D28B23 /* BITTREXDepositOrWithdrawal.swift in Sources */,
@@ -3204,6 +3229,7 @@
 				53F078641ED73E6D00E7EDF9 /* ThemeGlobals.swift in Sources */,
 				28F678481DCB6E9600383D22 /* SetPasswordViewController.swift in Sources */,
 				2DF8985C1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */,
+				409BF84D201A349900E2D30D /* NewPoloniexInstitution.swift in Sources */,
 				538DD1711DA2EDB600066288 /* TransactionContextMenu.swift in Sources */,
 				5313F9631F58D76500DD6BDB /* PFMoveApplication.m in Sources */,
 				53178C5B1FD07273003E1707 /* KeychainWrapper.swift in Sources */,
