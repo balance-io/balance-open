@@ -281,27 +281,34 @@ class Syncer {
                         // Initialize an Account object to insert the record
                         AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: wallet.currencyCode, sourceInstitutionId: institution.sourceInstitutionId, accountTypeId: .exchange, accountSubTypeId: nil, name: wallet.currencyCode, currency: wallet.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
                     }
-                }
-                // Sync transactions
-                try self.bitfinexApiClient.fetchTransactions({ (transactions, error) in
-                    guard let unwrappedTransactions = transactions else {
-                        if let unwrappedError = error {
-                            syncingErrors.append(unwrappedError)
-                        }
-                        syncingSuccess = false
-                        performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
-                        return
-                    }
-                    for transaction in unwrappedTransactions
-                    {
-                        let amount = paddedInteger(for: transaction.amount, currencyCode: transaction.currencyCode)
-                        let identifier = "\(transaction.address)\(transaction.amount)\(transaction.movementTimestamp)"
-
-                        TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: identifier, sourceAccountId: transaction.currencyCode, name: identifier, currency: transaction.currencyCode, amount: amount, date: transaction.createdAt, categoryID: nil, institution: institution)
-                    }
                     
-                    performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
-                })
+                    do {
+                        // Sync transactions
+                        try self.bitfinexApiClient.fetchTransactions { transactions, error in
+                            guard let unwrappedTransactions = transactions else {
+                                if let unwrappedError = error {
+                                    syncingErrors.append(unwrappedError)
+                                }
+                                syncingSuccess = false
+                                performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                                return
+                            }
+                            
+                            for transaction in unwrappedTransactions {
+                                let amount = paddedInteger(for: transaction.amount, currencyCode: transaction.currencyCode)
+                                let identifier = "\(transaction.address)\(transaction.amount)\(transaction.movementTimestamp)"
+                                
+                                TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: identifier, sourceAccountId: transaction.currencyCode, name: identifier, currency: transaction.currencyCode, amount: amount, date: transaction.createdAt, categoryID: nil, institution: institution)
+                            }
+                            
+                            performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                        }
+                    } catch {
+                        syncingSuccess = false
+                        syncingErrors.append(error)
+                        performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                    }
+                }
             } catch {
                 if let credentialsError = error as? APICredentialsComponents.Error {
                     switch credentialsError {
@@ -396,7 +403,6 @@ class Syncer {
                 syncingSuccess = false
                 syncingErrors.append(error)
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
-                
                 return
             }
         case .bittrex:
@@ -479,7 +485,6 @@ class Syncer {
                     syncingErrors.append(error)
                     log.error("Error pulling accounts for \(institution): \(error)")
                 }
-                log.debug("Finished pulling accounts for \(institution)")
             }
             
             if self.canceled {
@@ -491,7 +496,6 @@ class Syncer {
                 
                 if let error = error {
                     syncingSuccess = false
-                
                     syncingErrors.append(error)
                     log.error("Error pulling transactions for \(institution): \(error)")
                 }
@@ -518,7 +522,6 @@ class Syncer {
                     syncingErrors.append(error)
                     log.error("Error pulling accounts for \(institution): \(error)")
                 }
-                log.debug("Finished pulling accounts for \(institution)")
             }
             
             if self.canceled {
