@@ -531,7 +531,11 @@
 		E66743F6201935D90009A57F /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66743F5201935D90009A57F /* APIRequest.swift */; };
 		E66743F92019368C0009A57F /* APiCredentialsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66743F82019368C0009A57F /* APiCredentialsProtocol.swift */; };
 		E66743FB20195A460009A57F /* PoloniexAPI2Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66743FA20195A460009A57F /* PoloniexAPI2Action.swift */; };
-		E66743FF20195F900009A57F /* ApiEntityProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66743FE20195F900009A57F /* ApiEntityProtocol.swift */; };
+		E66743FF20195F900009A57F /* ApiEntityProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66743FE20195F900009A57F /* ApiEntityProtocols.swift */; };
+		E6674400201973490009A57F /* PoloniexAPI2Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66743FA20195A460009A57F /* PoloniexAPI2Action.swift */; };
+		E6674401201973540009A57F /* APiCredentialsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66743F82019368C0009A57F /* APiCredentialsProtocol.swift */; };
+		E6674402201973570009A57F /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66743F5201935D90009A57F /* APIRequest.swift */; };
+		E6674403201975440009A57F /* ApiEntityProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66743FE20195F900009A57F /* ApiEntityProtocols.swift */; };
 		E68EE578201587FE00ACB01F /* BITTREXDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312721FE8C3E400F57977 /* BITTREXDataHelper.swift */; };
 		E68EE5792015880400ACB01F /* balances.json in Resources */ = {isa = PBXBuildFile; fileRef = E65312701FE8C3E400F57977 /* balances.json */; };
 		E68EE57A2015880400ACB01F /* currencies.json in Resources */ = {isa = PBXBuildFile; fileRef = E65312711FE8C3E400F57977 /* currencies.json */; };
@@ -1017,7 +1021,7 @@
 		E66743F5201935D90009A57F /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		E66743F82019368C0009A57F /* APiCredentialsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APiCredentialsProtocol.swift; sourceTree = "<group>"; };
 		E66743FA20195A460009A57F /* PoloniexAPI2Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAPI2Action.swift; sourceTree = "<group>"; };
-		E66743FE20195F900009A57F /* ApiEntityProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEntityProtocol.swift; sourceTree = "<group>"; };
+		E66743FE20195F900009A57F /* ApiEntityProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEntityProtocols.swift; sourceTree = "<group>"; };
 		E68EE57F20158CD600ACB01F /* MockInstitutionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInstitutionRepository.swift; sourceTree = "<group>"; };
 		E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddAccountDelegate.swift; path = AddCredentialBasedAccountViewController/AddAccountDelegate.swift; sourceTree = "<group>"; };
 		E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountViewController.swift; sourceTree = "<group>"; };
@@ -2407,7 +2411,7 @@
 		E66743FD20195F680009A57F /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				E66743FE20195F900009A57F /* ApiEntityProtocol.swift */,
+				E66743FE20195F900009A57F /* ApiEntityProtocols.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -2895,6 +2899,7 @@
 				A41D3E4C1F6C32E700FD25B5 /* KrakenAccount.swift in Sources */,
 				53552A221ED7252900DD95F9 /* NSAttributedString.swift in Sources */,
 				A42953CE1F8E179900729045 /* SplashScreenViewController.swift in Sources */,
+				E6674403201975440009A57F /* ApiEntityProtocols.swift in Sources */,
 				53561EB41F82DD260043D4F9 /* TableData.swift in Sources */,
 				535529F21ED724ED00DD95F9 /* AccountsTabViewModel.swift in Sources */,
 				532121A21EE8B91600F4812A /* zip.c in Sources */,
@@ -2927,6 +2932,7 @@
 				A41EE4821FB9B66D00210038 /* QRLoginCredentialsParser.swift in Sources */,
 				532121A81EE8B91600F4812A /* ZipUtilities.swift in Sources */,
 				53DE2E9A1FAF16B000AC9FCF /* KrakenTransaction.swift in Sources */,
+				E6674401201973540009A57F /* APiCredentialsProtocol.swift in Sources */,
 				A4ED56DE1F86378200E4CC42 /* InstitutionTableHeaderView.swift in Sources */,
 				5301A77E1F17FDED00668099 /* Feedback.swift in Sources */,
 				2DF8985D1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */,
@@ -3034,6 +3040,7 @@
 				53561EA81F82DD260043D4F9 /* AccountsListViewController.swift in Sources */,
 				2DF898471FCC8F7500CCDFB9 /* CountlyCommon.m in Sources */,
 				A41EE47D1FB9A98A00210038 /* GDAXTransaction.swift in Sources */,
+				E6674400201973490009A57F /* PoloniexAPI2Action.swift in Sources */,
 				535529FF1ED7250500DD95F9 /* DefaultsStorage.swift in Sources */,
 				53552A181ED7251700DD95F9 /* Account.swift in Sources */,
 				53552A201ED7252900DD95F9 /* NotificationCenter.swift in Sources */,
@@ -3047,6 +3054,7 @@
 				53762EB31ED796F100D34A1E /* main.swift in Sources */,
 				53561EB11F82DD260043D4F9 /* Value1TableViewCell.swift in Sources */,
 				A459EDA41F839D9800DC4B51 /* TransactionsListViewController.swift in Sources */,
+				E6674402201973570009A57F /* APIRequest.swift in Sources */,
 				A4E4571D1F790388002E2879 /* CoinbaseError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3246,7 +3254,7 @@
 				5325508E1D06FED30045404E /* TableView.swift in Sources */,
 				537187E71F4CC23C00E7F9D6 /* CoinbaseApi.swift in Sources */,
 				536C6EF21D864CB900823688 /* DefaultsStorage.swift in Sources */,
-				E66743FF20195F900009A57F /* ApiEntityProtocol.swift in Sources */,
+				E66743FF20195F900009A57F /* ApiEntityProtocols.swift in Sources */,
 				DCC684D81BD1080E00E95B90 /* TransactionsTabViewController.swift in Sources */,
 				2DF898461FCC8F7500CCDFB9 /* CountlyCommon.m in Sources */,
 				530291241C6A6B7200C31CC1 /* AccountType.swift in Sources */,

@@ -22,19 +22,19 @@ struct PoloniexApiAction {
 
 extension PoloniexApiAction: APIAction {
 
-    private var params: [String: String] {
+    private var params: [(key: String, value: String)] {
         switch type {
         case .accounts:
             return [
-                "command": "returnCompleteBalances",
-                "nonce": "\(nonce)"
+                ("command", "returnCompleteBalances"),
+                ("nonce", "\(nonce)")
             ]
         case .transactions:
             return [
-                "command" : "returnDepositsWithdrawals",
-                "start" : "0",
-                "end" : "\(Date().timeIntervalSince1970)",
-                "nonce": "\(nonce)"
+                ("command", "returnDepositsWithdrawals"),
+                ("start", "0"),
+                ("end", "\(Date().timeIntervalSince1970)"),
+                ("nonce", "\(nonce)")
             ]
         }
     }

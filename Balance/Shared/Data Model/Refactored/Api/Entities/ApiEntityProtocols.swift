@@ -1,5 +1,5 @@
 //
-//  ApiEntityProtocol.swift
+//  ApiEntityProtocols.swift
 //  BalancemacOS
 //
 //  Created by Eli Pacheco Hoyos on 1/24/18.

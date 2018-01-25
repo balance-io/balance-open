@@ -32,8 +32,8 @@ public enum ApiRequestDataFormat {
 
 public enum ApiRequestEncoding {
     case none
-    case hmac512
-    case hmac256
+    case hmacSha512
+    case hmacSha256
 }
 
 public protocol APIAction {

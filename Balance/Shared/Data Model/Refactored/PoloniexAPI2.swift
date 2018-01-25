@@ -12,7 +12,7 @@ import Foundation
 class PoloniexAPI2: AbstractApi {
     override var requestMethod: ApiRequestMethod { return .post }
     override var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
-    override var requestEncoding: ApiRequestEncoding { return .hmac512 }
+    override var requestEncoding: ApiRequestEncoding { return .hmacSha512 }
     
     override func processErrors(requestType: ApiRequestType, response: HTTPURLResponse, data: Data) -> ExchangeError? {
         // In this example, look for 400 or 403 errors and return .invalidCredentials, then look for

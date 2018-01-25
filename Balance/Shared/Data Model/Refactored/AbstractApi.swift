@@ -44,7 +44,7 @@ open class AbstractApi: ExchangeApi2 {
     // MARK - ExchangeApi Protocol -
     
     public func fetchData(for action: APIAction, completion: @escaping ExchangeApiOperationCompletionHandler) -> Operation {
-        return performRequest(type: action.type, completion: completion)
+        return performRequest(for: action, completion: completion)
     }
     
 }
@@ -53,7 +53,8 @@ private extension AbstractApi {
     
     // This creates the async network operation based on the overridden options, encapsulates it in an AsyncOperation,
     // and returns that for queuing. The completion handler is called when the operation completes.
-    func performRequest(type: ApiRequestType, completion: @escaping ExchangeApiOperationCompletionHandler) -> Operation {
+    func performRequest(for action: APIAction, completion: @escaping ExchangeApiOperationCompletionHandler) -> Operation {
+        let requestForAction = createRequest(for: action)
         fatalError("Must override")
     }
     
@@ -68,9 +69,9 @@ extension AbstractApi {
         }
         
         switch requestEncoding {
-        case .hmac256:
+        case .hmacSha256:
             return CryptoAlgorithm.sha256.hmac(body: message, key: action.credentials.secretKey)
-        case .hmac512:
+        case .hmacSha512:
             return CryptoAlgorithm.sha512.hmac(body: message, key: action.credentials.secretKey)
         default:
             return nil
