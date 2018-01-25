@@ -88,16 +88,16 @@ class SyncManager: NSObject {
         }
     }
     
-    func sync(userInitiated: Bool = false, validateReceipt: Bool = true, completion: SuccessErrorsHandler? = nil) {
+    func sync(userInitiated: Bool = false, validateReceipt: Bool = true, skip: [Source] = [.coinbase], completion: SuccessErrorsHandler? = nil) {
         guard !syncer.syncing && networkStatus.isReachable && Thread.isMainThread else {
             completion?(true, [])
             return
         }
         
-        performSync(userInitiated: userInitiated, completion: completion)
+        performSync(userInitiated: userInitiated, skip: skip, completion: completion)
     }
     
-    fileprivate func performSync(userInitiated: Bool = false, completion: SuccessErrorsHandler? = nil) {
+    private func performSync(userInitiated: Bool = false, skip: [Source] = [], completion: SuccessErrorsHandler? = nil) {
         // Cancel any automatic runs of this method in case it's called manually
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.automaticSync), object: nil)
        
@@ -114,7 +114,7 @@ class SyncManager: NSObject {
         // Start the sync
         log.debug("Performing full sync")
         self.syncer = debugging.useMockSyncing ? MockSyncer() : Syncer()
-        self.syncer.sync(startDate: Date(timeIntervalSinceNow: -tenYears), pruneTransactions: true) { success, errors in
+        self.syncer.sync(startDate: Date(timeIntervalSinceNow: -tenYears), pruneTransactions: true, skip: skip) { success, errors in
             // Set the last sync dates, record all syncs using the lastSyncTime keys for ease of use then record full syncs separately
             let now = Date()
             self.syncDefaults.lastSyncTime = now

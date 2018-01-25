@@ -167,7 +167,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
     {
-        syncManager.sync(userInitiated: false, validateReceipt: false) { (success, error) in
+        syncManager.sync(userInitiated: false, validateReceipt: false, skip: [.coinbase]) { (success, error) in
             let result: UIBackgroundFetchResult = success ? .newData : .failed
             completionHandler(result)
         }

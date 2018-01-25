@@ -22,7 +22,7 @@ class Syncer {
         canceled = true
     }
     
-    func sync(startDate: Date, pruneTransactions: Bool = false, completion: SuccessErrorsHandler?) {
+    func sync(startDate: Date, pruneTransactions: Bool = false, skip: [Source] = [], completion: SuccessErrorsHandler?) {
         guard !syncing else {
             return
         }
@@ -36,7 +36,9 @@ class Syncer {
         if InstitutionRepository.si.institutionsCount > 0 {
             // Grab the institutions again in case we've added one while syncing categories or we've been canceled
             // and sort them as they're displayed in the UI
-            let institutions = InstitutionRepository.si.allInstitutions(sorted: true)
+            let institutions = InstitutionRepository.si.allInstitutions(sorted: true).filter { institution -> Bool in
+                return !skip.contains(institution.source)
+            }
             
             let success = true
             let errors = [Error]()
@@ -555,7 +557,7 @@ class Syncer {
 }
 
 class MockSyncer: Syncer {
-    override func sync(startDate: Date, pruneTransactions: Bool, completion: SuccessErrorsHandler?) {
+    override func sync(startDate: Date, pruneTransactions: Bool, skip: [Source] = [], completion: SuccessErrorsHandler?) {
         guard !syncing else {
             return
         }
