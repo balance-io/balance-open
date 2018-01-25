@@ -221,7 +221,7 @@ class AddAccountViewController: NSViewController {
         containerView.addSubview(githubButton)
         githubButton.snp.makeConstraints { make in
             make.height.equalTo(20)
-            make.left.equalToSuperview().offset(backButton.frame.size.width + 25)
+            make.left.equalTo(backButton.snp.right).offset(5)
             make.centerY.equalTo(backButton)
         }
         
