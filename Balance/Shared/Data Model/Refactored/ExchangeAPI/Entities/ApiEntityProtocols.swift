@@ -12,6 +12,7 @@ public protocol Credentials {
     var apiKey: String { get }
     var secretKey: String { get }
     var passphrase: String { get }
+    var address: String { get }
 }
 
 public protocol ExchangeInstitution {

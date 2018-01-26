@@ -28,7 +28,7 @@ protocol ApiInstitution {
 public struct Field {
     var name: String
     var type: FieldType
-    var value: String?
+    var value: String
     
     var testValue: String? {
         switch type {

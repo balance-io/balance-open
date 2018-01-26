@@ -31,7 +31,7 @@ final class NewAccountViewModel {
         for index in 0 ..< fields.count {
             let textField = self.textField(at: index)
             var sourceField = fields[index]
-            sourceField.value = textField.text
+            sourceField.value = textField.text ?? ""
             newFields.append(sourceField)
         }
         return newFields

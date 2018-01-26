@@ -68,9 +68,9 @@ class KeychainManager: KeychainManagement {
                 do {
                     if var dict = try KeychainWrapper.getDictionary(forIdentifier: keychainName) {
                         dict[key] = newValue
-                        try KeychainWrapper.setDictionary(dict, forIdentifier: keychainName)
+                        try KeychainWrapper.setDictionary(dict, for: keychainName)
                     } else {
-                        try KeychainWrapper.setDictionary([key: newValue], forIdentifier: keychainName)
+                        try KeychainWrapper.setDictionary([key: newValue], for: keychainName)
                     }
                 } catch {
                     log.severe("Couldn't write to keychain using key \(key): \(error)")
@@ -80,7 +80,7 @@ class KeychainManager: KeychainManagement {
                 do {
                     if var dict = try KeychainWrapper.getDictionary(forIdentifier: keychainName) {
                         dict.removeValue(forKey: key)
-                        try KeychainWrapper.setDictionary(dict, forIdentifier: keychainName)
+                        try KeychainWrapper.setDictionary(dict, for: keychainName)
                     }
                 } catch {
                     log.severe("Couldn't write to keychain using key \(key): \(error)")

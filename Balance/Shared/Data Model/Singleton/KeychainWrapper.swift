@@ -34,7 +34,7 @@ struct KeychainWrapper {
         #endif
     }
     
-    static func setDictionary(_ dictionary: [String: Any], forIdentifier identifier: String) throws {
+    static func setDictionary(_ dictionary: [String: Any], for identifier: String) throws {
         let data = NSKeyedArchiver.archivedData(withRootObject: dictionary)
         var keychainQuery: [CFString: Any] = [kSecClass: kSecClassGenericPassword,
                                               kSecAttrService: try serviceIdentifier(),

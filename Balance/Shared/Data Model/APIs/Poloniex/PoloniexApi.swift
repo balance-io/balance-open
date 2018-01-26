@@ -250,6 +250,7 @@ class PoloniexApi: ExchangeApi {
         return poloniexAccounts
     }
     
+    //TODO: check if these code is needed
     fileprivate func processPoloniexAccounts(accounts: [PoloniexAccount], institution: Institution) {
         for account in accounts {
             // Create or update the local account object
@@ -267,6 +268,7 @@ class PoloniexApi: ExchangeApi {
     }
 }
 
+//TODO: check if these code is needed
 extension PoloniexAccount {
     var altCurrency: Currency {
         return Currency.rawValue("BTC")
