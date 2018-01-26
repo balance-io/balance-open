@@ -56,8 +56,8 @@ class ExchangeManager: ExchangeManagerAction {
         switch source {
         case .poloniex:
             let api = PoloniexAPI2.init(session: urlSession)
-            let action = PoloniexApiAction.init(type: .accounts, credentials: credentials)
-            let fetchAccountsOperation = api.fetchData(for: action, completion: { [weak self] (success, error, result) in
+            let locingAction = PoloniexApiAction.init(type: .accounts, credentials: credentials)
+            let fetchAccountsOperation = api.fetchData(for: locingAction, completion: { [weak self] (success, error, result) in
                 let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
                 self?.processLoginCallbackResult(callbackResult, source: source, credentials: credentials)
             })
@@ -69,15 +69,37 @@ class ExchangeManager: ExchangeManagerAction {
     }
     
     func refresh(institution: Institution) {
-        
+        let source = institution.source
+        switch source {
+        case .poloniex:
+            refreshPoloniex(with: institution)
+        default:
+            return
+        }
     }
     
 }
 
 private extension ExchangeManager {
     
-    func processRefreshCallback(_ callbackResult: ExchangeCallbackResult, source: Source, credentials: Credentials) {
+    func processRefreshCallback(_ callbackResult: ExchangeCallbackResult, institution: Institution, credentials: Credentials) {
+        let result = callbackResult.result
         
+        if !result.isEmpty, callbackResult.success {
+            
+            if let transactions = result as? [ExchangeTransaction] {
+                repositoryService.createTransactions(for: institution.source, transactions: transactions)
+                //TODO: change state using the account result too
+            }
+            
+            return
+        }
+        
+        //TODO: validate error like invalid credentials and change state
+        if let error = callbackResult.error as? APIBasicError {
+            institution.passwordInvalid = true
+            institution.replace()
+        }
     }
     
     func processLoginCallbackResult(_ callbackResult: ExchangeCallbackResult, source: Source, credentials: Credentials) {
@@ -104,6 +126,35 @@ private extension ExchangeManager {
         if let error = callbackResult.error as? APIBasicError {
             
         }
+    }
+    
+}
+
+private extension ExchangeManager {
+    
+    func refreshPoloniex(with institution: Institution) {
+        guard let apiKey = institution.apiKey, let secret = institution.secret else {
+            print("Error - Can't refresh poloniex institution without credentials")
+            return
+        }
+        
+        let api = PoloniexAPI2.init(session: urlSession)
+        let credentials = BalanceCredentials(apiKey: apiKey, secretKey: secret)
+        let refreshTransactionAction = PoloniexApiAction(type: .transactions, credentials: credentials)
+        
+        let refreshTransationOperation = api.fetchData(for: refreshTransactionAction) { [weak self] (success, error, result) in
+            let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
+            self?.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
+        }
+        
+        let refreshAccountsAction = PoloniexApiAction.init(type: .accounts, credentials: credentials)
+        let refreshAccountsOperation = api.fetchData(for: refreshAccountsAction) { [weak self] (success, error, result) in
+            let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
+            self?.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
+        }
+        
+        refreshQueue.addOperation(refreshAccountsOperation)
+        refreshQueue.addOperation(refreshTransationOperation)
     }
     
 }

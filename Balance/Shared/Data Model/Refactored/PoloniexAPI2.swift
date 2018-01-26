@@ -20,7 +20,7 @@ class PoloniexAPI2: AbstractApi {
         fatalError("not implemented")
     }
     
-    override func processData(requestType: ApiRequestType, data: Data) -> [Any] {
+    override func processData(requestType: ApiRequestType, data: Data) -> Any {
         // Parse the JSON into [PoloniexAccount] or [PoloniexInstitution] depending on request type
         // and return for handling in the completion block by the app
         fatalError("not implemented")

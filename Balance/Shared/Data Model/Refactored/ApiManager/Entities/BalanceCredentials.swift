@@ -15,11 +15,11 @@ struct BalanceCredentials: Credentials {
     let passphrase: String
     let address: String
     
-    init(apiKey: String, secretKey: String, passphrase: String, address: String) {
-        self.apiKey = apiKey
-        self.secretKey = secretKey
-        self.passphrase = passphrase
-        self.address = address
+    init(apiKey: String? = nil, secretKey: String? = nil, passphrase: String? = nil, address: String? = nil) {
+        self.apiKey = apiKey ?? ""
+        self.secretKey = secretKey ?? ""
+        self.passphrase = passphrase ?? ""
+        self.address = address ?? ""
     }
     
     init(fields: [Field]) {
