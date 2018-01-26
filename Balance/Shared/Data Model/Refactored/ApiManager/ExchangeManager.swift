@@ -83,7 +83,7 @@ private extension ExchangeManager {
     func processLoginCallbackResult(_ callbackResult: ExchangeCallbackResult, source: Source, credentials: Credentials) {
         guard let institution = repositoryService.createInstitution(for: .poloniex) else {
             print("Error - Can't create institution for poloniex login")
-            //TODO: notify state
+            //TODO: change state
             return
         }
         
@@ -94,12 +94,13 @@ private extension ExchangeManager {
             if let accounts = result as? [ExchangeAccount] {
                 keychainService.save(source: source, identifier: "\(institution.institutionId)", credentials: credentials)
                 repositoryService.createAccounts(for: source, accounts: accounts, institution: institution)
+                //TODO: change state
             }
             
             return
         }
         
-        //TODO: validate error like invalid credentials and notify state
+        //TODO: validate error like invalid credentials and change state
         if let error = callbackResult.error as? APIBasicError {
             
         }
