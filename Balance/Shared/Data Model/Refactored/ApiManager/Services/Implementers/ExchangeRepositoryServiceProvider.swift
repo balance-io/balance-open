@@ -24,7 +24,7 @@ class ExchangeRepositoryServiceProvider: RepositoryServiceProtocol {
     }
     
     func createTransactions(for source: Source, transactions: [ExchangeTransaction]) {
-        
+        saveExchangeTransactions(transactions)
     }
     
 }
@@ -92,7 +92,7 @@ private extension ExchangeRepositoryServiceProvider {
                                              sourceAccountId: transaction.sourceAccountId,
                                              name: transaction.name,
                                              currency: transaction.currencyCode,
-                                             amount: transaction.amount,
+                                             amount: transaction.amount, //TODO: use amountWithDecimals instead normal amount and each exchange transaction must validate if has to return with decimals or not
                                              date: transaction.date,
                                              categoryID: nil,
                                              sourceInstitutionId: transaction.sourceInstitutionId,
