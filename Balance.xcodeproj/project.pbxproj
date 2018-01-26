@@ -1991,12 +1991,10 @@
 		53F696622016876A00D28B23 /* Refactored */ = {
 			isa = PBXGroup;
 			children = (
-				E6635C65201A775A00D9720E /* ApiManager */,
 				53F69669201691E100D28B23 /* PoloniexAPI2.swift */,
 				E66743FA20195A460009A57F /* PoloniexAPI2Action.swift */,
-				E66743FC20195E8A0009A57F /* ExchangeAPI */,
-				53F696632016879F00D28B23 /* ExchangeProtocols.swift */,
-				53F6966620168D4400D28B23 /* AbstractApi.swift */,
+				E6635C65201A775A00D9720E /* ApiManager */,
+				E66743FC20195E8A0009A57F /* Interface */,
 			);
 			path = Refactored;
 			sourceTree = "<group>";
@@ -2438,13 +2436,15 @@
 			path = Request;
 			sourceTree = "<group>";
 		};
-		E66743FC20195E8A0009A57F /* ExchangeAPI */ = {
+		E66743FC20195E8A0009A57F /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				53F6966620168D4400D28B23 /* AbstractApi.swift */,
+				53F696632016879F00D28B23 /* ExchangeProtocols.swift */,
 				E66743FD20195F680009A57F /* Entities */,
 				E66743F72019363D0009A57F /* Request */,
 			);
-			path = ExchangeAPI;
+			path = Interface;
 			sourceTree = "<group>";
 		};
 		E66743FD20195F680009A57F /* Entities */ = {
