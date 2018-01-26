@@ -88,7 +88,7 @@ class SyncManager: NSObject {
         }
     }
     
-    func sync(userInitiated: Bool = false, validateReceipt: Bool = true, skip: [Source] = [.coinbase], completion: SuccessErrorsHandler? = nil) {
+    func sync(userInitiated: Bool = false, validateReceipt: Bool = true, skip: [Source] = [], completion: SuccessErrorsHandler? = nil) {
         guard !syncer.syncing && networkStatus.isReachable && Thread.isMainThread else {
             completion?(true, [])
             return
