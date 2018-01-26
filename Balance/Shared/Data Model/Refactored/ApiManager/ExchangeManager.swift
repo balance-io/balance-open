@@ -59,7 +59,7 @@ class ExchangeManager: ExchangeManagerAction {
             let action = PoloniexApiAction.init(type: .accounts, credentials: credentials)
             let fetchAccountsOperation = api.fetchData(for: action, completion: { [weak self] (success, error, result) in
                 let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
-                self?.processLoginCallback(callbackResult, source: source, credentials: credentials)
+                self?.processLoginCallbackResult(callbackResult, source: source, credentials: credentials)
             })
             
             autenticationQueue.addOperation(fetchAccountsOperation)
@@ -76,25 +76,11 @@ class ExchangeManager: ExchangeManagerAction {
 
 private extension ExchangeManager {
     
-    struct KeychainConstants {
-        static let secretKey = "secret"
-        static let apiKey = "apiKey"
-    }
-    
-    func processLoginCallback(_ callbackResult: ExchangeCallbackResult, source: Source, credentials: Credentials) {
-        switch source {
-        case .poloniex:
-            processPoloniexLogin(callbackResult, credentials: credentials)
-        default:
-            return
-        }
-    }
-    
     func processRefreshCallback(_ callbackResult: ExchangeCallbackResult, source: Source, credentials: Credentials) {
         
     }
     
-    func processPoloniexLogin(_ callbackResult: ExchangeCallbackResult, credentials: Credentials) {
+    func processLoginCallbackResult(_ callbackResult: ExchangeCallbackResult, source: Source, credentials: Credentials) {
         guard let institution = repositoryService.createInstitution(for: .poloniex) else {
             print("Error - Can't create institution for poloniex login")
             //TODO: notify state
@@ -105,10 +91,10 @@ private extension ExchangeManager {
         
         if !result.isEmpty, callbackResult.success {
             
-            let poloniexKeychainSecretKeyAccount = "secret institutionId: \(institution.institutionId)"
-            keychainService.save(account: poloniexKeychainSecretKeyAccount, key: KeychainConstants.secretKey, value: credentials.secretKey)
-            let poloniexKeychainApiKeyAccount = "apiKey institutionId: \(institution.institutionId)"
-            keychainService.save(account: poloniexKeychainApiKeyAccount, key: KeychainConstants.secretKey, value: credentials.apiKey)
+            if let accounts = result as? [ExchangeAccount] {
+                keychainService.save(source: source, identifier: "\(institution.institutionId)", credentials: credentials)
+                repositoryService.createAccounts(for: source, accounts: accounts, institution: institution)
+            }
             
             return
         }

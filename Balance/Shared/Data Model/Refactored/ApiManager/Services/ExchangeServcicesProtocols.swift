@@ -10,12 +10,11 @@ import Foundation
 
 protocol RepositoryServiceProtocol {
     func createInstitution(for source: Source) -> Institution?
-    func processAccounts(for source: Source, accounts: [ExchangeAccount], institution: ExchangeInstitution)
-    func processTransactions(for source: Source, transactions: [ExchangeTransaction])
+    func createAccounts(for source: Source, accounts: [ExchangeAccount], institution: Institution)
+    func createTransactions(for source: Source, transactions: [ExchangeTransaction])
 }
 
 protocol KeychainServiceProtocol: class {
-    func save(identifier: String, value: [String: Any]) throws
-    func save(account: String, key: String, value: String)
+    func save(source: Source, identifier: String, credentials: Credentials)
     func fetch(account: String, key: String) -> String?
 }
