@@ -8,7 +8,7 @@
 
 /// This data is duplicated in the accountTypes database table for use in joins if needed
 // TODO: populate that table
-enum AccountType: Int, CustomStringConvertible {
+public enum AccountType: Int, CustomStringConvertible {
     // Main types
     case depository             = 1
     case credit                 = 2
@@ -69,7 +69,7 @@ enum AccountType: Int, CustomStringConvertible {
         }
     }
     
-    var description: String {
+    public var description: String {
         switch self {
         case .depository:            return "Depository"
         case .credit:                return "Credit"
