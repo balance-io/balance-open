@@ -46,6 +46,10 @@ final class NewAccountViewModel {
         }
     }
     
+    var helpNeeded: Bool {
+        return self.source.helpUrl.host != nil
+    }
+    
     var existingInstitutionId: Int? {
         return existingInstitution?.institutionId
     }
