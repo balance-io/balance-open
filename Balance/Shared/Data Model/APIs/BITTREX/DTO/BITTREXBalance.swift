@@ -14,8 +14,8 @@ struct BITTREXBalance: Codable {
     let balance: Double
     let available: Double
     let pending: Double
-    let cryptoAddress: String
-    let requested: Bool
+    let cryptoAddress: String?
+    let requested: Bool?
     let uuid: String?
     
     enum CodingKeys: String, CodingKey {
