@@ -14,6 +14,7 @@ open class AbstractApi: ExchangeApi2 {
     open var requestMethod: ApiRequestMethod { return .get }
     open var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
     open var requestEncoding: ApiRequestEncoding { return .none }
+    open var encondingMessageType: ApiEncondingMessageType { return .none }
     
     private var session: URLSession
     
@@ -64,14 +65,29 @@ private extension AbstractApi {
 // MARK: Helper functions
 extension AbstractApi {
     
+    func generateMessageSigned(from message: Data, secretKeyEncoded: Data) -> String? {
+        guard let dataSigned = createSignatureData(with: message, secretKeyData: secretKeyEncoded) else {
+            return nil
+        }
+        
+        switch encondingMessageType {
+        case .base64:
+            return dataSigned.base64EncodedString()
+        case .concatenate(let format):
+            return dataSigned.reduce("") { (result, byte) -> String in
+                return result + String(format: format, byte)
+            }
+        default:
+            return nil
+        }
+    }
+    
     func generateMessageSigned(for action: APIAction) -> String? {
         guard let message = createMessage(for: action) else {
             return nil
         }
         
         switch requestEncoding {
-        case .hmacSha256:
-            return CryptoAlgorithm.sha256.hmac(body: message, key: action.credentials.secretKey)
         case .hmacSha512:
             return CryptoAlgorithm.sha512.hmac(body: message, key: action.credentials.secretKey)
         default:
@@ -79,4 +95,45 @@ extension AbstractApi {
         }
     }
     
+    private func createSignatureData(with message: Data, secretKeyData: Data) -> Data?
+    {
+        // Create the signature
+        guard case let .hmac(algorithm, digestLength) = requestEncoding else {
+            return nil
+        }
+        
+        let signatureCapacity = digestLength
+        let signature = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: signatureCapacity)
+        defer
+        {
+            signature.deallocate(capacity: signatureCapacity)
+        }
+        
+        secretKeyData.withUnsafeBytes({ (secretBytes: UnsafePointer<UInt8>) -> Void in
+            message.withUnsafeBytes({ (messageBytes: UnsafePointer<UInt8>) -> Void in
+                CCHmac(algorithm, secretBytes, secretKeyData.count, messageBytes, message.count, signature)
+            })
+        })
+        
+        return Data(bytes: signature, count: signatureCapacity)
+    }
+    
+}
+
+fileprivate extension String {
+    
+    func sha256() -> Data? {
+        guard let selfData = self.data(using: .utf8) else {
+            return nil
+        }
+        
+        var digestData = Data(count: Int(CC_SHA256_DIGEST_LENGTH))
+        _ = digestData.withUnsafeMutableBytes { bytes in
+            selfData.withUnsafeBytes({ selfBytes in
+                CC_SHA256(selfBytes, UInt32(selfData.count), bytes)
+            })
+        }
+        
+        return digestData
+    }
 }

@@ -33,7 +33,13 @@ public enum ApiRequestDataFormat {
 public enum ApiRequestEncoding {
     case none
     case hmacSha512
-    case hmacSha256
+    case hmac(hmacAlgorithm: CCHmacAlgorithm, digestLength: Int)
+}
+
+public enum ApiEncondingMessageType {
+    case none
+    case base64
+    case concatenate(format: String)
 }
 
 public protocol APIAction {
