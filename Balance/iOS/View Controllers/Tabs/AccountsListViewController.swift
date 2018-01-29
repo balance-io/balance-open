@@ -321,7 +321,9 @@ extension AccountsListViewController: StackedLayoutDelegate {
         let measurementCell = InstitutionCollectionViewCell.measurementCell
         measurementCell.viewModel = InstitutionAccountsListViewModel(institution: institution)
         
-        return measurementCell.closedContentHeight
+        // NOTE: It's unintuitive but in the iOS implementation, the table has only one actual section with tables inside the cards,
+        // so in this case, the row of the indexPath in the collection view is the section
+        return viewModel.isLastSection(indexPath.row) ? measurementCell.closedContentHeight - 40 : measurementCell.closedContentHeight
     }
     
     func expandedHeightForItem(at indexPath: IndexPath, in collectionView: UICollectionView) -> CGFloat {

@@ -126,6 +126,10 @@ class AccountsTabViewModel: TabViewModel {
         return 0
     }
     
+    func isLastSection(_ section: Int) -> Bool {
+        return section == numberOfSections() - 1
+    }
+    
     func isLastRow(_ row: Int, inSection section: Int) -> Bool {
         return row == numberOfRows(inSection: section) - 1
     }
