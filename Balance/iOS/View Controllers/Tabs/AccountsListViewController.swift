@@ -8,8 +8,7 @@
 
 import UIKit
 
-
-internal final class AccountsListViewController: UIViewController {
+final class AccountsListViewController: UIViewController {
     // Fileprivate
     fileprivate let viewModel = AccountsTabViewModel()
     
@@ -74,7 +73,7 @@ internal final class AccountsListViewController: UIViewController {
         }
         
         // Refresh controler
-        refreshControl.tintColor = UIColor.white
+        refreshControl.tintColor = .white
         refreshControl.addTarget(self, action: #selector(self.refreshControlValueChanged(_:)), for: .valueChanged)
         
         // Collection view
@@ -119,6 +118,11 @@ internal final class AccountsListViewController: UIViewController {
         
         view.bringSubview(toFront: titleLabel)
         view.bringSubview(toFront: headerAddAcountButton)
+        
+        // NOTE: Due to a bug in UIRefreshControl (since iOS 7...yeah), if we don't call this here the
+        // tintColor will not be used on the first refresh unless the user manually drags the table down a bit
+        showLoadingSpinner()
+        refreshControl.endRefreshing()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -129,11 +133,15 @@ internal final class AccountsListViewController: UIViewController {
         
         reloadData()
         
-        DispatchQueue.main.async(after: 1.0) {
+        async(after: 1.0) {
             self.presentReconnectViewIfNeeded()
         }
         
         registerForNotifications()
+        
+        if syncManager.syncing {
+            showLoadingSpinner()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -167,6 +175,7 @@ internal final class AccountsListViewController: UIViewController {
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.AccountHidden)
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.AccountUnhidden)
         
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(showLoadingSpinner), name: Notifications.SyncStarted)
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.SyncCompleted)
         
         NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.MasterCurrencyChanged)
@@ -185,12 +194,29 @@ internal final class AccountsListViewController: UIViewController {
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.AccountHidden)
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.AccountUnhidden)
         
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.SyncStarted)
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.SyncCompleted)
         
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.MasterCurrencyChanged)
     }
     
     // MARK: Reload Data
+    
+    @objc func showLoadingSpinner() {
+        guard !refreshControl.isRefreshing && InstitutionRepository.si.hasInstitutions else {
+            return
+        }
+        
+        // If we're at the top of the view, like on first launch, then slide the view down to show the spinner
+        // otherwise, don't so it doesn't interrupt the user if they've scrolled down but they can still see it
+        // if they scroll up
+        if collectionView.contentOffset == CGPoint.zero {
+            collectionView.setContentOffset(CGPoint(x: 0, y: -1), animated: false)
+            collectionView.setContentOffset(CGPoint(x: 0, y: -refreshControl.frame.size.height), animated: true)
+        }
+        
+        refreshControl.beginRefreshing()
+    }
     
     @objc func reloadData() {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(reloadDataDelayed), object: nil)
@@ -215,7 +241,9 @@ internal final class AccountsListViewController: UIViewController {
         
         totalBalanceBar.totalBalanceLabel.text = viewModel.formattedMasterCurrencyTotalBalance
         
-        refreshControl.endRefreshing()
+        if !syncManager.syncing {
+            refreshControl.endRefreshing()
+        }
     }
     
     func presentReconnectViewIfNeeded() {
