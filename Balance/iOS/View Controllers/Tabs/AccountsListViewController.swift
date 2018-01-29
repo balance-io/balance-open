@@ -119,6 +119,10 @@ internal final class AccountsListViewController: UIViewController {
         
         view.bringSubview(toFront: titleLabel)
         view.bringSubview(toFront: headerAddAcountButton)
+        
+        self.collectionView.setContentOffset(CGPoint(x: 0, y: -1.0), animated: false);
+        self.collectionView.setContentOffset(CGPoint(x: 0, y: -self.refreshControl.frame.size.height), animated: true)
+        self.refreshControl.beginRefreshing()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -134,11 +138,6 @@ internal final class AccountsListViewController: UIViewController {
         }
         
         registerForNotifications()
-        
-        self.collectionView.setContentOffset(CGPoint(x: 0, y: -1.0), animated: false);
-        self.collectionView.setContentOffset(CGPoint(x: 0, y: -self.refreshControl.frame.size.height), animated: true)
-        self.refreshControl.beginRefreshing()
-
     }
     
     override func viewWillDisappear(_ animated: Bool) {
