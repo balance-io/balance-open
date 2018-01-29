@@ -32,7 +32,7 @@ internal extension APICredentials
     internal func save(identifier: String) throws
     {
         let namespacedIdentifier = self.namespacedKeychainIdentifier(identifier)
-        try KeychainWrapper.setDictionary(components.dictionary, forIdentifier: namespacedIdentifier)
+        try KeychainWrapper.setDictionary(components.dictionary, for: namespacedIdentifier)
     }
     
     // MARK: Signature

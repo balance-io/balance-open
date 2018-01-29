@@ -48,8 +48,8 @@ internal final class BitfinexAPIClient
         // MARK: Initialization
         
         init() {
-            let keyField = Field(name: "API key", type: .key, value: nil)
-            let secretField = Field(name: "API key secret", type: .secret, value: nil)
+            let keyField = Field(name: "API key", type: .key, value: "")
+            let secretField = Field(name: "API key secret", type: .secret, value: "")
             self.fields = [keyField, secretField]
         }
     }
@@ -217,9 +217,9 @@ extension BitfinexAPIClient: ExchangeApi {
         for field in loginStrings {
             switch field.type {
             case .key:
-                keyField = field.value?.trimmingCharacters(in: .whitespacesAndNewlines)
+                keyField = field.value.trimmingCharacters(in: .whitespacesAndNewlines)
             case .secret:
-                secretField = field.value?.trimmingCharacters(in: .whitespacesAndNewlines)
+                secretField = field.value.trimmingCharacters(in: .whitespacesAndNewlines)
             default:
                 assert(false, "wrong fields are passed into the Bitfinex auth, we require secret and key fields and values")
             }

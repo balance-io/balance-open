@@ -23,7 +23,7 @@ class KeychainWrapperTests: XCTestCase {
     func testSetNewDictionary() {
         let setDict: [String: Any] = ["Key1": "Value1", "Key2": "Value2"]
         
-        XCTAssertNoThrow(try KeychainWrapper.setDictionary(setDict, forIdentifier: setNewDictionaryIdentifier))
+        XCTAssertNoThrow(try KeychainWrapper.setDictionary(setDict, for: setNewDictionaryIdentifier))
         
         var getDict: [String: Any]? = nil
         XCTAssertNoThrow(getDict = try KeychainWrapper.getDictionary(forIdentifier: setNewDictionaryIdentifier))
@@ -36,7 +36,7 @@ class KeychainWrapperTests: XCTestCase {
         let setDict: [String: Any] = ["Key1": "Value1", "Key2": "Value2"]
         let setDict2: [String: Any] = ["Key1": "Value3", "Key2": "Value4"]
         
-        XCTAssertNoThrow(try KeychainWrapper.setDictionary(setDict, forIdentifier: setUpdateDictionaryIdentifier))
+        XCTAssertNoThrow(try KeychainWrapper.setDictionary(setDict, for: setUpdateDictionaryIdentifier))
         
         var getDict: [String: Any]? = nil
         XCTAssertNoThrow(getDict = try KeychainWrapper.getDictionary(forIdentifier: setUpdateDictionaryIdentifier))
@@ -44,7 +44,7 @@ class KeychainWrapperTests: XCTestCase {
         XCTAssertEqual(setDict["Key1"] as? String, getDict?["Key1"] as? String)
         XCTAssertEqual(setDict["Key2"] as? String, getDict?["Key2"] as? String)
         
-        XCTAssertNoThrow(try KeychainWrapper.setDictionary(setDict2, forIdentifier: setUpdateDictionaryIdentifier))
+        XCTAssertNoThrow(try KeychainWrapper.setDictionary(setDict2, for: setUpdateDictionaryIdentifier))
         
         var getDict2: [String: Any]? = nil
         XCTAssertNoThrow(getDict2 = try KeychainWrapper.getDictionary(forIdentifier: setUpdateDictionaryIdentifier))
@@ -56,7 +56,7 @@ class KeychainWrapperTests: XCTestCase {
     func testDeleteDictionary() {
         let setDict: [String: Any] = ["Key1": "Value1", "Key2": "Value2"]
         
-        XCTAssertNoThrow(try KeychainWrapper.setDictionary(setDict, forIdentifier: setDeleteDictionaryIdentifier))
+        XCTAssertNoThrow(try KeychainWrapper.setDictionary(setDict, for: setDeleteDictionaryIdentifier))
         
         var getDict: [String: Any]? = nil
         XCTAssertNoThrow(getDict = try KeychainWrapper.getDictionary(forIdentifier: setDeleteDictionaryIdentifier))

@@ -46,9 +46,9 @@ internal final class GDAXAPIClient
         var fields: [Field]
         
         init() {
-            let keyField = Field(name: "API Key", type: .key, value: nil)
-            let secretField = Field(name: "API Secret", type: .secret, value: nil)
-            let passphraseField = Field(name: "Passphrase", type: .passphrase, value: nil)
+            let keyField = Field(name: "API Key", type: .key, value: "")
+            let secretField = Field(name: "API Secret", type: .secret, value: "")
+            let passphraseField = Field(name: "Passphrase", type: .passphrase, value: "")
             self.fields = [keyField, secretField, passphraseField]
         }
     }
@@ -238,11 +238,11 @@ extension GDAXAPIClient: ExchangeApi {
         var passphrasField: String?
         for field in loginStrings {
             if field.type == .key {
-                keyField = field.value?.trimmingCharacters(in: .whitespacesAndNewlines)
+                keyField = field.value.trimmingCharacters(in: .whitespacesAndNewlines)
             } else if field.type == .secret {
-                secretField = field.value?.trimmingCharacters(in: .whitespacesAndNewlines)
+                secretField = field.value.trimmingCharacters(in: .whitespacesAndNewlines)
             } else if field.type == .passphrase {
-                passphrasField = field.value?.trimmingCharacters(in: .whitespacesAndNewlines)
+                passphrasField = field.value.trimmingCharacters(in: .whitespacesAndNewlines)
             } else {
                 assert(false, "wrong fields are passed into the gdax auth, we require secret and key fields and values")
             }

@@ -233,6 +233,7 @@ class PoloniexApi: ExchangeApi {
     
 }
 
+//TODO: check if these code is needed
 extension PoloniexAccount {
     var altCurrency: Currency {
         return Currency.rawValue("BTC")

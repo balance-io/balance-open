@@ -34,7 +34,7 @@ extension SignUpTextField {
         let value = textField.stringValue
         switch self.type {
         case .none:
-            return Field(name: type.rawValue, type: fieldType, value: nil)
+            return Field(name: type.rawValue, type: fieldType, value: "")
         default:
             return Field(name: type.rawValue, type: fieldType, value: value)
         }
