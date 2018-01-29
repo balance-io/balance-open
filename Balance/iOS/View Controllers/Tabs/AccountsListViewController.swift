@@ -134,6 +134,11 @@ internal final class AccountsListViewController: UIViewController {
         }
         
         registerForNotifications()
+        
+        self.collectionView.setContentOffset(CGPoint(x: 0, y: -1.0), animated: false);
+        self.collectionView.setContentOffset(CGPoint(x: 0, y: -self.refreshControl.frame.size.height), animated: true)
+        self.refreshControl.beginRefreshing()
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
