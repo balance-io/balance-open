@@ -13,14 +13,21 @@ class PoloniexAPI2: AbstractApi {
     override var requestMethod: ApiRequestMethod { return .post }
     override var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
     override var requestEncoding: ApiRequestEncoding { return .hmacSha512 }
-    
-    override func processErrors(requestType: ApiRequestType, response: HTTPURLResponse, data: Data) -> ExchangeError? {
-        // In this example, look for 400 or 403 errors and return .invalidCredentials, then look for
-        // correct data format and either return .other or nil
-        fatalError("not implemented")
+
+    override func processErrors(requestType: ApiRequestType, response: HTTPURLResponse, data: Data?, error: Error?) -> Error? {
+        
+        if let error = processBaseErrors(response: response, error: error) {
+            return error
+        }
+        
+        if let _ = createDict(from: data) {
+            return nil
+        }
+        
+        return nil
     }
     
-    override func processData(requestType: ApiRequestType, data: Data) -> Any {
+    override func processData(requestType: ApiRequestType, data: Data) -> [Any] {
         // Parse the JSON into [PoloniexAccount] or [PoloniexInstitution] depending on request type
         // and return for handling in the completion block by the app
         fatalError("not implemented")
@@ -52,4 +59,26 @@ class PoloniexAPI2: AbstractApi {
         return action.components.query
     }
     
+    class func buildObject(from data: Data, for type: ApiRequestType) -> [Any] {
+        return type == .accounts ? buildAccounts(from: data) : buildTransacionts(from: data)
+    }
+}
+
+private extension PoloniexAPI2 {
+    
+    class func buildTransacionts(from data: Data) -> [Any] {
+        guard let transactions = try? JSONDecoder().decode([NewPoloniexTransaction].self, from: data) else {
+            return []
+        }
+        
+        return transactions
+    }
+    
+    class func buildAccounts(from data: Data) -> [Any] {
+        guard let accounts = try? JSONDecoder().decode([NewPoloniexAccount].self, from: data) else {
+            return []
+        }
+        
+        return accounts
+    }
 }

@@ -231,41 +231,6 @@ class PoloniexApi: ExchangeApi {
         return request
     }
     
-    fileprivate func parsePoloniexAccounts(data: Data) throws -> [PoloniexAccount] {
-        guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] else {
-            throw PoloniexApi.CredentialsError.bodyNotValidJSON
-        }
-        
-        var poloniexAccounts = [PoloniexAccount]()
-        for (currencyShortName, dictionary) in dict {
-            do {
-                if let dictionary = dictionary as? [String: AnyObject] {
-                    let poloniexAccount = try PoloniexAccount(dictionary: dictionary, currencyShortName: currencyShortName, type: .exchange)
-                    poloniexAccounts.append(poloniexAccount)
-                }
-            } catch {
-                log.error("Failed to parse account data: \(error)")
-            }
-        }
-        return poloniexAccounts
-    }
-    
-    //TODO: check if these code is needed
-    fileprivate func processPoloniexAccounts(accounts: [PoloniexAccount], institution: Institution) {
-        for account in accounts {
-            // Create or update the local account object
-            account.updateLocalAccount(institution: institution)
-        }
-        
-        let accounts = AccountRepository.si.accounts(institutionId: institution.institutionId)
-        for account in accounts {
-            let index = accounts.index(where: {$0.currency == account.currency})
-            if index == nil {
-                // This account doesn't exist in the response, so remove it
-                AccountRepository.si.delete(account: account)
-            }
-        }
-    }
 }
 
 //TODO: check if these code is needed
@@ -284,26 +249,6 @@ extension PoloniexAccount {
         return (altBalance as NSDecimalNumber).intValue
     }
     
-    @discardableResult func updateLocalAccount(institution: Institution) -> Account? {
-        // Calculate the integer value of the balance based on the decimals
-        let currentBalance = balance
-        let altCurrentBalance = altBalance
-        
-        // Poloniex doesn't have id's per-se, the id a coin is the coin symbol itself
-        if let newAccount = AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: currency.code, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: currency.code, currency: currency.code, currentBalance: currentBalance, availableBalance: nil, number: nil, altCurrency: altCurrency.code, altCurrentBalance: altCurrentBalance, altAvailableBalance: nil) {
-            
-            // Hide unpoplular currencies that have a 0 balance
-            if currency != Currency.btc && currency != Currency.eth {
-                let isHidden = (currentBalance == 0)
-                if newAccount.isHidden != isHidden {
-                    newAccount.isHidden = isHidden
-                }
-            }
-            
-            return newAccount
-        }
-        return nil
-    }
 }
 
 extension Institution {
@@ -348,7 +293,11 @@ internal extension PoloniexApi {
                 if let safeData = data {
                     //create accounts
                     let poloniexTransactions = try self.parsePoloniexTransactions(data: safeData)
-                    self.processPoloniexTransactions(transactions: poloniexTransactions, institution: institution)
+                    poloniexTransactions.forEach {
+                        $0.institutionId = institution.institutionId
+                        $0.sourceInstitutionId = institution.sourceInstitutionId
+                    }
+                    self.processPoloniexTransactions(transactions: poloniexTransactions)
                     
                     async {
                         completion(true, error)
@@ -370,43 +319,115 @@ internal extension PoloniexApi {
             }
         }
         datatask.resume()
+        
+    }
+
+}
+
+//TODO: MOVE TO THE NEW API
+private extension PoloniexApi {
+    
+    // MARK: Accounts
+    func parsePoloniexAccounts(data: Data) throws -> [NewPoloniexAccount] {
+        guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] else {
+            throw PoloniexApi.CredentialsError.bodyNotValidJSON
+        }
+        
+        let flatDict = dict.map { (key, value) -> [String : AnyObject] in
+            if var dict = value as? [String: AnyObject] {
+                dict["currency"] = key as AnyObject
+                return dict
+            }
+            return [:]
+        }
+        
+        if let serialized = try? JSONSerialization.data(withJSONObject: flatDict, options: .prettyPrinted),
+            let accounts = PoloniexAPI2.buildObject(from: serialized, for: .accounts) as? [NewPoloniexAccount] {
+            
+            return accounts
+        }
+        
+        return []
     }
     
-    fileprivate func parsePoloniexTransactions(data: Data) throws -> [PoloniexApi.Transaction] {
+    func processPoloniexAccounts(accounts: [NewPoloniexAccount], institution: Institution) {
+        for account in accounts {
+            // Create or update the local account object
+            updateLocal(account: account, institution: institution)
+        }
+        
+        let accounts = AccountRepository.si.accounts(institutionId: institution.institutionId)
+        for account in accounts {
+            let index = accounts.index(where: {$0.currency == account.currency})
+            if index == nil {
+                // This account doesn't exist in the response, so remove it
+                AccountRepository.si.delete(account: account)
+            }
+        }
+    }
+
+    // this is the function to save into a repository
+    func updateLocal(account: NewPoloniexAccount, institution: Institution) {
+        // Poloniex doesn't have id's per-se, the id a coin is the coin symbol itself
+        if let newAccount = AccountRepository.si.account(institutionId: institution.institutionId,
+                                                         source: institution.source,
+                                                         sourceAccountId: account.currency.code,
+                                                         sourceInstitutionId: "",
+                                                         accountTypeId: account.accountType,
+                                                         accountSubTypeId: nil,
+                                                         name: account.currency.code,
+                                                         currency: account.currency.code,
+                                                         currentBalance: account.currentBalance,
+                                                         availableBalance: nil,
+                                                         number: nil,
+                                                         altCurrency: account.altCurrency.code,
+                                                         altCurrentBalance: account.altCurrentBalance,
+                                                         altAvailableBalance: nil) {
+            
+            // Hide unpoplular currencies that have a 0 balance
+            if account.currency != Currency.btc && account.currency != Currency.eth {
+                let isHidden = (account.currentBalance == 0)
+                if newAccount.isHidden != isHidden {
+                    newAccount.isHidden = isHidden
+                }
+            }
+            
+        }
+        
+    }
+    
+    // MARK: Transactions
+    func parsePoloniexTransactions(data: Data) throws -> [NewPoloniexTransaction] {
         guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String : AnyObject] else {
             throw PoloniexApi.CredentialsError.bodyNotValidJSON
         }
         
-        var transactions = [PoloniexApi.Transaction]()
+        var transactions = [NewPoloniexTransaction]()
         
-        if let depositsJSON = json["deposits"] as? [[String : Any]] {
-            for depositJSON in depositsJSON {
-                do {
-                    let deposit = try Transaction(depositDictionary: depositJSON)
-                    transactions.append(deposit)
-                }
-                catch { }
-            }
+        if let depositsJSON = json["deposits"] as? [[String : Any]],
+            let serialized = try? JSONSerialization.data(withJSONObject: depositsJSON, options: .prettyPrinted),
+            let deposits = PoloniexAPI2.buildObject(from: serialized, for: .transactions) as? [NewPoloniexTransaction] {
+            
+            deposits.forEach { $0.category = .deposit }
+            transactions += deposits
+            
         }
         
-        if let withdrawalsJSON = json["withdrawals"] as? [[String : Any]] {
-            for withdrawalJSON in withdrawalsJSON {
-                do {
-                    let withdrawal = try Transaction(withdrawalDictionary: withdrawalJSON)
-                    transactions.append(withdrawal)
-                }
-                catch { }
-            }
+        if let withdrawalsJSON = json["withdrawals"] as? [[String : Any]],
+            let serialized = try? JSONSerialization.data(withJSONObject: withdrawalsJSON, options: .prettyPrinted),
+            let withdrawals = PoloniexAPI2.buildObject(from: serialized, for: .transactions) as? [NewPoloniexTransaction] {
+            
+            withdrawals.forEach { $0.category = .withdrawal }
+            transactions += withdrawals
+            
         }
         
         return transactions
     }
     
-    fileprivate func processPoloniexTransactions(transactions: [PoloniexApi.Transaction], institution: Institution) {
+    func processPoloniexTransactions(transactions: [NewPoloniexTransaction]) {
         for transaction in transactions {
-            let amount = transaction.amount.integerValueWith(decimals: Currency.rawValue(transaction.currencyCode).decimals)
-            TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: transaction.identifier, sourceAccountId: transaction.currencyCode, name: transaction.identifier, currency: transaction.currencyCode, amount: amount, date: transaction.timestamp, categoryID: nil, sourceInstitutionId: institution.sourceInstitutionId, institutionId: institution.institutionId)
+            TransactionRepository.si.transaction(source: transaction.source, sourceTransactionId: transaction.sourceTransactionId, sourceAccountId: transaction.sourceAccountId, name: transaction.name, currency: transaction.currencyCode, amount: transaction.amount, date: transaction.date, categoryID: nil, sourceInstitutionId: transaction.sourceInstitutionId, institutionId: transaction.institutionId)
         }
-
     }
 }

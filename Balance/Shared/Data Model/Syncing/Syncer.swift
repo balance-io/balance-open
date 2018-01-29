@@ -368,8 +368,7 @@ class Syncer {
                             for transaction in unwrappedTransactions {
                                 let amount = paddedInteger(for: transaction.amount, currencyCode: transaction.asset.code)
                                 let identifier = "\(transaction.ledgerId)\(transaction.amount)\(transaction.time)"
-                                
-                                TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: identifier, sourceAccountId: transaction.asset.code, name: identifier, currency: transaction.asset.code, amount: amount, date: transaction.time, categoryID: nil, sourceInstitutionId: "", institutionId: institution.institutionId)
+                                TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: identifier, sourceAccountId: transaction.asset.code, name: identifier, currency: transaction.asset.code, amount: amount, date: transaction.time, categoryID: nil, sourceInstitutionId: institution.sourceInstitutionId, institutionId: institution.institutionId)
                             }
                             
                             performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
@@ -438,7 +437,7 @@ class Syncer {
                     
                     let amount = paddedInteger(for: transaction.amount, currencyCode: transaction.currency)
                     
-                    TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: transaction.paymentUuid, sourceAccountId: transaction.currency, name: transaction.paymentUuid, currency: transaction.currency, amount: amount, date: date, categoryID: nil, sourceInstitutionId: "", institutionId: institution.institutionId)
+                    TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: transaction.paymentUuid, sourceAccountId: transaction.currency, name: transaction.paymentUuid, currency: transaction.currency, amount: amount, date: date, categoryID: nil, sourceInstitutionId: institution.sourceInstitutionId, institutionId: institution.institutionId)
                 }
             }
             
