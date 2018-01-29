@@ -27,31 +27,3 @@ public enum ExchangeBaseError: Error {
         }
     }
 }
-
-
-//enum APIBasicError: LocalizedError {
-//    case bodyNotValidJSON
-//    case incorrectLoginCredentials
-//    case invalidPermissionCredentials
-//    case dataNotPresented
-//    case dataWithError(errorDescription: String)
-//    case repositoryNotCreated(onExchange: Source)
-//
-//    var errorDescription: String? {
-//        switch self {
-//        case .bodyNotValidJSON:
-//            return "There was a problem reaching the server."
-//        case .incorrectLoginCredentials:
-//            return "Invalid login credentials. Make sure you have right API and Secret pair."
-//        case .invalidPermissionCredentials:
-//            return "Your API key doesn't have enough permisions to perfom this action."
-//        case .dataNotPresented:
-//            return "Response not contains any data"
-//        case .dataWithError(let errorDescription):
-//            return "Data fetched from server contains error: \(errorDescription)"
-//        case .repositoryNotCreated(let onExchange):
-//            return "Repository can't not be created on \(onExchange.description), after pass base validations"
-//        }
-//    }
-//}
-

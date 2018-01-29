@@ -22,6 +22,7 @@ public protocol ExchangeInstitution {
 }
 
 public protocol ExchangeAccount {
+    var accountType: AccountType { get }
     var institutionId: Int { get }
     var source: Source { get }
     var sourceAccountId: String { get }
@@ -35,6 +36,7 @@ public protocol ExchangeAccount {
 }
 
 public protocol ExchangeTransaction {
+    var category: TransactionType { get }
     var institutionId: Int { get }
     var source: Source { get }
     var sourceInstitutionId: String { get }

@@ -56,6 +56,8 @@
 		403AA173201F81940088A2DE /* PoloniexAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40970264201F7DA400C34623 /* PoloniexAPI2.swift */; };
 		403AA175201F87BA0088A2DE /* ExchangeAPIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AA174201F87BA0088A2DE /* ExchangeAPIErrors.swift */; };
 		403AA176201F87BA0088A2DE /* ExchangeAPIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AA174201F87BA0088A2DE /* ExchangeAPIErrors.swift */; };
+		403AA179201FA5520088A2DE /* ExchangeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AA178201FA5520088A2DE /* ExchangeOperation.swift */; };
+		403AA17A201FA5520088A2DE /* ExchangeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AA178201FA5520088A2DE /* ExchangeOperation.swift */; };
 		40970261201F7D6200C34623 /* AbstractApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40970260201F7D6200C34623 /* AbstractApi.swift */; };
 		40970263201F7D7A00C34623 /* ExchangeProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40970262201F7D7900C34623 /* ExchangeProtocols.swift */; };
 		40970265201F7DA400C34623 /* PoloniexAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40970264201F7DA400C34623 /* PoloniexAPI2.swift */; };
@@ -672,6 +674,7 @@
 		2DF898371FCC8F7500CCDFB9 /* CountlyViewTracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyViewTracking.h; sourceTree = "<group>"; };
 		2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyViewTracking.m; sourceTree = "<group>"; };
 		403AA174201F87BA0088A2DE /* ExchangeAPIErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeAPIErrors.swift; sourceTree = "<group>"; };
+		403AA178201FA5520088A2DE /* ExchangeOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeOperation.swift; sourceTree = "<group>"; };
 		40970260201F7D6200C34623 /* AbstractApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractApi.swift; sourceTree = "<group>"; };
 		40970262201F7D7900C34623 /* ExchangeProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeProtocols.swift; sourceTree = "<group>"; };
 		40970264201F7DA400C34623 /* PoloniexAPI2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoloniexAPI2.swift; sourceTree = "<group>"; };
@@ -1195,6 +1198,16 @@
 			path = "countly-sdk-ios-master";
 			sourceTree = "<group>";
 		};
+		403AA177201F8F7F0088A2DE /* LegacyAPIProtocols */ = {
+			isa = PBXGroup;
+			children = (
+				537187F31F4CC37400E7F9D6 /* ExchangeApi.swift */,
+				E653123D1FE8C20600F57977 /* NewExchangeAPI.swift */,
+				535315251F4CEBF2008D6890 /* ApiInstitution.swift */,
+			);
+			path = LegacyAPIProtocols;
+			sourceTree = "<group>";
+		};
 		409BF848201A2A0600E2D30D /* Poloniex */ = {
 			isa = PBXGroup;
 			children = (
@@ -1211,9 +1224,7 @@
 			isa = PBXGroup;
 			children = (
 				53F696622016876A00D28B23 /* Refactored */,
-				537187F31F4CC37400E7F9D6 /* ExchangeApi.swift */,
-				E653123D1FE8C20600F57977 /* NewExchangeAPI.swift */,
-				535315251F4CEBF2008D6890 /* ApiInstitution.swift */,
+				403AA177201F8F7F0088A2DE /* LegacyAPIProtocols */,
 				A4E7680E1F67F034002B1AE1 /* API Credentials */,
 				A4E768001F67DACC002B1AE1 /* Bitfinex */,
 				E653123F1FE8C21600F57977 /* BITTREX */,
@@ -2018,10 +2029,10 @@
 		53F696622016876A00D28B23 /* Refactored */ = {
 			isa = PBXGroup;
 			children = (
-				E61B7B6B201BE05900B391CE /* ExchangeAPI2 */,
-				E6635C65201A775A00D9720E /* ApiManager */,
 				E66743FC20195E8A0009A57F /* Interface */,
+				E6635C65201A775A00D9720E /* ApiManager */,
 				409BF848201A2A0600E2D30D /* Poloniex */,
+				E61B7B6B201BE05900B391CE /* ExchangeAPI2 */,
 			);
 			path = Refactored;
 			sourceTree = "<group>";
@@ -2443,6 +2454,7 @@
 				E6635C6A201A949300D9720E /* Entities */,
 				E6635C69201A947C00D9720E /* Services */,
 				E6635C63201A6E4400D9720E /* ExchangeManager.swift */,
+				403AA178201FA5520088A2DE /* ExchangeOperation.swift */,
 			);
 			path = ApiManager;
 			sourceTree = "<group>";
@@ -3133,6 +3145,7 @@
 				2DF898471FCC8F7500CCDFB9 /* CountlyCommon.m in Sources */,
 				A41EE47D1FB9A98A00210038 /* GDAXTransaction.swift in Sources */,
 				E6674400201973490009A57F /* PoloniexAPI2Action.swift in Sources */,
+				403AA17A201FA5520088A2DE /* ExchangeOperation.swift in Sources */,
 				535529FF1ED7250500DD95F9 /* DefaultsStorage.swift in Sources */,
 				53552A181ED7251700DD95F9 /* Account.swift in Sources */,
 				53552A201ED7252900DD95F9 /* NotificationCenter.swift in Sources */,
@@ -3291,6 +3304,7 @@
 				531E8D9C1C6A633800F765F7 /* Category.swift in Sources */,
 				530F57CF1DCD72680083F3A7 /* FMDatabaseVariadic.swift in Sources */,
 				DC39E0001CD80D0E00B48F75 /* HoverButton.swift in Sources */,
+				403AA179201FA5520088A2DE /* ExchangeOperation.swift in Sources */,
 				533A3B1D1DF23C2B005D3C89 /* Array.swift in Sources */,
 				2DF898581FCC8F7500CCDFB9 /* CountlyStarRating.m in Sources */,
 				5329FB751E3EB5C400A9CAF7 /* EmailIssueController.swift in Sources */,
