@@ -46,6 +46,7 @@ public protocol APIAction {
     var host: String { get }
     var path: String { get }
     var url: URL? { get }
+    var nonce: Int64 { get }
     var components: URLComponents { get }
     var type: ApiRequestType { get }
     var credentials: Credentials { get }
@@ -57,10 +58,6 @@ extension APIAction {
     
     var query: String? {
         return components.query
-    }
-    
-    var nonce: Int64 {
-        return Int64(Date().timeIntervalSince1970 * 10000)
     }
     
 }

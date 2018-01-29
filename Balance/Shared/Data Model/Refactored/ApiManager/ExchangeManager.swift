@@ -53,19 +53,30 @@ class ExchangeManager: ExchangeManagerAction {
             return
         }
         
+        let exchangeApi: AbstractApi?
+        let exchangeAction: APIAction?
+        
         switch source {
         case .poloniex:
-            let api = PoloniexAPI2.init(session: urlSession)
-            let locingAction = PoloniexApiAction.init(type: .accounts, credentials: credentials)
-            let fetchAccountsOperation = api.fetchData(for: locingAction, completion: { [weak self] (success, error, result) in
-                let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
-                self?.processLoginCallbackResult(callbackResult, source: source, credentials: credentials)
-            })
-            
-            autenticationQueue.addOperation(fetchAccountsOperation)
+            exchangeApi = PoloniexAPI2.init(session: urlSession)
+            exchangeAction = PoloniexApiAction.init(type: .accounts, credentials: credentials)
+        case .kraken:
+            exchangeApi = KrakenAPI2.init(session: urlSession)
+            exchangeAction = KrakenApiAction.init(type: .accounts, credentials: credentials)
         default:
             return
         }
+        
+        guard let api = exchangeApi, let action = exchangeAction else {
+            return
+        }
+        
+        let fetchAccountsOperation = api.fetchData(for: action, completion: { [weak self] (success, error, result) in
+            let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
+            self?.processLoginCallbackResult(callbackResult, source: source, credentials: credentials)
+        })
+        
+        autenticationQueue.addOperation(fetchAccountsOperation)
     }
     
     func refresh(institution: Institution) {
@@ -179,7 +190,7 @@ private extension ExchangeManager {
     
     func areCredentialsValid(_ credentials: Credentials, for source: Source) -> Bool {
         switch source {
-        case .poloniex:
+        case .poloniex, .kraken:
             return !credentials.apiKey.isEmpty && !credentials.secretKey.isEmpty
         default:
             return false

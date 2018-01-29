@@ -31,9 +31,54 @@ class KrakenAPI2: AbstractApi {
         
         switch action.type {
         case .accounts, .transactions:
+            guard let url = action.url,
+                let query = action.query,
+                let encondedSecretData = encodeSecret(from: action.credentials) else {
+                    print("Invalid action: \(action.type), for creating kraken request")
+                return nil
+            }
+            
+            guard let messageData = createMessageData(nonce: Int(action.nonce), path: action.path, query: query),
+                let messageSigned = generateMessageSigned(from: messageData, secretKeyEncoded: encondedSecretData)else {
+                print("Invalid message signed")
+                return nil
+            }
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = requestMethod.rawValue
+            request.httpBody = query.data(using: .utf8)
+            request.setValue(action.credentials.apiKey, forHTTPHeaderField: "API-Key")
+            request.setValue(messageSigned, forHTTPHeaderField: "API-Sign")
+            return request
+        }
+        
+    }
+    
+}
+
+private extension KrakenAPI2 {
+    
+    func encodeSecret(from credentials: Credentials) -> Data? {
+        guard let encodedSecretData = Data(base64Encoded: credentials.secretKey) else {
+            print("Secret is not base64 encoded")
             return nil
         }
         
+        return encodedSecretData
+    }
+    
+    func createMessageData(nonce: Int, path: String, query: String) -> Data? {
+        guard let nonceQueryEncoded = ("\(nonce)" + query).sha256 else {
+            print("Relative path can not be encoded")
+            return nil
+        }
+        
+        guard let pathData = path.data(using: .utf8) else {
+            print("Path can not be transformed into a data type")
+            return nil
+        }
+        
+        return  pathData + nonceQueryEncoded
     }
     
 }

@@ -119,21 +119,3 @@ extension AbstractApi {
     }
     
 }
-
-fileprivate extension String {
-    
-    func sha256() -> Data? {
-        guard let selfData = self.data(using: .utf8) else {
-            return nil
-        }
-        
-        var digestData = Data(count: Int(CC_SHA256_DIGEST_LENGTH))
-        _ = digestData.withUnsafeMutableBytes { bytes in
-            selfData.withUnsafeBytes({ selfBytes in
-                CC_SHA256(selfBytes, UInt32(selfData.count), bytes)
-            })
-        }
-        
-        return digestData
-    }
-}

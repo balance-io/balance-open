@@ -65,7 +65,7 @@ extension KrakenAPIClient {
         
         func generateSignature(nonce: String, requestPath: String, body: String) throws -> String {
             // sha256(nonce + body data)
-            guard let sha256NonceBody = (nonce + body).sha256() else {
+            guard let sha256NonceBody = (nonce + body).sha256 else {
                 throw APICredentialsError.creatingSignature(message: "SHA256 failed")
             }
             
@@ -81,25 +81,5 @@ extension KrakenAPIClient {
         func namespacedKeychainIdentifier(_ identifier: String) -> String {
             return keychainIdentifier(identifier)
         }
-    }
-}
-
-
-// MARK: String+SHA256
-
-fileprivate extension String {
-    fileprivate func sha256() -> Data? {
-        guard let selfData = self.data(using: .utf8) else {
-            return nil
-        }
-        
-        var digestData = Data(count: Int(CC_SHA256_DIGEST_LENGTH))
-        _ = digestData.withUnsafeMutableBytes { bytes in
-            selfData.withUnsafeBytes({ selfBytes in
-                CC_SHA256(selfBytes, UInt32(selfData.count), bytes)
-            })
-        }
-        
-        return digestData
     }
 }

@@ -8,6 +8,8 @@
 
 import Foundation
 
+let internalNonce: Int64 = Int64(Date().timeIntervalSince1970 * 1000000000)
+
 struct KrakenApiAction {
     
     let type: ApiRequestType
@@ -32,15 +34,15 @@ extension KrakenApiAction: APIAction {
     }
     
     var host: String {
-        return "https://api.kraken.com/"
+        return "https://api.kraken.com"
     }
     
     var path: String {
         switch type {
         case .accounts:
-            return "0/private/Balance"
+            return "/0/private/Balance"
         case .transactions:
-            return "0/private/Ledgers"
+            return "/0/private/Ledgers"
         }
     }
     
@@ -59,6 +61,10 @@ extension KrakenApiAction: APIAction {
         components.queryItems = queryItems
         
         return components
+    }
+    
+    var nonce: Int64 {
+        return internalNonce
     }
     
 }
