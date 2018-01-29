@@ -33,12 +33,12 @@ open class AbstractApi: ExchangeApi2 {
     
     // Look for api specific errors (some use http status codes, some use info in the data) and return either
     // a standardized error or nil if no error
-    open func processErrors(requestType: ApiRequestType, response: HTTPURLResponse, data: Data) -> ExchangeError? {
+    func processErrors(requestType: ApiRequestType, response: HTTPURLResponse, data: Data?, error: Error?) -> Error?  {
         fatalError("Must override")
     }
     
     // At this point we know there are no errors, so parse the data and return the exchagne data model
-    open func processData(requestType: ApiRequestType, data: Data) -> Any {
+    open func processData(requestType: ApiRequestType, data: Data) -> [Any] {
         fatalError("Must override")
     }
     

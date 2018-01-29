@@ -15,8 +15,8 @@ class NewPoloniexInstitution: ExchangeInstitution {
     var fields: [Field] = []
     
     init() {
-        let keyField = Field(name: "API Key", type: .key, value: nil)
-        let secretField = Field(name: "Secret", type: .secret, value: nil)
+        let keyField = Field(name: "API Key", type: .key, value: "")
+        let secretField = Field(name: "Secret", type: .secret, value: "")
         self.fields = [keyField, secretField]
     }
 }

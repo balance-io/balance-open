@@ -342,7 +342,7 @@ private extension PoloniexApi {
         }
         
         if let serialized = try? JSONSerialization.data(withJSONObject: flatDict, options: .prettyPrinted),
-            let accounts = NewPoloniexAPI.buildObject(from: serialized, for: .accounts) as? [NewPoloniexAccount] {
+            let accounts = PoloniexAPI2.buildObject(from: serialized, for: .accounts) as? [NewPoloniexAccount] {
             
             return accounts
         }
@@ -406,7 +406,7 @@ private extension PoloniexApi {
         
         if let depositsJSON = json["deposits"] as? [[String : Any]],
             let serialized = try? JSONSerialization.data(withJSONObject: depositsJSON, options: .prettyPrinted),
-            let deposits = NewPoloniexAPI.buildObject(from: serialized, for: .transactions) as? [NewPoloniexTransaction] {
+            let deposits = PoloniexAPI2.buildObject(from: serialized, for: .transactions) as? [NewPoloniexTransaction] {
             
             deposits.forEach { $0.category = .deposit }
             transactions += deposits
@@ -415,7 +415,7 @@ private extension PoloniexApi {
         
         if let withdrawalsJSON = json["withdrawals"] as? [[String : Any]],
             let serialized = try? JSONSerialization.data(withJSONObject: withdrawalsJSON, options: .prettyPrinted),
-            let withdrawals = NewPoloniexAPI.buildObject(from: serialized, for: .transactions) as? [NewPoloniexTransaction] {
+            let withdrawals = PoloniexAPI2.buildObject(from: serialized, for: .transactions) as? [NewPoloniexTransaction] {
             
             withdrawals.forEach { $0.category = .withdrawal }
             transactions += withdrawals
