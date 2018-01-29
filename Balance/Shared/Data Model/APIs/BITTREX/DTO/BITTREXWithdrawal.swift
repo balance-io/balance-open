@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct BITTREXDepositOrWithdrawal: Codable {
+struct BITTREXWithdrawal: Codable {
 
     let paymentUuid: String
     let currency: String
@@ -38,15 +38,8 @@ struct BITTREXDepositOrWithdrawal: Codable {
     
 }
 
-fileprivate var dateFormatter: DateFormatter {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
-    dateFormatter.timeZone = TimeZone(identifier: "UTC")
-    return dateFormatter
-}
-
-extension BITTREXDepositOrWithdrawal {
+extension BITTREXWithdrawal {
     var date: Date? {
-        return dateFormatter.date(from: opened)
+        return jsonWithMillisecondsDateFormatter.date(from: opened)
     }
 }

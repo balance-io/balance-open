@@ -1,0 +1,111 @@
+{
+    "success": true,
+    "message": "",
+    "result": [
+               {
+               "Currency": "ADA",
+               "Balance": 30000,
+               "Available": 30000,
+               "Pending": 0,
+               "CryptoAddress": null
+               },
+               {
+               "Currency": "BCC",
+               "Balance": 20.0984,
+               "Available": 20.0984,
+               "Pending": 0,
+               "CryptoAddress": "1XpykDDzYtvQzrUnBUa8XCrJdWexEiiJA"
+               },
+               {
+               "Currency": "BTC",
+               "Balance": 0.0121713,
+               "Available": 0.0121713,
+               "Pending": 0,
+               "CryptoAddress": "1RKfcSz4ckAF5sp8kxUeEaeYFDAnkJDjcr"
+               },
+               {
+               "Currency": "DGB",
+               "Balance": 30000,
+               "Available": 30000,
+               "Pending": 0,
+               "CryptoAddress": null
+               },
+               {
+               "Currency": "ETH",
+               "Balance": 19.9995622,
+               "Available": 19.9995622,
+               "Pending": 0,
+               "CryptoAddress": "0x61ed3ab1ede63acf5f9ed12c52ea81adbdc553ff"
+               },
+               {
+               "Currency": "LTC",
+               "Balance": 200,
+               "Available": 200,
+               "Pending": 0,
+               "CryptoAddress": null
+               },
+               {
+               "Currency": "NEO",
+               "Balance": 0,
+               "Available": 0,
+               "Pending": 0,
+               "CryptoAddress": "AgqtfgNKCvU3wYs6CzBTyrPneHsqSe3T8g"
+               },
+               {
+               "Currency": "NEOS",
+               "Balance": 0,
+               "Available": 0,
+               "Pending": 0,
+               "CryptoAddress": "NcbsaCCyzEjs8sadqXrhiwUY8WD9QDPFJv"
+               },
+               {
+               "Currency": "NXT",
+               "Balance": 5000,
+               "Available": 5000,
+               "Pending": 0,
+               "CryptoAddress": null
+               },
+               {
+               "Currency": "POWR",
+               "Balance": 10000,
+               "Available": 10000,
+               "Pending": 0,
+               "CryptoAddress": null
+               },
+               {
+               "Currency": "UBQ",
+               "Balance": 6000,
+               "Available": 6000,
+               "Pending": 0,
+               "CryptoAddress": "0xc5a7e6ba043f23f83d8e17a11f3ae2d46510e253"
+               },
+               {
+               "Currency": "XLM",
+               "Balance": 99999.99998,
+               "Available": 99999.99998,
+               "Pending": 0,
+               "CryptoAddress": "35a19ef534024e75920"
+               },
+               {
+               "Currency": "XMR",
+               "Balance": 24.95,
+               "Available": 24.95,
+               "Pending": 0,
+               "CryptoAddress": "24351cf5247c4a135f1bef29de271a5d4634cc3a48a74925afabb649ba3372de"
+               },
+               {
+               "Currency": "XRP",
+               "Balance": 0,
+               "Available": 0,
+               "Pending": 0,
+               "CryptoAddress": "230746599"
+               },
+               {
+               "Currency": "XVG",
+               "Balance": 100000,
+               "Available": 100000,
+               "Pending": 0,
+               "CryptoAddress": null
+               }
+               ]
+}

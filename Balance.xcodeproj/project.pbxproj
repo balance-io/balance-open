@@ -267,6 +267,8 @@
 		53762EB11ED793A200D34A1E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53762EB01ED793A200D34A1E /* main.swift */; };
 		53762EB31ED796F100D34A1E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53762EB21ED796F100D34A1E /* main.swift */; };
 		537B4B041D6B4AE500603060 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 537B4B021D6B4ADB00603060 /* Security.framework */; };
+		5383C5D2201F830700B45DED /* BITTREXDeposit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5383C5D1201F830700B45DED /* BITTREXDeposit.swift */; };
+		5383C5D3201F830700B45DED /* BITTREXDeposit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5383C5D1201F830700B45DED /* BITTREXDeposit.swift */; };
 		5384FDD81FCB529C00C19F3C /* libsqlcipher-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5384FDD71FCB529C00C19F3C /* libsqlcipher-ios.a */; };
 		5384FDDA1FCB52B500C19F3C /* libsqlcipher-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5384FDD91FCB52B400C19F3C /* libsqlcipher-mac.a */; };
 		538B47BE1F4CA0200023CED5 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538B47BD1F4CA0200023CED5 /* Currency.swift */; };
@@ -292,8 +294,8 @@
 		53C078A61DFF7CEB00696666 /* CertValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C078A51DFF7CEB00696666 /* CertValidator.m */; };
 		53C197171CB8714100F0A47B /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C197161CB8714100F0A47B /* SyncManager.swift */; };
 		53C23BDC1E5F988000DA1281 /* ComboBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C23BDB1E5F988000DA1281 /* ComboBox.swift */; };
-		53C439762017E39D00EE76EB /* deposits.json in Resources */ = {isa = PBXBuildFile; fileRef = 53C439742017E39D00EE76EB /* deposits.json */; };
-		53C439772017E39D00EE76EB /* withdrawals.json in Resources */ = {isa = PBXBuildFile; fileRef = 53C439752017E39D00EE76EB /* withdrawals.json */; };
+		53C439762017E39D00EE76EB /* BittrexDeposits.json in Resources */ = {isa = PBXBuildFile; fileRef = 53C439742017E39D00EE76EB /* BittrexDeposits.json */; };
+		53C439772017E39D00EE76EB /* BittrexWithdrawals.json in Resources */ = {isa = PBXBuildFile; fileRef = 53C439752017E39D00EE76EB /* BittrexWithdrawals.json */; };
 		53CED06A1D19B26000CE1B73 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CED0691D19B26000CE1B73 /* VisualEffectView.swift */; };
 		53D441E21F44AA9F006967E1 /* GenericItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D441E11F44AA9F006967E1 /* GenericItemRepository.swift */; };
 		53D441E31F44AA9F006967E1 /* GenericItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D441E11F44AA9F006967E1 /* GenericItemRepository.swift */; };
@@ -359,8 +361,8 @@
 		53F63CD31F82C26600FD4B27 /* ObjcExceptionBridging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F63CD21F82C25D00FD4B27 /* ObjcExceptionBridging.framework */; };
 		53F63CD41F82C26600FD4B27 /* ObjcExceptionBridging.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53F63CD21F82C25D00FD4B27 /* ObjcExceptionBridging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53F63CD81F82C2A100FD4B27 /* ObjcExceptionBridging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F63CD71F82C29700FD4B27 /* ObjcExceptionBridging.framework */; };
-		53F6965C2011322F00D28B23 /* BITTREXDepositOrWithdrawal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F6965B2011322F00D28B23 /* BITTREXDepositOrWithdrawal.swift */; };
-		53F6965D2011322F00D28B23 /* BITTREXDepositOrWithdrawal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F6965B2011322F00D28B23 /* BITTREXDepositOrWithdrawal.swift */; };
+		53F6965C2011322F00D28B23 /* BITTREXWithdrawal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F6965B2011322F00D28B23 /* BITTREXWithdrawal.swift */; };
+		53F6965D2011322F00D28B23 /* BITTREXWithdrawal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F6965B2011322F00D28B23 /* BITTREXWithdrawal.swift */; };
 		53FCE3421F06B5DC004EB25C /* NSDateTimeAgo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33A1F06B5DC004EB25C /* NSDateTimeAgo.framework */; };
 		53FCE3461F06B5DC004EB25C /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33E1F06B5DC004EB25C /* SnapKit.framework */; };
 		53FCE3481F06B5DC004EB25C /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3401F06B5DC004EB25C /* XCGLogger.framework */; };
@@ -522,9 +524,9 @@
 		E65312901FE8C4E100F57977 /* BITTREXInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312861FE8C47F00F57977 /* BITTREXInstitution.swift */; };
 		E65312931FE8C69800F57977 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078421F4F8EC700D0054C /* TestHelpers.swift */; };
 		E68EE578201587FE00ACB01F /* BITTREXDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312721FE8C3E400F57977 /* BITTREXDataHelper.swift */; };
-		E68EE5792015880400ACB01F /* balances.json in Resources */ = {isa = PBXBuildFile; fileRef = E65312701FE8C3E400F57977 /* balances.json */; };
-		E68EE57A2015880400ACB01F /* currencies.json in Resources */ = {isa = PBXBuildFile; fileRef = E65312711FE8C3E400F57977 /* currencies.json */; };
-		E68EE57B2015880400ACB01F /* invalid_api_key.json in Resources */ = {isa = PBXBuildFile; fileRef = E65312731FE8C3E400F57977 /* invalid_api_key.json */; };
+		E68EE5792015880400ACB01F /* BittrexBalances.json in Resources */ = {isa = PBXBuildFile; fileRef = E65312701FE8C3E400F57977 /* BittrexBalances.json */; };
+		E68EE57A2015880400ACB01F /* BittrexCurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = E65312711FE8C3E400F57977 /* BittrexCurrencies.json */; };
+		E68EE57B2015880400ACB01F /* BittrexInvalidApiKey.json in Resources */ = {isa = PBXBuildFile; fileRef = E65312731FE8C3E400F57977 /* BittrexInvalidApiKey.json */; };
 		E68EE57D2015881100ACB01F /* BITTREXApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E653127A1FE8C40A00F57977 /* BITTREXApiTest.swift */; };
 		E68EE57E2015881100ACB01F /* ExchangeAPIURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312781FE8C40900F57977 /* ExchangeAPIURLSession.swift */; };
 		E68EE58020158CD600ACB01F /* MockInstitutionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68EE57F20158CD600ACB01F /* MockInstitutionRepository.swift */; };
@@ -779,6 +781,7 @@
 		53762EB01ED793A200D34A1E /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		53762EB21ED796F100D34A1E /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		537B4B021D6B4ADB00603060 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		5383C5D1201F830700B45DED /* BITTREXDeposit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BITTREXDeposit.swift; sourceTree = "<group>"; };
 		5384FDD71FCB529C00C19F3C /* libsqlcipher-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libsqlcipher-ios.a"; sourceTree = "<group>"; };
 		5384FDD91FCB52B400C19F3C /* libsqlcipher-mac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libsqlcipher-mac.a"; sourceTree = "<group>"; };
 		538B47B01F4C9FD60023CED5 /* CoinbaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseAccount.swift; sourceTree = "<group>"; };
@@ -819,8 +822,8 @@
 		53C078A51DFF7CEB00696666 /* CertValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertValidator.m; sourceTree = "<group>"; };
 		53C197161CB8714100F0A47B /* SyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
 		53C23BDB1E5F988000DA1281 /* ComboBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComboBox.swift; sourceTree = "<group>"; };
-		53C439742017E39D00EE76EB /* deposits.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = deposits.json; sourceTree = "<group>"; };
-		53C439752017E39D00EE76EB /* withdrawals.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = withdrawals.json; sourceTree = "<group>"; };
+		53C439742017E39D00EE76EB /* BittrexDeposits.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BittrexDeposits.json; sourceTree = "<group>"; };
+		53C439752017E39D00EE76EB /* BittrexWithdrawals.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BittrexWithdrawals.json; sourceTree = "<group>"; };
 		53CED0691D19B26000CE1B73 /* VisualEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 		53D441E11F44AA9F006967E1 /* GenericItemRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericItemRepository.swift; sourceTree = "<group>"; };
 		53D441E41F44ABBD006967E1 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -872,7 +875,7 @@
 		53F6383E1C5FFF3200864346 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		53F63CD21F82C25D00FD4B27 /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjcExceptionBridging.framework; path = Carthage/Build/Mac/ObjcExceptionBridging.framework; sourceTree = SOURCE_ROOT; };
 		53F63CD71F82C29700FD4B27 /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjcExceptionBridging.framework; path = Carthage/Build/iOS/ObjcExceptionBridging.framework; sourceTree = SOURCE_ROOT; };
-		53F6965B2011322F00D28B23 /* BITTREXDepositOrWithdrawal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BITTREXDepositOrWithdrawal.swift; sourceTree = "<group>"; };
+		53F6965B2011322F00D28B23 /* BITTREXWithdrawal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BITTREXWithdrawal.swift; sourceTree = "<group>"; };
 		53FCE33A1F06B5DC004EB25C /* NSDateTimeAgo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NSDateTimeAgo.framework; path = Carthage/Build/iOS/NSDateTimeAgo.framework; sourceTree = SOURCE_ROOT; };
 		53FCE33E1F06B5DC004EB25C /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = SOURCE_ROOT; };
 		53FCE3401F06B5DC004EB25C /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/iOS/XCGLogger.framework; sourceTree = SOURCE_ROOT; };
@@ -990,10 +993,10 @@
 		E653124B1FE8C28D00F57977 /* BITTREXDataBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BITTREXDataBuilder.swift; path = "Balance/Shared/Data Model/APIs/BITTREX/DTO/BITTREXDataBuilder.swift"; sourceTree = SOURCE_ROOT; };
 		E653125B1FE8C2EF00F57977 /* BalanceUnitTestsiOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceUnitTestsiOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E653125F1FE8C2EF00F57977 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E65312701FE8C3E400F57977 /* balances.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = balances.json; sourceTree = "<group>"; };
-		E65312711FE8C3E400F57977 /* currencies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = currencies.json; sourceTree = "<group>"; };
+		E65312701FE8C3E400F57977 /* BittrexBalances.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BittrexBalances.json; sourceTree = "<group>"; };
+		E65312711FE8C3E400F57977 /* BittrexCurrencies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BittrexCurrencies.json; sourceTree = "<group>"; };
 		E65312721FE8C3E400F57977 /* BITTREXDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXDataHelper.swift; sourceTree = "<group>"; };
-		E65312731FE8C3E400F57977 /* invalid_api_key.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = invalid_api_key.json; sourceTree = "<group>"; };
+		E65312731FE8C3E400F57977 /* BittrexInvalidApiKey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BittrexInvalidApiKey.json; sourceTree = "<group>"; };
 		E65312781FE8C40900F57977 /* ExchangeAPIURLSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeAPIURLSession.swift; sourceTree = "<group>"; };
 		E653127A1FE8C40A00F57977 /* BITTREXApiTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXApiTest.swift; sourceTree = "<group>"; };
 		E65312851FE8C47F00F57977 /* BITTREXApiError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXApiError.swift; sourceTree = "<group>"; };
@@ -2314,7 +2317,8 @@
 			children = (
 				E653124A1FE8C28D00F57977 /* BITTREXBalance.swift */,
 				E65312491FE8C28D00F57977 /* BITTREXCurrency.swift */,
-				53F6965B2011322F00D28B23 /* BITTREXDepositOrWithdrawal.swift */,
+				5383C5D1201F830700B45DED /* BITTREXDeposit.swift */,
+				53F6965B2011322F00D28B23 /* BITTREXWithdrawal.swift */,
 				E653124B1FE8C28D00F57977 /* BITTREXDataBuilder.swift */,
 			);
 			path = DTO;
@@ -2340,12 +2344,12 @@
 		E68EE5762015879200ACB01F /* BITTREX API Responses */ = {
 			isa = PBXGroup;
 			children = (
-				53C439742017E39D00EE76EB /* deposits.json */,
-				53C439752017E39D00EE76EB /* withdrawals.json */,
-				E65312701FE8C3E400F57977 /* balances.json */,
+				53C439742017E39D00EE76EB /* BittrexDeposits.json */,
+				53C439752017E39D00EE76EB /* BittrexWithdrawals.json */,
+				E65312701FE8C3E400F57977 /* BittrexBalances.json */,
 				E65312721FE8C3E400F57977 /* BITTREXDataHelper.swift */,
-				E65312711FE8C3E400F57977 /* currencies.json */,
-				E65312731FE8C3E400F57977 /* invalid_api_key.json */,
+				E65312711FE8C3E400F57977 /* BittrexCurrencies.json */,
+				E65312731FE8C3E400F57977 /* BittrexInvalidApiKey.json */,
 			);
 			path = "BITTREX API Responses";
 			sourceTree = "<group>";
@@ -2671,20 +2675,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4E457331F793702002E2879 /* PoloniexWithdrawal.json in Resources */,
-				53C439762017E39D00EE76EB /* deposits.json in Resources */,
+				53C439762017E39D00EE76EB /* BittrexDeposits.json in Resources */,
 				53F0786F1F4F916800D0054C /* FetchAccounts.json in Resources */,
 				A4E457311F79362F002E2879 /* PoloniexDeposit.json in Resources */,
 				A41204C51F719CB800FD8078 /* KrakenFetchAccounts.json in Resources */,
-				E68EE57B2015880400ACB01F /* invalid_api_key.json in Resources */,
+				E68EE57B2015880400ACB01F /* BittrexInvalidApiKey.json in Resources */,
 				53F078701F4F916800D0054C /* WithdrawToCrypto.json in Resources */,
 				A44C76271F7BE5A00024476E /* BitfinexMovement.json in Resources */,
 				53F0786C1F4F916500D0054C /* PoloniexTradingError.json in Resources */,
 				A41742971F73E8D2004A9B4F /* CoinbaseSendTransaction.json in Resources */,
-				E68EE57A2015880400ACB01F /* currencies.json in Resources */,
-				E68EE5792015880400ACB01F /* balances.json in Resources */,
+				E68EE57A2015880400ACB01F /* BittrexCurrencies.json in Resources */,
+				E68EE5792015880400ACB01F /* BittrexBalances.json in Resources */,
 				53F0786D1F4F916800D0054C /* Account.json in Resources */,
 				53F0786A1F4F916500D0054C /* CompleteBalancesResponse.json in Resources */,
-				53C439772017E39D00EE76EB /* withdrawals.json in Resources */,
+				53C439772017E39D00EE76EB /* BittrexWithdrawals.json in Resources */,
 				53F0786E1F4F916800D0054C /* Error.json in Resources */,
 				53F0786B1F4F916500D0054C /* PoloniexAccount.json in Resources */,
 				A40ABBE31F6BBD1100383C62 /* FetchWallets.json in Resources */,
@@ -2763,7 +2767,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53F6965D2011322F00D28B23 /* BITTREXDepositOrWithdrawal.swift in Sources */,
+				53F6965D2011322F00D28B23 /* BITTREXWithdrawal.swift in Sources */,
 				53552A1B1ED7251700DD95F9 /* Transaction.swift in Sources */,
 				A4E4571A1F7901E7002E2879 /* EthplorerInstitution.swift in Sources */,
 				53552A091ED7251200DD95F9 /* Defaults.swift in Sources */,
@@ -2866,6 +2870,7 @@
 				53561EA61F82DD260043D4F9 /* InstitutionSettingsViewController.swift in Sources */,
 				537187DC1F4CC23B00E7F9D6 /* CoinbaseApi.swift in Sources */,
 				A4E4570D1F79018A002E2879 /* Reachability.swift in Sources */,
+				5383C5D3201F830700B45DED /* BITTREXDeposit.swift in Sources */,
 				53561EB21F82DD260043D4F9 /* SegmentedControlTableViewCell.swift in Sources */,
 				2DF898531FCC8F7500CCDFB9 /* CountlyNotificationService.m in Sources */,
 				A4E768031F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */,
@@ -3123,7 +3128,7 @@
 				28FD09C21D99F18500A395AB /* PaintCodeButton.swift in Sources */,
 				532121A71EE8B91600F4812A /* ZipUtilities.swift in Sources */,
 				533626601D54E5F80090656F /* FlippedView.swift in Sources */,
-				53F6965C2011322F00D28B23 /* BITTREXDepositOrWithdrawal.swift in Sources */,
+				53F6965C2011322F00D28B23 /* BITTREXWithdrawal.swift in Sources */,
 				F1EA1A561D775ACC0040BB9E /* MockedKeychainManager.swift in Sources */,
 				5301A77D1F17FDED00668099 /* Feedback.swift in Sources */,
 				530F57C61DCD72680083F3A7 /* FMDatabaseAdditionsVariadic.swift in Sources */,
@@ -3133,6 +3138,7 @@
 				2DE6D9DC1FB1D016007DDCBD /* GDAXTransaction.swift in Sources */,
 				53EB77CE1CF3E6F600F01903 /* NSFont.swift in Sources */,
 				537504FD1F192D280062C11A /* TypeAliases.swift in Sources */,
+				5383C5D2201F830700B45DED /* BITTREXDeposit.swift in Sources */,
 				A4E768021F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */,
 				532550901D06FEFE0045404E /* SearchField.swift in Sources */,
 				539085331CF97D01009D6E87 /* HoverTableRowView.swift in Sources */,

@@ -56,6 +56,13 @@ let jsonDateFormatter: DateFormatter = {
     return jsonDateFormatter
 }()
 
+let jsonWithMillisecondsDateFormatter: DateFormatter = {
+    let jsonDateFormatter = DateFormatter()
+    jsonDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+    jsonDateFormatter.timeZone = TimeZone(identifier: "UTC")
+    return jsonDateFormatter
+}()
+
 let centeredParagraphStyle: NSParagraphStyle = {
     let paragraphStyle = NSMutableParagraphStyle()
     paragraphStyle.alignment = .center

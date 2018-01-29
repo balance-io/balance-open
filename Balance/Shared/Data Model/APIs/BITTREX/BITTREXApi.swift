@@ -240,13 +240,20 @@ private extension BITTREXApi {
             }
             
             return currencies
-        case .getAllDepositHistory, .getDepositHistory(_), .getAllWithdrawalHistory, .getWithdrawalHistory(_):
-            let depositsOrWithdrawals = dataBuilder.createDepositsOrWithdrawals(from: data)
-            guard !depositsOrWithdrawals.isEmpty else {
+        case .getAllDepositHistory, .getDepositHistory(_):
+            let deposits = dataBuilder.createDeposits(from: data)
+            guard !deposits.isEmpty else {
                 return nil
             }
             
-            return depositsOrWithdrawals
+            return deposits
+        case .getAllWithdrawalHistory, .getWithdrawalHistory(_):
+            let withdrawals = dataBuilder.createWithdrawals(from: data)
+            guard !withdrawals.isEmpty else {
+                return nil
+            }
+            
+            return withdrawals
         }
     }
     

@@ -431,22 +431,42 @@ class Syncer {
                 }
             }
             
-            func processTransactions(result: ExchangeAPIResult) {
-                guard let transactions = result.object as? [BITTREXDepositOrWithdrawal] else {
+            func processDeposits(result: ExchangeAPIResult) {
+                guard let deposits = result.object as? [BITTREXDeposit] else {
                     syncingSuccess = false
                     syncingErrors.append(BalanceError.unexpectedData)
                     return
                 }
                 
-                for transaction in transactions {
-                    guard let date = transaction.date else {
-                        log.error("Failed to format date for Bittrex transaction \(transaction.paymentUuid) with date string \(transaction.opened)")
+                for deposit in deposits {
+                    guard let date = deposit.date else {
+                        log.error("Failed to format date for Bittrex deposit \(deposit.id) with date string \(deposit.lastUpdated)")
                         continue
                     }
                     
-                    let amount = paddedInteger(for: transaction.amount, currencyCode: transaction.currency)
+                    let amount = paddedInteger(for: deposit.amount, currencyCode: deposit.currency)
                     
-                    TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: transaction.paymentUuid, sourceAccountId: transaction.currency, name: transaction.paymentUuid, currency: transaction.currency, amount: amount, date: date, categoryID: nil, institution: institution)
+                    // NOTE: Maybe we shoul be using txId here instead of id?
+                    TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: String(deposit.id), sourceAccountId: deposit.currency, name: String(deposit.id), currency: deposit.currency, amount: amount, date: date, categoryID: nil, institution: institution)
+                }
+            }
+            
+            func processWithdrawals(result: ExchangeAPIResult) {
+                guard let withdrawals = result.object as? [BITTREXWithdrawal] else {
+                    syncingSuccess = false
+                    syncingErrors.append(BalanceError.unexpectedData)
+                    return
+                }
+                
+                for withdrawal in withdrawals {
+                    guard let date = withdrawal.date else {
+                        log.error("Failed to format date for Bittrex withdrawal \(withdrawal.paymentUuid) with date string \(withdrawal.opened)")
+                        continue
+                    }
+                    
+                    let amount = paddedInteger(for: withdrawal.amount, currencyCode: withdrawal.currency)
+                    
+                    TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: withdrawal.paymentUuid, sourceAccountId: withdrawal.currency, name: withdrawal.paymentUuid, currency: withdrawal.currency, amount: amount, date: date, categoryID: nil, institution: institution)
                 }
             }
             
@@ -454,10 +474,10 @@ class Syncer {
                 processBalances(result: result)
                 
                 BITTREXApi().performAction(for: .getAllDepositHistory, apiKey: apiKey, secretKey: secretKey) { depositResult in
-                    processTransactions(result: depositResult)
+                    processDeposits(result: depositResult)
                     
                     BITTREXApi().performAction(for: .getAllWithdrawalHistory, apiKey: apiKey, secretKey: secretKey) { withdrawalResult in
-                        processTransactions(result: withdrawalResult)
+                        processWithdrawals(result: withdrawalResult)
                         
                         performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                     }

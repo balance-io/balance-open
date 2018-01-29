@@ -27,7 +27,8 @@ class BITTREXApiTest: XCTestCase {
                                     return
                             }
                             
-                            XCTAssertTrue(balance.cryptoAddress == "DLxcEt3AatMyr2NTatzjsfHNoB9NT62HiF", "Invalid balance")
+                            XCTAssertTrue(balance.currency == "ADA", "Invalid currency")
+                            XCTAssertTrue(balance.balance == 30000, "Invalid balance")
                             
                             asyncTaskExpectation.fulfill()
         }
@@ -67,15 +68,15 @@ class BITTREXApiTest: XCTestCase {
             .performAction(for: .getAllDepositHistory,
                            apiKey: "mockAPIKey123",
                            secretKey: "mockSecretKey") { (result) in
-                            guard let deposits = result.object as? [BITTREXDepositOrWithdrawal],
+                            guard let deposits = result.object as? [BITTREXDeposit],
                                 let deposit = deposits.first else {
                                     assertionFailure("Invalid deposits Response")
                                     return
                             }
                             
-                            XCTAssertTrue(deposit.paymentUuid == "554ec664-8842-4fe9-b491-06225becbd59", "Invalid payment UUID")
-                            XCTAssertTrue(deposit.currency == "BTC", "Invalid currency")
-                            XCTAssertTrue(deposit.amount == 0.00156121, "Invalid amount")
+                            XCTAssertTrue(deposit.id == 47273562, "Invalid payment ID")
+                            XCTAssertTrue(deposit.currency == "ETH", "Invalid currency")
+                            XCTAssertTrue(deposit.amount == 19.9995622, "Invalid amount")
                             
                             asyncTaskExpectation.fulfill()
         }
@@ -92,7 +93,7 @@ class BITTREXApiTest: XCTestCase {
             .performAction(for: .getAllWithdrawalHistory,
                            apiKey: "mockAPIKey123",
                            secretKey: "mockSecretKey") { (result) in
-                            guard let withdrawals = result.object as? [BITTREXDepositOrWithdrawal], let withdrawal = withdrawals.first else {
+                            guard let withdrawals = result.object as? [BITTREXWithdrawal], let withdrawal = withdrawals.first else {
                                 XCTFail("Invalid withdrawals Response")
                                 return
                             }
