@@ -8,7 +8,11 @@
 
 import Foundation
 
-class ExchangeOperation: Operation {
+class ExchangeOperation: Operation, OperationResult {
+    
+    var responseData: ExchangeApiOperationCompletionHandler?
+    var handler: OperationRequest
+    
     
     var operatorHasFinished: Bool = false {
         didSet{
@@ -40,6 +44,10 @@ class ExchangeOperation: Operation {
         return false
     }
     
+    init(with handler: OperationRequest) {
+        self.handler = handler
+    }    
+    
     func taskFinished() {
         operatorIsExecuting = false
         operatorHasFinished = true
@@ -55,9 +63,21 @@ class ExchangeOperation: Operation {
     }
     
     override func main() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        if isCancelled {
+            taskFinished()
+            return
+        }
+        
+        guard let session = handler.sesion,
+            let request = handler.request else {
+                return
+        }
+        
+        let task = session.dataTask(with: request) { (data, response, error) in
             
         }
+        
+        task.resume()
     }
     
 }
