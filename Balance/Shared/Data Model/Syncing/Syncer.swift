@@ -415,6 +415,17 @@ class Syncer {
                 return
             }
             
+            // Fixes the special case in Bittrex where they incorrectly use the BCC ticker symbol
+            // for BCH (Bitcoin Cash). BCC is already the symbol of Bitconnect so we can't just make
+            // them equivalent in the Currency enum and everyone else uses BCH, so we need to save
+            // BCC from Bittrex as BCH for it to work correctly.
+            func bittrexFixCurrencyCode(_ currencyCode: String) -> String {
+                if currencyCode == "BCC" {
+                    return "BCH"
+                }
+                return currencyCode
+            }
+            
             func processBalances(result: ExchangeAPIResult) {
                 guard let balances = result.object as? [BITTREXBalance] else {
                     syncingSuccess = false
@@ -423,11 +434,12 @@ class Syncer {
                 }
                 
                 for balance in balances {
-                    let currentBalance = paddedInteger(for: balance.balance, currencyCode: balance.currency)
+                    let currencyCode = bittrexFixCurrencyCode(balance.currency)
+                    let currentBalance = paddedInteger(for: balance.balance, currencyCode: currencyCode)
                     let availableBalance = currentBalance
                     
                     // Initialize an Account object to insert the record
-                    AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: balance.currency, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: balance.currency, currency: balance.currency, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
+                    AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: currencyCode, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: currencyCode, currency: currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
                 }
             }
             
@@ -444,10 +456,11 @@ class Syncer {
                         continue
                     }
                     
-                    let amount = paddedInteger(for: deposit.amount, currencyCode: deposit.currency)
+                    let currencyCode = bittrexFixCurrencyCode(deposit.currency)
+                    let amount = paddedInteger(for: deposit.amount, currencyCode: currencyCode)
                     
                     // NOTE: Maybe we shoul be using txId here instead of id?
-                    TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: String(deposit.id), sourceAccountId: deposit.currency, name: String(deposit.id), currency: deposit.currency, amount: amount, date: date, categoryID: nil, institution: institution)
+                    TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: String(deposit.id), sourceAccountId: currencyCode, name: String(deposit.id), currency: currencyCode, amount: amount, date: date, categoryID: nil, institution: institution)
                 }
             }
             
@@ -464,9 +477,10 @@ class Syncer {
                         continue
                     }
                     
-                    let amount = paddedInteger(for: withdrawal.amount, currencyCode: withdrawal.currency)
+                    let currencyCode = bittrexFixCurrencyCode(withdrawal.currency)
+                    let amount = paddedInteger(for: withdrawal.amount, currencyCode: currencyCode)
                     
-                    TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: withdrawal.paymentUuid, sourceAccountId: withdrawal.currency, name: withdrawal.paymentUuid, currency: withdrawal.currency, amount: amount, date: date, categoryID: nil, institution: institution)
+                    TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: withdrawal.paymentUuid, sourceAccountId: currencyCode, name: withdrawal.paymentUuid, currency: currencyCode, amount: amount, date: date, categoryID: nil, institution: institution)
                 }
             }
             
