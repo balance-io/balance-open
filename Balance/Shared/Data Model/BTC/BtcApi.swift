@@ -10,6 +10,15 @@ import Foundation
 
 class BtcApi: ExchangeApi {
     
+    enum Commands: String {
+        case rawaddr
+    }
+    let blockchainURL = URL(string: "https://blockchain.info")!
+    
+    func getRequestURL(command: Commands) -> URL {
+        return blockchainURL.appendingPathComponent(command.rawValue)
+    }
+
     func authenticationChallenge(loginStrings: [Field], existingInstitution: Institution?, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) {
         assert(false,"Not implemented")
     }
