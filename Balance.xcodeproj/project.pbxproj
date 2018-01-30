@@ -53,6 +53,14 @@
 		2DF8985B1FCC8F7500CCDFB9 /* CountlyUserDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898361FCC8F7500CCDFB9 /* CountlyUserDetails.m */; };
 		2DF8985C1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */; };
 		2DF8985D1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */; };
+		2DFB5FFA20207DFE00C4B817 /* BtcInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFB5FF920207DFE00C4B817 /* BtcInstitution.swift */; };
+		2DFB5FFB20207DFE00C4B817 /* BtcInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFB5FF920207DFE00C4B817 /* BtcInstitution.swift */; };
+		2DFB5FFD20208EBE00C4B817 /* BtcAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFB5FFC20208EBE00C4B817 /* BtcAccount.swift */; };
+		2DFB5FFE20208EBE00C4B817 /* BtcAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFB5FFC20208EBE00C4B817 /* BtcAccount.swift */; };
+		2DFB60002020CA3D00C4B817 /* BtcApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFB5FFF2020CA3D00C4B817 /* BtcApi.swift */; };
+		2DFB60012020CA3D00C4B817 /* BtcApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFB5FFF2020CA3D00C4B817 /* BtcApi.swift */; };
+		2DFB60042020D08700C4B817 /* BtcAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFB60032020D08700C4B817 /* BtcAccountTests.swift */; };
+		2DFB60092020D5B300C4B817 /* BtcApiResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DFB60082020D5B300C4B817 /* BtcApiResponse.json */; };
 		40A90EA5200959840063B2F5 /* AddNewAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA4200959840063B2F5 /* AddNewAccountView.swift */; };
 		40A90EA7200EA7C60063B2F5 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA6200EA7C60063B2F5 /* UIView+Shadow.swift */; };
 		40A90EA9200F9A4C0063B2F5 /* BlankStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA8200F9A4C0063B2F5 /* BlankStateView.swift */; };
@@ -641,6 +649,11 @@
 		2DF898361FCC8F7500CCDFB9 /* CountlyUserDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyUserDetails.m; sourceTree = "<group>"; };
 		2DF898371FCC8F7500CCDFB9 /* CountlyViewTracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyViewTracking.h; sourceTree = "<group>"; };
 		2DF898381FCC8F7500CCDFB9 /* CountlyViewTracking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyViewTracking.m; sourceTree = "<group>"; };
+		2DFB5FF920207DFE00C4B817 /* BtcInstitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtcInstitution.swift; sourceTree = "<group>"; };
+		2DFB5FFC20208EBE00C4B817 /* BtcAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtcAccount.swift; sourceTree = "<group>"; };
+		2DFB5FFF2020CA3D00C4B817 /* BtcApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtcApi.swift; sourceTree = "<group>"; };
+		2DFB60032020D08700C4B817 /* BtcAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtcAccountTests.swift; sourceTree = "<group>"; };
+		2DFB60082020D5B300C4B817 /* BtcApiResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BtcApiResponse.json; sourceTree = "<group>"; };
 		40A90EA4200959840063B2F5 /* AddNewAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewAccountView.swift; sourceTree = "<group>"; };
 		40A90EA6200EA7C60063B2F5 /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
 		40A90EA8200F9A4C0063B2F5 /* BlankStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankStateView.swift; sourceTree = "<group>"; };
@@ -1148,9 +1161,36 @@
 			path = "countly-sdk-ios-master";
 			sourceTree = "<group>";
 		};
+		2DFB5FF820207DCF00C4B817 /* BTC */ = {
+			isa = PBXGroup;
+			children = (
+				2DFB5FF920207DFE00C4B817 /* BtcInstitution.swift */,
+				2DFB5FFC20208EBE00C4B817 /* BtcAccount.swift */,
+				2DFB5FFF2020CA3D00C4B817 /* BtcApi.swift */,
+			);
+			path = BTC;
+			sourceTree = "<group>";
+		};
+		2DFB60022020D05300C4B817 /* BtcAPIClient */ = {
+			isa = PBXGroup;
+			children = (
+				2DFB60032020D08700C4B817 /* BtcAccountTests.swift */,
+			);
+			path = BtcAPIClient;
+			sourceTree = "<group>";
+		};
+		2DFB60052020D0E100C4B817 /* Btc API Responses */ = {
+			isa = PBXGroup;
+			children = (
+				2DFB60082020D5B300C4B817 /* BtcApiResponse.json */,
+			);
+			path = "Btc API Responses";
+			sourceTree = "<group>";
+		};
 		5301A7641F17F42700668099 /* APIs */ = {
 			isa = PBXGroup;
 			children = (
+				2DFB5FF820207DCF00C4B817 /* BTC */,
 				E653123F1FE8C21600F57977 /* BITTREX */,
 				A4E4570E1F7901DD002E2879 /* Ethplorer */,
 				537187F31F4CC37400E7F9D6 /* ExchangeApi.swift */,
@@ -1886,6 +1926,7 @@
 		53F078551F4F8EC800D0054C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2DFB60052020D0E100C4B817 /* Btc API Responses */,
 				E68EE5762015879200ACB01F /* BITTREX API Responses */,
 				A4E4572F1F7935F2002E2879 /* Poloniex API Responses */,
 				A41742951F73E8A3004A9B4F /* Coinbase API Responses */,
@@ -2435,6 +2476,7 @@
 		F1F948801D8049B800AB30B2 /* BalanceUnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				2DFB60022020D05300C4B817 /* BtcAPIClient */,
 				2DC5EB9820079FE000FB1ED4 /* Extensions */,
 				A4E457241F7921B5002E2879 /* Poloniex */,
 				A41742921F73E829004A9B4F /* CoinbaseAPIClient */,
@@ -2679,6 +2721,7 @@
 				53F0786F1F4F916800D0054C /* FetchAccounts.json in Resources */,
 				A4E457311F79362F002E2879 /* PoloniexDeposit.json in Resources */,
 				A41204C51F719CB800FD8078 /* KrakenFetchAccounts.json in Resources */,
+				2DFB60092020D5B300C4B817 /* BtcApiResponse.json in Resources */,
 				E68EE57B2015880400ACB01F /* BittrexInvalidApiKey.json in Resources */,
 				53F078701F4F916800D0054C /* WithdrawToCrypto.json in Resources */,
 				A44C76271F7BE5A00024476E /* BitfinexMovement.json in Resources */,
@@ -2769,6 +2812,7 @@
 			files = (
 				53F6965D2011322F00D28B23 /* BITTREXWithdrawal.swift in Sources */,
 				53552A1B1ED7251700DD95F9 /* Transaction.swift in Sources */,
+				2DFB60012020CA3D00C4B817 /* BtcApi.swift in Sources */,
 				A4E4571A1F7901E7002E2879 /* EthplorerInstitution.swift in Sources */,
 				53552A091ED7251200DD95F9 /* Defaults.swift in Sources */,
 				537187DD1F4CC23B00E7F9D6 /* CoinbaseAccount.swift in Sources */,
@@ -2865,6 +2909,7 @@
 				A41742911F73C6BF004A9B4F /* CoinbaseTransaction.swift in Sources */,
 				53552A171ED7251700DD95F9 /* Institution.swift in Sources */,
 				53552A021ED7251200DD95F9 /* Singletons.swift in Sources */,
+				2DFB5FFB20207DFE00C4B817 /* BtcInstitution.swift in Sources */,
 				534DDFD91F4CCE9400E6C37F /* URLRequest.swift in Sources */,
 				E65312511FE8C2AC00F57977 /* BITTREXDataBuilder.swift in Sources */,
 				53561EA61F82DD260043D4F9 /* InstitutionSettingsViewController.swift in Sources */,
@@ -2908,6 +2953,7 @@
 				535529DB1ED723C600DD95F9 /* AppDelegate.swift in Sources */,
 				A4E457201F79045A002E2879 /* Double.swift in Sources */,
 				A453A5231F866CFF0002C6C8 /* LoginViewController.swift in Sources */,
+				2DFB5FFE20208EBE00C4B817 /* BtcAccount.swift in Sources */,
 				537187E21F4CC23B00E7F9D6 /* GDAXErrors.swift in Sources */,
 				E65312521FE8C2B000F57977 /* BITTREXApi.swift in Sources */,
 				2DF8984F1FCC8F7500CCDFB9 /* CountlyDeviceInfo.m in Sources */,
@@ -3109,6 +3155,7 @@
 				531E8D9C1C6A633800F765F7 /* Category.swift in Sources */,
 				530F57CF1DCD72680083F3A7 /* FMDatabaseVariadic.swift in Sources */,
 				DC39E0001CD80D0E00B48F75 /* HoverButton.swift in Sources */,
+				2DFB60002020CA3D00C4B817 /* BtcApi.swift in Sources */,
 				533A3B1D1DF23C2B005D3C89 /* Array.swift in Sources */,
 				2DF898581FCC8F7500CCDFB9 /* CountlyStarRating.m in Sources */,
 				5329FB751E3EB5C400A9CAF7 /* EmailIssueController.swift in Sources */,
@@ -3138,7 +3185,9 @@
 				2DE6D9DC1FB1D016007DDCBD /* GDAXTransaction.swift in Sources */,
 				53EB77CE1CF3E6F600F01903 /* NSFont.swift in Sources */,
 				537504FD1F192D280062C11A /* TypeAliases.swift in Sources */,
+				2DFB5FFA20207DFE00C4B817 /* BtcInstitution.swift in Sources */,
 				5383C5D2201F830700B45DED /* BITTREXDeposit.swift in Sources */,
+				2DFB5FFD20208EBE00C4B817 /* BtcAccount.swift in Sources */,
 				A4E768021F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */,
 				532550901D06FEFE0045404E /* SearchField.swift in Sources */,
 				539085331CF97D01009D6E87 /* HoverTableRowView.swift in Sources */,
@@ -3250,6 +3299,7 @@
 				53F0785B1F4F8F2E00D0054C /* BalanceOpenTests.swift in Sources */,
 				A4E4572A1F7921BC002E2879 /* PoloniexAccountTests.swift in Sources */,
 				A41742941F73E84B004A9B4F /* CoinbaseTransactionTests.swift in Sources */,
+				2DFB60042020D08700C4B817 /* BtcAccountTests.swift in Sources */,
 				53F0785D1F4F8F3C00D0054C /* CurrencyTests.swift in Sources */,
 				A4E457291F7921BC002E2879 /* InstitutionTests.swift in Sources */,
 				53ED3BD51FD1902800557AB1 /* KeychainWrapperTests.swift in Sources */,
