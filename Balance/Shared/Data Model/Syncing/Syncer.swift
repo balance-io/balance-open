@@ -420,10 +420,7 @@ class Syncer {
             // them equivalent in the Currency enum and everyone else uses BCH, so we need to save
             // BCC from Bittrex as BCH for it to work correctly.
             func bittrexFixCurrencyCode(_ currencyCode: String) -> String {
-                if currencyCode == "BCC" {
-                    return "BCH"
-                }
-                return currencyCode
+                return currencyCode == "BCC" ? "BCH" : currencyCode
             }
             
             func processBalances(result: ExchangeAPIResult) {

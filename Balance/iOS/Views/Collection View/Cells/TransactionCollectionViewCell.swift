@@ -149,18 +149,17 @@ internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusab
     // MARK: Data
     
     private func reloadData() {
-        guard let unwrappedTransaction = self.transaction, let institution = unwrappedTransaction.institution else {
+        guard let transaction = transaction, let institution = transaction.institution else {
             return
         }
         
         // Amount
-        let currency = Currency.rawValue(unwrappedTransaction.currency)
-        amountLabel.text = amountToString(amount: unwrappedTransaction.amount, currency: currency)
+        let currency = Currency.rawValue(transaction.currency)
+        amountLabel.text = amountToString(amount: transaction.amount, currency: currency)
         
         // User currency amount
-        if !hideConvertedAmounts {
-            let masterCurrency = defaults.masterCurrency!
-            if let masterAmount = unwrappedTransaction.masterAltAmount {
+        if !hideConvertedAmounts, let masterCurrency = defaults.masterCurrency {
+            if let masterAmount = transaction.masterAltAmount {
                 userCurrencyAmountLabel.text = amountToString(amount: masterAmount, currency: masterCurrency, showNegative: true)
                 userCurrencyAmountLabel.isHidden = false
             } else {
@@ -169,19 +168,15 @@ internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusab
         }
         
         // Transaction type
-        transactionTypeLabel.textColor = unwrappedTransaction.source.color
-        transactionTypeImageView.tintColor = unwrappedTransaction.source.color
-        if unwrappedTransaction.amount > 0 {
-            transactionTypeLabel.text = "Received"
-            transactionTypeImageView.image = UIImage(named: "Received")
-        } else {
-            transactionTypeLabel.text = "Sent"
-            transactionTypeImageView.image = UIImage(named: "Sent")
-        }
+        transactionTypeLabel.textColor = transaction.source.color
+        transactionTypeImageView.tintColor = transaction.source.color
+        let transactionType = transaction.amount > 0 ? "Received" : "Sent"
+        transactionTypeLabel.text = transactionType
+        transactionTypeImageView.image = UIImage(named: transactionType)
         
         // Institution
         institutionNameLabel.text = institution.displayName
-        institutionNameLabel.textColor = unwrappedTransaction.source.color
+        institutionNameLabel.textColor = transaction.source.color
         
         if let logo = institution.source.transactionsLogo {
             logoView.image = logo

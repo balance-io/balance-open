@@ -226,7 +226,6 @@
 		53629D45201FE7A9000081E9 /* VectorTypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D43201FE7A8000081E9 /* VectorTypeAliases.swift */; };
 		53629D47201FE7FE000081E9 /* ResizingBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D46201FE7FE000081E9 /* ResizingBehavior.swift */; };
 		53629D48201FE7FE000081E9 /* ResizingBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D46201FE7FE000081E9 /* ResizingBehavior.swift */; };
-		53629D50201FE85B000081E9 /* TouchBarAccountButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D4A201FE85A000081E9 /* TouchBarAccountButtons.swift */; };
 		53629D51201FE85B000081E9 /* InstitutionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D4B201FE85A000081E9 /* InstitutionButtons.swift */; };
 		53629D52201FE85B000081E9 /* TouchBarAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D4C201FE85A000081E9 /* TouchBarAccounts.swift */; };
 		53629D53201FE85B000081E9 /* PreferencesAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D4D201FE85A000081E9 /* PreferencesAccounts.swift */; };
@@ -773,7 +772,6 @@
 		5361BC9D1F562580009C3F07 /* PoloniexInstitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexInstitution.swift; sourceTree = "<group>"; };
 		53629D43201FE7A8000081E9 /* VectorTypeAliases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorTypeAliases.swift; sourceTree = "<group>"; };
 		53629D46201FE7FE000081E9 /* ResizingBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizingBehavior.swift; sourceTree = "<group>"; };
-		53629D4A201FE85A000081E9 /* TouchBarAccountButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchBarAccountButtons.swift; sourceTree = "<group>"; };
 		53629D4B201FE85A000081E9 /* InstitutionButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionButtons.swift; sourceTree = "<group>"; };
 		53629D4C201FE85A000081E9 /* TouchBarAccounts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchBarAccounts.swift; sourceTree = "<group>"; };
 		53629D4D201FE85A000081E9 /* PreferencesAccounts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesAccounts.swift; sourceTree = "<group>"; };
@@ -1631,7 +1629,6 @@
 				53629D4B201FE85A000081E9 /* InstitutionButtons.swift */,
 				53629D4D201FE85A000081E9 /* PreferencesAccounts.swift */,
 				53629D4E201FE85A000081E9 /* TabButtons.swift */,
-				53629D4A201FE85A000081E9 /* TouchBarAccountButtons.swift */,
 				53629D4C201FE85A000081E9 /* TouchBarAccounts.swift */,
 			);
 			path = VectorGraphics;
@@ -3133,7 +3130,6 @@
 				53294FA31D1DDD9500F08059 /* CCNStatusItemDropView.m in Sources */,
 				53BB42E71CE849E70002D473 /* Shortcut.swift in Sources */,
 				53F0785D1ED73B7D00E7EDF9 /* Element.swift in Sources */,
-				53629D50201FE85B000081E9 /* TouchBarAccountButtons.swift in Sources */,
 				53629D47201FE7FE000081E9 /* ResizingBehavior.swift in Sources */,
 				532B6FE51E95D5C40010D81D /* Swizzling.swift in Sources */,
 				530F57B41DCD72680083F3A7 /* FMDatabaseQueue.m in Sources */,
