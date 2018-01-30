@@ -67,7 +67,7 @@ class Syncer {
                 // No access token somehow, so move on to the next one
                 log.severe("Tried to sync institution \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name) but did not find an access token")
                 syncInstitutions(syncingInstitutions, startDate: startDate, success: success, errors: errors, pruneTransactions: pruneTransactions)
-            } else if institution.source == .coinbase && institution.isTokenExpired {
+            } else if institution.source == .coinbase && CoinbasePreferences.isTokenExpired {
                 if institution.refreshToken == nil {
                     // No refresh token somehow, so move on to the next one
                     log.severe("Tried to refresh access token for institution \(institution.institutionId) (\(institution.sourceInstitutionId)): \(institution.name) but did not find a refresh token")

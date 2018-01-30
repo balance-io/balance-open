@@ -21,7 +21,7 @@ protocol ExchangeManagerAction {
 
 fileprivate typealias ExchangeCallbackResult = (success: Bool, error: Error?, result: Any?)
 
-class ExchangeManager: ExchangeManagerAction {
+class ExchangeManager {
     
     private lazy var autenticationQueue: OperationQueue = {
         let taskQueue = OperationQueue()
@@ -53,8 +53,14 @@ class ExchangeManager: ExchangeManagerAction {
         self.keychainService = keychainService ?? ExchangeKeychainServiceProvider()
     }
     
+}
+
+
+//mark: Common Interface
+extension ExchangeManager: ExchangeManagerAction {
+    
     func login(with source: Source, fields: [Field]) {
-        guard let credentials = credentials(from: fields, source: source) else {
+        guard let credentials = BalanceCredentials.credentials(from: fields, source: source) else {
             return
         }
         
@@ -108,6 +114,7 @@ class ExchangeManager: ExchangeManagerAction {
     
 }
 
+//Process reponse methods
 private extension ExchangeManager {
     
     func processRefreshCallback(_ callbackResult: ExchangeCallbackResult, institution: Institution, credentials: Credentials) {
@@ -161,9 +168,16 @@ private extension ExchangeManager {
     
     func launchCoinbaseAutentication(with data: Any) {
         let operation = coinbaseExchangeAPI.startAutentication(with: data) { [weak self] (success, error, result) in
-            if let coinbaseInstitution = result as? Institution,
+            guard let `self` = self else {
+                return
+            }
+            
+            if let coinbaseOAUTHCredentials = result as? OAUTHCredentials,
+                let coinbaseInstitution = self.repositoryService.createInstitution(for: .coinbase),
                 success {
-                self?.fetchCoinbaseAccounts(with: coinbaseInstitution)
+                
+                self.keychainService.save(source: .coinbase, identifier: "\(coinbaseInstitution.institutionId)" , credentials: coinbaseOAUTHCredentials)
+                self.fetchCoinbaseAccounts(with: coinbaseInstitution)
             }
             
             if let error = error {
@@ -181,6 +195,14 @@ private extension ExchangeManager {
     
     func fetchCoinbaseAccounts(with institution: Institution) {
         
+    }
+    
+    func createCoinbaseInstitution(with auntenticationCredentials: OAUTHCredentials) {
+        guard let coinbaseInstitution = repositoryService.createInstitution(for: .coinbase) else {
+            return
+        }
+
+        keychainService
     }
     
 }
@@ -211,48 +233,6 @@ private extension ExchangeManager {
         
         refreshQueue.addOperation(refreshAccountsOperation)
         refreshQueue.addOperation(refreshTransationOperation)
-    }
-    
-}
-
-//mark: Credential Helper Methods
-private extension ExchangeManager {
-    
-    func credentials(from fields: [Field], source: Source) -> Credentials? {
-        guard source != .coinbase else {
-            return BalanceCredentials()
-        }
-        
-        guard fields.count == totalFields(for: source) else {
-            print("Error - Invalid amount for creating credentials from fields array")
-            return nil
-        }
-        
-        let credentials = BalanceCredentials(fields: fields)
-        guard areCredentialsValid(credentials, for: source) else {
-            print("Error - Credentials weren't setted correctly for \(source)")
-            return nil
-        }
-        
-        return credentials
-    }
-    
-    func areCredentialsValid(_ credentials: Credentials, for source: Source) -> Bool {
-        switch source {
-        case .poloniex, .kraken:
-            return !credentials.apiKey.isEmpty && !credentials.secretKey.isEmpty
-        default:
-            return false
-        }
-    }
-    
-    func totalFields(for source: Source) -> Int {
-        switch source {
-        case .poloniex:
-            return 2
-        default:
-            return 2
-        }
     }
     
 }

@@ -15,9 +15,8 @@ enum CoinbaseAuthenticationKey: String, CodingKey  {
     case accessToken = "accessToken"
     case refreshToken = "refreshToken"
     case code = "code"
-    case scope = "scope"
+    case apiScope = "scope"
 }
-
 fileprivate struct CoinbaseAutenticationConstants {
     
     //mark: Coinbase app configurations
@@ -108,22 +107,13 @@ extension CoinbaseAPI2: RequestHandler {
         }
     }
     
-    func getAutenticationData(from data: Data?) -> Institution? {
+    func getAutenticationData(from data: Data?) -> CoinbaseAutentication? {
         guard let jsonData = data else {
             return nil
         }
         
         do {
             let coinbaseAutentication = try JSONDecoder().decode(CoinbaseAutentication.self, from: jsonData)
-            
-            guard let institution = InstitutionRepository.si.institution(source: .coinbase, sourceInstitutionId: "", name: Source.coinbase.description) else {
-                return nil
-            }
-            
-            institution.accessToken = coinbaseAutentication.accessToken
-            institution.refreshToken = coinbaseAutentication.refreshToken
-            institution.tokenExpireDate = Date().addingTimeInterval(coinbaseAutentication.expiresIn - 10.0)
-            institution.apiScope = coinbaseAutentication.scope
             
             return coinbaseAutentication
         } catch  {
@@ -187,44 +177,20 @@ private class CoibaseAutenticationOperation: Operation {
     override func main() {
         let strongHandler = requestHandler
         let task = certValidatedSession.dataTask(with: autenticationRequest) { (data, response, error) in
-            let mockData = strongHandler.handleResponseData(for: nil, data: data, error: error, ulrResponse: response)
+            let parsedData = strongHandler.handleResponseData(for: nil, data: data, error: error, ulrResponse: response)
             self.completionBlock?()
-            self.autenticationResultBlock(true, nil, mockData)
+            
+            switch parsedData {
+            case let autenticationData as CoinbaseAutentication:
+                self.autenticationResultBlock(true, nil, autenticationData)
+            case let autenticationError as ExchangeBaseError:
+                self.autenticationResultBlock(false, autenticationError, nil)
+            default:
+                self.autenticationResultBlock(false, nil, nil)
+            }
         }
         
         task.resume()
     }
     
-}
-
-struct CoinbaseAutentication: Decodable {
-    
-    let tokenType: String
-    let expiresIn: Double
-    let accessToken: String
-    let refreshToken: String
-    let code: Double
-    let scope: String
-    
-    init(tokenType: String = "", expiresIn: Double = 0, accessToken: String = "", refreshToken: String, code: Double, scope: String) {
-        self.tokenType = tokenType
-        self.expiresIn = expiresIn
-        self.accessToken = accessToken
-        self.refreshToken = refreshToken
-        self.code = code
-        self.scope = scope
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CoinbaseAuthenticationKey.self)
-        let tokenType: String = try container.decode(String.self, forKey: .tokenType)
-        let expiresIn: Double = try container.decode(Double.self, forKey: .expiresIn)
-        let accessToken: String = try container.decode(String.self, forKey: .accessToken)
-        let refreshToken: String = try container.decode(String.self, forKey: .refreshToken)
-        let code: Double = try container.decode(Double.self, forKey: .code)
-        let scope: String = try container.decode(String.self, forKey: .scope)
-        
-        self.init(tokenType: tokenType, expiresIn: expiresIn, accessToken: accessToken, refreshToken: refreshToken, code: code, scope: scope)
-    }
-
 }

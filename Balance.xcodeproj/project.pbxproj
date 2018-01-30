@@ -522,6 +522,7 @@
 		E61B7B6A201BE05300B391CE /* KrakenAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B7B69201BE05300B391CE /* KrakenAPI2.swift */; };
 		E61B7B6C201BE06C00B391CE /* KrakenAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B7B69201BE05300B391CE /* KrakenAPI2.swift */; };
 		E61B7B6E201BE67F00B391CE /* KrakenAPI2Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B7B6D201BE67F00B391CE /* KrakenAPI2Action.swift */; };
+		E630FB0620210DEE00146E99 /* CoinbaseAPICredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E630FB0520210DEE00146E99 /* CoinbaseAPICredentials.swift */; };
 		E6490DC5201A9E06007C41B7 /* ExchangeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6635C63201A6E4400D9720E /* ExchangeManager.swift */; };
 		E6490DC6201A9E12007C41B7 /* BalanceCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6635C66201A777900D9720E /* BalanceCredentials.swift */; };
 		E64AAA38201F883C00CE7050 /* KrakenAPI2Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B7B6D201BE67F00B391CE /* KrakenAPI2Action.swift */; };
@@ -1033,6 +1034,7 @@
 		E605EF8D2006BF3600A95632 /* UIViewController+Present.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Present.swift"; sourceTree = "<group>"; };
 		E61B7B69201BE05300B391CE /* KrakenAPI2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenAPI2.swift; sourceTree = "<group>"; };
 		E61B7B6D201BE67F00B391CE /* KrakenAPI2Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenAPI2Action.swift; sourceTree = "<group>"; };
+		E630FB0520210DEE00146E99 /* CoinbaseAPICredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseAPICredentials.swift; sourceTree = "<group>"; };
 		E64AAA3B201FCBD000CE7050 /* CoinbaseAPI2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseAPI2.swift; sourceTree = "<group>"; };
 		E64AAA3D201FCBE300CE7050 /* CoinbaseAPI2Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseAPI2Action.swift; sourceTree = "<group>"; };
 		E653123D1FE8C20600F57977 /* NewExchangeAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewExchangeAPI.swift; sourceTree = "<group>"; };
@@ -2428,6 +2430,7 @@
 			children = (
 				E64AAA3B201FCBD000CE7050 /* CoinbaseAPI2.swift */,
 				E64AAA3D201FCBE300CE7050 /* CoinbaseAPI2Action.swift */,
+				E630FB0520210DEE00146E99 /* CoinbaseAPICredentials.swift */,
 			);
 			path = Coinbase;
 			sourceTree = "<group>";
@@ -3351,6 +3354,7 @@
 				532550941D0702980045404E /* TableRowView.swift in Sources */,
 				5334022A1DDD0E5E000236A0 /* PaintCodeView.swift in Sources */,
 				28FD09C21D99F18500A395AB /* PaintCodeButton.swift in Sources */,
+				E630FB0620210DEE00146E99 /* CoinbaseAPICredentials.swift in Sources */,
 				409BF850201A353800E2D30D /* NewPoloniexTransaction.swift in Sources */,
 				532121A71EE8B91600F4812A /* ZipUtilities.swift in Sources */,
 				533626601D54E5F80090656F /* FlippedView.swift in Sources */,

@@ -15,6 +15,6 @@ protocol RepositoryServiceProtocol {
 }
 
 protocol KeychainServiceProtocol: class {
-    func save(source: Source, identifier: String, credentials: Credentials)
+    func save(source: Source, identifier: String, credentials: BaseCredentials)
     func fetch(account: String, key: String) -> String?
 }

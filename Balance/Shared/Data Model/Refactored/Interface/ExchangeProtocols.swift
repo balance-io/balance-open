@@ -8,7 +8,7 @@
 
 import Foundation
 
-public typealias ExchangeOperationCompletionHandler = (_ success: Bool, _ error: ExchangeError?, _ data: Any?) -> Void
+public typealias ExchangeOperationCompletionHandler = (_ success: Bool, _ error: ExchangeBaseError?, _ data: Any?) -> Void
 
 public enum ExchangeError: Error {
     case invalidCredentials
