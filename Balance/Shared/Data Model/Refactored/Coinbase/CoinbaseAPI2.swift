@@ -8,9 +8,14 @@
 
 import Foundation
 
-enum CoinbaseAuthenticationKey: String {
-    case state
-    case code
+enum CoinbaseAuthenticationKey: String, CodingKey  {
+    case state = "state"
+    case tokenType = "tokenType"
+    case expiresIn = "expiresIn"
+    case accessToken = "accessToken"
+    case refreshToken = "refreshToken"
+    case code = "code"
+    case scope = "scope"
 }
 
 fileprivate struct CoinbaseAutenticationConstants {
@@ -65,7 +70,7 @@ class CoinbaseAPI2: AbstractApi {
             #endif
         } catch {
             // TODO: Better error handling
-            log.error("Error opening Coinbase authentication URL: \(error)")
+            log.error("Error - opening Coinbase authentication URL: \(error)")
         }
         
         lastState = state
@@ -89,8 +94,42 @@ extension CoinbaseAPI2: RequestHandler {
         return nil
     }
     
-    func handleResponseData(_ data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any {
-        return "example"
+    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any {
+        guard let action = action else {
+            let autentication = getAutenticationData(from: data)
+            return autentication ?? ExchangeBaseError.other(message: "Data retrieved from autentication is not valid")
+        }
+        
+        switch action.type {
+        case .accounts:
+            return "example accounts"
+        case .transactions:
+            return "example transactions"
+        }
+    }
+    
+    func getAutenticationData(from data: Data?) -> Institution? {
+        guard let jsonData = data else {
+            return nil
+        }
+        
+        do {
+            let coinbaseAutentication = try JSONDecoder().decode(CoinbaseAutentication.self, from: jsonData)
+            
+            guard let institution = InstitutionRepository.si.institution(source: .coinbase, sourceInstitutionId: "", name: Source.coinbase.description) else {
+                return nil
+            }
+            
+            institution.accessToken = coinbaseAutentication.accessToken
+            institution.refreshToken = coinbaseAutentication.refreshToken
+            institution.tokenExpireDate = Date().addingTimeInterval(coinbaseAutentication.expiresIn - 10.0)
+            institution.apiScope = coinbaseAutentication.scope
+            
+            return coinbaseAutentication
+        } catch  {
+            print("Error parsin data from auntetication \(error)")
+            return nil
+        }
     }
     
 }
@@ -100,7 +139,7 @@ private extension CoinbaseAPI2 {
     func createAutenticationRequest(with data: Any) -> URLRequest? {
         guard let dict = data as? [String: Any],
             let state = dict[CoinbaseAuthenticationKey.state.rawValue] as? String,
-            let code = dict[CoinbaseAuthenticationKey.state.rawValue] as? String else {
+            let code = dict[CoinbaseAuthenticationKey.code.rawValue] as? String else {
                 log.debug("can't retrive data for begin autentication")
                 return nil
         }
@@ -148,7 +187,7 @@ private class CoibaseAutenticationOperation: Operation {
     override func main() {
         let strongHandler = requestHandler
         let task = certValidatedSession.dataTask(with: autenticationRequest) { (data, response, error) in
-            let mockData = strongHandler.handleResponseData(data, error: error, ulrResponse: response)
+            let mockData = strongHandler.handleResponseData(for: nil, data: data, error: error, ulrResponse: response)
             self.completionBlock?()
             self.autenticationResultBlock(true, nil, mockData)
         }
@@ -156,4 +195,36 @@ private class CoibaseAutenticationOperation: Operation {
         task.resume()
     }
     
+}
+
+struct CoinbaseAutentication: Decodable {
+    
+    let tokenType: String
+    let expiresIn: Double
+    let accessToken: String
+    let refreshToken: String
+    let code: Double
+    let scope: String
+    
+    init(tokenType: String = "", expiresIn: Double = 0, accessToken: String = "", refreshToken: String, code: Double, scope: String) {
+        self.tokenType = tokenType
+        self.expiresIn = expiresIn
+        self.accessToken = accessToken
+        self.refreshToken = refreshToken
+        self.code = code
+        self.scope = scope
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CoinbaseAuthenticationKey.self)
+        let tokenType: String = try container.decode(String.self, forKey: .tokenType)
+        let expiresIn: Double = try container.decode(Double.self, forKey: .expiresIn)
+        let accessToken: String = try container.decode(String.self, forKey: .accessToken)
+        let refreshToken: String = try container.decode(String.self, forKey: .refreshToken)
+        let code: Double = try container.decode(Double.self, forKey: .code)
+        let scope: String = try container.decode(String.self, forKey: .scope)
+        
+        self.init(tokenType: tokenType, expiresIn: expiresIn, accessToken: accessToken, refreshToken: refreshToken, code: code, scope: scope)
+    }
+
 }

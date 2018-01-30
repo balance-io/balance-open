@@ -56,7 +56,7 @@ public protocol APIAction {
 
 public protocol RequestHandler: class {    
     func request(for action: APIAction) -> URLRequest?
-    func handleResponseData(_ data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any
+    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any
 }
 
 extension APIAction {
