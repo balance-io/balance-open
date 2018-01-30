@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import BalanceVectorGraphics
 import SnapKit
 
 fileprivate let padding = 18

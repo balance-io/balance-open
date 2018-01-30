@@ -1,7 +1,6 @@
 import Cocoa
 import SnapKit
 import MapKit
-import BalanceVectorGraphics
 import JMSRangeSlider
 
 class TransactionsTabViewController: NSViewController, TransactionsTabViewModelDelegate, SectionedTableViewDelegate, SectionedTableViewDataSource, NSTextFieldDelegate, TextFieldDelegate, PaintCodeDropdownDelegate {

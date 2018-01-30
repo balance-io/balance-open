@@ -1,5 +1,4 @@
 import Cocoa
-import BalanceVectorGraphics
 
 class PaintCodeButton: Button {
     

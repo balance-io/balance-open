@@ -6,8 +6,21 @@
 //  Copyright © 2017 Balanced Software, Inc. All rights reserved.
 //
 
-import BalanceVectorGraphics_iOS
 import UIKit
+
+fileprivate extension Source {
+    var transactionsLogo: UIImage? {
+        switch self {
+        case .coinbase: return #imageLiteral(resourceName: "coinbaseTransactions")
+        case .poloniex: return #imageLiteral(resourceName: "poloniexTransactions")
+        case .gdax:     return #imageLiteral(resourceName: "gdaxTransactions")
+        case .bitfinex: return #imageLiteral(resourceName: "bitfinexTransactions")
+        case .kraken:   return #imageLiteral(resourceName: "krakenTransactions")
+        case .bittrex:  return #imageLiteral(resourceName: "bittrexTransactions")
+        default:        return nil
+        }
+    }
+}
 
 fileprivate let hideConvertedAmounts = true
 internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusable
@@ -24,7 +37,7 @@ internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusab
     }
     
     // Private
-    private let logoView = PaintCodeView()
+    private let logoView = UIImageView()
     
     private let institutionNameLabel: UILabel = {
         let label = UILabel()
@@ -75,7 +88,6 @@ internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusab
         
         // Transaction type image view
         self.contentView.addSubview(self.transactionTypeImageView)
-        
         self.transactionTypeImageView.snp.makeConstraints { (make) in
             make.bottom.equalTo(self.contentView.snp.centerY).offset(-5.0)
             make.left.equalToSuperview().inset(15.0)
@@ -83,7 +95,6 @@ internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusab
         
         // Transaction type
         self.contentView.addSubview(self.transactionTypeLabel)
-        
         self.transactionTypeLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.transactionTypeImageView)
             make.left.equalTo(self.transactionTypeImageView.snp.right).offset(5.0)
@@ -91,7 +102,6 @@ internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusab
         
         // Institution name label
         self.contentView.addSubview(self.institutionNameLabel)
-        
         self.institutionNameLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.transactionTypeImageView)
             make.right.equalToSuperview().inset(15.0)
@@ -100,17 +110,15 @@ internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusab
         // Logo view
         self.logoView.isHidden = true
         self.contentView.addSubview(self.logoView)
-        
         self.logoView.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.transactionTypeImageView)
-            make.right.equalToSuperview()
-            make.width.equalTo(75.0)
-            make.height.equalTo(25.0)
+            make.right.equalToSuperview().offset(-10)
+            make.width.equalTo(0)
+            make.height.equalTo(0)
         }
         
         // Amount label
         self.contentView.addSubview(self.amountLabel)
-        
         self.amountLabel.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView.snp.centerY).offset(2.0)
             make.left.equalToSuperview().inset(15.0)
@@ -118,7 +126,6 @@ internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusab
         
         // User currency amount label
         self.contentView.addSubview(self.userCurrencyAmountLabel)
-        
         self.userCurrencyAmountLabel.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView.snp.centerY).offset(2.0)
             make.right.equalToSuperview().inset(15.0)
@@ -141,60 +148,53 @@ internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusab
     
     // MARK: Data
     
-    private func reloadData()
-    {
-        guard let unwrappedTransaction = self.transaction,
-              let institution = unwrappedTransaction.institution else
-        {
+    private func reloadData() {
+        guard let unwrappedTransaction = self.transaction, let institution = unwrappedTransaction.institution else {
             return
         }
         
         // Amount
         let currency = Currency.rawValue(unwrappedTransaction.currency)
-        self.amountLabel.text = amountToString(amount: unwrappedTransaction.amount, currency: currency)
+        amountLabel.text = amountToString(amount: unwrappedTransaction.amount, currency: currency)
         
         // User currency amount
         if !hideConvertedAmounts {
             let masterCurrency = defaults.masterCurrency!
             if let masterAmount = unwrappedTransaction.masterAltAmount {
-                self.userCurrencyAmountLabel.text = amountToString(amount: masterAmount, currency: masterCurrency, showNegative: true)
-                self.userCurrencyAmountLabel.isHidden = false
+                userCurrencyAmountLabel.text = amountToString(amount: masterAmount, currency: masterCurrency, showNegative: true)
+                userCurrencyAmountLabel.isHidden = false
             } else {
-                self.userCurrencyAmountLabel.isHidden = true
+                userCurrencyAmountLabel.isHidden = true
             }
         }
         
         // Transaction type
-        self.transactionTypeLabel.textColor = unwrappedTransaction.source.color
-        self.transactionTypeImageView.tintColor = unwrappedTransaction.source.color
-        if unwrappedTransaction.amount > 0
-        {
-            self.transactionTypeLabel.text = "Received"
-            self.transactionTypeImageView.image = UIImage(named: "Received")
-        }
-        else
-        {
-            self.transactionTypeLabel.text = "Sent"
-            self.transactionTypeImageView.image = UIImage(named: "Sent")
+        transactionTypeLabel.textColor = unwrappedTransaction.source.color
+        transactionTypeImageView.tintColor = unwrappedTransaction.source.color
+        if unwrappedTransaction.amount > 0 {
+            transactionTypeLabel.text = "Received"
+            transactionTypeImageView.image = UIImage(named: "Received")
+        } else {
+            transactionTypeLabel.text = "Sent"
+            transactionTypeImageView.image = UIImage(named: "Sent")
         }
         
         // Institution
-        self.institutionNameLabel.text = institution.displayName
-        self.institutionNameLabel.textColor = unwrappedTransaction.source.color
+        institutionNameLabel.text = institution.displayName
+        institutionNameLabel.textColor = unwrappedTransaction.source.color
         
-        // TODO:
-        // Currently the coinbase logo is white, which won't be visible
-        // on this view.
-        
-//        let institutionID = institution.source.description
-//        if let logoDrawFunction = InstitutionLogos.drawingFunctionForId(sourceInstitutionId: institutionID) {
-//            self.logoView.drawingBlock = logoDrawFunction
-//
-//            self.institutionNameLabel.isHidden = true
-//            self.logoView.isHidden = false
-//        } else {
-//            self.institutionNameLabel.isHidden = false
-//            self.logoView.isHidden = true
-//        }
+        if let logo = institution.source.transactionsLogo {
+            logoView.image = logo
+            logoView.snp.updateConstraints { make in
+                make.width.equalTo(logo.size.width)
+                make.height.equalTo(logo.size.height)
+            }
+
+            institutionNameLabel.isHidden = true
+            logoView.isHidden = false
+        } else {
+            institutionNameLabel.isHidden = false
+            logoView.isHidden = true
+        }
     }
 }

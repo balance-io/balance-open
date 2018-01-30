@@ -63,6 +63,7 @@ final class NewAccountViewModel {
     private let poloniexAPIClient = PoloniexApi()
     private let bitfinexAPIClient = BitfinexAPIClient()
     private let krakenAPIClient = KrakenAPIClient()
+    private let bittrexAPIClient = BITTREXApi()
     private let ethplorerAPIClient = EthplorerApi()
     
     private let apiKeyTextField: UITextField = {
@@ -165,6 +166,10 @@ final class NewAccountViewModel {
             }
         case .kraken:
             self.krakenAPIClient.authenticationChallenge(loginStrings: fields, existingInstitution: existingInstitution) { (success, error, _) in
+                completionHandler(success, error)
+            }
+        case .bittrex:
+            self.bittrexAPIClient.authenticationChallenge(loginStrings: fields, existingInstitution: existingInstitution) { (success, error, _) in
                 completionHandler(success, error)
             }
         case .ethplorer:
