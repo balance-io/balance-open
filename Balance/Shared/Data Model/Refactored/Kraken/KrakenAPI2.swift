@@ -10,9 +10,9 @@ import Foundation
 
 class KrakenAPI2: AbstractApi {
     override var requestMethod: ApiRequestMethod { return .post }
-    override var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
-    override var requestEncoding: ApiRequestEncoding { return .hmac(hmacAlgorithm: CCHmacAlgorithm(kCCHmacAlgSHA512), digestLength: Int(CC_SHA512_DIGEST_LENGTH)) }
-    override var encondingMessageType: ApiEncondingMessageType { return .base64 }
+    override var requestDataFormat: ApiRequestDataFormat { return .json }
+    override var requestEncoding: ApiRequestEncoding { return .none }
+    override var encondingMessageType: ApiEncondingMessageType { return .none }
     
     override func processErrors(requestType: ApiRequestType, response: HTTPURLResponse, data: Data?, error: Error?) -> Error?  {
         // In this example, look for 400 or 403 errors and return .invalidCredentials, then look for

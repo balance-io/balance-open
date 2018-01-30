@@ -525,6 +525,10 @@
 		E6490DC5201A9E06007C41B7 /* ExchangeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6635C63201A6E4400D9720E /* ExchangeManager.swift */; };
 		E6490DC6201A9E12007C41B7 /* BalanceCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6635C66201A777900D9720E /* BalanceCredentials.swift */; };
 		E64AAA38201F883C00CE7050 /* KrakenAPI2Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B7B6D201BE67F00B391CE /* KrakenAPI2Action.swift */; };
+		E64AAA3C201FCBD000CE7050 /* CoinbaseAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64AAA3B201FCBD000CE7050 /* CoinbaseAPI2.swift */; };
+		E64AAA3E201FCBE300CE7050 /* CoinbaseAPI2Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64AAA3D201FCBE300CE7050 /* CoinbaseAPI2Action.swift */; };
+		E64AAA3F201FCBF500CE7050 /* CoinbaseAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64AAA3B201FCBD000CE7050 /* CoinbaseAPI2.swift */; };
+		E64AAA40201FCBF500CE7050 /* CoinbaseAPI2Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64AAA3D201FCBE300CE7050 /* CoinbaseAPI2Action.swift */; };
 		E653123E1FE8C20700F57977 /* NewExchangeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E653123D1FE8C20600F57977 /* NewExchangeAPI.swift */; };
 		E65312451FE8C22E00F57977 /* BITTREXApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312411FE8C22D00F57977 /* BITTREXApi.swift */; };
 		E653124C1FE8C28D00F57977 /* BITTREXCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312491FE8C28D00F57977 /* BITTREXCurrency.swift */; };
@@ -1029,6 +1033,8 @@
 		E605EF8D2006BF3600A95632 /* UIViewController+Present.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Present.swift"; sourceTree = "<group>"; };
 		E61B7B69201BE05300B391CE /* KrakenAPI2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenAPI2.swift; sourceTree = "<group>"; };
 		E61B7B6D201BE67F00B391CE /* KrakenAPI2Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenAPI2Action.swift; sourceTree = "<group>"; };
+		E64AAA3B201FCBD000CE7050 /* CoinbaseAPI2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseAPI2.swift; sourceTree = "<group>"; };
+		E64AAA3D201FCBE300CE7050 /* CoinbaseAPI2Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseAPI2Action.swift; sourceTree = "<group>"; };
 		E653123D1FE8C20600F57977 /* NewExchangeAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewExchangeAPI.swift; sourceTree = "<group>"; };
 		E65312411FE8C22D00F57977 /* BITTREXApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXApi.swift; sourceTree = "<group>"; };
 		E65312491FE8C28D00F57977 /* BITTREXCurrency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BITTREXCurrency.swift; path = "Balance/Shared/Data Model/APIs/BITTREX/DTO/BITTREXCurrency.swift"; sourceTree = SOURCE_ROOT; };
@@ -2030,6 +2036,8 @@
 		53F696622016876A00D28B23 /* Refactored */ = {
 			isa = PBXGroup;
 			children = (
+				E64AAA3A201FCBA600CE7050 /* Coinbase */,
+				E64AAA39201FCB9400CE7050 /* Kraken */,
 				E66743FC20195E8A0009A57F /* Interface */,
 				E6635C65201A775A00D9720E /* ApiManager */,
 				409BF848201A2A0600E2D30D /* Poloniex */,
@@ -2402,10 +2410,26 @@
 		E61B7B6B201BE05900B391CE /* ExchangeAPI2 */ = {
 			isa = PBXGroup;
 			children = (
+			);
+			path = ExchangeAPI2;
+			sourceTree = "<group>";
+		};
+		E64AAA39201FCB9400CE7050 /* Kraken */ = {
+			isa = PBXGroup;
+			children = (
 				E61B7B69201BE05300B391CE /* KrakenAPI2.swift */,
 				E61B7B6D201BE67F00B391CE /* KrakenAPI2Action.swift */,
 			);
-			path = ExchangeAPI2;
+			path = Kraken;
+			sourceTree = "<group>";
+		};
+		E64AAA3A201FCBA600CE7050 /* Coinbase */ = {
+			isa = PBXGroup;
+			children = (
+				E64AAA3B201FCBD000CE7050 /* CoinbaseAPI2.swift */,
+				E64AAA3D201FCBE300CE7050 /* CoinbaseAPI2Action.swift */,
+			);
+			path = Coinbase;
 			sourceTree = "<group>";
 		};
 		E653123F1FE8C21600F57977 /* BITTREX */ = {
@@ -2994,6 +3018,7 @@
 				A493B93A1F68137E0074ACCC /* APICredentialsComponents.swift in Sources */,
 				2DF898451FCC8F7500CCDFB9 /* CountlyAPMNetworkLog.m in Sources */,
 				A4E7680A1F67DDFE002B1AE1 /* BitfinexErrors.swift in Sources */,
+				E64AAA40201FCBF500CE7050 /* CoinbaseAPI2Action.swift in Sources */,
 				53561EAE1F82DD260043D4F9 /* InstitutionSettingsViewModel.swift in Sources */,
 				A41D3E461F6BF81A00FD25B5 /* KrakenAuthHeaders.swift in Sources */,
 				A432F5E81FBDA09D00DDDAFF /* TotalBalanceBar.swift in Sources */,
@@ -3001,6 +3026,7 @@
 				403AA173201F81940088A2DE /* PoloniexAPI2.swift in Sources */,
 				53552A221ED7252900DD95F9 /* NSAttributedString.swift in Sources */,
 				A42953CE1F8E179900729045 /* SplashScreenViewController.swift in Sources */,
+				E64AAA3F201FCBF500CE7050 /* CoinbaseAPI2.swift in Sources */,
 				E6674403201975440009A57F /* ApiEntityProtocols.swift in Sources */,
 				53561EB41F82DD260043D4F9 /* TableData.swift in Sources */,
 				535529F21ED724ED00DD95F9 /* AccountsTabViewModel.swift in Sources */,
@@ -3196,6 +3222,7 @@
 				53F47FCE1E3A78B70042AE06 /* DispatchQueue.swift in Sources */,
 				2DF898441FCC8F7500CCDFB9 /* CountlyAPMNetworkLog.m in Sources */,
 				A4430AA01F95F3ED00F2FFFA /* ExchangeRateSource.swift in Sources */,
+				E64AAA3E201FCBE300CE7050 /* CoinbaseAPI2Action.swift in Sources */,
 				2D9AA1E31FB5AED300058491 /* Analytics.swift in Sources */,
 				530422941ED39EE7001CA499 /* TransactionsTabViewModel.swift in Sources */,
 				E653124E1FE8C28D00F57977 /* BITTREXDataBuilder.swift in Sources */,
@@ -3389,6 +3416,7 @@
 				530F57AB1DCD72680083F3A7 /* FMDatabasePool.m in Sources */,
 				537187E91F4CC23C00E7F9D6 /* GDAXAPIClient.swift in Sources */,
 				40970261201F7D6200C34623 /* AbstractApi.swift in Sources */,
+				E64AAA3C201FCBD000CE7050 /* CoinbaseAPI2.swift in Sources */,
 				A41742901F73C6BF004A9B4F /* CoinbaseTransaction.swift in Sources */,
 				5302912D1C6A731F00C31CC1 /* Account.swift in Sources */,
 				53CED06A1D19B26000CE1B73 /* VisualEffectView.swift in Sources */,

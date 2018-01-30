@@ -43,8 +43,16 @@ open class AbstractApi: ExchangeApi2 {
     }
     
     // MARK - ExchangeApi Protocol -
+    open func prepareForAutentication() {
+        fatalError("Must override")
+    }
     
-    public func fetchData(for action: APIAction, completion: @escaping ExchangeApiOperationCompletionHandler) -> Operation {
+
+    open func startAutentication(with data: Any, completionBlock: @escaping ExchangeOperationCompletionHandler) -> Operation? {
+        fatalError("Must override")
+    }
+    
+    public func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation {
         return performRequest(for: action, completion: completion)
     }
     
@@ -54,7 +62,7 @@ private extension AbstractApi {
     
     // This creates the async network operation based on the overridden options, encapsulates it in an AsyncOperation,
     // and returns that for queuing. The completion handler is called when the operation completes.
-    func performRequest(for action: APIAction, completion: @escaping ExchangeApiOperationCompletionHandler) -> Operation {
+    func performRequest(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation {
         //TODO: Felipe create the operation class
         let requestForAction = createRequest(for: action)
         fatalError("Must override")

@@ -54,6 +54,11 @@ public protocol APIAction {
     init(type: ApiRequestType, credentials: Credentials)
 }
 
+public protocol RequestHandler: class {    
+    func request(for action: APIAction) -> URLRequest?
+    func handleResponseData(_ data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any
+}
+
 extension APIAction {
     
     var query: String? {

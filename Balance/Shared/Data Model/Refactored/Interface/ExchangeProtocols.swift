@@ -8,7 +8,7 @@
 
 import Foundation
 
-public typealias ExchangeApiOperationCompletionHandler = (_ success: Bool, _ error: ExchangeError?, _ data: [Any]) -> Void
+public typealias ExchangeOperationCompletionHandler = (_ success: Bool, _ error: ExchangeError?, _ data: Any?) -> Void
 
 public enum ExchangeError: Error {
     case invalidCredentials
@@ -28,7 +28,7 @@ public enum TransactionType {
 }
 
 public protocol ExchangeApi2 {
-    func fetchData(for action: APIAction, completion: @escaping ExchangeApiOperationCompletionHandler) -> Operation
+    func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation
 }
 
 extension ExchangeApi2 {
