@@ -17,7 +17,7 @@ internal final class NewAccountListViewModel
     }
     
     // Private
-    private let sources: [Source] = [.coinbase, .gdax, .poloniex, .bitfinex, .kraken, .ethplorer]
+    private let sources: [Source] = [.coinbase, .gdax, .poloniex, .bitfinex, .kraken, .bittrex, .ethplorer]
 
     // MARK: Initialization
     

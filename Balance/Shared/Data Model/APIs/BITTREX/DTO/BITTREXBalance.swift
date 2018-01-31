@@ -27,5 +27,4 @@ struct BITTREXBalance: Codable {
         case requested = "Requested"
         case uuid = "Uuid"
     }
-    
 }

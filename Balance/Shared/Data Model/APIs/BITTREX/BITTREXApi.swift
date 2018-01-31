@@ -78,12 +78,21 @@ class BITTREXApi: NewExchangeApi, ExchangeApi {
                 return
             }
             
+            // Fixes the special case in Bittrex where they incorrectly use the BCC ticker symbol
+            // for BCH (Bitcoin Cash). BCC is already the symbol of Bitconnect so we can't just make
+            // them equivalent in the Currency enum and everyone else uses BCH, so we need to save
+            // BCC from Bittrex as BCH for it to work correctly.
+            func bittrexFixCurrencyCode(_ currencyCode: String) -> String {
+                return currencyCode == "BCC" ? "BCH" : currencyCode
+            }
+            
             for balance in balances {
-                let currentBalance = paddedInteger(for: balance.balance, currencyCode: balance.currency)
+                let currencyCode = bittrexFixCurrencyCode(balance.currency)
+                let currentBalance = paddedInteger(for: balance.balance, currencyCode: currencyCode)
                 let availableBalance = currentBalance
                 
                 // Initialize an Account object to insert the record
-                AccountRepository.si.account(institutionId: unwrappedInstitution.institutionId, source: unwrappedInstitution.source, sourceAccountId: balance.currency, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: balance.currency, currency: balance.currency, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
+                AccountRepository.si.account(institutionId: unwrappedInstitution.institutionId, source: unwrappedInstitution.source, sourceAccountId: currencyCode, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: currencyCode, currency: currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
             }
             
             async {

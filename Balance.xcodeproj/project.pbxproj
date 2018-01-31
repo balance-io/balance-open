@@ -222,6 +222,14 @@
 		535BE39E1F05A14C00DEA4EF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 535BE39D1F05A14C00DEA4EF /* libz.tbd */; };
 		5361BC9E1F562580009C3F07 /* PoloniexInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5361BC9D1F562580009C3F07 /* PoloniexInstitution.swift */; };
 		5361BC9F1F562580009C3F07 /* PoloniexInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5361BC9D1F562580009C3F07 /* PoloniexInstitution.swift */; };
+		53629D44201FE7A8000081E9 /* VectorTypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D43201FE7A8000081E9 /* VectorTypeAliases.swift */; };
+		53629D45201FE7A9000081E9 /* VectorTypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D43201FE7A8000081E9 /* VectorTypeAliases.swift */; };
+		53629D47201FE7FE000081E9 /* ResizingBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D46201FE7FE000081E9 /* ResizingBehavior.swift */; };
+		53629D48201FE7FE000081E9 /* ResizingBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D46201FE7FE000081E9 /* ResizingBehavior.swift */; };
+		53629D51201FE85B000081E9 /* InstitutionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D4B201FE85A000081E9 /* InstitutionButtons.swift */; };
+		53629D53201FE85B000081E9 /* PreferencesAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D4D201FE85A000081E9 /* PreferencesAccounts.swift */; };
+		53629D54201FE85B000081E9 /* TabButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D4E201FE85A000081E9 /* TabButtons.swift */; };
+		53629D55201FE85B000081E9 /* AccountConnectionErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D4F201FE85A000081E9 /* AccountConnectionErrors.swift */; };
 		536C6EEF1D864C9B00823688 /* MockedDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536C6EEE1D864C9B00823688 /* MockedDefaultsStorage.swift */; };
 		536C6EF21D864CB900823688 /* DefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536C6EF11D864CB900823688 /* DefaultsStorage.swift */; };
 		537187DC1F4CC23B00E7F9D6 /* CoinbaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538B47B11F4C9FD60023CED5 /* CoinbaseApi.swift */; };
@@ -367,8 +375,6 @@
 		53FCE3461F06B5DC004EB25C /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE33E1F06B5DC004EB25C /* SnapKit.framework */; };
 		53FCE3481F06B5DC004EB25C /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3401F06B5DC004EB25C /* XCGLogger.framework */; };
 		53FCE35B1F06B653004EB25C /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34E1F06B653004EB25C /* MASShortcut.framework */; };
-		53FCE3631F06B818004EB25C /* BalanceVectorGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3491F06B653004EB25C /* BalanceVectorGraphics.framework */; };
-		53FCE3641F06B818004EB25C /* BalanceVectorGraphics.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE3491F06B653004EB25C /* BalanceVectorGraphics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53FCE3691F06B819004EB25C /* JMSRangeSlider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34C1F06B653004EB25C /* JMSRangeSlider.framework */; };
 		53FCE36A1F06B819004EB25C /* JMSRangeSlider.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34C1F06B653004EB25C /* JMSRangeSlider.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53FCE36E1F06B819004EB25C /* MASShortcut.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53FCE34E1F06B653004EB25C /* MASShortcut.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -576,7 +582,6 @@
 				53FCE37C1F06B819004EB25C /* XCGLogger.framework in Embed Frameworks */,
 				533674FE1F4CE0C40034040F /* Sparkle.framework in Embed Frameworks */,
 				537596401F50B90A00B36E6E /* TrustKit.framework in Embed Frameworks */,
-				53FCE3641F06B818004EB25C /* BalanceVectorGraphics.framework in Embed Frameworks */,
 				53FCE36A1F06B819004EB25C /* JMSRangeSlider.framework in Embed Frameworks */,
 				53FCE3701F06B819004EB25C /* NSDateTimeAgo.framework in Embed Frameworks */,
 				53FCE3781F06B819004EB25C /* SnapKit.framework in Embed Frameworks */,
@@ -764,6 +769,12 @@
 		535AEA321D22D177003F13E2 /* NSAttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		535BE39D1F05A14C00DEA4EF /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
 		5361BC9D1F562580009C3F07 /* PoloniexInstitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexInstitution.swift; sourceTree = "<group>"; };
+		53629D43201FE7A8000081E9 /* VectorTypeAliases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorTypeAliases.swift; sourceTree = "<group>"; };
+		53629D46201FE7FE000081E9 /* ResizingBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizingBehavior.swift; sourceTree = "<group>"; };
+		53629D4B201FE85A000081E9 /* InstitutionButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionButtons.swift; sourceTree = "<group>"; };
+		53629D4D201FE85A000081E9 /* PreferencesAccounts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesAccounts.swift; sourceTree = "<group>"; };
+		53629D4E201FE85A000081E9 /* TabButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabButtons.swift; sourceTree = "<group>"; };
+		53629D4F201FE85A000081E9 /* AccountConnectionErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountConnectionErrors.swift; sourceTree = "<group>"; };
 		536C6EEE1D864C9B00823688 /* MockedDefaultsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockedDefaultsStorage.swift; sourceTree = "<group>"; };
 		536C6EF11D864CB900823688 /* DefaultsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsStorage.swift; sourceTree = "<group>"; };
 		537187F21F4CC2FB00E7F9D6 /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
@@ -1060,7 +1071,6 @@
 				53FCE37B1F06B819004EB25C /* XCGLogger.framework in Frameworks */,
 				53FCE36F1F06B819004EB25C /* NSDateTimeAgo.framework in Frameworks */,
 				2DE6294520164332005C4DC2 /* StoreKit.framework in Frameworks */,
-				53FCE3631F06B818004EB25C /* BalanceVectorGraphics.framework in Frameworks */,
 				53FCE35B1F06B653004EB25C /* MASShortcut.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1360,6 +1370,7 @@
 		535529EB1ED7241A00DD95F9 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				53629D42201FE78C000081E9 /* Vector Graphics */,
 				53F6383A1C5FF00900864346 /* Data Model */,
 				53552A2D1ED72B0700DD95F9 /* Frameworks */,
 				53F078621ED73E5600E7EDF9 /* Themes */,
@@ -1378,6 +1389,7 @@
 				53CED0651D19709000CE1B73 /* Travis Testing */,
 				53F6383B1C5FF01500864346 /* View Controllers */,
 				53C197151CB7488600F0A47B /* Views */,
+				53629D49201FE84D000081E9 /* VectorGraphics */,
 				DC1A64991B867B1F009356A0 /* AppDelegate.swift */,
 				2DD9B1EF1EDDDFD10006268F /* TestingAppDelegate.swift */,
 				53762EB01ED793A200D34A1E /* main.swift */,
@@ -1597,6 +1609,26 @@
 				A41EE4811FB9B66D00210038 /* QRLoginCredentialsParser.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		53629D42201FE78C000081E9 /* Vector Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				53629D43201FE7A8000081E9 /* VectorTypeAliases.swift */,
+				53629D46201FE7FE000081E9 /* ResizingBehavior.swift */,
+			);
+			path = "Vector Graphics";
+			sourceTree = "<group>";
+		};
+		53629D49201FE84D000081E9 /* VectorGraphics */ = {
+			isa = PBXGroup;
+			children = (
+				53629D4F201FE85A000081E9 /* AccountConnectionErrors.swift */,
+				53629D4B201FE85A000081E9 /* InstitutionButtons.swift */,
+				53629D4D201FE85A000081E9 /* PreferencesAccounts.swift */,
+				53629D4E201FE85A000081E9 /* TabButtons.swift */,
+			);
+			path = VectorGraphics;
 			sourceTree = "<group>";
 		};
 		5383C53C201A760200B45DED /* Tabs */ = {
@@ -2723,7 +2755,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/XCGLogger.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/TrustKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ObjcExceptionBridging.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/BalanceVectorGraphics_iOS.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SVProgressHUD.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/OnePasswordExtension.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
@@ -2736,7 +2767,6 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/XCGLogger.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TrustKit.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ObjcExceptionBridging.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/BalanceVectorGraphics_iOS.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SVProgressHUD.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/OnePasswordExtension.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
@@ -2783,6 +2813,7 @@
 				53D441E91F44B0DD006967E1 /* FMDatabasePoolAdditionsVariadic.swift in Sources */,
 				E653124F1FE8C2A500F57977 /* BITTREXBalance.swift in Sources */,
 				53552A2B1ED7252900DD95F9 /* FileManager.swift in Sources */,
+				53629D45201FE7A9000081E9 /* VectorTypeAliases.swift in Sources */,
 				A4430AA61F95F47300F2FFFA /* SimpleCache.swift in Sources */,
 				E605EF8F2006BF3C00A95632 /* UIViewController+Present.swift in Sources */,
 				A4E7680D1F67E410002B1AE1 /* APICredentials.swift in Sources */,
@@ -2799,6 +2830,7 @@
 				A456ED121FB3067D006EE529 /* CurrencyCollectionViewCell.swift in Sources */,
 				2DF898431FCC8F7500CCDFB9 /* CountlyAPM.m in Sources */,
 				A4E457231F790EE5002E2879 /* PoloniexTransaction.swift in Sources */,
+				53629D48201FE7FE000081E9 /* ResizingBehavior.swift in Sources */,
 				E65312501FE8C2A900F57977 /* BITTREXCurrency.swift in Sources */,
 				5321219E1EE8B91600F4812A /* ioapi.c in Sources */,
 				53552A0C1ED7251200DD95F9 /* Utils.swift in Sources */,
@@ -2987,12 +3019,14 @@
 				53E8C77E1C62EB4C0085D64E /* TabsViewController.swift in Sources */,
 				A4E457091F79010A002E2879 /* BalanceError.swift in Sources */,
 				53D441F81F44CD93006967E1 /* InstitutionRepository.swift in Sources */,
+				53629D55201FE85B000081E9 /* AccountConnectionErrors.swift in Sources */,
 				2DF8983A1FCC8F7500CCDFB9 /* Countly.m in Sources */,
 				A44C76221F7BD9610024476E /* BitfinexTransaction.swift in Sources */,
 				2DF898521FCC8F7500CCDFB9 /* CountlyNotificationService.m in Sources */,
 				A41D3E451F6BF81A00FD25B5 /* KrakenAuthHeaders.swift in Sources */,
 				2DF898501FCC8F7500CCDFB9 /* CountlyEvent.m in Sources */,
 				5361BC9E1F562580009C3F07 /* PoloniexInstitution.swift in Sources */,
+				53629D54201FE85B000081E9 /* TabButtons.swift in Sources */,
 				40A90EA5200959840063B2F5 /* AddNewAccountView.swift in Sources */,
 				536C6EEF1D864C9B00823688 /* MockedDefaultsStorage.swift in Sources */,
 				537187EF1F4CC23C00E7F9D6 /* GDAXWithdrawal.swift in Sources */,
@@ -3093,6 +3127,7 @@
 				53294FA31D1DDD9500F08059 /* CCNStatusItemDropView.m in Sources */,
 				53BB42E71CE849E70002D473 /* Shortcut.swift in Sources */,
 				53F0785D1ED73B7D00E7EDF9 /* Element.swift in Sources */,
+				53629D47201FE7FE000081E9 /* ResizingBehavior.swift in Sources */,
 				532B6FE51E95D5C40010D81D /* Swizzling.swift in Sources */,
 				530F57B41DCD72680083F3A7 /* FMDatabaseQueue.m in Sources */,
 				A4430AA51F95F47300F2FFFA /* SimpleCache.swift in Sources */,
@@ -3112,6 +3147,7 @@
 				533A3B1D1DF23C2B005D3C89 /* Array.swift in Sources */,
 				2DF898581FCC8F7500CCDFB9 /* CountlyStarRating.m in Sources */,
 				5329FB751E3EB5C400A9CAF7 /* EmailIssueController.swift in Sources */,
+				53629D44201FE7A8000081E9 /* VectorTypeAliases.swift in Sources */,
 				2DF898561FCC8F7500CCDFB9 /* CountlyPushNotifications.m in Sources */,
 				676ED7A51D17ACB400D03395 /* SampleResponses.swift in Sources */,
 				5301A7611F17DC8B00668099 /* URL.swift in Sources */,
@@ -3130,6 +3166,7 @@
 				533626601D54E5F80090656F /* FlippedView.swift in Sources */,
 				53F6965C2011322F00D28B23 /* BITTREXWithdrawal.swift in Sources */,
 				F1EA1A561D775ACC0040BB9E /* MockedKeychainManager.swift in Sources */,
+				53629D53201FE85B000081E9 /* PreferencesAccounts.swift in Sources */,
 				5301A77D1F17FDED00668099 /* Feedback.swift in Sources */,
 				530F57C61DCD72680083F3A7 /* FMDatabaseAdditionsVariadic.swift in Sources */,
 				5372E96F1DF7E75C00DDE214 /* SignUpTextField.swift in Sources */,
@@ -3182,6 +3219,7 @@
 				53EB77BD1CF3DFDB00F01903 /* NotificationCenter.swift in Sources */,
 				2D6B22DB1EDE238200356035 /* AppDelegate.swift in Sources */,
 				A4E768091F67DDFE002B1AE1 /* BitfinexErrors.swift in Sources */,
+				53629D51201FE85B000081E9 /* InstitutionButtons.swift in Sources */,
 				530F57AB1DCD72680083F3A7 /* FMDatabasePool.m in Sources */,
 				537187E91F4CC23C00E7F9D6 /* GDAXAPIClient.swift in Sources */,
 				A41742901F73C6BF004A9B4F /* CoinbaseTransaction.swift in Sources */,
