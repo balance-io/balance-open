@@ -90,13 +90,61 @@ class CoinbaseAPI2: AbstractApi {
                                              autenticationResultBlock: completionBlock)
     }
     
+    override func processErrors(requestType: ApiRequestType, response: HTTPURLResponse, data: Data?, error: Error?) -> Error? {
+        /*TODO: Felipe
+         static func checkErrors(jsonResult: [String: AnyObject]?) throws {
+         // Check for errors (they return an array, but as far as I know it's always one error
+         if let errorDicts = jsonResult?["errors"] as? [[String: AnyObject]] {
+         for errorDict in errorDicts {
+         if let id = errorDict["id"] as? String, let coinbaseError = CoinbaseError(rawValue: id), let errorMessage = errorDict["message"] as? String {
+         log.error("Coinbase error: \(errorMessage)")
+         switch coinbaseError {
+         case .personalDetailsRequired:
+         // TODO: Display message to user
+         throw coinbaseError
+         case .unverifiedEmail:
+         // TODO: Display message to user
+         throw coinbaseError
+         case .invalidScope:
+         // TODO: Display message to user
+         throw coinbaseError
+         case .authenticationError, .invalidToken, .revokedToken, .expiredToken:
+         throw coinbaseError
+         default:
+         throw coinbaseError
+         }
+         } else {
+         throw (errorDict["id"] as? String) ?? BalanceError.unknownError
+         }
+         }
+         }
+         }
+         */
+        return nil
+    }
+    
+    override func createRequest(for action: APIAction) -> URLRequest? {
+        guard let ouathCredentials = action.credentials as? OAUTHCredentials,
+            let url = action.url else {
+                return nil
+        }
+        
+        switch action.type {
+        case .accounts, .transactions(_):
+            var request = URLRequest(url: url)
+            request.timeoutInterval = CoinbaseAutenticationConstants.connectionTimeout
+            request.cachePolicy = .reloadIgnoringLocalCacheData
+            request.httpMethod = HTTPMethod.GET
+            request.setValue("Bearer " + ouathCredentials.accessToken, forHTTPHeaderField: "Authorization")
+            request.setValue(CoinbaseAutenticationConstants.cbVersion, forHTTPHeaderField: "CB-VERSION")
+            
+            return request
+        }
+    }
+    
 }
 
 extension CoinbaseAPI2: RequestHandler {
-    
-    func request(for action: APIAction) -> URLRequest? {
-        return nil
-    }
     
     func handleResponseData(for action: APIAction?, data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any {
         guard let action = action else {
@@ -168,8 +216,10 @@ private class CoibaseAutenticationOperation: Operation {
     private let autenticationResultBlock: ExchangeOperationCompletionHandler
     private let requestHandler: RequestHandler
     private var autenticationRequest: URLRequest
+    private let session: URLSession
     
-    init(autenticationRequest: URLRequest, requestHandler: RequestHandler, autenticationResultBlock: @escaping ExchangeOperationCompletionHandler) {
+    init(session: URLSession? = nil, autenticationRequest: URLRequest, requestHandler: RequestHandler, autenticationResultBlock: @escaping ExchangeOperationCompletionHandler) {
+        self.session = session ?? certValidatedSession
         self.autenticationRequest = autenticationRequest
         self.requestHandler = requestHandler
         self.autenticationResultBlock = autenticationResultBlock

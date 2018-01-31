@@ -8,7 +8,44 @@
 
 import Foundation
 
-struct CoinbaseAPI2Action {
+struct CoinbaseAPI2Action: APIAction {
     
+    let credentials: Credentials
+    let type: ApiRequestType
+    
+    init(type: ApiRequestType, credentials: Credentials) {
+        self.type = type
+        self.credentials = credentials
+    }
+    
+}
+
+extension CoinbaseAPI2Action {
+    
+    var host: String {
+        return "https://api.coinbase.com/v2/"
+    }
+    
+    var path: String {
+        switch type {
+        case .accounts:
+            return "accounts"
+        case .transactions(let accountID):
+            let accountID = (accountID as? String) ?? ""
+            return "accounts/\(accountID)/transactions"
+        }
+    }
+    
+    var url: URL? {
+        return URL(string: host + path)
+    }
+    
+    var nonce: Int64 {
+        return 0
+    }
+    
+    var components: URLComponents {
+        return URLComponents()
+    }
     
 }

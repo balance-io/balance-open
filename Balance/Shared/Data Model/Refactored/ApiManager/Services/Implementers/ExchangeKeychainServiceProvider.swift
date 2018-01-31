@@ -10,7 +10,7 @@ import Foundation
 
 class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
 
-    func save(source: Source, identifier: String, credentials: BaseCredentials) {
+    func save(source: Source, identifier: String, credentials: Credentials) {
         guard let keychainAccounts = buildKeychainAccounts(for: source, with: identifier) else {
             log.debug("Error - Keychain accounts can't be created for saving credentials on keychain, source: \(source.description)")
             return
@@ -18,11 +18,6 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
         
         switch source {
         case .poloniex:
-            guard let credentials = credentials as? Credentials else {
-                log.debug("Error - Can't use credentials type to be saved on keychain")
-                return
-            }
-            
             save(account: keychainAccounts.secretKey, key: KeychainConstants.secretKey, value: credentials.secretKey)
             save(account: keychainAccounts.apiKey, key: KeychainConstants.secretKey, value: credentials.apiKey)
         case .coinbase:
@@ -44,7 +39,7 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
         return keychain[account, key]
     }
     
-    func fetchCredentials(with identifer: String, source: Source) -> BaseCredentials? {
+    func fetchCredentials(with identifer: String, source: Source) -> Credentials? {
         guard let accountValues = buildKeychainAccounts(for: source, with: identifer) else {
             return nil
         }

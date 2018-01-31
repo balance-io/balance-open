@@ -51,3 +51,23 @@ extension CoinbaseAutentication {
     }
     
 }
+
+extension CoinbaseAutentication {
+    
+    var apiKey: String {
+        return ""
+    }
+    
+    var secretKey: String {
+        return ""
+    }
+    
+    var address: String {
+        return ""
+    }
+    
+    var passphrase: String {
+        return ""
+    }
+    
+}
