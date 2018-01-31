@@ -24,6 +24,7 @@ protocol OAUTHCredentials: BaseCredentials {
     var refreshToken: String { get }
     var apiScope: String { get }
     var expiresIn: Double { get }
+    var expireDate: Date { get } 
 }
 
 public protocol ExchangeInstitution {

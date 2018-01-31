@@ -34,7 +34,7 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
             save(account: keychainAccounts.accessToken, key: KeychainConstants.accessToken, value: credentials.accessToken)
             save(account: keychainAccounts.refreshToken, key: KeychainConstants.refreshToken, value: credentials.refreshToken)
             CoinbasePreferences.apiScope = credentials.apiScope
-            CoinbasePreferences.tokenExpireDate = Date().addingTimeInterval(credentials.expiresIn - 10.0)
+            CoinbasePreferences.tokenExpireDate = credentials.expireDate
         default:
             return
         }
@@ -44,45 +44,28 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
         return keychain[account, key]
     }
     
-    //TODO: NEED FINISH
-    func fetchCredentials(for institution: Institution) -> BaseCredentials? {
-        switch institution.source {
-        case .coinbase:
+    func fetchCredentials(with identifer: String, source: Source) -> BaseCredentials? {
+        guard let accountValues = buildKeychainAccounts(for: source, with: identifer) else {
             return nil
+        }
+        
+        switch source {
+        case .coinbase:
+            guard let accessToken = fetch(account: accountValues.accessToken, key: KeychainConstants.accessToken),
+                let refreshToken = fetch(account: accountValues.refreshToken, key: KeychainConstants.refreshToken) else {
+                    return nil
+            }
+            
+            return CoinbaseAutentication(accessToken: accessToken, refreshToken: refreshToken)
+        case .poloniex:
+            guard let secretKey = fetch(account: accountValues.secretKey, key: KeychainConstants.secretKey),
+                let apiKey = fetch(account: accountValues.apiKey, key: KeychainConstants.apiKey) else {
+                    return nil
+            }
+            
+            return BalanceCredentials(apiKey: apiKey, secretKey: secretKey)
         default:
             return nil
-        }
-    }
-    
-}
-
-//THIS SHOULD BE IMPROVED, ONLY SAVE THE LAST ACCOUNT REGISTER ON USER DEFAULT
-class CoinbasePreferences {
-    
-    private struct PreferencesKeys {
-        static let tokenExpireDate = "tokenExpireDateKey"
-        static let apiScope = "Institution.apiScopeKey"
-    }
-    
-    static var tokenExpireDate: Date {
-        get {
-            return UserDefaults.standard.object(forKey: PreferencesKeys.tokenExpireDate) as? Date ?? Date.distantPast
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: PreferencesKeys.tokenExpireDate)
-        }
-    }
-    
-    static var isTokenExpired: Bool {
-        return Date().timeIntervalSince(tokenExpireDate) > 0.0
-    }
-    
-    static var apiScope: String? {
-        get {
-            return UserDefaults.standard.string(forKey: PreferencesKeys.apiScope)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: PreferencesKeys.apiScope)
         }
     }
     
@@ -109,6 +92,7 @@ private extension ExchangeKeychainServiceProvider {
         static let apiKey = "apiKey"
         static let accessToken = "accessToken"
         static let refreshToken = "refreshToken"
+        static let passphrase = "passphrase"
     }
     
     func save(identifier: String, value: [String : Any]) throws {

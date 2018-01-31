@@ -17,7 +17,7 @@ struct CoinbaseAutentication: Decodable, OAUTHCredentials {
     let code: Double
     let apiScope: String
     
-    init(tokenType: String = "", expiresIn: Double = 0, accessToken: String = "", refreshToken: String, code: Double, apiScope: String) {
+    init(tokenType: String = "", expiresIn: Double = 0, accessToken: String = "", refreshToken: String = "", code: Double = 0, apiScope: String = "") {
         self.tokenType = tokenType
         self.expiresIn = expiresIn
         self.accessToken = accessToken
@@ -36,6 +36,18 @@ struct CoinbaseAutentication: Decodable, OAUTHCredentials {
         let apiScope: String = try container.decode(String.self, forKey: .apiScope)
         
         self.init(tokenType: tokenType, expiresIn: expiresIn, accessToken: accessToken, refreshToken: refreshToken, code: code, apiScope: apiScope)
+    }
+    
+}
+
+extension CoinbaseAutentication {
+    
+    var isTokenExpired: Bool {
+        return CoinbasePreferences.isTokenExpired
+    }
+    
+    var expireDate: Date {
+        return Date().addingTimeInterval(expiresIn - 10.0)
     }
     
 }
