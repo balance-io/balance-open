@@ -35,7 +35,12 @@ fileprivate struct CoinbaseAutenticationConstants {
     }
     
     static func getAuthenticationURL(with state: String) -> URL? {
-        let autenticationURLText = "https://www.coinbase.com/oauth/authorize?client_id=\(clientId)&redirect_uri=\(redirectUri)&state=\(state)&response_type=\(responseType)&scope=\(scope)&account=all"
+        let autenticationURLText = "https://www.coinbase.com/oauth/authorize?"
+            + "client_id=\(clientId)&"
+            + "redirect_uri=\(redirectUri)&"
+            + "state=\(state)&"
+            + "response_type=\(responseType)&"
+            + "scope=\(scope)&account=all"
         
         return URL(string: autenticationURLText)
     }

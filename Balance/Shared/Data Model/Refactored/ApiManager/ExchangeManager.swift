@@ -197,14 +197,6 @@ private extension ExchangeManager {
         
     }
     
-    func createCoinbaseInstitution(with auntenticationCredentials: OAUTHCredentials) {
-        guard let coinbaseInstitution = repositoryService.createInstitution(for: .coinbase) else {
-            return
-        }
-
-        keychainService
-    }
-    
 }
 
 //mark: Poloniex helper methods
