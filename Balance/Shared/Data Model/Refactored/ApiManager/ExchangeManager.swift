@@ -15,12 +15,13 @@ enum ManagerState {
 
 protocol ExchangeManagerAction {
     func login(with source: Source, fields: [Field])
+    func manageAutenticationCallback(with data: Any, source: Source)
     func refresh(institution: Institution)
 }
 
-fileprivate typealias ExchangeCallbackResult = (success: Bool, error: Error?, result: [Any])
+fileprivate typealias ExchangeCallbackResult = (success: Bool, error: Error?, result: Any?)
 
-class ExchangeManager: ExchangeManagerAction {
+class ExchangeManager {
     
     private lazy var autenticationQueue: OperationQueue = {
         let taskQueue = OperationQueue()
@@ -42,27 +43,60 @@ class ExchangeManager: ExchangeManagerAction {
     private let repositoryService: RepositoryServiceProtocol
     private let urlSession: URLSession
     
+    private lazy var krakenExchangeAPI = { return KrakenAPI2(session: urlSession) }()
+    private lazy var poloniexExchangeAPI = { return CoinbaseAPI2(session: urlSession) }()
+    private lazy var coinbaseExchangeAPI = { return CoinbaseAPI2(session: urlSession) }()
+    
     init(urlSession: URLSession? = nil, repositoryService: RepositoryServiceProtocol? = nil, keychainService: KeychainServiceProtocol? = nil) {
         self.urlSession = urlSession ?? certValidatedSession
         self.repositoryService = repositoryService ?? ExchangeRepositoryServiceProvider()
         self.keychainService = keychainService ?? ExchangeKeychainServiceProvider()
     }
     
+}
+
+
+//mark: Common Interface
+extension ExchangeManager: ExchangeManagerAction {
+    
     func login(with source: Source, fields: [Field]) {
-        guard let credentials = credentials(from: fields, source: source) else {
+        guard let credentials = BalanceCredentials.credentials(from: fields, source: source) else {
             return
         }
         
+        let exchangeApi: AbstractApi?
+        let exchangeAction: APIAction?
+        
         switch source {
         case .poloniex:
-            let api = PoloniexAPI2.init(session: urlSession)
-            let locingAction = PoloniexApiAction.init(type: .accounts, credentials: credentials)
-            let fetchAccountsOperation = api.fetchData(for: locingAction, completion: { [weak self] (success, error, result) in
-                let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
-                self?.processLoginCallbackResult(callbackResult, source: source, credentials: credentials)
-            })
-            
-            autenticationQueue.addOperation(fetchAccountsOperation)
+            exchangeApi = poloniexExchangeAPI
+            exchangeAction = PoloniexApiAction.init(type: .accounts, credentials: credentials)
+        case .kraken:
+            exchangeApi = krakenExchangeAPI
+            exchangeAction = KrakenApiAction.init(type: .accounts, credentials: credentials)
+        case .coinbase:
+            coinbaseExchangeAPI.prepareForAutentication()
+            return
+        default:
+            return
+        }
+        
+        guard let api = exchangeApi, let action = exchangeAction else {
+            return
+        }
+        
+        let fetchAccountsOperation = api.fetchData(for: action, completion: { [weak self] (success, error, result) in
+            let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
+            self?.processLoginCallbackResult(callbackResult, source: source, credentials: credentials)
+        })
+        
+        autenticationQueue.addOperation(fetchAccountsOperation)
+    }
+    
+    func manageAutenticationCallback(with data: Any, source: Source) {
+        switch source {
+        case .coinbase:
+            launchCoinbaseAutentication(with: data)
         default:
             return
         }
@@ -80,14 +114,14 @@ class ExchangeManager: ExchangeManagerAction {
     
 }
 
+//Process reponse methods
 private extension ExchangeManager {
     
     func processRefreshCallback(_ callbackResult: ExchangeCallbackResult, institution: Institution, credentials: Credentials) {
-        let result = callbackResult.result
-        
-        if !result.isEmpty, callbackResult.success {
+        if let data = callbackResult.result,
+            callbackResult.success {
             
-            if let transactions = result as? [ExchangeTransaction] {
+            if let transactions = data as? [ExchangeTransaction] {
                 repositoryService.createTransactions(for: institution.source, transactions: transactions)
                 //TODO: change state using the account result too
             }
@@ -109,11 +143,10 @@ private extension ExchangeManager {
             return
         }
         
-        let result = callbackResult.result
-        
-        if !result.isEmpty, callbackResult.success {
+        if let data = callbackResult.result,
+            callbackResult.success {
             
-            if let accounts = result as? [ExchangeAccount] {
+            if let accounts = data as? [ExchangeAccount] {
                 keychainService.save(source: source, identifier: "\(institution.institutionId)", credentials: credentials)
                 repositoryService.createAccounts(for: source, accounts: accounts, institution: institution)
                 //TODO: change state
@@ -130,6 +163,51 @@ private extension ExchangeManager {
     
 }
 
+//mark: Coinbase helper methods
+private extension ExchangeManager {
+    
+    func launchCoinbaseAutentication(with data: Any) {
+        let operation = coinbaseExchangeAPI.startAutentication(with: data) { [weak self] (success, error, result) in
+            guard let `self` = self else {
+                return
+            }
+            
+            if let coinbaseOAUTHCredentials = result as? OAUTHCredentials,
+                let coinbaseInstitution = self.repositoryService.createInstitution(for: .coinbase),
+                success {
+                
+                self.keychainService.save(source: .coinbase, identifier: "\(coinbaseInstitution.institutionId)" , credentials: coinbaseOAUTHCredentials)
+                self.fetchCoinbaseAccounts(with: coinbaseInstitution)
+            }
+            
+            if let error = error {
+                print(error)
+                //change state
+            }
+        }
+        
+        guard let coinbaseOperation = operation else {
+            return
+        }
+        
+        autenticationQueue.addOperation(coinbaseOperation)
+    }
+    
+    func fetchCoinbaseAccounts(with institution: Institution) {
+        
+    }
+    
+    func createCoinbaseInstitution(with auntenticationCredentials: OAUTHCredentials) {
+        guard let coinbaseInstitution = repositoryService.createInstitution(for: .coinbase) else {
+            return
+        }
+
+        keychainService
+    }
+    
+}
+
+//mark: Poloniex helper methods
 private extension ExchangeManager {
     
     func refreshPoloniex(with institution: Institution) {
@@ -155,44 +233,6 @@ private extension ExchangeManager {
         
         refreshQueue.addOperation(refreshAccountsOperation)
         refreshQueue.addOperation(refreshTransationOperation)
-    }
-    
-}
-
-//mark: Credential Helper Methods
-private extension ExchangeManager {
-    
-    func credentials(from fields: [Field], source: Source) -> Credentials? {
-        guard fields.count == totalFields(for: source) else {
-            print("Error - Invalid amount for creating credentials from fields array")
-            return nil
-        }
-        
-        let credentials = BalanceCredentials(fields: fields)
-        guard areCredentialsValid(credentials, for: source) else {
-            print("Error - Credentials weren't setted correctly for \(source)")
-            return nil
-        }
-        
-        return credentials
-    }
-    
-    func areCredentialsValid(_ credentials: Credentials, for source: Source) -> Bool {
-        switch source {
-        case .poloniex:
-            return !credentials.apiKey.isEmpty && !credentials.secretKey.isEmpty
-        default:
-            return false
-        }
-    }
-    
-    func totalFields(for source: Source) -> Int {
-        switch source {
-        case .poloniex:
-            return 2
-        default:
-            return 2
-        }
     }
     
 }

@@ -13,24 +13,25 @@ class PoloniexAPI2: AbstractApi {
     override var requestMethod: ApiRequestMethod { return .post }
     override var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
     override var requestEncoding: ApiRequestEncoding { return .hmacSha512 }
+    
+    override func processErrors(requestType: ApiRequestType, response: URLResponse?, data: Data?, error: Error?) -> Error? {
+        guard let response = response as? HTTPURLResponse else {
+            return nil
+        }
 
-    override func processErrors(requestType: ApiRequestType, response: HTTPURLResponse, data: Data?, error: Error?) -> Error? {
-        
         if let error = processBaseErrors(response: response, error: error) {
             return error
         }
         
-        if let _ = createDict(from: data) {
-            return nil
+        if let dict = createDict(from: data), let errorDict = dict["error"] as? String {
+            return ExchangeBaseError.other(message: errorDict)
         }
         
         return nil
     }
     
-    override func processData(requestType: ApiRequestType, data: Data) -> [Any] {
-        // Parse the JSON into [PoloniexAccount] or [PoloniexInstitution] depending on request type
-        // and return for handling in the completion block by the app
-        fatalError("not implemented")
+    override func processData(requestType: ApiRequestType, data: Data) -> Any {
+        return requestType == .accounts ? buildAccounts(from: data) : buildTransacionts(from: data)
     }
     
     //MARK: Builder methods for Request
@@ -55,18 +56,44 @@ class PoloniexAPI2: AbstractApi {
         
     }
     
+    override func operation(for action: APIAction, session: URLSession, completion: @escaping ExchangeOperationCompletionHandler) -> Operation {
+        guard let request = createRequest(for: action)
+            else {
+                completion(false, nil, nil)
+                return Operation()
+        }
+        return ExchangeOperation.init(with: self, action: action, session: session, request: request)
+    }
+    
     override func createMessage(for action: APIAction) -> String? {
         return action.components.query
     }
     
-    class func buildObject(from data: Data, for type: ApiRequestType) -> [Any] {
-        return type == .accounts ? buildAccounts(from: data) : buildTransacionts(from: data)
+}
+
+extension PoloniexAPI2: RequestHandler {
+    
+    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any {
+        guard let action = action else {
+            return ExchangeBaseError.other(message: "No action provided")
+        }
+        
+        guard let data = data else {
+            return ExchangeBaseError.other(message: "no data to manage")
+        }
+        
+        if let error = processErrors(requestType: action.type, response: ulrResponse, data: data, error: error) {
+            return error
+        }
+        
+        return processData(requestType: action.type, data: data)
     }
+    
 }
 
 private extension PoloniexAPI2 {
     
-    class func buildTransacionts(from data: Data) -> [Any] {
+    func buildTransacionts(from data: Data) -> [Any] {
         guard let transactions = try? JSONDecoder().decode([NewPoloniexTransaction].self, from: data) else {
             return []
         }
@@ -74,7 +101,7 @@ private extension PoloniexAPI2 {
         return transactions
     }
     
-    class func buildAccounts(from data: Data) -> [Any] {
+    func buildAccounts(from data: Data) -> [Any] {
         guard let accounts = try? JSONDecoder().decode([NewPoloniexAccount].self, from: data) else {
             return []
         }

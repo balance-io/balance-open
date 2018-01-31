@@ -46,6 +46,7 @@ public protocol APIAction {
     var host: String { get }
     var path: String { get }
     var url: URL? { get }
+    var nonce: Int64 { get }
     var components: URLComponents { get }
     var type: ApiRequestType { get }
     var credentials: Credentials { get }
@@ -53,14 +54,14 @@ public protocol APIAction {
     init(type: ApiRequestType, credentials: Credentials)
 }
 
+public protocol RequestHandler: class {    
+    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any
+}
+
 extension APIAction {
     
     var query: String? {
         return components.query
-    }
-    
-    var nonce: Int64 {
-        return Int64(Date().timeIntervalSince1970 * 10000)
     }
     
 }

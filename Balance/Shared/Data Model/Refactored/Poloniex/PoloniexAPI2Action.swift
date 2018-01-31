@@ -64,4 +64,8 @@ extension PoloniexApiAction: APIAction {
         return components
     }
     
+    var nonce: Int64 {
+        return Int64(Date().timeIntervalSince1970 * 10000)
+    }
+    
 }

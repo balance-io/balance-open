@@ -329,24 +329,24 @@ private extension PoloniexApi {
     
     // MARK: Accounts
     func parsePoloniexAccounts(data: Data) throws -> [NewPoloniexAccount] {
-        guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] else {
-            throw PoloniexApi.CredentialsError.bodyNotValidJSON
-        }
-        
-        let flatDict = dict.map { (key, value) -> [String : AnyObject] in
-            if var dict = value as? [String: AnyObject] {
-                dict["currency"] = key as AnyObject
-                return dict
-            }
-            return [:]
-        }
-        
-        if let serialized = try? JSONSerialization.data(withJSONObject: flatDict, options: .prettyPrinted),
-            let accounts = PoloniexAPI2.buildObject(from: serialized, for: .accounts) as? [NewPoloniexAccount] {
-            
-            return accounts
-        }
-        
+//        guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] else {
+//            throw PoloniexApi.CredentialsError.bodyNotValidJSON
+//        }
+//
+//        let flatDict = dict.map { (key, value) -> [String : AnyObject] in
+//            if var dict = value as? [String: AnyObject] {
+//                dict["currency"] = key as AnyObject
+//                return dict
+//            }
+//            return [:]
+//        }
+//
+//        if let serialized = try? JSONSerialization.data(withJSONObject: flatDict, options: .prettyPrinted),
+//            let accounts = PoloniexAPI2.buildObject(from: serialized, for: .accounts) as? [NewPoloniexAccount] {
+//
+//            return accounts
+//        }
+//
         return []
     }
     
@@ -404,23 +404,23 @@ private extension PoloniexApi {
         
         var transactions = [NewPoloniexTransaction]()
         
-        if let depositsJSON = json["deposits"] as? [[String : Any]],
-            let serialized = try? JSONSerialization.data(withJSONObject: depositsJSON, options: .prettyPrinted),
-            let deposits = PoloniexAPI2.buildObject(from: serialized, for: .transactions) as? [NewPoloniexTransaction] {
-            
-            deposits.forEach { $0.category = .deposit }
-            transactions += deposits
-            
-        }
-        
-        if let withdrawalsJSON = json["withdrawals"] as? [[String : Any]],
-            let serialized = try? JSONSerialization.data(withJSONObject: withdrawalsJSON, options: .prettyPrinted),
-            let withdrawals = PoloniexAPI2.buildObject(from: serialized, for: .transactions) as? [NewPoloniexTransaction] {
-            
-            withdrawals.forEach { $0.category = .withdrawal }
-            transactions += withdrawals
-            
-        }
+//        if let depositsJSON = json["deposits"] as? [[String : Any]],
+//            let serialized = try? JSONSerialization.data(withJSONObject: depositsJSON, options: .prettyPrinted),
+//            let deposits = PoloniexAPI2.buildObject(from: serialized, for: .transactions) as? [NewPoloniexTransaction] {
+//
+//            deposits.forEach { $0.category = .deposit }
+//            transactions += deposits
+//
+//        }
+//
+//        if let withdrawalsJSON = json["withdrawals"] as? [[String : Any]],
+//            let serialized = try? JSONSerialization.data(withJSONObject: withdrawalsJSON, options: .prettyPrinted),
+//            let withdrawals = PoloniexAPI2.buildObject(from: serialized, for: .transactions) as? [NewPoloniexTransaction] {
+//
+//            withdrawals.forEach { $0.category = .withdrawal }
+//            transactions += withdrawals
+//
+//        }
         
         return transactions
     }

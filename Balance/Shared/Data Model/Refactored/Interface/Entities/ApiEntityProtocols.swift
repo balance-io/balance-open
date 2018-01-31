@@ -8,11 +8,22 @@
 
 import Foundation
 
-public protocol Credentials {
+public protocol BaseCredentials {
+    
+}
+
+public protocol Credentials: BaseCredentials {
     var apiKey: String { get }
     var secretKey: String { get }
     var passphrase: String { get }
     var address: String { get }
+}
+
+protocol OAUTHCredentials: BaseCredentials {
+    var accessToken: String { get }
+    var refreshToken: String { get }
+    var apiScope: String { get }
+    var expiresIn: Double { get }
 }
 
 public protocol ExchangeInstitution {

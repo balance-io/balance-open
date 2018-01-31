@@ -8,7 +8,7 @@
 
 import Foundation
 
-public typealias ExchangeApiOperationCompletionHandler = (_ success: Bool, _ error: ExchangeBaseError?, _ data: [Any]) -> Void
+public typealias ExchangeOperationCompletionHandler = (_ success: Bool, _ error: Error?, _ data: Any?) -> Void
 
 public enum TransactionType {
     case unknown
@@ -23,7 +23,7 @@ public enum TransactionType {
 }
 
 public protocol ExchangeApi2 {
-    func fetchData(for action: APIAction, completion: @escaping ExchangeApiOperationCompletionHandler) -> Operation
+    func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation
 }
 
 extension ExchangeApi2 {
@@ -59,21 +59,15 @@ extension ExchangeApi2 {
     
 }
 
-protocol OperationRequest {
-    var sesion: URLSession? { get }
-    var request: URLRequest? { get }
-    func parseResponse(with data: Data?) -> ExchangeApiOperationCompletionHandler
-}
-
 protocol OperationResult {
-    var responseData: ExchangeApiOperationCompletionHandler? { get }
-    var handler: OperationRequest { get }
+    var responseData: ExchangeOperationCompletionHandler? { get }
+    var handler: RequestHandler { get }
 }
 
 extension OperationResult {
     
-    func handleResponse(data: Data?) -> ExchangeApiOperationCompletionHandler {
-        return handler.parseResponse(with: data)
+    func handleResponse(for action: APIAction?, data: Data?, response: URLResponse?, error: Error?) -> Any {
+        return handler.handleResponseData(for: action, data: data, error: error, ulrResponse: response)
     }
     
 }

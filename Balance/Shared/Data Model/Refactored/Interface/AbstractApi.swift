@@ -15,8 +15,8 @@ open class AbstractApi: ExchangeApi2 {
     open var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
     open var requestEncoding: ApiRequestEncoding { return .none }
     open var encondingMessageType: ApiEncondingMessageType { return .none }
-    
-    private var session: URLSession
+
+    var session: URLSession
     
     // certValidatedSession should always be passed here when using in the app except for tests
     public init(session: URLSession) {
@@ -38,26 +38,25 @@ open class AbstractApi: ExchangeApi2 {
     }
     
     // At this point we know there are no errors, so parse the data and return the exchagne data model
-    open func processData(requestType: ApiRequestType, data: Data) -> [Any] {
+    open func processData(requestType: ApiRequestType, data: Data) -> Any {
         fatalError("Must override")
     }
     
     // MARK - ExchangeApi Protocol -
-    
-    public func fetchData(for action: APIAction, completion: @escaping ExchangeApiOperationCompletionHandler) -> Operation {
-        return performRequest(for: action, completion: completion)
+    open func prepareForAutentication() {
+        fatalError("Must override")
     }
     
-}
-
-private extension AbstractApi {
-    
-    // This creates the async network operation based on the overridden options, encapsulates it in an AsyncOperation,
-    // and returns that for queuing. The completion handler is called when the operation completes.
-    func performRequest(for action: APIAction, completion: @escaping ExchangeApiOperationCompletionHandler) -> Operation {
-        //TODO: Felipe create the operation class
-        let requestForAction = createRequest(for: action)
+    open func operation(for action: APIAction, session: URLSession, completion: @escaping ExchangeOperationCompletionHandler) -> Operation {
         fatalError("Must override")
+    }
+
+    open func startAutentication(with data: Any, completionBlock: @escaping ExchangeOperationCompletionHandler) -> Operation? {
+        fatalError("Must override")
+    }
+    
+    public func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation {
+        return operation(for: action, session: session, completion: completion)
     }
     
 }
@@ -118,22 +117,4 @@ extension AbstractApi {
         return Data(bytes: signature, count: signatureCapacity)
     }
     
-}
-
-fileprivate extension String {
-    
-    func sha256() -> Data? {
-        guard let selfData = self.data(using: .utf8) else {
-            return nil
-        }
-        
-        var digestData = Data(count: Int(CC_SHA256_DIGEST_LENGTH))
-        _ = digestData.withUnsafeMutableBytes { bytes in
-            selfData.withUnsafeBytes({ selfBytes in
-                CC_SHA256(selfBytes, UInt32(selfData.count), bytes)
-            })
-        }
-        
-        return digestData
-    }
 }

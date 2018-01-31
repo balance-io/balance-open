@@ -93,6 +93,7 @@ extension Institution: CustomStringConvertible {
 }
 
 extension Institution {
+    
     var isNewInstitution: Bool {
         return Date().timeIntervalSince(dateAdded) <= Date.dayInterval
     }
