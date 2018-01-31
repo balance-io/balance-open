@@ -47,14 +47,15 @@ enum Source: Int, CustomStringConvertible {
     
     var helpUrl: URL {
         switch self {
-        case .coinbase:  return URL(string: "https://coinbase.com")!
-        case .poloniex:  return URL(string: "https://github.com/balancemymoney/balance-open/wiki/Poloniex-Guide")!
-        case .gdax:      return URL(string: "https://github.com/balancemymoney/balance-open/wiki/Gdax-Manual")!
-        case .bitfinex:  return URL(string: "https://github.com/balancemymoney/balance-open/wiki/Bitfinex-Guide")!
-        case .kraken:    return URL(string: "https://github.com/balancemymoney/balance-open/wiki/Kraken-Login-Manual")!
-        case .ethplorer: return URL(string: "https://etherscanio.freshdesk.com/support/solutions/articles/16000046111-what-is-an-ethereum-address-and-how-to-do-i-get-one-")!
-        case .bittrex:   return URL(string: "https://github.com/balancemymoney/balance-open/wiki")!
+        case .coinbase:   return URL(string: "https://coinbase.com")!
+        case .poloniex:   return URL(string: "https://github.com/balancemymoney/balance-open/wiki/Poloniex-Guide")!
+        case .gdax:       return URL(string: "https://github.com/balancemymoney/balance-open/wiki/Gdax-Manual")!
+        case .bitfinex:   return URL(string: "https://github.com/balancemymoney/balance-open/wiki/Bitfinex-Guide")!
+        case .kraken:     return URL(string: "https://github.com/balancemymoney/balance-open/wiki/Kraken-Login-Manual")!
+        case .ethplorer:  return URL(string: "https://etherscanio.freshdesk.com/support/solutions/articles/16000046111-what-is-an-ethereum-address-and-how-to-do-i-get-one-")!
+        case .bittrex:    return URL(string: "https://github.com/balancemymoney/balance-open/wiki/Bittrex-Guide")!
         case .blockchain: return URL(string: "https://bitcoin.org/en/choose-your-wallet")!
+        case .bittrex:    return URL(string: "https://github.com/balancemymoney/balance-open/wiki/Bittrex-Guide")!
         }
     }
 }
