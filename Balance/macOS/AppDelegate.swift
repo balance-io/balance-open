@@ -161,6 +161,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } else if debugging.showBillingPreferencesOnLaunch {
             self.showBillingPreferences()
         }
+        
+        let manager = ExchangeManager()
+        async(after: 3) {
+            manager.login(with: .poloniex, fields: [Field(name: "API Key", type: .key, value: "KK76H39C-WZG5Z24G-9GWHM7IU-GTNL4KUE"),
+                                                    Field(name: "Secret", type: .secret, value: "b85634241c6cec08d8e67dda9b207fb6e8a23152772cf070df2fc707ce6ddd0aa6544311a80fe89bc048e9ad62900fcb6d86026808b2477ba7d4d5f82ec69c17")])
+        }
+        
+        
     }
     
     // Gets called when the App launches/opens via URL

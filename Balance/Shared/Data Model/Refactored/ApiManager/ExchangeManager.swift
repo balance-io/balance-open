@@ -94,7 +94,10 @@ extension ExchangeManager: ExchangeManagerActions {
             self.processLoginCallbackResult(callbackResult, source: source, credentials: credentials)
         }
         
-        autenticationQueue.addOperation(fetchAccountsOperation)
+        if let fetchAccountsOperation = fetchAccountsOperation {
+            autenticationQueue.addOperation(fetchAccountsOperation)
+        }
+        
     }
     
     func manageAutenticationCallback(with data: Any, source: Source) {
@@ -148,8 +151,11 @@ extension ExchangeManager: ExchangeManagerActions {
             self?.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
         }
         
-        refreshQueue.addOperation(refreshAccountsOperation)
-        refreshQueue.addOperation(refreshTransationOperation)
+        if let refreshOperation = refreshAccountsOperation, let refreshTransaction = refreshTransationOperation {
+            refreshQueue.addOperation(refreshOperation)
+            refreshQueue.addOperation(refreshTransaction)
+        }
+
     }
     
     func refreshAccessToken(for institution: Institution) {
@@ -285,7 +291,10 @@ private extension ExchangeManager {
             self?.processLoginCallbackResult(callbackResult, source: institution.source, credentials: credentials, institution: institution)
         }
         
-        autenticationQueue.addOperation(coinbaseAccountsOperation)
+        if let accountOperation = coinbaseAccountsOperation {
+            autenticationQueue.addOperation(accountOperation)
+        }
+        
     }
     
     func refreshCoinbase(with institution: Institution, credentials: Credentials) {
@@ -296,7 +305,9 @@ private extension ExchangeManager {
             self?.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
         }
         
-        refreshQueue.addOperation(refreshAccountsOperation)
+        if let refreshOperation = refreshAccountsOperation {
+            refreshQueue.addOperation(refreshOperation)
+        }
         
         let coinbaseAccounts = AccountRepository.si.accounts(institutionId: institution.institutionId)
         
@@ -312,7 +323,9 @@ private extension ExchangeManager {
                 self?.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
             })
             
-            refreshQueue.addOperation(refreshTransationOperation)
+            if let refreshTransaction = refreshTransationOperation {
+                refreshQueue.addOperation(refreshTransaction)
+            }
         }
         
     }

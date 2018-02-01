@@ -10,12 +10,14 @@ import Foundation
 
 // This class does all of the heavy lifting: i.e. URLSession, preparing requests, etc
 open class AbstractApi: ExchangeApi2 {
+
     open var requestMethod: ApiRequestMethod { return .get }
     open var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
     open var requestEncoding: ApiRequestEncoding { return .none }
     open var encondingMessageType: ApiEncondingMessageType { return .none }
-
-    var session: URLSession
+    open var requestHandler: RequestHandler? { return nil }
+    
+    private var session: URLSession
     
     // certValidatedSession should always be passed here when using in the app except for tests
     public init(session: URLSession) {
@@ -41,12 +43,17 @@ open class AbstractApi: ExchangeApi2 {
         fatalError("Must override")
     }
     
-    open func operation(for action: APIAction, session: URLSession, completion: @escaping ExchangeOperationCompletionHandler) -> Operation {
+    open func operation(for action: APIAction, session: URLSession, completion: @escaping ExchangeOperationCompletionHandler) -> Operation? {
         fatalError("Must override")
     }
     
-    public func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation {
-        fatalError("Must override")
+    public func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation?  {
+        guard let request = createRequest(for: action), let handler = requestHandler else {
+            completion(false, nil, nil)
+            return nil
+        }
+        
+        return ExchangeOperation(with: handler, action: action, session: session, request: request)
     }
     
     //mark: Needed for OAUTH

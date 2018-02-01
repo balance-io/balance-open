@@ -13,6 +13,16 @@ class NewPoloniexInstitution: ExchangeInstitution {
     var name: String = "Poloniex"
     var fields: [Field] = []
     
+    //let sourceInstitutionId: String = ""
+    
+    //var currencyCode: String = ""
+    //var usernameLabel: String = ""
+    //var passwordLabel: String = ""
+    
+    //var products: [String] = []
+    //var type: String = ""
+    //var url: String? = "https://poloniex.com/login"
+    
     init() {
         let keyField = Field(name: "API Key", type: .key, value: "")
         let secretField = Field(name: "Secret", type: .secret, value: "")

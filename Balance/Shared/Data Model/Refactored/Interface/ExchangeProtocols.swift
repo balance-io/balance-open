@@ -23,7 +23,7 @@ public enum TransactionType {
 }
 
 public protocol ExchangeApi2 {
-    func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation
+    func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation?
 }
 
 extension ExchangeApi2 {
