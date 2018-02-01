@@ -142,6 +142,21 @@ class CoinbaseAPI2: AbstractApi {
         }
     }
     
+    func refreshAccessToken(with credentials: OAUTHCredentials, completion: @escaping ExchangeOperationCompletionHandler) -> Operation?  {
+        guard let refreshURL = URL(string: "\(CoinbaseAutenticationConstants.subServerUrl)coinbase/refreshToken") else {
+            return nil
+        }
+        
+        var request = URLRequest(url: refreshURL)
+        request.timeoutInterval = CoinbaseAutenticationConstants.connectionTimeout
+        request.cachePolicy = .reloadIgnoringLocalCacheData
+        request.httpMethod = HTTPMethod.POST
+        let parameters = "{\"refreshToken\":\"\(credentials.refreshToken)\"}"
+        request.httpBody = parameters.data(using: .utf8)
+        
+        return CoibaseAutenticationOperation(autenticationRequest: request, requestHandler: self, autenticationResultBlock: completion)
+    }
+    
 }
 
 extension CoinbaseAPI2: RequestHandler {
@@ -170,7 +185,7 @@ extension CoinbaseAPI2: RequestHandler {
             
             return coinbaseAutentication
         } catch  {
-            print("Error parsin data from auntetication \(error)")
+            print("Error parsing data from auntetication \(error)")
             return nil
         }
     }

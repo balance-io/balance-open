@@ -42,18 +42,17 @@ open class AbstractApi: ExchangeApi2 {
         fatalError("Must override")
     }
     
-    // MARK - ExchangeApi Protocol -
+    public func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation {
+        return performRequest(for: action, completion: completion)
+    }
+    
+    //mark: Needed for OAUTH
     open func prepareForAutentication() {
         fatalError("Must override")
     }
     
-
     open func startAutentication(with data: Any, completionBlock: @escaping ExchangeOperationCompletionHandler) -> Operation? {
         fatalError("Must override")
-    }
-    
-    public func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation {
-        return performRequest(for: action, completion: completion)
     }
     
 }

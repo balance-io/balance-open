@@ -1,5 +1,5 @@
 //
-//  ExchangeServcicesProtocols.swift
+//  ExchangeServicesProtocols.swift
 //  BalancemacOS
 //
 //  Created by Eli Pacheco Hoyos on 1/25/18.

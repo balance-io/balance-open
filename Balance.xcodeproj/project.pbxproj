@@ -549,7 +549,7 @@
 		E65312931FE8C69800F57977 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078421F4F8EC700D0054C /* TestHelpers.swift */; };
 		E6635C67201A777900D9720E /* BalanceCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6635C66201A777900D9720E /* BalanceCredentials.swift */; };
 		E6635C68201A945B00D9720E /* ExchangeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6635C63201A6E4400D9720E /* ExchangeManager.swift */; };
-		E6635C6D201A95A800D9720E /* ExchangeServcicesProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6635C6B201A94C800D9720E /* ExchangeServcicesProtocols.swift */; };
+		E6635C6D201A95A800D9720E /* ExchangeServicesProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6635C6B201A94C800D9720E /* ExchangeServicesProtocols.swift */; };
 		E66743F6201935D90009A57F /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66743F5201935D90009A57F /* APIRequest.swift */; };
 		E66743FB20195A460009A57F /* PoloniexAPI2Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66743FA20195A460009A57F /* PoloniexAPI2Action.swift */; };
 		E66743FF20195F900009A57F /* ApiEntityProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66743FE20195F900009A57F /* ApiEntityProtocols.swift */; };
@@ -570,7 +570,7 @@
 		E6C1AC4620057ABE0018D6AA /* ReconnectAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */; };
 		E6C1AC49200590070018D6AA /* ReconnectAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */; };
 		E6FF3544201AB92D0032FB2F /* ExchangeKeychainServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FF3543201AB92D0032FB2F /* ExchangeKeychainServiceProvider.swift */; };
-		E6FF3545201ABD9E0032FB2F /* ExchangeServcicesProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6635C6B201A94C800D9720E /* ExchangeServcicesProtocols.swift */; };
+		E6FF3545201ABD9E0032FB2F /* ExchangeServicesProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6635C6B201A94C800D9720E /* ExchangeServicesProtocols.swift */; };
 		E6FF3546201ABDA20032FB2F /* ExchangeKeychainServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FF3543201AB92D0032FB2F /* ExchangeKeychainServiceProvider.swift */; };
 		E6FF3549201AC0D20032FB2F /* ExchangeRepositoryServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FF3548201AC0D20032FB2F /* ExchangeRepositoryServiceProvider.swift */; };
 		E6FF354A201AC0D50032FB2F /* ExchangeRepositoryServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FF3548201AC0D20032FB2F /* ExchangeRepositoryServiceProvider.swift */; };
@@ -1057,7 +1057,7 @@
 		E65312871FE8C47F00F57977 /* BITTREXApiAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXApiAction.swift; sourceTree = "<group>"; };
 		E6635C63201A6E4400D9720E /* ExchangeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeManager.swift; sourceTree = "<group>"; };
 		E6635C66201A777900D9720E /* BalanceCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceCredentials.swift; sourceTree = "<group>"; };
-		E6635C6B201A94C800D9720E /* ExchangeServcicesProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeServcicesProtocols.swift; sourceTree = "<group>"; };
+		E6635C6B201A94C800D9720E /* ExchangeServicesProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeServicesProtocols.swift; sourceTree = "<group>"; };
 		E66743F5201935D90009A57F /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		E66743FA20195A460009A57F /* PoloniexAPI2Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoloniexAPI2Action.swift; sourceTree = "<group>"; };
 		E66743FE20195F900009A57F /* ApiEntityProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEntityProtocols.swift; sourceTree = "<group>"; };
@@ -2484,7 +2484,7 @@
 			isa = PBXGroup;
 			children = (
 				E6FF3547201AC0840032FB2F /* Implementers */,
-				E6635C6B201A94C800D9720E /* ExchangeServcicesProtocols.swift */,
+				E6635C6B201A94C800D9720E /* ExchangeServicesProtocols.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -3017,7 +3017,7 @@
 				53552A271ED7252900DD95F9 /* Array.swift in Sources */,
 				2DF898591FCC8F7500CCDFB9 /* CountlyStarRating.m in Sources */,
 				53D441E31F44AA9F006967E1 /* GenericItemRepository.swift in Sources */,
-				E6635C6D201A95A800D9720E /* ExchangeServcicesProtocols.swift in Sources */,
+				E6635C6D201A95A800D9720E /* ExchangeServicesProtocols.swift in Sources */,
 				E6490DC6201A9E12007C41B7 /* BalanceCredentials.swift in Sources */,
 				A456ED0D1FB225A6006EE529 /* PriceTickerViewController.swift in Sources */,
 				A4307A901F8F6EA800BBA8B4 /* StackedCardCollectionView.swift in Sources */,
@@ -3283,7 +3283,7 @@
 				E6FF3549201AC0D20032FB2F /* ExchangeRepositoryServiceProvider.swift in Sources */,
 				537187EC1F4CC23C00E7F9D6 /* GDAXCredentials.swift in Sources */,
 				531E8D9A1C6A598500F765F7 /* Source.swift in Sources */,
-				E6FF3545201ABD9E0032FB2F /* ExchangeServcicesProtocols.swift in Sources */,
+				E6FF3545201ABD9E0032FB2F /* ExchangeServicesProtocols.swift in Sources */,
 				A40ABBE61F6BC0C000383C62 /* KrakenAPIClient.swift in Sources */,
 				53F6383F1C5FFF3200864346 /* Transaction.swift in Sources */,
 				DCDF77BD1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift in Sources */,
