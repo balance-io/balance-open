@@ -200,7 +200,7 @@ private extension ExchangeManager {
             callbackResult.success {
             
             if let transactions = data as? [ExchangeTransaction] {
-                repositoryService.createTransactions(for: institution.source, transactions: transactions)
+                repositoryService.createTransactions(for: institution.source, transactions: transactions, institution: institution)
                 //TODO: change state
             }
             
@@ -212,7 +212,7 @@ private extension ExchangeManager {
         }
         
         if containsError(callbackResult.error, with: institution) {
-            //TODO: invalid refresh for institution, remove the operation for insitution if there is one pending(account operation, transaction operation)
+            //TODO: remove the operation for insitution if there is one pending(account operation, transaction operation)
         }
     }
     
