@@ -43,6 +43,8 @@ extension SignUpTextField {
 
 class SignUpViewController: NSViewController {
     
+    let manager = ExchangeManager()
+    
     fileprivate let errorTextColor = NSColor(deviceRedInt: 243, green: 191, blue: 107)
     
     //
@@ -544,11 +546,11 @@ class SignUpViewController: NSViewController {
     
     // Initial connection
     @objc fileprivate func connect() {
-        let manager = ExchangeManager()
-
+       
+        
         //TEST HERE
-            manager.login(with: .poloniex, fields: [Field(name: "API Key", type: .key, value: ""),
-                                                    Field(name: "Secret", type: .secret, value: "")])
+        manager.login(with: .poloniex, fields: [Field(name: "API Key", type: .key, value: "FJ8SEP0I-78OYYUFP-89F5JAIK-27QZIZGN"),
+                                                Field(name: "Secret", type: .secret, value: "86b7e74bcc7bde7821207445776c68d43db2ddcca2ba7d944b6d7f0f11ad68e85771402fb9e61a973499c56e8ff6166b98529d3c91bd68012d57773894f103e3")])
         
 //        guard allFieldsFilled() else {
 //            return

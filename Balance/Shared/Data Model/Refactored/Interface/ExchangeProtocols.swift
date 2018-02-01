@@ -57,7 +57,7 @@ extension ExchangeApi2 {
 }
 
 protocol OperationResult {
-    var responseData: ExchangeOperationCompletionHandler? { get }
+    var resultBlock: ExchangeOperationCompletionHandler { get }
     var handler: RequestHandler { get }
 }
 

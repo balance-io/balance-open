@@ -11,7 +11,8 @@ import Foundation
 //TODO: Felipe - coinbase operation should be concurrent becuase there are many transactions and use a non concurrent approach will take much time, for other exchange we should use non concurrent becuase some of them use nonce param on the request and sometimes concurrent request can create invalid nonce(repeated, similar times like e.g 123456789112233445566 and 123456789112233445456).
 
 class ExchangeOperation: Operation, OperationResult {
-    var responseData: ExchangeOperationCompletionHandler?
+    
+    var resultBlock: ExchangeOperationCompletionHandler
     var handler: RequestHandler
     var session: URLSession
     var request: URLRequest
@@ -47,11 +48,12 @@ class ExchangeOperation: Operation, OperationResult {
         return false
     }
     
-    init(with handler: RequestHandler, action: APIAction, session: URLSession, request: URLRequest) {
+    init(with handler: RequestHandler, action: APIAction, session: URLSession, request: URLRequest, resultBlock: @escaping ExchangeOperationCompletionHandler) {
         self.handler = handler
         self.action = action
         self.session = session
         self.request = request
+        self.resultBlock = resultBlock
     }    
     
     func taskFinished() {
@@ -87,11 +89,11 @@ class ExchangeOperation: Operation, OperationResult {
             
             switch response {
             case is [ExchangeAccount], is [ExchangeTransaction]:
-                self.responseData?(true, nil, response)
+                self.resultBlock(true, nil, response)
             case (let error) as Error:
-                self.responseData?(false, error, nil)
+                self.resultBlock(false, error, nil)
             default:
-                self.responseData?(false, nil, nil)
+                self.resultBlock(false, nil, nil)
             }
         }
         
