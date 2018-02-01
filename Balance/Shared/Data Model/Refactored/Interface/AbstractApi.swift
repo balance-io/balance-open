@@ -15,10 +15,7 @@ open class AbstractApi: ExchangeApi2 {
     open var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
     open var requestEncoding: ApiRequestEncoding { return .none }
     open var encondingMessageType: ApiEncondingMessageType { return .none }
-    open var requestHandler: RequestHandler? { return nil }
-
-    private var session: URLSession
-    
+    open var requestHandler: RequestHandler? { return nil }    
     private var session: URLSession
     
     // certValidatedSession should always be passed here when using in the app except for tests

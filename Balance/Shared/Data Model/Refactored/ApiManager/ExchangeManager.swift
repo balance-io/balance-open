@@ -141,14 +141,14 @@ extension ExchangeManager: ExchangeManagerActions {
                 return
         }
         
-        let refreshAccountsOperation = api.fetchData(for: accountAction) { [weak self] (success, error, result) in
+        let refreshAccountsOperation = api.fetchData(for: accountAction) { (success, error, result) in
             let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
-            self?.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
+            self.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
         }
         
-        let refreshTransationOperation = api.fetchData(for: transactionAction) { [weak self] (success, error, result) in
+        let refreshTransationOperation = api.fetchData(for: transactionAction) { (success, error, result) in
             let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
-            self?.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
+            self.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
         }
         
         if let refreshOperation = refreshAccountsOperation, let refreshTransaction = refreshTransationOperation {
