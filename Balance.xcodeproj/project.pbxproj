@@ -238,6 +238,7 @@
 		53629D53201FE85B000081E9 /* PreferencesAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D4D201FE85A000081E9 /* PreferencesAccounts.swift */; };
 		53629D54201FE85B000081E9 /* TabButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D4E201FE85A000081E9 /* TabButtons.swift */; };
 		53629D55201FE85B000081E9 /* AccountConnectionErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D4F201FE85A000081E9 /* AccountConnectionErrors.swift */; };
+		53629D5820238AF9000081E9 /* EmailIssueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D5720238AF9000081E9 /* EmailIssueController.swift */; };
 		536C6EEF1D864C9B00823688 /* MockedDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536C6EEE1D864C9B00823688 /* MockedDefaultsStorage.swift */; };
 		536C6EF21D864CB900823688 /* DefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536C6EF11D864CB900823688 /* DefaultsStorage.swift */; };
 		537187DC1F4CC23B00E7F9D6 /* CoinbaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538B47B11F4C9FD60023CED5 /* CoinbaseApi.swift */; };
@@ -788,6 +789,7 @@
 		53629D4D201FE85A000081E9 /* PreferencesAccounts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesAccounts.swift; sourceTree = "<group>"; };
 		53629D4E201FE85A000081E9 /* TabButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabButtons.swift; sourceTree = "<group>"; };
 		53629D4F201FE85A000081E9 /* AccountConnectionErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountConnectionErrors.swift; sourceTree = "<group>"; };
+		53629D5720238AF9000081E9 /* EmailIssueController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailIssueController.swift; sourceTree = "<group>"; };
 		536C6EEE1D864C9B00823688 /* MockedDefaultsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockedDefaultsStorage.swift; sourceTree = "<group>"; };
 		536C6EF11D864CB900823688 /* DefaultsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsStorage.swift; sourceTree = "<group>"; };
 		537187F21F4CC2FB00E7F9D6 /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
@@ -1611,6 +1613,7 @@
 			children = (
 				53561E981F82DD120043D4F9 /* SettingsViewController.swift */,
 				53561E961F82DD120043D4F9 /* Institution Settings */,
+				53629D5720238AF9000081E9 /* EmailIssueController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -2878,6 +2881,7 @@
 				E65312501FE8C2A900F57977 /* BITTREXCurrency.swift in Sources */,
 				5321219E1EE8B91600F4812A /* ioapi.c in Sources */,
 				53552A0C1ED7251200DD95F9 /* Utils.swift in Sources */,
+				53629D5820238AF9000081E9 /* EmailIssueController.swift in Sources */,
 				53552A271ED7252900DD95F9 /* Array.swift in Sources */,
 				2DF898591FCC8F7500CCDFB9 /* CountlyStarRating.m in Sources */,
 				53D441E31F44AA9F006967E1 /* GenericItemRepository.swift in Sources */,
