@@ -2041,11 +2041,9 @@
 		53F696622016876A00D28B23 /* Refactored */ = {
 			isa = PBXGroup;
 			children = (
-				E64AAA3A201FCBA600CE7050 /* Coinbase */,
-				E64AAA39201FCB9400CE7050 /* Kraken */,
+				E686DA7D20228DEA009D5A1E /* Exchanges */,
 				E66743FC20195E8A0009A57F /* Interface */,
 				E6635C65201A775A00D9720E /* ApiManager */,
-				409BF848201A2A0600E2D30D /* Poloniex */,
 			);
 			path = Refactored;
 			sourceTree = "<group>";
@@ -2533,6 +2531,16 @@
 				E686DA79202225CE009D5A1E /* CoinbasePreferences.swift */,
 			);
 			path = Preferences;
+			sourceTree = "<group>";
+		};
+		E686DA7D20228DEA009D5A1E /* Exchanges */ = {
+			isa = PBXGroup;
+			children = (
+				E64AAA3A201FCBA600CE7050 /* Coinbase */,
+				E64AAA39201FCB9400CE7050 /* Kraken */,
+				409BF848201A2A0600E2D30D /* Poloniex */,
+			);
+			path = Exchanges;
 			sourceTree = "<group>";
 		};
 		E68EE5762015879200ACB01F /* BITTREX API Responses */ = {

@@ -231,7 +231,7 @@ private class CoibaseAutenticationOperation: Operation {
     
     override func main() {
         let strongHandler = requestHandler
-        let task = certValidatedSession.dataTask(with: autenticationRequest) { (data, response, error) in
+        let task = session.dataTask(with: autenticationRequest) { (data, response, error) in
             let parsedData = strongHandler.handleResponseData(for: nil, data: data, error: error, ulrResponse: response)
             self.completionBlock?()
             

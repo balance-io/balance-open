@@ -8,6 +8,8 @@
 
 import Foundation
 
+//TODO: Felipe - coinbase operation should be concurrent becuase there are many transactions and use a non concurrent approach will take much time, for other exchange we should use non concurrent becuase some of them use nonce param on the request and sometimes concurrent request can create invalid nonce(repeated, similar times like e.g 123456789112233445566 and 123456789112233445456).
+
 class ExchangeOperation: Operation {
     
     var operatorHasFinished: Bool = false {

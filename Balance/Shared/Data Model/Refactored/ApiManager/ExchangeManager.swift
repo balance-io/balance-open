@@ -72,10 +72,10 @@ extension ExchangeManager: ExchangeManagerAction {
         switch source {
         case .poloniex:
             exchangeApi = poloniexExchangeAPI
-            exchangeAction = PoloniexApiAction.init(type: .accounts, credentials: credentials)
+            exchangeAction = PoloniexApiAction(type: .accounts, credentials: credentials)
         case .kraken:
             exchangeApi = krakenExchangeAPI
-            exchangeAction = KrakenApiAction.init(type: .accounts, credentials: credentials)
+            exchangeAction = KrakenApiAction(type: .accounts, credentials: credentials)
         case .coinbase:
             coinbaseExchangeAPI.prepareForAutentication()
             return
@@ -103,13 +103,7 @@ extension ExchangeManager: ExchangeManagerAction {
     }
     
     func refresh(institution: Institution) {
-        let source = institution.source
-        switch source {
-        case .poloniex:
-            refreshPoloniex(with: institution)
-        default:
-            return
-        }
+        
     }
     
 }
@@ -168,17 +162,68 @@ private extension ExchangeManager {
             return false
         }
         
-        guard case .invalidCredentials(_) = baseError else {
+        guard let institution = institution,
+            case .invalidCredentials(_) = baseError else {
             log.debug("Error - Can't refresh data with error \(baseError.localizedDescription)")
             //TODO: change state
             return true
         }
         
         log.debug("Error - Can't refresh data with invalid certificate \(baseError.localizedDescription)")
-        institution?.passwordInvalid = true
-        institution?.replace()
-        //TODO: change state
+        institution.passwordInvalid = true
+        institution.replace()
+        //TODO: change state and check if other operation should be canceled like a transaction when an account operation was invalid by credentials(this case) is not needed to trigger the transactions
         return true
+    }
+    
+}
+
+private extension ExchangeManager {
+    
+    func refresh(with institution: Institution) {
+        guard let credentials = keychainService.fetchCredentials(with: "\(institution.institutionId)", source: institution.source) else {
+            log.debug("Error - Can't refresh \(institution.source.description) institution with id \(institution.institutionId), becuase credentials weren't fetched")
+            return
+        }
+        
+        let exchangeApi: AbstractApi?
+        let exchangeAccountAction: APIAction?
+        let exchangeTransactionAction: APIAction?
+        
+        switch institution.source {
+        case .poloniex:
+            exchangeApi = poloniexExchangeAPI
+            exchangeAccountAction = PoloniexApiAction(type: .accounts, credentials: credentials)
+            exchangeTransactionAction = PoloniexApiAction(type: .transactions(input: nil), credentials: credentials)
+        case .kraken:
+            exchangeApi = krakenExchangeAPI
+            exchangeAccountAction = KrakenApiAction(type: .accounts, credentials: credentials)
+            exchangeTransactionAction = KrakenApiAction(type: .transactions(input: nil), credentials: credentials)
+        case .coinbase:
+            refreshCoinbase(with: institution, credentials: credentials)
+            return
+        default:
+            return
+        }
+        
+        guard let api = exchangeApi,
+            let accountAction = exchangeAccountAction,
+            let transactionAction = exchangeTransactionAction else {
+            return
+        }
+        
+        let refreshAccountsOperation = api.fetchData(for: accountAction) { [weak self] (success, error, result) in
+            let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
+            self?.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
+        }
+        
+        let refreshTransationOperation = api.fetchData(for: transactionAction) { [weak self] (success, error, result) in
+            let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
+            self?.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
+        }
+        
+        refreshQueue.addOperation(refreshAccountsOperation)
+        refreshQueue.addOperation(refreshTransationOperation)
     }
     
 }
@@ -222,34 +267,33 @@ private extension ExchangeManager {
         autenticationQueue.addOperation(coinbaseAccountsOperation)
     }
     
-}
-
-//mark: Poloniex helper methods
-private extension ExchangeManager {
-    
-    func refreshPoloniex(with institution: Institution) {
-        guard let apiKey = institution.apiKey, let secret = institution.secret else {
-            print("Error - Can't refresh poloniex institution without credentials")
-            return
-        }
+    func refreshCoinbase(with institution: Institution, credentials: Credentials) {
         
-        let api = PoloniexAPI2.init(session: urlSession)
-        let credentials = BalanceCredentials(apiKey: apiKey, secretKey: secret)
-        let refreshTransactionAction = PoloniexApiAction(type: .transactions(input: nil), credentials: credentials)
-        
-        let refreshTransationOperation = api.fetchData(for: refreshTransactionAction) { [weak self] (success, error, result) in
-            let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
-            self?.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
-        }
-        
-        let refreshAccountsAction = PoloniexApiAction.init(type: .accounts, credentials: credentials)
-        let refreshAccountsOperation = api.fetchData(for: refreshAccountsAction) { [weak self] (success, error, result) in
+        let exchangeAccountAction = CoinbaseAPI2Action(type: .accounts, credentials: credentials)
+        let refreshAccountsOperation = coinbaseExchangeAPI.fetchData(for: exchangeAccountAction) { [weak self] (success, error, result) in
             let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
             self?.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
         }
         
         refreshQueue.addOperation(refreshAccountsOperation)
-        refreshQueue.addOperation(refreshTransationOperation)
+        
+        let coinbaseAccounts = AccountRepository.si.accounts(institutionId: institution.institutionId)
+        
+        guard !coinbaseAccounts.isEmpty else {
+            log.debug("Warning - Can't refresh coinbase institution with \(institution.institutionId) id")
+            return
+        }
+        
+        coinbaseAccounts.forEach {
+            let exchangeTransactionAction = CoinbaseAPI2Action(type: .transactions(input: $0.sourceAccountId), credentials: credentials)
+            let refreshTransationOperation = coinbaseExchangeAPI.fetchData(for: exchangeTransactionAction, completion: { [weak self] (success, error, result) in
+                let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
+                self?.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
+            })
+            
+            refreshQueue.addOperation(refreshTransationOperation)
+        }
+        
     }
     
 }
