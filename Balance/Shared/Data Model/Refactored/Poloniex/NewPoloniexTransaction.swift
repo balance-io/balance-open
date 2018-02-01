@@ -10,7 +10,7 @@ import Foundation
 
 class NewPoloniexTransaction: ExchangeTransaction, Codable {
     
-    var category: TransactionType = .unknown
+    var type: TransactionType = .unknown
     var institutionId: Int = 0
     var source: Source = .poloniex
     var sourceInstitutionId: String = ""
