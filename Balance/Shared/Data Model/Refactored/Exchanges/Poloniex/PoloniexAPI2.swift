@@ -13,6 +13,7 @@ class PoloniexAPI2: AbstractApi {
     override var requestMethod: ApiRequestMethod { return .post }
     override var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
     override var requestEncoding: ApiRequestEncoding { return .simpleHmacSha512 }
+    override var requestHandler: RequestHandler? { return self }
     
     override func processErrors(requestType: ApiRequestType, response: URLResponse?, data: Data?, error: Error?) -> Error? {
         guard let response = response as? HTTPURLResponse else {
@@ -51,15 +52,6 @@ class PoloniexAPI2: AbstractApi {
             
             return request
         }
-    }
-    
-    override func operation(for action: APIAction, session: URLSession, completion: @escaping ExchangeOperationCompletionHandler) -> Operation {
-        guard let request = createRequest(for: action) else {
-            completion(false, nil, nil)
-            return Operation()
-        }
-        
-        return ExchangeOperation(with: self, action: action, session: session, request: request)
     }
     
     override func createMessage(for action: APIAction) -> String? {
