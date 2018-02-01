@@ -108,6 +108,16 @@ class PoloniexApi: ExchangeApi {
         
         let datatask = certValidatedSession.dataTask(with: urlRequest) { data, response, error in
             do {
+                if let httpResponse = response as? HTTPURLResponse {
+                    switch httpResponse.statusCode {
+                    case 400, 403:
+                        institution.passwordInvalid = true
+                        institution.replace()
+                        throw PoloniexApi.CredentialsError.incorrectLoginCredentials
+                    default: break
+                    }
+                }
+            
                 if let safeData = data {
                     //create accounts
                     let poloniexAccounts = try self.parsePoloniexAccounts(data: safeData)
@@ -343,6 +353,16 @@ internal extension PoloniexApi {
         
         let datatask = certValidatedSession.dataTask(with: urlRequest) { data, response, error in
             do {
+                if let httpResponse = response as? HTTPURLResponse {
+                    switch httpResponse.statusCode {
+                    case 400, 403:
+                        institution.passwordInvalid = true
+                        institution.replace()
+                        throw PoloniexApi.CredentialsError.incorrectLoginCredentials
+                    default: break
+                    }
+                }
+                
                 if let safeData = data {
                     //create accounts
                     let poloniexTransactions = try self.parsePoloniexTransactions(data: safeData)
