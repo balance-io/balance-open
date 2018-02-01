@@ -94,7 +94,7 @@ private extension ReconnectAccountCell {
     }
     
     func createNameLabel() {
-        let nameLabel = UILabel.init()
+        let nameLabel = UILabel()
         nameLabel.text = "Example"
         nameLabel.font = UIFont.Balance.monoFont(ofSize: 14, weight: .regular)
         

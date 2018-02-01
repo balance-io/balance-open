@@ -207,7 +207,7 @@ private extension ExchangeManager {
             return
         }
         
-        let api = PoloniexAPI2.init(session: urlSession)
+        let api = PoloniexAPI2(session: urlSession)
         let credentials = BalanceCredentials(apiKey: apiKey, secretKey: secret)
         let refreshTransactionAction = PoloniexApiAction(type: .transactions, credentials: credentials)
         
@@ -216,7 +216,7 @@ private extension ExchangeManager {
             self.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
         }
         
-        let refreshAccountsAction = PoloniexApiAction.init(type: .accounts, credentials: credentials)
+        let refreshAccountsAction = PoloniexApiAction(type: .accounts, credentials: credentials)
         let refreshAccountsOperation = api.fetchData(for: refreshAccountsAction) { success, error, result in
             let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
             self.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)

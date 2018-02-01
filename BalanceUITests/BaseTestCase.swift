@@ -55,7 +55,7 @@ class BaseTestCase: XCTestCase {
     func _convertCurrencyStringToFloat(_ string: String) -> NSDecimalNumber? {
         let formatter = NumberFormatter()
         formatter.usesGroupingSeparator = true
-        formatter.locale = Locale.init(identifier: "en_US")
+        formatter.locale = Locale(identifier: "en_US")
         
         if string.contains("$") {
             formatter.numberStyle = .currency

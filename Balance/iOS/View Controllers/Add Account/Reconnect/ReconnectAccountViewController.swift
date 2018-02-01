@@ -174,7 +174,7 @@ private extension ReconnectAccountViewController {
             CoinbaseApi.authenticate(existingInstitution: institution)
         default:
             let addCredentialVM = NewAccountViewModel(source: source, existingInstitution: institution)
-            let newCredentialBasedAccountViewController = AddCredentialBasedAccountViewController.init(viewModel: addCredentialVM)
+            let newCredentialBasedAccountViewController = AddCredentialBasedAccountViewController(viewModel: addCredentialVM)
             newCredentialBasedAccountViewController.delegate = self
             navigationController?.setNavigationBarHidden(false, animated: true)
             navigationController?.pushViewController(newCredentialBasedAccountViewController, animated: true)

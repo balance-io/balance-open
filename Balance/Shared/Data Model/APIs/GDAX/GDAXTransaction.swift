@@ -43,7 +43,7 @@ extension GDAXAPIClient {
             let createdAt: String = try checkType(dictionary["created_at"], name: "createdAt")
             self.createdAt = dateFormatter.date(from:createdAt)!
             if  let detail = dictionary["detail"] as? [String:Any] {
-                self.type = EntryType.init(rawValue: detail["transfer_type"] as! String)
+                self.type = EntryType(rawValue: detail["transfer_type"] as! String)
                 self.transferId = detail["transfer_id"] as? String
                 self.productId = detail["product_id"] as? String
             } else {

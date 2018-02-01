@@ -150,7 +150,7 @@ extension GDAXAPIClient
                     var transactions = [GDAXAPIClient.Transaction]()
                     for transaction in transactionsJSON {
                         do {
-                            let transactoinObject = try Transaction.init(dictionary: transaction, currencyCode: currencyCode)
+                            let transactoinObject = try Transaction(dictionary: transaction, currencyCode: currencyCode)
                             transactions.append(transactoinObject)
                         }
                         catch {
