@@ -9,30 +9,27 @@
 import Foundation
 
 class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
-    func save(source: Source, identifier: String, credentials: BaseCredentials) {
+
+    func save(source: Source, identifier: String, credentials: Credentials) {
+        guard let keychainAccounts = buildKeychainAccounts(for: source, with: identifier) else {
+            log.debug("Error - Keychain accounts can't be created for saving credentials on keychain, source: \(source.description)")
+            return
+        }
+        
         switch source {
         case .poloniex:
-            guard let credentials = credentials as? Credentials else {
-                log.debug("Error - Can't use credentials type to be saved on keychain")
-                return
-            }
-            
-            let keychainSecretKeyAccount = "secret institutionId: \(identifier)"
-            save(account: keychainSecretKeyAccount, key: KeychainConstants.secretKey, value: credentials.secretKey)
-            let keychainApiKeyAccount = "apiKey institutionId: \(identifier)"
-            save(account: keychainApiKeyAccount, key: KeychainConstants.secretKey, value: credentials.apiKey)
+            save(account: keychainAccounts.secretKey, key: KeychainConstants.secretKey, value: credentials.secretKey)
+            save(account: keychainAccounts.apiKey, key: KeychainConstants.secretKey, value: credentials.apiKey)
         case .coinbase:
             guard let credentials = credentials as? OAUTHCredentials else {
                 log.debug("Error - Can't use credentials type to be saved on keychain")
                 return
             }
             
-            let keychainAccessTokenKey = "institutionId: \(identifier)"
-            save(account: keychainAccessTokenKey, key: KeychainConstants.accessToken, value: credentials.accessToken)
-            let keychainRefreshTokenKey = "refreshToken institutionId: \(identifier)"
-            save(account: keychainRefreshTokenKey, key: KeychainConstants.refreshToken, value: credentials.refreshToken)
+            save(account: keychainAccounts.accessToken, key: KeychainConstants.accessToken, value: credentials.accessToken)
+            save(account: keychainAccounts.refreshToken, key: KeychainConstants.refreshToken, value: credentials.refreshToken)
             CoinbasePreferences.apiScope = credentials.apiScope
-            CoinbasePreferences.tokenExpireDate = Date().addingTimeInterval(credentials.expiresIn - 10.0)
+            CoinbasePreferences.tokenExpireDate = credentials.expireDate
         default:
             return
         }
@@ -41,34 +38,45 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
     func fetch(account: String, key: String) -> String? {
         return keychain[account, key]
     }
+    
+    func fetchCredentials(with identifer: String, source: Source) -> Credentials? {
+        guard let accountValues = buildKeychainAccounts(for: source, with: identifer) else {
+            return nil
+        }
+        
+        switch source {
+        case .coinbase:
+            guard let accessToken = fetch(account: accountValues.accessToken, key: KeychainConstants.accessToken),
+                let refreshToken = fetch(account: accountValues.refreshToken, key: KeychainConstants.refreshToken) else {
+                    return nil
+            }
+            
+            return CoinbaseAutentication(accessToken: accessToken, refreshToken: refreshToken)
+        case .poloniex:
+            guard let secretKey = fetch(account: accountValues.secretKey, key: KeychainConstants.secretKey),
+                let apiKey = fetch(account: accountValues.apiKey, key: KeychainConstants.apiKey) else {
+                    return nil
+            }
+            
+            return BalanceCredentials(apiKey: apiKey, secretKey: secretKey)
+        default:
+            return nil
+        }
+    }
+    
 }
 
-class CoinbasePreferences {
-    private struct PreferencesKeys {
-        static let tokenExpireDate = "tokenExpireDateKey"
-        static let apiScope = "Institution.apiScopeKey"
-    }
+private struct KeychainAccountValues {
+    let apiKey: String
+    let secretKey: String
+    let accessToken: String
+    let refreshToken: String
     
-    static var tokenExpireDate: Date {
-        get {
-            return UserDefaults.standard.object(forKey: PreferencesKeys.tokenExpireDate) as? Date ?? Date.distantPast
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: PreferencesKeys.tokenExpireDate)
-        }
-    }
-    
-    static var isTokenExpired: Bool {
-        return Date().timeIntervalSince(tokenExpireDate) > 0.0
-    }
-    
-    static var apiScope: String? {
-        get {
-            return UserDefaults.standard.string(forKey: PreferencesKeys.apiScope)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: PreferencesKeys.apiScope)
-        }
+    init(apiKey: String = "", secretKey: String = "", accessToken: String = "", refreshToken: String = "") {
+        self.apiKey = apiKey
+        self.secretKey = secretKey
+        self.accessToken = accessToken
+        self.refreshToken = refreshToken
     }
 }
 
@@ -78,6 +86,7 @@ private extension ExchangeKeychainServiceProvider {
         static let apiKey = "apiKey"
         static let accessToken = "accessToken"
         static let refreshToken = "refreshToken"
+        static let passphrase = "passphrase"
     }
     
     func save(identifier: String, value: [String : Any]) throws {
@@ -89,4 +98,22 @@ private extension ExchangeKeychainServiceProvider {
         log.debug("Set account: \(account)\nkey: \(key)\nvalue: \(value)) on keychain")
         keychain[account, key] = value
     }
+    
+    func buildKeychainAccounts(for source: Source, with identifier: String) -> KeychainAccountValues? {
+        switch source {
+        case .poloniex:
+            let keychainSecretKeyAccount = "secret institutionId: \(identifier)"
+            let keychainApiKeyAccount = "apiKey institutionId: \(identifier)"
+            
+            return KeychainAccountValues(apiKey: keychainApiKeyAccount, secretKey: keychainSecretKeyAccount)
+        case .coinbase:
+            let keychainAccessTokenKey = "institutionId: \(identifier)"
+            let keychainRefreshTokenKey = "refreshToken institutionId: \(identifier)"
+            
+            return KeychainAccountValues(accessToken: keychainAccessTokenKey, refreshToken: keychainRefreshTokenKey)
+        default:
+            return nil
+        }
+    }
+    
 }

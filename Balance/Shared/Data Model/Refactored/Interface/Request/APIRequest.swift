@@ -10,7 +10,32 @@ import Foundation
 
 public enum ApiRequestType {
     case accounts
-    case transactions
+    case transactions(input: Any?)
+}
+
+extension ApiRequestType: Equatable {
+    
+    public static func ==(left: ApiRequestType, right: ApiRequestType) -> Bool {
+        switch (left, right) {
+        case (.accounts, .accounts):
+            return true
+        case (.transactions(let leftInput), .transactions(let rightInput)):
+            return inputTransactionsAreEquals(left: leftInput, right: rightInput)
+        default:
+            return false
+        }
+    }
+    
+    static func inputTransactionsAreEquals(left: Any?, right: Any?) -> Bool {
+        
+        if let leftString = left as? String,
+            let rightString = right as? String {
+            return leftString == rightString
+        }
+        
+        return false
+    }
+    
 }
 
 public enum ApiRequestMethod: String {

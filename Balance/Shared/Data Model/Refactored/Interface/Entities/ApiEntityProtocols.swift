@@ -8,21 +8,19 @@
 
 import Foundation
 
-public protocol BaseCredentials {
-}
-
-public protocol Credentials: BaseCredentials {
+public protocol Credentials {
     var apiKey: String { get }
     var secretKey: String { get }
     var passphrase: String { get }
     var address: String { get }
 }
 
-protocol OAUTHCredentials: BaseCredentials {
+protocol OAUTHCredentials: Credentials {
     var accessToken: String { get }
     var refreshToken: String { get }
     var apiScope: String { get }
     var expiresIn: Double { get }
+    var expireDate: Date { get } 
 }
 
 public protocol ExchangeInstitution {
@@ -33,8 +31,8 @@ public protocol ExchangeInstitution {
 
 public protocol ExchangeAccount {
     var accountType: AccountType { get }
-    var institutionId: Int { get }
-    var source: Source { get }
+    var institutionId: Int { get set }
+    var source: Source { get set }
     var sourceAccountId: String { get }
     var name: String { get }
     var currencyCode: String { get }

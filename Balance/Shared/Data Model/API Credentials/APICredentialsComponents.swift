@@ -33,8 +33,8 @@ internal struct APICredentialsComponents
     
     internal init(key: String, secret: String, passphrase: String?) throws
     {
-        self.key = "sBfyAa5Suqi5AqMzfqeYpE0iiLJN3MTACQwYe/sT9qx+OGsIx4/xh2f5"//key
-        self.secret = "pAYNrfYpTBtI99HYEHK9ZdnhGw1aWW1iCWAA75VSATwG5E4J3PcJ/F0dKuysXvex1BPNEzJ4yBnUNRi4oMutVg=="//secret
+        self.key = key
+        self.secret = secret
         self.passphrase = passphrase
     }
     
