@@ -14,7 +14,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let statusItem = CCNStatusItem.sharedInstance()!
     var contentViewController: PopoverViewController!
     var preferencesWindowController: NSWindowController!
-    let exchangeManager = ExchangeManager()
     
     var launchedAtLogin = false
     var isAutolaunchHelperRunning: Bool {
@@ -162,10 +161,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } else if debugging.showBillingPreferencesOnLaunch {
             self.showBillingPreferences()
         }
-        
-        DispatchQueue.main.async(after: 3.0) {
-            self.exchangeManager.login(with: .coinbase, fields: [])
-        }
     }
     
     // Gets called when the App launches/opens via URL
@@ -187,19 +182,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     }
                     
                     if let code = code, let state = state {
-                        let data = [
-                            CoinbaseAuthenticationKey.code.rawValue: code,
-                            CoinbaseAuthenticationKey.state.rawValue: state
-                        ]
-                        
-                        self.exchangeManager.manageAutenticationCallback(with: data, source: .coinbase)
-//                        CoinbaseApi.handleAuthenticationCallback(state: state, code: code) { success, error in
-//                            if !success {
-//                                log.error("Error handling Coinbase authentication callback: \(String(describing: error))")
-//                            }
-//                            
-//                            self.showPopover()
-//                        }
+                        CoinbaseApi.handleAuthenticationCallback(state: state, code: code) { success, error in
+                            if !success {
+                                log.error("Error handling Coinbase authentication callback: \(String(describing: error))")
+                            }
+                            
+                            self.showPopover()
+                        }
                     } else {
                         log.error("Missing query items, code: \(String(describing: code)), state: \(String(describing: state))")
                     }
