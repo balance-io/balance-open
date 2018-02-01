@@ -30,7 +30,7 @@ struct Feedback {
             dict["source"] = apiInstitution?.source.rawValue
             dict["sourceInstitutionId"] = apiInstitution?.sourceInstitutionId
             dict["institutionName"] = apiInstitution?.name
-            if let logsZipUrl = logging.zipLogFiles(), let logsData = try? Data(contentsOf: logsZipUrl), logsData.count < 2 * 1024 * 1024 {
+            if let logsZipUrl = logging.zipLogFiles(), let logsData = try? Data(contentsOf: logsZipUrl) {
                 dict["logs"] = logsData.base64EncodedString()
             }
             
