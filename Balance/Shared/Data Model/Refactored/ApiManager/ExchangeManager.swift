@@ -210,6 +210,12 @@ private extension ExchangeManager {
                 //TODO: change state
             }
             
+            if institution.passwordInvalid {
+                keychainService.save(source: institution.source, identifier: "\(institution.institutionId)", credentials: credentials)
+                institution.passwordInvalid = false
+                institution.replace()
+            }
+            
             return
         }
         
