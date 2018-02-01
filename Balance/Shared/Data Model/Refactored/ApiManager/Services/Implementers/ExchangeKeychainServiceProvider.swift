@@ -30,6 +30,13 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
             save(account: keychainAccounts.refreshToken, key: KeychainConstants.refreshToken, value: credentials.refreshToken)
             CoinbasePreferences.apiScope = credentials.apiScope
             CoinbasePreferences.tokenExpireDate = credentials.expireDate
+        case .kraken, .bitfinex, .gdax:
+            save(account: keychainAccounts.commonKey, key: KeychainConstants.secretKey, value: credentials.secretKey)
+            save(account: keychainAccounts.commonKey, key: KeychainConstants.apiKey, value: credentials.apiKey)
+            
+            if !credentials.passphrase.isEmpty {
+                save(account: keychainAccounts.commonKey, key: KeychainConstants.passphrase, value: credentials.passphrase)
+            }
         default:
             return
         }
@@ -59,6 +66,15 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
             }
             
             return BalanceCredentials(apiKey: apiKey, secretKey: secretKey)
+        case .kraken, .gdax, .bitfinex:
+            guard let secretKey = fetch(account: accountValues.commonKey, key: KeychainConstants.secretKey),
+                let apiKey = fetch(account: accountValues.commonKey, key: KeychainConstants.apiKey) else {
+                    return nil
+            }
+            
+            let passphrase = fetch(account: accountValues.commonKey, key: KeychainConstants.passphrase) ?? ""
+            
+            return BalanceCredentials(apiKey: apiKey, secretKey: secretKey, passphrase: passphrase)
         default:
             return nil
         }
@@ -71,12 +87,14 @@ private struct KeychainAccountValues {
     let secretKey: String
     let accessToken: String
     let refreshToken: String
+    let commonKey: String
     
-    init(apiKey: String = "", secretKey: String = "", accessToken: String = "", refreshToken: String = "") {
+    init(apiKey: String = "", secretKey: String = "", accessToken: String = "", refreshToken: String = "", commonKey: String = "") {
         self.apiKey = apiKey
         self.secretKey = secretKey
         self.accessToken = accessToken
         self.refreshToken = refreshToken
+        self.commonKey = commonKey
     }
 }
 
@@ -111,8 +129,25 @@ private extension ExchangeKeychainServiceProvider {
             let keychainRefreshTokenKey = "refreshToken institutionId: \(identifier)"
             
             return KeychainAccountValues(accessToken: keychainAccessTokenKey, refreshToken: keychainRefreshTokenKey)
+        case .kraken, .bitfinex, .gdax:
+            let realIdentifer = computeIdentifier(for: source, with: identifier)
+            
+            return KeychainAccountValues(commonKey: realIdentifer)
         default:
             return nil
+        }
+    }
+    
+    func computeIdentifier(for source: Source, with identifier: String) -> String {
+        switch source {
+        case .gdax:
+            return "com.GDAXAPIClient.Credentials.\(identifier)"
+        case .kraken:
+            return "com.KrakenAPIClient.Credentials.\(identifier)"
+        case .bitfinex:
+            return "com.BitfinexAPIClient.Credentials.\(identifier)"
+        default:
+            return identifier
         }
     }
     

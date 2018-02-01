@@ -14,21 +14,22 @@ class ExchangeRepositoryServiceProvider: RepositoryServiceProtocol {
     }
     
     func createAccounts(for source: Source, accounts: [ExchangeAccount], institution: Institution) {
-        let accountsWithInsitutions = updateAccounts(accounts, with: institution)
+        let accountsUpdated = updateAccounts(accounts, with: institution)
         
         switch source {
         case .poloniex:
-            savePoloniexAccounts(accounts: accountsWithInsitutions, institution: institution)
+            savePoloniexAccounts(accounts: accountsUpdated, institution: institution)
         case .coinbase:
-            saveCoinbaseAccounts(accounts: accountsWithInsitutions, institution: institution)
+            saveCoinbaseAccounts(accounts: accountsUpdated, institution: institution)
         default:
             return
         }
         
     }
     
-    func createTransactions(for source: Source, transactions: [ExchangeTransaction]) {
-        saveExchangeTransactions(transactions)
+    func createTransactions(for source: Source, transactions: [ExchangeTransaction], institution: Institution) {
+        let transactionsUpdated = updateTransactions(transactions, institution: institution)
+        saveExchangeTransactions(transactionsUpdated)
     }
 }
 
@@ -108,7 +109,7 @@ private extension ExchangeRepositoryServiceProvider {
     
     @discardableResult func saveExchangeTransaction(_ transaction: ExchangeTransaction) -> Transaction? {
         return TransactionRepository.si.transaction(source: transaction.source,
-                                                    sourceTransactionId: transaction.sourceInstitutionId,
+                                                    sourceTransactionId: transaction.sourceTransactionId,
                                                     sourceAccountId: transaction.sourceAccountId,
                                                     name: transaction.name,
                                                     currency: transaction.currencyCode,
@@ -134,6 +135,16 @@ private extension ExchangeRepositoryServiceProvider {
             account.source = institution.source
             
             return account
+        })
+    }
+    
+    func updateTransactions(_ transactions: [ExchangeTransaction], institution: Institution) -> [ExchangeTransaction] {
+        return transactions.map({ (transaction) -> ExchangeTransaction in
+            var transaction = transaction
+            transaction.institutionId = institution.institutionId
+            transaction.sourceInstitutionId = institution.sourceInstitutionId
+            
+            return transaction
         })
     }
     

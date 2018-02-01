@@ -135,27 +135,28 @@ extension ExchangeManager: ExchangeManagerActions {
             return
         }
         
-        guard let api = exchangeApi,
-            let accountAction = exchangeAccountAction,
-            let transactionAction = exchangeTransactionAction else {
-                return
+        guard let api = exchangeApi, let accountAction = exchangeAccountAction, let transactionAction = exchangeTransactionAction else {
+            return
         }
         
-        let refreshAccountsOperation = api.fetchData(for: accountAction) { [weak self] (success, error, result) in
+        createRefreshOperations(api: api, accountAction: accountAction, transactionAction: transactionAction, institution: institution, credentials: credentials)
+    }
+    
+    func createRefreshOperations(api: AbstractApi, accountAction: APIAction, transactionAction: APIAction, institution: Institution, credentials: Credentials) {
+        let refreshAccountsOperation = api.fetchData(for: accountAction) { (success, error, result) in
             let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
-            self?.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
+            self.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
         }
         
-        let refreshTransationOperation = api.fetchData(for: transactionAction) { [weak self] (success, error, result) in
+        let refreshTransationOperation = api.fetchData(for: transactionAction) { (success, error, result) in
             let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
-            self?.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
+            self.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
         }
         
         if let refreshOperation = refreshAccountsOperation, let refreshTransaction = refreshTransationOperation {
             refreshQueue.addOperation(refreshOperation)
             refreshQueue.addOperation(refreshTransaction)
         }
-
     }
     
     func refreshAccessToken(for institution: Institution) {
@@ -200,19 +201,26 @@ private extension ExchangeManager {
             callbackResult.success {
             
             if let transactions = data as? [ExchangeTransaction] {
-                repositoryService.createTransactions(for: institution.source, transactions: transactions)
+                repositoryService.createTransactions(for: institution.source, transactions: transactions, institution: institution)
                 //TODO: change state
             }
             
             if let accounts = data as? [ExchangeAccount] {
-                
+                repositoryService.createAccounts(for: institution.source, accounts: accounts, institution: institution)
+                //TODO: change state
+            }
+            
+            if institution.passwordInvalid {
+                keychainService.save(source: institution.source, identifier: "\(institution.institutionId)", credentials: credentials)
+                institution.passwordInvalid = false
+                institution.replace()
             }
             
             return
         }
         
         if containsError(callbackResult.error, with: institution) {
-            //TODO: invalid refresh for institution, remove the operation for insitution if there is one pending(account operation, transaction operation)
+            //TODO: remove the operation for insitution if there is one pending(account operation, transaction operation)
         }
     }
     

@@ -74,6 +74,8 @@ private extension BalanceCredentials {
         switch source {
         case .poloniex, .kraken:
             return !credentials.apiKey.isEmpty && !credentials.secretKey.isEmpty
+        case .gdax:
+            return !credentials.apiKey.isEmpty && !credentials.secretKey.isEmpty && !credentials.passphrase.isEmpty
         default:
             return false
         }
@@ -81,8 +83,8 @@ private extension BalanceCredentials {
     
     static func totalFields(for source: Source) -> Int {
         switch source {
-        case .poloniex:
-            return 2
+        case .gdax:
+            return 3
         default:
             return 2
         }
