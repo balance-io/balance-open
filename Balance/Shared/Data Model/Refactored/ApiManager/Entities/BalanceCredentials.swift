@@ -9,7 +9,6 @@
 import Foundation
 
 struct BalanceCredentials: Credentials {
-    
     let apiKey: String
     let secretKey: String
     let passphrase: String
@@ -21,12 +20,11 @@ struct BalanceCredentials: Credentials {
         self.passphrase = passphrase ?? ""
         self.address = address ?? ""
     }
-    
 }
 
-//Builder methods
+// MARK: Builder methods
+
 extension BalanceCredentials {
-    
     static func credentials(from fields: [Field], source: Source) -> Credentials? {
         guard source != .coinbase else {
             return BalanceCredentials()
@@ -45,11 +43,9 @@ extension BalanceCredentials {
         
         return credentials
     }
-    
 }
 
 private extension BalanceCredentials {
-
     init(fields: [Field]) {
         var apiKey = ""
         var secretKey = ""
@@ -91,5 +87,4 @@ private extension BalanceCredentials {
             return 2
         }
     }
-    
 }

@@ -59,9 +59,7 @@ public protocol RequestHandler: class {
 }
 
 extension APIAction {
-    
     var query: String? {
         return components.query
     }
-    
 }

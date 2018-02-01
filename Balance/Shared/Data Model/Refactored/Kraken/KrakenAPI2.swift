@@ -26,9 +26,9 @@ class KrakenAPI2: AbstractApi {
         fatalError("not implemented")
     }
     
-    //MARK: Builder methods for Request
+    // MARK: Builder methods for Request
+    
     override func createRequest(for action: APIAction) -> URLRequest? {
-        
         switch action.type {
         case .accounts, .transactions:
             guard let url = action.url,
@@ -51,13 +51,10 @@ class KrakenAPI2: AbstractApi {
             request.setValue(messageSigned, forHTTPHeaderField: "API-Sign")
             return request
         }
-        
     }
-    
 }
 
 private extension KrakenAPI2 {
-    
     func encodeSecret(from credentials: Credentials) -> Data? {
         guard let encodedSecretData = Data(base64Encoded: credentials.secretKey) else {
             print("Secret is not base64 encoded")
@@ -80,5 +77,4 @@ private extension KrakenAPI2 {
         
         return  pathData + nonceQueryEncoded
     }
-    
 }

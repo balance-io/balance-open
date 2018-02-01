@@ -9,7 +9,6 @@
 import Foundation
 
 struct PoloniexApiAction {
-    
     let type: ApiRequestType
     let credentials: Credentials
     
@@ -17,11 +16,9 @@ struct PoloniexApiAction {
         self.type = type
         self.credentials = credentials
     }
-    
 }
 
 extension PoloniexApiAction: APIAction {
-
     private var params: [(key: String, value: String)] {
         switch type {
         case .accounts:
@@ -67,5 +64,4 @@ extension PoloniexApiAction: APIAction {
     var nonce: Int64 {
         return Int64(Date().timeIntervalSince1970 * 10000)
     }
-    
 }

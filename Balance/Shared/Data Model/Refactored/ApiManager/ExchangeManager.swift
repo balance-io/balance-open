@@ -22,7 +22,6 @@ protocol ExchangeManagerAction {
 fileprivate typealias ExchangeCallbackResult = (success: Bool, error: Error?, result: Any?)
 
 class ExchangeManager {
-    
     private lazy var autenticationQueue: OperationQueue = {
         let taskQueue = OperationQueue()
         taskQueue.maxConcurrentOperationCount = OperationQueue.defaultMaxConcurrentOperationCount
@@ -52,13 +51,12 @@ class ExchangeManager {
         self.repositoryService = repositoryService ?? ExchangeRepositoryServiceProvider()
         self.keychainService = keychainService ?? ExchangeKeychainServiceProvider()
     }
-    
 }
 
 
-//mark: Common Interface
+// MARK: Common Interface
+
 extension ExchangeManager: ExchangeManagerAction {
-    
     func login(with source: Source, fields: [Field]) {
         guard let credentials = BalanceCredentials.credentials(from: fields, source: source) else {
             return
@@ -111,10 +109,10 @@ extension ExchangeManager: ExchangeManagerAction {
             return
         }
     }
-    
 }
 
-//Process reponse methods
+// MARK: Process reponse methods
+
 private extension ExchangeManager {
     
     func processRefreshCallback(_ callbackResult: ExchangeCallbackResult, institution: Institution, credentials: Credentials) {
@@ -160,12 +158,11 @@ private extension ExchangeManager {
             
         }
     }
-    
 }
 
-//mark: Coinbase helper methods
+// MARK: Coinbase helper methods
+
 private extension ExchangeManager {
-    
     func launchCoinbaseAutentication(with data: Any) {
         let operation = coinbaseExchangeAPI.startAutentication(with: data) { [weak self] (success, error, result) in
             guard let `self` = self else {
@@ -204,12 +201,10 @@ private extension ExchangeManager {
 
         keychainService
     }
-    
 }
 
-//mark: Poloniex helper methods
+// MARK: Poloniex helper methods
 private extension ExchangeManager {
-    
     func refreshPoloniex(with institution: Institution) {
         guard let apiKey = institution.apiKey, let secret = institution.secret else {
             print("Error - Can't refresh poloniex institution without credentials")
@@ -234,5 +229,4 @@ private extension ExchangeManager {
         refreshQueue.addOperation(refreshAccountsOperation)
         refreshQueue.addOperation(refreshTransationOperation)
     }
-    
 }

@@ -9,7 +9,6 @@
 import Foundation
 
 class NewPoloniexInstitution: ExchangeInstitution {
-    
     var source: Source = .poloniex
     var name: String = "Poloniex"
     var fields: [Field] = []

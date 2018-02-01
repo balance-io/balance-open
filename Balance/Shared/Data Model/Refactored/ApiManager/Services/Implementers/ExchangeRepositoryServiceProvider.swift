@@ -9,7 +9,6 @@
 import Foundation
 
 class ExchangeRepositoryServiceProvider: RepositoryServiceProtocol {
-    
     func createInstitution(for source: Source) -> Institution? {
         return InstitutionRepository.si.institution(source: source, sourceInstitutionId: "", name: source.description)
     }
@@ -26,11 +25,9 @@ class ExchangeRepositoryServiceProvider: RepositoryServiceProtocol {
     func createTransactions(for source: Source, transactions: [ExchangeTransaction]) {
         saveExchangeTransactions(transactions)
     }
-    
 }
 
 private extension ExchangeRepositoryServiceProvider {
-    
     func savePoloniexAccounts(accounts: [ExchangeAccount], institution: Institution) {
         //TODO: FELIPE update accounts with the institution if needed
         hideLocalAccounts(accounts)
@@ -64,11 +61,9 @@ private extension ExchangeRepositoryServiceProvider {
             accountSaved.isHidden = isHidden
         }
     }
-    
 }
 
 private extension ExchangeRepositoryServiceProvider {
-
     @discardableResult func saveExchangeAccount(_ account: ExchangeAccount) -> Account? {
         return AccountRepository.si.account(institutionId: account.institutionId,
                                      source: account.source,
@@ -106,5 +101,4 @@ private extension ExchangeRepositoryServiceProvider {
     @discardableResult func saveExchangeTransactions(_ transactions: [ExchangeTransaction]) -> [Transaction] {
         return transactions.flatMap { self.saveExchangeTransaction($0) }
     }
-    
 }

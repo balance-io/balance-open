@@ -9,7 +9,6 @@
 import Foundation
 
 class ExchangeOperation: Operation, OperationResult {
-    
     var responseData: ExchangeOperationCompletionHandler?
     var handler: RequestHandler
     var session: URLSession
@@ -75,16 +74,12 @@ class ExchangeOperation: Operation, OperationResult {
         }
         
         let task = session.dataTask(with: request) { (data, response, error) in
-            
             if self.isCancelled {
                 self.taskFinished()
                 return
             }
             
-            let response = self.handler.handleResponseData(for: self.action,
-                                                           data: data,
-                                                           error: error,
-                                                           ulrResponse: response)
+            let response = self.handler.handleResponseData(for: self.action, data: data, error: error, ulrResponse: response)
             
             self.completionBlock?()
             
@@ -96,10 +91,8 @@ class ExchangeOperation: Operation, OperationResult {
             default:
                 self.responseData?(false, nil, nil)
             }
-            
         }
         
         task.resume()
     }
-    
 }

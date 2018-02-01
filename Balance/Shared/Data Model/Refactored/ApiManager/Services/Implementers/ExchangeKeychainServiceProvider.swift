@@ -9,7 +9,6 @@
 import Foundation
 
 class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
-
     func save(source: Source, identifier: String, credentials: BaseCredentials) {
         switch source {
         case .poloniex:
@@ -42,11 +41,9 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
     func fetch(account: String, key: String) -> String? {
         return keychain[account, key]
     }
-    
 }
 
 class CoinbasePreferences {
-    
     private struct PreferencesKeys {
         static let tokenExpireDate = "tokenExpireDateKey"
         static let apiScope = "Institution.apiScopeKey"
@@ -73,11 +70,9 @@ class CoinbasePreferences {
             UserDefaults.standard.set(newValue, forKey: PreferencesKeys.apiScope)
         }
     }
-    
 }
 
 private extension ExchangeKeychainServiceProvider {
-    
     struct KeychainConstants {
         static let secretKey = "secret"
         static let apiKey = "apiKey"
@@ -94,5 +89,4 @@ private extension ExchangeKeychainServiceProvider {
         log.debug("Set account: \(account)\nkey: \(key)\nvalue: \(value)) on keychain")
         keychain[account, key] = value
     }
-    
 }

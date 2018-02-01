@@ -27,7 +27,6 @@ public protocol ExchangeApi2 {
 }
 
 extension ExchangeApi2 {
-    
     func processBaseErrors(response: HTTPURLResponse?, error: Error?) -> Error? {
         if let error = error as NSError?, error.code == -1009 {
             return ExchangeBaseError.internetConnection
@@ -55,8 +54,6 @@ extension ExchangeApi2 {
         
         return rawData as? [AnyHashable: Any]
     }
-    
-    
 }
 
 protocol OperationResult {
@@ -65,9 +62,7 @@ protocol OperationResult {
 }
 
 extension OperationResult {
-    
     func handleResponse(for action: APIAction?, data: Data?, response: URLResponse?, error: Error?) -> Any {
         return handler.handleResponseData(for: action, data: data, error: error, ulrResponse: response)
     }
-    
 }

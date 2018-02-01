@@ -9,7 +9,6 @@
 import Foundation
 
 class NewPoloniexTransaction: ExchangeTransaction, Codable {
-    
     var type: TransactionType = .unknown
     var institutionId: Int = 0
     var source: Source = .poloniex
@@ -26,8 +25,7 @@ class NewPoloniexTransaction: ExchangeTransaction, Codable {
     }
     
     var amount: Int {
-        return Double(amountString)?
-            .integerValueWith(decimals: Currency.rawValue(currencyCode).decimals) ?? 0
+        return Double(amountString)?.integerValueWith(decimals: Currency.rawValue(currencyCode).decimals) ?? 0
     }
     
     var date: Date {
@@ -35,6 +33,7 @@ class NewPoloniexTransaction: ExchangeTransaction, Codable {
     }
     
     // MARK: API specific values
+    
     let address: String
     let status: String
     let numberOfConfirmations: Int
@@ -50,5 +49,4 @@ class NewPoloniexTransaction: ExchangeTransaction, Codable {
         case numberOfConfirmations = "confirmations"
         case timestamp
     }
-
 }

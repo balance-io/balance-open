@@ -9,7 +9,6 @@
 import Foundation
 
 class NewPoloniexAccount: ExchangeAccount, Codable {
-    
     var accountType: AccountType = .exchange
     var source: Source = .poloniex
     var institutionId: Int = 0
@@ -35,7 +34,8 @@ class NewPoloniexAccount: ExchangeAccount, Codable {
     var altCurrentBalance: Int? {
         return btcValue
     }
-    // API specific values
+    
+    // MARK: API specific values
     
     var currency: Currency {
         return Currency.rawValue(currencyCode)
@@ -47,20 +47,17 @@ class NewPoloniexAccount: ExchangeAccount, Codable {
     
     private var onOrdersString: String
     var onOrders: Int {
-        return Double(onOrdersString)?
-            .integerValueWith(decimals: Currency.rawValue(currencyCode).decimals) ?? 0
+        return Double(onOrdersString)?.integerValueWith(decimals: Currency.rawValue(currencyCode).decimals) ?? 0
     }
     
     private var btcValueString: String
     var btcValue: Int {
-        return Double(btcValueString)?
-            .integerValueWith(decimals: Currency.rawValue(currencyCode).decimals) ?? 0
+        return Double(btcValueString)?.integerValueWith(decimals: Currency.rawValue(currencyCode).decimals) ?? 0
     }
     
     private var availableString: String
     var available: Int {
-        return Double(availableString)?
-            .integerValueWith(decimals: Currency.rawValue(currencyCode).decimals) ?? 0
+        return Double(availableString)?.integerValueWith(decimals: Currency.rawValue(currencyCode).decimals) ?? 0
     }
     
     enum CodingKeys: String, CodingKey {
@@ -70,5 +67,3 @@ class NewPoloniexAccount: ExchangeAccount, Codable {
         case currencyCode = "currency"
     }
 }
-
-

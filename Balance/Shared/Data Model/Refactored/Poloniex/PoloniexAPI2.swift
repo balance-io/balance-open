@@ -36,13 +36,11 @@ class PoloniexAPI2: AbstractApi {
     
     //MARK: Builder methods for Request
     override func createRequest(for action: APIAction) -> URLRequest? {
-        
         switch action.type {
         case .accounts, .transactions:
             let message = createMessage(for: action)
-            guard let messageSigned = generateMessageSigned(for: action),
-                let url = action.url else {
-                    return nil
+            guard let messageSigned = generateMessageSigned(for: action), let url = action.url else {
+                return nil
             }
             
             var request = URLRequest(url: url)
@@ -53,26 +51,23 @@ class PoloniexAPI2: AbstractApi {
             
             return request
         }
-        
     }
     
     override func operation(for action: APIAction, session: URLSession, completion: @escaping ExchangeOperationCompletionHandler) -> Operation {
-        guard let request = createRequest(for: action)
-            else {
-                completion(false, nil, nil)
-                return Operation()
+        guard let request = createRequest(for: action) else {
+            completion(false, nil, nil)
+            return Operation()
         }
-        return ExchangeOperation.init(with: self, action: action, session: session, request: request)
+        
+        return ExchangeOperation(with: self, action: action, session: session, request: request)
     }
     
     override func createMessage(for action: APIAction) -> String? {
         return action.components.query
     }
-    
 }
 
 extension PoloniexAPI2: RequestHandler {
-    
     func handleResponseData(for action: APIAction?, data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any {
         guard let action = action else {
             return ExchangeBaseError.other(message: "No action provided")
@@ -88,11 +83,9 @@ extension PoloniexAPI2: RequestHandler {
         
         return processData(requestType: action.type, data: data)
     }
-    
 }
 
 private extension PoloniexAPI2 {
-    
     func buildTransacionts(from data: Data) -> [Any] {
         guard let transactions = try? JSONDecoder().decode([NewPoloniexTransaction].self, from: data) else {
             return []

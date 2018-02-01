@@ -10,7 +10,6 @@ import Foundation
 
 // This class does all of the heavy lifting: i.e. URLSession, preparing requests, etc
 open class AbstractApi: ExchangeApi2 {
-    
     open var requestMethod: ApiRequestMethod { return .get }
     open var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
     open var requestEncoding: ApiRequestEncoding { return .none }
@@ -43,6 +42,7 @@ open class AbstractApi: ExchangeApi2 {
     }
     
     // MARK - ExchangeApi Protocol -
+    
     open func prepareForAutentication() {
         fatalError("Must override")
     }
@@ -58,12 +58,10 @@ open class AbstractApi: ExchangeApi2 {
     public func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation {
         return operation(for: action, session: session, completion: completion)
     }
-    
 }
 
 // MARK: Helper functions
 extension AbstractApi {
-    
     func generateMessageSigned(from message: Data, secretKeyEncoded: Data) -> String? {
         guard let dataSigned = createSignatureData(with: message, secretKeyData: secretKeyEncoded) else {
             return nil
@@ -94,8 +92,7 @@ extension AbstractApi {
         }
     }
     
-    private func createSignatureData(with message: Data, secretKeyData: Data) -> Data?
-    {
+    private func createSignatureData(with message: Data, secretKeyData: Data) -> Data? {
         // Create the signature
         guard case let .hmac(algorithm, digestLength) = requestEncoding else {
             return nil
@@ -103,8 +100,7 @@ extension AbstractApi {
         
         let signatureCapacity = digestLength
         let signature = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: signatureCapacity)
-        defer
-        {
+        defer {
             signature.deallocate(capacity: signatureCapacity)
         }
         
@@ -116,5 +112,4 @@ extension AbstractApi {
         
         return Data(bytes: signature, count: signatureCapacity)
     }
-    
 }

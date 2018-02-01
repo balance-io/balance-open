@@ -9,7 +9,6 @@
 import Foundation
 
 public protocol BaseCredentials {
-    
 }
 
 public protocol Credentials: BaseCredentials {
