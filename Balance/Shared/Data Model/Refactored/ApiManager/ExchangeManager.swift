@@ -97,7 +97,7 @@ extension ExchangeManager: ExchangeManagerActions {
         if let fetchAccountsOperation = fetchAccountsOperation {
             autenticationQueue.addOperation(fetchAccountsOperation)
         }
-        
+
     }
     
     func manageAutenticationCallback(with data: Any, source: Source) {
@@ -294,7 +294,7 @@ private extension ExchangeManager {
         if let accountOperation = coinbaseAccountsOperation {
             autenticationQueue.addOperation(accountOperation)
         }
-        
+
     }
     
     func refreshCoinbase(with institution: Institution, credentials: Credentials) {
@@ -326,6 +326,7 @@ private extension ExchangeManager {
             if let refreshTransaction = refreshTransationOperation {
                 refreshQueue.addOperation(refreshTransaction)
             }
+
         }
         
     }

@@ -16,6 +16,8 @@ open class AbstractApi: ExchangeApi2 {
     open var requestEncoding: ApiRequestEncoding { return .none }
     open var encondingMessageType: ApiEncondingMessageType { return .none }
     open var requestHandler: RequestHandler? { return nil }
+
+    private var session: URLSession
     
     private var session: URLSession
     
@@ -43,16 +45,11 @@ open class AbstractApi: ExchangeApi2 {
         fatalError("Must override")
     }
     
-    open func operation(for action: APIAction, session: URLSession, completion: @escaping ExchangeOperationCompletionHandler) -> Operation? {
-        fatalError("Must override")
-    }
-    
-    public func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation?  {
+    public func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation? {
         guard let request = createRequest(for: action), let handler = requestHandler else {
             completion(false, nil, nil)
             return nil
         }
-        
         return ExchangeOperation(with: handler, action: action, session: session, request: request)
     }
     
