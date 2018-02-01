@@ -27,7 +27,11 @@ var appVersionAndBuildString: String = {
 }()
 
 var osVersionString: String = {
-    return "macOS " + ProcessInfo.processInfo.operatingSystemVersionString
+    #if os(iOS)
+        return "iOS " + ProcessInfo.processInfo.operatingSystemVersionString
+    #else
+        return "macOS " + ProcessInfo.processInfo.operatingSystemVersionString
+    #endif
 }()
 
 var hardwareModelString: String = {
