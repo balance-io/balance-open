@@ -9,8 +9,10 @@
 import Foundation
 
 struct PoloniexApiAction {
+    
     let type: ApiRequestType
     let credentials: Credentials
+    let nonce = Int64(Date().timeIntervalSince1970 * 10000)
     
     init(type: ApiRequestType, credentials: Credentials) {
         self.type = type
@@ -41,7 +43,7 @@ extension PoloniexApiAction: APIAction {
     }
     
     var path: String {
-        return "tradingApi/"
+        return "tradingApi"
     }
     
     var url: URL? {
@@ -60,8 +62,5 @@ extension PoloniexApiAction: APIAction {
         
         return components
     }
-    
-    var nonce: Int64 {
-        return Int64(Date().timeIntervalSince1970 * 10000)
-    }
+
 }

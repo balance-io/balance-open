@@ -544,26 +544,34 @@ class SignUpViewController: NSViewController {
     
     // Initial connection
     @objc fileprivate func connect() {
-        guard allFieldsFilled() else {
-            return
-        }
-        
-        prepareViewsForSubmit(loadingText: "Connecting to \(apiInstitution.name)...")
+        let manager = ExchangeManager()
 
-        var loginFields = [Field]()
-        for textField in connectFields {
-            if let field = textField.field {
-                loginFields.append(field)
-            }
-        }
-        // try login with loginFields
-        loginService.authenticationChallenge(loginStrings: loginFields, existingInstitution: institution) { success, error, institution in
-            if success, let institution = institution {
-                self.completeConnect(institution: institution)
-            } else {
-                self.failConnect(error: error)
-            }
-        }
+        //TEST HERE
+            manager.login(with: .poloniex, fields: [Field(name: "API Key", type: .key, value: ""),
+                                                    Field(name: "Secret", type: .secret, value: "")])
+        
+//        guard allFieldsFilled() else {
+//            return
+//        }
+//        
+//        prepareViewsForSubmit(loadingText: "Connecting to \(apiInstitution.name)...")
+//
+//        var loginFields = [Field]()
+//        for textField in connectFields {
+//            if let field = textField.field {
+//                loginFields.append(field)
+//            }
+//        }
+//        // try login with loginFields
+//
+//        loginService.authenticationChallenge(loginStrings: loginFields, existingInstitution: institution) { success, error, institution in
+//            if success, let institution = institution {
+//                self.completeConnect(institution: institution)
+//            } else {
+//                self.failConnect(error: error)
+//            }
+//        }
+        
     }
     
     fileprivate func setLoadingFieldString(_ stringValue: String) {

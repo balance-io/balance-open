@@ -8,11 +8,11 @@
 
 import Foundation
 
-let internalNonce: Int64 = Int64(Date().timeIntervalSince1970 * 1000000000)
-
 struct KrakenApiAction {
+    
     let type: ApiRequestType
     let credentials: Credentials
+    let nonce: Int64 = Int64(Date().timeIntervalSince1970 * 1000000000)
     
     init(type: ApiRequestType, credentials: Credentials) {
         self.type = type
@@ -59,8 +59,5 @@ extension KrakenApiAction: APIAction {
         
         return components
     }
-    
-    var nonce: Int64 {
-        return internalNonce
-    }
+
 }
