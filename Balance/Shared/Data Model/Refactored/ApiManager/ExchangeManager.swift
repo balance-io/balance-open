@@ -135,12 +135,14 @@ extension ExchangeManager: ExchangeManagerActions {
             return
         }
         
-        guard let api = exchangeApi,
-            let accountAction = exchangeAccountAction,
-            let transactionAction = exchangeTransactionAction else {
-                return
+        guard let api = exchangeApi, let accountAction = exchangeAccountAction, let transactionAction = exchangeTransactionAction else {
+            return
         }
         
+        createRefreshOperations(api: api, accountAction: accountAction, transactionAction: transactionAction, institution: institution, credentials: credentials)
+    }
+    
+    func createRefreshOperations(api: AbstractApi, accountAction: APIAction, transactionAction: APIAction, institution: Institution, credentials: Credentials) {
         let refreshAccountsOperation = api.fetchData(for: accountAction) { (success, error, result) in
             let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
             self.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
@@ -155,7 +157,6 @@ extension ExchangeManager: ExchangeManagerActions {
             refreshQueue.addOperation(refreshOperation)
             refreshQueue.addOperation(refreshTransaction)
         }
-
     }
     
     func refreshAccessToken(for institution: Institution) {
@@ -205,7 +206,8 @@ private extension ExchangeManager {
             }
             
             if let accounts = data as? [ExchangeAccount] {
-                
+                repositoryService.createAccounts(for: institution.source, accounts: accounts, institution: institution)
+                //TODO: change state
             }
             
             return
