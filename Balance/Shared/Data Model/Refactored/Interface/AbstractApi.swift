@@ -87,7 +87,7 @@ extension AbstractApi {
         }
         
         switch requestEncoding {
-        case .hmacSha512:
+        case .simpleHmacSha512:
             return CryptoAlgorithm.sha512.hmac(body: message, key: action.credentials.secretKey)
         default:
             return nil

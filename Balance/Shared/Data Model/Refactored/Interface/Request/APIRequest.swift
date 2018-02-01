@@ -32,7 +32,7 @@ public enum ApiRequestDataFormat {
 
 public enum ApiRequestEncoding {
     case none
-    case hmacSha512
+    case simpleHmacSha512
     case hmac(hmacAlgorithm: CCHmacAlgorithm, digestLength: Int)
 }
 

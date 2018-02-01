@@ -12,7 +12,7 @@ import Foundation
 class PoloniexAPI2: AbstractApi {
     override var requestMethod: ApiRequestMethod { return .post }
     override var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
-    override var requestEncoding: ApiRequestEncoding { return .hmacSha512 }
+    override var requestEncoding: ApiRequestEncoding { return .simpleHmacSha512 }
     
     override func processErrors(requestType: ApiRequestType, response: URLResponse?, data: Data?, error: Error?) -> Error? {
         guard let response = response as? HTTPURLResponse else {
