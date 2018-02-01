@@ -148,7 +148,7 @@ private extension ReconnectAccountViewController {
     func finishValidation(succeeded: Bool, at index: Int, with message: String? = nil) {
         let indexPaths = [IndexPath(row: index, section: 0)]
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+        async(after: 1) { [weak self] in
             guard let message = message else { return }
             self?.showSimpleMessage(title: succeeded ? "Balance" : "Error", message: message)
         }

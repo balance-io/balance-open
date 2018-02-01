@@ -139,8 +139,8 @@ internal final class AccountsListViewController: UIViewController {
         
         reloadData()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            self?.presentReconnectViewIfNeeded()
+        async(after: 1) {
+            self.presentReconnectViewIfNeeded()
         }
     }
     

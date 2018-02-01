@@ -68,10 +68,10 @@ extension ExchangeManager: ExchangeManagerAction {
         switch source {
         case .poloniex:
             exchangeApi = poloniexExchangeAPI
-            exchangeAction = PoloniexApiAction.init(type: .accounts, credentials: credentials)
+            exchangeAction = PoloniexApiAction(type: .accounts, credentials: credentials)
         case .kraken:
             exchangeApi = krakenExchangeAPI
-            exchangeAction = KrakenApiAction.init(type: .accounts, credentials: credentials)
+            exchangeAction = KrakenApiAction(type: .accounts, credentials: credentials)
         case .coinbase:
             coinbaseExchangeAPI.prepareForAutentication()
             return
@@ -83,10 +83,10 @@ extension ExchangeManager: ExchangeManagerAction {
             return
         }
         
-        let fetchAccountsOperation = api.fetchData(for: action, completion: { [weak self] (success, error, result) in
+        let fetchAccountsOperation = api.fetchData(for: action) { success, error, result in
             let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
-            self?.processLoginCallbackResult(callbackResult, source: source, credentials: credentials)
-        })
+            self.processLoginCallbackResult(callbackResult, source: source, credentials: credentials)
+        }
         
         autenticationQueue.addOperation(fetchAccountsOperation)
     }
@@ -164,11 +164,7 @@ private extension ExchangeManager {
 
 private extension ExchangeManager {
     func launchCoinbaseAutentication(with data: Any) {
-        let operation = coinbaseExchangeAPI.startAutentication(with: data) { [weak self] (success, error, result) in
-            guard let `self` = self else {
-                return
-            }
-            
+        let operation = coinbaseExchangeAPI.startAutentication(with: data) { success, error, result in
             if let coinbaseOAUTHCredentials = result as? OAUTHCredentials,
                 let coinbaseInstitution = self.repositoryService.createInstitution(for: .coinbase),
                 success {
@@ -215,15 +211,15 @@ private extension ExchangeManager {
         let credentials = BalanceCredentials(apiKey: apiKey, secretKey: secret)
         let refreshTransactionAction = PoloniexApiAction(type: .transactions, credentials: credentials)
         
-        let refreshTransationOperation = api.fetchData(for: refreshTransactionAction) { [weak self] (success, error, result) in
+        let refreshTransationOperation = api.fetchData(for: refreshTransactionAction) { success, error, result in
             let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
-            self?.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
+            self.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
         }
         
         let refreshAccountsAction = PoloniexApiAction.init(type: .accounts, credentials: credentials)
-        let refreshAccountsOperation = api.fetchData(for: refreshAccountsAction) { [weak self] (success, error, result) in
+        let refreshAccountsOperation = api.fetchData(for: refreshAccountsAction) { success, error, result in
             let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
-            self?.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
+            self.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
         }
         
         refreshQueue.addOperation(refreshAccountsOperation)
