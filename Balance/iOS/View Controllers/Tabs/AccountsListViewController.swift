@@ -133,10 +133,6 @@ final class AccountsListViewController: UIViewController {
         
         reloadData()
         
-        async(after: 1.0) {
-            self.presentReconnectViewIfNeeded()
-        }
-        
         registerForNotifications()
         
         if syncManager.syncing {
@@ -243,6 +239,10 @@ final class AccountsListViewController: UIViewController {
         
         if !syncManager.syncing {
             refreshControl.endRefreshing()
+        }
+        
+        async(after: 0.1) {
+            self.presentReconnectViewIfNeeded()
         }
     }
     
