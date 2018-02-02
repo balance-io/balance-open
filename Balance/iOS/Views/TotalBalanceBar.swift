@@ -14,16 +14,16 @@ internal final class TotalBalanceBar: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Balance"
-        label.font = UIFont.Balance.font(ofSize: 16.0, weight: .semibold)
-        label.textColor = UIColor.white
+        label.font = CurrentTheme.accounts.balanceBar.titleFont
+        label.textColor = CurrentTheme.accounts.balanceBar.titleColor
         
         return label
     }()
     
     let totalBalanceLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.Balance.monoFont(ofSize: 16.0, weight: .bold)
-        label.textColor = UIColor.white
+        label.font = CurrentTheme.accounts.balanceBar.totalBalanceFont
+        label.textColor = CurrentTheme.accounts.balanceBar.totalBalanceColor
         
         return label
     }()
@@ -33,7 +33,7 @@ internal final class TotalBalanceBar: UIView {
     internal required init() {
         super.init(frame: .zero)
         
-        self.backgroundColor = UIColor(red: 39.0/255.0, green: 45.0/255.0, blue: 54.0/255.0, alpha: 0.6)
+        self.backgroundColor = CurrentTheme.accounts.balanceBar.backgroundColor
         
         // Container
         let container = UIView()
@@ -71,6 +71,6 @@ internal final class TotalBalanceBar: UIView {
     // MARK: Autolayout
     
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: UIViewNoIntrinsicMetric, height: 60.0)
+        return CGSize(width: UIViewNoIntrinsicMetric, height: CurrentTheme.accounts.balanceBar.height)
     }
 }

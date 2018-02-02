@@ -43,7 +43,16 @@ struct OpenTheme: Theme {
             detailLabelColor: .white
         )
         
-        return AccountsTheme(backgroundColor: backgroundColor, header: header, card: card, headerCell: headerCell, cell: cell)
+        let balanceBar = AccountsTheme.BalanceBarTheme(
+            height: 60.0,
+            backgroundColor: UIColor(red: 39.0/255.0, green: 45.0/255.0, blue: 54.0/255.0, alpha: 0.6),
+            titleFont: UIFont.Balance.font(ofSize: 16.0, weight: .semibold),
+            titleColor: .white,
+            totalBalanceFont: UIFont.Balance.monoFont(ofSize: 16.0, weight: .bold),
+            totalBalanceColor: .white
+        )
+        
+        return AccountsTheme(backgroundColor: backgroundColor, header: header, card: card, headerCell: headerCell, cell: cell, balanceBar: balanceBar)
     }
     
     var transactions: TransactionsTheme {

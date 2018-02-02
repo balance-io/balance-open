@@ -24,6 +24,7 @@ struct AccountsTheme {
     let card: CardTheme
     let headerCell: HeaderCellTheme
     let cell: CellTheme
+    let balanceBar: BalanceBarTheme
     
     struct HeaderTheme {
         let titleLabelFont: UIFont
@@ -56,6 +57,15 @@ struct AccountsTheme {
         let bottomBorderColor: UIColor
         let detailLabelFont: UIFont
         let detailLabelColor: UIColor
+    }
+    
+    struct BalanceBarTheme {
+        let height: CGFloat
+        let backgroundColor: UIColor
+        let titleFont: UIFont
+        let titleColor: UIColor
+        let totalBalanceFont: UIFont
+        let totalBalanceColor: UIColor
     }
 }
 
