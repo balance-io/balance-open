@@ -13,6 +13,7 @@ struct PoloniexApiAction {
     let type: ApiRequestType
     let credentials: Credentials
     let nonce = Int64(Date().timeIntervalSince1970 * 10000)
+    private let end = Date().timeIntervalSince1970
     
     init(type: ApiRequestType, credentials: Credentials) {
         self.type = type
@@ -32,7 +33,7 @@ extension PoloniexApiAction: APIAction {
             return [
                 ("command", "returnDepositsWithdrawals"),
                 ("start", "0"),
-                ("end", "\(Date().timeIntervalSince1970)"),
+                ("end", "\(end)"),
                 ("nonce", "\(nonce)")
             ]
         }
