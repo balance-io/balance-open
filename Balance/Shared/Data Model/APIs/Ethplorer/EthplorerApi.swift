@@ -74,9 +74,14 @@ class EthplorerApi: ExchangeApi {
     
     func fetchAddressInfo(institution: Institution, completion: @escaping SuccessErrorBlock) {
         guard let address = institution.address else {
-            assert(false, "Address shouldn't be nil")
+            institution.passwordInvalid = true
+            institution.replace()
+            async {
+                completion(false, BalanceError.authenticationError)
+            }
             return
         }
+        
         let addressURL = EthplorerUrl.appendingPathComponent("\(Commands.getAddressInfo.rawValue)/\(address)")
         var urlComponent = URLComponents(url: addressURL, resolvingAgainstBaseURL: false)
         var params = [URLQueryItem]()
@@ -85,7 +90,7 @@ class EthplorerApi: ExchangeApi {
         
         let urlRequest = assembleRequest(components:urlComponent!)
         
-        let datatask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+        let datatask = certValidatedSession.dataTask(with: urlRequest) { data, response, error in
             do {
                 if let safeData = data {
                     //create accounts
@@ -108,6 +113,48 @@ class EthplorerApi: ExchangeApi {
         datatask.resume()
     }
     
+    func fetchTransactionInfo(institution: Institution, completion: @escaping SuccessErrorBlock) {
+        guard let address = institution.address else {
+            institution.passwordInvalid = true
+            institution.replace()
+            async {
+                completion(false, BalanceError.authenticationError)
+            }
+            return
+        }
+        
+        let addressURL = EthplorerUrl.appendingPathComponent("\(Commands.getAddressTransactions.rawValue)/\(address)")
+        var urlComponent = URLComponents(url: addressURL, resolvingAgainstBaseURL: false)
+        var params = [URLQueryItem]()
+        params.append(URLQueryItem(name: "apiKey", value: ethploreToken))
+        params.append(URLQueryItem(name: "limit", value: "50"))
+        urlComponent?.queryItems = params
+        
+        let urlRequest = assembleRequest(components:urlComponent!)
+        
+        let datatask = certValidatedSession.dataTask(with: urlRequest) { data, response, error in
+            do {
+                if let safeData = data {
+                    //create transactions
+                    let ethplorerTransactions = try self.parseEthploreTransactions(data: safeData)
+                    self.processEthploreTransactions(ethplorerTransactions: ethplorerTransactions, institution: institution)
+                } else {
+                    log.error("Ethplore Error: \(String(describing: error))")
+                    log.error("Ethplore Data: \(String(describing: data))")
+                }
+                async {
+                    completion(false, error)
+                }
+            } catch {
+                log.error("Failed to Ethplore transaction data: \(error)")
+                async {
+                    completion(false, error)
+                }
+            }
+        }
+        datatask.resume()
+    }
+    
     // MARK: - Private -
     
     fileprivate func authenticate(name: String, address: String, existingInstitution: Institution?, closeBlock: @escaping (Bool, Error?, Institution?) -> Void) throws {
@@ -122,7 +169,7 @@ class EthplorerApi: ExchangeApi {
         
         let urlRequest = assembleRequest(components:urlComponent!)
         
-        let datatask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+        let datatask = certValidatedSession.dataTask(with: urlRequest) { data, response, error in
             do {
                 if let safeData = data {
                     
@@ -194,6 +241,16 @@ class EthplorerApi: ExchangeApi {
         return ethplorerAccount
     }
     
+    fileprivate func parseEthploreTransactions(data: Data) throws -> [EthplorerTransaction] {
+        return try JSONDecoder().decode([EthplorerTransaction].self, from: data)
+    }
+    
+    fileprivate func processEthploreTransactions(ethplorerTransactions: [EthplorerTransaction], institution: Institution) {
+        for ethplorerTransaction in ethplorerTransactions {
+            ethplorerTransaction.updateLocalTransaction(institution: institution)
+        }
+    }
+    
     fileprivate func findError(data: Data) -> String? {
         do {
             guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] else {
@@ -239,6 +296,34 @@ class EthplorerApi: ExchangeApi {
         if let newAccount = AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: currency.code, sourceInstitutionId: "", accountTypeId: .wallet, accountSubTypeId: nil, name: currency.name, currency: currency.code, currentBalance: balance, availableBalance: nil, number: nil, altCurrency: altCurrency?.code, altCurrentBalance: altBalance, altAvailableBalance: nil) {
             return newAccount
         }
+        return nil
+    }
+}
+
+extension EthplorerTransaction {
+    var currency: String {
+        return "ETH"
+    }
+    
+    var amount: Int {
+        let amount = value.integerFixedCryptoDecimals()
+        return amount
+    }
+    
+    var date: Date {
+        let date = Date(timeIntervalSince1970: Double(timestamp))
+        return date
+    }
+    
+    @discardableResult func updateLocalTransaction(institution: Institution) -> Transaction? {
+        guard success == true else {
+            return nil
+        }
+        
+        if let newTransaction = TransactionRepository.si.transaction(source: .ethplorer, sourceTransactionId: hash, sourceAccountId: currency, name: hash, currency: currency, amount: amount, date: date, categoryID: nil, institution: institution) {
+            return newTransaction
+        }
+
         return nil
     }
 }
