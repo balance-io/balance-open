@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DC1A64931B867B1F009356A0"
-               BuildableName = "BalanceOpen.app"
+               BuildableName = "Balance.app"
                BlueprintName = "BalancemacOS"
                ReferencedContainer = "container:Balance.xcodeproj">
             </BuildableReference>
@@ -67,7 +67,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DC1A64931B867B1F009356A0"
-            BuildableName = "BalanceOpen.app"
+            BuildableName = "Balance.app"
             BlueprintName = "BalancemacOS"
             ReferencedContainer = "container:Balance.xcodeproj">
          </BuildableReference>
@@ -98,7 +98,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DC1A64931B867B1F009356A0"
-            BuildableName = "BalanceOpen.app"
+            BuildableName = "Balance.app"
             BlueprintName = "BalancemacOS"
             ReferencedContainer = "container:Balance.xcodeproj">
          </BuildableReference>
@@ -117,7 +117,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DC1A64931B867B1F009356A0"
-            BuildableName = "BalanceOpen.app"
+            BuildableName = "Balance.app"
             BlueprintName = "BalancemacOS"
             ReferencedContainer = "container:Balance.xcodeproj">
          </BuildableReference>
