@@ -10,9 +10,6 @@ import UIKit
 
 
 internal final class AccountTableViewCell: TableViewCell {
-    // Static
-    static let height: CGFloat = 60.0
-    
     // Internal
     internal var account: Account? {
         didSet {
@@ -23,23 +20,23 @@ internal final class AccountTableViewCell: TableViewCell {
     // Private
     private let currencyNameLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(white: 1.0, alpha: 0.8)
-        label.font = UIFont.Balance.monoFont(ofSize: 12.5, weight: .regular)
+        label.font = CurrentTheme.accounts.cell.currencyNameFont
+        label.textColor = CurrentTheme.accounts.cell.currencyNameColor
         
         return label
     }()
     
     private let amountLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(white: 1.0, alpha: 0.95)
-        label.font = UIFont.Balance.monoFont(ofSize: 12.5, weight: .regular)
+        label.textColor = CurrentTheme.accounts.cell.amountColor
+        label.font = CurrentTheme.accounts.cell.amountFont
         
         return label
     }()
     
     private let bottomBorder: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(white: 1.0, alpha: 0.06)
+        view.backgroundColor = CurrentTheme.accounts.cell.bottomBorderColor
         
         return view
     }()
@@ -69,8 +66,8 @@ internal final class AccountTableViewCell: TableViewCell {
         }
         
         // Detail label
-        self.detailTextLabel?.textColor = UIColor.white
-        self.detailTextLabel?.font = UIFont.Balance.monoFont(ofSize: 14.0, weight: .medium)
+        self.detailTextLabel?.font = CurrentTheme.accounts.cell.detailLabelFont
+        self.detailTextLabel?.textColor = CurrentTheme.accounts.cell.detailLabelColor
         
         // Bottom border
         self.contentView.addSubview(self.bottomBorder)

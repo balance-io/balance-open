@@ -49,7 +49,7 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
         self.selectedBackgroundView = nil
         
         // Container
-        self.container.layer.cornerRadius = 20.0
+        self.container.layer.cornerRadius = CurrentTheme.accounts.card.cornerRadius
         self.container.layer.masksToBounds = true
        
         self.contentView.addSubview(self.container)
@@ -90,7 +90,7 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
             return
         }
         
-        self.expandedContentHeight = CGFloat(unwrappedViewModel.numberOfAccounts) * AccountTableViewCell.height + InstitutionTableHeaderView.height
+        self.expandedContentHeight = CGFloat(unwrappedViewModel.numberOfAccounts) * CurrentTheme.accounts.cell.height + CurrentTheme.accounts.headerCell.height
     }
 }
 
@@ -120,7 +120,7 @@ extension InstitutionCollectionViewCell: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return InstitutionTableHeaderView.height
+        return CurrentTheme.accounts.headerCell.height
     }
 }
 
@@ -137,7 +137,7 @@ extension InstitutionCollectionViewCell: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return AccountTableViewCell.height
+        return CurrentTheme.accounts.cell.height
     }
 }
 

@@ -50,7 +50,7 @@ internal final class TransactionsListViewController: UIViewController, Transacti
         
         // Collection view
         self.collectionView.refreshControl = self.refreshControl
-        self.collectionView.backgroundColor = UIColor(red: 237.0/255.0, green: 238.0/255.0, blue: 240.0/255.0, alpha: 1.0)
+        self.collectionView.backgroundColor = CurrentTheme.transactions.collectionView.backgroundColor
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         self.collectionView.register(reusableCell: TransactionCollectionViewCell.self)
@@ -169,10 +169,10 @@ extension TransactionsListViewController: UICollectionViewDelegate {
 
 extension TransactionsListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: TransactionCollectionViewCell.height)
+        return CGSize(width: collectionView.bounds.width, height: CurrentTheme.transactions.cell.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 45.0)
+        return CGSize(width: collectionView.bounds.width, height: CurrentTheme.transactions.collectionView.headerHeight)
     }
 }

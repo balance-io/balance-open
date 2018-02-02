@@ -8,9 +8,9 @@
 
 import AppKit
 
-var CurrentTheme: Theme {
+var CurrentTheme: Theme = {
     return OpenTheme()
-}
+}()
 
 protocol Theme {
     var type: ThemeType { get }

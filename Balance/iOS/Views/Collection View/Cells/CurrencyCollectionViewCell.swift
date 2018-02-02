@@ -10,20 +10,17 @@ import UIKit
 
 
 internal final class CurrencyCollectionViewCell: UICollectionViewCell, Reusable {
-    // Static
-    static let height: CGFloat = 60.0
-    
     // Private
     private let currencyNameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.Balance.monoFont(ofSize: 12.5, weight: .regular)
+        label.font = CurrentTheme.priceTicker.cell.currencyNameFont
         
         return label
     }()
     
     private let amountLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.Balance.monoFont(ofSize: 12.5, weight: .regular)
+        label.font = CurrentTheme.priceTicker.cell.amountFont
         
         return label
     }()
@@ -35,15 +32,15 @@ internal final class CurrencyCollectionViewCell: UICollectionViewCell, Reusable 
         
         self.backgroundColor = UIColor.clear
         
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOffset = .zero
-        self.layer.shadowRadius = 2.0
-        self.layer.shadowOpacity = 0.04
+        self.layer.shadowColor = CurrentTheme.priceTicker.cell.shadowColor.cgColor
+        self.layer.shadowOffset = CurrentTheme.priceTicker.cell.shadowOffset
+        self.layer.shadowRadius = CurrentTheme.priceTicker.cell.shadowRadius
+        self.layer.shadowOpacity = CurrentTheme.priceTicker.cell.shadowOpacity
         self.layer.masksToBounds = false
         
-        self.contentView.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
+        self.contentView.backgroundColor = CurrentTheme.priceTicker.cell.backgroundColor
         self.contentView.layer.masksToBounds = true
-        self.contentView.layer.cornerRadius = 20.0
+        self.contentView.layer.cornerRadius = CurrentTheme.priceTicker.cell.cornerRadius
         
         // Institution name label
         self.contentView.addSubview(self.currencyNameLabel)

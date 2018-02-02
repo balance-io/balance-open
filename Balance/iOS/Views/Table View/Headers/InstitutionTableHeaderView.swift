@@ -23,9 +23,6 @@ fileprivate extension Source {
 }
 
 internal final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Reusable {
-    // Static
-    internal static let height: CGFloat = 60.0
-    
     // Internal
     internal var institution: Institution? {
         didSet {
@@ -38,23 +35,23 @@ internal final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Re
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor.white
-        label.font = UIFont.Balance.monoFont(ofSize: 16.0, weight: .semibold)
+        label.font = CurrentTheme.accounts.headerCell.nameFont
+        label.textColor = CurrentTheme.accounts.headerCell.nameColor
         
         return label
     }()
     
     private let totalBalanceLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor.white
-        label.font = UIFont.Balance.monoFont(ofSize: 16.0, weight: .semibold)
+        label.font = CurrentTheme.accounts.headerCell.totalBalanceFont
+        label.textColor = CurrentTheme.accounts.headerCell.totalBalanceColor
         
         return label
     }()
     
     private let bottomBorder: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(white: 1.0, alpha: 0.06)
+        view.backgroundColor = CurrentTheme.accounts.headerCell.bottomBorderColor
         
         return view
     }()

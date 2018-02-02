@@ -25,9 +25,6 @@ fileprivate extension Source {
 fileprivate let hideConvertedAmounts = true
 internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusable
 {
-    // Static
-    static let height: CGFloat = 60.0
-    
     // Internal
     internal var transaction: Transaction? {
         didSet
@@ -41,7 +38,7 @@ internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusab
     
     private let institutionNameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.Balance.monoFont(ofSize: 12.0, weight: .medium)
+        label.font = CurrentTheme.transactions.cell.institutionNameFont
         
         return label
     }()
@@ -50,21 +47,21 @@ internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusab
     
     private let transactionTypeLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.Balance.font(ofSize: 12.0, weight: .medium)
+        label.font = CurrentTheme.transactions.cell.transactionTypeFont
         
         return label
     }()
     
     private let amountLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.Balance.monoFont(ofSize: 14.0, weight: .medium)
+        label.font = CurrentTheme.transactions.cell.amountFont
         
         return label
     }()
     
     private let userCurrencyAmountLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.Balance.monoFont(ofSize: 14.0, weight: .medium)
+        label.font = CurrentTheme.transactions.cell.userCurrencyAmountFont
         
         return label
     }()
@@ -76,15 +73,15 @@ internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusab
         
         self.backgroundColor = UIColor.clear
         
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOffset = .zero
-        self.layer.shadowRadius = 2.0
-        self.layer.shadowOpacity = 0.04
+        self.layer.shadowColor = CurrentTheme.transactions.cell.shadowColor.cgColor
+        self.layer.shadowOffset = CurrentTheme.transactions.cell.shadowOffset
+        self.layer.shadowRadius = CurrentTheme.transactions.cell.shadowRadius
+        self.layer.shadowOpacity = CurrentTheme.transactions.cell.shadowOpacity
         self.layer.masksToBounds = false
         
-        self.contentView.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
+        self.contentView.backgroundColor = CurrentTheme.transactions.cell.backgroundColor
         self.contentView.layer.masksToBounds = true
-        self.contentView.layer.cornerRadius = 20.0
+        self.contentView.layer.cornerRadius = CurrentTheme.transactions.cell.cornerRadius
         
         // Transaction type image view
         self.contentView.addSubview(self.transactionTypeImageView)

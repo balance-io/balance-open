@@ -17,8 +17,9 @@ internal final class PriceTickerViewController: UIViewController {
     private let collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.sectionHeadersPinToVisibleBounds = true
-        flowLayout.sectionInset = UIEdgeInsetsMake(20, 0, 20, 0);
-        flowLayout.headerReferenceSize = CGSize(width: 30, height: 30)
+        flowLayout.headerReferenceSize = CurrentTheme.priceTicker.collectionView.headerReferenceSize
+        flowLayout.sectionInset = CurrentTheme.priceTicker.collectionView.sectionInset
+        flowLayout.minimumLineSpacing = CurrentTheme.priceTicker.collectionView.minimumLineSpacing
         return UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     }()
     
@@ -81,7 +82,7 @@ private extension PriceTickerViewController {
         // Refresh control
         refreshControl.addTarget(self, action: #selector(refreshControlValueChanged), for: .valueChanged)
         
-        collectionView.backgroundColor = UIColor(red: 237.0/255.0, green: 238.0/255.0, blue: 240.0/255.0, alpha: 1.0)
+        collectionView.backgroundColor = CurrentTheme.priceTicker.collectionView.backgroundColor
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(reusableCell: CurrencyCollectionViewCell.self)
@@ -153,14 +154,6 @@ extension PriceTickerViewController: UICollectionViewDelegate {
 
 extension PriceTickerViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 50.0)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10.0, left: 0.0, bottom: 10.0, right: 0.0)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10.0
+        return CGSize(width: collectionView.bounds.width, height: CurrentTheme.priceTicker.cell.height)
     }
 }

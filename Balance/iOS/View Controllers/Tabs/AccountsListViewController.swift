@@ -42,8 +42,8 @@ final class AccountsListViewController: UIViewController {
         
         // View header
         titleLabel.text = title ?? ""
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 25)
-        titleLabel.textColor = .white
+        titleLabel.font = CurrentTheme.accounts.header.titleLabelFont
+        titleLabel.textColor = CurrentTheme.accounts.header.titleLabelColor
         titleLabel.backgroundColor = .clear
         
         view.addSubview(titleLabel)
@@ -60,7 +60,7 @@ final class AccountsListViewController: UIViewController {
         }
         
         headerAddAcountButton.setImage(UIImage(named: "iconAdd")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        headerAddAcountButton.tintColor = .white
+        headerAddAcountButton.tintColor = CurrentTheme.accounts.header.addAccountButtonColor
         headerAddAcountButton.addTarget(self, action: #selector(addAccountButtonTapped), for: .touchUpInside)
         
         view.addSubview(headerAddAcountButton)
@@ -73,20 +73,18 @@ final class AccountsListViewController: UIViewController {
         }
         
         // Refresh controler
-        refreshControl.tintColor = .white
+        refreshControl.tintColor = CurrentTheme.accounts.header.refreshControlColor
         refreshControl.addTarget(self, action: #selector(self.refreshControlValueChanged(_:)), for: .valueChanged)
         
         // Collection view
-        collectionView.refreshControl = self.refreshControl
+        collectionView.refreshControl = refreshControl
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.stackedLayout.delegate = self
         collectionView.backgroundColor = .clear
         collectionView.alwaysBounceVertical = true
         collectionView.register(reusableCell: InstitutionCollectionViewCell.self)
-        
         view.addSubview(collectionView)
-        
         collectionView.snp.makeConstraints { (make) in
             make.top.equalTo(self.titleLabel.snp.bottom)
             make.bottom.equalTo(self.bottomLayoutGuide.snp.bottom)
@@ -98,14 +96,12 @@ final class AccountsListViewController: UIViewController {
         blankStateView.isHidden = true
         blankStateView.addTarget(self, action: #selector(addAccountButtonTapped))
         view.addSubview(blankStateView)
-        
         blankStateView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
          
         // Total balance bar
         view.addSubview(totalBalanceBar)
-        
         totalBalanceBar.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
             make.right.equalToSuperview()
