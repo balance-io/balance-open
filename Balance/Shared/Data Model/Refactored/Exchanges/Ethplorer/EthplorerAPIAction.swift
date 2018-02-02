@@ -1,54 +1,60 @@
 //
-//  KrakenAPI2Action.swift
+//  EthplorerAPIAction.swift
 //  BalancemacOS
 //
-//  Created by Eli Pacheco Hoyos on 1/26/18.
+//  Created by Eli Pacheco Hoyos on 2/1/18.
 //  Copyright © 2018 Balanced Software, Inc. All rights reserved.
 //
 
 import Foundation
 
-struct KrakenApiAction {
+struct EthplorerAPI2Action: APIAction {
     
-    let type: ApiRequestType
     let credentials: Credentials
-    let nonce: Int64 = Int64(Date().timeIntervalSince1970 * 1000000000)
+    let type: ApiRequestType
     
     init(type: ApiRequestType, credentials: Credentials) {
         self.type = type
         self.credentials = credentials
     }
+    
 }
 
-extension KrakenApiAction: APIAction {
-    private var params: [String: String] {
-        switch type {
-        case .accounts, .transactions:
-            return [
-                "nonce" : "\(nonce)"
-            ]
-        }
-    }
+extension EthplorerAPI2Action {
     
     var host: String {
-        return "https://api.kraken.com"
+        return "https://api.ethplorer.io/"
     }
     
     var path: String {
         switch type {
         case .accounts:
-            return "/0/private/Balance"
-        case .transactions:
-            return "/0/private/Ledgers"
+            return "getAddressInfo/\(credentials.address)"
+        case .transactions(_):
+            return ""
         }
+    }
+    
+    private var params: [String: String] {
+        return [
+            "apiKey": ethploreToken
+        ]
+    }
+    
+    private var ethploreToken: String {
+        return "freekey"
     }
     
     var url: URL? {
         return URL(string: host + path)
     }
     
+    var nonce: Int64 {
+        return 0
+    }
+    
     var components: URLComponents {
         return getBasicURLComponents(from: params)
     }
-
+    
 }
