@@ -6,9 +6,21 @@
 //  Copyright © 2017 Balanced Software, Inc. All rights reserved.
 //
 
-import BalanceVectorGraphics_iOS
 import UIKit
 
+fileprivate extension Source {
+    var accountsLogo: UIImage? {
+        switch self {
+        case .coinbase: return #imageLiteral(resourceName: "coinbaseAccounts")
+        case .poloniex: return #imageLiteral(resourceName: "poloniexAccounts")
+        case .gdax:     return #imageLiteral(resourceName: "gdaxAccounts")
+        case .bitfinex: return #imageLiteral(resourceName: "bitfinexAccounts")
+        case .kraken:   return #imageLiteral(resourceName: "krakenAccounts")
+        case .bittrex:  return #imageLiteral(resourceName: "bittrexAccounts")
+        default:        return nil
+        }
+    }
+}
 
 internal final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Reusable {
     // Static
@@ -22,7 +34,7 @@ internal final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Re
     }
 
     // Private
-    private let logoView = PaintCodeView()
+    private let logoView = UIImageView()
     
     private let nameLabel: UILabel = {
         let label = UILabel()
@@ -54,7 +66,6 @@ internal final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Re
         
         // Name label
         self.contentView.addSubview(self.nameLabel)
-        
         self.nameLabel.snp.makeConstraints { (make) in
             make.left.equalToSuperview().inset(15.0)
             make.centerY.equalToSuperview()
@@ -62,7 +73,6 @@ internal final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Re
         
         // Total balance label
         self.contentView.addSubview(self.totalBalanceLabel)
-        
         self.totalBalanceLabel.snp.makeConstraints { (make) in
             make.right.equalToSuperview().inset(15.0)
             make.centerY.equalToSuperview()
@@ -72,22 +82,20 @@ internal final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Re
         self.logoView.backgroundColor = UIColor.clear
         self.logoView.isHidden = true
         self.contentView.addSubview(self.logoView)
-        
         self.logoView.snp.makeConstraints { (make) in
-            make.left.equalToSuperview()
-            make.width.equalTo(140.0)
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.left.equalToSuperview().offset(15)
+            make.width.equalTo(0)
+            make.height.equalTo(0)
+            make.centerY.equalToSuperview()
         }
         
         // Bottom border
         self.contentView.addSubview(self.bottomBorder)
-        
         self.bottomBorder.snp.makeConstraints { (make) in
-            make.height.equalTo(1.0)
+            make.height.equalTo(1)
             make.bottom.equalToSuperview()
             make.right.equalToSuperview()
-            make.left.equalToSuperview().inset(18.0)
+            make.left.equalToSuperview().offset(18)
         }
     }
     
@@ -105,9 +113,12 @@ internal final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Re
         self.nameLabel.text = unwrappedInstitution.displayName
         self.totalBalanceLabel.text = "TODO: $1,000,000"
 
-        let institutionID = unwrappedInstitution.source.description
-        if let logoDrawFunction = InstitutionLogos.drawingFunctionForId(sourceInstitutionId: institutionID) {
-            self.logoView.drawingBlock = logoDrawFunction
+        if let logo = unwrappedInstitution.source.accountsLogo {
+            logoView.image = logo
+            logoView.snp.updateConstraints { make in
+                make.width.equalTo(logo.size.width)
+                make.height.equalTo(logo.size.height)
+            }
             
             self.nameLabel.isHidden = true
             self.logoView.isHidden = false

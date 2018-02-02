@@ -8,7 +8,6 @@
 
 import Cocoa
 import QuartzCore
-import BalanceVectorGraphics
 
 // TODO: Make this and the == overload private again once the LLDB bug is fixed
 // http://stackoverflow.com/questions/38357114/unable-to-use-swift-debugger-in-one-particular-class-file

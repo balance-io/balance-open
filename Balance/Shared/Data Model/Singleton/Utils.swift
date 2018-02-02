@@ -27,7 +27,11 @@ var appVersionAndBuildString: String = {
 }()
 
 var osVersionString: String = {
-    return "macOS " + ProcessInfo.processInfo.operatingSystemVersionString
+    #if os(iOS)
+        return "iOS " + ProcessInfo.processInfo.operatingSystemVersionString
+    #else
+        return "macOS " + ProcessInfo.processInfo.operatingSystemVersionString
+    #endif
 }()
 
 var hardwareModelString: String = {
@@ -52,6 +56,13 @@ var appSupportPathUrl: URL = {
 let jsonDateFormatter: DateFormatter = {
     let jsonDateFormatter = DateFormatter()
     jsonDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    jsonDateFormatter.timeZone = TimeZone(identifier: "UTC")
+    return jsonDateFormatter
+}()
+
+let jsonWithMillisecondsDateFormatter: DateFormatter = {
+    let jsonDateFormatter = DateFormatter()
+    jsonDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
     jsonDateFormatter.timeZone = TimeZone(identifier: "UTC")
     return jsonDateFormatter
 }()

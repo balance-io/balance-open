@@ -8,7 +8,6 @@
 
 import Cocoa
 import SnapKit
-import BalanceVectorGraphics
 
 enum Tab: Int {
     case none           = -1

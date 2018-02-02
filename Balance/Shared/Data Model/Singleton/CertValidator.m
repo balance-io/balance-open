@@ -40,6 +40,10 @@ const NSString *globalSign                              = @"7HIpactkIAq2Y49orFOO
 const NSString *COMODOECCCertificationAuthority         = @"58qRu/uxh4gFezqAcERupSkRYBlBAvfcw7mEjGPLnNU="; // COMODO ECC Certification Authority (note this uses kTSKAlgorithmEcDsaSecp384r1)
 const NSString *COMODOECCDomainValidationSecureServerCA = @"EohwrK1N7rr3bRQphPj4j2cel+B2d0NNbM9PWHNDXpM="; // COMODO ECC Domain Validation Secure Server CA 2 (note this uses kTSKAlgorithmEcDsaSecp256r1)
 
+// Comodo RSA
+const NSString *COMODORSADomainValidationSecureServerCA = @"klO23nT2ehFDXCfx3eHTDRESMz3asj1muO+4aIdjiuY="; // COMODO RSA Domain Validation Secure Server CA
+const NSString *COMODORSACertificationAuthority         = @"grX4Ta9HpZx6tSHkmCrvpApTQGo67CYDnvprLg5yRME="; // COMODO RSA Certification Authority (note this uses kTSKAlgorithmRsa4096)
+
 @implementation CertValidator
     
 - (instancetype)init {
@@ -108,6 +112,18 @@ const NSString *COMODOECCDomainValidationSecureServerCA = @"EohwrK1N7rr3bRQphPj4
                           kTSKEnforcePinning : @YES,
                           kTSKPublicKeyAlgorithms : @[kTSKAlgorithmEcDsaSecp384r1, kTSKAlgorithmEcDsaSecp256r1],
                           kTSKPublicKeyHashes : @[COMODOECCDomainValidationSecureServerCA, COMODOECCCertificationAuthority],
+                          kTSKReportUris : @[balanceReportUri]
+                          },
+                  @"bittrex.com" : @{
+                          kTSKEnforcePinning : @YES,
+                          kTSKPublicKeyAlgorithms : @[kTSKAlgorithmEcDsaSecp384r1, kTSKAlgorithmEcDsaSecp256r1],
+                          kTSKPublicKeyHashes : @[COMODOECCDomainValidationSecureServerCA, COMODOECCCertificationAuthority],
+                          kTSKReportUris : @[balanceReportUri]
+                          },
+                  @"api.ethplorer.io" : @{
+                          kTSKEnforcePinning : @YES,
+                          kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048, kTSKAlgorithmRsa4096],
+                          kTSKPublicKeyHashes : @[COMODORSADomainValidationSecureServerCA, COMODORSACertificationAuthority],
                           kTSKReportUris : @[balanceReportUri]
                           }
                   }};

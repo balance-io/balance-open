@@ -62,6 +62,7 @@ extension Source {
         case .kraken:           return .kraken
         case .ethplorer:        return .average
         case .bittrex:          return .bittrex
+        case .blockchain:        return .average
         }
     }
 }

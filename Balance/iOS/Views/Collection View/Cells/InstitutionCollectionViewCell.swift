@@ -34,7 +34,7 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
     internal private(set) var expandedContentHeight: CGFloat = 0.0
     
     internal var closedContentHeight: CGFloat {
-        return 100.0
+        return 99.0
     }
     
     // Private
