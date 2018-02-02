@@ -8,34 +8,10 @@
 
 import Foundation
 
-class NewPoloniexAccount: ExchangeAccount, Codable {
-    var accountType: AccountType = .exchange
-    var source: Source = .poloniex
-    var institutionId: Int = 0
-    var sourceAccountId: String = ""
-    var name: String = ""
-    var currencyCode: String
-
-    var availableBalance: Int {
-        return currentBalance
-    }
-    
-    var altCurrencyCode: String? {
-        return altCurrency.code
-    }
-    var altAvailableBalance: Int? {
-        return altCurrentBalance
-    }
-    
-    var currentBalance: Int {
-        return available
-    }
-    
-    var altCurrentBalance: Int? {
-        return btcValue
-    }
-    
-    // MARK: API specific values
+class NewPoloniexAccount: Codable {
+    private var accountInstitution: Int = 0
+    private var accountSource: Source = .poloniex
+    private var currencyString: String
     
     var currency: Currency {
         return Currency.rawValue(currencyCode)
@@ -46,17 +22,17 @@ class NewPoloniexAccount: ExchangeAccount, Codable {
     }
     
     private var onOrdersString: String
-    var onOrders: Int {
+    private var onOrders: Int {
         return Double(onOrdersString)?.integerValueWith(decimals: Currency.rawValue(currencyCode).decimals) ?? 0
     }
     
     private var btcValueString: String
-    var btcValue: Int {
+    private var btcValue: Int {
         return Double(btcValueString)?.integerValueWith(decimals: Currency.rawValue(currencyCode).decimals) ?? 0
     }
     
     private var availableString: String
-    var available: Int {
+    private var available: Int {
         return Double(availableString)?.integerValueWith(decimals: Currency.rawValue(currencyCode).decimals) ?? 0
     }
     
@@ -64,6 +40,64 @@ class NewPoloniexAccount: ExchangeAccount, Codable {
         case onOrdersString = "onOrders"
         case btcValueString = "btcValue"
         case availableString = "available"
-        case currencyCode = "currency"
+        case currencyString = "currency"
+    }
+}
+
+//MARK: Protocol
+
+extension NewPoloniexAccount: ExchangeAccount {
+    var accountType: AccountType {
+        return .exchange
+    }
+    
+    var institutionId: Int {
+        get {
+            return accountInstitution
+        }
+        set {
+            accountInstitution = newValue
+        }
+    }
+    
+    var source: Source {
+        get {
+            return accountSource
+        }
+        set {
+            accountSource = newValue
+        }
+    }
+    
+    var sourceAccountId: String {
+        return currencyCode
+    }
+    
+    var name: String {
+        return currencyCode
+    }
+    
+    var currencyCode: String {
+        return currencyString
+    }
+    
+    var currentBalance: Int {
+        return available
+    }
+    
+    var availableBalance: Int {
+        return available
+    }
+    
+    var altCurrencyCode: String? {
+        return altCurrency.code
+    }
+    
+    var altCurrentBalance: Int? {
+        return btcValue
+    }
+    
+    var altAvailableBalance: Int? {
+        return altCurrentBalance
     }
 }

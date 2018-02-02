@@ -8,45 +8,85 @@
 
 import Foundation
 
-class NewPoloniexTransaction: ExchangeTransaction, Codable {
-    var type: TransactionType = .unknown
-    var institutionId: Int = 0
-    var source: Source = .poloniex
-    var sourceInstitutionId: String = ""
-    var currencyCode: String
-    var sourceTransactionId: String
+class NewPoloniexTransaction: Codable {
+    private var transactionType: TransactionType = .unknown
+    private var transactionInstitution: Int = 0
+    private var transactionSourceInstitution: String = ""
+    private var transactionId: String
+    private var currency: String
+    private let address: String
+    private let status: String
+    private let numberOfConfirmations: Int
+    private let timestamp: TimeInterval
+    private let amountString: String
+    
+    enum CodingKeys: String, CodingKey {
+        case transactionId = "txid"
+        case amountString = "amount"
+        case currency
+        case address
+        case status
+        case numberOfConfirmations = "confirmations"
+        case timestamp
+    }
+}
+
+// MARK: Protocol
+
+extension NewPoloniexTransaction: ExchangeTransaction {
+    var type: TransactionType {
+        get {
+            return transactionType
+        }
+        set {
+            transactionType = newValue
+        }
+    }
+    
+    var institutionId: Int {
+        get {
+            return transactionInstitution
+        }
+        set {
+            transactionInstitution = newValue
+        }
+    }
+    
+    var source: Source {
+        return .poloniex
+    }
+    
+    var sourceInstitutionId: String {
+        get {
+            return transactionSourceInstitution
+        }
+        
+        set {
+            transactionSourceInstitution = newValue
+        }
+    }
     
     var sourceAccountId: String {
         return currencyCode
     }
     
-    var name: String {
-        return sourceTransactionId
+    var sourceTransactionId: String {
+        return transactionId
     }
     
-    var amount: Int {
-        return Double(amountString)?.integerValueWith(decimals: Currency.rawValue(currencyCode).decimals) ?? 0
+    var name: String {
+        return transactionId
     }
     
     var date: Date {
         return Date(timeIntervalSince1970: timestamp)
     }
     
-    // MARK: API specific values
+    var currencyCode: String {
+        return currency
+    }
     
-    let address: String
-    let status: String
-    let numberOfConfirmations: Int
-    let timestamp: TimeInterval
-    let amountString: String
-    
-    enum CodingKeys: String, CodingKey {
-        case sourceTransactionId = "txid"
-        case amountString = "amount"
-        case currencyCode = "currency"
-        case address
-        case status
-        case numberOfConfirmations = "confirmations"
-        case timestamp
+    var amount: Int {
+        return Double(amountString)?.integerValueWith(decimals: Currency.rawValue(currencyCode).decimals) ?? 0
     }
 }

@@ -468,34 +468,34 @@ class Syncer {
         log.debug("Pulling accounts and transactions for \(institution)")
         
         //sync Poloniex
-        let poloniexApi = PoloniexApi(secret: secret, key: key)
-        poloniexApi.fetchBalances(institution: institution) { success, error in
-            if !success {
-                syncingSuccess = false
-                if let error = error {
-                    syncingErrors.append(error)
-                    log.error("Error pulling accounts for \(institution): \(error)")
-                }
-                log.debug("Finished pulling accounts for \(institution)")
-            }
-            
-            if self.canceled {
-                self.cancelSync(errors: syncingErrors)
-                return
-            }
-            
-            poloniexApi.fetchTransactions(institution: institution, completion: { (success, error) in
-                
-                if let error = error {
-                    syncingSuccess = false
-                
-                    syncingErrors.append(error)
-                    log.error("Error pulling transactions for \(institution): \(error)")
-                }
-                
-                self.syncInstitutions(remainingInstitutions, startDate: startDate, success: syncingSuccess, errors: syncingErrors)
-            })
-        }
+//        let poloniexApi = PoloniexApi(secret: secret, key: key)
+//        poloniexApi.fetchBalances(institution: institution) { success, error in
+//            if !success {
+//                syncingSuccess = false
+//                if let error = error {
+//                    syncingErrors.append(error)
+//                    log.error("Error pulling accounts for \(institution): \(error)")
+//                }
+//                log.debug("Finished pulling accounts for \(institution)")
+//            }
+//
+//            if self.canceled {
+//                self.cancelSync(errors: syncingErrors)
+//                return
+//            }
+//
+//            poloniexApi.fetchTransactions(institution: institution, completion: { (success, error) in
+//
+//                if let error = error {
+//                    syncingSuccess = false
+//
+//                    syncingErrors.append(error)
+//                    log.error("Error pulling transactions for \(institution): \(error)")
+//                }
+//
+//                self.syncInstitutions(remainingInstitutions, startDate: startDate, success: syncingSuccess, errors: syncingErrors)
+//            })
+//        }
     }
     
     fileprivate func syncWallet(address: String, institution: Institution, remainingInstitutions: [Institution], startDate: Date, success: Bool, errors:[Error]) {

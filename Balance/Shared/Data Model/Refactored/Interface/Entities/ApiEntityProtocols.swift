@@ -44,7 +44,7 @@ public protocol ExchangeAccount {
 }
 
 public protocol ExchangeTransaction {
-    var type: TransactionType { get }
+    var type: TransactionType { get set }
     var institutionId: Int { get set }
     var source: Source { get }
     var sourceInstitutionId: String { get set }

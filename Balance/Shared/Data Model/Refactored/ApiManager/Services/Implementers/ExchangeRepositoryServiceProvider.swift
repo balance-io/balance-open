@@ -56,7 +56,7 @@ private extension ExchangeRepositoryServiceProvider {
     
     func savePoloniexAccounts(accounts: [ExchangeAccount], institution: Institution) {
         hideLocalAccounts(accounts)
-        
+         
         let accounts = AccountRepository.si.accounts(institutionId: institution.institutionId)
         for account in accounts {
             let index = accounts.index(where: {$0.currency == account.currency})
@@ -80,7 +80,7 @@ private extension ExchangeRepositoryServiceProvider {
             guard currency != Currency.btc,
                 currency != Currency.eth,
                 accountSaved.isHidden != isHidden else {
-                    return
+                    continue
             }
             
             accountSaved.isHidden = isHidden
@@ -95,7 +95,7 @@ private extension ExchangeRepositoryServiceProvider {
                                             source: account.source,
                                             sourceAccountId: account.sourceAccountId,
                                             sourceInstitutionId: "",
-                                            accountTypeId: .exchange,
+                                            accountTypeId: account.accountType,
                                             accountSubTypeId: nil,
                                             name: account.name,
                                             currency: account.currencyCode,

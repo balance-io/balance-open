@@ -371,16 +371,16 @@ private extension PoloniexApi {
         // Poloniex doesn't have id's per-se, the id a coin is the coin symbol itself
         if let newAccount = AccountRepository.si.account(institutionId: institution.institutionId,
                                                          source: institution.source,
-                                                         sourceAccountId: account.currency.code,
+                                                         sourceAccountId: account.currencyCode,
                                                          sourceInstitutionId: "",
                                                          accountTypeId: account.accountType,
                                                          accountSubTypeId: nil,
-                                                         name: account.currency.code,
-                                                         currency: account.currency.code,
+                                                         name: account.currencyCode,
+                                                         currency: account.currencyCode,
                                                          currentBalance: account.currentBalance,
                                                          availableBalance: nil,
                                                          number: nil,
-                                                         altCurrency: account.altCurrency.code,
+                                                         altCurrency: account.altCurrencyCode,
                                                          altCurrentBalance: account.altCurrentBalance,
                                                          altAvailableBalance: nil) {
             

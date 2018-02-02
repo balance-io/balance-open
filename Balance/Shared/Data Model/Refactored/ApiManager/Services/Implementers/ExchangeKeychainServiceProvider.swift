@@ -19,7 +19,7 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
         switch source {
         case .poloniex:
             save(account: keychainAccounts.secretKey, key: KeychainConstants.secretKey, value: credentials.secretKey)
-            save(account: keychainAccounts.apiKey, key: KeychainConstants.secretKey, value: credentials.apiKey)
+            save(account: keychainAccounts.apiKey, key: KeychainConstants.apiKey, value: credentials.apiKey)
         case .coinbase:
             guard let credentials = credentials as? OAUTHCredentials else {
                 log.debug("Error - Can't use credentials type to be saved on keychain")

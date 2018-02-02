@@ -76,7 +76,7 @@ extension ExchangeManager: ExchangeManagerActions {
         switch source {
         case .poloniex:
             exchangeApi = poloniexExchangeAPI
-            exchangeAction = PoloniexApiAction(type: .accounts, credentials: credentials)
+            exchangeAction = PoloniexApiAction(type: .transactions(input: nil), credentials: credentials)
         case .kraken:
             exchangeApi = krakenExchangeAPI
             exchangeAction = KrakenApiAction(type: .accounts, credentials: credentials)
