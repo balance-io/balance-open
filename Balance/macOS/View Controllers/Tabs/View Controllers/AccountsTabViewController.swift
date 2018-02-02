@@ -9,7 +9,6 @@
 import AppKit
 import Cocoa
 import SnapKit
-import BalanceVectorGraphics
 
 class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, SectionedTableViewDataSource, NSSearchFieldDelegate {
     

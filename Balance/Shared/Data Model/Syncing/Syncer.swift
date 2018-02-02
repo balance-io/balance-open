@@ -22,7 +22,7 @@ class Syncer {
         canceled = true
     }
     
-    func sync(startDate: Date, pruneTransactions: Bool = false, completion: SuccessErrorsHandler?) {
+    func sync(startDate: Date, pruneTransactions: Bool = false, skip: [Source] = [], completion: SuccessErrorsHandler?) {
         guard !syncing else {
             return
         }
@@ -36,7 +36,9 @@ class Syncer {
         if InstitutionRepository.si.institutionsCount > 0 {
             // Grab the institutions again in case we've added one while syncing categories or we've been canceled
             // and sort them as they're displayed in the UI
-            let institutions = InstitutionRepository.si.allInstitutions(sorted: true)
+            let institutions = InstitutionRepository.si.allInstitutions(sorted: true).filter { institution -> Bool in
+                return !skip.contains(institution.source)
+            }
             
             let success = true
             let errors = [Error]()
@@ -279,27 +281,34 @@ class Syncer {
                         // Initialize an Account object to insert the record
                         AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: wallet.currencyCode, sourceInstitutionId: institution.sourceInstitutionId, accountTypeId: .exchange, accountSubTypeId: nil, name: wallet.currencyCode, currency: wallet.currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
                     }
-                }
-                // Sync transactions
-                try self.bitfinexApiClient.fetchTransactions({ (transactions, error) in
-                    guard let unwrappedTransactions = transactions else {
-                        if let unwrappedError = error {
-                            syncingErrors.append(unwrappedError)
-                        }
-                        syncingSuccess = false
-                        performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
-                        return
-                    }
-                    for transaction in unwrappedTransactions
-                    {
-                        let amount = paddedInteger(for: transaction.amount, currencyCode: transaction.currencyCode)
-                        let identifier = "\(transaction.address)\(transaction.amount)\(transaction.movementTimestamp)"
-
-                        TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: identifier, sourceAccountId: transaction.currencyCode, name: identifier, currency: transaction.currencyCode, amount: amount, date: transaction.createdAt, categoryID: nil, sourceInstitutionId: institution.sourceInstitutionId, institutionId: institution.institutionId)
-                    }
                     
-                    performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
-                })
+                    do {
+                        // Sync transactions
+                        try self.bitfinexApiClient.fetchTransactions { transactions, error in
+                            guard let unwrappedTransactions = transactions else {
+                                if let unwrappedError = error {
+                                    syncingErrors.append(unwrappedError)
+                                }
+                                syncingSuccess = false
+                                performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                                return
+                            }
+                            
+                            for transaction in unwrappedTransactions {
+                                let amount = paddedInteger(for: transaction.amount, currencyCode: transaction.currencyCode)
+                                let identifier = "\(transaction.address)\(transaction.amount)\(transaction.movementTimestamp)"
+                                
+                                TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: identifier, sourceAccountId: transaction.currencyCode, name: identifier, currency: transaction.currencyCode, amount: amount, date: transaction.createdAt, categoryID: nil, sourceInstitutionId: institution.sourceInstitutionId, institutionId: institution.institutionId)
+                            }
+                            
+                            performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                        }
+                    } catch {
+                        syncingSuccess = false
+                        syncingErrors.append(error)
+                        performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
+                    }
+                }
             } catch {
                 if let credentialsError = error as? APICredentialsComponents.Error {
                     switch credentialsError {
@@ -393,7 +402,6 @@ class Syncer {
                 syncingSuccess = false
                 syncingErrors.append(error)
                 performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
-                
                 return
             }
         case .bittrex:
@@ -406,6 +414,14 @@ class Syncer {
                 return
             }
             
+            // Fixes the special case in Bittrex where they incorrectly use the BCC ticker symbol
+            // for BCH (Bitcoin Cash). BCC is already the symbol of Bitconnect so we can't just make
+            // them equivalent in the Currency enum and everyone else uses BCH, so we need to save
+            // BCC from Bittrex as BCH for it to work correctly.
+            func bittrexFixCurrencyCode(_ currencyCode: String) -> String {
+                return currencyCode == "BCC" ? "BCH" : currencyCode
+            }
+            
             func processBalances(result: ExchangeAPIResult) {
                 guard let balances = result.object as? [BITTREXBalance] else {
                     syncingSuccess = false
@@ -414,30 +430,53 @@ class Syncer {
                 }
                 
                 for balance in balances {
-                    let currentBalance = paddedInteger(for: balance.balance, currencyCode: balance.currency)
+                    let currencyCode = bittrexFixCurrencyCode(balance.currency)
+                    let currentBalance = paddedInteger(for: balance.balance, currencyCode: currencyCode)
                     let availableBalance = currentBalance
                     
                     // Initialize an Account object to insert the record
-                    AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: balance.currency, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: balance.currency, currency: balance.currency, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
+                    AccountRepository.si.account(institutionId: institution.institutionId, source: institution.source, sourceAccountId: currencyCode, sourceInstitutionId: "", accountTypeId: .exchange, accountSubTypeId: nil, name: currencyCode, currency: currencyCode, currentBalance: currentBalance, availableBalance: availableBalance, number: nil, altCurrency: nil, altCurrentBalance: nil, altAvailableBalance: nil)
                 }
             }
             
-            func processTransactions(result: ExchangeAPIResult) {
-                guard let transactions = result.object as? [BITTREXDepositOrWithdrawal] else {
+            func processDeposits(result: ExchangeAPIResult) {
+                guard let deposits = result.object as? [BITTREXDeposit] else {
                     syncingSuccess = false
                     syncingErrors.append(BalanceError.unexpectedData)
                     return
                 }
                 
-                for transaction in transactions {
-                    guard let date = transaction.date else {
-                        log.error("Failed to format date for Bittrex transaction \(transaction.paymentUuid) with date string \(transaction.opened)")
+                for deposit in deposits {
+                    guard let date = deposit.date else {
+                        log.error("Failed to format date for Bittrex deposit \(deposit.id) with date string \(deposit.lastUpdated)")
                         continue
                     }
                     
-                    let amount = paddedInteger(for: transaction.amount, currencyCode: transaction.currency)
+                    let currencyCode = bittrexFixCurrencyCode(deposit.currency)
+                    let amount = paddedInteger(for: deposit.amount, currencyCode: currencyCode)
+
+                    // NOTE: Maybe we shoul be using txId here instead of id?
+                    TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: String(deposit.id), sourceAccountId: currencyCode, name: String(deposit.id), currency: currencyCode, amount: amount, date: date, categoryID: nil, sourceInstitutionId: institution.sourceInstitutionId, institutionId: institution.institutionId)
+                }
+            }
+            
+            func processWithdrawals(result: ExchangeAPIResult) {
+                guard let withdrawals = result.object as? [BITTREXWithdrawal] else {
+                    syncingSuccess = false
+                    syncingErrors.append(BalanceError.unexpectedData)
+                    return
+                }
+                
+                for withdrawal in withdrawals {
+                    guard let date = withdrawal.date else {
+                        log.error("Failed to format date for Bittrex withdrawal \(withdrawal.paymentUuid) with date string \(withdrawal.opened)")
+                        continue
+                    }
                     
-                    TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: transaction.paymentUuid, sourceAccountId: transaction.currency, name: transaction.paymentUuid, currency: transaction.currency, amount: amount, date: date, categoryID: nil, sourceInstitutionId: institution.sourceInstitutionId, institutionId: institution.institutionId)
+                    let currencyCode = bittrexFixCurrencyCode(withdrawal.currency)
+                    let amount = paddedInteger(for: withdrawal.amount, currencyCode: currencyCode)
+                    
+                    TransactionRepository.si.transaction(source: institution.source, sourceTransactionId: withdrawal.paymentUuid, sourceAccountId: currencyCode, name: withdrawal.paymentUuid, currency: currencyCode, amount: amount, date: date, categoryID: nil, sourceInstitutionId: institution.sourceInstitutionId, institutionId: institution.institutionId)
                 }
             }
             
@@ -445,10 +484,10 @@ class Syncer {
                 processBalances(result: result)
                 
                 BITTREXApi().performAction(for: .getAllDepositHistory, apiKey: apiKey, secretKey: secretKey) { depositResult in
-                    processTransactions(result: depositResult)
+                    processDeposits(result: depositResult)
                     
                     BITTREXApi().performAction(for: .getAllWithdrawalHistory, apiKey: apiKey, secretKey: secretKey) { withdrawalResult in
-                        processTransactions(result: withdrawalResult)
+                        processWithdrawals(result: withdrawalResult)
                         
                         performNextSyncHandler(remainingInstitutions, startDate, syncingSuccess, syncingErrors)
                     }
@@ -508,22 +547,32 @@ class Syncer {
         
         //sync Ethplore
         let ethploreApi = EthplorerApi(name: "", address: address)
-        ethploreApi.fetchAddressInfo(institution: institution, completion: { (success, error) in
+        ethploreApi.fetchAddressInfo(institution: institution) { success, error in
             if !success {
                 syncingSuccess = false
                 if let error = error {
                     syncingErrors.append(error)
                     log.error("Error pulling accounts for \(institution): \(error)")
                 }
-                log.debug("Finished pulling accounts for \(institution)")
             }
             
             if self.canceled {
                 self.cancelSync(errors: syncingErrors)
                 return
             }
-            self.syncInstitutions(remainingInstitutions, startDate: startDate, success: syncingSuccess, errors: syncingErrors)
-        })
+            
+            ethploreApi.fetchTransactionInfo(institution: institution) { success, error in
+                if !success {
+                    syncingSuccess = false
+                    if let error = error {
+                        syncingErrors.append(error)
+                        log.error("Error pulling transactions for \(institution): \(error)")
+                    }
+                }
+                
+                self.syncInstitutions(remainingInstitutions, startDate: startDate, success: syncingSuccess, errors: syncingErrors)
+            }
+        }
     }
     
     fileprivate func cancelSync(errors: [Error]) {
@@ -554,7 +603,7 @@ class Syncer {
 }
 
 class MockSyncer: Syncer {
-    override func sync(startDate: Date, pruneTransactions: Bool, completion: SuccessErrorsHandler?) {
+    override func sync(startDate: Date, pruneTransactions: Bool, skip: [Source] = [], completion: SuccessErrorsHandler?) {
         guard !syncing else {
             return
         }

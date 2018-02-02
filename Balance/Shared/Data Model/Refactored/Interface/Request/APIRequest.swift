@@ -79,6 +79,23 @@ public protocol APIAction {
     init(type: ApiRequestType, credentials: Credentials)
 }
 
+extension APIAction {
+    
+    func getBasicURLComponents(from params: [String: String]) -> URLComponents {
+        var queryItems = [URLQueryItem]()
+        
+        for (key, value) in params {
+            queryItems.append(URLQueryItem(name: key, value: String(describing: value)))
+        }
+        
+        var components = URLComponents()
+        components.queryItems = queryItems
+        
+        return components
+    }
+    
+}
+
 public protocol RequestHandler: class {    
     func handleResponseData(for action: APIAction?, data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any
 }

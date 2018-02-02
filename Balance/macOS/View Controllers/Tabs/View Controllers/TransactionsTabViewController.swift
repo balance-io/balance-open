@@ -1,7 +1,6 @@
 import Cocoa
 import SnapKit
 import MapKit
-import BalanceVectorGraphics
 import JMSRangeSlider
 
 class TransactionsTabViewController: NSViewController, TransactionsTabViewModelDelegate, SectionedTableViewDelegate, SectionedTableViewDataSource, NSTextFieldDelegate, TextFieldDelegate, PaintCodeDropdownDelegate {
@@ -726,8 +725,8 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
         cell.identifier = NSUserInterfaceItemIdentifier(rawValue: "Group Cell")
         cell.section = -1
         
-        let date = viewModel.data.keys[section]
-        cell.updateModel(date)
+        let sectionTitle = viewModel.sectionTitle(for: section)
+        cell.updateModel(sectionTitle)
         
         return cell
     }
@@ -746,13 +745,16 @@ class TransactionsTabViewController: NSViewController, TransactionsTabViewModelD
             previousSelectedIndex = TableIndex.none
         }
         
-        let transaction = viewModel.data[section]![row]
-        cell.updateModel(transaction)
-        cell.index = TableIndex(section: section, row: row)
-        
-        let selectedIndex = tableView.selectedIndex
-        if selectedIndex != TableIndex.none {
-            cell.alphaValue = cell.index == selectedIndex ? 1.0 : CurrentTheme.transactions.cell.dimmedAlpha
+        if let transaction = viewModel.transaction(forRow: row, inSection: section) {
+            cell.updateModel(transaction)
+            cell.index = TableIndex(section: section, row: row)
+            
+            let selectedIndex = tableView.selectedIndex
+            if selectedIndex != TableIndex.none {
+                cell.alphaValue = cell.index == selectedIndex ? 1.0 : CurrentTheme.transactions.cell.dimmedAlpha
+            }
+        } else {
+            log.error("Couldn't find transaction for row \(row) in section \(section)")
         }
         
         return cell

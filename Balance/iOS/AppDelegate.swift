@@ -60,18 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialyze crash logging and analytics
         analytics.setupAnalytics()
         
-        // Access tokens and Realm syncing credentials for debugging
-        #if DEBUG
-        if !Testing.runningUiTests {
-            if debugging.logAccessTokens {
-                for institution in InstitutionRepository.si.allInstitutions() {
-                    if let accessToken = institution.accessToken {
-                        log.debug("(\(institution)): \(accessToken)")
-                    }
-                }
-            }
-        }
-        #endif
+        // Access tokens and Realm syncing credentials for debugging (only Xcode builds)
+        debugPrintInstitutionKeys()
         
         // Start monitoring network status
         networkStatus.startMonitoring()
@@ -167,7 +157,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
     {
-        syncManager.sync(userInitiated: false, validateReceipt: false) { (success, error) in
+        syncManager.sync(userInitiated: false, validateReceipt: false, skip: [.coinbase]) { (success, error) in
             let result: UIBackgroundFetchResult = success ? .newData : .failed
             completionHandler(result)
         }

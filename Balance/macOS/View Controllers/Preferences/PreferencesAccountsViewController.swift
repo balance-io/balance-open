@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import BalanceVectorGraphics
 
 class PreferencesAccountsViewController: NSViewController {
     

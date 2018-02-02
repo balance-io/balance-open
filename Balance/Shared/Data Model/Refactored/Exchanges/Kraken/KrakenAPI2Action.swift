@@ -21,11 +21,11 @@ struct KrakenApiAction {
 }
 
 extension KrakenApiAction: APIAction {
-    private var params: [(key: String, value: String)] {
+    private var params: [String: String] {
         switch type {
         case .accounts, .transactions:
             return [
-                ("nonce", "\(nonce)")
+                "nonce" : "\(nonce)"
             ]
         }
     }
@@ -48,16 +48,7 @@ extension KrakenApiAction: APIAction {
     }
     
     var components: URLComponents {
-        var queryItems = [URLQueryItem]()
-        
-        for (key, value) in params {
-            queryItems.append(URLQueryItem(name: key, value: String(describing: value)))
-        }
-        
-        var components = URLComponents()
-        components.queryItems = queryItems
-        
-        return components
+        return getBasicURLComponents(from: params)
     }
 
 }

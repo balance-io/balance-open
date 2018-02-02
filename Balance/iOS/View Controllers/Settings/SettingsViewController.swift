@@ -107,7 +107,6 @@ internal final class SettingsViewController: UIViewController
                 cell.textLabel?.text = "Touch/Face ID"
                 cell.accessoryView = self?.biometricLockEnabledSwitch
                 cell.selectionStyle = .none
-                
                 return cell
             }
             
@@ -120,13 +119,11 @@ internal final class SettingsViewController: UIViewController
             let cell: TableViewCell = tableView.dequeueReusableCell(at: indexPath)
             cell.textLabel?.text = self.currencyViewModel.currentCurrencyDisplay
             cell.accessoryType = .disclosureIndicator
-            
             return cell
         }
         
-        mainCurrencyRow.actionHandler = { [unowned self] (indexPath) in
-            let mainCurencySelectionViewController = MainCurrencySelectionViewController()
-            self.navigationController?.pushViewController(mainCurencySelectionViewController, animated: true)
+        mainCurrencyRow.actionHandler = { [weak self] (indexPath) in
+            self?.navigationController?.pushViewController(MainCurrencySelectionViewController(), animated: true)
         }
         
         let currencySection = TableSection(title: "Main Currency", rows: [mainCurrencyRow])
@@ -134,11 +131,9 @@ internal final class SettingsViewController: UIViewController
         
         // Insitutions
         var institutionRows = [TableRow]()
-        let numberOfInstitutions = self.viewModel.numberOfSections()
-        for index in 0..<numberOfInstitutions
-        {
-            guard let institution = self.viewModel.institution(forSection: index) else
-            {
+        let numberOfInstitutions = viewModel.numberOfSections()
+        for index in 0 ..< numberOfInstitutions {
+            guard let institution = viewModel.institution(forSection: index) else {
                 continue
             }
             
@@ -146,13 +141,11 @@ internal final class SettingsViewController: UIViewController
                 let cell: TableViewCell = tableView.dequeueReusableCell(at: indexPath)
                 cell.textLabel?.text = institution.displayName
                 cell.accessoryType = .disclosureIndicator
-                
                 return cell
             })
             
-            row.actionHandler = { [unowned self] (indexPath) in
-                let institutionSettingsViewController = InstitutionSettingsViewController(institution: institution)
-                self.navigationController?.pushViewController(institutionSettingsViewController, animated: true)
+            row.actionHandler = { [weak self] (indexPath) in
+                self?.navigationController?.pushViewController(InstitutionSettingsViewController(institution: institution), animated: true)
             }
             
             row.deletionHandler = { [weak self] (indexPath) in
@@ -167,15 +160,12 @@ internal final class SettingsViewController: UIViewController
             let cell: TableViewCell = tableView.dequeueReusableCell(at: indexPath)
             cell.textLabel?.text = "Add Account"
             cell.accessoryType = .disclosureIndicator
-            
             return cell
         })
         
-        addAccountRow.actionHandler = { [unowned self] (indexPath) in
-            let addAccountViewController = AddAccountViewController()
-            let navigationController = UINavigationController(rootViewController: addAccountViewController)
-            
-            self.present(navigationController, animated: true, completion: nil)
+        addAccountRow.actionHandler = { [weak self] (indexPath) in
+            let navigationController = UINavigationController(rootViewController: AddAccountViewController())
+            self?.present(navigationController, animated: true, completion: nil)
         }
         
         institutionRows.append(addAccountRow)
@@ -183,6 +173,21 @@ internal final class SettingsViewController: UIViewController
         // Accounts section
         let accountsSection = TableSection(title: "Accounts", rows: institutionRows)
         tableSections.append(accountsSection)
+        
+        // Help section
+        var feedbackRow = TableRow { (tableView, indexPath) -> UITableViewCell in
+            let cell: TableViewCell = tableView.dequeueReusableCell(at: indexPath)
+            cell.textLabel?.text = "Send Feedback"
+            cell.accessoryType = .disclosureIndicator
+            return cell
+        }
+        
+        feedbackRow.actionHandler = { [weak self] (indexPath) in
+            self?.navigationController?.pushViewController(EmailIssueController(), animated: true)
+        }
+        
+        let helpSection = TableSection(title: "Help", rows: [feedbackRow])
+        tableSections.append(helpSection)
         
         self.tableData = tableSections
         self.tableView.reloadData()

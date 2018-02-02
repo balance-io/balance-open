@@ -8,6 +8,7 @@
 
 import SVProgressHUD
 import UIKit
+import WebKit
 
 internal class AddCredentialBasedAccountViewController: UIViewController
 {
@@ -104,6 +105,22 @@ internal class AddCredentialBasedAccountViewController: UIViewController
             
             let qrCodeSection = TableSection(title: nil, rows: [row])
             sections.append(qrCodeSection)
+        }
+        
+        if self.viewModel.helpNeeded {
+            var row = TableRow(cellPreparationHandler: { (tableView, indexPath) -> UITableViewCell in
+                let cell: TableViewCell = tableView.dequeueReusableCell(at: indexPath)
+                cell.textLabel?.text = "Help"
+                
+                return cell
+            })
+            row.actionHandler = { (indexPath) in
+                UIApplication.shared.open(self.viewModel.source.helpUrl)
+            }
+            
+            let helpSection = TableSection(title: nil, rows: [row])
+            sections.append(helpSection)
+            
         }
         
         self.tableSections = sections
