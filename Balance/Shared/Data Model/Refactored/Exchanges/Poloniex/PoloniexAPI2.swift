@@ -78,19 +78,59 @@ extension PoloniexAPI2: RequestHandler {
 }
 
 private extension PoloniexAPI2 {
-    func buildTransacionts(from data: Data) -> [Any] {
-        guard let transactions = try? JSONDecoder().decode([NewPoloniexTransaction].self, from: data) else {
+    func buildTransacionts(from data: Data) -> Any {
+        guard let rawData = try? JSONSerialization.jsonObject(with: data, options: []),
+            let json = rawData as? [String : AnyObject] else {
             return []
         }
         
+        var transactions = [NewPoloniexTransaction]()
+        
+        if let depositsJSON = json["deposits"] as? [[String : Any]],
+            let serialized = try? JSONSerialization.data(withJSONObject: depositsJSON, options: .prettyPrinted),
+            let deposits = try? JSONDecoder().decode([NewPoloniexTransaction].self, from: serialized) {
+            
+            deposits.forEach { $0.type = .deposit }
+            transactions += deposits
+            
+        }
+        
+        if let withdrawalsJSON = json["withdrawals"] as? [[String : Any]],
+            let serialized = try? JSONSerialization.data(withJSONObject: withdrawalsJSON, options: .prettyPrinted),
+            let withdrawals = try? JSONDecoder().decode([NewPoloniexTransaction].self, from: serialized) {
+            
+            withdrawals.forEach { $0.type = .withdrawal }
+            transactions += withdrawals
+            
+        }
+    
         return transactions
     }
-    
-    func buildAccounts(from data: Data) -> [Any] {
-        guard let accounts = try? JSONDecoder().decode([NewPoloniexAccount].self, from: data) else {
-            return []
+
+        
+    func buildAccounts(from data: Data) -> Any {
+        guard let data = prepareAccountsData(from: data),
+            let accounts = try? JSONDecoder().decode([NewPoloniexAccount].self, from: data) else {
+                return []
         }
         
         return accounts
+    }
+    
+    func prepareAccountsData(from data: Data) -> Data? {
+        guard let rawData = try? JSONSerialization.jsonObject(with: data),
+            let dict = rawData as? [String: AnyObject] else {
+            return nil
+        }
+        
+        let flatDict = dict.map { (key, value) -> [String : AnyObject] in
+            if var dict = value as? [String: AnyObject] {
+                dict["currency"] = key as AnyObject
+                return dict
+            }
+            return [:]
+        }
+        
+        return try? JSONSerialization.data(withJSONObject: flatDict, options: .prettyPrinted)
     }
 }

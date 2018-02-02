@@ -15,7 +15,7 @@ open class AbstractApi: ExchangeApi2 {
     open var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
     open var requestEncoding: ApiRequestEncoding { return .none }
     open var encondingMessageType: ApiEncondingMessageType { return .none }
-    open var requestHandler: RequestHandler? { return nil }    
+    open var requestHandler: RequestHandler? { return nil }
     private var session: URLSession
     
     // certValidatedSession should always be passed here when using in the app except for tests
@@ -47,7 +47,7 @@ open class AbstractApi: ExchangeApi2 {
             completion(false, nil, nil)
             return nil
         }
-        return ExchangeOperation(with: handler, action: action, session: session, request: request)
+        return ExchangeOperation(with: handler, action: action, session: session, request: request, resultBlock: completion)
     }
     
     //mark: Needed for OAUTH
