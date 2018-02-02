@@ -239,6 +239,8 @@
 		53629D54201FE85B000081E9 /* TabButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D4E201FE85A000081E9 /* TabButtons.swift */; };
 		53629D55201FE85B000081E9 /* AccountConnectionErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D4F201FE85A000081E9 /* AccountConnectionErrors.swift */; };
 		53629D5820238AF9000081E9 /* EmailIssueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D5720238AF9000081E9 /* EmailIssueController.swift */; };
+		53629D5A20240F48000081E9 /* EthplorerTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D5920240F48000081E9 /* EthplorerTransaction.swift */; };
+		53629D5B20240F48000081E9 /* EthplorerTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53629D5920240F48000081E9 /* EthplorerTransaction.swift */; };
 		536C6EEF1D864C9B00823688 /* MockedDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536C6EEE1D864C9B00823688 /* MockedDefaultsStorage.swift */; };
 		536C6EF21D864CB900823688 /* DefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536C6EF11D864CB900823688 /* DefaultsStorage.swift */; };
 		537187DC1F4CC23B00E7F9D6 /* CoinbaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538B47B11F4C9FD60023CED5 /* CoinbaseApi.swift */; };
@@ -790,6 +792,7 @@
 		53629D4E201FE85A000081E9 /* TabButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabButtons.swift; sourceTree = "<group>"; };
 		53629D4F201FE85A000081E9 /* AccountConnectionErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountConnectionErrors.swift; sourceTree = "<group>"; };
 		53629D5720238AF9000081E9 /* EmailIssueController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailIssueController.swift; sourceTree = "<group>"; };
+		53629D5920240F48000081E9 /* EthplorerTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthplorerTransaction.swift; sourceTree = "<group>"; };
 		536C6EEE1D864C9B00823688 /* MockedDefaultsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockedDefaultsStorage.swift; sourceTree = "<group>"; };
 		536C6EF11D864CB900823688 /* DefaultsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsStorage.swift; sourceTree = "<group>"; };
 		537187F21F4CC2FB00E7F9D6 /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
@@ -2209,6 +2212,7 @@
 				A4E457101F7901DD002E2879 /* EthplorerApi.swift */,
 				A4E457111F7901DD002E2879 /* EthplorerErrors.swift */,
 				A4E457121F7901DD002E2879 /* EthplorerInstitution.swift */,
+				53629D5920240F48000081E9 /* EthplorerTransaction.swift */,
 			);
 			name = Ethplorer;
 			path = APIs/Ethplorer;
@@ -2847,6 +2851,7 @@
 				53552A1B1ED7251700DD95F9 /* Transaction.swift in Sources */,
 				2DFB60012020CA3D00C4B817 /* BtcApi.swift in Sources */,
 				A4E4571A1F7901E7002E2879 /* EthplorerInstitution.swift in Sources */,
+				53629D5B20240F48000081E9 /* EthplorerTransaction.swift in Sources */,
 				53552A091ED7251200DD95F9 /* Defaults.swift in Sources */,
 				537187DD1F4CC23B00E7F9D6 /* CoinbaseAccount.swift in Sources */,
 				A42953D41F8E255D00729045 /* InstitutionCollectionViewCell.swift in Sources */,
@@ -3117,6 +3122,7 @@
 				537187FD1F4CC43000E7F9D6 /* SignUpViewController.swift in Sources */,
 				53D441EC1F44B224006967E1 /* FMDatabasePoolAdditions.m in Sources */,
 				530F57991DCD72680083F3A7 /* FMDatabase.m in Sources */,
+				53629D5A20240F48000081E9 /* EthplorerTransaction.swift in Sources */,
 				F1253E5E1D75D2D0001BD48C /* KeychainManager.swift in Sources */,
 				53C197171CB8714100F0A47B /* SyncManager.swift in Sources */,
 				28A0DC131DCD010800601E87 /* ChangePasswordViewController.swift in Sources */,

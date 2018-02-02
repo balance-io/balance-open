@@ -546,7 +546,7 @@ class Syncer {
         
         //sync Ethplore
         let ethploreApi = EthplorerApi(name: "", address: address)
-        ethploreApi.fetchAddressInfo(institution: institution, completion: { (success, error) in
+        ethploreApi.fetchAddressInfo(institution: institution) { success, error in
             if !success {
                 syncingSuccess = false
                 if let error = error {
@@ -559,8 +559,19 @@ class Syncer {
                 self.cancelSync(errors: syncingErrors)
                 return
             }
-            self.syncInstitutions(remainingInstitutions, startDate: startDate, success: syncingSuccess, errors: syncingErrors)
-        })
+            
+            ethploreApi.fetchTransactionInfo(institution: institution) { success, error in
+                if !success {
+                    syncingSuccess = false
+                    if let error = error {
+                        syncingErrors.append(error)
+                        log.error("Error pulling transactions for \(institution): \(error)")
+                    }
+                }
+                
+                self.syncInstitutions(remainingInstitutions, startDate: startDate, success: syncingSuccess, errors: syncingErrors)
+            }
+        }
     }
     
     fileprivate func cancelSync(errors: [Error]) {
