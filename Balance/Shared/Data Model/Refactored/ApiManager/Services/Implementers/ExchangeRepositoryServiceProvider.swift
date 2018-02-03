@@ -9,8 +9,9 @@
 import Foundation
 
 class ExchangeRepositoryServiceProvider: RepositoryServiceProtocol {
-    func createInstitution(for source: Source) -> Institution? {
-        return InstitutionRepository.si.institution(source: source, sourceInstitutionId: "", name: source.description)
+    
+    func createInstitution(for source: Source, name: String) -> Institution? {
+        return InstitutionRepository.si.institution(source: source, sourceInstitutionId: "", name: !name.isEmpty ? name : source.description)
     }
     
     func createAccounts(for source: Source, accounts: [ExchangeAccount], institution: Institution) {
@@ -31,6 +32,7 @@ class ExchangeRepositoryServiceProvider: RepositoryServiceProtocol {
         let transactionsUpdated = updateTransactions(transactions, institution: institution)
         saveExchangeTransactions(transactionsUpdated)
     }
+    
 }
 
 //mark: Coinbase

@@ -235,7 +235,7 @@ private extension ExchangeManager {
         if let data = callbackResult.result,
             callbackResult.success {
             
-            guard let institution = institution ?? repositoryService.createInstitution(for: source) else {
+            guard let institution = institution ?? repositoryService.createInstitution(for: source, name: credentials.name) else {
                 print("Error - Can't create institution for \(source.description) on login operation")
                 //TODO: change state
                 return
@@ -280,7 +280,7 @@ private extension ExchangeManager {
     func launchCoinbaseAutentication(with data: Any) {
         let operation = coinbaseExchangeAPI.startAutentication(with: data) { success, error, result in
             if let coinbaseOAUTHCredentials = result as? OAUTHCredentials,
-                let coinbaseInstitution = self.repositoryService.createInstitution(for: .coinbase),
+                let coinbaseInstitution = self.repositoryService.createInstitution(for: .coinbase, name: ""),
                 success {
                 
                 self.fetchCoinbaseAccounts(with: coinbaseInstitution, credentials: coinbaseOAUTHCredentials)
