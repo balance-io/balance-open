@@ -31,14 +31,33 @@ extension EthplorerAPI2Action {
         case .accounts:
             return "getAddressInfo/\(credentials.address)"
         case .transactions(_):
-            return ""
+            return "getAddressTransactions/\(credentials.address)"
         }
     }
     
+    private var defaultLimit: String {
+        return "50"
+    }
+    
     private var params: [String: String] {
-        return [
+        var basicParams =  [
             "apiKey": ethploreToken
         ]
+        
+        switch type {
+        case .accounts:
+            return basicParams
+        case .transactions(let input):
+            guard let input = input,
+                let limit = input as? Int else {
+                    basicParams["limit"] = defaultLimit
+                    return basicParams
+            }
+            
+            basicParams["limit"] = "\(limit)"
+            return basicParams
+        }
+        
     }
     
     private var ethploreToken: String {
@@ -46,7 +65,7 @@ extension EthplorerAPI2Action {
     }
     
     var url: URL? {
-        return URL(string: host + path)
+        return URL(string: host + path + "?" + (query ?? ""))
     }
     
     var nonce: Int64 {

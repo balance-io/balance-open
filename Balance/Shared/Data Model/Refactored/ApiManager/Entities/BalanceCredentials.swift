@@ -13,12 +13,14 @@ struct BalanceCredentials: Credentials {
     let secretKey: String
     let passphrase: String
     let address: String
+    let name: String
     
-    init(apiKey: String? = nil, secretKey: String? = nil, passphrase: String? = nil, address: String? = nil) {
+    init(apiKey: String? = nil, secretKey: String? = nil, passphrase: String? = nil, address: String? = nil, name: String? = nil) {
         self.apiKey = apiKey ?? ""
         self.secretKey = secretKey ?? ""
         self.passphrase = passphrase ?? ""
         self.address = address ?? ""
+        self.name = name ?? ""
     }
 }
 
@@ -51,6 +53,7 @@ private extension BalanceCredentials {
         var secretKey = ""
         var passphrase = ""
         var address = ""
+        var name = ""
         
         for field in fields {
             switch field.type {
@@ -62,12 +65,12 @@ private extension BalanceCredentials {
                 secretKey = field.value
             case .passphrase:
                 passphrase = field.value
-            default:
-                continue
+            case .name:
+                name = field.name
             }
         }
         
-        self.init(apiKey: apiKey, secretKey: secretKey, passphrase: passphrase, address: address)
+        self.init(apiKey: apiKey, secretKey: secretKey, passphrase: passphrase, address: address, name: name)
     }
     
     static func areCredentialsValid(_ credentials: Credentials, for source: Source) -> Bool {
@@ -76,6 +79,8 @@ private extension BalanceCredentials {
             return !credentials.apiKey.isEmpty && !credentials.secretKey.isEmpty
         case .gdax:
             return !credentials.apiKey.isEmpty && !credentials.secretKey.isEmpty && !credentials.passphrase.isEmpty
+        case .ethplorer:
+            return !credentials.address.isEmpty && !credentials.name.isEmpty
         default:
             return false
         }

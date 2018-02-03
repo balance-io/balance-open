@@ -545,25 +545,31 @@ class SignUpViewController: NSViewController {
     
     // Initial connection
     @objc fileprivate func connect() {
-       
+        let loginFields = [Field(name: "Name", type: .name, value: "My Wallet"),
+                      Field(name: "Address", type: .address, value: "0x6748F50f686bfbcA6Fe8ad62b22228b87F31ff2b")]
         
         //TEST HERE
-        manager.login(with: .poloniex, fields: [Field(name: "API Key", type: .key, value: ""),
-                                                Field(name: "Secret", type: .secret, value: "")])
+        manager.login(with: .ethplorer, fields: loginFields)
         
 //        guard allFieldsFilled() else {
 //            return
 //        }
-//        
+        
+        let api = EthplorerApi.init(name: "My Wallet", address: "0x6748F50f686bfbcA6Fe8ad62b22228b87F31ff2b")
+        let institution = Institution.init(institutionId: 1, source: .ethplorer, sourceInstitutionId: "", name: "")
+        api.fetchTransactionInfo(institution: institution) { (success, error) in
+            
+        }
+        
 //        prepareViewsForSubmit(loadingText: "Connecting to \(apiInstitution.name)...")
-//
+
 //        var loginFields = [Field]()
 //        for textField in connectFields {
 //            if let field = textField.field {
 //                loginFields.append(field)
 //            }
 //        }
-//        // try login with loginFields
+        // try login with loginFields
 //
 //        loginService.authenticationChallenge(loginStrings: loginFields, existingInstitution: institution) { success, error, institution in
 //            if success, let institution = institution {

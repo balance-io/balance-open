@@ -53,6 +53,7 @@ class ExchangeManager {
     private lazy var krakenExchangeAPI = { return KrakenAPI2(session: urlSession) }()
     private lazy var poloniexExchangeAPI = { return PoloniexAPI2(session: urlSession) }()
     private lazy var coinbaseExchangeAPI = { return CoinbaseAPI2(session: urlSession) }()
+    private lazy var ethploreExchangeAPI = { return EthplorerAPI2(session: urlSession) }()
     
     init(urlSession: URLSession? = nil, repositoryService: RepositoryServiceProtocol? = nil, keychainService: KeychainServiceProtocol? = nil) {
         self.urlSession = urlSession ?? certValidatedSession
@@ -76,10 +77,13 @@ extension ExchangeManager: ExchangeManagerActions {
         switch source {
         case .poloniex:
             exchangeApi = poloniexExchangeAPI
-            exchangeAction = PoloniexApiAction(type: .transactions(input: nil), credentials: credentials)
+            exchangeAction = PoloniexApiAction(type: .accounts, credentials: credentials)
         case .kraken:
             exchangeApi = krakenExchangeAPI
             exchangeAction = KrakenApiAction(type: .accounts, credentials: credentials)
+        case .ethplorer:
+            exchangeApi = ethploreExchangeAPI
+            exchangeAction = EthplorerAPI2Action(type: .transactions(input: nil), credentials: credentials)
         case .coinbase:
             coinbaseExchangeAPI.prepareForAutentication()
             return
@@ -131,7 +135,12 @@ extension ExchangeManager: ExchangeManagerActions {
         case .coinbase:
             refreshCoinbase(with: institution, credentials: credentials)
             return
+        case .ethplorer:
+            exchangeApi = ethploreExchangeAPI
+            exchangeAccountAction = EthplorerAPI2Action(type: .accounts, credentials: credentials)
+            exchangeTransactionAction = EthplorerAPI2Action(type: .transactions(input: 50), credentials: credentials)
         default:
+            log.debug("Error - Can't trigger action for api with source \(institution.source.description)")
             return
         }
         
@@ -143,15 +152,13 @@ extension ExchangeManager: ExchangeManagerActions {
     }
     
     func createRefreshOperations(api: AbstractApi, accountAction: APIAction, transactionAction: APIAction, institution: Institution, credentials: Credentials) {
-        let refreshAccountsOperation = api.fetchData(for: accountAction) { (success, error, result) in
+        let callBack: (Bool, Error?, Any?) -> Void = { (success, error, result) in
             let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
             self.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
         }
         
-        let refreshTransationOperation = api.fetchData(for: transactionAction) { (success, error, result) in
-            let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
-            self.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
-        }
+        let refreshAccountsOperation = api.fetchData(for: accountAction, completion: callBack)
+        let refreshTransationOperation = api.fetchData(for: transactionAction, completion: callBack)
         
         if let refreshOperation = refreshAccountsOperation, let refreshTransaction = refreshTransationOperation {
             refreshQueue.addOperation(refreshOperation)

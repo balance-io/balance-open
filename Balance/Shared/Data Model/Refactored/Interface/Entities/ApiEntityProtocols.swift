@@ -13,6 +13,7 @@ public protocol Credentials {
     var secretKey: String { get }
     var passphrase: String { get }
     var address: String { get }
+    var name: String { get }
 }
 
 protocol OAUTHCredentials: Credentials {

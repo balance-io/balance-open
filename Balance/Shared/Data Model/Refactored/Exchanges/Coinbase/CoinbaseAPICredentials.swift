@@ -70,4 +70,8 @@ extension CoinbaseAutentication {
         return ""
     }
     
+    var name: String {
+        return ""
+    }
+    
 }
