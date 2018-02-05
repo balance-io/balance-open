@@ -76,7 +76,7 @@ extension ExchangeManager: ExchangeManagerActions {
         switch source {
         case .poloniex:
             exchangeApi = poloniexExchangeAPI
-            exchangeAction = PoloniexApiAction(type: .transactions(input: nil), credentials: credentials)
+            exchangeAction = PoloniexApiAction(type: .accounts, credentials: credentials)
         case .kraken:
             exchangeApi = krakenExchangeAPI
             exchangeAction = KrakenApiAction(type: .accounts, credentials: credentials)
@@ -147,7 +147,7 @@ extension ExchangeManager: ExchangeManagerActions {
             let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
             self.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
         }
-        
+
         let refreshTransationOperation = api.fetchData(for: transactionAction) { (success, error, result) in
             let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
             self.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
@@ -243,6 +243,7 @@ private extension ExchangeManager {
             keychainService.save(source: source, identifier: "\(institution.institutionId)", credentials: credentials)
             repositoryService.createAccounts(for: source, accounts: accounts, institution: institution)
             //TODO: change state
+            
             return
         }
         
