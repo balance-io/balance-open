@@ -76,6 +76,11 @@ public enum ApiEncondingMessageType {
     case concatenate(format: String)
 }
 
+public enum ServerEnvironment {
+    case sandbox
+    case production    
+}
+
 public protocol APIAction {
     var host: String { get }
     var path: String { get }

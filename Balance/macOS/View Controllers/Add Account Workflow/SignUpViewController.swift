@@ -546,7 +546,7 @@ class SignUpViewController: NSViewController {
     // Initial connection
     @objc fileprivate func connect() {
         let loginFields = [Field(name: "Name", type: .name, value: "My Wallet"),
-                      Field(name: "Address", type: .address, value: "0x6748F50f686bfbcA6Fe8ad62b22228b87F31ff2b")]
+                      Field(name: "Address", type: .address, value: "")]
         
         //TEST HERE
         manager.login(with: .ethplorer, fields: loginFields)
@@ -555,7 +555,7 @@ class SignUpViewController: NSViewController {
 //            return
 //        }
         
-        let api = EthplorerApi.init(name: "My Wallet", address: "0x6748F50f686bfbcA6Fe8ad62b22228b87F31ff2b")
+        let api = EthplorerApi.init(name: "My Wallet", address: "")
         let institution = Institution.init(institutionId: 1, source: .ethplorer, sourceInstitutionId: "", name: "")
         api.fetchTransactionInfo(institution: institution) { (success, error) in
             

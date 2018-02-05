@@ -27,9 +27,11 @@ protocol ExchangeManagerActions {
     func getCredentials(for institution: Institution) -> Credentials?
 }
 
-fileprivate typealias ExchangeCallbackResult = (success: Bool, error: Error?, result: Any?)
+fileprivate typealias ExchangeManagerCallbackResult = (success: Bool, error: Error?, result: Any?)
+fileprivate typealias ExchangeManagerRefreshAction = (api: AbstractApi, accountAction: APIAction, transactionAction: APIAction)
 
 class ExchangeManager {
+    
     private lazy var autenticationQueue: OperationQueue = {
         let taskQueue = OperationQueue()
         taskQueue.maxConcurrentOperationCount = OperationQueue.defaultMaxConcurrentOperationCount
@@ -55,6 +57,7 @@ class ExchangeManager {
     private lazy var coinbaseExchangeAPI = { return CoinbaseAPI2(session: urlSession) }()
     private lazy var ethploreExchangeAPI = { return EthplorerAPI2(session: urlSession) }()
     private lazy var bitfinexExchangeAPI = { return BitfinexAPI2(session: urlSession) }()
+    private lazy var gdaxExchangeAPI = { return GDAXAPI2(session: urlSession) }()
     
     init(urlSession: URLSession? = nil, repositoryService: RepositoryServiceProtocol? = nil, keychainService: KeychainServiceProtocol? = nil) {
         self.urlSession = urlSession ?? certValidatedSession
@@ -63,49 +66,25 @@ class ExchangeManager {
     }
 }
 
-
 //mark: Common Interface
 extension ExchangeManager: ExchangeManagerActions {
     
     func login(with source: Source, fields: [Field]) {
         guard let credentials = BalanceCredentials.credentials(from: fields, source: source) else {
+            print("Invalid credentials for login")
             return
         }
-        
-        let exchangeApi: AbstractApi?
-        let exchangeAction: APIAction?
         
         switch source {
-        case .poloniex:
-            exchangeApi = poloniexExchangeAPI
-            exchangeAction = PoloniexApiAction(type: .accounts, credentials: credentials)
-        case .kraken:
-            exchangeApi = krakenExchangeAPI
-            exchangeAction = KrakenApiAction(type: .accounts, credentials: credentials)
-        case .ethplorer:
-            exchangeApi = ethploreExchangeAPI
-            exchangeAction = EthplorerAPI2Action(type: .accounts, credentials: credentials)
-        case .bitfinex:
-            exchangeApi = bitfinexExchangeAPI
-            exchangeAction = BitfinexAPI2Action(type: .accounts, credentials: credentials)
         case .coinbase:
             coinbaseExchangeAPI.prepareForAutentication()
-            return
         default:
-            return
+            guard let loginOperation = loginAction(from: source, with: credentials) else {
+                return
+            }
+            
+            autenticationQueue.addOperation(loginOperation)
         }
-        
-        guard let api = exchangeApi, let action = exchangeAction else { return }
-        
-        let fetchAccountsOperation = api.fetchData(for: action) { success, error, result in
-            let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
-            self.processLoginCallbackResult(callbackResult, source: source, credentials: credentials)
-        }
-        
-        if let fetchAccountsOperation = fetchAccountsOperation {
-            autenticationQueue.addOperation(fetchAccountsOperation)
-        }
-
     }
     
     func manageAutenticationCallback(with data: Any, source: Source) {
@@ -123,55 +102,38 @@ extension ExchangeManager: ExchangeManagerActions {
             return
         }
         
-        let exchangeApi: AbstractApi?
-        let exchangeAccountAction: APIAction?
-        let exchangeTransactionAction: APIAction?
+        let refreshAction: ExchangeManagerRefreshAction?
         
         switch institution.source {
         case .poloniex:
-            exchangeApi = poloniexExchangeAPI
-            exchangeAccountAction = PoloniexApiAction(type: .accounts, credentials: credentials)
-            exchangeTransactionAction = PoloniexApiAction(type: .transactions(input: nil), credentials: credentials)
+            let accountAction = PoloniexApiAction(type: .accounts, credentials: credentials)
+            let transactionAction = PoloniexApiAction(type: .transactions(input: nil), credentials: credentials)
+            refreshAction = (poloniexExchangeAPI, accountAction, transactionAction)
         case .kraken:
-            exchangeApi = krakenExchangeAPI
-            exchangeAccountAction = KrakenApiAction(type: .accounts, credentials: credentials)
-            exchangeTransactionAction = KrakenApiAction(type: .transactions(input: nil), credentials: credentials)
-        case .coinbase:
-            refreshCoinbase(with: institution, credentials: credentials)
-            return
+            let accountAction = KrakenApiAction(type: .accounts, credentials: credentials)
+            let transactionAction = KrakenApiAction(type: .transactions(input: nil), credentials: credentials)
+            refreshAction = (krakenExchangeAPI, accountAction, transactionAction)
         case .ethplorer:
-            exchangeApi = ethploreExchangeAPI
-            exchangeAccountAction = EthplorerAPI2Action(type: .accounts, credentials: credentials)
-            exchangeTransactionAction = EthplorerAPI2Action(type: .transactions(input: 50), credentials: credentials)
+            let accountAction = EthplorerAPI2Action(type: .accounts, credentials: credentials)
+            let transactionAction = EthplorerAPI2Action(type: .transactions(input: 50), credentials: credentials)
+            refreshAction = (ethploreExchangeAPI, accountAction, transactionAction)
         case .bitfinex:
-            exchangeApi = bitfinexExchangeAPI
-            exchangeAccountAction = BitfinexAPI2Action(type: .accounts, credentials: credentials)
-            exchangeTransactionAction = BitfinexAPI2Action(type: .transactions(input: nil), credentials: credentials)
+            let accountAction = BitfinexAPI2Action(type: .accounts, credentials: credentials)
+            let transactionAction = BitfinexAPI2Action(type: .transactions(input: nil), credentials: credentials)
+            refreshAction = (bitfinexExchangeAPI, accountAction, transactionAction)
+        case .gdax, .coinbase:
+            refreshAccountsForTransactions(with: institution, credentials: credentials)
+            return
         default:
             log.debug("Error - Can't trigger action for api with source \(institution.source.description)")
             return
         }
         
-        guard let api = exchangeApi, let accountAction = exchangeAccountAction, let transactionAction = exchangeTransactionAction else {
+        guard let refreshAPIAction = refreshAction else {
             return
         }
         
-        createRefreshOperations(api: api, accountAction: accountAction, transactionAction: transactionAction, institution: institution, credentials: credentials)
-    }
-    
-    func createRefreshOperations(api: AbstractApi, accountAction: APIAction, transactionAction: APIAction, institution: Institution, credentials: Credentials) {
-        let callBack: (Bool, Error?, Any?) -> Void = { (success, error, result) in
-            let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
-            self.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
-        }
-        
-        let refreshAccountsOperation = api.fetchData(for: accountAction, completion: callBack)
-        let refreshTransationOperation = api.fetchData(for: transactionAction, completion: callBack)
-        
-        if let refreshOperation = refreshAccountsOperation, let refreshTransaction = refreshTransationOperation {
-            refreshQueue.addOperation(refreshOperation)
-            refreshQueue.addOperation(refreshTransaction)
-        }
+        createRefreshOperations(with: refreshAPIAction, institution: institution, credentials: credentials)
     }
     
     func refreshAccessToken(for institution: Institution) {
@@ -190,7 +152,7 @@ extension ExchangeManager: ExchangeManagerActions {
             if let refreshedCoinbaseCredentials = result as? CoinbaseAutentication ,success {
                 self.keychainService.save(source: institution.source, identifier: credentialIdentifier, credentials: refreshedCoinbaseCredentials)
                 //TODO: change state before refesh new data
-                self.refreshCoinbase(with: institution, credentials: refreshedCoinbaseCredentials)
+                self.refreshAccountsForTransactions(with: institution, credentials: refreshedCoinbaseCredentials)
             }
             
             if self.containsError(error, with: nil) {
@@ -208,10 +170,69 @@ extension ExchangeManager: ExchangeManagerActions {
     
 }
 
-//Reponse methods
 private extension ExchangeManager {
     
-    func processRefreshCallback(_ callbackResult: ExchangeCallbackResult, institution: Institution, credentials: Credentials) {
+    func createRefreshOperations(with refreshAPIAction: ExchangeManagerRefreshAction , institution: Institution, credentials: Credentials) {
+        let callBack: (Bool, Error?, Any?) -> Void = { (success, error, result) in
+            let callbackResult = ExchangeManagerCallbackResult(success: success, error: error, result: result)
+            self.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
+        }
+        
+        guard let refreshAccountsOperation = refreshAPIAction.api.fetchData(for: refreshAPIAction.accountAction, completion: callBack),
+            let refreshTransationOperation = refreshAPIAction.api.fetchData(for: refreshAPIAction.transactionAction, completion: callBack) else {
+                return
+        }
+        
+        refreshQueue.addOperation(refreshAccountsOperation)
+        refreshQueue.addOperation(refreshTransationOperation)
+    }
+    
+    func loginAction(from source: Source, with credentials: Credentials, callback: ExchangeOperationCompletionHandler? = nil) -> Operation?  {
+        let callback: ExchangeOperationCompletionHandler = callback ?? { success, error, result in
+            let callbackResult = ExchangeManagerCallbackResult(success: success, error: error, result: result)
+            self.processLoginCallbackResult(callbackResult, source: source, credentials: credentials)
+        }
+        
+        let loginAction: (api: AbstractApi, accountAction: APIAction)?
+        
+        switch source {
+        case .poloniex:
+            let exchangeAction = PoloniexApiAction(type: .accounts, credentials: credentials)
+            loginAction = (poloniexExchangeAPI, exchangeAction)
+        case .kraken:
+            let exchangeAction = KrakenApiAction(type: .accounts, credentials: credentials)
+            loginAction = (krakenExchangeAPI, exchangeAction)
+        case .ethplorer:
+            let exchangeAction = EthplorerAPI2Action(type: .accounts, credentials: credentials)
+            loginAction = (ethploreExchangeAPI, exchangeAction)
+        case .bitfinex:
+            let exchangeAction = BitfinexAPI2Action(type: .accounts, credentials: credentials)
+            loginAction = (bitfinexExchangeAPI, exchangeAction)
+        case .gdax:
+            let dict = [
+                GDAXAPI2Action.TransactionInputDataType.accountId.rawValue: "qq",
+                GDAXAPI2Action.TransactionInputDataType.currencyCode.rawValue: "zz"
+            ]
+            let exchangeAction = GDAXAPI2Action(type: .transactions(input: dict), credentials: credentials)
+            loginAction = (gdaxExchangeAPI, exchangeAction)
+        default:
+            return nil
+        }
+        
+        guard let loginAPIAction = loginAction else {
+            return nil
+        }
+        
+        return loginAPIAction.api.fetchData(for: loginAPIAction.accountAction, completion: callback)
+    }
+    
+}
+
+//MARK: Reponse methods
+
+private extension ExchangeManager {
+    
+    func processRefreshCallback(_ callbackResult: ExchangeManagerCallbackResult, institution: Institution, credentials: Credentials, triggerTransactions: Bool = false) {
         if let data = callbackResult.result,
             callbackResult.success {
             
@@ -223,6 +244,10 @@ private extension ExchangeManager {
             if let accounts = data as? [ExchangeAccount] {
                 repositoryService.createAccounts(for: institution.source, accounts: accounts, institution: institution)
                 //TODO: change state
+                
+                if triggerTransactions {
+                    refreshTransactionsFromAccounts(with: institution, credentials: credentials)
+                }
             }
             
             if institution.passwordInvalid {
@@ -239,7 +264,7 @@ private extension ExchangeManager {
         }
     }
     
-    func processLoginCallbackResult(_ callbackResult: ExchangeCallbackResult, source: Source, credentials: Credentials, institution: Institution? = nil) {
+    func processLoginCallbackResult(_ callbackResult: ExchangeManagerCallbackResult, source: Source, credentials: Credentials, institution: Institution? = nil) {
         if let data = callbackResult.result,
             callbackResult.success {
             
@@ -281,11 +306,68 @@ private extension ExchangeManager {
         institution.replace()
         return true
     }
+    
+    
+    func refreshAccountsForTransactions(with institution: Institution, credentials: Credentials) {
+        let refreshCallBack: (Bool, Error?, Any?) -> Void = { (success, error, result) in
+            let callbackResult = ExchangeManagerCallbackResult(success: success, error: error, result: result)
+            self.processRefreshCallback(callbackResult, institution: institution, credentials: credentials, triggerTransactions: true)
+        }
+        
+        guard let loginOperation = loginAction(from: institution.source, with: credentials, callback: refreshCallBack) else {
+            return
+        }
+        
+        autenticationQueue.addOperation(loginOperation)
+    }
+    
+    func refreshTransactionsFromAccounts(with institution: Institution, credentials: Credentials) {
+        let callBack: (Bool, Error?, Any?) -> Void = { (success, error, result) in
+            let callbackResult = ExchangeManagerCallbackResult(success: success, error: error, result: result)
+            self.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
+        }
+        
+        let accounts = AccountRepository.si.accounts(institutionId: institution.institutionId)
+        
+        guard !accounts.isEmpty else {
+            log.debug("Warning - Can't refresh coinbase institution with \(institution.institutionId) id")
+            return
+        }
+        
+        for account in accounts {
+            let transactionOperation: Operation?
+
+            switch institution.source {
+            case .coinbase:
+                let transactionAction = CoinbaseAPI2Action(type: .transactions(input: account.sourceAccountId), credentials: credentials)
+                transactionOperation = coinbaseExchangeAPI.fetchData(for: transactionAction, completion: callBack)
+            case .gdax:
+                let transactionDict: [String: Any] = [
+                    GDAXAPI2Action.TransactionInputDataType.accountId.rawValue: account.sourceAccountId,
+                    GDAXAPI2Action.TransactionInputDataType.currencyCode.rawValue: account.currency
+                ]
+                let transactionAction = GDAXAPI2Action(type: .transactions(input: transactionDict), credentials: credentials)
+                transactionOperation = gdaxExchangeAPI.fetchData(for: transactionAction, completion: callBack)
+            default:
+                return
+            }
+
+            
+            guard let operation = transactionOperation else {
+                print("Can't create refresh operation for \(institution.source.description) with institution \(institution.institutionId) id")
+                continue
+            }
+            
+            refreshQueue.addOperation(operation)
+        }
+    }
+    
 }
 
 // MARK: Coinbase helper methods
 
 private extension ExchangeManager {
+    
     func launchCoinbaseAutentication(with data: Any) {
         let operation = coinbaseExchangeAPI.startAutentication(with: data) { success, error, result in
             if let coinbaseOAUTHCredentials = result as? OAUTHCredentials,
@@ -311,7 +393,7 @@ private extension ExchangeManager {
     func fetchCoinbaseAccounts(with institution: Institution, credentials: OAUTHCredentials) {
         let apiAction = CoinbaseAPI2Action(type: .accounts, credentials: credentials)
         let coinbaseAccountsOperation = coinbaseExchangeAPI.fetchData(for: apiAction) { [weak self] (success, error, result) in
-            let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
+            let callbackResult = ExchangeManagerCallbackResult(success: success, error: error, result: result)
             self?.processLoginCallbackResult(callbackResult, source: institution.source, credentials: credentials, institution: institution)
         }
         
@@ -321,37 +403,4 @@ private extension ExchangeManager {
 
     }
     
-    func refreshCoinbase(with institution: Institution, credentials: Credentials) {
-        
-        let exchangeAccountAction = CoinbaseAPI2Action(type: .accounts, credentials: credentials)
-        let refreshAccountsOperation = coinbaseExchangeAPI.fetchData(for: exchangeAccountAction) { [weak self] (success, error, result) in
-            let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
-            self?.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
-        }
-        
-        if let refreshOperation = refreshAccountsOperation {
-            refreshQueue.addOperation(refreshOperation)
-        }
-        
-        let coinbaseAccounts = AccountRepository.si.accounts(institutionId: institution.institutionId)
-        
-        guard !coinbaseAccounts.isEmpty else {
-            log.debug("Warning - Can't refresh coinbase institution with \(institution.institutionId) id")
-            return
-        }
-        
-        coinbaseAccounts.forEach {
-            let exchangeTransactionAction = CoinbaseAPI2Action(type: .transactions(input: $0.sourceAccountId), credentials: credentials)
-            let refreshTransationOperation = coinbaseExchangeAPI.fetchData(for: exchangeTransactionAction, completion: { [weak self] (success, error, result) in
-                let callbackResult = ExchangeCallbackResult(success: success, error: error, result: result)
-                self?.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
-            })
-            
-            if let refreshTransaction = refreshTransationOperation {
-                refreshQueue.addOperation(refreshTransaction)
-            }
-
-        }
-        
-    }
 }

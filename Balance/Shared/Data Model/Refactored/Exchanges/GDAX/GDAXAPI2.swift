@@ -1,5 +1,5 @@
 //
-//  BitfinexAPI2.swift
+//  GDAXAPI2.swift
 //  BalancemacOS
 //
 //  Created by Eli Pacheco Hoyos on 2/5/18.
@@ -8,12 +8,12 @@
 
 import Foundation
 
-class BitfinexAPI2: AbstractApi {
+class GDAXAPI2: AbstractApi {
     
-    override var requestMethod: ApiRequestMethod { return .post }
+    override var requestMethod: ApiRequestMethod { return .get }
     override var requestDataFormat: ApiRequestDataFormat { return .json }
-    override var requestEncoding: ApiRequestEncoding { return .hmac(hmacAlgorithm: CCHmacAlgorithm(kCCHmacAlgSHA384), digestLength: Int(CC_SHA384_DIGEST_LENGTH)) }
-    override var encondingMessageType: ApiEncondingMessageType { return .concatenate(format: "%02x") }
+    override var requestEncoding: ApiRequestEncoding { return .hmac(hmacAlgorithm: CCHmacAlgorithm(kCCHmacAlgSHA256), digestLength: Int(CC_SHA256_DIGEST_LENGTH)) }
+    override var encondingMessageType: ApiEncondingMessageType { return .base64 }
     
     override func processErrors(requestType: ApiRequestType, response: HTTPURLResponse, data: Data?, error: Error?) -> Error?  {
         // In this example, look for 400 or 403 errors and return .invalidCredentials, then look for
@@ -28,6 +28,7 @@ class BitfinexAPI2: AbstractApi {
     }
     
     override func createRequest(for action: APIAction) -> URLRequest? {
+       
         switch action.type {
         case .accounts, .transactions(_):
             guard let url = action.url,
@@ -37,15 +38,15 @@ class BitfinexAPI2: AbstractApi {
             
             guard let messageData = createMessageData(nonce: action.nonce, path: action.path),
                 let messageSigned = generateMessageSigned(from: messageData, secretKeyEncoded: encondedSecredData) else {
-                return nil
+                    return nil
             }
             
             var request = URLRequest.init(url: url)
             request.httpMethod = requestMethod.rawValue
-            request.setValue(action.credentials.apiKey, forHTTPHeaderField: "bfx-apikey")
-            request.setValue(messageSigned, forHTTPHeaderField: "bfx-signature")
-            request.setValue("\(action.nonce)", forHTTPHeaderField: "bfx-nonce")
-            request.setValue("\(requestDataFormat.header.value)", forHTTPHeaderField: requestDataFormat.header.key)
+            request.setValue(action.credentials.apiKey, forHTTPHeaderField: "CB-ACCESS-KEY")
+            request.setValue(messageSigned, forHTTPHeaderField:"CB-ACCESS-SIGN")
+            request.setValue("\(action.nonce)", forHTTPHeaderField: "CB-ACCESS-TIMESTAMP")
+            request.setValue(action.credentials.passphrase, forHTTPHeaderField: "CB-ACCESS-PASSPHRASE")
             
             return request
         }
@@ -53,22 +54,22 @@ class BitfinexAPI2: AbstractApi {
     
 }
 
-private extension BitfinexAPI2 {
+private extension GDAXAPI2 {
     
     func encodeSecret(from credentials: Credentials) -> Data? {
-        guard let encodedSecretData = credentials.secretKey.data(using: .utf8),
-            !credentials.secretKey.isEmpty else {
-                print("Unable to turn secret into Data")
-                return nil
+        guard let encondedSecret = Data.init(base64Encoded: credentials.secretKey) else {
+            print("Secret is not base64 encoded")
+            return nil
         }
         
-        return encodedSecretData
+        return encondedSecret
     }
     
     func createMessageData(nonce: Int64, path: String) -> Data? {
-        let message = "/api/\(path)\(nonce)"
+        let message = "\(nonce)\(requestMethod.rawValue)\(path)"
+        
         guard let messageData = message.data(using: .utf8) else {
-            print("Message can't be transformed into a data type")
+            print("Can't create data from message")
             return nil
         }
         
