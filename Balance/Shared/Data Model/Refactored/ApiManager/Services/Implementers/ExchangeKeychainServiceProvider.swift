@@ -132,10 +132,9 @@ private extension ExchangeKeychainServiceProvider {
     func buildKeychainAccounts(for source: Source, with identifier: String) -> KeychainAccountValues? {
         switch source {
         case .poloniex:
-            let keychainSecretKeyAccount = "secret institutionId: \(identifier)"
+//            let keychainSecretKeyAccount = "secret institutionId: \(identifier)" // TODO: the old way uses the secretKeyAccount like the same the apiKeyAccount
             let keychainApiKeyAccount = "apiKey institutionId: \(identifier)"
-            
-            return KeychainAccountValues(apiKey: keychainApiKeyAccount, secretKey: keychainSecretKeyAccount)
+            return KeychainAccountValues(apiKey: keychainApiKeyAccount, secretKey: keychainApiKeyAccount)
         case .coinbase:
             let keychainAccessTokenKey = "institutionId: \(identifier)"
             let keychainRefreshTokenKey = "refreshToken institutionId: \(identifier)"

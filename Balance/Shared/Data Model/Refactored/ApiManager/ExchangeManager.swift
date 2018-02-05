@@ -258,6 +258,7 @@ private extension ExchangeManager {
             keychainService.save(source: source, identifier: "\(institution.institutionId)", credentials: credentials)
             repositoryService.createAccounts(for: source, accounts: accounts, institution: institution)
             //TODO: change state
+            
             return
         }
         
