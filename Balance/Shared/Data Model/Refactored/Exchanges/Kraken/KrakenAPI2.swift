@@ -25,9 +25,7 @@ class KrakenAPI2: AbstractApi {
         // and return for handling in the completion block by the app
         fatalError("not implemented")
     }
-    
-    // MARK: Builder methods for Request
-    
+        
     override func createRequest(for action: APIAction) -> URLRequest? {
         switch action.type {
         case .accounts, .transactions:

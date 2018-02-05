@@ -9,7 +9,7 @@
 import Foundation
 
 protocol RepositoryServiceProtocol {
-    func createInstitution(for source: Source) -> Institution?
+    func createInstitution(for source: Source, name: String) -> Institution?
     func createAccounts(for source: Source, accounts: [ExchangeAccount], institution: Institution)
     func createTransactions(for source: Source, transactions: [ExchangeTransaction], institution: Institution)
 }

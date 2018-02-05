@@ -37,6 +37,8 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
             if !credentials.passphrase.isEmpty {
                 save(account: keychainAccounts.commonKey, key: KeychainConstants.passphrase, value: credentials.passphrase)
             }
+        case .ethplorer:
+            save(account: keychainAccounts.addressKey, key: KeychainConstants.address, value: credentials.address)
         default:
             return
         }
@@ -88,13 +90,22 @@ private struct KeychainAccountValues {
     let accessToken: String
     let refreshToken: String
     let commonKey: String
+    let addressKey: String
     
-    init(apiKey: String = "", secretKey: String = "", accessToken: String = "", refreshToken: String = "", commonKey: String = "") {
+    init(apiKey: String = "",
+         secretKey: String = "",
+         accessToken: String = "",
+         refreshToken: String = "",
+         commonKey: String = "",
+         addressKey: String = ""
+        )
+    {
         self.apiKey = apiKey
         self.secretKey = secretKey
         self.accessToken = accessToken
         self.refreshToken = refreshToken
         self.commonKey = commonKey
+        self.addressKey = addressKey
     }
 }
 
@@ -105,6 +116,7 @@ private extension ExchangeKeychainServiceProvider {
         static let accessToken = "accessToken"
         static let refreshToken = "refreshToken"
         static let passphrase = "passphrase"
+        static let address = "address"
     }
     
     func save(identifier: String, value: [String : Any]) throws {
@@ -132,6 +144,8 @@ private extension ExchangeKeychainServiceProvider {
             let realIdentifer = computeIdentifier(for: source, with: identifier)
             
             return KeychainAccountValues(commonKey: realIdentifer)
+        case .ethplorer:
+            return KeychainAccountValues(addressKey: "address institutionId: \(identifier)")
         default:
             return nil
         }

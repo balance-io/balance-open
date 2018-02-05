@@ -9,18 +9,23 @@
 import Foundation
 
 class ExchangeRepositoryServiceProvider: RepositoryServiceProtocol {
-    func createInstitution(for source: Source) -> Institution? {
-        return InstitutionRepository.si.institution(source: source, sourceInstitutionId: "", name: source.description)
+    
+    func createInstitution(for source: Source, name: String) -> Institution? {
+        return InstitutionRepository.si.institution(source: source, sourceInstitutionId: "", name: !name.isEmpty ? name : source.description)
     }
     
     func createAccounts(for source: Source, accounts: [ExchangeAccount], institution: Institution) {
         let accountsUpdated = updateAccounts(accounts, with: institution)
         
         switch source {
+        case .kraken:
+            saveExchangeAccounts(accountsUpdated)
         case .poloniex:
-            savePoloniexAccounts(accounts: accountsUpdated, institution: institution)
+            savePoloniexAccounts(accountsUpdated, institution: institution)
         case .coinbase:
-            saveCoinbaseAccounts(accounts: accountsUpdated, institution: institution)
+            saveCoinbaseAccounts(accountsUpdated, institution: institution)
+        case .ethplorer:
+            saveEthplorerAccounts(accountsUpdated, institution: institution)
         default:
             return
         }
@@ -31,12 +36,32 @@ class ExchangeRepositoryServiceProvider: RepositoryServiceProtocol {
         let transactionsUpdated = updateTransactions(transactions, institution: institution)
         saveExchangeTransactions(transactionsUpdated)
     }
+    
+}
+
+//TODO: Refactor the way for deleting an account(account not used). Look all the implementation are very similar the only diference is the index implementation. "if index == nil"
+//mark: Ethplorer
+private extension ExchangeRepositoryServiceProvider {
+
+    func saveEthplorerAccounts(_ accounts: [ExchangeAccount], institution: Institution) {
+        saveExchangeAccounts(accounts)
+        
+        let savedAccounts = AccountRepository.si.accounts(institutionId: institution.institutionId)
+        for account in savedAccounts {
+            let index = accounts.index(where: {$0.currencyCode == account.currency})
+            if index == nil {
+                // This account doesn't exist in the response, so remove it
+                AccountRepository.si.delete(account: account)
+            }
+        }
+    }
+    
 }
 
 //mark: Coinbase
 private extension ExchangeRepositoryServiceProvider {
     
-    func saveCoinbaseAccounts(accounts: [ExchangeAccount], institution: Institution) {
+    func saveCoinbaseAccounts(_ accounts: [ExchangeAccount], institution: Institution) {
         saveExchangeAccounts(accounts)
         let savedAccounts = AccountRepository.si.accounts(institutionId: institution.institutionId)
         
@@ -54,7 +79,7 @@ private extension ExchangeRepositoryServiceProvider {
 //mark: Poloniex
 private extension ExchangeRepositoryServiceProvider {
     
-    func savePoloniexAccounts(accounts: [ExchangeAccount], institution: Institution) {
+    func savePoloniexAccounts(_ accounts: [ExchangeAccount], institution: Institution) {
         hideLocalAccounts(accounts)
          
         let accounts = AccountRepository.si.accounts(institutionId: institution.institutionId)
@@ -147,5 +172,5 @@ private extension ExchangeRepositoryServiceProvider {
             return transaction
         })
     }
-    
+        
 }
