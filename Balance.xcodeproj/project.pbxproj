@@ -2618,6 +2618,13 @@
 			path = Poloniex;
 			sourceTree = "<group>";
 		};
+		E67EABF22028E21F0070FA3A /* GDAX */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = GDAX;
+			sourceTree = "<group>";
+		};
 		E686DA78202225BC009D5A1E /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
@@ -2629,6 +2636,7 @@
 		E686DA7D20228DEA009D5A1E /* Exchanges */ = {
 			isa = PBXGroup;
 			children = (
+				E67EABF22028E21F0070FA3A /* GDAX */,
 				E67EABDC2028D3710070FA3A /* Poloniex */,
 				E67EABDB2028D3680070FA3A /* Coinbase */,
 				E67EABD22028A8260070FA3A /* Bitfinex */,
