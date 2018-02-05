@@ -54,6 +54,7 @@ class ExchangeManager {
     private lazy var poloniexExchangeAPI = { return PoloniexAPI2(session: urlSession) }()
     private lazy var coinbaseExchangeAPI = { return CoinbaseAPI2(session: urlSession) }()
     private lazy var ethploreExchangeAPI = { return EthplorerAPI2(session: urlSession) }()
+    private lazy var bitfinexExchangeAPI = { return BitfinexAPI2(session: urlSession) }()
     
     init(urlSession: URLSession? = nil, repositoryService: RepositoryServiceProtocol? = nil, keychainService: KeychainServiceProtocol? = nil) {
         self.urlSession = urlSession ?? certValidatedSession
@@ -83,7 +84,10 @@ extension ExchangeManager: ExchangeManagerActions {
             exchangeAction = KrakenApiAction(type: .accounts, credentials: credentials)
         case .ethplorer:
             exchangeApi = ethploreExchangeAPI
-            exchangeAction = EthplorerAPI2Action(type: .transactions(input: nil), credentials: credentials)
+            exchangeAction = EthplorerAPI2Action(type: .accounts, credentials: credentials)
+        case .bitfinex:
+            exchangeApi = bitfinexExchangeAPI
+            exchangeAction = BitfinexAPI2Action(type: .accounts, credentials: credentials)
         case .coinbase:
             coinbaseExchangeAPI.prepareForAutentication()
             return
@@ -139,6 +143,10 @@ extension ExchangeManager: ExchangeManagerActions {
             exchangeApi = ethploreExchangeAPI
             exchangeAccountAction = EthplorerAPI2Action(type: .accounts, credentials: credentials)
             exchangeTransactionAction = EthplorerAPI2Action(type: .transactions(input: 50), credentials: credentials)
+        case .bitfinex:
+            exchangeApi = bitfinexExchangeAPI
+            exchangeAccountAction = BitfinexAPI2Action(type: .accounts, credentials: credentials)
+            exchangeTransactionAction = BitfinexAPI2Action(type: .transactions(input: nil), credentials: credentials)
         default:
             log.debug("Error - Can't trigger action for api with source \(institution.source.description)")
             return

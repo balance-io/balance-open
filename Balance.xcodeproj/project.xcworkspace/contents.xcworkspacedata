@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/bbaron/workspacex/bal/Balance.xcodeproj">
+      location = "self:../Balance/Shared/Data Model/Refactored/Exchanges/Bitfinex">
    </FileRef>
 </Workspace>

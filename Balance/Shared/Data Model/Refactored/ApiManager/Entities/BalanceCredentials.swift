@@ -75,7 +75,7 @@ private extension BalanceCredentials {
     
     static func areCredentialsValid(_ credentials: Credentials, for source: Source) -> Bool {
         switch source {
-        case .poloniex, .kraken:
+        case .poloniex, .kraken, .bitfinex:
             return !credentials.apiKey.isEmpty && !credentials.secretKey.isEmpty
         case .gdax:
             return !credentials.apiKey.isEmpty && !credentials.secretKey.isEmpty && !credentials.passphrase.isEmpty

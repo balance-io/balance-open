@@ -53,6 +53,15 @@ public enum ApiRequestDataFormat {
     
     // Can be used for POST requests
     case json
+    
+    var header: (key: String, value: String) {
+        switch self {
+        case .json:
+            return (key: "content-type", value: "application/json")
+        case .urlEncoded:
+            return (key: "content-type", value: "application/x-www-form-urlencoded")
+        }
+    }
 }
 
 public enum ApiRequestEncoding {
