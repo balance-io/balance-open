@@ -118,11 +118,6 @@ final class AccountsListViewController: UIViewController {
         
         view.bringSubview(toFront: titleLabel)
         view.bringSubview(toFront: headerAddAcountButton)
-        
-        // NOTE: Due to a bug in UIRefreshControl (since iOS 7...yeah), if we don't call this here the
-        // tintColor will not be used on the first refresh unless the user manually drags the table down a bit
-        showLoadingSpinner()
-        refreshControl.endRefreshing()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -199,19 +194,11 @@ final class AccountsListViewController: UIViewController {
     // MARK: Reload Data
     
     @objc func showLoadingSpinner() {
-        guard !refreshControl.isRefreshing && InstitutionRepository.si.hasInstitutions else {
+        guard !totalBalanceBar.loadingSpinner.isAnimating && !refreshControl.isRefreshing && InstitutionRepository.si.hasInstitutions else {
             return
         }
         
-        // If we're at the top of the view, like on first launch, then slide the view down to show the spinner
-        // otherwise, don't so it doesn't interrupt the user if they've scrolled down but they can still see it
-        // if they scroll up
-        if collectionView.contentOffset == CGPoint.zero {
-            collectionView.setContentOffset(CGPoint(x: 0, y: -1), animated: false)
-            collectionView.setContentOffset(CGPoint(x: 0, y: -refreshControl.frame.size.height), animated: true)
-        }
-        
-        refreshControl.beginRefreshing()
+        totalBalanceBar.loadingSpinner.startAnimating()
     }
     
     @objc func reloadData() {
@@ -239,6 +226,7 @@ final class AccountsListViewController: UIViewController {
         
         if !syncManager.syncing {
             refreshControl.endRefreshing()
+            totalBalanceBar.loadingSpinner.stopAnimating()
         }
         
         async(after: 0.1) {
