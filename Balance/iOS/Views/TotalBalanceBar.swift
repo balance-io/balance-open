@@ -9,20 +9,20 @@
 import UIKit
 
 internal final class TotalBalanceBar: UIView {
-    // Internal
-    internal let totalBalanceLabel: UILabel = {
+    let loadingSpinner = UIActivityIndicatorView(activityIndicatorStyle: .white)
+    
+    private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.Balance.monoFont(ofSize: 16.0, weight: .bold)
+        label.text = "Balance"
+        label.font = UIFont.Balance.font(ofSize: 16.0, weight: .semibold)
         label.textColor = UIColor.white
         
         return label
     }()
     
-    // Private
-    private let titleLabel: UILabel = {
+    let totalBalanceLabel: UILabel = {
         let label = UILabel()
-        label.text = "Balance"
-        label.font = UIFont.Balance.font(ofSize: 16.0, weight: .semibold)
+        label.font = UIFont.Balance.monoFont(ofSize: 16.0, weight: .bold)
         label.textColor = UIColor.white
         
         return label
@@ -38,23 +38,27 @@ internal final class TotalBalanceBar: UIView {
         // Container
         let container = UIView()
         self.addSubview(container)
-        
         container.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
         
         // Title label
-        container.addSubview(self.titleLabel)
-        
-        self.titleLabel.snp.makeConstraints { (make) in
+        container.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.left.equalToSuperview().inset(16.0)
         }
         
-        // Total balance label
-        container.addSubview(self.totalBalanceLabel)
+        // LoadingSpinner
+        container.addSubview(loadingSpinner)
+        loadingSpinner.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalTo(titleLabel.snp.right).offset(10.0)
+        }
         
-        self.totalBalanceLabel.snp.makeConstraints { (make) in
+        // Total balance label
+        container.addSubview(totalBalanceLabel)
+        totalBalanceLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.right.equalToSuperview().inset(16.0)
         }
