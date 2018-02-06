@@ -1,5 +1,5 @@
 //
-//  CurrencyCollectionViewCell.swift
+//  PriceTickerCollectionViewCell.swift
 //  BalanceiOS
 //
 //  Created by Red Davis on 08/11/2017.
@@ -8,26 +8,13 @@
 
 import UIKit
 
-
-internal final class CurrencyCollectionViewCell: UICollectionViewCell, Reusable {
-    // Private
-    private let currencyNameLabel: UILabel = {
-        let label = UILabel()
-        label.font = CurrentTheme.priceTicker.cell.currencyNameFont
-        
-        return label
-    }()
-    
-    private let amountLabel: UILabel = {
-        let label = UILabel()
-        label.font = CurrentTheme.priceTicker.cell.amountFont
-        
-        return label
-    }()
+final class PriceTickerCollectionViewCell: UICollectionViewCell, Reusable {
+    private let currencyNameLabel = UILabel()
+    private let amountLabel = UILabel()
     
     // MARK: Initialization
     
-    internal override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         
         self.backgroundColor = UIColor.clear
@@ -42,25 +29,25 @@ internal final class CurrencyCollectionViewCell: UICollectionViewCell, Reusable 
         self.contentView.layer.masksToBounds = true
         self.contentView.layer.cornerRadius = CurrentTheme.priceTicker.cell.cornerRadius
         
-        // Institution name label
+        // Currency name label
+        currencyNameLabel.font = CurrentTheme.priceTicker.cell.currencyNameFont
         self.contentView.addSubview(self.currencyNameLabel)
-        
         self.currencyNameLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.left.equalToSuperview().inset(15.0)
         }
         
         // Amount label
+        amountLabel.font = CurrentTheme.priceTicker.cell.amountFont
         self.contentView.addSubview(self.amountLabel)
-        
         self.amountLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.right.equalToSuperview().inset(15.0)
         }
     }
     
-    internal required init?(coder aDecoder: NSCoder) {
-        abort()
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("unsupported")
     }
     
     // MARK: Layout

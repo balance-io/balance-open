@@ -8,7 +8,7 @@
 
 import UIKit
 
-internal final class PriceTickerViewController: UIViewController {
+final class PriceTickerViewController: UIViewController {
     
     // Private
     
@@ -25,14 +25,14 @@ internal final class PriceTickerViewController: UIViewController {
     
     // MARK: Initialization
     
-    internal required init() {
+    required init() {
         super.init(nibName: nil, bundle: nil)
         
         self.title = "Ticker"
         self.tabBarItem.image = UIImage(named: "Activity")
     }
     
-    internal required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         abort()
     }
     
@@ -85,7 +85,7 @@ private extension PriceTickerViewController {
         collectionView.backgroundColor = CurrentTheme.priceTicker.collectionView.backgroundColor
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(reusableCell: CurrencyCollectionViewCell.self)
+        collectionView.register(reusableCell: PriceTickerCollectionViewCell.self)
         collectionView.register(reusableSupplementaryView: CustomHeaderReusableView.self,
                                 kind: UICollectionElementKindSectionHeader)
         collectionView.refreshControl = self.refreshControl
@@ -123,7 +123,7 @@ extension PriceTickerViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(at: indexPath) as CurrencyCollectionViewCell
+        return collectionView.dequeueReusableCell(at: indexPath) as PriceTickerCollectionViewCell
     }
 }
 
@@ -131,7 +131,7 @@ extension PriceTickerViewController: UICollectionViewDataSource {
 
 extension PriceTickerViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let currencyCell = cell as? CurrencyCollectionViewCell else {
+        guard let currencyCell = cell as? PriceTickerCollectionViewCell else {
             return
         }
         

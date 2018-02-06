@@ -10,21 +10,21 @@ import LocalAuthentication
 import UIKit
 
 
-internal final class SettingsViewController: UIViewController
+final class SettingsViewController: UIViewController
 {
     // Fileprivate
     fileprivate var tableData = [TableSection]()
     
     // Private
     private let viewModel = AccountsTabViewModel()
-    private let currencyViewModel = CurrencySelectionViewModel()
+    private let currencyViewModel = MainCurrencySelectionViewModel()
     
     private let tableView = UITableView(frame: CGRect.zero, style: .grouped)
     private let biometricLockEnabledSwitch = UISwitch()
     
     // MARK: Initialization
     
-    internal required init()
+    required init()
     {
         super.init(nibName: nil, bundle: nil)
         self.title = "Settings"
@@ -35,7 +35,7 @@ internal final class SettingsViewController: UIViewController
         NotificationCenter.default.addObserver(self, selector: #selector(self.accountRemovedNotification(_:)), name: Notifications.AccountRemoved, object: nil)
     }
     
-    internal required init?(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         fatalError()
     }

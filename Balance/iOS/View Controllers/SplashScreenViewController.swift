@@ -9,14 +9,14 @@
 import UIKit
 
 
-internal final class SplashScreenViewController: UIViewController {
+final class SplashScreenViewController: UIViewController {
     // Private
     private let headerImageView = UIImageView(image: UIImage(named: "intro-logo"))
     
     private let headerLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.white
-        label.font = UIFont.Balance.font(ofSize: 30.0, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 30.0, weight: .semibold)
         label.text = "Balance"
         
         return label
@@ -25,7 +25,7 @@ internal final class SplashScreenViewController: UIViewController {
     private let headerSubtitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(white: 1.0, alpha: 0.75)
-        label.font = UIFont.Balance.font(ofSize: 15.0, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 15.0, weight: .regular)
         label.text = "A wallet for all the world's currencies"
         
         return label

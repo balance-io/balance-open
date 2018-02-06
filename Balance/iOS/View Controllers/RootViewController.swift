@@ -17,7 +17,7 @@ private enum TabIndex: Int {
     case settings = 3
 }
 
-internal final class RootViewController: UIViewController
+final class RootViewController: UIViewController
 {
     // Internal
     
@@ -38,7 +38,7 @@ internal final class RootViewController: UIViewController
     
     // MARK: Initialization
     
-    internal required init()
+    required init()
     {
         super.init(nibName: nil, bundle: nil)
         
@@ -62,7 +62,7 @@ internal final class RootViewController: UIViewController
         NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillEnterForegroundNotification(_:)), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
     }
 
-    internal required init?(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         abort()
     }

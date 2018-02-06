@@ -132,7 +132,7 @@ final class NewAccountViewModel {
     
     // MARK: Initialization
     
-    internal init(source: Source, existingInstitution: Institution?)
+    init(source: Source, existingInstitution: Institution?)
     {
         self.source = source
         self.existingInstitution = existingInstitution
@@ -141,7 +141,7 @@ final class NewAccountViewModel {
     
     // MARK: Authenticate
     
-    internal func authenticate(_ completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void) {
+    func authenticate(_ completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         guard isValid else {
             completionHandler(false, nil)
             return
@@ -150,7 +150,7 @@ final class NewAccountViewModel {
         self.authenticate(with: loginFields, completionHandler: completionHandler)
     }
     
-    internal func authenticate(with fields: [Field], completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void) {
+    func authenticate(with fields: [Field], completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         switch self.source {
         case .gdax:
             self.gdaxAPIClient.authenticationChallenge(loginStrings: fields, existingInstitution: existingInstitution) { (success, error, _) in

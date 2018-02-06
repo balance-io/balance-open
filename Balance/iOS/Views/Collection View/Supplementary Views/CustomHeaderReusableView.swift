@@ -9,9 +9,9 @@
 import UIKit
 
 
-internal final class CustomHeaderReusableView: UICollectionReusableView, Reusable {
+final class CustomHeaderReusableView: UICollectionReusableView, Reusable {
     
-    internal let textLabel: UILabel = {
+    let textLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 11.0, weight: .bold)
         label.textColor = UIColor(red: 60.0/255.0, green: 68.0/255.0, blue: 79.0/255.0, alpha: 0.4)
@@ -21,7 +21,7 @@ internal final class CustomHeaderReusableView: UICollectionReusableView, Reusabl
     
     // MARK: Initialization
     
-    internal override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         
         // Text label

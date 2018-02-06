@@ -10,14 +10,14 @@ import LocalAuthentication
 import UIKit
 
 
-internal protocol UnlockApplicationViewControllerDelegate: class {
+protocol UnlockApplicationViewControllerDelegate: class {
     func didAuthenticateUser(in controller: UnlockApplicationViewController)
 }
 
 
-internal final class UnlockApplicationViewController: UIViewController {
+final class UnlockApplicationViewController: UIViewController {
     // Internal
-    internal weak var delegate: UnlockApplicationViewControllerDelegate?
+    weak var delegate: UnlockApplicationViewControllerDelegate?
     
     // Private
     private let authenticateContext = LAContext()
@@ -28,7 +28,7 @@ internal final class UnlockApplicationViewController: UIViewController {
         label.numberOfLines = 0
         label.textColor = UIColor.white
         label.textAlignment = .center
-        label.font = UIFont.Balance.font(ofSize: 25.0, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 25.0, weight: .semibold)
         
         return label
     }()
@@ -36,7 +36,7 @@ internal final class UnlockApplicationViewController: UIViewController {
     private let retryAuthenticationButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = UIColor.white
-        button.titleLabel?.font = UIFont.Balance.font(ofSize: 16.0, weight: .regular)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
         button.setTitle("Retry", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.cornerRadius = 4.0

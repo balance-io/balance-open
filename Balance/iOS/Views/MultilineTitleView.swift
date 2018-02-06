@@ -9,10 +9,10 @@
 import UIKit
 
 
-internal final class MultilineTitleView: UIView
+final class MultilineTitleView: UIView
 {
     // Internal
-    internal let titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         label.lineBreakMode = .byTruncatingTail
@@ -21,7 +21,7 @@ internal final class MultilineTitleView: UIView
         return label
     }()
     
-    internal let detailLabel: UILabel = {
+    let detailLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.light)
         label.lineBreakMode = .byTruncatingTail
@@ -32,7 +32,7 @@ internal final class MultilineTitleView: UIView
     
     // MARK: Initialization
     
-    internal required init()
+    required init()
     {
         super.init(frame: CGRect.zero)
         
@@ -63,7 +63,7 @@ internal final class MultilineTitleView: UIView
         }
     }
     
-    internal required init?(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         fatalError("Unused")
     }

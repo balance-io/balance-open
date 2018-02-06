@@ -10,14 +10,14 @@ import AVFoundation
 import UIKit
 
 
-internal protocol QRCodeScannerViewControllerDelegate: class {
+protocol QRCodeScannerViewControllerDelegate: class {
     func didFind(value: String, in controller: QRCodeScannerViewController)
 }
 
 
-internal final  class QRCodeScannerViewController: UIViewController {
+final  class QRCodeScannerViewController: UIViewController {
     // Internal
-    internal weak var delegate: QRCodeScannerViewControllerDelegate?
+    weak var delegate: QRCodeScannerViewControllerDelegate?
     
     // Private
     private let session: AVCaptureSession = {

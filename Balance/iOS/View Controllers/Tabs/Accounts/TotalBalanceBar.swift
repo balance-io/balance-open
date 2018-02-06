@@ -8,7 +8,7 @@
 
 import UIKit
 
-internal final class TotalBalanceBar: UIView {
+final class TotalBalanceBar: UIView {
     let loadingSpinner = UIActivityIndicatorView(activityIndicatorStyle: .white)
     
     private let titleLabel: UILabel = {
@@ -30,7 +30,7 @@ internal final class TotalBalanceBar: UIView {
     
     // MARK: Initialization
     
-    internal required init() {
+    required init() {
         super.init(frame: .zero)
         
         self.backgroundColor = CurrentTheme.accounts.balanceBar.backgroundColor

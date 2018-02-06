@@ -9,17 +9,17 @@
 import UIKit
 
 
-internal final class TextFieldTableViewCell: TableViewCell
+final class TextFieldTableViewCell: TableViewCell
 {
     // Internal
-    internal let titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17.0, weight: .regular)
         
         return label
     }()
     
-    internal var textField: UITextField? {
+    var textField: UITextField? {
         willSet
         {
             self.textField?.removeFromSuperview()
@@ -49,7 +49,7 @@ internal final class TextFieldTableViewCell: TableViewCell
     
     // MARK: Initialization
     
-    internal override init(style: UITableViewCellStyle, reuseIdentifier: String?)
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?)
     {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         
@@ -80,7 +80,7 @@ internal final class TextFieldTableViewCell: TableViewCell
         self.contentView.addGestureRecognizer(tapGesture)
     }
     
-    internal required init?(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         fatalError()
     }

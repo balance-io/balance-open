@@ -8,13 +8,13 @@
 
 import Foundation
 
-internal enum ResizingBehavior: Int {
+enum ResizingBehavior: Int {
     case aspectFit /// The content is proportionally resized to fit into the target rectangle.
     case aspectFill /// The content is proportionally resized to completely fill the target rectangle.
     case stretch /// The content is stretched to match the entire target rectangle.
     case center /// The content is centered in the target rectangle, but it is NOT resized.
     
-    internal func apply(rect: Rect, target: Rect) -> Rect {
+    func apply(rect: Rect, target: Rect) -> Rect {
         if rect == target || target == Rect.zero {
             return rect
         }

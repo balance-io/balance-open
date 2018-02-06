@@ -9,9 +9,9 @@
 import UIKit
 
 
-internal final class MainCurrencySelectionViewController: UIViewController {
+final class MainCurrencySelectionViewController: UIViewController {
     // Fileprivate
-    fileprivate let viewModel = CurrencySelectionViewModel()
+    fileprivate let viewModel = MainCurrencySelectionViewModel()
     
     // Private
     private let tableView = UITableView(frame: CGRect.zero, style: .plain)

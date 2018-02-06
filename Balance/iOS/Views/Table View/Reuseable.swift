@@ -9,12 +9,12 @@
 import UIKit
 
 
-internal protocol Reusable: class
+protocol Reusable: class
 {
     static var reuseIdentifier: String { get }
 }
 
-internal extension Reusable
+extension Reusable
 {
     static var reuseIdentifier: String { return String(describing: Self.self) }
 }
@@ -22,7 +22,7 @@ internal extension Reusable
 
 // MARK: UITableView
 
-internal extension UITableView
+extension UITableView
 {
     func register<T: UITableViewCell>(reusableCell: T.Type) where T: Reusable
     {
@@ -48,7 +48,7 @@ internal extension UITableView
 
 // MARK: UICollectionView
 
-internal extension UICollectionView
+extension UICollectionView
 {
     func register<T: UICollectionReusableView>(reusableSupplementaryView: T.Type, kind: String) where T: Reusable
     {

@@ -9,10 +9,10 @@
 import UIKit
 
 
-internal final class SegmentedControlTableViewCell: TableViewCell
+final class SegmentedControlTableViewCell: TableViewCell
 {
     // Internal
-    internal var segmentedControl: UISegmentedControl? {
+    var segmentedControl: UISegmentedControl? {
         willSet
         {
             self.segmentedControl?.removeFromSuperview()
@@ -36,13 +36,13 @@ internal final class SegmentedControlTableViewCell: TableViewCell
     
     // MARK: Initialization
     
-    internal override init(style: UITableViewCellStyle, reuseIdentifier: String?)
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?)
     {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
     }
     
-    internal required init?(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         fatalError()
     }

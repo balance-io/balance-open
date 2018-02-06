@@ -23,10 +23,10 @@ fileprivate extension Source {
 }
 
 fileprivate let hideConvertedAmounts = true
-internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusable
+final class TransactionCollectionViewCell: UICollectionViewCell, Reusable
 {
     // Internal
-    internal var transaction: Transaction? {
+    var transaction: Transaction? {
         didSet
         {
             self.reloadData()
@@ -68,7 +68,7 @@ internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusab
     
     // MARK: Initialization
     
-    internal override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         
         self.backgroundColor = UIColor.clear
@@ -130,7 +130,7 @@ internal final class TransactionCollectionViewCell: UICollectionViewCell, Reusab
         self.userCurrencyAmountLabel.isHidden = hideConvertedAmounts
     }
     
-    internal required init?(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         fatalError()
     }

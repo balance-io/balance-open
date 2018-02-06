@@ -13,7 +13,7 @@ import UIKit
     func expandedHeightForItem(at indexPath: IndexPath, in collectionView: UICollectionView) -> CGFloat
 }
 
-internal final class StackedLayout: UICollectionViewLayout {
+final class StackedLayout: UICollectionViewLayout {
     weak var delegate: StackedLayoutDelegate?
     
     // Private
@@ -43,7 +43,7 @@ internal final class StackedLayout: UICollectionViewLayout {
         return true
     }
     
-    internal override func prepare() {
+    override func prepare() {
         super.prepare()
         
         guard let collectionView = self.collectionView, let selectedIndexPaths = collectionView.indexPathsForSelectedItems else {

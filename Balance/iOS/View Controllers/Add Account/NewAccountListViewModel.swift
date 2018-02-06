@@ -9,10 +9,10 @@
 import Foundation
 
 
-internal final class NewAccountListViewModel
+final class NewAccountListViewModel
 {
     // Internal
-    internal var numberOfSources: Int {
+    var numberOfSources: Int {
         return self.sources.count
     }
     
@@ -21,14 +21,14 @@ internal final class NewAccountListViewModel
 
     // MARK: Initialization
     
-    internal required init()
+    required init()
     {
         
     }
     
     // MARK: Data
     
-    internal func source(at index: Int) -> Source
+    func source(at index: Int) -> Source
     {
         return self.sources[index]
     }

@@ -9,7 +9,7 @@
 import UIKit
 
 
-internal final class TransactionsListViewController: UIViewController, TransactionsTabViewModelDelegate {
+final class TransactionsListViewController: UIViewController, TransactionsTabViewModelDelegate {
     // Private
     private let viewModel = TransactionsTabViewModel()
     private let refreshControl = UIRefreshControl()
@@ -23,14 +23,14 @@ internal final class TransactionsListViewController: UIViewController, Transacti
     
     // MARK: Initialization
     
-    internal required init() {
+    required init() {
         super.init(nibName: nil, bundle: nil)
         
         self.title = "Transactions"
         self.tabBarItem.image = UIImage(named: "Cash")
     }
     
-    internal required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         abort()
     }
 

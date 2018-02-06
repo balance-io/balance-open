@@ -11,7 +11,7 @@ import UIKit
 
 // MARK: TableSection
 
-internal struct TableSection
+struct TableSection
 {
     let title: String?
     var rows: [TableRow]
@@ -20,24 +20,24 @@ internal struct TableSection
 
 // MARK: TableRow
 
-internal struct TableRow
+struct TableRow
 {
     // Internal
     typealias CellPreparationHandler = (_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell
     typealias ActionHandler = (_ indexPath: IndexPath) -> Void
     typealias DeletionHandler = (_ indexPath: IndexPath) -> Void
     
-    internal let cellPreparationHandler: CellPreparationHandler
-    internal var actionHandler: ActionHandler?
-    internal var deletionHandler: DeletionHandler?
+    let cellPreparationHandler: CellPreparationHandler
+    var actionHandler: ActionHandler?
+    var deletionHandler: DeletionHandler?
     
-    internal var isDeletable: Bool {
+    var isDeletable: Bool {
         return self.deletionHandler != nil
     }
     
     // MARK: Initialization
     
-    internal init(cellPreparationHandler: @escaping CellPreparationHandler)
+    init(cellPreparationHandler: @escaping CellPreparationHandler)
     {
         self.cellPreparationHandler = cellPreparationHandler
     }

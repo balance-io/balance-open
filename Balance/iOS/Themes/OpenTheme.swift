@@ -25,30 +25,30 @@ struct OpenTheme: Theme {
         
         let headerCell = AccountsTheme.HeaderCellTheme(
             height: 60.0,
-            nameFont: UIFont.Balance.monoFont(ofSize: 16.0, weight: .semibold),
+            nameFont: UIFont.monoFont(ofSize: 16.0, weight: .semibold),
             nameColor: .white,
-            totalBalanceFont: UIFont.Balance.monoFont(ofSize: 16.0, weight: .semibold),
+            totalBalanceFont: UIFont.monoFont(ofSize: 16.0, weight: .semibold),
             totalBalanceColor: .white,
             bottomBorderColor: UIColor(white: 1.0, alpha: 0.06)
         )
                 
         let cell = AccountsTheme.CellTheme(
             height: 60.0,
-            currencyNameFont: UIFont.Balance.monoFont(ofSize: 12.5, weight: .regular),
+            currencyNameFont: UIFont.monoFont(ofSize: 12.5, weight: .regular),
             currencyNameColor: UIColor(white: 1.0, alpha: 0.8),
-            amountFont: UIFont.Balance.monoFont(ofSize: 12.5, weight: .regular),
+            amountFont: UIFont.monoFont(ofSize: 12.5, weight: .regular),
             amountColor:  UIColor(white: 1.0, alpha: 0.95),
             bottomBorderColor: UIColor(white: 1.0, alpha: 0.06),
-            detailLabelFont: UIFont.Balance.monoFont(ofSize: 14.0, weight: .medium),
+            detailLabelFont: UIFont.monoFont(ofSize: 14.0, weight: .medium),
             detailLabelColor: .white
         )
         
         let balanceBar = AccountsTheme.BalanceBarTheme(
             height: 60.0,
             backgroundColor: UIColor(red: 39.0/255.0, green: 45.0/255.0, blue: 54.0/255.0, alpha: 0.6),
-            titleFont: UIFont.Balance.font(ofSize: 16.0, weight: .semibold),
+            titleFont: UIFont.systemFont(ofSize: 16.0, weight: .semibold),
             titleColor: .white,
-            totalBalanceFont: UIFont.Balance.monoFont(ofSize: 16.0, weight: .bold),
+            totalBalanceFont: UIFont.monoFont(ofSize: 16.0, weight: .bold),
             totalBalanceColor: .white
         )
         
@@ -70,10 +70,10 @@ struct OpenTheme: Theme {
             shadowRadius: 2.0,
             shadowOpacity: 0.04,
             
-            institutionNameFont: UIFont.Balance.monoFont(ofSize: 12.0, weight: .medium),
-            transactionTypeFont: UIFont.Balance.font(ofSize: 12.0, weight: .medium),
-            amountFont: UIFont.Balance.monoFont(ofSize: 14.0, weight: .medium),
-            userCurrencyAmountFont: UIFont.Balance.monoFont(ofSize: 14.0, weight: .medium))
+            institutionNameFont: UIFont.monoFont(ofSize: 12.0, weight: .medium),
+            transactionTypeFont: UIFont.systemFont(ofSize: 12.0, weight: .medium),
+            amountFont: UIFont.monoFont(ofSize: 14.0, weight: .medium),
+            userCurrencyAmountFont: UIFont.monoFont(ofSize: 14.0, weight: .medium))
         
         return TransactionsTheme(collectionView: collectionView, cell: cell)
     }
@@ -95,8 +95,8 @@ struct OpenTheme: Theme {
             shadowRadius: 2.0,
             shadowOpacity: 0.04,
             
-            currencyNameFont: UIFont.Balance.monoFont(ofSize: 12.5, weight: .regular),
-            amountFont: UIFont.Balance.monoFont(ofSize: 12.5, weight: .regular)
+            currencyNameFont: UIFont.monoFont(ofSize: 12.5, weight: .regular),
+            amountFont: UIFont.monoFont(ofSize: 12.5, weight: .regular)
         )
         
         return PriceTickerTheme(collectionView: collectionView, cell: cell)

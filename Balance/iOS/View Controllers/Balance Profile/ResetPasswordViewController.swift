@@ -9,7 +9,7 @@
 import UIKit
 
 
-internal final class ResetPasswordViewController: UIViewController {
+final class ResetPasswordViewController: UIViewController {
     // Private
     private let container = UIView()
     
@@ -49,7 +49,7 @@ internal final class ResetPasswordViewController: UIViewController {
     
     // MARK: Initialization
     
-    internal required init()
+    required init()
     {
         super.init(nibName: nil, bundle: nil)
         
@@ -58,7 +58,7 @@ internal final class ResetPasswordViewController: UIViewController {
         
     }
     
-    internal required init?(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         fatalError()
     }

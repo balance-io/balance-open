@@ -9,10 +9,10 @@
 import Foundation
 
 
-internal final class InstitutionSettingsViewModel
+final class InstitutionSettingsViewModel
 {
     // Internal
-    internal var numberOfAccounts: Int {
+    var numberOfAccounts: Int {
         return self.accounts.count
     }
     
@@ -22,7 +22,7 @@ internal final class InstitutionSettingsViewModel
     
     // MARK: Initialization
     
-    internal required init(institution: Institution)
+    required init(institution: Institution)
     {
         self.institution = institution
         self.accounts = AccountRepository.si.accounts(institutionId: institution.institutionId, includeHidden: true)
@@ -30,12 +30,12 @@ internal final class InstitutionSettingsViewModel
     
     // MARK: Accounts
     
-    internal func account(at index: Int) -> Account
+    func account(at index: Int) -> Account
     {
         return self.accounts[index]
     }
     
-    internal func set(account: Account, hidden: Bool)
+    func set(account: Account, hidden: Bool)
     {
         account.isHidden = hidden
     }

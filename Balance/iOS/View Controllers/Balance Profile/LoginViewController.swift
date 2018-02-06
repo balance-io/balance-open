@@ -10,7 +10,7 @@ import OnePasswordExtension
 import UIKit
 
 
-internal final class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
     // Private
     private let container = UIView()
     

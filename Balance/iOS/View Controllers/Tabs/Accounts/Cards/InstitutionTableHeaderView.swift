@@ -22,9 +22,9 @@ fileprivate extension Source {
     }
 }
 
-internal final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Reusable {
+final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Reusable {
     // Internal
-    internal var institution: Institution? {
+    var institution: Institution? {
         didSet {
             self.reloadData()
         }
@@ -58,7 +58,7 @@ internal final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Re
     
     // MARK: Initialization
     
-    internal override init(reuseIdentifier: String?) {
+    override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         
         // Name label
@@ -96,7 +96,7 @@ internal final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Re
         }
     }
     
-    internal required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
     

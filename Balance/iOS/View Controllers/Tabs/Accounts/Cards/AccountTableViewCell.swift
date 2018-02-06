@@ -9,9 +9,9 @@
 import UIKit
 
 
-internal final class AccountTableViewCell: TableViewCell {
+final class AccountTableViewCell: TableViewCell {
     // Internal
-    internal var account: Account? {
+    var account: Account? {
         didSet {
             self.reloadData()
         }
@@ -43,7 +43,7 @@ internal final class AccountTableViewCell: TableViewCell {
     
     // MARK: Initialization
     
-    internal override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
         
         self.backgroundView = nil
@@ -80,7 +80,7 @@ internal final class AccountTableViewCell: TableViewCell {
         }
     }
     
-    internal required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
     

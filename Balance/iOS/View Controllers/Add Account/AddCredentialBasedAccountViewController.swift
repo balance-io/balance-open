@@ -10,7 +10,7 @@ import SVProgressHUD
 import UIKit
 import WebKit
 
-internal class AddCredentialBasedAccountViewController: UIViewController
+class AddCredentialBasedAccountViewController: UIViewController
 {
     // Private
     private let viewModel: NewAccountViewModel
@@ -21,13 +21,13 @@ internal class AddCredentialBasedAccountViewController: UIViewController
     
     // MARK: Initialization
     
-    internal required init(viewModel: NewAccountViewModel)
+    required init(viewModel: NewAccountViewModel)
     {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
-    internal required init?(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         fatalError()
     }

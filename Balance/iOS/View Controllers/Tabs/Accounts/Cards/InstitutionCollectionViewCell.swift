@@ -9,10 +9,10 @@
 import UIKit
 
 
-internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusable {
+final class InstitutionCollectionViewCell: UICollectionViewCell, Reusable {
     static let measurementCell = InstitutionCollectionViewCell()
     
-    var viewModel: InstitutionAccountsListViewModel? {
+    var viewModel: AccountsListViewModel? {
         didSet {
             self.reloadData()
         }
@@ -29,9 +29,9 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
     }
     
     // Internal
-    internal private(set) var expandedContentHeight: CGFloat = 0.0
+    private(set) var expandedContentHeight: CGFloat = 0.0
     
-    internal var closedContentHeight: CGFloat {
+    var closedContentHeight: CGFloat {
         return 99.0
     }
     
@@ -41,7 +41,7 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
     
     // MARK: Initialization
     
-    internal override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         
         self.selectedBackgroundView = nil
@@ -74,7 +74,7 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
         self.contentView.dropShadow()
     }
     
-    internal required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
     

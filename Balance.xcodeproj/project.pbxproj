@@ -62,7 +62,6 @@
 		2DFB60042020D08700C4B817 /* BtcAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFB60032020D08700C4B817 /* BtcAccountTests.swift */; };
 		2DFB60092020D5B300C4B817 /* BtcApiResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DFB60082020D5B300C4B817 /* BtcApiResponse.json */; };
 		40A90EA5200959840063B2F5 /* AddNewAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA4200959840063B2F5 /* AddNewAccountView.swift */; };
-		40A90EA7200EA7C60063B2F5 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA6200EA7C60063B2F5 /* UIView+Shadow.swift */; };
 		40A90EA9200F9A4C0063B2F5 /* BlankStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA8200F9A4C0063B2F5 /* BlankStateView.swift */; };
 		5300D6261DCE5A1E00D02657 /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5300D6251DCE5A1E00D02657 /* LockViewController.swift */; };
 		5301A7611F17DC8B00668099 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301A7601F17DC8B00668099 /* URL.swift */; };
@@ -217,7 +216,6 @@
 		53561EAE1F82DD260043D4F9 /* InstitutionSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53561E881F82DD120043D4F9 /* InstitutionSettingsViewModel.swift */; };
 		53561EAF1F82DD260043D4F9 /* NewAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53561E891F82DD120043D4F9 /* NewAccountViewModel.swift */; };
 		53561EB01F82DD260043D4F9 /* Reuseable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53561E8C1F82DD120043D4F9 /* Reuseable.swift */; };
-		53561EB11F82DD260043D4F9 /* Value1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53561E8E1F82DD120043D4F9 /* Value1TableViewCell.swift */; };
 		53561EB21F82DD260043D4F9 /* SegmentedControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53561E8F1F82DD120043D4F9 /* SegmentedControlTableViewCell.swift */; };
 		53561EB31F82DD260043D4F9 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53561E901F82DD120043D4F9 /* TableViewCell.swift */; };
 		53561EB41F82DD260043D4F9 /* TableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53561E911F82DD120043D4F9 /* TableData.swift */; };
@@ -446,8 +444,8 @@
 		A453A5231F866CFF0002C6C8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A453A5221F866CFF0002C6C8 /* LoginViewController.swift */; };
 		A453A5261F8676F00002C6C8 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A453A5251F8676F00002C6C8 /* RegistrationViewController.swift */; };
 		A456ED0D1FB225A6006EE529 /* PriceTickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456ED0C1FB225A6006EE529 /* PriceTickerViewController.swift */; };
-		A456ED121FB3067D006EE529 /* CurrencyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456ED111FB3067D006EE529 /* CurrencyCollectionViewCell.swift */; };
-		A456ED151FB31A33006EE529 /* UIFont+Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456ED141FB31A33006EE529 /* UIFont+Balance.swift */; };
+		A456ED121FB3067D006EE529 /* PriceTickerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456ED111FB3067D006EE529 /* PriceTickerCollectionViewCell.swift */; };
+		A456ED151FB31A33006EE529 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456ED141FB31A33006EE529 /* UIFont.swift */; };
 		A459EDA41F839D9800DC4B51 /* TransactionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A459EDA31F839D9800DC4B51 /* TransactionsListViewController.swift */; };
 		A459EDA81F83D2BB00DC4B51 /* TransactionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A459EDA71F83D2BB00DC4B51 /* TransactionCollectionViewCell.swift */; };
 		A467DFC51F98EBFD0063882C /* Currency+MasterCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = A467DFC41F98EBFD0063882C /* Currency+MasterCurrency.swift */; };
@@ -504,7 +502,7 @@
 		A4ED56DB1F86301A00E4CC42 /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED56DA1F86301A00E4CC42 /* AccountTableViewCell.swift */; };
 		A4ED56DE1F86378200E4CC42 /* InstitutionTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED56DD1F86378200E4CC42 /* InstitutionTableHeaderView.swift */; };
 		A4ED56E11F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ED56E01F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift */; };
-		A4EF39E71F8E43A40032265E /* InstitutionAccountsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EF39E61F8E43A40032265E /* InstitutionAccountsListViewModel.swift */; };
+		A4EF39E71F8E43A40032265E /* AccountsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EF39E61F8E43A40032265E /* AccountsListViewModel.swift */; };
 		A4F273E01FC2DBF100493077 /* OnePasswordExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F273DF1FC2DBF000493077 /* OnePasswordExtension.framework */; };
 		DC1A649F1B867B1F009356A0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1A649D1B867B1F009356A0 /* MainMenu.xib */; };
 		DC33D6D21CDDB22900E213FF /* ObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = DC33D6D11CDDB22900E213FF /* ObjC.m */; };
@@ -519,12 +517,12 @@
 		DCC684D81BD1080E00E95B90 /* TransactionsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC684D71BD1080E00E95B90 /* TransactionsTabViewController.swift */; };
 		DCDF77BD1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDF77BC1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift */; };
 		DCDF77BF1BE6C703004AF8AE /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDF77BE1BE6C703004AF8AE /* PreferencesViewController.swift */; };
-		E605EF7F20065F3700A95632 /* UIView+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605EF7D20065EFA00A95632 /* UIView+Size.swift */; };
+		E605EF7F20065F3700A95632 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605EF7D20065EFA00A95632 /* UIView.swift */; };
 		E605EF8320065FE700A95632 /* ReconnectAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605EF8120065FDD00A95632 /* ReconnectAccountViewModel.swift */; };
-		E605EF862006851300A95632 /* Collection+Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605EF852006851300A95632 /* Collection+Index.swift */; };
+		E605EF862006851300A95632 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605EF852006851300A95632 /* Collection.swift */; };
 		E605EF882006AC8F00A95632 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E605EF872006AC8E00A95632 /* RxSwift.framework */; };
 		E605EF8A2006B6BF00A95632 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E605EF892006B6BF00A95632 /* RxCocoa.framework */; };
-		E605EF8F2006BF3C00A95632 /* UIViewController+Present.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605EF8D2006BF3600A95632 /* UIViewController+Present.swift */; };
+		E605EF8F2006BF3C00A95632 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605EF8D2006BF3600A95632 /* UIViewController.swift */; };
 		E653123E1FE8C20700F57977 /* NewExchangeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E653123D1FE8C20600F57977 /* NewExchangeAPI.swift */; };
 		E65312451FE8C22E00F57977 /* BITTREXApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312411FE8C22D00F57977 /* BITTREXApi.swift */; };
 		E653124C1FE8C28D00F57977 /* BITTREXCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312491FE8C28D00F57977 /* BITTREXCurrency.swift */; };
@@ -665,7 +663,6 @@
 		2DFB60032020D08700C4B817 /* BtcAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtcAccountTests.swift; sourceTree = "<group>"; };
 		2DFB60082020D5B300C4B817 /* BtcApiResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BtcApiResponse.json; sourceTree = "<group>"; };
 		40A90EA4200959840063B2F5 /* AddNewAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewAccountView.swift; sourceTree = "<group>"; };
-		40A90EA6200EA7C60063B2F5 /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
 		40A90EA8200F9A4C0063B2F5 /* BlankStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankStateView.swift; sourceTree = "<group>"; };
 		5300D6251DCE5A1E00D02657 /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
 		5301A7601F17DC8B00668099 /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
@@ -768,7 +765,6 @@
 		53561E881F82DD120043D4F9 /* InstitutionSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionSettingsViewModel.swift; sourceTree = "<group>"; };
 		53561E891F82DD120043D4F9 /* NewAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAccountViewModel.swift; sourceTree = "<group>"; };
 		53561E8C1F82DD120043D4F9 /* Reuseable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reuseable.swift; sourceTree = "<group>"; };
-		53561E8E1F82DD120043D4F9 /* Value1TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Value1TableViewCell.swift; sourceTree = "<group>"; };
 		53561E8F1F82DD120043D4F9 /* SegmentedControlTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlTableViewCell.swift; sourceTree = "<group>"; };
 		53561E901F82DD120043D4F9 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		53561E911F82DD120043D4F9 /* TableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableData.swift; sourceTree = "<group>"; };
@@ -955,8 +951,8 @@
 		A453A5221F866CFF0002C6C8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A453A5251F8676F00002C6C8 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		A456ED0C1FB225A6006EE529 /* PriceTickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTickerViewController.swift; sourceTree = "<group>"; };
-		A456ED111FB3067D006EE529 /* CurrencyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCollectionViewCell.swift; sourceTree = "<group>"; };
-		A456ED141FB31A33006EE529 /* UIFont+Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Balance.swift"; sourceTree = "<group>"; };
+		A456ED111FB3067D006EE529 /* PriceTickerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTickerCollectionViewCell.swift; sourceTree = "<group>"; };
+		A456ED141FB31A33006EE529 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		A459EDA31F839D9800DC4B51 /* TransactionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListViewController.swift; sourceTree = "<group>"; };
 		A459EDA71F83D2BB00DC4B51 /* TransactionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCollectionViewCell.swift; sourceTree = "<group>"; };
 		A467DFC41F98EBFD0063882C /* Currency+MasterCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Currency+MasterCurrency.swift"; sourceTree = "<group>"; };
@@ -993,7 +989,7 @@
 		A4ED56DA1F86301A00E4CC42 /* AccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
 		A4ED56DD1F86378200E4CC42 /* InstitutionTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionTableHeaderView.swift; sourceTree = "<group>"; };
 		A4ED56E01F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCurrencySelectionViewController.swift; sourceTree = "<group>"; };
-		A4EF39E61F8E43A40032265E /* InstitutionAccountsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionAccountsListViewModel.swift; sourceTree = "<group>"; };
+		A4EF39E61F8E43A40032265E /* AccountsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListViewModel.swift; sourceTree = "<group>"; };
 		A4F273DF1FC2DBF000493077 /* OnePasswordExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OnePasswordExtension.framework; path = Carthage/Build/iOS/OnePasswordExtension.framework; sourceTree = "<group>"; };
 		DC1A64941B867B1F009356A0 /* Balance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC1A64981B867B1F009356A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1013,12 +1009,12 @@
 		DCC684D71BD1080E00E95B90 /* TransactionsTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionsTabViewController.swift; sourceTree = "<group>"; };
 		DCDF77BC1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesGeneralViewController.swift; sourceTree = "<group>"; };
 		DCDF77BE1BE6C703004AF8AE /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
-		E605EF7D20065EFA00A95632 /* UIView+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Size.swift"; sourceTree = "<group>"; };
+		E605EF7D20065EFA00A95632 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		E605EF8120065FDD00A95632 /* ReconnectAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountViewModel.swift; sourceTree = "<group>"; };
-		E605EF852006851300A95632 /* Collection+Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Index.swift"; sourceTree = "<group>"; };
+		E605EF852006851300A95632 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		E605EF872006AC8E00A95632 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		E605EF892006B6BF00A95632 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
-		E605EF8D2006BF3600A95632 /* UIViewController+Present.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Present.swift"; sourceTree = "<group>"; };
+		E605EF8D2006BF3600A95632 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		E653123D1FE8C20600F57977 /* NewExchangeAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewExchangeAPI.swift; sourceTree = "<group>"; };
 		E65312411FE8C22D00F57977 /* BITTREXApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXApi.swift; sourceTree = "<group>"; };
 		E65312491FE8C28D00F57977 /* BITTREXCurrency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BITTREXCurrency.swift; path = "Balance/Shared/Data Model/APIs/BITTREX/DTO/BITTREXCurrency.swift"; sourceTree = SOURCE_ROOT; };
@@ -1574,7 +1570,6 @@
 		53561E8D1F82DD120043D4F9 /* Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
-				53561E8E1F82DD120043D4F9 /* Value1TableViewCell.swift */,
 				53561E8F1F82DD120043D4F9 /* SegmentedControlTableViewCell.swift */,
 				53561E901F82DD120043D4F9 /* TableViewCell.swift */,
 				53561E911F82DD120043D4F9 /* TableData.swift */,
@@ -1711,13 +1706,9 @@
 		539298C8202A4EB300BAEF91 /* Accounts */ = {
 			isa = PBXGroup;
 			children = (
+				539298CB202A589900BAEF91 /* Cards */,
 				53561E9A1F82DD120043D4F9 /* AccountsListViewController.swift */,
-				A4307A8F1F8F6EA800BBA8B4 /* StackedCardCollectionView.swift */,
-				A42953CF1F8E1EB300729045 /* StackedLayout.swift */,
-				A4ED56DD1F86378200E4CC42 /* InstitutionTableHeaderView.swift */,
-				A42953D31F8E255D00729045 /* InstitutionCollectionViewCell.swift */,
-				A4ED56DA1F86301A00E4CC42 /* AccountTableViewCell.swift */,
-				A4EF39E61F8E43A40032265E /* InstitutionAccountsListViewModel.swift */,
+				A4EF39E61F8E43A40032265E /* AccountsListViewModel.swift */,
 				A432F5E71FBDA09D00DDDAFF /* TotalBalanceBar.swift */,
 			);
 			path = Accounts;
@@ -1736,9 +1727,21 @@
 			isa = PBXGroup;
 			children = (
 				A456ED0C1FB225A6006EE529 /* PriceTickerViewController.swift */,
-				A456ED111FB3067D006EE529 /* CurrencyCollectionViewCell.swift */,
+				A456ED111FB3067D006EE529 /* PriceTickerCollectionViewCell.swift */,
 			);
 			path = Prices;
+			sourceTree = "<group>";
+		};
+		539298CB202A589900BAEF91 /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				A4307A8F1F8F6EA800BBA8B4 /* StackedCardCollectionView.swift */,
+				A42953CF1F8E1EB300729045 /* StackedLayout.swift */,
+				A42953D31F8E255D00729045 /* InstitutionCollectionViewCell.swift */,
+				A4ED56DD1F86378200E4CC42 /* InstitutionTableHeaderView.swift */,
+				A4ED56DA1F86301A00E4CC42 /* AccountTableViewCell.swift */,
+			);
+			path = Cards;
 			sourceTree = "<group>";
 		};
 		539C8E911C73CB1A005C72BC /* Preferences */ = {
@@ -2298,10 +2301,9 @@
 		E605EF8B2006BEF700A95632 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
-				A456ED141FB31A33006EE529 /* UIFont+Balance.swift */,
-				E605EF7D20065EFA00A95632 /* UIView+Size.swift */,
-				E605EF8D2006BF3600A95632 /* UIViewController+Present.swift */,
-				40A90EA6200EA7C60063B2F5 /* UIView+Shadow.swift */,
+				A456ED141FB31A33006EE529 /* UIFont.swift */,
+				E605EF7D20065EFA00A95632 /* UIView.swift */,
+				E605EF8D2006BF3600A95632 /* UIViewController.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -2309,7 +2311,7 @@
 		E605EF8C2006BEFD00A95632 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
-				E605EF852006851300A95632 /* Collection+Index.swift */,
+				E605EF852006851300A95632 /* Collection.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -2794,9 +2796,9 @@
 				53552A2B1ED7252900DD95F9 /* FileManager.swift in Sources */,
 				53629D45201FE7A9000081E9 /* VectorTypeAliases.swift in Sources */,
 				A4430AA61F95F47300F2FFFA /* SimpleCache.swift in Sources */,
-				E605EF8F2006BF3C00A95632 /* UIViewController+Present.swift in Sources */,
+				E605EF8F2006BF3C00A95632 /* UIViewController.swift in Sources */,
 				A4E7680D1F67E410002B1AE1 /* APICredentials.swift in Sources */,
-				E605EF862006851300A95632 /* Collection+Index.swift in Sources */,
+				E605EF862006851300A95632 /* Collection.swift in Sources */,
 				53552A2F1ED72B5700DD95F9 /* FMDatabaseAdditions.m in Sources */,
 				537187E61F4CC23B00E7F9D6 /* PoloniexAccount.swift in Sources */,
 				A41EE4801FB9AA1A00210038 /* QRCodeScannerViewController.swift in Sources */,
@@ -2806,7 +2808,7 @@
 				2DF898551FCC8F7500CCDFB9 /* CountlyPersistency.m in Sources */,
 				53D441E61F44ABBD006967E1 /* Item.swift in Sources */,
 				532121A01EE8B91600F4812A /* unzip.c in Sources */,
-				A456ED121FB3067D006EE529 /* CurrencyCollectionViewCell.swift in Sources */,
+				A456ED121FB3067D006EE529 /* PriceTickerCollectionViewCell.swift in Sources */,
 				2DF898431FCC8F7500CCDFB9 /* CountlyAPM.m in Sources */,
 				A4E457231F790EE5002E2879 /* PoloniexTransaction.swift in Sources */,
 				53629D48201FE7FE000081E9 /* ResizingBehavior.swift in Sources */,
@@ -2856,7 +2858,6 @@
 				53D441ED1F44B224006967E1 /* FMDatabasePoolAdditions.m in Sources */,
 				5301A7781F17F86900668099 /* HTTPMethod.swift in Sources */,
 				2DF8985B1FCC8F7500CCDFB9 /* CountlyUserDetails.m in Sources */,
-				40A90EA7200EA7C60063B2F5 /* UIView+Shadow.swift in Sources */,
 				537187DF1F4CC23B00E7F9D6 /* GDAXAccount.swift in Sources */,
 				53552A7C1ED7347E00DD95F9 /* MockedDefaults.swift in Sources */,
 				53F078671ED740E500E7EDF9 /* SampleResponses.swift in Sources */,
@@ -2890,7 +2891,7 @@
 				53552A231ED7252900DD95F9 /* Date.swift in Sources */,
 				A495727A1F98DA3100651C89 /* CustomHeaderReusableView.swift in Sources */,
 				A4E768071F67DC60002B1AE1 /* PoloniexErrors.swift in Sources */,
-				A4EF39E71F8E43A40032265E /* InstitutionAccountsListViewModel.swift in Sources */,
+				A4EF39E71F8E43A40032265E /* AccountsListViewModel.swift in Sources */,
 				532121A41EE8B91600F4812A /* QuickZip.swift in Sources */,
 				2DF8984B1FCC8F7500CCDFB9 /* CountlyConnectionManager.m in Sources */,
 				A40ABBEA1F6BC5A000383C62 /* KrakenCredentials.swift in Sources */,
@@ -2940,7 +2941,7 @@
 				53552A241ED7252900DD95F9 /* TimeInterval.swift in Sources */,
 				53552A121ED7251200DD95F9 /* NetworkStatus.swift in Sources */,
 				A495726D1F98B56400651C89 /* CurrentExchangeRates.swift in Sources */,
-				E605EF7F20065F3700A95632 /* UIView+Size.swift in Sources */,
+				E605EF7F20065F3700A95632 /* UIView.swift in Sources */,
 				535529F91ED7250100DD95F9 /* Syncer.swift in Sources */,
 				2DF8984D1FCC8F7500CCDFB9 /* CountlyCrashReporter.m in Sources */,
 				53F078651ED73E6D00E7EDF9 /* ThemeGlobals.swift in Sources */,
@@ -2969,7 +2970,7 @@
 				53561EAD1F82DD260043D4F9 /* NewAccountListViewModel.swift in Sources */,
 				53552A131ED7251200DD95F9 /* CertValidator.m in Sources */,
 				E6C1AC4620057ABE0018D6AA /* ReconnectAccountViewController.swift in Sources */,
-				A456ED151FB31A33006EE529 /* UIFont+Balance.swift in Sources */,
+				A456ED151FB31A33006EE529 /* UIFont.swift in Sources */,
 				53552A141ED7251200DD95F9 /* ServerMessage.swift in Sources */,
 				53561EA81F82DD260043D4F9 /* AccountsListViewController.swift in Sources */,
 				2DF898471FCC8F7500CCDFB9 /* CountlyCommon.m in Sources */,
@@ -2986,7 +2987,6 @@
 				53552A341ED72B5700DD95F9 /* FMDatabaseVariadic.swift in Sources */,
 				53D441F01F44B34B006967E1 /* AccountRepository.swift in Sources */,
 				53762EB31ED796F100D34A1E /* main.swift in Sources */,
-				53561EB11F82DD260043D4F9 /* Value1TableViewCell.swift in Sources */,
 				A459EDA41F839D9800DC4B51 /* TransactionsListViewController.swift in Sources */,
 				A4E4571D1F790388002E2879 /* CoinbaseError.swift in Sources */,
 			);

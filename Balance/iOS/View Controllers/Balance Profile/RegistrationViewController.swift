@@ -9,7 +9,7 @@
 import UIKit
 
 
-internal final class RegistrationViewController: UIViewController {
+final class RegistrationViewController: UIViewController {
     // Private
     private let container = UIView()
     

@@ -96,7 +96,7 @@ private extension ReconnectAccountCell {
     func createNameLabel() {
         let nameLabel = UILabel.init()
         nameLabel.text = "Example"
-        nameLabel.font = UIFont.Balance.monoFont(ofSize: 14, weight: .regular)
+        nameLabel.font = UIFont.monoFont(ofSize: 14, weight: .regular)
         
         contentView.addSubview(nameLabel)
         
@@ -131,7 +131,7 @@ private extension ReconnectAccountCell {
         reconnectButton.addTarget(self, action: #selector(ReconnectAccountCell.reconnectAction(with:)), for: .touchUpInside)
         reconnectButton.setTitle("Reconnect", for: .normal)
         reconnectButton.setTitleColor(.black, for: .normal)
-        reconnectButton.titleLabel?.font = UIFont.Balance.font(ofSize: 14, weight: .medium)
+        reconnectButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         reconnectButton.backgroundColor = UIColor.lightGray
         reconnectButton.layer.cornerRadius = 6
         

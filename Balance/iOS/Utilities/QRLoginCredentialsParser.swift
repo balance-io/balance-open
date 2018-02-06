@@ -9,18 +9,18 @@
 import Foundation
 
 
-internal final class QRLoginCredentialsParser {
+final class QRLoginCredentialsParser {
     // Private
     
     // MARK: Initialization
     
-    internal required init() {
+    required init() {
         
     }
     
     // MARK: Parse
     
-    internal func parse(value: String, for source: Source) throws -> [Field]
+    func parse(value: String, for source: Source) throws -> [Field]
     {
         switch source
         {
@@ -95,8 +95,8 @@ internal final class QRLoginCredentialsParser {
 }
 
 
-internal extension QRLoginCredentialsParser {
-    internal enum ParseError: Error {
+extension QRLoginCredentialsParser {
+    enum ParseError: Error {
         case unsupportedSource
         case invalidValue
         case missingData

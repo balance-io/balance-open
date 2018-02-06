@@ -9,21 +9,21 @@
 import Foundation
 
 
-internal final class MainCurrencySelectionViewModel {
+final class MainCurrencySelectionViewModel {
     // Internal
-    internal var numberOfSections: Int {
+    var numberOfSections: Int {
         return self.sectionIndexTitles.count
     }
     
-    internal let sectionIndexTitles: [String?] = [nil, "Fiat Currencies", "Crypto Currencies"]
+    let sectionIndexTitles: [String?] = [nil, "Fiat Currencies", "Crypto Currencies"]
     
-    internal var currencies: [[String]] {
+    var currencies: [[String]] {
         return [["Automatic - \(NSLocale.current.currencyCode ?? "USD")", "USD", "EUR", "GBP"],
                 ["AUD", "CAD", "CNY", "DKK", "HKD", "JPY"],
                 ["BTC", "ETH", "LTC"]]
     }
     
-    internal var currentCurrencyDisplay: String {
+    var currentCurrencyDisplay: String {
         if defaults.isMasterCurrencySet {
             return defaults.masterCurrency.longName
         } else {
@@ -33,7 +33,7 @@ internal final class MainCurrencySelectionViewModel {
     
     // MARK: -
     
-    internal func numberOfCurrencies(at section: Int) -> Int {
+    func numberOfCurrencies(at section: Int) -> Int {
         guard section >= 0 && section < currencies.count else {
             return 0
         }
@@ -41,12 +41,12 @@ internal final class MainCurrencySelectionViewModel {
         return currencies[section].count
     }
     
-    internal func currency(at indexPath: IndexPath) -> Currency {
+    func currency(at indexPath: IndexPath) -> Currency {
         let code = currencies[indexPath.section][indexPath.row]
         return Currency.rawValue(code)
     }
     
-    internal func currencyDisplay(at indexPath: IndexPath) -> String {
+    func currencyDisplay(at indexPath: IndexPath) -> String {
         if indexPath.section == 0 && indexPath.row == 0 {
             return currencies[0][0]
         } else {
@@ -54,7 +54,7 @@ internal final class MainCurrencySelectionViewModel {
         }
     }
     
-    internal func isCurrencySelected(at indexPath: IndexPath) -> Bool {
+    func isCurrencySelected(at indexPath: IndexPath) -> Bool {
         if indexPath.section == 0 && indexPath.row == 0 {
             return !defaults.isMasterCurrencySet
         } else {
@@ -62,7 +62,7 @@ internal final class MainCurrencySelectionViewModel {
         }
     }
     
-    internal func selectCurrency(at indexPath: IndexPath) {
+    func selectCurrency(at indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == 0 {
             defaults.masterCurrency = nil
         } else {

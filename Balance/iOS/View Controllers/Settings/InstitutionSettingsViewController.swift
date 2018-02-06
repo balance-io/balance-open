@@ -9,7 +9,7 @@
 import UIKit
 
 
-internal final class InstitutionSettingsViewController: UIViewController
+final class InstitutionSettingsViewController: UIViewController
 {
     // Private
     private let institution: Institution
@@ -19,14 +19,14 @@ internal final class InstitutionSettingsViewController: UIViewController
     
     // MARK: Initialization
     
-    internal required init(institution: Institution)
+    required init(institution: Institution)
     {
         self.institution = institution
         self.viewModel = InstitutionSettingsViewModel(institution: institution)
         super.init(nibName: nil, bundle: nil)
     }
     
-    internal required init?(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         abort()
     }

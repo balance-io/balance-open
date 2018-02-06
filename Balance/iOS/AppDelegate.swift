@@ -8,15 +8,10 @@
 
 import UIKit
 
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    
+final class AppDelegate: UIResponder, UIApplicationDelegate {
     static fileprivate(set) var sharedInstance: AppDelegate!
-    
-    // Private
-    private var rootViewController: RootViewController?
-    
-    // Internal
-    var window: UIWindow?
+    let rootViewController = RootViewController()
+    let window = UIWindow(frame: UIScreen.main.bounds)
     
     // MARK: Initialization
     
@@ -40,10 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Background fetch
         let hourInSeconds = 60.0 * 60.0
         application.setMinimumBackgroundFetchInterval(hourInSeconds)
-        
-        //////////////////
-        //benDebugging()
-        //////////////////
         
         // Initialize singletons
         initializeSingletons()
@@ -72,34 +63,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Window
-        self.rootViewController = RootViewController()
-        
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = self.rootViewController
-        self.window?.backgroundColor = UIColor.white
-        self.window?.makeKeyAndVisible()
+        window.rootViewController = rootViewController
+        window.backgroundColor = .white
+        window.makeKeyAndVisible()
         
         return true
-    }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool

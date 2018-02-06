@@ -23,14 +23,14 @@ final class AccountsListViewController: UIViewController {
     
     // MARK: Initialization
     
-    internal required init() {
+    required init() {
         super.init(nibName: nil, bundle: nil)
         
         self.title = "Accounts"
         self.tabBarItem.image = UIImage(named: "Library")
     }
     
-    internal required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         abort()
     }
     
@@ -274,7 +274,7 @@ extension AccountsListViewController: UICollectionViewDataSource {
         let cell: InstitutionCollectionViewCell = collectionView.dequeueReusableCell(at: indexPath)
         
         let institution = self.viewModel.institution(forSection: indexPath.row)!
-        let viewModel = InstitutionAccountsListViewModel(institution: institution)
+        let viewModel = AccountsListViewModel(institution: institution)
         cell.viewModel = viewModel
         
         return cell
@@ -303,7 +303,7 @@ extension AccountsListViewController: StackedLayoutDelegate {
         let institution = viewModel.institution(forSection: indexPath.row)!
         
         let measurementCell = InstitutionCollectionViewCell.measurementCell
-        measurementCell.viewModel = InstitutionAccountsListViewModel(institution: institution)
+        measurementCell.viewModel = AccountsListViewModel(institution: institution)
         
         // NOTE: It's unintuitive but in the iOS implementation, the table has only one actual section with tables inside the cards,
         // so in this case, the row of the indexPath in the collection view is the section
@@ -314,7 +314,7 @@ extension AccountsListViewController: StackedLayoutDelegate {
         let institution = viewModel.institution(forSection: indexPath.row)!
         
         let measurementCell = InstitutionCollectionViewCell.measurementCell
-        measurementCell.viewModel = InstitutionAccountsListViewModel(institution: institution)
+        measurementCell.viewModel = AccountsListViewModel(institution: institution)
         
         return measurementCell.expandedContentHeight
     }

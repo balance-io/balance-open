@@ -8,9 +8,9 @@
 
 import UIKit
 
-internal class PaintCodeView: UIView {
+class PaintCodeView: UIView {
     // Internal
-    internal var drawingBlock: ((_ frame: CGRect) -> Void)? {
+    var drawingBlock: ((_ frame: CGRect) -> Void)? {
         didSet {
             self.setNeedsDisplay()
         }
@@ -18,7 +18,7 @@ internal class PaintCodeView: UIView {
     
     // MARK: Drawing
     
-    internal override func draw(_ rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         self.drawingBlock?(rect)
     }
 }

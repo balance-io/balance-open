@@ -9,7 +9,7 @@
 import UIKit
 
 
-internal final class AddAccountViewController: UIViewController
+final class AddAccountViewController: UIViewController
 {
     // Fileprivate
     fileprivate let viewModel = NewAccountListViewModel()

@@ -1,5 +1,5 @@
 //
-//  InstitutionAccountsListViewModel.swift
+//  AccountsListViewModel.swift
 //  BalanceiOS
 //
 //  Created by Red Davis on 11/10/2017.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class InstitutionAccountsListViewModel {
+final class AccountsListViewModel {
     var institution: Institution
     
     var numberOfAccounts: Int {
@@ -20,7 +20,7 @@ final class InstitutionAccountsListViewModel {
     
     // MARK: Initialization
     
-    internal required init(institution: Institution) {
+    required init(institution: Institution) {
         self.institution = institution
         self.reloadData()
     }
@@ -33,7 +33,7 @@ final class InstitutionAccountsListViewModel {
     
     // MARK: API
     
-    internal func account(at index: Int) -> Account {
+    func account(at index: Int) -> Account {
         return accounts[index]
     }
 }

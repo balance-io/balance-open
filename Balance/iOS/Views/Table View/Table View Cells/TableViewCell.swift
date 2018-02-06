@@ -9,7 +9,7 @@
 import UIKit
 
 
-internal class TableViewCell: UITableViewCell, Reusable
+class TableViewCell: UITableViewCell, Reusable
 {
 
 }

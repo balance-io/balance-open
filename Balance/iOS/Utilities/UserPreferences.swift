@@ -9,7 +9,7 @@
 import Foundation
 
 
-internal final class UserPreferences
+final class UserPreferences
 {
     // Fileprivate
     fileprivate let identifier: String
@@ -17,7 +17,7 @@ internal final class UserPreferences
     
     // MARK: Initialization
     
-    internal init(identifier: String, userDefaults: UserDefaults)
+    init(identifier: String, userDefaults: UserDefaults)
     {
         self.identifier = identifier
         self.userDefaults = userDefaults
@@ -34,23 +34,23 @@ internal final class UserPreferences
 
 // MARK: Theme
 
-internal extension UserPreferences
+extension UserPreferences
 {
-    internal enum Theme: String
+    enum Theme: String
     {
-        internal static let available: [Theme] = [.automatic, .night, .light]
+        static let available: [Theme] = [.automatic, .night, .light]
         
         case automatic, night, light
         
         // MARK: Title
         
-        internal func title() -> String
+        func title() -> String
         {
             return self.rawValue.capitalized
         }
     }
     
-    internal var theme: Theme {
+    var theme: Theme {
         set(newValue)
         {
             let key = self.preferenceKey(for: "theme")
