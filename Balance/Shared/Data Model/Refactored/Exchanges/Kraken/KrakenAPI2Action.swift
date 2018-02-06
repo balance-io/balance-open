@@ -47,7 +47,7 @@ extension KrakenApiAction: APIAction {
         return URL(string: host + path)
     }
     
-    var components: URLComponents {
+    var components: URLComponents? {
         return getBasicURLComponents(from: params)
     }
 

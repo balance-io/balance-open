@@ -53,6 +53,15 @@ public enum ApiRequestDataFormat {
     
     // Can be used for POST requests
     case json
+    
+    var header: (key: String, value: String) {
+        switch self {
+        case .json:
+            return (key: "content-type", value: "application/json")
+        case .urlEncoded:
+            return (key: "content-type", value: "application/x-www-form-urlencoded")
+        }
+    }
 }
 
 public enum ApiRequestEncoding {
@@ -67,12 +76,17 @@ public enum ApiEncondingMessageType {
     case concatenate(format: String)
 }
 
+public enum ServerEnvironment {
+    case sandbox
+    case production    
+}
+
 public protocol APIAction {
     var host: String { get }
     var path: String { get }
     var url: URL? { get }
     var nonce: Int64 { get }
-    var components: URLComponents { get }
+    var components: URLComponents? { get }
     var type: ApiRequestType { get }
     var credentials: Credentials { get }
 
@@ -102,6 +116,6 @@ public protocol RequestHandler: class {
 
 extension APIAction {
     var query: String? {
-        return components.query
+        return components?.query
     }
 }

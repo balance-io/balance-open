@@ -52,7 +52,7 @@ class PoloniexAPI2: AbstractApi {
     }
     
     override func createMessage(for action: APIAction) -> String? {
-        return action.components.query
+        return action.components?.query
     }
 }
 

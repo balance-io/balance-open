@@ -72,7 +72,7 @@ extension EthplorerAPI2Action {
         return 0
     }
     
-    var components: URLComponents {
+    var components: URLComponents? {
         return getBasicURLComponents(from: params)
     }
     

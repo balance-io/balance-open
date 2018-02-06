@@ -1,17 +1,18 @@
 //
-//  CoinbaseAPI2Action.swift
+//  BitfinexAPI2Action.swift
 //  BalancemacOS
 //
-//  Created by Eli Pacheco Hoyos on 1/29/18.
+//  Created by Eli Pacheco Hoyos on 2/5/18.
 //  Copyright © 2018 Balanced Software, Inc. All rights reserved.
 //
 
 import Foundation
 
-struct CoinbaseAPI2Action: APIAction {
+struct BitfinexAPI2Action: APIAction {
     
-    let credentials: Credentials
+    let nonce: Int64 = Int64(Date().timeIntervalSince1970)
     let type: ApiRequestType
+    let credentials: Credentials
     
     init(type: ApiRequestType, credentials: Credentials) {
         self.type = type
@@ -20,28 +21,23 @@ struct CoinbaseAPI2Action: APIAction {
     
 }
 
-extension CoinbaseAPI2Action {
+extension BitfinexAPI2Action {
     
     var host: String {
-        return "https://api.coinbase.com/v2/"
+        return "https://api.bitfinex.com/"
     }
     
     var path: String {
         switch type {
         case .accounts:
-            return "accounts"
-        case .transactions(let accountID):
-            let accountID = (accountID as? String) ?? ""
-            return "accounts/\(accountID)/transactions"
+            return "v2/auth/r/wallets"
+        case .transactions(_):
+            return "v2/auth/r/movements/hist"
         }
     }
     
     var url: URL? {
         return URL(string: host + path)
-    }
-    
-    var nonce: Int64 {
-        return 0
     }
     
     var components: URLComponents? {

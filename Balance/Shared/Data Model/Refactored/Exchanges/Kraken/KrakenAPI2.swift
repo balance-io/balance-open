@@ -36,7 +36,7 @@ class KrakenAPI2: AbstractApi {
                 return nil
             }
             
-            guard let messageData = createMessageData(nonce: Int(action.nonce), path: action.path, query: query),
+            guard let messageData = createMessageData(nonce: action.nonce, path: action.path, query: query),
                 let messageSigned = generateMessageSigned(from: messageData, secretKeyEncoded: encondedSecretData)else {
                 print("Invalid message signed")
                 return nil
@@ -62,7 +62,7 @@ private extension KrakenAPI2 {
         return encodedSecretData
     }
     
-    func createMessageData(nonce: Int, path: String, query: String) -> Data? {
+    func createMessageData(nonce: Int64, path: String, query: String) -> Data? {
         guard let nonceQueryEncoded = ("\(nonce)" + query).sha256 else {
             print("Relative path can not be encoded")
             return nil
