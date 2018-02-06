@@ -81,7 +81,7 @@ final class AccountTableViewCell: TableViewCell {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError()
+        fatalError("unsupported")
     }
     
     // MARK: Data

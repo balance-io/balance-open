@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StackedCardCollectionView: UICollectionView {
+final class StackedCardCollectionView: UICollectionView {
     let stackedLayout = StackedLayout()
         
     required init() {
@@ -23,7 +23,7 @@ class StackedCardCollectionView: UICollectionView {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError()
+        fatalError("unsupported")
     }
     
     func reloadData(shouldPersistSelection: Bool, with indexes: [IndexPath]) {

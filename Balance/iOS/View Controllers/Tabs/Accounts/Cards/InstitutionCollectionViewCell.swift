@@ -8,23 +8,22 @@
 
 import UIKit
 
-
 final class InstitutionCollectionViewCell: UICollectionViewCell, Reusable {
     static let measurementCell = InstitutionCollectionViewCell()
     
     var viewModel: AccountsListViewModel? {
         didSet {
-            self.reloadData()
+            reloadData()
         }
     }
     
     override var isSelected: Bool {
-        set(newValue) { }
+        set { }
         get { return false }
     }
     
     override var isHighlighted: Bool {
-        set(newValue) { }
+        set { }
         get { return false }
     }
     
@@ -75,20 +74,20 @@ final class InstitutionCollectionViewCell: UICollectionViewCell, Reusable {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError()
+        fatalError("unsupported")
     }
     
     // MARK: Data
     
     private func reloadData() {
-        self.container.backgroundColor = self.viewModel?.institution.source.color
-        self.tableView.reloadData()
+        container.backgroundColor = viewModel?.institution.source.color
+        tableView.reloadData()
         
-        guard let unwrappedViewModel = self.viewModel else {
+        guard let viewModel = viewModel else {
             return
         }
         
-        self.expandedContentHeight = CGFloat(unwrappedViewModel.numberOfAccounts) * CurrentTheme.accounts.cell.height + CurrentTheme.accounts.headerCell.height
+        expandedContentHeight = CGFloat(viewModel.numberOfAccounts) * CurrentTheme.accounts.cell.height + CurrentTheme.accounts.headerCell.height
     }
 }
 

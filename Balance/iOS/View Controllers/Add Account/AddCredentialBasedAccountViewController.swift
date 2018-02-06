@@ -29,7 +29,7 @@ class AddCredentialBasedAccountViewController: UIViewController
     
     required init?(coder aDecoder: NSCoder)
     {
-        fatalError()
+        fatalError("unsupported")
     }
     
     // MARK: View lifecycle

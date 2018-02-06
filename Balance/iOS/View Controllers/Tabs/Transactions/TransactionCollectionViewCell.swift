@@ -132,7 +132,7 @@ final class TransactionCollectionViewCell: UICollectionViewCell, Reusable
     
     required init?(coder aDecoder: NSCoder)
     {
-        fatalError()
+        fatalError("unsupported")
     }
     
     // MARK: Layout

@@ -60,7 +60,7 @@ final class ResetPasswordViewController: UIViewController {
     
     required init?(coder aDecoder: NSCoder)
     {
-        fatalError()
+        fatalError("unsupported")
     }
     
     deinit

@@ -34,6 +34,6 @@ final class CustomHeaderReusableView: UICollectionReusableView, Reusable {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError()
+        fatalError("unsupported")
     }
 }

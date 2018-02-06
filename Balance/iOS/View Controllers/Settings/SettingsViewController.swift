@@ -37,7 +37,7 @@ final class SettingsViewController: UIViewController
     
     required init?(coder aDecoder: NSCoder)
     {
-        fatalError()
+        fatalError("unsupported")
     }
     
     deinit {
