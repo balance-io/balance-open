@@ -15,10 +15,7 @@ class PoloniexAPI2: AbstractApi {
     override var requestEncoding: ApiRequestEncoding { return .simpleHmacSha512 }
     override var requestHandler: RequestHandler? { return self }
     
-    override func processErrors(requestType: ApiRequestType, response: URLResponse?, data: Data?, error: Error?) -> Error? {
-        guard let response = response as? HTTPURLResponse else {
-            return nil
-        }
+    override func processErrors(response: URLResponse?, data: Data?, error: Error?) -> Error? {
 
         if let error = processBaseErrors(response: response, error: error) {
             return error
@@ -69,7 +66,7 @@ extension PoloniexAPI2: RequestHandler {
             return ExchangeBaseError.other(message: "no data to manage")
         }
         
-        if let error = processErrors(requestType: action.type, response: ulrResponse, data: data, error: error) {
+        if let error = processErrors(response: ulrResponse, data: data, error: error) {
             return error
         }
         

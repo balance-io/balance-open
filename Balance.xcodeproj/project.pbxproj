@@ -68,6 +68,7 @@
 		403AA176201F87BA0088A2DE /* ExchangeAPIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AA174201F87BA0088A2DE /* ExchangeAPIErrors.swift */; };
 		403AA179201FA5520088A2DE /* ExchangeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AA178201FA5520088A2DE /* ExchangeOperation.swift */; };
 		403AA17A201FA5520088A2DE /* ExchangeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AA178201FA5520088A2DE /* ExchangeOperation.swift */; };
+		404B3EBB2028CE7F00E9427E /* CoinbaseTransaction2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B3EB92028CE7F00E9427E /* CoinbaseTransaction2.swift */; };
 		40970261201F7D6200C34623 /* AbstractApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40970260201F7D6200C34623 /* AbstractApi.swift */; };
 		40970263201F7D7A00C34623 /* ExchangeProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40970262201F7D7900C34623 /* ExchangeProtocols.swift */; };
 		40970265201F7DA400C34623 /* PoloniexAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40970264201F7DA400C34623 /* PoloniexAPI2.swift */; };
@@ -707,6 +708,7 @@
 		400AA1972025203E002BDE20 /* CoinbaseAccount2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseAccount2.swift; sourceTree = "<group>"; };
 		403AA174201F87BA0088A2DE /* ExchangeAPIErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeAPIErrors.swift; sourceTree = "<group>"; };
 		403AA178201FA5520088A2DE /* ExchangeOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeOperation.swift; sourceTree = "<group>"; };
+		404B3EB92028CE7F00E9427E /* CoinbaseTransaction2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseTransaction2.swift; sourceTree = "<group>"; };
 		40970260201F7D6200C34623 /* AbstractApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractApi.swift; sourceTree = "<group>"; };
 		40970262201F7D7900C34623 /* ExchangeProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeProtocols.swift; sourceTree = "<group>"; };
 		40970264201F7DA400C34623 /* PoloniexAPI2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoloniexAPI2.swift; sourceTree = "<group>"; };
@@ -2482,6 +2484,7 @@
 				E64AAA3D201FCBE300CE7050 /* CoinbaseAPI2Action.swift */,
 				E630FB0520210DEE00146E99 /* CoinbaseAPICredentials.swift */,
 				400AA1972025203E002BDE20 /* CoinbaseAccount2.swift */,
+				404B3EB92028CE7F00E9427E /* CoinbaseTransaction2.swift */,
 			);
 			path = Coinbase;
 			sourceTree = "<group>";
@@ -3296,6 +3299,7 @@
 				53762EB31ED796F100D34A1E /* main.swift in Sources */,
 				53561EB11F82DD260043D4F9 /* Value1TableViewCell.swift in Sources */,
 				A459EDA41F839D9800DC4B51 /* TransactionsListViewController.swift in Sources */,
+				404B3EBB2028CE7F00E9427E /* CoinbaseTransaction2.swift in Sources */,
 				E6674402201973570009A57F /* APIRequest.swift in Sources */,
 				A4E4571D1F790388002E2879 /* CoinbaseError.swift in Sources */,
 			);
@@ -3504,6 +3508,7 @@
 				2DF8984A1FCC8F7500CCDFB9 /* CountlyConnectionManager.m in Sources */,
 				A4430A901F94EE1700F2FFFA /* CoinbaseInstitution.swift in Sources */,
 				53F638391C5FEAB800864346 /* Database.swift in Sources */,
+				404B3EBA2028CE7F00E9427E /* CoinbaseTransaction2.swift in Sources */,
 				53F078641ED73E6D00E7EDF9 /* ThemeGlobals.swift in Sources */,
 				28F678481DCB6E9600383D22 /* SetPasswordViewController.swift in Sources */,
 				2DF8985C1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */,
