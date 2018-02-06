@@ -27,7 +27,7 @@ final class CustomHeaderReusableView: UICollectionReusableView, Reusable {
         // Text label
         self.addSubview(self.textLabel)
         self.backgroundColor = .groupTableViewBackground
-        self.textLabel.snp.makeConstraints { (make) in
+        self.textLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(14.0)
             make.bottom.equalToSuperview().inset(9.0)
         }

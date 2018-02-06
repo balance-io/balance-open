@@ -40,7 +40,7 @@ final class AddAccountViewController: UIViewController
         self.tableView.tableFooterView = UIView()
         self.view.addSubview(self.tableView)
         
-        self.tableView.snp.makeConstraints { (make) in
+        self.tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }

@@ -34,7 +34,7 @@ final class MainCurrencySelectionViewController: UIViewController {
         self.tableView.register(reusableCell: TableViewCell.self)
         self.view.addSubview(self.tableView)
         
-        self.tableView.snp.makeConstraints { (make) in
+        self.tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }

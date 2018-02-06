@@ -31,7 +31,7 @@ final class AccountsListViewController: UIViewController {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        abort()
+        fatalError("unsupported")
     }
     
     // MARK: View lifecycle
@@ -85,7 +85,7 @@ final class AccountsListViewController: UIViewController {
         collectionView.alwaysBounceVertical = true
         collectionView.register(reusableCell: InstitutionCollectionViewCell.self)
         view.addSubview(collectionView)
-        collectionView.snp.makeConstraints { (make) in
+        collectionView.snp.makeConstraints { make in
             make.top.equalTo(self.titleLabel.snp.bottom)
             make.bottom.equalTo(self.bottomLayoutGuide.snp.bottom)
             make.left.equalToSuperview()
@@ -96,13 +96,13 @@ final class AccountsListViewController: UIViewController {
         blankStateView.isHidden = true
         blankStateView.addTarget(self, action: #selector(addAccountButtonTapped))
         view.addSubview(blankStateView)
-        blankStateView.snp.makeConstraints { (make) in
+        blankStateView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
          
         // Total balance bar
         view.addSubview(totalBalanceBar)
-        totalBalanceBar.snp.makeConstraints { (make) in
+        totalBalanceBar.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             if #available(iOS 11.0, *) {

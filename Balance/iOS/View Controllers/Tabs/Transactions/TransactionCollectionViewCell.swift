@@ -85,21 +85,21 @@ final class TransactionCollectionViewCell: UICollectionViewCell, Reusable
         
         // Transaction type image view
         self.contentView.addSubview(self.transactionTypeImageView)
-        self.transactionTypeImageView.snp.makeConstraints { (make) in
+        self.transactionTypeImageView.snp.makeConstraints { make in
             make.bottom.equalTo(self.contentView.snp.centerY).offset(-5.0)
             make.left.equalToSuperview().inset(15.0)
         }
         
         // Transaction type
         self.contentView.addSubview(self.transactionTypeLabel)
-        self.transactionTypeLabel.snp.makeConstraints { (make) in
+        self.transactionTypeLabel.snp.makeConstraints { make in
             make.centerY.equalTo(self.transactionTypeImageView)
             make.left.equalTo(self.transactionTypeImageView.snp.right).offset(5.0)
         }
         
         // Institution name label
         self.contentView.addSubview(self.institutionNameLabel)
-        self.institutionNameLabel.snp.makeConstraints { (make) in
+        self.institutionNameLabel.snp.makeConstraints { make in
             make.centerY.equalTo(self.transactionTypeImageView)
             make.right.equalToSuperview().inset(15.0)
         }
@@ -107,7 +107,7 @@ final class TransactionCollectionViewCell: UICollectionViewCell, Reusable
         // Logo view
         self.logoView.isHidden = true
         self.contentView.addSubview(self.logoView)
-        self.logoView.snp.makeConstraints { (make) in
+        self.logoView.snp.makeConstraints { make in
             make.centerY.equalTo(self.transactionTypeImageView)
             make.right.equalToSuperview().offset(-10)
             make.width.equalTo(0)
@@ -116,14 +116,14 @@ final class TransactionCollectionViewCell: UICollectionViewCell, Reusable
         
         // Amount label
         self.contentView.addSubview(self.amountLabel)
-        self.amountLabel.snp.makeConstraints { (make) in
+        self.amountLabel.snp.makeConstraints { make in
             make.top.equalTo(self.contentView.snp.centerY).offset(2.0)
             make.left.equalToSuperview().inset(15.0)
         }
         
         // User currency amount label
         self.contentView.addSubview(self.userCurrencyAmountLabel)
-        self.userCurrencyAmountLabel.snp.makeConstraints { (make) in
+        self.userCurrencyAmountLabel.snp.makeConstraints { make in
             make.top.equalTo(self.contentView.snp.centerY).offset(2.0)
             make.right.equalToSuperview().inset(15.0)
         }

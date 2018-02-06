@@ -52,7 +52,7 @@ final  class QRCodeScannerViewController: UIViewController {
         self.videoLayerContainer.backgroundColor = UIColor.black
         self.view.addSubview(self.videoLayerContainer)
         
-        self.videoLayerContainer.snp.makeConstraints { (make) in
+        self.videoLayerContainer.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
@@ -60,7 +60,7 @@ final  class QRCodeScannerViewController: UIViewController {
         self.cancelButton.addTarget(self, action: #selector(self.cancelButtonTapped(_:)), for: .touchUpInside)
         self.view.addSubview(self.cancelButton)
         
-        self.cancelButton.snp.makeConstraints { (make) in
+        self.cancelButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.right.equalToSuperview().inset(20.0)
             make.left.equalToSuperview().inset(20.0)

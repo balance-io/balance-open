@@ -33,7 +33,7 @@ final class PriceTickerViewController: UIViewController {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        abort()
+        fatalError("unsupported")
     }
     
     // MARK: View lifecycle
@@ -92,7 +92,7 @@ private extension PriceTickerViewController {
         
         view.addSubview(collectionView)
         
-        collectionView.snp.makeConstraints { (make) in
+        collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }

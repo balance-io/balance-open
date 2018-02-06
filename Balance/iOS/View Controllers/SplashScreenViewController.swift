@@ -8,50 +8,12 @@
 
 import UIKit
 
-
 final class SplashScreenViewController: UIViewController {
-    // Private
-    private let headerImageView = UIImageView(image: UIImage(named: "intro-logo"))
-    
-    private let headerLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 30.0, weight: .semibold)
-        label.text = "Balance"
-        
-        return label
-    }()
-    
-    private let headerSubtitleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = UIColor(white: 1.0, alpha: 0.75)
-        label.font = UIFont.systemFont(ofSize: 15.0, weight: .regular)
-        label.text = "A wallet for all the world's currencies"
-        
-        return label
-    }()
-    
-    private let loginButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Login", for: .normal)
-        button.tintColor = UIColor.white
-        button.layer.borderColor = UIColor.white.cgColor
-        button.layer.borderWidth = 1.0
-        button.layer.cornerRadius = 4.0
-        
-        return button
-    }()
-    
-    private let registerButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Register", for: .normal)
-        button.tintColor = UIColor.white
-        button.layer.borderColor = UIColor.white.cgColor
-        button.layer.borderWidth = 1.0
-        button.layer.cornerRadius = 4.0
-        
-        return button
-    }()
+    private let headerImageView = UIImageView(image: #imageLiteral(resourceName: "intro-logo"))
+    private let headerLabel = UILabel()
+    private let headerSubtitleLabel = UILabel()
+    private let loginButton = UIButton(type: .system)
+    private let registerButton = UIButton(type: .system)
     
     // MARK: View lifecycle
     override func viewDidLoad() {
@@ -64,33 +26,40 @@ final class SplashScreenViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.white
         
         // Header title
-        self.view.addSubview(self.headerLabel)
-        
-        self.headerLabel.snp.makeConstraints { (make) in
+        headerLabel.textColor = UIColor.white
+        headerLabel.font = UIFont.systemFont(ofSize: 30.0, weight: .semibold)
+        headerLabel.text = "Balance"
+        self.view.addSubview(headerLabel)
+        headerLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
         
         // Subtitle label
-        self.view.addSubview(self.headerSubtitleLabel)
-        
-        self.headerSubtitleLabel.snp.makeConstraints { (make) in
+        headerSubtitleLabel.textColor = UIColor(white: 1.0, alpha: 0.75)
+        headerSubtitleLabel.font = UIFont.systemFont(ofSize: 15.0, weight: .regular)
+        headerSubtitleLabel.text = "A wallet for all the world's currencies"
+        self.view.addSubview(headerSubtitleLabel)
+        headerSubtitleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.headerLabel.snp.bottom)
+            make.top.equalTo(headerLabel.snp.bottom)
         }
         
         // Header image view
-        self.view.addSubview(self.headerImageView)
-        
-        self.headerImageView.snp.makeConstraints { (make) in
+        self.view.addSubview(headerImageView)
+        headerImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(self.headerLabel.snp.top).offset(-10.0)
+            make.bottom.equalTo(headerLabel.snp.top).offset(-10.0)
         }
         
         // Register button
-        self.registerButton.addTarget(self, action: #selector(self.registerButtonTapped(_:)), for: .touchUpInside)
-        self.view.addSubview(self.registerButton)
-        
-        self.registerButton.snp.makeConstraints { (make) in
+        registerButton.setTitle("Register", for: .normal)
+        registerButton.tintColor = UIColor.white
+        registerButton.layer.borderColor = UIColor.white.cgColor
+        registerButton.layer.borderWidth = 1.0
+        registerButton.layer.cornerRadius = 4.0
+        registerButton.addTarget(self, action: #selector(registerButtonTapped(_:)), for: .touchUpInside)
+        self.view.addSubview(registerButton)
+        registerButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.9)
             make.height.equalTo(44.0)
@@ -102,24 +71,24 @@ final class SplashScreenViewController: UIViewController {
         }
         
         // Login button
-        self.loginButton.addTarget(self, action: #selector(self.loginButtonTapped(_:)), for: .touchUpInside)
-        self.view.addSubview(self.loginButton)
-        
-        self.loginButton.snp.makeConstraints { (make) in
+        loginButton.setTitle("Login", for: .normal)
+        loginButton.tintColor = UIColor.white
+        loginButton.layer.borderColor = UIColor.white.cgColor
+        loginButton.layer.borderWidth = 1.0
+        loginButton.layer.cornerRadius = 4.0
+        loginButton.addTarget(self, action: #selector(loginButtonTapped(_:)), for: .touchUpInside)
+        self.view.addSubview(loginButton)
+        loginButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.9)
             make.height.equalTo(44.0)
-            make.bottom.equalTo(self.registerButton.snp.top).offset(-10.0)
+            make.bottom.equalTo(registerButton.snp.top).offset(-10.0)
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     // MARK: Actions

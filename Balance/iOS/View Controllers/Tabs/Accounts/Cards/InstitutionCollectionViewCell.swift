@@ -52,7 +52,7 @@ final class InstitutionCollectionViewCell: UICollectionViewCell, Reusable {
        
         self.contentView.addSubview(self.container)
         
-        self.container.snp.makeConstraints { (make) in
+        self.container.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
@@ -67,7 +67,7 @@ final class InstitutionCollectionViewCell: UICollectionViewCell, Reusable {
         self.tableView.register(reusableView: InstitutionTableHeaderView.self)
         self.container.addSubview(self.tableView)
         
-        self.tableView.snp.makeConstraints { (make) in
+        self.tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     

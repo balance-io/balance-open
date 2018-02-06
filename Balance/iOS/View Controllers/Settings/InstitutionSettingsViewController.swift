@@ -28,7 +28,7 @@ final class InstitutionSettingsViewController: UIViewController
     
     required init?(coder aDecoder: NSCoder)
     {
-        abort()
+        fatalError("unsupported")
     }
     
     // MARK: View lifecycle
@@ -51,7 +51,7 @@ final class InstitutionSettingsViewController: UIViewController
         self.tableView.register(reusableCell: TableViewCell.self)
         self.view.addSubview(self.tableView)
         
-        self.tableView.snp.makeConstraints { (make) in
+        self.tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }

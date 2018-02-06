@@ -46,7 +46,7 @@ private extension BlankStateView {
         
         addSubview(noAccountsLabel)
         
-        noAccountsLabel.snp.makeConstraints { (make) in
+        noAccountsLabel.snp.makeConstraints { make in
             make.bottom.equalTo(self.snp.centerY).offset(-10.0)
             make.centerX.equalToSuperview()
         }
@@ -61,7 +61,7 @@ private extension BlankStateView {
             
             addSubview(addAccountButton)
             
-            addAccountButton.snp.makeConstraints { (make) in
+            addAccountButton.snp.makeConstraints { make in
                 make.top.equalTo(self.snp.centerY).offset(10.0)
                 make.centerX.equalToSuperview()
             }

@@ -31,7 +31,7 @@ final class TransactionsListViewController: UIViewController, TransactionsTabVie
     }
     
     required init?(coder aDecoder: NSCoder) {
-        abort()
+        fatalError("unsupported")
     }
 
     // MARK: View lifecycle
@@ -57,7 +57,7 @@ final class TransactionsListViewController: UIViewController, TransactionsTabVie
         self.collectionView.register(reusableSupplementaryView: CustomHeaderReusableView.self, kind: UICollectionElementKindSectionHeader)
         self.view.addSubview(self.collectionView)
         
-        self.collectionView.snp.makeConstraints { (make) in
+        self.collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         

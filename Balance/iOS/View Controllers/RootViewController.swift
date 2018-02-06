@@ -17,11 +17,7 @@ private enum TabIndex: Int {
     case settings = 3
 }
 
-final class RootViewController: UIViewController
-{
-    // Internal
-    
-    // Private
+final class RootViewController: UIViewController {
     private let rootTabBarController = UITabBarController()
     private let priceTickerViewController = PriceTickerViewController()
     private let accountsListViewController = AccountsListViewController()
@@ -38,8 +34,7 @@ final class RootViewController: UIViewController
     
     // MARK: Initialization
     
-    required init()
-    {
+    required init() {
         super.init(nibName: nil, bundle: nil)
         
         // Tab bar controller
@@ -59,39 +54,33 @@ final class RootViewController: UIViewController
         self.addChildViewController(self.rootTabBarController)
         
         // Notifications
-        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillEnterForegroundNotification(_:)), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(self.applicationWillEnterForegroundNotification(_:)), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
     }
 
-    required init?(coder aDecoder: NSCoder)
-    {
-        abort()
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("unsupported")
     }
     
-    deinit
-    {
-        NotificationCenter.default.removeObserver(self)
+    deinit {
+        NotificationCenter.removeObserverOnMainThread(self, name: Notification.Name.UIApplicationWillEnterForeground)
     }
     
     // MARK: View lifecycle
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setUIDefaults()
+        setupUIDefaults()
         
         // Root tab bar controller
-        self.view.addSubview(self.rootTabBarController.view)
+        self.view.addSubview(rootTabBarController.view)
 
-        self.rootTabBarController.view.snp.makeConstraints { (make) in
+        rootTabBarController.view.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
-        
     }
     
-    override func viewWillAppear(_ animated: Bool)
-    {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if !viewHasAppeared {
             // Show the price ticker if there are no institutions
@@ -103,15 +92,10 @@ final class RootViewController: UIViewController
         super.viewDidAppear(animated)
         
         // Present unlock screen
-        if self.shouldPresentUnlockViewController && !self.viewHasAppeared {
-            self.presentUnlockApplicationViewController()
-            self.viewHasAppeared = true
+        if shouldPresentUnlockViewController && !viewHasAppeared {
+            presentUnlockApplicationViewController()
+            viewHasAppeared = true
         }
-    }
-    
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
     }
     
     // MARK: Presentation
@@ -124,36 +108,34 @@ final class RootViewController: UIViewController
     }
     
     private func presentUnlockApplicationViewController() {
-        if self.unlockApplicationViewController != nil {
+        if unlockApplicationViewController != nil {
             return
         }
         
-        let unlockApplicationViewController = UnlockApplicationViewController()
-        unlockApplicationViewController.delegate = self
-        self.present(unlockApplicationViewController, animated: false, completion: nil)
-        
-        self.unlockApplicationViewController = unlockApplicationViewController
+        unlockApplicationViewController = UnlockApplicationViewController()
+        unlockApplicationViewController!.delegate = self
+        self.present(unlockApplicationViewController!, animated: false, completion: nil)
     }
     
     private func dismissUnlockApplicationViewController() {
-        self.unlockApplicationViewController?.dismiss(animated: true, completion: nil)
-        self.unlockApplicationViewController = nil
+        unlockApplicationViewController?.dismiss(animated: true, completion: nil)
+        unlockApplicationViewController = nil
     }
     
     // MARK: UI Defaults
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if self.rootTabBarController.selectedIndex == self.rootTabBarController.viewControllers?.index(of: self.accountsListViewController) {
+        if rootTabBarController.selectedIndex == rootTabBarController.viewControllers?.index(of: accountsListViewController) {
             return .lightContent
         }
         
         return .default
     }
     
-    private func setUIDefaults() {
+    private func setupUIDefaults() {
         // UITabBar
-        UITabBar.appearance().barTintColor = UIColor.black
-        UITabBar.appearance().tintColor = UIColor.white
+        UITabBar.appearance().barTintColor = .black
+        UITabBar.appearance().tintColor = .white
         
         // SVProgressHUD
         SVProgressHUD.setHapticsEnabled(true)
@@ -164,8 +146,8 @@ final class RootViewController: UIViewController
     // MARK: Notifications
     
     @objc private func applicationWillEnterForegroundNotification(_ notification: Notification) {
-        if self.shouldPresentUnlockViewController {
-            self.presentUnlockApplicationViewController()
+        if shouldPresentUnlockViewController {
+            presentUnlockApplicationViewController()
         }
     }
 }

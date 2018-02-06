@@ -102,7 +102,7 @@ class Database {
                     }
                 })
                 async(after: 1.5) {
-                    AppDelegate.sharedInstance.window?.rootViewController?.present(alert, animated: true)
+                    AppDelegate.sharedInstance.rootViewController.present(alert, animated: true)
                 }
                 return false
             #endif

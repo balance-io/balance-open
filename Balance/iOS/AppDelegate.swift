@@ -11,7 +11,9 @@ import UIKit
 final class AppDelegate: UIResponder, UIApplicationDelegate {
     static fileprivate(set) var sharedInstance: AppDelegate!
     let rootViewController = RootViewController()
-    let window = UIWindow(frame: UIScreen.main.bounds)
+
+    // NOTE: Must use var and optional here to comply with protocol and not cause any crashes
+    var window: UIWindow? = UIWindow(frame: UIScreen.main.bounds)
     
     // MARK: Initialization
     
@@ -63,31 +65,27 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Window
-        window.rootViewController = rootViewController
-        window.backgroundColor = .white
-        window.makeKeyAndVisible()
+        if let window = window {
+            window.rootViewController = rootViewController
+            window.backgroundColor = .white
+            window.makeKeyAndVisible()
+        }
         
         return true
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool
-    {
-        guard let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else
-        {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        guard let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             return false
         }
         
         // Coinbase callback
-        if let queryItems = urlComponents.queryItems,
-           urlComponents.host == "coinbase"
-        {
+        if let queryItems = urlComponents.queryItems, urlComponents.host == "coinbase" {
             var code: String?
             var state: String?
             
-            for queryItem in queryItems
-            {
-                switch queryItem.name
-                {
+            for queryItem in queryItems {
+                switch queryItem.name {
                 case "code":
                     code = queryItem.value
                 case "state":
@@ -96,35 +94,24 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
             
-            if let unwrappedCode = code,
-               let unwrappedState = state
-            {
-                let exitingInstitutionId = CoinbaseApi.existingInstitution?.institutionId
-                
-                CoinbaseApi.handleAuthenticationCallback(state: unwrappedState, code: unwrappedCode, completion: { (success, error) in
-                    log.debug(success)
-                    log.debug(error)
+            if let code = code, let state = state {
+                CoinbaseApi.handleAuthenticationCallback(state: state, code: code) { success, error in
+                    log.debug("success: \(success)  error: \(String(describing: error))")
                     
-                    let autenticationResult = CoinbaseAutenticationResult(succeeded: success,
-                                                                          error: error,
-                                                                          institutionId: exitingInstitutionId)
-                    let coinbaseUserInfo: [AnyHashable: Any] = [
-                        CoinbaseNotifications.key.auntenticationResult.rawValue: autenticationResult
-                    ]
+                    let institutionId = CoinbaseApi.existingInstitution?.institutionId
+                    let result = CoinbaseAutenticationResult(succeeded: success, error: error, institutionId: institutionId)
+                    let userInfo: [AnyHashable: Any] = [CoinbaseNotifications.Keys.authenticationResult: result]
+                    NotificationCenter.postOnMainThread(name: CoinbaseNotifications.autenticationDidFinish, object: nil, userInfo: userInfo)
                     
-                    NotificationCenter.default.post(name: CoinbaseNotifications.autenticationDidFinish,
-                                                    object: nil,
-                                                    userInfo: coinbaseUserInfo)
                     syncManager.sync()
-                })
+                }
             }
         }
         
         return true
     }
     
-    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
-    {
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         syncManager.sync(userInitiated: false, validateReceipt: false, skip: [.coinbase]) { (success, error) in
             let result: UIBackgroundFetchResult = success ? .newData : .failed
             completionHandler(result)

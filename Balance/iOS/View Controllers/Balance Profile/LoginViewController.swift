@@ -68,7 +68,7 @@ final class LoginViewController: UIViewController {
         // Container
         self.view.addSubview(self.container)
         
-        self.container.snp.makeConstraints { (make) in
+        self.container.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.center.equalToSuperview()
         }
@@ -77,7 +77,7 @@ final class LoginViewController: UIViewController {
         self.emailTextField.delegate = self
         self.container.addSubview(self.emailTextField)
         
-        self.emailTextField.snp.makeConstraints { (make) in
+        self.emailTextField.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.75)
@@ -86,7 +86,7 @@ final class LoginViewController: UIViewController {
         // 1Password button
         self.onePasswordButton.addTarget(self, action: #selector(self.onePasswordButtonTapped(_:)), for: .touchUpInside)
         
-        self.onePasswordButton.snp.makeConstraints { (make) in
+        self.onePasswordButton.snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 30.0, height: 30.0))
         }
         
@@ -96,7 +96,7 @@ final class LoginViewController: UIViewController {
         self.passwordTextField.delegate = self
         self.container.addSubview(self.passwordTextField)
         
-        self.passwordTextField.snp.makeConstraints { (make) in
+        self.passwordTextField.snp.makeConstraints { make in
             make.top.equalTo(self.emailTextField.snp.bottom).offset(10.0)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.75)
@@ -106,7 +106,7 @@ final class LoginViewController: UIViewController {
         self.forgottonPasswordButton.addTarget(self, action: #selector(self.forgottonPasswordButtonTapped(_:)), for: .touchUpInside)
         self.container.addSubview(self.forgottonPasswordButton)
         
-        self.forgottonPasswordButton.snp.makeConstraints { (make) in
+        self.forgottonPasswordButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(self.passwordTextField.snp.bottom).offset(10.0)
             make.bottom.equalToSuperview()

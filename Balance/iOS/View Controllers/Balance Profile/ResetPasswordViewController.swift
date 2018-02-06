@@ -82,7 +82,7 @@ final class ResetPasswordViewController: UIViewController {
         // Container
         self.view.addSubview(self.container)
         
-        self.container.snp.makeConstraints { (make) in
+        self.container.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
@@ -90,7 +90,7 @@ final class ResetPasswordViewController: UIViewController {
         let contentContainer = UIView()
         self.container.addSubview(contentContainer)
         
-        contentContainer.snp.makeConstraints { (make) in
+        contentContainer.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.width.equalToSuperview()
         }
@@ -99,7 +99,7 @@ final class ResetPasswordViewController: UIViewController {
         self.resetCodeTextField.delegate = self
         contentContainer.addSubview(self.resetCodeTextField)
         
-        self.resetCodeTextField.snp.makeConstraints { (make) in
+        self.resetCodeTextField.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.75)
@@ -109,7 +109,7 @@ final class ResetPasswordViewController: UIViewController {
         self.passwordTextField.delegate = self
         contentContainer.addSubview(self.passwordTextField)
         
-        self.passwordTextField.snp.makeConstraints { (make) in
+        self.passwordTextField.snp.makeConstraints { make in
             make.top.equalTo(self.resetCodeTextField.snp.bottom).offset(10.0)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.75)
@@ -119,7 +119,7 @@ final class ResetPasswordViewController: UIViewController {
         self.passwordConfirmationTextField.delegate = self
         contentContainer.addSubview(self.passwordConfirmationTextField)
         
-        self.passwordConfirmationTextField.snp.makeConstraints { (make) in
+        self.passwordConfirmationTextField.snp.makeConstraints { make in
             make.top.equalTo(self.passwordTextField.snp.bottom).offset(10.0)
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
@@ -154,7 +154,7 @@ final class ResetPasswordViewController: UIViewController {
             UIView.animate(withDuration: animationDuration, delay: 0.0, options: UIViewAnimationOptions(rawValue: animationCurve), animations: {
                 let keyboardEndFrame = self.view.convert(screenEndFrame, from: window)
                 
-                self.container.snp.remakeConstraints({ (make) in
+                self.container.snp.remakeConstraints({ make in
                     make.top.equalToSuperview()
                     make.left.equalToSuperview()
                     make.right.equalToSuperview()
@@ -179,7 +179,7 @@ final class ResetPasswordViewController: UIViewController {
             }
             
             UIView.animate(withDuration: animationDuration, delay: 0.0, options: UIViewAnimationOptions(rawValue: animationCurve), animations: {
-                self.container.snp.remakeConstraints({ (make) in
+                self.container.snp.remakeConstraints({ make in
                     make.edges.equalToSuperview()
                 })
                 

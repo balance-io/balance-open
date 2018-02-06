@@ -100,7 +100,7 @@ private extension ReconnectAccountCell {
         
         contentView.addSubview(nameLabel)
         
-        nameLabel.snp.makeConstraints { (make) in
+        nameLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(8)
             make.trailing.equalTo(contentView.snp.centerX)
             make.centerY.equalToSuperview()
@@ -114,7 +114,7 @@ private extension ReconnectAccountCell {
         
         contentView.addSubview(statusContainerView)
         
-        statusContainerView.snp.makeConstraints { (make) in
+        statusContainerView.snp.makeConstraints { make in
             make.leading.equalTo(contentView.snp.centerX).offset(UIView.getHorizontalSize(with: 8))
             make.trailing.equalTo(contentView.snp.trailing).offset(UIView.getHorizontalSize(with: -8))
             make.top.equalToSuperview()
@@ -137,7 +137,7 @@ private extension ReconnectAccountCell {
         
         containerView.addSubview(reconnectButton)
         
-        reconnectButton.snp.makeConstraints { (make) in
+        reconnectButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.8)
@@ -155,7 +155,7 @@ private extension ReconnectAccountCell {
         
         containerView.addSubview(loaderView)
         
-        loaderView.snp.makeConstraints { (make) in
+        loaderView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
         }

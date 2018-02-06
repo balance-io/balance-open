@@ -35,7 +35,7 @@ final class TextFieldTableViewCell: TableViewCell
             unwrappedTextField.textAlignment = .right
             self.container.addSubview(unwrappedTextField)
             
-            unwrappedTextField.snp.makeConstraints { (make) in
+            unwrappedTextField.snp.makeConstraints { make in
                 make.right.equalTo(self.contentView.layoutMarginsGuide.snp.right)
                 make.top.equalToSuperview()
                 make.bottom.equalToSuperview()
@@ -58,7 +58,7 @@ final class TextFieldTableViewCell: TableViewCell
         // Container
         self.contentView.addSubview(self.container)
         
-        self.container.snp.makeConstraints { (make) in
+        self.container.snp.makeConstraints { make in
             make.height.equalTo(44.0).priority(999)
             make.edges.equalToSuperview()
         }
@@ -69,7 +69,7 @@ final class TextFieldTableViewCell: TableViewCell
         
         self.container.addSubview(self.titleLabel)
         
-        self.titleLabel.snp.makeConstraints { (make) in
+        self.titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
             make.left.equalToSuperview().inset(15.0)

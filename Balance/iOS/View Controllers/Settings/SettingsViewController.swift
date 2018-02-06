@@ -65,7 +65,7 @@ final class SettingsViewController: UIViewController
         self.tableView.register(reusableCell: SegmentedControlTableViewCell.self)
         self.view.addSubview(self.tableView)
         
-        self.tableView.snp.makeConstraints { (make) in
+        self.tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         

@@ -66,7 +66,7 @@ private extension ReconnectAccountViewController {
                                 for: .touchUpInside)
         
         view.addSubview(dismissButton)
-        dismissButton.snp.makeConstraints { (make) in
+        dismissButton.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.height.equalToSuperview()
         }
@@ -78,7 +78,7 @@ private extension ReconnectAccountViewController {
         let invalidAccountsView = UIView(frame: .zero)
         view.addSubview(invalidAccountsView)
         
-        invalidAccountsView.snp.makeConstraints { (make) in
+        invalidAccountsView.snp.makeConstraints { make in
             make.height.equalTo(UIView.getVerticalSize(with: 30))
             make.leading.equalToSuperview().offset(UIView.getHorizontalSize(with: 10))
             make.trailing.equalToSuperview().offset(-UIView.getHorizontalSize(with: 10))
@@ -95,7 +95,7 @@ private extension ReconnectAccountViewController {
         let invalidAccountsTableView = UITableView(frame: .zero)
         containerView.addSubview(invalidAccountsTableView)
         
-        invalidAccountsTableView.snp.makeConstraints { (make) in
+        invalidAccountsTableView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.bottom.equalToSuperview()

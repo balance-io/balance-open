@@ -52,7 +52,7 @@ final class AccountTableViewCell: TableViewCell {
         // Currency name
         self.contentView.addSubview(self.currencyNameLabel)
         
-        self.currencyNameLabel.snp.makeConstraints { (make) in
+        self.currencyNameLabel.snp.makeConstraints { make in
             make.bottom.equalTo(self.contentView.snp.centerY).offset(-2.0)
             make.left.equalTo(self.contentView.layoutMarginsGuide.snp.left)
         }
@@ -60,7 +60,7 @@ final class AccountTableViewCell: TableViewCell {
         // Amount label
         self.contentView.addSubview(self.amountLabel)
         
-        self.amountLabel.snp.makeConstraints { (make) in
+        self.amountLabel.snp.makeConstraints { make in
             make.top.equalTo(self.contentView.snp.centerY).offset(2.0)
             make.left.equalTo(self.contentView.layoutMarginsGuide.snp.left)
         }
@@ -72,7 +72,7 @@ final class AccountTableViewCell: TableViewCell {
         // Bottom border
         self.contentView.addSubview(self.bottomBorder)
         
-        self.bottomBorder.snp.makeConstraints { (make) in
+        self.bottomBorder.snp.makeConstraints { make in
             make.height.equalTo(1.0)
             make.bottom.equalToSuperview()
             make.right.equalToSuperview()

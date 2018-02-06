@@ -40,14 +40,14 @@ final class MultilineTitleView: UIView
         let container = UIView()
         self.addSubview(container)
         
-        container.snp.makeConstraints { (make) in
+        container.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
         // Title label
         container.addSubview(self.titleLabel)
         
-        self.titleLabel.snp.makeConstraints { (make) in
+        self.titleLabel.snp.makeConstraints { make in
             make.bottom.equalTo(container.snp.centerY)
             make.width.lessThanOrEqualToSuperview()
             make.centerX.equalToSuperview()
@@ -56,7 +56,7 @@ final class MultilineTitleView: UIView
         // Detail label
         container.addSubview(self.detailLabel)
        
-        self.detailLabel.snp.makeConstraints { (make) in
+        self.detailLabel.snp.makeConstraints { make in
             make.top.equalTo(container.snp.centerY)
             make.width.lessThanOrEqualToSuperview()
             make.centerX.equalToSuperview()

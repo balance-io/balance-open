@@ -63,14 +63,14 @@ final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Reusable {
         
         // Name label
         self.contentView.addSubview(self.nameLabel)
-        self.nameLabel.snp.makeConstraints { (make) in
+        self.nameLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(15.0)
             make.centerY.equalToSuperview()
         }
         
         // Total balance label
         self.contentView.addSubview(self.totalBalanceLabel)
-        self.totalBalanceLabel.snp.makeConstraints { (make) in
+        self.totalBalanceLabel.snp.makeConstraints { make in
             make.right.equalToSuperview().inset(15.0)
             make.centerY.equalToSuperview()
         }
@@ -79,7 +79,7 @@ final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Reusable {
         self.logoView.backgroundColor = UIColor.clear
         self.logoView.isHidden = true
         self.contentView.addSubview(self.logoView)
-        self.logoView.snp.makeConstraints { (make) in
+        self.logoView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(15)
             make.width.equalTo(0)
             make.height.equalTo(0)
@@ -88,7 +88,7 @@ final class InstitutionTableHeaderView: UITableViewHeaderFooterView, Reusable {
         
         // Bottom border
         self.contentView.addSubview(self.bottomBorder)
-        self.bottomBorder.snp.makeConstraints { (make) in
+        self.bottomBorder.snp.makeConstraints { make in
             make.height.equalTo(1)
             make.bottom.equalToSuperview()
             make.right.equalToSuperview()

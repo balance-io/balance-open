@@ -38,13 +38,13 @@ final class TotalBalanceBar: UIView {
         // Container
         let container = UIView()
         self.addSubview(container)
-        container.snp.makeConstraints { (make) in
+        container.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
         // Title label
         container.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { (make) in
+        titleLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.left.equalToSuperview().inset(16.0)
         }
@@ -58,14 +58,14 @@ final class TotalBalanceBar: UIView {
         
         // Total balance label
         container.addSubview(totalBalanceLabel)
-        totalBalanceLabel.snp.makeConstraints { (make) in
+        totalBalanceLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.right.equalToSuperview().inset(16.0)
         }
     }
     
     required init?(coder aDecoder: NSCoder) {
-        abort()
+        fatalError("unsupported")
     }
     
     // MARK: Autolayout

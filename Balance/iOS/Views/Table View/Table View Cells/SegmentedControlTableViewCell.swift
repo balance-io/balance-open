@@ -27,7 +27,7 @@ final class SegmentedControlTableViewCell: TableViewCell
             
             self.contentView.addSubview(unwrappedSegmentedControl)
             
-            unwrappedSegmentedControl.snp.makeConstraints { (make) in
+            unwrappedSegmentedControl.snp.makeConstraints { make in
                 make.right.equalToSuperview().inset(10.0)
                 make.centerY.equalToSuperview()
             }

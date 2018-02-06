@@ -62,7 +62,7 @@ final class RegistrationViewController: UIViewController {
         // Container
         self.view.addSubview(self.container)
         
-        self.container.snp.makeConstraints { (make) in
+        self.container.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.center.equalToSuperview()
         }
@@ -71,7 +71,7 @@ final class RegistrationViewController: UIViewController {
         self.emailTextField.delegate = self
         self.container.addSubview(self.emailTextField)
         
-        self.emailTextField.snp.makeConstraints { (make) in
+        self.emailTextField.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.75)
@@ -81,7 +81,7 @@ final class RegistrationViewController: UIViewController {
         self.passwordTextField.delegate = self
         self.container.addSubview(self.passwordTextField)
         
-        self.passwordTextField.snp.makeConstraints { (make) in
+        self.passwordTextField.snp.makeConstraints { make in
             make.top.equalTo(self.emailTextField.snp.bottom).offset(10.0)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.75)
@@ -91,7 +91,7 @@ final class RegistrationViewController: UIViewController {
         self.passwordConfirmationTextField.delegate = self
         self.container.addSubview(self.passwordConfirmationTextField)
         
-        self.passwordConfirmationTextField.snp.makeConstraints { (make) in
+        self.passwordConfirmationTextField.snp.makeConstraints { make in
             make.top.equalTo(self.passwordTextField.snp.bottom).offset(10.0)
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
