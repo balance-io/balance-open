@@ -11,22 +11,8 @@ import UIKit
 final class TotalBalanceBar: UIView {
     let loadingSpinner = UIActivityIndicatorView(activityIndicatorStyle: .white)
     
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Balance"
-        label.font = CurrentTheme.accounts.balanceBar.titleFont
-        label.textColor = CurrentTheme.accounts.balanceBar.titleColor
-        
-        return label
-    }()
-    
-    let totalBalanceLabel: UILabel = {
-        let label = UILabel()
-        label.font = CurrentTheme.accounts.balanceBar.totalBalanceFont
-        label.textColor = CurrentTheme.accounts.balanceBar.totalBalanceColor
-        
-        return label
-    }()
+    let titleLabel = UILabel()
+    let totalBalanceLabel = UILabel()
     
     // MARK: Initialization
     
@@ -43,10 +29,13 @@ final class TotalBalanceBar: UIView {
         }
         
         // Title label
+        titleLabel.text = "Balance"
+        titleLabel.font = CurrentTheme.accounts.balanceBar.titleFont
+        titleLabel.textColor = CurrentTheme.accounts.balanceBar.titleColor
         container.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.left.equalToSuperview().inset(16.0)
+            make.left.equalToSuperview().offset(16.0)
         }
         
         // LoadingSpinner
@@ -57,10 +46,12 @@ final class TotalBalanceBar: UIView {
         }
         
         // Total balance label
+        totalBalanceLabel.font = CurrentTheme.accounts.balanceBar.totalBalanceFont
+        totalBalanceLabel.textColor = CurrentTheme.accounts.balanceBar.totalBalanceColor
         container.addSubview(totalBalanceLabel)
         totalBalanceLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.right.equalToSuperview().inset(16.0)
+            make.right.equalToSuperview().offset(-16.0)
         }
     }
     

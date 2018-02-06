@@ -9,10 +9,8 @@
 import UIKit
 
 final class PriceTickerViewController: UIViewController {
-    
-    // Private
-    
     private let viewModel = PriceTickerTabViewModel()
+    
     private let refreshControl = UIRefreshControl()
     private let collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -27,7 +25,6 @@ final class PriceTickerViewController: UIViewController {
     
     required init() {
         super.init(nibName: nil, bundle: nil)
-        
         self.title = "Ticker"
         self.tabBarItem.image = UIImage(named: "Activity")
     }
@@ -37,9 +34,9 @@ final class PriceTickerViewController: UIViewController {
     }
     
     // MARK: View lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupView()
     }
     
@@ -146,8 +143,7 @@ extension PriceTickerViewController: UICollectionViewDelegate {
         header.textLabel.text = viewModel.name(forSection: indexPath.section)
         
         return header
-    }
-    
+    }    
 }
 
 // MARK: UICollectionViewFlowLayout

@@ -9,10 +9,8 @@
 import UIKit
 
 final class AccountsListViewController: UIViewController {
-    // Fileprivate
     fileprivate let viewModel = AccountsTabViewModel()
     
-    // Private
     private let refreshControl = UIRefreshControl()
     private let collectionView = StackedCardCollectionView()
     private let totalBalanceBar = TotalBalanceBar()
@@ -38,38 +36,34 @@ final class AccountsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
+        self.view.backgroundColor = .black
         
         // View header
         titleLabel.text = title ?? ""
         titleLabel.font = CurrentTheme.accounts.header.titleLabelFont
         titleLabel.textColor = CurrentTheme.accounts.header.titleLabelColor
         titleLabel.backgroundColor = .clear
-        
-        view.addSubview(titleLabel)
-
-        titleLabel.snp.makeConstraints{
+        self.view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
             if #available(iOS 11, *) {
-                $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
             } else {
-                $0.top.equalTo(20)
+                make.top.equalTo(20)
             }
-            $0.left.equalTo(20)
-            $0.right.equalToSuperview()
-            $0.height.equalTo(50)
+            make.left.equalTo(20)
+            make.right.equalToSuperview()
+            make.height.equalTo(50)
         }
         
         headerAddAcountButton.setImage(UIImage(named: "iconAdd")?.withRenderingMode(.alwaysTemplate), for: .normal)
         headerAddAcountButton.tintColor = CurrentTheme.accounts.header.addAccountButtonColor
         headerAddAcountButton.addTarget(self, action: #selector(addAccountButtonTapped), for: .touchUpInside)
-        
-        view.addSubview(headerAddAcountButton)
-        
-        headerAddAcountButton.snp.makeConstraints {
-            $0.right.equalToSuperview().inset(10)
-            $0.size.width.equalTo(50)
-            $0.size.height.equalTo(50)
-            $0.centerYWithinMargins.equalTo(titleLabel)
+        self.view.addSubview(headerAddAcountButton)
+        headerAddAcountButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().inset(10)
+            make.width.equalTo(50)
+            make.height.equalTo(50)
+            make.centerYWithinMargins.equalTo(titleLabel)
         }
         
         // Refresh controler
@@ -84,7 +78,7 @@ final class AccountsListViewController: UIViewController {
         collectionView.backgroundColor = .clear
         collectionView.alwaysBounceVertical = true
         collectionView.register(reusableCell: InstitutionCollectionViewCell.self)
-        view.addSubview(collectionView)
+        self.view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(self.titleLabel.snp.bottom)
             make.bottom.equalTo(self.bottomLayoutGuide.snp.bottom)
@@ -95,13 +89,13 @@ final class AccountsListViewController: UIViewController {
         // Blank state view
         blankStateView.isHidden = true
         blankStateView.addTarget(self, action: #selector(addAccountButtonTapped))
-        view.addSubview(blankStateView)
+        self.view.addSubview(blankStateView)
         blankStateView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
          
         // Total balance bar
-        view.addSubview(totalBalanceBar)
+        self.view.addSubview(totalBalanceBar)
         totalBalanceBar.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.right.equalToSuperview()
@@ -112,14 +106,14 @@ final class AccountsListViewController: UIViewController {
             }
         }
         
-        view.bringSubview(toFront: titleLabel)
-        view.bringSubview(toFront: headerAddAcountButton)
+        self.view.bringSubview(toFront: titleLabel)
+        self.view.bringSubview(toFront: headerAddAcountButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.isNavigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         UIApplication.shared.statusBarStyle = .lightContent
         
         reloadData()
@@ -261,7 +255,6 @@ final class AccountsListViewController: UIViewController {
 // MARK: UICollectionViewDataSource
 
 extension AccountsListViewController: UICollectionViewDataSource {
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -273,19 +266,17 @@ extension AccountsListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: InstitutionCollectionViewCell = collectionView.dequeueReusableCell(at: indexPath)
         
-        let institution = self.viewModel.institution(forSection: indexPath.row)!
-        let viewModel = AccountsListViewModel(institution: institution)
-        cell.viewModel = viewModel
-        
+        guard let institution = viewModel.institution(forSection: indexPath.row) else {
+            return cell
+        }
+        cell.viewModel = AccountsListViewModel(institution: institution)
         return cell
     }
-    
 }
 
 // MARK: UICollectionViewDelegate
 
-extension AccountsListViewController: UICollectionViewDelegate
-{
+extension AccountsListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.updateSelectedCards(with: collectionView.indexPathsForSelectedItems ?? [])
     }
@@ -298,9 +289,10 @@ extension AccountsListViewController: UICollectionViewDelegate
 // MARK: StackedLayoutDelegate
 
 extension AccountsListViewController: StackedLayoutDelegate {
-    
     func closedHeightForItem(at indexPath: IndexPath, in collectionView: UICollectionView) -> CGFloat {
-        let institution = viewModel.institution(forSection: indexPath.row)!
+        guard let institution = viewModel.institution(forSection: indexPath.row) else {
+            return 0
+        }
         
         let measurementCell = InstitutionCollectionViewCell.measurementCell
         measurementCell.viewModel = AccountsListViewModel(institution: institution)
@@ -311,12 +303,12 @@ extension AccountsListViewController: StackedLayoutDelegate {
     }
     
     func expandedHeightForItem(at indexPath: IndexPath, in collectionView: UICollectionView) -> CGFloat {
-        let institution = viewModel.institution(forSection: indexPath.row)!
+        guard let institution = viewModel.institution(forSection: indexPath.row) else {
+            return 0
+        }
         
         let measurementCell = InstitutionCollectionViewCell.measurementCell
         measurementCell.viewModel = AccountsListViewModel(institution: institution)
-        
         return measurementCell.expandedContentHeight
     }
-    
 }

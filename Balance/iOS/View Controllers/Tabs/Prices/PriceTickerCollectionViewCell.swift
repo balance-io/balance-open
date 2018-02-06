@@ -31,16 +31,16 @@ final class PriceTickerCollectionViewCell: UICollectionViewCell, Reusable {
         
         // Currency name label
         currencyNameLabel.font = CurrentTheme.priceTicker.cell.currencyNameFont
-        self.contentView.addSubview(self.currencyNameLabel)
-        self.currencyNameLabel.snp.makeConstraints { make in
+        self.contentView.addSubview(currencyNameLabel)
+        currencyNameLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.left.equalToSuperview().inset(15.0)
         }
         
         // Amount label
         amountLabel.font = CurrentTheme.priceTicker.cell.amountFont
-        self.contentView.addSubview(self.amountLabel)
-        self.amountLabel.snp.makeConstraints { make in
+        self.contentView.addSubview(amountLabel)
+        amountLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.right.equalToSuperview().inset(15.0)
         }
@@ -54,14 +54,13 @@ final class PriceTickerCollectionViewCell: UICollectionViewCell, Reusable {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
     }
     
     // MARK: Data
     
     func update(currency: Currency, rate: String) {
-        self.currencyNameLabel.text = currency.longName
-        self.amountLabel.text = rate
+        currencyNameLabel.text = currency.longName
+        amountLabel.text = rate
     }
 }

@@ -23,48 +23,19 @@ fileprivate extension Source {
 }
 
 fileprivate let hideConvertedAmounts = true
-final class TransactionCollectionViewCell: UICollectionViewCell, Reusable
-{
-    // Internal
+final class TransactionCollectionViewCell: UICollectionViewCell, Reusable {
     var transaction: Transaction? {
-        didSet
-        {
-            self.reloadData()
+        didSet {
+            reloadData()
         }
     }
     
-    // Private
     private let logoView = UIImageView()
-    
-    private let institutionNameLabel: UILabel = {
-        let label = UILabel()
-        label.font = CurrentTheme.transactions.cell.institutionNameFont
-        
-        return label
-    }()
-    
+    private let institutionNameLabel = UILabel()
     private let transactionTypeImageView = UIImageView()
-    
-    private let transactionTypeLabel: UILabel = {
-        let label = UILabel()
-        label.font = CurrentTheme.transactions.cell.transactionTypeFont
-        
-        return label
-    }()
-    
-    private let amountLabel: UILabel = {
-        let label = UILabel()
-        label.font = CurrentTheme.transactions.cell.amountFont
-        
-        return label
-    }()
-    
-    private let userCurrencyAmountLabel: UILabel = {
-        let label = UILabel()
-        label.font = CurrentTheme.transactions.cell.userCurrencyAmountFont
-        
-        return label
-    }()
+    private let transactionTypeLabel = UILabel()
+    private let amountLabel = UILabel()
+    private let userCurrencyAmountLabel = UILabel()
     
     // MARK: Initialization
     
@@ -84,54 +55,57 @@ final class TransactionCollectionViewCell: UICollectionViewCell, Reusable
         self.contentView.layer.cornerRadius = CurrentTheme.transactions.cell.cornerRadius
         
         // Transaction type image view
-        self.contentView.addSubview(self.transactionTypeImageView)
-        self.transactionTypeImageView.snp.makeConstraints { make in
+        self.contentView.addSubview(transactionTypeImageView)
+        transactionTypeImageView.snp.makeConstraints { make in
             make.bottom.equalTo(self.contentView.snp.centerY).offset(-5.0)
             make.left.equalToSuperview().inset(15.0)
         }
         
         // Transaction type
-        self.contentView.addSubview(self.transactionTypeLabel)
-        self.transactionTypeLabel.snp.makeConstraints { make in
+        transactionTypeLabel.font = CurrentTheme.transactions.cell.transactionTypeFont
+        self.contentView.addSubview(transactionTypeLabel)
+        transactionTypeLabel.snp.makeConstraints { make in
             make.centerY.equalTo(self.transactionTypeImageView)
             make.left.equalTo(self.transactionTypeImageView.snp.right).offset(5.0)
         }
         
         // Institution name label
-        self.contentView.addSubview(self.institutionNameLabel)
-        self.institutionNameLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(self.transactionTypeImageView)
+        institutionNameLabel.font = CurrentTheme.transactions.cell.institutionNameFont
+        self.contentView.addSubview(institutionNameLabel)
+        institutionNameLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(transactionTypeImageView)
             make.right.equalToSuperview().inset(15.0)
         }
         
         // Logo view
-        self.logoView.isHidden = true
-        self.contentView.addSubview(self.logoView)
-        self.logoView.snp.makeConstraints { make in
-            make.centerY.equalTo(self.transactionTypeImageView)
+        logoView.isHidden = true
+        self.contentView.addSubview(logoView)
+        logoView.snp.makeConstraints { make in
+            make.centerY.equalTo(transactionTypeImageView)
             make.right.equalToSuperview().offset(-10)
             make.width.equalTo(0)
             make.height.equalTo(0)
         }
         
         // Amount label
-        self.contentView.addSubview(self.amountLabel)
-        self.amountLabel.snp.makeConstraints { make in
+        amountLabel.font = CurrentTheme.transactions.cell.amountFont
+        self.contentView.addSubview(amountLabel)
+        amountLabel.snp.makeConstraints { make in
             make.top.equalTo(self.contentView.snp.centerY).offset(2.0)
             make.left.equalToSuperview().inset(15.0)
         }
         
         // User currency amount label
-        self.contentView.addSubview(self.userCurrencyAmountLabel)
-        self.userCurrencyAmountLabel.snp.makeConstraints { make in
+        userCurrencyAmountLabel.font = CurrentTheme.transactions.cell.userCurrencyAmountFont
+        self.contentView.addSubview(userCurrencyAmountLabel)
+        userCurrencyAmountLabel.snp.makeConstraints { make in
             make.top.equalTo(self.contentView.snp.centerY).offset(2.0)
             make.right.equalToSuperview().inset(15.0)
         }
-        self.userCurrencyAmountLabel.isHidden = hideConvertedAmounts
+        userCurrencyAmountLabel.isHidden = hideConvertedAmounts
     }
     
-    required init?(coder aDecoder: NSCoder)
-    {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("unsupported")
     }
     
@@ -139,7 +113,6 @@ final class TransactionCollectionViewCell: UICollectionViewCell, Reusable
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
     }
     

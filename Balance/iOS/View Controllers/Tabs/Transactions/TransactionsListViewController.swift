@@ -10,16 +10,9 @@ import UIKit
 
 
 final class TransactionsListViewController: UIViewController, TransactionsTabViewModelDelegate {
-    // Private
     private let viewModel = TransactionsTabViewModel()
     private let refreshControl = UIRefreshControl()
-    
-    private let collectionView: UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        
-        return collectionView
-    }()
+    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     // MARK: Initialization
     
@@ -45,19 +38,18 @@ final class TransactionsListViewController: UIViewController, TransactionsTabVie
         }
         
         // Refresh control
-        self.collectionView.refreshControl = self.refreshControl
-        self.refreshControl.addTarget(self, action: #selector(self.refreshControlValueChanged(_:)), for: .valueChanged)
+        collectionView.refreshControl = self.refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshControlValueChanged(_:)), for: .valueChanged)
         
         // Collection view
-        self.collectionView.refreshControl = self.refreshControl
-        self.collectionView.backgroundColor = CurrentTheme.transactions.collectionView.backgroundColor
-        self.collectionView.dataSource = self
-        self.collectionView.delegate = self
-        self.collectionView.register(reusableCell: TransactionCollectionViewCell.self)
-        self.collectionView.register(reusableSupplementaryView: CustomHeaderReusableView.self, kind: UICollectionElementKindSectionHeader)
-        self.view.addSubview(self.collectionView)
-        
-        self.collectionView.snp.makeConstraints { make in
+        collectionView.refreshControl = self.refreshControl
+        collectionView.backgroundColor = CurrentTheme.transactions.collectionView.backgroundColor
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(reusableCell: TransactionCollectionViewCell.self)
+        collectionView.register(reusableSupplementaryView: CustomHeaderReusableView.self, kind: UICollectionElementKindSectionHeader)
+        self.view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
@@ -67,15 +59,12 @@ final class TransactionsListViewController: UIViewController, TransactionsTabVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         viewModel.reloadData()
-        
         registerForNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         unregisterForNotifications()
     }
     
@@ -147,7 +136,7 @@ extension TransactionsListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(at: indexPath, kind: kind) as CustomHeaderReusableView
-        header.textLabel.text = self.viewModel.sectionTitle(for: indexPath.section)
+        header.textLabel.text = viewModel.sectionTitle(for: indexPath.section)
         
         return header
     }
