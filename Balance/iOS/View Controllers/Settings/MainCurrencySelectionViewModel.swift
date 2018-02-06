@@ -1,5 +1,5 @@
 //
-//  CurrencySelectionViewModel.swift
+//  MainCurrencySelectionViewModel.swift
 //  BalanceiOS
 //
 //  Created by Red Davis on 17/10/2017.
@@ -9,7 +9,7 @@
 import Foundation
 
 
-internal final class CurrencySelectionViewModel {
+internal final class MainCurrencySelectionViewModel {
     // Internal
     internal var numberOfSections: Int {
         return self.sectionIndexTitles.count

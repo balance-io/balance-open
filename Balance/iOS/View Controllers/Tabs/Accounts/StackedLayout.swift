@@ -14,8 +14,7 @@ import UIKit
 }
 
 internal final class StackedLayout: UICollectionViewLayout {
-    // Internal
-    internal weak var delegate: StackedLayoutDelegate?
+    weak var delegate: StackedLayoutDelegate?
     
     // Private
     private let stretchValue: CGFloat = 0
@@ -28,7 +27,7 @@ internal final class StackedLayout: UICollectionViewLayout {
     
     override var collectionViewContentSize: CGSize {
         guard let unwrappedCollectionView = collectionView else {
-            return CGSize.zero
+            return .zero
         }
         
         let minimumHeight: CGFloat
@@ -47,19 +46,18 @@ internal final class StackedLayout: UICollectionViewLayout {
     internal override func prepare() {
         super.prepare()
         
-        guard let unwrappedCollectionView = collectionView,
-              let selectedIndexPaths = unwrappedCollectionView.indexPathsForSelectedItems else {
+        guard let collectionView = self.collectionView, let selectedIndexPaths = collectionView.indexPathsForSelectedItems else {
             return
         }
         
-        unwrappedCollectionView.layoutIfNeeded()
+        collectionView.layoutIfNeeded()
         
         var layoutAttributes = [IndexPath : UICollectionViewLayoutAttributes]()
-        let numberOfItems = unwrappedCollectionView.numberOfItems(inSection: 0)
+        let numberOfItems = collectionView.numberOfItems(inSection: 0)
         var nextYCoor: CGFloat = 0.0
         
-        for index in 0..<numberOfItems {
-            guard let unwrappedDelegate = delegate else {
+        for index in 0 ..< numberOfItems {
+            guard let delegate = delegate else {
                 continue
             }
             
@@ -69,7 +67,7 @@ internal final class StackedLayout: UICollectionViewLayout {
             
             var height: CGFloat
             if !selectedIndexPaths.contains(indexPath) {
-                height = unwrappedDelegate.expandedHeightForItem(at: indexPath, in: unwrappedCollectionView)
+                height = delegate.expandedHeightForItem(at: indexPath, in: collectionView)
                 
                 // If not the last item, add extra height so that the next cell
                 // has space to overlap and not obstruct the cell details
@@ -77,27 +75,24 @@ internal final class StackedLayout: UICollectionViewLayout {
                     height += self.itemOverlap
                 }
             } else {
-                height = unwrappedDelegate.closedHeightForItem(at: indexPath, in: unwrappedCollectionView)
+                height = delegate.closedHeightForItem(at: indexPath, in: collectionView)
             }
             
-            attributes.frame = CGRect(x: 0.0, y: nextYCoor, width: unwrappedCollectionView.bounds.width, height: height)
+            attributes.frame = CGRect(x: 0.0, y: nextYCoor, width: collectionView.bounds.width, height: height)
             attributes.zIndex = index
             attributes.transform3D = CATransform3DMakeTranslation(0.0, 0.0, CGFloat(index - numberOfItems))
             
             // Collection view is at the top and the user continues to pull down
-            if (unwrappedCollectionView.contentOffset.y + unwrappedCollectionView.contentInset.top < 0.0) {
-                var frame = attributes.frame
-                frame.origin.y -= self.stretchValue * unwrappedCollectionView.contentOffset.y * CGFloat(index)
-                
-                attributes.frame = frame
+            if (collectionView.contentOffset.y + collectionView.contentInset.top < 0.0) {
+                attributes.frame.origin.y -= stretchValue * collectionView.contentOffset.y * CGFloat(index)
             }
             
-            self.contentHeight = nextYCoor + height
-            nextYCoor += (height - self.itemOverlap)
+            contentHeight = nextYCoor + height
+            nextYCoor += (height - itemOverlap)
             layoutAttributes[indexPath] = attributes
         }
         
-        self.previousLayoutAttributes = self.layoutAttributes
+        previousLayoutAttributes = layoutAttributes
         self.layoutAttributes = layoutAttributes
     }
     

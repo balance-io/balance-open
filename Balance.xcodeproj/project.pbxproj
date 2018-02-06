@@ -428,7 +428,7 @@
 		A42953D41F8E255D00729045 /* InstitutionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42953D31F8E255D00729045 /* InstitutionCollectionViewCell.swift */; };
 		A4307A901F8F6EA800BBA8B4 /* StackedCardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4307A8F1F8F6EA800BBA8B4 /* StackedCardCollectionView.swift */; };
 		A432F5E81FBDA09D00DDDAFF /* TotalBalanceBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A432F5E71FBDA09D00DDDAFF /* TotalBalanceBar.swift */; };
-		A43ACE501F963035009F2AE9 /* CurrencySelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43ACE4F1F963035009F2AE9 /* CurrencySelectionViewModel.swift */; };
+		A43ACE501F963035009F2AE9 /* MainCurrencySelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43ACE4F1F963035009F2AE9 /* MainCurrencySelectionViewModel.swift */; };
 		A4430A901F94EE1700F2FFFA /* CoinbaseInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A8F1F94EE1700F2FFFA /* CoinbaseInstitution.swift */; };
 		A4430A911F94EE1700F2FFFA /* CoinbaseInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A8F1F94EE1700F2FFFA /* CoinbaseInstitution.swift */; };
 		A4430A931F94EFB300F2FFFA /* OpenTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430A921F94EFB300F2FFFA /* OpenTheme.swift */; };
@@ -942,7 +942,7 @@
 		A42953D31F8E255D00729045 /* InstitutionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionCollectionViewCell.swift; sourceTree = "<group>"; };
 		A4307A8F1F8F6EA800BBA8B4 /* StackedCardCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedCardCollectionView.swift; sourceTree = "<group>"; };
 		A432F5E71FBDA09D00DDDAFF /* TotalBalanceBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalBalanceBar.swift; sourceTree = "<group>"; };
-		A43ACE4F1F963035009F2AE9 /* CurrencySelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySelectionViewModel.swift; sourceTree = "<group>"; };
+		A43ACE4F1F963035009F2AE9 /* MainCurrencySelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCurrencySelectionViewModel.swift; sourceTree = "<group>"; };
 		A4430A8F1F94EE1700F2FFFA /* CoinbaseInstitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseInstitution.swift; sourceTree = "<group>"; };
 		A4430A921F94EFB300F2FFFA /* OpenTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTheme.swift; sourceTree = "<group>"; };
 		A4430A981F95004C00F2FFFA /* PaintCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaintCodeView.swift; sourceTree = "<group>"; };
@@ -1452,7 +1452,6 @@
 				53762EB21ED796F100D34A1E /* main.swift */,
 				535529DA1ED723C600DD95F9 /* AppDelegate.swift */,
 				539E0BB120250366000CD3C4 /* Themes */,
-				53561E861F82DD120043D4F9 /* View Models */,
 				53561E941F82DD120043D4F9 /* View Controllers */,
 				53561E8A1F82DD120043D4F9 /* Views */,
 				53561EA11F82DD120043D4F9 /* Utilities */,
@@ -1551,17 +1550,6 @@
 			path = Carthage;
 			sourceTree = "<group>";
 		};
-		53561E861F82DD120043D4F9 /* View Models */ = {
-			isa = PBXGroup;
-			children = (
-				E605EF8020065FBC00A95632 /* Add Account */,
-				53561E881F82DD120043D4F9 /* InstitutionSettingsViewModel.swift */,
-				A4EF39E61F8E43A40032265E /* InstitutionAccountsListViewModel.swift */,
-				A43ACE4F1F963035009F2AE9 /* CurrencySelectionViewModel.swift */,
-			);
-			path = "View Models";
-			sourceTree = "<group>";
-		};
 		53561E8A1F82DD120043D4F9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1569,7 +1557,6 @@
 				53561E8B1F82DD120043D4F9 /* Table View */,
 				53561E931F82DD120043D4F9 /* MultilineTitleView.swift */,
 				A4430A981F95004C00F2FFFA /* PaintCodeView.swift */,
-				A432F5E71FBDA09D00DDDAFF /* TotalBalanceBar.swift */,
 				40A90EA8200F9A4C0063B2F5 /* BlankStateView.swift */,
 			);
 			path = Views;
@@ -1579,7 +1566,6 @@
 			isa = PBXGroup;
 			children = (
 				53561E8C1F82DD120043D4F9 /* Reuseable.swift */,
-				A4ED56DC1F86373200E4CC42 /* Headers */,
 				53561E8D1F82DD120043D4F9 /* Table View Cells */,
 			);
 			path = "Table View";
@@ -1593,7 +1579,6 @@
 				53561E901F82DD120043D4F9 /* TableViewCell.swift */,
 				53561E911F82DD120043D4F9 /* TableData.swift */,
 				53561E921F82DD120043D4F9 /* TextFieldTableViewCell.swift */,
-				A4ED56DA1F86301A00E4CC42 /* AccountTableViewCell.swift */,
 			);
 			path = "Table View Cells";
 			sourceTree = "<group>";
@@ -1602,16 +1587,12 @@
 			isa = PBXGroup;
 			children = (
 				53561E9C1F82DD120043D4F9 /* RootViewController.swift */,
+				A42953CD1F8E179900729045 /* SplashScreenViewController.swift */,
+				A4BDE9981FCD706D002D958D /* UnlockApplicationViewController.swift */,
 				5383C53C201A760200B45DED /* Tabs */,
-				A42953CC1F8E175E00729045 /* Splash Screen */,
-				A453A5241F8676CA0002C6C8 /* Registration */,
-				A453A5211F866CEC0002C6C8 /* Login */,
-				A478A9231FB1FF5100F4764A /* Reset Password */,
-				A41EE47E1FB9AA1A00210038 /* QR Code Scanner */,
 				53561E9D1F82DD120043D4F9 /* Add Account */,
 				53561E951F82DD120043D4F9 /* Settings */,
-				A4ED56DF1F865ECC00E4CC42 /* Main Currency Selection */,
-				A4BDE9971FCD7049002D958D /* Unlock Application */,
+				A453A5241F8676CA0002C6C8 /* Balance Profile */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -1619,38 +1600,30 @@
 		53561E951F82DD120043D4F9 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				53561E981F82DD120043D4F9 /* SettingsViewController.swift */,
-				53561E961F82DD120043D4F9 /* Institution Settings */,
 				53629D5720238AF9000081E9 /* EmailIssueController.swift */,
+				A4ED56E01F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift */,
+				A43ACE4F1F963035009F2AE9 /* MainCurrencySelectionViewModel.swift */,
+				53561E981F82DD120043D4F9 /* SettingsViewController.swift */,
+				53561E971F82DD120043D4F9 /* InstitutionSettingsViewController.swift */,
+				53561E881F82DD120043D4F9 /* InstitutionSettingsViewModel.swift */,
 			);
 			path = Settings;
-			sourceTree = "<group>";
-		};
-		53561E961F82DD120043D4F9 /* Institution Settings */ = {
-			isa = PBXGroup;
-			children = (
-				53561E971F82DD120043D4F9 /* InstitutionSettingsViewController.swift */,
-			);
-			path = "Institution Settings";
 			sourceTree = "<group>";
 		};
 		53561E9D1F82DD120043D4F9 /* Add Account */ = {
 			isa = PBXGroup;
 			children = (
-				E6C1AC45200578C00018D6AA /* Reconnect */,
 				E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */,
+				53561E891F82DD120043D4F9 /* NewAccountViewModel.swift */,
+				53561EA01F82DD120043D4F9 /* AddCredentialBasedAccountViewController.swift */,
+				53561E871F82DD120043D4F9 /* NewAccountListViewModel.swift */,
 				53561E9E1F82DD120043D4F9 /* AddAccountViewController.swift */,
-				53561E9F1F82DD120043D4F9 /* AddCredentialBasedAccountViewController */,
+				A41EE47F1FB9AA1A00210038 /* QRCodeScannerViewController.swift */,
+				E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */,
+				E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */,
+				E605EF8120065FDD00A95632 /* ReconnectAccountViewModel.swift */,
 			);
 			path = "Add Account";
-			sourceTree = "<group>";
-		};
-		53561E9F1F82DD120043D4F9 /* AddCredentialBasedAccountViewController */ = {
-			isa = PBXGroup;
-			children = (
-				53561EA01F82DD120043D4F9 /* AddCredentialBasedAccountViewController.swift */,
-			);
-			path = AddCredentialBasedAccountViewController;
 			sourceTree = "<group>";
 		};
 		53561EA11F82DD120043D4F9 /* Utilities */ = {
@@ -1685,9 +1658,9 @@
 		5383C53C201A760200B45DED /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				53561E9A1F82DD120043D4F9 /* AccountsListViewController.swift */,
-				A459EDA31F839D9800DC4B51 /* TransactionsListViewController.swift */,
-				A456ED0C1FB225A6006EE529 /* PriceTickerViewController.swift */,
+				539298C8202A4EB300BAEF91 /* Accounts */,
+				539298C9202A4EBF00BAEF91 /* Transactions */,
+				539298CA202A4EC900BAEF91 /* Prices */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -1733,6 +1706,39 @@
 			);
 			name = Poloniex;
 			path = APIs/Poloniex;
+			sourceTree = "<group>";
+		};
+		539298C8202A4EB300BAEF91 /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				53561E9A1F82DD120043D4F9 /* AccountsListViewController.swift */,
+				A4307A8F1F8F6EA800BBA8B4 /* StackedCardCollectionView.swift */,
+				A42953CF1F8E1EB300729045 /* StackedLayout.swift */,
+				A4ED56DD1F86378200E4CC42 /* InstitutionTableHeaderView.swift */,
+				A42953D31F8E255D00729045 /* InstitutionCollectionViewCell.swift */,
+				A4ED56DA1F86301A00E4CC42 /* AccountTableViewCell.swift */,
+				A4EF39E61F8E43A40032265E /* InstitutionAccountsListViewModel.swift */,
+				A432F5E71FBDA09D00DDDAFF /* TotalBalanceBar.swift */,
+			);
+			path = Accounts;
+			sourceTree = "<group>";
+		};
+		539298C9202A4EBF00BAEF91 /* Transactions */ = {
+			isa = PBXGroup;
+			children = (
+				A459EDA31F839D9800DC4B51 /* TransactionsListViewController.swift */,
+				A459EDA71F83D2BB00DC4B51 /* TransactionCollectionViewCell.swift */,
+			);
+			path = Transactions;
+			sourceTree = "<group>";
+		};
+		539298CA202A4EC900BAEF91 /* Prices */ = {
+			isa = PBXGroup;
+			children = (
+				A456ED0C1FB225A6006EE529 /* PriceTickerViewController.swift */,
+				A456ED111FB3067D006EE529 /* CurrencyCollectionViewCell.swift */,
+			);
+			path = Prices;
 			sourceTree = "<group>";
 		};
 		539C8E911C73CB1A005C72BC /* Preferences */ = {
@@ -2103,14 +2109,6 @@
 			path = KrakenAPIClient;
 			sourceTree = "<group>";
 		};
-		A41EE47E1FB9AA1A00210038 /* QR Code Scanner */ = {
-			isa = PBXGroup;
-			children = (
-				A41EE47F1FB9AA1A00210038 /* QRCodeScannerViewController.swift */,
-			);
-			path = "QR Code Scanner";
-			sourceTree = "<group>";
-		};
 		A41EE4851FB9E4F000210038 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2122,33 +2120,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A42953CC1F8E175E00729045 /* Splash Screen */ = {
-			isa = PBXGroup;
-			children = (
-				A42953CD1F8E179900729045 /* SplashScreenViewController.swift */,
-			);
-			path = "Splash Screen";
-			sourceTree = "<group>";
-		};
 		A42953D11F8E252900729045 /* Collection View */ = {
 			isa = PBXGroup;
 			children = (
-				A4307A8F1F8F6EA800BBA8B4 /* StackedCardCollectionView.swift */,
-				A4EF39EC1F8F5F5B0032265E /* Layouts */,
-				A42953D21F8E253300729045 /* Cells */,
 				A49572781F98D9F700651C89 /* Supplementary Views */,
 			);
 			path = "Collection View";
-			sourceTree = "<group>";
-		};
-		A42953D21F8E253300729045 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				A459EDA71F83D2BB00DC4B51 /* TransactionCollectionViewCell.swift */,
-				A42953D31F8E255D00729045 /* InstitutionCollectionViewCell.swift */,
-				A456ED111FB3067D006EE529 /* CurrencyCollectionViewCell.swift */,
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		A4430A9A1F95F3E200F2FFFA /* Exchange Rates */ = {
@@ -2160,20 +2137,14 @@
 			path = "Exchange Rates";
 			sourceTree = "<group>";
 		};
-		A453A5211F866CEC0002C6C8 /* Login */ = {
+		A453A5241F8676CA0002C6C8 /* Balance Profile */ = {
 			isa = PBXGroup;
 			children = (
 				A453A5221F866CFF0002C6C8 /* LoginViewController.swift */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
-		A453A5241F8676CA0002C6C8 /* Registration */ = {
-			isa = PBXGroup;
-			children = (
 				A453A5251F8676F00002C6C8 /* RegistrationViewController.swift */,
+				A478A9241FB204C800F4764A /* ResetPasswordViewController.swift */,
 			);
-			path = Registration;
+			path = "Balance Profile";
 			sourceTree = "<group>";
 		};
 		A456ED131FB31A1A006EE529 /* Extensions */ = {
@@ -2185,28 +2156,12 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		A478A9231FB1FF5100F4764A /* Reset Password */ = {
-			isa = PBXGroup;
-			children = (
-				A478A9241FB204C800F4764A /* ResetPasswordViewController.swift */,
-			);
-			path = "Reset Password";
-			sourceTree = "<group>";
-		};
 		A49572781F98D9F700651C89 /* Supplementary Views */ = {
 			isa = PBXGroup;
 			children = (
 				A49572791F98DA3100651C89 /* CustomHeaderReusableView.swift */,
 			);
 			path = "Supplementary Views";
-			sourceTree = "<group>";
-		};
-		A4BDE9971FCD7049002D958D /* Unlock Application */ = {
-			isa = PBXGroup;
-			children = (
-				A4BDE9981FCD706D002D958D /* UnlockApplicationViewController.swift */,
-			);
-			path = "Unlock Application";
 			sourceTree = "<group>";
 		};
 		A4CB29E01F68209E00128E48 /* BitfinexAPIClient */ = {
@@ -2276,30 +2231,6 @@
 			path = "API Credentials";
 			sourceTree = "<group>";
 		};
-		A4ED56DC1F86373200E4CC42 /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				A4ED56DD1F86378200E4CC42 /* InstitutionTableHeaderView.swift */,
-			);
-			path = Headers;
-			sourceTree = "<group>";
-		};
-		A4ED56DF1F865ECC00E4CC42 /* Main Currency Selection */ = {
-			isa = PBXGroup;
-			children = (
-				A4ED56E01F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift */,
-			);
-			path = "Main Currency Selection";
-			sourceTree = "<group>";
-		};
-		A4EF39EC1F8F5F5B0032265E /* Layouts */ = {
-			isa = PBXGroup;
-			children = (
-				A42953CF1F8E1EB300729045 /* StackedLayout.swift */,
-			);
-			path = Layouts;
-			sourceTree = "<group>";
-		};
 		DC1A648B1B867B1F009356A0 = {
 			isa = PBXGroup;
 			children = (
@@ -2362,16 +2293,6 @@
 				5349909B1E0354630057C5C1 /* main.m */,
 			);
 			path = "Bal Helper";
-			sourceTree = "<group>";
-		};
-		E605EF8020065FBC00A95632 /* Add Account */ = {
-			isa = PBXGroup;
-			children = (
-				53561E891F82DD120043D4F9 /* NewAccountViewModel.swift */,
-				53561E871F82DD120043D4F9 /* NewAccountListViewModel.swift */,
-				E605EF8120065FDD00A95632 /* ReconnectAccountViewModel.swift */,
-			);
-			path = "Add Account";
 			sourceTree = "<group>";
 		};
 		E605EF8B2006BEF700A95632 /* UIKit */ = {
@@ -2446,15 +2367,6 @@
 				E65312731FE8C3E400F57977 /* BittrexInvalidApiKey.json */,
 			);
 			path = "BITTREX API Responses";
-			sourceTree = "<group>";
-		};
-		E6C1AC45200578C00018D6AA /* Reconnect */ = {
-			isa = PBXGroup;
-			children = (
-				E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */,
-				E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */,
-			);
-			path = Reconnect;
 			sourceTree = "<group>";
 		};
 		F107D99F1D6B048800CEEF35 /* BalanceUITests */ = {
@@ -2888,7 +2800,7 @@
 				53552A2F1ED72B5700DD95F9 /* FMDatabaseAdditions.m in Sources */,
 				537187E61F4CC23B00E7F9D6 /* PoloniexAccount.swift in Sources */,
 				A41EE4801FB9AA1A00210038 /* QRCodeScannerViewController.swift in Sources */,
-				A43ACE501F963035009F2AE9 /* CurrencySelectionViewModel.swift in Sources */,
+				A43ACE501F963035009F2AE9 /* MainCurrencySelectionViewModel.swift in Sources */,
 				53552A7B1ED7347C00DD95F9 /* MockedDefaultsStorage.swift in Sources */,
 				53552A051ED7251200DD95F9 /* Logging.swift in Sources */,
 				2DF898551FCC8F7500CCDFB9 /* CountlyPersistency.m in Sources */,

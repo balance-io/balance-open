@@ -10,11 +10,9 @@ import UIKit
 
 
 internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusable {
-    // Static
-    internal static let measurementCell = InstitutionCollectionViewCell()
+    static let measurementCell = InstitutionCollectionViewCell()
     
-    // Internal
-    internal var viewModel: InstitutionAccountsListViewModel? {
+    var viewModel: InstitutionAccountsListViewModel? {
         didSet {
             self.reloadData()
         }
@@ -97,18 +95,15 @@ internal final class InstitutionCollectionViewCell: UICollectionViewCell, Reusab
 // MARK: UITableViewDataSource
 
 extension InstitutionCollectionViewCell: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int
-    {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
-        return self.viewModel?.numberOfAccounts ?? 0
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel?.numberOfAccounts ?? 0
     }
         
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return tableView.dequeueReusableCell(at: indexPath) as AccountTableViewCell
     }
     

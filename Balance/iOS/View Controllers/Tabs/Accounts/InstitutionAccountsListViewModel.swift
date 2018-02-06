@@ -8,13 +8,11 @@
 
 import Foundation
 
-
-internal final class InstitutionAccountsListViewModel {
-    // Internal
-    internal let institution: Institution
+final class InstitutionAccountsListViewModel {
+    var institution: Institution
     
-    internal var numberOfAccounts: Int {
-        return self.accounts.count
+    var numberOfAccounts: Int {
+        return accounts.count
     }
     
     // Private
@@ -30,12 +28,12 @@ internal final class InstitutionAccountsListViewModel {
     // MARK: Data
     
     private func reloadData() {
-        self.accounts = AccountRepository.si.accounts(institutionId: self.institution.institutionId)
+        accounts = AccountRepository.si.accounts(institutionId: self.institution.institutionId)
     }
     
     // MARK: API
     
     internal func account(at index: Int) -> Account {
-        return self.accounts[index]
+        return accounts[index]
     }
 }

@@ -8,32 +8,26 @@
 
 import UIKit
 
-internal class StackedCardCollectionView: UICollectionView {
-    // Internal
-    internal let stackedLayout = StackedLayout()
-    
-    // Private
-    
-    // MARK: Initialization
-    
-    internal required init() {
+class StackedCardCollectionView: UICollectionView {
+    let stackedLayout = StackedLayout()
+        
+    required init() {
         super.init(frame: .zero, collectionViewLayout: stackedLayout)
         
-        allowsMultipleSelection = true
+        self.allowsMultipleSelection = true
+        self.layer.cornerRadius = 20
         
         // Select item gesture
-        let tapGesture = UITapGestureRecognizer(target: self,
-                                                action: #selector(tapGestureEngaged))
-        addGestureRecognizer(tapGesture)
-        layer.cornerRadius = 20
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureAction))
+        self.addGestureRecognizer(tapGesture)
     }
     
-    internal required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
     
     func reloadData(shouldPersistSelection: Bool, with indexes: [IndexPath]) {
-        reloadData()
+        self.reloadData()
         
         guard !indexes.isEmpty,
             shouldPersistSelection else {
@@ -45,13 +39,8 @@ internal class StackedCardCollectionView: UICollectionView {
         }
     }
     
-    // MARK: Presentation
-    
-    // Gestures
-    
-    @objc private func tapGestureEngaged(_ gesture: UITapGestureRecognizer) {
-        guard let indexPath = indexPathForItem(at: gesture.location(in: self)),
-              let selectedIndexPaths = indexPathsForSelectedItems else {
+    @objc private func tapGestureAction(_ gesture: UITapGestureRecognizer) {
+        guard let indexPath = indexPathForItem(at: gesture.location(in: self)), let selectedIndexPaths = indexPathsForSelectedItems else {
             return
         }
         
@@ -69,8 +58,8 @@ internal class StackedCardCollectionView: UICollectionView {
                        animations: {
                         self.collectionViewLayout.invalidateLayout()
                         self.layoutIfNeeded()
-        }) { _ in
-            self.delegate?.collectionView!(self, didSelectItemAt: indexPath)
-        }
+        }, completion: { _ in
+            self.delegate?.collectionView?(self, didSelectItemAt: indexPath)
+        })
     }
 }
