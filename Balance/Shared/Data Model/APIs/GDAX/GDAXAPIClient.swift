@@ -75,17 +75,19 @@ extension GDAXAPIClient
         // Perform request
         let task = self.session.dataTask(with: request) { (data, response, error) in
             do {
-            guard let httpResponse = response as? HTTPURLResponse,
-                let json = try? JSONSerialization.jsonObject(with: data!, options: []) else
-            {
-                completionHandler(nil, GDAXAPIClient.APIError.invalidJSON)
+            guard let httpResponse = response as? HTTPURLResponse, let json = try? JSONSerialization.jsonObject(with: data!, options: []) else {
+                async {
+                    completionHandler(nil, GDAXAPIClient.APIError.invalidJSON)
+                }
                 return
             }
             
             if case 200...299 = httpResponse.statusCode {
                 guard let accountsJSON = json as? [[String : Any]] else {
-                    // return invalid json
-                    fatalError()
+                    async {
+                        completionHandler(nil, GDAXAPIClient.APIError.invalidJSON)
+                    }
+                    return
                 }
                 
                 // Build accounts
