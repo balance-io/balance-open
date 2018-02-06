@@ -171,13 +171,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     }
                     
                     if let code = code, let state = state {
-                        CoinbaseApi.handleAuthenticationCallback(state: state, code: code) { success, error in
-                            if !success {
-                                log.error("Error handling Coinbase authentication callback: \(String(describing: error))")
-                            }
-                            
-                            self.showPopover()
-                        }
+                        let data = [
+                            CoinbaseAuthenticationKey.code.rawValue: code,
+                            CoinbaseAuthenticationKey.state.rawValue: state
+                        ]
+                        
+                        exchangeManager.manageAutenticationCallback(with: data, source: .coinbase)
+//                        CoinbaseApi.handleAuthenticationCallback(state: state, code: code) { success, error in
+//                            if !success {
+//                                log.error("Error handling Coinbase authentication callback: \(String(describing: error))")
+//                            }
+//
+//                            self.showPopover()
+//                        }
                     } else {
                         log.error("Missing query items, code: \(String(describing: code)), state: \(String(describing: state))")
                     }

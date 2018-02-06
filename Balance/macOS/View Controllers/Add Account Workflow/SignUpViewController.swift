@@ -9,6 +9,8 @@
 import Cocoa
 import QuartzCore
 
+let exchangeManager = ExchangeManager()
+
 // TODO: Make this and the == overload private again once the LLDB bug is fixed
 // http://stackoverflow.com/questions/38357114/unable-to-use-swift-debugger-in-one-particular-class-file
 struct Device: Hashable {
@@ -42,7 +44,7 @@ extension SignUpTextField {
 
 class SignUpViewController: NSViewController {
     
-    let manager = ExchangeManager()
+
     
     fileprivate let errorTextColor = NSColor(deviceRedInt: 243, green: 191, blue: 107)
     
@@ -545,22 +547,10 @@ class SignUpViewController: NSViewController {
     
     // Initial connection
     @objc fileprivate func connect() {
-        let loginFields = [Field(name: "Name", type: .name, value: "My Wallet"),
-                      Field(name: "Address", type: .address, value: "0x6748F50f686bfbcA6Fe8ad62b22228b87F31ff2b")]
         
         //TEST HERE
-        manager.login(with: .ethplorer, fields: loginFields)
-        
-//        guard allFieldsFilled() else {
-//            return
-//        }
-        
-        let api = EthplorerApi.init(name: "My Wallet", address: "0x6748F50f686bfbcA6Fe8ad62b22228b87F31ff2b")
-        let institution = Institution.init(institutionId: 1, source: .ethplorer, sourceInstitutionId: "", name: "")
-        api.fetchTransactionInfo(institution: institution) { (success, error) in
-            
-        }
-        
+        exchangeManager.login(with: .coinbase, fields: [])
+
 //        prepareViewsForSubmit(loadingText: "Connecting to \(apiInstitution.name)...")
 
 //        var loginFields = [Field]()
