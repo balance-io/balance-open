@@ -1,14 +1,14 @@
 //
-//  CoinbaseAPI2Action.swift
+//  BTCAPI2Action.swift
 //  BalancemacOS
 //
-//  Created by Eli Pacheco Hoyos on 1/29/18.
+//  Created by Eli Pacheco Hoyos on 2/6/18.
 //  Copyright © 2018 Balanced Software, Inc. All rights reserved.
 //
 
 import Foundation
 
-struct CoinbaseAPI2Action: APIAction {
+struct BTCAPI2Action: APIAction {
     
     let credentials: Credentials
     let type: ApiRequestType
@@ -20,20 +20,23 @@ struct CoinbaseAPI2Action: APIAction {
     
 }
 
-extension CoinbaseAPI2Action {
+extension BTCAPI2Action {
     
     var host: String {
-        return "https://api.coinbase.com/v2/"
+        return "https://blockchain.info/"
     }
     
     var path: String {
         switch type {
         case .accounts:
-            return "accounts"
-        case .transactions(let accountID):
-            let accountID = (accountID as? String) ?? ""
-            return "accounts/\(accountID)/transactions"
+            return "rawaddr/\(credentials.address)"
+        case .transactions(_):
+            return ""
         }
+    }
+    
+    var components: URLComponents? {
+        return nil
     }
     
     var url: URL? {
@@ -42,10 +45,6 @@ extension CoinbaseAPI2Action {
     
     var nonce: Int64 {
         return 0
-    }
-    
-    var components: URLComponents? {
-        return nil
     }
     
 }

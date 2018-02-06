@@ -28,7 +28,7 @@ protocol ExchangeManagerActions {
 }
 
 fileprivate typealias ExchangeManagerCallbackResult = (success: Bool, error: Error?, result: Any?)
-fileprivate typealias ExchangeManagerRefreshAction = (api: AbstractApi, accountAction: APIAction, transactionAction: APIAction)
+fileprivate typealias ExchangeManagerRefreshAction = (api: AbstractApi, accountAction: APIAction, transactionAction: APIAction?)
 
 class ExchangeManager {
     
@@ -58,6 +58,7 @@ class ExchangeManager {
     private lazy var ethploreExchangeAPI = { return EthplorerAPI2(session: urlSession) }()
     private lazy var bitfinexExchangeAPI = { return BitfinexAPI2(session: urlSession) }()
     private lazy var gdaxExchangeAPI = { return GDAXAPI2(session: urlSession) }()
+    private lazy var btcExchangeAPI = { return BTCAPI2(session: urlSession) }()
     
     init(urlSession: URLSession? = nil, repositoryService: RepositoryServiceProtocol? = nil, keychainService: KeychainServiceProtocol? = nil) {
         self.urlSession = urlSession ?? certValidatedSession
@@ -97,7 +98,7 @@ extension ExchangeManager: ExchangeManagerActions {
     }
     
     func refresh(institution: Institution) {
-        guard let credentials = keychainService.fetchCredentials(with: "\(institution.institutionId)", source: institution.source) else {
+        guard let credentials = keychainService.fetchCredentials(with: "\(institution.institutionId)", source: institution.source, name: institution.name) else {
             log.debug("Error - Can't refresh \(institution.source.description) institution with id \(institution.institutionId), becuase credentials weren't fetched")
             return
         }
@@ -124,6 +125,9 @@ extension ExchangeManager: ExchangeManagerActions {
         case .gdax, .coinbase:
             refreshAccountsForTransactions(with: institution, credentials: credentials)
             return
+        case .blockchain:
+            let accountAction = BTCAPI2Action.init(type: .accounts, credentials: credentials)
+            refreshAction = (btcExchangeAPI, accountAction, nil)
         default:
             log.debug("Error - Can't trigger action for api with source \(institution.source.description)")
             return
@@ -138,7 +142,7 @@ extension ExchangeManager: ExchangeManagerActions {
     
     func refreshAccessToken(for institution: Institution) {
         let credentialIdentifier = "\(institution.institutionId)"
-        let credentials = keychainService.fetchCredentials(with: credentialIdentifier, source: institution.source)
+        let credentials = keychainService.fetchCredentials(with: credentialIdentifier, source: institution.source, name: nil)
         guard let oauthCredentials = credentials as? OAUTHCredentials,
             institution.source == .coinbase else {
                 return
@@ -165,7 +169,7 @@ extension ExchangeManager: ExchangeManagerActions {
     }
     
     func getCredentials(for institution: Institution) -> Credentials? {
-        return keychainService.fetchCredentials(with: "\(institution.institutionId)", source: institution.source)
+        return keychainService.fetchCredentials(with: "\(institution.institutionId)", source: institution.source, name: institution.name)
     }
     
 }
@@ -178,12 +182,17 @@ private extension ExchangeManager {
             self.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
         }
         
-        guard let refreshAccountsOperation = refreshAPIAction.api.fetchData(for: refreshAPIAction.accountAction, completion: callBack),
-            let refreshTransationOperation = refreshAPIAction.api.fetchData(for: refreshAPIAction.transactionAction, completion: callBack) else {
-                return
+        guard let refreshAccountsOperation = refreshAPIAction.api.fetchData(for: refreshAPIAction.accountAction, completion: callBack) else {
+            return
         }
         
         refreshQueue.addOperation(refreshAccountsOperation)
+        
+        guard let transactionAction = refreshAPIAction.transactionAction ,
+            let refreshTransationOperation = refreshAPIAction.api.fetchData(for: transactionAction, completion: callBack) else {
+            return
+        }
+        
         refreshQueue.addOperation(refreshTransationOperation)
     }
     
@@ -209,12 +218,11 @@ private extension ExchangeManager {
             let exchangeAction = BitfinexAPI2Action(type: .accounts, credentials: credentials)
             loginAction = (bitfinexExchangeAPI, exchangeAction)
         case .gdax:
-            let dict = [
-                GDAXAPI2Action.TransactionInputDataType.accountId.rawValue: "qq",
-                GDAXAPI2Action.TransactionInputDataType.currencyCode.rawValue: "zz"
-            ]
-            let exchangeAction = GDAXAPI2Action(type: .transactions(input: dict), credentials: credentials)
+            let exchangeAction = GDAXAPI2Action(type: .accounts, credentials: credentials)
             loginAction = (gdaxExchangeAPI, exchangeAction)
+        case .blockchain:
+            let exchangeAction = BTCAPI2Action(type: .accounts, credentials: credentials)
+            loginAction = (btcExchangeAPI, exchangeAction)
         default:
             return nil
         }

@@ -86,7 +86,7 @@ public protocol APIAction {
     var path: String { get }
     var url: URL? { get }
     var nonce: Int64 { get }
-    var components: URLComponents { get }
+    var components: URLComponents? { get }
     var type: ApiRequestType { get }
     var credentials: Credentials { get }
 
@@ -116,6 +116,6 @@ public protocol RequestHandler: class {
 
 extension APIAction {
     var query: String? {
-        return components.query
+        return components?.query
     }
 }

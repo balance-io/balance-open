@@ -37,7 +37,7 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
             if !credentials.passphrase.isEmpty {
                 save(account: keychainAccounts.commonKey, key: KeychainConstants.passphrase, value: credentials.passphrase)
             }
-        case .ethplorer:
+        case .ethplorer, .blockchain:
             save(account: keychainAccounts.addressKey, key: KeychainConstants.address, value: credentials.address)
         default:
             return
@@ -48,7 +48,7 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
         return keychain[account, key]
     }
     
-    func fetchCredentials(with identifer: String, source: Source) -> Credentials? {
+    func fetchCredentials(with identifer: String, source: Source, name: String?) -> Credentials? {
         guard let accountValues = buildKeychainAccounts(for: source, with: identifer) else {
             return nil
         }
@@ -77,6 +77,12 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
             let passphrase = fetch(account: accountValues.commonKey, key: KeychainConstants.passphrase) ?? ""
             
             return BalanceCredentials(apiKey: apiKey, secretKey: secretKey, passphrase: passphrase)
+        case .ethplorer, .blockchain:
+            guard let address = fetch(account: accountValues.addressKey, key: KeychainConstants.address) else {
+                return nil
+            }
+            
+            return BalanceCredentials(address: address, name: name ?? "")
         default:
             return nil
         }
@@ -132,7 +138,8 @@ private extension ExchangeKeychainServiceProvider {
     func buildKeychainAccounts(for source: Source, with identifier: String) -> KeychainAccountValues? {
         switch source {
         case .poloniex:
-//            let keychainSecretKeyAccount = "secret institutionId: \(identifier)" // TODO: the old way uses for secretKeyAccount value the apiKeyAccount, it must use secretKeyAccount
+             // TODO: the old way uses for secretKeyAccount value the apiKeyAccount, it must use secretKeyAccount
+//            let keychainSecretKeyAccount = "secret institutionId: \(identifier)"
             let keychainApiKeyAccount = "apiKey institutionId: \(identifier)"
             return KeychainAccountValues(apiKey: keychainApiKeyAccount, secretKey: keychainApiKeyAccount)
         case .coinbase:
@@ -144,7 +151,7 @@ private extension ExchangeKeychainServiceProvider {
             let realIdentifer = computeIdentifier(for: source, with: identifier)
             
             return KeychainAccountValues(commonKey: realIdentifer)
-        case .ethplorer:
+        case .ethplorer, .blockchain:
             return KeychainAccountValues(addressKey: "address institutionId: \(identifier)")
         default:
             return nil

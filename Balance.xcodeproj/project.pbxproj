@@ -557,6 +557,9 @@
 		E66743FF20195F900009A57F /* ApiEntityProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66743FE20195F900009A57F /* ApiEntityProtocols.swift */; };
 		E6674402201973570009A57F /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66743F5201935D90009A57F /* APIRequest.swift */; };
 		E6674403201975440009A57F /* ApiEntityProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66743FE20195F900009A57F /* ApiEntityProtocols.swift */; };
+		E672C2E6202A078400BE3390 /* BTCAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E672C2E5202A078400BE3390 /* BTCAPI2.swift */; };
+		E672C2E8202A07B300BE3390 /* BTCAPI2Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = E672C2E7202A07B300BE3390 /* BTCAPI2Action.swift */; };
+		E672C2E9202A0E1100BE3390 /* BTCAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E672C2E5202A078400BE3390 /* BTCAPI2.swift */; };
 		E676EA8C202501F00023279B /* NewExchangeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E676EA89202501F00023279B /* NewExchangeAPI.swift */; };
 		E676EA8D202501F00023279B /* ApiInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = E676EA8A202501F00023279B /* ApiInstitution.swift */; };
 		E676EA8E202501F00023279B /* ExchangeApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E676EA8B202501F00023279B /* ExchangeApi.swift */; };
@@ -1084,6 +1087,8 @@
 		E6635C6B201A94C800D9720E /* ExchangeServicesProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeServicesProtocols.swift; sourceTree = "<group>"; };
 		E66743F5201935D90009A57F /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		E66743FE20195F900009A57F /* ApiEntityProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEntityProtocols.swift; sourceTree = "<group>"; };
+		E672C2E5202A078400BE3390 /* BTCAPI2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTCAPI2.swift; sourceTree = "<group>"; };
+		E672C2E7202A07B300BE3390 /* BTCAPI2Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCAPI2Action.swift; sourceTree = "<group>"; };
 		E676EA89202501F00023279B /* NewExchangeAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewExchangeAPI.swift; path = LegacyAPIProtocols/NewExchangeAPI.swift; sourceTree = "<group>"; };
 		E676EA8A202501F00023279B /* ApiInstitution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApiInstitution.swift; path = LegacyAPIProtocols/ApiInstitution.swift; sourceTree = "<group>"; };
 		E676EA8B202501F00023279B /* ExchangeApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExchangeApi.swift; path = LegacyAPIProtocols/ExchangeApi.swift; sourceTree = "<group>"; };
@@ -2576,6 +2581,15 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		E672C2E1202A06F400BE3390 /* BTC */ = {
+			isa = PBXGroup;
+			children = (
+				E672C2E5202A078400BE3390 /* BTCAPI2.swift */,
+				E672C2E7202A07B300BE3390 /* BTCAPI2Action.swift */,
+			);
+			path = BTC;
+			sourceTree = "<group>";
+		};
 		E676EA87202501100023279B /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -2644,6 +2658,7 @@
 		E686DA7D20228DEA009D5A1E /* Exchanges */ = {
 			isa = PBXGroup;
 			children = (
+				E672C2E1202A06F400BE3390 /* BTC */,
 				E67EABF22028E21F0070FA3A /* GDAX */,
 				E67EABDC2028D3710070FA3A /* Poloniex */,
 				E67EABDB2028D3680070FA3A /* Coinbase */,
@@ -3162,6 +3177,7 @@
 				537187E51F4CC23B00E7F9D6 /* PoloniexApi.swift in Sources */,
 				A4E768111F67F049002B1AE1 /* APICredentialsComponentsError.swift in Sources */,
 				53F0785E1ED73B7D00E7EDF9 /* Element.swift in Sources */,
+				E672C2E9202A0E1100BE3390 /* BTCAPI2.swift in Sources */,
 				E653128E1FE8C4DA00F57977 /* BITTREXApiError.swift in Sources */,
 				53552A041ED7251200DD95F9 /* Debugging.swift in Sources */,
 				537504FE1F192D280062C11A /* TypeAliases.swift in Sources */,
@@ -3388,6 +3404,7 @@
 				53629D5A20240F48000081E9 /* EthplorerTransaction.swift in Sources */,
 				F1253E5E1D75D2D0001BD48C /* KeychainManager.swift in Sources */,
 				53C197171CB8714100F0A47B /* SyncManager.swift in Sources */,
+				E672C2E8202A07B300BE3390 /* BTCAPI2Action.swift in Sources */,
 				28A0DC131DCD010800601E87 /* ChangePasswordViewController.swift in Sources */,
 				5347B6A51DFD180E0046951D /* NSViewController.swift in Sources */,
 				5321219D1EE8B91600F4812A /* ioapi.c in Sources */,
@@ -3521,6 +3538,7 @@
 				5329FB731E3EA36F00A9CAF7 /* CwlSysctl.swift in Sources */,
 				2DD9B1F01EDDDFD10006268F /* TestingAppDelegate.swift in Sources */,
 				53C23BDC1E5F988000DA1281 /* ComboBox.swift in Sources */,
+				E672C2E6202A078400BE3390 /* BTCAPI2.swift in Sources */,
 				2DF898541FCC8F7500CCDFB9 /* CountlyPersistency.m in Sources */,
 				53B327C61E56AEC2009C7AFC /* SyncDefaults.swift in Sources */,
 				2DF8984A1FCC8F7500CCDFB9 /* CountlyConnectionManager.m in Sources */,

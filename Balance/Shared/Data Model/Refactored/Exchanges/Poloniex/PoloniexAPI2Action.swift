@@ -51,7 +51,7 @@ extension PoloniexApiAction: APIAction {
         return URL(string: host + path)
     }
     
-    var components: URLComponents {
+    var components: URLComponents? {
         var queryItems = [URLQueryItem]()
         
         for (key, value) in params {

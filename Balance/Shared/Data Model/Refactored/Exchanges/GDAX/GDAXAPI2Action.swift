@@ -43,8 +43,8 @@ extension GDAXAPI2Action {
         }
     }
     
-    var components: URLComponents {
-        return URLComponents()
+    var components: URLComponents? {
+        return nil
     }
     
     var path: String {

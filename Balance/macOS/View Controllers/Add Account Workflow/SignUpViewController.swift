@@ -549,18 +549,18 @@ class SignUpViewController: NSViewController {
                       Field(name: "Address", type: .address, value: "")]
         
         //TEST HERE
-        manager.login(with: .ethplorer, fields: loginFields)
+        
         
 //        guard allFieldsFilled() else {
 //            return
 //        }
         
-        let api = EthplorerApi.init(name: "My Wallet", address: "")
-        let institution = Institution.init(institutionId: 1, source: .ethplorer, sourceInstitutionId: "", name: "")
-        api.fetchTransactionInfo(institution: institution) { (success, error) in
-            
-        }
-        
+//        let api = EthplorerApi.init(name: "My Wallet", address: "")
+//        let institution = Institution.init(institutionId: 1, source: .ethplorer, sourceInstitutionId: "", name: "")
+//        api.fetchTransactionInfo(institution: institution) { (success, error) in
+//
+//        }
+//
 //        prepareViewsForSubmit(loadingText: "Connecting to \(apiInstitution.name)...")
 
 //        var loginFields = [Field]()

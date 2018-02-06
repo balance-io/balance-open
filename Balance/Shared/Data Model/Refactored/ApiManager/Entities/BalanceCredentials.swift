@@ -79,7 +79,7 @@ private extension BalanceCredentials {
             return !credentials.apiKey.isEmpty && !credentials.secretKey.isEmpty
         case .gdax:
             return !credentials.apiKey.isEmpty && !credentials.secretKey.isEmpty && !credentials.passphrase.isEmpty
-        case .ethplorer:
+        case .ethplorer, .blockchain:
             return !credentials.address.isEmpty && !credentials.name.isEmpty
         default:
             return false

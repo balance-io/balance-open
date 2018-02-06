@@ -40,8 +40,8 @@ extension BitfinexAPI2Action {
         return URL(string: host + path)
     }
     
-    var components: URLComponents {
-        return URLComponents()
+    var components: URLComponents? {
+        return nil
     }
     
 }
