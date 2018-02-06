@@ -187,18 +187,18 @@ private extension CoinbaseAPI2 {
         return errorArray.first
     }
     
-    func prepareAccountsData(from data: Data) -> Data? {
+    func preprocessData(from data: Data) -> Data? {
         guard let rawData = try? JSONSerialization.jsonObject(with: data),
             let dict = rawData as? [String: AnyObject],
             let dataDict = dict["data"] as? [[String: AnyObject]] else {
                 return nil
         }
-        
+        print(dataDict)
         return try? JSONSerialization.data(withJSONObject: dataDict, options: .prettyPrinted)
     }
     
     func buildAccounts(from data: Data) -> Any {
-        guard let preparedData = prepareAccountsData(from: data),
+        guard let preparedData = preprocessData(from: data),
             let accounts = try? JSONDecoder().decode([CoinbaseAccount2].self, from: preparedData) else {
             log.error("Error: unable to parse coinbase account from data \(String(data: data, encoding: .utf8) ?? "")")
             return []
@@ -207,7 +207,8 @@ private extension CoinbaseAPI2 {
     }
     
     func buildTransactions(from data: Data) -> Any {
-        guard let transactions = try? JSONDecoder().decode([CoinbaseTransaction2].self, from: data) else {
+        guard let preparedData = preprocessData(from: data),
+            let transactions = try? JSONDecoder().decode([CoinbaseTransaction2].self, from: preparedData) else {
             log.error("Error: unable to parse coinbase transactions from data \(String(data: data, encoding: .utf8) ?? "")")
             return []
         }

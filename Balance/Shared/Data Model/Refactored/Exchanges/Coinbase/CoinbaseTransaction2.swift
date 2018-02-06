@@ -16,9 +16,8 @@ struct CoinbaseTransaction2: Codable {
     private let status: String
     private let created: String
     private let updated: String
-    private let amountValue: Double
-    private let currency: String
-    private let nativeBalanceDict: BalanceDict
+    private let balanceAmount: CoinbaseBalance
+    private let nativeAmount: CoinbaseBalance
     
     enum CodingKeys: String, CodingKey {
         case identifier = "id"
@@ -26,9 +25,8 @@ struct CoinbaseTransaction2: Codable {
         case status
         case created = "created_at"
         case updated = "updated_at"
-        case amountValue = "amount"
-        case currency
-        case nativeBalanceDict = "native_amount"
+        case balanceAmount = "amount"
+        case nativeAmount = "native_amount"
     }
 }
 
@@ -83,10 +81,10 @@ extension CoinbaseTransaction2: ExchangeTransaction {
     }
     
     var currencyCode: String {
-        return currency
+        return balanceAmount.currency
     }
     
     var amount: Int {
-        return Int(amountValue)
+        return Int(balanceAmount.amount) ?? 0
     }
 }

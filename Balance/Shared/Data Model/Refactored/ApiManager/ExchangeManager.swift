@@ -223,6 +223,9 @@ private extension ExchangeManager {
         case .blockchain:
             let exchangeAction = BTCAPI2Action(type: .accounts, credentials: credentials)
             loginAction = (btcExchangeAPI, exchangeAction)
+        case .coinbase:
+            let exchangeAction2 = CoinbaseAPI2Action(type: .accounts, credentials: credentials)
+            loginAction = (coinbaseExchangeAPI, exchangeAction2)
         default:
             return nil
         }
@@ -378,11 +381,8 @@ private extension ExchangeManager {
     
     func launchCoinbaseAutentication(with data: Any) {
         let operation = coinbaseExchangeAPI.startAutentication(with: data) { success, error, result in
-            if let coinbaseOAUTHCredentials = result as? OAUTHCredentials,
-                let coinbaseInstitution = self.repositoryService.createInstitution(for: .coinbase, name: ""),
-                success {
-                
-                self.fetchCoinbaseAccounts(with: coinbaseInstitution, credentials: coinbaseOAUTHCredentials)
+            if let coinbaseOAUTHCredentials = result as? OAUTHCredentials, let accountOperation = self.loginAction(from: .coinbase, with: coinbaseOAUTHCredentials), success {
+                self.autenticationQueue.addOperation(accountOperation)
             }
             
             if let error = error {
@@ -397,18 +397,4 @@ private extension ExchangeManager {
         
         autenticationQueue.addOperation(coinbaseOperation)
     }
-    
-    func fetchCoinbaseAccounts(with institution: Institution, credentials: OAUTHCredentials) {
-        let apiAction = CoinbaseAPI2Action(type: .accounts, credentials: credentials)
-        let coinbaseAccountsOperation = coinbaseExchangeAPI.fetchData(for: apiAction) { [weak self] (success, error, result) in
-            let callbackResult = ExchangeManagerCallbackResult(success: success, error: error, result: result)
-            self?.processLoginCallbackResult(callbackResult, source: institution.source, credentials: credentials, institution: institution)
-        }
-        
-        if let accountOperation = coinbaseAccountsOperation {
-            autenticationQueue.addOperation(accountOperation)
-        }
-
-    }
-    
 }

@@ -15,8 +15,8 @@ struct CoinbaseAccount2: Codable {
     private let accountName: String
     private let primary: Bool
     private let type: String
-    private let balanceDict: BalanceDict
-    private let nativeBalanceDict: BalanceDict
+    private let balanceDict: CoinbaseBalance
+    private let nativeBalanceDict: CoinbaseBalance
 
     private var currency: Currency {
         return Currency.rawValue(balanceDict.currency)
@@ -36,7 +36,7 @@ struct CoinbaseAccount2: Codable {
     }
 }
 
-struct BalanceDict: Codable {
+struct CoinbaseBalance: Codable {
     let currency: String
     let amount: String
 }

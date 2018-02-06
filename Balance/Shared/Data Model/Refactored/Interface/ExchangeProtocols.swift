@@ -17,9 +17,19 @@ public enum TransactionType: String, Codable {
     case trade
     case margin
     case fee
-    case transfer
     case match
     case rebate
+    case vault
+    case send
+    case request
+    case transfer
+    case buy
+    case sell
+    case fiat_deposit
+    case fiat_withdrawal
+    case exchange_deposit
+    case exchange_withdrawal
+    case vault_withdrawal
 }
 
 public protocol ExchangeApi2 {
