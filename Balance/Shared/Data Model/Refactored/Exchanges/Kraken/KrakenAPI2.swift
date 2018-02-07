@@ -76,7 +76,7 @@ class KrakenAPI2: AbstractApi {
         case "EAPI:Invalid nonce":
             return ExchangeBaseError.other(message: "Invalid nonce")
         default:
-            return ExchangeBaseError.other(message: errorArray.first ?? "")
+            return ExchangeBaseError.other(message: error)
         }
     }
 }
