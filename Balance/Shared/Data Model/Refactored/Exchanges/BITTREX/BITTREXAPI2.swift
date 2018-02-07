@@ -31,7 +31,7 @@ class BITTREXAPI2: AbstractApi {
                 return nil
             }
             
-            let transactionRequestManager = BITTREXAPI2Transactions(requests: transactionRequests)
+            let transactionRequestManager = BITTREXAPI2SyncerTransaction(requests: transactionRequests)
             //TODO: insert handler respose(parser delegate) into the operation
             return BITTREXAPI2TransactionOperation(transactionsRequest: transactionRequestManager)
         }
@@ -85,11 +85,11 @@ private extension BITTREXAPI2 {
     
 }
 
-protocol BITTREXAPI2TransactionDataDelegate: class {
+fileprivate protocol BITTREXAPI2TransactionDataDelegate: class {
     func process(deposits: [BITTREXDeposit], withdrawals: [BITTREXWithdrawal])
 }
 
-fileprivate struct BITTREXAPI2Transactions {
+fileprivate struct BITTREXAPI2SyncerTransaction {
     
     let depositRequest: URLRequest
     let withdrawalRequest: URLRequest
@@ -129,9 +129,9 @@ fileprivate struct BITTREXAPI2Transactions {
 
 fileprivate class BITTREXAPI2TransactionOperation: Operation, BITTREXAPI2TransactionDataDelegate {
     
-    private var transactionsRequest: BITTREXAPI2Transactions
+    private var transactionsRequest: BITTREXAPI2SyncerTransaction
     
-    init(transactionsRequest: BITTREXAPI2Transactions) {
+    init(transactionsRequest: BITTREXAPI2SyncerTransaction) {
         self.transactionsRequest = transactionsRequest
         super.init()
         self.transactionsRequest.delegate = self
