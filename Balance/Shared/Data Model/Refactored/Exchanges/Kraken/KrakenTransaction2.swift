@@ -17,18 +17,22 @@ struct KrakenTransaction2: Codable {
     private var txType: String
     private let asset: String
     private let assetClass: String
-    private let txAmount: Double
-    private let fee: Double
-    private let balance: Double
+    private let txAmount: String
+    private let fee: String
+    private let balance: String
 
     private var currency: Currency {
-        return Currency.rawValue(asset)
+        var currencyCode = asset
+        if asset.count == 4 && (asset.hasPrefix("Z") || asset.hasPrefix("X")) {
+            currencyCode = asset.substring(from: 1)
+        }
+        return Currency.rawValue(currencyCode)
     }
     
     enum CodingKeys: String, CodingKey {
         case ledgerId
         case referenceId = "refid"
-        case timestamp
+        case timestamp = "time"
         case txType = "type"
         case asset
         case assetClass = "aclass"
@@ -77,11 +81,11 @@ extension KrakenTransaction2: ExchangeTransaction {
     }
 
     var sourceTransactionId: String {
-        return referenceId
+        return "\(ledgerId)\(amount)\(date)"
     }
 
     var name: String {
-        return currency.name
+        return sourceTransactionId
     }
 
     var date: Date {
@@ -93,7 +97,7 @@ extension KrakenTransaction2: ExchangeTransaction {
     }
 
     var amount: Int {
-        return Int(balance)
+        return Double(txAmount)?.integerValueWith(decimals: currency.decimals) ?? 0
     }
 }
 

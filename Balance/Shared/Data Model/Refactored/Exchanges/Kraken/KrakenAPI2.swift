@@ -55,7 +55,12 @@ class KrakenAPI2: AbstractApi {
     }
     
      override func buildTransactions(from data: Data) -> Any {
-        return []
+        guard let data = prepareTransactionsData(from: data),
+            let transactions = try? JSONDecoder().decode([KrakenTransaction2].self, from: data) else {
+                return ExchangeBaseError.other(message: "malformed payload")
+        }
+        
+        return transactions
     }
     
     override func processApiErrors(from data: Data) -> Error? {
@@ -94,6 +99,24 @@ private extension KrakenAPI2 {
         }
         
         return resultDict
+    }
+    
+    func prepareTransactionsData(from data: Data) -> Data? {
+        guard let dict = createDict(from: data) as? [String: AnyObject],
+            let resultDict = dict["result"] as? [String: AnyObject],
+            let ledgerDict = resultDict["ledger"] as? [String: AnyObject] else {
+                return nil
+        }
+
+        let flatDict = ledgerDict.map { (key, value) -> [String : AnyObject] in
+            if var dict = value as? [String: AnyObject] {
+                dict["ledgerId"] = key as AnyObject
+                return dict
+            }
+            return [:]
+        }
+        
+        return try? JSONSerialization.data(withJSONObject: flatDict, options: .prettyPrinted)
     }
 }
 
