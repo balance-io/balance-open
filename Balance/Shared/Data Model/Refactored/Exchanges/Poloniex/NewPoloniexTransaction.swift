@@ -9,7 +9,7 @@
 import Foundation
 
 class NewPoloniexTransaction: Codable {
-    private var transactionType: TransactionType = .unknown
+    private var transactionType: String = ""
     private var transactionInstitution: Int = 0
     private var transactionSourceInstitution: String = ""
     private var transactionId: String
@@ -34,7 +34,7 @@ class NewPoloniexTransaction: Codable {
 // MARK: Protocol
 
 extension NewPoloniexTransaction: ExchangeTransaction {
-    var type: TransactionType {
+    var type: String {
         get {
             return transactionType
         }

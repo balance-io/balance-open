@@ -11,8 +11,8 @@ import Foundation
 class KrakenAPI2: AbstractApi {
     override var requestMethod: ApiRequestMethod { return .post }
     override var requestDataFormat: ApiRequestDataFormat { return .json }
-    override var requestEncoding: ApiRequestEncoding { return .none }
-    override var encondingMessageType: ApiEncondingMessageType { return .none }
+    override var requestEncoding: ApiRequestEncoding { return .hmac(hmacAlgorithm: CCHmacAlgorithm(kCCHmacAlgSHA512), digestLength: Int(CC_SHA512_DIGEST_LENGTH)) }
+    override var encondingMessageType: ApiEncondingMessageType { return .base64 }
     override var requestHandler: RequestHandler? { return self }
     
     override func createRequest(for action: APIAction) -> URLRequest? {
@@ -41,7 +41,17 @@ class KrakenAPI2: AbstractApi {
     }
     
     override func buildAccounts(from data: Data) -> Any {
-        return []
+        guard let dict = preprocessData(from: data) else {
+            return []
+        }
+        
+        var accounts: [KrakenAccount2] = []
+        dict.forEach { (currency, balance) in
+            let account = KrakenAccount2(currency: currency, balance: balance)
+            accounts.append(account)
+        }
+        
+        return accounts
     }
     
      override func buildTransactions(from data: Data) -> Any {
@@ -75,6 +85,15 @@ private extension KrakenAPI2 {
         }
         
         return  pathData + nonceQueryEncoded
+    }
+    
+    func preprocessData(from data: Data) -> [String: String]? {
+        guard let dict = createDict(from: data) as? [String: AnyObject],
+            let resultDict = dict["result"] as? [String: String] else {
+                return nil
+        }
+        
+        return resultDict
     }
 }
 
