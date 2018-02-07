@@ -36,33 +36,33 @@ struct TransactionRepository: ItemRepository {
     // MARK: Initialization
     
     internal init() {
-        self.performMigrations()
+//        self.performMigrations()
     }
     
     // MARK: Migrations
     
-    private func performMigrations() {
-        // If the app has the old transactions table
-        // drop it a build the new one
-        database.write.inDatabase { db in
-            let result = db.getTableSchema("transactions")
-            
-            // Old database schema. Update...
-            if db.columnExists("address", inTableWithName: "transactions") {
-                var statements = [String]()
-                statements.append("DROP TABLE IF EXISTS transactions")
-                statements.append("CREATE TABLE IF NOT EXISTS transactions (transactionId INTEGER PRIMARY KEY AUTOINCREMENT, sourceId INTEGER, sourceTransactionId TEXT, accountId INTEGER, name TEXT, currency TEXT, amount INTEGER, date REAL, institutionId INTEGER NOT NULL, sourceInstitutionId TEXT, categoryId INTEGER)")
-                
-                for statement in statements {
-                    if !db.executeUpdate(statement, withArgumentsIn: nil) {
-                        log.severe("DB Error: " + db.lastErrorMessage())
-                    }
-                }
-            }
-            
-            result?.close()
-        }
-    }
+//    private func performMigrations() {
+//        // If the app has the old transactions table
+//        // drop it a build the new one
+//        database.write.inDatabase { db in
+//            let result = db.getTableSchema("transactions")
+//
+//            // Old database schema. Update...
+//            if db.columnExists("address", inTableWithName: "transactions") {
+//                var statements = [String]()
+//                statements.append("DROP TABLE IF EXISTS transactions")
+//                statements.append("CREATE TABLE IF NOT EXISTS transactions (transactionId INTEGER PRIMARY KEY AUTOINCREMENT, sourceId INTEGER, sourceTransactionId TEXT, accountId INTEGER, name TEXT, currency TEXT, amount INTEGER, date REAL, institutionId INTEGER NOT NULL, sourceInstitutionId TEXT, categoryId INTEGER)")
+//
+//                for statement in statements {
+//                    if !db.executeUpdate(statement, withArgumentsIn: nil) {
+//                        log.severe("DB Error: " + db.lastErrorMessage())
+//                    }
+//                }
+//            }
+//
+//            result?.close()
+//        }
+//    }
     
     // MARK: -
     
