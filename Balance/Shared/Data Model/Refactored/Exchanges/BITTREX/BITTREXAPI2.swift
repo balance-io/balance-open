@@ -8,8 +8,6 @@
 
 import Foundation
 
-fileprivate typealias bittrexTransactionRequest = (depositRequest: URLRequest, withdrawalRequest: URLRequest)
-
 class BITTREXAPI2: AbstractApi {
     
     override var requestMethod: ApiRequestMethod { return .get }
@@ -27,13 +25,10 @@ class BITTREXAPI2: AbstractApi {
             print(singleRequest)
             return nil
         case .transactions(_):
-            guard let transactionRequests = createMultipleTransactionRequests(for: action) else {
-                return nil
-            }
             
-            let transactionRequestManager = BITTREXAPI2SyncerTransaction(requests: transactionRequests)
+            let transactionSyncer = BITTREXAPI2SyncerTransaction()
             //TODO: insert handler respose(parser delegate) into the operation
-            return BITTREXAPI2TransactionOperation(transactionsRequest: transactionRequestManager)
+            return BITTREXAPI2TransactionOperation(action: action, dataSyncer: transactionSyncer, requestBuilder: self)
         }
     }
     
@@ -44,12 +39,8 @@ class BITTREXAPI2: AbstractApi {
                 let messageSigned = generateMessageSigned(for: action) else {
                     return nil
             }
-            
-            var request = URLRequest(url: url)
-            request.httpMethod = requestMethod.rawValue
-            request.setValue(messageSigned, forHTTPHeaderField: "apisign")
 
-            return request
+            return createRequest(url: url, credentials: action.credentials, messageSigned: messageSigned)
         default:
             return nil
         }
@@ -61,64 +52,71 @@ class BITTREXAPI2: AbstractApi {
     
 }
 
-private extension BITTREXAPI2 {
+extension BITTREXAPI2: BITTREXAPI2TransactionRequest {
     
-    func createMultipleTransactionRequests(for action: APIAction) -> bittrexTransactionRequest? {
+    func createRequest(action: APIAction, transactionType: BITTREXAPI2TransactionType) -> URLRequest? {
         guard let bittrexAction = action as? BITTREXAPI2Action,
-            let urls = bittrexAction.transactionURLs else {
+            case .transactions(_) = bittrexAction.type else {
             return nil
         }
         
-        let depositMessageSigned = CryptoAlgorithm.sha512.hmac(body: urls.deposits.absoluteString, key: action.credentials.secretKey)
-        let withdrawalMessageSigned = CryptoAlgorithm.sha512.hmac(body: urls.deposits.absoluteString, key: action.credentials.secretKey)
+        let url = transactionType == .deposit ? bittrexAction.depositTransactionURL : bittrexAction.withdrawalTransactionURL
         
-        var depositRequest = URLRequest(url: urls.deposits)
-        depositRequest.httpMethod = requestMethod.rawValue
-        depositRequest.setValue(depositMessageSigned, forHTTPHeaderField: "apisign")
+        guard let transactionURL = url else {
+            return nil
+        }
         
-        var withdrawalRequest = URLRequest(url: urls.withdrawals)
-        withdrawalRequest.httpMethod = requestMethod.rawValue
-        withdrawalRequest.setValue(withdrawalMessageSigned, forHTTPHeaderField: "apisign")
-        
-        return (depositRequest, withdrawalRequest)
+        let messageSigned = CryptoAlgorithm.sha512.hmac(body: transactionURL.absoluteString, key: action.credentials.secretKey)
+    
+        return createRequest(url: transactionURL, credentials: action.credentials, messageSigned: messageSigned)
+    }
+    
+    private func createRequest(url: URL, credentials: Credentials, messageSigned: String) -> URLRequest? {
+        var request = URLRequest(url: url)
+        request.httpMethod = requestMethod.rawValue
+        request.setValue(messageSigned, forHTTPHeaderField: "apisign")
+
+        return (request)
     }
     
 }
 
+
 fileprivate protocol BITTREXAPI2TransactionDataDelegate: class {
-    func process(deposits: [BITTREXDeposit], withdrawals: [BITTREXWithdrawal])
+    func process(deposits: Any, withdrawals: Any)
+}
+
+enum BITTREXAPI2TransactionType {
+    case deposit
+    case withdrawal
+}
+
+fileprivate protocol BITTREXAPI2TransactionRequest: class {
+    func createRequest(action: APIAction ,transactionType: BITTREXAPI2TransactionType) -> URLRequest?
 }
 
 fileprivate struct BITTREXAPI2SyncerTransaction {
     
-    let depositRequest: URLRequest
-    let withdrawalRequest: URLRequest
-    
     private var numberOfCalls: Int = 0
     private let maxNumberOfCalls: Int = 2
     
-    var deposits: [BITTREXDeposit] = [] {
+    var deposits: Any = [] {
         didSet {
             incrementCalls()
         }
     }
     
-    var withdraws: [BITTREXWithdrawal] = [] {
+    var withdraws: Any = [] {
         didSet {
             incrementCalls()
         }
     }
     
-    weak var delegate: BITTREXAPI2TransactionDataDelegate?
-    
-    init(requests: bittrexTransactionRequest) {
-        self.depositRequest = requests.depositRequest
-        self.withdrawalRequest = requests.withdrawalRequest
-    }
+    weak var dataDelegate: BITTREXAPI2TransactionDataDelegate?
     
     mutating func incrementCalls() {
         guard numberOfCalls < maxNumberOfCalls else {
-            delegate?.process(deposits: deposits, withdrawals: withdraws)
+            dataDelegate?.process(deposits: deposits, withdrawals: withdraws)
             return
         }
         
@@ -129,16 +127,54 @@ fileprivate struct BITTREXAPI2SyncerTransaction {
 
 fileprivate class BITTREXAPI2TransactionOperation: Operation, BITTREXAPI2TransactionDataDelegate {
     
-    private var transactionsRequest: BITTREXAPI2SyncerTransaction
+    private var dataSyncer: BITTREXAPI2SyncerTransaction
+    private let requestBuilder: BITTREXAPI2TransactionRequest
+    private let session: URLSession
+    private let action: APIAction
     
-    init(transactionsRequest: BITTREXAPI2SyncerTransaction) {
-        self.transactionsRequest = transactionsRequest
+    init(action: APIAction, dataSyncer: BITTREXAPI2SyncerTransaction, requestBuilder: BITTREXAPI2TransactionRequest, session: URLSession? = nil) {
+        self.dataSyncer = dataSyncer
+        self.requestBuilder = requestBuilder
+        self.session = session ?? certValidatedSession
+        self.action = action
+        
         super.init()
-        self.transactionsRequest.delegate = self
+        self.dataSyncer.dataDelegate = self
     }
     
-    func process(deposits: [BITTREXDeposit], withdrawals: [BITTREXWithdrawal]) {
-        //TODO: call callback
+    func process(deposits: Any, withdrawals: Any) {
+        //TODO: call callback, check errors too, you can recive an array[BITTREXDeposit or BITTREXWithdrawal] or an error on each params
+    }
+    
+    override func main() {
+        fetchDeposits()
+        async(after: 1) {
+            self.fetchWithdrawals()
+        }
+    }
+    
+    func fetchDeposits() {
+        guard let depositRequest = requestBuilder.createRequest(action: action, transactionType: .deposit) else {
+            dataSyncer.deposits = []
+            return
+        }
+        
+        session.dataTask(with: depositRequest) { (data, response, error) in
+            //TODO: process data and set it on dataSyncer Property, error can be setted too becuase property is Any type
+            //data dataSyncer.deposits = <DATA PROCESSED>
+        }
+    }
+    
+    func fetchWithdrawals() {
+        guard let withdrawalRequest = requestBuilder.createRequest(action: action, transactionType: .withdrawal) else {
+            dataSyncer.withdraws = []
+            return
+        }
+        
+        session.dataTask(with: withdrawalRequest) { (data, response, error) in
+            //TODO: process data and set it on dataSyncer Property, error can be setted too becuase property is Any type
+            //data dataSyncer.withdraws = <DATA PROCESSED>
+        }
     }
     
 }
