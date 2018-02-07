@@ -22,15 +22,7 @@ open class AbstractApi: ExchangeApi2 {
     public init(session: URLSession) {
         self.session = session
     }
-    
-    open func createRequest(for action: APIAction) -> URLRequest? {
-        fatalError("Must override")
-    }
-    
-    open func createMessage(for action: APIAction) -> String? {
-        fatalError("Must override")
-    }
-    
+
     // Look for api specific errors (some use http status codes, some use info in the data) and return either
     // a standardized error or nil if no error
     func processErrors(response: URLResponse?, data: Data?, error: Error?) -> Error?  {
@@ -57,6 +49,14 @@ open class AbstractApi: ExchangeApi2 {
             return nil
         }
         return ExchangeOperation(with: handler, action: action, session: session, request: request, resultBlock: completion)
+    }
+    
+    open func createRequest(for action: APIAction) -> URLRequest? {
+        fatalError("Must override")
+    }
+    
+    open func createMessage(for action: APIAction) -> String? {
+        fatalError("Must override")
     }
     
     open func processApiErrors(from data: Data) -> Error? {
