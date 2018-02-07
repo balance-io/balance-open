@@ -41,23 +41,7 @@ class CoinbaseAPI2: AbstractApi {
         
         return ExchangeOperation(with: self, request: request, resultBlock: completionBlock)
     }
-    
-    override func processErrors(response: URLResponse?, data: Data?, error: Error?) -> Error? {
-        if let error = processBaseErrors(response: response, error: error) {
-            return error
-        }
         
-        if let dict = createDict(from: data), let coinbaseError = checkErrors(from: dict) {
-            return coinbaseError
-        }
-        
-        return nil
-    }
-    
-    override func processData(requestType: ApiRequestType, data: Data) -> Any {
-        return requestType == .accounts ? buildAccounts(from: data) : buildTransactions(from: data)
-    }
-    
     override func createRequest(for action: APIAction) -> URLRequest? {
         guard let ouathCredentials = action.credentials as? OAUTHCredentials,
             let url = action.url else {
@@ -75,6 +59,32 @@ class CoinbaseAPI2: AbstractApi {
             
             return request
         }
+    }
+    
+    override func processApiErrors(from data: Data) -> Error? {
+        if let dict = createDict(from: data), let coinbaseError = checkErrors(from: dict) {
+            return coinbaseError
+        }
+        
+        return nil
+    }
+    
+    override func buildAccounts(from data: Data) -> Any {
+        guard let preparedData = preprocessData(from: data),
+            let accounts = try? JSONDecoder().decode([CoinbaseAccount2].self, from: preparedData) else {
+                log.error("Error: unable to parse coinbase account from data \(String(data: data, encoding: .utf8) ?? "")")
+                return []
+        }
+        return accounts
+    }
+    
+    override func buildTransactions(from data: Data) -> Any {
+        guard let preparedData = preprocessData(from: data),
+            let transactions = try? JSONDecoder().decode([CoinbaseTransaction2].self, from: preparedData) else {
+                log.error("Error: unable to parse coinbase transactions from data \(String(data: data, encoding: .utf8) ?? "")")
+                return []
+        }
+        return transactions
     }
     
     func refreshAccessToken(with credentials: OAUTHCredentials, completion: @escaping ExchangeOperationCompletionHandler) -> Operation?  {
@@ -100,10 +110,6 @@ extension CoinbaseAPI2: RequestHandler {
         guard let action = action else {
             let autentication = getAutenticationData(from: data)
             return autentication ?? ExchangeBaseError.other(message: "Data retrieved from autentication is not valid")
-        }
-        
-        guard let data = data else {
-            return ExchangeBaseError.other(message: "no data to manage")
         }
         
         if let error = processErrors(response: ulrResponse, data: data, error: error) {
@@ -192,24 +198,6 @@ private extension CoinbaseAPI2 {
                 return nil
         }
         return try? JSONSerialization.data(withJSONObject: dataDict, options: .prettyPrinted)
-    }
-    
-    func buildAccounts(from data: Data) -> Any {
-        guard let preparedData = preprocessData(from: data),
-            let accounts = try? JSONDecoder().decode([CoinbaseAccount2].self, from: preparedData) else {
-            log.error("Error: unable to parse coinbase account from data \(String(data: data, encoding: .utf8) ?? "")")
-            return []
-        }
-        return accounts
-    }
-    
-    func buildTransactions(from data: Data) -> Any {
-        guard let preparedData = preprocessData(from: data),
-            let transactions = try? JSONDecoder().decode([CoinbaseTransaction2].self, from: preparedData) else {
-            log.error("Error: unable to parse coinbase transactions from data \(String(data: data, encoding: .utf8) ?? "")")
-            return []
-        }
-        return transactions
     }
     
 }

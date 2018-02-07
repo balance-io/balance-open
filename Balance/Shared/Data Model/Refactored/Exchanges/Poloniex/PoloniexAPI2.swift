@@ -15,23 +15,6 @@ class PoloniexAPI2: AbstractApi {
     override var requestEncoding: ApiRequestEncoding { return .simpleHmacSha512 }
     override var requestHandler: RequestHandler? { return self }
     
-    override func processErrors(response: URLResponse?, data: Data?, error: Error?) -> Error? {
-
-        if let error = processBaseErrors(response: response, error: error) {
-            return error
-        }
-        
-        if let dict = createDict(from: data), let errorDict = dict["error"] as? String {
-            return ExchangeBaseError.other(message: errorDict)
-        }
-        
-        return nil
-    }
-    
-    override func processData(requestType: ApiRequestType, data: Data) -> Any {
-        return requestType == .accounts ? buildAccounts(from: data) : buildTransacionts(from: data)
-    }
-    
     //MARK: Builder methods for Request
     override func createRequest(for action: APIAction) -> URLRequest? {
         switch action.type {
@@ -54,31 +37,19 @@ class PoloniexAPI2: AbstractApi {
     override func createMessage(for action: APIAction) -> String? {
         return action.components?.query
     }
-}
-
-extension PoloniexAPI2: RequestHandler {
-    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any {
-        guard let action = action else {
-            return ExchangeBaseError.other(message: "No action provided")
+    
+    override func processApiErrors(from data: Data) -> Error? {
+        if let dict = createDict(from: data), let errorDict = dict["error"] as? String {
+            return ExchangeBaseError.other(message: errorDict)
         }
         
-        guard let data = data else {
-            return ExchangeBaseError.other(message: "no data to manage")
-        }
-        
-        if let error = processErrors(response: ulrResponse, data: data, error: error) {
-            return error
-        }
-        
-        return processData(requestType: action.type, data: data)
+        return nil
     }
-}
-
-private extension PoloniexAPI2 {
-    func buildTransacionts(from data: Data) -> Any {
+    
+    override func buildTransactions(from data: Data) -> Any {
         guard let rawData = try? JSONSerialization.jsonObject(with: data, options: []),
             let json = rawData as? [String : AnyObject] else {
-            return []
+                return []
         }
         
         var transactions = [NewPoloniexTransaction]()
@@ -100,12 +71,12 @@ private extension PoloniexAPI2 {
             transactions += withdrawals
             
         }
-    
+        
         return transactions
     }
-
-        
-    func buildAccounts(from data: Data) -> Any {
+    
+    
+    override func buildAccounts(from data: Data) -> Any {
         guard let data = prepareAccountsData(from: data),
             let accounts = try? JSONDecoder().decode([NewPoloniexAccount].self, from: data) else {
                 return []
@@ -114,6 +85,23 @@ private extension PoloniexAPI2 {
         return accounts
     }
     
+}
+
+extension PoloniexAPI2: RequestHandler {
+    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any {
+        guard let action = action else {
+            return ExchangeBaseError.other(message: "No action provided")
+        }
+
+        if let error = processErrors(response: ulrResponse, data: data, error: error) {
+            return error
+        }
+        
+        return processData(requestType: action.type, data: data)
+    }
+}
+
+private extension PoloniexAPI2 {
     func prepareAccountsData(from data: Data) -> Data? {
         guard let rawData = try? JSONSerialization.jsonObject(with: data),
             let dict = rawData as? [String: AnyObject] else {

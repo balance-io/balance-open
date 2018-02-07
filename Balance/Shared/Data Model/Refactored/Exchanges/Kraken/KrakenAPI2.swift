@@ -13,19 +13,8 @@ class KrakenAPI2: AbstractApi {
     override var requestDataFormat: ApiRequestDataFormat { return .json }
     override var requestEncoding: ApiRequestEncoding { return .none }
     override var encondingMessageType: ApiEncondingMessageType { return .none }
+    override var requestHandler: RequestHandler? { return self }
     
-    override func processErrors(response: URLResponse?, data: Data?, error: Error?) -> Error?  {
-        // In this example, look for 400 or 403 errors and return .invalidCredentials, then look for
-        // correct data format and either return .other or nil
-        fatalError("not implemented")
-    }
-    
-    override func processData(requestType: ApiRequestType, data: Data) -> Any {
-        // Parse the JSON into [PoloniexAccount] or [PoloniexInstitution] depending on request type
-        // and return for handling in the completion block by the app
-        fatalError("not implemented")
-    }
-        
     override func createRequest(for action: APIAction) -> URLRequest? {
         switch action.type {
         case .accounts, .transactions:
@@ -49,6 +38,18 @@ class KrakenAPI2: AbstractApi {
             request.setValue(messageSigned, forHTTPHeaderField: "API-Sign")
             return request
         }
+    }
+    
+    override func buildAccounts(from data: Data) -> Any {
+        return []
+    }
+    
+     override func buildTransactions(from data: Data) -> Any {
+        return []
+    }
+    
+    override func processApiErrors(from data: Data) -> Error? {
+        return nil
     }
 }
 
@@ -74,5 +75,21 @@ private extension KrakenAPI2 {
         }
         
         return  pathData + nonceQueryEncoded
+    }
+}
+
+// MARK: Request Handler
+
+extension KrakenAPI2: RequestHandler {
+    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any {
+        guard let action = action else {
+            return ExchangeBaseError.other(message: "No action provided")
+        }
+        
+        if let error = processErrors(response: ulrResponse, data: data, error: error) {
+            return error
+        }
+        
+        return processData(requestType: action.type, data: data)
     }
 }

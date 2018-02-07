@@ -67,6 +67,8 @@
 		403AA17A201FA5520088A2DE /* ExchangeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AA178201FA5520088A2DE /* ExchangeOperation.swift */; };
 		404B3EBB2028CE7F00E9427E /* CoinbaseTransaction2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B3EB92028CE7F00E9427E /* CoinbaseTransaction2.swift */; };
 		404B3EBD202A405A00E9427E /* CoinbaseTransaction2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B3EBC202A405A00E9427E /* CoinbaseTransaction2.swift */; };
+		404B3EBF202B590F00E9427E /* KrakenAccount2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B3EBE202B590F00E9427E /* KrakenAccount2.swift */; };
+		404B3EC0202B590F00E9427E /* KrakenAccount2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B3EBE202B590F00E9427E /* KrakenAccount2.swift */; };
 		40970261201F7D6200C34623 /* AbstractApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40970260201F7D6200C34623 /* AbstractApi.swift */; };
 		40970263201F7D7A00C34623 /* ExchangeProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40970262201F7D7900C34623 /* ExchangeProtocols.swift */; };
 		40A90EA5200959840063B2F5 /* AddNewAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA4200959840063B2F5 /* AddNewAccountView.swift */; };
@@ -717,6 +719,7 @@
 		403AA178201FA5520088A2DE /* ExchangeOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeOperation.swift; sourceTree = "<group>"; };
 		404B3EB92028CE7F00E9427E /* CoinbaseTransaction2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseTransaction2.swift; sourceTree = "<group>"; };
 		404B3EBC202A405A00E9427E /* CoinbaseTransaction2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinbaseTransaction2.swift; sourceTree = "<group>"; };
+		404B3EBE202B590F00E9427E /* KrakenAccount2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenAccount2.swift; sourceTree = "<group>"; };
 		40970260201F7D6200C34623 /* AbstractApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractApi.swift; sourceTree = "<group>"; };
 		40970262201F7D7900C34623 /* ExchangeProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeProtocols.swift; sourceTree = "<group>"; };
 		40A90EA4200959840063B2F5 /* AddNewAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewAccountView.swift; sourceTree = "<group>"; };
@@ -2478,6 +2481,7 @@
 			children = (
 				E61B7B69201BE05300B391CE /* KrakenAPI2.swift */,
 				E61B7B6D201BE67F00B391CE /* KrakenAPI2Action.swift */,
+				404B3EBE202B590F00E9427E /* KrakenAccount2.swift */,
 			);
 			path = Kraken;
 			sourceTree = "<group>";
@@ -3283,6 +3287,7 @@
 				53561EAF1F82DD260043D4F9 /* NewAccountViewModel.swift in Sources */,
 				537504FB1F19237E0062C11A /* ProductId.swift in Sources */,
 				53552A361ED72B5B00DD95F9 /* Pluralize.swift in Sources */,
+				404B3EC0202B590F00E9427E /* KrakenAccount2.swift in Sources */,
 				535529DB1ED723C600DD95F9 /* AppDelegate.swift in Sources */,
 				A4E457201F79045A002E2879 /* Double.swift in Sources */,
 				A453A5231F866CFF0002C6C8 /* LoginViewController.swift in Sources */,
@@ -3392,6 +3397,7 @@
 				E653124D1FE8C28D00F57977 /* BITTREXBalance.swift in Sources */,
 				E676EA8E202501F00023279B /* ExchangeApi.swift in Sources */,
 				53F47FCE1E3A78B70042AE06 /* DispatchQueue.swift in Sources */,
+				404B3EBF202B590F00E9427E /* KrakenAccount2.swift in Sources */,
 				2DF898441FCC8F7500CCDFB9 /* CountlyAPMNetworkLog.m in Sources */,
 				E67EABEB2028D3A60070FA3A /* NewPoloniexAccount.swift in Sources */,
 				A4430AA01F95F3ED00F2FFFA /* ExchangeRateSource.swift in Sources */,

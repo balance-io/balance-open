@@ -34,12 +34,21 @@ open class AbstractApi: ExchangeApi2 {
     // Look for api specific errors (some use http status codes, some use info in the data) and return either
     // a standardized error or nil if no error
     func processErrors(response: URLResponse?, data: Data?, error: Error?) -> Error?  {
-        fatalError("Must override")
+        if let baseError = processBaseErrors(response: response, error: error) {
+            return baseError
+        }
+        
+        guard let data = data else {
+            return ExchangeBaseError.other(message: "no data to manage")
+        }
+        
+        return processApiErrors(from: data)
     }
     
     // At this point we know there are no errors, so parse the data and return the exchagne data model
-    open func processData(requestType: ApiRequestType, data: Data) -> Any {
-        fatalError("Must override")
+    open func processData(requestType: ApiRequestType, data: Data?) -> Any {
+        guard let data = data else { return [] }
+        return requestType == .accounts ? buildAccounts(from: data) : buildTransactions(from: data)
     }
     
     public func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation? {
@@ -50,6 +59,17 @@ open class AbstractApi: ExchangeApi2 {
         return ExchangeOperation(with: handler, action: action, session: session, request: request, resultBlock: completion)
     }
     
+    open func processApiErrors(from data: Data) -> Error? {
+        fatalError("Must override")
+    }
+    
+    open func buildAccounts(from data: Data) -> Any {
+        fatalError("Must override")
+    }
+
+    open func buildTransactions(from data: Data) -> Any {
+        fatalError("Must override")
+    }
     //mark: Needed for OAUTH
     open func prepareForAutentication() {
         fatalError("Must override")
