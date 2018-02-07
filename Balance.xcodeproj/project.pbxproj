@@ -2125,9 +2125,9 @@
 		53F696622016876A00D28B23 /* Refactored */ = {
 			isa = PBXGroup;
 			children = (
-				E686DA7D20228DEA009D5A1E /* Exchanges */,
 				E66743FC20195E8A0009A57F /* Interface */,
 				E6635C65201A775A00D9720E /* ApiManager */,
+				E686DA7D20228DEA009D5A1E /* Exchanges */,
 			);
 			path = Refactored;
 			sourceTree = "<group>";
