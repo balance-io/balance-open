@@ -10,16 +10,26 @@ import Foundation
 
 public typealias ExchangeOperationCompletionHandler = (_ success: Bool, _ error: Error?, _ data: Any?) -> Void
 
-public enum TransactionType {
+public enum TransactionType: String, Codable {
     case unknown
     case deposit
     case withdrawal
     case trade
     case margin
     case fee
-    case transfer
     case match
     case rebate
+    case vault
+    case send
+    case request
+    case transfer
+    case buy
+    case sell
+    case fiat_deposit
+    case fiat_withdrawal
+    case exchange_deposit
+    case exchange_withdrawal
+    case vault_withdrawal
 }
 
 public protocol ExchangeApi2 {
@@ -27,20 +37,20 @@ public protocol ExchangeApi2 {
 }
 
 extension ExchangeApi2 {
-    func processBaseErrors(response: HTTPURLResponse?, error: Error?) -> Error? {
+    func processBaseErrors(response: URLResponse?, error: Error?) -> Error? {
         if let error = error as NSError?, error.code == -1009 {
             return ExchangeBaseError.internetConnection
         }
         
-        guard let statusCode = response?.statusCode else {
-            return nil
+        guard let response = response as? HTTPURLResponse else {
+            return ExchangeBaseError.other(message: "response malformed")
         }
-        
-        switch statusCode {
+
+        switch response.statusCode {
         case 400...499:
-            return ExchangeBaseError.invalidCredentials(statusCode: statusCode)
+            return ExchangeBaseError.invalidCredentials(statusCode: response.statusCode)
         case 500...599:
-            return ExchangeBaseError.invalidServer(statusCode: statusCode)
+            return ExchangeBaseError.invalidServer(statusCode: response.statusCode)
         default:
             return nil
         }

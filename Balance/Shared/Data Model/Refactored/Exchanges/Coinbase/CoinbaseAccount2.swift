@@ -9,19 +9,17 @@
 import Foundation
 
 struct CoinbaseAccount2: Codable {
-    
     private var accountInstitution: Int = 0
-    private var accountSource: Source = .poloniex
+    private var accountSource: Source = .coinbase
     private let id: String
     private let accountName: String
     private let primary: Bool
     private let type: String
-    private let currencyString: String
-    private let amount: String
-    private let nativeBalanceDict: NativeBalanceDict
+    private let balanceDict: CoinbaseBalance
+    private let nativeBalanceDict: CoinbaseBalance
 
     private var currency: Currency {
-        return Currency.rawValue(currencyString)
+        return Currency.rawValue(balanceDict.currency)
     }
     
     private var altCurrency: Currency {
@@ -33,13 +31,12 @@ struct CoinbaseAccount2: Codable {
         case accountName = "name"
         case primary
         case type
-        case currencyString = "currency"
-        case amount
+        case balanceDict = "balance"
         case nativeBalanceDict = "native_balance"
     }
 }
 
-struct NativeBalanceDict: Codable {
+struct CoinbaseBalance: Codable {
     let currency: String
     let amount: String
 }
@@ -80,7 +77,7 @@ extension CoinbaseAccount2: ExchangeAccount {
     }
     
     var currentBalance: Int {
-       return Double(amount)?.integerValueWith(decimals: currency.decimals) ?? 0
+       return Int(balanceDict.amount) ?? 0
     }
     
     var availableBalance: Int {
@@ -92,11 +89,10 @@ extension CoinbaseAccount2: ExchangeAccount {
     }
     
     var altCurrentBalance: Int? {
-        return Double(nativeBalanceDict.amount)?.integerValueWith(decimals: altCurrency.decimals) ?? 0
+        return Int(nativeBalanceDict.amount) ?? 0
     }
     
     var altAvailableBalance: Int? {
         return altCurrentBalance
     }
-    
 }

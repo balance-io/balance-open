@@ -15,7 +15,7 @@ class BitfinexAPI2: AbstractApi {
     override var requestEncoding: ApiRequestEncoding { return .hmac(hmacAlgorithm: CCHmacAlgorithm(kCCHmacAlgSHA384), digestLength: Int(CC_SHA384_DIGEST_LENGTH)) }
     override var encondingMessageType: ApiEncondingMessageType { return .concatenate(format: "%02x") }
     
-    override func processErrors(requestType: ApiRequestType, response: HTTPURLResponse, data: Data?, error: Error?) -> Error?  {
+    override func processErrors(response: URLResponse?, data: Data?, error: Error?) -> Error?  {
         // In this example, look for 400 or 403 errors and return .invalidCredentials, then look for
         // correct data format and either return .other or nil
         fatalError("not implemented")

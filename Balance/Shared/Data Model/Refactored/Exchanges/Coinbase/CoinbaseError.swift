@@ -25,10 +25,6 @@ enum CoinbaseError: String, LocalizedError {
     case invalidScope            = "invalid_scope"
     case rateLimitExceeded       = "rate_limit_exceeded"
     
-    // NOTE: Check to see if these actually hit since they use 404 and 500 error codes, we might just get a URLSession error
-    case notFound                = "not_found"
-    case internalServerError     = "internal_server_error"
-    
     var errorDescription: String? {
         return rawValue
     }
