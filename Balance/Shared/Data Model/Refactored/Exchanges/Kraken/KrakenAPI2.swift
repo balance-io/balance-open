@@ -64,7 +64,20 @@ class KrakenAPI2: AbstractApi {
     }
     
     override func processApiErrors(from data: Data) -> Error? {
-        return nil
+        guard let dict = createDict(from: data) as? [String: AnyObject],
+            let errorArray = dict["error"] as? [String],
+            let error = errorArray.first else {
+                return nil
+        }
+
+        switch error {
+        case "Invalid key":
+            return ExchangeBaseError.invalidCredentials(statusCode: 0)
+        case "EAPI:Invalid nonce":
+            return ExchangeBaseError.other(message: "Invalid nonce")
+        default:
+            return ExchangeBaseError.other(message: errorArray.first ?? "")
+        }
     }
 }
 
