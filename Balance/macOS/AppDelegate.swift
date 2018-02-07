@@ -148,8 +148,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } else if debugging.showBillingPreferencesOnLaunch {
             self.showBillingPreferences()
         }
-        
-        
     }
     
     // Gets called when the App launches/opens via URL

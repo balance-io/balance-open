@@ -35,13 +35,11 @@ class CoinbaseAPI2: AbstractApi {
     }
     
     override func startAutentication(with data: Any, completionBlock: @escaping ExchangeOperationCompletionHandler) -> Operation? {
-        guard let autenticationRequest = createAutenticationRequest(with: data) else {
+        guard let request = createAutenticationRequest(with: data) else {
             return nil
         }
         
-        return CoibaseAutenticationOperation(autenticationRequest: autenticationRequest,
-                                             requestHandler: self,
-                                             autenticationResultBlock: completionBlock)
+        return ExchangeOperation(with: self, request: request, resultBlock: completionBlock)
     }
     
     override func processErrors(response: URLResponse?, data: Data?, error: Error?) -> Error? {
@@ -91,7 +89,7 @@ class CoinbaseAPI2: AbstractApi {
         let parameters = "{\"refreshToken\":\"\(credentials.refreshToken)\"}"
         request.httpBody = parameters.data(using: .utf8)
         
-        return CoibaseAutenticationOperation(autenticationRequest: request, requestHandler: self, autenticationResultBlock: completion)
+        return ExchangeOperation(with: self, request: request, resultBlock: completion)
     }
 }
 
@@ -193,7 +191,6 @@ private extension CoinbaseAPI2 {
             let dataDict = dict["data"] as? [[String: AnyObject]] else {
                 return nil
         }
-        print(dataDict)
         return try? JSONSerialization.data(withJSONObject: dataDict, options: .prettyPrinted)
     }
     
@@ -218,45 +215,6 @@ private extension CoinbaseAPI2 {
 }
 
 // MARK: Coinbase Authetication
-
-private class CoibaseAutenticationOperation: Operation {
-    
-    private let autenticationResultBlock: ExchangeOperationCompletionHandler
-    private let requestHandler: RequestHandler
-    private var autenticationRequest: URLRequest
-    private let session: URLSession
-    
-    init(session: URLSession? = nil, autenticationRequest: URLRequest, requestHandler: RequestHandler, autenticationResultBlock: @escaping ExchangeOperationCompletionHandler) {
-        self.session = session ?? certValidatedSession
-        self.autenticationRequest = autenticationRequest
-        self.requestHandler = requestHandler
-        self.autenticationResultBlock = autenticationResultBlock
-    }
-    
-    override func start() {
-        main()
-    }
-    
-    override func main() {
-        let strongHandler = requestHandler
-        let task = session.dataTask(with: autenticationRequest) { (data, response, error) in
-            let parsedData = strongHandler.handleResponseData(for: nil, data: data, error: error, ulrResponse: response)
-            self.completionBlock?()
-            
-            switch parsedData {
-            case let autenticationData as CoinbaseAutentication:
-                self.autenticationResultBlock(true, nil, autenticationData)
-            case let autenticationError as ExchangeBaseError:
-                self.autenticationResultBlock(false, autenticationError, nil)
-            default:
-                self.autenticationResultBlock(false, nil, nil)
-            }
-        }
-        
-        task.resume()
-    }
-    
-}
 
 enum CoinbaseAuthenticationKey: String, CodingKey  {
     case state = "state"

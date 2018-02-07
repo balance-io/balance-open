@@ -38,7 +38,7 @@ public protocol ExchangeApi2 {
 
 extension ExchangeApi2 {
     func processBaseErrors(response: URLResponse?, error: Error?) -> Error? {
-        if let error = error as NSError?, error.code == -1009 {
+        if let error = error as NSError?, error.code == -1009, error.code == -1001 {
             return ExchangeBaseError.internetConnection
         }
         
