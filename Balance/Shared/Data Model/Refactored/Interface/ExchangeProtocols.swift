@@ -10,28 +10,6 @@ import Foundation
 
 public typealias ExchangeOperationCompletionHandler = (_ success: Bool, _ error: Error?, _ data: Any?) -> Void
 
-public enum TransactionType: String, Codable {
-    case unknown
-    case deposit
-    case withdrawal
-    case trade
-    case margin
-    case fee
-    case match
-    case rebate
-    case vault
-    case send
-    case request
-    case transfer
-    case buy
-    case sell
-    case fiat_deposit
-    case fiat_withdrawal
-    case exchange_deposit
-    case exchange_withdrawal
-    case vault_withdrawal
-}
-
 public protocol ExchangeApi2 {
     func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation?
 }

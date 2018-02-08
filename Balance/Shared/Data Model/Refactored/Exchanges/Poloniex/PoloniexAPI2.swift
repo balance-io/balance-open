@@ -58,7 +58,7 @@ class PoloniexAPI2: AbstractApi {
             let serialized = try? JSONSerialization.data(withJSONObject: depositsJSON, options: .prettyPrinted),
             let deposits = try? JSONDecoder().decode([NewPoloniexTransaction].self, from: serialized) {
             
-            deposits.forEach { $0.type = .deposit }
+            deposits.forEach { $0.type = "deposit" }
             transactions += deposits
             
         }
@@ -67,7 +67,7 @@ class PoloniexAPI2: AbstractApi {
             let serialized = try? JSONSerialization.data(withJSONObject: withdrawalsJSON, options: .prettyPrinted),
             let withdrawals = try? JSONDecoder().decode([NewPoloniexTransaction].self, from: serialized) {
             
-            withdrawals.forEach { $0.type = .withdrawal }
+            withdrawals.forEach { $0.type = "withdrawal" }
             transactions += withdrawals
             
         }

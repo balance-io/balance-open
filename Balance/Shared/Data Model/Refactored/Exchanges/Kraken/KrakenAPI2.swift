@@ -11,8 +11,8 @@ import Foundation
 class KrakenAPI2: AbstractApi {
     override var requestMethod: ApiRequestMethod { return .post }
     override var requestDataFormat: ApiRequestDataFormat { return .json }
-    override var requestEncoding: ApiRequestEncoding { return .none }
-    override var encondingMessageType: ApiEncondingMessageType { return .none }
+    override var requestEncoding: ApiRequestEncoding { return .hmac(hmacAlgorithm: CCHmacAlgorithm(kCCHmacAlgSHA512), digestLength: Int(CC_SHA512_DIGEST_LENGTH)) }
+    override var encondingMessageType: ApiEncondingMessageType { return .base64 }
     override var requestHandler: RequestHandler? { return self }
     
     override func createRequest(for action: APIAction) -> URLRequest? {
@@ -41,15 +41,43 @@ class KrakenAPI2: AbstractApi {
     }
     
     override func buildAccounts(from data: Data) -> Any {
-        return []
+        guard let dict = preprocessData(from: data) else {
+            return []
+        }
+        
+        var accounts: [KrakenAccount2] = []
+        dict.forEach { (currency, balance) in
+            let account = KrakenAccount2(currency: currency, balance: balance)
+            accounts.append(account)
+        }
+        
+        return accounts
     }
     
      override func buildTransactions(from data: Data) -> Any {
-        return []
+        guard let data = prepareTransactionsData(from: data),
+            let transactions = try? JSONDecoder().decode([KrakenTransaction2].self, from: data) else {
+                return ExchangeBaseError.other(message: "malformed payload")
+        }
+        
+        return transactions
     }
     
     override func processApiErrors(from data: Data) -> Error? {
-        return nil
+        guard let dict = createDict(from: data) as? [String: AnyObject],
+            let errorArray = dict["error"] as? [String],
+            let error = errorArray.first else {
+                return nil
+        }
+
+        switch error {
+        case "Invalid key":
+            return ExchangeBaseError.invalidCredentials(statusCode: 0)
+        case "EAPI:Invalid nonce":
+            return ExchangeBaseError.other(message: "Invalid nonce")
+        default:
+            return ExchangeBaseError.other(message: error)
+        }
     }
 }
 
@@ -75,6 +103,33 @@ private extension KrakenAPI2 {
         }
         
         return  pathData + nonceQueryEncoded
+    }
+    
+    func preprocessData(from data: Data) -> [String: String]? {
+        guard let dict = createDict(from: data) as? [String: AnyObject],
+            let resultDict = dict["result"] as? [String: String] else {
+                return nil
+        }
+        
+        return resultDict
+    }
+    
+    func prepareTransactionsData(from data: Data) -> Data? {
+        guard let dict = createDict(from: data) as? [String: AnyObject],
+            let resultDict = dict["result"] as? [String: AnyObject],
+            let ledgerDict = resultDict["ledger"] as? [String: AnyObject] else {
+                return nil
+        }
+
+        let flatDict = ledgerDict.map { (key, value) -> [String : AnyObject] in
+            if var dict = value as? [String: AnyObject] {
+                dict["ledgerId"] = key as AnyObject
+                return dict
+            }
+            return [:]
+        }
+        
+        return try? JSONSerialization.data(withJSONObject: flatDict, options: .prettyPrinted)
     }
 }
 

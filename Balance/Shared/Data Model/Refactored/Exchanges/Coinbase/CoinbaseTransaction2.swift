@@ -10,7 +10,7 @@ import Foundation
 
 struct CoinbaseTransaction2: Codable {
     private var transactionInstitution: Int = 0
-    private var transactionType: TransactionType
+    private var transactionType: String = ""
     private var transactionSourceInstitution: String = ""
     private let identifier: String
     private let status: String
@@ -33,7 +33,7 @@ struct CoinbaseTransaction2: Codable {
 // MARK: Protocol
 
 extension CoinbaseTransaction2: ExchangeTransaction {
-    var type: TransactionType {
+    var type: String {
         get {
             return transactionType
         }
