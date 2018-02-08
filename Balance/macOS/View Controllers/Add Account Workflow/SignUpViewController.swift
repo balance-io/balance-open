@@ -549,22 +549,15 @@ class SignUpViewController: NSViewController {
     @objc fileprivate func connect() {
         
         //TEST HERE
-        var name: String
-        var type: FieldType
-        var value: String
         let loginFields: [Field] = [
             Field(name: "", type: .key, value: ""),
             Field(name: "", type: .secret, value: "")
         ]
         
-        guard let credentials = BalanceCredentials.credentials(from: loginFields, source: .bittrex) else {
-            return
-        }
+        let mockInstitution = Institution.init(institutionId: 1, source: .bittrex, sourceInstitutionId: "", name: "")
+        exchangeManager.refresh(institution: mockInstitution)
         
-        exchangeManager.login(with: .coinbase, fields: [])
-        let bittrexAPI = BITTREXAPI2.init(session: certValidatedSession)
-        let accountsAction = BITTREXAPI2Action.init(type: .accounts, credentials: credentials)
-        let transactionAction = BITTREXAPI2Action.init(type: .transactions(input: nil), credentials: credentials)
+
 //        prepareViewsForSubmit(loadingText: "Connecting to \(apiInstitution.name)...")
 
 //        var loginFields = [Field]()

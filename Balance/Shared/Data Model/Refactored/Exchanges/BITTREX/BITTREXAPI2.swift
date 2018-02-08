@@ -21,13 +21,12 @@ class BITTREXAPI2: AbstractApi {
                 return nil
             }
             
-            //TODO: use normal operation
-            print(singleRequest)
-            return nil
+            //TODO: insert response handler(parser) into the operation
+            return ExchangeOperation(with: self, request: singleRequest, resultBlock: completion)
         case .transactions(_):
             
             let transactionSyncer = BITTREXAPI2SyncerTransaction()
-            //TODO: insert handler respose(parser delegate) into the operation
+            //TODO: insert response handler(parser) into the operation
             return BITTREXAPI2TransactionOperation(action: action, dataSyncer: transactionSyncer, requestBuilder: self)
         }
     }
@@ -81,100 +80,11 @@ extension BITTREXAPI2: BITTREXAPI2TransactionRequest {
     
 }
 
-
-fileprivate protocol BITTREXAPI2TransactionDataDelegate: class {
-    func process(deposits: Any, withdrawals: Any)
-}
-
-enum BITTREXAPI2TransactionType {
-    case deposit
-    case withdrawal
-}
-
-fileprivate protocol BITTREXAPI2TransactionRequest: class {
-    func createRequest(action: APIAction ,transactionType: BITTREXAPI2TransactionType) -> URLRequest?
-}
-
-fileprivate struct BITTREXAPI2SyncerTransaction {
+//TODO: Need implement
+extension BITTREXAPI2: RequestHandler {
     
-    private var numberOfCalls: Int = 0
-    private let maxNumberOfCalls: Int = 2
-    
-    var deposits: Any = [] {
-        didSet {
-            incrementCalls()
-        }
-    }
-    
-    var withdraws: Any = [] {
-        didSet {
-            incrementCalls()
-        }
-    }
-    
-    weak var dataDelegate: BITTREXAPI2TransactionDataDelegate?
-    
-    mutating func incrementCalls() {
-        guard numberOfCalls < maxNumberOfCalls else {
-            dataDelegate?.process(deposits: deposits, withdrawals: withdraws)
-            return
-        }
-        
-        numberOfCalls += 1
-    }
-    
-}
-
-fileprivate class BITTREXAPI2TransactionOperation: Operation, BITTREXAPI2TransactionDataDelegate {
-    
-    private var dataSyncer: BITTREXAPI2SyncerTransaction
-    private let requestBuilder: BITTREXAPI2TransactionRequest
-    private let session: URLSession
-    private let action: APIAction
-    
-    init(action: APIAction, dataSyncer: BITTREXAPI2SyncerTransaction, requestBuilder: BITTREXAPI2TransactionRequest, session: URLSession? = nil) {
-        self.dataSyncer = dataSyncer
-        self.requestBuilder = requestBuilder
-        self.session = session ?? certValidatedSession
-        self.action = action
-        
-        super.init()
-        self.dataSyncer.dataDelegate = self
-    }
-    
-    func process(deposits: Any, withdrawals: Any) {
-        //TODO: call callback, check errors too, you can recive an array[BITTREXDeposit or BITTREXWithdrawal] or an error on each params
-    }
-    
-    override func main() {
-        fetchDeposits()
-        async(after: 1) {
-            self.fetchWithdrawals()
-        }
-    }
-    
-    func fetchDeposits() {
-        guard let depositRequest = requestBuilder.createRequest(action: action, transactionType: .deposit) else {
-            dataSyncer.deposits = []
-            return
-        }
-        
-        session.dataTask(with: depositRequest) { (data, response, error) in
-            //TODO: process data and set it on dataSyncer Property, error can be setted too becuase property is Any type
-            //data dataSyncer.deposits = <DATA PROCESSED>
-        }
-    }
-    
-    func fetchWithdrawals() {
-        guard let withdrawalRequest = requestBuilder.createRequest(action: action, transactionType: .withdrawal) else {
-            dataSyncer.withdraws = []
-            return
-        }
-        
-        session.dataTask(with: withdrawalRequest) { (data, response, error) in
-            //TODO: process data and set it on dataSyncer Property, error can be setted too becuase property is Any type
-            //data dataSyncer.withdraws = <DATA PROCESSED>
-        }
+    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any {
+        return "Mock Data"
     }
     
 }

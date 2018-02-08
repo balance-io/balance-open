@@ -546,6 +546,8 @@
 		E653128F1FE8C4E000F57977 /* BITTREXInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312861FE8C47F00F57977 /* BITTREXInstitution.swift */; };
 		E65312901FE8C4E100F57977 /* BITTREXInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312861FE8C47F00F57977 /* BITTREXInstitution.swift */; };
 		E65312931FE8C69800F57977 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F078421F4F8EC700D0054C /* TestHelpers.swift */; };
+		E6594914202BB60D006A2C38 /* BITTREXAPI2TransactionSyncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6594913202BB60D006A2C38 /* BITTREXAPI2TransactionSyncer.swift */; };
+		E6594915202BB61A006A2C38 /* BITTREXAPI2TransactionSyncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6594913202BB60D006A2C38 /* BITTREXAPI2TransactionSyncer.swift */; };
 		E65CAF602023DCC50018E7A2 /* EthplorerAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65CAF5F2023DCC50018E7A2 /* EthplorerAPI2.swift */; };
 		E65CAF622023DCDE0018E7A2 /* EthplorerAPIAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65CAF612023DCDE0018E7A2 /* EthplorerAPIAction.swift */; };
 		E65CAF632023E2730018E7A2 /* EthplorerAPIAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65CAF612023DCDE0018E7A2 /* EthplorerAPIAction.swift */; };
@@ -1085,6 +1087,7 @@
 		E65312851FE8C47F00F57977 /* BITTREXApiError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXApiError.swift; sourceTree = "<group>"; };
 		E65312861FE8C47F00F57977 /* BITTREXInstitution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXInstitution.swift; sourceTree = "<group>"; };
 		E65312871FE8C47F00F57977 /* BITTREXApiAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXApiAction.swift; sourceTree = "<group>"; };
+		E6594913202BB60D006A2C38 /* BITTREXAPI2TransactionSyncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BITTREXAPI2TransactionSyncer.swift; sourceTree = "<group>"; };
 		E65CAF5F2023DCC50018E7A2 /* EthplorerAPI2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthplorerAPI2.swift; sourceTree = "<group>"; };
 		E65CAF612023DCDE0018E7A2 /* EthplorerAPIAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthplorerAPIAction.swift; sourceTree = "<group>"; };
 		E6635C63201A6E4400D9720E /* ExchangeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeManager.swift; sourceTree = "<group>"; };
@@ -2601,6 +2604,7 @@
 			children = (
 				E672C2EB202A3CB200BE3390 /* BITTREXAPI2.swift */,
 				E672C2ED202A3CBF00BE3390 /* BITTREXAPI2Action.swift */,
+				E6594913202BB60D006A2C38 /* BITTREXAPI2TransactionSyncer.swift */,
 			);
 			path = BITTREX;
 			sourceTree = "<group>";
@@ -3205,6 +3209,7 @@
 				E67EABF72028E2C70070FA3A /* GDAXAPI2Action.swift in Sources */,
 				53552A0A1ED7251200DD95F9 /* Notifications.swift in Sources */,
 				A4430AA31F95F3ED00F2FFFA /* ExchangeRateSource.swift in Sources */,
+				E6594915202BB61A006A2C38 /* BITTREXAPI2TransactionSyncer.swift in Sources */,
 				53D441FC1F44D813006967E1 /* CategoryRepository.swift in Sources */,
 				53561EB31F82DD260043D4F9 /* TableViewCell.swift in Sources */,
 				53561EB51F82DD260043D4F9 /* TextFieldTableViewCell.swift in Sources */,
@@ -3531,6 +3536,7 @@
 				28FD09C21D99F18500A395AB /* PaintCodeButton.swift in Sources */,
 				532121A71EE8B91600F4812A /* ZipUtilities.swift in Sources */,
 				533626601D54E5F80090656F /* FlippedView.swift in Sources */,
+				E6594914202BB60D006A2C38 /* BITTREXAPI2TransactionSyncer.swift in Sources */,
 				53F6965C2011322F00D28B23 /* BITTREXWithdrawal.swift in Sources */,
 				F1EA1A561D775ACC0040BB9E /* MockedKeychainManager.swift in Sources */,
 				53629D53201FE85B000081E9 /* PreferencesAccounts.swift in Sources */,

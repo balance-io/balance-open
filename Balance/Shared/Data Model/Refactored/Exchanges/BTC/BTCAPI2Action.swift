@@ -40,7 +40,12 @@ extension BTCAPI2Action {
     }
     
     var url: URL? {
-        return URL(string: host + path)
+        switch type {
+        case .accounts:
+            return URL(string: host + path)
+        case .transactions(_):
+            return nil
+        }
     }
     
     var nonce: Int64 {

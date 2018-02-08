@@ -12,6 +12,7 @@ struct BITTREXAPI2Action: APIAction {
     
     let type: ApiRequestType
     let credentials: Credentials
+    let internalNonce: Int64 = Int64(Date().timeIntervalSince1970 * 10000)
     
     init(type: ApiRequestType, credentials: Credentials) {
         self.type = type
@@ -49,7 +50,7 @@ extension BITTREXAPI2Action {
     }
     
     var nonce: Int64 {
-        return Int64(Date().timeIntervalSince1970 * 10000)
+        return internalNonce
     }
     
 }
