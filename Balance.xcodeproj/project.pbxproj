@@ -598,6 +598,10 @@
 		E68EE57D2015881100ACB01F /* BITTREXApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E653127A1FE8C40A00F57977 /* BITTREXApiTest.swift */; };
 		E68EE57E2015881100ACB01F /* ExchangeAPIURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312781FE8C40900F57977 /* ExchangeAPIURLSession.swift */; };
 		E68EE58020158CD600ACB01F /* MockInstitutionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68EE57F20158CD600ACB01F /* MockInstitutionRepository.swift */; };
+		E6A5B9A6202E0928006426BE /* BinanceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A5B9A5202E0928006426BE /* BinanceAPI.swift */; };
+		E6A5B9A7202E0948006426BE /* BinanceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A5B9A5202E0928006426BE /* BinanceAPI.swift */; };
+		E6A5B9A9202E0963006426BE /* BinanceAPIAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A5B9A8202E0963006426BE /* BinanceAPIAction.swift */; };
+		E6A5B9AA202E09BF006426BE /* BinanceAPIAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A5B9A8202E0963006426BE /* BinanceAPIAction.swift */; };
 		E6B0416C1FFECFB200192319 /* AddAccountDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */; };
 		E6B0416D1FFED03300192319 /* AddAccountDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */; };
 		E6C1AC4620057ABE0018D6AA /* ReconnectAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */; };
@@ -1122,6 +1126,8 @@
 		E67EABF52028E2C30070FA3A /* GDAXAPI2Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAPI2Action.swift; sourceTree = "<group>"; };
 		E686DA79202225CE009D5A1E /* CoinbasePreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbasePreferences.swift; sourceTree = "<group>"; };
 		E68EE57F20158CD600ACB01F /* MockInstitutionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInstitutionRepository.swift; sourceTree = "<group>"; };
+		E6A5B9A5202E0928006426BE /* BinanceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceAPI.swift; sourceTree = "<group>"; };
+		E6A5B9A8202E0963006426BE /* BinanceAPIAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceAPIAction.swift; sourceTree = "<group>"; };
 		E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddAccountDelegate.swift; path = AddCredentialBasedAccountViewController/AddAccountDelegate.swift; sourceTree = "<group>"; };
 		E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountViewController.swift; sourceTree = "<group>"; };
 		E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountCell.swift; sourceTree = "<group>"; };
@@ -2687,6 +2693,7 @@
 		E686DA7D20228DEA009D5A1E /* Exchanges */ = {
 			isa = PBXGroup;
 			children = (
+				E6A5B9A4202E0910006426BE /* Binance */,
 				E67EABDC2028D3710070FA3A /* Poloniex */,
 				E67EABDB2028D3680070FA3A /* Coinbase */,
 				E64AAA39201FCB9400CE7050 /* Kraken */,
@@ -2710,6 +2717,15 @@
 				E65312731FE8C3E400F57977 /* BittrexInvalidApiKey.json */,
 			);
 			path = "BITTREX API Responses";
+			sourceTree = "<group>";
+		};
+		E6A5B9A4202E0910006426BE /* Binance */ = {
+			isa = PBXGroup;
+			children = (
+				E6A5B9A5202E0928006426BE /* BinanceAPI.swift */,
+				E6A5B9A8202E0963006426BE /* BinanceAPIAction.swift */,
+			);
+			path = Binance;
 			sourceTree = "<group>";
 		};
 		E6C1AC45200578C00018D6AA /* Reconnect */ = {
@@ -3137,6 +3153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53F6965D2011322F00D28B23 /* BITTREXWithdrawal.swift in Sources */,
+				E6A5B9A7202E0948006426BE /* BinanceAPI.swift in Sources */,
 				53552A1B1ED7251700DD95F9 /* Transaction.swift in Sources */,
 				A4E4571A1F7901E7002E2879 /* EthplorerInstitution.swift in Sources */,
 				53629D5B20240F48000081E9 /* EthplorerTransaction.swift in Sources */,
@@ -3280,6 +3297,7 @@
 				A4ED56E11F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift in Sources */,
 				A4E457181F7901E7002E2879 /* EthplorerApi.swift in Sources */,
 				53552A251ED7252900DD95F9 /* Data.swift in Sources */,
+				E6A5B9AA202E09BF006426BE /* BinanceAPIAction.swift in Sources */,
 				535529F81ED7250100DD95F9 /* SyncDefaults.swift in Sources */,
 				53D441F91F44CD93006967E1 /* InstitutionRepository.swift in Sources */,
 				537187DE1F4CC23B00E7F9D6 /* GDAXAPIClient.swift in Sources */,
@@ -3618,9 +3636,11 @@
 				E6635C67201A777900D9720E /* BalanceCredentials.swift in Sources */,
 				A4E768091F67DDFE002B1AE1 /* BitfinexErrors.swift in Sources */,
 				53629D51201FE85B000081E9 /* InstitutionButtons.swift in Sources */,
+				E6A5B9A6202E0928006426BE /* BinanceAPI.swift in Sources */,
 				530F57AB1DCD72680083F3A7 /* FMDatabasePool.m in Sources */,
 				537187E91F4CC23C00E7F9D6 /* GDAXAPIClient.swift in Sources */,
 				40970261201F7D6200C34623 /* AbstractApi.swift in Sources */,
+				E6A5B9A9202E0963006426BE /* BinanceAPIAction.swift in Sources */,
 				A41742901F73C6BF004A9B4F /* CoinbaseTransaction.swift in Sources */,
 				5302912D1C6A731F00C31CC1 /* Account.swift in Sources */,
 				E67EABF42028E2A70070FA3A /* GDAXAPI2.swift in Sources */,

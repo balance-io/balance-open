@@ -83,7 +83,7 @@ extension BITTREXAPI2: BITTREXAPI2TransactionRequest {
 //TODO: Need implement
 extension BITTREXAPI2: RequestHandler {
     
-    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any {
+    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, urlResponse: URLResponse?) -> Any {
         return "Mock Data"
     }
     

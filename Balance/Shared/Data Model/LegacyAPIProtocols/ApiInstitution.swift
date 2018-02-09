@@ -63,6 +63,8 @@ extension Source {
         case .ethplorer:    return EthplorerInstitution()
         case .bittrex:      return BITTREXInstitution()
         case .blockchain:   return BtcInstitution()
+        case .binance:      return BtcInstitution() //TODO: Remove it
+            
         }
     }
 }

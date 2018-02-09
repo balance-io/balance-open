@@ -51,6 +51,6 @@ protocol OperationResult {
 
 extension OperationResult {
     func handleResponse(for action: APIAction?, data: Data?, response: URLResponse?, error: Error?) -> Any {
-        return handler.handleResponseData(for: action, data: data, error: error, ulrResponse: response)
+        return handler.handleResponseData(for: action, data: data, error: error, urlResponse: response)
     }
 }

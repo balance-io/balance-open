@@ -17,6 +17,7 @@ public enum Source: Int, CustomStringConvertible {
     case ethplorer  = 7
     case bittrex    = 8
     case blockchain = 9
+    case binance = 10
     
     public var description: String {
         switch self {
@@ -29,6 +30,7 @@ public enum Source: Int, CustomStringConvertible {
         case .ethplorer:    return "Ethereum Wallet"
         case .bittrex:      return "Bittrex"
         case .blockchain:   return "BTC Wallet"
+        case .binance:      return "Binance" //TODO: Need validation
         }
     }
     
@@ -42,6 +44,7 @@ public enum Source: Int, CustomStringConvertible {
         case .ethplorer:    return PXColor(hexString: "#333D4E")!
         case .bittrex:      return PXColor(hexString: "#29333D")!
         case .blockchain:   return PXColor(hexString: "#F38724")!
+        case .binance:      return PXColor(hexString: "#020102")! //TODO: Need validation
         }
     }
     
@@ -56,6 +59,7 @@ public enum Source: Int, CustomStringConvertible {
         case .bittrex:    return URL(string: "https://github.com/balancemymoney/balance-open/wiki/Bittrex-Guide")!
         case .blockchain: return URL(string: "https://bitcoin.org/en/choose-your-wallet")!
         case .bittrex:    return URL(string: "https://github.com/balancemymoney/balance-open/wiki/Bittrex-Guide")!
+        case .binance:    return URL(string: "https://google.com/binance")! //TODO: Need validation
         }
     }
 }

@@ -80,7 +80,7 @@ class ExchangeOperation: Operation, OperationResult {
                 return
             }
             
-            let response = self.handler.handleResponseData(for: self.action, data: data, error: error, ulrResponse: response)
+            let response = self.handler.handleResponseData(for: self.action, data: data, error: error, urlResponse: response)
             
             self.completionBlock?()
             

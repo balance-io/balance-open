@@ -30,7 +30,7 @@ extension BITTREXAPI2Action {
     var url: URL? {
         switch type {
         case .accounts:
-            return URL(string: baseURL + path + query)
+            return URL(string: baseURL + path + validQuery)
         case .transactions(_):
             return nil
         }
@@ -83,9 +83,13 @@ extension BITTREXAPI2Action {
     private var baseURL: String {
         return host + apiVersion + methodType
     }
-    
-    private var query: String {
-        return  "?" + (self.query ?? "")
+
+    private var validQuery: String {
+        guard let validQuery = self.query else {
+            return ""
+        }
+        
+        return "?" + validQuery
     }
     
     private var depositPath: String {
@@ -97,11 +101,11 @@ extension BITTREXAPI2Action {
     }
     
     var depositTransactionURL: URL? {
-        return URL(string: baseURL + depositPath + query)
+        return URL(string: baseURL + depositPath + validQuery)
     }
     
     var withdrawalTransactionURL: URL? {
-        return URL(string: baseURL + withdrawalPath + query)
+        return URL(string: baseURL + withdrawalPath + validQuery)
     }
     
 }

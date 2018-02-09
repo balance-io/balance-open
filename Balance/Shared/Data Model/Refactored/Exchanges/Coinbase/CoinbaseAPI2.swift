@@ -106,13 +106,13 @@ class CoinbaseAPI2: AbstractApi {
 // MARK: Operation RequestHandler
 
 extension CoinbaseAPI2: RequestHandler {
-    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any {
+    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, urlResponse: URLResponse?) -> Any {
         guard let action = action else {
             let autentication = getAutenticationData(from: data)
             return autentication ?? ExchangeBaseError.other(message: "Data retrieved from autentication is not valid")
         }
         
-        if let error = processErrors(response: ulrResponse, data: data, error: error) {
+        if let error = processErrors(response: urlResponse, data: data, error: error) {
             return error
         }
         

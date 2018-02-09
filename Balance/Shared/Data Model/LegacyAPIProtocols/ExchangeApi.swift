@@ -25,6 +25,7 @@ extension Source {
         case .ethplorer:    return EthplorerApi()
         case .bittrex:      return BITTREXApi()
         case .blockchain:   return BtcApi()
+        case .binance:      return BinanceAPI(session: certValidatedSession)
         }
     }
 }

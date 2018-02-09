@@ -67,6 +67,7 @@ public enum ApiRequestDataFormat {
 public enum ApiRequestEncoding {
     case none
     case simpleHmacSha512
+    case simpleHmacSha256
     case hmac(hmacAlgorithm: CCHmacAlgorithm, digestLength: Int)
 }
 
@@ -111,7 +112,7 @@ extension APIAction {
 }
 
 public protocol RequestHandler: class {    
-    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any
+    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, urlResponse: URLResponse?) -> Any
 }
 
 extension APIAction {

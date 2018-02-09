@@ -554,9 +554,7 @@ class SignUpViewController: NSViewController {
             Field(name: "", type: .secret, value: "")
         ]
         
-        let mockInstitution = Institution.init(institutionId: 1, source: .bittrex, sourceInstitutionId: "", name: "")
-        exchangeManager.refresh(institution: mockInstitution)
-        
+        exchangeManager.login(with: .binance, fields: loginFields)
 
 //        prepareViewsForSubmit(loadingText: "Connecting to \(apiInstitution.name)...")
 
