@@ -10,9 +10,9 @@ import Foundation
 
 struct BITTREXAPI2Action: APIAction {
     
-    let nonce: Int64 = Int64(Date().timeIntervalSince1970 * 10000)
     let type: ApiRequestType
     let credentials: Credentials
+    let internalNonce: Int64 = Int64(Date().timeIntervalSince1970 * 10000)
     
     init(type: ApiRequestType, credentials: Credentials) {
         self.type = type
@@ -30,8 +30,7 @@ extension BITTREXAPI2Action {
     var url: URL? {
         switch type {
         case .accounts:
-            let query = "?" + (self.query ?? "")
-            return URL(string: host + apiVersion + methodType + path + query)
+            return URL(string: baseURL + path + query)
         case .transactions(_):
             return nil
         }
@@ -50,28 +49,8 @@ extension BITTREXAPI2Action {
         }
     }
     
-    var transactionURLs: (deposits: URL, withdrawals: URL)? {
-        guard case .transactions(_) = type else {
-            return nil
-        }
-        
-        let query = "?" + (self.query ?? "")
-        
-        guard let paths = transactionPaths,
-        let depositURL = URL(string: host + apiVersion + methodType + paths.deposits + query),
-            let withdrawalURL = URL(string: host + apiVersion + methodType + paths.withdrawals + query) else {
-                return nil
-        }
-        
-        return (depositURL, withdrawalURL)
-    }
-    
-    var transactionPaths: (deposits: String, withdrawals: String)? {
-        guard case .transactions(_) = type else {
-            return nil
-        }
-        
-        return ("getdeposithistory", "getwithdrawalhistory")
+    var nonce: Int64 {
+        return internalNonce
     }
     
 }
@@ -94,6 +73,35 @@ private extension BITTREXAPI2Action {
         case .accounts, .transactions(_):
             return "account/"
         }
+    }
+    
+}
+
+//MARK: Transaction variables
+extension BITTREXAPI2Action {
+    
+    private var baseURL: String {
+        return host + apiVersion + methodType
+    }
+    
+    private var query: String {
+        return  "?" + (self.query ?? "")
+    }
+    
+    private var depositPath: String {
+        return "getdeposithistory"
+    }
+    
+    private var withdrawalPath: String {
+        return "getwithdrawalhistory"
+    }
+    
+    var depositTransactionURL: URL? {
+        return URL(string: baseURL + depositPath + query)
+    }
+    
+    var withdrawalTransactionURL: URL? {
+        return URL(string: baseURL + withdrawalPath + query)
     }
     
 }

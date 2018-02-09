@@ -8,8 +8,6 @@
 
 import Foundation
 
-fileprivate typealias bittrexTransactionRequest = (depositRequest: URLRequest, withdrawalRequest: URLRequest)
-
 class BITTREXAPI2: AbstractApi {
     
     override var requestMethod: ApiRequestMethod { return .get }
@@ -23,17 +21,13 @@ class BITTREXAPI2: AbstractApi {
                 return nil
             }
             
-            //TODO: use normal operation
-            print(singleRequest)
-            return nil
+            //TODO: insert response handler(parser) into the operation
+            return ExchangeOperation(with: self, request: singleRequest, resultBlock: completion)
         case .transactions(_):
-            guard let transactionRequests = createMultipleTransactionRequests(for: action) else {
-                return nil
-            }
             
-            let transactionRequestManager = BITTREXAPI2SyncerTransaction(requests: transactionRequests)
-            //TODO: insert handler respose(parser delegate) into the operation
-            return BITTREXAPI2TransactionOperation(transactionsRequest: transactionRequestManager)
+            let transactionSyncer = BITTREXAPI2SyncerTransaction()
+            //TODO: insert response handler(parser) into the operation
+            return BITTREXAPI2TransactionOperation(action: action, dataSyncer: transactionSyncer, requestBuilder: self)
         }
     }
     
@@ -44,12 +38,8 @@ class BITTREXAPI2: AbstractApi {
                 let messageSigned = generateMessageSigned(for: action) else {
                     return nil
             }
-            
-            var request = URLRequest(url: url)
-            request.httpMethod = requestMethod.rawValue
-            request.setValue(messageSigned, forHTTPHeaderField: "apisign")
 
-            return request
+            return createRequest(url: url, credentials: action.credentials, messageSigned: messageSigned)
         default:
             return nil
         }
@@ -61,84 +51,40 @@ class BITTREXAPI2: AbstractApi {
     
 }
 
-private extension BITTREXAPI2 {
+extension BITTREXAPI2: BITTREXAPI2TransactionRequest {
     
-    func createMultipleTransactionRequests(for action: APIAction) -> bittrexTransactionRequest? {
+    func createRequest(action: APIAction, transactionType: BITTREXAPI2TransactionType) -> URLRequest? {
         guard let bittrexAction = action as? BITTREXAPI2Action,
-            let urls = bittrexAction.transactionURLs else {
+            case .transactions(_) = bittrexAction.type else {
             return nil
         }
         
-        let depositMessageSigned = CryptoAlgorithm.sha512.hmac(body: urls.deposits.absoluteString, key: action.credentials.secretKey)
-        let withdrawalMessageSigned = CryptoAlgorithm.sha512.hmac(body: urls.deposits.absoluteString, key: action.credentials.secretKey)
+        let url = transactionType == .deposit ? bittrexAction.depositTransactionURL : bittrexAction.withdrawalTransactionURL
         
-        var depositRequest = URLRequest(url: urls.deposits)
-        depositRequest.httpMethod = requestMethod.rawValue
-        depositRequest.setValue(depositMessageSigned, forHTTPHeaderField: "apisign")
+        guard let transactionURL = url else {
+            return nil
+        }
         
-        var withdrawalRequest = URLRequest(url: urls.withdrawals)
-        withdrawalRequest.httpMethod = requestMethod.rawValue
-        withdrawalRequest.setValue(withdrawalMessageSigned, forHTTPHeaderField: "apisign")
-        
-        return (depositRequest, withdrawalRequest)
+        let messageSigned = CryptoAlgorithm.sha512.hmac(body: transactionURL.absoluteString, key: action.credentials.secretKey)
+    
+        return createRequest(url: transactionURL, credentials: action.credentials, messageSigned: messageSigned)
+    }
+    
+    private func createRequest(url: URL, credentials: Credentials, messageSigned: String) -> URLRequest? {
+        var request = URLRequest(url: url)
+        request.httpMethod = requestMethod.rawValue
+        request.setValue(messageSigned, forHTTPHeaderField: "apisign")
+
+        return (request)
     }
     
 }
 
-fileprivate protocol BITTREXAPI2TransactionDataDelegate: class {
-    func process(deposits: [BITTREXDeposit], withdrawals: [BITTREXWithdrawal])
-}
-
-fileprivate struct BITTREXAPI2SyncerTransaction {
+//TODO: Need implement
+extension BITTREXAPI2: RequestHandler {
     
-    let depositRequest: URLRequest
-    let withdrawalRequest: URLRequest
-    
-    private var numberOfCalls: Int = 0
-    private let maxNumberOfCalls: Int = 2
-    
-    var deposits: [BITTREXDeposit] = [] {
-        didSet {
-            incrementCalls()
-        }
-    }
-    
-    var withdraws: [BITTREXWithdrawal] = [] {
-        didSet {
-            incrementCalls()
-        }
-    }
-    
-    weak var delegate: BITTREXAPI2TransactionDataDelegate?
-    
-    init(requests: bittrexTransactionRequest) {
-        self.depositRequest = requests.depositRequest
-        self.withdrawalRequest = requests.withdrawalRequest
-    }
-    
-    mutating func incrementCalls() {
-        guard numberOfCalls < maxNumberOfCalls else {
-            delegate?.process(deposits: deposits, withdrawals: withdraws)
-            return
-        }
-        
-        numberOfCalls += 1
-    }
-    
-}
-
-fileprivate class BITTREXAPI2TransactionOperation: Operation, BITTREXAPI2TransactionDataDelegate {
-    
-    private var transactionsRequest: BITTREXAPI2SyncerTransaction
-    
-    init(transactionsRequest: BITTREXAPI2SyncerTransaction) {
-        self.transactionsRequest = transactionsRequest
-        super.init()
-        self.transactionsRequest.delegate = self
-    }
-    
-    func process(deposits: [BITTREXDeposit], withdrawals: [BITTREXWithdrawal]) {
-        //TODO: call callback
+    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any {
+        return "Mock Data"
     }
     
 }

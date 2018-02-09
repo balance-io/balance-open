@@ -17,7 +17,7 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
         }
         
         switch source {
-        case .poloniex:
+        case .poloniex, .bittrex:
             save(account: keychainAccounts.secretKey, key: KeychainConstants.secretKey, value: credentials.secretKey)
             save(account: keychainAccounts.apiKey, key: KeychainConstants.apiKey, value: credentials.apiKey)
         case .coinbase:
@@ -39,8 +39,6 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
             }
         case .ethplorer, .blockchain:
             save(account: keychainAccounts.addressKey, key: KeychainConstants.address, value: credentials.address)
-        default:
-            return
         }
     }
     
@@ -61,7 +59,7 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
             }
             
             return CoinbaseAutentication(accessToken: accessToken, refreshToken: refreshToken)
-        case .poloniex:
+        case .poloniex, .bittrex:
             guard let secretKey = fetch(account: accountValues.secretKey, key: KeychainConstants.secretKey),
                 let apiKey = fetch(account: accountValues.apiKey, key: KeychainConstants.apiKey) else {
                     return nil
@@ -83,8 +81,6 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
             }
             
             return BalanceCredentials(address: address, name: name ?? "")
-        default:
-            return nil
         }
     }
     
@@ -138,10 +134,16 @@ private extension ExchangeKeychainServiceProvider {
     func buildKeychainAccounts(for source: Source, with identifier: String) -> KeychainAccountValues? {
         switch source {
         case .poloniex:
-             // TODO: the old way uses for secretKeyAccount value the apiKeyAccount, it must use secretKeyAccount
-//            let keychainSecretKeyAccount = "secret institutionId: \(identifier)"
+            // TODO: the old way uses for secretKeyAccount value the apiKeyAccount(error), it must use secretKeyAccount
+            //let keychainSecretKeyAccount = "secret institutionId: \(identifier)"
             let keychainApiKeyAccount = "apiKey institutionId: \(identifier)"
+            
             return KeychainAccountValues(apiKey: keychainApiKeyAccount, secretKey: keychainApiKeyAccount)
+        case .bittrex: //This case should be in the same case with kraken, but due to kraken error we need to separate this one
+            let keychainSecretKeyAccount = "secret institutionId: \(identifier)"
+            let keychainApiKeyAccount = "apiKey institutionId: \(identifier)"
+            
+            return KeychainAccountValues(apiKey: keychainApiKeyAccount, secretKey: keychainSecretKeyAccount)
         case .coinbase:
             let keychainAccessTokenKey = "institutionId: \(identifier)"
             let keychainRefreshTokenKey = "refreshToken institutionId: \(identifier)"
@@ -153,8 +155,6 @@ private extension ExchangeKeychainServiceProvider {
             return KeychainAccountValues(commonKey: realIdentifer)
         case .ethplorer, .blockchain:
             return KeychainAccountValues(addressKey: "address institutionId: \(identifier)")
-        default:
-            return nil
         }
     }
     

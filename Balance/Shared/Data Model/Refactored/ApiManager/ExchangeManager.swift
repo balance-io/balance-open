@@ -28,7 +28,6 @@ protocol ExchangeManagerActions {
 }
 
 fileprivate typealias ExchangeManagerCallbackResult = (success: Bool, error: Error?, result: Any?)
-fileprivate typealias ExchangeManagerRefreshAction = (api: AbstractApi, accountAction: APIAction, transactionAction: APIAction?)
 
 class ExchangeManager {
     
@@ -59,6 +58,7 @@ class ExchangeManager {
     private lazy var bitfinexExchangeAPI = { return BitfinexAPI2(session: urlSession) }()
     private lazy var gdaxExchangeAPI = { return GDAXAPI2(session: urlSession) }()
     private lazy var btcExchangeAPI = { return BTCAPI2(session: urlSession) }()
+    private lazy var bittrexExchangeAPI = { return BITTREXAPI2(session: urlSession) }()
     
     init(urlSession: URLSession? = nil, repositoryService: RepositoryServiceProtocol? = nil, keychainService: KeychainServiceProtocol? = nil) {
         self.urlSession = urlSession ?? certValidatedSession
@@ -103,41 +103,23 @@ extension ExchangeManager: ExchangeManagerActions {
             return
         }
         
-        let refreshAction: ExchangeManagerRefreshAction?
-        
         switch institution.source {
         case .poloniex:
-            let accountAction = PoloniexApiAction(type: .accounts, credentials: credentials)
-            let transactionAction = PoloniexApiAction(type: .transactions(input: nil), credentials: credentials)
-            refreshAction = (poloniexExchangeAPI, accountAction, transactionAction)
+            refreshInstitution(institution: institution, credentials: credentials, exchangeAPI: poloniexExchangeAPI, apiAction: PoloniexApiAction.self, delayTransactions: true)
         case .kraken:
-            let accountAction = KrakenApiAction(type: .accounts, credentials: credentials)
-            let transactionAction = KrakenApiAction(type: .transactions(input: nil), credentials: credentials)
-            refreshAction = (krakenExchangeAPI, accountAction, transactionAction)
-        case .ethplorer:
-            let accountAction = EthplorerAPI2Action(type: .accounts, credentials: credentials)
-            let transactionAction = EthplorerAPI2Action(type: .transactions(input: 50), credentials: credentials)
-            refreshAction = (ethploreExchangeAPI, accountAction, transactionAction)
+            refreshInstitution(institution: institution, credentials: credentials, exchangeAPI: krakenExchangeAPI, apiAction: KrakenApiAction.self, delayTransactions: true)
         case .bitfinex:
-            let accountAction = BitfinexAPI2Action(type: .accounts, credentials: credentials)
-            let transactionAction = BitfinexAPI2Action(type: .transactions(input: nil), credentials: credentials)
-            refreshAction = (bitfinexExchangeAPI, accountAction, transactionAction)
+            refreshInstitution(institution: institution, credentials: credentials, exchangeAPI: bitfinexExchangeAPI, apiAction: BitfinexAPI2Action.self, delayTransactions: true)
+        case .bittrex:
+            refreshInstitution(institution: institution, credentials: credentials, exchangeAPI: bittrexExchangeAPI, apiAction: BITTREXAPI2Action.self, delayTransactions: true)
+        case .blockchain:
+            refreshInstitution(institution: institution, credentials: credentials, exchangeAPI: btcExchangeAPI, apiAction: BTCAPI2Action.self, delayTransactions: false)
+        case .ethplorer:
+            refreshInstitution(institution: institution, credentials: credentials, exchangeAPI: ethploreExchangeAPI, apiAction: EthplorerAPI2Action.self, delayTransactions: false)
         case .gdax, .coinbase:
             refreshAccountsForTransactions(with: institution, credentials: credentials)
             return
-        case .blockchain:
-            let accountAction = BTCAPI2Action.init(type: .accounts, credentials: credentials)
-            refreshAction = (btcExchangeAPI, accountAction, nil)
-        default:
-            log.debug("Error - Can't trigger action for api with source \(institution.source.description)")
-            return
         }
-        
-        guard let refreshAPIAction = refreshAction else {
-            return
-        }
-        
-        createRefreshOperations(with: refreshAPIAction, institution: institution, credentials: credentials)
     }
     
     func refreshAccessToken(for institution: Institution) {
@@ -176,24 +158,31 @@ extension ExchangeManager: ExchangeManagerActions {
 
 private extension ExchangeManager {
     
-    func createRefreshOperations(with refreshAPIAction: ExchangeManagerRefreshAction , institution: Institution, credentials: Credentials) {
+    func refreshInstitution<T: AbstractApi, U: APIAction>(institution: Institution, credentials: Credentials, exchangeAPI: T, apiAction: U.Type, delayTransactions: Bool) {
         let callBack: (Bool, Error?, Any?) -> Void = { (success, error, result) in
             let callbackResult = ExchangeManagerCallbackResult(success: success, error: error, result: result)
             self.processRefreshCallback(callbackResult, institution: institution, credentials: credentials)
         }
         
-        guard let refreshAccountsOperation = refreshAPIAction.api.fetchData(for: refreshAPIAction.accountAction, completion: callBack) else {
+        let accountAction = U(type: .accounts, credentials: credentials)
+        guard let accountOperation = exchangeAPI.fetchData(for: accountAction, completion: callBack) else { return }
+        
+        refreshQueue.addOperation(accountOperation)
+        
+        if !delayTransactions {
+            let transactionAction = U(type: .transactions(input: nil), credentials: credentials)
+            guard let transactionOperation = exchangeAPI.fetchData(for: transactionAction, completion: callBack) else { return }
+            
+            refreshQueue.addOperation(transactionOperation)
             return
         }
         
-        refreshQueue.addOperation(refreshAccountsOperation)
-        
-        guard let transactionAction = refreshAPIAction.transactionAction ,
-            let refreshTransationOperation = refreshAPIAction.api.fetchData(for: transactionAction, completion: callBack) else {
-            return
+        async(after: 0.5) {
+            let delayedTransactionAction = U(type: .transactions(input: nil), credentials: credentials)
+            guard let delayedTransactionOperation = exchangeAPI.fetchData(for: delayedTransactionAction, completion: callBack) else { return }
+            
+            self.refreshQueue.addOperation(delayedTransactionOperation)
         }
-        
-        refreshQueue.addOperation(refreshTransationOperation)
     }
     
     func loginAction(from source: Source, with credentials: Credentials, callback: ExchangeOperationCompletionHandler? = nil) -> Operation?  {
@@ -224,10 +213,11 @@ private extension ExchangeManager {
             let exchangeAction = BTCAPI2Action(type: .accounts, credentials: credentials)
             loginAction = (btcExchangeAPI, exchangeAction)
         case .coinbase:
-            let exchangeAction2 = CoinbaseAPI2Action(type: .accounts, credentials: credentials)
-            loginAction = (coinbaseExchangeAPI, exchangeAction2)
-        default:
-            return nil
+            let exchangeAction = CoinbaseAPI2Action(type: .accounts, credentials: credentials)
+            loginAction = (coinbaseExchangeAPI, exchangeAction)
+        case .bittrex:
+            let exchangeAction = BITTREXAPI2Action(type: .accounts, credentials: credentials)
+            loginAction = (bittrexExchangeAPI, exchangeAction)
         }
         
         guard let loginAPIAction = loginAction else {

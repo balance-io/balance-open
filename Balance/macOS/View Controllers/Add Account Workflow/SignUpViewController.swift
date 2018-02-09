@@ -549,7 +549,14 @@ class SignUpViewController: NSViewController {
     @objc fileprivate func connect() {
         
         //TEST HERE
-        exchangeManager.login(with: .coinbase, fields: [])
+        let loginFields: [Field] = [
+            Field(name: "", type: .key, value: ""),
+            Field(name: "", type: .secret, value: "")
+        ]
+        
+        let mockInstitution = Institution.init(institutionId: 1, source: .bittrex, sourceInstitutionId: "", name: "")
+        exchangeManager.refresh(institution: mockInstitution)
+        
 
 //        prepareViewsForSubmit(loadingText: "Connecting to \(apiInstitution.name)...")
 
