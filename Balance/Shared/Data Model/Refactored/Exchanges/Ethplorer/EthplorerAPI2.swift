@@ -40,12 +40,12 @@ class EthplorerAPI2: AbstractApi{
     }
     
     override func buildAccounts(from data: Data) -> Any {
-        guard let data = prepareAccountData(from: data),
-            let accounts = try? JSONDecoder().decode([EthplorerAccount2].self, from: data) else {
-            return ExchangeBaseError.other(message: "malformed data payload")
+        guard let rawData = prepareAccountData(from: data),
+            let accounts = try? JSONDecoder().decode([EthplorerAccount2].self, from: rawData) else {
+                return ExchangeBaseError.other(message: "malformed data payload")
         }
         
-        return accounts
+        return accountsWithEthtoken(accounts: accounts, data: data)
     }
     
     override func buildTransactions(from data: Data) -> Any {
@@ -60,19 +60,42 @@ class EthplorerAPI2: AbstractApi{
 private extension EthplorerAPI2 {
     func prepareAccountData(from data: Data) -> Data? {
         guard let dict = createDict(from: data) as? [String: AnyObject],
-            let ethDict = dict["ETH"], let address = dict["address"],
-            let tokens = dict["tokens"] as? [[String: AnyObject]] else {
+            let tokens = dict["tokens"] as? [[String: Any]] else {
                 return nil
         }
-
-        let flatDict = tokens.map { (tokenInfo) -> [String: AnyObject] in
-            var token = tokenInfo
-            token["ETH"] = ethDict
-            token["address"] = address
-            return token
+        
+        return try? JSONSerialization.data(withJSONObject: tokens, options: .prettyPrinted)
+    }
+    
+    // Creates the ETH Token manually because the info of the ETH was outside of tokens array
+    // that we passed to parse with codable, so we add the ETH info at the end
+    func accountsWithEthtoken(accounts: [ExchangeAccount], data: Data) -> Any {
+        guard let dict = createDict(from: data) as? [String: AnyObject],
+            let ethDict = dict["ETH"] as? [String: AnyObject],
+            let address = dict["address"] as? String,
+            let balance = ethDict["balance"] as? Double else {
+                return accounts
         }
         
-        return try? JSONSerialization.data(withJSONObject: flatDict, options: .prettyPrinted)
+        // Create tokenInfo dict for ETH token
+        let ethInfo = EthplorerToken(address: address,
+                                     name: Currency.eth.name,
+                                     symbol: Currency.eth.code,
+                                     decimals: Currency.eth.decimals,
+                                     price: EthplorerPrice(rate: 1,
+                                                           currency: .eth))
+        
+        // Create the ETH Account
+        let balanceInt = balance.integerValueWith(decimals: Currency.eth.decimals)
+        let ethAccount = EthplorerAccount2(balance: Double(balanceInt),
+                                           tokenInfo: ethInfo)
+        
+        // Make accounts array mutable
+        var accounts = accounts
+        accounts.insert(ethAccount, at: 0)
+        
+        // Return the full array with ETH token inside
+        return accounts
     }
 }
 

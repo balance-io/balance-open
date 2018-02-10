@@ -13,12 +13,15 @@ struct EthplorerAccount2: Codable {
     private var accountSource: Source = .ethplorer
     private let balance: Double
     private let tokenInfo: EthplorerToken
-    private let altCurrencyInfo: EthToken
-    
+
     enum CodingKeys: String, CodingKey {
         case balance
         case tokenInfo
-        case altCurrencyInfo = "ETH"
+    }
+    
+    init(balance: Double, tokenInfo: EthplorerToken) {
+        self.balance = balance
+        self.tokenInfo = tokenInfo
     }
 }
 
@@ -27,12 +30,14 @@ struct EthplorerToken: Codable {
     let name: String
     let symbol: String
     let decimals: Int
+    let price: EthplorerPrice
     
-    init(address: String = "", name: String = "", symbol: String = "", decimals: Int = 0) {
+    init(address: String = "", name: String = "", symbol: String = "", decimals: Int = 0, price: EthplorerPrice) {
         self.address = address
         self.name = name
         self.symbol = symbol
         self.decimals = decimals
+        self.price = price
     }
     
     enum CodingKeys: String, CodingKey {
@@ -40,6 +45,7 @@ struct EthplorerToken: Codable {
         case name
         case symbol
         case decimals
+        case price
     }
     
     init(from decoder: Decoder) throws {
@@ -49,26 +55,32 @@ struct EthplorerToken: Codable {
         let symbol: String = try container.decode(String.self, forKey: .symbol)
         let decimalsInt: Int? = try? container.decode(Int.self, forKey: .decimals)
         let decimalsString: String? = try? container.decode(String.self, forKey: .decimals)
-        
         let decimals = (decimalsInt ?? Int(decimalsString ?? "")) ?? 0
+        let price: EthplorerPrice? = try? container.decode(EthplorerPrice.self, forKey: .price)
         
-        self.init(address: address, name: name, symbol: symbol, decimals: decimals)
+        self.init(address: address, name: name, symbol: symbol, decimals: decimals, price: price ?? EthplorerPrice(rate: 0))
     }
 }
 
-struct EthToken: Codable {
-    let currency: Currency = .eth
-    let balance: Double
-    let totalIn: Double
-    let totalOut: Double
+struct EthplorerPrice: Codable {
+    let rate: Double
+    let currency: Currency
     
     enum CodingKeys: String, CodingKey {
-        case balance
-        case totalIn
-        case totalOut
+        case rate
+    }
+    
+    init(rate: Double, currency: Currency = .usd) {
+        self.rate = rate
+        self.currency = currency
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let rate = try container.decode(String.self, forKey: .rate)
+        self.init(rate: Double(rate) ?? 0)
     }
 }
-
 extension EthplorerAccount2: ExchangeAccount {
     var accountType: AccountType {
         return .wallet
@@ -105,7 +117,7 @@ extension EthplorerAccount2: ExchangeAccount {
     }
     
     var currentBalance: Int {
-        return balance.integerValueWith(decimals: tokenInfo.decimals)
+        return Int(balance.cientificToEightDecimals(decimals: tokenInfo.decimals))
     }
     
     var availableBalance: Int {
@@ -113,15 +125,16 @@ extension EthplorerAccount2: ExchangeAccount {
     }
     
     var altCurrencyCode: String? {
-        return altCurrencyInfo.currency.code
+        return tokenInfo.price.currency.code
     }
     
     var altCurrentBalance: Int? {
-        return altCurrencyInfo.balance.integerValueWith(decimals: tokenInfo.decimals)
+        let altBalance = tokenInfo.price.rate * Double(availableBalance)
+        return Int(altBalance.cientificToEightDecimals(decimals: tokenInfo.price.currency.decimals))
     }
     
     var altAvailableBalance: Int? {
-        return altCurrentBalance
+        return nil
     }
     
     
