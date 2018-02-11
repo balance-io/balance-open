@@ -117,7 +117,11 @@ extension EthplorerAccount2: ExchangeAccount {
     }
     
     var currentBalance: Int {
-        return Int(balance.cientificToEightDecimals(decimals: tokenInfo.decimals))
+        if tokenInfo.decimals > 8 {
+            return Int(balance.cientificToEightDecimals(decimals: tokenInfo.decimals))
+        } else {
+            return balance.integerValueWith(decimals: tokenInfo.decimals)
+        }
     }
     
     var availableBalance: Int {
@@ -130,7 +134,7 @@ extension EthplorerAccount2: ExchangeAccount {
     
     var altCurrentBalance: Int? {
         let altBalance = tokenInfo.price.rate * Double(availableBalance)
-        return Int(altBalance.cientificToEightDecimals(decimals: tokenInfo.price.currency.decimals))
+        return altBalance.integerValueWith(decimals: tokenInfo.price.currency.decimals)
     }
     
     var altAvailableBalance: Int? {

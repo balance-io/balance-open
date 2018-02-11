@@ -86,8 +86,8 @@ private extension EthplorerAPI2 {
                                                            currency: .eth))
         
         // Create the ETH Account
-        let balanceInt = balance.integerValueWith(decimals: Currency.eth.decimals)
-        let ethAccount = EthplorerAccount2(balance: Double(balanceInt),
+//        let balanceInt = balance.integerValueWith(decimals: Currency.eth.decimals)
+        let ethAccount = EthplorerAccount2(balance: balance,
                                            tokenInfo: ethInfo)
         
         // Make accounts array mutable
