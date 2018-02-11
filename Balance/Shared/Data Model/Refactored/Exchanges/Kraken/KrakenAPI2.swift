@@ -13,7 +13,7 @@ class KrakenAPI2: AbstractApi {
     override var requestDataFormat: ApiRequestDataFormat { return .json }
     override var requestEncoding: ApiRequestEncoding { return .hmac(hmacAlgorithm: CCHmacAlgorithm(kCCHmacAlgSHA512), digestLength: Int(CC_SHA512_DIGEST_LENGTH)) }
     override var encondingMessageType: ApiEncondingMessageType { return .base64 }
-    override var requestHandler: RequestHandler? { return self }
+    override var responseHandler: ResponseHandler? { return self }
     
     override func createRequest(for action: APIAction) -> URLRequest? {
         switch action.type {
@@ -135,7 +135,7 @@ private extension KrakenAPI2 {
 
 // MARK: Request Handler
 
-extension KrakenAPI2: RequestHandler {
+extension KrakenAPI2: ResponseHandler {
     func handleResponseData(for action: APIAction?, data: Data?, error: Error?, urlResponse: URLResponse?) -> Any {
         guard let action = action else {
             return ExchangeBaseError.other(message: "No action provided")

@@ -120,7 +120,7 @@ extension APIAction {
     
 }
 
-public protocol RequestHandler: class {    
+public protocol ResponseHandler: class {    
     func handleResponseData(for action: APIAction?, data: Data?, error: Error?, urlResponse: URLResponse?) -> Any
 }
 

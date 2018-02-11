@@ -13,7 +13,7 @@ class PoloniexAPI2: AbstractApi {
     override var requestMethod: ApiRequestMethod { return .post }
     override var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
     override var requestEncoding: ApiRequestEncoding { return .simpleHmacSha512 }
-    override var requestHandler: RequestHandler? { return self }
+    override var responseHandler: ResponseHandler? { return self }
     
     //MARK: Builder methods for Request
     override func createRequest(for action: APIAction) -> URLRequest? {
@@ -87,7 +87,7 @@ class PoloniexAPI2: AbstractApi {
     
 }
 
-extension PoloniexAPI2: RequestHandler {
+extension PoloniexAPI2: ResponseHandler {
     func handleResponseData(for action: APIAction?, data: Data?, error: Error?, urlResponse: URLResponse?) -> Any {
         guard let action = action else {
             return ExchangeBaseError.other(message: "No action provided")

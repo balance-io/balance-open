@@ -24,10 +24,12 @@ class BITTREXAPI2: AbstractApi {
             //TODO: insert response handler(parser) into the operation
             return ExchangeOperation(with: self, request: singleRequest, resultBlock: completion)
         case .transactions(_):
-            
             let transactionSyncer = ExchangeTransactionDataSyncer()
-            //TODO: insert response handler(parser) into the operation
-            return ExchangeTransactionOperation(action: action, dataSyncer: transactionSyncer, requestBuilder: self)
+            return ExchangeTransactionOperation(action: action,
+                                                dataSyncer: transactionSyncer,
+                                                requestBuilder: self,
+                                                responseHandler: self,
+                                                resultBlock: completion)
         }
     }
     
@@ -52,6 +54,10 @@ class BITTREXAPI2: AbstractApi {
 }
 
 extension BITTREXAPI2: ExchangeTransactionRequest {
+    
+    func createTransactionAction(from action: APIAction) -> APIAction {
+        return BITTREXAPI2Action(type: action.type, credentials: action.credentials)
+    }
     
     func createRequest(with action: APIAction, for transactionType: ExchangeTransactionType) -> URLRequest? {
         guard let bittrexAction = action as? BITTREXAPI2Action,
@@ -83,7 +89,7 @@ extension BITTREXAPI2: ExchangeTransactionRequest {
 }
 
 //TODO: Need implement
-extension BITTREXAPI2: RequestHandler {
+extension BITTREXAPI2: ResponseHandler {
     
     func handleResponseData(for action: APIAction?, data: Data?, error: Error?, urlResponse: URLResponse?) -> Any {
         return "Mock Data"

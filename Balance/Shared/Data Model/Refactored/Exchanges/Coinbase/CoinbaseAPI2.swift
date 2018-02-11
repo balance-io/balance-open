@@ -9,7 +9,7 @@
 import Foundation
 
 class CoinbaseAPI2: AbstractApi {
-    override var requestHandler: RequestHandler? { return self }
+    override var responseHandler: ResponseHandler? { return self }
     private var lastState: String? = nil
     
     override func prepareForAutentication() {
@@ -105,7 +105,7 @@ class CoinbaseAPI2: AbstractApi {
 
 // MARK: Operation RequestHandler
 
-extension CoinbaseAPI2: RequestHandler {
+extension CoinbaseAPI2: ResponseHandler {
     func handleResponseData(for action: APIAction?, data: Data?, error: Error?, urlResponse: URLResponse?) -> Any {
         guard let action = action else {
             let autentication = getAutenticationData(from: data)

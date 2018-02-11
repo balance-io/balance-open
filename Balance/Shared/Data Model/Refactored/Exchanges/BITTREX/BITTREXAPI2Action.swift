@@ -13,6 +13,7 @@ struct BITTREXAPI2Action: APIAction {
     let type: ApiRequestType
     let credentials: Credentials
     let internalNonce: Int64 = Int64(Date().timeIntervalSince1970 * 10000)
+    var transactionType: ExchangeTransactionType?
     
     init(type: ApiRequestType, credentials: Credentials) {
         self.type = type
@@ -53,6 +54,10 @@ extension BITTREXAPI2Action {
         return internalNonce
     }
     
+    private var baseURL: String {
+        return host + apiVersion + methodType
+    }
+    
 }
 
 private extension BITTREXAPI2Action {
@@ -79,10 +84,6 @@ private extension BITTREXAPI2Action {
 
 //MARK: Transaction variables
 extension BITTREXAPI2Action {
-    
-    private var baseURL: String {
-        return host + apiVersion + methodType
-    }
 
     private var validQuery: String {
         guard let validQuery = self.query else {

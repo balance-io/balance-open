@@ -9,11 +9,12 @@
 import Foundation
 
 class ExchangeOperation: Operation, OperationResult {
-    var handler: RequestHandler
-    var action: APIAction?
-    var session: URLSession
-    var request: URLRequest
-    var resultBlock: ExchangeOperationCompletionHandler
+    
+    let handler: ResponseHandler
+    let action: APIAction?
+    let session: URLSession
+    let request: URLRequest
+    let resultBlock: ExchangeOperationCompletionHandler
     
     var operatorHasFinished: Bool = false {
         didSet{
@@ -45,7 +46,7 @@ class ExchangeOperation: Operation, OperationResult {
         return false
     }
     
-    init(with handler: RequestHandler, action: APIAction? = nil, session: URLSession? = nil, request: URLRequest, resultBlock: @escaping ExchangeOperationCompletionHandler) {
+    init(with handler: ResponseHandler, action: APIAction? = nil, session: URLSession? = nil, request: URLRequest, resultBlock: @escaping ExchangeOperationCompletionHandler) {
         self.handler = handler
         self.action = action
         self.session = session ?? certValidatedSession

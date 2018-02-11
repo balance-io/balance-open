@@ -13,7 +13,7 @@ class BinanceAPI: AbstractApi {
     override var requestMethod: ApiRequestMethod { return .get }
     override var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
     override var requestEncoding: ApiRequestEncoding { return .simpleHmacSha256 }
-    override var requestHandler: RequestHandler? { return self }
+    override var responseHandler: ResponseHandler? { return self }
     
     override func createMessage(for action: APIAction) -> String? {
         return action.query
@@ -21,7 +21,7 @@ class BinanceAPI: AbstractApi {
     
     override func createRequest(for action: APIAction) -> URLRequest? {
         switch action.type {
-        case .accounts, .transactions(_):
+        case .accounts:
             guard let urlWithoutSignature = action.url,
                 let messageSigned = generateMessageSigned(for: action),
                 let url = urlWithoutSignature.addQueryParams(url: urlWithoutSignature, newParams: ["signature": messageSigned]) else {
@@ -29,23 +29,43 @@ class BinanceAPI: AbstractApi {
             }
             
             var request = URLRequest(url: url)
+            request.httpMethod = requestMethod.rawValue
             request.timeoutInterval = 5000
-            request.httpBody = messageSigned.data(using: .utf8)
             request.setValue(action.credentials.apiKey, forHTTPHeaderField: "X-MBX-APIKEY")
             
             return request
+        case .transactions(_):
+            return nil
         }
     }
     
 }
 
-extension BinanceAPI: RequestHandler {
+extension BinanceAPI: ResponseHandler {
     
     func handleResponseData(for action: APIAction?, data: Data?, error: Error?, urlResponse: URLResponse?) -> Any {
         print(String(data: data ?? Data.init(), encoding: .utf8))
         print(error)
         
         return "Mock response"
+    }
+    
+}
+
+extension BinanceAPI: ExchangeTransactionRequest {
+    
+    func createTransactionAction(from action: APIAction) -> APIAction {
+        return BinanceAPIAction(type: action.type, credentials: action.credentials)
+    }
+    
+    func createRequest(with action: APIAction, for transactionType: ExchangeTransactionType) -> URLRequest? {
+        guard let binanceAction = action as? BinanceAPIAction,
+            case .transactions(_) = binanceAction.type else {
+            return nil
+        }
+
+        
+        return nil
     }
     
 }

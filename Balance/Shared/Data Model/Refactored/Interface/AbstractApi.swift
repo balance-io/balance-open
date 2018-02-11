@@ -15,7 +15,7 @@ open class AbstractApi: ExchangeApi2 {
     open var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
     open var requestEncoding: ApiRequestEncoding { return .none }
     open var encondingMessageType: ApiEncondingMessageType { return .none }
-    open var requestHandler: RequestHandler? { return nil }
+    open var responseHandler: ResponseHandler? { return nil }
     private var session: URLSession
     
     // certValidatedSession should always be passed here when using in the app except for tests
@@ -44,7 +44,7 @@ open class AbstractApi: ExchangeApi2 {
     }
     
     public func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation? {
-        guard let request = createRequest(for: action), let handler = requestHandler else {
+        guard let request = createRequest(for: action), let handler = responseHandler else {
             completion(false, nil, nil)
             return nil
         }
