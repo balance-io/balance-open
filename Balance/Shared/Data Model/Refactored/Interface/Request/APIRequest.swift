@@ -13,6 +13,15 @@ public enum ApiRequestType {
     case transactions(input: Any?)
 }
 
+public protocol ExchangeTransactionDataDelegate: class {
+    func process(deposits: Any, withdrawals: Any)
+}
+
+public enum ExchangeTransactionType {
+    case deposit
+    case withdrawal
+}
+
 extension ApiRequestType: Equatable {
     
     public static func ==(left: ApiRequestType, right: ApiRequestType) -> Bool {

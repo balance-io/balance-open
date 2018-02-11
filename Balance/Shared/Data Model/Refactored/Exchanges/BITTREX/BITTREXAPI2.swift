@@ -25,9 +25,9 @@ class BITTREXAPI2: AbstractApi {
             return ExchangeOperation(with: self, request: singleRequest, resultBlock: completion)
         case .transactions(_):
             
-            let transactionSyncer = BITTREXAPI2SyncerTransaction()
+            let transactionSyncer = ExchangeTransactionDataSyncer()
             //TODO: insert response handler(parser) into the operation
-            return BITTREXAPI2TransactionOperation(action: action, dataSyncer: transactionSyncer, requestBuilder: self)
+            return ExchangeTransactionOperation(action: action, dataSyncer: transactionSyncer, requestBuilder: self)
         }
     }
     
@@ -51,21 +51,23 @@ class BITTREXAPI2: AbstractApi {
     
 }
 
-extension BITTREXAPI2: BITTREXAPI2TransactionRequest {
+extension BITTREXAPI2: ExchangeTransactionRequest {
     
-    func createRequest(action: APIAction, transactionType: BITTREXAPI2TransactionType) -> URLRequest? {
+    func createRequest(with action: APIAction, for transactionType: ExchangeTransactionType) -> URLRequest? {
         guard let bittrexAction = action as? BITTREXAPI2Action,
             case .transactions(_) = bittrexAction.type else {
             return nil
         }
         
-        let url = transactionType == .deposit ? bittrexAction.depositTransactionURL : bittrexAction.withdrawalTransactionURL
+        let url = transactionType == .deposit ?
+            bittrexAction.depositTransactionURL : bittrexAction.withdrawalTransactionURL
         
         guard let transactionURL = url else {
             return nil
         }
         
-        let messageSigned = CryptoAlgorithm.sha512.hmac(body: transactionURL.absoluteString, key: action.credentials.secretKey)
+        let messageSigned = CryptoAlgorithm.sha512.hmac(body: transactionURL.absoluteString,
+                                                        key: action.credentials.secretKey)
     
         return createRequest(url: transactionURL, credentials: action.credentials, messageSigned: messageSigned)
     }
