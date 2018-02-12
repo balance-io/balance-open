@@ -56,14 +56,7 @@ class TransactionContextMenu: NSObject, NSMenuDelegate {
     @objc fileprivate func copyTransactionToClipboard() {
         let name = transaction.displayName
         let amount = amountToString(amount: transaction.amount, currency: Currency.rawValue(transaction.currency), showNegative: false, showCodeAfterValue: true)
-        var altAmount: String? = nil
-        if let displayAltAmount = transaction.displayAltAmount {
-            altAmount = amountToString(amount: displayAltAmount, currency: defaults.masterCurrency, showNegative: true, showCodeAfterValue: true)
-        }
-        var finalString = "\(name) \(amount)"
-        if let altAmount = altAmount {
-            finalString += " (\(altAmount))"
-        }
+        let finalString = "\(name) \(amount)"
         
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString(finalString, forType: .string)
