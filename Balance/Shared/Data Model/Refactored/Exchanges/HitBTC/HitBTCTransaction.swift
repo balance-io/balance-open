@@ -44,7 +44,7 @@ fileprivate let dateFormatter: DateFormatter = {
 }()
 
 
-struct HitBTCTransaction {
+struct HitBTCTransaction: Codable {
     
     private let identifier: String
     private let transactionAmount: Double

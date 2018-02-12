@@ -31,6 +31,25 @@ open class AbstractApi: ExchangeApi2, ResponseHandler {
         return ExchangeOperation(with: self, action: action, session: session, request: request, resultBlock: completion)
     }
     
+    open func processBaseErrors(data: Data?, error: Error?, response: URLResponse?) -> Error? {
+        if let error = error as NSError?, error.code == -1009, error.code == -1001 {
+            return ExchangeBaseError.internetConnection
+        }
+        
+        guard let response = response as? HTTPURLResponse else {
+            return ExchangeBaseError.other(message: "response malformed")
+        }
+        
+        switch response.statusCode {
+        case 400...499:
+            return ExchangeBaseError.invalidCredentials(statusCode: response.statusCode)
+        case 500...599:
+            return ExchangeBaseError.invalidServer(statusCode: response.statusCode)
+        default:
+            return nil
+        }
+    }
+    
     open func createRequest(for action: APIAction) -> URLRequest? {
         fatalError("Must override")
     }
@@ -137,7 +156,7 @@ private extension AbstractApi {
     // Look for api specific errors (some use http status codes, some use info in the data) and return either
     // a standardized error or nil if no error
     func processErrors(response: URLResponse?, data: Data?, error: Error?) -> Error?  {
-        if let baseError = processBaseErrors(response: response, error: error) {
+        if let baseError = processBaseErrors(data: data, error: error, response: response) {
             return baseError
         }
         

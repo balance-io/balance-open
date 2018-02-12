@@ -52,6 +52,31 @@ class HitBTCAPI: AbstractApi {
         }
     }
     
+    override func processBaseErrors(data: Data?, error: Error?, response: URLResponse?) -> Error? {
+        guard let data = data,
+            let response = response as? HTTPURLResponse,
+            let dict = createDict(from: data) else {
+            return nil
+        }
+        
+        guard let errorDict = dict["error"] as? [String: Any],
+            let errorCode = errorDict["code"] as? Int else {
+            return nil
+        }
+        let statusCode = response.statusCode
+        switch errorCode {
+        case 1001:
+            return ExchangeBaseError.invalidCredentials(statusCode: response.statusCode)
+        case 1003:
+            return ExchangeBaseError.scopeRestricted
+        default:
+            let errorMessage = errorDict["message"] as? String ?? ""
+            return statusCode > 500 ? ExchangeBaseError.invalidServer(statusCode: statusCode) :
+            ExchangeBaseError.other(message: errorMessage)
+        }
+        
+    }
+    
     override func processApiErrors(from data: Data) -> Error? {
         return nil
     }

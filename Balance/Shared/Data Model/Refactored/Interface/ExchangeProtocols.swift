@@ -15,24 +15,6 @@ public protocol ExchangeApi2 {
 }
 
 extension ExchangeApi2 {
-    func processBaseErrors(response: URLResponse?, error: Error?) -> Error? {
-        if let error = error as NSError?, error.code == -1009, error.code == -1001 {
-            return ExchangeBaseError.internetConnection
-        }
-        
-        guard let response = response as? HTTPURLResponse else {
-            return ExchangeBaseError.other(message: "response malformed")
-        }
-
-        switch response.statusCode {
-        case 400...499:
-            return ExchangeBaseError.invalidCredentials(statusCode: response.statusCode)
-        case 500...599:
-            return ExchangeBaseError.invalidServer(statusCode: response.statusCode)
-        default:
-            return nil
-        }
-    }
     
     func createDict(from data: Data?) -> [AnyHashable: Any]? {
         guard let data = data,

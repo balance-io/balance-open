@@ -10,7 +10,7 @@ import Foundation
 
 struct HitBTCAccount: Codable {
     
-    private let balance: Double
+    private let balance: String
     private var currency: Currency {
         return Currency.rawValue(currencyCode)
     }
@@ -41,6 +41,10 @@ extension HitBTCAccount: ExchangeAccount {
     }
     
     var currentBalance: Int {
+        guard let balance = Double(balance) else {
+            return 0
+        }
+        
         return balance.integerFixedCryptoDecimals()
     }
     

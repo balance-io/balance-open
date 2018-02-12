@@ -100,8 +100,17 @@ extension ExchangeManager: ExchangeManagerActions {
     }
     
     func refresh(institution: Institution) {
-        guard let credentials = keychainService.fetchCredentials(with: "\(institution.institutionId)", source: institution.source, name: institution.name) else {
-            log.debug("Error - Can't refresh \(institution.source.description) institution with id \(institution.institutionId), becuase credentials weren't fetched")
+//        guard let credentials = keychainService.fetchCredentials(with: "\(institution.institutionId)", source: institution.source, name: institution.name) else {
+//            log.debug("Error - Can't refresh \(institution.source.description) institution with id \(institution.institutionId), becuase credentials weren't fetched")
+//            return
+//        }
+        
+        let loginFields: [Field] = [
+            Field(name: "", type: .key, value: ""),
+            Field(name: "", type: .secret, value: "")
+        ]
+        
+        guard let credentials = BalanceCredentials.credentials(from: loginFields, source: institution.source) else {
             return
         }
 
@@ -310,11 +319,11 @@ private extension ExchangeManager {
         
         guard let institution = institution,
             case .invalidCredentials(_) = baseError else {
-            log.debug("Error - Can't refresh data with error \(baseError.localizedDescription)")
+            log.debug("Error - Can't refresh data with error, \(baseError.localizedDescription)")
             return true
         }
         
-        log.debug("Error - Can't refresh data with invalid certificate \(baseError.localizedDescription)")
+        log.debug("Error - Can't refresh data with error, \(baseError.localizedDescription)")
         institution.passwordInvalid = true
         institution.replace()
         return true
