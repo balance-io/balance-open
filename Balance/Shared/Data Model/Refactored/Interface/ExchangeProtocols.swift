@@ -42,6 +42,15 @@ extension ExchangeApi2 {
         
         return rawData as? [AnyHashable: Any]
     }
+    
+    func createArray(from data: Data?) -> [Any]? {
+        guard let data = data,
+            let rawData = try? JSONSerialization.jsonObject(with: data) else {
+                return nil
+        }
+        
+        return rawData as? [Any]
+    }
 }
 
 protocol OperationResult {
