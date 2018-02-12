@@ -14,7 +14,6 @@ class EthplorerAPI2: AbstractApi{
     override var requestDataFormat: ApiRequestDataFormat { return .json }
     override var requestEncoding: ApiRequestEncoding { return .none }
     override var encondingMessageType: ApiEncondingMessageType { return .none }
-    override var requestHandler: RequestHandler? { return self }
     
     override func createRequest(for action: APIAction) -> URLRequest? {
         switch action.type {
@@ -97,20 +96,4 @@ private extension EthplorerAPI2 {
         // Return the full array with ETH token inside
         return accounts
     }
-}
-
-extension EthplorerAPI2: RequestHandler {
-    
-    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any {
-        guard let action = action else {
-            return ExchangeBaseError.other(message: "No action provided")
-        }
-        
-        if let error = processErrors(response: ulrResponse, data: data, error: error) {
-            return error
-        }
-        
-        return processData(requestType: action.type, data: data)
-    }
-
 }

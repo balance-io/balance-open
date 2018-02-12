@@ -9,14 +9,13 @@
 import Foundation
 
 // This class does all of the heavy lifting: i.e. URLSession, preparing requests, etc
-open class AbstractApi: ExchangeApi2 {
+open class AbstractApi: ExchangeApi2, ResponseHandler {
 
     open var requestMethod: ApiRequestMethod { return .get }
     open var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
     open var requestEncoding: ApiRequestEncoding { return .none }
     open var encondingMessageType: ApiEncondingMessageType { return .none }
-    open var requestHandler: RequestHandler? { return nil }
-
+    open var shouldHandleNoActionResponse: Bool { return false }
     private var session: URLSession
     
     // certValidatedSession should always be passed here when using in the app except for tests
@@ -25,11 +24,11 @@ open class AbstractApi: ExchangeApi2 {
     }
     
     public func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation? {
-        guard let request = createRequest(for: action), let handler = requestHandler else {
+        guard let request = createRequest(for: action) else {
             completion(false, nil, nil)
             return nil
         }
-        return ExchangeOperation(with: handler, action: action, session: session, request: request, resultBlock: completion)
+        return ExchangeOperation(with: self, action: action, session: session, request: request, resultBlock: completion)
     }
     
     open func createRequest(for action: APIAction) -> URLRequest? {
@@ -51,6 +50,11 @@ open class AbstractApi: ExchangeApi2 {
     open func buildTransactions(from data: Data) -> Any {
         fatalError("Must override")
     }
+    
+    open func buildDataFromNoAction(_ data: Data?) -> Any {
+        fatalError("Must override")
+    }
+    
     //mark: Needed for OAUTH
     open func prepareForAutentication() {
         fatalError("Must override")
@@ -64,6 +68,22 @@ open class AbstractApi: ExchangeApi2 {
 
 // MARK: Helper functions
 extension AbstractApi {
+    
+    public func handleResponseData(for action: APIAction?, data: Data?, error: Error?, urlResponse ulrResponse: URLResponse?) -> Any {
+        guard let action = action else {
+            let noActionData = shouldHandleNoActionResponse ? buildDataFromNoAction(data) :
+                ExchangeBaseError.other(message: "No action provided")
+            
+            return noActionData
+        }
+        
+        if let error = processErrors(response: ulrResponse, data: data, error: error) {
+            return error
+        }
+        
+        return processData(requestType: action.type, data: data)
+    }
+    
     func generateMessageSigned(from message: Data, secretKeyEncoded: Data) -> String? {
         guard let dataSigned = createSignatureData(with: message, secretKeyData: secretKeyEncoded) else {
             return nil
@@ -89,12 +109,52 @@ extension AbstractApi {
         switch requestEncoding {
         case .simpleHmacSha512:
             return CryptoAlgorithm.sha512.hmac(body: message, key: action.credentials.secretKey)
+        case .simpleHmacSha256:
+            return CryptoAlgorithm.sha256.hmac(body: message, key: action.credentials.secretKey)
         default:
             return nil
         }
     }
     
-    private func createSignatureData(with message: Data, secretKeyData: Data) -> Data? {
+    func encodeCredentialsWithBaseAuthentication(with action: APIAction) -> BasicAuthenticationCredentialsResult? {
+        guard case .baseAuthentication = requestEncoding else {
+            print("Invalid request encoding type")
+            return nil
+        }
+        
+        guard let credentialsData = "\(action.credentials.apiKey):\(action.credentials.secretKey)".data(using: .utf8) else {
+            print("Credentials can't be tranformed to data")
+            return nil
+        }
+        
+        return ("Authorization" ,"Basic \(credentialsData.base64EncodedString())")
+    }
+    
+}
+
+private extension AbstractApi {
+    
+    // Look for api specific errors (some use http status codes, some use info in the data) and return either
+    // a standardized error or nil if no error
+    func processErrors(response: URLResponse?, data: Data?, error: Error?) -> Error?  {
+        if let baseError = processBaseErrors(response: response, error: error) {
+            return baseError
+        }
+        
+        guard let data = data else {
+            return ExchangeBaseError.other(message: "no data to manage")
+        }
+        
+        return processApiErrors(from: data)
+    }
+    
+    // At this point we know there are no errors, so parse the data and return the exchagne data model
+    func processData(requestType: ApiRequestType, data: Data?) -> Any {
+        guard let data = data else { return [] }
+        return requestType == .accounts ? buildAccounts(from: data) : buildTransactions(from: data)
+    }
+    
+    func createSignatureData(with message: Data, secretKeyData: Data) -> Data? {
         // Create the signature
         guard case let .hmac(algorithm, digestLength) = requestEncoding else {
             return nil
@@ -115,24 +175,4 @@ extension AbstractApi {
         return Data(bytes: signature, count: signatureCapacity)
     }
     
-    // Look for api specific errors (some use http status codes, some use info in the data) and return either
-    // a standardized error or nil if no error
-    func processErrors(response: URLResponse?, data: Data?, error: Error?) -> Error?  {
-        if let baseError = processBaseErrors(response: response, error: error) {
-            return baseError
-        }
-        
-        guard let data = data else {
-            return ExchangeBaseError.other(message: "no data to manage")
-        }
-        
-        return processApiErrors(from: data)
-    }
-    
-    // At this point we know there are no errors, so parse the data and return the exchagne data model
-    open func processData(requestType: ApiRequestType, data: Data?) -> Any {
-        guard let data = data else { return [] }
-        return requestType == .accounts ? buildAccounts(from: data) : buildTransactions(from: data)
-    }
-
 }

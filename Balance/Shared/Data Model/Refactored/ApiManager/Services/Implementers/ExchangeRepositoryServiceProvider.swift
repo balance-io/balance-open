@@ -18,7 +18,7 @@ class ExchangeRepositoryServiceProvider: RepositoryServiceProtocol {
         let accountsUpdated = updateAccounts(accounts, with: institution)
         
         switch source {
-        case .kraken, .gdax, .bitfinex, .blockchain, .bittrex:
+        case .kraken, .gdax, .bitfinex, .blockchain, .bittrex, .binance, .hitbtc:
             saveExchangeAccounts(accountsUpdated)
         case .poloniex:
             savePoloniexAccounts(accountsUpdated, institution: institution)
@@ -155,7 +155,6 @@ private extension ExchangeRepositoryServiceProvider {
         return accounts.map({ (account) -> ExchangeAccount in
             var account = account
             account.institutionId = institution.institutionId
-            account.source = institution.source
             
             return account
         })

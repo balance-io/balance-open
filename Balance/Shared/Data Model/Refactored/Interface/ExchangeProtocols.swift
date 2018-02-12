@@ -55,11 +55,11 @@ extension ExchangeApi2 {
 
 protocol OperationResult {
     var resultBlock: ExchangeOperationCompletionHandler { get }
-    var handler: RequestHandler { get }
+    var handler: ResponseHandler { get }
 }
 
 extension OperationResult {
     func handleResponse(for action: APIAction?, data: Data?, response: URLResponse?, error: Error?) -> Any {
-        return handler.handleResponseData(for: action, data: data, error: error, ulrResponse: response)
+        return handler.handleResponseData(for: action, data: data, error: error, urlResponse: response)
     }
 }

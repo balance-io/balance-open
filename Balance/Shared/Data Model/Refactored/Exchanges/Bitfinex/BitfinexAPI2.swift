@@ -14,7 +14,6 @@ class BitfinexAPI2: AbstractApi {
     override var requestDataFormat: ApiRequestDataFormat { return .json }
     override var requestEncoding: ApiRequestEncoding { return .hmac(hmacAlgorithm: CCHmacAlgorithm(kCCHmacAlgSHA384), digestLength: Int(CC_SHA384_DIGEST_LENGTH)) }
     override var encondingMessageType: ApiEncondingMessageType { return .concatenate(format: "%02x") }
-    override var requestHandler: RequestHandler? { return self }
     
     override func createRequest(for action: APIAction) -> URLRequest? {
         switch action.type {
@@ -130,18 +129,4 @@ private extension BitfinexAPI2 {
         return BitfinexTransaction2(currency: currency, address: address, status: status, amount: amount, createdAt: createdAt, updatedAt: updatedAt)
     }
     
-}
-
-extension BitfinexAPI2: RequestHandler {
-    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any {
-        guard let action = action else {
-            return ExchangeBaseError.other(message: "No action provided")
-        }
-        
-        if let error = processErrors(response: ulrResponse, data: data, error: error) {
-            return error
-        }
-        
-        return processData(requestType: action.type, data: data)
-    }
 }

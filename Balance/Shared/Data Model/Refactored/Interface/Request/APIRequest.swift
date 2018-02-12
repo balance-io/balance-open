@@ -13,6 +13,15 @@ public enum ApiRequestType {
     case transactions(input: Any?)
 }
 
+public protocol ExchangeTransactionDataDelegate: class {
+    func process(deposits: Any, withdrawals: Any)
+}
+
+public enum ExchangeTransactionType: String {
+    case deposit
+    case withdrawal
+}
+
 extension ApiRequestType: Equatable {
     
     public static func ==(left: ApiRequestType, right: ApiRequestType) -> Bool {
@@ -66,7 +75,9 @@ public enum ApiRequestDataFormat {
 
 public enum ApiRequestEncoding {
     case none
+    case baseAuthentication
     case simpleHmacSha512
+    case simpleHmacSha256
     case hmac(hmacAlgorithm: CCHmacAlgorithm, digestLength: Int)
 }
 
@@ -80,6 +91,8 @@ public enum ServerEnvironment {
     case sandbox
     case production    
 }
+
+public typealias BasicAuthenticationCredentialsResult = (header: String, value: String)
 
 public protocol APIAction {
     var host: String { get }
@@ -110,8 +123,8 @@ extension APIAction {
     
 }
 
-public protocol RequestHandler: class {    
-    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any
+public protocol ResponseHandler: class {    
+    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, urlResponse: URLResponse?) -> Any
 }
 
 extension APIAction {
