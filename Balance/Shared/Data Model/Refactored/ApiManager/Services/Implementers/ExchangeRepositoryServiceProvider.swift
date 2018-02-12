@@ -155,7 +155,6 @@ private extension ExchangeRepositoryServiceProvider {
         return accounts.map({ (account) -> ExchangeAccount in
             var account = account
             account.institutionId = institution.institutionId
-            account.source = institution.source
             
             return account
         })

@@ -13,7 +13,6 @@ class HitBTCAPI: AbstractApi {
     override var requestMethod: ApiRequestMethod { return .get }
     override var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
     override var requestEncoding: ApiRequestEncoding { return .baseAuthentication }
-    override var responseHandler: ResponseHandler? { return self }
     
     override func createRequest(for action: APIAction) -> URLRequest? {
         switch action.type {
@@ -31,15 +30,30 @@ class HitBTCAPI: AbstractApi {
         }
     }
     
-}
-
-extension HitBTCAPI: ResponseHandler {
+    override func buildAccounts(from data: Data) -> Any {
+        do {
+            let accounts = try JSONDecoder().decode([HitBTCAccount].self, from: data)
+            
+            return accounts
+        } catch {
+            print("Accounts from hitbtc can not be parsed to an object\n\(error)")
+            return []
+        }
+    }
     
-    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, urlResponse: URLResponse?) -> Any {
-        print(String(data: data ?? Data.init(), encoding: .utf8))
-        print(error)
-        
-        return "Mock response"
+    override func buildTransactions(from data: Data) -> Any {
+        do {
+            let transactions = try JSONDecoder().decode([HitBTCTransaction].self, from: data)
+            
+            return transactions
+        } catch {
+            print("Transactions from hitbtc can not be parsed to an object\n\(error)")
+            return []
+        }
+    }
+    
+    override func processApiErrors(from data: Data) -> Error? {
+        return nil
     }
     
 }

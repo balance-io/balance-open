@@ -9,7 +9,6 @@
 import Foundation
 
 class CoinbaseAPI2: AbstractApi {
-    override var responseHandler: ResponseHandler? { return self }
     private var lastState: String? = nil
     
     override func prepareForAutentication() {
@@ -100,23 +99,6 @@ class CoinbaseAPI2: AbstractApi {
         request.httpBody = parameters.data(using: .utf8)
         
         return ExchangeOperation(with: self, request: request, resultBlock: completion)
-    }
-}
-
-// MARK: Operation RequestHandler
-
-extension CoinbaseAPI2: ResponseHandler {
-    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, urlResponse: URLResponse?) -> Any {
-        guard let action = action else {
-            let autentication = getAutenticationData(from: data)
-            return autentication ?? ExchangeBaseError.other(message: "Data retrieved from autentication is not valid")
-        }
-        
-        if let error = processErrors(response: urlResponse, data: data, error: error) {
-            return error
-        }
-        
-        return processData(requestType: action.type, data: data)
     }
 }
 

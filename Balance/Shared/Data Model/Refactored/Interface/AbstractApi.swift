@@ -9,46 +9,25 @@
 import Foundation
 
 // This class does all of the heavy lifting: i.e. URLSession, preparing requests, etc
-open class AbstractApi: ExchangeApi2 {
+open class AbstractApi: ExchangeApi2, ResponseHandler {
 
     open var requestMethod: ApiRequestMethod { return .get }
     open var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
     open var requestEncoding: ApiRequestEncoding { return .none }
     open var encondingMessageType: ApiEncondingMessageType { return .none }
-    open var responseHandler: ResponseHandler? { return nil }
     private var session: URLSession
     
     // certValidatedSession should always be passed here when using in the app except for tests
     public init(session: URLSession) {
         self.session = session
     }
-
-    // Look for api specific errors (some use http status codes, some use info in the data) and return either
-    // a standardized error or nil if no error
-    func processErrors(response: URLResponse?, data: Data?, error: Error?) -> Error?  {
-        if let baseError = processBaseErrors(response: response, error: error) {
-            return baseError
-        }
-        
-        guard let data = data else {
-            return ExchangeBaseError.other(message: "no data to manage")
-        }
-        
-        return processApiErrors(from: data)
-    }
-    
-    // At this point we know there are no errors, so parse the data and return the exchagne data model
-    open func processData(requestType: ApiRequestType, data: Data?) -> Any {
-        guard let data = data else { return [] }
-        return requestType == .accounts ? buildAccounts(from: data) : buildTransactions(from: data)
-    }
     
     public func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation? {
-        guard let request = createRequest(for: action), let handler = responseHandler else {
+        guard let request = createRequest(for: action) else {
             completion(false, nil, nil)
             return nil
         }
-        return ExchangeOperation(with: handler, action: action, session: session, request: request, resultBlock: completion)
+        return ExchangeOperation(with: self, action: action, session: session, request: request, resultBlock: completion)
     }
     
     open func createRequest(for action: APIAction) -> URLRequest? {
@@ -83,6 +62,19 @@ open class AbstractApi: ExchangeApi2 {
 
 // MARK: Helper functions
 extension AbstractApi {
+    
+    public func handleResponseData(for action: APIAction?, data: Data?, error: Error?, urlResponse ulrResponse: URLResponse?) -> Any {
+        guard let action = action else {
+            return ExchangeBaseError.other(message: "No action provided")
+        }
+        
+        if let error = processErrors(response: ulrResponse, data: data, error: error) {
+            return error
+        }
+        
+        return processData(requestType: action.type, data: data)
+    }
+    
     func generateMessageSigned(from message: Data, secretKeyEncoded: Data) -> String? {
         guard let dataSigned = createSignatureData(with: message, secretKeyData: secretKeyEncoded) else {
             return nil
@@ -129,6 +121,30 @@ extension AbstractApi {
         return ("Authorization" ,"Basic \(credentialsData.base64EncodedString())")
     }
     
+}
+
+private extension AbstractApi {
+    
+    // Look for api specific errors (some use http status codes, some use info in the data) and return either
+    // a standardized error or nil if no error
+    func processErrors(response: URLResponse?, data: Data?, error: Error?) -> Error?  {
+        if let baseError = processBaseErrors(response: response, error: error) {
+            return baseError
+        }
+        
+        guard let data = data else {
+            return ExchangeBaseError.other(message: "no data to manage")
+        }
+        
+        return processApiErrors(from: data)
+    }
+    
+    // At this point we know there are no errors, so parse the data and return the exchagne data model
+    func processData(requestType: ApiRequestType, data: Data?) -> Any {
+        guard let data = data else { return [] }
+        return requestType == .accounts ? buildAccounts(from: data) : buildTransactions(from: data)
+    }
+    
     private func createSignatureData(with message: Data, secretKeyData: Data) -> Data? {
         // Create the signature
         guard case let .hmac(algorithm, digestLength) = requestEncoding else {
@@ -149,4 +165,5 @@ extension AbstractApi {
         
         return Data(bytes: signature, count: signatureCapacity)
     }
+    
 }

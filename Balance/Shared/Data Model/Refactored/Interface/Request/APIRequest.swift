@@ -17,7 +17,7 @@ public protocol ExchangeTransactionDataDelegate: class {
     func process(deposits: Any, withdrawals: Any)
 }
 
-public enum ExchangeTransactionType {
+public enum ExchangeTransactionType: String {
     case deposit
     case withdrawal
 }

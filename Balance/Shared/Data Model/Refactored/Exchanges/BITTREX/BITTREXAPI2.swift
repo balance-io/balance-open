@@ -13,7 +13,6 @@ class BITTREXAPI2: AbstractApi {
     override var requestMethod: ApiRequestMethod { return .get }
     override var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
     override var requestEncoding: ApiRequestEncoding { return .simpleHmacSha512 }
-    override var responseHandler: ResponseHandler? { return self }
     
     override func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation? {
         switch action.type {
@@ -25,15 +24,11 @@ class BITTREXAPI2: AbstractApi {
             //TODO: insert response handler(parser) into the operation
             return ExchangeOperation(with: self, request: singleRequest, resultBlock: completion)
         case .transactions(_):
-            guard let responseHandler = responseHandler else {
-                return nil
-            }
-            
             let transactionSyncer = ExchangeTransactionDataSyncer()
             return ExchangeTransactionOperation(action: action,
                                                 dataSyncer: transactionSyncer,
                                                 requestBuilder: self,
-                                                responseHandler: responseHandler,
+                                                responseHandler: self,
                                                 resultBlock: completion)
         }
     }
@@ -89,15 +84,6 @@ extension BITTREXAPI2: ExchangeTransactionRequest {
         request.setValue(messageSigned, forHTTPHeaderField: "apisign")
 
         return (request)
-    }
-    
-}
-
-//TODO: Need implement
-extension BITTREXAPI2: ResponseHandler {
-    
-    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, urlResponse: URLResponse?) -> Any {
-        return "Mock Data"
     }
     
 }

@@ -602,6 +602,9 @@
 		E67EABF62028E2C30070FA3A /* GDAXAPI2Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67EABF52028E2C30070FA3A /* GDAXAPI2Action.swift */; };
 		E67EABF72028E2C70070FA3A /* GDAXAPI2Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67EABF52028E2C30070FA3A /* GDAXAPI2Action.swift */; };
 		E67EABF82028E2CB0070FA3A /* GDAXAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67EABF32028E2A70070FA3A /* GDAXAPI2.swift */; };
+		E68143522031F64900B7CD4C /* HitBTCAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68143512031F64900B7CD4C /* HitBTCAccount.swift */; };
+		E68143542031F65E00B7CD4C /* HitBTCTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68143532031F65E00B7CD4C /* HitBTCTransaction.swift */; };
+		E68143552031F65E00B7CD4C /* HitBTCTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68143532031F65E00B7CD4C /* HitBTCTransaction.swift */; };
 		E686DA7A202225CE009D5A1E /* CoinbasePreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = E686DA79202225CE009D5A1E /* CoinbasePreferences.swift */; };
 		E686DA7B202225DD009D5A1E /* CoinbasePreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = E686DA79202225CE009D5A1E /* CoinbasePreferences.swift */; };
 		E68EE578201587FE00ACB01F /* BITTREXDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65312721FE8C3E400F57977 /* BITTREXDataHelper.swift */; };
@@ -1144,6 +1147,8 @@
 		E67EABE82028D3A60070FA3A /* PoloniexAPI2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoloniexAPI2.swift; sourceTree = "<group>"; };
 		E67EABF32028E2A70070FA3A /* GDAXAPI2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAPI2.swift; sourceTree = "<group>"; };
 		E67EABF52028E2C30070FA3A /* GDAXAPI2Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAPI2Action.swift; sourceTree = "<group>"; };
+		E68143512031F64900B7CD4C /* HitBTCAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitBTCAccount.swift; sourceTree = "<group>"; };
+		E68143532031F65E00B7CD4C /* HitBTCTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitBTCTransaction.swift; sourceTree = "<group>"; };
 		E686DA79202225CE009D5A1E /* CoinbasePreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbasePreferences.swift; sourceTree = "<group>"; };
 		E68EE57F20158CD600ACB01F /* MockInstitutionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInstitutionRepository.swift; sourceTree = "<group>"; };
 		E6A5B9A5202E0928006426BE /* BinanceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceAPI.swift; sourceTree = "<group>"; };
@@ -2511,6 +2516,8 @@
 			children = (
 				E63F3BC1203146CD00E7F4B7 /* HitBTCAPI.swift */,
 				E63F3BC4203146FD00E7F4B7 /* HitBTCAPIAction.swift */,
+				E68143512031F64900B7CD4C /* HitBTCAccount.swift */,
+				E68143532031F65E00B7CD4C /* HitBTCTransaction.swift */,
 			);
 			path = HitBTC;
 			sourceTree = "<group>";
@@ -3334,6 +3341,7 @@
 				E653128C1FE8C4D200F57977 /* BITTREXApiAction.swift in Sources */,
 				53552A311ED72B5700DD95F9 /* FMDatabaseQueue.m in Sources */,
 				A4ED56E11F865EFB00E4CC42 /* MainCurrencySelectionViewController.swift in Sources */,
+				E68143552031F65E00B7CD4C /* HitBTCTransaction.swift in Sources */,
 				A4E457181F7901E7002E2879 /* EthplorerApi.swift in Sources */,
 				53552A251ED7252900DD95F9 /* Data.swift in Sources */,
 				E6A5B9AA202E09BF006426BE /* BinanceAPIAction.swift in Sources */,
@@ -3550,6 +3558,7 @@
 				A4E7680C1F67E410002B1AE1 /* APICredentials.swift in Sources */,
 				534E83C61D3FB76200F76E8A /* OrderedDictionary.swift in Sources */,
 				534FD6401C7F8F5E0066FE91 /* Institution.swift in Sources */,
+				E68143522031F64900B7CD4C /* HitBTCAccount.swift in Sources */,
 				E66743F6201935D90009A57F /* APIRequest.swift in Sources */,
 				53560E7F1DFCDF8A00547AF7 /* NSBezierPath.swift in Sources */,
 				539C8E931C73CB31005C72BC /* PreferencesAccountsViewController.swift in Sources */,
@@ -3697,6 +3706,7 @@
 				40970263201F7D7A00C34623 /* ExchangeProtocols.swift in Sources */,
 				53DC85B11E678223007C72EB /* FileManager.swift in Sources */,
 				532121A51EE8B91600F4812A /* Zip.swift in Sources */,
+				E68143542031F65E00B7CD4C /* HitBTCTransaction.swift in Sources */,
 				53E74A571DD53CCB00AD8876 /* TimeInterval.swift in Sources */,
 				53368DD81E3FFD4200B7A199 /* PaintCodeDropdown.swift in Sources */,
 				5373B4791FAB7AD1007432DC /* PriceTickerTabTableCells.swift in Sources */,

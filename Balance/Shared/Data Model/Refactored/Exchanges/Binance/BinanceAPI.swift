@@ -67,17 +67,6 @@ private extension BinanceAPI {
     
 }
 
-extension BinanceAPI: ResponseHandler {
-    
-    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, urlResponse: URLResponse?) -> Any {
-        print(String(data: data ?? Data.init(), encoding: .utf8))
-        print(error)
-        
-        return "Mock response"
-    }
-    
-}
-
 extension BinanceAPI: ExchangeTransactionRequest {
     
     func createTransactionAction(from action: APIAction) -> APIAction {
