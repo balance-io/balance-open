@@ -16,31 +16,12 @@ open class AbstractApi: ExchangeApi2 {
     open var requestEncoding: ApiRequestEncoding { return .none }
     open var encondingMessageType: ApiEncondingMessageType { return .none }
     open var requestHandler: RequestHandler? { return nil }
+
     private var session: URLSession
     
     // certValidatedSession should always be passed here when using in the app except for tests
     public init(session: URLSession) {
         self.session = session
-    }
-
-    // Look for api specific errors (some use http status codes, some use info in the data) and return either
-    // a standardized error or nil if no error
-    func processErrors(response: URLResponse?, data: Data?, error: Error?) -> Error?  {
-        if let baseError = processBaseErrors(response: response, error: error) {
-            return baseError
-        }
-        
-        guard let data = data else {
-            return ExchangeBaseError.other(message: "no data to manage")
-        }
-        
-        return processApiErrors(from: data)
-    }
-    
-    // At this point we know there are no errors, so parse the data and return the exchagne data model
-    open func processData(requestType: ApiRequestType, data: Data?) -> Any {
-        guard let data = data else { return [] }
-        return requestType == .accounts ? buildAccounts(from: data) : buildTransactions(from: data)
     }
     
     public func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation? {
@@ -133,4 +114,25 @@ extension AbstractApi {
         
         return Data(bytes: signature, count: signatureCapacity)
     }
+    
+    // Look for api specific errors (some use http status codes, some use info in the data) and return either
+    // a standardized error or nil if no error
+    func processErrors(response: URLResponse?, data: Data?, error: Error?) -> Error?  {
+        if let baseError = processBaseErrors(response: response, error: error) {
+            return baseError
+        }
+        
+        guard let data = data else {
+            return ExchangeBaseError.other(message: "no data to manage")
+        }
+        
+        return processApiErrors(from: data)
+    }
+    
+    // At this point we know there are no errors, so parse the data and return the exchagne data model
+    open func processData(requestType: ApiRequestType, data: Data?) -> Any {
+        guard let data = data else { return [] }
+        return requestType == .accounts ? buildAccounts(from: data) : buildTransactions(from: data)
+    }
+
 }

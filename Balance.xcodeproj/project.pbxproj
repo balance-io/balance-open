@@ -61,6 +61,7 @@
 		400AA19420251BE9002BDE20 /* BtcAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400AA18F20251BE9002BDE20 /* BtcAccount.swift */; };
 		400AA19520251BE9002BDE20 /* BtcInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400AA19020251BE9002BDE20 /* BtcInstitution.swift */; };
 		400AA19620251BE9002BDE20 /* BtcInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400AA19020251BE9002BDE20 /* BtcInstitution.swift */; };
+		4015869320323578006C7998 /* PoloniexAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67EABE82028D3A60070FA3A /* PoloniexAPI2.swift */; };
 		403AA175201F87BA0088A2DE /* ExchangeAPIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AA174201F87BA0088A2DE /* ExchangeAPIErrors.swift */; };
 		403AA176201F87BA0088A2DE /* ExchangeAPIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AA174201F87BA0088A2DE /* ExchangeAPIErrors.swift */; };
 		403AA179201FA5520088A2DE /* ExchangeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AA178201FA5520088A2DE /* ExchangeOperation.swift */; };
@@ -76,6 +77,10 @@
 		404B3ECC2031320000E9427E /* BitfinexAccount2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B3ECA203131FB00E9427E /* BitfinexAccount2.swift */; };
 		404B3ECE2031320E00E9427E /* BitfinexTransaction2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B3ECD2031320E00E9427E /* BitfinexTransaction2.swift */; };
 		404B3ECF2031321200E9427E /* BitfinexTransaction2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B3ECD2031320E00E9427E /* BitfinexTransaction2.swift */; };
+		404B3ED12031E61C00E9427E /* GDAXAccount2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B3ED02031E61C00E9427E /* GDAXAccount2.swift */; };
+		404B3ED22031E61C00E9427E /* GDAXAccount2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B3ED02031E61C00E9427E /* GDAXAccount2.swift */; };
+		404B3ED42032047900E9427E /* GDAXTransaction2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B3ED32032047900E9427E /* GDAXTransaction2.swift */; };
+		404B3ED52032047900E9427E /* GDAXTransaction2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B3ED32032047900E9427E /* GDAXTransaction2.swift */; };
 		40970261201F7D6200C34623 /* AbstractApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40970260201F7D6200C34623 /* AbstractApi.swift */; };
 		40970263201F7D7A00C34623 /* ExchangeProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40970262201F7D7900C34623 /* ExchangeProtocols.swift */; };
 		40A90EA5200959840063B2F5 /* AddNewAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA4200959840063B2F5 /* AddNewAccountView.swift */; };
@@ -735,6 +740,8 @@
 		404B3EC7202C9BBA00E9427E /* EthplorerTransaction2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthplorerTransaction2.swift; sourceTree = "<group>"; };
 		404B3ECA203131FB00E9427E /* BitfinexAccount2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexAccount2.swift; sourceTree = "<group>"; };
 		404B3ECD2031320E00E9427E /* BitfinexTransaction2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitfinexTransaction2.swift; sourceTree = "<group>"; };
+		404B3ED02031E61C00E9427E /* GDAXAccount2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXAccount2.swift; sourceTree = "<group>"; };
+		404B3ED32032047900E9427E /* GDAXTransaction2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXTransaction2.swift; sourceTree = "<group>"; };
 		40970260201F7D6200C34623 /* AbstractApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractApi.swift; sourceTree = "<group>"; };
 		40970262201F7D7900C34623 /* ExchangeProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeProtocols.swift; sourceTree = "<group>"; };
 		40A90EA4200959840063B2F5 /* AddNewAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewAccountView.swift; sourceTree = "<group>"; };
@@ -2688,6 +2695,8 @@
 			children = (
 				E67EABF32028E2A70070FA3A /* GDAXAPI2.swift */,
 				E67EABF52028E2C30070FA3A /* GDAXAPI2Action.swift */,
+				404B3ED02031E61C00E9427E /* GDAXAccount2.swift */,
+				404B3ED32032047900E9427E /* GDAXTransaction2.swift */,
 			);
 			path = GDAX;
 			sourceTree = "<group>";
@@ -3168,6 +3177,8 @@
 				535529F71ED7250100DD95F9 /* SyncManager.swift in Sources */,
 				53D441E91F44B0DD006967E1 /* FMDatabasePoolAdditionsVariadic.swift in Sources */,
 				E653124F1FE8C2A500F57977 /* BITTREXBalance.swift in Sources */,
+				4015869320323578006C7998 /* PoloniexAPI2.swift in Sources */,
+				404B3ED22031E61C00E9427E /* GDAXAccount2.swift in Sources */,
 				53552A2B1ED7252900DD95F9 /* FileManager.swift in Sources */,
 				E65CAF632023E2730018E7A2 /* EthplorerAPIAction.swift in Sources */,
 				53629D45201FE7A9000081E9 /* VectorTypeAliases.swift in Sources */,
@@ -3276,6 +3287,7 @@
 				E6FF354A201AC0D50032FB2F /* ExchangeRepositoryServiceProvider.swift in Sources */,
 				A4E4570D1F79018A002E2879 /* Reachability.swift in Sources */,
 				5383C5D3201F830700B45DED /* BITTREXDeposit.swift in Sources */,
+				404B3ED52032047900E9427E /* GDAXTransaction2.swift in Sources */,
 				53561EB21F82DD260043D4F9 /* SegmentedControlTableViewCell.swift in Sources */,
 				2DF898531FCC8F7500CCDFB9 /* CountlyNotificationService.m in Sources */,
 				A4E768031F67DB02002B1AE1 /* BitfinexAPIClient.swift in Sources */,
@@ -3562,6 +3574,7 @@
 				53E83CA81E40309800185975 /* SearchFilterButtonsLight.swift in Sources */,
 				DC65EFA41CE3FDF8006C9373 /* Defaults.swift in Sources */,
 				532550881D06FA5C0045404E /* ScrollView.swift in Sources */,
+				404B3ED42032047900E9427E /* GDAXTransaction2.swift in Sources */,
 				53E7BC181D1805F600FD8613 /* Singletons.swift in Sources */,
 				532550941D0702980045404E /* TableRowView.swift in Sources */,
 				5334022A1DDD0E5E000236A0 /* PaintCodeView.swift in Sources */,
@@ -3671,6 +3684,7 @@
 				537187EE1F4CC23C00E7F9D6 /* GDAXServer.swift in Sources */,
 				53D441F51F44C477006967E1 /* TransactionRepository.swift in Sources */,
 				53C078A61DFF7CEB00696666 /* CertValidator.m in Sources */,
+				404B3ED12031E61C00E9427E /* GDAXAccount2.swift in Sources */,
 				A493B93C1F6819600074ACCC /* BitfinexAuthHeaders.swift in Sources */,
 				A4E457221F790EE5002E2879 /* PoloniexTransaction.swift in Sources */,
 				532B6FF21E9613520010D81D /* AccountsTabViewModel.swift in Sources */,

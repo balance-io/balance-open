@@ -14,6 +14,7 @@ class GDAXAPI2: AbstractApi {
     override var requestDataFormat: ApiRequestDataFormat { return .json }
     override var requestEncoding: ApiRequestEncoding { return .hmac(hmacAlgorithm: CCHmacAlgorithm(kCCHmacAlgSHA256), digestLength: Int(CC_SHA256_DIGEST_LENGTH)) }
     override var encondingMessageType: ApiEncondingMessageType { return .base64 }
+    override var requestHandler: RequestHandler? { return self }
     
     override func createRequest(for action: APIAction) -> URLRequest? {
        
@@ -40,6 +41,32 @@ class GDAXAPI2: AbstractApi {
         }
     }
     
+    override func processApiErrors(from data: Data) -> Error? {
+        guard let errorDict = createDict(from: data) as? [String: AnyObject],
+            let message = errorDict["message"] as? String else {
+            return nil
+        }
+        
+        return ExchangeBaseError.other(message: message)
+    }
+    
+    override func buildAccounts(from data: Data) -> Any {
+        do {
+            return try JSONDecoder().decode([GDAXAccount2].self, from: data)
+        } catch {
+            print("error: \(error)")
+            return ExchangeBaseError.other(message: "acounts data not available")
+        }
+    }
+    
+    override func buildTransactions(from data: Data) -> Any {
+        do {
+            return try JSONDecoder().decode([GDAXTransaction2].self, from: data)
+        } catch {
+            print("error: \(error)")
+            return ExchangeBaseError.other(message: "transactions data not available")
+        }
+    }
 }
 
 private extension GDAXAPI2 {
@@ -64,4 +91,18 @@ private extension GDAXAPI2 {
         return messageData
     }
     
+}
+
+extension GDAXAPI2: RequestHandler {
+    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any {
+        guard let action = action else {
+            return ExchangeBaseError.other(message: "No action provided")
+        }
+        
+        if let error = processErrors(response: ulrResponse, data: data, error: error) {
+            return error
+        }
+        
+        return processData(requestType: action.type, data: data)
+    }
 }
