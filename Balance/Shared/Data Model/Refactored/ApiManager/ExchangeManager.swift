@@ -222,7 +222,7 @@ private extension ExchangeManager {
             let exchangeAction = BITTREXAPI2Action(type: .accounts, credentials: credentials)
             loginAction = (bittrexExchangeAPI, exchangeAction)
         case .binance:
-            let exchangeAction = BinanceAPIAction.init(type: .accounts, credentials: credentials)
+            let exchangeAction = BinanceAPIAction(type: .accounts, credentials: credentials)
             loginAction = (binanceExchangeAPI, exchangeAction)
         }
         

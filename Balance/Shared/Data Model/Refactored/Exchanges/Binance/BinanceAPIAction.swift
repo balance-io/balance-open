@@ -28,7 +28,12 @@ extension BinanceAPIAction {
     }
     
     var url: URL? {
-        return URL(string: host + path + validQuery)
+        switch type {
+        case .accounts:
+            return URL(string: host + path + validQuery)
+        default:
+            return nil
+        }
     }
     
     var components: URLComponents? {
@@ -40,7 +45,7 @@ extension BinanceAPIAction {
         case .accounts:
             return "/api/v3/account"
         case .transactions(_):
-            return "/api/v3/allOrders"
+            return ""
         }
     }
     
@@ -54,8 +59,28 @@ extension BinanceAPIAction {
     
     private var params: [String: String] {
         return [
-            "timestamp": String(nonce)
+            "timestamp": String(nonce),
         ]
+    }
+    
+}
+
+extension BinanceAPIAction {
+    
+    private var depositPath: String {
+        return "/wapi/v3/depositHistory.html"
+    }
+    
+    private var withdrawalPath: String {
+        return "/wapi/v3/withdrawHistory.html"
+    }
+    
+    var depositTransactionURL: URL? {
+        return URL(string: host + depositPath + validQuery)
+    }
+    
+    var withdrawalTransactionURL: URL? {
+        return URL(string: host + withdrawalPath + validQuery)
     }
     
 }

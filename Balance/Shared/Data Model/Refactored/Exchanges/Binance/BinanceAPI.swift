@@ -13,7 +13,6 @@ class BinanceAPI: AbstractApi {
     override var requestMethod: ApiRequestMethod { return .get }
     override var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
     override var requestEncoding: ApiRequestEncoding { return .simpleHmacSha256 }
-    override var responseHandler: ResponseHandler? { return self }
     
     override func createMessage(for action: APIAction) -> String? {
         return action.query
@@ -28,15 +27,42 @@ class BinanceAPI: AbstractApi {
                 return nil
             }
             
-            var request = URLRequest(url: url)
-            request.httpMethod = requestMethod.rawValue
-            request.timeoutInterval = 5000
-            request.setValue(action.credentials.apiKey, forHTTPHeaderField: "X-MBX-APIKEY")
-            
-            return request
-        case .transactions(_):
+            return createRequest(from: action, with: url)
+        default:
             return nil
         }
+    }
+    
+    override func fetchData(for action: APIAction, completion: @escaping ExchangeOperationCompletionHandler) -> Operation? {
+        switch action.type {
+        case .accounts:
+            guard let singleRequest = createRequest(for: action) else {
+                return nil
+            }
+            
+            return ExchangeOperation(with: self, request: singleRequest, resultBlock: completion)
+        case .transactions(_):
+            let transactionSyncer = ExchangeTransactionDataSyncer()
+            
+            return ExchangeTransactionOperation(action: action,
+                                                dataSyncer: transactionSyncer,
+                                                requestBuilder: self,
+                                                responseHandler: self,
+                                                resultBlock: completion)
+        }
+    }
+    
+}
+
+private extension BinanceAPI {
+    
+    func createRequest(from action: APIAction, with url: URL) -> URLRequest? {
+        var request = URLRequest(url: url)
+        request.httpMethod = requestMethod.rawValue
+        request.timeoutInterval = 5000
+        request.setValue(action.credentials.apiKey, forHTTPHeaderField: "X-MBX-APIKEY")
+        
+        return request
     }
     
 }
@@ -63,9 +89,23 @@ extension BinanceAPI: ExchangeTransactionRequest {
             case .transactions(_) = binanceAction.type else {
             return nil
         }
-
         
-        return nil
+        let actionURL =  transactionType == .deposit ?
+            binanceAction.depositTransactionURL : binanceAction.withdrawalTransactionURL
+        
+        guard let urlWithoutSignature = actionURL,
+            let query = urlWithoutSignature.query else {
+            return nil
+        }
+        
+        let messageSigned = CryptoAlgorithm.sha256.hmac(body: query,
+                                                        key: action.credentials.secretKey)
+        
+        guard let url = urlWithoutSignature.addQueryParams(url: urlWithoutSignature, newParams: ["signature": messageSigned]) else {
+            return nil
+        }
+        
+        return createRequest(from: action, with: url)
     }
     
 }
