@@ -60,6 +60,7 @@ class ExchangeManager {
     private lazy var btcExchangeAPI = { return BTCAPI2(session: urlSession) }()
     private lazy var bittrexExchangeAPI = { return BITTREXAPI2(session: urlSession) }()
     private lazy var binanceExchangeAPI = { return BinanceAPI(session: urlSession) }()
+    private lazy var hitbtcExchangeAPI = { return HitBTCAPI(session: urlSession) }()
     
     init(urlSession: URLSession? = nil, repositoryService: RepositoryServiceProtocol? = nil, keychainService: KeychainServiceProtocol? = nil) {
         self.urlSession = urlSession ?? certValidatedSession
@@ -103,7 +104,7 @@ extension ExchangeManager: ExchangeManagerActions {
             log.debug("Error - Can't refresh \(institution.source.description) institution with id \(institution.institutionId), becuase credentials weren't fetched")
             return
         }
-        
+
         switch institution.source {
         case .poloniex:
             refreshInstitution(institution: institution, credentials: credentials, exchangeAPI: poloniexExchangeAPI, apiAction: PoloniexApiAction.self, delayTransactions: true)
@@ -115,6 +116,8 @@ extension ExchangeManager: ExchangeManagerActions {
             refreshInstitution(institution: institution, credentials: credentials, exchangeAPI: bittrexExchangeAPI, apiAction: BITTREXAPI2Action.self, delayTransactions: true)
         case .binance:
             refreshInstitution(institution: institution, credentials: credentials, exchangeAPI: binanceExchangeAPI, apiAction: BinanceAPIAction.self, delayTransactions: true)
+        case .hitbtc:
+            refreshInstitution(institution: institution, credentials: credentials, exchangeAPI: hitbtcExchangeAPI, apiAction: HitBTCAPIAction.self, delayTransactions: true)
         case .blockchain:
             refreshInstitution(institution: institution, credentials: credentials, exchangeAPI: btcExchangeAPI, apiAction: BTCAPI2Action.self, delayTransactions: false)
         case .ethplorer:
@@ -224,6 +227,9 @@ private extension ExchangeManager {
         case .binance:
             let exchangeAction = BinanceAPIAction(type: .accounts, credentials: credentials)
             loginAction = (binanceExchangeAPI, exchangeAction)
+        case .hitbtc:
+            let exchangeAction = HitBTCAPIAction(type: .accounts, credentials: credentials)
+            loginAction = (hitbtcExchangeAPI, exchangeAction)
         }
         
         guard let loginAPIAction = loginAction else {

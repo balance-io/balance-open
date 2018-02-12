@@ -26,6 +26,7 @@ extension Source {
         case .bittrex:      return BITTREXApi()
         case .blockchain:   return BtcApi()
         case .binance:      return BinanceAPI(session: certValidatedSession)
+        case .hitbtc:       return HitBTCAPI(session: certValidatedSession)
         }
     }
 }

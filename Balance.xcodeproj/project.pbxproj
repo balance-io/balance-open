@@ -533,6 +533,10 @@
 		E63F3BBC2030E5D500E7F4B7 /* ExchangeTransactionDataSyncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63F3BBB2030E5D500E7F4B7 /* ExchangeTransactionDataSyncer.swift */; };
 		E63F3BBD2030E5DA00E7F4B7 /* ExchangeTransactionDataSyncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63F3BBB2030E5D500E7F4B7 /* ExchangeTransactionDataSyncer.swift */; };
 		E63F3BBF2030E98000E7F4B7 /* ExchangeTransactionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63F3BBE2030E98000E7F4B7 /* ExchangeTransactionOperation.swift */; };
+		E63F3BC2203146CD00E7F4B7 /* HitBTCAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63F3BC1203146CD00E7F4B7 /* HitBTCAPI.swift */; };
+		E63F3BC3203146CD00E7F4B7 /* HitBTCAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63F3BC1203146CD00E7F4B7 /* HitBTCAPI.swift */; };
+		E63F3BC5203146FD00E7F4B7 /* HitBTCAPIAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63F3BC4203146FD00E7F4B7 /* HitBTCAPIAction.swift */; };
+		E63F3BC6203146FD00E7F4B7 /* HitBTCAPIAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63F3BC4203146FD00E7F4B7 /* HitBTCAPIAction.swift */; };
 		E6490DC5201A9E06007C41B7 /* ExchangeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6635C63201A6E4400D9720E /* ExchangeManager.swift */; };
 		E6490DC6201A9E12007C41B7 /* BalanceCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6635C66201A777900D9720E /* BalanceCredentials.swift */; };
 		E64AAA38201F883C00CE7050 /* KrakenAPI2Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B7B6D201BE67F00B391CE /* KrakenAPI2Action.swift */; };
@@ -1085,6 +1089,8 @@
 		E61B7B6D201BE67F00B391CE /* KrakenAPI2Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenAPI2Action.swift; sourceTree = "<group>"; };
 		E63F3BBB2030E5D500E7F4B7 /* ExchangeTransactionDataSyncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTransactionDataSyncer.swift; sourceTree = "<group>"; };
 		E63F3BBE2030E98000E7F4B7 /* ExchangeTransactionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTransactionOperation.swift; sourceTree = "<group>"; };
+		E63F3BC1203146CD00E7F4B7 /* HitBTCAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitBTCAPI.swift; sourceTree = "<group>"; };
+		E63F3BC4203146FD00E7F4B7 /* HitBTCAPIAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitBTCAPIAction.swift; sourceTree = "<group>"; };
 		E65312411FE8C22D00F57977 /* BITTREXApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BITTREXApi.swift; sourceTree = "<group>"; };
 		E65312491FE8C28D00F57977 /* BITTREXCurrency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BITTREXCurrency.swift; path = "Balance/Shared/Data Model/APIs/BITTREX/DTO/BITTREXCurrency.swift"; sourceTree = SOURCE_ROOT; };
 		E653124A1FE8C28D00F57977 /* BITTREXBalance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BITTREXBalance.swift; path = "Balance/Shared/Data Model/APIs/BITTREX/DTO/BITTREXBalance.swift"; sourceTree = SOURCE_ROOT; };
@@ -2488,6 +2494,15 @@
 			path = Foundation;
 			sourceTree = "<group>";
 		};
+		E63F3BC0203146B300E7F4B7 /* HitBTC */ = {
+			isa = PBXGroup;
+			children = (
+				E63F3BC1203146CD00E7F4B7 /* HitBTCAPI.swift */,
+				E63F3BC4203146FD00E7F4B7 /* HitBTCAPIAction.swift */,
+			);
+			path = HitBTC;
+			sourceTree = "<group>";
+		};
 		E64AAA39201FCB9400CE7050 /* Kraken */ = {
 			isa = PBXGroup;
 			children = (
@@ -2696,6 +2711,7 @@
 		E686DA7D20228DEA009D5A1E /* Exchanges */ = {
 			isa = PBXGroup;
 			children = (
+				E63F3BC0203146B300E7F4B7 /* HitBTC */,
 				E6A5B9A4202E0910006426BE /* Binance */,
 				E67EABDC2028D3710070FA3A /* Poloniex */,
 				E67EABDB2028D3680070FA3A /* Coinbase */,
@@ -3192,6 +3208,7 @@
 				2DF898431FCC8F7500CCDFB9 /* CountlyAPM.m in Sources */,
 				A4E457231F790EE5002E2879 /* PoloniexTransaction.swift in Sources */,
 				53629D48201FE7FE000081E9 /* ResizingBehavior.swift in Sources */,
+				E63F3BC3203146CD00E7F4B7 /* HitBTCAPI.swift in Sources */,
 				E65312501FE8C2A900F57977 /* BITTREXCurrency.swift in Sources */,
 				5321219E1EE8B91600F4812A /* ioapi.c in Sources */,
 				53552A0C1ED7251200DD95F9 /* Utils.swift in Sources */,
@@ -3360,6 +3377,7 @@
 				53561EAC1F82DD260043D4F9 /* AddCredentialBasedAccountViewController.swift in Sources */,
 				53552A7A1ED7347900DD95F9 /* MockedKeychainManager.swift in Sources */,
 				535529FD1ED7250500DD95F9 /* PlaidDataMockingProtocol.swift in Sources */,
+				E63F3BC6203146FD00E7F4B7 /* HitBTCAPIAction.swift in Sources */,
 				A4E457171F7901E7002E2879 /* EthplorerAccount.swift in Sources */,
 				53552A2E1ED72B5700DD95F9 /* FMDatabase.m in Sources */,
 				A4E4570A1F79010A002E2879 /* BalanceError.swift in Sources */,
@@ -3454,6 +3472,7 @@
 				53EB77D61CF3EFAA00F01903 /* NSView.swift in Sources */,
 				2D326D261F5EA22900873286 /* PoloniexErrors.swift in Sources */,
 				537187E81F4CC23C00E7F9D6 /* CoinbaseAccount.swift in Sources */,
+				E63F3BC5203146FD00E7F4B7 /* HitBTCAPIAction.swift in Sources */,
 				A4E4571F1F79045A002E2879 /* Double.swift in Sources */,
 				537187FD1F4CC43000E7F9D6 /* SignUpViewController.swift in Sources */,
 				53D441EC1F44B224006967E1 /* FMDatabasePoolAdditions.m in Sources */,
@@ -3619,6 +3638,7 @@
 				5325508E1D06FED30045404E /* TableView.swift in Sources */,
 				E67EABE12028D3950070FA3A /* CoinbaseAccount2.swift in Sources */,
 				537187E71F4CC23C00E7F9D6 /* CoinbaseApi.swift in Sources */,
+				E63F3BC2203146CD00E7F4B7 /* HitBTCAPI.swift in Sources */,
 				E67EABEC2028D3A60070FA3A /* PoloniexAPI2.swift in Sources */,
 				536C6EF21D864CB900823688 /* DefaultsStorage.swift in Sources */,
 				E66743FF20195F900009A57F /* ApiEntityProtocols.swift in Sources */,

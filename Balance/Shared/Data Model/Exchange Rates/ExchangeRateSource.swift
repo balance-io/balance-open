@@ -64,6 +64,7 @@ extension Source {
         case .bittrex:          return .bittrex
         case .blockchain:       return .average
         case .binance:          return .binance
+        case .hitbtc:           return .hitbtc
         }
     }
 }

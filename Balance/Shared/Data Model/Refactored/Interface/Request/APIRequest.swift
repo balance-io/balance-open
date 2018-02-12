@@ -75,6 +75,7 @@ public enum ApiRequestDataFormat {
 
 public enum ApiRequestEncoding {
     case none
+    case baseAuthentication
     case simpleHmacSha512
     case simpleHmacSha256
     case hmac(hmacAlgorithm: CCHmacAlgorithm, digestLength: Int)
@@ -90,6 +91,8 @@ public enum ServerEnvironment {
     case sandbox
     case production    
 }
+
+public typealias BasicAuthenticationCredentialsResult = (header: String, value: String)
 
 public protocol APIAction {
     var host: String { get }

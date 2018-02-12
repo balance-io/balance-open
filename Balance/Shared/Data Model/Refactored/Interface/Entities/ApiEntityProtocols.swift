@@ -16,7 +16,7 @@ public protocol Credentials {
     var name: String { get }
 }
 
-protocol OAUTHCredentials: Credentials {
+public protocol OAUTHCredentials: Credentials {
     var accessToken: String { get }
     var refreshToken: String { get }
     var apiScope: String { get }

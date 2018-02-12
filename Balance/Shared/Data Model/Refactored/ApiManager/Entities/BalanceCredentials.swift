@@ -9,13 +9,19 @@
 import Foundation
 
 struct BalanceCredentials: Credentials {
+    
     let apiKey: String
     let secretKey: String
     let passphrase: String
     let address: String
     let name: String
-    
-    init(apiKey: String? = nil, secretKey: String? = nil, passphrase: String? = nil, address: String? = nil, name: String? = nil) {
+        
+    init(apiKey: String? = nil,
+         secretKey: String? = nil,
+         passphrase: String? = nil,
+         address: String? = nil,
+         name: String? = nil)
+    {
         self.apiKey = apiKey ?? ""
         self.secretKey = secretKey ?? ""
         self.passphrase = passphrase ?? ""
@@ -75,13 +81,13 @@ private extension BalanceCredentials {
     
     static func areCredentialsValid(_ credentials: Credentials, for source: Source) -> Bool {
         switch source {
-        case .poloniex, .kraken, .bitfinex, .bittrex, .binance:
+        case .poloniex, .kraken, .bitfinex, .bittrex, .binance, .hitbtc:
             return !credentials.apiKey.isEmpty && !credentials.secretKey.isEmpty
         case .gdax:
             return !credentials.apiKey.isEmpty && !credentials.secretKey.isEmpty && !credentials.passphrase.isEmpty
         case .ethplorer, .blockchain:
             return !credentials.address.isEmpty && !credentials.name.isEmpty
-        default:
+        case .coinbase:
             return false
         }
     }
@@ -94,4 +100,5 @@ private extension BalanceCredentials {
             return 2
         }
     }
+
 }

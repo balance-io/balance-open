@@ -17,8 +17,8 @@ extension URL {
         return parameters
     }
     
-    func addQueryParams(url: URL, newParams: [String: String]) -> URL? {
-        guard let urlComponents = NSURLComponents(url: url, resolvingAgainstBaseURL: false) else {
+    func addQueryParams(_ newParams: [String: String]) -> URL? {
+        guard let urlComponents = NSURLComponents(url: self, resolvingAgainstBaseURL: false) else {
             return nil
         }
         

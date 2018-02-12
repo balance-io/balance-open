@@ -23,7 +23,7 @@ class BinanceAPI: AbstractApi {
         case .accounts:
             guard let urlWithoutSignature = action.url,
                 let messageSigned = generateMessageSigned(for: action),
-                let url = urlWithoutSignature.addQueryParams(url: urlWithoutSignature, newParams: ["signature": messageSigned]) else {
+                let url = urlWithoutSignature.addQueryParams(["signature": messageSigned]) else {
                 return nil
             }
             
@@ -101,7 +101,7 @@ extension BinanceAPI: ExchangeTransactionRequest {
         let messageSigned = CryptoAlgorithm.sha256.hmac(body: query,
                                                         key: action.credentials.secretKey)
         
-        guard let url = urlWithoutSignature.addQueryParams(url: urlWithoutSignature, newParams: ["signature": messageSigned]) else {
+        guard let url = urlWithoutSignature.addQueryParams(["signature": messageSigned]) else {
             return nil
         }
         

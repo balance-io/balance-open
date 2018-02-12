@@ -115,6 +115,20 @@ extension AbstractApi {
         }
     }
     
+    func encodeCredentialsWithBaseAuthentication(with action: APIAction) -> BasicAuthenticationCredentialsResult? {
+        guard case .baseAuthentication = requestEncoding else {
+            print("Invalid request encoding type")
+            return nil
+        }
+        
+        guard let credentialsData = "\(action.credentials.apiKey):\(action.credentials.secretKey)".data(using: .utf8) else {
+            print("Credentials can't be tranformed to data")
+            return nil
+        }
+        
+        return ("Authorization" ,"Basic \(credentialsData.base64EncodedString())")
+    }
+    
     private func createSignatureData(with message: Data, secretKeyData: Data) -> Data? {
         // Create the signature
         guard case let .hmac(algorithm, digestLength) = requestEncoding else {

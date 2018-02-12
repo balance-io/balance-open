@@ -12,6 +12,7 @@ public enum ExchangeBaseError: Error {
     case internetConnection
     case invalidCredentials(statusCode: Int?)
     case invalidServer(statusCode: Int)
+    case scopeRestricted
     case other(message: String)
     
     var localizedDescription: String {
@@ -22,6 +23,8 @@ public enum ExchangeBaseError: Error {
             return "Invalid credentials, try again"
         case .invalidServer(_):
             return "We have problems with the server, please try later"
+        case .scopeRestricted:
+            return "Your API key doesn't have enough permisions to perfom this action."
         case .other(let message):
             return "Error: \(message)"
         }
