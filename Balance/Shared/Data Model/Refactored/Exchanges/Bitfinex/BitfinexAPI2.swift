@@ -14,6 +14,7 @@ class BitfinexAPI2: AbstractApi {
     override var requestDataFormat: ApiRequestDataFormat { return .json }
     override var requestEncoding: ApiRequestEncoding { return .hmac(hmacAlgorithm: CCHmacAlgorithm(kCCHmacAlgSHA384), digestLength: Int(CC_SHA384_DIGEST_LENGTH)) }
     override var encondingMessageType: ApiEncondingMessageType { return .concatenate(format: "%02x") }
+    override var requestHandler: RequestHandler? { return self }
     
     override func createRequest(for action: APIAction) -> URLRequest? {
         switch action.type {
@@ -39,6 +40,39 @@ class BitfinexAPI2: AbstractApi {
         }
     }
     
+    override func processApiErrors(from data: Data) -> Error? {
+        if let errorDict = createDict(from: data) as? [String: AnyObject],
+            let message = errorDict["message"] as? String {
+            return ExchangeBaseError.other(message: message)
+        }
+        
+        guard let JSONArray = createArray(from: data) else {
+            return ExchangeBaseError.other(message: "Invalid response")
+        }
+        
+        // array count: 5 for accounts, 22 for transactions
+        guard let array = JSONArray.first as? [Any], array.count == 5 || array.count == 22 else {
+            return ExchangeBaseError.other(message: "Invalid JSON")
+        }
+        
+        return nil
+    }
+    
+    override func buildAccounts(from data: Data) -> Any {
+        guard let array = createArray(from: data)  else {
+            return []
+        }
+        
+        return array.flatMap{ createAccounts($0) }
+    }
+    
+    override func buildTransactions(from data: Data) -> Any {
+        guard let array = createArray(from: data)  else {
+            return []
+        }
+        
+        return array.flatMap{ createTransactions($0) }
+    }
 }
 
 private extension BitfinexAPI2 {
@@ -63,4 +97,51 @@ private extension BitfinexAPI2 {
         return messageData
     }
     
+    func createAccounts(_ data: Any) -> BitfinexAccount2? {
+        guard let data = data as? [Any],
+            let type = data[0] as? String,
+            let currencyCode = data[1] as? String,
+            let balance = data[2] as? Double,
+            let unsettledInterest = data[3] as? Double else {
+                return nil
+        }
+        
+        let currency: Currency = Currency.rawValue(currencyCode)
+        
+        // Optional
+        let available: Double? = data[4] as? Double
+    
+        return BitfinexAccount2(type: type, currency: currency, balance: balance, unsettledInterest: unsettledInterest, available: available)
+    }
+    
+    func createTransactions(_ data: Any) -> BitfinexTransaction2? {
+        guard let data = data as? [Any],
+            let currencyCode = data[1] as? String,
+            let address = data[16] as? String,
+            let status = data[9] as? String,
+            let amount = data[12] as? Double,
+            let createdAt = data[6] as? Double,
+            let updatedAt = data[5] as? Double else {
+                return nil
+        }
+        
+        let currency: Currency = Currency.rawValue(currencyCode)
+        
+        return BitfinexTransaction2(currency: currency, address: address, status: status, amount: amount, createdAt: createdAt, updatedAt: updatedAt)
+    }
+    
+}
+
+extension BitfinexAPI2: RequestHandler {
+    func handleResponseData(for action: APIAction?, data: Data?, error: Error?, ulrResponse: URLResponse?) -> Any {
+        guard let action = action else {
+            return ExchangeBaseError.other(message: "No action provided")
+        }
+        
+        if let error = processErrors(response: ulrResponse, data: data, error: error) {
+            return error
+        }
+        
+        return processData(requestType: action.type, data: data)
+    }
 }
