@@ -549,15 +549,15 @@ class SignUpViewController: NSViewController {
     @objc fileprivate func connect() {
         
         //TEST HERE
-//        let loginFields: [Field] = [
-//            Field(name: "", type: .key, value: ""),
-//            Field(name: "", type: .secret, value: "")
-//        ]
-//
-//        exchangeManager.login(with: .binance, fields: loginFields)
+        let loginFields: [Field] = [
+            Field(name: "", type: .key, value: ""),
+            Field(name: "", type: .secret, value: "")
+        ]
 
-        let mockInstitution = Institution(institutionId: 1, source: .hitbtc, sourceInstitutionId: "", name: "")
-        exchangeManager.refresh(institution: mockInstitution)
+        exchangeManager.login(with: .coinbase, fields: loginFields)
+
+//        let mockInstitution = Institution(institutionId: 1, source: .hitbtc, sourceInstitutionId: "", name: "")
+//        exchangeManager.refresh(institution: mockInstitution)
         
 //        prepareViewsForSubmit(loadingText: "Connecting to \(apiInstitution.name)...")
 

@@ -15,6 +15,7 @@ open class AbstractApi: ExchangeApi2, ResponseHandler {
     open var requestDataFormat: ApiRequestDataFormat { return .urlEncoded }
     open var requestEncoding: ApiRequestEncoding { return .none }
     open var encondingMessageType: ApiEncondingMessageType { return .none }
+    open var shouldHandleNoActionResponse: Bool { return false }
     private var session: URLSession
     
     // certValidatedSession should always be passed here when using in the app except for tests
@@ -49,6 +50,11 @@ open class AbstractApi: ExchangeApi2, ResponseHandler {
     open func buildTransactions(from data: Data) -> Any {
         fatalError("Must override")
     }
+    
+    open func buildDataFromNoAction(_ data: Data?) -> Any {
+        fatalError("Must override")
+    }
+    
     //mark: Needed for OAUTH
     open func prepareForAutentication() {
         fatalError("Must override")
@@ -65,7 +71,10 @@ extension AbstractApi {
     
     public func handleResponseData(for action: APIAction?, data: Data?, error: Error?, urlResponse ulrResponse: URLResponse?) -> Any {
         guard let action = action else {
-            return ExchangeBaseError.other(message: "No action provided")
+            let noActionData = shouldHandleNoActionResponse ? buildDataFromNoAction(data) :
+                ExchangeBaseError.other(message: "No action provided")
+            
+            return noActionData
         }
         
         if let error = processErrors(response: ulrResponse, data: data, error: error) {
@@ -145,7 +154,7 @@ private extension AbstractApi {
         return requestType == .accounts ? buildAccounts(from: data) : buildTransactions(from: data)
     }
     
-    private func createSignatureData(with message: Data, secretKeyData: Data) -> Data? {
+    func createSignatureData(with message: Data, secretKeyData: Data) -> Data? {
         // Create the signature
         guard case let .hmac(algorithm, digestLength) = requestEncoding else {
             return nil
