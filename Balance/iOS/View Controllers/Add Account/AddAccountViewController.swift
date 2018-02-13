@@ -26,8 +26,10 @@ internal final class AddAccountViewController: UIViewController
         self.title = "Add an Account"
         self.view.backgroundColor = UIColor.white
         
-        // Navigation bar
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneButtonTapped(_:)))
+        // Show done button if we we're the root view controller i.e. if we were presented modally 
+        if self.navigationController?.viewControllers.first == self {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneButtonTapped(_:)))
+        }
         
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true
