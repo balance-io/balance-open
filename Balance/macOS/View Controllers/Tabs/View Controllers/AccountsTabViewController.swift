@@ -78,9 +78,9 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
     fileprivate var hackDelayCount = 2
     func adjustWindowHeight() {
         var finalHeight = CurrentTheme.defaults.size.height
-        if let delegate = tableView.delegate {
+        if InstitutionRepository.si.hasInstitutions, let delegate = tableView.delegate {
             // Calculate the table rows total height
-            var tableHeight: CGFloat = 200 // Account for other UI elements
+            var tableHeight: CGFloat = 100 // Account for other UI elements
             let numberOfRows = tableView.numberOfRows
             
             if numberOfRows > 0 {
@@ -90,7 +90,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
             }
             
             // Calculate height
-            let minHeight: CGFloat = 520
+            let minHeight: CGFloat = 100
             let maxHeight: CGFloat = AppDelegate.sharedInstance.maxHeight
             var height = minHeight
             if tableHeight > minHeight && tableHeight < maxHeight {
@@ -110,7 +110,9 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
                 }
             }
             
-            AppDelegate.sharedInstance.resizeWindowHeight(finalHeight, animated: true)
+            if AppDelegate.sharedInstance.visibleTab == .accounts {
+                AppDelegate.sharedInstance.resizeWindowHeight(finalHeight, animated: true)
+            }
         }
     }
     
@@ -534,8 +536,8 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
         updateTotalBalance()
         tableView.reloadData()
         createFixPasswordPrompt()
-        
-        self.invalidateTouchBar()
+        invalidateTouchBar()
+        adjustWindowHeight()
     }
     
     func updateTotalBalance() {
