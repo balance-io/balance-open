@@ -10,7 +10,6 @@ import Foundation
 
 class NewPoloniexAccount: Codable {
     private var accountInstitution: Int = 0
-    private var accountSource: Source = .poloniex
     private var currencyString: String
     
     var currency: Currency {
@@ -61,12 +60,7 @@ extension NewPoloniexAccount: ExchangeAccount {
     }
     
     var source: Source {
-        get {
-            return accountSource
-        }
-        set {
-            accountSource = newValue
-        }
+        return .poloniex
     }
     
     var sourceAccountId: String {

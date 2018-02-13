@@ -22,7 +22,7 @@ class BITTREXAPI2: AbstractApi {
             }
             
             //TODO: insert response handler(parser) into the operation
-            return ExchangeOperation(with: self, request: singleRequest, resultBlock: completion)
+            return ExchangeOperation(with: self, action: action, request: singleRequest, resultBlock: completion)
         case .transactions(_):
             let transactionSyncer = ExchangeTransactionDataSyncer()
             return ExchangeTransactionOperation(action: action,
@@ -51,6 +51,52 @@ class BITTREXAPI2: AbstractApi {
         return action.url?.absoluteString
     }
     
+    override func processApiErrors(from data: Data) -> Error? {
+        guard let info = createDict(from: data) as? [String:AnyObject],
+            let success = info["success"] as? Bool, !success,
+            let message = info["message"] as? String else {
+                return nil
+        }
+        
+        return ExchangeBaseError.other(message: message)
+    }
+ 
+    override func buildAccounts(from data: Data) -> Any {
+        guard let data = prepareData(from: data) else {
+            return ExchangeBaseError.other(message: "BITTREX accounts data unavailable")
+        }
+        
+        do {
+            return try JSONDecoder().decode([BITTREXAccount2].self, from: data)
+        } catch {
+            print("error: \(error)")
+            return ExchangeBaseError.other(message: "BITTREX accounts data unavailable")
+        }
+    }
+    
+    override func buildTransactions(from data: Data) -> Any {
+        guard let data = prepareData(from: data) else {
+            return ExchangeBaseError.other(message: "BITTREX transactions data unavailable")
+        }
+        
+        do {
+            return try JSONDecoder().decode([BITTREXTransaction2].self, from: data)
+        } catch {
+            print("error: \(error)")
+            return ExchangeBaseError.other(message: "BITTREX transactions data unavailable")
+        }
+    }
+}
+
+private extension BITTREXAPI2 {
+    func prepareData(from data: Data) -> Data? {
+        guard let dict = createDict(from: data) as? [String: AnyObject],
+            let data = dict["result"] as? [Any], data.count > 0  else {
+            return nil
+        }
+        
+        return try? JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+    }
 }
 
 extension BITTREXAPI2: ExchangeTransactionRequest {

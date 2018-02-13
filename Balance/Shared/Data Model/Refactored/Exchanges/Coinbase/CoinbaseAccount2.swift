@@ -10,7 +10,6 @@ import Foundation
 
 struct CoinbaseAccount2: Codable {
     private var accountInstitution: Int = 0
-    private var accountSource: Source = .coinbase
     private let id: String
     private let accountName: String
     private let primary: Bool
@@ -56,12 +55,7 @@ extension CoinbaseAccount2: ExchangeAccount {
     }
     
     var source: Source {
-        get {
-            return accountSource
-        }
-        set {
-            accountSource = newValue
-        }
+        return .coinbase
     }
     
     var sourceAccountId: String {

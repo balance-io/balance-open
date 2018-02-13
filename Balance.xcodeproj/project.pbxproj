@@ -62,6 +62,10 @@
 		400AA19520251BE9002BDE20 /* BtcInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400AA19020251BE9002BDE20 /* BtcInstitution.swift */; };
 		400AA19620251BE9002BDE20 /* BtcInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400AA19020251BE9002BDE20 /* BtcInstitution.swift */; };
 		4015869320323578006C7998 /* PoloniexAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67EABE82028D3A60070FA3A /* PoloniexAPI2.swift */; };
+		401586982032403D006C7998 /* BITTREXAccount2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401586972032403D006C7998 /* BITTREXAccount2.swift */; };
+		401586992032403D006C7998 /* BITTREXAccount2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401586972032403D006C7998 /* BITTREXAccount2.swift */; };
+		4015869B20324EA1006C7998 /* BITTREXTransaction2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4015869A20324EA1006C7998 /* BITTREXTransaction2.swift */; };
+		4015869C20324EA1006C7998 /* BITTREXTransaction2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4015869A20324EA1006C7998 /* BITTREXTransaction2.swift */; };
 		403AA175201F87BA0088A2DE /* ExchangeAPIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AA174201F87BA0088A2DE /* ExchangeAPIErrors.swift */; };
 		403AA176201F87BA0088A2DE /* ExchangeAPIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AA174201F87BA0088A2DE /* ExchangeAPIErrors.swift */; };
 		403AA179201FA5520088A2DE /* ExchangeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AA178201FA5520088A2DE /* ExchangeOperation.swift */; };
@@ -743,6 +747,8 @@
 		400AA18E20251BE9002BDE20 /* BtcApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BtcApi.swift; sourceTree = "<group>"; };
 		400AA18F20251BE9002BDE20 /* BtcAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BtcAccount.swift; sourceTree = "<group>"; };
 		400AA19020251BE9002BDE20 /* BtcInstitution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BtcInstitution.swift; sourceTree = "<group>"; };
+		401586972032403D006C7998 /* BITTREXAccount2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BITTREXAccount2.swift; sourceTree = "<group>"; };
+		4015869A20324EA1006C7998 /* BITTREXTransaction2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BITTREXTransaction2.swift; sourceTree = "<group>"; };
 		403AA174201F87BA0088A2DE /* ExchangeAPIErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeAPIErrors.swift; sourceTree = "<group>"; };
 		403AA178201FA5520088A2DE /* ExchangeOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeOperation.swift; sourceTree = "<group>"; };
 		404B3EBC202A405A00E9427E /* CoinbaseTransaction2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinbaseTransaction2.swift; sourceTree = "<group>"; };
@@ -2665,6 +2671,8 @@
 			children = (
 				E672C2EB202A3CB200BE3390 /* BITTREXAPI2.swift */,
 				E672C2ED202A3CBF00BE3390 /* BITTREXAPI2Action.swift */,
+				401586972032403D006C7998 /* BITTREXAccount2.swift */,
+				4015869A20324EA1006C7998 /* BITTREXTransaction2.swift */,
 			);
 			path = BITTREX;
 			sourceTree = "<group>";
@@ -3249,6 +3257,7 @@
 				53552A0C1ED7251200DD95F9 /* Utils.swift in Sources */,
 				E63F3BBD2030E5DA00E7F4B7 /* ExchangeTransactionDataSyncer.swift in Sources */,
 				53629D5820238AF9000081E9 /* EmailIssueController.swift in Sources */,
+				4015869C20324EA1006C7998 /* BITTREXTransaction2.swift in Sources */,
 				404B3EC6202BC16600E9427E /* EthplorerAccount2.swift in Sources */,
 				53552A271ED7252900DD95F9 /* Array.swift in Sources */,
 				2DF898591FCC8F7500CCDFB9 /* CountlyStarRating.m in Sources */,
@@ -3429,6 +3438,7 @@
 				E6C1AC4620057ABE0018D6AA /* ReconnectAccountViewController.swift in Sources */,
 				A456ED151FB31A33006EE529 /* UIFont+Balance.swift in Sources */,
 				53552A141ED7251200DD95F9 /* ServerMessage.swift in Sources */,
+				401586992032403D006C7998 /* BITTREXAccount2.swift in Sources */,
 				53561EA81F82DD260043D4F9 /* AccountsListViewController.swift in Sources */,
 				2DF898471FCC8F7500CCDFB9 /* CountlyCommon.m in Sources */,
 				A41EE47D1FB9A98A00210038 /* GDAXTransaction.swift in Sources */,
@@ -3513,6 +3523,7 @@
 				2D326D261F5EA22900873286 /* PoloniexErrors.swift in Sources */,
 				537187E81F4CC23C00E7F9D6 /* CoinbaseAccount.swift in Sources */,
 				E63F3BC5203146FD00E7F4B7 /* HitBTCAPIAction.swift in Sources */,
+				4015869B20324EA1006C7998 /* BITTREXTransaction2.swift in Sources */,
 				A4E4571F1F79045A002E2879 /* Double.swift in Sources */,
 				537187FD1F4CC43000E7F9D6 /* SignUpViewController.swift in Sources */,
 				53D441EC1F44B224006967E1 /* FMDatabasePoolAdditions.m in Sources */,
@@ -3633,6 +3644,7 @@
 				533626601D54E5F80090656F /* FlippedView.swift in Sources */,
 				53F6965C2011322F00D28B23 /* BITTREXWithdrawal.swift in Sources */,
 				F1EA1A561D775ACC0040BB9E /* MockedKeychainManager.swift in Sources */,
+				401586982032403D006C7998 /* BITTREXAccount2.swift in Sources */,
 				53629D53201FE85B000081E9 /* PreferencesAccounts.swift in Sources */,
 				5301A77D1F17FDED00668099 /* Feedback.swift in Sources */,
 				400AA19320251BE9002BDE20 /* BtcAccount.swift in Sources */,

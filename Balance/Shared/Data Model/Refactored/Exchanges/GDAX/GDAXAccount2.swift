@@ -10,7 +10,6 @@ import Foundation
 
 struct GDAXAccount2: Codable {
     private var accountInstitutionId: Int = 0
-    private var accountSource: Source = .gdax
     private let identifier: String
     private let profileID: String
     private let currencyString: String
@@ -54,12 +53,7 @@ extension GDAXAccount2: ExchangeAccount {
     }
     
     var source: Source {
-        get {
-            return accountSource
-        }
-        set {
-            accountSource = newValue
-        }
+        return .gdax
     }
     
     var sourceAccountId: String {

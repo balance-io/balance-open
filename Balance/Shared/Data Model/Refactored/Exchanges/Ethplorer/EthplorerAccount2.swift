@@ -10,7 +10,6 @@ import Foundation
 
 struct EthplorerAccount2: Codable {
     private var accountInstitutionId: Int = 0
-    private var accountSource: Source = .ethplorer
     private let balance: Double
     private let tokenInfo: EthplorerToken
 
@@ -96,12 +95,7 @@ extension EthplorerAccount2: ExchangeAccount {
     }
     
     var source: Source {
-        get {
-            return accountSource
-        }
-        set {
-            accountSource = newValue
-        }
+        return .ethplorer
     }
     
     var sourceAccountId: String {

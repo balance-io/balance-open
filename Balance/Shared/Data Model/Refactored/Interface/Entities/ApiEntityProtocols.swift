@@ -33,7 +33,7 @@ public protocol ExchangeInstitution {
 public protocol ExchangeAccount {
     var accountType: AccountType { get }
     var institutionId: Int { get set }
-    var source: Source { get set }
+    var source: Source { get }
     var sourceAccountId: String { get }
     var name: String { get }
     var currencyCode: String { get }

@@ -12,7 +12,6 @@ struct KrakenAccount2 {
     private let assetCode: String
     private let balance: Double
     private var accountInstitutionId: Int = 0
-    private var accountSource: Source = .kraken
     
     // NOTE: Kraken standardizes all of their currency codes to 4 characters for some reason
     // so for example LTC is XLTC, USD is ZUSD, but USDT is just USDT. So we need to remove
@@ -51,12 +50,7 @@ extension KrakenAccount2: ExchangeAccount {
     }
 
     var source: Source {
-        get {
-            return accountSource
-        }
-        set {
-            accountSource = newValue
-        }
+        return .kraken
     }
 
     var sourceAccountId: String {

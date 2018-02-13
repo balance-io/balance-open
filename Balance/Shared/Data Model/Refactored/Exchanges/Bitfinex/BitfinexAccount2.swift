@@ -10,7 +10,6 @@ import Foundation
 
 struct BitfinexAccount2 {
     private var accountInstitutionId: Int = 0
-    private var accountSource: Source = .bitfinex
     private let type: String
     private let currency: Currency
     private let balance: Double
@@ -41,12 +40,7 @@ extension BitfinexAccount2: ExchangeAccount {
     }
     
     var source: Source {
-        get {
-            return accountSource
-        }
-        set {
-            accountSource = newValue
-        }
+        return .bitfinex
     }
     
     var sourceAccountId: String {
