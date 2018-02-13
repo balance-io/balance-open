@@ -403,9 +403,9 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
                     }
                     
                     self.updateTotalBalance()
-                    
                     self.adjustWindowHeight()
-                    
+                    self.createFixPasswordPrompt()
+
                     // Scroll to the end of the table
                     async(after: self.institutionUpdateDelay) {
                         NSAnimationContext.runAnimationGroup({ context in
@@ -447,6 +447,7 @@ class AccountsTabViewController: NSViewController, SectionedTableViewDelegate, S
                 }
                 
                 self.updateTotalBalance()
+                self.createFixPasswordPrompt()
                 
                 // Only adjust if we're visible
                 if self.view.window != nil {
