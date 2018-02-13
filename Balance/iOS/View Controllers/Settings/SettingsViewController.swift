@@ -164,8 +164,7 @@ internal final class SettingsViewController: UIViewController
         })
         
         addAccountRow.actionHandler = { [weak self] (indexPath) in
-            let navigationController = UINavigationController(rootViewController: AddAccountViewController())
-            self?.present(navigationController, animated: true, completion: nil)
+            self?.navigationController?.pushViewController(AddAccountViewController(), animated: true)
         }
         
         institutionRows.append(addAccountRow)
