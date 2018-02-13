@@ -18,8 +18,10 @@ class ExchangeRepositoryServiceProvider: RepositoryServiceProtocol {
         let accountsUpdated = updateAccounts(accounts, with: institution)
         
         switch source {
-        case .kraken, .gdax, .bitfinex, .blockchain, .bittrex, .binance, .hitbtc:
+        case .kraken, .gdax, .bitfinex, .blockchain, .bittrex, .hitbtc:
             saveExchangeAccounts(accountsUpdated)
+        case .binance:
+            saveAndHideLocalAccounts(accountsUpdated)
         case .poloniex:
             savePoloniexAccounts(accountsUpdated, institution: institution)
         case .coinbase:
@@ -78,7 +80,7 @@ private extension ExchangeRepositoryServiceProvider {
 private extension ExchangeRepositoryServiceProvider {
     
     func savePoloniexAccounts(_ accounts: [ExchangeAccount], institution: Institution) {
-        hideLocalAccounts(accounts)
+        saveAndHideLocalAccounts(accounts)
          
         let accounts = AccountRepository.si.accounts(institutionId: institution.institutionId)
         for account in accounts {
@@ -90,13 +92,12 @@ private extension ExchangeRepositoryServiceProvider {
         }
     }
     
-    func hideLocalAccounts(_ accounts: [ExchangeAccount]) {
+    func saveAndHideLocalAccounts(_ accounts: [ExchangeAccount]) {
         for exchangeAccount in accounts {
             guard let accountSaved = saveExchangeAccount(exchangeAccount) else {
                 continue
             }
             
-            //TODO: validate if currenty property on Poloniex account is equal with currencyCode from ExchangeAccount protocol
             let currency = Currency.rawValue(exchangeAccount.currencyCode)
             let isHidden = (exchangeAccount.currentBalance == 0)
             

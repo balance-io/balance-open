@@ -104,7 +104,7 @@ extension ExchangeManager: ExchangeManagerActions {
             log.debug("Error - Can't refresh \(institution.source.description) institution with id \(institution.institutionId), becuase credentials weren't fetched")
             return
         }
-        
+
         switch institution.source {
         case .poloniex:
             refreshInstitution(institution: institution, credentials: credentials, exchangeAPI: poloniexExchangeAPI, apiAction: PoloniexApiAction.self, delayTransactions: true)

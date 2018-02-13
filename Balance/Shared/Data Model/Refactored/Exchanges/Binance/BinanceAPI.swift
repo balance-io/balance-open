@@ -83,6 +83,32 @@ class BinanceAPI: AbstractApi {
         return []
     }
     
+    override func processBaseErrors(data: Data?, error: Error?, response: URLResponse?) -> Error? {
+        guard let data = data,
+            let response = response as? HTTPURLResponse,
+            let dict = createDict(from: data) else {
+                return nil
+        }
+        
+        guard let code = dict["code"] as? Int,
+            let message = dict["msg"] as? String else {
+                return nil
+        }
+        
+        let statusCode = response.statusCode
+        
+        switch code {
+        case -1002:
+            return ExchangeBaseError.scopeRestricted
+        case -1022:
+            return ExchangeBaseError.invalidCredentials(statusCode: statusCode)
+        default:
+            return statusCode > 500 ? ExchangeBaseError.invalidServer(statusCode: statusCode) :
+                ExchangeBaseError.other(message: message)
+        }
+    }
+
+    //Errors come over the http protocol not throght 200 status code
     override func processApiErrors(from data: Data) -> Error? {
         return nil
     }

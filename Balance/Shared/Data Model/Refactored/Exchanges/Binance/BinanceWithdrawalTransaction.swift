@@ -84,7 +84,7 @@ extension BinanceWithdrawalTransaction: ExchangeTransaction {
     }
     
     var amount: Int {
-        return transactionAmount.integerFixedCryptoDecimals()
+        return -transactionAmount.integerFixedCryptoDecimals()
     }
     
 }

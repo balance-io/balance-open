@@ -126,7 +126,9 @@ extension HitBTCTransaction: ExchangeTransaction {
             return 0
         }
         
-        return amount.integerFixedCryptoDecimals()
+        let realAmount = amount.integerFixedCryptoDecimals()
+        
+        return transactionType.exchangeType == .withdrawal && realAmount > 0 ? -realAmount : realAmount
     }
     
 }
