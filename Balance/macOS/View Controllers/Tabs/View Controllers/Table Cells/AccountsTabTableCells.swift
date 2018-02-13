@@ -98,6 +98,16 @@ class AccountsTabGroupCell: View {
         
         self.setAccessibilityLabel("Section: " + updatedModel.name)
         self.needsDisplay = true
+        
+        updateBackgroundColors()
+    }
+    
+    func updateBackgroundColors() {
+        if let color = model?.source.color {
+            self.layerBackgroundColor = color
+            amountField.backgroundColor = color
+            nameField.backgroundColor = color
+        }
     }
 }
 
@@ -136,7 +146,6 @@ class AccountsTabAccountCell: View {
     
     init() {
         super.init(frame: NSZeroRect)
-        self.layerBackgroundColor = CurrentTheme.defaults.cell.backgroundColor
         
         self.addSubview(topContainer)
         topContainer.snp.makeConstraints { make in
