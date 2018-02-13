@@ -45,7 +45,7 @@ class HitBTCAPI: AbstractApi {
         do {
             let transactions = try JSONDecoder().decode([HitBTCTransaction].self, from: data)
             
-            return transactions
+            return transactions.filter { $0.status == .success }
         } catch {
             print("Transactions from hitbtc can not be parsed to an object\n\(error)")
             return []

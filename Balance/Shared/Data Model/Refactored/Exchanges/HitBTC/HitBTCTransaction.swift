@@ -52,7 +52,6 @@ struct HitBTCTransaction: Codable {
     private let fee: String
     private let networkFee: String
     private let hash: String
-    private let status: HitBTCTransactionStatus
     private let transactionType: HitBTCTransactionType
     private let createdAt: String
     
@@ -62,6 +61,7 @@ struct HitBTCTransaction: Codable {
     
     let currencyCode: String
     let source: Source = .hitbtc
+    let status: HitBTCTransactionStatus
     var institutionId: Int = 0
     var sourceInstitutionId: String = ""
     

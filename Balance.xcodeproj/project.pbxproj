@@ -529,6 +529,12 @@
 		DCC684D81BD1080E00E95B90 /* TransactionsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC684D71BD1080E00E95B90 /* TransactionsTabViewController.swift */; };
 		DCDF77BD1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDF77BC1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift */; };
 		DCDF77BF1BE6C703004AF8AE /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDF77BE1BE6C703004AF8AE /* PreferencesViewController.swift */; };
+		E6056BF920329D6B00F55CE5 /* BinanceAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6056BF820329D6B00F55CE5 /* BinanceAccount.swift */; };
+		E6056BFA20329D6B00F55CE5 /* BinanceAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6056BF820329D6B00F55CE5 /* BinanceAccount.swift */; };
+		E6056BFC20329DB000F55CE5 /* BinanceDepositTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6056BFB20329DB000F55CE5 /* BinanceDepositTransaction.swift */; };
+		E6056BFD20329DB000F55CE5 /* BinanceDepositTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6056BFB20329DB000F55CE5 /* BinanceDepositTransaction.swift */; };
+		E6056BFF20329DC200F55CE5 /* BinanceWithdrawalTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6056BFE20329DC200F55CE5 /* BinanceWithdrawalTransaction.swift */; };
+		E6056C0020329DC200F55CE5 /* BinanceWithdrawalTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6056BFE20329DC200F55CE5 /* BinanceWithdrawalTransaction.swift */; };
 		E605EF7F20065F3700A95632 /* UIView+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605EF7D20065EFA00A95632 /* UIView+Size.swift */; };
 		E605EF8320065FE700A95632 /* ReconnectAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605EF8120065FDD00A95632 /* ReconnectAccountViewModel.swift */; };
 		E605EF862006851300A95632 /* Collection+Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605EF852006851300A95632 /* Collection+Index.swift */; };
@@ -1094,6 +1100,9 @@
 		DCC684D71BD1080E00E95B90 /* TransactionsTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionsTabViewController.swift; sourceTree = "<group>"; };
 		DCDF77BC1BE6C6C6004AF8AE /* PreferencesGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesGeneralViewController.swift; sourceTree = "<group>"; };
 		DCDF77BE1BE6C703004AF8AE /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		E6056BF820329D6B00F55CE5 /* BinanceAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceAccount.swift; sourceTree = "<group>"; };
+		E6056BFB20329DB000F55CE5 /* BinanceDepositTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceDepositTransaction.swift; sourceTree = "<group>"; };
+		E6056BFE20329DC200F55CE5 /* BinanceWithdrawalTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceWithdrawalTransaction.swift; sourceTree = "<group>"; };
 		E605EF7D20065EFA00A95632 /* UIView+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Size.swift"; sourceTree = "<group>"; };
 		E605EF8120065FDD00A95632 /* ReconnectAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountViewModel.swift; sourceTree = "<group>"; };
 		E605EF852006851300A95632 /* Collection+Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Index.swift"; sourceTree = "<group>"; };
@@ -2766,6 +2775,9 @@
 			children = (
 				E6A5B9A5202E0928006426BE /* BinanceAPI.swift */,
 				E6A5B9A8202E0963006426BE /* BinanceAPIAction.swift */,
+				E6056BF820329D6B00F55CE5 /* BinanceAccount.swift */,
+				E6056BFB20329DB000F55CE5 /* BinanceDepositTransaction.swift */,
+				E6056BFE20329DC200F55CE5 /* BinanceWithdrawalTransaction.swift */,
 			);
 			path = Binance;
 			sourceTree = "<group>";
@@ -3302,6 +3314,7 @@
 				A41EE4821FB9B66D00210038 /* QRLoginCredentialsParser.swift in Sources */,
 				532121A81EE8B91600F4812A /* ZipUtilities.swift in Sources */,
 				53DE2E9A1FAF16B000AC9FCF /* KrakenTransaction.swift in Sources */,
+				E6056BFA20329D6B00F55CE5 /* BinanceAccount.swift in Sources */,
 				A4ED56DE1F86378200E4CC42 /* InstitutionTableHeaderView.swift in Sources */,
 				5301A77E1F17FDED00668099 /* Feedback.swift in Sources */,
 				2DF8985D1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */,
@@ -3404,6 +3417,8 @@
 				53561EAC1F82DD260043D4F9 /* AddCredentialBasedAccountViewController.swift in Sources */,
 				53552A7A1ED7347900DD95F9 /* MockedKeychainManager.swift in Sources */,
 				535529FD1ED7250500DD95F9 /* PlaidDataMockingProtocol.swift in Sources */,
+				E6056BFD20329DB000F55CE5 /* BinanceDepositTransaction.swift in Sources */,
+				E6056C0020329DC200F55CE5 /* BinanceWithdrawalTransaction.swift in Sources */,
 				E63F3BC6203146FD00E7F4B7 /* HitBTCAPIAction.swift in Sources */,
 				A4E457171F7901E7002E2879 /* EthplorerAccount.swift in Sources */,
 				53552A2E1ED72B5700DD95F9 /* FMDatabase.m in Sources */,
@@ -3494,6 +3509,7 @@
 				5373B4771FAB7350007432DC /* PriceTickerTabViewController.swift in Sources */,
 				A40ABBE91F6BC5A000383C62 /* KrakenCredentials.swift in Sources */,
 				530422981ED3A82A001CA499 /* TransactionsTabTableCells.swift in Sources */,
+				E6056BFF20329DC200F55CE5 /* BinanceWithdrawalTransaction.swift in Sources */,
 				53D441E51F44ABBD006967E1 /* Item.swift in Sources */,
 				A4430A9F1F95F3ED00F2FFFA /* ExchangeRate.swift in Sources */,
 				5301A7771F17F86900668099 /* HTTPMethod.swift in Sources */,
@@ -3564,6 +3580,7 @@
 				539C8E931C73CB31005C72BC /* PreferencesAccountsViewController.swift in Sources */,
 				53EB77BB1CF3DF6E00F01903 /* Color.swift in Sources */,
 				53762EB11ED793A200D34A1E /* main.swift in Sources */,
+				E6056BFC20329DB000F55CE5 /* BinanceDepositTransaction.swift in Sources */,
 				539348BB1DEBB479009F4564 /* TokenSearchField.swift in Sources */,
 				537187F01F4CC23C00E7F9D6 /* PoloniexApi.swift in Sources */,
 				537187F11F4CC23C00E7F9D6 /* PoloniexAccount.swift in Sources */,
@@ -3652,6 +3669,7 @@
 				404B3EC5202BC16600E9427E /* EthplorerAccount2.swift in Sources */,
 				2DF898541FCC8F7500CCDFB9 /* CountlyPersistency.m in Sources */,
 				53B327C61E56AEC2009C7AFC /* SyncDefaults.swift in Sources */,
+				E6056BF920329D6B00F55CE5 /* BinanceAccount.swift in Sources */,
 				2DF8984A1FCC8F7500CCDFB9 /* CountlyConnectionManager.m in Sources */,
 				A4430A901F94EE1700F2FFFA /* CoinbaseInstitution.swift in Sources */,
 				E63F3BBC2030E5D500E7F4B7 /* ExchangeTransactionDataSyncer.swift in Sources */,

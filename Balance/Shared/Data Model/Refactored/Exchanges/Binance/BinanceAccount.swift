@@ -1,6 +1,6 @@
 //
-//  HitBTCAccount.swift
-//  BalancemacOS
+//  BinanceAccount.swift
+//  Balance
 //
 //  Created by Eli Pacheco Hoyos on 2/12/18.
 //  Copyright © 2018 Balanced Software, Inc. All rights reserved.
@@ -8,25 +8,45 @@
 
 import Foundation
 
-struct HitBTCAccount: Codable {
+struct BinanceAccounts: Codable {
     
-    private let balance: String
+    private let makerCommission: Int
+    private let takerCommission: Int
+    private let buyerCommission: Int
+    private let sellerCommission: Int
+    private let canTrade: Bool
+    private let canWithdraw: Bool
+    private let canDeposit: Bool
+    private let updateTime: Int
+    let balances: [BinanceAccount]
+    
+}
+
+struct BinanceAccount: Codable {
+    
     private var currency: Currency {
-        return Currency.rawValue(currencyCode)
+        return Currency.rawValue(asset)
     }
     
-    let currencyCode: String
-    var institutionId: Int = -1
-    var source: Source = .hitbtc
+    let asset: String
+    let free: String
+    let locked: String
+    let source: Source = .binance
+    var institutionId: Int = 0
     
     enum CodingKeys: String, CodingKey {
-        case currencyCode = "currency"
-        case balance = "available"
+        case asset
+        case free
+        case locked
     }
     
 }
 
-extension HitBTCAccount: ExchangeAccount {
+extension  BinanceAccount: ExchangeAccount {
+    
+    var currencyCode: String {
+        return currency.code
+    }
     
     var accountType: AccountType {
         return .exchange
@@ -41,7 +61,7 @@ extension HitBTCAccount: ExchangeAccount {
     }
     
     var currentBalance: Int {
-        guard let balance = Double(balance) else {
+        guard let balance = Double(free) else {
             return 0
         }
         

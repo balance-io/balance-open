@@ -40,7 +40,7 @@ class BinanceAPI: AbstractApi {
                 return nil
             }
             
-            return ExchangeOperation(with: self, request: singleRequest, resultBlock: completion)
+            return ExchangeOperation(with: self, action: action, request: singleRequest, resultBlock: completion)
         case .transactions(_):
             let transactionSyncer = ExchangeTransactionDataSyncer()
             
@@ -50,6 +50,41 @@ class BinanceAPI: AbstractApi {
                                                 responseHandler: self,
                                                 resultBlock: completion)
         }
+    }
+    
+    override func buildAccounts(from data: Data) -> Any {
+        do {
+            let accounts = try JSONDecoder().decode(BinanceAccounts.self, from: data)
+            
+            return accounts.balances
+        } catch {
+            print("Accounts from hitbtc can not be parsed to an object\n\(error)")
+            return []
+        }
+    }
+    
+    override func buildTransactions(from data: Data) -> Any {
+        do {
+            let deposit = try JSONDecoder().decode(BinanceDepositList.self, from: data)
+            
+            return deposit.depositList.filter { $0.status == .success }
+        } catch {
+            print("Deposits from binance can not be parsed to an object\n\(error)")
+        }
+        
+        do {
+            let withdrawal = try JSONDecoder().decode(BinanceWithdrawalList.self, from: data)
+            
+            return withdrawal.withdrawList.filter { $0.status == .completed }
+        } catch {
+            print("Withdrawal from binance can not be parsed to an object\n\(error)")
+        }
+        
+        return []
+    }
+    
+    override func processApiErrors(from data: Data) -> Error? {
+        return nil
     }
     
 }
