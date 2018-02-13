@@ -9,9 +9,7 @@
 import LocalAuthentication
 import UIKit
 
-
-internal final class SettingsViewController: UIViewController
-{
+final class SettingsViewController: UIViewController {
     // Fileprivate
     fileprivate var tableData = [TableSection]()
     
@@ -24,8 +22,7 @@ internal final class SettingsViewController: UIViewController
     
     // MARK: Initialization
     
-    internal required init()
-    {
+    required init() {
         super.init(nibName: nil, bundle: nil)
         self.title = "Settings"
         self.tabBarItem.image = UIImage(named: "Gear")
@@ -35,8 +32,7 @@ internal final class SettingsViewController: UIViewController
         NotificationCenter.default.addObserver(self, selector: #selector(self.accountRemovedNotification(_:)), name: Notifications.AccountRemoved, object: nil)
     }
     
-    internal required init?(coder aDecoder: NSCoder)
-    {
+    required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
     
@@ -46,8 +42,7 @@ internal final class SettingsViewController: UIViewController
     
     // MARK: View lifecycle
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.white
@@ -56,28 +51,26 @@ internal final class SettingsViewController: UIViewController
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true
         }
-//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(self.logoutButtonTapped(_:)))
         
         // Table view
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
-        self.tableView.register(reusableCell: TableViewCell.self)
-        self.tableView.register(reusableCell: SegmentedControlTableViewCell.self)
-        self.view.addSubview(self.tableView)
-        
-        self.tableView.snp.makeConstraints { (make) in
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(reusableCell: TableViewCell.self)
+        tableView.register(reusableCell: SegmentedControlTableViewCell.self)
+        self.view.addSubview(tableView)
+        tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
         
         // Biometric lock switch
-        self.biometricLockEnabledSwitch.addTarget(self, action: #selector(self.biometricLockEnabledSwitchValueChanged(_:)), for: .valueChanged)
+        biometricLockEnabledSwitch.addTarget(self, action: #selector(biometricLockEnabledSwitchValueChanged(_:)), for: .valueChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.reloadData()
-        self.tableView.reloadData()
+        reloadData()
+        tableView.setEditing(false, animated: false)
     }
     
     // MARK: Data
@@ -191,9 +184,24 @@ internal final class SettingsViewController: UIViewController
         
         self.tableData = tableSections
         self.tableView.reloadData()
+        
+        // Show Edit button if there are any institutions
+        self.navigationItem.rightBarButtonItem = viewModel.numberOfSections() > 0 ? UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButtonTapped(_:))) : nil
     }
     
     // MARK: Actions
+    
+    @objc private func editButtonTapped(_ sender: Any) {
+        // Set editing to false to close any cell that may have been swiped open to show the delete button
+        tableView.setEditing(false, animated: false)
+        tableView.setEditing(true, animated: true)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped(_:)))
+    }
+    
+    @objc private func doneButtonTapped(_ sender: Any) {
+        tableView.setEditing(false, animated: true)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButtonTapped(_:)))
+    }
 
     @objc private func logoutButtonTapped(_ sender: Any) {
         // TODO: Logout
