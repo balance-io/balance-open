@@ -73,6 +73,11 @@ final class SettingsViewController: UIViewController {
         tableView.setEditing(false, animated: false)
     }
     
+    private func createEditButton() {
+        // Show Edit button if there are any institutions
+        self.navigationItem.rightBarButtonItem = viewModel.numberOfSections() > 0 ? UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButtonTapped(_:))) : nil
+    }
+    
     // MARK: Data
     
     private func reloadData() {
@@ -185,8 +190,7 @@ final class SettingsViewController: UIViewController {
         self.tableData = tableSections
         self.tableView.reloadData()
         
-        // Show Edit button if there are any institutions
-        self.navigationItem.rightBarButtonItem = viewModel.numberOfSections() > 0 ? UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButtonTapped(_:))) : nil
+        createEditButton()
     }
     
     // MARK: Actions
@@ -200,7 +204,7 @@ final class SettingsViewController: UIViewController {
     
     @objc private func doneButtonTapped(_ sender: Any) {
         tableView.setEditing(false, animated: true)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButtonTapped(_:)))
+        createEditButton()
     }
 
     @objc private func logoutButtonTapped(_ sender: Any) {
