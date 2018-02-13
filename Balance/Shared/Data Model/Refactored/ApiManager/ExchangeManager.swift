@@ -100,20 +100,11 @@ extension ExchangeManager: ExchangeManagerActions {
     }
     
     func refresh(institution: Institution) {
-//        guard let credentials = keychainService.fetchCredentials(with: "\(institution.institutionId)", source: institution.source, name: institution.name) else {
-//            log.debug("Error - Can't refresh \(institution.source.description) institution with id \(institution.institutionId), becuase credentials weren't fetched")
-//            return
-//        }
-        
-        let loginFields: [Field] = [
-            Field(name: "", type: .key, value: ""),
-            Field(name: "", type: .secret, value: "")
-        ]
-        
-        guard let credentials = BalanceCredentials.credentials(from: loginFields, source: institution.source) else {
+        guard let credentials = keychainService.fetchCredentials(with: "\(institution.institutionId)", source: institution.source, name: institution.name) else {
+            log.debug("Error - Can't refresh \(institution.source.description) institution with id \(institution.institutionId), becuase credentials weren't fetched")
             return
         }
-
+        
         switch institution.source {
         case .poloniex:
             refreshInstitution(institution: institution, credentials: credentials, exchangeAPI: poloniexExchangeAPI, apiAction: PoloniexApiAction.self, delayTransactions: true)

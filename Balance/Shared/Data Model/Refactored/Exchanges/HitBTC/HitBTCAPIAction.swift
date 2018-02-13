@@ -12,7 +12,7 @@ struct HitBTCAPIAction: APIAction {
     
     let credentials: Credentials
     let type: ApiRequestType
-    let nonce: Int64 = Int64(Date().timeIntervalSince1970 * 1000)
+    let nonce: Int64 = 0
     
     init(type: ApiRequestType, credentials: Credentials) {
         self.type = type
@@ -38,33 +38,11 @@ extension HitBTCAPIAction {
     }
     
     var url: URL? {
-        return URL(string: host + path + validQuery)
+        return URL(string: host + path)
     }
     
     var components: URLComponents? {
-        return getBasicURLComponents(from: params)
-    }
-    
-    private var params: [String: String] {
-        let basicParams:  [String: String] = [
-            "nonce" : String(nonce),
-            "apikey": credentials.apiKey
-        ]
-        
-        switch type {
-        case .accounts:
-            return basicParams
-        case .transactions(_):
-            return basicParams
-        }
-    }
-    
-    private var validQuery: String {
-        guard let validQuery = self.query else {
-            return ""
-        }
-        
-        return "?" + validQuery
+        return nil
     }
     
 }

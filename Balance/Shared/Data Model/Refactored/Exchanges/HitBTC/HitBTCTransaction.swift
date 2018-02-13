@@ -47,7 +47,7 @@ fileprivate let dateFormatter: DateFormatter = {
 struct HitBTCTransaction: Codable {
     
     private let identifier: String
-    private let transactionAmount: Double
+    private let transactionAmount: String
     private let address: String
     private let fee: String
     private let networkFee: String
@@ -122,7 +122,11 @@ extension HitBTCTransaction: ExchangeTransaction {
     }
     
     var amount: Int {
-        return transactionAmount.integerFixedCryptoDecimals()
+        guard let amount = Double(transactionAmount) else {
+            return 0
+        }
+        
+        return amount.integerFixedCryptoDecimals()
     }
     
 }
