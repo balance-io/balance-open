@@ -9,11 +9,17 @@
 import Foundation
 
 struct KucoinAccounts: Decodable {
-    private let data: [KucoinAccount]
+    private let success: Bool
+    private let code: String
+    private let data: KucoinAccountsInformation
     
     var accounts: [ExchangeAccount] {
-        return data
+        return data.datas
     }
+}
+
+fileprivate struct KucoinAccountsInformation: Decodable {
+    let datas: [KucoinAccount]
 }
 
 struct KucoinAccount: Decodable {

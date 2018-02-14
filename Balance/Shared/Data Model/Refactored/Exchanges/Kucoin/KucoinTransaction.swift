@@ -8,55 +8,71 @@
 
 import Foundation
 
-enum KucoinTransactionType: Decodable {
+enum KucoinTransactionType: Equatable {
     case deposit
     case withdrawal
-    case unknown
+    case unknown(type: String)
     
-    private enum CodingKeys: String, CodingKey {
-        case deposit = "DEPOSIT"
-        case withdrawal = "WITHDRAWAL"
+    init(type: String) {
+        switch type {
+        case "DEPOSIT":
+            self = .deposit
+        case "WITHDRAW":
+            self = .withdrawal
+        default:
+            self = .unknown(type: type)
+        }
     }
     
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        
-        if (try? values.decode(String.self, forKey: .deposit)) != nil {
-            self = .deposit
+    static func==(left: KucoinTransactionType, right: KucoinTransactionType) -> Bool {
+        switch (left, right) {
+        case (.deposit, .deposit):
+            return true
+        case (.withdrawal, .withdrawal):
+            return true
+        case (.unknown(let leftType), .unknown(let rightType)):
+            return leftType == rightType
+        default:
+            return false
         }
-        
-        if (try? values.decode(String.self, forKey: .withdrawal)) != nil {
-            self = .withdrawal
-        }
-        
-        self = .unknown
     }
     
 }
 
-enum KucoinTransactionStatus: Decodable {
+enum KucoinTransactionStatus: Equatable {
     case success
     case cancel
-    case unknown
+    case unknown(status: String)
     
     private enum CodingKeys: String, CodingKey {
         case success = "SUCCESS"
         case cancel = "CANCEL"
     }
     
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        
-        if (try? values.decode(String.self, forKey: .success)) != nil {
+    init(status: String) {
+        switch status {
+        case "SUCCESS":
             self = .success
-        }
-        
-        if (try? values.decode(String.self, forKey: .cancel)) != nil {
+        case "CANCEL":
             self = .cancel
+        default:
+            self = .unknown(status: status)
         }
-        
-        self = .unknown
     }
+    
+    static func==(left: KucoinTransactionStatus, right: KucoinTransactionStatus) -> Bool {
+        switch (left, right) {
+        case (.success, .success):
+            return true
+        case (.cancel, .cancel):
+            return true
+        case (.unknown(let leftStatus), .unknown(let rightStatus)):
+            return leftStatus == rightStatus
+        default:
+            return false
+        }
+    }
+    
 }
 
 struct KucoinTransactions: Decodable {
@@ -75,18 +91,23 @@ struct KucoinTransaction: Decodable {
     
     private let fee: Double
     private let oid: String
-    private let transactionType: KucoinTransactionType
     private let transactionAmount: Double
     private let address: String
     private let coinType: String
     private let createdAt: Double
     private let updatedAt: Double
     
+    private let transactionType: String
+    private let transactionStatus: String
+    
     private var currency: Currency {
         return Currency.rawValue(coinType)
     }
     
-    let status: KucoinTransactionStatus
+    var status: KucoinTransactionStatus {
+        return KucoinTransactionStatus(status: transactionStatus)
+    }
+    
     var institutionId: Int = -1
     var source: Source = .kucoin
     var sourceInstitutionId: String = ""
@@ -96,7 +117,7 @@ struct KucoinTransaction: Decodable {
         case oid
         case transactionType = "type"
         case transactionAmount = "amount"
-        case status
+        case transactionStatus = "status"
         case address
         case coinType
         case createdAt
@@ -113,6 +134,7 @@ extension KucoinTransaction: ExchangeTransaction {
     
     var type: String {
         get {
+            let transactionType = KucoinTransactionType(type: self.transactionType)
             switch transactionType {
             case .deposit:
                 return ExchangeTransactionType.deposit.rawValue
@@ -145,7 +167,8 @@ extension KucoinTransaction: ExchangeTransaction {
     }
     
     var amount: Int {
-        guard transactionType == .unknown else {
+        let transactionType = KucoinTransactionType(type: self.transactionType)
+        if case .unknown(_) = transactionType {
             return 0
         }
         

@@ -47,7 +47,7 @@ class KucoinAPI: AbstractApi {
             
             return data.accounts
         } catch {
-            print("Accounts from hitbtc can not be parsed to an object\n\(error)")
+            print("Accounts from kucoin can not be parsed to an object\n\(error)")
             return []
         }
     }
@@ -58,13 +58,9 @@ class KucoinAPI: AbstractApi {
             
             return data.transactions.filter { $0.status == .success }
         } catch {
-            print("Transactions from hitbtc can not be parsed to an object\n\(error)")
+            print("Transactions from kucoin can not be parsed to an object\n\(error)")
             return []
         }
-    }
-    
-    override func processBaseErrors(data: Data?, error: Error?, response: URLResponse?) -> Error? {
-        return nil
     }
     
     override func processApiErrors(from data: Data) -> Error? {

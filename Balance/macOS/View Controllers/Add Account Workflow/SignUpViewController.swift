@@ -554,9 +554,10 @@ class SignUpViewController: NSViewController {
             Field(name: "", type: .secret, value: "")
         ]
 
+
         exchangeManager.login(with: .kucoin, fields: loginFields)
 
-//        let mockInstitution = Institution(institutionId: 1, source: .binance, sourceInstitutionId: "", name: "")
+//        let mockInstitution = Institution(institutionId: 1, source: .kucoin, sourceInstitutionId: "", name: "")
 //        exchangeManager.refresh(institution: mockInstitution)
 
 //        prepareViewsForSubmit(loadingText: "Connecting to \(apiInstitution.name)...")
