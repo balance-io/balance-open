@@ -18,6 +18,7 @@ enum SignUpTextFieldType: String {
     case passphrase
     case name
     case address
+    case userId
     case none
 }
 
@@ -73,7 +74,7 @@ class SignUpTextField: View, TextFieldDelegate {
         var iconImage = #imageLiteral(resourceName: "login-user")
         var iconImageSize = NSZeroSize
         switch type {
-        case .secret, .passphrase:
+        case .secret, .passphrase, .userId:
             iconImage = #imageLiteral(resourceName: "login-password")
             iconImageSize = NSSize(width: 10, height: 12)
         case .pin, .key, .address, .name:

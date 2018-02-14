@@ -17,8 +17,9 @@ public enum Source: Int, CustomStringConvertible {
     case ethplorer  = 7
     case bittrex    = 8
     case blockchain = 9
-    case binance = 10
-    case hitbtc = 11
+    case binance    = 10
+    case hitbtc     = 11
+    case cex        = 12
     
     public var description: String {
         switch self {
@@ -33,6 +34,7 @@ public enum Source: Int, CustomStringConvertible {
         case .blockchain:   return "BTC Wallet"
         case .binance:      return "Binance" //TODO: Need validation
         case .hitbtc:       return "HitBTC"  //TODO: Need validation
+        case .cex:          return "CEX"
         }
     }
     
@@ -48,6 +50,7 @@ public enum Source: Int, CustomStringConvertible {
         case .blockchain:   return PXColor(hexString: "#F38724")!
         case .binance:      return PXColor(hexString: "#020102")! //TODO: Need validation
         case .hitbtc:       return PXColor(hexString: "#14374A")! //TODO: Need validation
+        case .cex:          return PXColor(hexString: "#182E46")! //TODO: Need validation
         }
     }
     
@@ -63,6 +66,7 @@ public enum Source: Int, CustomStringConvertible {
         case .blockchain: return URL(string: "https://bitcoin.org/en/choose-your-wallet")!
         case .binance:    return URL(string: "https://google.com/binance")! //TODO: Need validation
         case .hitbtc:     return URL(string: "https://google.com/hitbtc")! //TODO: Need validation
+        case .cex:        return URL(string: "https://google.com/cex.io")! // TODO: Need validation
         }
     }
 }

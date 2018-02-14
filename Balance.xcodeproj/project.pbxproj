@@ -68,6 +68,11 @@
 		4015869C20324EA1006C7998 /* BITTREXTransaction2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4015869A20324EA1006C7998 /* BITTREXTransaction2.swift */; };
 		4015869E20334A99006C7998 /* BTCAccount2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4015869D20334A99006C7998 /* BTCAccount2.swift */; };
 		4015869F20334A99006C7998 /* BTCAccount2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4015869D20334A99006C7998 /* BTCAccount2.swift */; };
+		401586A220336B89006C7998 /* CEXAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401586A120336B89006C7998 /* CEXAPI.swift */; };
+		401586A320336B89006C7998 /* CEXAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401586A120336B89006C7998 /* CEXAPI.swift */; };
+		401586A5203379F4006C7998 /* CEXAPIAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401586A4203379F4006C7998 /* CEXAPIAction.swift */; };
+		401586A6203379F4006C7998 /* CEXAPIAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401586A4203379F4006C7998 /* CEXAPIAction.swift */; };
+		401586A720349533006C7998 /* ExchangeApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E676EA8B202501F00023279B /* ExchangeApi.swift */; };
 		403AA175201F87BA0088A2DE /* ExchangeAPIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AA174201F87BA0088A2DE /* ExchangeAPIErrors.swift */; };
 		403AA176201F87BA0088A2DE /* ExchangeAPIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AA174201F87BA0088A2DE /* ExchangeAPIErrors.swift */; };
 		403AA179201FA5520088A2DE /* ExchangeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AA178201FA5520088A2DE /* ExchangeOperation.swift */; };
@@ -92,6 +97,8 @@
 		40A90EA5200959840063B2F5 /* AddNewAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA4200959840063B2F5 /* AddNewAccountView.swift */; };
 		40A90EA7200EA7C60063B2F5 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA6200EA7C60063B2F5 /* UIView+Shadow.swift */; };
 		40A90EA9200F9A4C0063B2F5 /* BlankStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A90EA8200F9A4C0063B2F5 /* BlankStateView.swift */; };
+		40BB6ED32034A2D000A8450B /* CEXAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BB6ED22034A2D000A8450B /* CEXAccount.swift */; };
+		40BB6ED42034A2D000A8450B /* CEXAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BB6ED22034A2D000A8450B /* CEXAccount.swift */; };
 		5300D6261DCE5A1E00D02657 /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5300D6251DCE5A1E00D02657 /* LockViewController.swift */; };
 		5301A7611F17DC8B00668099 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301A7601F17DC8B00668099 /* URL.swift */; };
 		5301A7771F17F86900668099 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301A7761F17F86900668099 /* HTTPMethod.swift */; };
@@ -752,6 +759,8 @@
 		401586972032403D006C7998 /* BITTREXAccount2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BITTREXAccount2.swift; sourceTree = "<group>"; };
 		4015869A20324EA1006C7998 /* BITTREXTransaction2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BITTREXTransaction2.swift; sourceTree = "<group>"; };
 		4015869D20334A99006C7998 /* BTCAccount2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCAccount2.swift; sourceTree = "<group>"; };
+		401586A120336B89006C7998 /* CEXAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEXAPI.swift; sourceTree = "<group>"; };
+		401586A4203379F4006C7998 /* CEXAPIAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEXAPIAction.swift; sourceTree = "<group>"; };
 		403AA174201F87BA0088A2DE /* ExchangeAPIErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeAPIErrors.swift; sourceTree = "<group>"; };
 		403AA178201FA5520088A2DE /* ExchangeOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeOperation.swift; sourceTree = "<group>"; };
 		404B3EBC202A405A00E9427E /* CoinbaseTransaction2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinbaseTransaction2.swift; sourceTree = "<group>"; };
@@ -768,6 +777,7 @@
 		40A90EA4200959840063B2F5 /* AddNewAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewAccountView.swift; sourceTree = "<group>"; };
 		40A90EA6200EA7C60063B2F5 /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
 		40A90EA8200F9A4C0063B2F5 /* BlankStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankStateView.swift; sourceTree = "<group>"; };
+		40BB6ED22034A2D000A8450B /* CEXAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEXAccount.swift; sourceTree = "<group>"; };
 		5300D6251DCE5A1E00D02657 /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
 		5301A7601F17DC8B00668099 /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		5301A7761F17F86900668099 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -1339,6 +1349,16 @@
 				400AA19020251BE9002BDE20 /* BtcInstitution.swift */,
 			);
 			path = BTC;
+			sourceTree = "<group>";
+		};
+		401586A020336969006C7998 /* CEX */ = {
+			isa = PBXGroup;
+			children = (
+				401586A120336B89006C7998 /* CEXAPI.swift */,
+				401586A4203379F4006C7998 /* CEXAPIAction.swift */,
+				40BB6ED22034A2D000A8450B /* CEXAccount.swift */,
+			);
+			path = CEX;
 			sourceTree = "<group>";
 		};
 		5301A7641F17F42700668099 /* APIs */ = {
@@ -2755,6 +2775,7 @@
 		E686DA7D20228DEA009D5A1E /* Exchanges */ = {
 			isa = PBXGroup;
 			children = (
+				401586A020336969006C7998 /* CEX */,
 				E63F3BC0203146B300E7F4B7 /* HitBTC */,
 				E6A5B9A4202E0910006426BE /* Binance */,
 				E67EABDC2028D3710070FA3A /* Poloniex */,
@@ -3320,6 +3341,7 @@
 				53552A7C1ED7347E00DD95F9 /* MockedDefaults.swift in Sources */,
 				53F078671ED740E500E7EDF9 /* SampleResponses.swift in Sources */,
 				A459EDA81F83D2BB00DC4B51 /* TransactionCollectionViewCell.swift in Sources */,
+				401586A320336B89006C7998 /* CEXAPI.swift in Sources */,
 				5361BC9F1F562580009C3F07 /* PoloniexInstitution.swift in Sources */,
 				53552A351ED72B5B00DD95F9 /* OrderedDictionary.swift in Sources */,
 				537187E31F4CC23B00E7F9D6 /* GDAXServer.swift in Sources */,
@@ -3327,6 +3349,7 @@
 				A41EE4821FB9B66D00210038 /* QRLoginCredentialsParser.swift in Sources */,
 				532121A81EE8B91600F4812A /* ZipUtilities.swift in Sources */,
 				53DE2E9A1FAF16B000AC9FCF /* KrakenTransaction.swift in Sources */,
+				401586A720349533006C7998 /* ExchangeApi.swift in Sources */,
 				A4ED56DE1F86378200E4CC42 /* InstitutionTableHeaderView.swift in Sources */,
 				5301A77E1F17FDED00668099 /* Feedback.swift in Sources */,
 				2DF8985D1FCC8F7500CCDFB9 /* CountlyViewTracking.m in Sources */,
@@ -3336,7 +3359,9 @@
 				A4BDE9991FCD706D002D958D /* UnlockApplicationViewController.swift in Sources */,
 				A41742911F73C6BF004A9B4F /* CoinbaseTransaction.swift in Sources */,
 				53552A171ED7251700DD95F9 /* Institution.swift in Sources */,
+				401586A6203379F4006C7998 /* CEXAPIAction.swift in Sources */,
 				E6FF3546201ABDA20032FB2F /* ExchangeKeychainServiceProvider.swift in Sources */,
+				40BB6ED42034A2D000A8450B /* CEXAccount.swift in Sources */,
 				53552A021ED7251200DD95F9 /* Singletons.swift in Sources */,
 				534DDFD91F4CCE9400E6C37F /* URLRequest.swift in Sources */,
 				E65312511FE8C2AC00F57977 /* BITTREXDataBuilder.swift in Sources */,
@@ -3526,6 +3551,7 @@
 				A4430A9F1F95F3ED00F2FFFA /* ExchangeRate.swift in Sources */,
 				5301A7771F17F86900668099 /* HTTPMethod.swift in Sources */,
 				53EB77D61CF3EFAA00F01903 /* NSView.swift in Sources */,
+				401586A220336B89006C7998 /* CEXAPI.swift in Sources */,
 				2D326D261F5EA22900873286 /* PoloniexErrors.swift in Sources */,
 				537187E81F4CC23C00E7F9D6 /* CoinbaseAccount.swift in Sources */,
 				E63F3BC5203146FD00E7F4B7 /* HitBTCAPIAction.swift in Sources */,
@@ -3646,6 +3672,7 @@
 				532550941D0702980045404E /* TableRowView.swift in Sources */,
 				5334022A1DDD0E5E000236A0 /* PaintCodeView.swift in Sources */,
 				28FD09C21D99F18500A395AB /* PaintCodeButton.swift in Sources */,
+				40BB6ED32034A2D000A8450B /* CEXAccount.swift in Sources */,
 				532121A71EE8B91600F4812A /* ZipUtilities.swift in Sources */,
 				533626601D54E5F80090656F /* FlippedView.swift in Sources */,
 				53F6965C2011322F00D28B23 /* BITTREXWithdrawal.swift in Sources */,
@@ -3715,6 +3742,7 @@
 				E6B0416C1FFECFB200192319 /* AddAccountDelegate.swift in Sources */,
 				53294FA51D1DDD9500F08059 /* CCNStatusItemWindowBackgroundView.m in Sources */,
 				F1253E611D75D55D001BD48C /* KeychainManagement.swift in Sources */,
+				401586A5203379F4006C7998 /* CEXAPIAction.swift in Sources */,
 				535905691CC8482400DBC816 /* Logging.swift in Sources */,
 				53E83CA71E40309800185975 /* SearchFilterButtonsDark.swift in Sources */,
 				53EB77D21CF3EB9100F01903 /* PopoverViewController.swift in Sources */,

@@ -9,7 +9,7 @@
 import Foundation
 
 struct CoinbaseAutentication: Decodable, OAUTHCredentials {
-    
+
     let tokenType: String
     let expiresIn: Double
     let accessToken: String
@@ -74,4 +74,7 @@ extension CoinbaseAutentication {
         return ""
     }
     
+    var userId: String {
+        return ""
+    }
 }

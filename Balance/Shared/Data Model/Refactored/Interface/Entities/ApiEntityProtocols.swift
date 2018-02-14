@@ -14,6 +14,7 @@ public protocol Credentials {
     var passphrase: String { get }
     var address: String { get }
     var name: String { get }
+    var userId: String { get }
 }
 
 public protocol OAUTHCredentials: Credentials {

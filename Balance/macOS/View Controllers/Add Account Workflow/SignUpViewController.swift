@@ -399,6 +399,7 @@ class SignUpViewController: NSViewController {
             case .secret:     type = .secret
             case .name:       type = .name
             case .address:    type = .address
+            case .userId:     type = .userId
             }
             
             let textField = SignUpTextField(type: type)

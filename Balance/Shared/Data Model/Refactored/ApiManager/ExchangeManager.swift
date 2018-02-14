@@ -61,6 +61,7 @@ class ExchangeManager {
     private lazy var bittrexExchangeAPI = { return BITTREXAPI2(session: urlSession) }()
     private lazy var binanceExchangeAPI = { return BinanceAPI(session: urlSession) }()
     private lazy var hitbtcExchangeAPI = { return HitBTCAPI(session: urlSession) }()
+    private lazy var cexExchangeAPI = { return CEXAPI(session: urlSession) }()
     
     init(urlSession: URLSession? = nil, repositoryService: RepositoryServiceProtocol? = nil, keychainService: KeychainServiceProtocol? = nil) {
         self.urlSession = urlSession ?? certValidatedSession
@@ -122,6 +123,8 @@ extension ExchangeManager: ExchangeManagerActions {
             refreshInstitution(institution: institution, credentials: credentials, exchangeAPI: btcExchangeAPI, apiAction: BTCAPI2Action.self, delayTransactions: false)
         case .ethplorer:
             refreshInstitution(institution: institution, credentials: credentials, exchangeAPI: ethploreExchangeAPI, apiAction: EthplorerAPI2Action.self, delayTransactions: false)
+        case .cex:
+            refreshInstitution(institution: institution, credentials: credentials, exchangeAPI: cexExchangeAPI, apiAction: CEXAPIAction.self, delayTransactions: false)
         case .gdax, .coinbase:
             refreshAccountsForTransactions(with: institution, credentials: credentials)
             return
@@ -230,6 +233,9 @@ private extension ExchangeManager {
         case .hitbtc:
             let exchangeAction = HitBTCAPIAction(type: .accounts, credentials: credentials)
             loginAction = (hitbtcExchangeAPI, exchangeAction)
+        case .cex:
+            let exchangeAction = CEXAPIAction(type: .accounts, credentials: credentials)
+            loginAction = (cexExchangeAPI, exchangeAction)
         }
         
         guard let loginAPIAction = loginAction else {

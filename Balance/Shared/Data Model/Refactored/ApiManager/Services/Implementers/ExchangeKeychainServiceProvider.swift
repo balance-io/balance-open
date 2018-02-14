@@ -39,6 +39,10 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
             }
         case .ethplorer, .blockchain:
             save(account: keychainAccounts.addressKey, key: KeychainConstants.address, value: credentials.address)
+        case .cex:
+            save(account: keychainAccounts.userId, key: KeychainConstants.userId, value: credentials.userId)
+            save(account: keychainAccounts.apiKey, key: KeychainConstants.apiKey, value: credentials.apiKey)
+            save(account: keychainAccounts.secretKey, key: KeychainConstants.secretKey, value: credentials.secretKey)
         }
     }
     
@@ -81,6 +85,14 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
             }
             
             return BalanceCredentials(address: address, name: name ?? "")
+        case .cex:
+            guard let userId = fetch(account: accountValues.userId, key: KeychainConstants.userId),
+                let apiKey = fetch(account: accountValues.apiKey, key: KeychainConstants.apiKey),
+                let secret = fetch(account: accountValues.secretKey, key: KeychainConstants.secretKey) else {
+                    return nil
+            }
+            
+            return BalanceCredentials(apiKey: apiKey, secretKey: secret, userId: userId)
         }
     }
     
@@ -93,13 +105,15 @@ private struct KeychainAccountValues {
     let refreshToken: String
     let commonKey: String
     let addressKey: String
+    let userId: String
     
     init(apiKey: String = "",
          secretKey: String = "",
          accessToken: String = "",
          refreshToken: String = "",
          commonKey: String = "",
-         addressKey: String = ""
+         addressKey: String = "",
+         userId: String = ""
         )
     {
         self.apiKey = apiKey
@@ -108,6 +122,7 @@ private struct KeychainAccountValues {
         self.refreshToken = refreshToken
         self.commonKey = commonKey
         self.addressKey = addressKey
+        self.userId = userId
     }
 }
 
@@ -119,6 +134,7 @@ private extension ExchangeKeychainServiceProvider {
         static let refreshToken = "refreshToken"
         static let passphrase = "passphrase"
         static let address = "address"
+        static let userId = "userId"
     }
     
     func save(identifier: String, value: [String : Any]) throws {
@@ -149,7 +165,7 @@ private extension ExchangeKeychainServiceProvider {
             let keychainRefreshTokenKey = "refreshToken institutionId: \(identifier)"
             
             return KeychainAccountValues(accessToken: keychainAccessTokenKey, refreshToken: keychainRefreshTokenKey)
-        case .kraken, .bitfinex, .gdax:
+        case .kraken, .bitfinex, .gdax, .cex:
             let realIdentifer = computeIdentifier(for: source, with: identifier)
             
             return KeychainAccountValues(commonKey: realIdentifer)
@@ -166,6 +182,8 @@ private extension ExchangeKeychainServiceProvider {
             return "com.KrakenAPIClient.Credentials.\(identifier)"
         case .bitfinex:
             return "com.BitfinexAPIClient.Credentials.\(identifier)"
+        case .cex:
+            return "com.CEX.Credentials,.\(identifier)"
         default:
             return identifier
         }
