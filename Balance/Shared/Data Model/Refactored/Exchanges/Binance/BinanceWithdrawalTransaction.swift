@@ -35,7 +35,7 @@ struct BinanceWithdrawalTransaction: Codable {
     }
     
     let status: BinanceWithdrawalTransactionStatus
-    var institutionId: Int = 0
+    var institutionId: Int = -1
     var source: Source = .binance
     var sourceInstitutionId: String = ""
     

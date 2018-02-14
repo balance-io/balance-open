@@ -62,7 +62,7 @@ struct HitBTCTransaction: Codable {
     let currencyCode: String
     let source: Source = .hitbtc
     let status: HitBTCTransactionStatus
-    var institutionId: Int = 0
+    var institutionId: Int = -1
     var sourceInstitutionId: String = ""
     
     enum CodingKeys: String, CodingKey {

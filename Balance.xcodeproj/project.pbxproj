@@ -628,6 +628,10 @@
 		E6A5B9A7202E0948006426BE /* BinanceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A5B9A5202E0928006426BE /* BinanceAPI.swift */; };
 		E6A5B9A9202E0963006426BE /* BinanceAPIAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A5B9A8202E0963006426BE /* BinanceAPIAction.swift */; };
 		E6A5B9AA202E09BF006426BE /* BinanceAPIAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A5B9A8202E0963006426BE /* BinanceAPIAction.swift */; };
+		E6AB904520349CD500DE26FA /* KucoinAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB904420349CD500DE26FA /* KucoinAccount.swift */; };
+		E6AB904620349CD900DE26FA /* KucoinAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB904420349CD500DE26FA /* KucoinAccount.swift */; };
+		E6AB904820349CEA00DE26FA /* KucoinTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB904720349CEA00DE26FA /* KucoinTransaction.swift */; };
+		E6AB904920349CEA00DE26FA /* KucoinTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB904720349CEA00DE26FA /* KucoinTransaction.swift */; };
 		E6B0416C1FFECFB200192319 /* AddAccountDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */; };
 		E6B0416D1FFED03300192319 /* AddAccountDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */; };
 		E6C1AC4620057ABE0018D6AA /* ReconnectAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */; };
@@ -1168,6 +1172,8 @@
 		E68EE57F20158CD600ACB01F /* MockInstitutionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInstitutionRepository.swift; sourceTree = "<group>"; };
 		E6A5B9A5202E0928006426BE /* BinanceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceAPI.swift; sourceTree = "<group>"; };
 		E6A5B9A8202E0963006426BE /* BinanceAPIAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceAPIAction.swift; sourceTree = "<group>"; };
+		E6AB904420349CD500DE26FA /* KucoinAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KucoinAccount.swift; sourceTree = "<group>"; };
+		E6AB904720349CEA00DE26FA /* KucoinTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KucoinTransaction.swift; sourceTree = "<group>"; };
 		E6B0416B1FFECFB200192319 /* AddAccountDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddAccountDelegate.swift; path = AddCredentialBasedAccountViewController/AddAccountDelegate.swift; sourceTree = "<group>"; };
 		E6C1AC43200577BC0018D6AA /* ReconnectAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountViewController.swift; sourceTree = "<group>"; };
 		E6C1AC4720058EC10018D6AA /* ReconnectAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconnectAccountCell.swift; sourceTree = "<group>"; };
@@ -2531,6 +2537,8 @@
 			children = (
 				E61BF68320337402000A1540 /* KucoinAPI.swift */,
 				E61BF68620337415000A1540 /* KucoinAPIAction.swift */,
+				E6AB904420349CD500DE26FA /* KucoinAccount.swift */,
+				E6AB904720349CEA00DE26FA /* KucoinTransaction.swift */,
 			);
 			path = Kucoin;
 			sourceTree = "<group>";
@@ -3258,6 +3266,7 @@
 				532121A01EE8B91600F4812A /* unzip.c in Sources */,
 				A456ED121FB3067D006EE529 /* CurrencyCollectionViewCell.swift in Sources */,
 				2DF898431FCC8F7500CCDFB9 /* CountlyAPM.m in Sources */,
+				E6AB904620349CD900DE26FA /* KucoinAccount.swift in Sources */,
 				A4E457231F790EE5002E2879 /* PoloniexTransaction.swift in Sources */,
 				53629D48201FE7FE000081E9 /* ResizingBehavior.swift in Sources */,
 				E63F3BC3203146CD00E7F4B7 /* HitBTCAPI.swift in Sources */,
@@ -3408,6 +3417,7 @@
 				E64AAA38201F883C00CE7050 /* KrakenAPI2Action.swift in Sources */,
 				535529F61ED724FA00DD95F9 /* AsyncOperation.swift in Sources */,
 				53552A001ED7251200DD95F9 /* ObjC.m in Sources */,
+				E6AB904920349CEA00DE26FA /* KucoinTransaction.swift in Sources */,
 				2D9AA1E41FB5AED300058491 /* Analytics.swift in Sources */,
 				53552A301ED72B5700DD95F9 /* FMDatabasePool.m in Sources */,
 				53552A241ED7252900DD95F9 /* TimeInterval.swift in Sources */,
@@ -3606,6 +3616,7 @@
 				E67EABE22028D3950070FA3A /* CoinbaseAPICredentials.swift in Sources */,
 				2DF898481FCC8F7500CCDFB9 /* CountlyConfig.m in Sources */,
 				53EB77CA1CF3E5BC00F01903 /* String.swift in Sources */,
+				E6AB904820349CEA00DE26FA /* KucoinTransaction.swift in Sources */,
 				2DF898421FCC8F7500CCDFB9 /* CountlyAPM.m in Sources */,
 				5325508C1D06FBB60045404E /* Button.swift in Sources */,
 				539F65D61D3D17EF00A22EF7 /* ImageView.swift in Sources */,
@@ -3711,6 +3722,7 @@
 				537187E71F4CC23C00E7F9D6 /* CoinbaseApi.swift in Sources */,
 				E63F3BC2203146CD00E7F4B7 /* HitBTCAPI.swift in Sources */,
 				E67EABEC2028D3A60070FA3A /* PoloniexAPI2.swift in Sources */,
+				E6AB904520349CD500DE26FA /* KucoinAccount.swift in Sources */,
 				536C6EF21D864CB900823688 /* DefaultsStorage.swift in Sources */,
 				E66743FF20195F900009A57F /* ApiEntityProtocols.swift in Sources */,
 				DCC684D81BD1080E00E95B90 /* TransactionsTabViewController.swift in Sources */,

@@ -42,11 +42,25 @@ class KucoinAPI: AbstractApi {
     }
     
     override func buildAccounts(from data: Data) -> Any {
-        return ""
+        do {
+            let data = try JSONDecoder().decode(KucoinAccounts.self, from: data)
+            
+            return data.accounts
+        } catch {
+            print("Accounts from hitbtc can not be parsed to an object\n\(error)")
+            return []
+        }
     }
     
     override func buildTransactions(from data: Data) -> Any {
-        return ""
+        do {
+            let data = try JSONDecoder().decode(KucoinTransactions.self, from: data)
+            
+            return data.transactions.filter { $0.status == .success }
+        } catch {
+            print("Transactions from hitbtc can not be parsed to an object\n\(error)")
+            return []
+        }
     }
     
     override func processBaseErrors(data: Data?, error: Error?, response: URLResponse?) -> Error? {
