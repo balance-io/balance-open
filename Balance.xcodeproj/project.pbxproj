@@ -544,6 +544,10 @@
 		E61B7B6A201BE05300B391CE /* KrakenAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B7B69201BE05300B391CE /* KrakenAPI2.swift */; };
 		E61B7B6C201BE06C00B391CE /* KrakenAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B7B69201BE05300B391CE /* KrakenAPI2.swift */; };
 		E61B7B6E201BE67F00B391CE /* KrakenAPI2Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B7B6D201BE67F00B391CE /* KrakenAPI2Action.swift */; };
+		E61BF68420337402000A1540 /* KucoinAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61BF68320337402000A1540 /* KucoinAPI.swift */; };
+		E61BF68520337402000A1540 /* KucoinAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61BF68320337402000A1540 /* KucoinAPI.swift */; };
+		E61BF68720337415000A1540 /* KucoinAPIAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61BF68620337415000A1540 /* KucoinAPIAction.swift */; };
+		E61BF68820337415000A1540 /* KucoinAPIAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61BF68620337415000A1540 /* KucoinAPIAction.swift */; };
 		E63F3BBC2030E5D500E7F4B7 /* ExchangeTransactionDataSyncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63F3BBB2030E5D500E7F4B7 /* ExchangeTransactionDataSyncer.swift */; };
 		E63F3BBD2030E5DA00E7F4B7 /* ExchangeTransactionDataSyncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63F3BBB2030E5D500E7F4B7 /* ExchangeTransactionDataSyncer.swift */; };
 		E63F3BBF2030E98000E7F4B7 /* ExchangeTransactionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63F3BBE2030E98000E7F4B7 /* ExchangeTransactionOperation.swift */; };
@@ -1111,6 +1115,8 @@
 		E605EF8D2006BF3600A95632 /* UIViewController+Present.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Present.swift"; sourceTree = "<group>"; };
 		E61B7B69201BE05300B391CE /* KrakenAPI2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenAPI2.swift; sourceTree = "<group>"; };
 		E61B7B6D201BE67F00B391CE /* KrakenAPI2Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenAPI2Action.swift; sourceTree = "<group>"; };
+		E61BF68320337402000A1540 /* KucoinAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KucoinAPI.swift; sourceTree = "<group>"; };
+		E61BF68620337415000A1540 /* KucoinAPIAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KucoinAPIAction.swift; sourceTree = "<group>"; };
 		E63F3BBB2030E5D500E7F4B7 /* ExchangeTransactionDataSyncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTransactionDataSyncer.swift; sourceTree = "<group>"; };
 		E63F3BBE2030E98000E7F4B7 /* ExchangeTransactionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTransactionOperation.swift; sourceTree = "<group>"; };
 		E63F3BC1203146CD00E7F4B7 /* HitBTCAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitBTCAPI.swift; sourceTree = "<group>"; };
@@ -2520,6 +2526,15 @@
 			path = Foundation;
 			sourceTree = "<group>";
 		};
+		E61BF682203373E6000A1540 /* Kucoin */ = {
+			isa = PBXGroup;
+			children = (
+				E61BF68320337402000A1540 /* KucoinAPI.swift */,
+				E61BF68620337415000A1540 /* KucoinAPIAction.swift */,
+			);
+			path = Kucoin;
+			sourceTree = "<group>";
+		};
 		E63F3BC0203146B300E7F4B7 /* HitBTC */ = {
 			isa = PBXGroup;
 			children = (
@@ -2743,6 +2758,7 @@
 		E686DA7D20228DEA009D5A1E /* Exchanges */ = {
 			isa = PBXGroup;
 			children = (
+				E61BF682203373E6000A1540 /* Kucoin */,
 				E63F3BC0203146B300E7F4B7 /* HitBTC */,
 				E6A5B9A4202E0910006426BE /* Binance */,
 				E67EABDC2028D3710070FA3A /* Poloniex */,
@@ -3266,6 +3282,7 @@
 				A44C76231F7BD9610024476E /* BitfinexTransaction.swift in Sources */,
 				A4430A911F94EE1700F2FFFA /* CoinbaseInstitution.swift in Sources */,
 				A4ED56DB1F86301A00E4CC42 /* AccountTableViewCell.swift in Sources */,
+				E61BF68520337402000A1540 /* KucoinAPI.swift in Sources */,
 				53552A371ED72B5B00DD95F9 /* CwlSysctl.swift in Sources */,
 				A493B93A1F68137E0074ACCC /* APICredentialsComponents.swift in Sources */,
 				2DF898451FCC8F7500CCDFB9 /* CountlyAPMNetworkLog.m in Sources */,
@@ -3350,6 +3367,7 @@
 				535529F11ED724ED00DD95F9 /* TabViewModel.swift in Sources */,
 				532121A61EE8B91600F4812A /* Zip.swift in Sources */,
 				2DF898571FCC8F7500CCDFB9 /* CountlyPushNotifications.m in Sources */,
+				E61BF68820337415000A1540 /* KucoinAPIAction.swift in Sources */,
 				53552A321ED72B5700DD95F9 /* FMResultSet.m in Sources */,
 				E653128C1FE8C4D200F57977 /* BITTREXApiAction.swift in Sources */,
 				53552A311ED72B5700DD95F9 /* FMDatabaseQueue.m in Sources */,
@@ -3576,6 +3594,7 @@
 				534FD6401C7F8F5E0066FE91 /* Institution.swift in Sources */,
 				E68143522031F64900B7CD4C /* HitBTCAccount.swift in Sources */,
 				E66743F6201935D90009A57F /* APIRequest.swift in Sources */,
+				E61BF68420337402000A1540 /* KucoinAPI.swift in Sources */,
 				53560E7F1DFCDF8A00547AF7 /* NSBezierPath.swift in Sources */,
 				539C8E931C73CB31005C72BC /* PreferencesAccountsViewController.swift in Sources */,
 				53EB77BB1CF3DF6E00F01903 /* Color.swift in Sources */,
@@ -3595,6 +3614,7 @@
 				53294FA31D1DDD9500F08059 /* CCNStatusItemDropView.m in Sources */,
 				53BB42E71CE849E70002D473 /* Shortcut.swift in Sources */,
 				53F0785D1ED73B7D00E7EDF9 /* Element.swift in Sources */,
+				E61BF68720337415000A1540 /* KucoinAPIAction.swift in Sources */,
 				53629D47201FE7FE000081E9 /* ResizingBehavior.swift in Sources */,
 				532B6FE51E95D5C40010D81D /* Swizzling.swift in Sources */,
 				530F57B41DCD72680083F3A7 /* FMDatabaseQueue.m in Sources */,

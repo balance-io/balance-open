@@ -17,7 +17,7 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
         }
         
         switch source {
-        case .poloniex, .bittrex, .binance, .hitbtc:
+        case .poloniex, .bittrex, .binance, .hitbtc, .kucoin:
             save(account: keychainAccounts.secretKey, key: KeychainConstants.secretKey, value: credentials.secretKey)
             save(account: keychainAccounts.apiKey, key: KeychainConstants.apiKey, value: credentials.apiKey)
         case .coinbase:
@@ -59,7 +59,7 @@ class ExchangeKeychainServiceProvider: KeychainServiceProtocol {
             }
             
             return CoinbaseAutentication(accessToken: accessToken, refreshToken: refreshToken)
-        case .poloniex, .bittrex, .binance, .hitbtc:
+        case .poloniex, .bittrex, .binance, .hitbtc, .kucoin:
             guard let secretKey = fetch(account: accountValues.secretKey, key: KeychainConstants.secretKey),
                 let apiKey = fetch(account: accountValues.apiKey, key: KeychainConstants.apiKey) else {
                     return nil
@@ -139,7 +139,7 @@ private extension ExchangeKeychainServiceProvider {
             let keychainApiKeyAccount = "apiKey institutionId: \(identifier)"
             
             return KeychainAccountValues(apiKey: keychainApiKeyAccount, secretKey: keychainApiKeyAccount)
-        case .bittrex, .binance, .hitbtc: //This case should be in the same case with kraken, but due to kraken error we need to separate this one
+        case .bittrex, .binance, .hitbtc, .kucoin: //This case should be in the same case with kraken, but due to kraken error we need to separate this one
             let keychainSecretKeyAccount = "secret institutionId: \(identifier)"
             let keychainApiKeyAccount = "apiKey institutionId: \(identifier)"
             

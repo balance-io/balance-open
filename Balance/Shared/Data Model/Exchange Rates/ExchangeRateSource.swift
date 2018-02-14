@@ -65,6 +65,7 @@ extension Source {
         case .blockchain:       return .average
         case .binance:          return .binance
         case .hitbtc:           return .hitbtc
+        case .kucoin:           return .kucoin
         }
     }
 }

@@ -65,6 +65,7 @@ extension Source {
         case .blockchain:   return BtcInstitution()
         case .binance:      return BtcInstitution() //TODO: Remove it
         case .hitbtc:       return BtcInstitution() //TODO: Remove it
+        case .kucoin:       return BtcInstitution() //TODO: Remove it
         }
     }
 }

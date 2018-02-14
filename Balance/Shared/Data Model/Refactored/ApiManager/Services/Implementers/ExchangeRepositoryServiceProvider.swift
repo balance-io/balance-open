@@ -20,7 +20,7 @@ class ExchangeRepositoryServiceProvider: RepositoryServiceProtocol {
         switch source {
         case .kraken, .gdax, .bitfinex, .blockchain, .bittrex, .hitbtc:
             saveExchangeAccounts(accountsUpdated)
-        case .binance:
+        case .binance, .kucoin:
             saveAndHideLocalAccounts(accountsUpdated)
         case .poloniex:
             savePoloniexAccounts(accountsUpdated, institution: institution)

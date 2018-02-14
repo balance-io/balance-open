@@ -27,6 +27,7 @@ extension Source {
         case .blockchain:   return BtcApi()
         case .binance:      return BinanceAPI(session: certValidatedSession)
         case .hitbtc:       return HitBTCAPI(session: certValidatedSession)
+        case .kucoin:       return KucoinAPI(session: certValidatedSession)
         }
     }
 }

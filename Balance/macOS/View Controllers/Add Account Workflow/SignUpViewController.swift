@@ -554,7 +554,7 @@ class SignUpViewController: NSViewController {
             Field(name: "", type: .secret, value: "")
         ]
 
-        exchangeManager.login(with: .binance, fields: loginFields)
+        exchangeManager.login(with: .kucoin, fields: loginFields)
 
 //        let mockInstitution = Institution(institutionId: 1, source: .binance, sourceInstitutionId: "", name: "")
 //        exchangeManager.refresh(institution: mockInstitution)

@@ -61,6 +61,7 @@ class ExchangeManager {
     private lazy var bittrexExchangeAPI = { return BITTREXAPI2(session: urlSession) }()
     private lazy var binanceExchangeAPI = { return BinanceAPI(session: urlSession) }()
     private lazy var hitbtcExchangeAPI = { return HitBTCAPI(session: urlSession) }()
+    private lazy var kucoinExchangeAPI = { return KucoinAPI(session: urlSession) }()
     
     init(urlSession: URLSession? = nil, repositoryService: RepositoryServiceProtocol? = nil, keychainService: KeychainServiceProtocol? = nil) {
         self.urlSession = urlSession ?? certValidatedSession
@@ -122,7 +123,7 @@ extension ExchangeManager: ExchangeManagerActions {
             refreshInstitution(institution: institution, credentials: credentials, exchangeAPI: btcExchangeAPI, apiAction: BTCAPI2Action.self, delayTransactions: false)
         case .ethplorer:
             refreshInstitution(institution: institution, credentials: credentials, exchangeAPI: ethploreExchangeAPI, apiAction: EthplorerAPI2Action.self, delayTransactions: false)
-        case .gdax, .coinbase:
+        case .gdax, .coinbase, .kucoin:
             refreshAccountsForTransactions(with: institution, credentials: credentials)
             return
         }
@@ -230,6 +231,9 @@ private extension ExchangeManager {
         case .hitbtc:
             let exchangeAction = HitBTCAPIAction(type: .accounts, credentials: credentials)
             loginAction = (hitbtcExchangeAPI, exchangeAction)
+        case .kucoin:
+            let exchangeAction = KucoinAPIAction(type: .accounts, credentials: credentials)
+            loginAction = (kucoinExchangeAPI, exchangeAction)
         }
         
         guard let loginAPIAction = loginAction else {
@@ -361,6 +365,9 @@ private extension ExchangeManager {
                 ]
                 let transactionAction = GDAXAPI2Action(type: .transactions(input: transactionDict), credentials: credentials)
                 transactionOperation = gdaxExchangeAPI.fetchData(for: transactionAction, completion: callBack)
+            case .kucoin:
+                let transactionAction = KucoinAPIAction(type: .transactions(input: account.currency), credentials: credentials)
+                transactionOperation = kucoinExchangeAPI.fetchData(for: transactionAction, completion: callBack)
             default:
                 return
             }
