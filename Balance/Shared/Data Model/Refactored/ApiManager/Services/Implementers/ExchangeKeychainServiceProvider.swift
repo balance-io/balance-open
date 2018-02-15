@@ -183,7 +183,7 @@ private extension ExchangeKeychainServiceProvider {
         case .bitfinex:
             return "com.BitfinexAPIClient.Credentials.\(identifier)"
         case .cex:
-            return "com.CEX.Credentials,.\(identifier)"
+            return "com.CEXAPIClient.Credentials.\(identifier)"
         default:
             return identifier
         }
