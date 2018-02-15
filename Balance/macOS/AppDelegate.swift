@@ -41,6 +41,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return CurrentTheme.defaults.size.height
     }
     
+    var visibleTab: Tab {
+        guard contentViewController.currentControllerType == .tabs else {
+            return .none
+        }
+        return contentViewController.tabsController.currentVisibleTab
+    }
+    
     // For debugging
     let showInWindow = false
     let window = NSWindow()

@@ -21,11 +21,11 @@ class PopoverViewController: NSViewController {
     // MARK: - Properties -
     //
 
-    fileprivate(set) var currentControllerType: ContentControllerType = .none
-    fileprivate var currentController: NSViewController!
-    fileprivate var tabsController = TabsViewController(defaultTab: InstitutionRepository.si.hasInstitutions ? .accounts : .priceTicker)
-    fileprivate var lockController = LockViewController()
-    fileprivate var patchController: SignUpViewController?
+    private(set) var currentControllerType: ContentControllerType = .none
+    private var currentController: NSViewController!
+    private(set) var tabsController = TabsViewController(defaultTab: InstitutionRepository.si.hasInstitutions ? .accounts : .priceTicker)
+    private var lockController = LockViewController()
+    private var patchController: SignUpViewController?
     
     //
     // MARK: - Lifecycle -

@@ -39,7 +39,7 @@ class PriceTickerTabViewController: NSViewController, SectionedTableViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        reloadData()
+        reloadDataDelayed()
         
         registerForNotifications()
     }
@@ -51,7 +51,7 @@ class PriceTickerTabViewController: NSViewController, SectionedTableViewDelegate
             AppDelegate.sharedInstance.resizeWindowToMaxHeight(animated: true)
         }
         
-        reloadData()
+        reloadDataDelayed()
     }
     
     //
@@ -92,7 +92,12 @@ class PriceTickerTabViewController: NSViewController, SectionedTableViewDelegate
     // MARK: - Data Reloading -
     //
     
-    func reloadData() {
+    @objc private func reloadData() {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(reloadDataDelayed), object: nil)
+        self.perform(#selector(reloadDataDelayed), with: nil, afterDelay: 0.5)
+    }
+    
+    @objc private func reloadDataDelayed() {
         viewModel.reloadData()
         tableView.reloadData()
     }
@@ -102,21 +107,23 @@ class PriceTickerTabViewController: NSViewController, SectionedTableViewDelegate
     //
     
     func registerForNotifications() {
-        NotificationCenter.addObserverOnMainThread(self, selector: #selector(exchangeRatesUpdated), name: CurrentExchangeRates.Notifications.exchangeRatesUpdated)
-        NotificationCenter.addObserverOnMainThread(self, selector: #selector(masterCurrencyChanged), name: Notifications.MasterCurrencyChanged)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: CurrentExchangeRates.Notifications.exchangeRatesUpdated)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.MasterCurrencyChanged)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.AccountHidden)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.AccountUnhidden)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.InstitutionAdded)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.InstitutionRemoved)
+        NotificationCenter.addObserverOnMainThread(self, selector: #selector(reloadData), name: Notifications.SyncCompleted)
     }
     
     func unregisterForNotifications() {
         NotificationCenter.removeObserverOnMainThread(self, name: CurrentExchangeRates.Notifications.exchangeRatesUpdated)
         NotificationCenter.removeObserverOnMainThread(self, name: Notifications.MasterCurrencyChanged)
-    }
-    
-    @objc private func exchangeRatesUpdated() {
-        reloadData()
-    }
-    
-    @objc private func masterCurrencyChanged() {
-        reloadData()
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.AccountHidden)
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.AccountUnhidden)
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.InstitutionAdded)
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.InstitutionRemoved)
+        NotificationCenter.removeObserverOnMainThread(self, name: Notifications.SyncCompleted)
     }
     
     //

@@ -392,6 +392,7 @@ class TabsViewController: NSViewController {
                     }
                 }
                 
+                let tabButtonKeyCode = 48
                 if !appLock.locked && event.window == self.view.window {
                     if let characters = event.charactersIgnoringModifiers {
                         if event.modifierFlags.contains(NSEvent.ModifierFlags.command) && characters.count == 1 {
@@ -411,6 +412,14 @@ class TabsViewController: NSViewController {
                             } else if characters == "h" {
                                 NotificationCenter.postOnMainThread(name: Notifications.HidePopover)
                             }
+                        } else if event.keyCode == tabButtonKeyCode {
+                            // Cycle through the tabs
+                            var tabIndex = self.currentVisibleTab.rawValue + 1
+                            if tabIndex >= self.tabButtons.count {
+                                tabIndex = 0
+                            }
+                            self.showTab(tabIndex: tabIndex)
+                            return nil
                         }
                     }
                 }
