@@ -40,6 +40,32 @@ class GDAXAPI2: AbstractApi {
         }
     }
     
+    override func processApiErrors(from data: Data) -> Error? {
+        guard let errorDict = createDict(from: data) as? [String: AnyObject],
+            let message = errorDict["message"] as? String else {
+            return nil
+        }
+        
+        return ExchangeBaseError.other(message: message)
+    }
+    
+    override func buildAccounts(from data: Data) -> Any {
+        do {
+            return try JSONDecoder().decode([GDAXAccount2].self, from: data)
+        } catch {
+            print("error: \(error)")
+            return ExchangeBaseError.other(message: "acounts data not available")
+        }
+    }
+    
+    override func buildTransactions(from data: Data) -> Any {
+        do {
+            return try JSONDecoder().decode([GDAXTransaction2].self, from: data)
+        } catch {
+            print("error: \(error)")
+            return ExchangeBaseError.other(message: "transactions data not available")
+        }
+    }
 }
 
 private extension GDAXAPI2 {

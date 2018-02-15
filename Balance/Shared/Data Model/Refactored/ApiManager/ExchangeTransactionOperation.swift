@@ -106,6 +106,18 @@ extension ExchangeTransactionOperation: ExchangeTransactionDataDelegate {
         if let deposits = deposits as? [ExchangeTransaction],
             let withdrawals = withdrawals as? [ExchangeTransaction] {
             
+            let deposits = deposits.map { (tx) -> ExchangeTransaction in
+                var deposit = tx
+                deposit.type = "deposit"
+                return deposit
+            }
+            
+            let withdrawals = withdrawals.map { (tx) -> ExchangeTransaction in
+                var withdrawal = tx
+                withdrawal.type = "withdrawal"
+                return withdrawal
+            }
+            
             resultBlock(true, nil, deposits + withdrawals)
             return
         }

@@ -20,6 +20,7 @@ public enum ExchangeRateSource: Int {
     case coinbaseGdaxEur = 8
     case coinbaseGdaxGbp = 9
     case bittrex         = 10
+    case cex             = 11
     
     // Fiat
     case fixer         = 10001
@@ -66,6 +67,7 @@ extension Source {
         case .binance:          return .binance
         case .hitbtc:           return .hitbtc
         case .kucoin:           return .kucoin
+        case .cex:              return .cex
         }
     }
 }

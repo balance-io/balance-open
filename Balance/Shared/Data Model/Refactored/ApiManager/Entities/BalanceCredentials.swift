@@ -15,18 +15,21 @@ struct BalanceCredentials: Credentials {
     let passphrase: String
     let address: String
     let name: String
+    let userId: String
         
     init(apiKey: String? = nil,
          secretKey: String? = nil,
          passphrase: String? = nil,
          address: String? = nil,
-         name: String? = nil)
+         name: String? = nil,
+         userId: String? = nil)
     {
         self.apiKey = apiKey ?? ""
         self.secretKey = secretKey ?? ""
         self.passphrase = passphrase ?? ""
         self.address = address ?? ""
         self.name = name ?? ""
+        self.userId = userId ?? ""
     }
 }
 
@@ -60,6 +63,7 @@ private extension BalanceCredentials {
         var passphrase = ""
         var address = ""
         var name = ""
+        var userId = ""
         
         for field in fields {
             switch field.type {
@@ -72,11 +76,13 @@ private extension BalanceCredentials {
             case .passphrase:
                 passphrase = field.value
             case .name:
-                name = field.name
+                name = field.value
+            case .userId:
+                userId = field.value
             }
         }
         
-        self.init(apiKey: apiKey, secretKey: secretKey, passphrase: passphrase, address: address, name: name)
+        self.init(apiKey: apiKey, secretKey: secretKey, passphrase: passphrase, address: address, name: name, userId: userId)
     }
     
     static func areCredentialsValid(_ credentials: Credentials, for source: Source) -> Bool {
@@ -87,6 +93,8 @@ private extension BalanceCredentials {
             return !credentials.apiKey.isEmpty && !credentials.secretKey.isEmpty && !credentials.passphrase.isEmpty
         case .ethplorer, .blockchain:
             return !credentials.address.isEmpty && !credentials.name.isEmpty
+        case .cex:
+            return !credentials.userId.isEmpty && !credentials.apiKey.isEmpty && !credentials.secretKey.isEmpty
         case .coinbase:
             return false
         }
@@ -94,7 +102,7 @@ private extension BalanceCredentials {
     
     static func totalFields(for source: Source) -> Int {
         switch source {
-        case .gdax:
+        case .gdax, .cex:
             return 3
         default:
             return 2

@@ -29,4 +29,22 @@ class BTCAPI2: AbstractApi {
         }
     }
     
+    override func processApiErrors(from data: Data) -> Error? {
+        return nil
+    }
+    
+    override func buildAccounts(from data: Data) -> Any {
+        do {
+            let accounts = try JSONDecoder().decode(BTCAccount2.self, from: data)
+            return [accounts]
+        } catch {
+            print("error: \(error)")
+            return ExchangeBaseError.other(message: "BTC accounts not available")
+        }
+    }
+    
+    override func buildTransactions(from data: Data) -> Any {
+        // No transactions yet
+        return []
+    }
 }

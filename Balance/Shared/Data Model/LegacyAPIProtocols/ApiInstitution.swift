@@ -50,6 +50,7 @@ enum FieldType: String {
     case passphrase = "passphrase"
     case name       = "name"
     case address    = "address"
+    case userId     = "userId"
 }
 
 extension Source {
@@ -66,6 +67,7 @@ extension Source {
         case .binance:      return BtcInstitution() //TODO: Remove it
         case .hitbtc:       return BtcInstitution() //TODO: Remove it
         case .kucoin:       return BtcInstitution() //TODO: Remove it
+        case .cex:          return BtcInstitution() //TODO: Remove it
         }
     }
 }

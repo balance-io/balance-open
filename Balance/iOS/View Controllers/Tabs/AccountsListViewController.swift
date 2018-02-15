@@ -245,7 +245,9 @@ final class AccountsListViewController: UIViewController {
         let reconnectNavVC = UINavigationController(rootViewController: reconnectVC)
         reconnectNavVC.modalPresentationStyle = .overFullScreen
         
-        present(reconnectNavVC, animated: true)
+        if self.view.window != nil {
+            present(reconnectNavVC, animated: true)
+        }
     }
     
     // MARK: Actions

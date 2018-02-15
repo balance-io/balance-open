@@ -9,8 +9,6 @@
 import Cocoa
 import QuartzCore
 
-let exchangeManager = ExchangeManager()
-
 // TODO: Make this and the == overload private again once the LLDB bug is fixed
 // http://stackoverflow.com/questions/38357114/unable-to-use-swift-debugger-in-one-particular-class-file
 struct Device: Hashable {
@@ -399,6 +397,7 @@ class SignUpViewController: NSViewController {
             case .secret:     type = .secret
             case .name:       type = .name
             case .address:    type = .address
+            case .userId:     type = .userId
             }
             
             let textField = SignUpTextField(type: type)
@@ -547,37 +546,26 @@ class SignUpViewController: NSViewController {
     
     // Initial connection
     @objc fileprivate func connect() {
+        guard allFieldsFilled() else {
+            return
+        }
         
-        //TEST HERE
-        let loginFields: [Field] = [
-            Field(name: "", type: .key, value: ""),
-            Field(name: "", type: .secret, value: "")
-        ]
-
-
-        exchangeManager.login(with: .kucoin, fields: loginFields)
-
-//        let mockInstitution = Institution(institutionId: 1, source: .kucoin, sourceInstitutionId: "", name: "")
-//        exchangeManager.refresh(institution: mockInstitution)
-
-//        prepareViewsForSubmit(loadingText: "Connecting to \(apiInstitution.name)...")
-
-//        var loginFields = [Field]()
-//        for textField in connectFields {
-//            if let field = textField.field {
-//                loginFields.append(field)
-//            }
-//        }
+        prepareViewsForSubmit(loadingText: "Connecting to \(apiInstitution.name)...")
+        
+        var loginFields = [Field]()
+        for textField in connectFields {
+            if let field = textField.field {
+                loginFields.append(field)
+            }
+        }
         // try login with loginFields
-//
-//        loginService.authenticationChallenge(loginStrings: loginFields, existingInstitution: institution) { success, error, institution in
-//            if success, let institution = institution {
-//                self.completeConnect(institution: institution)
-//            } else {
-//                self.failConnect(error: error)
-//            }
-//        }
-        
+        loginService.authenticationChallenge(loginStrings: loginFields, existingInstitution: institution) { success, error, institution in
+            if success, let institution = institution {
+                self.completeConnect(institution: institution)
+            } else {
+                self.failConnect(error: error)
+            }
+        }
     }
     
     fileprivate func setLoadingFieldString(_ stringValue: String) {

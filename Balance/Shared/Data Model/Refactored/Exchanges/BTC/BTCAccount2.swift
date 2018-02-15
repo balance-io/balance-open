@@ -1,33 +1,36 @@
 //
-//  BitfinexAccount2.swift
-//  BalancemacOS
+//  BTCAccount2.swift
+//  Balance
 //
-//  Created by Felipe Rolvar on 2/11/18.
+//  Created by Felipe Rolvar on 2/13/18.
 //  Copyright © 2018 Balanced Software, Inc. All rights reserved.
 //
 
 import Foundation
 
-struct BitfinexAccount2 {
+struct BTCAccount2: Codable {
     private var accountInstitutionId: Int = 0
-    private let type: String
-    private let currency: Currency
-    private let balance: Double
-    private let unsettledInterest: Double
-    private let available: Double?
+    private var currency: Currency = .btc
+    private let hash160: String
+    private let address: String
+    private let txCount: Int
+    private let totalReceived: Int
+    private let totalSent: Int
+    private let finalBalance: Int
     
-    init(type: String, currency: Currency, balance: Double, unsettledInterest: Double, available: Double?) {
-        self.type = type
-        self.currency = currency
-        self.balance = balance
-        self.unsettledInterest = unsettledInterest
-        self.available = available
+    enum CodingKeys: String, CodingKey {
+        case hash160
+        case address
+        case txCount = "n_tx"
+        case totalReceived = "total_received"
+        case totalSent = "total_sent"
+        case finalBalance = "final_balance"
     }
 }
 
-extension BitfinexAccount2: ExchangeAccount {
+extension BTCAccount2: ExchangeAccount {
     var accountType: AccountType {
-        return AccountType(plaidString: type)
+        return .wallet
     }
     
     var institutionId: Int {
@@ -40,7 +43,7 @@ extension BitfinexAccount2: ExchangeAccount {
     }
     
     var source: Source {
-        return .bitfinex
+        return .blockchain
     }
     
     var sourceAccountId: String {
@@ -56,11 +59,11 @@ extension BitfinexAccount2: ExchangeAccount {
     }
     
     var currentBalance: Int {
-        return balance.integerValueWith(decimals: currency.decimals)
+        return finalBalance
     }
     
     var availableBalance: Int {
-        return available?.integerValueWith(decimals: currency.decimals) ?? 0
+        return currentBalance
     }
     
     var altCurrencyCode: String? {
@@ -75,4 +78,3 @@ extension BitfinexAccount2: ExchangeAccount {
         return nil
     }
 }
-

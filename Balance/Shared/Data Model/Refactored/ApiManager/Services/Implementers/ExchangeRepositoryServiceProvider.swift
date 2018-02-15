@@ -18,10 +18,10 @@ class ExchangeRepositoryServiceProvider: RepositoryServiceProtocol {
         let accountsUpdated = updateAccounts(accounts, with: institution)
         
         switch source {
-        case .kraken, .gdax, .bitfinex, .blockchain, .bittrex, .hitbtc:
+        case .kraken, .gdax, .bitfinex, .blockchain, .bittrex, .cex:
             saveExchangeAccounts(accountsUpdated)
-        case .binance, .kucoin:
-            saveAndHideLocalAccounts(accountsUpdated)
+        case .binance, .kucoin, .hitbtc:
+            saveAndHideEmptyAccounts(accountsUpdated)
         case .poloniex:
             savePoloniexAccounts(accountsUpdated, institution: institution)
         case .coinbase:
@@ -80,7 +80,7 @@ private extension ExchangeRepositoryServiceProvider {
 private extension ExchangeRepositoryServiceProvider {
     
     func savePoloniexAccounts(_ accounts: [ExchangeAccount], institution: Institution) {
-        saveAndHideLocalAccounts(accounts)
+        saveAndHideEmptyAccounts(accounts)
          
         let accounts = AccountRepository.si.accounts(institutionId: institution.institutionId)
         for account in accounts {
@@ -92,7 +92,7 @@ private extension ExchangeRepositoryServiceProvider {
         }
     }
     
-    func saveAndHideLocalAccounts(_ accounts: [ExchangeAccount]) {
+    func saveAndHideEmptyAccounts(_ accounts: [ExchangeAccount]) {
         for exchangeAccount in accounts {
             guard let accountSaved = saveExchangeAccount(exchangeAccount) else {
                 continue

@@ -1,33 +1,41 @@
 //
-//  BitfinexAccount2.swift
-//  BalancemacOS
+//  CEXAccount.swift
+//  Balance
 //
-//  Created by Felipe Rolvar on 2/11/18.
+//  Created by Felipe Rolvar on 2/14/18.
 //  Copyright © 2018 Balanced Software, Inc. All rights reserved.
 //
 
 import Foundation
 
-struct BitfinexAccount2 {
+struct CEXAccount: Codable {
     private var accountInstitutionId: Int = 0
-    private let type: String
-    private let currency: Currency
-    private let balance: Double
-    private let unsettledInterest: Double
-    private let available: Double?
+    private let timestamp: String
+    private let currencyString: String
+    private let availableString: String
+
+    private var date: Date {
+        return Date(timeIntervalSince1970: Double(timestamp) ?? 0)
+    }
     
-    init(type: String, currency: Currency, balance: Double, unsettledInterest: Double, available: Double?) {
-        self.type = type
-        self.currency = currency
-        self.balance = balance
-        self.unsettledInterest = unsettledInterest
-        self.available = available
+    private var currency: Currency {
+        return Currency.rawValue(currencyString)
+    }
+    
+    private var available: Double {
+        return Double(availableString) ?? 0
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case timestamp
+        case currencyString = "currency"
+        case availableString = "available"
     }
 }
 
-extension BitfinexAccount2: ExchangeAccount {
+extension CEXAccount: ExchangeAccount {
     var accountType: AccountType {
-        return AccountType(plaidString: type)
+        return .exchange
     }
     
     var institutionId: Int {
@@ -40,7 +48,7 @@ extension BitfinexAccount2: ExchangeAccount {
     }
     
     var source: Source {
-        return .bitfinex
+        return .cex
     }
     
     var sourceAccountId: String {
@@ -56,11 +64,11 @@ extension BitfinexAccount2: ExchangeAccount {
     }
     
     var currentBalance: Int {
-        return balance.integerValueWith(decimals: currency.decimals)
+        return currency.isFiat ? available.integerFixedFiatDecimals() : available.integerFixedCryptoDecimals()
     }
     
     var availableBalance: Int {
-        return available?.integerValueWith(decimals: currency.decimals) ?? 0
+        return currentBalance
     }
     
     var altCurrencyCode: String? {
@@ -75,4 +83,3 @@ extension BitfinexAccount2: ExchangeAccount {
         return nil
     }
 }
-

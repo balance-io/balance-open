@@ -24,9 +24,7 @@ class TransactionContextMenu: NSObject, NSMenuDelegate {
     }
     
     static func showMenu(transaction: Transaction, view: NSView) {
-        var items = [NSMenuItem(title: "Find Similar Transactions", action: #selector(searchTransactionsAction), keyEquivalent: ""),
-                     NSMenuItem.separator(),
-                     NSMenuItem(title: "Copy Transaction", action: #selector(copyTransactionToClipboard), keyEquivalent: ""),
+        var items = [NSMenuItem(title: "Copy Transaction", action: #selector(copyTransactionToClipboard), keyEquivalent: ""),
                      NSMenuItem(title: "Copy Transaction ID", action: #selector(copyTransactionIdToClipboard), keyEquivalent: ""),
                      NSMenuItem(title: "Copy Amount", action: #selector(copyAmountToClipboard), keyEquivalent: "")]
         
@@ -58,14 +56,7 @@ class TransactionContextMenu: NSObject, NSMenuDelegate {
     @objc fileprivate func copyTransactionToClipboard() {
         let name = transaction.displayName
         let amount = amountToString(amount: transaction.amount, currency: Currency.rawValue(transaction.currency), showNegative: false, showCodeAfterValue: true)
-        var altAmount: String? = nil
-        if let displayAltAmount = transaction.displayAltAmount {
-            altAmount = amountToString(amount: displayAltAmount, currency: defaults.masterCurrency, showNegative: true, showCodeAfterValue: true)
-        }
-        var finalString = "\(name) \(amount)"
-        if let altAmount = altAmount {
-            finalString += " (\(altAmount))"
-        }
+        let finalString = "\(name) \(amount)"
         
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString(finalString, forType: .string)

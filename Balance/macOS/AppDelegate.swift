@@ -41,6 +41,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return CurrentTheme.defaults.size.height
     }
     
+    var visibleTab: Tab {
+        guard contentViewController.currentControllerType == .tabs else {
+            return .none
+        }
+        return contentViewController.tabsController.currentVisibleTab
+    }
+    
     // For debugging
     let showInWindow = false
     let window = NSWindow()
@@ -169,19 +176,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     }
                     
                     if let code = code, let state = state {
-                        let data = [
-                            CoinbaseAuthenticationKey.code.rawValue: code,
-                            CoinbaseAuthenticationKey.state.rawValue: state
-                        ]
-                        
-                        exchangeManager.manageAutenticationCallback(with: data, source: .coinbase)
-//                        CoinbaseApi.handleAuthenticationCallback(state: state, code: code) { success, error in
-//                            if !success {
-//                                log.error("Error handling Coinbase authentication callback: \(String(describing: error))")
-//                            }
-//
-//                            self.showPopover()
-//                        }
+                        CoinbaseApi.handleAuthenticationCallback(state: state, code: code) { success, error in
+                            if !success {
+                                log.error("Error handling Coinbase authentication callback: \(String(describing: error))")
+                            }
+                            
+                            self.showPopover()
+                        }
                     } else {
                         log.error("Missing query items, code: \(String(describing: code)), state: \(String(describing: state))")
                     }
