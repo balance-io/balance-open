@@ -10,7 +10,7 @@ import Foundation
 
 enum ExchangeManagerInteractions {
     case autentication
-    case refresh
+    case refreshInstitution
     case refreshToken
 }
 
@@ -375,6 +375,7 @@ private extension ExchangeManager {
                 let transactionAction = KucoinAPIAction(type: .transactions(input: account.currency), credentials: credentials)
                 transactionOperation = kucoinExchangeAPI.fetchData(for: transactionAction, completion: callBack)
             default:
+                print("Error - \(institution.source) Exchange doesn't implement a refresh action after accounts were refreshed")
                 return
             }
 

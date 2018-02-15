@@ -115,6 +115,17 @@ final class NewAccountViewModel {
         return textField
     }()
     
+    //TODO: Need to validate with ui desing
+    private lazy var userIdTextField: UITextField = {
+        let textField = UITextField()
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
+        textField.textAlignment = .right
+        textField.placeholder = "Enter your user id, please"
+        
+        return textField
+    }()
+    
     func testValue(at index: Int) -> String {
         let type = fields[index].type
         
@@ -191,6 +202,7 @@ final class NewAccountViewModel {
         case .secret:     return secretKeyKeyTextField
         case .name:       return nameTextField
         case .address:    return addressTextField
+        case .userId:     return userIdTextField
         }
     }
     

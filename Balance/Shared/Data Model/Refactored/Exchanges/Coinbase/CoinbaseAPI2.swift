@@ -6,6 +6,12 @@
 //  Copyright © 2018 Balanced Software, Inc. All rights reserved.
 //
 
+#if os(OSX)
+    import AppKit
+#else
+    import UIKit
+#endif
+
 import Foundation
 
 class CoinbaseAPI2: AbstractApi {
